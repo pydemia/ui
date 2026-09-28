@@ -70,7 +70,13 @@ function App() {
             <header className="topbar">
                 <div className="topbar-inner">
                     <a href="#overview" className="wordmark" aria-label="pydemia UI 개요">
-                        <span className="monogram" aria-hidden="true">p</span>
+                        <img
+                            className="brand-mark"
+                            src={`${import.meta.env.BASE_URL}favicon.svg`}
+                            width="38"
+                            height="38"
+                            alt=""
+                        />
                         <span>pydemia <span className="wordmark-light">/ ui</span></span>
                     </a>
                     <span className="version">v0.1.0 · prototype</span>
