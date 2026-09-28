@@ -5,3 +5,4 @@ apps/docs/public/examples/
 apps/docs/public/r/
 *.tsbuildinfo
 .DS_Store
+.vercel/
