@@ -36,7 +36,7 @@ token 정의를 소비자 stylesheet에 연결해야 합니다. `npm run build`�
 | `registry.json`, `registry/provenance.json` | registry 항목, 출처·라이선스·의존성·접근성 metadata |
 | `apps/docs` | 컴포넌트 미리보기, 사용 코드, palette, 예시 사이트의 원본 |
 | `apps/profile-demo` | 실제 컴포넌트를 조합한 프로필 예시 |
-| `docs/` | GitHub Pages 게시용 빌드 결과 (`npm run build`로 갱신) |
+| `docs/` | Vercel 정적 배포용 빌드 결과 (`npm run build`로 갱신) |
 | `research/` | source inventory, taxonomy, 검증 기록 |
 
 외부 component를 추가할 때는 upstream revision과 정확한 license를 확인하고,
@@ -46,17 +46,19 @@ token과 상호작용을 정규화합니다. 출처별 notice는
 
 ## 문서 사이트 게시
 
-Vercel에서는 저장소 루트를 프로젝트의 Root Directory로 선택합니다.
-[`vercel.json`](vercel.json)이 `npm ci`로 설치한 뒤 `npm run build`를 실행하고
-`docs/`를 정적 사이트로 게시하도록 지정합니다. GitHub 저장소 연결과
-`ui.pydemia.ai` 도메인 등록은 Vercel 프로젝트 설정에서 완료합니다.
+문서 사이트는 GitHub에 연결된 Vercel 프로젝트
+[`pydemia-ui`](https://vercel.com/pydemia-7822/pydemia-ui)에 배포됩니다. 현재
+공개 주소는 [`https://pydemia-ui.vercel.app`](https://pydemia-ui.vercel.app/)입니다.
+[`vercel.json`](vercel.json)은 저장소 루트에서 `npm ci`와 `npm run build`를
+실행하고 `docs/`를 정적 사이트로 게시하도록 지정합니다. `main`에 push하면
+Vercel이 다시 배포합니다.
 
-이 저장소의 GitHub Pages 게시 원본은 **`main` branch의 `/docs` 폴더**이며,
-커스텀 도메인은 [`ui.pydemia.ai`](https://ui.pydemia.ai/)입니다. DNS 공급자에서
-`ui`의 CNAME을 `pydemia.github.io`로 연결하고 Pages에서 DNS 확인 및 HTTPS가
-활성화되면 문서가 공개됩니다. 코드를 바꿀 때마다 `npm run build`로 `/docs`를
-다시 생성하고 함께 commit해야 합니다. GitHub Actions 기반 빌드나 자동 배포는
-설정하지 않았습니다.
+`ui.pydemia.ai`는 Vercel 프로젝트에 등록되어 있으며 Squarespace DNS 연결을
+기다리는 중입니다. Squarespace에서 `ui`의 CNAME을 프로젝트의 Vercel
+[Domains 설정](https://vercel.com/pydemia-7822/pydemia-ui/settings/domains)에
+표시되는 대상으로 지정해야 합니다. 기존 GitHub Pages 배포 설정은 도메인
+전환이 확인될 때까지 남아 있습니다. 따라서 이전 대상인
+`pydemia.github.io`로 CNAME을 새로 지정하지 마세요.
 
 접근성과 브라우저 검증의 현재 상태는 [`research/verification.md`](research/verification.md)에
 기록했습니다. 화면의 상태 변경과 복사는 데모 기능이며 서버 데이터가 아닙니다.

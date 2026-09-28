@@ -13,7 +13,8 @@
 | `import('@pydemia/ui')` | pass | Node ESM에서 18개 export 로드 |
 | 별도 consumer에 component source 복사 후 `tsc --noEmit` | pass | Snippet 포함 9개 소스의 import closure typecheck |
 | shadcn CLI `add`로 별도 consumer 설치 | blocked | CLI의 필수 색상 파일 fetch가 이 환경의 proxy에서 거절됨. 원본 registry item 생성과 수동 복사만 확인 |
-| 실제 브라우저 화면과 키보드·focus·dark/mobile | unverified | 연결된 브라우저가 `127.0.0.1` 접근을 `ERR_BLOCKED_BY_CLIENT`로 거절 |
+| Vercel 공개 사이트와 예시 화면 | pass (limited) | `https://pydemia-ui.vercel.app/`에서 컴포넌트·토큰·예시 iframe 렌더링, 테마 전환, `/examples/profile/` 검색·코드 탭·검토 상태 변경을 브라우저에서 확인. 모바일·키보드 focus의 정식 검사는 미실행 |
+| Vercel registry JSON 직접 브라우저 요청 | unverified | `/r/pyd-button.json` 직접 탐색을 브라우저가 `ERR_BLOCKED_BY_CLIENT`로 거절. 로컬 빌드의 9개 JSON과 링크 생성은 검증됨 |
 | screen reader와 formal WCAG audit | unverified | 브라우저 및 보조기술 테스트 미실행 |
 
 Source 확인은 공식 docs·upstream file·LICENSE 원문을 기준으로 했습니다.
@@ -27,6 +28,7 @@ muted/표면 6.46:1(light), 8.25:1(dark), accent 텍스트/표면
 수치일 뿐 실제 렌더링의 모든 대비나 WCAG 적합성을 증명하지 않습니다.
 
 남은 수용 검사는 `shadcn add`를 정상 네트워크에서 실행하고,
-desktop/mobile light/dark 화면을 실제
-브라우저에서 보고 키보드 탭 이동·복사 feedback·focus ring을 확인하는
+mobile light/dark 화면과 키보드 탭 이동·복사 feedback·focus ring을 확인하는
 것입니다. 이후 실제 screen reader로 이름과 상태 발표를 확인합니다.
+`ui.pydemia.ai`의 Squarespace CNAME은 아직 Vercel 대상으로 설정되지 않아
+커스텀 도메인에서의 동작은 검증되지 않았습니다.
