@@ -26,11 +26,9 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
     width: 38px;
     height: 38px;
     flex: none;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
 }
-.version { padding: 3px 9px; border: 1px solid var(--border); border-radius: 3px; color: var(--muted); font-size: 12px; white-space: nowrap; }
+.dark .brand-mark { filter: brightness(2.1); }
+.version { padding: 3px 9px; color: var(--muted); font-size: 12px; white-space: nowrap; }
 .top-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; font-size: 14px; font-weight: 550; }
 .github-link { display: inline-flex; align-items: center; gap: 5px; }
 .theme-button { width: 35px; height: 35px; margin-left: 7px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 4px; color: var(--foreground); background: var(--surface); }
