@@ -21,6 +21,11 @@ const colorTokens = [
     { name: "Danger", token: "--danger" },
 ] as const;
 
+const curatedComponentIds = new Set([
+    "affixed-input", "snippet", "metric-card", "dropzone",
+    "message", "prompt-input",
+]);
+
 function App() {
     const [selectedId, setSelectedId] = useState(() => {
         const fromUrl = new URLSearchParams(window.location.search).get("component");
@@ -30,7 +35,8 @@ function App() {
     const [values, setValues] = useState<Record<string, string>>({});
     const selected = catalog.find((entry) => entry.id === selectedId)!;
     const record = provenance.items.find((item) => item.name === `pyd-${selectedId}`)!;
-    const registryUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-button.json`, window.location.origin).href;
+    const registryUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-${selected.id}.json`, window.location.origin).href;
+    const tokensUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-tokens.json`, window.location.origin).href;
 
     useEffect(() => {
         const root = document.documentElement;
@@ -83,11 +89,11 @@ function App() {
                     <div className="sidebar-inner">
                         <a href="#overview" className="sidebar-overview">Overview</a>
                         <p className="sidebar-label">FOUNDATION</p>
-                        {catalog.filter((entry) => !["affixed-input", "snippet"].includes(entry.id)).map((entry) =>
+                        {catalog.filter((entry) => !curatedComponentIds.has(entry.id)).map((entry) =>
                             <button key={entry.id} type="button" aria-current={entry.id === selectedId ? "page" : undefined} className={`sidebar-item${entry.id === selectedId ? " selected" : ""}`} onClick={() => selectComponent(entry.id)}>{entry.name}</button>,
                         )}
                         <p className="sidebar-label">CURATED</p>
-                        {catalog.filter((entry) => ["affixed-input", "snippet"].includes(entry.id)).map((entry) =>
+                        {catalog.filter((entry) => curatedComponentIds.has(entry.id)).map((entry) =>
                             <button key={entry.id} type="button" aria-current={entry.id === selectedId ? "page" : undefined} className={`sidebar-item${entry.id === selectedId ? " selected" : ""}`} onClick={() => selectComponent(entry.id)}>{entry.name}</button>,
                         )}
                         <div className="sidebar-lower"><a href="#tokens">Color & tokens</a><a href="#examples">Profile example</a><a href="#installation">Using the source</a></div>
@@ -97,7 +103,7 @@ function App() {
                 <main id="main" className="main-content">
                     <section id="overview" className="intro" aria-labelledby="page-heading">
                         <div className="eyebrow"><span className="eyebrow-line" /> DESIGN SYSTEM / OPEN CODE</div>
-                        <div className="intro-head"><div><h1 id="page-heading">pydemia UI</h1><p>소스 코드를 직접 관리하는 React 컴포넌트와 검토된 내부 registry입니다.<br className="desktop-break" /> 같은 토큰을 쓰는 컴포넌트, 코드, 실제 사용 예시를 한곳에서 확인할 수 있습니다.</p></div><div className="intro-count"><strong>08</strong><span>COMPONENTS<br />IN THE PROTOTYPE</span></div></div>
+                        <div className="intro-head"><div><h1 id="page-heading">pydemia UI</h1><p>소스 코드를 직접 관리하는 React 컴포넌트와 검토된 내부 registry입니다.<br className="desktop-break" /> 같은 토큰을 쓰는 컴포넌트, 코드, 실제 사용 예시를 한곳에서 확인할 수 있습니다.</p></div><div className="intro-count"><strong>{String(catalog.length).padStart(2, "0")}</strong><span>COMPONENTS<br />IN THE PROTOTYPE</span></div></div>
                         <div className="intro-meta"><span>React 19</span><span>Tailwind CSS 4</span><span>shadcn registry</span><span>source owned</span></div>
                     </section>
 
@@ -118,7 +124,7 @@ function App() {
 
                     <section id="examples" className="doc-section" aria-labelledby="examples-heading"><div className="section-lead"><div><p className="section-index">03 / COMPOSED EXAMPLE</p><h2 id="examples-heading">Registry review</h2><p>Button, Input, Badge, Table, Origin AffixedInput, Kibo Snippet을 조합한 실제 데모입니다. 데이터와 검토 상태는 예시용입니다.</p></div><a className="text-link" href={`${import.meta.env.BASE_URL}examples/profile/`} target="_blank" rel="noreferrer">전체 화면으로 열기 <ArrowUpRight size={16} aria-hidden="true" /></a></div><div className="example-frame"><iframe title="pydemia UI registry review 예시 화면" src={`${import.meta.env.BASE_URL}examples/profile/`} loading="lazy" /></div></section>
 
-                    <section id="installation" className="doc-section usage-section" aria-labelledby="usage-heading"><div className="section-lead"><div><p className="section-index">04 / USING THE SOURCE</p><h2 id="usage-heading">코드 사용</h2><p>현재 패키지는 이 저장소의 private workspace package이며 npm registry에 게시되지 않았습니다. 소스에서 실행하거나 필요한 컴포넌트를 registry로 복사할 수 있습니다.</p></div></div><div className="usage-columns"><div><h3>Repository</h3><p>소스를 내려받아 문서와 예시 화면을 실행합니다.</p><pre><code>git clone https://github.com/pydemia/ui.git{"\n"}cd ui &amp;&amp; npm ci{"\n"}npm run build &amp;&amp; npm run dev</code></pre></div><div><h3>Registry</h3><p>게시된 registry 항목을 프로젝트의 shadcn 구성에 복사합니다. 소비자 프로젝트에는 토큰 stylesheet도 연결해야 합니다.</p><pre><code>npx shadcn@latest add{"\n"}  {registryUrl}</code></pre></div></div><p className="section-note">위 registry URL은 현재 Vercel 배포 주소에서 사용할 수 있습니다. 커스텀 도메인 연결 뒤에도 같은 경로로 제공됩니다.</p></section>
+                    <section id="installation" className="doc-section usage-section" aria-labelledby="usage-heading"><div className="section-lead"><div><p className="section-index">04 / USING THE SOURCE</p><h2 id="usage-heading">코드 사용</h2><p>현재 패키지는 이 저장소의 private workspace package이며 npm registry에 게시되지 않았습니다. 소스에서 실행하거나 필요한 컴포넌트를 registry로 복사할 수 있습니다.</p></div></div><div className="usage-columns"><div><h3>Repository</h3><p>소스를 내려받아 문서와 예시 화면을 실행합니다.</p><pre><code>git clone https://github.com/pydemia/ui.git{"\n"}cd ui &amp;&amp; npm ci{"\n"}npm run build &amp;&amp; npm run dev</code></pre></div><div><h3>Registry</h3><p>컴포넌트와 token stylesheet를 설치한 뒤 앱의 CSS에서 <code>tokens.css</code>를 import합니다.</p><pre><code>npx shadcn@latest add {registryUrl}{"\n"}npx shadcn@latest add {tokensUrl}</code></pre><pre><code>@import "./components/ui/tokens.css";</code></pre></div></div><p className="section-note">로컬 registry 설치 검사는 README의 base URL 설정 후 빌드해야 합니다. 공개 registry URL은 배포된 문서에서 사용할 수 있습니다.</p></section>
                     <footer className="footer"><span>pydemia UI · prototype v0.1.0</span><a href="https://github.com/pydemia/ui/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noreferrer">Third-party notices</a></footer>
                 </main>
             </div>

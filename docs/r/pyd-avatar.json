@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-avatar",
+  "title": "Avatar",
+  "dependencies": [
+    "@radix-ui/react-avatar@1.2.6"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/avatar.tsx",
+      "content": "import * as AvatarPrimitive from \"@radix-ui/react-avatar\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Avatar({ className, ...props }: ComponentProps<typeof AvatarPrimitive.Root>) {\n    return (\n        <AvatarPrimitive.Root\n            className={cn(\n                \"relative flex size-9 shrink-0 overflow-hidden rounded-full \" +\n                \"border border-border bg-surface-subtle\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nfunction AvatarImage({\n    className,\n    ...props\n}: ComponentProps<typeof AvatarPrimitive.Image>) {\n    return (\n        <AvatarPrimitive.Image\n            className={cn(\"size-full object-cover\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction AvatarFallback({\n    className,\n    ...props\n}: ComponentProps<typeof AvatarPrimitive.Fallback>) {\n    return (\n        <AvatarPrimitive.Fallback\n            className={cn(\n                \"flex size-full items-center justify-center text-xs font-medium\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui",
+      "target": "@ui/avatar.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

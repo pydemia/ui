@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-skeleton",
+  "title": "Skeleton",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/skeleton.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Skeleton({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            aria-hidden=\"true\"\n            className={cn(\"animate-pulse rounded-sm bg-border/60\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Skeleton };\n",
+      "type": "registry:ui",
+      "target": "@ui/skeleton.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-prompt-input",
+  "title": "Prompt Input",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-button.json",
+    "https://pydemia-ui.vercel.app/r/pyd-textarea.json",
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/prompt-input.tsx",
+      "content": "import { useId, useState, type FormEvent, type KeyboardEvent } from \"react\";\nimport { Button } from \"./button\";\nimport { Textarea } from \"./textarea\";\nimport { cn } from \"./utils\";\n\ntype PromptInputProps = {\n    onSend: (text: string) => void;\n    label?: string;\n    placeholder?: string;\n    disabled?: boolean;\n    className?: string;\n};\n\nfunction PromptInput({\n    onSend,\n    label = \"메시지\",\n    placeholder = \"메시지를 입력하세요\",\n    disabled,\n    className,\n}: PromptInputProps) {\n    const inputId = useId();\n    const [text, setText] = useState(\"\");\n\n    function submit(event: FormEvent<HTMLFormElement>) {\n        event.preventDefault();\n        const value = text.trim();\n        if (!value || disabled) return;\n        onSend(value);\n        setText(\"\");\n    }\n\n    function handleKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {\n        if (event.key !== \"Enter\" || event.shiftKey || event.nativeEvent.isComposing) {\n            return;\n        }\n        event.preventDefault();\n        event.currentTarget.form?.requestSubmit();\n    }\n\n    return (\n        <form\n            onSubmit={submit}\n            className={cn(\n                \"flex min-w-0 flex-col gap-2 rounded-sm border border-border \" +\n                \"bg-surface p-[var(--space-3)]\",\n                className,\n            )}\n        >\n            <label className=\"sr-only\" htmlFor={inputId}>{label}</label>\n            <Textarea\n                id={inputId}\n                value={text}\n                onChange={(event) => setText(event.target.value)}\n                onKeyDown={handleKeyDown}\n                placeholder={placeholder}\n                disabled={disabled}\n                rows={2}\n            />\n            <div className=\"flex justify-end\">\n                <Button type=\"submit\" disabled={disabled || !text.trim()}>\n                    보내기\n                </Button>\n            </div>\n        </form>\n    );\n}\n\nexport { PromptInput };\nexport type { PromptInputProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/prompt-input.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

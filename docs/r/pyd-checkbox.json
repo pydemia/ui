@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-checkbox",
+  "title": "Checkbox",
+  "dependencies": [
+    "@radix-ui/react-checkbox@1.3.11",
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/checkbox.tsx",
+      "content": "import * as CheckboxPrimitive from \"@radix-ui/react-checkbox\";\nimport type { ComponentProps } from \"react\";\nimport { Check, Minus } from \"lucide-react\";\nimport { cn } from \"./utils\";\n\nfunction Checkbox({\n    className,\n    ...props\n}: ComponentProps<typeof CheckboxPrimitive.Root>) {\n    return (\n        <CheckboxPrimitive.Root\n            className={cn(\n                \"group relative inline-flex size-5 shrink-0 items-center \" +\n                \"justify-center after:absolute after:-inset-1 \" +\n                \"rounded-sm border border-border bg-surface text-accent-foreground \" +\n                \"data-[state=checked]:border-accent data-[state=checked]:bg-accent \" +\n                \"data-[state=indeterminate]:border-accent \" +\n                \"data-[state=indeterminate]:bg-accent \" +\n                \"aria-invalid:border-danger disabled:cursor-not-allowed \" +\n                \"disabled:opacity-50\",\n                className,\n            )}\n            {...props}\n        >\n            <CheckboxPrimitive.Indicator>\n                <Check\n                    aria-hidden=\"true\"\n                    className=\"size-3 group-data-[state=indeterminate]:hidden\"\n                />\n                <Minus\n                    aria-hidden=\"true\"\n                    className=\"hidden size-3 group-data-[state=indeterminate]:block\"\n                />\n            </CheckboxPrimitive.Indicator>\n        </CheckboxPrimitive.Root>\n    );\n}\n\nexport { Checkbox };\n",
+      "type": "registry:ui",
+      "target": "@ui/checkbox.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

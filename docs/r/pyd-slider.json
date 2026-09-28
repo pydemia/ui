@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-slider",
+  "title": "Slider",
+  "dependencies": [
+    "@radix-ui/react-slider@1.4.7"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/slider.tsx",
+      "content": "import * as SliderPrimitive from \"@radix-ui/react-slider\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype SliderProps = ComponentProps<typeof SliderPrimitive.Root> & {\n    \"aria-label\": string;\n};\n\nfunction Slider({\n    className,\n    defaultValue,\n    value,\n    min = 0,\n    \"aria-label\": label,\n    ...props\n}: SliderProps) {\n    const values = value ?? defaultValue ?? [min];\n\n    return (\n        <SliderPrimitive.Root\n            defaultValue={defaultValue}\n            value={value}\n            min={min}\n            className={cn(\n                \"relative flex w-full touch-none items-center select-none \" +\n                \"data-[orientation=vertical]:h-40 \" +\n                \"data-[orientation=vertical]:w-auto \" +\n                \"data-[orientation=vertical]:flex-col \" +\n                \"data-[disabled]:opacity-50\",\n                className,\n            )}\n            {...props}\n        >\n            <SliderPrimitive.Track\n                className={\"relative h-2 w-full grow overflow-hidden rounded-full \" +\n                    \"bg-surface-subtle data-[orientation=vertical]:w-2\"}\n            >\n                <SliderPrimitive.Range\n                    className={\"absolute h-full bg-accent \" +\n                        \"data-[orientation=vertical]:w-full\"}\n                />\n            </SliderPrimitive.Track>\n            {values.map((_, index) => (\n                <SliderPrimitive.Thumb\n                    key={index}\n                    aria-label={values.length > 1 ? `${label} ${index + 1}` : label}\n                    className={\"block size-5 rounded-full border border-accent \" +\n                        \"bg-surface shadow-[var(--shadow-float)] \" +\n                        \"disabled:pointer-events-none\"}\n                />\n            ))}\n        </SliderPrimitive.Root>\n    );\n}\n\nexport { Slider };\n",
+      "type": "registry:ui",
+      "target": "@ui/slider.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

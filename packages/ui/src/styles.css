@@ -23,6 +23,7 @@
   --space-4: 16px;
   --space-6: 24px;
   --shadow-float: 0 4px 16px rgb(20 35 45 / 8%);
+  --overlay: rgb(13 25 32 / 45%);
   --motion-fast: 150ms;
   --font-ui: Inter, "Noto Sans KR", system-ui, sans-serif;
 }
@@ -40,6 +41,7 @@
   --focus: #9ad6eb;
   --danger: #ff9aa0;
   --shadow-float: 0 4px 16px rgb(0 0 0 / 20%);
+  --overlay: rgb(0 0 0 / 65%);
 }
 
 @theme inline {

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+  <title>pydemia UI</title>
+  <rect width="64" height="64" rx="10" fill="#245d70" />
+  <text
+    x="32" y="17" text-anchor="middle" fill="#c9e3ea"
+    font-family="Arial, sans-serif" font-size="8.5" font-weight="700"
+    letter-spacing="0.5"
+  >PYDEMIA</text>
+  <path
+    fill="#fff"
+    d="M12 25h7v16c0 5 2 7 6 7s6-2 6-7V25h7v16c0 9-5 14-13 14S12 50 12 41V25Zm32 0h8v30h-8V25Z"
+  />
+</svg>

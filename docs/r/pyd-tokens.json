@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-tokens",
+  "title": "Design tokens",
+  "files": [
+    {
+      "path": "packages/ui/src/styles.css",
+      "content": ":root {\n  color-scheme: light;\n  --background: #f7f8fa;\n  --foreground: #202a35;\n  --surface: #ffffff;\n  --surface-subtle: #f2f4f6;\n  --border: #d6dce2;\n  --muted: #52606d;\n  --accent: #245d70;\n  --accent-foreground: #ffffff;\n  --focus: #176c8a;\n  --danger: #a22c36;\n  --radius: 5px;\n  --density-control-height: 36px;\n  --density-row-block: 10px;\n  --control-height: var(--density-control-height);\n  --type-body-size: 14px;\n  --type-caption-size: 12px;\n  --type-body-leading: 1.5;\n  --space-1: 4px;\n  --space-2: 8px;\n  --space-3: 12px;\n  --space-4: 16px;\n  --space-6: 24px;\n  --shadow-float: 0 4px 16px rgb(20 35 45 / 8%);\n  --overlay: rgb(13 25 32 / 45%);\n  --motion-fast: 150ms;\n  --font-ui: Inter, \"Noto Sans KR\", system-ui, sans-serif;\n}\n\n.dark {\n  color-scheme: dark;\n  --background: #131a21;\n  --foreground: #e9eef2;\n  --surface: #1b242d;\n  --surface-subtle: #25313b;\n  --border: #46545f;\n  --muted: #afbec9;\n  --accent: #83bfd2;\n  --accent-foreground: #13232d;\n  --focus: #9ad6eb;\n  --danger: #ff9aa0;\n  --shadow-float: 0 4px 16px rgb(0 0 0 / 20%);\n  --overlay: rgb(0 0 0 / 65%);\n}\n\n@theme inline {\n  --color-background: var(--background);\n  --color-foreground: var(--foreground);\n  --color-surface: var(--surface);\n  --color-surface-subtle: var(--surface-subtle);\n  --color-border: var(--border);\n  --color-muted: var(--muted);\n  --color-accent: var(--accent);\n  --color-accent-foreground: var(--accent-foreground);\n  --color-focus: var(--focus);\n  --color-danger: var(--danger);\n  --radius-sm: var(--radius);\n  --font-sans: var(--font-ui);\n  --text-sm: var(--type-body-size);\n  --text-xs: var(--type-caption-size);\n}\n\nhtml {\n  font-family: var(--font-ui);\n  line-height: var(--type-body-leading);\n  background: var(--background);\n}\n*:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }\n@media (prefers-reduced-motion: reduce) {\n  *, *::before, *::after {\n    scroll-behavior: auto !important;\n    animation-duration: 0.01ms !important;\n    transition-duration: 0.01ms !important;\n  }\n}\n",
+      "type": "registry:file",
+      "target": "@ui/tokens.css"
+    }
+  ],
+  "type": "registry:ui"
+}

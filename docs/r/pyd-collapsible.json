@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-collapsible",
+  "title": "Collapsible",
+  "dependencies": [
+    "@radix-ui/react-collapsible@1.1.20"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/collapsible.tsx",
+      "content": "import * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Collapsible = CollapsiblePrimitive.Root;\nconst CollapsibleTrigger = CollapsiblePrimitive.Trigger;\n\nfunction CollapsibleContent({\n    className,\n    ...props\n}: ComponentProps<typeof CollapsiblePrimitive.Content>) {\n    return (\n        <CollapsiblePrimitive.Content\n            className={cn(\"text-sm\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/collapsible.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

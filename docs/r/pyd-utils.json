@@ -10,7 +10,8 @@
     {
       "path": "packages/ui/src/components/utils.ts",
       "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...values: ClassValue[]) {\n    return twMerge(clsx(values));\n}\n",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "target": "@ui/utils.ts"
     }
   ],
   "type": "registry:ui"

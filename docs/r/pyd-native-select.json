@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-native-select",
+  "title": "Native Select",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/native-select.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { ChevronDown } from \"lucide-react\";\nimport { cn } from \"./utils\";\n\nfunction NativeSelect({ className, ...props }: ComponentProps<\"select\">) {\n    return (\n        <div className=\"relative w-full\">\n            <select\n                className={cn(\n                    \"h-[var(--control-height)] w-full appearance-none rounded-sm \" +\n                    \"border border-border bg-surface px-[var(--space-3)] \" +\n                    \"pr-9 text-sm text-foreground disabled:cursor-not-allowed \" +\n                    \"disabled:opacity-50 aria-invalid:border-danger\",\n                    className,\n                )}\n                {...props}\n            />\n            <ChevronDown\n                aria-hidden=\"true\"\n                className={\n                    \"pointer-events-none absolute right-3 top-1/2 size-4 \" +\n                    \"-translate-y-1/2 text-muted\"\n                }\n            />\n        </div>\n    );\n}\n\nexport { NativeSelect };\n",
+      "type": "registry:ui",
+      "target": "@ui/native-select.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

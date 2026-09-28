@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-dropzone",
+  "title": "Dropzone",
+  "dependencies": [
+    "react-dropzone@14.4.1",
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/dropzone.tsx",
+      "content": "import { Upload } from \"lucide-react\";\nimport { useState } from \"react\";\nimport { useDropzone, type Accept, type FileRejection } from \"react-dropzone\";\nimport { cn } from \"./utils\";\n\ntype DropzoneProps = {\n    label: string;\n    description?: string;\n    accept?: Accept;\n    maxFiles?: number;\n    maxSize?: number;\n    disabled?: boolean;\n    className?: string;\n    onFilesSelected?: (files: File[]) => void;\n    onFilesRejected?: (rejections: FileRejection[]) => void;\n};\n\nfunction Dropzone({\n    label,\n    description,\n    accept,\n    maxFiles = 1,\n    maxSize,\n    disabled,\n    className,\n    onFilesSelected,\n    onFilesRejected,\n}: DropzoneProps) {\n    const [names, setNames] = useState<string[]>([]);\n    const [error, setError] = useState(\"\");\n    const { getRootProps, getInputProps, isDragActive } = useDropzone({\n        accept,\n        maxFiles,\n        maxSize,\n        multiple: maxFiles > 1,\n        disabled,\n        onDrop: (accepted, rejected) => {\n            if (rejected.length > 0) {\n                const code = rejected[0].errors[0]?.code;\n                if (code === \"file-invalid-type\") {\n                    setError(\"허용되지 않는 파일 형식입니다.\");\n                } else if (code === \"file-too-large\") {\n                    setError(\"파일 크기가 제한을 초과했습니다.\");\n                } else if (code === \"too-many-files\") {\n                    setError(\"파일 개수가 제한을 초과했습니다.\");\n                } else {\n                    setError(\"파일을 선택할 수 없습니다.\");\n                }\n                onFilesRejected?.(rejected);\n                return;\n            }\n            setError(\"\");\n            setNames(accepted.map((file) => file.name));\n            onFilesSelected?.(accepted);\n        },\n    });\n\n    return (\n        <div className=\"min-w-0\">\n            <div\n                {...getRootProps({\n                    role: \"button\",\n                    \"aria-label\": label,\n                    className: cn(\n                        \"flex min-h-32 cursor-pointer flex-col items-center \" +\n                        \"justify-center gap-2 rounded-sm border border-dashed \" +\n                        \"border-border bg-surface-subtle p-[var(--space-4)] \" +\n                        \"text-center text-sm focus-visible:outline-2 \" +\n                        \"focus-visible:outline-focus\",\n                        isDragActive && \"border-accent bg-surface\",\n                        disabled && \"cursor-not-allowed opacity-50\",\n                        className,\n                    ),\n                })}\n            >\n                <Upload aria-hidden=\"true\" className=\"size-5 text-muted\" />\n                <span className=\"font-medium\">{label}</span>\n                {description && <span className=\"text-xs text-muted\">{description}</span>}\n            </div>\n            <input {...getInputProps({ \"aria-label\": `${label} 파일` })} />\n            {error && <p role=\"alert\" className=\"mt-2 text-sm text-danger\">{error}</p>}\n            {names.length > 0 && (\n                <p role=\"status\" className=\"mt-2 break-words text-sm\">\n                    선택한 파일: {names.join(\", \")}\n                </p>\n            )}\n        </div>\n    );\n}\n\nexport { Dropzone };\nexport type { DropzoneProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/dropzone.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

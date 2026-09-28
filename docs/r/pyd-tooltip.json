@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-tooltip",
+  "title": "Tooltip",
+  "dependencies": [
+    "@radix-ui/react-tooltip@1.2.16"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/tooltip.tsx",
+      "content": "import * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction TooltipProvider({\n    delayDuration = 300,\n    ...props\n}: ComponentProps<typeof TooltipPrimitive.Provider>) {\n    return <TooltipPrimitive.Provider delayDuration={delayDuration} {...props} />;\n}\n\nconst Tooltip = TooltipPrimitive.Root;\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\nfunction TooltipContent({\n    className,\n    sideOffset = 6,\n    ...props\n}: ComponentProps<typeof TooltipPrimitive.Content>) {\n    return (\n        <TooltipPrimitive.Portal>\n            <TooltipPrimitive.Content\n                sideOffset={sideOffset}\n                className={cn(\n                    \"z-50 max-w-xs rounded-sm bg-foreground \" +\n                    \"px-[var(--space-2)] py-[var(--space-1)] \" +\n                    \"text-xs text-background shadow-[var(--shadow-float)]\",\n                    className,\n                )}\n                {...props}\n            />\n        </TooltipPrimitive.Portal>\n    );\n}\n\nexport { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/tooltip.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

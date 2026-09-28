@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-breadcrumb",
+  "title": "Breadcrumb",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/breadcrumb.tsx",
+      "content": "import { ChevronRight, MoreHorizontal } from \"lucide-react\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Breadcrumb({ className, ...props }: ComponentProps<\"nav\">) {\n    return <nav aria-label=\"breadcrumb\" className={cn(\"text-sm\", className)} {...props} />;\n}\n\nfunction BreadcrumbList({ className, ...props }: ComponentProps<\"ol\">) {\n    return (\n        <ol\n            className={cn(\"flex flex-wrap items-center gap-2\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction BreadcrumbItem({ className, ...props }: ComponentProps<\"li\">) {\n    return <li className={cn(\"inline-flex items-center\", className)} {...props} />;\n}\n\nfunction BreadcrumbLink({ className, ...props }: ComponentProps<\"a\">) {\n    return (\n        <a\n            className={cn(\"text-muted underline-offset-4 hover:underline\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction BreadcrumbPage({ className, ...props }: ComponentProps<\"span\">) {\n    return (\n        <span\n            aria-current=\"page\"\n            className={cn(\"font-medium text-foreground\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction BreadcrumbSeparator({\n    className,\n    children,\n    ...props\n}: ComponentProps<\"li\">) {\n    return (\n        <li\n            role=\"presentation\"\n            aria-hidden=\"true\"\n            className={cn(\"text-muted [&_svg]:size-4\", className)}\n            {...props}\n        >\n            {children ?? <ChevronRight className=\"rtl:rotate-180\" />}\n        </li>\n    );\n}\n\nfunction BreadcrumbEllipsis({ className, ...props }: ComponentProps<\"span\">) {\n    return (\n        <span\n            aria-hidden=\"true\"\n            className={cn(\"inline-flex text-muted\", className)}\n            {...props}\n        >\n            <MoreHorizontal className=\"size-4\" />\n        </span>\n    );\n}\n\nexport {\n    Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink,\n    BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis,\n};\n",
+      "type": "registry:ui",
+      "target": "@ui/breadcrumb.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

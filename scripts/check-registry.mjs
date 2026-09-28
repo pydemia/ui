@@ -1,11 +1,20 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { basename, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = new URL("../", import.meta.url).pathname;
+const root = fileURLToPath(new URL("../", import.meta.url));
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 const provenance = JSON.parse(readFileSync(join(root, "registry/provenance.json"), "utf8"));
 const output = join(root, "apps/profile-demo/public/r");
+const base = new URL(
+    process.env.PYDEMIA_REGISTRY_BASE_URL ??
+        "https://pydemia-ui.vercel.app/r/",
+);
+if (!["http:", "https:"].includes(base.protocol)) {
+    throw new Error("PYDEMIA_REGISTRY_BASE_URL must be an HTTP URL.");
+}
+if (!base.pathname.endsWith("/")) base.pathname += "/";
 const names = new Set(registry.items.map((item) => item.name));
 assert.equal(names.size, registry.items.length, "Registry item names must be unique");
 
@@ -33,7 +42,20 @@ for (const item of registry.items) {
     assert(existsSync(file), `Missing compiled registry item ${item.name}`);
     const compiled = JSON.parse(readFileSync(file, "utf8"));
     assert.equal(compiled.name, item.name);
+    assert.deepEqual(
+        compiled.registryDependencies,
+        item.registryDependencies?.map((dependency) =>
+            new URL(dependency.slice(2), base).href,
+        ),
+        `Unresolved registry dependencies for ${item.name}`,
+    );
     assert(compiled.files?.every((entry) => entry.content?.length > 0));
+    for (const entry of compiled.files) {
+        const target = entry.path === "packages/ui/src/styles.css"
+            ? "@ui/tokens.css"
+            : `@ui/${basename(entry.path)}`;
+        assert.equal(entry.target, target);
+    }
 }
 
 console.log(`Verified ${names.size} compiled registry items and provenance records.`);

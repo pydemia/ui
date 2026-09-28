@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-accordion",
+  "title": "Accordion",
+  "dependencies": [
+    "@radix-ui/react-accordion@1.2.20",
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/accordion.tsx",
+      "content": "import * as AccordionPrimitive from \"@radix-ui/react-accordion\";\nimport { ChevronDown } from \"lucide-react\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Accordion = AccordionPrimitive.Root;\n\nfunction AccordionItem({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Item>) {\n    return (\n        <AccordionPrimitive.Item\n            className={cn(\"border-b border-border\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction AccordionTrigger({\n    className,\n    children,\n    ...props\n}: ComponentProps<typeof AccordionPrimitive.Trigger>) {\n    return (\n        <AccordionPrimitive.Header className=\"flex\">\n            <AccordionPrimitive.Trigger\n                className={cn(\n                    \"group flex min-h-[var(--control-height)] flex-1 items-center \" +\n                    \"justify-between gap-2 py-[var(--space-2)] text-left \" +\n                    \"font-medium disabled:opacity-50\",\n                    className,\n                )}\n                {...props}\n            >\n                {children}\n                <ChevronDown\n                    aria-hidden=\"true\"\n                    className={\"size-4 shrink-0 transition-transform \" +\n                        \"duration-[var(--motion-fast)] \" +\n                        \"group-data-[state=open]:rotate-180\"}\n                />\n            </AccordionPrimitive.Trigger>\n        </AccordionPrimitive.Header>\n    );\n}\n\nfunction AccordionContent({\n    className,\n    ...props\n}: ComponentProps<typeof AccordionPrimitive.Content>) {\n    return (\n        <AccordionPrimitive.Content\n            className={cn(\"overflow-hidden pb-[var(--space-3)] text-sm\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/accordion.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-card",
+  "title": "Card",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/card.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Card({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\n                \"rounded-sm border border-border bg-surface text-foreground\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nfunction CardHeader({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\"grid gap-1 px-[var(--space-4)] pt-[var(--space-4)]\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction CardTitle({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"font-semibold\", className)} {...props} />;\n}\n\nfunction CardDescription({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"text-sm text-muted\", className)} {...props} />;\n}\n\nfunction CardContent({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\"px-[var(--space-4)] py-[var(--space-4)]\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction CardFooter({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\n                \"flex items-center gap-2 px-[var(--space-4)] \" +\n                \"pb-[var(--space-4)]\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport {\n    Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,\n};\n",
+      "type": "registry:ui",
+      "target": "@ui/card.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

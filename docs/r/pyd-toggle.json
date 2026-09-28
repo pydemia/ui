@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-toggle",
+  "title": "Toggle",
+  "dependencies": [
+    "@radix-ui/react-toggle@1.1.18"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/toggle.tsx",
+      "content": "import * as TogglePrimitive from \"@radix-ui/react-toggle\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Toggle({\n    className,\n    ...props\n}: ComponentProps<typeof TogglePrimitive.Root>) {\n    return (\n        <TogglePrimitive.Root\n            className={cn(\n                \"inline-flex min-h-[var(--control-height)] min-w-[var(--control-height)] \" +\n                \"items-center justify-center rounded-sm border border-border \" +\n                \"bg-surface px-[var(--space-2)] text-sm \" +\n                \"data-[state=on]:border-accent data-[state=on]:bg-accent \" +\n                \"data-[state=on]:text-accent-foreground \" +\n                \"disabled:pointer-events-none disabled:opacity-50\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Toggle };\n",
+      "type": "registry:ui",
+      "target": "@ui/toggle.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

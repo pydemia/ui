@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-alert",
+  "title": "Alert",
+  "dependencies": [
+    "class-variance-authority@0.7.1"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/alert.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"./utils\";\n\nconst alertVariants = cva(\n    \"grid gap-1 rounded-sm border bg-surface p-[var(--space-4)] text-sm\",\n    {\n        variants: {\n            variant: {\n                default: \"border-border text-foreground\",\n                destructive: \"border-danger text-danger\",\n            },\n        },\n        defaultVariants: { variant: \"default\" },\n    },\n);\n\ntype AlertProps = ComponentProps<\"div\"> & VariantProps<typeof alertVariants>;\n\nfunction Alert({ className, variant, ...props }: AlertProps) {\n    return (\n        <div\n            role={variant === \"destructive\" ? \"alert\" : \"status\"}\n            className={cn(alertVariants({ variant }), className)}\n            {...props}\n        />\n    );\n}\n\nfunction AlertTitle({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"font-semibold\", className)} {...props} />;\n}\n\nfunction AlertDescription({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"leading-relaxed\", className)} {...props} />;\n}\n\nexport { Alert, AlertTitle, AlertDescription };\nexport type { AlertProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/alert.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

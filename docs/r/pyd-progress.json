@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-progress",
+  "title": "Progress",
+  "dependencies": [
+    "@radix-ui/react-progress@1.1.16"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/progress.tsx",
+      "content": "import * as ProgressPrimitive from \"@radix-ui/react-progress\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Progress({\n    className,\n    value = 0,\n    max = 100,\n    ...props\n}: ComponentProps<typeof ProgressPrimitive.Root>) {\n    let percentage = 100;\n    if (value !== null) {\n        percentage = max > 0\n            ? Math.max(0, Math.min(100, (value / max) * 100))\n            : 0;\n    }\n\n    return (\n        <ProgressPrimitive.Root\n            value={value}\n            max={max}\n            className={cn(\n                \"group h-2 w-full overflow-hidden rounded-full bg-surface-subtle\",\n                className,\n            )}\n            {...props}\n        >\n            <ProgressPrimitive.Indicator\n                className={\"block h-full rounded-full bg-accent \" +\n                    \"transition-[width] duration-[var(--motion-fast)] \" +\n                    \"group-data-[state=indeterminate]:animate-pulse\"}\n                style={{ width: `${percentage}%` }}\n            />\n        </ProgressPrimitive.Root>\n    );\n}\n\nexport { Progress };\n",
+      "type": "registry:ui",
+      "target": "@ui/progress.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

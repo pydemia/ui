@@ -6,13 +6,14 @@
     "class-variance-authority@0.7.1"
   ],
   "registryDependencies": [
-    "./pyd-utils.json"
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
   ],
   "files": [
     {
       "path": "packages/ui/src/components/button.tsx",
       "content": "import type { ComponentProps } from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"./utils\";\n\nconst buttonVariants = cva(\n    \"inline-flex h-[var(--control-height)] items-center justify-center \" +\n    \"gap-2 rounded-sm border px-[var(--space-3)] text-sm font-medium \" +\n    \"transition-colors duration-[var(--motion-fast)] \" +\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    {\n        variants: {\n            variant: {\n                primary: \"border-accent bg-accent text-accent-foreground \" +\n                    \"hover:opacity-90\",\n                outline: \"border-border bg-surface text-foreground \" +\n                    \"hover:bg-surface-subtle\",\n                ghost: \"border-transparent bg-transparent text-foreground \" +\n                    \"hover:bg-surface-subtle\",\n            },\n            size: {\n                default: \"px-[var(--space-3)]\",\n                icon: \"w-[var(--control-height)] px-0\",\n            },\n        },\n        defaultVariants: { variant: \"primary\", size: \"default\" },\n    },\n);\n\ntype ButtonProps = ComponentProps<\"button\"> &\n    VariantProps<typeof buttonVariants>;\n\nfunction Button({ className, variant, size, type = \"button\", ...props }: ButtonProps) {\n    return (\n        <button\n            type={type}\n            className={cn(buttonVariants({ variant, size }), className)}\n            {...props}\n        />\n    );\n}\n\nexport { Button, buttonVariants };\nexport type { ButtonProps };\n",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "target": "@ui/button.tsx"
     }
   ],
   "type": "registry:ui"

@@ -1,10 +1,10 @@
 # pydemia UI
 
 React 19, Tailwind CSS 4, TypeScript와 shadcn registry convention으로 만든
-source-owned UI 컴포넌트 작업공간입니다. 현재 foundation 6개와 Origin UI,
-Kibo UI에서 정규화한 컴포넌트 각 1개를 포함합니다. 이 저장소와 문서 사이트는
-prototype 단계이며 Mantine/MUI 수준의 전체 component breadth를 제공한다는
-뜻은 아닙니다.
+source-owned UI 컴포넌트 작업공간입니다. 현재 38개 컴포넌트를 포함하며
+shadcn/ui, Origin UI, Kibo UI, AI Elements를 항목별로 검토해 편입했습니다.
+이 저장소와 문서 사이트는 prototype 단계이며 Mantine/MUI 수준의 전체
+component breadth를 제공하지는 않습니다.
 
 ## 시작하기
 
@@ -23,10 +23,18 @@ npm run dev
 
 `@pydemia/ui`는 이 workspace 안에서 사용하는 **private 패키지**이며 npm에
 게시되지 않았습니다. 컴포넌트 소스를 프로젝트에 편입할 때는 원하는
-`docs/r/pyd-*.json` 항목을 shadcn registry로 설치하고 `packages/ui/src/styles.css`의
-token 정의를 소비자 stylesheet에 연결해야 합니다. `npm run build`는
+`docs/r/pyd-*.json` 항목을 shadcn registry로 설치합니다. token은
+`pyd-tokens.json`을 함께 설치하고 소비자 CSS에서
+`@import "./components/ui/tokens.css";`로 연결합니다. `npm run build`는
 `docs/`에 게시용 사이트, `docs/r/`에 registry JSON, `docs/examples/profile/`에
-실행 가능한 조합 예시를 생성합니다.
+실행 가능한 조합 예시를 생성합니다. import 경로는 소비자 프로젝트의
+`components.json`에 지정한 `aliases.ui` 위치에 맞춰 조정합니다.
+
+생성된 JSON의 내부 의존성은 공개 registry URL을 가리킵니다. 별도 소비자
+프로젝트에서 로컬 registry를 시험할 때는 먼저
+`PYDEMIA_REGISTRY_BASE_URL=http://127.0.0.1:5173/r/`를 설정하고
+`npm run build`를 실행하세요. 환경 변수를 지정하지 않은 빌드는
+`https://pydemia-ui.vercel.app/r/`를 사용합니다.
 
 ## 구조
 
@@ -38,6 +46,7 @@ token 정의를 소비자 stylesheet에 연결해야 합니다. `npm run build`�
 | `apps/profile-demo` | 실제 컴포넌트를 조합한 프로필 예시 |
 | `docs/` | Vercel 정적 배포용 빌드 결과 (`npm run build`로 갱신) |
 | `research/` | source inventory, taxonomy, 검증 기록 |
+| `.worknotes/` | 세션 인계, [확장 계획](.worknotes/component-roadmap.md), 검토 기록 |
 
 외부 component를 추가할 때는 upstream revision과 정확한 license를 확인하고,
 `registry/provenance.json`에 의존성·적용 profile·접근성 상태를 기록한 다음

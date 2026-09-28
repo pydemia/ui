@@ -8,7 +8,7 @@
     "dev:example": "npm run dev -w @pydemia/profile-demo",
     "typecheck": "npm run build -w @pydemia/ui && npm run typecheck -w @pydemia/profile-demo && npm run typecheck -w @pydemia/docs",
     "build": "npm run registry:build && npm run build -w @pydemia/ui && node scripts/build-site.mjs",
-    "registry:build": "shadcn build --output apps/profile-demo/public/r",
+    "registry:build": "shadcn build --output apps/profile-demo/public/r && node scripts/finalize-registry.mjs",
     "registry:check": "node scripts/check-registry.mjs"
   },
   "devDependencies": {

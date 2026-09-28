@@ -2,14 +2,30 @@
 
 The `AffixedInput` composition is adapted from Origin UI `comp-13`.
 The `Snippet` composition is adapted from Kibo UI `packages/snippet`.
-The foundation components follow shadcn/ui conventions.
+The `Dropzone` composition is adapted from Kibo UI `packages/dropzone`.
+The foundation components follow or adapt shadcn/ui source. Their exact
+revisions are in `registry/provenance.json`.
+The `Message` and `PromptInput` components are simplified adaptations of
+AI Elements. Their source is licensed under Apache-2.0. Copyright 2023
+Vercel, Inc. The upstream license notice is retained below; the full
+Apache-2.0 text is in `licenses/Apache-2.0.txt`.
 See `registry/provenance.json` for exact file revisions and modification status.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use these files except in compliance with the License.
+You may obtain a copy of the License at
+<https://www.apache.org/licenses/LICENSE-2.0>.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 - Copyright (c) 2025 Origin UI
 - Copyright (c) 2023 — Present shadcnblocks
 - Copyright (c) 2023 shadcn
 
-The above sources are licensed under the MIT License:
+Origin UI, Kibo UI, and shadcn/ui are licensed under the MIT License:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

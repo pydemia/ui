@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-metric-card",
+  "title": "Metric Card",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-card.json",
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/metric-card.tsx",
+      "content": "import type { ComponentProps, ReactNode } from \"react\";\nimport { Card } from \"./card\";\nimport { cn } from \"./utils\";\n\ntype MetricCardProps = Omit<ComponentProps<typeof Card>, \"children\"> & {\n    label: string;\n    value: ReactNode;\n    change?: string;\n    detail?: string;\n};\n\nfunction MetricCard({\n    className,\n    label,\n    value,\n    change,\n    detail,\n    ...props\n}: MetricCardProps) {\n    return (\n        <Card\n            role=\"group\"\n            aria-label={label}\n            className={cn(\"min-w-0\", className)}\n            {...props}\n        >\n            <p className=\"text-sm text-muted\">{label}</p>\n            <p className=\"mt-2 text-2xl font-semibold tabular-nums\">{value}</p>\n            {(change || detail) && (\n                <p className=\"mt-2 text-xs text-muted\">\n                    {change && <span className=\"font-medium text-foreground\">{change}</span>}\n                    {change && detail && \" · \"}\n                    {detail}\n                </p>\n            )}\n        </Card>\n    );\n}\n\nexport { MetricCard };\nexport type { MetricCardProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/metric-card.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

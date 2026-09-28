@@ -38,7 +38,7 @@ slice입니다. 기존 repository와 brand palette가 제공되지 않아 color�
 - Spacing: `--space-1/2/3/4/6`. 컴포넌트 내부는 이에 대응하는 Tailwind
   utility와 control padding을 사용합니다.
 - Surface: `--background`, `--surface`, `--surface-subtle`, `--border`,
-  `--radius`, `--shadow-float`; border 두께는 1px입니다.
+  `--overlay`, `--radius`, `--shadow-float`; border 두께는 1px입니다.
 - Semantics: `--foreground`, `--muted`, `--accent`, `--accent-foreground`,
   `--focus`, `--danger`를 light/dark에 각각 할당합니다.
 - Motion/density: `--motion-fast`, `--density-control-height`,
@@ -71,3 +71,17 @@ keyboard focus를 받고 복사 버튼은 이름과 상태 텍스트를 갖습�
 
 코드와 문서로 본 특성입니다. 브라우저가 로컬 주소를 열지 못해 pixel,
 hover, 실제 responsive 화면의 시각 관찰은 수행하지 못했습니다.
+
+## 2026-09-28 폼 입력 확장
+
+- `Field`는 자체 label이 없는 control에 `id`, 설명·오류 ID,
+  `aria-invalid`, `aria-required`를 전달합니다. 실제 필수값·형식 검사는
+  소비자 form이 맡습니다.
+- `Select`는 검색 없는 단일 선택입니다. Radix Select가 option 탐색과
+  form 값을 관리하며, `Field`는 trigger에 이름을 연결합니다.
+- `DatePicker`는 `YYYY-MM-DD` 달력 날짜 또는 `null`만 받습니다.
+  시각·시간대 값은 이 API에 넣지 않습니다. hidden input의 빈 값은
+  빈 문자열이며, 오류 표시는 소비자 form과 `Field`가 맡습니다.
+- registry 설치는 `pyd-tokens` stylesheet를 함께 설치하고 소비자 CSS에서
+  import해야 공통 token을 적용합니다. 배포 JSON의 내부 의존성은
+  공개 URL로 변환하고 파일 target은 소비자의 `@ui/` 경로로 지정합니다.
