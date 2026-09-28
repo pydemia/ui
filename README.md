@@ -18,7 +18,7 @@ npm run registry:check
 npm run dev
 ```
 
-`npm run dev`는 문서 사이트를 `http://127.0.0.1:5173/ui/`에서 실행합니다.
+`npm run dev`는 문서 사이트를 `http://127.0.0.1:5173/`에서 실행합니다.
 프로필 예시만 보려면 `npm run dev:example`을 사용합니다.
 
 `@pydemia/ui`는 이 workspace 안에서 사용하는 **private 패키지**이며 npm에
@@ -46,10 +46,10 @@ token과 상호작용을 정규화합니다. 출처별 notice는
 
 ## 문서 사이트 게시
 
-이 저장소의 GitHub Pages 게시 원본은 **`main` branch의 `/docs` 폴더**입니다.
-저장소 Settings → Pages → Build and deployment에서 `Deploy from a branch`,
-`main`, `/docs`를 선택하면 `https://pydemia.github.io/ui/`에서 문서를 볼 수
-있습니다. Pages 설정 후 코드를 바꿀 때마다 `npm run build`로 `/docs`를
+이 저장소의 GitHub Pages 게시 원본은 **`main` branch의 `/docs` 폴더**이며,
+커스텀 도메인은 [`ui.pydemia.ai`](https://ui.pydemia.ai/)입니다. DNS 공급자에서
+`ui`의 CNAME을 `pydemia.github.io`로 연결하고 Pages에서 DNS 확인 및 HTTPS가
+활성화되면 문서가 공개됩니다. 코드를 바꿀 때마다 `npm run build`로 `/docs`를
 다시 생성하고 함께 commit해야 합니다. GitHub Actions 기반 빌드나 자동 배포는
 설정하지 않았습니다.
 
