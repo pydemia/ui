@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+  <title>UI 프레임과 PYDEMIA</title>
+  <rect width="64" height="64" rx="10" fill="#245d70" />
+  <path d="M15 17H9v28h6M49 17h6v28h-6"
+    fill="none" stroke="#c9e3ea" stroke-width="3" />
+  <path
+    fill="#fff"
+    d="M18 21h5v16c0 3 2 5 5 5s5-2 5-5V21h5v16c0 7-4 11-10 11s-10-4-10-11V21Zm23 0h6v27h-6V21Z"
+  />
+  <text
+    x="32" y="57" text-anchor="middle" fill="#c9e3ea"
+    font-family="Arial, sans-serif" font-size="7.5" font-weight="700"
+    letter-spacing="0.4"
+  >PYDEMIA</text>
+</svg>
