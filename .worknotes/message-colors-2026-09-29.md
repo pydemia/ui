@@ -25,3 +25,8 @@ variant에만 적용했습니다. API, 의존성, registry metadata는 바뀌지
 - user 글자색 대비는 WCAG 계산식으로 light 13.30:1, dark 7.31:1입니다.
 - 실제 screen reader 발표와 전체 WCAG audit은 실행하지 않았습니다.
 - 문서 빌드의 기존 500 kB 초과 JS chunk 경고가 남아 있습니다.
+- 코드 commit `589ce95`를 `origin/main`에 push했습니다. Vercel production
+  배포 `dpl_CnWwx8KATqPHuhbCUcYEecPAWHUp`가 `READY`이고
+  `ui.pydemia.ai` alias가 연결됐습니다. 공개 문서에서 light/dark
+  Message의 계산 스타일을 다시 확인했습니다. 공개 `pyd-message.json`과
+  `pyd-tokens.json`에도 새 class와 token이 포함돼 있습니다.

@@ -168,6 +168,7 @@ system 발화의 기존 표면·글자색은 유지했습니다.
 | 문서 preview, light | pass | user `#103344`/`#ffffff`, assistant `#ffffff`/`#202a35` 계산 스타일 확인 |
 | 문서 preview, dark | pass | user `#245d70`/`#ffffff`, assistant `#1b242d`/`#e9eef2` 계산 스타일과 시각 표시 확인 |
 | user 글자색 대비 | pass | 흰색 기준 light 13.30:1, dark 7.31:1 계산 |
+| 공개 문서와 registry | pass | `ui.pydemia.ai`의 두 테마 계산 스타일, 두 JSON에 새 class와 token 포함 확인 |
 | 실제 screen reader | unverified | 발신자별 이름 있는 group은 유지되지만 보조기술 발표는 실행하지 않음 |
 
 문서 빌드에는 기존의 500 kB 초과 JS chunk 경고가 남아 있습니다.
