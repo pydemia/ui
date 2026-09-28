@@ -386,7 +386,7 @@ function FieldPreview() {
 
 function SelectPreview() {
     const [role, setRole] = useState("");
-    const [submitted, setSubmitted] = useState("");
+    const [submitted, setSubmitted] = useState<string | null>(null);
     const [tried, setTried] = useState(false);
 
     return (
@@ -404,7 +404,11 @@ function SelectPreview() {
                 required
             >
                 {(control) => (
-                    <Select name="role" value={role} onValueChange={setRole}>
+                    <Select name="role" value={role} onValueChange={(value) => {
+                        setRole(value);
+                        setSubmitted(null);
+                        setTried(false);
+                    }}>
                         <SelectTrigger {...control}>
                             <SelectValue placeholder="역할 선택" />
                         </SelectTrigger>
@@ -416,14 +420,17 @@ function SelectPreview() {
                 )}
             </Field>
             <Button type="submit">폼 값 확인</Button>
-            <p role="status">제출한 값: {submitted || "없음"}</p>
+            <p role="status">
+                {submitted === null ? "아직 제출하지 않았습니다." :
+                    submitted ? `제출한 값: ${submitted}` : "선택한 값이 없습니다."}
+            </p>
         </form>
     );
 }
 
 function DatePickerPreview() {
     const [date, setDate] = useState<string | null>(null);
-    const [submitted, setSubmitted] = useState("");
+    const [submitted, setSubmitted] = useState<string | null>(null);
     const [tried, setTried] = useState(false);
 
     return (
@@ -445,14 +452,21 @@ function DatePickerPreview() {
                         {...control}
                         name="date"
                         value={date}
-                        onValueChange={setDate}
+                        onValueChange={(value) => {
+                            setDate(value);
+                            setSubmitted(null);
+                            setTried(false);
+                        }}
                         calendarLocale={ko}
                         required
                     />
                 )}
             </Field>
             <Button type="submit">폼 값 확인</Button>
-            <p role="status">제출한 값: {submitted || "없음"}</p>
+            <p role="status">
+                {submitted === null ? "아직 제출하지 않았습니다." :
+                    submitted ? `제출한 값: ${submitted}` : "선택한 값이 없습니다."}
+            </p>
         </form>
     );
 }
