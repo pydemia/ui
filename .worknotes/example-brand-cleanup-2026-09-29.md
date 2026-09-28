@@ -21,3 +21,7 @@
   결과가 없을 때 안내 문구가 나오는 것을 브라우저에서 확인했습니다.
 - 이번 변경은 예시 문구와 데이터에 한정됩니다. 법률 검토는 수행하지
   않았습니다.
+- commit `e1cb0c9`를 `origin/main`에 push했습니다. Vercel production
+  배포 `dpl_962Sv9izHPXvqsFaq4qXJA3NH5h7`이 `READY`이고
+  `ui.pydemia.ai` alias가 연결됐습니다. 공개 Table preview와 조합
+  예시에서 새 요청 데이터를 다시 확인했습니다.
