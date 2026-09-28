@@ -46,6 +46,11 @@ token과 상호작용을 정규화합니다. 출처별 notice는
 
 ## 문서 사이트 게시
 
+Vercel에서는 저장소 루트를 프로젝트의 Root Directory로 선택합니다.
+[`vercel.json`](vercel.json)이 `npm ci`로 설치한 뒤 `npm run build`를 실행하고
+`docs/`를 정적 사이트로 게시하도록 지정합니다. GitHub 저장소 연결과
+`ui.pydemia.ai` 도메인 등록은 Vercel 프로젝트 설정에서 완료합니다.
+
 이 저장소의 GitHub Pages 게시 원본은 **`main` branch의 `/docs` 폴더**이며,
 커스텀 도메인은 [`ui.pydemia.ai`](https://ui.pydemia.ai/)입니다. DNS 공급자에서
 `ui`의 CNAME을 `pydemia.github.io`로 연결하고 Pages에서 DNS 확인 및 HTTPS가
