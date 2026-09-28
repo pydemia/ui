@@ -1,0 +1,55 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "pydemia-ui",
+  "homepage": "https://github.com/pydemia/ui",
+  "items": [
+    {
+      "name": "pyd-utils", "type": "registry:ui", "title": "Class utility",
+      "dependencies": ["clsx@2.1.1", "tailwind-merge@3.7.0"],
+      "files": [{ "path": "packages/ui/src/components/utils.ts", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-button", "type": "registry:ui", "title": "Button",
+      "dependencies": ["class-variance-authority@0.7.1"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/button.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-input", "type": "registry:ui", "title": "Input",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/input.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-label", "type": "registry:ui", "title": "Label",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/label.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-badge", "type": "registry:ui", "title": "Badge",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/badge.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-tabs", "type": "registry:ui", "title": "Tabs",
+      "dependencies": ["@radix-ui/react-tabs@1.1.21"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/tabs.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-table", "type": "registry:ui", "title": "Table",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/table.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-affixed-input", "type": "registry:ui", "title": "Affixed Input",
+      "registryDependencies": ["./pyd-input.json", "./pyd-label.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/affixed-input.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-snippet", "type": "registry:ui", "title": "Snippet",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-tabs.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/snippet.tsx", "type": "registry:ui" }]
+    }
+  ]
+}

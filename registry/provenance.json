@@ -1,0 +1,50 @@
+{
+  "reviewed_at": "2026-09-27",
+  "items": [
+    {
+      "name": "pyd-utils", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["clsx", "tailwind-merge"], "accessibility": { "semantics": "not-applicable", "keyboard": "not-applicable", "screen_reader": "not-applicable" }
+    },
+    {
+      "name": "pyd-button", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "dependencies": ["class-variance-authority", "pyd-utils"], "accessibility": { "semantics": "native button", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/input.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native input; consumer supplies label", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-label", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "shadcn/ui convention", "implementation": "original adaptation", "upstream": "https://ui.shadcn.com/docs/components/label", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native label", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-badge", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "shadcn/ui convention", "implementation": "original adaptation", "upstream": "https://ui.shadcn.com/docs/components/badge", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "text status; color not sole signal", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-tabs", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tabs.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "dependencies": ["@radix-ui/react-tabs", "pyd-utils"], "accessibility": { "semantics": "Radix tab roles", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-table", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "shadcn/ui convention", "implementation": "original adaptation", "upstream": "https://ui.shadcn.com/docs/components/table", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native table; consumer supplies caption and scope", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-affixed-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "Origin UI", "implementation": "modified", "upstream": "https://github.com/shadcn/originui/blob/f4f366ae39759248d46b1252c52fbdc0bc01c285/registry/default/components/comp-13.tsx", "license_file": "https://github.com/shadcn/originui/blob/f4f366ae39759248d46b1252c52fbdc0bc01c285/LICENSE.md", "license": "MIT", "copyright": "2025 Origin UI", "notice": "THIRD_PARTY_NOTICES.md" },
+      "dependencies": ["pyd-input", "pyd-label", "pyd-utils"], "accessibility": { "semantics": "label associated by id; affixes decorative", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-snippet", "category": "Developer tools", "profiles": ["developer-tool"],
+      "source": { "provider": "Kibo UI", "implementation": "modified", "upstream": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/snippet/index.tsx", "license_file": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md", "license": "MIT", "copyright": "2023–present shadcnblocks", "notice": "THIRD_PARTY_NOTICES.md" },
+      "dependencies": ["pyd-button", "pyd-tabs", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "Radix tabs; named copy button; live status", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    }
+  ]
+}

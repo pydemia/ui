@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@source "../../../packages/ui/src";
+@import "@pydemia/ui/styles.css";
+
+body { margin: 0; }

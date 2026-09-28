@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-badge",
+  "title": "Badge",
+  "registryDependencies": [
+    "./pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/badge.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Badge({ className, ...props }: ComponentProps<\"span\">) {\n    return (\n        <span\n            className={cn(\n                \"inline-flex items-center rounded-sm border border-border \" +\n                \"bg-surface-subtle px-2 py-0.5 text-xs font-medium text-foreground\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Badge };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

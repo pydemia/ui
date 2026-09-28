@@ -1,0 +1,18 @@
+{
+  "name": "pydemia-ui",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/ui", "apps/profile-demo", "apps/docs"],
+  "scripts": {
+    "dev": "npm run dev -w @pydemia/docs",
+    "dev:example": "npm run dev -w @pydemia/profile-demo",
+    "typecheck": "npm run build -w @pydemia/ui && npm run typecheck -w @pydemia/profile-demo && npm run typecheck -w @pydemia/docs",
+    "build": "npm run registry:build && npm run build -w @pydemia/ui && node scripts/build-site.mjs",
+    "registry:build": "shadcn build --output apps/profile-demo/public/r",
+    "registry:check": "node scripts/check-registry.mjs"
+  },
+  "devDependencies": {
+    "shadcn": "^4.0.0",
+    "typescript": "^5.9.3"
+  }
+}

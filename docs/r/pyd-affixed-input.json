@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-affixed-input",
+  "title": "Affixed Input",
+  "registryDependencies": [
+    "./pyd-input.json",
+    "./pyd-label.json",
+    "./pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/affixed-input.tsx",
+      "content": "import { useId, type ComponentProps } from \"react\";\nimport { Input } from \"./input\";\nimport { Label } from \"./label\";\nimport { cn } from \"./utils\";\n\ntype AffixedInputProps = Omit<ComponentProps<typeof Input>, \"type\"> & {\n    label: string;\n    prefix?: string;\n    suffix?: string;\n};\n\n// Adapted from Origin UI comp-13: two non-interactive, visual affixes.\nfunction AffixedInput({\n    label,\n    prefix,\n    suffix,\n    id,\n    className,\n    ...props\n}: AffixedInputProps) {\n    const generatedId = useId();\n    const inputId = id ?? generatedId;\n\n    return (\n        <div className=\"grid gap-2\">\n            <Label htmlFor={inputId}>{label}</Label>\n            <div className=\"flex h-[var(--control-height)] items-stretch overflow-hidden rounded-sm border border-border bg-surface focus-within:outline-2 focus-within:outline-focus focus-within:outline-offset-2\">\n                {prefix && (\n                    <span aria-hidden=\"true\" className=\"flex items-center border-r border-border bg-surface-subtle px-[var(--space-3)] text-sm text-muted\">\n                        {prefix}\n                    </span>\n                )}\n                <Input\n                    id={inputId}\n                    className={cn(\"h-full flex-1 rounded-none border-0 bg-transparent focus-visible:outline-none\", className)}\n                    {...props}\n                />\n                {suffix && (\n                    <span aria-hidden=\"true\" className=\"flex items-center border-l border-border bg-surface-subtle px-[var(--space-3)] text-sm text-muted\">\n                        {suffix}\n                    </span>\n                )}\n            </div>\n        </div>\n    );\n}\n\nexport { AffixedInput };\nexport type { AffixedInputProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-input",
+  "title": "Input",
+  "registryDependencies": [
+    "./pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/input.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Input({ className, type = \"text\", ...props }: ComponentProps<\"input\">) {\n    return (\n        <input\n            type={type}\n            className={cn(\n                \"h-[var(--control-height)] w-full min-w-0 rounded-sm border \" +\n                \"border-border bg-surface px-[var(--space-3)] text-sm text-foreground \" +\n                \"placeholder:text-muted disabled:cursor-not-allowed \" +\n                \"disabled:opacity-50 aria-invalid:border-danger\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Input };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
