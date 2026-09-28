@@ -39,3 +39,8 @@ SVG·32px PNG·16px PNG를 복사했습니다. 두 앱의 `index.html`에 favico
   `pydemia-ui.vercel.app`의 16px·32px PNG, 프로필 예시 페이지와
   프로필 favicon SVG도 HTTP 200입니다. 공개 SVG를 브라우저에서 직접
   열어 색상과 형태가 렌더링되는 것을 확인했습니다.
+
+2026-09-29에 사용자가 flat 컬러 원본을 선택해 favicon과 상단 로고를
+교체했습니다. 현재 상태는
+[`brand-logo-flat-2026-09-29.md`](brand-logo-flat-2026-09-29.md)에
+기록했습니다.

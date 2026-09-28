@@ -32,4 +32,9 @@
   SVG favicon을 브라우저에서 직접 열어 flat 색상을 확인했습니다.
   두 페이지의 SVG·PNG 경로는 모두 HTTP 200입니다.
 - 작은 화면의 실제 표시와 브라우저 탭 chrome의 아이콘은 확인하지
-  못했습니다. 원격 배포도 아직 확인하지 않았습니다.
+  못했습니다.
+- commit `5859d0d`를 `origin/main`에 push했습니다. Vercel production
+  배포 `dpl_4Smpm33CGsKHE2NQGVwvouyjAEeT`가 `READY`이고
+  `ui.pydemia.ai`, `pydemia-ui.vercel.app` alias가 연결됐습니다.
+  두 도메인의 페이지·flat SVG·PNG가 HTTP 200으로 응답했고, 공개
+  사이트의 상단 flat 로고를 브라우저에서 확인했습니다.
