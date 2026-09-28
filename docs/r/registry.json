@@ -191,7 +191,7 @@
     },
     {
       "name": "pyd-dropzone", "type": "registry:ui", "title": "Dropzone",
-      "dependencies": ["react-dropzone@14.4.1", "lucide-react@0.468.0"],
+      "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/dropzone.tsx", "type": "registry:ui" }]
     },

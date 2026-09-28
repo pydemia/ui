@@ -1,8 +1,10 @@
 # pydemia UI
 
 React 19, Tailwind CSS 4, TypeScript와 shadcn registry convention으로 만든
-source-owned UI 컴포넌트 작업공간입니다. 현재 38개 컴포넌트를 포함하며
-shadcn/ui, Origin UI, Kibo UI, AI Elements를 항목별로 검토해 편입했습니다.
+source-owned UI 컴포넌트 작업공간입니다. 현재 38개 컴포넌트를 포함합니다.
+shadcn/ui 기반 항목은 원본 revision과 MIT notice를 유지합니다. Origin UI,
+Kibo UI, AI Elements, Tremor는 디자인·상호작용 reference로 기록하고
+해당 항목의 구현 코드는 `pydemia/ui`에서 관리합니다.
 이 저장소와 문서 사이트는 prototype 단계이며 Mantine/MUI 수준의 전체
 component breadth를 제공하지는 않습니다.
 
@@ -69,10 +71,15 @@ document.documentElement.style.setProperty("--palette-accent", "#25684a");
 | `research/` | source inventory, taxonomy, 검증 기록 |
 | `.worknotes/` | 세션 인계, [확장 계획](.worknotes/component-roadmap.md), 검토 기록 |
 
-외부 component를 추가할 때는 upstream revision과 정확한 license를 확인하고,
-`registry/provenance.json`에 의존성·적용 profile·접근성 상태를 기록한 다음
-token과 상호작용을 정규화합니다. 출처별 notice는
-[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)에 보관합니다.
+새 component의 디자인 reference와 실제 코드 출처는
+`registry/provenance.json`에서 별도로 기록합니다. shadcn/ui source를
+변형한 항목은 revision·license·notice를 유지합니다. 다른 library는
+구현 source로 복사하지 않고 필요한 동작을 자체 코드로 작성합니다.
+dependency의 license는 component source license와 구분합니다.
+외부 source notice는 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)에
+보관합니다. 이전 adaptation의 귀속 notice도 보존합니다.
+이 저장소에는 아직 전체 코드에 적용할 공개 LICENSE가
+없으므로 문서의 「공개 사용 조건 미지정」은 재사용 허가를 뜻하지 않습니다.
 
 ## 문서 사이트 게시
 

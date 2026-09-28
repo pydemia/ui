@@ -190,3 +190,22 @@ system 발화의 기존 표면·글자색은 유지했습니다.
 
 직접 지정한 색은 자동 보정하지 않습니다. UI는 본문, Accent, User
 message의 세 텍스트 대비만 계산합니다.
+
+## 2026-09-29 component 구현 출처 재검토
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI와 문서·프로필 예시 TypeScript |
+| `npm run build` | pass | 40개 registry item, 게시용 문서·예시 |
+| `npm run registry:check` | pass | 구현 출처는 pydemia/ui 또는 shadcn/ui, reference와 분리 |
+| Dropzone 파일 선택 | pass | PNG 선택, TXT 형식 오류, 1 MB 초과 오류 |
+| Dropzone 키보드 | pass | Enter로 native file chooser 열기 |
+| 문서 표시 | pass | 자체 구현 source·별도 reference·공개 사용 조건 미지정 |
+| 실제 drag/drop·개수 제한 | 미검증 | 파일 drag 및 다중 파일 입력 미실행 |
+| 실제 screen reader·법률 검토 | 미검증 | DOM 역할과 metadata 확인에 한정 |
+
+`react-dropzone` runtime과 registry 의존성을 제거했습니다. shadcn/ui
+변형 항목의 MIT notice와 과거 adaptation의 귀속 notice는
+유지합니다. Origin UI·Kibo UI·AI Elements·Tremor는 현재 metadata에서
+디자인 reference로 표시합니다.
+저장소 전체 공개 LICENSE는 아직 정해지지 않았습니다.

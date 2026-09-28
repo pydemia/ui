@@ -103,3 +103,14 @@ hover, 실제 responsive 화면의 시각 관찰은 수행하지 못했습니다
   적용합니다. 전체 화면 링크는 현재 선택을 URL query로 전달합니다.
 - 본문, Accent, User message의 텍스트 대비를 화면에 표시합니다.
   사용자가 입력한 임의 색상의 대비를 자동 보정하지는 않습니다.
+
+## 2026-09-29 source 표시와 구현 소유
+
+- `registry/provenance.json`의 `source`는 현재 배포 코드의 구현
+  출처입니다. `reference`는 디자인·동작 참고 자료를 가리킵니다.
+  두 필드의 license를 합쳐 표시하지 않습니다.
+- shadcn/ui source를 변형한 항목은 고정 revision, MIT notice를
+  유지합니다. 기타 reference는 자체 구현으로 관리합니다.
+- 문서의 SOURCE는 구현 코드로, DESIGN REFERENCE는 참고 자료로
+  연결합니다. `project-owned` 항목은 공개 LICENSE가 아직 없어
+  「공개 사용 조건 미지정」으로 표시합니다.

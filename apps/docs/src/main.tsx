@@ -123,6 +123,9 @@ function App() {
     );
     const selected = catalog.find((entry) => entry.id === selectedId)!;
     const record = provenance.items.find((item) => item.name === `pyd-${selectedId}`)!;
+    const implementationUrl = record.source.upstream ??
+        `https://github.com/pydemia/ui/blob/main/packages/ui/src/components/${selected.id}.tsx`;
+    const reference = "reference" in record ? record.reference : undefined;
     const registryUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-${selected.id}.json`, window.location.origin).href;
     const tokensUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-tokens.json`, window.location.origin).href;
     const exampleUrl = new URL(`${import.meta.env.BASE_URL}examples/profile/`, window.location.origin);
@@ -282,7 +285,32 @@ function App() {
                             <div className="preview-panel"><div className="panel-caption"><span>LIVE PREVIEW</span><span>Neutral Product</span></div><div className="preview-stage">{selected.preview()}</div></div>
                             <div className="code-panel"><div className="panel-caption"><span>REACT / TSX</span><span>Copy ready</span></div><Snippet className="docs-snippet" defaultValue="usage"><SnippetHeader><SnippetTabsList aria-label="코드 예시"><SnippetTabsTrigger value="usage">Usage</SnippetTabsTrigger></SnippetTabsList><SnippetCopyButton value={selected.code} /></SnippetHeader><SnippetContent value="usage">{selected.code}</SnippetContent></Snippet></div>
                         </div>
-                        <div className="component-meta"><div><span className="meta-label">SOURCE</span><a href={record.source.upstream ?? "https://github.com/pydemia/ui"} target="_blank" rel="noreferrer">{record.source.provider} <ArrowUpRight size={13} aria-hidden="true" /></a></div><div><span className="meta-label">LICENSE</span><strong>{record.source.license}</strong></div><div><span className="meta-label">ACCESSIBILITY</span><span>{record.accessibility.keyboard === "pending browser check" ? "키보드·스크린리더 검증 대기" : record.accessibility.semantics}</span></div></div>
+                        <div className="component-meta">
+                            <div>
+                                <span className="meta-label">SOURCE</span>
+                                <a href={implementationUrl} target="_blank" rel="noreferrer">
+                                    {record.source.provider}
+                                    <ArrowUpRight size={13} aria-hidden="true" />
+                                </a>
+                            </div>
+                            {reference && <div>
+                                <span className="meta-label">DESIGN REFERENCE</span>
+                                <a href={reference.url} target="_blank" rel="noreferrer">
+                                    {reference.provider}
+                                    <ArrowUpRight size={13} aria-hidden="true" />
+                                </a>
+                            </div>}
+                            <div>
+                                <span className="meta-label">LICENSE</span>
+                                <strong>{record.source.license === "project-owned"
+                                    ? "공개 사용 조건 미지정"
+                                    : record.source.license}</strong>
+                            </div>
+                            <div>
+                                <span className="meta-label">ACCESSIBILITY</span>
+                                <span>{record.accessibility.keyboard === "pending browser check" ? "키보드·스크린리더 검증 대기" : record.accessibility.semantics}</span>
+                            </div>
+                        </div>
                         <p className="section-note">예시는 실제 <code>@pydemia/ui</code> 컴포넌트를 사용합니다. 접근성 상태는 <a href="https://github.com/pydemia/ui/blob/main/registry/provenance.json" target="_blank" rel="noreferrer">provenance metadata</a>에 기록합니다.</p>
                     </section>
 

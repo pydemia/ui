@@ -240,3 +240,12 @@ DatePicker는 기존 Calendar와 Popover를 조합한 원본 코드입니다.
 [고정 소스](https://github.com/gpbl/react-day-picker/tree/a5b0c43c0aec821d24d58ed7e274db54a9a38b11)와
 설치된 release의 MIT LICENSE를 대조했습니다. 값은 로컬 시각이 아닌
 `YYYY-MM-DD` 달력 날짜로 정했고, form 전송은 hidden input으로 처리합니다.
+
+## 2026-09-29 구현 출처 재분류
+
+위 2026-09-28 기록은 당시 편입 방식과 의존성 조사입니다. 현재
+Dropzone은 native file input과 drag/drop 이벤트로 직접 구현했고
+`react-dropzone` 의존성을 제거했습니다. Origin UI, Kibo UI,
+AI Elements, Tremor는 구현 출처가 아닌 디자인·동작 reference로
+`registry/provenance.json`에 별도로 기록합니다. 문서 사이트도
+현재 코드의 출처와 디자인 reference를 분리해 표시합니다.

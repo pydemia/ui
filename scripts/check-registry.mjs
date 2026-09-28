@@ -27,6 +27,24 @@ assert.deepEqual(
 for (const item of registry.items) {
     const record = provenance.items.find((entry) => entry.name === item.name);
     assert(record?.source?.license, `Missing license for ${item.name}`);
+    if (record.source.provider === "pydemia/ui") {
+        assert.equal(record.source.implementation, "original");
+        assert.equal(record.source.upstream, null);
+        assert.equal(record.source.license, "project-owned");
+    } else {
+        assert.equal(
+            record.source.provider,
+            "shadcn/ui",
+            `Unsupported implementation source for ${item.name}`,
+        );
+    }
+    if (record.reference) {
+        assert(record.reference.provider, `Missing reference name for ${item.name}`);
+        assert(
+            record.reference.url.startsWith("https://"),
+            `Invalid reference URL for ${item.name}`,
+        );
+    }
     assert(record.profiles?.length, `Missing intended profile for ${item.name}`);
     assert(Array.isArray(record.dependencies), `Missing dependencies for ${item.name}`);
     assert(record.accessibility?.semantics, `Missing accessibility state for ${item.name}`);

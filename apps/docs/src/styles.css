@@ -88,7 +88,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .docs-snippet > div:first-child { min-height: 44px; }
 .docs-snippet pre { max-height: 299px; min-height: 282px; margin: 0; font-size: 12px; line-height: 1.85; }
 .code-panel .panel-caption { background: var(--surface); }
-.component-meta { display: grid; grid-template-columns: 1fr .6fr 1.2fr; gap: 17px; padding: 16px 2px; border-bottom: 1px solid var(--border); }
+.component-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 17px; padding: 16px 2px; border-bottom: 1px solid var(--border); }
 .component-meta > div { min-width: 0; display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
 .component-meta strong { font-weight: 550; }
 .component-meta a { width: fit-content; display: inline-flex; align-items: center; gap: 3px; text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }

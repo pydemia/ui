@@ -1,11 +1,9 @@
-import type { ComponentProps } from "react";
-import { useState } from "react";
+import { useId, useState, type ComponentProps } from "react";
 import { Check, Copy } from "lucide-react";
 import { Button } from "./button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import { cn } from "./utils";
 
-// Adapted from Kibo UI Snippet: tabbed code with an explicit copy action.
 function Snippet({ className, ...props }: ComponentProps<typeof Tabs>) {
     return (
         <Tabs
@@ -25,6 +23,7 @@ function SnippetHeader({ className, ...props }: ComponentProps<"div">) {
 }
 
 function SnippetCopyButton({ value }: { value: string }) {
+    const statusId = useId();
     const [feedback, setFeedback] = useState<{ value: string; message: string } | null>(null);
     const message = feedback?.value === value ? feedback.message : "";
 
@@ -39,13 +38,14 @@ function SnippetCopyButton({ value }: { value: string }) {
 
     return (
         <div className="flex items-center gap-2">
-            <span className="text-xs text-muted" role="status" aria-live="polite">
+            <span id={statusId} className="text-xs text-muted" role="status">
                 {message}
             </span>
             <Button
                 variant="ghost"
                 size="icon"
                 aria-label="현재 코드 복사"
+                aria-describedby={message ? statusId : undefined}
                 onClick={copy}
             >
                 {message === "복사되었습니다" ? <Check aria-hidden size={16} /> : <Copy aria-hidden size={16} />}

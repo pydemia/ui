@@ -1,14 +1,14 @@
 {
-  "reviewed_at": "2026-09-28",
+  "reviewed_at": "2026-09-29",
   "items": [
     {
       "name": "pyd-utils", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "pydemia", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["clsx", "tailwind-merge"], "accessibility": { "semantics": "not-applicable", "keyboard": "not-applicable", "screen_reader": "not-applicable" }
     },
     {
       "name": "pyd-tokens", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "pydemia", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": [], "accessibility": { "semantics": "CSS variables and focus/reduced-motion rules", "keyboard": "not-applicable", "screen_reader": "not-applicable" }
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "name": "pyd-field", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "pydemia", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-label", "pyd-utils"], "accessibility": { "semantics": "label, description, error and required state connected to a supplied control", "keyboard": "Chromium: input entry and error association verified", "screen_reader": "pending manual review" }
     },
     {
@@ -38,17 +38,20 @@
     },
     {
       "name": "pyd-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "pydemia", "implementation": "original", "upstream": null, "license": "project-owned", "references": ["https://www.radix-ui.com/primitives/docs/components/select"] },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Radix UI", "url": "https://www.radix-ui.com/primitives/docs/components/select" },
       "dependencies": ["@radix-ui/react-select@2.3.7 (MIT)", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "Radix single select with labeled trigger and form value", "keyboard": "Chromium: Enter, ArrowDown, selection and form value verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-label", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui convention", "implementation": "original adaptation", "upstream": "https://ui.shadcn.com/docs/components/label", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/label" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native label", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-badge", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui convention", "implementation": "original adaptation", "upstream": "https://ui.shadcn.com/docs/components/badge", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/badge" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "text status; color not sole signal", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
@@ -158,27 +161,32 @@
     },
     {
       "name": "pyd-date-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "pydemia", "implementation": "original", "upstream": null, "license": "project-owned", "references": ["https://daypicker.dev/selections/selection-modes", "https://www.radix-ui.com/primitives/docs/components/popover"] },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "DayPicker", "url": "https://daypicker.dev/selections/selection-modes" },
       "dependencies": ["pyd-calendar", "pyd-popover", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "button trigger, calendar grid and hidden form value; consumer supplies label", "keyboard": "Chromium: Enter, date selection, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-metric-card", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "pydemia; Tremor reference", "implementation": "original composition", "upstream": "https://github.com/tremorlabs/tremor/blob/ca4d588f47820ff3d514d37fa4ee08a4222dec11/src/components/Card/Card.tsx", "license_file": "https://github.com/tremorlabs/tremor/blob/ca4d588f47820ff3d514d37fa4ee08a4222dec11/LICENSE", "reference_license": "Apache-2.0", "license": "project-owned" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Tremor", "url": "https://github.com/tremorlabs/tremor/blob/ca4d588f47820ff3d514d37fa4ee08a4222dec11/src/components/Card/Card.tsx", "license": "Apache-2.0" },
       "dependencies": ["pyd-card", "pyd-utils"], "accessibility": { "semantics": "named group with textual metric and change", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-dropzone", "category": "File & media", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "Kibo UI", "implementation": "modified", "upstream": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx", "license_file": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md", "license": "MIT", "copyright": "2023–present shadcnblocks", "notice": "THIRD_PARTY_NOTICES.md" },
-      "dependencies": ["react-dropzone", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "named keyboard-operable file input and status/error text", "keyboard": "Chromium: Enter opens file input; accepted and rejected file selection verified", "screen_reader": "pending manual review" }
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Kibo UI", "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx", "license": "MIT" },
+      "dependencies": ["lucide-react", "pyd-utils"], "accessibility": { "semantics": "named native button opens file input; status and errors are announced", "keyboard": "pending browser check after rewrite", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-message", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "AI Elements", "implementation": "modified", "upstream": "https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/message.tsx", "license_file": "https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/LICENSE", "license": "Apache-2.0", "copyright": "2023 Vercel, Inc.", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "AI Elements", "url": "https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/message.tsx", "license": "Apache-2.0" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named message groups by sender", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-prompt-input", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "AI Elements", "implementation": "original simplified adaptation", "upstream": "https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/prompt-input.tsx", "license_file": "https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/LICENSE", "license": "Apache-2.0", "copyright": "2023 Vercel, Inc.", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "AI Elements", "url": "https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/prompt-input.tsx", "license": "Apache-2.0" },
       "dependencies": ["pyd-button", "pyd-textarea", "pyd-utils"], "accessibility": { "semantics": "labeled textarea and submit button", "keyboard": "Chromium: Enter submit, Shift+Enter newline and empty disable verified", "screen_reader": "pending manual review" }
     },
     {
@@ -188,17 +196,20 @@
     },
     {
       "name": "pyd-table", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui convention", "implementation": "original adaptation", "upstream": "https://ui.shadcn.com/docs/components/table", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/table" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native table; consumer supplies caption and scope", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-affixed-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "Origin UI", "implementation": "modified", "upstream": "https://github.com/shadcn/originui/blob/f4f366ae39759248d46b1252c52fbdc0bc01c285/registry/default/components/comp-13.tsx", "license_file": "https://github.com/shadcn/originui/blob/f4f366ae39759248d46b1252c52fbdc0bc01c285/LICENSE.md", "license": "MIT", "copyright": "2025 Origin UI", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Origin UI", "url": "https://github.com/shadcn/originui/blob/f4f366ae39759248d46b1252c52fbdc0bc01c285/registry/default/components/comp-13.tsx", "license": "MIT" },
       "dependencies": ["pyd-input", "pyd-label", "pyd-utils"], "accessibility": { "semantics": "label associated by id; affixes decorative", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-snippet", "category": "Developer tools", "profiles": ["developer-tool"],
-      "source": { "provider": "Kibo UI", "implementation": "modified", "upstream": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/snippet/index.tsx", "license_file": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md", "license": "MIT", "copyright": "2023–present shadcnblocks", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Kibo UI", "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/snippet/index.tsx", "license": "MIT" },
       "dependencies": ["pyd-button", "pyd-tabs", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "Radix tabs; named copy button; live status", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     }
   ]

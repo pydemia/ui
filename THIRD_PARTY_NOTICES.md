@@ -1,15 +1,16 @@
-# Adapted source notices
+# Source and historical attribution notices
 
-The `AffixedInput` composition is adapted from Origin UI `comp-13`.
-The `Snippet` composition is adapted from Kibo UI `packages/snippet`.
-The `Dropzone` composition is adapted from Kibo UI `packages/dropzone`.
-The foundation components follow or adapt shadcn/ui source. Their exact
-revisions are in `registry/provenance.json`.
-The `Message` and `PromptInput` components are simplified adaptations of
-AI Elements. Their source is licensed under Apache-2.0. Copyright 2023
-Vercel, Inc. The upstream license notice is retained below; the full
-Apache-2.0 text is in `licenses/Apache-2.0.txt`.
-See `registry/provenance.json` for exact file revisions and modification status.
+The components marked `shadcn/ui` in `registry/provenance.json` adapt
+shadcn/ui source. The metadata records their exact revisions. Origin UI,
+Kibo UI, and AI Elements were recorded as adaptation sources in earlier
+versions. Their notices are retained for provenance and attribution even
+though current component code is implemented in pydemia/ui. Tremor is a
+design reference; its source was not copied. Package dependencies retain
+their own licenses in the installed packages.
+
+The earlier Message and PromptInput adaptations referenced AI Elements,
+licensed under Apache-2.0. Copyright 2023 Vercel, Inc. The full license
+text is in `licenses/Apache-2.0.txt`.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use these files except in compliance with the License.

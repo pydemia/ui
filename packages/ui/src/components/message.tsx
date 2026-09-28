@@ -6,19 +6,23 @@ type MessageProps = ComponentProps<"div"> & {
 };
 
 function Message({ from, className, ...props }: MessageProps) {
-    const label = from === "user" ? "사용자" : from === "assistant" ? "응답" : "시스템";
+    const labels = {
+        user: "사용자",
+        assistant: "응답",
+        system: "시스템",
+    };
 
     return (
         <div
             role="group"
-            aria-label={`${label} 메시지`}
-            data-from={from}
+            aria-label={`${labels[from]} 메시지`}
             className={cn(
-                "group flex max-w-[92%] flex-col gap-1 text-sm " +
-                "data-[from=user]:ml-auto data-[from=user]:items-end",
+                "group flex max-w-[92%] flex-col gap-1 text-sm",
+                from === "user" && "ml-auto items-end",
                 className,
             )}
             {...props}
+            data-from={from}
         />
     );
 }
