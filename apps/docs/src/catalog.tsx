@@ -497,7 +497,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "checkbox", name: "Checkbox", category: "Selection",
-        description: "Radix Checkbox의 선택·비활성 상태를 공통 token으로 표시합니다. Label을 연결해 사용합니다.",
+        description: "선택·비활성 상태를 공통 token으로 표시합니다. Label을 연결해 사용합니다.",
         code: `import { Checkbox, Label } from "@pydemia/ui";
 
 <div>
@@ -510,7 +510,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "dialog", name: "Dialog", category: "Overlays",
-        description: "제목·설명과 닫기 동작을 명시하는 모달입니다. Radix가 focus 이동과 복원을 처리합니다.",
+        description: "제목·설명과 닫기 동작을 명시하는 모달입니다. focus 이동과 복원을 처리합니다.",
         code: `import {
   Button, Dialog, DialogClose, DialogContent, DialogDescription,
   DialogFooter, DialogHeader, DialogTitle, DialogTrigger,
@@ -568,7 +568,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "switch", name: "Switch", category: "Selection",
-        description: "즉시 적용되는 설정에 쓰는 Radix switch입니다. 현재 상태를 화면에도 텍스트로 표시합니다.",
+        description: "즉시 적용되는 설정에 쓰는 switch입니다. 현재 상태를 화면에도 텍스트로 표시합니다.",
         code: `import { Label, Switch } from "@pydemia/ui";
 
 <Switch id="email-alerts" defaultChecked />
@@ -577,7 +577,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "radio-group", name: "RadioGroup", category: "Selection",
-        description: "한 옵션을 선택하는 Radix radio group입니다. 방향키 이동과 그룹 이름을 지원합니다.",
+        description: "한 옵션을 선택하는 radio group입니다. 방향키 이동과 그룹 이름을 지원합니다.",
         code: `import { Label, RadioGroup, RadioGroupItem } from "@pydemia/ui";
 
 <RadioGroup aria-label="화면 밀도" defaultValue="standard">
@@ -622,7 +622,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "progress", name: "Progress", category: "Feedback",
-        description: "진행 수치를 표시하는 Radix progressbar입니다. 접근 가능한 이름을 함께 지정합니다.",
+        description: "진행 수치를 표시하는 progressbar입니다. 접근 가능한 이름을 함께 지정합니다.",
         code: `import { Progress } from "@pydemia/ui";
 
 <Progress aria-label="업로드 진행률" value={30} />`,
@@ -659,7 +659,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "accordion", name: "Accordion", category: "Overlays",
-        description: "여러 section을 펼쳐 내용을 확인합니다. Radix의 방향키 이동과 heading 구조를 사용합니다.",
+        description: "여러 section을 펼쳐 내용을 확인합니다. 방향키 이동과 heading 구조를 사용합니다.",
         code: `import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@pydemia/ui";
 
 <Accordion type="single" collapsible>
@@ -672,7 +672,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "collapsible", name: "Collapsible", category: "Overlays",
-        description: "한 영역의 부가 정보를 펼치거나 접습니다. trigger와 content의 연결은 Radix가 처리합니다.",
+        description: "한 영역의 부가 정보를 펼치거나 접습니다. trigger와 content의 연결을 유지합니다.",
         code: `import { Button, Collapsible, CollapsibleTrigger, CollapsibleContent } from "@pydemia/ui";
 
 <Collapsible>
@@ -683,7 +683,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "popover", name: "Popover", category: "Overlays",
-        description: "trigger에서 열리는 부가 설정 영역입니다. focus 이동, Escape 닫기와 복원은 Radix가 처리합니다.",
+        description: "trigger에서 열리는 부가 설정 영역입니다. focus 이동, Escape 닫기와 복원을 처리합니다.",
         code: `import { Button, Popover, PopoverTrigger, PopoverContent, PopoverClose } from "@pydemia/ui";
 
 <Popover>
@@ -765,7 +765,7 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "toggle", name: "Toggle", category: "Actions",
-        description: "눌림 상태를 유지하는 동작 버튼입니다. Radix의 aria-pressed 상태를 사용합니다.",
+        description: "눌림 상태를 유지하는 동작 버튼입니다. aria-pressed 상태를 사용합니다.",
         code: `import { Toggle } from "@pydemia/ui";
 
 <Toggle aria-label="굵게" defaultPressed>굵게</Toggle>`,
@@ -842,7 +842,7 @@ function DateExample() {
     },
     {
         id: "tabs", name: "Tabs", category: "Navigation",
-        description: "Radix Tabs를 기반으로 탭 전환, 키보드 이동, 선택 상태를 제공합니다.",
+        description: "탭 전환, 키보드 이동, 선택 상태를 제공합니다.",
         code: `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@pydemia/ui";
 
 <Tabs defaultValue="overview">
@@ -861,15 +861,43 @@ function DateExample() {
         code: `import { Table, TableHead, TableCell } from "@pydemia/ui";
 
 <Table>
-  <caption className="sr-only">컴포넌트 목록</caption>
-  <thead><tr><TableHead scope="col">이름</TableHead></tr></thead>
-  <tbody><tr><TableCell>Button</TableCell></tr></tbody>
+  <caption className="sr-only">화면 개선 요청</caption>
+  <thead><tr>
+    <TableHead scope="col">요청</TableHead>
+    <TableHead scope="col">담당</TableHead>
+    <TableHead scope="col">상태</TableHead>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <TableCell>초대 화면</TableCell>
+      <TableCell>제품팀</TableCell>
+      <TableCell>검토 중</TableCell>
+    </tr>
+    <tr>
+      <TableCell>검색 필터</TableCell>
+      <TableCell>운영팀</TableCell>
+      <TableCell>승인</TableCell>
+    </tr>
+  </tbody>
 </Table>`,
-        preview: () => <div className="preview-table"><Table><caption className="sr-only">컴포넌트 목록</caption><thead><tr><TableHead scope="col">이름</TableHead><TableHead scope="col">출처</TableHead><TableHead scope="col">상태</TableHead></tr></thead><tbody><tr><TableCell>Button</TableCell><TableCell>shadcn/ui</TableCell><TableCell>Foundation</TableCell></tr><tr><TableCell>Snippet</TableCell><TableCell>Kibo UI</TableCell><TableCell>Normalized</TableCell></tr></tbody></Table></div>,
+        preview: () => <div className="preview-table">
+            <Table>
+                <caption className="sr-only">화면 개선 요청</caption>
+                <thead><tr>
+                    <TableHead scope="col">요청</TableHead>
+                    <TableHead scope="col">담당</TableHead>
+                    <TableHead scope="col">상태</TableHead>
+                </tr></thead>
+                <tbody>
+                    <tr><TableCell>초대 화면</TableCell><TableCell>제품팀</TableCell><TableCell>검토 중</TableCell></tr>
+                    <tr><TableCell>검색 필터</TableCell><TableCell>운영팀</TableCell><TableCell>승인</TableCell></tr>
+                </tbody>
+            </Table>
+        </div>,
     },
     {
         id: "affixed-input", name: "AffixedInput", category: "Inputs",
-        description: "Origin UI 패턴을 조정했습니다. prefix와 suffix는 입력값에 포함되지 않습니다.",
+        description: "입력 앞뒤에 고정 텍스트를 놓습니다. prefix와 suffix는 입력값에 포함되지 않습니다.",
         code: `import { AffixedInput } from "@pydemia/ui";
 
 <AffixedInput
@@ -882,7 +910,7 @@ function DateExample() {
     },
     {
         id: "snippet", name: "Snippet", category: "Developer tools",
-        description: "Kibo UI 패턴을 토큰에 맞춰 정리한 탭형 코드 블록과 복사 버튼입니다.",
+        description: "탭형 코드 블록과 복사 버튼을 공통 token으로 표시합니다.",
         code: `import {
   Snippet, SnippetHeader, SnippetTabsList, SnippetTabsTrigger,
   SnippetCopyButton, SnippetContent,
@@ -926,7 +954,7 @@ function EmailField() {
     },
     {
         id: "select", name: "Select", category: "Selection",
-        description: "검색 없는 단일 선택입니다. Radix가 option 탐색과 form 값을 관리합니다.",
+        description: "검색 없는 단일 선택입니다. option 탐색과 form 값을 관리합니다.",
         code: `import { useState } from "react";
 import { Field, Select, SelectTrigger, SelectValue,
   SelectContent, SelectItem } from "@pydemia/ui";

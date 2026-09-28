@@ -20,11 +20,11 @@ import { ArrowRight, Check, Moon, Search, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import "./app.css";
 
-const components = [
-    { name: "Button", source: "shadcn/ui", category: "Actions", status: "Foundation" },
-    { name: "Input", source: "shadcn/ui", category: "Inputs", status: "Foundation" },
-    { name: "AffixedInput", source: "Origin UI", category: "Inputs", status: "Normalized" },
-    { name: "Snippet", source: "Kibo UI", category: "Developer tools", status: "Normalized" },
+const requests = [
+    { title: "초대 화면", owner: "제품팀", category: "계정", status: "검토 중" },
+    { title: "검색 필터", owner: "운영팀", category: "데이터", status: "승인" },
+    { title: "알림 설정", owner: "디자인팀", category: "설정", status: "검토 중" },
+    { title: "사용량 요약", owner: "제품팀", category: "분석", status: "대기" },
 ];
 
 const registryBase = import.meta.env.BASE_URL.replace(/examples\/profile\/$/, "");
@@ -41,8 +41,8 @@ function App() {
     const [scope, setScope] = useState("registry");
     const [reviewed, setReviewed] = useState(false);
     const [activeSnippet, setActiveSnippet] = useState<keyof typeof commands>("npm");
-    const results = components.filter((component) =>
-        [component.name, component.source, component.category].some((value) =>
+    const results = requests.filter((request) =>
+        [request.title, request.owner, request.category].some((value) =>
             value.toLowerCase().includes(query.toLowerCase().trim()),
         ),
     );
@@ -72,9 +72,8 @@ function App() {
                     <p className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-accent">Developer tool / prototype</p>
                     <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">Registry review</h1>
                     <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
-                        외부 component의 출처와 의존성을 검토하고, 공통 token으로 정리한 뒤
-                        내부 registry에 추가하는 흐름을 확인하는 예시 화면입니다.
-                        아래 항목과 승인 상태는 모두 데모 데이터입니다.
+                        제품 화면에 필요한 컴포넌트 요청을 검토하고 내부 registry에
+                        추가하는 흐름의 예시입니다. 아래 요청과 상태는 데모 데이터입니다.
                     </p>
                 </div>
 
@@ -82,37 +81,37 @@ function App() {
                     <section aria-labelledby="inventory-heading" className="min-w-0">
                         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
                             <div>
-                                <h2 id="inventory-heading" className="text-lg font-semibold">내부 후보 목록</h2>
-                                <p className="mt-1 text-sm text-muted">8개 registry item 중 대표 4개를 표시합니다.</p>
+                                <h2 id="inventory-heading" className="text-lg font-semibold">요청 목록</h2>
+                                <p className="mt-1 text-sm text-muted">예시 요청 4건을 표시합니다.</p>
                             </div>
                             <Badge>{results.length}개 표시</Badge>
                         </div>
                         <div className="mb-3 grid gap-2">
-                            <Label htmlFor="component-search">Component 검색</Label>
+                            <Label htmlFor="request-search">요청 검색</Label>
                             <div className="relative">
                                 <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" aria-hidden size={16} />
-                                <Input id="component-search" type="search" className="pl-9" placeholder="이름, source, category" value={query} onChange={(event) => setQuery(event.target.value)} />
+                                <Input id="request-search" type="search" className="pl-9" placeholder="요청, 담당, 범주" value={query} onChange={(event) => setQuery(event.target.value)} />
                             </div>
                         </div>
                         <div className="overflow-x-auto rounded-sm border border-border bg-surface">
                             <Table>
-                                <caption className="sr-only">검토 대상 component</caption>
-                                <thead><tr><TableHead scope="col">Component</TableHead><TableHead scope="col">Source</TableHead><TableHead scope="col">Category</TableHead><TableHead scope="col">상태</TableHead></tr></thead>
+                                <caption className="sr-only">컴포넌트 요청 목록</caption>
+                                <thead><tr><TableHead scope="col">요청</TableHead><TableHead scope="col">담당</TableHead><TableHead scope="col">범주</TableHead><TableHead scope="col">상태</TableHead></tr></thead>
                                 <tbody>
-                                    {results.map((component) => (
-                                        <tr key={component.name}>
-                                            <TableCell className="font-medium">{component.name}</TableCell>
-                                            <TableCell>{component.source}</TableCell>
-                                            <TableCell>{component.category}</TableCell>
-                                            <TableCell><Badge>{component.status}</Badge></TableCell>
+                                    {results.map((request) => (
+                                        <tr key={request.title}>
+                                            <TableCell className="font-medium">{request.title}</TableCell>
+                                            <TableCell>{request.owner}</TableCell>
+                                            <TableCell>{request.category}</TableCell>
+                                            <TableCell><Badge>{request.status}</Badge></TableCell>
                                         </tr>
                                     ))}
                                 </tbody>
                             </Table>
-                            {results.length === 0 && <p className="p-5 text-sm text-muted" role="status">일치하는 component가 없습니다.</p>}
+                            {results.length === 0 && <p className="p-5 text-sm text-muted" role="status">일치하는 요청이 없습니다.</p>}
                         </div>
                         <div className="mt-7">
-                            <h2 className="mb-3 text-lg font-semibold">Kibo Snippet / 설치 코드</h2>
+                            <h2 className="mb-3 text-lg font-semibold">Registry 설치 코드</h2>
                             <Snippet value={activeSnippet} onValueChange={(value) => setActiveSnippet(value as keyof typeof commands)}>
                                 <SnippetHeader>
                                     <SnippetTabsList aria-label="코드 종류">
@@ -137,7 +136,7 @@ function App() {
                             <div className="flex items-start justify-between gap-3 border-b border-border pb-4">
                                 <div>
                                     <h3 className="font-semibold">새 registry 항목</h3>
-                                    <p className="mt-1 text-xs leading-5 text-muted">Origin UI 입력 변형과 Kibo UI 코드 블록을 함께 사용합니다.</p>
+                                    <p className="mt-1 text-xs leading-5 text-muted">고정 접두어가 있는 입력과 복사 가능한 코드 블록을 함께 사용합니다.</p>
                                 </div>
                                 <Badge>Draft</Badge>
                             </div>
