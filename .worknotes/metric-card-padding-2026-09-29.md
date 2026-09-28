@@ -17,3 +17,8 @@
   변화 텍스트가 갱신됐습니다.
 - 좁은 화면과 실제 screen reader는 이번 변경에서 확인하지 않았습니다.
 - 문서 빌드의 기존 500 kB 초과 JS chunk 경고가 남아 있습니다.
+- commit `abaabb5`를 `origin/main`에 push했습니다. Vercel production
+  배포 `dpl_4RAqK36HgWhBC4CamBFa9891HkJa`가 `READY`이고
+  `ui.pydemia.ai` alias가 연결됐습니다. 공개 preview에서도 계산된
+  padding이 네 방향 모두 16px이며, 공개 `pyd-metric-card.json`에
+  변경된 class가 포함된 것을 확인했습니다.
