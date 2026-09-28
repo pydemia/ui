@@ -184,7 +184,8 @@ system 발화의 기존 표면·글자색은 유지했습니다.
 | iframe·전체 화면 | pass | 조합 예시 iframe의 token 동기화, URL query로 양쪽 모드 조정값 재현 |
 | 기본 preset 대비 | pass | 5개 preset × 2개 모드의 본문·Accent·User message 조합 모두 4.5:1 이상 |
 | 낮은 대비 안내 | pass | Accent 1.0:1 입력에서 일반 텍스트 대비 부족 표시 |
-| 좁은 화면·native 색상 선택기 | unverified | 반응형 CSS만 검사, 실제 viewport·선택기 팝업 조작 미실행 |
+| 공개 사이트 | pass | `ui.pydemia.ai`에서 Pydemia preset, 직접 hex, iframe·전체 화면 동기화 확인 |
+| 좁은 화면·native 색상 선택기 | unverified | 반응형 CSS 검사, 팝업 열기 확인; 실제 viewport·색상 선택 미실행 |
 | 실제 screen reader·임의 색상 전체 | unverified | 세 텍스트 조합 표시 외의 모든 접근성 상태 감사 미실행 |
 
 직접 지정한 색은 자동 보정하지 않습니다. UI는 본문, Accent, User

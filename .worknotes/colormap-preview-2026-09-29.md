@@ -34,8 +34,14 @@
 
 ## 남은 검증
 
-- 좁은 viewport의 실제 배치와 native color picker 팝업은 실행하지
-  않았습니다. 반응형 CSS는 빌드에 포함됐습니다.
+- 좁은 viewport의 실제 배치는 확인하지 않았습니다. native color
+  picker 팝업은 열기만 확인하고 색상 선택은 실행하지 않았습니다.
+  반응형 CSS는 빌드에 포함됐습니다.
 - 실제 screen reader 발표와 모든 임의 색상 조합의 접근성은 확인하지
   않았습니다. 직접 입력의 대비 표시 범위는 위 세 텍스트 조합입니다.
-- 배포 후 공개 사이트 상태는 push 후 갱신합니다.
+- commit `bd50665`을 `origin/main`에 push했습니다. Vercel production
+  배포 `dpl_YitkbHrwv33XJ5yi1JTFgg1mJrR8`이 `READY`이고
+  `ui.pydemia.ai` alias가 연결됐습니다.
+- 공개 사이트에서 Pydemia preset의 `#ba365b` 적용, 직접 입력한
+  `#8844cc`의 문서·iframe 동기화, 전체 화면 링크의 색상 재현을
+  확인했습니다.
