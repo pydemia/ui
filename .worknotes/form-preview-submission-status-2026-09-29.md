@@ -21,4 +21,8 @@ Select의 `editor`, DatePicker의 `2026-09-29`가 제출 후 실제로 표시되
   이후 `reviewer`로 변경했을 때 결과 초기화를 브라우저에서 확인했습니다.
 - DatePicker에서 초기 상태, 빈 제출, 2026-09-29 선택과 제출을
   브라우저에서 확인했습니다.
-- 배포 후 공개 사이트 확인 결과는 아래에 추가합니다.
+- commit `2bd02e6`을 `origin/main`에 push했습니다. Vercel production 배포
+  `dpl_Eb1By1cJUGUpwUuoJKFb4CMy3FaY`가 `READY`이며
+  `ui.pydemia.ai` alias가 연결됐습니다.
+- 공개 사이트에서 두 preview의 초기 안내와 Select의 `editor`,
+  DatePicker의 `2026-09-29` 제출 결과를 다시 확인했습니다.
