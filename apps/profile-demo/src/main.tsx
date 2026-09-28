@@ -35,8 +35,33 @@ const commands = {
     api: 'import { Snippet, SnippetContent } from "@pydemia/ui";\nimport "@pydemia/ui/styles.css";',
 };
 
+const colormapIds = ["neutral", "pydemia", "ocean", "forest", "violet"] as const;
+const colorTokens = [
+    "--background", "--surface", "--surface-subtle", "--foreground",
+    "--muted", "--border", "--accent", "--accent-foreground",
+    "--focus", "--danger", "--message-user-background",
+    "--message-user-foreground",
+] as const;
+type ColorToken = (typeof colorTokens)[number];
+type ColorOverrides = Record<"light" | "dark", Partial<Record<ColorToken, string>>>;
+
+const hexColor = /^#[0-9a-fA-F]{6}$/;
+const initialParams = new URLSearchParams(window.location.search);
+const initialColormap = colormapIds.find(
+    (id) => id === initialParams.get("colormap"),
+) ?? "neutral";
+const initialOverrides: ColorOverrides = { light: {}, dark: {} };
+for (const mode of ["light", "dark"] as const) {
+    for (const token of colorTokens) {
+        const value = initialParams.get(`${mode}.${token.slice(2)}`);
+        if (value && hexColor.test(value)) initialOverrides[mode][token] = value;
+    }
+}
+
 function App() {
-    const [dark, setDark] = useState(false);
+    const [dark, setDark] = useState(initialParams.get("mode") === "dark");
+    const [colormap, setColormap] = useState<(typeof colormapIds)[number]>(initialColormap);
+    const [colorOverrides, setColorOverrides] = useState<ColorOverrides>(initialOverrides);
     const [query, setQuery] = useState("");
     const [scope, setScope] = useState("registry");
     const [reviewed, setReviewed] = useState(false);
@@ -48,9 +73,50 @@ function App() {
     );
 
     useEffect(() => {
-        document.documentElement.classList.toggle("dark", dark);
-        return () => document.documentElement.classList.remove("dark");
-    }, [dark]);
+        const root = document.documentElement;
+        root.classList.toggle("dark", dark);
+        root.dataset.colormap = colormap;
+        for (const token of colorTokens) {
+            const paletteToken = token.replace("--", "--palette-");
+            const color = colorOverrides[dark ? "dark" : "light"][token];
+            if (color) root.style.setProperty(paletteToken, color);
+            else root.style.removeProperty(paletteToken);
+        }
+        return () => {
+            root.classList.remove("dark");
+            delete root.dataset.colormap;
+            for (const token of colorTokens) {
+                root.style.removeProperty(token.replace("--", "--palette-"));
+            }
+        };
+    }, [dark, colormap, colorOverrides]);
+
+    useEffect(() => {
+        function receiveColormap(event: MessageEvent) {
+            if (event.origin !== window.location.origin ||
+                event.source !== window.parent ||
+                typeof event.data !== "object" || event.data === null ||
+                event.data.type !== "pydemia-ui-colormap" ||
+                !colormapIds.includes(event.data.colormap)) return;
+
+            const next: ColorOverrides = { light: {}, dark: {} };
+            for (const mode of ["light", "dark"] as const) {
+                const colors = event.data.overrides?.[mode];
+                if (!colors || typeof colors !== "object") continue;
+                for (const token of colorTokens) {
+                    const color = colors[token];
+                    if (typeof color === "string" && hexColor.test(color)) {
+                        next[mode][token] = color;
+                    }
+                }
+            }
+            setColormap(event.data.colormap);
+            setColorOverrides(next);
+            if (typeof event.data.dark === "boolean") setDark(event.data.dark);
+        }
+        window.addEventListener("message", receiveColormap);
+        return () => window.removeEventListener("message", receiveColormap);
+    }, []);
 
     return (
         <div className="min-h-screen bg-background text-foreground">

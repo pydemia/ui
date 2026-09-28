@@ -172,3 +172,20 @@ system 발화의 기존 표면·글자색은 유지했습니다.
 | 실제 screen reader | unverified | 발신자별 이름 있는 group은 유지되지만 보조기술 발표는 실행하지 않음 |
 
 문서 빌드에는 기존의 500 kB 초과 JS chunk 경고가 남아 있습니다.
+
+## 2026-09-29 Colormap 선택과 직접 조정
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| typecheck·build·registry:check | pass | 공통 token, 두 앱, 40개 registry item과 게시용 파일 |
+| preset 전환 | pass | Ocean·Forest·Violet 선택 시 root semantic token과 Button 배경 변경 |
+| hex 입력 | pass | 유효한 Accent 적용, 잘못된 형식 차단과 오류 문구, preset 선택 시 초기화 |
+| light/dark | pass | 양쪽 모드의 직접 조정값 독립 유지, Violet dark 표시 |
+| iframe·전체 화면 | pass | 조합 예시 iframe의 token 동기화, URL query로 양쪽 모드 조정값 재현 |
+| 기본 preset 대비 | pass | 5개 preset × 2개 모드의 본문·Accent·User message 조합 모두 4.5:1 이상 |
+| 낮은 대비 안내 | pass | Accent 1.0:1 입력에서 일반 텍스트 대비 부족 표시 |
+| 좁은 화면·native 색상 선택기 | unverified | 반응형 CSS만 검사, 실제 viewport·선택기 팝업 조작 미실행 |
+| 실제 screen reader·임의 색상 전체 | unverified | 세 텍스트 조합 표시 외의 모든 접근성 상태 감사 미실행 |
+
+직접 지정한 색은 자동 보정하지 않습니다. UI는 본문, Accent, User
+message의 세 텍스트 대비만 계산합니다.

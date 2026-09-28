@@ -87,3 +87,19 @@ hover, 실제 responsive 화면의 시각 관찰은 수행하지 못했습니다
 - registry 설치는 `pyd-tokens` stylesheet를 함께 설치하고 소비자 CSS에서
   import해야 공통 token을 적용합니다. 배포 JSON의 내부 의존성은
   공개 URL로 변환하고 파일 target은 소비자의 `@ui/` 경로로 지정합니다.
+
+## 2026-09-29 Colormap preview
+
+- `packages/ui/src/styles.css`의 semantic color token은 대응하는
+  `--palette-*` 변수의 alias입니다. `data-colormap`과 `.dark`가 palette
+  값을 정하며 attribute가 없는 소비자는 기존 Neutral 색상을 사용합니다.
+  Pydemia preset은 승인된 로고의 네이비 `#103344`와 로즈 `#ba365b`를
+  기준으로 합니다.
+- 문서 사이트에는 별도 Colormap 영역을 둡니다. preset 선택은 직접
+  조정값을 지우고, hex 입력은 현재 light/dark 모드의 palette 변수만
+  덮어씁니다. 문서의 직접 조정값은 서버에 저장하지 않습니다.
+- 문서의 조합 예시는 별도 iframe입니다. 같은 origin의 문서가 선택을
+  `postMessage`로 전달하고, 예시는 허용된 palette 이름과 6자리 hex만
+  적용합니다. 전체 화면 링크는 현재 선택을 URL query로 전달합니다.
+- 본문, Accent, User message의 텍스트 대비를 화면에 표시합니다.
+  사용자가 입력한 임의 색상의 대비를 자동 보정하지는 않습니다.

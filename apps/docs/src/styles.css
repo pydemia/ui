@@ -3,14 +3,9 @@
 @import "@pydemia/ui/styles.css";
 
 :root {
-    --docs-rail: #f2f5f7;
-    --docs-grid: #e8edf0;
-    --docs-tint: #e7f0f2;
-}
-.dark {
-    --docs-rail: #18222a;
-    --docs-grid: #2b3944;
-    --docs-tint: #243943;
+    --docs-rail: color-mix(in srgb, var(--background) 95%, var(--accent));
+    --docs-grid: color-mix(in srgb, var(--border) 55%, var(--background));
+    --docs-tint: color-mix(in srgb, var(--accent) 9%, var(--surface));
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -107,6 +102,33 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .swatch-info { display: flex; flex-direction: column; min-width: 0; gap: 1px; font-size: 12px; color: var(--muted); }
 .swatch-info strong { color: var(--foreground); font-size: 13px; font-weight: 600; }
 .swatch-info code { white-space: nowrap; font-size: 11px; }
+.colormap-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.colormap-option { min-width: 0; padding: 12px; text-align: left; border: 1px solid var(--border); border-radius: 5px; background: var(--surface); color: var(--foreground); }
+.colormap-option:hover { border-color: var(--accent); }
+.colormap-option[aria-pressed="true"] { outline: 2px solid var(--focus); outline-offset: 2px; }
+.colormap-preview { display: flex; height: 34px; margin-bottom: 10px; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
+.colormap-preview span { flex: 1; }
+.colormap-option strong, .colormap-option small { display: block; }
+.colormap-option strong { font-size: 14px; }
+.colormap-option small { margin-top: 3px; color: var(--muted); font-size: 12px; }
+.colormap-editor { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 29px 0 13px; }
+.colormap-editor h3 { margin: 0; font-size: 17px; }
+.colormap-editor p { margin: 5px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.colormap-reset { flex: none; padding: 7px 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--foreground); font-size: 12px; }
+.colormap-reset:hover { background: var(--surface-subtle); }
+.colormap-reset:disabled { opacity: .5; cursor: default; }
+.colormap-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.colormap-field { display: grid; grid-template-columns: 32px minmax(0, 1fr); grid-template-rows: auto auto auto; gap: 3px 9px; min-width: 0; padding: 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+.colormap-field label { grid-column: 1 / -1; font-size: 13px; font-weight: 600; }
+.colormap-field input[type="color"] { width: 32px; height: 32px; padding: 2px; border: 1px solid var(--border); border-radius: 3px; background: var(--surface); }
+.colormap-field input[type="text"] { min-width: 0; height: 32px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 3px; background: var(--background); color: var(--foreground); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; }
+.colormap-field input[aria-invalid="true"] { border-color: var(--danger); }
+.colormap-field code { grid-column: 1 / -1; color: var(--muted); font-size: 10px; overflow-wrap: anywhere; }
+.colormap-error { min-height: 20px; margin: 7px 0 0; color: var(--danger); font-size: 12px; }
+.contrast-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.contrast-grid > div { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; padding: 11px 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); font-size: 12px; }
+.contrast-grid strong { font-size: 14px; }
+.contrast-grid small { width: 100%; color: var(--danger); font-size: 11px; }
 .token-detail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; padding: 18px 0; border-top: 1px solid var(--border); }
 .token-detail > div { display: grid; gap: 6px; }
 .token-detail strong { font-size: 16px; font-weight: 600; }
@@ -121,8 +143,8 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .usage-columns pre { margin: 0; padding: 15px; overflow-x: auto; background: var(--surface-subtle); border: 1px solid var(--border); border-radius: 3px; line-height: 1.8; font-size: 12px; }
 .footer { display: flex; justify-content: space-between; gap: 12px; padding: 28px 0 52px; color: var(--muted); font-size: 12px; }
 .footer a { text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 1200px) { .main-content { padding-inline: 32px; } .intro-count { display: none; } .component-grid { grid-template-columns: 1fr; } .preview-panel { border-right: 0; border-bottom: 1px solid var(--border); } .preview-stage { min-height: 250px; } .docs-snippet pre { min-height: 150px; } }
+@media (max-width: 1200px) { .main-content { padding-inline: 32px; } .intro-count { display: none; } .component-grid { grid-template-columns: 1fr; } .colormap-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .preview-panel { border-right: 0; border-bottom: 1px solid var(--border); } .preview-stage { min-height: 250px; } .docs-snippet pre { min-height: 150px; } }
 @media (max-width: 850px) { .layout { display: block; } .sidebar { position: sticky; top: 68px; z-index: 10; border-right: 0; border-bottom: 1px solid var(--border); } .sidebar-inner { display: flex; align-items: center; gap: 2px; overflow-x: auto; max-height: none; padding: 8px 18px; white-space: nowrap; } .sidebar-overview, .sidebar-lower, .sidebar-label { display: none; } .sidebar-item { width: auto; flex: none; border-left: 0; border-bottom: 2px solid transparent; border-radius: 3px; } .sidebar-item.selected { border-left: 0; border-bottom-color: var(--accent); } .doc-section { scroll-margin-top: 145px; } .intro { scroll-margin-top: 145px; } }
-@media (max-width: 670px) { .topbar-inner { padding: 0 17px; gap: 9px; } .wordmark { font-size: 15px; } .version, .top-nav > a:not(.github-link) { display: none; } .top-nav { margin-left: auto; gap: 0; } .github-link { font-size: 0; } .github-link svg:last-child { display: none; } .theme-button { margin-left: 5px; } .main-content { padding: 0 17px; } .intro { padding: 36px 0 32px; } .intro h1 { font-size: 40px; } .intro p { font-size: 15px; } .desktop-break { display: none; } .doc-section { padding: 36px 0; } .section-lead { flex-wrap: wrap; } .swatch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .token-detail { grid-template-columns: repeat(2, 1fr); } .component-meta { grid-template-columns: repeat(2, 1fr); } .component-meta > div:last-child { grid-column: 1 / -1; } .usage-columns { grid-template-columns: 1fr; } .usage-columns p { min-height: 0; } .example-frame { height: 590px; } }
-@media (max-width: 410px) { .swatch-grid { grid-template-columns: 1fr; } .preview-stage { padding: 12px; } .preview-row { padding: 12px; } }
+@media (max-width: 670px) { .topbar-inner { padding: 0 17px; gap: 9px; } .wordmark { font-size: 15px; } .version, .top-nav > a:not(.github-link) { display: none; } .top-nav { margin-left: auto; gap: 0; } .github-link { font-size: 0; } .github-link svg:last-child { display: none; } .theme-button { margin-left: 5px; } .main-content { padding: 0 17px; } .intro { padding: 36px 0 32px; } .intro h1 { font-size: 40px; } .intro p { font-size: 15px; } .desktop-break { display: none; } .doc-section { padding: 36px 0; } .section-lead { flex-wrap: wrap; } .colormap-grid, .colormap-fields, .swatch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .contrast-grid { grid-template-columns: 1fr; } .token-detail { grid-template-columns: repeat(2, 1fr); } .component-meta { grid-template-columns: repeat(2, 1fr); } .component-meta > div:last-child { grid-column: 1 / -1; } .usage-columns { grid-template-columns: 1fr; } .usage-columns p { min-height: 0; } .example-frame { height: 590px; } }
+@media (max-width: 410px) { .colormap-grid, .colormap-fields, .swatch-grid { grid-template-columns: 1fr; } .colormap-editor { align-items: start; flex-direction: column; } .preview-stage { padding: 12px; } .preview-row { padding: 12px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
