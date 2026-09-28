@@ -49,6 +49,8 @@
 | Dropzone 형식·크기 거부 | pass | TXT 오류, 1 MB 초과 PNG 오류 |
 | Dropzone 키보드 | pass | Enter로 native file chooser 열기 |
 | 문서 metadata | pass | 자체 source, Kibo UI·Origin UI reference, 공개 사용 조건 미지정 표시 |
+| Vercel production | pass | `975c729`, `dpl_8DvfHEEXwQuEsSPRQChHKv8VofXs` READY |
+| 공개 사이트·registry | pass | `ui.pydemia.ai` 표시, Dropzone JSON에 `react-dropzone` 없음 |
 | 실제 drag/drop·개수 제한 | 미검증 | 브라우저 자동화에서 파일 drag를 실행하지 않음 |
 | 실제 screen reader | 미검증 | role·aria 속성과 상태 DOM만 확인 |
 
