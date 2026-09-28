@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>pydemia UI · A 시안 변형</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 36px; color: #202a35;
+        background: #f7f8fa; font: 15px/1.5 Arial, sans-serif; }
+      header { max-width: 1200px; margin: 0 auto 25px; }
+      h1 { margin: 0 0 7px; font-size: 26px; }
+      header p { margin: 0; color: #52606d; }
+      main { max-width: 1200px; margin: auto; display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+      article { padding: 20px; border: 1px solid #d6dce2;
+        border-radius: 9px; background: #fff; }
+      h2 { margin: 0 0 4px; font-size: 18px; }
+      .note { min-height: 48px; margin: 0; color: #52606d; font-size: 13px; }
+      .sizes { min-height: 104px; display: flex; align-items: center;
+        gap: 16px; margin: 7px 0 14px; }
+      .sizes div { display: grid; justify-items: center; gap: 5px; }
+      .sizes span { color: #52606d; font-size: 11px; }
+      .tab { display: flex; align-items: center; gap: 9px;
+        padding: 8px 10px; border: 1px solid #d6dce2;
+        border-radius: 6px; background: #f2f4f6;
+        white-space: nowrap; font-size: 12px; }
+      .tab img { width: 16px; height: 16px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>A 시안 변형 · 브랜드명 없는 UI 아이콘</h1>
+      <p>pydemia UI의 기존 색을 유지했습니다. 선택 전 시안이며 사이트에는 적용되지 않았습니다.</p>
+    </header>
+    <main>
+      <article>
+        <h2>A1 · 솔리드</h2>
+        <p class="note">장식을 덜고 UI의 크기와 대비를 높였습니다.</p>
+        <div class="sizes">
+          <div><img src="a1-solid-ui.svg" width="16" height="16" alt="" /><span>16px</span></div>
+          <div><img src="a1-solid-ui.svg" width="32" height="32" alt="" /><span>32px</span></div>
+          <div><img src="a1-solid-ui.svg" width="64" height="64" alt="" /><span>64px</span></div>
+        </div>
+        <div class="tab"><img src="a1-solid-ui.svg" alt="" />pydemia UI — Components</div>
+      </article>
+      <article>
+        <h2>A2 · 라운드</h2>
+        <p class="note">획 끝을 둥글게 하고 I에 밝은 청록색을 썼습니다.</p>
+        <div class="sizes">
+          <div><img src="a2-rounded-ui.svg" width="16" height="16" alt="" /><span>16px</span></div>
+          <div><img src="a2-rounded-ui.svg" width="32" height="32" alt="" /><span>32px</span></div>
+          <div><img src="a2-rounded-ui.svg" width="64" height="64" alt="" /><span>64px</span></div>
+        </div>
+        <div class="tab"><img src="a2-rounded-ui.svg" alt="" />pydemia UI — Components</div>
+      </article>
+      <article>
+        <h2>A3 · 스플릿</h2>
+        <p class="note">배경을 두 면으로 나눠 U와 I의 형태를 분리했습니다.</p>
+        <div class="sizes">
+          <div><img src="a3-split-ui.svg" width="16" height="16" alt="" /><span>16px</span></div>
+          <div><img src="a3-split-ui.svg" width="32" height="32" alt="" /><span>32px</span></div>
+          <div><img src="a3-split-ui.svg" width="64" height="64" alt="" /><span>64px</span></div>
+        </div>
+        <div class="tab"><img src="a3-split-ui.svg" alt="" />pydemia UI — Components</div>
+      </article>
+      <article>
+        <h2>A4 · 인버스</h2>
+        <p class="note">밝은 바탕에 청록색 UI를 배치한 변형입니다.</p>
+        <div class="sizes">
+          <div><img src="a4-inverse-ui.svg" width="16" height="16" alt="" /><span>16px</span></div>
+          <div><img src="a4-inverse-ui.svg" width="32" height="32" alt="" /><span>32px</span></div>
+          <div><img src="a4-inverse-ui.svg" width="64" height="64" alt="" /><span>64px</span></div>
+        </div>
+        <div class="tab"><img src="a4-inverse-ui.svg" alt="" />pydemia UI — Components</div>
+      </article>
+    </main>
+  </body>
+</html>

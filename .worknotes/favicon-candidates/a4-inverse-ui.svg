@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+  <title>UI 인버스</title>
+  <rect x="1" y="1" width="62" height="62" rx="11"
+    fill="#f7f8fa" stroke="#245d70" stroke-width="2" />
+  <path fill="#245d70" d="M10 15h9v25c0 6.5 3 9.5 9 9.5s9-3 9-9.5V15h9v25c0 12-7 19-18 19S10 52 10 40V15Z" />
+  <path fill="#176c8a" d="M50 15h8v42h-8V15Z" />
+</svg>

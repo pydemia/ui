@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+  <title>UI 솔리드</title>
+  <rect width="64" height="64" rx="11" fill="#245d70" />
+  <path fill="#fff" d="M10 15h9v25c0 6.5 3 9.5 9 9.5s9-3 9-9.5V15h9v25c0 12-7 19-18 19S10 52 10 40V15Zm40 0h8v42h-8V15Z" />
+</svg>

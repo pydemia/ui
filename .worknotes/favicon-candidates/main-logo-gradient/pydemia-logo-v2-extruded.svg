@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="864" height="864" viewBox="0 0 864 864" role="img" aria-labelledby="title desc">
+  <title id="title">pydemia logo v2 — shallow extrusion study</title>
+  <desc id="desc">The approved pydemia hexagonal p/d front face with shallow navy and burgundy sides extending down and right. Transparent background.</desc>
+  <defs>
+    <path id="p-module" d="M 0.000000 -374.122974 L 206.000000 -255.188819 L 206.000000 -128.171760 L 124.000000 -80.829038 L 0.000000 -152.420471 L -124.000000 -80.829038 L -124.000000 34.641016 L -206.000000 81.983738 L -206.000000 -118.934155 L 0.000000 -237.868311 L 136.000000 -159.348674 L 136.000000 -210.155498 L 0.000000 -288.675135 L -250.000000 -144.337567 L -250.000000 229.785407 L -324.000000 187.061487 L -324.000000 -187.061487 Z"/>
+    <linearGradient id="navy-depth" gradientUnits="userSpaceOnUse" x1="-257" y1="-257" x2="-7" y2="-7">
+      <stop offset="0" stop-color="#4A778A"/>
+      <stop offset="0.28" stop-color="#24586B"/>
+      <stop offset="0.65" stop-color="#103344"/>
+      <stop offset="1" stop-color="#1C2732"/>
+    </linearGradient>
+    <linearGradient id="burgundy-depth" gradientUnits="userSpaceOnUse" x1="57" y1="57" x2="-268" y2="-268">
+      <stop offset="0" stop-color="#DC7896"/>
+      <stop offset="0.32" stop-color="#BA365B"/>
+      <stop offset="0.70" stop-color="#792343"/>
+      <stop offset="1" stop-color="#1C181F"/>
+    </linearGradient>
+    <radialGradient id="channel-shade" gradientUnits="userSpaceOnUse" cx="0" cy="-215" r="180">
+      <stop offset="0" stop-color="#103344" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#103344" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(432 432)">
+    <g aria-hidden="true">
+      <use href="#p-module" fill="#102A36" transform="translate(10 14)"/>
+      <use href="#p-module" fill="#702440" transform="translate(10 14) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(9.5 13.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(9.5 13.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(9 13)"/>
+      <use href="#p-module" fill="#702440" transform="translate(9 13) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(9 12.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(9 12.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(8.5 12)"/>
+      <use href="#p-module" fill="#702440" transform="translate(8.5 12) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(8 11.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(8 11.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(7.5 11)"/>
+      <use href="#p-module" fill="#702440" transform="translate(7.5 11) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(7.5 10.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(7.5 10.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(7 10)"/>
+      <use href="#p-module" fill="#702440" transform="translate(7 10) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(6.5 9.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(6.5 9.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(6.5 9)"/>
+      <use href="#p-module" fill="#702440" transform="translate(6.5 9) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(6 8.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(6 8.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(5.5 8)"/>
+      <use href="#p-module" fill="#702440" transform="translate(5.5 8) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(5.5 7.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(5.5 7.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(5 7)"/>
+      <use href="#p-module" fill="#702440" transform="translate(5 7) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(4.5 6.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(4.5 6.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(4 6)"/>
+      <use href="#p-module" fill="#702440" transform="translate(4 6) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(4 5.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(4 5.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(3.5 5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(3.5 5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(3 4.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(3 4.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(3 4)"/>
+      <use href="#p-module" fill="#702440" transform="translate(3 4) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(2.5 3.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(2.5 3.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(2 3)"/>
+      <use href="#p-module" fill="#702440" transform="translate(2 3) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(2 2.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(2 2.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(1.5 2)"/>
+      <use href="#p-module" fill="#702440" transform="translate(1.5 2) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(1 1.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(1 1.5) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(0.5 1)"/>
+      <use href="#p-module" fill="#702440" transform="translate(0.5 1) rotate(180)"/>
+      <use href="#p-module" fill="#102A36" transform="translate(0.5 0.5)"/>
+      <use href="#p-module" fill="#702440" transform="translate(0.5 0.5) rotate(180)"/>
+    </g>
+    <use href="#p-module" fill="url(#navy-depth)"/>
+    <use href="#p-module" fill="url(#channel-shade)"/>
+    <use href="#p-module" fill="url(#burgundy-depth)" transform="rotate(180)"/>
+  </g>
+</svg>

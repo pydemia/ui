@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="864" height="864" viewBox="0 0 864 864" role="img" aria-labelledby="title desc">
+  <title id="title">pydemia logo v2 — dimensional color study</title>
+  <desc id="desc">The approved pydemia hexagonal p/d emblem with a navy and burgundy gradient. Transparent background.</desc>
+  <defs>
+    <path id="p-module" d="M 0.000000 -374.122974 L 206.000000 -255.188819 L 206.000000 -128.171760 L 124.000000 -80.829038 L 0.000000 -152.420471 L -124.000000 -80.829038 L -124.000000 34.641016 L -206.000000 81.983738 L -206.000000 -118.934155 L 0.000000 -237.868311 L 136.000000 -159.348674 L 136.000000 -210.155498 L 0.000000 -288.675135 L -250.000000 -144.337567 L -250.000000 229.785407 L -324.000000 187.061487 L -324.000000 -187.061487 Z"/>
+    <linearGradient id="navy-depth" gradientUnits="userSpaceOnUse" x1="-357" y1="-357" x2="43" y2="43">
+      <stop offset="0" stop-color="#376476"/>
+      <stop offset="0.28" stop-color="#174758"/>
+      <stop offset="0.65" stop-color="#103344"/>
+      <stop offset="1" stop-color="#1C181F"/>
+    </linearGradient>
+    <linearGradient id="burgundy-depth" gradientUnits="userSpaceOnUse" x1="107" y1="107" x2="-318" y2="-318">
+      <stop offset="0" stop-color="#D16887"/>
+      <stop offset="0.32" stop-color="#BA365B"/>
+      <stop offset="0.70" stop-color="#8B294B"/>
+      <stop offset="1" stop-color="#1C181F"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(432 432)">
+    <use href="#p-module" fill="url(#navy-depth)"/>
+    <use href="#p-module" fill="url(#burgundy-depth)" transform="rotate(180)"/>
+  </g>
+</svg>
