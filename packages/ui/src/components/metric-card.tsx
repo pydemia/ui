@@ -21,7 +21,7 @@ function MetricCard({
         <Card
             role="group"
             aria-label={label}
-            className={cn("min-w-0", className)}
+            className={cn("min-w-0 p-[var(--space-4)]", className)}
             {...props}
         >
             <p className="text-sm text-muted">{label}</p>
