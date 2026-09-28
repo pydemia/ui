@@ -32,4 +32,10 @@ SVG·32px PNG·16px PNG를 복사했습니다. 두 앱의 `index.html`에 favico
   브라우저에서 렌더링되는 것을 확인했습니다. 문서 사이트의 SVG·32px·
   16px 파일은 HTTP 200으로 응답했습니다.
 - 브라우저 탭 chrome의 작은 아이콘 표시 자체는 확인하지 못했습니다.
-- Vercel production 배포와 공개 URL 응답은 push 이후 확인할 예정입니다.
+- commit `319a9cc`를 `origin/main`에 push했습니다. Vercel production
+  배포 `dpl_DCg2iw1JZbBzS9AmNsvFKUcPbVjB`가 `READY`이고
+  `pydemia-ui.vercel.app`, `ui.pydemia.ai` alias가 연결됐습니다.
+- 두 도메인의 문서·favicon SVG 경로가 HTTP 200으로 응답했습니다.
+  `pydemia-ui.vercel.app`의 16px·32px PNG, 프로필 예시 페이지와
+  프로필 favicon SVG도 HTTP 200입니다. 공개 SVG를 브라우저에서 직접
+  열어 색상과 형태가 렌더링되는 것을 확인했습니다.
