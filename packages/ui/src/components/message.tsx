@@ -29,7 +29,9 @@ function MessageContent({ className, ...props }: ComponentProps<"div">) {
             className={cn(
                 "min-w-0 rounded-sm border border-border bg-surface " +
                 "p-[var(--space-3)] [overflow-wrap:anywhere] " +
-                "group-data-[from=user]:border-accent",
+                "group-data-[from=user]:border-message-user " +
+                "group-data-[from=user]:bg-message-user " +
+                "group-data-[from=user]:text-message-user-foreground",
                 className,
             )}
             {...props}

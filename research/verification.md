@@ -154,3 +154,20 @@ URL로 바꾸고 file target을 `@ui/<파일명>`으로 지정한 뒤 다시 설
 통과했습니다. 로컬 검사는 base URL을 `http://127.0.0.1:5173/r/`로
 지정해 실행하고, 최종 빌드는 기본 공개 URL로 되돌렸습니다.
 문서 JS chunk에는 500 kB 초과 경고가 남아 있습니다.
+
+## 2026-09-29 Message 발신자별 색상
+
+`MessageContent`의 user 발화에 별도 색상 token을 적용했습니다. assistant와
+system 발화의 기존 표면·글자색은 유지했습니다.
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI와 두 앱의 TypeScript 검사 |
+| `npm run build` | pass | 정적 문서와 40개 registry item 생성 |
+| `npm run registry:check` | pass | 40개 item과 provenance 검사 |
+| 문서 preview, light | pass | user `#103344`/`#ffffff`, assistant `#ffffff`/`#202a35` 계산 스타일 확인 |
+| 문서 preview, dark | pass | user `#245d70`/`#ffffff`, assistant `#1b242d`/`#e9eef2` 계산 스타일과 시각 표시 확인 |
+| user 글자색 대비 | pass | 흰색 기준 light 13.30:1, dark 7.31:1 계산 |
+| 실제 screen reader | unverified | 발신자별 이름 있는 group은 유지되지만 보조기술 발표는 실행하지 않음 |
+
+문서 빌드에는 기존의 500 kB 초과 JS chunk 경고가 남아 있습니다.

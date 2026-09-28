@@ -8,6 +8,8 @@
   --muted: #52606d;
   --accent: #245d70;
   --accent-foreground: #ffffff;
+  --message-user-background: #103344;
+  --message-user-foreground: #ffffff;
   --focus: #176c8a;
   --danger: #a22c36;
   --radius: 5px;
@@ -38,6 +40,7 @@
   --muted: #afbec9;
   --accent: #83bfd2;
   --accent-foreground: #13232d;
+  --message-user-background: #245d70;
   --focus: #9ad6eb;
   --danger: #ff9aa0;
   --shadow-float: 0 4px 16px rgb(0 0 0 / 20%);
@@ -53,6 +56,8 @@
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-message-user: var(--message-user-background);
+  --color-message-user-foreground: var(--message-user-foreground);
   --color-focus: var(--focus);
   --color-danger: var(--danger);
   --radius-sm: var(--radius);

@@ -821,7 +821,7 @@ function DateExample() {
     },
     {
         id: "message", name: "Message", category: "AI & agent",
-        description: "사용자와 응답의 발신자를 구분해 읽을 수 있는 메시지 표면입니다.",
+        description: "사용자 메시지는 어두운 배경과 밝은 글씨로, 응답은 기본 표면으로 구분합니다.",
         code: `import { Message, MessageContent } from "@pydemia/ui";
 
 <Message from="user">
