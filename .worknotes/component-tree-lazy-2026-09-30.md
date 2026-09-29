@@ -27,8 +27,16 @@ W3C WAI-ARIA Tree View Pattern의 동적 노드 속성과 방향키 규칙을
   오류 표시의 pointer 재시도도 확인했습니다.
 - 390px에서 문서 가로 overflow가 없었고, light/dark 오류 메시지와
   focus 표시를 화면으로 확인했습니다.
+- `npm run build`와 `npm run registry:release-check`가 통과했습니다.
+  95개 item·93개 component와 14개 불변 snapshot을 검사했고, 새 ID는
+  `sha256-5ff46dc370f8d49e297550557af2d0cc42d5ec7c90bd0a80ee458ac72e5c8e59`입니다.
+- 별도 Vite 소비자에 CLI로 Tree·tokens와 전이 utils 3개 파일을 설치해
+  typecheck·build를 통과했습니다. 소비자 Chromium에서 펼침·실패·
+  `ArrowRight` 재시도·완료·자식 focus를 확인했습니다. 첫 typecheck는
+  fixture의 Vite 설정에 `@types/node`가 없어서 실패했고, 설치 후
+  통과했습니다. Tree 파일의 오류는 아니었습니다.
 
-현재 registry snapshot·독립 소비자·PR CI·공개 배포는 미검증입니다.
+현재 PR CI·공개 배포와 공개 URL의 독립 설치는 미검증입니다.
 실제 screen reader·touch·Safari·RTL과 네트워크 오류의 소비자별 처리도
 미검증입니다. 이전 미공개 draft snapshot 네 디렉터리는 stage하지
 않습니다.

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-switch",
+  "title": "Switch",
+  "dependencies": [
+    "@radix-ui/react-switch@1.3.7"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-5ff46dc370f8d49e297550557af2d0cc42d5ec7c90bd0a80ee458ac72e5c8e59/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/switch.tsx",
+      "content": "import * as SwitchPrimitive from \"@radix-ui/react-switch\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Switch({ className, ...props }: ComponentProps<typeof SwitchPrimitive.Root>) {\n    return (\n        <SwitchPrimitive.Root\n            className={cn(\n                \"relative inline-flex h-5 w-9 shrink-0 items-center \" +\n                \"rounded-full border border-border bg-surface-subtle \" +\n                \"transition-colors duration-[var(--motion-fast)] \" +\n                \"after:absolute after:-inset-1 \" +\n                \"data-[state=checked]:border-accent \" +\n                \"data-[state=checked]:bg-accent disabled:cursor-not-allowed \" +\n                \"disabled:opacity-50\",\n                className,\n            )}\n            {...props}\n        >\n            <SwitchPrimitive.Thumb\n                className={\"block size-4 translate-x-0.5 rounded-full \" +\n                    \"bg-surface shadow-sm transition-transform \" +\n                    \"duration-[var(--motion-fast)] \" +\n                    \"data-[state=checked]:translate-x-4\"}\n            />\n        </SwitchPrimitive.Root>\n    );\n}\n\nexport { Switch };\n",
+      "type": "registry:ui",
+      "target": "@ui/switch.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `c60dab6a82d6dc4db6d0efa1b46e899b051dae34`:\n<https://github.com/pydemia/ui/blob/c60dab6a82d6dc4db6d0efa1b46e899b051dae34/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`ecd3ccbe079f061258c8b007dc187ab4b47efcfc6798768797a3d017e716f81c`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -3,8 +3,11 @@
 2026-09-30 Tree 원격 하위 항목 진행: `childState`와
 `onLoadChildren(id)`로 원격 폴더의 대기·로딩·오류·재시도를 추가했습니다.
 typecheck·테스트 75/75와 로컬 Chromium의 오류·재시도·자식 focus·
-390px light/dark 표시를 확인했습니다. snapshot·독립 소비자·CI·배포는
-아직 미검증입니다. [Tree 작업 기록](component-tree-lazy-2026-09-30.md)을
+390px light/dark 표시를 확인했습니다. 95개 item·14개 release 검사와
+별도 소비자 CLI 설치·typecheck·build·Chromium 동작도 통과했습니다.
+새 snapshot은 `sha256-5ff46dc370f8d49e297550557af2d0cc42d5ec7c90bd0a80ee458ac72e5c8e59`입니다.
+PR CI·배포는 아직 미검증입니다.
+[Tree 작업 기록](component-tree-lazy-2026-09-30.md)을
 참고하세요. 이전 Tree WIP stash는 작업 브랜치에 적용했으며 원본 stash는
 안전하게 남겨 두었습니다. 미공개 draft snapshot 네 디렉터리는
 stage하지 마세요.
