@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-09-30 상단 GNB: `Components → category → component` 메뉴를
+기존 catalog와 `Popover`로 구현했습니다. 로컬 데스크톱·390px Chromium
+동작을 확인했고 새 component·registry item은 없습니다. 상세 설계와
+미검증 범위는 [상단 메뉴 기록](top-gnb-components-2026-09-30.md)에
+남겼습니다. 공급·품질 조건 5/10과 전체 goal 관리용 추정 약 70%는
+유지합니다.
+
 2026-09-29 Markdown 배포: 90번째 component와 92번째 registry item을
 [PR #4](https://github.com/pydemia/ui/pull/4)로 `main`에 병합했습니다.
 공개 snapshot은
