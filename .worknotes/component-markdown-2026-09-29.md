@@ -56,8 +56,25 @@ production base URL로 다시 빌드해 `registry:release-check`를
 
 처음 생성한 `ab03eb99` 후보는 공개 전에 HTML prop 차단을 추가하면서
 폐기했습니다. [PR #4](https://github.com/pydemia/ui/pull/4)에 최신
-snapshot과 수정 사항을 반영합니다.
+snapshot과 수정 사항을 반영했습니다.
 
 실제 screen reader 발표, 다른 브라우저·기기의 동작과 새 공개 ID의
 장기 URL 보존은 미검증입니다. 이번 검사 결과는 전체 CommonMark
 호환 또는 임의 HTML의 렌더링을 뜻하지 않습니다.
+
+## 병합·공개 확인
+
+[PR #4](https://github.com/pydemia/ui/pull/4)를 병합했습니다. 병합
+커밋은 `078b886ee199c5a9bedf58d3b1484e8f82b75d18`입니다.
+[PR CI](https://github.com/pydemia/ui/actions/runs/36586151078)와
+[main push CI](https://github.com/pydemia/ui/actions/runs/36586341719)가
+성공했습니다. Vercel production 배포
+`dpl_D2tBD3XiDY8nh8VbVwMpj6HzhYM2`는 READY이며 현재 ID를 제공합니다.
+
+운영 문서에서 90개 component 목록, Markdown의 제목·목록·링크·코드
+preview와 Usage를 확인했습니다. 공개 snapshot의 `manifest.json`과
+`pyd-markdown.json`은 HTTP 200이며 저장소 파일과 일치합니다.
+공개 URL의 `pyd-markdown.json`을 소비자에 `shadcn@4.21.0 add`로 설치해
+Markdown 소스 해시 일치, typecheck·build를 확인했습니다. 이 검사는
+공개 ID의 Markdown 경로에 한정되며 92개 item 각각의 공개 설치나
+rollback 뒤 URL 보존까지 확인한 것은 아닙니다.

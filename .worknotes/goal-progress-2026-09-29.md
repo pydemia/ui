@@ -1,5 +1,16 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29 Markdown 공개: [PR #4](https://github.com/pydemia/ui/pull/4)를
+병합하고 PR·main CI, Vercel production READY, 공개 Markdown preview와
+snapshot URL 설치 소비자 typecheck·build를 확인했습니다. 현재
+**90개 component·92개 registry item**입니다. 공급·품질 조건의
+완료 표시는 **5/10**, 전체 goal의 관리용 추정은 **약 70%**입니다.
+규모 기준 90/100과 조건 5/10을 같은 비중으로 평균한 임시 수치이며
+확정된 기능 요구사항 대비 완료율은 아닙니다. 92개 item 각각의 공개
+격리 설치·상호작용, 실제 보조기술·touch·drag/drop·시간대,
+rollback 뒤 snapshot URL 보존은 남았습니다.
+[검증 기록](component-markdown-2026-09-29.md)에 근거와 한계를 적었습니다.
+
 2026-09-29 Markdown 후보: 안전한 문법 부분집합을 90번째 component와
 92번째 registry item으로 구현했습니다. 패키지·문서·registry와 새
 소비자 설치, 로컬 브라우저를 검사했습니다. 공개 배포와 새 snapshot의

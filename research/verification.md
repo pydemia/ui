@@ -1498,7 +1498,7 @@ HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공�
 | 새 소비자 단독 설치 | pass | Markdown·utils·tokens 3개 파일, 원본 소스 일치·typecheck·build·브라우저 제목·목록·링크; HTML prop 수정 뒤 최신 item 재설치·typecheck·build |
 | package tarball Usage | pass | private package tarball 설치 후 Markdown·Message 사용 코드 typecheck |
 | 전체 로컬 소비자 | pass (limited) | 92개 item을 8개 batch로 같은 새 소비자에 설치; 94개 파일 일치·90개 모듈 typecheck·build·Chromium 212개 export·console error 0건 |
-| 공개 snapshot 설치·production | unverified | 새 ID는 아직 로컬 후보이며 공개 URL 설치·배포 미실행 |
+| 공개 snapshot 설치·production | pass (limited) | PR #4 병합·main CI·Vercel READY, 운영 preview, 새 ID manifest·Markdown JSON 원본 일치, 공개 URL 설치 소비자 typecheck·build |
 | 실제 screen reader·다른 브라우저 | unverified | native 요소의 실제 발표와 기기별 동작 미실행 |
 
 새 ID는
@@ -1508,3 +1508,4 @@ HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공�
 가리켜 게시 전 로컬 CLI 설치에서 404였으므로, 내부 URL을 운영 주소로
 되돌린 뒤 build·release 검사를 재실행했습니다. 단계와 미검증 항목은
 `.worknotes/component-markdown-2026-09-29.md`에 기록했습니다.
+병합 뒤 공개 설치도 통과했습니다. rollback 후 주소 보존은 미검증입니다.

@@ -16,7 +16,8 @@ Markdown을
 90개 component와 92개 registry item입니다. PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
-새 Markdown과 snapshot의 공개 배포는 아직 확인하지 않았습니다.
+새 Markdown과 snapshot도 PR #4 병합 뒤 production과 공개 URL 설치를
+확인했습니다.
 shadcn/ui source를 수정한 27개는
 각각 격리 설치해 소스와 MIT 고지의 전달을 확인했습니다. 나머지
 item의 개별 격리 설치·전체 동작은 미검증입니다.
