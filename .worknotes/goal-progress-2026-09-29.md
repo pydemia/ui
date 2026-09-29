@@ -1,7 +1,9 @@
 # Component 공급 목표 진행 상태
 
 2026-09-29: 새 registry 소비자 고지의 provenance 링크를 고정 commit과
-내용 해시로 바꾸고 검사에 추가했습니다. 새 로컬 snapshot ID는
+내용 해시로 바꾸고 검사에 추가했습니다. [PR #3](https://github.com/pydemia/ui/pull/3)
+병합 뒤 CI와 production 배포, 공개 Button 설치·소비자 build를
+확인했습니다. 현재 snapshot ID는
 `sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee`
 입니다. [검증 기록](component-provenance-pin-2026-09-29.md)에 범위가
 있습니다. 과거 snapshot의 고지와 rollback URL 보존은 미완료이므로

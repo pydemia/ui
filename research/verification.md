@@ -1476,8 +1476,13 @@ URL의 Sidebar·AppShell을 기존 Vite 소비자에 설치해 typecheck·build�
 | package 테스트 | pass | 48/48 |
 | `npm run build` | pass (retry) | 첫 생성 HTML 접근 오류 뒤 같은 명령 재실행 성공 |
 | `npm run registry:release-check` | pass | 91개 item, 89개 export/catalog, 새 로컬 snapshot 일치 |
-| 새 snapshot 공개 설치 | unverified | 새 ID는 아직 배포 전 |
+| 새 snapshot 공개 설치 | pass (limited) | Button 설치·고지 확인, 기존 소비자 typecheck·build |
 | 과거 snapshot의 provenance 고정 | incomplete | 불변 고지에는 당시의 `main` 링크가 남음 |
+
+PR #3 병합 커밋 `dd29b56`의 Verify UI CI와 Vercel production 배포가
+성공했습니다. 새 manifest·Button JSON과 직전 manifest는 공개 URL에서
+HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공개
+설치와 rollback 뒤 URL 보존은 이 검사 범위 밖입니다.
 
 고정 revision과 새 ID는
 `.worknotes/component-provenance-pin-2026-09-29.md`에 기록했습니다.

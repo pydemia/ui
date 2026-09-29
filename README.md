@@ -78,6 +78,9 @@ registry JSON과 내부 의존성, token 파일을 같은 내용 해시로 묶�
 있습니다. 현재 `/r/pyd-*.json`은 빌드할 때 갱신되는 최신 경로이고,
 `/r/releases/sha256-<digest>/pyd-*.json`은 해당 시점의 고정 경로입니다.
 snapshot 디렉터리의 `manifest.json`은 각 파일의 SHA-256을 기록합니다.
+과거 Vercel 배포로 rollback하면 그 배포에 없던 새 snapshot 경로는
+열리지 않을 수 있습니다. 모든 공개 ID를 유지하는 복구 절차는 아직
+마련 중입니다.
 
 ```bash
 npm run build
@@ -96,14 +99,16 @@ npm run registry:release-check
 전달한 ID가 현재 빌드와 다르면 실패합니다. 배포 전 변경 내용은
 [CHANGELOG.md](CHANGELOG.md)에
 기록하고, 배포 후 공개 snapshot URL의 설치를 별도 소비자에서 확인합니다.
-2026-09-29 배포의 현재 ID
-`sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`와
-이전 ID `sha256-a1cd11bae6654a55136729439cd7b437a507d59896271b7c0950745a9e61bf21`에서
-각각 선택한 item을 공개 URL로 설치해 typecheck·build를 확인했습니다.
+현재 게시한 ID는
+`sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee`입니다.
+이 ID의 Button과 직전
+`sha256-a3db94852dbdea79f551fa350fdf314cbf43b274b235fb76fb313a1008489a28`
+ID의 Sidebar·AppShell을 공개 URL로 설치해 소비자 typecheck·build를
+확인했습니다. 더 이전 공개 ID도 저장소에 보존합니다.
 새 소비자에서 현재 Button과 token을 고정 버전으로 설치하려면:
 
 ```bash
-npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93/pyd-button.json https://pydemia-ui.vercel.app/r/releases/sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93/pyd-tokens.json
+npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee/pyd-button.json https://pydemia-ui.vercel.app/r/releases/sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee/pyd-tokens.json
 ```
 
 기존 registry 설치물을 갱신할 때는 소비자 저장소의 변경을 먼저

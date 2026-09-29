@@ -20,7 +20,13 @@ metadata가 바뀌면 새 고지·고정 revision을 함께 갱신해야 합니�
 시도는 Windows의 생성 HTML 파일 접근 오류로 중단됐지만, 생성 파일을
 확인한 뒤 같은 명령을 다시 실행해 성공했습니다. `npm run typecheck`,
 package 테스트 48/48, `npm run registry:release-check`가 통과했습니다.
-새 snapshot의 공개 배포·소비자 설치는 아직 확인하지 않았습니다.
+PR #3을 병합한 커밋 `dd29b56`의 Verify UI CI가 성공했고 Vercel
+production 배포 `dpl_FC8u2JxDJFtkb1D7WN48atSG2jLz`는 READY입니다.
+새 manifest·Button JSON과 직전 snapshot manifest는 공개 URL에서
+HTTP 200이며 저장소 파일과 같습니다. 기존 Vite 소비자에 새 ID의
+Button을 `shadcn@4.21.0 add --yes --overwrite`로 설치했습니다. 고지
+파일이 갱신돼 고정 commit·SHA-256을 포함했고 소비자 typecheck·build가
+통과했습니다. 91개 item의 개별 공개 설치 전체를 뜻하지는 않습니다.
 
 기존 공개 snapshot 안의 고지는 여전히 당시의 `main` 링크를 포함합니다.
 불변 파일을 바꾸지 않고 그 버전의 출처를 고정해 찾아볼 수 있는 방법과
