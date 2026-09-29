@@ -1,5 +1,20 @@
 # Component taxonomy와 source 검토
 
+## 2026-09-30 Kanban reference 확인
+
+[Kibo Kanban 공식 문서](https://www.kibo-ui.com/components/kanban)는 열 사이
+카드 끌기와 카드 내용 사용자 정의를 설명합니다. 같은 revision
+[`3d63cdb`](https://github.com/shadcnblocks/kibo/tree/3d63cdb15b79d972e3dc38a10997987672f9b263)의
+[소스](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/kanban/index.tsx),
+[package manifest](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/kanban/package.json),
+[LICENSE](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md)를
+확인했습니다. LICENSE는 MIT이고 소스는 dnd-kit core/sortable/utilities,
+React, react-dom, 내부 shadcn-ui와 tunnel-rat에 의존합니다.
+`pyd-kanban`은 열·카드 역할과 이동 동작만 참고해 React의 native
+drag/drop과 버튼으로 직접 작성했습니다. Kibo 코드를 복사하거나 위
+런타임 의존성을 추가하지 않았습니다. touch에서 drag 지원을 전제로
+하지 않고 버튼으로 같은 이동을 수행하도록 설계했습니다.
+
 2026-09-27 UTC에 각 source의 공식 사이트, upstream repository와 license
 원문을 확인했습니다. 이 표는 category coverage 지도입니다. 같은 category에
 표시된 source가 동일한 API나 접근성 품질을 제공한다는 뜻은 아닙니다.

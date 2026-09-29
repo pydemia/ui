@@ -1,5 +1,5 @@
 {
-  "reviewed_at": "2026-09-29",
+  "reviewed_at": "2026-09-30",
   "items": [
     {
       "name": "pyd-utils", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
@@ -402,6 +402,12 @@
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WHATWG HTML Standard", "url": "https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-time-element" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named ordered events with time element when dateTime is supplied; visible status labels", "keyboard": "native links when href is supplied", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-kanban", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Kibo UI", "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/kanban/index.tsx", "scope": "column/card layout and move interaction only; no code copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named board region and columns, native move buttons, live move announcement", "keyboard": "Chromium: Enter cross-column move, focus restoration, position announcement and button reorder verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-log-console", "category": "Developer tools", "profiles": ["developer-tool"],

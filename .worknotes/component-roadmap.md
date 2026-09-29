@@ -13,7 +13,9 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-90개 component와 92개 registry item입니다. PR #1을 `main`에 병합해
+90개 component와 92개 registry item입니다. 2026-09-30 작업 branch에서
+`Kanban`을 추가해 로컬 기준 91개 component·93개 item입니다.
+PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
 새 Markdown과 snapshot도 PR #4 병합 뒤 production과 공개 URL 설치를
@@ -299,8 +301,9 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 - [x] `Citation` — `CitationList`로 출처 제목·위치·절대 HTTP(S)
   링크와 빈 상태를 제공합니다. pointer·keyboard preview와 새 소비자
   설치를 확인했고 실제 screen reader 발표는 남았습니다.
-- [ ] `Kanban` — 실제 열·카드 데이터 구조와 반복 작업을 확인한 뒤
-  이동·keyboard 대안을 구현할지 판정.
+- [x] `Kanban` — controlled 열·카드 데이터와 이동 순서를 구현하고
+  drag 외에 키보드·touch용 방향 버튼을 제공합니다. 실제 drag와
+  보조기술 발표는 미검증입니다.
 - [ ] `Gantt` — 실제 일정·의존 관계 모델과 반복 작업을 확인한 뒤
   시간축·이동·대체 조작을 구현할지 판정.
 

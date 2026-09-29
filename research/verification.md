@@ -1563,3 +1563,27 @@ HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공�
 검사 입력과 변경 범위는
 `.worknotes/component-data-chart-series-visibility-2026-09-30.md`에
 기록했습니다.
+
+## 2026-09-30 Kanban 작업 보드
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run test -w @pydemia/ui` | pass | 64/64; 카드 이동 순서·불변성·오류와 SSR 이름·버튼 |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm run build` | pass | 93개 registry item, 문서·예시 산출물 |
+| 로컬 Chromium | pass (limited) | 열 이동·빈 열·같은 열 재정렬·Enter 키·focus 복원·live region, 390px에서 보드 내부 scroll과 문서 가로 overflow 없음 |
+| native drag/drop | unverified | 브라우저 자동화 drag에서 이벤트 결과를 확인하지 못함 |
+| `registry:release-check` | pass | 93개 item과 새 snapshot의 현재 내용 일치 |
+| 독립 소비자 설치·typecheck·build·Chromium | pass | `shadcn@4.21.0` 설치 파일 SHA 일치, 카드 열 이동과 live region 확인 |
+| 실제 touch·Safari·screen reader | unverified | 기기와 보조기술 실행 전 |
+
+입력 데이터와 검증 범위는
+`.worknotes/component-kanban-2026-09-30.md`에 기록했습니다.
+
+## 2026-09-30 모바일 SNB 스크롤 보정
+
+390px Chromium에서 본문을 내린 뒤 SNB의 컴포넌트를 연속 선택해
+문서 `scrollY`와 SNB `scrollLeft`, DOM focus, 제목 변경을 확인했습니다.
+데스크톱 1280px의 기존 본문 이동도 확인했습니다. 실제 touch와
+Safari는 미검증입니다. 재현과 수치는
+`.worknotes/mobile-snb-focus-2026-09-30.md`에 기록했습니다.
