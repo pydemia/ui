@@ -454,7 +454,8 @@ function App() {
                         <div className="component-grid"
                             data-wide={[
                                 "app-shell", "data-chart", "dashboard",
-                                "data-table", "resizable-panels", "sidebar", "stepper",
+                                "data-table", "gantt", "resizable-panels",
+                                "sidebar", "stepper",
                             ].includes(selected.id) ? "true" : undefined}>
                             <div className="preview-panel"><div className="panel-caption"><span>LIVE PREVIEW</span><span>Neutral Product</span></div><div className="preview-stage">{selected.preview()}</div></div>
                             <div className="code-panel"><div className="panel-caption"><span>REACT / TSX</span><span>Copy ready</span></div><Snippet className="docs-snippet" defaultValue="usage"><SnippetHeader><SnippetTabsList aria-label="코드 예시"><SnippetTabsTrigger value="usage">Usage</SnippetTabsTrigger></SnippetTabsList><SnippetCopyButton value={selected.code} /></SnippetHeader><SnippetContent value="usage">{selected.code}</SnippetContent></Snippet></div>

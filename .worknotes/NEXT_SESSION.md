@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-09-30 Gantt 진행: 원본 React·Tailwind 일정 시간축, 선행 관계와
+하루 단위 변경 버튼, 일·7일 표시, registry metadata 및 동작하는 문서
+preview·Usage를 추가했습니다. Kibo 공식 문서·고정 revision 소스·MIT
+LICENSE와 의존성을 확인했습니다. typecheck·패키지 테스트 84/84,
+로컬 Chromium의 1280px·390px·키보드·dark/colormap 동작을 확인했습니다.
+axe preview는 violation 0건, contrast incomplete 1건입니다. build·
+registry snapshot·별도 소비자·공개 사이트는 아직 미검증입니다.
+[Gantt 기록](component-gantt-2026-09-30.md)을 참고하세요. 기존 미공개
+draft snapshot 네 디렉터리는 stage하지 마세요.
+
 2026-09-30 모바일 SNB 포커스 후속 수정: 사용자가 선택 시 본문으로
 이동한다고 보고했습니다. 로컬 393px Chromium 마우스 클릭에서는 기존
 코드로 재현되지 않았습니다. 모바일 포인터 선택 후 버튼 포커스를
