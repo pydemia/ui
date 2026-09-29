@@ -1673,3 +1673,19 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 
 상세 동작과 미검증 범위는
 `.worknotes/component-tree-lazy-2026-09-30.md`에 기록했습니다.
+
+## 2026-09-30 Heatmap
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm test -w @pydemia/ui` | pass | 79/79; 표 헤더·값·결측·빈 상태·입력 오류·극단값 |
+| 로컬 Chromium | pass (limited) | 390px 내부 가로 스크롤·행 헤더 고정·ArrowRight·밀도·빈 상태·light/dark·Pydemia colormap |
+| `npm run build`·`registry:release-check` | pass | 96개 item·94개 component·15개 불변 snapshot 및 현재 ID 일치 |
+| 별도 소비자 CLI·typecheck·build | pass | Heatmap·tokens·utils 3개 파일 내용 일치 |
+| 별도 소비자 Chromium | pass (limited) | 390px의 표 헤더·0·결측값·문서 가로 overflow 없음 |
+| PR CI·공개 배포·공개 snapshot 설치 | unverified | 현재 작업 브랜치 소스·문서 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+상세 기록과 화면은 `.worknotes/component-heatmap-2026-09-30.md`에
+있습니다.

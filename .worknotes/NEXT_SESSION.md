@@ -1,5 +1,18 @@
 # Component 확장 작업 인계
 
+2026-09-30 Heatmap 진행: 두 범주의 값·결측값·빈 목록을 native 표와
+색 농도로 표시하는 새 component와 registry item, 문서 preview·Usage를
+추가했습니다. Kibo 공식 문서와 고정 revision 소스·MIT LICENSE를
+참고했으며 소스는 복사하지 않았습니다. typecheck·패키지 테스트
+79/79가 통과했습니다. 로컬 Chromium의 390px 표 내부 스크롤·행 이름
+고정·밀도·빈 상태·light/dark·colormap도 확인했습니다. build·
+registry release 검사와 별도 소비자 CLI 설치·typecheck·build·Chromium
+표시가 통과했습니다. 새 snapshot은
+`sha256-34e05c67026d4eafde4bba89993145eef2718414d4312c4ff87c7b33a4cc6481`입니다.
+PR CI·공개 배포와 공개 snapshot 소비자 설치는 미검증입니다.
+[Heatmap 기록](component-heatmap-2026-09-30.md)을
+참고하세요. 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
+
 2026-09-30 Tree 원격 하위 항목 진행: `childState`와
 `onLoadChildren(id)`로 원격 폴더의 대기·로딩·오류·재시도를 추가했습니다.
 typecheck·테스트 75/75와 로컬 Chromium의 오류·재시도·자식 focus·

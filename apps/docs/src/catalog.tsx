@@ -37,7 +37,7 @@ import {
     Empty, EmptyContent, EmptyDescription,
     EmptyMedia, EmptyTitle, Field, FileUpload, FilterBar,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
-    HoverCardTrigger, Image, Input, InputGroup, InputGroupAddon,
+    HoverCardTrigger, Heatmap, Image, Input, InputGroup, InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, JsonViewer, Kanban,
     Label, LogConsole, Markdown, Message, MessageContent, MetricCard,
@@ -2043,6 +2043,46 @@ function DonutChartPreview() {
                 description="각 상태의 요청 수와 전체 비율입니다."
                 totalLabel="전체 요청" unit="건"
                 segments={empty ? [] : donutSegments} />
+        </div>
+    );
+}
+
+const heatmapColumns = [
+    "09시", "10시", "11시", "12시", "13시",
+    "14시", "15시", "16시", "17시", "18시",
+];
+const heatmapRows = [
+    { id: "mon", label: "월", values: [3, 5, 9, 6, 2, 4, 8, 12, 7, 1] },
+    { id: "tue", label: "화", values: [2, 4, 7, 5, 0, 6, 11, 15, 9, 3] },
+    { id: "wed", label: "수", values: [1, 6, 10, 7, null, 8, 13, 17, 8, 2] },
+    { id: "thu", label: "목", values: [4, 8, 12, 9, 3, 7, 16, 20, 11, 5] },
+    { id: "fri", label: "금", values: [5, 9, 15, 11, 4, 10, 18, 24, 14, 6] },
+];
+
+function HeatmapPreview() {
+    const [density, setDensity] = useState<"compact" | "comfortable">(
+        "compact",
+    );
+    const [empty, setEmpty] = useState(false);
+
+    return (
+        <div className="preview-workspace grid gap-3">
+            <div className="flex flex-wrap gap-2">
+                <Button type="button" variant="outline"
+                    onClick={() => setDensity((value) =>
+                        value === "compact" ? "comfortable" : "compact"
+                    )}>
+                    {density === "compact" ? "넓게 보기" : "촘촘히 보기"}
+                </Button>
+                <Button type="button" variant="ghost"
+                    onClick={() => setEmpty((value) => !value)}>
+                    {empty ? "데이터 표시" : "빈 데이터"}
+                </Button>
+            </div>
+            <Heatmap title="요일·시간별 요청" unit="건"
+                description="각 칸에 요청 수를 표시합니다. 수요일 13시는 집계 전입니다."
+                columns={heatmapColumns} rows={empty ? [] : heatmapRows}
+                density={density} />
         </div>
     );
 }
@@ -4692,6 +4732,22 @@ const segments = [
 <DonutChart title="요청 처리 상태" segments={segments}
   unit="건" totalLabel="전체 요청" />`,
         preview: () => <DonutChartPreview />,
+    },
+    {
+        id: "heatmap", name: "Heatmap", category: "Data & analytics",
+        description: "두 범주의 수치를 색 농도와 숫자로 함께 표시합니다. 결측값·0·빈 목록을 구분하고 좁은 화면에서는 표만 가로로 스크롤합니다.",
+        code: `import { Heatmap } from "@pydemia/ui";
+
+const columns = ["09시", "10시", "11시", "12시"];
+const rows = [
+  { id: "mon", label: "월", values: [3, 5, 9, 6] },
+  { id: "tue", label: "화", values: [2, 0, null, 5] },
+];
+
+<Heatmap title="요일·시간별 요청" unit="건"
+  description="결측값은 —로 표시합니다."
+  columns={columns} rows={rows} density="compact" />;`,
+        preview: () => <HeatmapPreview />,
     },
     {
         id: "dashboard", name: "Dashboard", category: "Data & analytics",
