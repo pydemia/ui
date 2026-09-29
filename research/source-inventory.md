@@ -1018,3 +1018,26 @@ revision `98a1fe67b439324ddc857f47fbdce056600a4329`의
 입력과 textarea의 label 연결, 별도 버튼의 DOM·Tab 순서, Enter 제출은
 SSR과 Chromium에서 확인했습니다. 실제 screen reader·touch·Safari·RTL은
 검증하지 않았습니다.
+
+## 2026-09-30 RangeSlider
+
+기존 `Slider`는 shadcn/ui의
+[공식 문서](https://ui.shadcn.com/docs/components/radix/slider),
+revision `98a1fe67b439324ddc857f47fbdce056600a4329`의
+[Slider source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/slider.tsx),
+[동일 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+수정해 사용합니다. 기존 registry item의 MIT 고지 전달을 유지합니다.
+[Radix Slider 공식 문서](https://www.radix-ui.com/primitives/docs/components/slider)는
+다중 thumb, 키보드, 최소 간격과 form 동작을 설명합니다. 설치된
+`@radix-ui/react-slider@1.4.7`의 package manifest, `dist/index.mjs`,
+MIT LICENSE를 확인했습니다. Root의 단일 `name`으로는 두 endpoint를
+각각 이름 붙여 제출할 수 없으므로 `RangeSlider`에 두 hidden input을
+추가했습니다. 두 입력은 새 이름으로 제출되고 Radix 내부 입력은
+이름 없이 남습니다.
+
+접근성 기준은
+[WAI-ARIA APG 다중 thumb 패턴](https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/)을
+참고했습니다. `RangeSlider`는 프로젝트의 원본 조합이며 upstream
+source를 복사하지 않았습니다. registry 의존성은 `pyd-slider`와
+`pyd-utils`, 새 npm runtime 의존성은 없습니다. 실제 touch 보조기술,
+screen reader, Safari, RTL은 검증하지 않았습니다.

@@ -47,7 +47,8 @@ import {
     NativeSelect, NumberInput,
     PageHeader, Pagination, PasswordInput, PinInput, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
-    RadioGroup, RadioGroupItem, Rating, Reasoning, ResizablePanels, ScrollArea,
+    RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
+    ResizablePanels, ScrollArea,
     SearchInput,
     Select, SelectContent, SelectItem,
     SelectTrigger, SelectValue, Separator, Skeleton, Slider,
@@ -919,6 +920,32 @@ function SliderPreview() {
             <Slider aria-label="목표 구간" value={range}
                 onValueChange={setRange} minStepsBetweenThumbs={1} />
         </div>
+    );
+}
+
+function RangeSliderPreview() {
+    const [applied, setApplied] = useState("가격 범위를 선택하세요.");
+
+    return (
+        <form className="preview-stack" onSubmit={(event) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            setApplied(`${data.get("minPrice")}–${data.get("maxPrice")}만원 적용`);
+        }} onReset={() => setApplied("가격 범위를 선택하세요.")}>
+            <RangeSlider
+                label="월 이용료 범위"
+                minLabel="최저 가격" maxLabel="최고 가격"
+                minName="minPrice" maxName="maxPrice"
+                min={0} max={100} step={5} defaultValue={[20, 80]}
+                minStepsBetweenThumbs={1}
+                formatValue={(amount) => `${amount}만원`}
+            />
+            <div className="flex gap-2">
+                <Button type="submit">범위 적용</Button>
+                <Button type="reset" variant="outline">초기화</Button>
+            </div>
+            <p role="status">{applied}</p>
+        </form>
     );
 }
 
@@ -3535,6 +3562,29 @@ function ViewMode() {
     min={0} max={100} minStepsBetweenThumbs={1} />
 </>;`,
         preview: () => <SliderPreview />,
+    },
+    {
+        id: "range-slider", name: "RangeSlider", category: "Selection",
+        description: "두 thumb에 이름을 붙이고 최솟값과 최댓값을 각각 form에 제출합니다.",
+        code: `import { RangeSlider } from "@pydemia/ui";
+
+function PriceFilter() {
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log(data.get("minPrice"), data.get("maxPrice"));
+  }}>
+    <RangeSlider label="월 이용료 범위"
+      minLabel="최저 가격" maxLabel="최고 가격"
+      minName="minPrice" maxName="maxPrice"
+      min={0} max={100} step={5} defaultValue={[20, 80]}
+      minStepsBetweenThumbs={1}
+      formatValue={(amount) => String(amount) + "만원"} />
+    <button type="submit">범위 적용</button>
+    <button type="reset">초기화</button>
+  </form>;
+}`,
+        preview: () => <RangeSliderPreview />,
     },
     {
         id: "calendar", name: "Calendar", category: "Date & time",

@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-09-30 RangeSlider 진행: 기존 Slider에 `thumbLabels`를 추가하고
+두 endpoint의 이름·form 값을 갖춘 `RangeSlider`를 작성했습니다.
+93개 component, 95개 registry item입니다. SSR 테스트, 문서 preview와
+Usage를 추가했으며 package test·typecheck 및 Chromium의 키보드·제출·
+초기화·390px 배치를 확인했습니다. 현재는 source·metadata와 문서 변경이
+있는 `codex/range-slider-form` branch입니다. 고정 provenance 고지,
+snapshot, 독립 소비자 설치, PR·CI·production 검증은 아직 진행 전입니다.
+[RangeSlider 작업 기록](component-range-slider-2026-09-30.md)을 보세요.
+기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
+
 2026-09-30 InputGroup과 모바일 SNB 후속 보정 진행:
 `InputGroup`을 기존 Input·Textarea·Button으로 구성하고 문서 preview·
 Usage·registry metadata·SSR 테스트를 추가했습니다. 92개 component,

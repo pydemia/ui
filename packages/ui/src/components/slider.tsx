@@ -4,6 +4,7 @@ import { cn } from "./utils";
 
 type SliderProps = ComponentProps<typeof SliderPrimitive.Root> & {
     "aria-label": string;
+    thumbLabels?: readonly string[];
 };
 
 function Slider({
@@ -12,9 +13,16 @@ function Slider({
     value,
     min = 0,
     "aria-label": label,
+    thumbLabels,
     ...props
 }: SliderProps) {
     const values = value ?? defaultValue ?? [min];
+    if (thumbLabels && (
+        thumbLabels.length !== values.length ||
+        thumbLabels.some((name) => !name.trim())
+    )) {
+        throw new Error("Slider needs one non-empty label per thumb.");
+    }
 
     return (
         <SliderPrimitive.Root
@@ -43,9 +51,13 @@ function Slider({
             {values.map((_, index) => (
                 <SliderPrimitive.Thumb
                     key={index}
-                    aria-label={values.length > 1 ? `${label} ${index + 1}` : label}
+                    aria-label={thumbLabels?.[index] ?? (
+                        values.length > 1 ? `${label} ${index + 1}` : label
+                    )}
                     className={"block size-5 rounded-full border border-accent " +
                         "bg-surface shadow-[var(--shadow-float)] " +
+                        "focus-visible:outline-2 focus-visible:outline-focus " +
+                        "focus-visible:outline-offset-2 " +
                         "disabled:pointer-events-none"}
                 />
             ))}
@@ -54,3 +66,4 @@ function Slider({
 }
 
 export { Slider };
+export type { SliderProps };

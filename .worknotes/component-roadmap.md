@@ -391,8 +391,10 @@ token 전달 방식을 정할 때,
   사용 사례와 키보드 순서를 별도로 확인해야 합니다.
 - [ ] `Sheet`·`Drawer`: 배치뿐 아니라 제스처·focus·닫기 동작이
   다른지 비교합니다.
-- [ ] `RangeSlider`: 현재 `Slider`의 다중 thumb 코드는 있으나 조작
-  검증이 남아 있습니다. 범위 값·thumb 이름·키보드·터치를 확인합니다.
+- [x] `RangeSlider`: 기존 `Slider`를 사용하며 각 endpoint 이름과
+  별도 form 값을 제공합니다. SSR과 Chromium에서 thumb 이름, 키보드,
+  값 제출·초기화를 확인했습니다. 실제 touch·screen reader·Safari는
+  미검증이며 [작업 기록](component-range-slider-2026-09-30.md)에 남겼습니다.
 - [ ] `EmptyState`·`Empty`: 결과별 독립 상태가 필요한지 비교합니다.
 - [ ] `ModelSelector`·`ApprovalCard`·`AgentStatus`: AI workspace에서
   실제 반복 작업과 독립 상태가 확인되면 D 후보로 올립니다.
