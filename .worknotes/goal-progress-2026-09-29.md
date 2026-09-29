@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29 후속 배포: [PR #2](https://github.com/pydemia/ui/pull/2)를
+병합했습니다. 병합 커밋 `cc14188`의 Verify UI CI와 Vercel production
+배포가 성공했고, 새·이전 공개 snapshot 파일을 확인했습니다.
+Sidebar·AppShell의 공개 URL 설치와 소비자 typecheck·build도
+통과했습니다. rollback 뒤 주소 보존과 release별 provenance 고정은
+미완료이므로 공급·품질 조건 **5/10**, 전체 goal의 관리용 추정
+**약 70%**를 유지합니다.
+
 2026-09-29 후속 독립 검토에서 배포 rollback이 최신 snapshot 경로를
 제거할 수 있음을 확인했습니다. 기존 ‘불변 주소 보존’ 완료 표시를
 철회해 공급·품질 조건은 **5/10**입니다. 문서 19개의 설치 명령,

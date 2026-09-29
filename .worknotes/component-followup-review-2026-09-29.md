@@ -33,11 +33,16 @@
   입니다. 앞서 공개한 두 ID의 파일은 변경하지 않았습니다.
 - 로컬 Chromium 문서의 Sidebar 페이지에서 AppShell을 import하는
   Usage와 `pyd-sidebar.json`, `pyd-app-shell.json`을 함께 제시하는
-  설치 명령을 확인했습니다. 공개 배포 전이라 새 명령의 공개 URL
-  설치는 아직 실행하지 않았습니다.
+  설치 명령을 확인했습니다. PR #2 병합 뒤 production 문서에서도
+  같은 명령을 확인했습니다. 새 공개 snapshot의 manifest·DataChart
+  JSON과 이전 공개 manifest는 HTTP 200이며 저장소 파일과 일치했습니다.
+  공개 snapshot URL로 Sidebar와 AppShell을 기존 Vite 소비자에
+  설치한 뒤 typecheck·build를 통과했습니다.
 - DataChart 극단값과 빈 점 이름은 서버 렌더링 회귀 테스트로
-  확인했습니다. DataTable의 동적 옵션 교체와 CI의 새 untracked 검사
-  단계는 브라우저·원격 CI에서 아직 실행하지 않았습니다.
+  확인했습니다. PR #2와 병합 커밋 `cc14188`의 Verify UI CI가
+  통과했고 Vercel production 배포 `dpl_5BHHVmFsWKrKRiY9YW6g41f3opVK`
+  는 READY입니다. DataTable의 동적 옵션 교체는 브라우저에서
+  아직 실행하지 않았습니다.
 
 ## 남은 문제와 진행률
 

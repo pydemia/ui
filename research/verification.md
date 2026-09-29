@@ -1451,9 +1451,17 @@ fixture 경로와 충돌 재현 단계는
 | typecheck·build·registry:release-check | pass | 91개 item, 89개 export/catalog, 새 로컬 snapshot 일치 |
 | 로컬 Sidebar 문서 | pass | Usage의 AppShell import와 Sidebar·AppShell 설치 URL 표시 |
 | DataTable 옵션 동적 변경 | inspected | 코드 경로 수정; 브라우저 갱신은 미실행 |
-| CI untracked 생성 파일 검사 | inspected | workflow 단계 추가; 원격 CI는 미실행 |
+| CI untracked 생성 파일 검사 | pass (remote) | PR #2와 병합 커밋의 Verify UI workflow 통과 |
 | rollback 뒤 snapshot URL | unverified | 이전 배포에는 신규 ID 파일이 없어 주소 손실 가능; 실제 rollback 미실행 |
 | release별 provenance 고정 | incomplete | notice의 `main` 링크는 변경 가능한 출처 metadata를 참조 |
+
+PR #2와 병합 커밋 `cc14188`의 Verify UI CI가 통과했습니다. Vercel
+production 배포는 READY이며 공개 Sidebar 문서에서 Sidebar·AppShell
+설치 URL을 함께 확인했습니다. 새 snapshot의 manifest·DataChart JSON,
+이전 공개 manifest는 HTTP 200이고 저장소 파일과 일치합니다. 새 공개
+URL의 Sidebar·AppShell을 기존 Vite 소비자에 설치해 typecheck·build를
+통과했습니다. DataTable
+옵션 교체 브라우저 검사와 실제 rollback은 실행하지 않았습니다.
 
 독립 검토의 범위와 잔여 문제는
 `.worknotes/component-followup-review-2026-09-29.md`에 기록했습니다.

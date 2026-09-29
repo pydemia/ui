@@ -1,10 +1,12 @@
 # Component 확장 작업 인계
 
-2026-09-29 후속 검토: 현재 branch `codex/ui-release-followup`에서
-문서 설치 명령 19개, DataChart·DataTable 경계 동작, CI의 untracked
-생성 파일 검사를 수정했습니다. 새 로컬 snapshot은
+2026-09-29 후속 검토: [PR #2](https://github.com/pydemia/ui/pull/2)를
+`main`에 병합했고, Verify UI CI와 Vercel production 배포가
+통과했습니다. 문서 설치 명령 19개, DataChart·DataTable 경계 동작,
+CI의 untracked 생성 파일 검사를 수정했습니다. 현재 snapshot은
 `sha256-a3db94852dbdea79f551fa350fdf314cbf43b274b235fb76fb313a1008489a28`
-입니다. build·typecheck·패키지 테스트 48개·registry release 검사가
+입니다. 로컬 build·typecheck·패키지 테스트 48개·registry release
+검사와 공개 Sidebar·AppShell 설치 후 소비자 typecheck·build가
 통과했습니다. [후속 검토](component-followup-review-2026-09-29.md)를
 먼저 읽으세요. rollback 시 신규 snapshot 주소가 사라질 수 있어
 불변 주소 조건을 미완료로 돌렸습니다. 공급·품질 조건 **5/10**,
