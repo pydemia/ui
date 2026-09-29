@@ -26,3 +26,15 @@ component를 복원합니다. 좁은 화면에서는 category와 component 목�
 실제 screen reader의 발표, 다른 브라우저·기기의 touch 동작은
 검증하지 않았습니다. component·registry item 수와 goal 진행률은
 변하지 않습니다.
+
+## 공개 확인
+
+[PR #5](https://github.com/pydemia/ui/pull/5)를 병합했습니다. 병합
+커밋은 `6f51c978655faf7a41617cbb3807efcee1abf89c`입니다.
+[PR CI](https://github.com/pydemia/ui/actions/runs/36589121999)와
+[main push CI](https://github.com/pydemia/ui/actions/runs/36589388539)가
+통과했고 Vercel production 배포
+`dpl_6xcJgW8Adsu8LaC15PoL9CGemazg`가 READY입니다. 운영 사이트에서
+`Components → Framework → Sidebar`를 선택해 URL과 preview 갱신을
+확인했습니다. 운영에서 다른 모든 category를 개별 클릭하거나 실제
+보조기술·touch로 검사하지는 않았습니다.
