@@ -31,3 +31,12 @@
 미검증입니다. Tree 지연 로딩의 작업 중 변경은 별도 stash에 보관해
 이번 빌드와 수정안에 포함하지 않았습니다. 기존 미공개 draft snapshot
 네 디렉터리도 포함하지 않습니다.
+
+[PR #14](https://github.com/pydemia/ui/pull/14)를 `main`에 병합했습니다.
+PR Verify UI, `main`의 [Verify UI](https://github.com/pydemia/ui/actions/runs/36625014823)·
+[Pages CI](https://github.com/pydemia/ui/actions/runs/36625014264)가
+성공했고 Vercel production `dpl_Bu4R6wpdpd3Es12gv2dTMaGHTRRr`는
+READY입니다. 공개 `ui.pydemia.ai`의 393px Chromium에서 DataChart →
+MetricCard 선택 후 `scrollY=844`, SNB `scrollLeft=6200`이 유지되고
+URL·제목·버튼 focus가 갱신됐습니다. 이 클릭은 mobile device emulation의
+mouse pointer였으므로 실제 touch 검증으로 계산하지 않습니다.

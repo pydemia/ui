@@ -7,7 +7,10 @@ MetricCard 선택·재선택에서 `scrollY=844`, SNB `scrollLeft=6200`이
 유지됐고 1280px의 본문 이동도 유지됐습니다. typecheck·테스트 72/72·
 build·registry 검사가 통과했습니다. 실제 touch·Safari·screen reader는
 미검증입니다. [모바일 SNB 기록](mobile-snb-pointer-scroll-2026-09-30.md)을
-참고하세요. Tree 지연 로딩 WIP는 Git stash에 별도 보관했습니다.
+참고하세요. [PR #14](https://github.com/pydemia/ui/pull/14) 병합 뒤
+`main` Verify UI·Pages CI와 Vercel production이 성공했습니다. 공개
+393px Chromium 선택에서도 두 스크롤 위치와 버튼 focus를 확인했습니다.
+Tree 지연 로딩 WIP는 Git stash에 별도 보관했습니다.
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 
 2026-09-30 RangeSlider 진행: 기존 Slider에 `thumbLabels`를 추가하고
