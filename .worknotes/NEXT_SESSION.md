@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-09-29: draft PR 검토 중 DataChart의 유한한 양·음 극값에서 SVG 좌표가
+`NaN`이 되는 문제를 고쳤습니다. 현재 새 내용 해시 후보는
+`sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`이며
+처음 PR 후보 ID는 보존했습니다. package 테스트 46/46, typecheck,
+build, `registry:check`, 새 ID의 `registry:release-check`가 통과했습니다.
+[검토 기록](component-release-review-2026-09-29.md)에 변경 범위를
+남겼습니다. 공개 URL 설치와 실제 보조기술·touch 검사는 남았습니다.
+
 2026-09-29: 변경안을 [draft PR #1](https://github.com/pydemia/ui/pull/1)로
 열었습니다. head `193d98c`의 Vercel preview는 READY이고 인증된
 브라우저에서 89개 목록과 Navigation variant 전환을 확인했습니다.

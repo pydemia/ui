@@ -1401,3 +1401,16 @@ fixture 경로와 충돌 재현 단계는
 
 검사 방법과 ID는
 `.worknotes/component-release-check-2026-09-29.md`에 기록했습니다.
+
+## 2026-09-29 DataChart 극값 계산
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| package 테스트 | pass | 46개; `line`·`bar`·`area`·`stacked-bar`의 양·음 극값에서 `NaN`·`Infinity` SVG 출력 없음 |
+| typecheck·build·registry:check | pass | 89개 component·91개 item, 이전·현재 snapshot 검사 |
+| 현재 release 검사 | pass | 새 내용 해시 ID와 빌드된 registry·`docs/r/` 최신 JSON 일치 |
+| 실제 브라우저 극값 표시·screen reader | unverified | server render 회귀 시험 범위 밖 |
+| 공개 URL 설치 | unverified | 새 후보는 production 배포 전 |
+
+수정 배경과 후보 ID는
+`.worknotes/component-release-review-2026-09-29.md`에 기록했습니다.

@@ -9,7 +9,7 @@
 | `ad5de72` | 문서 사이트와 profile 예시, README, CHANGELOG, research 기록 |
 | `7f292b0` | 사이트 빌드 산출물과 현재 불변 registry snapshot, LF 속성 |
 
-현재 릴리스 후보 ID는
+처음 PR을 열 때의 릴리스 후보 ID는
 `sha256-a1cd11bae6654a55136729439cd7b437a507d59896271b7c0950745a9e61bf21`입니다.
 로컬에서 생성했으나 공개한 적 없는 이전 draft ID
 `sha256-0fd137f58bdca77709885ac45073c41b44e62791835a8996fac6c1d34eb6f9fe`와
@@ -54,3 +54,18 @@ preview의 `/r/releases/<ID>/pyd-button.json`은 Vercel Authentication
 거절됐습니다. 인증 없는 CLI 소비자 설치의 증거가 아닙니다. production의
 동일 경로는 아직 404입니다. 이 PR은 draft이며 `main`에 병합하거나
 production에 배포하지 않았습니다.
+
+## DataChart 경계값 수정
+
+대규모 변경 검토 중 DataChart의 유한한 양·음 극값이 범위 차 계산에서
+overflow해 `NaN` SVG 좌표와 축 눈금을 만들 수 있음을 발견했습니다.
+범위 차가 유한할 때는 기존 계산을 유지하고, overflow할 때만 양끝을
+절반으로 나눈 비율을 사용합니다. 축 눈금도 가중 평균으로 계산합니다.
+`line`·`bar`·`area`·`stacked-bar`의 양끝 극값 회귀 시험을 추가했습니다.
+
+현재 후보 ID는
+`sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`입니다.
+처음 후보는 내용 해시 경로를 바꾸지 않고 보존했습니다. package 테스트
+46/46, typecheck, build, `registry:check`, 새 ID의
+`registry:release-check`가 로컬에서 통과했습니다. 새 ID는 아직 PR에
+push하거나 공개 URL에서 설치하지 않았습니다.

@@ -198,8 +198,14 @@ function DataChart({
     const plotWidth = right - left;
     const x = (index: number) =>
         left + (index + 0.5) * plotWidth / labels.length;
-    const y = (value: number) =>
-        bottom - (value - minimum) * (bottom - top) / (maximum - minimum);
+    const range = maximum - minimum;
+    const halfRange = maximum / 2 - minimum / 2;
+    const y = (value: number) => {
+        const fraction = Number.isFinite(range)
+            ? (value - minimum) / range
+            : (value / 2 - minimum / 2) / halfRange;
+        return bottom - fraction * (bottom - top);
+    };
     const zeroY = y(0);
     const groupWidth = Math.min(
         plotWidth / labels.length * 0.72,
@@ -330,8 +336,8 @@ function DataChart({
                             style={{ minWidth: width }}
                         >
                             {[0, 0.5, 1].map((fraction) => {
-                                const value = minimum +
-                                    (maximum - minimum) * fraction;
+                                const value = minimum * (1 - fraction) +
+                                    maximum * fraction;
                                 const rowY = y(value);
                                 return (
                                     <g key={fraction}>

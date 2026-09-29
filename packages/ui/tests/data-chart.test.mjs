@@ -80,6 +80,22 @@ test("stacked totals reject overflow and invalid variants", () => {
     });
 });
 
+test("finite values at opposite numeric limits keep SVG coordinates", () => {
+    for (const variant of ["line", "bar", "area", "stacked-bar"]) {
+        const markup = renderChart({
+            variant,
+            points: [
+                { label: "Low", value: -Number.MAX_VALUE },
+                { label: "High", value: Number.MAX_VALUE },
+            ],
+            categories: undefined,
+            series: undefined,
+        });
+        assert.match(markup, /<svg[^>]*>/);
+        assert.doesNotMatch(markup, /NaN|Infinity/);
+    }
+});
+
 test("empty stacked data keeps the empty state", () => {
     const markup = renderChart({ categories: [], series: [] });
     assert.match(markup, /표시할 데이터가 없습니다/);

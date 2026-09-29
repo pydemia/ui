@@ -85,7 +85,7 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   현재 변경 묶음의 검토·공개 URL 설치·실제 릴리스는 남았습니다.
 - [ ] 릴리스마다 component JSON, `registryDependencies`, token을 같은
   식별자로 묶고 불변 주소를 보존합니다. 현재 91개 item의 로컬
-  `sha256-a1cd11bae6654a55136729439cd7b437a507d59896271b7c0950745a9e61bf21`
+  `sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`
   snapshot과 `docs/r/releases/` 복사본을 검사했습니다. `/r/`은 최신
   경로로 유지합니다. 공개 배포 후 snapshot URL의 실제 설치와 이전
   snapshot 보존을 확인해야 완료 처리합니다.
