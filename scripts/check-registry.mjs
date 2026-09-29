@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { basename, join, posix } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -6,12 +7,31 @@ import ts from "typescript";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
-const provenance = JSON.parse(readFileSync(join(root, "registry/provenance.json"), "utf8"));
+const provenanceContent = readFileSync(
+    join(root, "registry/provenance.json"), "utf8",
+).replace(/\r\n/g, "\n");
+const provenance = JSON.parse(provenanceContent);
 const output = join(root, "apps/profile-demo/public/r");
 const noticePath = "registry/SHADCN_UI_LICENSE.md";
 const noticeTarget = "@ui/SHADCN_UI_LICENSE.md";
 const noticeContent = readFileSync(join(root, noticePath), "utf8")
     .replace(/\r\n/g, "\n");
+const pinnedProvenance = noticeContent.match(
+    /github\.com\/pydemia\/ui\/blob\/([a-f0-9]{40})\/registry\/provenance\.json>/,
+);
+assert(pinnedProvenance,
+    "Consumer notice must link to a pinned provenance revision");
+assert(noticeContent.includes(`commit \`${pinnedProvenance[1]}\``),
+    "Consumer notice revision and link differ");
+const provenanceHash = noticeContent.match(
+    /SHA-256 of that file with LF line endings:\n`([a-f0-9]{64})`/,
+);
+assert(provenanceHash, "Consumer notice needs a provenance SHA-256");
+assert.equal(
+    provenanceHash[1],
+    createHash("sha256").update(provenanceContent).digest("hex"),
+    "Consumer notice provenance SHA-256 differs from current metadata",
+);
 const base = new URL(
     process.env.PYDEMIA_REGISTRY_BASE_URL ??
         "https://pydemia-ui.vercel.app/r/",

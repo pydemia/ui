@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-09-29 — 출처 고지 고정
+
+- 수정한 shadcn/ui source의 소비자 고지에서 provenance URL을 특정
+  commit으로 고정하고 파일 SHA-256을 기록했습니다. registry 검사가
+  현재 metadata와 고지의 해시를 대조합니다.
+- 현재 source로 새 내용 해시 snapshot을 만들었습니다. 기존 공개
+  snapshot의 파일은 변경하지 않았습니다.
+
 ## 2026-09-29 — 공개 component 후속 수정
 
 - 19개 문서 Usage에 필요한 registry item을 설치 명령에 추가하고,
@@ -7,7 +15,8 @@
 - DataChart의 동일 극단값 좌표와 빈 구간 이름, DataTable의 변경된
   필터 옵션 처리 방식을 수정했습니다.
 - CI가 untracked 문서 생성 파일도 찾도록 했습니다. rollback 시
-  snapshot 주소 보존과 release별 provenance 고정은 계속 검토합니다.
+  snapshot 주소 보존과 과거 release의 provenance 연결은 계속
+  검토합니다.
 
 ## 2026-09-29 — component registry 확장
 

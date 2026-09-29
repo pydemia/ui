@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29: 새 registry 소비자 고지의 provenance 링크를 고정 commit과
+내용 해시로 바꾸고 검사에 추가했습니다. 새 로컬 snapshot ID는
+`sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee`
+입니다. [검증 기록](component-provenance-pin-2026-09-29.md)에 범위가
+있습니다. 과거 snapshot의 고지와 rollback URL 보존은 미완료이므로
+**89개 component·91개 item, 공급·품질 조건 5/10, 전체 goal의
+관리용 추정 약 70%**를 유지합니다.
+
 2026-09-29 후속 배포: [PR #2](https://github.com/pydemia/ui/pull/2)를
 병합했습니다. 병합 커밋 `cc14188`의 Verify UI CI와 Vercel production
 배포가 성공했고, 새·이전 공개 snapshot 파일을 확인했습니다.

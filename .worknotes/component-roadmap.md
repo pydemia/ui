@@ -91,6 +91,8 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   PR #1의 `main` 병합, production 배포와 공개 URL 설치는 확인했습니다.
   독립 검토에서 발견한 문서 설치 명령·rollback·provenance 문제는
   [후속 검토](component-followup-review-2026-09-29.md)에 기록했습니다.
+  새 고지는 provenance의 commit·SHA-256을 고정합니다. 과거
+  snapshot의 `main` 링크와 rollback 문제는 남아 있습니다.
 - [ ] 릴리스마다 component JSON, `registryDependencies`, token을 같은
   식별자로 묶고 불변 주소를 보존합니다. 현재 91개 item의 로컬
   `sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`
