@@ -7,7 +7,9 @@
 로컬 문서·독립 소비자 설치·typecheck·build·상호작용이 통과했습니다.
 새 snapshot은
 `sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331`입니다.
-PR·CI·공개 배포와 공개 URL 설치는 아직 확인 전입니다.
+[PR #8](https://github.com/pydemia/ui/pull/8)의 PR·main CI와
+Vercel production READY, 운영 preview와 공개 URL 독립 소비자
+설치·typecheck·build도 확인했습니다.
 [계열 표시 기록](component-data-chart-series-visibility-2026-09-30.md)을
 참고하세요. component 90개·item 92개, 관리용 전체 goal 약 70%는
 유지합니다. 이전 미공개 draft snapshot 네 디렉터리는 포함하지

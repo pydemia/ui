@@ -49,7 +49,22 @@
   설치했습니다. 설치 source의 LF 기준 SHA-256이 원본과 같고
   소비자 typecheck·build가 통과했습니다. Chromium에서 대기를
   숨기자 합계가 12건에서 8건으로 바뀌었고 error log는 0건입니다.
-- 공개 배포와 공개 snapshot URL 설치는 아직 진행 중입니다.
+- [PR #8](https://github.com/pydemia/ui/pull/8)을
+  `0e6d91fe525f7200e2521baf964d46e0df3624b4`로
+  병합했습니다. PR
+  [Verify UI](https://github.com/pydemia/ui/actions/runs/36598003940),
+  main
+  [Verify UI](https://github.com/pydemia/ui/actions/runs/36598194158),
+  [Pages](https://github.com/pydemia/ui/actions/runs/36598194373)가
+  성공했습니다. Vercel production 배포
+  `dpl_38zruqFkz7fHkDvrBXN6rsWrLbr5`는 READY입니다.
+- 운영 DataChart preview에서 계열을 숨기자 SVG와 표의 대기 계열이
+  사라졌고 error log는 0건입니다. 새 Vite 소비자
+  `%TEMP%/pydemia-ui-series-public-consumer-20260930`에 공개
+  고정 snapshot URL의 DataChart·utils·tokens를 설치했습니다.
+  설치 source SHA-256이 원본과 같고 typecheck·build가
+  통과했습니다. 이 공개 소비자의 브라우저 상호작용은 실행하지
+  않았습니다.
 
 실제 screen reader 발표, 실제 touch 기기, 다른 브라우저는
 검증하지 않았습니다. 이전 미공개 draft snapshot 네 디렉터리는

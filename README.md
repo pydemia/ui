@@ -100,15 +100,14 @@ npm run registry:release-check
 [CHANGELOG.md](CHANGELOG.md)에
 기록하고, 배포 후 공개 snapshot URL의 설치를 별도 소비자에서 확인합니다.
 현재 게시한 ID는
-`sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee`입니다.
-이 ID의 Button과 직전
-`sha256-a3db94852dbdea79f551fa350fdf314cbf43b274b235fb76fb313a1008489a28`
-ID의 Sidebar·AppShell을 공개 URL로 설치해 소비자 typecheck·build를
-확인했습니다. 더 이전 공개 ID도 저장소에 보존합니다.
-새 소비자에서 현재 Button과 token을 고정 버전으로 설치하려면:
+`sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331`입니다.
+이 ID의 DataChart와 token을 공개 URL로 새 소비자에 설치해
+소스 일치·typecheck·build를 확인했습니다. 더 이전 공개 ID도
+저장소에 보존합니다. 새 소비자에서 현재 DataChart와 token을
+고정 버전으로 설치하려면:
 
 ```bash
-npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee/pyd-button.json https://pydemia-ui.vercel.app/r/releases/sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee/pyd-tokens.json
+npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331/pyd-data-chart.json https://pydemia-ui.vercel.app/r/releases/sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331/pyd-tokens.json
 ```
 
 기존 registry 설치물을 갱신할 때는 소비자 저장소의 변경을 먼저
@@ -116,7 +115,7 @@ commit하거나 백업하세요. `shadcn@4.21.0 add <item URL> --diff`로
 차이를 확인할 수 있습니다. 덮어쓰기를 거절하면 수정 파일이 남지만
 새 API도 들어오지 않습니다. `--overwrite`는 새 파일로 교체하므로
 소비자 수정은 백업에서 다시 적용하고 typecheck·build를 실행해야
-합니다. 공개 40개 item에서 현재 91개로 갱신한 격리 소비자와 수정된
+합니다. 공개 40개 item에서 91개로 갱신한 격리 소비자와 수정된
 Badge에서 이 경로를 확인했습니다. [shadcn CLI 옵션](https://ui.shadcn.com/docs/cli)을
 참고하세요.
 
