@@ -40,8 +40,18 @@ revision의 소스·package manifest·MIT LICENSE를 확인하고, 시간축과
   판정하지 못한 항목이며 접근성 적합 판정으로 보지 않습니다.
 - [데스크톱 화면](gantt-desktop-preview.png)과
   [390px 화면](gantt-mobile-preview.png)을 남겼습니다.
+- `npm run build`와 `npm run registry:release-check`가 통과했습니다.
+  97개 item·95개 component와 16개 불변 snapshot을 검사했습니다.
+  새 snapshot은
+  `sha256-2946399b798e993844ba16ee444830619c7284631f9e661a331af2c26cae8ea9`입니다.
+- `shadcn@4.21.0`으로 로컬 registry URL의 Gantt를 별도 Vite
+  소비자에 설치했습니다. 생성된 Gantt 파일은 원본 소스·registry JSON과
+  일치했고 기존 utils는 동일해 CLI가 재설치를 생략했습니다. 소비자
+  typecheck·build가 통과했습니다. 390px Chromium에서 구현 작업을
+  선택해 10월 5~8일에서 4~7일로 옮겼고, 선행 작업에 닿자 앞당기기
+  버튼이 비활성화됐습니다. 문서 가로 overflow와 page error는 없었고
+  시간축만 388px 표시 폭 안에서 684px로 스크롤됐습니다.
 
-빌드, registry 검사·snapshot, 별도 소비자 설치, 공개 사이트는 아직
-검증하지 않았습니다. 실제 touch·Safari·screen reader·RTL 및 서버
-저장 실패 후 복구도 미검증입니다. 기존 미공개 draft snapshot 네
-디렉터리는 stage하지 않습니다.
+공개 사이트·공개 snapshot은 배포 전이라 미검증입니다. 실제 touch·
+Safari·screen reader·RTL 및 서버 저장 실패 후 복구도 미검증입니다.
+기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.
