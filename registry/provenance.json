@@ -234,6 +234,13 @@
       "dependencies": ["@radix-ui/react-slider", "pyd-utils"], "accessibility": { "semantics": "named Radix slider thumb", "keyboard": "Chromium: ArrowRight and value update verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-range-slider", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/" },
+      "dependencies": ["pyd-slider", "pyd-utils"],
+      "accessibility": { "semantics": "named slider group with separately named Radix thumbs and two native form values", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-calendar", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/calendar.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["react-day-picker", "pyd-utils"], "accessibility": { "semantics": "DayPicker grid, named dates and selected state", "keyboard": "Chromium: ArrowRight, Enter selection and month navigation verified", "screen_reader": "pending manual review" }

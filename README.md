@@ -1,7 +1,7 @@
 # pydemia UI
 
 React 19, Tailwind CSS 4, TypeScript와 shadcn registry convention으로 만든
-source-owned UI 컴포넌트 작업공간입니다. 현재 92개 컴포넌트를 포함합니다.
+source-owned UI 컴포넌트 작업공간입니다. 현재 93개 컴포넌트를 포함합니다.
 shadcn/ui 기반 항목은 원본 revision과 MIT notice를 유지합니다. Origin UI,
 Kibo UI, AI Elements, Tremor는 디자인·상호작용 reference로 기록하고
 해당 항목의 구현 코드는 `pydemia/ui`에서 관리합니다.
@@ -99,16 +99,17 @@ npm run registry:release-check
 전달한 ID가 현재 빌드와 다르면 실패합니다. 배포 전 변경 내용은
 [CHANGELOG.md](CHANGELOG.md)에
 기록하고, 배포 후 공개 snapshot URL의 설치를 별도 소비자에서 확인합니다.
-현재 게시한 ID는
-`sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331`입니다.
-이 ID의 DataChart와 token을 공개 URL로 새 소비자에 설치해
-소스 일치·typecheck·build를 확인했습니다. 더 이전 공개 ID도
-저장소에 보존합니다. 새 소비자에서 현재 DataChart와 token을
-고정 버전으로 설치하려면:
+현재 source의 ID는
+`sha256-4405ce202eb10a7cb865a7609676349ed6e002ae1b49676d06f4438dd31c5449`입니다.
+이 ID의 RangeSlider와 token을 별도 소비자에 설치하려면:
 
 ```bash
-npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331/pyd-data-chart.json https://pydemia-ui.vercel.app/r/releases/sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331/pyd-tokens.json
+npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-4405ce202eb10a7cb865a7609676349ed6e002ae1b49676d06f4438dd31c5449/pyd-range-slider.json https://pydemia-ui.vercel.app/r/releases/sha256-4405ce202eb10a7cb865a7609676349ed6e002ae1b49676d06f4438dd31c5449/pyd-tokens.json
 ```
+
+이전 DataChart snapshot
+`sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331`은
+공개 URL 소비자의 소스 일치·typecheck·build를 확인했습니다.
 
 기존 registry 설치물을 갱신할 때는 소비자 저장소의 변경을 먼저
 commit하거나 백업하세요. `shadcn@4.21.0 add <item URL> --diff`로

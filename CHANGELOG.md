@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-09-30 — RangeSlider
+
+- 기존 Slider의 다중 thumb를 사용해 이름 있는 가격 범위 필터를
+  추가했습니다. 최솟값과 최댓값은 별도 native form 값으로 제출됩니다.
+- 문서에 키보드 조작·제출·초기화를 시험할 수 있는 preview와 Usage를
+  추가했습니다. 새 npm runtime 의존성은 없습니다.
+
 ## 2026-09-30 — InputGroup과 모바일 SNB 위치
 
 - 입력·textarea에 텍스트와 버튼을 붙이는 `InputGroup`을 추가했습니다.

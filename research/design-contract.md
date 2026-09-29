@@ -733,3 +733,20 @@ control 다음에 addon이 오고 CSS `order`가 시각적 위치를 정합니�
 그러므로 키보드는 control 다음 addon 버튼으로 이동합니다. 공유
 테두리에 `focus-within` 표시를 하고 control의 중복 outline을 지웁니다.
 실제 screen reader와 RTL 시각 순서는 별도 확인이 필요합니다.
+
+## 2026-09-30 RangeSlider
+
+`RangeSlider`는 가격·수치 필터처럼 두 endpoint를 이름 붙여 제출할 때
+사용합니다. 기존 `Slider`의 두 thumb에 `minLabel`·`maxLabel`을 연결하고
+각각 `minName`·`maxName`의 hidden input으로 현재 숫자를 제출합니다.
+`label`은 전체 그룹의 이름입니다. `form`으로 외부 form을 지정할 수
+있으며 `disabled`면 두 값을 제출하지 않습니다. 기본값은 `[min, max]`,
+`defaultValue`는 내부 상태, `value`와 `onValueChange`는 호출자 상태를
+사용합니다. `formatValue`는 표시 문자열만 바꾸고 제출 값은 숫자입니다.
+
+두 값은 항상 오름차순이며 `minStepsBetweenThumbs`는 `step` 단위로
+최소 간격을 정합니다. Radix Slider는 thumb를 반대편으로 넘기면 값을
+정렬하고 focus를 이동합니다. 따라서 두 이름은 현재 작은 값과 큰 값에
+붙고, 이동 중 조작하는 endpoint가 바뀔 수 있습니다. 실제 screen
+reader가 이 전환을 어떻게 알리는지는 별도 검증 대상입니다. 전달된
+범위·이름·간격이 잘못되면 렌더링 단계에서 오류를 알립니다.

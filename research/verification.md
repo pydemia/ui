@@ -1627,3 +1627,24 @@ PR·`main` Verify UI와 Pages CI, Vercel production 배포가
 `sha256-d8219d9053fecc606f6219a9ec4ed62d4d47b0d682ec6411dfe77114280da271`입니다.
 공개 배포 기록과 SNB 위치 수치는
 `.worknotes/component-input-group-2026-09-30.md`에 있습니다.
+
+## 2026-09-30 RangeSlider
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm test -w @pydemia/ui` | pass | 72/72; 두 thumb 이름·form 값·disabled·잘못된 설정 |
+| 로컬 Chromium | pass (limited) | `20/80 → 25/75` 키보드 이동, 별도 값 제출, native reset, 390px 가로 overflow 없음 |
+| `npm run registry:build` | pass | 95개 item 생성; 공개 URL 대상으로 finalize |
+| `npm run build`·`registry:release-check` | pass | 95개 item·93개 component·13개 불변 snapshot과 현재 ID 일치 |
+| 독립 소비자 CLI 설치·typecheck·build | pass | RangeSlider·Slider·utils·tokens·MIT 고지 5개 파일의 LF 정규화 내용 일치 |
+| 독립 소비자 브라우저·PR·production | pending | 현재 로컬 branch 작업 중 |
+| 실제 touch·Safari·screen reader·RTL | unverified | 기기와 보조기술 실행 전 |
+
+Radix는 thumb가 교차하면 두 값을 다시 정렬하고 focus를 이동합니다.
+문서 예제에서 최소 thumb에 `End`를 적용했을 때 최대 thumb가 활성화돼
+값이 100으로 바뀌는 동작을 확인했습니다. 이 동작의 screen reader
+발표는 검증하지 않았습니다. 세부 사항은
+`.worknotes/component-range-slider-2026-09-30.md`에 있습니다.
+새 snapshot은
+`sha256-4405ce202eb10a7cb865a7609676349ed6e002ae1b49676d06f4438dd31c5449`입니다.
