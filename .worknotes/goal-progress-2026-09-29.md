@@ -1,5 +1,18 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29 작업 정리: [PR #1](https://github.com/pydemia/ui/pull/1)의
+코드·CI 변경 커밋 `2b41cfe`는 push되어 있고 해당 커밋의
+[GitHub Actions run](https://github.com/pydemia/ui/actions/runs/36572361755)이
+성공했습니다. PR은 draft이며 제출된 review와 review thread는 없습니다.
+`main` 병합과 production 게시, 공개 snapshot URL을 이용한 소비자 설치는
+아직 하지 않았습니다. 현재 89개 component와 91개 registry item,
+공급·품질 조건 5/10입니다. 약 100개라는 규모 기준의 수량 89%와
+조건 완료 표시 50%를 같은 비중으로 평균한 69.5%를 반올림해
+**전체 goal의 관리용 추정치를 약 70%**로 유지합니다. 100개는 확정된
+완료 수가 아니며 이 비율은 공개 준비율이나 검증된 사용 사례의 비율이
+아닙니다. 남은 일은 [로드맵](component-roadmap.md)의 미완료 조건과
+[릴리스 검토 기록](component-release-review-2026-09-29.md)에 있습니다.
+
 2026-09-29: 현재 내용 해시 ID를 자동으로 고르는 release 검사를 추가하고,
 PR·`main` push용 CI workflow에 typecheck·테스트·build·snapshot 검사·
 생성 파일 diff 검사를 넣었습니다. 로컬 검사와 PR #1의 GitHub Actions

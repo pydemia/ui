@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-09-29 작업 정리: [PR #1](https://github.com/pydemia/ui/pull/1)의
+코드·CI 변경 커밋 `2b41cfe`에 대한
+[GitHub Actions run](https://github.com/pydemia/ui/actions/runs/36572361755)은
+성공했습니다. PR은 draft·미병합이고 제출된 review나 review thread가
+없습니다. production의 현재 snapshot 공개 설치는 확인하지 못했습니다.
+다음 작업에서는 [진행률 기록](goal-progress-2026-09-29.md)의 약 70%를
+관리용 추정으로만 취급하고 [로드맵](component-roadmap.md)의 미완료
+공급 조건을 먼저 확인하세요. 작업 트리의 두 미공개 draft snapshot은
+untracked 상태로 남겨 두었으므로 일괄 `git add`에 포함하지 마세요.
+
 2026-09-29: 현재 registry ID를 빌드 내용에서 계산하는
 `npm run registry:release-check` 기본 동작을 추가했습니다. ID를 명시하는
 기존 방식도 유지하며 fixture에서 현재·변경·게시 JSON 누락을 재검사했습니다.

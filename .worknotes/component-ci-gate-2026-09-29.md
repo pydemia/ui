@@ -16,6 +16,9 @@ Action 버전은 GitHub의 checkout·setup-node 공식 README의 v7 사용 예�
 성공했습니다. `verify` job에서 `npm ci`, typecheck, package 테스트,
 build, 무인자 release 검사와 `git diff --exit-code -- docs`가 모두
 실행됐습니다. 따라서 Linux의 생성 파일 일치도 확인했습니다.
+코드·CI 변경 커밋 `2b41cfe`의
+[후속 run](https://github.com/pydemia/ui/actions/runs/36572361755)도
+`completed`·`success`입니다.
 
 두 미공개 draft snapshot은 로컬 untracked 상태이므로 PR checkout의
 검사 대상에 포함되지 않습니다. 현재 PR에는 보존한 이전 후보와 새 후보
