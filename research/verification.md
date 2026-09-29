@@ -1666,7 +1666,9 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | `npm run build`·`registry:release-check` | pass | 95개 item·93개 component·14개 snapshot과 현재 ID 일치 |
 | 별도 소비자 CLI·typecheck·build | pass | Tree·tokens·utils 3개 파일; fixture Node 타입 추가 뒤 재실행 |
 | 별도 소비자 Chromium | pass (limited) | 펼침·실패·ArrowRight 재시도·완료·자식 focus |
-| PR CI·공개 배포·공개 URL 소비자 설치 | unverified | 현재 작업 브랜치의 소스와 문서 |
+| PR·`main` CI와 production | pass (limited) | PR #15·병합 커밋 Verify UI, Pages CI, Vercel READY, 공개 preview·현재 및 snapshot item |
+| 공개 snapshot 소비자 설치·typecheck·build | pass | `shadcn@4.21.0`으로 Tree·tokens·전이 utils 3개 파일 설치 |
+| 공개 snapshot 소비자 브라우저 | unverified | 설치·정적 빌드 후 브라우저 실행 전 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 상세 동작과 미검증 범위는

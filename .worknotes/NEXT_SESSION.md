@@ -6,7 +6,13 @@ typecheck·테스트 75/75와 로컬 Chromium의 오류·재시도·자식 focus
 390px light/dark 표시를 확인했습니다. 95개 item·14개 release 검사와
 별도 소비자 CLI 설치·typecheck·build·Chromium 동작도 통과했습니다.
 새 snapshot은 `sha256-5ff46dc370f8d49e297550557af2d0cc42d5ec7c90bd0a80ee458ac72e5c8e59`입니다.
-PR CI·배포는 아직 미검증입니다.
+[PR #15](https://github.com/pydemia/ui/pull/15)를 `main`에 병합했습니다.
+PR·`main` Verify UI와 Pages CI가 통과했고 Vercel production
+`dpl_4y2PiCHhaQF9wL4VwYziAHByJszW`가 READY입니다. 공개 preview의
+실패·키보드 재시도·완료와 현재·snapshot item을 확인했습니다. 공개
+snapshot URL의 별도 소비자 설치·typecheck·build도 통과했습니다.
+실제 screen reader·touch·Safari·RTL과 공개 소비자 브라우저는
+미검증입니다.
 [Tree 작업 기록](component-tree-lazy-2026-09-30.md)을
 참고하세요. 이전 Tree WIP stash는 작업 브랜치에 적용했으며 원본 stash는
 안전하게 남겨 두었습니다. 미공개 draft snapshot 네 디렉터리는

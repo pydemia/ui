@@ -36,7 +36,15 @@ W3C WAI-ARIA Tree View Pattern의 동적 노드 속성과 방향키 규칙을
   fixture의 Vite 설정에 `@types/node`가 없어서 실패했고, 설치 후
   통과했습니다. Tree 파일의 오류는 아니었습니다.
 
-현재 PR CI·공개 배포와 공개 URL의 독립 설치는 미검증입니다.
-실제 screen reader·touch·Safari·RTL과 네트워크 오류의 소비자별 처리도
-미검증입니다. 이전 미공개 draft snapshot 네 디렉터리는 stage하지
-않습니다.
+[PR #15](https://github.com/pydemia/ui/pull/15)를 `main`에 병합했습니다.
+PR Verify UI와 병합 커밋 `93447e7`의 Verify UI·Pages CI가 통과했고,
+Vercel production `dpl_4y2PiCHhaQF9wL4VwYziAHByJszW`는 READY입니다.
+공개 `ui.pydemia.ai` Chromium preview에서 원격 노드의 실패 →
+`ArrowRight` 재시도 → 완료·자식 노출을 확인했습니다. 공개 현재 item과
+snapshot item의 `childState`, manifest의 95개 item도 조회했습니다.
+공개 snapshot URL을 새 Vite 소비자에 `shadcn@4.21.0`으로 설치했고
+Tree·tokens·전이 utils 3개 파일 생성과 typecheck·build를 확인했습니다.
+
+실제 screen reader·touch·Safari·RTL, 공개 snapshot 소비자의 브라우저
+동작과 네트워크 오류의 소비자별 처리는 미검증입니다. 이전 미공개
+draft snapshot 네 디렉터리는 stage하지 않습니다.
