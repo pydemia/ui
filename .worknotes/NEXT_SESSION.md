@@ -5,8 +5,11 @@
 추가했습니다. Kibo 공식 문서와 고정 revision 소스·MIT LICENSE를
 참고했으며 소스는 복사하지 않았습니다. typecheck·패키지 테스트
 79/79가 통과했습니다. 로컬 Chromium의 390px 표 내부 스크롤·행 이름
-고정·밀도·빈 상태·light/dark·colormap도 확인했습니다. 전체 build·
-registry·소비자 설치와 배포는 아직 미검증입니다.
+고정·밀도·빈 상태·light/dark·colormap도 확인했습니다. build·
+registry release 검사와 별도 소비자 CLI 설치·typecheck·build·Chromium
+표시가 통과했습니다. 새 snapshot은
+`sha256-34e05c67026d4eafde4bba89993145eef2718414d4312c4ff87c7b33a4cc6481`입니다.
+PR CI·공개 배포와 공개 snapshot 소비자 설치는 미검증입니다.
 [Heatmap 기록](component-heatmap-2026-09-30.md)을
 참고하세요. 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 

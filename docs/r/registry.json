@@ -545,6 +545,11 @@
       "files": [{ "path": "packages/ui/src/components/donut-chart.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-heatmap", "type": "registry:ui", "title": "Heatmap",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/heatmap.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-dashboard", "type": "registry:ui", "title": "Dashboard Layout",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/dashboard.tsx", "type": "registry:ui" }]

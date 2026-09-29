@@ -28,8 +28,15 @@
   셀 색이 바뀌었고 light/dark 화면을 확인했습니다.
 - [390px light](heatmap-mobile-grid-light.png)와
   [390px dark](heatmap-mobile-grid-dark.png) 화면을 남겼습니다.
-- 전체 build, registry 검사, 독립 소비자 설치 및 공개 배포는 아직
-  실행하지 않았습니다.
+- `npm run build`와 `npm run registry:release-check`가 통과했습니다.
+  96개 item·94개 component와 15개 불변 snapshot을 검사했습니다.
+  새 snapshot은
+  `sha256-34e05c67026d4eafde4bba89993145eef2718414d4312c4ff87c7b33a4cc6481`입니다.
+- 별도 Vite 소비자에 `shadcn@4.21.0`으로 Heatmap·tokens·전이 utils를
+  설치했습니다. 세 파일의 내용이 registry JSON과 일치하고 typecheck·
+  build가 통과했습니다. 390px Chromium에서 숫자 0·결측값·표 헤더와
+  문서 가로 overflow가 없음을 확인했습니다.
+- PR CI·공개 배포와 공개 snapshot URL 소비자 설치는 미검증입니다.
 - 실제 screen reader·touch·Safari·RTL은 미검증입니다.
 
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.
