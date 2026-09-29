@@ -837,6 +837,20 @@ npm dependency는 없습니다. 격리 소비자 설치에서 CodeBlock, Button,
 utils, token CSS, shadcn/ui MIT 고지 5개 파일을 원본과 대조했습니다.
 Button의 source·LICENSE·전이 의존성 조사는 앞선 기록을 따릅니다.
 
+## 2026-09-29 Markdown
+
+`Markdown`은 React 텍스트 노드와 native heading·paragraph·list·link·
+`pre`/`code` 요소로 직접 작성했습니다. 문법 범위를 정할 때
+[CommonMark 0.31.2 명세](https://spec.commonmark.org/0.31.2/)를
+참고했습니다. 명세의 문장·예제·파서 소스를 복사하지 않았으며,
+전체 CommonMark 호환을 주장하지 않습니다. 명세 문서의 라이선스는
+CC BY-SA 4.0이고 새 component 구현은 프로젝트 소유입니다.
+
+직접 registry 의존성은 `pyd-utils`입니다. 추가 npm 패키지는 없으며
+React와 기존 token stylesheet를 사용합니다. 보안상 링크는 절대
+HTTP(S) 주소만 허용하고 원시 HTML은 React 텍스트로 남깁니다. 실제
+screen reader와 개별 registry 소비자 설치는 검증 기록에 구분합니다.
+
 ## 2026-09-29 DataList
 
 `DataList`는 프로젝트에서 native `<dl>`·`<dt>`·`<dd>`를 사용해 직접

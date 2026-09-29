@@ -346,6 +346,12 @@
       "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named figure and focusable pre/code; named native copy button and status", "keyboard": "Chromium: Enter copy status, wrap toggle, 390px internal scroll; clipboard content not independently verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-markdown", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "CommonMark", "url": "https://spec.commonmark.org/0.31.2/", "scope": "syntax reference for a documented subset; no source or specification text copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native headings, paragraphs, lists, links, and focusable code blocks; unsafe links remain text", "keyboard": "native link and code block navigation; browser check pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-app-shell", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "header, named sidebars, main, named bottom and floating regions; bubble requires accessible name", "keyboard": "Chromium demo: bubble remains focused on open, Tab reaches close, Escape and close return focus", "screen_reader": "pending manual review" }

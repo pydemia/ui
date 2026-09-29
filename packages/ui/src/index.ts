@@ -171,6 +171,8 @@ export { DataList } from "./components/data-list";
 export type { DataListItem, DataListProps } from "./components/data-list";
 export { CodeBlock } from "./components/code-block";
 export type { CodeBlockProps } from "./components/code-block";
+export { Markdown } from "./components/markdown";
+export type { MarkdownProps } from "./components/markdown";
 export { Carousel } from "./components/carousel";
 export type { CarouselProps, CarouselSlide } from "./components/carousel";
 export { Toggle } from "./components/toggle";

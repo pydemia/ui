@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-message",
+  "title": "Message",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-70c4a56811508257fe1131e7ab65e3ab3836e60934bba5a16f58c0e8a66fe000/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/message.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype MessageProps = ComponentProps<\"div\"> & {\n    from: \"user\" | \"assistant\" | \"system\";\n};\n\nfunction Message({ from, className, ...props }: MessageProps) {\n    const labels = {\n        user: \"사용자\",\n        assistant: \"응답\",\n        system: \"시스템\",\n    };\n\n    return (\n        <div\n            role=\"group\"\n            aria-label={`${labels[from]} 메시지`}\n            className={cn(\n                \"group flex max-w-[92%] flex-col gap-1 text-sm\",\n                from === \"user\" && \"ml-auto items-end\",\n                className,\n            )}\n            {...props}\n            data-from={from}\n        />\n    );\n}\n\nfunction MessageContent({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\n                \"min-w-0 rounded-sm border border-border bg-surface \" +\n                \"p-[var(--space-3)] [overflow-wrap:anywhere] \" +\n                \"group-data-[from=user]:border-message-user \" +\n                \"group-data-[from=user]:bg-message-user \" +\n                \"group-data-[from=user]:text-message-user-foreground\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Message, MessageContent };\nexport type { MessageProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/message.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

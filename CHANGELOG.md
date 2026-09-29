@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 2026-09-29 — Markdown 부분집합
+
+- React와 native 요소로 작성한 `Markdown`을 추가했습니다. 제목·문단·
+  단층 목록·강조·코드·절대 HTTP(S) 링크를 표시하며, 원시 HTML과
+  허용하지 않은 링크는 텍스트로 남깁니다.
+- registry item과 내용 해시 snapshot을 추가하고 기존 snapshot을
+  보존했습니다. 문서에서 원문을 편집하는 preview와 사용 코드를
+  제공합니다.
+
 ## 2026-09-29 — 출처 고지 고정
 
 - 수정한 shadcn/ui source의 소비자 고지에서 provenance URL을 특정
