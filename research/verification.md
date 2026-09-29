@@ -1486,3 +1486,25 @@ HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공�
 
 고정 revision과 새 ID는
 `.worknotes/component-provenance-pin-2026-09-29.md`에 기록했습니다.
+
+## 2026-09-29 Markdown 부분집합
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| 패키지 Markdown 테스트 | pass | 서식·절대 링크·위험 링크·원시 HTML·닫히지 않은 코드 fence·빈 입력·깊이 제한 7개 |
+| 저장소 typecheck·build | pass | UI·프로필·문서 TS, 92개 registry item 및 문서 빌드 |
+| `registry:release-check` | pass | 새 92개 item snapshot과 현재 빌드 내용 일치 |
+| 문서 preview | pass (limited) | 원문 편집 뒤 제목·안전한 링크·차단된 링크와 HTML의 텍스트 표시 |
+| 새 소비자 단독 설치 | pass | Markdown·utils·tokens 3개 파일, 원본 소스 일치·typecheck·build·브라우저 제목·목록·링크 |
+| package tarball Usage | pass | private package tarball 설치 후 Markdown·Message 사용 코드 typecheck |
+| 전체 로컬 소비자 | pass (limited) | 92개 item을 8개 batch로 같은 새 소비자에 설치; 94개 파일 일치·90개 모듈 typecheck·build·Chromium 212개 export·console error 0건 |
+| 공개 snapshot 설치·production | unverified | 새 ID는 아직 로컬 후보이며 공개 URL 설치·배포 미실행 |
+| 실제 screen reader·다른 브라우저 | unverified | native 요소의 실제 발표와 기기별 동작 미실행 |
+
+새 ID는
+`sha256-ab03eb990472f506dbf903d0230c1894fe9d28c2f1f4893a3c6db512b94f387d`
+입니다. 로컬 전체 소비자 검사는 내부 의존성 URL을 로컬 서버로 빌드한
+최신 item을 사용했습니다. 같은 ID의 snapshot JSON은 공개 주소를
+가리켜 게시 전 로컬 CLI 설치에서 404였으므로, 내부 URL을 운영 주소로
+되돌린 뒤 build·release 검사를 재실행했습니다. 단계와 미검증 항목은
+`.worknotes/component-markdown-2026-09-29.md`에 기록했습니다.

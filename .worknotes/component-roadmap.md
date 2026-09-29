@@ -10,11 +10,13 @@ CommandPalette, DateRangePicker, Tree, Conversation, Reasoning, ToolCall,
 FilterBar, Carousel, Image, JsonViewer, ColorInput, SearchInput,
 ContextMenu, NumberInput, TagsInput, NavigationMenu, HoverCard,
 ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
-ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl을
+ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
+Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-89개 component와 91개 registry item입니다. PR #1을 `main`에 병합해
+90개 component와 92개 registry item입니다. PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
-현재 91개 item의 동시 설치는 새 소비자 fixture에서 확인했습니다.
+현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
+새 Markdown과 snapshot의 공개 배포는 아직 확인하지 않았습니다.
 shadcn/ui source를 수정한 27개는
 각각 격리 설치해 소스와 MIT 고지의 전달을 확인했습니다. 나머지
 item의 개별 격리 설치·전체 동작은 미검증입니다.
@@ -44,12 +46,12 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 
 ## 먼저 닫을 공급·품질 공백
 
-- [ ] 현재 89개 component의 public export와 registry item,
+- [ ] 현재 90개 component의 public export와 registry item,
   provenance, 문서 예시가 서로 일치하는지 확인하고 변경을 검토
-  가능한 단위로 정리합니다. 현재 89개 component 모듈·public export·
+  가능한 단위로 정리합니다. 현재 90개 component 모듈·public export·
   registry·catalog ID의 1:1 대응을 `registry:check`에 넣고
   통과했습니다. `AvatarGroup`과 `ButtonGroup`은 각각 별도 설치했고
-  provenance 91개도 검사했습니다. 현재 사용 코드 89개는 tarball
+  provenance 92개도 검사했습니다. 직전 사용 코드 89개는 tarball
   소비자와 registry 소스 경로에서 각각 typecheck했습니다.
   확장안을 기능·문서·생성 산출물의 세 커밋으로 정리하고 깨끗한
   체크아웃의 build·typecheck·테스트·registry 검사를 통과했습니다.
@@ -61,12 +63,13 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   DataTable의 390px 열 압축은 표 내부 가로 scroll로 수정했습니다.
   [검증 기록](component-data-table-responsive-2026-09-29.md)에 범위가
   있습니다.
-- [x] 별도 소비자 프로젝트에서 현재 91개 registry item을 한 번에
+- [x] 별도 소비자 프로젝트에서 현재 92개 registry item을
   `shadcn@4.21.0 add`로 설치했습니다. token·MIT 고지를 포함한
-  93개 파일이 생성된 JSON 내용과 일치했고 전체 모듈 typecheck·
-  build·Chromium 로딩(208개 값 export, console error 0건)을 확인했습니다.
-  현재 사용 코드 89개의 package·registry 직접 import typecheck도
-  수행했습니다.
+  94개 파일이 생성된 JSON 내용과 일치했고 90개 모듈의 typecheck·
+  build·Chromium 로딩(212개 값 export, console error 0건)을 확인했습니다.
+  직전 사용 코드 89개의 package·registry 직접 import typecheck도
+  수행했습니다. 새 Markdown 사용 코드는 별도 package tarball
+  소비자에서 typecheck했습니다.
   새 `CitationList` item도 별도 빈 소비자에 설치해 확인했습니다.
   개별 item 전체의 격리 설치와 상호작용 검사도 남았습니다.
 - [ ] 기존 35개에서 남은 미검증 항목 중 실제 사용에 영향을 주는 상호작용을
@@ -262,7 +265,8 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 - [x] `CodeBlock` — 이름 있는 단일 코드 블록의 언어 표시, 복사
   상태, 긴 줄의 내부 scroll·줄바꿈을 구현했습니다. 실제 clipboard
   내용과 screen reader 발표는 검증하지 않았습니다.
-- [ ] `Markdown` — 허용한 문법의 렌더링과 안전한 링크 처리.
+- [x] `Markdown` — 제목·문단·단층 목록·강조·코드와 안전한 절대
+  HTTP(S) 링크 부분집합을 구현했습니다. 원시 HTML은 텍스트로 남깁니다.
 - [x] `JsonViewer` — 중첩 JSON의 접기·펼치기, 항목별 추가 표시와
   원본 복사. JSON 외 값과 순환 구조는 오류로 알립니다.
 

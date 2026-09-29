@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-09-29 Markdown 후보: `codex/markdown-safe-renderer`에 90번째
+component와 92번째 registry item을 구현했습니다. 로컬 snapshot 후보는
+`sha256-ab03eb990472f506dbf903d0230c1894fe9d28c2f1f4893a3c6db512b94f387d`
+입니다. package 테스트·typecheck·build·release 검사, Markdown 단독
+소비자와 92개 item 전체 소비자 typecheck·build·브라우저 로딩을
+확인했습니다. 이 시점에는 PR·production 배포·공개 URL 설치를
+확인하지 않았습니다. 상세 범위는
+[Markdown 기록](component-markdown-2026-09-29.md)을 참고하세요.
+공급·품질 조건 5/10, 전체 goal의 관리용 추정 약 70%입니다. 이전
+미공개 draft snapshot 네 디렉터리는 계속 untracked로 둡니다.
+
 2026-09-29 작업 마감: `DateRangeFilter` 후보를 현재 코드와 문서 preview로
 검토해 기존 `DateRangePicker`·`FilterBar` 조합으로 판정했습니다. 새
 component나 registry item은 추가하지 않았습니다. 두 component를 결합한
