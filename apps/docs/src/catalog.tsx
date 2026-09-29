@@ -38,7 +38,8 @@ import {
     EmptyMedia, EmptyTitle, Field, FileUpload, FilterBar,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
     HoverCardTrigger, Image, Input, JsonViewer,
-    Label, LogConsole, Message, MessageContent, MetricCard, MultiSelect,
+    Label, LogConsole, Markdown, Message, MessageContent, MetricCard,
+    MultiSelect,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
     NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
     NativeSelect, NumberInput,
@@ -103,6 +104,36 @@ function CodeBlockPreview() {
             </Button>
             <CodeBlock label="request.ts" language="TypeScript"
                 code={code} wrap={wrap} />
+        </div>
+    );
+}
+
+function MarkdownPreview() {
+    const [source, setSource] = useState([
+        "## 주간 검토",
+        "",
+        "**완료 12건**과 *대기 3건*을 확인했습니다.",
+        "",
+        "- 변경 내역 확인",
+        "- [공식 문서](https://example.com/docs) 열기",
+        "",
+        "```ts",
+        "const total = 15;",
+        "```",
+    ].join("\n"));
+
+    return (
+        <div className="preview-workspace grid gap-3">
+            <Field label="Markdown 원문">
+                {(control) => <Textarea {...control} rows={8}
+                    value={source} onChange={(event) =>
+                        setSource(event.target.value)} />}
+            </Field>
+            <Message from="assistant">
+                <MessageContent>
+                    <Markdown source={source} />
+                </MessageContent>
+            </Message>
         </div>
     );
 }
@@ -3578,6 +3609,25 @@ function SupportChat() {
 />`,
         installItems: ["code-block"],
         preview: () => <CodeBlockPreview />,
+    },
+    {
+        id: "markdown", name: "Markdown", category: "Developer tools",
+        description: "제목·문단·단층 목록·강조·인라인 코드·코드 블록과 절대 HTTP(S) 링크를 표시합니다. 원시 HTML과 지원하지 않는 문법은 텍스트로 남깁니다.",
+        code: `import { Markdown, Message, MessageContent } from "@pydemia/ui";
+
+const answer = [
+  "## 검토 결과",
+  "",
+  "**완료 12건**과 *대기 3건*을 확인했습니다.",
+  "",
+  "- [공식 문서](https://example.com/docs)",
+].join("\\n");
+
+<Message from="assistant">
+  <MessageContent><Markdown source={answer} /></MessageContent>
+</Message>`,
+        installItems: ["markdown", "message"],
+        preview: () => <MarkdownPreview />,
     },
     {
         id: "field", name: "Field", category: "Inputs",

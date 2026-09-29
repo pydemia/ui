@@ -430,6 +430,11 @@
       "files": [{ "path": "packages/ui/src/components/code-block.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-markdown", "type": "registry:ui", "title": "Markdown",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/markdown.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-app-shell", "type": "registry:ui", "title": "App Shell",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/app-shell.tsx", "type": "registry:ui" }]
