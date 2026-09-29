@@ -8,6 +8,8 @@ typecheck, package 테스트 45개, `registry:check`,
 [릴리스 검토 기록](component-release-review-2026-09-29.md)에 있습니다.
 대규모 변경의 독립 검토와 공개 URL 설치·배포는 남아 있어 공급·품질
 조건은 **5/10**, 전체 goal의 관리용 추정은 **약 70%**로 유지합니다.
+기능·문서·생성 산출물·작업 기록은
+`origin/codex/ui-component-release`로 push했습니다.
 
 2026-09-29: [로컬 릴리스 검사](component-release-check-2026-09-29.md)를
 추가했습니다. 현재 빌드와 지정한 내용 해시 snapshot, `docs/r/`의

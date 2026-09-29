@@ -6,7 +6,8 @@ typecheck, package 테스트 45개, `registry:check`, 현재 내용 해시 ID의
 `registry:release-check`가 통과했습니다. Windows ZIP 복원 시 snapshot
 JSON의 줄바꿈 변환으로 검사에 실패한 뒤 `.gitattributes`로 LF를 고정하고
 재검사했습니다. 미공개 이전 draft snapshot 두 개는 커밋하지 않았습니다.
-현재 head와 원격·배포 상태, 검토 범위는
+작업 커밋은 `origin/codex/ui-component-release`로 push했습니다. 현재
+head와 배포 상태, 검토 범위는
 [릴리스 검토 기록](component-release-review-2026-09-29.md)에 있습니다.
 대규모 변경의 독립 검토, 공개 URL 설치와 배포는 남아 있으며 89개
 component·91개 registry item, 공급·품질 조건 5/10, 관리용 추정 약 70%입니다.

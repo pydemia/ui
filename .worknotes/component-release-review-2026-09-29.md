@@ -36,5 +36,7 @@ registry와 docs의 JSON을 `text eol=lf`로 지정하고 생성 산출물 커�
 
 기본 component 상호작용 중 실제 drag/drop·touch, 다른 시간대,
 screen reader 검사는 끝나지 않았습니다. 이 대규모 변경의 독립 코드
-검토와 공개 URL의 snapshot 설치·이전 공개 버전 보존, 원격 push와
-사이트 배포도 이 기록 시점에는 검증하지 않았습니다.
+검토와 공개 URL의 snapshot 설치·이전 공개 버전 보존, 사이트 배포는
+검증하지 않았습니다. 브랜치를
+`origin/codex/ui-component-release`로 push했습니다. 네 번째
+`4db73d2`는 `.worknotes/` 진행·검증·인계 기록입니다.
