@@ -8,7 +8,11 @@ Usage를 추가했으며 package test 72/72·typecheck 및 Chromium의 키보드
 `sha256-4405ce202eb10a7cb865a7609676349ed6e002ae1b49676d06f4438dd31c5449`
 snapshot, 95개 item release 검사도 통과했습니다. 별도 소비자에서
 CLI 설치 파일 5개 내용 일치와 typecheck·build를 확인했습니다.
-현재 `codex/range-slider-form` branch이며 PR·CI·production은 진행 전입니다.
+PR #13을 `main`에 병합했습니다. PR·`main` Verify UI와 Pages CI,
+Vercel production `dpl_Ag1DjmuWRKQ7FdZWq2oANPyiTkJu`가 통과했습니다.
+공개 RangeSlider preview의 키보드·제출, 현재 item·95개 item snapshot
+URL과 공개 URL의 독립 소비자 CLI 설치·typecheck·build를 확인했습니다.
+실제 touch·Safari·screen reader·RTL과 독립 소비자 브라우저는 미검증입니다.
 [RangeSlider 작업 기록](component-range-slider-2026-09-30.md)을 보세요.
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 

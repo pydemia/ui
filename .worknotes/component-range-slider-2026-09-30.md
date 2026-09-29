@@ -33,8 +33,22 @@
 - 별도 Vite 소비자에 `shadcn@4.21.0`으로 RangeSlider·tokens와 전이
   의존성을 설치했습니다. 5개 파일의 LF 정규화 내용이 원본과 같고
   TypeScript와 Vite build가 통과했습니다.
-- 현재 작성 시점의 미완료: 독립 소비자 브라우저·PR·production.
+- 공개 snapshot URL을 새 Vite 소비자에 설치했습니다. RangeSlider,
+  Slider, utils, token, MIT 고지 5개 파일이 생성됐고 typecheck·build가
+  통과했습니다.
 - 실제 touch, touch 보조기술, Safari, screen reader, RTL은 미검증.
 
-다음 작업은 PR·CI와 production 검증입니다. 이전
-미공개 draft snapshot 네 디렉터리는 포함하지 않습니다.
+실제 touch, touch 보조기술, Safari, screen reader, RTL과 독립 소비자
+브라우저 동작은 미검증입니다. 이전 미공개 draft snapshot 네
+디렉터리는 포함하지 않았습니다.
+
+## 공개 배포
+
+[PR #13](https://github.com/pydemia/ui/pull/13)의 Verify UI가 통과한
+뒤 `3f2d33b0016a7d20c888e231f5b92b16932b6f28`로 병합했습니다.
+`main`의 Verify UI와 Pages CI가 성공했고 Vercel production
+`dpl_Ag1DjmuWRKQ7FdZWq2oANPyiTkJu`가 READY입니다. 공개
+`https://ui.pydemia.ai/?component=range-slider`에서 93개 component,
+thumb별 이름, Usage와 `20/80 → 25/80` 변경·제출을 확인했습니다.
+공개 `pyd-range-slider.json`과 snapshot item은 조회됐으며
+manifest의 `itemCount`는 95입니다.

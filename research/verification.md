@@ -1638,7 +1638,9 @@ PR·`main` Verify UI와 Pages CI, Vercel production 배포가
 | `npm run registry:build` | pass | 95개 item 생성; 공개 URL 대상으로 finalize |
 | `npm run build`·`registry:release-check` | pass | 95개 item·93개 component·13개 불변 snapshot과 현재 ID 일치 |
 | 독립 소비자 CLI 설치·typecheck·build | pass | RangeSlider·Slider·utils·tokens·MIT 고지 5개 파일의 LF 정규화 내용 일치 |
-| 독립 소비자 브라우저·PR·production | pending | 현재 로컬 branch 작업 중 |
+| 공개 snapshot 소비자 설치·typecheck·build | pass | 배포 URL에서 RangeSlider·tokens·전이 의존성 5개 파일 설치 |
+| PR·`main` CI와 production | pass (limited) | PR #13·병합 커밋 Verify UI, Pages CI, Vercel READY와 공개 preview·JSON 조회 |
+| 독립 소비자 브라우저 | unverified | 설치·정적 빌드 후 브라우저 실행 전 |
 | 실제 touch·Safari·screen reader·RTL | unverified | 기기와 보조기술 실행 전 |
 
 Radix는 thumb가 교차하면 두 값을 다시 정렬하고 focus를 이동합니다.
@@ -1648,3 +1650,7 @@ Radix는 thumb가 교차하면 두 값을 다시 정렬하고 focus를 이동합
 `.worknotes/component-range-slider-2026-09-30.md`에 있습니다.
 새 snapshot은
 `sha256-4405ce202eb10a7cb865a7609676349ed6e002ae1b49676d06f4438dd31c5449`입니다.
+공개 manifest의 `itemCount=95`와 현재·snapshot `pyd-range-slider`를
+확인했습니다. 공개 문서의 두 thumb 이름, 키보드 변경·form 제출도
+Chromium에서 확인했습니다. 배포·소비자 세부 사항은
+`.worknotes/component-range-slider-2026-09-30.md`에 기록했습니다.
