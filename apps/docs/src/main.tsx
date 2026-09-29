@@ -210,7 +210,7 @@ function App() {
         return () => window.removeEventListener("popstate", handleHistory);
     }, []);
 
-    function selectComponent(id: string) {
+    function selectComponent(id: string, scrollToComponent = true) {
         setSelectedId(id);
         setMenuCategory(catalog.find((entry) => entry.id === id)!.category);
         setComponentMenuOpen(false);
@@ -218,7 +218,9 @@ function App() {
         url.searchParams.set("component", id);
         url.hash = "components";
         window.history.pushState({}, "", url);
-        document.getElementById("components")?.scrollIntoView({ behavior: "smooth" });
+        if (scrollToComponent) {
+            document.getElementById("components")?.scrollIntoView({ behavior: "smooth" });
+        }
     }
 
     function sendColormapToExample() {
@@ -337,7 +339,17 @@ function App() {
                                 <p className="sidebar-label">{category}</p>
                                 {catalog.filter((entry) => entry.category === category)
                                     .map((entry) =>
-                                        <button key={entry.id} type="button" aria-current={entry.id === selectedId ? "page" : undefined} className={`sidebar-item${entry.id === selectedId ? " selected" : ""}`} onClick={() => selectComponent(entry.id)}>{entry.name}</button>,
+                                        <button
+                                            key={entry.id}
+                                            type="button"
+                                            aria-current={entry.id === selectedId ? "page" : undefined}
+                                            className={`sidebar-item${entry.id === selectedId ? " selected" : ""}`}
+                                            onClick={() => selectComponent(
+                                                entry.id,
+                                                !window.matchMedia("(max-width: 850px)").matches,
+                                            )}>
+                                            {entry.name}
+                                        </button>,
                                     )}
                             </div>
                         ))}
