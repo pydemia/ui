@@ -3,7 +3,7 @@
   "name": "pyd-data-chart",
   "title": "Data Chart",
   "registryDependencies": [
-    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+    "https://pydemia-ui.vercel.app/r/releases/sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93/pyd-utils.json"
   ],
   "files": [
     {
