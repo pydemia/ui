@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <title>남색 산과 로즈색 태양</title>
+  <rect width="640" height="360" fill="#dfeaf0"/>
+  <circle cx="452" cy="112" r="56" fill="#ba365b"/>
+  <path d="M0 304 166 126l128 126 94-81 252 155v34H0Z"
+        fill="#4d8799"/>
+  <path d="M0 336 175 205l133 115 168-147 164 114v73H0Z"
+        fill="#103344"/>
+  <path d="M0 320c133-24 249-13 341 13 111 31 218 24 299-3v30H0Z"
+        fill="#ba365b"/>
+</svg>

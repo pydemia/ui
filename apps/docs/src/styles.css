@@ -11,27 +11,31 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--foreground); background: var(--background); font-size: 16px; }
 button, input { font: inherit; }
-a { color: inherit; text-decoration: none; }
-a:hover { color: var(--accent); }
+@layer base {
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--accent); }
+}
 button { cursor: pointer; }
 code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
 .skip-link { position: fixed; top: -100px; left: 16px; z-index: 50; padding: 10px 14px; color: var(--accent-foreground); background: var(--accent); }
 .skip-link:focus { top: 8px; }
-.topbar { height: 68px; position: sticky; z-index: 20; top: 0; background: var(--surface); border-bottom: 1px solid var(--border); }
+.topbar { height: 68px; position: sticky; z-index: 20; top: 0; background: var(--surface); }
 .topbar-inner { max-width: 1560px; height: 100%; margin: auto; padding: 0 38px; display: flex; align-items: center; gap: 22px; }
-.wordmark { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; font-size: 17px; font-weight: 650; letter-spacing: -.035em; }
+.wordmark { display: inline-flex; align-items: center; gap: 10px; border: 0; white-space: nowrap; font-size: 17px; font-weight: 650; letter-spacing: -.035em; }
 .wordmark:hover { color: var(--foreground); }
+.wordmark:focus-visible { outline: 0; box-shadow: 0 2px 0 var(--focus); }
 .wordmark-light { color: var(--muted); font-weight: 450; }
 .brand-mark {
     width: 38px;
     height: 38px;
     flex: none;
+    border: 0;
 }
 .dark .brand-mark { filter: brightness(2.1); }
 .version { padding: 3px 9px; color: var(--muted); font-size: 12px; white-space: nowrap; }
 .top-nav { display: flex; align-items: center; gap: 32px; margin-left: auto; font-size: 14px; font-weight: 550; }
 .github-link { display: inline-flex; align-items: center; gap: 5px; }
-.theme-button { width: 35px; height: 35px; margin-left: 7px; display: grid; place-items: center; border: 1px solid var(--border); border-radius: 4px; color: var(--foreground); background: var(--surface); }
+.theme-button { width: 35px; height: 35px; margin-left: 7px; display: grid; place-items: center; border: 0; border-radius: 4px; color: var(--foreground); background: var(--surface); }
 .theme-button:hover { background: var(--surface-subtle); }
 .layout { max-width: 1560px; min-height: calc(100vh - 68px); margin: 0 auto; display: grid; grid-template-columns: 238px minmax(0, 1fr); }
 .sidebar { border-right: 1px solid var(--border); background: var(--docs-rail); }
@@ -62,6 +66,8 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .section-lead p:not(.section-index) { margin: 0; max-width: 725px; font-size: 15px; line-height: 1.65; color: var(--muted); }
 .section-lead > span { white-space: nowrap; margin-bottom: 4px; }
 .component-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; background: var(--surface); }
+.component-grid[data-wide="true"] { grid-template-columns: minmax(0, 1fr); }
+.component-grid[data-wide="true"] .preview-panel { border-right: 0; border-bottom: 1px solid var(--border); }
 .preview-panel, .code-panel { min-width: 0; }
 .preview-panel { border-right: 1px solid var(--border); }
 .panel-caption { height: 43px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 16px; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--surface-subtle); }
@@ -82,6 +88,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .preview-table { width: 100%; min-width: 300px; overflow-x: auto; }
 .preview-snippet { width: 100%; min-width: 280px; }
 .preview-snippet > * { width: 100%; }
+.preview-stage > .preview-workspace { width: 100%; padding: 0; border: 0; background: transparent; box-shadow: none; }
 .docs-snippet { border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
 .docs-snippet > div:first-child { min-height: 44px; }
 .docs-snippet pre { max-height: 299px; min-height: 282px; margin: 0; font-size: 12px; line-height: 1.85; }
@@ -116,13 +123,6 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .colormap-reset:hover { background: var(--surface-subtle); }
 .colormap-reset:disabled { opacity: .5; cursor: default; }
 .colormap-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.colormap-field { display: grid; grid-template-columns: 32px minmax(0, 1fr); grid-template-rows: auto auto auto; gap: 3px 9px; min-width: 0; padding: 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
-.colormap-field label { grid-column: 1 / -1; font-size: 13px; font-weight: 600; }
-.colormap-field input[type="color"] { width: 32px; height: 32px; padding: 2px; border: 1px solid var(--border); border-radius: 3px; background: var(--surface); }
-.colormap-field input[type="text"] { min-width: 0; height: 32px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 3px; background: var(--background); color: var(--foreground); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; }
-.colormap-field input[aria-invalid="true"] { border-color: var(--danger); }
-.colormap-field code { grid-column: 1 / -1; color: var(--muted); font-size: 10px; overflow-wrap: anywhere; }
-.colormap-error { min-height: 20px; margin: 7px 0 0; color: var(--danger); font-size: 12px; }
 .contrast-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .contrast-grid > div { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 10px; padding: 11px 12px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); font-size: 12px; }
 .contrast-grid strong { font-size: 14px; }
@@ -134,6 +134,10 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .text-link { display: inline-flex; gap: 4px; align-items: center; white-space: nowrap; font-size: 14px; font-weight: 650; color: var(--accent); }
 .example-frame { height: 560px; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; background: var(--surface); }
 .example-frame iframe { width: 100%; height: 100%; border: 0; }
+.analytics-example-frame { max-height: 720px; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--background); }
+.analytics-install { margin-top: 14px; font-size: 13px; }
+.analytics-install summary { cursor: pointer; font-weight: 600; }
+.analytics-install pre { margin: 12px 0; padding: 12px; overflow-x: auto; background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius); white-space: pre-wrap; overflow-wrap: anywhere; }
 .usage-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .usage-columns > div { min-width: 0; background: var(--surface); border: 1px solid var(--border); padding: 19px; border-radius: 5px; }
 .usage-columns h3 { margin: 0 0 8px; font-size: 16px; }
@@ -143,6 +147,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .footer a { text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 1200px) { .main-content { padding-inline: 32px; } .intro-count { display: none; } .component-grid { grid-template-columns: 1fr; } .colormap-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .preview-panel { border-right: 0; border-bottom: 1px solid var(--border); } .preview-stage { min-height: 250px; } .docs-snippet pre { min-height: 150px; } }
 @media (max-width: 850px) { .layout { display: block; } .sidebar { position: sticky; top: 68px; z-index: 10; border-right: 0; border-bottom: 1px solid var(--border); } .sidebar-inner { display: flex; align-items: center; gap: 2px; overflow-x: auto; max-height: none; padding: 8px 18px; white-space: nowrap; } .sidebar-overview, .sidebar-lower, .sidebar-label { display: none; } .sidebar-item { width: auto; flex: none; border-left: 0; border-bottom: 2px solid transparent; border-radius: 3px; } .sidebar-item.selected { border-left: 0; border-bottom-color: var(--accent); } .doc-section { scroll-margin-top: 145px; } .intro { scroll-margin-top: 145px; } }
+@media (max-width: 850px) { .sidebar-inner > div:not(.sidebar-lower) { display: contents; } }
 @media (max-width: 670px) { .topbar-inner { padding: 0 17px; gap: 9px; } .wordmark { font-size: 15px; } .version, .top-nav > a:not(.github-link) { display: none; } .top-nav { margin-left: auto; gap: 0; } .github-link { font-size: 0; } .github-link svg:last-child { display: none; } .theme-button { margin-left: 5px; } .main-content { padding: 0 17px; } .intro { padding: 36px 0 32px; } .intro h1 { font-size: 40px; } .intro p { font-size: 15px; } .desktop-break { display: none; } .doc-section { padding: 36px 0; } .section-lead { flex-wrap: wrap; } .colormap-grid, .colormap-fields, .swatch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .contrast-grid { grid-template-columns: 1fr; } .token-detail { grid-template-columns: repeat(2, 1fr); } .component-meta { grid-template-columns: repeat(2, 1fr); } .component-meta > div:last-child { grid-column: 1 / -1; } .usage-columns { grid-template-columns: 1fr; } .usage-columns p { min-height: 0; } .example-frame { height: 590px; } }
 @media (max-width: 410px) { .colormap-grid, .colormap-fields, .swatch-grid { grid-template-columns: 1fr; } .colormap-editor { align-items: start; flex-direction: column; } .preview-stage { padding: 12px; } .preview-row { padding: 12px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
