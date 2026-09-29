@@ -1,5 +1,20 @@
 # Component 확장 작업 인계
 
+2026-09-30 진행 중인 `codex/kanban-board` branch: Workflow에
+`Kanban`을 추가해 로컬 기준 component 91개·registry item 93개입니다.
+공식 Kibo 문서·고정 revision 소스·MIT license를 확인하고 원본
+React·Tailwind 구현으로 작성했습니다. 패키지 테스트·typecheck·build,
+registry release 검사, 로컬 Chromium과 독립 소비자 설치·동작이
+통과했습니다. native drag, 실제 touch·Safari·screen reader는
+미검증입니다. [Kanban 기록](component-kanban-2026-09-30.md)을
+참고하세요. 새 snapshot은
+`sha256-ebeff129d8be2a68593c6bf8fbeca82380bd1c6c037fab4567cdb2e4c4400764`입니다.
+같은 branch에서 모바일 SNB의 scroll anchoring 보정을 막았습니다.
+390px 실제 클릭에서 문서·SNB 위치와 버튼 focus가 유지되고 1280px
+본문 이동은 유지됐습니다. [모바일 focus 기록](mobile-snb-focus-2026-09-30.md)을
+참고하세요. PR·CI·production 검증은 아직 남았습니다. 기존 미공개
+draft snapshot 네 디렉터리는 stage하지 마세요.
+
 2026-09-30 모바일 문서 SNB: 항목 선택의 명시적인 `#components`
 자동 스크롤을 850px 이하에서 생략했습니다. 선택·URL·버튼 focus는
 유지하고 상단 메뉴와 데스크톱 SNB의 본문 이동은 유지합니다.

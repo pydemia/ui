@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-accordion",
+  "title": "Accordion",
+  "dependencies": [
+    "@radix-ui/react-accordion@1.2.20",
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-ebeff129d8be2a68593c6bf8fbeca82380bd1c6c037fab4567cdb2e4c4400764/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/accordion.tsx",
+      "content": "import * as AccordionPrimitive from \"@radix-ui/react-accordion\";\nimport { ChevronDown } from \"lucide-react\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Accordion = AccordionPrimitive.Root;\n\nfunction AccordionItem({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Item>) {\n    return (\n        <AccordionPrimitive.Item\n            className={cn(\"border-b border-border\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction AccordionTrigger({\n    className,\n    children,\n    ...props\n}: ComponentProps<typeof AccordionPrimitive.Trigger>) {\n    return (\n        <AccordionPrimitive.Header className=\"flex\">\n            <AccordionPrimitive.Trigger\n                className={cn(\n                    \"group flex min-h-[var(--control-height)] flex-1 items-center \" +\n                    \"justify-between gap-2 py-[var(--space-2)] text-left \" +\n                    \"font-medium disabled:opacity-50\",\n                    className,\n                )}\n                {...props}\n            >\n                {children}\n                <ChevronDown\n                    aria-hidden=\"true\"\n                    className={\"size-4 shrink-0 transition-transform \" +\n                        \"duration-[var(--motion-fast)] \" +\n                        \"group-data-[state=open]:rotate-180\"}\n                />\n            </AccordionPrimitive.Trigger>\n        </AccordionPrimitive.Header>\n    );\n}\n\nfunction AccordionContent({\n    className,\n    ...props\n}: ComponentProps<typeof AccordionPrimitive.Content>) {\n    return (\n        <AccordionPrimitive.Content\n            className={cn(\"overflow-hidden pb-[var(--space-3)] text-sm\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/accordion.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `1cfe3a006f04ac6fef2ad804eb2a04d0c39bb334`:\n<https://github.com/pydemia/ui/blob/1cfe3a006f04ac6fef2ad804eb2a04d0c39bb334/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`ead8ace06c9d759e8bc0d4acd646be66e8bd2e4cf46c41b4735c23f80ddb2870`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

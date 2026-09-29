@@ -25,8 +25,8 @@ drag/drop으로 새로 작성했으며 Kibo 코드와 의존성은 편입하지 
 - [x] 전체 typecheck·build 검사, 93개 registry item 생성
 - [x] 로컬 Chromium 데스크톱·390px 버튼 이동과 키보드 Enter,
   이동 후 focus·live region, 빈 열 이동, 같은 열 재정렬, 페이지 overflow 없음
-- [ ] provenance 고지 SHA 갱신과 registry release 검사
-- [ ] 독립 소비자 registry 설치·typecheck·build
+- [x] provenance 고지 SHA 갱신과 registry release 검사
+- [x] 독립 소비자 registry 설치·typecheck·build·브라우저 카드 이동
 - [ ] PR·CI·production 배포
 
 브라우저 자동화의 drag 동작으로는 native drag/drop 이벤트가 확인되지
