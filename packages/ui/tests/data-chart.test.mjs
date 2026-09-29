@@ -130,6 +130,19 @@ test("empty stacked data keeps the empty state", () => {
     assert.doesNotMatch(markup, /data-category=/);
 });
 
+test("selectable legend remains available when every value is missing", () => {
+    const markup = renderChart({
+        categories: ["A"],
+        series: [{ id: "one", label: "One", values: [null] }],
+        toggleableSeries: true,
+    });
+    assert.match(markup, /표시할 데이터가 없습니다/);
+    assert.match(markup, /aria-label="계열 표시"/);
+    assert.match(markup, /<input[^>]*type="checkbox"[^>]*checked=""/);
+    assert.match(markup, /<th scope="col">One<\/th>/);
+    assert.doesNotMatch(renderChart(), /type="checkbox"/);
+});
+
 test("optional inspector exposes exact and missing category values", () => {
     const markup = renderChart({ inspectable: true });
     const inspector = markup.match(/<dl[^>]*>([\s\S]*?)<\/dl>/)?.[1];

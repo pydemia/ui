@@ -439,7 +439,7 @@
       "name": "pyd-data-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/base/chart" },
-      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, legend, hidden full data table and optional category inspector; stacked-area total is unknown when any series is missing", "keyboard": "Chromium: native select changes category values and totals; pointer selects plot category", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, optional checkbox legend, hidden data table for visible series and optional category inspector; stacked-area total is unknown when any visible series is missing", "keyboard": "Chromium: native select changes category values and totals; pointer selects plot category; Space toggles series visibility", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-donut-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],

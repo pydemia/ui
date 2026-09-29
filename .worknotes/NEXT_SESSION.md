@@ -1,5 +1,18 @@
 # Component 확장 작업 인계
 
+2026-09-30 DataChart 계열 표시 선택 진행: `toggleableSeries`를 추가해
+다중 계열의 축·누적값·구간 값·데이터 표를 현재 표시 계열로
+계산합니다. 정적 범례는 기본값으로 유지합니다. 패키지 테스트
+60/60, typecheck·build·registry release 검사와 Chromium
+로컬 문서·독립 소비자 설치·typecheck·build·상호작용이 통과했습니다.
+새 snapshot은
+`sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331`입니다.
+PR·CI·공개 배포와 공개 URL 설치는 아직 확인 전입니다.
+[계열 표시 기록](component-data-chart-series-visibility-2026-09-30.md)을
+참고하세요. component 90개·item 92개, 관리용 전체 goal 약 70%는
+유지합니다. 이전 미공개 draft snapshot 네 디렉터리는 포함하지
+마세요.
+
 2026-09-30 기간 필터 조합 진행: `FilterBar` 문서에 기존
 `DateRangePicker`의 draft·applied 상태, 부분 선택 오류, 초기화와
 결과 목록을 연결했습니다. 새 component·registry item은 없습니다.

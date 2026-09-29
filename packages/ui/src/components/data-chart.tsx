@@ -25,11 +25,13 @@ type DataChartProps = DataChartBaseProps & (
         points: readonly ChartPoint[];
         categories?: never;
         series?: never;
+        toggleableSeries?: never;
     }
     | {
         points?: never;
         categories: readonly string[];
         series: readonly ChartSeries[];
+        toggleableSeries?: boolean;
     }
 );
 
@@ -47,6 +49,7 @@ function DataChart({
     points,
     categories,
     series,
+    toggleableSeries = false,
     variant = "line",
     inspectable = false,
     unit = "",
@@ -56,6 +59,9 @@ function DataChart({
 }: DataChartProps) {
     const inspectorId = useId();
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [hiddenSeriesIds, setHiddenSeriesIds] = useState<Set<string>>(
+        () => new Set(),
+    );
 
     if (!["line", "bar", "area", "stacked-bar", "stacked-area"]
         .includes(variant)) {
@@ -80,7 +86,7 @@ function DataChart({
     );
     const inspectedLabel = labels[inspectedIndex]?.trim() ||
         `구간 ${inspectedIndex + 1}`;
-    const chartSeries: readonly ChartSeries[] = series ?? [{
+    const allSeries: readonly ChartSeries[] = series ?? [{
         id: "value", label: "값",
         values: inputPoints?.map((point) => point.value) ?? [],
     }];
@@ -101,17 +107,32 @@ function DataChart({
             ids.add(item.id);
         }
     }
-    const values = chartSeries.flatMap((item) => item.values);
-    if (values.some((value) => value !== null && !Number.isFinite(value))) {
+    const allValues = allSeries.flatMap((item) => item.values);
+    if (allValues.some((value) =>
+        value !== null && !Number.isFinite(value)
+    )) {
         throw new RangeError("DataChart values must be finite numbers or null.");
     }
-    if (variant === "stacked-area" && values.some((value) =>
+    if (variant === "stacked-area" && allValues.some((value) =>
         value !== null && value < 0
     )) {
         throw new RangeError(
             "DataChart stacked area values must be non-negative.",
         );
     }
+    const chartSeries = allSeries.filter((item) =>
+        !toggleableSeries || !hiddenSeriesIds.has(item.id),
+    );
+    const colorIndexBySeries = chartSeries.map((item) =>
+        allSeries.indexOf(item),
+    );
+    const seriesColors = colorIndexBySeries.map((index) =>
+        colors[index % colors.length],
+    );
+    const seriesDashPatterns = colorIndexBySeries.map((index) =>
+        dashPatterns[index % dashPatterns.length],
+    );
+    const values = chartSeries.flatMap((item) => item.values);
 
     const positiveTotals = labels.map(() => 0);
     const negativeTotals = labels.map(() => 0);
@@ -217,7 +238,7 @@ function DataChart({
         plotWidth / labels.length * 0.72,
         chartSeries.length * 32,
     );
-    const barSlot = groupWidth / chartSeries.length;
+    const barSlot = groupWidth / Math.max(1, chartSeries.length);
     const stackWidth = Math.min(plotWidth / labels.length * 0.62, 44);
     const labelStep = Math.max(1, Math.ceil(labels.length / 8));
     const paths = chartSeries.map((item) => {
@@ -302,9 +323,11 @@ function DataChart({
             return runs;
         })
         : [];
-    const hasRenderableData = variant === "stacked-area"
+    const hasRenderableData = chartSeries.length > 0 && (
+        variant === "stacked-area"
         ? stackedAreaLevels.some((levels) => levels !== null)
-        : present.length > 0;
+        : present.length > 0
+    );
 
     return (
         <figure
@@ -328,7 +351,9 @@ function DataChart({
             </figcaption>
             {!hasRenderableData ? (
                 <p role="status" className="m-0 py-12 text-center text-sm text-muted">
-                    {variant === "stacked-area" && present.length > 0
+                    {chartSeries.length === 0 && series?.length
+                        ? "표시할 계열을 선택하세요."
+                        : variant === "stacked-area" && present.length > 0
                         ? "누적 영역을 표시할 완전한 구간이 없습니다."
                         : "표시할 데이터가 없습니다."}
                 </p>
@@ -369,7 +394,7 @@ function DataChart({
                                     (path, segmentIndex) => (
                                         <path key={`${item.id}-${segmentIndex}`}
                                             d={path}
-                                            fill={colors[seriesIndex % colors.length]}
+                                            fill={seriesColors[seriesIndex]}
                                             fillOpacity="0.13" />
                                     ),
                                 ),
@@ -386,14 +411,13 @@ function DataChart({
                                                         data-end-category={
                                                             labels[run.end]}
                                                         d={run.area}
-                                                        fill={colors[seriesIndex %
-                                                            colors.length]}
+                                                        fill={seriesColors[
+                                                            seriesIndex]}
                                                         fillOpacity="0.52" />
                                                     <path d={run.line}
                                                         fill="none"
-                                                        stroke={colors[
-                                                            seriesIndex %
-                                                            colors.length]}
+                                                        stroke={seriesColors[
+                                                            seriesIndex]}
                                                         strokeWidth="2" />
                                                 </g>
                                             ),
@@ -406,9 +430,8 @@ function DataChart({
                                                     cy={y(levels[
                                                         seriesIndex + 1])}
                                                     r="3"
-                                                    fill={colors[
-                                                        seriesIndex %
-                                                        colors.length]} />
+                                                    fill={seriesColors[
+                                                        seriesIndex]} />
                                             ))}
                                     </g>
                                 ),
@@ -418,20 +441,18 @@ function DataChart({
                                     <g key={item.id} data-series={item.id}>
                                         <path d={paths[seriesIndex].line}
                                             fill="none"
-                                            stroke={colors[seriesIndex %
-                                                colors.length]}
+                                            stroke={seriesColors[seriesIndex]}
                                             strokeWidth="2.5"
-                                            strokeDasharray={dashPatterns[
-                                                seriesIndex % dashPatterns.length
-                                            ]}
+                                            strokeDasharray={seriesDashPatterns[
+                                                seriesIndex]}
                                             strokeLinejoin="round" />
                                         {item.values.map((value, index) =>
                                             value === null ? null : (
                                                 <circle key={index}
                                                     cx={x(index)} cy={y(value)}
                                                     r="3.5"
-                                                    fill={colors[seriesIndex %
-                                                        colors.length]} />
+                                                    fill={seriesColors[
+                                                        seriesIndex]} />
                                             ))}
                                     </g>
                                 ))}
@@ -451,8 +472,8 @@ function DataChart({
                                                     height={Math.max(1,
                                                         Math.abs(zeroY - valueY))}
                                                     rx="2"
-                                                    fill={colors[seriesIndex %
-                                                        colors.length]} />
+                                                    fill={seriesColors[
+                                                        seriesIndex]} />
                                             );
                                         })}
                                     </g>
@@ -477,8 +498,8 @@ function DataChart({
                                                         width={stackWidth}
                                                         height={Math.abs(startY - endY)}
                                                         rx="2"
-                                                        fill={colors[seriesIndex %
-                                                            colors.length]} />
+                                                        fill={seriesColors[
+                                                            seriesIndex]} />
                                                 );
                                             },
                                         )}
@@ -508,42 +529,78 @@ function DataChart({
                             ))}
                         </svg>
                     </div>
-                    {series && (
-                        <ul aria-label="계열" className={
-                            "m-0 mt-[var(--space-3)] flex list-none " +
-                            "flex-wrap gap-x-4 gap-y-2 p-0 text-xs"
-                        }>
-                            {series.map((item, index) => (
-                                <li key={item.id} className={
-                                    "flex min-w-0 items-center gap-2"
-                                }>
-                                    {variant === "bar" ||
-                                        variant === "stacked-bar" ||
-                                        variant === "stacked-area" ? (
-                                        <span aria-hidden="true"
-                                            className="inline-block size-3"
-                                            style={{ background: colors[index %
-                                                colors.length] }} />
-                                    ) : (
-                                        <svg aria-hidden="true" width="20"
-                                            height="8" viewBox="0 0 20 8">
-                                            <line x1="0" x2="20" y1="4" y2="4"
-                                                stroke={colors[index %
-                                                    colors.length]}
-                                                strokeWidth="3"
-                                                strokeDasharray={dashPatterns[
-                                                    index % dashPatterns.length
-                                                ]} />
-                                        </svg>
-                                    )}
-                                    <span>{item.label}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
                 </>
             )}
-            {inspectable && labels.length > 0 && (
+            {series && series.length > 0 &&
+                (toggleableSeries || hasRenderableData) && (
+                <ul aria-label={toggleableSeries ? "계열 표시" : "계열"}
+                    className={
+                        "m-0 mt-[var(--space-3)] flex list-none " +
+                        "flex-wrap gap-x-4 gap-y-2 p-0 text-xs"
+                    }>
+                    {series.map((item, index) => {
+                        const marker = variant === "bar" ||
+                            variant === "stacked-bar" ||
+                            variant === "stacked-area" ? (
+                            <span aria-hidden="true"
+                                className="inline-block size-3 shrink-0"
+                                style={{ background: colors[index %
+                                    colors.length] }} />
+                        ) : (
+                            <svg aria-hidden="true" width="20"
+                                height="8" viewBox="0 0 20 8">
+                                <line x1="0" x2="20" y1="4" y2="4"
+                                    stroke={colors[index % colors.length]}
+                                    strokeWidth="3"
+                                    strokeDasharray={dashPatterns[
+                                        index % dashPatterns.length
+                                    ]} />
+                            </svg>
+                        );
+                        return (
+                            <li key={item.id}>
+                                {toggleableSeries ? (
+                                    <label className={
+                                        "flex min-w-0 cursor-pointer " +
+                                        "items-center gap-2"
+                                    }>
+                                        <input type="checkbox"
+                                            checked={!hiddenSeriesIds.has(
+                                                item.id,
+                                            )}
+                                            onChange={() => {
+                                                setHiddenSeriesIds((current) => {
+                                                    const next = new Set(current);
+                                                    if (next.has(item.id)) {
+                                                        next.delete(item.id);
+                                                    } else {
+                                                        next.add(item.id);
+                                                    }
+                                                    return next;
+                                                });
+                                            }}
+                                            className={
+                                                "size-4 shrink-0 " +
+                                                "accent-[var(--accent)]"
+                                            } />
+                                        {marker}
+                                        <span>{item.label}</span>
+                                    </label>
+                                ) : (
+                                    <span className={
+                                        "flex min-w-0 items-center gap-2"
+                                    }>
+                                        {marker}
+                                        <span>{item.label}</span>
+                                    </span>
+                                )}
+                            </li>
+                        );
+                    })}
+                </ul>
+            )}
+            {inspectable && labels.length > 0 &&
+                chartSeries.length > 0 && (
                 <div className={
                     "mt-[var(--space-3)] border-t border-border " +
                     "pt-[var(--space-3)]"
@@ -595,7 +652,8 @@ function DataChart({
                                     </div>
                                 );
                             })}
-                            {variant === "stacked-area" && (
+                            {variant === "stacked-area" &&
+                                chartSeries.length > 0 && (
                                 <div className="flex justify-between gap-3">
                                     <dt className="min-w-0 text-muted">
                                         합계
@@ -617,14 +675,15 @@ function DataChart({
                     </div>
                 </div>
             )}
-            {labels.length > 0 && (
+            {labels.length > 0 && chartSeries.length > 0 && (
                 <table className="sr-only">
                     <caption>{title} 데이터</caption>
                     <thead><tr><th scope="col">구간</th>
                         {chartSeries.map((item) => (
                             <th key={item.id} scope="col">{item.label}</th>
                         ))}
-                        {variant === "stacked-area" && (
+                        {variant === "stacked-area" &&
+                            chartSeries.length > 0 && (
                             <th scope="col">합계</th>
                         )}
                     </tr></thead>
@@ -643,7 +702,8 @@ function DataChart({
                                             )}${unit}`}
                                     </td>
                                 ))}
-                                {variant === "stacked-area" && (
+                                {variant === "stacked-area" &&
+                                    chartSeries.length > 0 && (
                                     <td>
                                         {stackedAreaTotals[index] === null
                                             ? "데이터 없음"
