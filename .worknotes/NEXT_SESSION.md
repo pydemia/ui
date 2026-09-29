@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-09-30 모바일 문서 SNB: 항목 선택의 명시적인 `#components`
+자동 스크롤을 850px 이하에서 생략했습니다. 선택·URL·버튼 focus는
+유지하고 상단 메뉴와 데스크톱 SNB의 본문 이동은 유지합니다.
+390px·1280px Chromium 동작, typecheck·build·registry release 검사가
+통과했습니다. 실제 touch 기기와 Safari는 미검증입니다.
+[모바일 SNB 기록](mobile-snb-scroll-2026-09-30.md)을 참고하세요.
+component 90개·item 92개, 전체 goal 관리용 추정 약 70%는 유지합니다.
+기존 미공개 draft snapshot 네 디렉터리는 포함하지 마세요.
+
 2026-09-30 DataChart 계열 표시 선택 진행: `toggleableSeries`를 추가해
 다중 계열의 축·누적값·구간 값·데이터 표를 현재 표시 계열로
 계산합니다. 정적 범례는 기본값으로 유지합니다. 패키지 테스트
