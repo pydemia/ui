@@ -36,3 +36,14 @@
 실제 touch 기기와 Safari는 검증하지 않았습니다. 빌드 중 생성된
 무관한 예시 asset 변경은 제외했습니다. 이전 미공개 draft snapshot
 네 디렉터리는 untracked 상태로 유지합니다.
+
+## 배포 확인
+
+- [PR #9](https://github.com/pydemia/ui/pull/9)를 `main`에 병합했습니다.
+  PR Verify UI와 병합 커밋 `74770deb`의 push CI가 통과했습니다.
+- Vercel production 배포 `dpl_JCuzSTY3hC6tz8B8V5hviYpFwag2`가
+  READY입니다. 공개 사이트에서 새 asset `index-Dob0uGo7.js`를
+  제공하는 것을 확인했습니다.
+- 공개 사이트의 390px Chromium에서 DataChart와 Sparkline을 SNB로
+  선택할 때 `scrollLeft` 5997.5와 문서 `scrollY` 0이 유지되고
+  선택 상태와 URL이 갱신됐습니다.

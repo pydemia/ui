@@ -4,7 +4,9 @@
 자동 스크롤을 850px 이하에서 생략했습니다. 선택·URL·버튼 focus는
 유지하고 상단 메뉴와 데스크톱 SNB의 본문 이동은 유지합니다.
 390px·1280px Chromium 동작, typecheck·build·registry release 검사가
-통과했습니다. 실제 touch 기기와 Safari는 미검증입니다.
+통과했습니다. [PR #9](https://github.com/pydemia/ui/pull/9) 병합 뒤
+`main` CI, Vercel production READY와 공개 사이트의 390px SNB
+연속 선택도 확인했습니다. 실제 touch 기기와 Safari는 미검증입니다.
 [모바일 SNB 기록](mobile-snb-scroll-2026-09-30.md)을 참고하세요.
 component 90개·item 92개, 전체 goal 관리용 추정 약 70%는 유지합니다.
 기존 미공개 draft snapshot 네 디렉터리는 포함하지 마세요.
