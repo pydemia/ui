@@ -10,7 +10,13 @@ registry release 검사(97개 item·95개 component, 16개 snapshot)와
 별도 소비자 CLI 설치·typecheck·build·390px Chromium이 통과했습니다.
 새 snapshot은
 `sha256-2946399b798e993844ba16ee444830619c7284631f9e661a331af2c26cae8ea9`입니다.
-공개 사이트와 공개 snapshot은 배포 전이라 미검증입니다.
+PR #18을 `main`에 병합했고 PR·병합 commit의 Verify UI와 Pages CI가
+통과했습니다. Vercel production
+`dpl_6WQVzFaSZMYp6R87Q7Ux3pboMf6H`가 READY입니다. 공개 390px
+preview의 작업 이동·내부 스크롤과 현재·snapshot JSON 일치, 공개
+snapshot의 별도 소비자 설치·typecheck·build·Chromium 동작도
+확인했습니다. 실제 touch·Safari·screen reader·RTL,
+서버 저장 실패 후 복구는 미검증입니다.
 [Gantt 기록](component-gantt-2026-09-30.md)을 참고하세요. 기존 미공개
 draft snapshot 네 디렉터리는 stage하지 마세요.
 

@@ -51,7 +51,17 @@ revision의 소스·package manifest·MIT LICENSE를 확인하고, 시간축과
   선택해 10월 5~8일에서 4~7일로 옮겼고, 선행 작업에 닿자 앞당기기
   버튼이 비활성화됐습니다. 문서 가로 overflow와 page error는 없었고
   시간축만 388px 표시 폭 안에서 684px로 스크롤됐습니다.
+- [PR #18](https://github.com/pydemia/ui/pull/18)을 `main`에 병합했습니다.
+  PR·병합 commit의 Verify UI와 Pages CI가 통과했고 Vercel production
+  `dpl_6WQVzFaSZMYp6R87Q7Ux3pboMf6H`가 READY로
+  `ui.pydemia.ai`에 연결됐습니다. 공개 390px preview에서 화면 설계를
+  10월 7~9일에서 6~8일로 앞당겼습니다. 문서 가로 overflow는 없고
+  시간축의 표시 폭 328px, 스크롤 폭 530px을 확인했습니다.
+- 공개 현재·snapshot `pyd-gantt.json`과 97개 item manifest를 조회해
+  로컬 빌드 파일과 일치함을 확인했습니다. snapshot URL을 별도 Vite
+  소비자에 `shadcn@4.21.0`으로 설치하고 원본 파일 일치, typecheck·build,
+  390px Chromium의 작업 선택·하루 이동을 확인했습니다.
 
-공개 사이트·공개 snapshot은 배포 전이라 미검증입니다. 실제 touch·
-Safari·screen reader·RTL 및 서버 저장 실패 후 복구도 미검증입니다.
+실제 touch·Safari·screen reader·RTL 및 서버 저장 실패 후 복구는
+미검증입니다.
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.
