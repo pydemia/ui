@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 2026-09-30 — DataChart 계열 표시 선택
+
+- 다중 계열 `DataChart`에 `toggleableSeries`를 추가했습니다.
+  계열을 숨기면 축·누적값·구간 값·데이터 표를 표시 중인 계열로
+  다시 계산하며 색과 선 모양은 원래 계열 순서를 유지합니다.
+- 문서 preview와 Usage에 선택형 범례를 추가했습니다. 새 component,
+  npm dependency, registry item은 없으며 새 내용 해시 snapshot을
+  발행합니다.
+
 ## 2026-09-30 — 기간 필터 조합 예시
 
 - `FilterBar` 문서에 `DateRangePicker`를 결합한 적용·부분 선택 오류·

@@ -1555,7 +1555,9 @@ HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공�
 | `npm test -w @pydemia/ui` | pass | 60/60; 빈 데이터에서도 선택형 범례 유지 |
 | `npm run build` | pass | 92개 registry item과 문서·예시 산출물 |
 | 로컬 Chromium | pass (limited) | 계열 숨김·복원, 축·표·구간 값 변경, 누적 영역 합계 4→12, Space 키, 390px 배치, error log 0건 |
-| registry release·소비자 설치 | pending | 고지의 provenance commit 갱신 뒤 확인 예정 |
+| `registry:release-check` | pass | 92개 item·9개 snapshot과 현재 빌드 내용 일치 |
+| 로컬 소비자 설치 | pass | CLI로 DataChart·utils·tokens 설치, 원본 SHA-256 일치, typecheck·build, Chromium 12→8건 합계·error log 0건 |
+| 공개 snapshot 설치·배포 | pending | PR·CI·production 확인 전 |
 | 실제 screen reader·touch·다른 브라우저 | unverified | 기기와 보조기술 실행 전 |
 
 검사 입력과 변경 범위는
