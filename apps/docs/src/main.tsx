@@ -143,6 +143,7 @@ function App() {
     const exampleFrame = useRef<HTMLIFrameElement>(null);
     const sidebarInner = useRef<HTMLDivElement>(null);
     const mobileScroll = useRef<{ pageY: number; sidebarX: number } | null>(null);
+    const mobileRestoreFrame = useRef<number | null>(null);
     const pointerScroll = useRef<{
         id: string; pageY: number; sidebarX: number;
     } | null>(null);
@@ -219,17 +220,41 @@ function App() {
         return () => window.removeEventListener("popstate", handleHistory);
     }, []);
 
+    function restoreMobileScroll(position: { pageY: number; sidebarX: number }) {
+        document.scrollingElement?.scrollTo({
+            top: position.pageY, behavior: "instant",
+        });
+        sidebarInner.current?.scrollTo({
+            left: position.sidebarX, behavior: "instant",
+        });
+    }
+
+    function restoreMobileScrollNextFrame(position: {
+        pageY: number; sidebarX: number;
+    }) {
+        if (mobileRestoreFrame.current !== null) {
+            cancelAnimationFrame(mobileRestoreFrame.current);
+        }
+        mobileRestoreFrame.current = requestAnimationFrame(() => {
+            mobileRestoreFrame.current = null;
+            if (window.matchMedia("(max-width: 850px)").matches) {
+                restoreMobileScroll(position);
+            }
+        });
+    }
+
+    useEffect(() => () => {
+        if (mobileRestoreFrame.current !== null) {
+            cancelAnimationFrame(mobileRestoreFrame.current);
+        }
+    }, []);
+
     useLayoutEffect(() => {
         const position = mobileScroll.current;
         if (!position) return;
         mobileScroll.current = null;
-        const scrollRoot = document.scrollingElement;
-        scrollRoot?.scrollTo({ top: position.pageY, behavior: "instant" });
-        if (sidebarInner.current) {
-            sidebarInner.current.scrollTo({
-                left: position.sidebarX, behavior: "instant",
-            });
-        }
+        restoreMobileScroll(position);
+        restoreMobileScrollNextFrame(position);
     }, [selectedId]);
 
     function selectComponent(id: string, scrollToComponent = true) {
@@ -244,12 +269,8 @@ function App() {
             };
             if (id !== selectedId) mobileScroll.current = position;
             else {
-                document.scrollingElement?.scrollTo({
-                    top: position.pageY, behavior: "instant",
-                });
-                sidebarInner.current?.scrollTo({
-                    left: position.sidebarX, behavior: "instant",
-                });
+                restoreMobileScroll(position);
+                restoreMobileScrollNextFrame(position);
             }
         }
         pointerScroll.current = null;
@@ -400,9 +421,16 @@ function App() {
                                             onPointerCancel={() => { pointerScroll.current = null; }}
                                             onClick={(event) => {
                                                 if (event.detail === 0) pointerScroll.current = null;
+                                                const mobile = window.matchMedia(
+                                                    "(max-width: 850px)",
+                                                ).matches;
+                                                // A pointer focus can scroll the page after selection.
+                                                if (mobile &&
+                                                    pointerScroll.current?.id === entry.id) {
+                                                    event.currentTarget.blur();
+                                                }
                                                 selectComponent(
-                                                    entry.id,
-                                                    !window.matchMedia("(max-width: 850px)").matches,
+                                                    entry.id, !mobile,
                                                 );
                                             }}>
                                             {entry.name}

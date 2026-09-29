@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-09-30 모바일 SNB 포커스 후속 수정: 사용자가 선택 시 본문으로
+이동한다고 보고했습니다. 로컬 393px Chromium 마우스 클릭에서는 기존
+코드로 재현되지 않았습니다. 모바일 포인터 선택 후 버튼 포커스를
+해제하고, 다음 animation frame에도 문서·SNB 스크롤 위치를 복원하도록
+보강했습니다. 키보드 포커스와 데스크톱 본문 이동은 유지됩니다.
+typecheck·패키지 테스트 79/79·build·registry 검사와 393px 포인터·
+Chromium DevTools touch 입력, 키보드, 1280px 이동을 확인했습니다.
+실제 touch 기기·Safari·screen reader는 미검증입니다.
+[작업 기록](mobile-snb-focus-stability-2026-09-30.md)을 참고하세요.
+기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
+
 2026-09-30 Heatmap 진행: 두 범주의 값·결측값·빈 목록을 native 표와
 색 농도로 표시하는 새 component와 registry item, 문서 preview·Usage를
 추가했습니다. Kibo 공식 문서와 고정 revision 소스·MIT LICENSE를
