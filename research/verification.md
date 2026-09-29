@@ -1440,3 +1440,20 @@ fixture 경로와 충돌 재현 단계는
 
 실행 명령, fixture 경로와 병합·배포 ID는
 `.worknotes/component-production-release-2026-09-29.md`에 기록했습니다.
+
+## 2026-09-29 공개 component 후속 검토
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| 문서 Usage 설치 폐쇄 검사 | pass (local) | 89개 import와 `installItems`·registry 의존성 대조; 누락 19개 수정 |
+| DataChart 경계값 회귀 | pass | 단일·동일 `±Number.MAX_VALUE`의 유한 SVG 좌표, 빈 점의 접근 가능한 행 이름 |
+| package 테스트 | pass | 48/48 |
+| typecheck·build·registry:release-check | pass | 91개 item, 89개 export/catalog, 새 로컬 snapshot 일치 |
+| 로컬 Sidebar 문서 | pass | Usage의 AppShell import와 Sidebar·AppShell 설치 URL 표시 |
+| DataTable 옵션 동적 변경 | inspected | 코드 경로 수정; 브라우저 갱신은 미실행 |
+| CI untracked 생성 파일 검사 | inspected | workflow 단계 추가; 원격 CI는 미실행 |
+| rollback 뒤 snapshot URL | unverified | 이전 배포에는 신규 ID 파일이 없어 주소 손실 가능; 실제 rollback 미실행 |
+| release별 provenance 고정 | incomplete | notice의 `main` 링크는 변경 가능한 출처 metadata를 참조 |
+
+독립 검토의 범위와 잔여 문제는
+`.worknotes/component-followup-review-2026-09-29.md`에 기록했습니다.

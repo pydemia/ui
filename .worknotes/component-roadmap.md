@@ -54,7 +54,10 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   확장안을 기능·문서·생성 산출물의 세 커밋으로 정리하고 깨끗한
   체크아웃의 build·typecheck·테스트·registry 검사를 통과했습니다.
   [릴리스 검토 기록](component-release-review-2026-09-29.md)에 범위를
-  남겼으며 대규모 변경의 독립 검토는 남았습니다.
+  남겼습니다. 이후 독립 검토에서 문서 설치 명령과 Usage의 불일치,
+  차트 극단값·행 이름, 배포 rollback 시 snapshot 주소 손실 가능성을
+  확인했습니다. [후속 검토](component-followup-review-2026-09-29.md)의
+  미완료 항목을 닫은 뒤 완료 처리합니다.
   DataTable의 390px 열 압축은 표 내부 가로 scroll로 수정했습니다.
   [검증 기록](component-data-table-responsive-2026-09-29.md)에 범위가
   있습니다.
@@ -85,16 +88,20 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   변경 기록과 `registry:release-check`의 로컬 릴리스 검사도 마련했습니다.
   PR·`main` push의 CI workflow에 typecheck·테스트·빌드·현재 snapshot·
   생성 파일 검사도 추가했고 PR #1의 원격 실행이 통과했습니다.
-  현재 변경 묶음의 독립 검토는 남았습니다. PR #1의 `main` 병합,
-  production 배포와 공개 URL 설치는 확인했습니다.
-- [x] 릴리스마다 component JSON, `registryDependencies`, token을 같은
+  PR #1의 `main` 병합, production 배포와 공개 URL 설치는 확인했습니다.
+  독립 검토에서 발견한 문서 설치 명령·rollback·provenance 문제는
+  [후속 검토](component-followup-review-2026-09-29.md)에 기록했습니다.
+- [ ] 릴리스마다 component JSON, `registryDependencies`, token을 같은
   식별자로 묶고 불변 주소를 보존합니다. 현재 91개 item의 로컬
   `sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`
   snapshot과 `docs/r/releases/` 복사본을 검사했습니다. `/r/`은 최신
   경로로 유지합니다. production에서 현재·이전 snapshot의 manifest와
   Button JSON을 내려받아 저장소 파일과 해시를 비교했고 두 ID의
   item을 각각 새 소비자에 설치해 typecheck·build를 확인했습니다.
-  장기간의 URL 보존과 모든 item의 개별 공개 설치는 미검증입니다.
+  이전 배포로 Instant Rollback하면 새 snapshot 파일이 배포에서 빠져
+  주소가 404가 될 수 있습니다. rollback 복구 절차 또는 별도 보존
+  저장소를 마련해야 완료입니다. 장기간의 URL 보존과 모든 item의
+  개별 공개 설치도 미검증입니다.
   [배포 기록](component-production-release-2026-09-29.md)을 참고하세요.
 - [x] `pyd-tokens` item으로 token stylesheet를 전달하고 소비자 CSS에서
   import하는 절차를 별도 Vite 프로젝트에서 검증했습니다.
