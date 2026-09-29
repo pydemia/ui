@@ -1,9 +1,10 @@
 import { createRoot } from "react-dom/client";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Github, Moon, Sun } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Github, Moon, Sun } from "lucide-react";
 import {
     Badge, ColorInput, Snippet, SnippetContent, SnippetCopyButton,
     SnippetHeader, SnippetTabsList, SnippetTabsTrigger,
+    Popover, PopoverContent, PopoverTrigger,
 } from "@pydemia/ui";
 import provenance from "../../../registry/provenance.json";
 import { AnalyticsWorkspace } from "./analytics-workspace";
@@ -126,6 +127,11 @@ function App() {
         const fromUrl = new URLSearchParams(window.location.search).get("component");
         return catalog.some((entry) => entry.id === fromUrl) ? fromUrl! : "button";
     });
+    const [menuCategory, setMenuCategory] = useState(() =>
+        catalog.find((entry) => entry.id === selectedId)?.category ??
+        sidebarCategories[0],
+    );
+    const [componentMenuOpen, setComponentMenuOpen] = useState(false);
     const [dark, setDark] = useState(false);
     const [colormap, setColormap] = useState<ColormapId>("neutral");
     const [overrides, setOverrides] = useState<ColorOverrides>({ light: {}, dark: {} });
@@ -136,6 +142,7 @@ function App() {
         (colors) => Object.keys(colors).length > 0,
     );
     const selected = catalog.find((entry) => entry.id === selectedId)!;
+    const menuItems = catalog.filter((entry) => entry.category === menuCategory);
     const record = provenance.items.find((item) => item.name === `pyd-${selectedId}`)!;
     const implementationUrl = record.source.upstream ??
         `https://github.com/pydemia/ui/blob/main/packages/ui/src/components/${selected.id}.tsx`;
@@ -193,7 +200,11 @@ function App() {
     useEffect(() => {
         const handleHistory = () => {
             const id = new URLSearchParams(window.location.search).get("component");
-            if (catalog.some((entry) => entry.id === id)) setSelectedId(id!);
+            const entry = catalog.find((item) => item.id === id);
+            if (entry) {
+                setSelectedId(entry.id);
+                setMenuCategory(entry.category);
+            }
         };
         window.addEventListener("popstate", handleHistory);
         return () => window.removeEventListener("popstate", handleHistory);
@@ -201,6 +212,8 @@ function App() {
 
     function selectComponent(id: string) {
         setSelectedId(id);
+        setMenuCategory(catalog.find((entry) => entry.id === id)!.category);
+        setComponentMenuOpen(false);
         const url = new URL(window.location.href);
         url.searchParams.set("component", id);
         url.hash = "components";
@@ -252,11 +265,64 @@ function App() {
                     </a>
                     <span className="version">v0.1.0 · prototype</span>
                     <nav className="top-nav" aria-label="상단 탐색">
-                        <a href="#components">Components</a>
-                        <a href="#colormap">Colormap</a>
-                        <a href="#tokens">Tokens</a>
-                        <a href="#examples">Examples</a>
-                        <a className="github-link" href="https://github.com/pydemia/ui" target="_blank" rel="noreferrer"><Github size={17} aria-hidden="true" /> GitHub <ArrowUpRight size={14} aria-hidden="true" /></a>
+                        <Popover open={componentMenuOpen}
+                            onOpenChange={setComponentMenuOpen}>
+                            <PopoverTrigger asChild>
+                                <button className="component-menu-trigger" type="button">
+                                    Components
+                                    <ChevronDown size={14} aria-hidden="true" />
+                                </button>
+                            </PopoverTrigger>
+                            <PopoverContent className="component-menu" align="end"
+                                sideOffset={10} aria-label="Components">
+                                <div className="component-menu-categories"
+                                    role="group" aria-label="컴포넌트 분류">
+                                    {sidebarCategories.map((category) => (
+                                        <button key={category} type="button"
+                                            aria-current={menuCategory === category
+                                                ? "true" : undefined}
+                                            onClick={() => setMenuCategory(category)}>
+                                            <span>{category}</span>
+                                            <span className="component-menu-count">
+                                                {catalog.filter((entry) =>
+                                                    entry.category === category).length}
+                                            </span>
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="component-menu-detail">
+                                    <div className="component-menu-heading">
+                                        <strong>{menuCategory}</strong>
+                                        <span>{menuItems.length} components</span>
+                                    </div>
+                                    <div className="component-menu-items">
+                                        {menuItems.map((entry) => (
+                                            <a key={entry.id}
+                                                href={`?component=${entry.id}#components`}
+                                                aria-current={entry.id === selectedId
+                                                    ? "page" : undefined}
+                                                onClick={(event) => {
+                                                    if (event.button !== 0 || event.metaKey ||
+                                                        event.ctrlKey || event.shiftKey ||
+                                                        event.altKey) return;
+                                                    event.preventDefault();
+                                                    selectComponent(entry.id);
+                                                }}>
+                                                {entry.name}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            </PopoverContent>
+                        </Popover>
+                        <a className="top-nav-secondary" href="#colormap">Colormap</a>
+                        <a className="top-nav-secondary" href="#tokens">Tokens</a>
+                        <a className="top-nav-secondary" href="#examples">Examples</a>
+                        <a className="github-link" href="https://github.com/pydemia/ui"
+                            target="_blank" rel="noreferrer">
+                            <Github size={17} aria-hidden="true" /> GitHub
+                            <ArrowUpRight size={14} aria-hidden="true" />
+                        </a>
                     </nav>
                     <button className="theme-button" type="button" aria-label={dark ? "라이트 모드로 전환" : "다크 모드로 전환"} onClick={toggleDark}>{dark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}</button>
                 </div>
