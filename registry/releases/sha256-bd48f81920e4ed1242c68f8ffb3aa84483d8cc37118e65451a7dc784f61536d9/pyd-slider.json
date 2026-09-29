@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-slider",
+  "title": "Slider",
+  "dependencies": [
+    "@radix-ui/react-slider@1.4.7"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-bd48f81920e4ed1242c68f8ffb3aa84483d8cc37118e65451a7dc784f61536d9/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/slider.tsx",
+      "content": "import * as SliderPrimitive from \"@radix-ui/react-slider\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype SliderProps = ComponentProps<typeof SliderPrimitive.Root> & {\n    \"aria-label\": string;\n};\n\nfunction Slider({\n    className,\n    defaultValue,\n    value,\n    min = 0,\n    \"aria-label\": label,\n    ...props\n}: SliderProps) {\n    const values = value ?? defaultValue ?? [min];\n\n    return (\n        <SliderPrimitive.Root\n            defaultValue={defaultValue}\n            value={value}\n            min={min}\n            className={cn(\n                \"relative flex w-full touch-none items-center select-none \" +\n                \"data-[orientation=vertical]:h-40 \" +\n                \"data-[orientation=vertical]:w-auto \" +\n                \"data-[orientation=vertical]:flex-col \" +\n                \"data-[disabled]:opacity-50\",\n                className,\n            )}\n            {...props}\n        >\n            <SliderPrimitive.Track\n                className={\"relative h-2 w-full grow overflow-hidden rounded-full \" +\n                    \"bg-surface-subtle data-[orientation=vertical]:w-2\"}\n            >\n                <SliderPrimitive.Range\n                    className={\"absolute h-full bg-accent \" +\n                        \"data-[orientation=vertical]:w-full\"}\n                />\n            </SliderPrimitive.Track>\n            {values.map((_, index) => (\n                <SliderPrimitive.Thumb\n                    key={index}\n                    aria-label={values.length > 1 ? `${label} ${index + 1}` : label}\n                    className={\"block size-5 rounded-full border border-accent \" +\n                        \"bg-surface shadow-[var(--shadow-float)] \" +\n                        \"disabled:pointer-events-none\"}\n                />\n            ))}\n        </SliderPrimitive.Root>\n    );\n}\n\nexport { Slider };\n",
+      "type": "registry:ui",
+      "target": "@ui/slider.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `0770f9f43ea903249b0f6161aadc8822f491e7e4`:\n<https://github.com/pydemia/ui/blob/0770f9f43ea903249b0f6161aadc8822f491e7e4/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`c267c76e8698ab0e16f4467d8b51737051f925b32375cb60fc560b01b2ddfc1d`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

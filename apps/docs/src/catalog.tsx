@@ -1563,6 +1563,7 @@ function ResizablePanelsPreview() {
 function SidebarPreview() {
     const [active, setActive] = useState("overview");
     const [side, setSide] = useState<"left" | "right">("left");
+    const [grouped, setGrouped] = useState(false);
     const items = [
         { id: "overview", label: "개요", href: "#components",
             icon: <Gauge size={16} />, current: active === "overview" },
@@ -1571,21 +1572,32 @@ function SidebarPreview() {
         { id: "settings", label: "설정", href: "#components",
             icon: <Settings2 size={16} />, current: active === "settings" },
     ];
+    const sections = [
+        { id: "work", label: "작업", items: items.slice(0, 2) },
+        { id: "manage", label: "관리", items: items.slice(2) },
+    ];
     const activeLabel = items.find((item) => item.id === active)?.label;
+    const content = grouped ? { sections } : { items };
 
     return (
         <div className="preview-workspace @container grid gap-3">
-            <Button variant="outline" className="justify-self-start"
-                onClick={() => setSide((value) =>
-                    value === "left" ? "right" : "left"
-                )}>
-                {side === "left" ? "오른쪽 배치" : "왼쪽 배치"}
-            </Button>
+            <div className="flex flex-wrap gap-2">
+                <Button variant="outline"
+                    onClick={() => setSide((value) =>
+                        value === "left" ? "right" : "left"
+                    )}>
+                    {side === "left" ? "오른쪽 배치" : "왼쪽 배치"}
+                </Button>
+                <Button variant="outline" aria-pressed={grouped}
+                    onClick={() => setGrouped((value) => !value)}>
+                    {grouped ? "단일 목록" : "섹션별 보기"}
+                </Button>
+            </div>
             <div className={
                 "flex min-h-72 flex-col overflow-hidden rounded-sm " +
                 "border border-border bg-background @3xl:flex-row"
             }>
-                <Sidebar label="프로젝트 탐색" items={items} side={side}
+                <Sidebar label="프로젝트 탐색" {...content} side={side}
                     onNavigate={setActive} />
                 <div className="min-w-0 flex-1 p-[var(--space-4)]">
                     <h3 className="m-0 text-sm font-semibold">작업 공간</h3>
@@ -3957,16 +3969,22 @@ function Workspace() {
     {
         id: "sidebar", name: "Sidebar", category: "Framework",
         installItems: ["sidebar", "app-shell"],
-        description: "현재 페이지 링크를 표시하는 탐색 영역입니다. 넓은 화면에서는 아이콘 폭으로 접히고, 좁은 화면에서는 modal drawer로 열립니다.",
+        description: "현재 페이지 링크를 단일 목록이나 이름 있는 섹션으로 표시합니다. 넓은 화면에서는 아이콘 폭으로 접히고, 좁은 화면에서는 modal drawer로 열립니다.",
         code: `import { AppShell, AppBody, AppMain, Sidebar } from "@pydemia/ui";
+
+const sections = [
+  { id: "work", label: "작업", items: [
+    { id: "overview", label: "개요", href: "/overview", current: true },
+    { id: "files", label: "파일", href: "/files" },
+  ] },
+  { id: "manage", label: "관리", items: [
+    { id: "settings", label: "설정", href: "/settings" },
+  ] },
+];
 
 <AppShell>
   <AppBody>
-    <Sidebar label="프로젝트 탐색" items={[
-      { id: "overview", label: "개요", href: "/overview", current: true },
-      { id: "files", label: "파일", href: "/files" },
-      { id: "settings", label: "설정", href: "/settings" },
-    ]} />
+    <Sidebar label="프로젝트 탐색" sections={sections} />
     <AppMain>작업 공간</AppMain>
   </AppBody>
 </AppShell>`,

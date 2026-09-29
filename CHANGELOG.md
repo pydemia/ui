@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 2026-09-30 — Sidebar 섹션 탐색
+
+- `Sidebar`에 이름 있는 `sections` 입력을 추가했습니다. 기존 평면
+  `items` 입력은 유지하며, 한 번에 한 방식만 지정할 수 있습니다.
+- 접힌 상태와 모바일 Drawer에서도 섹션 이름을 접근성 트리에 남깁니다.
+  문서 preview에서 평면 목록과 섹션 목록을 전환할 수 있습니다.
+- 새 npm dependency나 component·registry item은 없습니다. 변경된
+  registry 소스로 새 내용 해시 snapshot을 발행합니다.
+
 ## 2026-09-29 — Markdown 부분집합
 
 - React와 native 요소로 작성한 `Markdown`을 추가했습니다. 제목·문단·

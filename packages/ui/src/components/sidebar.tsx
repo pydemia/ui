@@ -15,9 +15,20 @@ type SidebarItem = {
     current?: boolean;
 };
 
-type SidebarProps = {
+type SidebarSection = {
+    id: string;
     label: string;
     items: readonly SidebarItem[];
+};
+
+type SidebarProps = ({
+    items: readonly SidebarItem[];
+    sections?: never;
+} | {
+    items?: never;
+    sections: readonly SidebarSection[];
+}) & {
+    label: string;
     side?: "left" | "right";
     collapsed?: boolean;
     defaultCollapsed?: boolean;
@@ -32,6 +43,7 @@ type SidebarProps = {
 function Sidebar({
     label,
     items,
+    sections,
     side = "left",
     collapsed,
     defaultCollapsed = false,
@@ -42,12 +54,31 @@ function Sidebar({
     onNavigate,
     className,
 }: SidebarProps) {
-    if (!label.trim() || items.some((item) =>
-        !item.id.trim() || !item.label.trim() || !item.href.trim()
+    if (typeof label !== "string" || !label.trim()) {
+        throw new Error("Sidebar requires a label and named links.");
+    }
+    if ((items === undefined) === (sections === undefined) ||
+        (items !== undefined && !Array.isArray(items)) ||
+        (sections !== undefined && !Array.isArray(sections))) {
+        throw new Error("Sidebar requires items or sections, not both.");
+    }
+    if (sections?.some((section) =>
+        !section || typeof section.id !== "string" || !section.id.trim() ||
+        typeof section.label !== "string" || !section.label.trim() ||
+        !Array.isArray(section.items) || section.items.length === 0
+    ) || (sections && new Set(sections.map((section) => section.id)).size !==
+        sections.length)) {
+        throw new Error("Sidebar sections need unique IDs, labels, and links.");
+    }
+    const links = items ?? sections!.flatMap((section) => section.items);
+    if (links.some((item) =>
+        !item || typeof item.id !== "string" || !item.id.trim() ||
+        typeof item.label !== "string" || !item.label.trim() ||
+        typeof item.href !== "string" || !item.href.trim()
     )) {
         throw new Error("Sidebar requires a label and named links.");
     }
-    if (new Set(items.map((item) => item.id)).size !== items.length) {
+    if (new Set(links.map((item) => item.id)).size !== links.length) {
         throw new Error("Sidebar item ids must be unique.");
     }
 
@@ -97,6 +128,25 @@ function Sidebar({
         );
     }
 
+    function navigation(compact: boolean, mobile = false) {
+        if (!sections) return links.map((item) => link(item, compact, mobile));
+        return sections.map((section, index) => {
+            const headingId = `${navId}-${mobile ? "mobile" : "desktop"}-${index}`;
+            return (
+                <div key={section.id} role="group" aria-labelledby={headingId}
+                    className={cn("grid gap-1", index > 0 && "mt-2 border-t border-border pt-2")}>
+                    <h3 id={headingId} className={cn(
+                        "m-0 px-3 pb-1 pt-2 text-xs font-semibold text-muted",
+                        compact && "sr-only",
+                    )}>
+                        {section.label}
+                    </h3>
+                    {section.items.map((item) => link(item, compact, mobile))}
+                </div>
+            );
+        });
+    }
+
     return (
         <>
             <aside className={cn(
@@ -135,7 +185,7 @@ function Sidebar({
                 </div>
                 <SideNav id={navId} aria-label={label}
                     className="min-h-0 flex-1 content-start overflow-y-auto p-2">
-                    {items.map((item) => link(item, isCollapsed))}
+                    {navigation(isCollapsed)}
                 </SideNav>
             </aside>
             <div className="p-2 @3xl:hidden">
@@ -165,7 +215,7 @@ function Sidebar({
                         </div>
                         <SideNav aria-label={label}
                             className="content-start overflow-y-auto p-2">
-                            {items.map((item) => link(item, false, true))}
+                            {navigation(false, true)}
                         </SideNav>
                     </DrawerContent>
                 </Drawer>
@@ -175,4 +225,4 @@ function Sidebar({
 }
 
 export { Sidebar };
-export type { SidebarItem, SidebarProps };
+export type { SidebarItem, SidebarSection, SidebarProps };
