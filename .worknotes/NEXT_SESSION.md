@@ -1,7 +1,7 @@
 # Component 확장 작업 인계
 
-2026-09-30 진행 중인 `codex/kanban-board` branch: Workflow에
-`Kanban`을 추가해 로컬 기준 component 91개·registry item 93개입니다.
+2026-09-30 [PR #10](https://github.com/pydemia/ui/pull/10) 배포:
+Workflow에 `Kanban`을 추가해 component 91개·registry item 93개입니다.
 공식 Kibo 문서·고정 revision 소스·MIT license를 확인하고 원본
 React·Tailwind 구현으로 작성했습니다. 패키지 테스트·typecheck·build,
 registry release 검사, 로컬 Chromium과 독립 소비자 설치·동작이
@@ -9,11 +9,15 @@ registry release 검사, 로컬 Chromium과 독립 소비자 설치·동작이
 미검증입니다. [Kanban 기록](component-kanban-2026-09-30.md)을
 참고하세요. 새 snapshot은
 `sha256-ebeff129d8be2a68593c6bf8fbeca82380bd1c6c037fab4567cdb2e4c4400764`입니다.
-같은 branch에서 모바일 SNB의 scroll anchoring 보정을 막았습니다.
+같은 PR에서 모바일 SNB의 scroll anchoring 보정을 막았습니다.
 390px 실제 클릭에서 문서·SNB 위치와 버튼 focus가 유지되고 1280px
 본문 이동은 유지됐습니다. [모바일 focus 기록](mobile-snb-focus-2026-09-30.md)을
-참고하세요. PR·CI·production 검증은 아직 남았습니다. 기존 미공개
-draft snapshot 네 디렉터리는 stage하지 마세요.
+참고하세요. PR·`main` Verify UI와 Pages CI가 통과했고 Vercel
+production `dpl_nw6dEJ5pQ3xtyud6LBqBvnHM5Kbm`은 READY입니다.
+공개 사이트의 390px SNB 연속 선택·Kanban 카드 이동·새 registry
+item과 snapshot URL도 확인했습니다. 전체 goal의 관리용 추정은
+약 70%로 유지합니다. 기존 미공개 draft snapshot 네 디렉터리는
+stage하지 마세요.
 
 2026-09-30 모바일 문서 SNB: 항목 선택의 명시적인 `#components`
 자동 스크롤을 850px 이하에서 생략했습니다. 선택·URL·버튼 focus는

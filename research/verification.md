@@ -1587,3 +1587,7 @@ HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공�
 데스크톱 1280px의 기존 본문 이동도 확인했습니다. 실제 touch와
 Safari는 미검증입니다. 재현과 수치는
 `.worknotes/mobile-snb-focus-2026-09-30.md`에 기록했습니다.
+PR·`main` Verify UI와 Pages CI, Vercel production 배포가
+통과했습니다. 공개 사이트의 실제 SNB 클릭에서 문서·SNB 위치가
+유지되고 Kanban 방향 버튼의 카드 이동을 확인했습니다. 공개
+`pyd-kanban` JSON과 93개 item snapshot manifest도 조회했습니다.

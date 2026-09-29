@@ -28,5 +28,11 @@
   결과가 나왔으므로 위 비교에는 브라우저의 실제 클릭 경로를
   사용했습니다.
 
-이 변경은 진행 중인 Kanban branch에 포함합니다. 기존 미공개 draft
-snapshot 네 디렉터리는 포함하지 않습니다.
+이 변경은 [PR #10](https://github.com/pydemia/ui/pull/10)으로
+병합했습니다. PR·`main` Verify UI와 Pages CI가 통과했고 Vercel
+production `dpl_nw6dEJ5pQ3xtyud6LBqBvnHM5Kbm`은 READY입니다.
+공개 사이트의 390px Chromium에서 `scrollY=844`, SNB
+`scrollLeft=6375`인 상태로 DonutChart → DataChart를 실제
+클릭했습니다. 문서·SNB 위치가 유지되고 focus와 제목이 선택에 맞춰
+바뀌었습니다. 기존 미공개 draft snapshot 네 디렉터리는 포함하지
+않았습니다.

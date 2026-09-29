@@ -27,10 +27,23 @@ drag/drop으로 새로 작성했으며 Kibo 코드와 의존성은 편입하지 
   이동 후 focus·live region, 빈 열 이동, 같은 열 재정렬, 페이지 overflow 없음
 - [x] provenance 고지 SHA 갱신과 registry release 검사
 - [x] 독립 소비자 registry 설치·typecheck·build·브라우저 카드 이동
-- [ ] PR·CI·production 배포
+- [x] PR·CI·production 배포
 
 브라우저 자동화의 drag 동작으로는 native drag/drop 이벤트가 확인되지
 않았습니다. 따라서 마우스 끌기의 실제 이동, touch drag, Safari,
 screen reader 발표, 서버 저장 실패 후 복구는 미검증입니다. 키보드·
 touch용 방향 버튼의 클릭 경로는 확인했습니다. 이전 미공개 draft
 snapshot 네 디렉터리는 작업 범위에서 제외합니다.
+
+## 배포 확인
+
+- [PR #10](https://github.com/pydemia/ui/pull/10)을 병합했습니다.
+  PR Verify UI run `36605365836`, `main` Verify UI run
+  `36605563776`, Pages run `36605564092`가 통과했습니다.
+- 병합 커밋은 `4406b6709257f54960ad0db2a4ac51144f07d662`입니다.
+  Vercel production `dpl_nw6dEJ5pQ3xtyud6LBqBvnHM5Kbm`은
+  READY입니다. 공개 Kanban preview에서 방향 버튼으로 카드를
+  옮기고 열 개수와 live region 변경을 확인했습니다.
+- 공개 `/r/pyd-kanban.json`은 `pyd-kanban`을 제공하고 새 snapshot
+  manifest는 ID와 itemCount 93을 제공합니다. 공개 URL 전체 소비자
+  설치와 native drag 조작은 실행하지 않았습니다.
