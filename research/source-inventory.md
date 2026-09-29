@@ -278,6 +278,10 @@ Tree는 기존 React와 Tailwind, `pyd-utils`만 사용하는 저장소 원본
 구현입니다. 외부 component source를 복사하지 않았습니다.
 [W3C WAI-ARIA Tree View Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/)에서
 treeitem·group 관계, focus와 선택의 구분, 키보드 규칙을 확인했습니다.
+같은 패턴의 동적 로딩 설명에 따라 `aria-level`·`aria-posinset`·
+`aria-setsize`를 로드 전후 노드에 명시하고, 부모의 확장 상태와
+로딩·오류 설명을 별도로 표시합니다. 비동기 데이터 요청과 오류
+메시지는 소비자가 관리하며 Tree는 외부 source를 복사하지 않습니다.
 [W3C Navigation Treeview Example](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/examples/treeview-navigation/)은
 일반 사이트 탐색에서는 disclosure 패턴이 더 적합할 수 있고 실제
 보조기술 테스트가 필요하다고 설명합니다. Tree의 사용처를 파일·리소스

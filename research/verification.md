@@ -1654,3 +1654,17 @@ Radix는 thumb가 교차하면 두 값을 다시 정렬하고 focus를 이동합
 확인했습니다. 공개 문서의 두 thumb 이름, 키보드 변경·form 제출도
 Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 `.worknotes/component-range-slider-2026-09-30.md`에 기록했습니다.
+
+## 2026-09-30 Tree 원격 하위 항목
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm test -w @pydemia/ui` | pass | 75/75; 새 Tree 상태·오류 입력 3건 포함 |
+| 로컬 Chromium | pass (limited) | 펼침·로딩·실패·방향키 및 pointer 재시도·완료·자식 focus·선택 |
+| 390px light/dark | pass (limited) | 오류 상태·focus 표시, 가로 overflow 없음 |
+| snapshot·독립 소비자·CI·배포 | unverified | 현재 작업 브랜치의 소스와 문서 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+상세 동작과 미검증 범위는
+`.worknotes/component-tree-lazy-2026-09-30.md`에 기록했습니다.

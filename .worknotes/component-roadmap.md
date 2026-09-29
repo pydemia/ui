@@ -222,8 +222,8 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 - [x] `DataList` — native `dl`로 label/value 쌍을 표시하고 행·그리드,
   값 없음(`null`)·빈 목록을 구분합니다. 실제 screen reader 검사는
   남았습니다.
-- [x] `Tree` — 정적 계층의 확장·단일 선택·방향키·이름 검색.
-  비동기 node 상태와 실제 screen reader·touch 검사는 미구현·미검증입니다.
+- [x] `Tree` — 계층 확장·단일 선택·방향키·이름 검색과 원격 자식의
+  로딩·실패·재시도. 실제 screen reader·touch 검사는 미검증입니다.
 - [x] `Timeline` — 전달된 순서의 사건, 시간과 텍스트 상태를 표시합니다.
   정렬은 호출자가 결정합니다. 실제 screen reader 발표는 남았습니다.
 - [x] `StatusIndicator` — 별도 component 대신 기존 `Badge`의

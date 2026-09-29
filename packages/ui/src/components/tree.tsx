@@ -1,12 +1,22 @@
-import { useRef, useState, type ComponentProps, type KeyboardEvent } from "react";
+import {
+    useEffect, useId, useRef, useState,
+    type ComponentProps, type KeyboardEvent,
+} from "react";
 import { cn } from "./utils";
 
-type TreeNode = {
+type TreeNodeBase = {
     id: string;
     label: string;
-    children?: readonly TreeNode[];
     disabled?: boolean;
 };
+
+type TreeNode = TreeNodeBase & (
+    { children?: readonly TreeNode[]; childState?: never;
+        errorMessage?: never } |
+    { children?: never; childState: "unloaded" | "loading";
+        errorMessage?: never } |
+    { children?: never; childState: "error"; errorMessage: string }
+);
 
 type TreeProps = Omit<
     ComponentProps<"div">,
@@ -20,6 +30,7 @@ type TreeProps = Omit<
     expandedIds?: readonly string[];
     defaultExpandedIds?: readonly string[];
     onExpandedIdsChange?: (ids: string[]) => void;
+    onLoadChildren?: (id: string) => void;
     emptyMessage?: string;
 };
 
@@ -29,6 +40,7 @@ type TreeEntry = {
     level: number;
     position: number;
     setSize: number;
+    statusId: string;
 };
 
 function Tree({
@@ -40,10 +52,12 @@ function Tree({
     expandedIds,
     defaultExpandedIds = [],
     onExpandedIdsChange,
+    onLoadChildren,
     emptyMessage = "표시할 항목이 없습니다.",
     className,
     ...props
 }: TreeProps) {
+    const statusPrefix = useId();
     const [internalSelectedId, setInternalSelectedId] = useState(defaultSelectedId);
     const [internalExpandedIds, setInternalExpandedIds] = useState(
         [...defaultExpandedIds],
@@ -51,6 +65,7 @@ function Tree({
     const [focusedId, setFocusedId] = useState<string | null>(null);
     const typeahead = useRef({ query: "", at: 0 });
     const treeRef = useRef<HTMLDivElement>(null);
+    const requestedIds = useRef(new Set<string>());
     const currentSelectedId = selectedId === undefined
         ? internalSelectedId : selectedId;
     const currentExpandedIds = expandedIds ?? internalExpandedIds;
@@ -63,15 +78,35 @@ function Tree({
     function collect(nodes: readonly TreeNode[], parentId: string | null,
         level: number, parentDisabled: boolean) {
         nodes.forEach((node, index) => {
+            const input = node as TreeNodeBase & {
+                children?: readonly TreeNode[];
+                childState?: string;
+                errorMessage?: string;
+            };
             if (!node.id.trim() || !node.label.trim()) {
                 throw new Error("Tree nodes require nonempty ids and labels.");
             }
             if (entries.has(node.id)) {
                 throw new Error(`Tree node id must be unique: ${node.id}`);
             }
+            if (input.childState !== undefined && (
+                !["unloaded", "loading", "error"].includes(input.childState) ||
+                input.children !== undefined || !onLoadChildren ||
+                (input.childState === "error" &&
+                    !input.errorMessage?.trim()) ||
+                (input.childState !== "error" &&
+                    input.errorMessage !== undefined)
+            )) {
+                throw new Error(`Tree node has invalid load state: ${node.id}`);
+            }
+            if (input.childState === undefined &&
+                input.errorMessage !== undefined) {
+                throw new Error(`Tree node has invalid load state: ${node.id}`);
+            }
             const entry = {
                 node, parentId, level, position: index + 1,
                 setSize: nodes.length,
+                statusId: `${statusPrefix}-status-${entries.size}`,
             };
             entries.set(node.id, entry);
             if (!parentDisabled) visible.push(entry);
@@ -84,6 +119,22 @@ function Tree({
     }
 
     collect(items, null, 1, false);
+    useEffect(() => {
+        for (const id of requestedIds.current) {
+            const entry = entries.get(id);
+            if (!entry || !expanded.has(id) ||
+                entry.node.childState !== "unloaded") {
+                requestedIds.current.delete(id);
+            }
+        }
+        for (const entry of visible) {
+            if (entry.node.childState === "unloaded" &&
+                !entry.node.disabled && expanded.has(entry.node.id) &&
+                !requestedIds.current.has(entry.node.id)) {
+                requestChildren(entry.node);
+            }
+        }
+    });
     const focusable = visible.filter((entry) => !entry.node.disabled);
     let currentFocusedId = focusedId;
     while (currentFocusedId && !focusable.some((entry) =>
@@ -105,11 +156,21 @@ function Tree({
 
     function changeExpanded(id: string) {
         const next = new Set(currentExpandedIds);
-        if (next.has(id)) next.delete(id);
-        else next.add(id);
+        if (!next.has(id)) next.add(id);
+        else next.delete(id);
         const ordered = Array.from(entries.keys()).filter((key) => next.has(key));
         if (expandedIds === undefined) setInternalExpandedIds(ordered);
         onExpandedIdsChange?.(ordered);
+    }
+
+    function requestChildren(node: TreeNode) {
+        if (node.childState !== "unloaded" &&
+            node.childState !== "error") return;
+        if (node.childState === "unloaded") {
+            if (requestedIds.current.has(node.id)) return;
+            requestedIds.current.add(node.id);
+        }
+        onLoadChildren?.(node.id);
     }
 
     function changeSelected(id: string) {
@@ -136,15 +197,19 @@ function Tree({
                 next = focusable.at(-1)?.node.id;
                 break;
             case "ArrowRight":
-                if (node.children?.length) {
+                if (node.children?.length || node.childState) {
                     if (!expanded.has(node.id)) changeExpanded(node.id);
+                    else if (node.childState === "error") {
+                        requestChildren(node);
+                    }
                     else next = focusable.find((item) =>
                         item.parentId === node.id
                     )?.node.id;
                 }
                 break;
             case "ArrowLeft":
-                if (node.children?.length && expanded.has(node.id)) {
+                if ((node.children?.length || node.childState) &&
+                    expanded.has(node.id)) {
                     changeExpanded(node.id);
                 } else if (entry.parentId) {
                     next = entry.parentId;
@@ -178,11 +243,22 @@ function Tree({
     function renderNodes(nodes: readonly TreeNode[], level: number) {
         return nodes.map((node) => {
             const entry = entries.get(node.id)!;
-            const hasChildren = Boolean(node.children?.length);
+            const hasChildren = Boolean(node.children?.length ||
+                node.childState);
             const isExpanded = hasChildren && expanded.has(node.id);
+            const status = node.childState === "unloaded"
+                ? "항목 불러오기를 요청합니다."
+                : node.childState === "loading"
+                    ? "항목을 불러오는 중입니다."
+                    : node.childState === "error"
+                        ? `${node.errorMessage} 오른쪽 화살표로 다시 시도합니다.`
+                        : null;
             return (
                 <div key={node.id} role="treeitem" data-tree-id={node.id}
                     aria-label={node.label}
+                    aria-describedby={isExpanded && status ?
+                        entry.statusId : undefined}
+                    aria-busy={node.childState === "loading" || undefined}
                     aria-level={entry.level}
                     aria-posinset={entry.position}
                     aria-setsize={entry.setSize}
@@ -232,15 +308,33 @@ function Tree({
                             if (!hasChildren || node.disabled) return;
                             event.stopPropagation();
                             focusItem(node.id);
-                            changeExpanded(node.id);
+                            if (node.childState === "error" && isExpanded) {
+                                requestChildren(node);
+                            } else changeExpanded(node.id);
                         }}>
-                            {hasChildren ? isExpanded ? "▾" : "▸" : ""}
+                            {node.childState === "error" && isExpanded
+                                ? "↻" : hasChildren ? isExpanded ? "▾" : "▸" : ""}
                         </span>
-                        <span className="truncate">{node.label}</span>
+                        <span className="min-w-0">
+                            <span className="block truncate">{node.label}</span>
+                            {isExpanded && status && (
+                                <span id={entry.statusId}
+                                    role={node.childState === "error" ?
+                                        "alert" : "status"}
+                                    className={cn(
+                                        "block text-xs [overflow-wrap:anywhere]",
+                                        node.childState === "error" ?
+                                            "text-danger" : "text-muted",
+                                    )}>
+                                    {status}
+                                </span>
+                            )}
+                        </span>
                     </div>
                     {isExpanded && !node.disabled && (
                         <div role="group">
-                            {renderNodes(node.children!, level + 1)}
+                            {node.children ?
+                                renderNodes(node.children, level + 1) : null}
                         </div>
                     )}
                 </div>
