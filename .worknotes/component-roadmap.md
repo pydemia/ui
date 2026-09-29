@@ -255,7 +255,8 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   `DateRangePicker`의 controlled 값·form 입력과 `FilterBar`의 적용·초기화로
   현재 기간 필터 동작을 조합할 수 있습니다. 오늘·최근 7일 같은 preset은
   데이터의 기준일과 시간대를 아는 소비자 화면에서 계산합니다. 두
-  component를 결합한 설치 가능한 예시는 아직 작성·검증하지 않았습니다.
+  component의 적용·초기화·부분 선택 오류와 결과 목록을 문서 preview에
+  결합했습니다. 공개 registry에서 조합 설치 검증은 진행 중입니다.
 - [ ] `Stat` — 기존 `MetricCard`에 compact·featured 표시 형태를
   추가했습니다. 독립된 값·상태 규칙이 필요한 사용처를 확인한 뒤 분리
   여부를 판정합니다.

@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-09-30 기간 필터 조합 진행: `FilterBar` 문서에 기존
+`DateRangePicker`의 draft·applied 상태, 부분 선택 오류, 초기화와
+결과 목록을 연결했습니다. 새 component·registry item은 없습니다.
+typecheck·build·registry release 검사, Chromium 적용·오류·초기화,
+공개 snapshot의 독립 Vite 소비자 설치가 통과했습니다. 원격 배포는
+진행 중입니다.
+[기간 필터 기록](component-date-range-filter-recipe-2026-09-30.md)을
+참고하세요. 목표 수 90개·92개, 관리용 약 70%는 유지합니다.
+
 2026-09-30 Sidebar 섹션 탐색 진행: 기존 `items`와 호환되는 이름 있는
 `sections` 입력, 데스크톱·모바일 그룹, 문서 preview를 구현했습니다.
 `build`·`typecheck`·패키지 테스트 59/59와 registry release 검사가

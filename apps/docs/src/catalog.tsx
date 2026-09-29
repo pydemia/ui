@@ -2053,7 +2053,7 @@ function DataTablePreview() {
     );
 }
 
-function FilterBarPreview() {
+function RequestFilterPreview() {
     const [variant, setVariant] = useState<"bar" | "panel">("panel");
     const [query, setQuery] = useState("");
     const [status, setStatus] = useState("");
@@ -2115,6 +2115,82 @@ function FilterBarPreview() {
                     <li key={row.id}>{row.request} · {row.status}</li>
                 ))}
             </ul>
+        </div>
+    );
+}
+
+function DateRangeFilterPreview() {
+    const [range, setRange] = useState<DateRangeValue>(null);
+    const [applied, setApplied] = useState<DateRangeValue>(null);
+    const [error, setError] = useState(false);
+    const dirty = range?.from !== applied?.from || range?.to !== applied?.to;
+    const rows = [
+        { id: "review", date: "2026-09-23", name: "요청 검토" },
+        { id: "export", date: "2026-09-26", name: "내보내기" },
+        { id: "audit", date: "2026-09-29", name: "접근 기록 확인" },
+    ];
+    const appliedStart = applied?.from;
+    const appliedEnd = applied?.to;
+    const visibleRows = appliedStart && appliedEnd ? rows.filter((row) =>
+        row.date >= appliedStart && row.date <= appliedEnd
+    ) : rows;
+
+    return (
+        <div className="preview-workspace grid gap-3">
+            <p className="m-0 text-sm text-muted">
+                예제 데이터는 2026-09-23부터 29일까지의 달력 날짜입니다.
+            </p>
+            <FilterBar label="기록 기간 필터" dirty={dirty}
+                appliedFilters={applied?.to ? [{
+                    id: "period", label: "조회 기간",
+                    value: `${applied.from} — ${applied.to}`,
+                }] : []}
+                onApply={(values) => {
+                    const from = String(values.get("periodStart") ?? "");
+                    const to = String(values.get("periodEnd") ?? "");
+                    if (!from || !to) {
+                        setError(true);
+                        return;
+                    }
+                    setApplied({ from, to });
+                    setError(false);
+                }}
+                onClear={() => {
+                    setRange(null);
+                    setApplied(null);
+                    setError(false);
+                }}>
+                <Field label="조회 기간"
+                    error={error ? "시작일과 종료일을 선택하세요." : undefined}>
+                    {(control) => <DateRangePicker {...control}
+                        startName="periodStart" endName="periodEnd"
+                        value={range} onValueChange={(next) => {
+                            setRange(next);
+                            setError(false);
+                        }} calendarLocale={ko} />}
+                </Field>
+            </FilterBar>
+            <p role="status" className="m-0 text-sm text-muted">
+                적용 결과 {visibleRows.length}건
+            </p>
+            <ul className="m-0 grid gap-1 pl-5 text-sm">
+                {visibleRows.map((row) => (
+                    <li key={row.id}>{row.date} · {row.name}</li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+function FilterBarPreview() {
+    const [period, setPeriod] = useState(true);
+    return (
+        <div className="grid gap-3">
+            <Button variant="outline" className="justify-self-start"
+                onClick={() => setPeriod((current) => !current)}>
+                {period ? "검색·상태 필터 보기" : "기간 필터 보기"}
+            </Button>
+            {period ? <DateRangeFilterPreview /> : <RequestFilterPreview />}
         </div>
     );
 }
@@ -4178,48 +4254,44 @@ const columns: DataTableColumn<Request>[] = [
     },
     {
         id: "filter-bar", name: "FilterBar", category: "Data & analytics",
-        description: "여러 입력의 적용·초기화와 현재 적용된 조건을 한곳에 표시합니다. 데이터 필터링은 소비자가 맡습니다.",
+        description: "여러 입력의 적용·초기화와 현재 적용된 조건을 한곳에 표시합니다. 기간 필터는 DateRangePicker와 조합하며 데이터 필터링은 소비자가 맡습니다.",
         code: `import { useState } from "react";
-import { Field, FilterBar, Input, NativeSelect } from "@pydemia/ui";
+import {
+  DateRangePicker, Field, FilterBar, type DateRangeValue,
+} from "@pydemia/ui";
 
-function RequestFilters() {
-  const [query, setQuery] = useState("");
-  const [status, setStatus] = useState("");
-  const [applied, setApplied] = useState({ query: "", status: "" });
-  const dirty = query.trim() !== applied.query ||
-    status !== applied.status;
-  return <FilterBar label="요청 필터" dirty={dirty}
-    appliedFilters={[
-      ...(applied.query ? [{ id: "query", label: "검색어",
-        value: applied.query }] : []),
-      ...(applied.status ? [{ id: "status", label: "상태",
-        value: applied.status }] : []),
-    ]}
+function PeriodFilters() {
+  const [draft, setDraft] = useState<DateRangeValue>(null);
+  const [applied, setApplied] = useState<DateRangeValue>(null);
+  const [error, setError] = useState(false);
+  const dirty = draft?.from !== applied?.from ||
+    draft?.to !== applied?.to;
+  return <FilterBar label="기록 기간 필터" dirty={dirty}
+    appliedFilters={applied?.to ? [{
+      id: "period", label: "조회 기간",
+      value: applied.from + " — " + applied.to,
+    }] : []}
     onApply={(values) => {
-      const nextQuery = String(values.get("query") ?? "").trim();
-      setQuery(nextQuery);
-      setApplied({ query: nextQuery,
-        status: String(values.get("status") ?? "") });
+      const from = String(values.get("periodStart") ?? "");
+      const to = String(values.get("periodEnd") ?? "");
+      if (!from || !to) { setError(true); return; }
+      setApplied({ from, to });
+      setError(false);
     }}
     onClear={() => {
-      setQuery(""); setStatus("");
-      setApplied({ query: "", status: "" });
+      setDraft(null); setApplied(null); setError(false);
     }}>
-    <Field label="검색어">{(control) =>
-      <Input {...control} name="query" value={query}
-        onChange={(event) => setQuery(event.target.value)} />
-    }</Field>
-    <Field label="상태">{(control) =>
-      <NativeSelect {...control} name="status" value={status}
-        onChange={(event) => setStatus(event.target.value)}>
-        <option value="">전체</option>
-        <option value="대기">대기</option>
-        <option value="완료">완료</option>
-      </NativeSelect>
-    }</Field>
+    <Field label="조회 기간"
+      error={error ? "시작일과 종료일을 선택하세요." : undefined}>
+      {(control) => <DateRangePicker {...control}
+        startName="periodStart" endName="periodEnd"
+        value={draft} onValueChange={(next) => {
+          setDraft(next); setError(false);
+        }} />}
+    </Field>
   </FilterBar>;
 }`,
-        installItems: ["filter-bar", "field", "input", "native-select"],
+        installItems: ["filter-bar", "date-range-picker", "field"],
         preview: () => <FilterBarPreview />,
     },
     {
