@@ -1,8 +1,11 @@
 # 변경 기록
 
-## Unreleased — 배포 전 후보
+## 2026-09-29 — component registry 확장
 
-이 항목은 draft PR의 변경이며 production 배포를 뜻하지 않습니다.
+[PR #1](https://github.com/pydemia/ui/pull/1)을 `main`에 병합해
+문서 사이트와 registry를 production에 배포했습니다. 현재 내용 해시
+snapshot은
+`sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`입니다.
 
 - component 모듈을 38개에서 89개로, 공용 item을 포함한 내부 registry를
   40개에서 91개 item으로 확장했습니다. 화면 구조의 AppShell·Sidebar·
@@ -15,7 +18,7 @@
 - `pyd-tokens`로 공통 stylesheet를 전달하고 수정한 shadcn/ui source의
   MIT 고지를 해당 registry item에 포함했습니다. 내용 해시 snapshot과
   빌드된 최신 item의 일치 검사를 추가했습니다.
-- 이전 공개 item을 설치한 소비자를 로컬 신규 item으로 갱신하고,
+- 이전 공개 item을 설치한 소비자를 신규 item으로 갱신하고,
   수정된 Badge·Button 파일의 덮어쓰기와 수동 재적용을 시험했습니다.
 - DataChart가 부호가 다른 큰 유한값을 받아도 SVG 좌표와 축 눈금을
   유한하게 계산하도록 고쳤습니다.

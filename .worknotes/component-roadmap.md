@@ -11,10 +11,11 @@ FilterBar, Carousel, Image, JsonViewer, ColorInput, SearchInput,
 ContextMenu, NumberInput, TagsInput, NavigationMenu, HoverCard,
 ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl을
-추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 로컬 작업 트리는
-89개 component와 91개 registry item입니다. 이번 변경의 원격 배포는
-확인하지 않았습니다. 현재 91개 item의 동시 설치는 새 소비자
-fixture에서 확인했습니다. shadcn/ui source를 수정한 27개는
+추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
+89개 component와 91개 registry item입니다. PR #1을 `main`에 병합해
+production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
+현재 91개 item의 동시 설치는 새 소비자 fixture에서 확인했습니다.
+shadcn/ui source를 수정한 27개는
 각각 격리 설치해 소스와 MIT 고지의 전달을 확인했습니다. 나머지
 item의 개별 격리 설치·전체 동작은 미검증입니다.
 기존 `Badge`에 네 가지 표시 형태를 추가해 상태 표시 용례를
@@ -84,13 +85,17 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   변경 기록과 `registry:release-check`의 로컬 릴리스 검사도 마련했습니다.
   PR·`main` push의 CI workflow에 typecheck·테스트·빌드·현재 snapshot·
   생성 파일 검사도 추가했고 PR #1의 원격 실행이 통과했습니다.
-  현재 변경 묶음의 검토·공개 URL 설치·실제 릴리스는 남았습니다.
-- [ ] 릴리스마다 component JSON, `registryDependencies`, token을 같은
+  현재 변경 묶음의 독립 검토는 남았습니다. PR #1의 `main` 병합,
+  production 배포와 공개 URL 설치는 확인했습니다.
+- [x] 릴리스마다 component JSON, `registryDependencies`, token을 같은
   식별자로 묶고 불변 주소를 보존합니다. 현재 91개 item의 로컬
   `sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`
   snapshot과 `docs/r/releases/` 복사본을 검사했습니다. `/r/`은 최신
-  경로로 유지합니다. 공개 배포 후 snapshot URL의 실제 설치와 이전
-  snapshot 보존을 확인해야 완료 처리합니다.
+  경로로 유지합니다. production에서 현재·이전 snapshot의 manifest와
+  Button JSON을 내려받아 저장소 파일과 해시를 비교했고 두 ID의
+  item을 각각 새 소비자에 설치해 typecheck·build를 확인했습니다.
+  장기간의 URL 보존과 모든 item의 개별 공개 설치는 미검증입니다.
+  [배포 기록](component-production-release-2026-09-29.md)을 참고하세요.
 - [x] `pyd-tokens` item으로 token stylesheet를 전달하고 소비자 CSS에서
   import하는 절차를 별도 Vite 프로젝트에서 검증했습니다.
 - [x] 복사·수정한 shadcn/ui source 27개 item을 각각 새 소비자에

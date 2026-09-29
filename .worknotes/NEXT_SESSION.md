@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-09-29 production 배포: PR #1을 `main`에 병합한 커밋은 `092b748`이고
+Vercel production은 READY입니다. `main` push CI와 공개 URL의 현재·이전
+snapshot CLI 설치, 소비자 typecheck·build를 확인했습니다. 89개
+component·91개 registry item, 공급·품질 조건 6/10, 관리용 goal 추정
+약 75%입니다. [배포·미검증 기록](component-production-release-2026-09-29.md)을
+먼저 읽으세요. 독립 review와 실제 보조기술·touch·drag/drop·다른 시간대
+검사는 계속 남아 있습니다. 두 미공개 draft snapshot은 untracked이며
+일괄 `git add`에 포함하지 마세요.
+
 2026-09-29 작업 정리: [PR #1](https://github.com/pydemia/ui/pull/1)의
 코드·CI 변경 커밋 `2b41cfe`에 대한
 [GitHub Actions run](https://github.com/pydemia/ui/actions/runs/36572361755)은

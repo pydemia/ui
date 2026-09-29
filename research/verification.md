@@ -1425,3 +1425,18 @@ fixture 경로와 충돌 재현 단계는
 
 검사 범위와 원격 실행 결과는
 `.worknotes/component-ci-gate-2026-09-29.md`에 기록합니다.
+
+## 2026-09-29 production registry 배포
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `main` push CI | pass | 병합 커밋 `092b748`의 run 36573529988 성공 |
+| Vercel production | pass | 병합 커밋 배포 READY, 문서에 89개 목록·Spinner 예시·분석 화면 렌더링 |
+| 현재·이전 snapshot URL | pass (limited) | 두 ID의 공개 manifest·Button JSON HTTP 200, 저장소 파일 SHA-256 일치 |
+| 현재 ID CLI 소비자 | pass (limited) | Button·DataChart·token 설치, typecheck·build; DataChart 상호작용 미실행 |
+| 이전 ID CLI 소비자 | pass (limited) | Button·token 설치, typecheck·build |
+| 전체 개별 공개 설치·장기 보존 | unverified | 두 ID의 선택한 item과 이번 배포만 확인 |
+| 실제 보조기술·touch·drag/drop·다른 시간대 | unverified | 이번 릴리스 검사에서 실행하지 않음 |
+
+실행 명령, fixture 경로와 병합·배포 ID는
+`.worknotes/component-production-release-2026-09-29.md`에 기록했습니다.

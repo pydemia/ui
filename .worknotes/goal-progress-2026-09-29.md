@@ -1,5 +1,18 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29 production 배포: [PR #1](https://github.com/pydemia/ui/pull/1)을
+`main`에 병합했고 Vercel production이 READY입니다.
+[main push CI](https://github.com/pydemia/ui/actions/runs/36573529988)도
+통과했습니다. 공개 URL에서 현재·이전 snapshot을 각각 새 소비자에
+설치해 typecheck·build를 확인했습니다. 불변 주소 조건을 완료 표시해
+공급·품질 조건은 **6/10**입니다. 89개라는 규모 비율 89%와 조건 완료율
+60%를 같은 비중으로 평균한 74.5%를 반올림해 전체 goal의 관리용 추정을
+**약 75%**로 갱신합니다. 독립 코드 review, 실제 보조기술·touch·
+drag/drop·다른 시간대 검사는 남아 있습니다. 이 비율은 객관적인
+사용성이나 모든 component의 검증률이 아닙니다.
+[배포 기록](component-production-release-2026-09-29.md)에 실행 범위와
+남은 검증을 구분했습니다.
+
 2026-09-29 작업 정리: [PR #1](https://github.com/pydemia/ui/pull/1)의
 코드·CI 변경 커밋 `2b41cfe`는 push되어 있고 해당 커밋의
 [GitHub Actions run](https://github.com/pydemia/ui/actions/runs/36572361755)이
