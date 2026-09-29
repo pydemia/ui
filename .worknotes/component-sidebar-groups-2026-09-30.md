@@ -30,8 +30,21 @@ item은 추가하지 않습니다. 목표 수는 90개 component·92개 item입�
 - Chromium 문서 preview에서 평면·섹션 전환, 데스크톱 접힘 후 그룹·
   링크의 접근성 이름, 390px Drawer의 그룹·링크, 선택 후 닫기와
   Escape·trigger focus 복귀를 확인했습니다.
-- 공개 URL 소비자 설치와 새 snapshot 배포는 아직 검증하지
-  않았습니다. 실제 screen reader 발표·touch·RTL도 미검증입니다.
+- [PR #6](https://github.com/pydemia/ui/pull/6)을 `main`의
+  `5807c92eb47217caf991259c6a2244fffd59ce0d`로 병합했습니다.
+  PR과 main Verify UI CI가 통과했고 main Pages 작업도 성공했습니다.
+  Vercel production 배포는 READY이며 운영 preview에서 섹션 전환을
+  확인했습니다. 공개 manifest·Sidebar JSON은 200 응답이고 새
+  `SidebarSection` 소스를 포함합니다.
+  PR Verify UI는 [run 36591852652](https://github.com/pydemia/ui/actions/runs/36591852652),
+  main Verify UI는 [run 36592081997](https://github.com/pydemia/ui/actions/runs/36592081997)입니다.
+- 새 Vite 소비자
+  `pydemia-ui-sidebar-groups-consumer-20260930`에 공개 고정 snapshot을
+  `shadcn@4.21.0 add`로 설치했습니다. 7개 파일이 생성됐고 설치된
+  `sidebar.tsx`는 snapshot 소스와 일치합니다. 소비자 typecheck·build가
+  통과했습니다.
+- 실제 screen reader 발표·touch·RTL은 미검증입니다. 모든
+  component의 격리 설치·상호작용까지 확인한 결과로 해석하지 않습니다.
 
 미공개 draft snapshot 네 디렉터리는 기존 작업의 untracked 파일로
 유지합니다. 이번 릴리스에 포함하지 않습니다.

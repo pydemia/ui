@@ -354,7 +354,8 @@ AppShell, Navigation, LogConsole, Sparkline, PageHeader, ContentList를
 | `npm run registry:release-check` | pass | 92개 metadata·90개 export/catalog·8개 불변 snapshot, 현재 ID 일치 |
 | Chromium desktop | pass (limited) | 섹션 전환, 두 제목·링크, 접힌 상태의 접근성 이름 |
 | Chromium 390px | pass (limited) | Drawer의 섹션·링크, 링크 선택 후 닫기, Escape와 trigger focus 복귀 |
-| 공개 URL 설치·독립 소비자 | unverified | 새 snapshot 배포 전 |
+| 공개 URL 설치·독립 소비자 | pass | 고정 snapshot의 Sidebar·tokens 설치, 7개 파일 생성, 원본 소스 일치, typecheck·build |
+| 운영 배포·CI | pass | PR #6·main Verify UI 성공, Vercel production READY, 운영 preview 섹션 전환 |
 | 실제 screen reader·touch·RTL | unverified | 보조기술 발표와 별도 입력 환경 미실행 |
 
 현재 snapshot은

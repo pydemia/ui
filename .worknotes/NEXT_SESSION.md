@@ -4,8 +4,10 @@
 `sections` 입력, 데스크톱·모바일 그룹, 문서 preview를 구현했습니다.
 `build`·`typecheck`·패키지 테스트 59/59와 registry release 검사가
 통과했습니다. 소비자 MIT 고지의 commit·SHA-256을 갱신하고 새
-snapshot을 만들었습니다. Chromium 데스크톱·390px Drawer 동작을
-확인했고 공개 URL 소비자 검증·배포가 남았습니다. 자세한 상태는
+snapshot을 만들었습니다. Chromium 데스크톱·390px Drawer, 공개
+snapshot의 독립 Vite 소비자 설치·typecheck·build를 확인했습니다.
+[PR #6](https://github.com/pydemia/ui/pull/6)의 PR·main CI와
+production 배포도 통과했습니다. 자세한 상태와 미검증 범위는
 [Sidebar 섹션 기록](component-sidebar-groups-2026-09-30.md)을 참고하세요.
 component 90개·item 92개, goal 관리용 추정 약 70%는 유지합니다.
 
