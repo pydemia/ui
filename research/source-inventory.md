@@ -763,6 +763,20 @@ LICENSE는 편입하지 않았습니다.
 설치하지 않았습니다. 따라서 새로 편입된 upstream revision·LICENSE는
 없습니다. 직접 registry 의존성은 기존 `pyd-utils`뿐입니다.
 
+## 2026-09-30 DataChart 선택형 범례
+
+프로젝트 소유 `DataChart`에 `toggleableSeries` 옵션을 직접
+추가했습니다. 기존 정적 범례를 기본값으로 유지하며, 선택형 범례는
+native checkbox로 계열을 숨깁니다. 축·막대 배치·누적값·구간 값
+패널·접근 가능한 데이터 표는 표시 중인 계열로 다시 계산합니다.
+원래 계열 순서의 색과 선 모양은 유지합니다. 모든 계열을 숨기면
+안내와 checkbox만 남겨 다시 선택할 수 있습니다.
+
+[shadcn/ui Chart 공식 문서](https://ui.shadcn.com/docs/components/base/chart)는
+기존 데이터 표시 reference입니다. 새 외부 source를 복사하거나
+package를 추가하지 않았으므로 새 upstream revision·LICENSE는
+없습니다. registry 직접 의존성은 기존 `pyd-utils`뿐입니다.
+
 ## 2026-09-29 ScrollArea
 
 [shadcn/ui Scroll Area 공식 문서](https://ui.shadcn.com/docs/components/radix/scroll-area),

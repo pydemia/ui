@@ -245,8 +245,9 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   구분합니다. 긴 범주 이름의 full text는 title 속성으로 제공합니다.
 - [x] `Sparkline` — 작은 영역의 추세와 수치 대체 텍스트. 소비자 설치와
   실제 screen reader 발표는 미검증.
-- [ ] `Legend` — `DataChart` 내부에 정적 계열 이름·색을 표시합니다.
-  계열 표시 toggle이 필요한지 사용 사례로 판정합니다.
+- [x] `Legend` — 별도 component 대신 `DataChart`의 정적 범례와
+  선택형 범례로 제공합니다. 선택형은 다중 계열의 표시·숨김에 따라
+  축·누적값·구간 값·접근 가능한 데이터 표를 함께 갱신합니다.
 - [ ] `ChartTooltip` — `DataChart`에 포인터·native select로 조작하는
   구간별 값 패널을 추가했습니다. 부유 tooltip 필요성은 사용 사례로 판정.
 - [x] `FilterBar` — 여러 필터의 입력·적용·초기화와 적용된 조건 표시.

@@ -1546,3 +1546,18 @@ HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공�
 되돌린 뒤 build·release 검사를 재실행했습니다. 단계와 미검증 항목은
 `.worknotes/component-markdown-2026-09-29.md`에 기록했습니다.
 병합 뒤 공개 설치도 통과했습니다. rollback 후 주소 보존은 미검증입니다.
+
+## 2026-09-30 DataChart 계열 표시
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm test -w @pydemia/ui` | pass | 60/60; 빈 데이터에서도 선택형 범례 유지 |
+| `npm run build` | pass | 92개 registry item과 문서·예시 산출물 |
+| 로컬 Chromium | pass (limited) | 계열 숨김·복원, 축·표·구간 값 변경, 누적 영역 합계 4→12, Space 키, 390px 배치, error log 0건 |
+| registry release·소비자 설치 | pending | 고지의 provenance commit 갱신 뒤 확인 예정 |
+| 실제 screen reader·touch·다른 브라우저 | unverified | 기기와 보조기술 실행 전 |
+
+검사 입력과 변경 범위는
+`.worknotes/component-data-chart-series-visibility-2026-09-30.md`에
+기록했습니다.

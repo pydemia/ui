@@ -1852,13 +1852,13 @@ function DataChartPreview() {
                         variant === "stacked-area"
                             ? "완료와 대기의 합계를 표시합니다. 한 계열이라도 " +
                                 "누락된 구간에서는 영역을 끊습니다."
-                            : "완료와 대기를 비교합니다. 결측값은 그래프에서 " +
-                                "생략하고 표에 표시합니다."
+                            : "범례에서 계열을 선택해 완료와 대기를 비교합니다. " +
+                                "결측값은 그래프에서 생략하고 표에 표시합니다."
                     }
                     categories={empty ? [] : chartCategories}
                     series={empty ? [] : variant === "stacked-area"
                         ? stackedAreaSeries : chartSeries}
-                    variant={variant} inspectable />
+                    variant={variant} inspectable toggleableSeries />
             ) : (
                 <DataChart title="요일별 검토 완료" unit="건"
                     description="목요일 데이터는 집계되지 않았습니다."
@@ -4395,7 +4395,7 @@ const slides = [
     },
     {
         id: "data-chart", name: "DataChart", category: "Data & analytics",
-        description: "단일·다중 계열을 선형·그룹 막대·누적 막대·영역·누적 영역으로 표시합니다. 구간 선택기로 원본 값과 합계를 확인하고, 범례와 데이터 표로 전체 값을 읽을 수 있습니다.",
+        description: "단일·다중 계열을 선형·그룹 막대·누적 막대·영역·누적 영역으로 표시합니다. 선택형 범례로 계열을 숨기고 축·누적값을 다시 계산할 수 있습니다. 구간 선택기와 데이터 표는 현재 표시한 계열의 값을 제공합니다.",
         code: `import { DataChart } from "@pydemia/ui";
 
 const points = [
@@ -4421,15 +4421,16 @@ const series = [
 
 <>
   <DataChart title="요일별 요청" categories={["월", "화", "수", "목"]}
-    series={series} unit="건" variant="line" />
+    series={series} unit="건" variant="line"
+    toggleableSeries inspectable />
   <DataChart title="요일별 요청 구성"
     categories={["월", "화", "수", "목"]}
     series={series} unit="건" variant="stacked-bar"
-    inspectable />
+    inspectable toggleableSeries />
   <DataChart title="요일별 요청 추이"
     categories={["월", "화", "수", "목"]}
     series={series} unit="건" variant="stacked-area"
-    inspectable />
+    inspectable toggleableSeries />
 </>;`,
         preview: () => <DataChartPreview />,
     },
