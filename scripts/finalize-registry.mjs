@@ -25,6 +25,10 @@ for (const { name } of registry.items) {
             if (entry.target !== "@ui/tokens.css") {
                 throw new Error(`Unexpected token target: ${entry.target}`);
             }
+        } else if (entry.path === "registry/SHADCN_UI_LICENSE.md") {
+            if (entry.target !== "@ui/SHADCN_UI_LICENSE.md") {
+                throw new Error(`Unexpected license target: ${entry.target}`);
+            }
         } else if (entry.path.startsWith("packages/ui/src/components/")) {
             entry.target = `@ui/${basename(entry.path)}`;
         } else {

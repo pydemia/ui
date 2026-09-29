@@ -22,6 +22,7 @@ type DropzoneProps = {
     maxFiles?: number;
     maxSize?: number;
     disabled?: boolean;
+    showSelectedFiles?: boolean;
     className?: string;
     onFilesSelected?: (files: File[]) => void;
     onFilesRejected?: (rejections: FileRejection[]) => void;
@@ -54,6 +55,7 @@ function Dropzone({
     maxFiles = 1,
     maxSize,
     disabled = false,
+    showSelectedFiles = true,
     className,
     onFilesSelected,
     onFilesRejected,
@@ -104,7 +106,7 @@ function Dropzone({
         }
 
         setError("");
-        setNames(selected.map((file) => file.name));
+        if (showSelectedFiles) setNames(selected.map((file) => file.name));
         onFilesSelected?.(selected);
     }
 
@@ -169,7 +171,7 @@ function Dropzone({
                 )}
             </button>
             {error && <p role="alert" className="mt-2 text-sm text-danger">{error}</p>}
-            {names.length > 0 && (
+            {showSelectedFiles && names.length > 0 && (
                 <p role="status" className="mt-2 break-words text-sm">
                     선택한 파일: {names.join(", ")}
                 </p>

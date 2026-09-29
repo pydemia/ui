@@ -1,5 +1,25 @@
 export { Button } from "./components/button";
+export { ButtonGroup, ButtonGroupSeparator } from "./components/button-group";
+export type { ButtonGroupProps } from "./components/button-group";
 export { Input } from "./components/input";
+export { SearchInput } from "./components/search-input";
+export type { SearchInputProps } from "./components/search-input";
+export { NumberInput } from "./components/number-input";
+export type { NumberInputProps } from "./components/number-input";
+export { TagsInput } from "./components/tags-input";
+export type { TagsInputProps } from "./components/tags-input";
+export { PasswordInput } from "./components/password-input";
+export type { PasswordInputProps } from "./components/password-input";
+export { PinInput } from "./components/pin-input";
+export type { PinInputProps } from "./components/pin-input";
+export { Rating } from "./components/rating";
+export type { RatingProps } from "./components/rating";
+export { Combobox } from "./components/combobox";
+export type { ComboboxOption, ComboboxProps } from "./components/combobox";
+export { MultiSelect } from "./components/multi-select";
+export type {
+    MultiSelectOption, MultiSelectProps,
+} from "./components/multi-select";
 export { Field } from "./components/field";
 export type { FieldControlProps, FieldProps } from "./components/field";
 export { Textarea } from "./components/textarea";
@@ -9,11 +29,17 @@ export {
 } from "./components/select";
 export { Label } from "./components/label";
 export { Badge } from "./components/badge";
+export type { BadgeProps } from "./components/badge";
 export { Checkbox } from "./components/checkbox";
 export { Switch } from "./components/switch";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group";
+export { SegmentedControl, SegmentedControlItem } from
+    "./components/segmented-control";
+export type { SegmentedControlProps, SegmentedControlItemProps } from
+    "./components/segmented-control";
 export { Alert, AlertTitle, AlertDescription } from "./components/alert";
 export { Progress } from "./components/progress";
+export type { ProgressProps } from "./components/progress";
 export { Skeleton } from "./components/skeleton";
 export {
     Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
@@ -23,30 +49,173 @@ export {
     Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader,
     DialogFooter, DialogTitle, DialogDescription,
 } from "./components/dialog";
+export { CommandPalette } from "./components/command-palette";
+export type {
+    CommandPaletteItem, CommandPaletteProps,
+} from "./components/command-palette";
 export { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "./components/tooltip";
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./components/accordion";
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./components/collapsible";
 export { Popover, PopoverTrigger, PopoverClose, PopoverAnchor, PopoverContent } from "./components/popover";
+export { HoverCard, HoverCardTrigger, HoverCardContent } from "./components/hover-card";
 export {
     AlertDialog, AlertDialogTrigger, AlertDialogAction, AlertDialogCancel,
     AlertDialogContent, AlertDialogHeader, AlertDialogFooter,
     AlertDialogTitle, AlertDialogDescription,
 } from "./components/alert-dialog";
 export { Avatar, AvatarImage, AvatarFallback } from "./components/avatar";
+export { AvatarGroup } from "./components/avatar-group";
+export type {
+    AvatarGroupMember, AvatarGroupProps,
+} from "./components/avatar-group";
 export {
     Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink,
     BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis,
 } from "./components/breadcrumb";
 export { Empty, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from "./components/empty";
 export { Spinner } from "./components/spinner";
+export type { SpinnerProps } from "./components/spinner";
+export {
+    AppShell, AppHeader, AppBody, AppSidebar, AppMain, AppBottomPanel,
+    AppFloatingPanel, AppFloatingBubble,
+} from "./components/app-shell";
+export type {
+    AppMainProps, AppSidebarProps, AppFloatingPanelProps,
+    AppFloatingBubbleProps,
+} from "./components/app-shell";
+export { ResizablePanels } from "./components/resizable-panels";
+export type { ResizablePanelsProps } from "./components/resizable-panels";
+export { ScrollArea } from "./components/scroll-area";
+export type { ScrollAreaProps } from "./components/scroll-area";
+export {
+    GlobalNav, GlobalNavLink, SideNav, SideNavLink,
+    BottomNav, BottomNavLink,
+} from "./components/navigation";
+export type {
+    GlobalNavLinkProps, SideNavLinkProps, BottomNavLinkProps,
+} from "./components/navigation";
+export {
+    NavigationMenu, NavigationMenuList, NavigationMenuItem,
+    NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink,
+} from "./components/navigation-menu";
+export type {
+    NavigationMenuProps, NavigationMenuLinkProps,
+} from "./components/navigation-menu";
+export { Sidebar } from "./components/sidebar";
+export type { SidebarItem, SidebarProps } from "./components/sidebar";
+export { Tree } from "./components/tree";
+export type { TreeNode, TreeProps } from "./components/tree";
+export { Stepper } from "./components/stepper";
+export type { StepperProps, StepperStep } from "./components/stepper";
+export { Timeline } from "./components/timeline";
+export type {
+    TimelineProps, TimelineEntry, TimelineStatus,
+} from "./components/timeline";
+export { LogConsole } from "./components/log-console";
+export type { LogConsoleProps, LogEntry } from "./components/log-console";
+export { JsonViewer } from "./components/json-viewer";
+export type { JsonValue, JsonViewerProps } from "./components/json-viewer";
+export { Sparkline } from "./components/sparkline";
+export type { SparklineProps } from "./components/sparkline";
+export { DataChart } from "./components/data-chart";
+export type {
+    DataChartProps, ChartPoint, ChartSeries,
+} from "./components/data-chart";
+export { DonutChart } from "./components/donut-chart";
+export type { DonutChartProps, DonutSegment } from "./components/donut-chart";
+export {
+    Dashboard, DashboardMetrics, DashboardPanels,
+} from "./components/dashboard";
+export type { DashboardSectionProps } from "./components/dashboard";
+export {
+    ToastRegion, Toast, ToastQueue, useToastQueue,
+} from "./components/toast";
+export type {
+    ToastRegionProps, ToastProps, ToastDraft, ToastNotice,
+    ToastQueueProps,
+} from "./components/toast";
+export {
+    DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
+    DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
+    DropdownMenuGroup, DropdownMenuCheckboxItem, DropdownMenuRadioGroup,
+    DropdownMenuRadioItem, DropdownMenuSub, DropdownMenuSubTrigger,
+    DropdownMenuSubContent,
+} from "./components/dropdown-menu";
+export type { DropdownMenuItemProps } from "./components/dropdown-menu";
+export {
+    ContextMenu, ContextMenuTrigger, ContextMenuContent,
+    ContextMenuItem, ContextMenuLabel, ContextMenuSeparator,
+    ContextMenuGroup, ContextMenuCheckboxItem, ContextMenuRadioGroup,
+    ContextMenuRadioItem, ContextMenuSub, ContextMenuSubTrigger,
+    ContextMenuSubContent,
+} from "./components/context-menu";
+export type { ContextMenuItemProps } from "./components/context-menu";
+export { Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader,
+    DrawerFooter, DrawerTitle, DrawerDescription } from "./components/drawer";
+export type { DrawerContentProps } from "./components/drawer";
+export { Pagination } from "./components/pagination";
+export type { PaginationProps } from "./components/pagination";
+export { DataTable } from "./components/data-table";
+export type {
+    DataTableProps, DataTableColumn, DataTableFilter,
+} from "./components/data-table";
+export { FilterBar } from "./components/filter-bar";
+export type {
+    AppliedFilter, FilterBarProps,
+} from "./components/filter-bar";
+export { PageHeader } from "./components/page-header";
+export type { PageHeaderProps } from "./components/page-header";
+export { ContentList } from "./components/content-list";
+export type { ContentListProps } from "./components/content-list";
+export { DataList } from "./components/data-list";
+export type { DataListItem, DataListProps } from "./components/data-list";
+export { CodeBlock } from "./components/code-block";
+export type { CodeBlockProps } from "./components/code-block";
+export { Carousel } from "./components/carousel";
+export type { CarouselProps, CarouselSlide } from "./components/carousel";
 export { Toggle } from "./components/toggle";
+export { ToggleGroup, ToggleGroupItem } from "./components/toggle-group";
 export { Slider } from "./components/slider";
 export { Calendar } from "./components/calendar";
 export { DatePicker } from "./components/date-picker";
 export type { DatePickerProps } from "./components/date-picker";
+export { DateRangePicker } from "./components/date-range-picker";
+export type {
+    DateRangePickerProps, DateRangeValue,
+} from "./components/date-range-picker";
+export { TimePicker } from "./components/time-picker";
+export type { TimePickerProps } from "./components/time-picker";
+export { DateTimePicker } from "./components/date-time-picker";
+export type {
+    DateTimePickerProps, DateTimeSelection,
+} from "./components/date-time-picker";
+export { ColorInput } from "./components/color-input";
+export type { ColorInputProps } from "./components/color-input";
 export { MetricCard } from "./components/metric-card";
+export { Image } from "./components/image";
+export type { ImageProps } from "./components/image";
 export { Dropzone } from "./components/dropzone";
+export { FileUpload } from "./components/file-upload";
+export type {
+    FileUploadItem, FileUploadProps, FileUploadStatus,
+} from "./components/file-upload";
 export { Message, MessageContent } from "./components/message";
+export { Conversation } from "./components/conversation";
+export type {
+    ConversationMessage, ConversationProps,
+} from "./components/conversation";
+export { CitationList } from "./components/citation-list";
+export type {
+    CitationListProps, CitationSource,
+} from "./components/citation-list";
+export { Reasoning } from "./components/reasoning";
+export type {
+    ReasoningProps, ReasoningStatus,
+} from "./components/reasoning";
+export { ToolCall } from "./components/tool-call";
+export type {
+    ToolCallProps, ToolCallStatus,
+} from "./components/tool-call";
 export { PromptInput } from "./components/prompt-input";
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/tabs";
 export { Table, TableHead, TableCell } from "./components/table";

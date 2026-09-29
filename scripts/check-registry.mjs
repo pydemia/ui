@@ -1,12 +1,17 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
-import { basename, join } from "node:path";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { basename, join, posix } from "node:path";
 import { fileURLToPath } from "node:url";
+import ts from "typescript";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 const provenance = JSON.parse(readFileSync(join(root, "registry/provenance.json"), "utf8"));
 const output = join(root, "apps/profile-demo/public/r");
+const noticePath = "registry/SHADCN_UI_LICENSE.md";
+const noticeTarget = "@ui/SHADCN_UI_LICENSE.md";
+const noticeContent = readFileSync(join(root, noticePath), "utf8")
+    .replace(/\r\n/g, "\n");
 const base = new URL(
     process.env.PYDEMIA_REGISTRY_BASE_URL ??
         "https://pydemia-ui.vercel.app/r/",
@@ -17,6 +22,67 @@ if (!["http:", "https:"].includes(base.protocol)) {
 if (!base.pathname.endsWith("/")) base.pathname += "/";
 const names = new Set(registry.items.map((item) => item.name));
 assert.equal(names.size, registry.items.length, "Registry item names must be unique");
+
+const sourceOwners = new Map();
+const missingDependencies = [];
+for (const item of registry.items) {
+    for (const file of item.files) {
+        if (!file.path.startsWith("packages/ui/src/components/")) continue;
+        const owners = sourceOwners.get(file.path) ?? new Set();
+        owners.add(item.name);
+        sourceOwners.set(file.path, owners);
+    }
+}
+
+for (const item of registry.items) {
+    const itemDependencies = new Set(
+        (item.registryDependencies ?? []).map((entry) => entry.slice(2, -5)),
+    );
+    for (const file of item.files) {
+        if (!file.path.startsWith("packages/ui/src/components/")) continue;
+        const source = ts.createSourceFile(
+            file.path, readFileSync(join(root, file.path), "utf8"),
+            ts.ScriptTarget.Latest, true,
+        );
+        for (const statement of source.statements) {
+            if (!ts.isImportDeclaration(statement) &&
+                !ts.isExportDeclaration(statement)) continue;
+            const module = statement.moduleSpecifier;
+            if (!module || !ts.isStringLiteral(module)) continue;
+            const specifier = module.text;
+            if (specifier.startsWith(".")) {
+                const target = posix.normalize(posix.join(
+                    posix.dirname(file.path), specifier,
+                ));
+                const owners = sourceOwners.get(`${target}.tsx`) ??
+                    sourceOwners.get(`${target}.ts`);
+                assert(owners?.size,
+                    `Unregistered import in ${item.name}: ${file.path} -> ${specifier}`);
+                if (!owners.has(item.name) &&
+                    ![...owners].some((owner) => itemDependencies.has(owner))) {
+                    missingDependencies.push(
+                        `${item.name}: registry dependency for ${specifier}`,
+                    );
+                }
+                continue;
+            }
+            const packageName = specifier.startsWith("@")
+                ? specifier.split("/").slice(0, 2).join("/")
+                : specifier.split("/")[0];
+            if (packageName === "react" || packageName === "react-dom") {
+                continue;
+            }
+            if (!(item.dependencies ?? []).some((dependency) =>
+                dependency === packageName ||
+                dependency.startsWith(`${packageName}@`))) {
+                missingDependencies.push(
+                    `${item.name}: npm dependency for ${specifier}`,
+                );
+            }
+        }
+    }
+}
+assert.deepEqual(missingDependencies, [], "Registry imports need declared dependencies");
 
 assert.deepEqual(
     [...names].sort(),
@@ -51,6 +117,12 @@ for (const item of registry.items) {
     if (record.source.implementation === "modified") {
         assert(record.source.upstream?.includes("/blob/"), `Unpinned source for ${item.name}`);
         assert(record.source.notice, `Missing third-party notice for ${item.name}`);
+        assert.equal(record.source.consumer_notice, noticePath);
+        assert.equal(
+            item.files.filter((entry) => entry.path === noticePath).length,
+            1,
+            `Missing consumer license file for ${item.name}`,
+        );
     }
     for (const dependency of item.registryDependencies ?? []) {
         assert(dependency.startsWith("./") && dependency.endsWith(".json"));
@@ -61,6 +133,11 @@ for (const item of registry.items) {
     const compiled = JSON.parse(readFileSync(file, "utf8"));
     assert.equal(compiled.name, item.name);
     assert.deepEqual(
+        compiled.files.map((entry) => entry.path).sort(),
+        item.files.map((entry) => entry.path).sort(),
+        `Compiled file list differs for ${item.name}`,
+    );
+    assert.deepEqual(
         compiled.registryDependencies,
         item.registryDependencies?.map((dependency) =>
             new URL(dependency.slice(2), base).href,
@@ -69,11 +146,100 @@ for (const item of registry.items) {
     );
     assert(compiled.files?.every((entry) => entry.content?.length > 0));
     for (const entry of compiled.files) {
-        const target = entry.path === "packages/ui/src/styles.css"
-            ? "@ui/tokens.css"
-            : `@ui/${basename(entry.path)}`;
+        const sourceContent = readFileSync(join(root, entry.path), "utf8")
+            .replace(/\r\n/g, "\n");
+        assert.equal(
+            entry.content,
+            sourceContent,
+            `Compiled source differs for ${item.name}: ${entry.path}`,
+        );
+        let target;
+        if (entry.path === "packages/ui/src/styles.css") {
+            target = "@ui/tokens.css";
+        } else if (entry.path === noticePath) {
+            target = noticeTarget;
+        } else {
+            target = `@ui/${basename(entry.path)}`;
+        }
         assert.equal(entry.target, target);
+        if (entry.path === noticePath) {
+            assert.equal(entry.content, noticeContent);
+        }
     }
 }
 
-console.log(`Verified ${names.size} compiled registry items and provenance records.`);
+const componentPath = "packages/ui/src/components/";
+const sourceIds = readdirSync(join(root, componentPath))
+    .filter((name) => name.endsWith(".tsx"))
+    .map((name) => name.slice(0, -4)).sort();
+const registryComponents = registry.items.flatMap((item) =>
+    item.files.filter((entry) =>
+        entry.path.startsWith(componentPath) && entry.path.endsWith(".tsx"),
+    ).map((entry) => ({ id: basename(entry.path, ".tsx"), name: item.name })),
+);
+const registryIds = registryComponents.map((entry) => entry.id).sort();
+for (const entry of registryComponents) {
+    assert.equal(entry.name, `pyd-${entry.id}`,
+        `Registry item name differs for ${entry.id}`);
+}
+const indexPath = join(root, "packages/ui/src/index.ts");
+const index = ts.createSourceFile(indexPath, readFileSync(indexPath, "utf8"),
+    ts.ScriptTarget.Latest, true);
+const exportIds = [...new Set(index.statements
+    .filter(ts.isExportDeclaration)
+    .flatMap((statement) => {
+        const specifier = statement.moduleSpecifier;
+        if (!specifier || !ts.isStringLiteral(specifier) ||
+            !specifier.text.startsWith("./components/")) return [];
+        return [specifier.text.slice("./components/".length)];
+    }))].sort();
+const catalogPath = join(root, "apps/docs/src/catalog.tsx");
+const catalog = ts.createSourceFile(
+    catalogPath, readFileSync(catalogPath, "utf8"),
+    ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX,
+);
+let entries;
+function findCatalog(node) {
+    if (ts.isVariableDeclaration(node) &&
+        node.name.getText(catalog) === "catalog") {
+        entries = node.initializer;
+    }
+    ts.forEachChild(node, findCatalog);
+}
+findCatalog(catalog);
+assert(entries && ts.isArrayLiteralExpression(entries),
+    "Catalog must be a statically declared array");
+const catalogIds = entries.elements.map((entry) => {
+    assert(ts.isObjectLiteralExpression(entry));
+    const id = entry.properties.find((property) =>
+        ts.isPropertyAssignment(property) &&
+        property.name.getText(catalog) === "id");
+    assert(id && ts.isPropertyAssignment(id) &&
+        ts.isStringLiteral(id.initializer), "Catalog entry needs a literal ID");
+    const code = entry.properties.find((property) =>
+        ts.isPropertyAssignment(property) &&
+        property.name.getText(catalog) === "code");
+    assert(code && ts.isPropertyAssignment(code) &&
+        ts.isNoSubstitutionTemplateLiteral(code.initializer),
+        `Catalog usage needs a static code block: ${id.initializer.text}`);
+    const usage = ts.createSourceFile(
+        `${id.initializer.text}.tsx`, code.initializer.text,
+        ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX,
+    );
+    assert.equal(usage.parseDiagnostics.length, 0,
+        `Catalog usage has TSX syntax errors: ${id.initializer.text}`);
+    return id.initializer.text;
+}).sort();
+assert.equal(new Set(registryIds).size, registryIds.length,
+    "Component registry paths must be unique");
+assert.equal(new Set(catalogIds).size, catalogIds.length,
+    "Catalog IDs must be unique");
+assert.deepEqual(registryIds, sourceIds,
+    "Component source and registry items differ");
+assert.deepEqual(exportIds, sourceIds,
+    "Component source and public exports differ");
+assert.deepEqual(catalogIds, sourceIds,
+    "Component source and catalog entries differ");
+
+console.log(`Verified ${names.size} registry items, provenance records, ` +
+    `and ${sourceIds.length} component exports/catalog entries.`);
