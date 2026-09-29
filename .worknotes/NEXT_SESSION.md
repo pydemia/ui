@@ -1,7 +1,8 @@
 # Component 확장 작업 인계
 
-2026-09-30 `codex/feedback-status-variants` 진행: Spinner 다섯 형태는
-기존 구현으로 확인했습니다. Alert에 info·success·warning을 추가하고
+2026-09-30 [PR #11](https://github.com/pydemia/ui/pull/11) 배포:
+Spinner 다섯 형태는 기존 구현으로 확인했습니다. Alert에
+info·success·warning을 추가하고
 Toast 상태색을 맞췄습니다. `--success`·`--warning`은 light/dark
 palette alias와 문서 Colormap에 연결했습니다. 테스트 66/66,
 typecheck·build·registry release 검사와 독립 소비자 CLI 설치·
@@ -12,9 +13,10 @@ typecheck·build·Chromium 동작이 통과했습니다. 새 snapshot은
 1280px의 기존 본문 이동을 확인했습니다.
 [Feedback 상태 기록](feedback-status-variants-2026-09-30.md)과
 [모바일 SNB 앵커 기록](mobile-snb-hash-2026-09-30.md)을 참고하세요.
-PR·CI·배포는 아직 남았습니다. 실제 touch·Safari·screen reader는
-미검증입니다. 기존 미공개 draft snapshot 네 디렉터리는 stage하지
-마세요.
+PR·`main` CI와 Vercel production이 통과했고 공개 Alert·Toast preview,
+모바일 SNB와 snapshot URL을 확인했습니다. 실제 touch·Safari·
+screen reader는 미검증입니다. 기존 미공개 draft snapshot 네
+디렉터리는 stage하지 마세요.
 
 2026-09-30 [PR #10](https://github.com/pydemia/ui/pull/10) 배포:
 Workflow에 `Kanban`을 추가해 component 91개·registry item 93개입니다.

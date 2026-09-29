@@ -33,7 +33,7 @@ custom color 사용 사례를 제공하며, 기존 편입 소스와
 - [x] 로컬 Chromium light/dark·colormap·live region 확인
 - [x] registry release 검사
 - [x] 독립 소비자 registry 설치·typecheck·build
-- [ ] PR·CI·production 배포
+- [x] PR·CI·production 배포
 
 실제 screen reader 발표와 다른 브라우저는 별도 미검증 항목으로 둡니다.
 이전 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.
@@ -54,3 +54,12 @@ warning Toast의 `status` live region·좌측 테두리·닫기 뒤 트리거 fo
 11개 불변 snapshot의 release 검사가 통과했습니다. 새 snapshot은
 `sha256-6315cfe1a0a88ffa25cd36cbfaa57dc5e278e800f8c257b387c4159aa58d1d6f`
 입니다. 기존 미공개 draft snapshot 네 디렉터리는 게시 대상이 아닙니다.
+
+[PR #11](https://github.com/pydemia/ui/pull/11)을 병합했고 merge commit은
+`832987076ec497bd65038b122c05fe5dbccbc720`입니다. PR Verify UI와
+`main` Verify UI·Pages CI가 통과했습니다. Vercel production
+`dpl_HEZMX4L83uQdvLmmnwF7FLtURPqs`가 READY입니다. 공개 사이트에서
+Alert 네 상태의 preview·사용 코드와 Toast warning의 live region·
+상태색을 확인했습니다. 새 snapshot manifest·Alert·Toast JSON은
+`ui.pydemia.ai`에서 HTTP 200입니다. 실제 screen reader와 Safari,
+touch 기기는 검증하지 않았습니다.

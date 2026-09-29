@@ -14,3 +14,9 @@ URL 해시는 비었으며 선택 상태와 버튼 focus가 갱신됐습니다.
 약 84px, URL 해시는 `#components`였습니다. 실제 touch 기기와
 Safari는 검증하지 않았습니다. component·registry item 수와 snapshot
 내용은 변하지 않습니다.
+
+[PR #11](https://github.com/pydemia/ui/pull/11) 병합 뒤 공개 사이트의
+390px Chromium에서 `scrollY=844`, SNB `scrollLeft=1875` 상태로
+TagsInput을 선택했습니다. 두 위치가 유지됐고 URL 해시는 비었으며
+제목과 버튼 focus가 선택에 맞게 바뀌었습니다. `main` CI와
+Vercel production도 통과했습니다.

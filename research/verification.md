@@ -1603,6 +1603,7 @@ PR·`main` Verify UI와 Pages CI, Vercel production 배포가
 | 390px 모바일 SNB | pass (limited) | 연속 선택 시 문서·SNB 위치 유지, 해시 제거와 선택 버튼 focus |
 | 1280px 데스크톱 SNB | pass (limited) | 기존 `#components` 이동과 제목 변경 |
 | 실제 touch·Safari·screen reader | unverified | 기기와 보조기술 테스트 미실행 |
+| PR·`main` CI와 production | pass (limited) | PR #11·merge commit CI, Vercel READY, 운영 preview·모바일 SNB·새 snapshot URL |
 
 로컬 registry는 소비자 설치 때만 `127.0.0.1` 의존성 URL로 생성했고,
 게시용 URL로 다시 빌드한 뒤 현재 snapshot 검사를 통과했습니다.
