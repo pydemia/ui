@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 2026-09-29 — 공개 component 후속 수정
+
+- 19개 문서 Usage에 필요한 registry item을 설치 명령에 추가하고,
+  Usage import와 설치 목록의 폐쇄 관계를 자동 검사합니다.
+- DataChart의 동일 극단값 좌표와 빈 구간 이름, DataTable의 변경된
+  필터 옵션 처리 방식을 수정했습니다.
+- CI가 untracked 문서 생성 파일도 찾도록 했습니다. rollback 시
+  snapshot 주소 보존과 release별 provenance 고정은 계속 검토합니다.
+
 ## 2026-09-29 — component registry 확장
 
 [PR #1](https://github.com/pydemia/ui/pull/1)을 `main`에 병합해

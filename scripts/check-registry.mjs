@@ -193,6 +193,26 @@ const exportIds = [...new Set(index.statements
             !specifier.text.startsWith("./components/")) return [];
         return [specifier.text.slice("./components/".length)];
     }))].sort();
+const exportOwners = new Map();
+for (const statement of index.statements) {
+    if (!ts.isExportDeclaration(statement) ||
+        !statement.moduleSpecifier ||
+        !ts.isStringLiteral(statement.moduleSpecifier) ||
+        !statement.moduleSpecifier.text.startsWith("./components/") ||
+        !statement.exportClause ||
+        !ts.isNamedExports(statement.exportClause)) continue;
+    const owner = `pyd-${statement.moduleSpecifier.text.slice(
+        "./components/".length,
+    )}`;
+    for (const symbol of statement.exportClause.elements) {
+        assert(!exportOwners.has(symbol.name.text),
+            `Duplicate public export: ${symbol.name.text}`);
+        exportOwners.set(symbol.name.text, owner);
+    }
+}
+const registryItems = new Map(registry.items.map((item) =>
+    [item.name, item],
+));
 const catalogPath = join(root, "apps/docs/src/catalog.tsx");
 const catalog = ts.createSourceFile(
     catalogPath, readFileSync(catalogPath, "utf8"),
@@ -228,6 +248,48 @@ const catalogIds = entries.elements.map((entry) => {
     );
     assert.equal(usage.parseDiagnostics.length, 0,
         `Catalog usage has TSX syntax errors: ${id.initializer.text}`);
+    const installProperty = entry.properties.find((property) =>
+        ts.isPropertyAssignment(property) &&
+        property.name.getText(catalog) === "installItems");
+    let installIds = [id.initializer.text];
+    if (installProperty) {
+        assert(ts.isPropertyAssignment(installProperty) &&
+            ts.isArrayLiteralExpression(installProperty.initializer),
+            `Catalog installItems must be a literal array: ${id.initializer.text}`);
+        installIds = installProperty.initializer.elements.map((element) => {
+            assert(ts.isStringLiteral(element),
+                `Catalog installItems need literal IDs: ${id.initializer.text}`);
+            return element.text;
+        });
+    }
+    assert(installIds.includes(id.initializer.text),
+        `Catalog installItems omit ${id.initializer.text}`);
+    const installed = new Set();
+    function includeItem(name) {
+        assert(registryItems.has(name),
+            `Catalog ${id.initializer.text} installs unknown item ${name}`);
+        if (installed.has(name)) return;
+        installed.add(name);
+        for (const dependency of registryItems.get(name).registryDependencies ?? []) {
+            includeItem(dependency.slice(2, -5));
+        }
+    }
+    installIds.forEach((installId) => includeItem(`pyd-${installId}`));
+    for (const statement of usage.statements) {
+        if (!ts.isImportDeclaration(statement) ||
+            !ts.isStringLiteral(statement.moduleSpecifier) ||
+            statement.moduleSpecifier.text !== "@pydemia/ui") continue;
+        const imports = statement.importClause?.namedBindings;
+        assert(imports && ts.isNamedImports(imports),
+            `Catalog usage needs named UI imports: ${id.initializer.text}`);
+        for (const symbol of imports.elements) {
+            const name = symbol.propertyName?.text ?? symbol.name.text;
+            const owner = exportOwners.get(name);
+            assert(owner, `Unknown UI import in ${id.initializer.text}: ${name}`);
+            assert(installed.has(owner),
+                `Catalog ${id.initializer.text} must install ${owner} for ${name}`);
+        }
+    }
     return id.initializer.text;
 }).sort();
 assert.equal(new Set(registryIds).size, registryIds.length,

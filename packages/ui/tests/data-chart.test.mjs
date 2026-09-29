@@ -96,6 +96,34 @@ test("finite values at opposite numeric limits keep SVG coordinates", () => {
     }
 });
 
+test("constant numeric limits keep finite SVG coordinates", () => {
+    for (const value of [Number.MAX_VALUE, -Number.MAX_VALUE]) {
+        for (const count of [1, 2]) {
+            const markup = renderChart({
+                variant: "line",
+                points: Array.from({ length: count }, (_, index) => ({
+                    label: `Point ${index + 1}`, value,
+                })),
+                categories: undefined,
+                series: undefined,
+            });
+            assert.match(markup, /<svg[^>]*>/);
+            assert.doesNotMatch(markup, /NaN|Infinity/);
+        }
+    }
+});
+
+test("unnamed points have accessible category names", () => {
+    const markup = renderChart({
+        variant: "line",
+        points: [{ label: "  ", value: 3 }],
+        categories: undefined,
+        series: undefined,
+    });
+    assert.match(markup, /<th scope="row">\s*구간 1\s*<\/th>/);
+    assert.doesNotMatch(markup, /<th scope="row">\s*<\/th>/);
+});
+
 test("empty stacked data keeps the empty state", () => {
     const markup = renderChart({ categories: [], series: [] });
     assert.match(markup, /표시할 데이터가 없습니다/);

@@ -1,5 +1,17 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29 후속 독립 검토에서 배포 rollback이 최신 snapshot 경로를
+제거할 수 있음을 확인했습니다. 기존 ‘불변 주소 보존’ 완료 표시를
+철회해 공급·품질 조건은 **5/10**입니다. 문서 19개의 설치 명령,
+DataChart 극단값·빈 행 이름, DataTable 옵션 변경과 CI의 untracked
+생성 파일 검사를 수정했습니다. 로컬 **89개 component·91개 registry
+item**은 그대로입니다. 약 100개 규모 기준 89%와 조건 완료 표시
+50%를 같은 비중으로 계산한 69.5%를 반올림해 전체 goal의
+**관리용 추정은 약 70%**입니다. 두 축의 가중치는 합의된 기준이
+아니므로 객관적인 완성률이나 출시 준비도를 뜻하지 않습니다.
+[후속 검토](component-followup-review-2026-09-29.md)에 수정·검증과
+미완료 범위를 기록했습니다.
+
 2026-09-29 production 배포: [PR #1](https://github.com/pydemia/ui/pull/1)을
 `main`에 병합했고 Vercel production이 READY입니다.
 [main push CI](https://github.com/pydemia/ui/actions/runs/36573529988)도

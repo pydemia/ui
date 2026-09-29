@@ -184,8 +184,13 @@ function DataChart({
     }
     if (minimum === maximum) {
         const padding = Math.max(1, Math.abs(minimum) * 0.1);
-        minimum -= padding;
-        maximum += padding;
+        const paddedMinimum = minimum - padding;
+        const paddedMaximum = maximum + padding;
+        if (Number.isFinite(paddedMinimum) &&
+            Number.isFinite(paddedMaximum)) {
+            minimum = paddedMinimum;
+            maximum = paddedMaximum;
+        }
     }
 
     const slotWidth = variant === "stacked-bar"
@@ -201,6 +206,7 @@ function DataChart({
     const range = maximum - minimum;
     const halfRange = maximum / 2 - minimum / 2;
     const y = (value: number) => {
+        if (minimum === maximum) return (top + bottom) / 2;
         const fraction = Number.isFinite(range)
             ? (value - minimum) / range
             : (value / 2 - minimum / 2) / halfRange;
@@ -625,7 +631,9 @@ function DataChart({
                     <tbody>
                         {labels.map((label, index) => (
                             <tr key={index}>
-                                <th scope="row">{label}</th>
+                                <th scope="row">
+                                    {label.trim() || `구간 ${index + 1}`}
+                                </th>
                                 {chartSeries.map((item) => (
                                     <td key={item.id}>
                                         {item.values[index] === null

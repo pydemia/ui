@@ -2524,6 +2524,7 @@ function ReportActions() {
     },
     {
         id: "input", name: "Input", category: "Inputs",
+        installItems: ["input", "label"],
         description: "기본 HTML input을 토큰에 맞춰 정리했습니다. Label과 함께 사용합니다.",
         code: `import { Input, Label } from "@pydemia/ui";
 
@@ -2663,6 +2664,7 @@ function ReviewForm() {
     },
     {
         id: "label", name: "Label", category: "Inputs",
+        installItems: ["label", "input"],
         description: "form control과 직접 연결되는 native label입니다.",
         code: `import { Input, Label } from "@pydemia/ui";
 
@@ -2692,6 +2694,7 @@ function ReviewForm() {
     },
     {
         id: "checkbox", name: "Checkbox", category: "Selection",
+        installItems: ["checkbox", "label"],
         description: "선택·비활성 상태를 공통 token으로 표시합니다. Label을 연결해 사용합니다.",
         code: `import { Checkbox, Label } from "@pydemia/ui";
 
@@ -2707,6 +2710,7 @@ function ReviewForm() {
     },
     {
         id: "dialog", name: "Dialog", category: "Overlays",
+        installItems: ["dialog", "button"],
         description: "제목·설명과 닫기 동작을 명시하는 모달입니다. focus 이동과 복원을 처리합니다.",
         code: `import {
   Button, Dialog, DialogClose, DialogContent, DialogDescription,
@@ -2902,6 +2906,7 @@ function RequestContextMenu() {
     },
     {
         id: "textarea", name: "Textarea", category: "Inputs",
+        installItems: ["textarea", "label"],
         description: "여러 줄 입력에 쓰는 native textarea입니다. label과 오류 상태는 사용하는 form에서 연결합니다.",
         code: `import { Label, Textarea } from "@pydemia/ui";
 
@@ -2913,6 +2918,7 @@ function RequestContextMenu() {
     },
     {
         id: "native-select", name: "NativeSelect", category: "Selection",
+        installItems: ["native-select", "label"],
         description: "브라우저의 native select 동작을 유지하면서 입력 높이와 색상을 맞췄습니다.",
         code: `import { Label, NativeSelect } from "@pydemia/ui";
 
@@ -2927,6 +2933,7 @@ function RequestContextMenu() {
     },
     {
         id: "switch", name: "Switch", category: "Selection",
+        installItems: ["switch", "label"],
         description: "즉시 적용되는 설정에 쓰는 switch입니다. 현재 상태를 화면에도 텍스트로 표시합니다.",
         code: `import { Label, Switch } from "@pydemia/ui";
 
@@ -2938,6 +2945,7 @@ function RequestContextMenu() {
     },
     {
         id: "radio-group", name: "RadioGroup", category: "Selection",
+        installItems: ["radio-group", "label"],
         description: "한 옵션을 선택하는 radio group입니다. 방향키 이동과 그룹 이름을 지원합니다.",
         code: `import { Label, RadioGroup, RadioGroupItem } from "@pydemia/ui";
 
@@ -2981,6 +2989,7 @@ function DensitySetting() {
     },
     {
         id: "card", name: "Card", category: "Layout",
+        installItems: ["card", "badge"],
         description: "제목·설명·본문·동작을 한 표면에 묶는 조합 요소입니다.",
         code: `import {
   Badge, Card, CardContent, CardDescription,
@@ -3036,6 +3045,7 @@ function DensitySetting() {
     },
     {
         id: "tooltip", name: "Tooltip", category: "Overlays",
+        installItems: ["tooltip", "button"],
         description: "hover와 keyboard focus로 보이는 짧은 설명입니다. trigger는 자체 이름을 가져야 합니다.",
         code: `import {
   Button, Tooltip, TooltipContent,
@@ -3067,6 +3077,7 @@ function DensitySetting() {
     },
     {
         id: "collapsible", name: "Collapsible", category: "Overlays",
+        installItems: ["collapsible", "button"],
         description: "한 영역의 부가 정보를 펼치거나 접습니다. trigger와 content의 연결을 유지합니다.",
         code: `import { Button, Collapsible, CollapsibleTrigger, CollapsibleContent } from "@pydemia/ui";
 
@@ -3078,6 +3089,7 @@ function DensitySetting() {
     },
     {
         id: "popover", name: "Popover", category: "Overlays",
+        installItems: ["popover", "button"],
         description: "trigger에서 열리는 부가 설정 영역입니다. focus 이동, Escape 닫기와 복원을 처리합니다.",
         code: `import { Button, Popover, PopoverTrigger, PopoverContent, PopoverClose } from "@pydemia/ui";
 
@@ -3118,6 +3130,7 @@ function DensitySetting() {
     },
     {
         id: "alert-dialog", name: "AlertDialog", category: "Overlays",
+        installItems: ["alert-dialog", "button"],
         description: "되돌리기 어려운 동작을 확인합니다. 취소와 실행 동작을 모두 명시합니다.",
         code: `import { AlertDialog, AlertDialogTrigger, AlertDialogContent,
   AlertDialogHeader, AlertDialogTitle, AlertDialogDescription,
@@ -3182,6 +3195,7 @@ const reviewers = [
     },
     {
         id: "empty", name: "Empty", category: "Feedback",
+        installItems: ["empty", "button"],
         description: "항목이 없는 상태와 다음 동작을 제목, 설명, 버튼으로 전달합니다.",
         code: `import { Empty, EmptyTitle, EmptyDescription, EmptyContent, Button } from "@pydemia/ui";
 
@@ -3567,6 +3581,7 @@ function SupportChat() {
     },
     {
         id: "field", name: "Field", category: "Inputs",
+        installItems: ["field", "input"],
         description: "label, 설명, 오류와 필수 상태를 입력 control에 연결합니다. 자체 label이 없는 control에 사용합니다.",
         code: `import { useState } from "react";
 import { Field, Input } from "@pydemia/ui";
@@ -3592,6 +3607,7 @@ function EmailField() {
     },
     {
         id: "select", name: "Select", category: "Selection",
+        installItems: ["select", "field"],
         description: "검색 없는 단일 선택입니다. option 탐색과 form 값을 관리합니다.",
         code: `import { useState } from "react";
 import { Field, Select, SelectTrigger, SelectValue,
@@ -3682,6 +3698,7 @@ function WorkspaceForm() {
     },
     {
         id: "date-picker", name: "DatePicker", category: "Date & time",
+        installItems: ["date-picker", "field"],
         description: "달력 날짜를 YYYY-MM-DD 값으로 다룹니다. null은 미선택이며 hidden input으로 form에 전달합니다.",
         code: `import { useState } from "react";
 import { ko } from "react-day-picker/locale";
@@ -3797,6 +3814,7 @@ function ScheduleForm() {
     },
     {
         id: "app-shell", name: "AppShell", category: "Framework",
+        installItems: ["app-shell", "button"],
         description: "header, 좌우 panel, 본문, 하단 panel과 floating UI를 조합하는 화면 골격입니다.",
         code: `import { useId, useRef, useState } from "react";
 import {
@@ -3888,6 +3906,7 @@ function Workspace() {
     },
     {
         id: "sidebar", name: "Sidebar", category: "Framework",
+        installItems: ["sidebar", "app-shell"],
         description: "현재 페이지 링크를 표시하는 탐색 영역입니다. 넓은 화면에서는 아이콘 폭으로 접히고, 좁은 화면에서는 modal drawer로 열립니다.",
         code: `import { AppShell, AppBody, AppMain, Sidebar } from "@pydemia/ui";
 

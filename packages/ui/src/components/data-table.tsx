@@ -74,6 +74,13 @@ function DataTable<Row>({
     const [selectedIds, setSelectedIds] = useState<Set<string>>(
         () => new Set(),
     );
+    const activeFilterValue = filterValue && filter?.options.some(
+        (option) => option.value === filterValue,
+    ) ? filterValue : "";
+
+    useEffect(() => {
+        if (filterValue && !activeFilterValue) setFilterValue("");
+    }, [filterValue, activeFilterValue]);
 
     useEffect(() => {
         const availableIds = new Set(rows.map(getRowId));
@@ -92,8 +99,8 @@ function DataTable<Row>({
             .filter(({ row }) =>
                 (!needle || !getSearchText ||
                     getSearchText(row).toLowerCase().includes(needle)) &&
-                (!filterValue || !filter ||
-                    filter.getValue(row) === filterValue),
+                (!activeFilterValue || !filter ||
+                    filter.getValue(row) === activeFilterValue),
             );
         const column = columns.find((item) => item.id === sort?.id);
         if (column?.sortValue) {
@@ -114,7 +121,7 @@ function DataTable<Row>({
             });
         }
         return matches.map(({ row }) => row);
-    }, [rows, query, filterValue, getSearchText, filter, columns, sort]);
+    }, [rows, query, activeFilterValue, getSearchText, filter, columns, sort]);
 
     const validPageSize = Number.isInteger(pageSize) && pageSize > 0
         ? pageSize : 1;
@@ -178,7 +185,7 @@ function DataTable<Row>({
                         </label>
                         <NativeSelect
                             id={filterId}
-                            value={filterValue}
+                            value={activeFilterValue}
                             onChange={(event) => {
                                 setFilterValue(event.target.value);
                                 setPage(1);
