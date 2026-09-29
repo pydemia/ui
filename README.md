@@ -61,6 +61,8 @@ import해야 합니다. 버전 변경 시 설치 경로와 typecheck를 다시
 shadcn/ui 소스를 수정한 registry 항목은 설치할 때
 `aliases.ui/SHADCN_UI_LICENSE.md`도 복사합니다. 이 파일에는 사용한
 revision의 MIT 고지가 있으므로 설치한 코드를 배포할 때 함께 유지하세요.
+새 registry item의 고지는 출처 metadata의 commit과 SHA-256도
+기록합니다. `registry:check`는 현재 metadata와 그 해시를 비교합니다.
 저장소 전체의 출처 기록은 `registry/provenance.json`과
 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)에 있습니다.
 

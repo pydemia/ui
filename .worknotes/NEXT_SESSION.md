@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-09-29: `codex/ui-provenance-pin`에서 registry 소비자 고지의
+provenance 링크를 `a84b26f` commit으로 고정하고 SHA-256 검사를
+추가했습니다. 새 로컬 snapshot은
+`sha256-d6ac442e615afdf7bda064ed424685038b48ac2ff063bc5726e354494ba29fee`
+입니다. build·typecheck·패키지 테스트 48개·release 검사가 통과했고
+새 ID의 공개 배포·설치는 아직 확인하지 않았습니다.
+[기록](component-provenance-pin-2026-09-29.md)을 먼저 읽으세요.
+과거 snapshot의 `main` 링크와 rollback 문제는 남아 있어 조건 5/10,
+전체 goal의 관리용 추정 약 70%입니다.
+
 2026-09-29 후속 검토: [PR #2](https://github.com/pydemia/ui/pull/2)를
 `main`에 병합했고, Verify UI CI와 Vercel production 배포가
 통과했습니다. 문서 설치 명령 19개, DataChart·DataTable 경계 동작,

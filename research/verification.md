@@ -1465,3 +1465,19 @@ URL의 Sidebar·AppShell을 기존 Vite 소비자에 설치해 typecheck·build�
 
 독립 검토의 범위와 잔여 문제는
 `.worknotes/component-followup-review-2026-09-29.md`에 기록했습니다.
+
+## 2026-09-29 출처 고지 revision 고정
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| 고정 commit의 provenance | pass | 로컬 Git과 공개 GitHub raw 파일이 현재 metadata와 같음 |
+| 고지 SHA-256 | pass | LF 기준 현재 metadata의 해시와 고지 값 일치 |
+| `npm run typecheck` | pass | UI, 예시, 문서 TypeScript 검사 |
+| package 테스트 | pass | 48/48 |
+| `npm run build` | pass (retry) | 첫 생성 HTML 접근 오류 뒤 같은 명령 재실행 성공 |
+| `npm run registry:release-check` | pass | 91개 item, 89개 export/catalog, 새 로컬 snapshot 일치 |
+| 새 snapshot 공개 설치 | unverified | 새 ID는 아직 배포 전 |
+| 과거 snapshot의 provenance 고정 | incomplete | 불변 고지에는 당시의 `main` 링크가 남음 |
+
+고정 revision과 새 ID는
+`.worknotes/component-provenance-pin-2026-09-29.md`에 기록했습니다.
