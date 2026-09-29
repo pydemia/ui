@@ -16,12 +16,38 @@
       "name": "pyd-button", "type": "registry:ui", "title": "Button",
       "dependencies": ["class-variance-authority@0.7.1"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/button.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/button.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-input", "type": "registry:ui", "title": "Input",
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/input.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/input.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
+    },
+    {
+      "name": "pyd-button-group", "type": "registry:ui", "title": "Button Group",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/button-group.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-search-input", "type": "registry:ui", "title": "Search Input",
+      "registryDependencies": ["./pyd-input.json", "./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/search-input.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-number-input", "type": "registry:ui", "title": "Number Input",
+      "registryDependencies": ["./pyd-input.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/number-input.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-tags-input", "type": "registry:ui", "title": "Tags Input",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/tags-input.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-field", "type": "registry:ui", "title": "Field",
@@ -29,21 +55,42 @@
       "files": [{ "path": "packages/ui/src/components/field.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-color-input", "type": "registry:ui", "title": "Color Input",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/color-input.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-textarea", "type": "registry:ui", "title": "Textarea",
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/textarea.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/textarea.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-native-select", "type": "registry:ui", "title": "Native Select",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/native-select.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/native-select.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-select", "type": "registry:ui", "title": "Select",
       "dependencies": ["@radix-ui/react-select@2.3.7", "lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/select.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-combobox", "type": "registry:ui", "title": "Combobox",
+      "registryDependencies": ["./pyd-input.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/combobox.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-multi-select", "type": "registry:ui", "title": "Multi Select",
+      "registryDependencies": ["./pyd-input.json", "./pyd-popover.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/multi-select.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-label", "type": "registry:ui", "title": "Label",
@@ -59,135 +106,256 @@
       "name": "pyd-checkbox", "type": "registry:ui", "title": "Checkbox",
       "dependencies": ["@radix-ui/react-checkbox@1.3.11", "lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/checkbox.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/checkbox.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-switch", "type": "registry:ui", "title": "Switch",
       "dependencies": ["@radix-ui/react-switch@1.3.7"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/switch.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/switch.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-radio-group", "type": "registry:ui", "title": "Radio Group",
       "dependencies": ["@radix-ui/react-radio-group@1.4.7"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/radio-group.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/radio-group.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
+    },
+    {
+      "name": "pyd-segmented-control", "type": "registry:ui",
+      "title": "Segmented Control",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/segmented-control.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-dialog", "type": "registry:ui", "title": "Dialog",
       "dependencies": ["@radix-ui/react-dialog@1.1.23"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/dialog.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/dialog.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
+    },
+    {
+      "name": "pyd-command-palette", "type": "registry:ui", "title": "Command Palette",
+      "registryDependencies": ["./pyd-dialog.json", "./pyd-input.json"],
+      "files": [{ "path": "packages/ui/src/components/command-palette.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-alert", "type": "registry:ui", "title": "Alert",
       "dependencies": ["class-variance-authority@0.7.1"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/alert.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/alert.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-progress", "type": "registry:ui", "title": "Progress",
       "dependencies": ["@radix-ui/react-progress@1.1.16"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/progress.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/progress.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-skeleton", "type": "registry:ui", "title": "Skeleton",
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/skeleton.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/skeleton.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-card", "type": "registry:ui", "title": "Card",
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/card.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/card.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-separator", "type": "registry:ui", "title": "Separator",
       "dependencies": ["@radix-ui/react-separator@1.1.15"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/separator.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/separator.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-tooltip", "type": "registry:ui", "title": "Tooltip",
       "dependencies": ["@radix-ui/react-tooltip@1.2.16"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/tooltip.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/tooltip.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-accordion", "type": "registry:ui", "title": "Accordion",
       "dependencies": ["@radix-ui/react-accordion@1.2.20", "lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/accordion.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/accordion.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-collapsible", "type": "registry:ui", "title": "Collapsible",
       "dependencies": ["@radix-ui/react-collapsible@1.1.20"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/collapsible.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/collapsible.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-popover", "type": "registry:ui", "title": "Popover",
       "dependencies": ["@radix-ui/react-popover@1.1.23"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/popover.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/popover.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
+    },
+    {
+      "name": "pyd-hover-card", "type": "registry:ui", "title": "Hover Card",
+      "dependencies": ["@radix-ui/react-hover-card@1.1.23"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/hover-card.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-alert-dialog", "type": "registry:ui", "title": "Alert Dialog",
       "dependencies": ["@radix-ui/react-alert-dialog@1.1.23"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/alert-dialog.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/alert-dialog.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-avatar", "type": "registry:ui", "title": "Avatar",
       "dependencies": ["@radix-ui/react-avatar@1.2.6"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/avatar.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/avatar.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
+    },
+    {
+      "name": "pyd-avatar-group", "type": "registry:ui", "title": "Avatar Group",
+      "registryDependencies": ["./pyd-avatar.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/avatar-group.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-breadcrumb", "type": "registry:ui", "title": "Breadcrumb",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/breadcrumb.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/breadcrumb.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-empty", "type": "registry:ui", "title": "Empty",
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/empty.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/empty.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-spinner", "type": "registry:ui", "title": "Spinner",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/spinner.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/spinner.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-toggle", "type": "registry:ui", "title": "Toggle",
       "dependencies": ["@radix-ui/react-toggle@1.1.18"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/toggle.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/toggle.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
+    },
+    {
+      "name": "pyd-toggle-group", "type": "registry:ui",
+      "title": "Toggle Group",
+      "dependencies": ["@radix-ui/react-toggle-group@1.1.19"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [
+        { "path": "packages/ui/src/components/toggle-group.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "pyd-slider", "type": "registry:ui", "title": "Slider",
       "dependencies": ["@radix-ui/react-slider@1.4.7"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/slider.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/slider.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-calendar", "type": "registry:ui", "title": "Calendar",
       "dependencies": ["react-day-picker@9.14.0"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/calendar.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/calendar.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-date-picker", "type": "registry:ui", "title": "Date Picker",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-calendar.json", "./pyd-popover.json", "./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/date-picker.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/date-picker.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/calendar-date.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "pyd-date-range-picker", "type": "registry:ui", "title": "Date Range Picker",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-calendar.json", "./pyd-popover.json", "./pyd-utils.json"],
+      "files": [
+        { "path": "packages/ui/src/components/date-range-picker.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/calendar-date.ts", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "pyd-time-picker", "type": "registry:ui", "title": "Time Picker",
+      "registryDependencies": ["./pyd-native-select.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/time-picker.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-date-time-picker", "type": "registry:ui", "title": "Date Time Picker",
+      "registryDependencies": ["./pyd-date-picker.json", "./pyd-time-picker.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/date-time-picker.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-metric-card", "type": "registry:ui", "title": "Metric Card",
       "registryDependencies": ["./pyd-card.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/metric-card.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-image", "type": "registry:ui", "title": "Image",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/image.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-dropzone", "type": "registry:ui", "title": "Dropzone",
@@ -196,9 +364,30 @@
       "files": [{ "path": "packages/ui/src/components/dropzone.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-file-upload", "type": "registry:ui", "title": "File Upload",
+      "registryDependencies": ["./pyd-dropzone.json", "./pyd-progress.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/file-upload.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-message", "type": "registry:ui", "title": "Message",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/message.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-conversation", "type": "registry:ui", "title": "Conversation",
+      "registryDependencies": ["./pyd-message.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/conversation.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-reasoning", "type": "registry:ui", "title": "Reasoning",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-collapsible.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/reasoning.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-tool-call", "type": "registry:ui", "title": "Tool Call",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/tool-call.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-prompt-input", "type": "registry:ui", "title": "Prompt Input",
@@ -209,12 +398,20 @@
       "name": "pyd-tabs", "type": "registry:ui", "title": "Tabs",
       "dependencies": ["@radix-ui/react-tabs@1.1.21"],
       "registryDependencies": ["./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/tabs.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/tabs.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
     },
     {
       "name": "pyd-table", "type": "registry:ui", "title": "Table",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/table.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-data-list", "type": "registry:ui", "title": "Data List",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/data-list.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-affixed-input", "type": "registry:ui", "title": "Affixed Input",
@@ -226,6 +423,165 @@
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-button.json", "./pyd-tabs.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/snippet.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-code-block", "type": "registry:ui", "title": "Code Block",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/code-block.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-app-shell", "type": "registry:ui", "title": "App Shell",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/app-shell.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-scroll-area", "type": "registry:ui", "title": "Scroll Area",
+      "dependencies": ["@radix-ui/react-scroll-area@1.2.18"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [
+        { "path": "packages/ui/src/components/scroll-area.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
+    },
+    {
+      "name": "pyd-resizable-panels", "type": "registry:ui", "title": "Resizable Panels",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/resizable-panels.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-navigation", "type": "registry:ui", "title": "Global, Side, and Bottom Navigation",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/navigation.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-navigation-menu", "type": "registry:ui", "title": "Navigation Menu",
+      "dependencies": ["@radix-ui/react-navigation-menu@1.2.22", "lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/navigation-menu.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-sidebar", "type": "registry:ui", "title": "Sidebar",
+      "registryDependencies": ["./pyd-button.json", "./pyd-drawer.json", "./pyd-navigation.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/sidebar.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-tree", "type": "registry:ui", "title": "Tree",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/tree.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-stepper", "type": "registry:ui", "title": "Stepper",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/stepper.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-timeline", "type": "registry:ui", "title": "Timeline",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/timeline.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-log-console", "type": "registry:ui", "title": "Log Console",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/log-console.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-json-viewer", "type": "registry:ui", "title": "JSON Viewer",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/json-viewer.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-sparkline", "type": "registry:ui", "title": "Sparkline",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/sparkline.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-page-header", "type": "registry:ui", "title": "Page Header",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/page-header.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-content-list", "type": "registry:ui", "title": "Content List",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/content-list.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-carousel", "type": "registry:ui", "title": "Carousel",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/carousel.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-data-chart", "type": "registry:ui", "title": "Data Chart",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/data-chart.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-donut-chart", "type": "registry:ui", "title": "Donut Chart",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/donut-chart.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-dashboard", "type": "registry:ui", "title": "Dashboard Layout",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/dashboard.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-toast", "type": "registry:ui", "title": "Toast",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/toast.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-drawer", "type": "registry:ui", "title": "Drawer",
+      "dependencies": ["@radix-ui/react-dialog@1.1.23"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/drawer.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-pagination", "type": "registry:ui", "title": "Pagination",
+      "registryDependencies": ["./pyd-button.json", "./pyd-native-select.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/pagination.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-data-table", "type": "registry:ui", "title": "Data Table",
+      "registryDependencies": ["./pyd-button.json", "./pyd-checkbox.json", "./pyd-input.json", "./pyd-native-select.json", "./pyd-pagination.json", "./pyd-table.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/data-table.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-filter-bar", "type": "registry:ui", "title": "Filter Bar",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/filter-bar.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-dropdown-menu", "type": "registry:ui", "title": "Dropdown Menu",
+      "dependencies": ["@radix-ui/react-dropdown-menu@2.1.22", "lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/dropdown-menu.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-context-menu", "type": "registry:ui", "title": "Context Menu",
+      "dependencies": ["@radix-ui/react-context-menu@2.3.7", "lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/context-menu.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-password-input", "type": "registry:ui", "title": "Password Input",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-input.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/password-input.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-pin-input", "type": "registry:ui", "title": "Pin Input",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/pin-input.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-rating", "type": "registry:ui", "title": "Rating",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/rating.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-citation-list", "type": "registry:ui", "title": "Citation List",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/citation-list.tsx", "type": "registry:ui" }]
     }
   ]
 }
