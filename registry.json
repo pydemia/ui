@@ -30,6 +30,14 @@
       ]
     },
     {
+      "name": "pyd-input-group", "type": "registry:ui", "title": "Input Group",
+      "registryDependencies": ["./pyd-input.json", "./pyd-textarea.json", "./pyd-button.json", "./pyd-utils.json"],
+      "files": [
+        { "path": "packages/ui/src/components/input-group.tsx", "type": "registry:ui" },
+        { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
+      ]
+    },
+    {
       "name": "pyd-button-group", "type": "registry:ui", "title": "Button Group",
       "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/button-group.tsx", "type": "registry:ui" }]

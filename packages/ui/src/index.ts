@@ -2,6 +2,11 @@ export { Button } from "./components/button";
 export { ButtonGroup, ButtonGroupSeparator } from "./components/button-group";
 export type { ButtonGroupProps } from "./components/button-group";
 export { Input } from "./components/input";
+export {
+    InputGroup, InputGroupInput, InputGroupTextarea,
+    InputGroupAddon, InputGroupText, InputGroupButton,
+} from "./components/input-group";
+export type { InputGroupAddonProps } from "./components/input-group";
 export { SearchInput } from "./components/search-input";
 export type { SearchInputProps } from "./components/search-input";
 export { NumberInput } from "./components/number-input";

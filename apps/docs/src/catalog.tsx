@@ -37,7 +37,9 @@ import {
     Empty, EmptyContent, EmptyDescription,
     EmptyMedia, EmptyTitle, Field, FileUpload, FilterBar,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
-    HoverCardTrigger, Image, Input, JsonViewer, Kanban,
+    HoverCardTrigger, Image, Input, InputGroup, InputGroupAddon,
+    InputGroupButton, InputGroupInput, InputGroupText,
+    InputGroupTextarea, JsonViewer, Kanban,
     Label, LogConsole, Markdown, Message, MessageContent, MetricCard,
     MultiSelect,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
@@ -392,6 +394,62 @@ function SearchInputPreview() {
             <ul className="m-0 grid gap-1 pl-5 text-sm">
                 {visible.map((record) => <li key={record}>{record}</li>)}
             </ul>
+        </div>
+    );
+}
+
+function InputGroupPreview() {
+    const [requestId, setRequestId] = useState("1042");
+    const [lookedUp, setLookedUp] = useState<string | null>(null);
+    const [note, setNote] = useState("");
+    const [savedNote, setSavedNote] = useState<string | null>(null);
+
+    return (
+        <div className="preview-stack">
+            <form className="grid w-full gap-3" onSubmit={(event) => {
+                event.preventDefault();
+                setLookedUp(String(
+                    new FormData(event.currentTarget).get("requestId"),
+                ));
+            }}>
+                <Field label="요청 ID" description="입력값만 제출합니다.">
+                    {(control) => (
+                        <InputGroup>
+                            <InputGroupInput {...control} name="requestId"
+                                value={requestId}
+                                onChange={(event) => setRequestId(event.target.value)} />
+                            <InputGroupAddon align="inline-start">
+                                <InputGroupText>REQ</InputGroupText>
+                            </InputGroupAddon>
+                            <InputGroupAddon align="inline-end" className="px-1">
+                                <InputGroupButton type="submit">조회</InputGroupButton>
+                            </InputGroupAddon>
+                        </InputGroup>
+                    )}
+                </Field>
+            </form>
+            <p role="status" className="m-0 text-sm">
+                조회한 ID: {lookedUp ?? "없음"}
+            </p>
+            <Field label="검토 메모">
+                {(control) => (
+                    <InputGroup>
+                        <InputGroupTextarea {...control} name="note"
+                            value={note} maxLength={120}
+                            onChange={(event) => setNote(event.target.value)} />
+                        <InputGroupAddon align="block-end"
+                            className="justify-between py-1">
+                            <InputGroupText>{note.length}/120</InputGroupText>
+                            <InputGroupButton onClick={() => setSavedNote(note)}>
+                                메모 저장
+                            </InputGroupButton>
+                        </InputGroupAddon>
+                    </InputGroup>
+                )}
+            </Field>
+            <p role="status" className="m-0 text-sm">
+                저장한 메모: {savedNote === null ? "없음" : savedNote || "빈 메모"}
+            </p>
         </div>
     );
 }
@@ -2721,6 +2779,30 @@ function ProjectSearch() {
   </>;
 }`,
         preview: () => <SearchInputPreview />,
+    },
+    {
+        id: "input-group", name: "InputGroup", category: "Inputs",
+        description: "텍스트·버튼을 입력 안쪽에 배치합니다. 입력과 버튼은 각각 native form·keyboard 동작을 유지하며 textarea 아래에도 작업을 놓을 수 있습니다.",
+        installItems: ["input-group", "field"],
+        code: `import {
+  Field, InputGroup, InputGroupAddon, InputGroupButton,
+  InputGroupInput, InputGroupText,
+} from "@pydemia/ui";
+
+<form action="/requests" method="get">
+  <Field label="요청 ID">
+    {(control) => <InputGroup>
+      <InputGroupInput {...control} name="requestId" />
+      <InputGroupAddon align="inline-start">
+        <InputGroupText>REQ</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupAddon align="inline-end">
+        <InputGroupButton type="submit">조회</InputGroupButton>
+      </InputGroupAddon>
+    </InputGroup>}
+  </Field>
+</form>`,
+        preview: () => <InputGroupPreview />,
     },
     {
         id: "number-input", name: "NumberInput", category: "Inputs",

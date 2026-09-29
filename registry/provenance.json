@@ -28,6 +28,11 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native input; consumer supplies label", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-input-group", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/input-group.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
+      "dependencies": ["pyd-input", "pyd-textarea", "pyd-button", "pyd-utils"], "accessibility": { "semantics": "native input or textarea with associated external label; addon buttons keep native button semantics", "keyboard": "control precedes addons in DOM; Chromium Tab and Enter verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-search-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WHATWG HTML", "url": "https://html.spec.whatwg.org/multipage/input.html#text-(type=text)-state-and-search-state-(type=search)", "scope": "native search field and form submission; no source copied" },
