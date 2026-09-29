@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29: [draft PR #1](https://github.com/pydemia/ui/pull/1)을 열고
+Vercel preview의 READY 상태와 브라우저의 89개 목록·Navigation variant
+전환을 확인했습니다. preview registry JSON은 인증이 필요하고 현재
+production의 새 snapshot 경로는 404입니다. 따라서 공개 소비자 설치와
+릴리스 조건은 완료 처리하지 않으며 **5/10**, 관리용 **약 70%**를
+유지합니다. [기록](component-release-review-2026-09-29.md)에 범위를
+남겼습니다.
+
 2026-09-29: 확장안을 기능·문서·생성 산출물의 세 커밋으로 정리하고,
 Git archive에서 복원한 깨끗한 체크아웃으로 `npm ci`, build,
 typecheck, package 테스트 45개, `registry:check`,

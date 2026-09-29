@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-09-29: 변경안을 [draft PR #1](https://github.com/pydemia/ui/pull/1)로
+열었습니다. head `193d98c`의 Vercel preview는 READY이고 인증된
+브라우저에서 89개 목록과 Navigation variant 전환을 확인했습니다.
+preview registry JSON은 인증 302, 현재 production의 새 snapshot은
+404여서 공개 URL 소비자 설치는 아직 미검증입니다.
+[PR·preview 기록](component-release-review-2026-09-29.md)을 참고하세요.
+독립 검토 후 공개 배포와 설치 검증이 남았습니다.
+
 2026-09-29: `codex/ui-component-release`에서 확장안을 세 커밋으로
 정리했습니다. 깨끗한 Git archive 체크아웃에서 `npm ci`, build,
 typecheck, package 테스트 45개, `registry:check`, 현재 내용 해시 ID의

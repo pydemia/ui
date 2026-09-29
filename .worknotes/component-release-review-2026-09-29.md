@@ -40,3 +40,17 @@ screen reader 검사는 끝나지 않았습니다. 이 대규모 변경의 독�
 검증하지 않았습니다. 브랜치를
 `origin/codex/ui-component-release`로 push했습니다. 네 번째
 `4db73d2`는 `.worknotes/` 진행·검증·인계 기록입니다.
+
+## PR과 preview 배포
+
+2026-09-29: [draft PR #1](https://github.com/pydemia/ui/pull/1)을
+`main` 대상으로 열었습니다. Vercel의 head commit `193d98c` 상태 검사는
+성공했고 preview deployment는 READY입니다. 인증된 preview 브라우저에서
+89개 component 목록, Navigation의 전역 탐색 표면형→밑줄형과 측면 탐색
+선형→채움형 전환을 확인했습니다. 문서 내 profile 예시도 렌더링됐습니다.
+
+preview의 `/r/releases/<ID>/pyd-button.json`은 Vercel Authentication
+302를 반환했고 브라우저의 JSON 직접 탐색도 `ERR_BLOCKED_BY_CLIENT`로
+거절됐습니다. 인증 없는 CLI 소비자 설치의 증거가 아닙니다. production의
+동일 경로는 아직 404입니다. 이 PR은 draft이며 `main`에 병합하거나
+production에 배포하지 않았습니다.
