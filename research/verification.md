@@ -1691,3 +1691,22 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 
 상세 기록과 화면은 `.worknotes/component-heatmap-2026-09-30.md`에
 있습니다.
+
+## 2026-09-30 Gantt
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm test -w @pydemia/ui` | pass | 84/84; 일정 이동·기간 변경·경계·의존 관계·입력 오류 |
+| 로컬 Chromium 1280px | pass (limited) | 7일 축·선행 연결선·작업 선택·이동 경계·Usage |
+| 로컬 Chromium 390px | pass (limited) | 내부 가로 스크롤·작업 열 고정·키보드 Enter·일 단위 전환 |
+| dark·Pydemia colormap | pass (limited) | bar 진행률이 `--accent`를 따름 |
+| axe 4.12.1 preview | incomplete | violation 0, 배경 겹침 때문에 contrast 1건 판정 불가 |
+| build·registry·snapshot | pass | 97개 item·95개 component·16개 불변 snapshot; 현재 ID 일치 |
+| 별도 소비자 CLI·typecheck·build | pass | Gantt 원본·registry JSON·설치 파일 일치, utils 재사용 |
+| 별도 소비자 Chromium | pass (limited) | 390px 작업 선택·하루 이동·선행 경계·내부 가로 스크롤·page error 0 |
+| 공개 사이트와 snapshot | unverified | 배포 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+상세 기록과 화면은 `.worknotes/component-gantt-2026-09-30.md`에
+있습니다.

@@ -505,6 +505,11 @@
       "files": [{ "path": "packages/ui/src/components/kanban.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-gantt", "type": "registry:ui", "title": "Gantt",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/gantt.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-log-console", "type": "registry:ui", "title": "Log Console",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/log-console.tsx", "type": "registry:ui" }]

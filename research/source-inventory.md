@@ -1,5 +1,27 @@
 # Component taxonomy와 source 검토
 
+## 2026-09-30 Gantt reference 확인
+
+[Kibo Gantt 공식 문서](https://www.kibo-ui.com/components/gantt)는 일정
+시간축, drag·resize, 날짜 marker, 작업 grouping, 같은 행의 여러 항목과
+read-only 예시를 제공합니다. 같은 revision
+[`3d63cdb`](https://github.com/shadcnblocks/kibo/tree/3d63cdb15b79d972e3dc38a10997987672f9b263)의
+[소스](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/gantt/index.tsx),
+[package manifest](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/gantt/package.json),
+[LICENSE](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md)를
+확인했습니다. LICENSE는 MIT입니다. upstream Gantt는 dnd-kit core와
+modifiers, date-fns, jotai, `@uidotdev/usehooks`, `lodash.throttle`,
+lucide-react, React·react-dom 및 내부 shadcn-ui에 의존합니다.
+
+`pyd-gantt`는 일정·의존 관계라는 용도만 참고한 원본 React·Tailwind
+구현입니다. upstream 코드를 복사하지 않았고 직접 registry 의존성은
+기존 `pyd-utils`뿐입니다. 현재 범위는 단일 행에 작업 하나, 명시한
+1~366일 구간, 일·7일 단위 표시, 버튼을 통한 하루 단위 이동·기간
+조정입니다. drag, marker, grouping, 같은 행의 여러 작업은 제공하지
+않습니다. [W3C APG grid pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/)의
+셀 방향키 이동을 구현하지 않았으므로 chart를 ARIA grid로 표시하지
+않습니다. 이름 있는 스크롤 영역과 native 작업·조작 버튼을 사용합니다.
+
 ## 2026-09-30 Heatmap reference 확인
 
 [Kibo Contribution Graph 공식 문서](https://www.kibo-ui.com/components/contribution-graph)는

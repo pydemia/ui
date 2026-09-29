@@ -13,8 +13,9 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-94개 component와 96개 registry item이 있습니다. 2026-09-30에
-`Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`을 순차 편입했습니다.
+95개 component와 97개 registry item이 있습니다. 2026-09-30에
+`Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`를 순차
+편입했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -307,8 +308,9 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 - [x] `Kanban` — controlled 열·카드 데이터와 이동 순서를 구현하고
   drag 외에 키보드·touch용 방향 버튼을 제공합니다. 실제 drag와
   보조기술 발표는 미검증입니다.
-- [ ] `Gantt` — 실제 일정·의존 관계 모델과 반복 작업을 확인한 뒤
-  시간축·이동·대체 조작을 구현할지 판정.
+- [x] `Gantt` — 1~366일의 일정·선행 관계를 일·7일 시간축에 표시하고,
+  native 버튼으로 이동·기간 조정합니다. drag·marker·grouping은
+  현재 범위 밖이며 실제 screen reader·touch는 미검증입니다.
 
 ## 구현 순서와 완료 조건
 

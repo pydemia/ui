@@ -35,7 +35,7 @@ import {
     DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent,
     DropdownMenuSubTrigger, DropdownMenuTrigger, Dropzone,
     Empty, EmptyContent, EmptyDescription,
-    EmptyMedia, EmptyTitle, Field, FileUpload, FilterBar,
+    EmptyMedia, EmptyTitle, Field, FileUpload, FilterBar, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
     HoverCardTrigger, Heatmap, Image, Input, InputGroup, InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
@@ -69,7 +69,7 @@ import { useId, useRef, useState, type ReactNode } from "react";
 import type {
     AppliedFilter, ConversationMessage, DataTableColumn, DateRangeValue,
     DateTimeSelection,
-    FileUploadItem, JsonValue, KanbanColumn,
+    FileUploadItem, GanttTask, JsonValue, KanbanColumn,
     LogEntry, ReasoningStatus, ToolCallStatus, TreeNode,
 } from "@pydemia/ui";
 
@@ -138,6 +138,36 @@ function KanbanPreview() {
                 setColumns(initialKanbanColumns)}>
                 보드 초기화
             </Button>
+        </div>
+    );
+}
+
+const initialGanttTasks: GanttTask[] = [
+    { id: "scope", title: "요구 정리", startDate: "2026-10-02",
+        endDate: "2026-10-04", progress: 100 },
+    { id: "design", title: "화면 설계", startDate: "2026-10-07",
+        endDate: "2026-10-09", progress: 75, dependsOn: ["scope"] },
+    { id: "build", title: "구현", startDate: "2026-10-12",
+        endDate: "2026-10-16", progress: 30, dependsOn: ["design"] },
+    { id: "release", title: "배포 검토", startDate: "2026-10-20",
+        endDate: "2026-10-21", dependsOn: ["build"] },
+];
+
+function GanttPreview() {
+    const [tasks, setTasks] = useState<GanttTask[]>(initialGanttTasks);
+    const [scale, setScale] = useState<"day" | "week">("week");
+    return (
+        <div className="preview-workspace grid min-w-0 gap-3">
+            <div className="flex flex-wrap gap-2">
+                <Button variant="outline" onClick={() => setScale(
+                    scale === "day" ? "week" : "day",
+                )}>{scale === "day" ? "7일 단위" : "일 단위"} 보기</Button>
+                <Button variant="outline" onClick={() =>
+                    setTasks(initialGanttTasks)}>일정 초기화</Button>
+            </div>
+            <Gantt label="출시 일정" rangeStart="2026-10-01"
+                rangeEnd="2026-10-25" tasks={tasks} scale={scale}
+                onTasksChange={setTasks} />
         </div>
     );
 }
@@ -4407,6 +4437,29 @@ function RequestBoard() {
     onColumnsChange={setColumns} />;
 }`,
         preview: () => <KanbanPreview />,
+    },
+    {
+        id: "gantt", name: "Gantt", category: "Workflow",
+        description: "작업 기간·진행률과 선행 관계를 일 또는 7일 시간축에 표시합니다. 작업을 선택해 날짜를 하루씩 이동하거나 기간을 조정할 수 있습니다.",
+        code: `import { useState } from "react";
+import { Gantt, type GanttTask } from "@pydemia/ui";
+
+const initialTasks: GanttTask[] = [
+  { id: "scope", title: "요구 정리", startDate: "2026-10-02",
+    endDate: "2026-10-04", progress: 100 },
+  { id: "design", title: "화면 설계", startDate: "2026-10-07",
+    endDate: "2026-10-09", progress: 75, dependsOn: ["scope"] },
+  { id: "build", title: "구현", startDate: "2026-10-12",
+    endDate: "2026-10-16", progress: 30, dependsOn: ["design"] },
+];
+
+function ReleaseSchedule() {
+  const [tasks, setTasks] = useState(initialTasks);
+  return <Gantt label="출시 일정" rangeStart="2026-10-01"
+    rangeEnd="2026-10-25" tasks={tasks} scale="week"
+    onTasksChange={setTasks} />;
+}`,
+        preview: () => <GanttPreview />,
     },
     {
         id: "navigation", name: "Navigation", category: "Navigation",

@@ -94,6 +94,10 @@ export { Kanban, moveKanbanCard } from "./components/kanban";
 export type {
     KanbanCard, KanbanColumn, KanbanMove, KanbanProps,
 } from "./components/kanban";
+export { Gantt, changeGanttTask } from "./components/gantt";
+export type {
+    GanttTask, GanttOperation, GanttChange, GanttProps,
+} from "./components/gantt";
 export { ScrollArea } from "./components/scroll-area";
 export type { ScrollAreaProps } from "./components/scroll-area";
 export {
