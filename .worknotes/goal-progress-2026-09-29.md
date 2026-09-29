@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29 작업 마감: `DateRangeFilter` 후보는 기존 `DateRangePicker`와
+`FilterBar`의 조합으로 처리하기로 판정했습니다. 새 component·registry
+item이나 릴리스는 만들지 않았습니다. 결합 예시의 설치·브라우저 동작과
+기간 preset의 시간대 규칙은 미검증입니다. 현재 **89개 component·91개
+item, 공급·품질 조건 5/10, 전체 goal의 관리용 추정 약 70%**입니다.
+89/100이라는 규모 비율 89%와 조건 완료 표시 50%를 임의로 같은 비중으로
+평균한 69.5%를 반올림한 값입니다. 100개는 확정된 완료 기준이 아니며,
+이 수치는 실제 사용성 또는 배포 준비율이 아닙니다.
+
 2026-09-29: 새 registry 소비자 고지의 provenance 링크를 고정 commit과
 내용 해시로 바꾸고 검사에 추가했습니다. [PR #3](https://github.com/pydemia/ui/pull/3)
 병합 뒤 CI와 production 배포, 공개 Button 설치·소비자 build를

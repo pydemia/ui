@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-09-29 작업 마감: `DateRangeFilter` 후보를 현재 코드와 문서 preview로
+검토해 기존 `DateRangePicker`·`FilterBar` 조합으로 판정했습니다. 새
+component나 registry item은 추가하지 않았습니다. 두 component를 결합한
+설치 예시와 기간 preset의 기준일·시간대 동작은 아직 검증하지
+않았습니다. 이번 마감은 새 릴리스가 아닙니다. 89개 component·91개
+item, 공급·품질 조건 5/10, 전체 goal의 관리용 추정 약 70%입니다.
+미공개 draft snapshot 네 디렉터리는 untracked로 두었습니다.
+
 2026-09-29: [PR #3](https://github.com/pydemia/ui/pull/3)에서 registry
 소비자 고지의 provenance 링크를 `a84b26f` commit으로 고정하고
 SHA-256 검사를 추가했습니다. 병합 커밋 `dd29b56`의 CI와 Vercel

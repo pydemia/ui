@@ -245,8 +245,11 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   구간별 값 패널을 추가했습니다. 부유 tooltip 필요성은 사용 사례로 판정.
 - [x] `FilterBar` — 여러 필터의 입력·적용·초기화와 적용된 조건 표시.
   데이터 필터링과 draft/applied 상태는 소비자가 관리합니다.
-- [ ] `DateRangeFilter` — `FilterBar`·`DateRangePicker` 조합으로
-  충분한지 판정하고 기간 preset을 검토.
+- [x] `DateRangeFilter` — 별도 component는 만들지 않습니다.
+  `DateRangePicker`의 controlled 값·form 입력과 `FilterBar`의 적용·초기화로
+  현재 기간 필터 동작을 조합할 수 있습니다. 오늘·최근 7일 같은 preset은
+  데이터의 기준일과 시간대를 아는 소비자 화면에서 계산합니다. 두
+  component를 결합한 설치 가능한 예시는 아직 작성·검증하지 않았습니다.
 - [ ] `Stat` — 기존 `MetricCard`에 compact·featured 표시 형태를
   추가했습니다. 독립된 값·상태 규칙이 필요한 사용처를 확인한 뒤 분리
   여부를 판정합니다.
