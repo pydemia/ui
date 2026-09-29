@@ -35,3 +35,12 @@ frame 작업을 취소합니다. 데스크톱의 `#components` 이동은 유지�
 
 실제 touch 기기·Safari·screen reader는 아직 검증하지 않았습니다.
 기존 미공개 draft snapshot 네 디렉터리는 이번 수정 범위 밖입니다.
+
+[PR #17](https://github.com/pydemia/ui/pull/17)의 Verify UI가 통과했고
+`main`에 병합했습니다. Vercel production
+`dpl_D55T5PnjzkGaRPTZeYMqBEQHYQ3p`가 READY이며 `ui.pydemia.ai`
+alias가 연결됐습니다. 공개 사이트는 새 `index-JmcbRy5L.js`를 제공했고,
+393px Chromium에서 InputGroup 선택 후 `scrollY=844`, SNB
+`scrollLeft=1800`, `body` 포커스와 비어 있는 해시를 확인했습니다.
+공개 사이트의 실제 touch·Safari·screen reader 및 병합 commit의
+GitHub Actions 결과는 확인하지 못했습니다.

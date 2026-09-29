@@ -9,6 +9,10 @@ typecheck·패키지 테스트 79/79·build·registry 검사와 393px 포인터�
 Chromium DevTools touch 입력, 키보드, 1280px 이동을 확인했습니다.
 실제 touch 기기·Safari·screen reader는 미검증입니다.
 [작업 기록](mobile-snb-focus-stability-2026-09-30.md)을 참고하세요.
+PR #17을 병합했고 PR Verify UI와 Vercel production
+`dpl_D55T5PnjzkGaRPTZeYMqBEQHYQ3p`가 통과했습니다. 공개 393px
+Chromium 선택에서도 스크롤·포커스·새 JS 파일을 확인했습니다. 병합
+commit의 GitHub Actions 결과는 미확인입니다.
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 
 2026-09-30 Heatmap 진행: 두 범주의 값·결측값·빈 목록을 native 표와
