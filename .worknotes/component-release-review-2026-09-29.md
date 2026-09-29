@@ -71,3 +71,4 @@ overflow해 `NaN` SVG 좌표와 축 눈금을 만들 수 있음을 발견했습�
 통과했습니다. 이 환경에는 이전·현재 snapshot 두 개만 있습니다.
 코드 수정은 `d6713b4`, 생성 결과와 새 snapshot은 `9195662`로
 PR #1에 push했습니다. 공개 URL의 새 ID 설치는 확인하지 않았습니다.
+차트 수정이 포함된 PR head의 Vercel preview deployment는 READY입니다.
