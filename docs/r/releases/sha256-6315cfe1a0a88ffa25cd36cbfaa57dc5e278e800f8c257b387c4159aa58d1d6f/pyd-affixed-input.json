@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-affixed-input",
+  "title": "Affixed Input",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-6315cfe1a0a88ffa25cd36cbfaa57dc5e278e800f8c257b387c4159aa58d1d6f/pyd-input.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-6315cfe1a0a88ffa25cd36cbfaa57dc5e278e800f8c257b387c4159aa58d1d6f/pyd-label.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-6315cfe1a0a88ffa25cd36cbfaa57dc5e278e800f8c257b387c4159aa58d1d6f/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/affixed-input.tsx",
+      "content": "import { useId, type ComponentProps } from \"react\";\nimport { Input } from \"./input\";\nimport { Label } from \"./label\";\nimport { cn } from \"./utils\";\n\ntype AffixedInputProps = Omit<ComponentProps<typeof Input>, \"type\"> & {\n    label: string;\n    prefix?: string;\n    suffix?: string;\n};\n\nfunction AffixedInput({\n    label,\n    prefix,\n    suffix,\n    id,\n    className,\n    ...props\n}: AffixedInputProps) {\n    const generatedId = useId();\n    const inputId = id ?? generatedId;\n    const leading = prefix ? (\n        <span\n            aria-hidden=\"true\"\n            className=\"flex items-center border-r border-border bg-surface-subtle px-[var(--space-3)] text-sm text-muted\"\n        >\n            {prefix}\n        </span>\n    ) : null;\n    const trailing = suffix ? (\n        <span\n            aria-hidden=\"true\"\n            className=\"flex items-center border-l border-border bg-surface-subtle px-[var(--space-3)] text-sm text-muted\"\n        >\n            {suffix}\n        </span>\n    ) : null;\n\n    return (\n        <div className=\"grid gap-2\">\n            <Label htmlFor={inputId}>{label}</Label>\n            <div className=\"flex h-[var(--control-height)] items-stretch overflow-hidden rounded-sm border border-border bg-surface focus-within:outline-2 focus-within:outline-focus focus-within:outline-offset-2\">\n                {leading}\n                <Input\n                    id={inputId}\n                    className={cn(\"h-full flex-1 rounded-none border-0 bg-transparent focus-visible:outline-none\", className)}\n                    {...props}\n                />\n                {trailing}\n            </div>\n        </div>\n    );\n}\n\nexport { AffixedInput };\nexport type { AffixedInputProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/affixed-input.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -31,8 +31,8 @@ custom color 사용 사례를 제공하며, 기존 편입 소스와
 - [x] provenance의 역할 설명 갱신
 - [x] 패키지 테스트 66/66, typecheck·build
 - [x] 로컬 Chromium light/dark·colormap·live region 확인
-- [ ] registry release 검사
-- [ ] 독립 소비자 registry 설치·typecheck·build
+- [x] registry release 검사
+- [x] 독립 소비자 registry 설치·typecheck·build
 - [ ] PR·CI·production 배포
 
 실제 screen reader 발표와 다른 브라우저는 별도 미검증 항목으로 둡니다.
@@ -45,3 +45,12 @@ colormap에서도 alias 적용을 확인했습니다. Toast warning을 실행하
 `status` live region에 제목이 나타나고 warning 테두리가 적용됐습니다.
 390px preview에서 문서 가로 overflow는 없었습니다. 실제 보조기술의
 발표 여부는 확인하지 않았습니다.
+
+`shadcn@4.21.0 add`로 독립 Vite 소비자에 Alert·Toast·tokens와
+의존 파일을 설치했습니다. 소비자 typecheck·build가 통과했고
+Chromium에서 success·warning Alert의 `status` 역할과 상태별 테두리,
+warning Toast의 `status` live region·좌측 테두리·닫기 뒤 트리거 focus
+복원을 확인했습니다. 기본 URL로 다시 빌드한 registry 93개 item과
+11개 불변 snapshot의 release 검사가 통과했습니다. 새 snapshot은
+`sha256-6315cfe1a0a88ffa25cd36cbfaa57dc5e278e800f8c257b387c4159aa58d1d6f`
+입니다. 기존 미공개 draft snapshot 네 디렉터리는 게시 대상이 아닙니다.

@@ -220,7 +220,8 @@ function App() {
         setComponentMenuOpen(false);
         const url = new URL(window.location.href);
         url.searchParams.set("component", id);
-        url.hash = "components";
+        if (scrollToComponent) url.hash = "components";
+        else if (url.hash === "#components") url.hash = "";
         window.history.pushState({}, "", url);
         if (scrollToComponent) {
             document.getElementById("components")?.scrollIntoView({ behavior: "smooth" });
