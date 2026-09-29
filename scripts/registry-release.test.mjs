@@ -55,6 +55,7 @@ test("registry snapshots retain one dependency set across builds", async () => {
         await cp(release, published, { recursive: true });
         assert.equal(run(root, "verify").status, 0);
         assert.equal(run(root, "verify-current", id).status, 0);
+        assert.equal(run(root, "verify-current").status, 0);
 
         await writeFile(join(output, "pyd-button.json"), JSON.stringify({
             name: "pyd-button",
@@ -63,6 +64,7 @@ test("registry snapshots retain one dependency set across builds", async () => {
         }));
         assert.equal(run(root, "verify").status, 0);
         assert.notEqual(run(root, "verify-current", id).status, 0);
+        assert.notEqual(run(root, "verify-current").status, 0);
         const next = run(root, "create");
         assert.equal(next.status, 0, next.stderr);
         assert(!next.stdout.includes(id));
@@ -74,9 +76,11 @@ test("registry snapshots retain one dependency set across builds", async () => {
             join(root, "docs/r/pyd-button.json"));
         assert.equal(run(root, "verify").status, 0);
         assert.equal(run(root, "verify-current", nextId).status, 0);
+        assert.equal(run(root, "verify-current").status, 0);
 
         await writeFile(join(root, "docs/r/pyd-button.json"), "stale item");
         assert.notEqual(run(root, "verify-current", nextId).status, 0);
+        assert.notEqual(run(root, "verify-current").status, 0);
         await cp(join(output, "pyd-button.json"),
             join(root, "docs/r/pyd-button.json"));
 

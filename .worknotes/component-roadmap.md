@@ -82,6 +82,8 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   계획하지 않습니다. 내용 해시 snapshot과 변조 회귀 검사, 직전 공개
   버전 소비자의 갱신 시험을 추가했습니다. `CHANGELOG.md`의 미공개
   변경 기록과 `registry:release-check`의 로컬 릴리스 검사도 마련했습니다.
+  PR·`main` push의 CI workflow에 typecheck·테스트·빌드·현재 snapshot·
+  생성 파일 검사도 추가했으며 원격 실행 결과는 확인 중입니다.
   현재 변경 묶음의 검토·공개 URL 설치·실제 릴리스는 남았습니다.
 - [ ] 릴리스마다 component JSON, `registryDependencies`, token을 같은
   식별자로 묶고 불변 주소를 보존합니다. 현재 91개 item의 로컬

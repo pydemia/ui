@@ -1414,3 +1414,14 @@ fixture 경로와 충돌 재현 단계는
 
 수정 배경과 후보 ID는
 `.worknotes/component-release-review-2026-09-29.md`에 기록했습니다.
+
+## 2026-09-29 Registry CI 검사
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `registry:release-check` 무인자 실행 | pass | 빌드된 91개 item의 내용 해시를 계산해 현재 snapshot과 `docs/r/` 대조 |
+| release 회귀 fixture | pass | ID 생략·명시, 현재 item 변경, 게시용 최신 JSON 누락 탐지 |
+| GitHub Actions workflow | unverified | PR·`main` push의 Node 24 typecheck·테스트·build·release·`docs/` diff; 원격 실행 전 |
+
+검사 범위와 원격 실행 결과는
+`.worknotes/component-ci-gate-2026-09-29.md`에 기록합니다.

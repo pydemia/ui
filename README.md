@@ -81,17 +81,18 @@ snapshot 디렉터리의 `manifest.json`은 각 파일의 SHA-256을 기록합�
 npm run build
 npm run registry:snapshot
 npm run build
-npm run registry:release-check -- sha256-<digest>
+npm run registry:release-check
 ```
 
 `registry:snapshot`은 기본 공개 URL로 빌드된 item만 받습니다. 같은
 내용을 다시 실행하면 기존 snapshot을 확인하고 유지하며, 내용이 바뀌면
 새 식별자를 만듭니다. `registry:check`는 snapshot의 파일 해시·내부
 의존성·`docs/r/releases/` 복사본을 확인합니다. 이전 snapshot을 수정하지
-않고 새 경로를 추가합니다. `registry:release-check`에는 snapshot 생성
-출력의 ID를 전달합니다. 이 명령은 원본과 빌드 JSON, 선택한 snapshot,
-`docs/r/`의 최신 JSON이 같은 내용인지 확인합니다. ID가 현재 빌드와
-다르면 실패합니다. 배포 전 변경 내용은 [CHANGELOG.md](CHANGELOG.md)에
+않고 새 경로를 추가합니다. `registry:release-check`는 현재 빌드의 내용
+해시 ID를 계산해 해당 snapshot과 `docs/r/`의 최신 JSON을 대조합니다.
+특정 후보를 검사할 때는 `-- sha256-<digest>`를 덧붙일 수 있습니다.
+전달한 ID가 현재 빌드와 다르면 실패합니다. 배포 전 변경 내용은
+[CHANGELOG.md](CHANGELOG.md)에
 기록하고, 배포 후 공개 snapshot URL의 설치를 별도 소비자에서 확인합니다.
 현재 로컬 snapshot은 아직 공개 URL 설치를 검증하지 않았습니다.
 

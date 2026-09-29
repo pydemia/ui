@@ -156,14 +156,16 @@ async function createRelease() {
 }
 
 async function verifyCurrent(id) {
-    assert(releaseIdPattern.test(id), `Invalid release ID: ${id}`);
     const { names, items } = await currentRegistryItems();
     const currentId = `sha256-${releaseDigest(
         items, publicBase, new Set(names),
     )}`;
-    assert.equal(id, currentId,
-        `Release ${id} differs from the current built registry ${currentId}`);
-    const manifest = await checkRelease(id, true);
+    const selectedId = id ?? currentId;
+    assert(releaseIdPattern.test(selectedId),
+        `Invalid release ID: ${selectedId}`);
+    assert.equal(selectedId, currentId,
+        `Release ${selectedId} differs from the current built registry ${currentId}`);
+    const manifest = await checkRelease(selectedId, true);
     assert.deepEqual(manifest.files.map((file) => file.name), names);
     for (const name of ["registry", ...names]) {
         assert.deepEqual(
@@ -172,7 +174,7 @@ async function verifyCurrent(id) {
             `Published latest registry differs: ${name}`,
         );
     }
-    console.log(`Verified current built registry against ${id}.`);
+    console.log(`Verified current built registry against ${selectedId}.`);
 }
 
 async function verifyReleases() {
@@ -193,5 +195,5 @@ if (command === "create") await createRelease();
 else if (command === "verify") await verifyReleases();
 else if (command === "verify-current") await verifyCurrent(process.argv[3]);
 else throw new Error(
-    "Use registry-release.mjs create, verify, or verify-current <id>.",
+    "Use registry-release.mjs create, verify, or verify-current [id].",
 );

@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-09-29: 현재 내용 해시 ID를 자동으로 고르는 release 검사를 추가하고,
+PR·`main` push용 CI workflow에 typecheck·테스트·build·snapshot 검사·
+생성 파일 diff 검사를 넣었습니다. 로컬 검사는 통과했으며 원격 workflow는
+아직 실행 전입니다. component 89개·registry item 91개, 공급·품질 조건
+5/10, 관리용 전체 추정 약 70%는 유지합니다.
+[기록](component-ci-gate-2026-09-29.md)을 참고하세요.
+
 2026-09-29: DataChart의 유한한 양·음 극값에 대한 SVG 좌표 계산을
 수정하고 네 표시 형태의 회귀 시험을 추가했습니다. 현재 후보 snapshot
 ID를 새로 만들고 이전 ID는 보존했습니다. 테스트 46/46, typecheck,
