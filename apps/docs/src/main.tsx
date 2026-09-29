@@ -143,6 +143,9 @@ function App() {
     const exampleFrame = useRef<HTMLIFrameElement>(null);
     const sidebarInner = useRef<HTMLDivElement>(null);
     const mobileScroll = useRef<{ pageY: number; sidebarX: number } | null>(null);
+    const pointerScroll = useRef<{
+        id: string; pageY: number; sidebarX: number;
+    } | null>(null);
     const mode = dark ? "dark" : "light";
     const hasOverrides = Object.values(overrides).some(
         (colors) => Object.keys(colors).length > 0,
@@ -221,19 +224,35 @@ function App() {
         if (!position) return;
         mobileScroll.current = null;
         const scrollRoot = document.scrollingElement;
-        if (scrollRoot) scrollRoot.scrollTop = position.pageY;
+        scrollRoot?.scrollTo({ top: position.pageY, behavior: "instant" });
         if (sidebarInner.current) {
-            sidebarInner.current.scrollLeft = position.sidebarX;
+            sidebarInner.current.scrollTo({
+                left: position.sidebarX, behavior: "instant",
+            });
         }
     }, [selectedId]);
 
     function selectComponent(id: string, scrollToComponent = true) {
-        if (!scrollToComponent && id !== selectedId) {
-            mobileScroll.current = {
-                pageY: document.scrollingElement?.scrollTop ?? window.scrollY,
-                sidebarX: sidebarInner.current?.scrollLeft ?? 0,
+        if (!scrollToComponent) {
+            const pointer = pointerScroll.current?.id === id
+                ? pointerScroll.current : null;
+            const position = {
+                pageY: pointer?.pageY ??
+                    (document.scrollingElement?.scrollTop ?? window.scrollY),
+                sidebarX: pointer?.sidebarX ??
+                    (sidebarInner.current?.scrollLeft ?? 0),
             };
+            if (id !== selectedId) mobileScroll.current = position;
+            else {
+                document.scrollingElement?.scrollTo({
+                    top: position.pageY, behavior: "instant",
+                });
+                sidebarInner.current?.scrollTo({
+                    left: position.sidebarX, behavior: "instant",
+                });
+            }
         }
+        pointerScroll.current = null;
         setSelectedId(id);
         setMenuCategory(catalog.find((entry) => entry.id === id)!.category);
         setComponentMenuOpen(false);
@@ -245,6 +264,15 @@ function App() {
         if (scrollToComponent) {
             document.getElementById("components")?.scrollIntoView({ behavior: "smooth" });
         }
+    }
+
+    function captureMobilePointerScroll(id: string) {
+        if (!window.matchMedia("(max-width: 850px)").matches) return;
+        pointerScroll.current = {
+            id,
+            pageY: document.scrollingElement?.scrollTop ?? window.scrollY,
+            sidebarX: sidebarInner.current?.scrollLeft ?? 0,
+        };
     }
 
     function sendColormapToExample() {
@@ -368,10 +396,15 @@ function App() {
                                             type="button"
                                             aria-current={entry.id === selectedId ? "page" : undefined}
                                             className={`sidebar-item${entry.id === selectedId ? " selected" : ""}`}
-                                            onClick={() => selectComponent(
-                                                entry.id,
-                                                !window.matchMedia("(max-width: 850px)").matches,
-                                            )}>
+                                            onPointerDown={() => captureMobilePointerScroll(entry.id)}
+                                            onPointerCancel={() => { pointerScroll.current = null; }}
+                                            onClick={(event) => {
+                                                if (event.detail === 0) pointerScroll.current = null;
+                                                selectComponent(
+                                                    entry.id,
+                                                    !window.matchMedia("(max-width: 850px)").matches,
+                                                );
+                                            }}>
                                             {entry.name}
                                         </button>,
                                     )}

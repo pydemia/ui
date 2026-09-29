@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-09-30 모바일 SNB의 pointer 이전 위치 보정: 터치 focus가
+`click`보다 먼저 문서를 이동시킬 수 있어 `pointerdown`에서 문서·SNB
+좌표를 저장하고 즉시 복원하도록 변경했습니다. 390px Chromium의
+MetricCard 선택·재선택에서 `scrollY=844`, SNB `scrollLeft=6200`이
+유지됐고 1280px의 본문 이동도 유지됐습니다. typecheck·테스트 72/72·
+build·registry 검사가 통과했습니다. 실제 touch·Safari·screen reader는
+미검증입니다. [모바일 SNB 기록](mobile-snb-pointer-scroll-2026-09-30.md)을
+참고하세요. Tree 지연 로딩 WIP는 Git stash에 별도 보관했습니다.
+기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
+
 2026-09-30 RangeSlider 진행: 기존 Slider에 `thumbLabels`를 추가하고
 두 endpoint의 이름·form 값을 갖춘 `RangeSlider`를 작성했습니다.
 93개 component, 95개 registry item입니다. SSR 테스트, 문서 preview와
