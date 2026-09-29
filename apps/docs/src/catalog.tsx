@@ -585,8 +585,20 @@ function AlertPreview() {
     return (
         <div className="preview-alerts">
             <Alert>
-                <AlertTitle>저장되었습니다</AlertTitle>
+                <AlertTitle>안내</AlertTitle>
                 <AlertDescription>변경 사항을 확인할 수 있습니다.</AlertDescription>
+            </Alert>
+            <Alert variant="info">
+                <AlertTitle>새 기능이 준비됐습니다</AlertTitle>
+                <AlertDescription>설정에서 사용할 수 있습니다.</AlertDescription>
+            </Alert>
+            <Alert variant="success">
+                <AlertTitle>저장되었습니다</AlertTitle>
+                <AlertDescription>변경 사항이 반영됐습니다.</AlertDescription>
+            </Alert>
+            <Alert variant="warning">
+                <AlertTitle>확인이 필요합니다</AlertTitle>
+                <AlertDescription>만료 예정 항목을 검토하세요.</AlertDescription>
             </Alert>
             <Button variant="outline" onClick={() => setShowError(!showError)}>
                 {showError ? "오류 숨기기" : "오류 표시"}
@@ -2006,6 +2018,13 @@ function ToastPreview() {
             }}>
                 작업 알림
             </Button>
+            <Button variant="outline" onClick={() => enqueue({
+                variant: "warning", statusLabel: "주의",
+                title: "만료 예정 항목을 검토하세요",
+                closeLabel: "알림 닫기",
+            })}>
+                주의 알림
+            </Button>
             <span className="text-xs text-muted">
                 대기 중 {pendingCount}건
             </span>
@@ -3039,13 +3058,21 @@ function RequestContextMenu() {
     },
     {
         id: "alert", name: "Alert", category: "Feedback",
-        description: "일반 안내는 status, 오류 안내는 alert로 알립니다. 메시지는 색상과 함께 텍스트로 적습니다.",
+        description: "기본·정보·성공·주의·오류 상태를 token과 텍스트로 구분합니다. 오류만 긴급한 alert 역할을 사용합니다.",
         code: `import { Alert, AlertTitle, AlertDescription } from "@pydemia/ui";
 
 <>
   <Alert>
+    <AlertTitle>안내</AlertTitle>
+    <AlertDescription>변경 사항을 확인하세요.</AlertDescription>
+  </Alert>
+  <Alert variant="success">
     <AlertTitle>저장되었습니다</AlertTitle>
-    <AlertDescription>변경 사항을 확인할 수 있습니다.</AlertDescription>
+    <AlertDescription>변경 사항이 반영됐습니다.</AlertDescription>
+  </Alert>
+  <Alert variant="warning">
+    <AlertTitle>확인이 필요합니다</AlertTitle>
+    <AlertDescription>만료 예정 항목을 검토하세요.</AlertDescription>
   </Alert>
   <Alert variant="destructive">
     <AlertTitle>저장하지 못했습니다</AlertTitle>
@@ -4531,7 +4558,7 @@ const segments = [
     {
         id: "toast", name: "Toast", category: "Feedback",
         installItems: ["toast", "button"],
-        description: "성공·오류를 텍스트와 live region으로 알립니다. Queue는 먼저 온 알림부터 최대 표시 수만큼 보여주며 자동으로 사라지지 않습니다.",
+        description: "정보·성공·주의·오류를 텍스트와 상태색, live region으로 알립니다. Queue는 먼저 온 알림부터 최대 표시 수만큼 보여주며 자동으로 사라지지 않습니다.",
         code: `import { Button, ToastQueue, useToastQueue } from "@pydemia/ui";
 
 function SaveNotice() {
@@ -4541,6 +4568,11 @@ function SaveNotice() {
       dedupeKey: "saved", variant: "success",
       title: "저장했습니다", closeLabel: "알림 닫기",
     })}>저장</Button>
+    <Button onClick={() => enqueue({
+      variant: "warning", statusLabel: "주의",
+      title: "만료 예정 항목을 검토하세요",
+      closeLabel: "알림 닫기",
+    })}>주의 알림</Button>
     <span>대기 중 {pendingCount}건</span>
     <ToastQueue notices={visible} onDismiss={dismiss} />
   </>;

@@ -126,7 +126,8 @@ Violet을 선택하거나 각 색을 `#RRGGBB`로 조정할 수 있습니다. �
 light/dark 모드에 따로 적용되며 새로고침하면 초기화됩니다. 조합 예시의
 iframe에도 적용되고, 「전체 화면으로 열기」 링크에는 현재 선택이 담깁니다.
 
-공통 stylesheet는 `--accent`, `--background` 같은 semantic token을
+공통 stylesheet는 `--accent`, `--background`, `--success`,
+`--warning` 같은 semantic token을
 `--palette-accent`, `--palette-background`의 alias로 선언합니다. 소비자
 앱에서도 root의 `data-colormap`을 설정하거나 palette 변수를 덮어써
 같은 컴포넌트의 색을 바꿀 수 있습니다.
@@ -136,7 +137,8 @@ document.documentElement.dataset.colormap = "forest";
 document.documentElement.style.setProperty("--palette-accent", "#25684a");
 ```
 
-직접 지정한 색은 문서 사이트의 본문, Accent, User message 대비 표시를
+직접 지정한 색은 문서 사이트의 본문, Accent, Success, Warning,
+User message 대비 표시를
 확인하세요. 색상을 바꿔도 컴포넌트 소스나 registry metadata는 변하지
 않습니다.
 

@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-09-30 `codex/feedback-status-variants` 진행: Spinner 다섯 형태는
+기존 구현으로 확인했습니다. Alert에 info·success·warning을 추가하고
+Toast가 각 상태에 맞는 테두리 token을 사용하도록 바꿨습니다.
+`--success`·`--warning`은 light/dark palette alias와 문서 Colormap
+편집에 연결했습니다. 테스트 66/66, typecheck·build와 로컬 Chromium
+light/dark·Forest, Toast live region을 확인했습니다.
+[Feedback 상태 기록](feedback-status-variants-2026-09-30.md)을
+참고하세요. registry 고지·snapshot, 독립 소비자, PR·CI·배포는
+아직 남았습니다. 기존 미공개 draft snapshot 네 디렉터리는
+stage하지 마세요.
+
 2026-09-30 [PR #10](https://github.com/pydemia/ui/pull/10) 배포:
 Workflow에 `Kanban`을 추가해 component 91개·registry item 93개입니다.
 공식 Kibo 문서·고정 revision 소스·MIT license를 확인하고 원본

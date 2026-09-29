@@ -39,7 +39,8 @@ const colormapIds = ["neutral", "pydemia", "ocean", "forest", "violet"] as const
 const colorTokens = [
     "--background", "--surface", "--surface-subtle", "--foreground",
     "--muted", "--border", "--accent", "--accent-foreground",
-    "--focus", "--danger", "--message-user-background",
+    "--focus", "--danger", "--success", "--warning",
+    "--message-user-background",
     "--message-user-foreground",
 ] as const;
 type ColorToken = (typeof colorTokens)[number];

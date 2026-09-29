@@ -12,6 +12,8 @@
   --palette-message-user-foreground: #ffffff;
   --palette-focus: #176c8a;
   --palette-danger: #a22c36;
+  --palette-success: #236645;
+  --palette-warning: #8b5a06;
   --background: var(--palette-background);
   --foreground: var(--palette-foreground);
   --surface: var(--palette-surface);
@@ -24,6 +26,8 @@
   --message-user-foreground: var(--palette-message-user-foreground);
   --focus: var(--palette-focus);
   --danger: var(--palette-danger);
+  --success: var(--palette-success);
+  --warning: var(--palette-warning);
   --radius: 5px;
   --density-control-height: 36px;
   --density-row-block: 10px;
@@ -56,6 +60,8 @@
   --palette-message-user-foreground: #ffffff;
   --palette-focus: #9ad6eb;
   --palette-danger: #ff9aa0;
+  --palette-success: #8dd9ac;
+  --palette-warning: #f2c46f;
   --shadow-float: 0 4px 16px rgb(0 0 0 / 20%);
   --overlay: rgb(0 0 0 / 65%);
 }
@@ -193,6 +199,8 @@
   --color-message-user-foreground: var(--message-user-foreground);
   --color-focus: var(--focus);
   --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
   --radius-sm: var(--radius);
   --font-sans: var(--font-ui);
   --text-sm: var(--type-body-size);

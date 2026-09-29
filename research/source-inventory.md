@@ -989,3 +989,16 @@ lucide-react 등을 사용하지만 복사하거나 dependency로 편입하지
 새 registry item의 직접 의존성은 기존 `pyd-utils`뿐입니다.
 React와 Tailwind 외 새 npm runtime dependency는 없습니다. 실제
 screen reader 발표와 외부 링크 이동은 검증하지 않았습니다.
+
+## 2026-09-30 Feedback 상태별 표시 확장
+
+기존 Alert는 shadcn/ui의
+[공식 문서](https://ui.shadcn.com/docs/components/radix/alert),
+[고정 소스](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert.tsx),
+[동일 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+다시 확인했습니다. 공식 문서는 custom color 사례를 제공합니다.
+Alert의 info·success·warning 색상과 Toast의 상태색은 이 저장소에서
+구현했으며 새 외부 코드나 runtime 의존성을 편입하지 않았습니다.
+`status`와 `alert` 역할은
+[WAI Alert Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)과
+기존 역할 구분을 참고했습니다. 실제 screen reader 검사는 남았습니다.

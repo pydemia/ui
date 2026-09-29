@@ -40,7 +40,8 @@ slice입니다. 기존 repository와 brand palette가 제공되지 않아 color�
 - Surface: `--background`, `--surface`, `--surface-subtle`, `--border`,
   `--overlay`, `--radius`, `--shadow-float`; border 두께는 1px입니다.
 - Semantics: `--foreground`, `--muted`, `--accent`, `--accent-foreground`,
-  `--focus`, `--danger`를 light/dark에 각각 할당합니다.
+  `--focus`, `--danger`, `--success`, `--warning`을 light/dark에 각각
+  할당합니다.
 - Message: `--message-user-background`와 `--message-user-foreground`는
   두 테마에서 사용자 발화의 어두운 배경과 밝은 글씨를 유지합니다.
 - Motion/density: `--motion-fast`, `--density-control-height`,

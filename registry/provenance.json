@@ -133,7 +133,7 @@
     {
       "name": "pyd-alert", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
-      "dependencies": ["class-variance-authority", "pyd-utils"], "accessibility": { "semantics": "status for default; alert for destructive", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+      "dependencies": ["class-variance-authority", "pyd-utils"], "accessibility": { "semantics": "status for default, info, success and warning; alert for destructive; visible title text accompanies color", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-progress", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
