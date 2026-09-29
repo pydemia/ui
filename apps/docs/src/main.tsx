@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, Github, Moon, Sun } from "lucide-react";
 import {
     Badge, ColorInput, Snippet, SnippetContent, SnippetCopyButton,
@@ -141,6 +141,8 @@ function App() {
     const [overrides, setOverrides] = useState<ColorOverrides>({ light: {}, dark: {} });
     const [values, setValues] = useState<Record<string, string>>({});
     const exampleFrame = useRef<HTMLIFrameElement>(null);
+    const sidebarInner = useRef<HTMLDivElement>(null);
+    const mobileScroll = useRef<{ pageY: number; sidebarX: number } | null>(null);
     const mode = dark ? "dark" : "light";
     const hasOverrides = Object.values(overrides).some(
         (colors) => Object.keys(colors).length > 0,
@@ -214,7 +216,24 @@ function App() {
         return () => window.removeEventListener("popstate", handleHistory);
     }, []);
 
+    useLayoutEffect(() => {
+        const position = mobileScroll.current;
+        if (!position) return;
+        mobileScroll.current = null;
+        const scrollRoot = document.scrollingElement;
+        if (scrollRoot) scrollRoot.scrollTop = position.pageY;
+        if (sidebarInner.current) {
+            sidebarInner.current.scrollLeft = position.sidebarX;
+        }
+    }, [selectedId]);
+
     function selectComponent(id: string, scrollToComponent = true) {
+        if (!scrollToComponent && id !== selectedId) {
+            mobileScroll.current = {
+                pageY: document.scrollingElement?.scrollTop ?? window.scrollY,
+                sidebarX: sidebarInner.current?.scrollLeft ?? 0,
+            };
+        }
         setSelectedId(id);
         setMenuCategory(catalog.find((entry) => entry.id === id)!.category);
         setComponentMenuOpen(false);
@@ -337,7 +356,7 @@ function App() {
 
             <div className="layout">
                 <aside className="sidebar" aria-label="컴포넌트 목록">
-                    <div className="sidebar-inner">
+                    <div className="sidebar-inner" ref={sidebarInner}>
                         <a href="#overview" className="sidebar-overview">Overview</a>
                         {sidebarCategories.map((category) => (
                             <div key={category}>

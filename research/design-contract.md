@@ -717,3 +717,19 @@ component나 registry item을 만들지 않습니다.
 복원하고 새 위치를 live region으로 알립니다. 카드 데이터의 서버 저장과
 실패 시 복구는 호출자가 맡습니다. 현재 구현은 한 번에 카드 한 개를
 이동하며 열 재정렬·다중 선택은 제공하지 않습니다.
+
+## 2026-09-30 InputGroup
+
+`InputGroup`은 기존 `Input`·`Textarea`와 addon을 한 테두리 안에
+배치합니다. `InputGroupAddon`의 `align`은 `inline-start`,
+`inline-end`, `block-start`, `block-end` 중 하나입니다. 잘못된 값은
+설정 오류로 알립니다. addon은 텍스트와 `InputGroupButton` 같은
+독립 동작을 담을 수 있습니다. 버튼 기본 `type`은 `button`이며
+form 제출은 `type="submit"`을 명시합니다.
+
+입력값과 유효성 검사는 native control 또는 호출자가 소유합니다.
+`Field`와 조합하면 label·설명을 control에 연결합니다. DOM에서는
+control 다음에 addon이 오고 CSS `order`가 시각적 위치를 정합니다.
+그러므로 키보드는 control 다음 addon 버튼으로 이동합니다. 공유
+테두리에 `focus-within` 표시를 하고 control의 중복 outline을 지웁니다.
+실제 screen reader와 RTL 시각 순서는 별도 확인이 필요합니다.

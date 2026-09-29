@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-09-30 — InputGroup과 모바일 SNB 위치
+
+- 입력·textarea에 텍스트와 버튼을 붙이는 `InputGroup`을 추가했습니다.
+  입력값과 버튼은 native form·keyboard 동작을 유지합니다. 문서에
+  요청 ID 제출과 메모 저장 preview, Usage 코드를 추가했습니다.
+- 모바일 SNB 선택 시 React 갱신 후 문서·SNB 스크롤 위치를 복원합니다.
+  데스크톱의 본문 이동은 유지합니다.
+
 ## 2026-09-30 — DataChart 계열 표시 선택
 
 - 다중 계열 `DataChart`에 `toggleableSeries`를 추가했습니다.

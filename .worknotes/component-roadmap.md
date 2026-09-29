@@ -386,9 +386,9 @@ token 전달 방식을 정할 때,
 
 - [ ] `IconButton`: `Button size="icon"`이 accessible name을 보장하는지
   확인하고 이름을 필수화할 wrapper가 필요한지 판정합니다.
-- [ ] `InputGroup`: 현재 `AffixedInput`은 문자열·비상호작용 affix만
-  지원합니다. 버튼·선택기 등 focus 가능한 요소를 붙이는 실제 용례를
-  확인합니다.
+- [x] `InputGroup`: 입력 옆의 버튼과 textarea 아래 작업을 독립된
+  focus 대상과 native form 동작으로 구성했습니다. 선택기 결합은
+  사용 사례와 키보드 순서를 별도로 확인해야 합니다.
 - [ ] `Sheet`·`Drawer`: 배치뿐 아니라 제스처·focus·닫기 동작이
   다른지 비교합니다.
 - [ ] `RangeSlider`: 현재 `Slider`의 다중 thumb 코드는 있으나 조작

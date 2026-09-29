@@ -1002,3 +1002,19 @@ Alert의 info·success·warning 색상과 Toast의 상태색은 이 저장소에
 `status`와 `alert` 역할은
 [WAI Alert Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)과
 기존 역할 구분을 참고했습니다. 실제 screen reader 검사는 남았습니다.
+
+## 2026-09-30 InputGroup
+
+[shadcn/ui Input Group 공식 문서](https://ui.shadcn.com/docs/components/radix/input-group),
+revision `98a1fe67b439324ddc857f47fbdce056600a4329`의
+[Input Group source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/input-group.tsx),
+[동일 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. upstream은 React, `class-variance-authority`, 내부
+`Button`·`Input`·`Textarea`·`cn`을 사용합니다. 입력 옆·위·아래 addon과
+버튼 조합을 참고해 공통 token 및 기존 `@pydemia/ui` 컴포넌트로
+수정했습니다. 새 npm runtime dependency는 없습니다. registry 직접
+의존성은 `pyd-input`·`pyd-textarea`·`pyd-button`·`pyd-utils`입니다.
+
+입력과 textarea의 label 연결, 별도 버튼의 DOM·Tab 순서, Enter 제출은
+SSR과 Chromium에서 확인했습니다. 실제 screen reader·touch·Safari·RTL은
+검증하지 않았습니다.

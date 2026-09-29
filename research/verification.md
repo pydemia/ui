@@ -1609,3 +1609,16 @@ PR·`main` Verify UI와 Pages CI, Vercel production 배포가
 게시용 URL로 다시 빌드한 뒤 현재 snapshot 검사를 통과했습니다.
 상세 기록은 `.worknotes/feedback-status-variants-2026-09-30.md`와
 `.worknotes/mobile-snb-hash-2026-09-30.md`에 남겼습니다.
+
+## 2026-09-30 InputGroup과 모바일 SNB 후속 보정
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm test -w @pydemia/ui` | pass | 68/68; label·form·addon 순서와 잘못된 align |
+| 로컬 Chromium InputGroup | pass (limited) | Enter로 ID `2050` 제출, textarea 6/120·저장, Tab으로 입력→조회 버튼, 390px 폭·dark token |
+| 로컬 Chromium SNB | pass (limited) | 390px에서 문서 `scrollY=844`·SNB `scrollLeft=1875` 유지, 버튼 focus; 1280px 기존 `#components` 이동 |
+| 실제 touch·Safari·screen reader·RTL | unverified | 기기와 보조기술 실행 전 |
+
+registry build·snapshot, 독립 소비자, 공개 배포 결과는
+`.worknotes/component-input-group-2026-09-30.md`에 갱신합니다.
