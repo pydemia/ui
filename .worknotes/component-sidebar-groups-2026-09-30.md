@@ -23,12 +23,15 @@ item은 추가하지 않습니다. 목표 수는 90개 component·92개 item입�
 
 - `npm run build`, `npm run typecheck`, `npm test -w @pydemia/ui`
   59/59, `git diff --check` 통과.
-- registry metadata를 수정해 `registry:check`가 고정 출처 해시
-  불일치로 중단됐습니다. metadata commit을 고정한 뒤 소비자 고지의
-  commit·SHA-256을 갱신하고 새 snapshot을 만들어 다시 검사합니다.
-- 브라우저의 섹션 전환·접힘·모바일 Drawer, 공개 URL 소비자 설치,
-  새 snapshot 배포는 아직 검증하지 않았습니다. 실제 screen reader
-  발표·touch·RTL도 검증하지 않았습니다.
+- metadata commit `0770f9f43ea903249b0f6161aadc8822f491e7e4`와
+  SHA-256을 소비자 고지에 고정했습니다. `registry:release-check`는
+  92개 item·8개 snapshot과 현재 내용의 일치를 확인했습니다. 새
+  snapshot은 `sha256-bd48f81920e4ed1242c68f8ffb3aa84483d8cc37118e65451a7dc784f61536d9`입니다.
+- Chromium 문서 preview에서 평면·섹션 전환, 데스크톱 접힘 후 그룹·
+  링크의 접근성 이름, 390px Drawer의 그룹·링크, 선택 후 닫기와
+  Escape·trigger focus 복귀를 확인했습니다.
+- 공개 URL 소비자 설치와 새 snapshot 배포는 아직 검증하지
+  않았습니다. 실제 screen reader 발표·touch·RTL도 미검증입니다.
 
 미공개 draft snapshot 네 디렉터리는 기존 작업의 untracked 파일로
 유지합니다. 이번 릴리스에 포함하지 않습니다.

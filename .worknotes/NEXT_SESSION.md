@@ -2,10 +2,10 @@
 
 2026-09-30 Sidebar 섹션 탐색 진행: 기존 `items`와 호환되는 이름 있는
 `sections` 입력, 데스크톱·모바일 그룹, 문서 preview를 구현했습니다.
-`build`·`typecheck`·패키지 테스트 59/59는 통과했습니다. registry
-metadata 변경으로 소비자 MIT 고지의 고정 commit·SHA-256 갱신이
-필요해 snapshot·배포는 진행 중입니다. 브라우저·소비자 검증도
-남았습니다. 자세한 상태와 미검증 항목은
+`build`·`typecheck`·패키지 테스트 59/59와 registry release 검사가
+통과했습니다. 소비자 MIT 고지의 commit·SHA-256을 갱신하고 새
+snapshot을 만들었습니다. Chromium 데스크톱·390px Drawer 동작을
+확인했고 공개 URL 소비자 검증·배포가 남았습니다. 자세한 상태는
 [Sidebar 섹션 기록](component-sidebar-groups-2026-09-30.md)을 참고하세요.
 component 90개·item 92개, goal 관리용 추정 약 70%는 유지합니다.
 

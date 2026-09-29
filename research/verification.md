@@ -344,6 +344,24 @@ AppShell, Navigation, LogConsole, Sparkline, PageHeader, ContentList를
 구현 결정과 제한은 `.worknotes/component-sidebar-2026-09-29.md`에
 기록했습니다.
 
+## 2026-09-30 Sidebar 섹션 탐색
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI·두 앱 TypeScript |
+| `npm test -w @pydemia/ui` | pass | 59/59; 섹션 이름·현재 링크·기존 평면 목록·잘못된 입력 |
+| `npm run build` | pass | 문서·예시와 92개 registry item |
+| `npm run registry:release-check` | pass | 92개 metadata·90개 export/catalog·8개 불변 snapshot, 현재 ID 일치 |
+| Chromium desktop | pass (limited) | 섹션 전환, 두 제목·링크, 접힌 상태의 접근성 이름 |
+| Chromium 390px | pass (limited) | Drawer의 섹션·링크, 링크 선택 후 닫기, Escape와 trigger focus 복귀 |
+| 공개 URL 설치·독립 소비자 | unverified | 새 snapshot 배포 전 |
+| 실제 screen reader·touch·RTL | unverified | 보조기술 발표와 별도 입력 환경 미실행 |
+
+현재 snapshot은
+`sha256-bd48f81920e4ed1242c68f8ffb3aa84483d8cc37118e65451a7dc784f61536d9`입니다.
+구현 결정과 진행 상태는
+`.worknotes/component-sidebar-groups-2026-09-30.md`에 기록했습니다.
+
 ## 2026-09-29 단계·활동 표시
 
 | 검사 | 결과 | 확인 범위 |
