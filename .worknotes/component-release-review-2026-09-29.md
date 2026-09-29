@@ -67,5 +67,7 @@ overflow해 `NaN` SVG 좌표와 축 눈금을 만들 수 있음을 발견했습�
 `sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`입니다.
 처음 후보는 내용 해시 경로를 바꾸지 않고 보존했습니다. package 테스트
 46/46, typecheck, build, `registry:check`, 새 ID의
-`registry:release-check`가 로컬에서 통과했습니다. 새 ID는 아직 PR에
-push하거나 공개 URL에서 설치하지 않았습니다.
+`registry:release-check`가 커밋 파일만 추출한 별도 디렉터리에서
+통과했습니다. 이 환경에는 이전·현재 snapshot 두 개만 있습니다.
+코드 수정은 `d6713b4`, 생성 결과와 새 snapshot은 `9195662`로
+PR #1에 push했습니다. 공개 URL의 새 ID 설치는 확인하지 않았습니다.

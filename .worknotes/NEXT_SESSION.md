@@ -4,7 +4,9 @@
 `NaN`이 되는 문제를 고쳤습니다. 현재 새 내용 해시 후보는
 `sha256-48f182bbf4fafa4e209bb89acebf7e77b722f6aac842e1a3c90d974399d9ac93`이며
 처음 PR 후보 ID는 보존했습니다. package 테스트 46/46, typecheck,
-build, `registry:check`, 새 ID의 `registry:release-check`가 통과했습니다.
+build, `registry:check`, 새 ID의 `registry:release-check`가 커밋 파일만
+복원한 환경에서 통과했습니다. 수정은 `d6713b4`·`9195662`로 PR #1에
+push했습니다.
 [검토 기록](component-release-review-2026-09-29.md)에 변경 범위를
 남겼습니다. 공개 URL 설치와 실제 보조기술·touch 검사는 남았습니다.
 

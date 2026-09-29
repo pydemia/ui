@@ -3,7 +3,8 @@
 2026-09-29: DataChart의 유한한 양·음 극값에 대한 SVG 좌표 계산을
 수정하고 네 표시 형태의 회귀 시험을 추가했습니다. 현재 후보 snapshot
 ID를 새로 만들고 이전 ID는 보존했습니다. 테스트 46/46, typecheck,
-build와 로컬 release 검사가 통과했습니다. component·item 수는
+build와 커밋 복원본의 release 검사가 통과했고 PR #1에 push했습니다.
+component·item 수는
 **89개·91개**, 공급·품질 조건은 **5/10**, goal의 관리용 추정은
 **약 70%**로 유지합니다. [기록](component-release-review-2026-09-29.md)에
 범위와 미검증 항목을 남겼습니다.
