@@ -37,7 +37,7 @@ import {
     Empty, EmptyContent, EmptyDescription,
     EmptyMedia, EmptyTitle, Field, FileUpload, FilterBar,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
-    HoverCardTrigger, Image, Input, JsonViewer,
+    HoverCardTrigger, Image, Input, JsonViewer, Kanban,
     Label, LogConsole, Markdown, Message, MessageContent, MetricCard,
     MultiSelect,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
@@ -66,7 +66,7 @@ import { useId, useRef, useState, type ReactNode } from "react";
 import type {
     AppliedFilter, ConversationMessage, DataTableColumn, DateRangeValue,
     DateTimeSelection,
-    FileUploadItem, JsonValue,
+    FileUploadItem, JsonValue, KanbanColumn,
     LogEntry, ReasoningStatus, ToolCallStatus, TreeNode,
 } from "@pydemia/ui";
 
@@ -104,6 +104,37 @@ function CodeBlockPreview() {
             </Button>
             <CodeBlock label="request.ts" language="TypeScript"
                 code={code} wrap={wrap} />
+        </div>
+    );
+}
+
+const initialKanbanColumns: KanbanColumn[] = [
+    { id: "queued", title: "대기", cards: [
+        { id: "request-1", title: "요청 분류", description: "새 요청의 담당 팀 지정" },
+        { id: "request-2", title: "입력 검증", description: "누락된 필수값 확인" },
+    ] },
+    { id: "working", title: "진행 중", cards: [
+        { id: "request-3", title: "접근 권한 검토", description: "승인 기록 확인" },
+    ] },
+    { id: "done", title: "완료", cards: [] },
+];
+
+function KanbanPreview() {
+    const [columns, setColumns] = useState<KanbanColumn[]>(
+        initialKanbanColumns,
+    );
+
+    return (
+        <div className="preview-stack min-w-0">
+            <p className="m-0 text-xs text-muted">
+                카드를 끌거나 각 카드의 화살표 버튼으로 이동합니다.
+            </p>
+            <Kanban label="요청 처리 보드" columns={columns}
+                onColumnsChange={setColumns} />
+            <Button variant="outline" onClick={() =>
+                setColumns(initialKanbanColumns)}>
+                보드 초기화
+            </Button>
         </div>
     );
 }
@@ -4124,6 +4155,28 @@ function PublishFlow() {
     dateTime: "2026-09-28T17:05:00+09:00" },
 ]} />`,
         preview: () => <TimelinePreview />,
+    },
+    {
+        id: "kanban", name: "Kanban", category: "Workflow",
+        description: "상태별 작업 카드를 정렬하고 열 사이로 이동합니다. 마우스 끌기와 카드의 방향 버튼을 함께 제공하며, 빈 열에도 카드를 놓을 수 있습니다.",
+        code: `import { useState } from "react";
+import { Kanban, type KanbanColumn } from "@pydemia/ui";
+
+const initialColumns: KanbanColumn[] = [
+  { id: "queued", title: "대기", cards: [
+    { id: "request-1", title: "요청 분류" },
+    { id: "request-2", title: "입력 검증" },
+  ] },
+  { id: "working", title: "진행 중", cards: [] },
+  { id: "done", title: "완료", cards: [] },
+];
+
+function RequestBoard() {
+  const [columns, setColumns] = useState(initialColumns);
+  return <Kanban label="요청 처리 보드" columns={columns}
+    onColumnsChange={setColumns} />;
+}`,
+        preview: () => <KanbanPreview />,
     },
     {
         id: "navigation", name: "Navigation", category: "Navigation",

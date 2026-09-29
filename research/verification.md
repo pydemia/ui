@@ -1563,3 +1563,18 @@ HTTP 200이며 저장소 파일과 일치했습니다. 91개 item의 개별 공�
 검사 입력과 변경 범위는
 `.worknotes/component-data-chart-series-visibility-2026-09-30.md`에
 기록했습니다.
+
+## 2026-09-30 Kanban 작업 보드
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run test -w @pydemia/ui` | pass | 64/64; 카드 이동 순서·불변성·오류와 SSR 이름·버튼 |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm run build` | pass | 93개 registry item, 문서·예시 산출물 |
+| 로컬 Chromium | pass (limited) | 열 이동·빈 열·같은 열 재정렬·Enter 키·focus 복원·live region, 390px에서 보드 내부 scroll과 문서 가로 overflow 없음 |
+| native drag/drop | unverified | 브라우저 자동화 drag에서 이벤트 결과를 확인하지 못함 |
+| `registry:release-check` | pending | provenance 고지와 snapshot 갱신 후 실행 |
+| 독립 소비자 설치·실제 touch·Safari·screen reader | unverified | 별도 환경 실행 전 |
+
+입력 데이터와 검증 범위는
+`.worknotes/component-kanban-2026-09-30.md`에 기록했습니다.

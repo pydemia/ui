@@ -85,6 +85,10 @@ export type {
 } from "./components/app-shell";
 export { ResizablePanels } from "./components/resizable-panels";
 export type { ResizablePanelsProps } from "./components/resizable-panels";
+export { Kanban, moveKanbanCard } from "./components/kanban";
+export type {
+    KanbanCard, KanbanColumn, KanbanMove, KanbanProps,
+} from "./components/kanban";
 export { ScrollArea } from "./components/scroll-area";
 export type { ScrollAreaProps } from "./components/scroll-area";
 export {

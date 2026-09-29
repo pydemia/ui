@@ -485,6 +485,11 @@
       "files": [{ "path": "packages/ui/src/components/timeline.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-kanban", "type": "registry:ui", "title": "Kanban",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/kanban.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-log-console", "type": "registry:ui", "title": "Log Console",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/log-console.tsx", "type": "registry:ui" }]
