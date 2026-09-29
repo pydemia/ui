@@ -3,14 +3,17 @@
 2026-09-30 InputGroup과 모바일 SNB 후속 보정 진행:
 `InputGroup`을 기존 Input·Textarea·Button으로 구성하고 문서 preview·
 Usage·registry metadata·SSR 테스트를 추가했습니다. 92개 component,
-94개 registry item입니다. package 테스트 68/68과 typecheck,
-로컬 Chromium의 form 제출·Tab·390px 배치·dark token을 확인했습니다.
+94개 registry item입니다. package 테스트 68/68과 typecheck·build·
+registry release 검사, 로컬 Chromium의 form 제출·Tab·390px 배치·
+dark token을 확인했습니다. 새 snapshot은
+`sha256-d8219d9053fecc606f6219a9ec4ed62d4d47b0d682ec6411dfe77114280da271`입니다.
 모바일 SNB는 선택 직전의 문서·가로 스크롤 위치를 화면 갱신 후
 복원합니다. 390px 선택에서 위치·버튼 focus가 유지되고 1280px의
 기존 본문 이동도 확인했습니다. source·license·의존성 기록은
 `research/source-inventory.md`에 있으며 세부 사항은
 [InputGroup 작업 기록](component-input-group-2026-09-30.md)을 보세요.
-registry snapshot·독립 소비자·CI·공개 배포는 아직 진행 전입니다.
+독립 소비자 CLI 설치·typecheck·build·390px Chromium 동작은
+통과했습니다. CI·공개 배포는 아직 진행 전입니다.
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 
 2026-09-30 [PR #11](https://github.com/pydemia/ui/pull/11) 배포:

@@ -35,8 +35,14 @@ upstream 의존성을 `research/source-inventory.md`에 기록했습니다.
   제거하고 버튼 focus가 선택한 항목에 남았습니다.
 - 1280px에서 SNB 선택 후 `#components` 위치가 84px 부근으로
   이동하는 기존 동작을 확인했습니다.
+- `npm run build`와 `npm run registry:release-check` 통과. 94개
+  registry item과 92개 component의 대응을 확인했습니다. 새 snapshot은
+  `sha256-d8219d9053fecc606f6219a9ec4ed62d4d47b0d682ec6411dfe77114280da271`입니다.
+- 별도 Vite 소비자에 `shadcn@4.21.0`으로 InputGroup·Field·tokens와
+  전이 의존성을 설치했습니다. typecheck·build가 통과했고 390px
+  Chromium에서 ID `3077` 제출, 메모 저장, 가로 overflow 없음과
+  공유 focus 테두리를 확인했습니다.
 
 실제 touch·Safari·screen reader·RTL은 검증하지 않았습니다.
-registry snapshot·독립 소비자·공개 배포는 진행 후 이 파일에
-결과를 추가합니다. 기존 미공개 draft snapshot 네 디렉터리는
-이번 변경에 포함하지 않습니다.
+공개 배포 결과는 진행 후 이 파일에 추가합니다. 기존 미공개 draft
+snapshot 네 디렉터리는 이번 변경에 포함하지 않습니다.
