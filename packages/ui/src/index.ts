@@ -133,6 +133,8 @@ export type {
     DataChartProps, ChartPoint, ChartSeries,
 } from "./components/data-chart";
 export { DonutChart } from "./components/donut-chart";
+export { Heatmap } from "./components/heatmap";
+export type { HeatmapProps, HeatmapRow } from "./components/heatmap";
 export type { DonutChartProps, DonutSegment } from "./components/donut-chart";
 export {
     Dashboard, DashboardMetrics, DashboardPanels,

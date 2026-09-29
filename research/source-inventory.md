@@ -1,5 +1,23 @@
 # Component taxonomy와 source 검토
 
+## 2026-09-30 Heatmap reference 확인
+
+[Kibo Contribution Graph 공식 문서](https://www.kibo-ui.com/components/contribution-graph)는
+시간별 활동 강도, 명시한 값, 좁은 화면의 내부 가로 스크롤을 보여 줍니다.
+같은 revision [`3d63cdb`](https://github.com/shadcnblocks/kibo/tree/3d63cdb15b79d972e3dc38a10997987672f9b263)의
+[소스](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/contribution-graph/index.tsx),
+[package manifest](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/contribution-graph/package.json),
+[LICENSE](https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/license.md)를
+확인했습니다. MIT이며 React·react-dom·date-fns·내부 shadcn-ui에
+의존합니다. `pyd-heatmap`은 이 소스를 복사하지 않았습니다. 달력 날짜를
+계산하는 대신 호출자가 두 범주의 행렬을 전달하는 원본 React·Tailwind
+구현입니다. 직접 의존성은 기존 `pyd-utils`뿐입니다.
+
+[W3C WAI 표 지침](https://www.w3.org/WAI/tutorials/tables/)의 행·열
+헤더 연결을 참고해 native table과 `scope`를 사용했습니다. 색만으로
+값을 전달하지 않도록 모든 숫자를 셀 텍스트로 표시합니다. 실제 screen
+reader 검사는 별도 기록합니다.
+
 ## 2026-09-30 Kanban reference 확인
 
 [Kibo Kanban 공식 문서](https://www.kibo-ui.com/components/kanban)는 열 사이
