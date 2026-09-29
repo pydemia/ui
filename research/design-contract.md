@@ -686,3 +686,18 @@ Sidebar를 접어도 제목은 화면 판독기용 텍스트로 남고, 모바�
 제목을 보여줍니다. 링크의 `current`와 `onNavigate`, 접힘·Drawer
 제어 방식은 기존과 같습니다. 라우팅과 현재 항목 상태는 호출자가
 소유합니다. `items` 사용 코드는 수정할 필요가 없습니다.
+
+## 2026-09-30 기간 필터 조합
+
+문서의 `FilterBar` 예시는 기존 `DateRangePicker`의 controlled draft
+값과 별도의 applied 값을 사용합니다. `FilterBar` 제출 때
+`FormData`의 `periodStart`·`periodEnd`가 모두 비어 있지 않아야
+적용합니다. 부분 선택은 오류를 표시하고 이전 applied 값과 결과
+목록을 유지합니다. 초기화는 draft·applied·오류를 함께 지웁니다.
+
+예제 행은 날짜만 담은 `YYYY-MM-DD` 값이므로 완성된 기간의 양끝을
+포함해 문자열로 비교합니다. 서버 timestamp나 일광 절약 시간이
+있는 데이터의 날짜 구간은 소비자가 사용하는 시간대와 끝 경계를
+정해 변환해야 합니다. `오늘`·`최근 7일` 같은 preset도 소비자 앱이
+기준일과 시간대를 정한 뒤 draft에 넣습니다. 이 조합은 새 public
+component나 registry item을 만들지 않습니다.

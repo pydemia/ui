@@ -363,6 +363,22 @@ AppShell, Navigation, LogConsole, Sparkline, PageHeader, ContentList를
 구현 결정과 진행 상태는
 `.worknotes/component-sidebar-groups-2026-09-30.md`에 기록했습니다.
 
+## 2026-09-30 기간 필터 조합 예시
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck`·`npm run build` | pass | UI·두 앱 TypeScript와 정적 문서 |
+| `npm run registry:release-check` | pass | 92개 item·90개 catalog/export와 현재 snapshot 일치 |
+| Chromium 문서 preview | pass (limited) | 9월 26일 부분 선택 제출 오류·3건 유지, 29일 완료 후 적용 2건, 초기화 3건, 기존 검색·상태 예시 전환 |
+| 별도 Vite 소비자 | pass | 공개 고정 snapshot의 4개 item 설치·11개 파일 생성, 세 원본 파일 일치, 사용 코드 typecheck·build |
+| 실제 screen reader·touch·다른 시간대 | unverified | 보조기술 발표·터치 입력·timestamp 구간 변환 미실행 |
+
+기존 snapshot
+`sha256-bd48f81920e4ed1242c68f8ffb3aa84483d8cc37118e65451a7dc784f61536d9`의
+두 component를 조합했습니다. 새 registry source나 snapshot은 만들지
+않았습니다. 배포 결과는
+`.worknotes/component-date-range-filter-recipe-2026-09-30.md`에 갱신합니다.
+
 ## 2026-09-29 단계·활동 표시
 
 | 검사 | 결과 | 확인 범위 |

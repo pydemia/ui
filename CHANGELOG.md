@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-09-30 — 기간 필터 조합 예시
+
+- `FilterBar` 문서에 `DateRangePicker`를 결합한 적용·부분 선택 오류·
+  초기화·결과 목록 preview와 복사 가능한 사용 코드를 추가했습니다.
+- 기존 component와 registry item을 그대로 사용합니다.
+
 ## 2026-09-30 — Sidebar 섹션 탐색
 
 - `Sidebar`에 이름 있는 `sections` 입력을 추가했습니다. 기존 평면
