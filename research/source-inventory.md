@@ -193,7 +193,10 @@ Data & analytics의 MetricCard는
 [원본](https://github.com/tremorlabs/tremor/blob/ca4d588f47820ff3d514d37fa4ee08a4222dec11/src/components/Card/Card.tsx)과
 [Apache-2.0 LICENSE](https://github.com/tremorlabs/tremor/blob/ca4d588f47820ff3d514d37fa4ee08a4222dec11/LICENSE)를
 확인했으며 해당 source 코드는 복사하지 않았습니다. 변화량을 색상에만
-의존하지 않고 텍스트로 표시합니다.
+의존하지 않고 텍스트로 표시합니다. 2026-09-29에 기존 `MetricCard`에
+`compact`와 `featured` 표시 형태를 추가했습니다. `Card`와 공통 token만
+사용하며 새 upstream source나 dependency를 편입하지 않았습니다.
+세 형태는 같은 수치·변화·기간 텍스트를 유지합니다.
 
 File & media의 Dropzone은
 [Kibo 문서](https://www.kibo-ui.com/components/dropzone),
@@ -241,6 +244,60 @@ DatePicker는 기존 Calendar와 Popover를 조합한 원본 코드입니다.
 설치된 release의 MIT LICENSE를 대조했습니다. 값은 로컬 시각이 아닌
 `YYYY-MM-DD` 달력 날짜로 정했고, form 전송은 hidden input으로 처리합니다.
 
+DateRangePicker도 기존 Calendar와 Popover를 조합한 원본 코드입니다.
+[DayPicker v9.14.0 range mode 문서](https://daypicker.dev/v9/selections/range-mode)와
+[접근성 문서](https://daypicker.dev/guides/accessibility)의 range 선택,
+`resetOnSelect`, `excludeDisabled`, keyboard 규칙을 확인했습니다.
+설치된 `react-day-picker@9.14.0`의 `useRange.js`, `addToRange.js`,
+manifest와 같은 release의
+[MIT LICENSE](https://github.com/gpbl/react-day-picker/blob/v9.14.0/LICENSE)를
+검사했습니다. 기존 Calendar의 DayPicker와 Popover의
+`@radix-ui/react-popover@1.1.23`을 재사용하며 새로운 외부 runtime
+dependency는 없습니다. 두 날짜의 파싱·포맷은 DatePicker와 공유하는
+저장소 원본 `calendar-date.ts`가 맡습니다. 실제 접근성 확인 범위는
+`verification.md`에 기록합니다.
+
+## 2026-09-29 계층형 리소스 탐색
+
+Tree는 기존 React와 Tailwind, `pyd-utils`만 사용하는 저장소 원본
+구현입니다. 외부 component source를 복사하지 않았습니다.
+[W3C WAI-ARIA Tree View Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/)에서
+treeitem·group 관계, focus와 선택의 구분, 키보드 규칙을 확인했습니다.
+[W3C Navigation Treeview Example](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/examples/treeview-navigation/)은
+일반 사이트 탐색에서는 disclosure 패턴이 더 적합할 수 있고 실제
+보조기술 테스트가 필요하다고 설명합니다. Tree의 사용처를 파일·리소스
+계층으로 제한하고, 기존 `Navigation`·`Sidebar`와 용도를 구분했습니다.
+새 외부 runtime dependency는 없습니다. 실제 browser 확인 범위는
+`verification.md`에 기록합니다.
+
+## 2026-09-29 대화 목록
+
+Conversation은 기존 `Message`, React, Tailwind와 `pyd-utils`를
+사용하는 저장소 원본 구현입니다. 외부 component source를 복사하거나
+runtime dependency를 추가하지 않았습니다.
+[WAI-ARIA 1.2 log role](https://www.w3.org/TR/wai-aria-1.2/#log)은
+순서대로 새 항목이 추가되는 채팅 기록을 `log`의 예시로 제시하며,
+기본 live 상태는 `polite`입니다. 실제 보조기술의 발표 결과는
+검증하지 않았습니다.
+
+## 2026-09-29 AI 작업 상태
+
+Reasoning과 ToolCall은 저장소 원본 구현입니다. Reasoning은 기존
+shadcn 기반 `Collapsible`, lucide, utils를 조합하고 ToolCall은 React와
+utils만 사용합니다. 새로운 외부 runtime dependency는 없습니다.
+[shadcn/ui Collapsible 문서](https://ui.shadcn.com/docs/components/radix/collapsible),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/collapsible.tsx),
+[동일 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+직접 확인했습니다. 설치본에는 MIT 고지 파일이 함께 생성됩니다.
+기존 package의 `@radix-ui/react-collapsible@1.1.20`과
+`lucide-react@0.468.0` 설치 상태를 확인했습니다.
+[W3C WAI-ARIA APG Disclosure Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)에서
+button의 `aria-expanded`와 Enter·Space 동작을 확인했고,
+[W3C WAI-ARIA status role](https://www.w3.org/TR/wai-aria-1.2/#status)에서
+polite live 발표 규칙을 확인했습니다. 두 문서는 동작·접근성
+reference이며 component source를 복사하지 않았습니다. 실제 보조기술
+발표 결과는 검증하지 않았습니다.
+
 ## 2026-09-29 구현 출처 재분류
 
 위 2026-09-28 기록은 당시 편입 방식과 의존성 조사입니다. 현재
@@ -249,3 +306,636 @@ Dropzone은 native file input과 drag/drop 이벤트로 직접 구현했고
 AI Elements, Tremor는 구현 출처가 아닌 디자인·동작 reference로
 `registry/provenance.json`에 별도로 기록합니다. 문서 사이트도
 현재 코드의 출처와 디자인 reference를 분리해 표시합니다.
+
+## 2026-09-29 차트·대시보드·알림 reference
+
+DataChart, Dashboard, Toast는 이 저장소에서 직접 작성했습니다.
+[shadcn/ui Chart 공식 문서](https://ui.shadcn.com/docs/components/base/chart)의
+조합 방식을 참고했지만 해당 구현의 Recharts와 component source는
+사용하지 않았습니다. Toast의 발표 수준과 focus 정책은
+[WAI-ARIA status](https://www.w3.org/TR/wai-aria/#status)와
+[WAI Alert Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)을
+참고했습니다. 세 component의 신규 직접·전이 npm dependency는
+없습니다. 코드 출처와 reference는 `registry/provenance.json`에서
+구분합니다.
+
+## 2026-09-29 목록·패널 reference
+
+Pagination과 DataTable은 native table, React state, 기존 내부
+component로 직접 작성했습니다.
+[WAI sortable table 예시](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)의
+정렬 버튼·`aria-sort` 의미와
+[modal dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)의
+focus 이동을 확인했습니다. Drawer는 기존
+`@radix-ui/react-dialog@1.1.23`을 조합한 자체 wrapper입니다.
+[공식 Dialog 문서](https://www.radix-ui.com/primitives/docs/components/dialog)와
+설치된 1.1.23의 배포 소스 `dist/index.mjs`, package manifest,
+같은 release의 MIT LICENSE를 직접 확인했습니다. 웹 문서가 표시하는
+버전 1.1.20과 설치된 release를 구분합니다. 새 npm dependency는
+없습니다.
+
+## 2026-09-29 작업 메뉴·비밀번호·차트 reference
+
+DropdownMenu와 PasswordInput은 이 저장소에서 직접 작성했습니다.
+[Radix Dropdown Menu 문서](https://www.radix-ui.com/primitives/docs/components/dropdown-menu)의
+키보드·checked·submenu 동작과
+[WAI Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/)의
+고정 이름 toggle 규칙을 참고했습니다. 설치된
+`@radix-ui/react-dropdown-menu@2.1.22`의 배포 소스, manifest와 MIT
+LICENSE를 같은 release에서 확인했습니다. npm lockfile의 전이 closure
+47개에는 MIT metadata 46개와 0BSD 1개가 있습니다.
+`react-remove-scroll-bar@2.3.8`의 설치 파일에는 LICENSE가 없고
+manifest와 upstream 저장소는 MIT로 표기합니다. 동일 revision의
+LICENSE 파일 확인은 남아 있습니다. DataChart의 `area` variant는
+원본 SVG 구현을 확장했으며 추가 npm dependency가 없습니다.
+
+## 2026-09-29 검색 선택·구성비 차트 reference
+
+Combobox와 DonutChart는 이 저장소에서 직접 작성했습니다.
+[WAI-ARIA Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)의
+role·keyboard 규칙과
+[shadcn/ui Pie Chart](https://ui.shadcn.com/charts/pie)의 시각 표현을
+참고했지만 두 source의 구현 코드는 편입하지 않았습니다. 따라서
+복사한 upstream 소스의 동일 revision LICENSE는 이번 두 item에
+해당하지 않습니다. 직접·전이 npm dependency도 추가하지 않았습니다.
+registry에서는 기존 `pyd-input`과 `pyd-utils`만 참조합니다. 원본
+SVG·입력 상태 구현과 미검증 범위는
+`.worknotes/component-combobox-donut-2026-09-29.md`에 기록했습니다.
+
+## 2026-09-29 크기 조절 패널·원형 진행 표시 reference
+
+`ResizablePanels`는 이 저장소에서 직접 작성했습니다.
+[WAI-ARIA APG Window Splitter](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/)의
+separator 이름·값·키보드 규칙을 참고했습니다. APG 문서는 예시의
+기능 검토가 아직 완료되지 않았다고 명시하므로 동작은 브라우저에서
+별도로 확인합니다. shadcn/ui Resizable의
+`react-resizable-panels` 코드는 사용하지 않았습니다.
+
+`Progress`의 `circular` variant는 기존 Radix progressbar wrapper에
+원본 SVG를 추가했습니다.
+[Radix Progress 공식 문서](https://www.radix-ui.com/primitives/docs/components/progress)의
+값·indeterminate 의미를 따릅니다. 기존 shadcn/ui 변형 코드의
+revision과 MIT LICENSE는 `registry/provenance.json`에 기록된 것을
+유지합니다. 두 변경 모두 새 npm dependency는 없습니다.
+
+## 2026-09-29 접힘식 Sidebar reference
+
+`Sidebar`는 내부 `Button`, `SideNav`, `Drawer`를 조합한 원본
+구현입니다. [shadcn/ui Sidebar 공식 문서](https://ui.shadcn.com/docs/components/aria/sidebar)의
+접힘·모바일 구성을 디자인 reference로, [WAI Navigation Landmark](https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html)의
+이름 규칙을 접근성 reference로 확인했습니다. upstream source 코드를
+복사하지 않았습니다.
+
+모바일 Drawer가 사용하는 `@radix-ui/react-dialog@1.1.23`의 설치
+manifest, 배포 소스 `dist/index.mjs`, 동일 설치 패키지의 MIT LICENSE를
+확인했습니다. 공식 [Radix Dialog 문서](https://www.radix-ui.com/primitives/docs/components/dialog)는
+modal focus와 Escape 동작을 설명합니다. 새 npm dependency는 없으며
+registry 전이 항목은 `pyd-button`, `pyd-drawer`, `pyd-navigation`,
+`pyd-utils`입니다.
+
+## 2026-09-29 단계·활동 표시 reference
+
+`Stepper`와 `Timeline`은 이 저장소의 원본 구현입니다.
+[W3C ARIA26](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA26)의
+순서 목록과 `aria-current="step"` 예시,
+[WHATWG HTML Standard](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-time-element)의
+`time` 요소 규칙을 참고했습니다. upstream component source를 복사하지
+않았으므로 편입한 upstream revision·LICENSE는 없습니다. 두 item의
+직접 registry 의존성은 기존 `pyd-utils` 하나이며 새 npm dependency는
+없습니다. 상세 동작과 제한은
+`.worknotes/component-workflow-2026-09-29.md`에 기록했습니다.
+
+## 2026-09-29 파일 전송 상태 reference
+
+`FileUpload`는 기존 `Dropzone`과 `Progress`를 조합한 원본
+구현입니다. [WHATWG file input](<https://html.spec.whatwg.org/multipage/input.html#file-upload-state-(type=file)>)의
+파일 선택 모델과 [WAI-ARIA APG progress 값](https://www.w3.org/WAI/ARIA/apg/practices/range-related-properties/)을
+확인했습니다. 외부 component source를 새로 복사하지 않았습니다.
+`Progress`의 [shadcn/ui 고정 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/progress.tsx)와
+[동일 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 고정 revision은 `registry/provenance.json`의
+`pyd-progress` 항목에도 있습니다.
+설치된 `@radix-ui/react-progress@1.1.16`의 package manifest,
+`dist/index.mjs`와 MIT LICENSE도 확인했습니다. 직접 registry
+의존성은 `pyd-dropzone`, `pyd-progress`, `pyd-utils`이며 새 npm
+dependency는 없습니다.
+
+## 2026-09-29 다중 선택 reference
+
+`MultiSelect`는 이 저장소의 원본 구현입니다.
+[W3C WAI의 form control 그룹 지침](https://www.w3.org/WAI/tutorials/forms/grouping/)을
+native checkbox 묶음과 fieldset·legend 구성에 참고했습니다.
+[Radix Popover 공식 문서](https://www.radix-ui.com/primitives/docs/components/popover)의
+focus·Escape 동작을 확인하고 기존 `pyd-popover`를 조합했습니다.
+그 wrapper의
+[shadcn/ui 고정 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/popover.tsx)와
+[동일 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 설치된 `@radix-ui/react-popover@1.1.23`의 manifest,
+`dist/index.mjs`, MIT LICENSE도 확인했습니다. `MultiSelect`에 외부
+component source를 복사하지 않았고 새 npm dependency는 없습니다.
+직접 registry 의존성은 `pyd-input`, `pyd-popover`, `pyd-utils`입니다.
+
+## 2026-09-29 명령 팔레트 reference
+
+`CommandPalette`는 이 저장소의 원본 구현입니다.
+[WAI-ARIA APG Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)의
+검색 중 focus 유지, `aria-activedescendant`, 방향키와 Enter 동작을
+참고했습니다. modal focus·Escape에는 기존 `pyd-dialog`를 사용합니다.
+[Radix Dialog 공식 문서](https://www.radix-ui.com/primitives/docs/components/dialog)와
+wrapper의 [shadcn/ui 고정 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/dialog.tsx),
+[동일 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 설치된 `@radix-ui/react-dialog@1.1.23`의 manifest,
+`dist/index.mjs`, MIT LICENSE도 확인했습니다. 외부 Command 구현
+소스는 복사하지 않았으며 직접 registry 의존성은 `pyd-dialog`,
+`pyd-input`입니다. 새 npm dependency는 없습니다.
+
+## 2026-09-29 shadcn/ui 고지의 소비자 전달
+
+shadcn/ui에서 수정한 26개 source는
+[고정 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+사용합니다. [공식 registry item 명세](https://ui.shadcn.com/docs/registry/registry-item-json)의
+`registry:file`과 `target`을 사용해 각 item의 설치 결과에
+`SHADCN_UI_LICENSE.md`를 포함했습니다. 이 파일은 같은 revision의
+copyright와 MIT 허가·면책 문구를 담습니다. item별 소비자 전달 경로는
+`registry.json`과 `registry/provenance.json`의 `consumer_notice`에
+기록했습니다. 기존 `THIRD_PARTY_NOTICES.md`는 저장소 차원의 출처
+기록으로 유지합니다.
+
+## 2026-09-29 분석 필터 reference
+
+`FilterBar`는 이 저장소의 원본 구현입니다.
+[W3C WAI-ARIA APG Landmark Regions](https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/)에서
+이름이 있는 form의 landmark 동작을 확인했고,
+[W3C Form Labels](https://www.w3.org/WAI/tutorials/forms/labels/)에서
+입력 control의 label 연결을 확인했습니다. 외부 component source를
+복사하지 않아 편입한 upstream revision·LICENSE는 없습니다. 직접
+registry 의존성은 기존 `pyd-button`, `pyd-utils`이며 새 npm dependency는
+없습니다. `Field`, `Input`, `NativeSelect` 등은 사용 예시에만 필요합니다.
+
+## 2026-09-29 다중 계열 차트 reference
+
+기존 `DataChart` 원본 구현을 확장했습니다.
+[shadcn/ui Chart 공식 문서](https://ui.shadcn.com/docs/components/base/chart)의
+다중 계열·범례 표현은 디자인 reference입니다. 공식 구현의 Recharts
+source를 복사하지 않았고 새 package도 설치하지 않았으므로 편입한
+upstream revision·LICENSE는 없습니다.
+[W3C WAI Complex Images](https://www.w3.org/WAI/tutorials/images/complex/)에서
+차트의 짧은 설명과 상세 데이터 대안을 확인했습니다. 기존
+`pyd-utils` 외 직접 registry 의존성은 없습니다.
+
+## 2026-09-29 콘텐츠 Carousel reference
+
+`Carousel`은 이 저장소에서 직접 구현했습니다.
+[WAI-ARIA APG Carousel 패턴](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/)의
+이름 있는 영역·슬라이드, 이전·다음 native button, 수동 전환의
+`aria-live="polite"`, 현재 선택 버튼의 `aria-disabled`를 확인했습니다.
+[shadcn/ui Carousel 공식 문서](https://ui.shadcn.com/docs/components/base/carousel)는
+기능 범위만 비교했습니다. 그 구현은 Embla를 사용하며 source를
+복사하거나 Embla를 설치하지 않았습니다. 따라서 `Carousel` 자체에
+편입한 외부 revision·LICENSE는 없습니다.
+
+직접 registry 의존성은 기존 `pyd-button`과 `pyd-utils`입니다.
+`pyd-button`의 [고정 shadcn/ui source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx)와
+[동일 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+재확인했습니다. 소비자 설치에는 그 MIT 고지 파일이 함께 들어갑니다.
+새 npm dependency는 없습니다.
+
+## 2026-09-29 일반 이미지 reference
+
+`Image`는 이 저장소에서 직접 구현했습니다.
+[W3C WAI Images Tutorial](https://www.w3.org/WAI/tutorials/images/)의
+정보 이미지 설명과 장식 이미지의 빈 `alt` 지침,
+[WHATWG HTML 이미지 명세](https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element)의
+native `<img>` 속성을 확인했습니다. 외부 component source를 복사하지
+않아 편입한 upstream revision·LICENSE는 없습니다. 직접 registry
+의존성은 기존 `pyd-utils`뿐이며 새 npm dependency는 없습니다.
+
+## 2026-09-29 JSON 탐색 reference
+
+`JsonViewer`는 이 저장소에서 직접 구현했습니다.
+[WHATWG HTML details 명세](https://html.spec.whatwg.org/multipage/interactive-elements.html#the-details-element)의
+native disclosure와 summary 동작을 확인했습니다.
+[ECMA-404](https://ecma-international.org/publications-and-standards/standards/ecma-404/)는
+허용할 JSON 값의 범위를 정하는 데 참고했습니다. 외부 component
+source를 복사하지 않아 편입한 upstream revision·LICENSE는 없습니다.
+직접 registry 의존성은 기존 `pyd-utils`뿐이며 새 npm dependency는
+없습니다.
+
+## 2026-09-29 색상 입력 reference
+
+`ColorInput`은 문서 사이트의 기존 Colormap 편집 요구를 분리해 이
+저장소에서 직접 구현했습니다. native 색상 입력의 동작 범위는
+[WHATWG HTML color state](https://html.spec.whatwg.org/multipage/input.html#color-state-(type=color))를,
+두 필드의 이름과 연결은
+[W3C WAI form labels](https://www.w3.org/WAI/tutorials/forms/labels/)를
+참고했습니다. 외부 component source를 복사하지 않아 편입한 upstream
+revision·LICENSE는 없습니다. 직접 registry 의존성은 기존
+`pyd-utils`뿐이며 새 npm dependency는 없습니다.
+
+## 2026-09-29 검색 입력 reference
+
+`SearchInput`은 이 저장소에서 직접 구현했습니다.
+[WHATWG HTML Search state](https://html.spec.whatwg.org/multipage/input.html#text-(type=text)-state-and-search-state-(type=search))의
+native 검색 필드·form 제출과
+[W3C WAI search landmark](https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/)의
+이름 있는 검색 영역을 참고했습니다. 외부 component source를 복사하지
+않아 편입한 upstream revision·LICENSE는 없습니다. 직접 registry
+의존성은 기존 `pyd-input`·`pyd-button`이며 새 npm dependency는
+없습니다. 이 두 항목의 shadcn/ui MIT 고지는 registry 설치 시 함께
+전달합니다.
+
+## 2026-09-29 ContextMenu reference
+
+`ContextMenu`는 기존 `DropdownMenu`의 token과 표현 규칙에 맞춰 이
+저장소에서 직접 구현했습니다. 별도 primitive를 쓰는 이유는 메뉴를
+pointer 위치의 우클릭 또는 focus 가능한 대상의 `Shift+F10`으로 열어야
+하기 때문입니다. [shadcn/ui Context Menu 공식 문서](https://ui.shadcn.com/docs/components/radix/context-menu),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/context-menu.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. source를 복사하지 않아 shadcn notice를 이 item에
+포함하지 않습니다.
+
+[Radix Context Menu 공식 문서](https://www.radix-ui.com/primitives/docs/components/context-menu)의
+우클릭·길게 누르기, item 탐색·활성화·submenu·Escape 규칙을
+확인했습니다. 실제 의존성 `@radix-ui/react-context-menu@2.3.7`의
+설치 패키지 `dist/index.mjs`, `LICENSE`와 package metadata를 같은
+버전에서 확인했습니다. MIT LICENSE는 WorkOS copyright를 포함하며
+패키지 자체가 npm dependency로 설치됩니다. 직접 registry 의존성은
+`pyd-utils`, npm dependency는 해당 Radix 패키지와
+`lucide-react@0.468.0`입니다. 추가 UI reference library 코드는
+사용하지 않았습니다.
+
+## 2026-09-29 숫자 입력 reference
+
+`NumberInput`은 이 저장소에서 직접 구현했습니다.
+[WAI-ARIA APG Spinbutton](https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/)의
+이름·범위·값 표현과 방향키, Home/End 조작을 참고했습니다.
+[WHATWG HTML Number state](https://html.spec.whatwg.org/multipage/input.html#number-state-(type=number))의
+숫자값 직렬화와 native form 동작도 확인했습니다. 외부 component
+source를 복사하지 않아 편입한 upstream revision·LICENSE는 없습니다.
+직접 registry 의존성은 기존 `pyd-input`이며 새 npm dependency는
+없습니다. `pyd-input`의 shadcn/ui MIT 고지는 registry 설치 시 함께
+전달합니다.
+
+## 2026-09-29 태그 입력 reference
+
+`TagsInput`은 이 저장소에서 직접 구현했습니다.
+[W3C WAI form labels](https://www.w3.org/WAI/tutorials/forms/labels/)의
+명시적으로 연결된 label과
+[W3C WAI form instructions](https://www.w3.org/WAI/tutorials/forms/instructions/)의
+키보드 조작 안내,
+[W3C WAI form validation](https://www.w3.org/WAI/tutorials/forms/validation/)의
+오류 설명을 참고했습니다. 외부 component source를 복사하지 않아
+편입한 upstream revision·LICENSE는 없습니다. 직접 registry 의존성은
+기존 `pyd-utils`뿐이고, 새 npm dependency는 없습니다.
+
+## 2026-09-29 Spinner 형태 확장
+
+기존 Spinner의 shadcn/ui 기반 icon 형태에 `ring`, `dots`, `bars`,
+`orbit` 표현을 추가했습니다. [공식 Spinner 문서](https://ui.shadcn.com/docs/components/radix/spinner),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/spinner.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 추가 형태의 SVG는 이 저장소에서 직접 작성했습니다.
+움직임 줄이기 처리는 [W3C WAI C39](https://www.w3.org/WAI/WCAG22/Techniques/css/C39)의
+`prefers-reduced-motion` 사용 지침을 참고했습니다.
+
+새 npm dependency는 없습니다. 기존 `lucide-react@0.468.0`과
+`pyd-utils`를 사용하며, registry 설치 시 shadcn/ui MIT 고지를
+함께 전달합니다. 접근 가능한 이름을 가진 `status` semantics를
+모든 형태에 적용합니다.
+
+## 2026-09-29 NavigationMenu reference
+
+`NavigationMenu`는 이 저장소에서 직접 작성한 Radix primitive 조합입니다.
+[shadcn/ui 공식 문서](https://ui.shadcn.com/docs/components/radix/navigation-menu),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/navigation-menu.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. shadcn source는 복사하지 않았고 compound 구성만
+참고했습니다. [Radix Navigation Menu 문서](https://www.radix-ui.com/primitives/docs/components/navigation-menu)의
+Link·Trigger·Content 관계, 방향키·Escape 규칙을 확인했습니다.
+
+직접 npm dependency는 `@radix-ui/react-navigation-menu@1.2.22`와
+기존 `lucide-react@0.468.0`입니다. 설치된 Radix 1.2.22의
+`package.json`, `dist/index.mjs`, MIT `LICENSE`를 같은 버전에서
+확인했습니다. LICENSE에는 WorkOS copyright가 있습니다. 직접
+registry 의존성은 `pyd-utils`이며 추가 UI reference library 코드는
+사용하지 않았습니다.
+
+## 2026-09-29 DataChart 누적 막대
+
+기존 프로젝트 소유 `DataChart`에 누적 막대 계산과 SVG 도형을 직접
+추가했습니다. 기존에 기록한
+[shadcn/ui Chart 공식 문서](https://ui.shadcn.com/docs/components/base/chart)는
+차트 조합의 디자인 reference이며, 해당 component source나
+Recharts 구현을 가져오지 않았습니다. 따라서 이번 variant에 편입한
+외부 source revision이나 새 LICENSE는 없습니다. 직접 registry
+의존성은 기존 `pyd-utils`뿐이며 새 npm dependency도 없습니다.
+접근 가능한 값 목록은 기존 숨겨진 데이터 표를 그대로 사용합니다.
+
+## 2026-09-29 HoverCard reference
+
+`HoverCard`는 이 저장소의 `Popover` 관례에 맞춰 직접 작성했습니다.
+[shadcn/ui 공식 문서](https://ui.shadcn.com/docs/components/radix/hover-card),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/hover-card.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 해당 source를 복사하지 않고 Root·Trigger·Content 구성과
+링크 미리보기 용례만 참고했습니다.
+
+[Radix Hover Card 문서](https://www.radix-ui.com/primitives/docs/components/hover-card)는
+시각 사용자가 링크 목적지를 미리 보는 용도이며, 내용은 screen reader에
+노출되지 않고 keyboard focus에서 열릴 수 있다고 설명합니다. 따라서
+필수 정보는 카드 안에만 두지 않습니다. 직접 npm dependency는
+`@radix-ui/react-hover-card@1.1.23`, registry 의존성은 `pyd-utils`입니다.
+설치된 1.1.23의 `package.json`, `dist/index.mjs`, MIT `LICENSE`를
+같은 버전에서 확인했습니다. LICENSE에는 WorkOS copyright가 있습니다.
+추가 UI reference library 코드는 사용하지 않았습니다.
+
+## 2026-09-29 Toast queue 확장
+
+기존 프로젝트 소유 `Toast`에 queue hook과 표시 컴포넌트를 직접
+추가했습니다. [WAI Alert Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)은
+알림이 작업 focus를 방해하지 않아야 하며 너무 빠른 자동 소멸과 잦은
+발표를 피하라고 설명합니다. 기존 `status`·`alert` 구분과 수동 닫기를
+유지하고, 같은 `dedupeKey`가 대기열에 있으면 반복 추가를 무시합니다.
+외부 component source를 편입하지 않았고 새 npm dependency도 없습니다.
+직접 registry 의존성은 기존 `pyd-utils`뿐입니다.
+
+## 2026-09-29 TimePicker
+
+`TimePicker`의 시·분 조합, 부분 입력과 `HH:mm` 변환은 프로젝트에서
+직접 작성했습니다. [React의 select 문서](https://react.dev/reference/react-dom/components/select)는
+controlled 값·변경 이벤트·form과 label 연결의 근거입니다.
+[MDN의 time input 문서](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/time)는
+화면 형식과 독립된 24시간 `HH:mm` 값의 의미를 확인하는 reference입니다.
+[Intl.DateTimeFormat 문서](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat)는
+locale별 hour cycle과 day period 표기를 확인하는 reference입니다.
+[W3C WAI의 form grouping 지침](https://www.w3.org/WAI/tutorials/forms/grouping/)에
+따라 관련 select를 `fieldset`·`legend`로 묶고 각 select에도 이름을
+제공했습니다.
+이 문서들의 source는 복사하지 않았습니다.
+
+표시용 `NativeSelect`는 이미 편입된 shadcn/ui 기반 component를
+재사용합니다. [공식 문서](https://ui.shadcn.com/docs/components/radix/native-select),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/native-select.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+다시 확인했습니다. 새 소비자 설치에 NativeSelect와 MIT 고지 파일이
+함께 생성됐습니다. 직접 registry 의존성은 `pyd-native-select`와
+`pyd-utils`입니다. `NativeSelect`의 아이콘에 쓰이는 설치 버전
+`lucide-react@0.468.0`의 package manifest와 ISC LICENSE를
+소비자 fixture에서 확인했습니다. 이번 변경으로 새 npm dependency는
+추가하지 않았습니다.
+
+## 2026-09-29 DataChart 구간 선택기
+
+기존 프로젝트 소유 `DataChart`에 native `<select>`와 SVG pointer
+영역을 직접 추가했습니다.
+[shadcn/ui Chart 공식 문서](https://ui.shadcn.com/docs/components/base/chart)는
+차트와 값 표시의 조합 reference이며 Recharts나 `ChartTooltip` source는
+편입하지 않았습니다.
+[W3C 데이터 표 지침](https://www.w3.org/WAI/tutorials/tables/)에 맞춰
+기존 `<table>`의 범주·계열 머리글과 모든 값을 유지합니다. 따라서
+이번 확장에 편입한 외부 source revision이나 새 LICENSE는 없습니다.
+직접 registry 의존성은 기존 `pyd-utils`뿐이고 새 npm dependency도
+없습니다.
+
+## 2026-09-29 ToggleGroup reference
+
+`ToggleGroup`은 기존 토큰과 `utils`를 쓰는 프로젝트 소유 wrapper로
+작성했습니다. [shadcn/ui 공식 문서](https://ui.shadcn.com/docs/components/radix/toggle-group),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/toggle-group.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 코드를 복사하지 않고 단일·복수 그룹의 용례만
+참고했습니다.
+
+[Radix Toggle Group 문서](https://www.radix-ui.com/primitives/docs/components/toggle-group)는
+controlled·uncontrolled 값, 방향키 탐색과 비활성 항목을 명시합니다.
+직접 npm dependency는 `@radix-ui/react-toggle-group@1.1.19`, registry
+의존성은 `pyd-utils`입니다. 설치된 1.1.19의 `package.json`,
+`dist/index.mjs`, WorkOS copyright의 MIT `LICENSE`를 확인했습니다.
+해당 버전의 직접 의존성은 Radix primitive, context, direction,
+roving focus, toggle, controllable state 패키지입니다.
+
+## 2026-09-29 PinInput reference
+
+`PinInput`은 native React input과 Tailwind로 직접 작성했습니다.
+[shadcn/ui 공식 Input OTP 문서](https://ui.shadcn.com/docs/components/radix/input-otp),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/input-otp.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. upstream의 `input-otp` source나 패키지는 편입하지
+않았습니다. 분리된 칸의 표현만 참고했습니다.
+
+[MDN OTP 입력 안내](https://developer.mozilla.org/en-US/docs/Web/Security/Authentication/OTP)의
+native 입력 속성을 적용했습니다. 직접 registry 의존성은 기존
+`pyd-utils`이고 새 npm dependency는 없습니다. 실제 SMS 자동완성은
+확인하지 않았습니다.
+
+## 2026-09-29 Rating reference
+
+`Rating`은 native React radio와 Tailwind로 직접 작성했습니다.
+[W3C WAI Rating Radio Group 예시](https://www.w3.org/WAI/ARIA/apg/patterns/radio/examples/radio-rating/)에서
+점수를 radio로 선택하는 구조와 키보드 동작을 확인했습니다. 이 예시는
+자체 코드를 production용으로 제공하지 않는다고 명시합니다. 예시
+source는 사용하지 않았으므로 외부 component source revision이나
+LICENSE는 편입하지 않았습니다.
+
+[MDN radio 문서](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio)의
+같은 이름을 가진 input과 `required` 규칙을 적용했습니다. 직접 registry
+의존성은 기존 `pyd-utils`뿐이고 새 npm dependency는 없습니다.
+
+## 2026-09-29 DataChart 누적 영역
+
+기존 프로젝트 소유 `DataChart`에 `stacked-area` 계산과 SVG 도형을
+직접 추가했습니다. [Vega의 공식 누적 영역 예시](https://vega.github.io/vega/examples/stacked-area-chart/)는
+여러 계열의 누적값을 영역으로 표시하는 용례를 확인하는 데 사용했습니다.
+[Vega-Lite의 invalid data 문서](https://vega.github.io/vega-lite/docs/invalid-data.html)는
+결측값을 0으로 취급하거나 경로를 끊는 선택의 의미를 검토하는 데
+참고했습니다. 이번 구현은 범주 안의 계열 하나라도 `null`이면 그
+범주의 합계를 알 수 없는 값으로 표시하고 영역 경로를 끊습니다.
+
+참고 문서의 source를 복사하거나 Vega, Vega-Lite, Recharts package를
+설치하지 않았습니다. 따라서 새로 편입된 upstream revision·LICENSE는
+없습니다. 직접 registry 의존성은 기존 `pyd-utils`뿐입니다.
+
+## 2026-09-29 ScrollArea
+
+[shadcn/ui Scroll Area 공식 문서](https://ui.shadcn.com/docs/components/radix/scroll-area),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/scroll-area.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. root·viewport·scrollbar·thumb 구성을 이 저장소의
+token과 `@radix-ui/react-scroll-area` 패키지에 맞게 수정했습니다.
+viewport에 이름, `role=region`, keyboard focus를 추가했습니다.
+registry 설치 시 shadcn/ui MIT 고지 파일도 전달합니다.
+
+[Radix Scroll Area 문서](https://www.radix-ui.com/primitives/docs/components/scroll-area)는
+native 스크롤과 keyboard 조작을 명시합니다. 직접 npm 의존성은
+`@radix-ui/react-scroll-area@1.2.18`이며 설치된 package manifest와
+LICENSE는 MIT, copyright는 WorkOS 2022입니다. 그 패키지의 직접 전이
+의존성 9개 manifest도 모두 MIT로 확인했습니다. registry 내부 의존성은
+`pyd-utils`이고 새로운 icon package는 없습니다. 실제 screen reader
+발표, touch와 RTL 동작은 별도 검증이 필요합니다.
+
+## 2026-09-29 AvatarGroup
+
+`AvatarGroup`의 목록·표시 제한·남은 인원 표현은 이 저장소에서 직접
+작성했습니다. [shadcn/ui Avatar 공식 문서](https://ui.shadcn.com/docs/components/radix/avatar)는
+기존 `Avatar` 사용법의 reference입니다.
+[고정 revision의 Avatar source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/avatar.tsx)와
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 새 group에 외부 source를 복사하지 않았습니다.
+
+직접 registry 의존성은 기존 `pyd-avatar`, `pyd-utils`입니다. 새 npm
+dependency는 없습니다. 격리 소비자에 설치된
+`@radix-ui/react-avatar@1.2.6`의 package manifest와 MIT LICENSE를
+확인했습니다. 실제 screen reader와 이미지 요청 실패 후 fallback은
+검증하지 않았습니다.
+
+## 2026-09-29 ButtonGroup
+
+`ButtonGroup`의 연결 배치와 장식 분리선은 프로젝트에서 직접
+작성했습니다. [shadcn/ui 공식 문서](https://ui.shadcn.com/docs/components/radix/button-group),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button-group.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 작업 버튼과 상태 toggle의 사용처 구분, 이름 있는
+그룹의 native keyboard 조작을 참고했으며 upstream source는
+복사하지 않았습니다.
+
+새 npm dependency는 없습니다. 직접 registry 의존성은 기존
+`pyd-button`과 `pyd-utils`입니다. 격리 소비자에서 기존 `Button`에
+필요한 `class-variance-authority@0.7.1`(Apache-2.0),
+`clsx@2.1.1`(MIT), `tailwind-merge@3.7.0`(MIT)의 package
+manifest와 LICENSE 파일을 확인했습니다. shadcn/ui 기반 `Button`의
+MIT 고지 파일도 함께 설치됐습니다.
+
+## 2026-09-29 DateTimePicker
+
+`DateTimePicker`는 프로젝트 소유 `DatePicker`와 `TimePicker`를
+조합해 직접 작성했습니다. 외부 component source를 복사하거나 새
+npm dependency를 추가하지 않았습니다. 날짜 선택의 공식 문서·고정
+source·MIT LICENSE는 위 DatePicker와 Calendar 조사에, 시각 선택의
+native `<select>` 근거는 위 TimePicker 조사에 기록했습니다.
+
+직접 registry 의존성은 `pyd-date-picker`, `pyd-time-picker`,
+`pyd-utils`입니다. 격리 소비자 설치에서 이 항목과 전이 의존성을
+포함한 10개 파일이 생성됐고 원본과 일치했습니다. 설치된 외부 runtime
+패키지는 `react-day-picker@9.14.0`, `@radix-ui/react-popover@1.1.23`,
+`lucide-react@0.468.0`, React·`clsx`·`tailwind-merge`입니다.
+새로 작성한 조합에는 별도 upstream revision이나 LICENSE가 없습니다.
+
+## 2026-09-29 CodeBlock
+
+`CodeBlock`은 native `<figure>`·`<figcaption>`·`<pre>`·`<code>`와
+기존 `Button`으로 직접 작성했습니다.
+[MDN의 `pre` 문서](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre)에서
+공백 보존과 긴 줄의 CSS 처리 원칙을,
+[Clipboard `writeText()` 문서](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText)에서
+secure context와 Promise 실패 처리를 확인했습니다. MDN의 예시
+source는 복사하지 않았으므로 새로 편입된 upstream revision·LICENSE는
+없습니다.
+
+직접 registry 의존성은 기존 `pyd-button`, `pyd-utils`이고 새 외부
+npm dependency는 없습니다. 격리 소비자 설치에서 CodeBlock, Button,
+utils, token CSS, shadcn/ui MIT 고지 5개 파일을 원본과 대조했습니다.
+Button의 source·LICENSE·전이 의존성 조사는 앞선 기록을 따릅니다.
+
+## 2026-09-29 DataList
+
+`DataList`는 프로젝트에서 native `<dl>`·`<dt>`·`<dd>`를 사용해 직접
+작성했습니다. [MDN의 `dl` 문서](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl)와
+[HTML Living Standard의 description list 규칙](https://html.spec.whatwg.org/multipage/grouping-content.html#the-dl-element)을
+확인했습니다. 이름/값 쌍과 `div`를 통한 묶음만 참고했으며 외부
+source는 복사하지 않았습니다. 따라서 편입한 upstream revision이나
+LICENSE는 없습니다.
+
+직접 registry 의존성은 `pyd-utils`이고 새 npm dependency는 없습니다.
+문서 예시에서 쓰는 `Badge`는 별도 기존 component이며 `DataList`
+자체의 의존성은 아닙니다. 격리 소비자에 설치된 DataList·Badge·utils·
+token CSS의 원본 일치를 확인했습니다. 실제 screen reader 발표는
+별도 검증 대상입니다.
+
+## 2026-09-29 Badge 표시 형태
+
+기존 프로젝트 소유 `Badge`의 `variant`를 확장했습니다.
+[shadcn/ui Badge 공식 문서](https://ui.shadcn.com/docs/components/radix/badge),
+[고정 revision의 Badge source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/badge.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. variant 개념을 참고했지만 source는 복사하지 않았습니다.
+새 `Badge` 코드의 색과 형태는 pydemia token으로 직접 정했습니다.
+
+직접 registry 의존성은 기존 `pyd-utils`이고 새 npm dependency는
+없습니다. 설치된 `clsx@2.1.1`과 `tailwind-merge@3.7.0`의 package
+manifest와 LICENSE 파일에서 모두 MIT를 확인했습니다. React는
+peer dependency입니다. 격리 소비자의 Badge·utils·token CSS 3개
+파일을 원본과 대조했습니다. 실제 screen reader 발표는 미검증입니다.
+
+## 2026-09-29 registry target 경로
+
+[shadcn registry item 문서](https://ui.shadcn.com/docs/registry/registry-item-json)는
+`@ui/` target이 소비자의 `components.json`에서 `aliases.ui`로 지정한
+디렉터리에 설치되는 placeholder라고 설명합니다. 현재
+`shadcn@4.21.0` 새 소비자에서 `@ui/`가
+`src/components/ui/`에 설치되는 것을 확인했습니다. 같은 registry
+JSON을 `shadcn@4.0.0`으로 설치하면 `src/@ui/`에 생성됐습니다.
+따라서 문서의 설치 명령을 확인한 CLI 버전으로 고정했습니다.
+이 조사는 source code 편입이나 npm runtime dependency 변경이
+아닙니다.
+
+## 2026-09-29 하단 탐색 참고 범위
+
+[MUI Bottom Navigation 공식 문서](https://mui.com/material-ui/react-bottom-navigation/)의
+주요 목적지 배치와 아이콘·이름 표시 사례를 확인했습니다. 같은
+`v9.4.0` revision(`ce3c596185a73b3c85b7702c0297163096b2e6c4`)의
+[BottomNavigation source](https://github.com/mui/material-ui/blob/ce3c596185a73b3c85b7702c0297163096b2e6c4/packages/mui-material/src/BottomNavigation/BottomNavigation.js),
+[BottomNavigationAction source](https://github.com/mui/material-ui/blob/ce3c596185a73b3c85b7702c0297163096b2e6c4/packages/mui-material/src/BottomNavigationAction/BottomNavigationAction.js),
+[MIT LICENSE](https://github.com/mui/material-ui/blob/ce3c596185a73b3c85b7702c0297163096b2e6c4/LICENSE)를
+대조했습니다. MUI의 source와 dependency는 편입하지 않았습니다.
+`BottomNav`는 기존 React·Tailwind·`pyd-utils`만 사용하며 npm runtime
+dependency를 추가하지 않습니다. 접근성 규칙은
+[W3C navigation landmark 예시](https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html)와
+[W3C `aria-current` 기법](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA26)을
+확인했습니다. 실제 screen reader 발표는 아직 확인하지 않았습니다.
+
+## 2026-09-29 SegmentedControl 참고 범위
+
+`SegmentedControl`은 프로젝트에서 작성한 native `fieldset`·`legend`·
+radio 입력입니다. [W3C WAI-ARIA radio group 패턴](https://www.w3.org/WAI/ARIA/apg/patterns/radio/)의
+단일 선택과 방향키 규칙을 참고했습니다. 외부 component source를
+복사하지 않았으므로 편입한 upstream revision이나 LICENSE는 없습니다.
+
+처음 검토한 [Radix Radio Group 공식 문서](https://www.radix-ui.com/primitives/docs/components/radio-group/)와
+설치된 `@radix-ui/react-radio-group@1.4.7`의 배포 source
+(`node_modules/@radix-ui/react-radio-group/dist/index.mjs`)·MIT
+LICENSE를 대조했습니다. 그러나 문서 preview에서 이 구현의 방향키가
+focus만 옮기고 선택값을 갱신하지 않아 최종 코드에서 사용하지
+않았습니다. 최종 registry 직접 의존성은 `pyd-utils`이며 새로운 npm
+dependency는 없습니다. `pyd-utils`가 사용하는 `clsx`와
+`tailwind-merge`는 기존 의존성입니다.
+
+## 2026-09-29 SplitButton 조합 예시
+
+별도 source 편입 없이 기존 `ButtonGroup`·`Button`·`DropdownMenu`를
+조합했습니다. 분할 작업 구성은 [shadcn/ui Button Group 문서](https://ui.shadcn.com/docs/components/radix/button-group)를
+참고했습니다. 해당 `ButtonGroup`의 고정 source revision과 같은
+revision의 MIT LICENSE는 위 ButtonGroup 절에 기록했습니다.
+[Radix Dropdown Menu 문서](https://www.radix-ui.com/primitives/docs/components/dropdown-menu)와
+[W3C Menu Button 패턴](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/)도
+확인했습니다. 설치된 `@radix-ui/react-dropdown-menu@2.1.22`의
+package manifest, `dist/index.mjs`, MIT LICENSE를 확인했습니다.
+새 npm dependency나 registry item은 없습니다. 실제 screen reader
+발표와 touch·RTL 동작은 검증하지 않았습니다.
+
+## 2026-09-29 CitationList 참고 범위
+
+`CitationList`는 프로젝트가 작성한 출처 목록입니다.
+[AI Elements Inline Citation 문서](https://elements.ai-sdk.dev/components/inline-citation),
+revision `6a9d5b1822ffb10bba4bd97175f01edd7d8651cd`의
+[inline-citation source](https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/inline-citation.tsx),
+[sources source](https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/sources.tsx),
+[같은 revision의 Apache-2.0 LICENSE](https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/LICENSE)를
+확인했습니다. upstream source는 HoverCard·Carousel·Badge·
+lucide-react 등을 사용하지만 복사하거나 dependency로 편입하지
+않았습니다. 링크 이름은 [W3C H30](https://www.w3.org/WAI/WCAG21/Techniques/html/H30)을
+참고했습니다.
+
+새 registry item의 직접 의존성은 기존 `pyd-utils`뿐입니다.
+React와 Tailwind 외 새 npm runtime dependency는 없습니다. 실제
+screen reader 발표와 외부 링크 이동은 검증하지 않았습니다.

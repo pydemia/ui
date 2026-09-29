@@ -31,7 +31,7 @@ const registryBase = import.meta.env.BASE_URL.replace(/examples\/profile\/$/, ""
 const registryUrl = new URL(`${registryBase}r/pyd-snippet.json`, window.location.origin).href;
 
 const commands = {
-    npm: `npx shadcn@latest add ${registryUrl}`,
+    npm: `npx shadcn@4.21.0 add ${registryUrl}`,
     api: 'import { Snippet, SnippetContent } from "@pydemia/ui";\nimport "@pydemia/ui/styles.css";',
 };
 
@@ -123,7 +123,11 @@ function App() {
             <header className="border-b border-border bg-surface">
                 <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
                     <div className="flex items-center gap-3">
-                        <span className="flex size-8 items-center justify-center rounded-sm bg-accent text-sm font-semibold text-accent-foreground" aria-hidden="true">p</span>
+                        <img
+                            src={`${import.meta.env.BASE_URL}favicon.svg`}
+                            className="size-8 shrink-0 dark:brightness-[2.1]"
+                            alt=""
+                        />
                         <span className="text-sm font-semibold">pydemia / ui</span>
                         <span className="hidden border-l border-border pl-3 text-xs text-muted sm:inline">Component intake</span>
                     </div>

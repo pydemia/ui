@@ -2,10 +2,11 @@ import { createRoot } from "react-dom/client";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Github, Moon, Sun } from "lucide-react";
 import {
-    Badge, Snippet, SnippetContent, SnippetCopyButton,
+    Badge, ColorInput, Snippet, SnippetContent, SnippetCopyButton,
     SnippetHeader, SnippetTabsList, SnippetTabsTrigger,
 } from "@pydemia/ui";
 import provenance from "../../../registry/provenance.json";
+import { AnalyticsWorkspace } from "./analytics-workspace";
 import { catalog } from "./catalog";
 import "./styles.css";
 
@@ -76,6 +77,12 @@ const contrastPairs = [
     },
 ] as const;
 
+const analyticsItems = [
+    "app-shell", "navigation", "badge", "button", "content-list",
+    "dashboard", "data-chart", "data-table", "log-console",
+    "metric-card", "native-select", "page-header",
+];
+
 function expandHex(value: string) {
     const color = value.trim().toLowerCase();
     if (/^#[0-9a-f]{3}$/.test(color)) {
@@ -98,10 +105,21 @@ function contrastRatio(first: string, second: string) {
     return (brighter + 0.05) / (darker + 0.05);
 }
 
-const curatedComponentIds = new Set([
-    "affixed-input", "snippet", "metric-card", "dropzone",
-    "message", "prompt-input",
-]);
+const categoryOrder = [
+    "Framework", "Navigation", "Workflow", "Layout", "Content",
+    "Actions", "Inputs",
+    "Selection", "Date & time", "Overlays", "Feedback",
+    "Data display", "Data & analytics", "File & media",
+    "Developer tools", "AI & agent",
+];
+const sidebarCategories = [...new Set(catalog.map((entry) => entry.category))]
+    .sort((first, second) => {
+        const firstIndex = categoryOrder.indexOf(first);
+        const secondIndex = categoryOrder.indexOf(second);
+        const firstRank = firstIndex < 0 ? Infinity : firstIndex;
+        const secondRank = secondIndex < 0 ? Infinity : secondIndex;
+        return firstRank - secondRank || first.localeCompare(second);
+    });
 
 function App() {
     const [selectedId, setSelectedId] = useState(() => {
@@ -111,24 +129,32 @@ function App() {
     const [dark, setDark] = useState(false);
     const [colormap, setColormap] = useState<ColormapId>("neutral");
     const [overrides, setOverrides] = useState<ColorOverrides>({ light: {}, dark: {} });
-    const [hexDrafts, setHexDrafts] = useState<Partial<Record<ColorToken, string>>>({});
     const [values, setValues] = useState<Record<string, string>>({});
     const exampleFrame = useRef<HTMLIFrameElement>(null);
     const mode = dark ? "dark" : "light";
     const hasOverrides = Object.values(overrides).some(
         (colors) => Object.keys(colors).length > 0,
     );
-    const hasInvalidHex = Object.values(hexDrafts).some(
-        (value) => value !== undefined && !hexColor.test(value),
-    );
     const selected = catalog.find((entry) => entry.id === selectedId)!;
     const record = provenance.items.find((item) => item.name === `pyd-${selectedId}`)!;
     const implementationUrl = record.source.upstream ??
         `https://github.com/pydemia/ui/blob/main/packages/ui/src/components/${selected.id}.tsx`;
     const reference = "reference" in record ? record.reference : undefined;
-    const registryUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-${selected.id}.json`, window.location.origin).href;
+    const registryUrls = (selected.installItems ?? [selected.id])
+        .map((item) => new URL(
+            `${import.meta.env.BASE_URL}r/pyd-${item}.json`,
+            window.location.origin,
+        ).href)
+        .join(" ");
     const tokensUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-tokens.json`, window.location.origin).href;
-    const exampleUrl = new URL(`${import.meta.env.BASE_URL}examples/profile/`, window.location.origin);
+    const analyticsUrls = analyticsItems.map((item) => new URL(
+        `${import.meta.env.BASE_URL}r/pyd-${item}.json`,
+        window.location.origin,
+    ).href).join(" ");
+    const exampleUrl = new URL(
+        `${import.meta.env.BASE_URL}examples/profile/index.html`,
+        window.location.origin,
+    );
     exampleUrl.searchParams.set("colormap", colormap);
     if (dark) exampleUrl.searchParams.set("mode", "dark");
     for (const theme of ["light", "dark"] as const) {
@@ -196,20 +222,10 @@ function App() {
 
     function resetOverrides() {
         setOverrides({ light: {}, dark: {} });
-        setHexDrafts({});
     }
 
     function toggleDark() {
         setDark((current) => !current);
-        setHexDrafts({});
-    }
-
-    function clearHexDraft(token: ColorToken) {
-        setHexDrafts((current) => {
-            const next = { ...current };
-            delete next[token];
-            return next;
-        });
     }
 
     function setColor(token: ColorToken, value: string) {
@@ -217,16 +233,6 @@ function App() {
             ...current,
             [mode]: { ...current[mode], [token]: value.toLowerCase() },
         }));
-    }
-
-    function updateHex(token: ColorToken, value: string) {
-        setHexDrafts((current) => ({ ...current, [token]: value }));
-        if (hexColor.test(value)) setColor(token, value);
-    }
-
-    function chooseColor(token: ColorToken, value: string) {
-        setColor(token, value);
-        clearHexDraft(token);
     }
 
     return (
@@ -260,15 +266,16 @@ function App() {
                 <aside className="sidebar" aria-label="컴포넌트 목록">
                     <div className="sidebar-inner">
                         <a href="#overview" className="sidebar-overview">Overview</a>
-                        <p className="sidebar-label">FOUNDATION</p>
-                        {catalog.filter((entry) => !curatedComponentIds.has(entry.id)).map((entry) =>
-                            <button key={entry.id} type="button" aria-current={entry.id === selectedId ? "page" : undefined} className={`sidebar-item${entry.id === selectedId ? " selected" : ""}`} onClick={() => selectComponent(entry.id)}>{entry.name}</button>,
-                        )}
-                        <p className="sidebar-label">CURATED</p>
-                        {catalog.filter((entry) => curatedComponentIds.has(entry.id)).map((entry) =>
-                            <button key={entry.id} type="button" aria-current={entry.id === selectedId ? "page" : undefined} className={`sidebar-item${entry.id === selectedId ? " selected" : ""}`} onClick={() => selectComponent(entry.id)}>{entry.name}</button>,
-                        )}
-                        <div className="sidebar-lower"><a href="#colormap">Colormap</a><a href="#tokens">Design tokens</a><a href="#examples">Profile example</a><a href="#installation">Using the source</a></div>
+                        {sidebarCategories.map((category) => (
+                            <div key={category}>
+                                <p className="sidebar-label">{category}</p>
+                                {catalog.filter((entry) => entry.category === category)
+                                    .map((entry) =>
+                                        <button key={entry.id} type="button" aria-current={entry.id === selectedId ? "page" : undefined} className={`sidebar-item${entry.id === selectedId ? " selected" : ""}`} onClick={() => selectComponent(entry.id)}>{entry.name}</button>,
+                                    )}
+                            </div>
+                        ))}
+                        <div className="sidebar-lower"><a href="#colormap">Colormap</a><a href="#tokens">Design tokens</a><a href="#examples">Profile example</a><a href="#analytics-example">Operations workspace</a><a href="#installation">Using the source</a></div>
                     </div>
                 </aside>
 
@@ -281,7 +288,11 @@ function App() {
 
                     <section id="components" className="doc-section" aria-labelledby="component-heading">
                         <div className="section-lead"><div><p className="section-index">01 / COMPONENT LIBRARY</p><h2 id="component-heading">{selected.name}</h2><p>{selected.description}</p></div><Badge>{selected.category}</Badge></div>
-                        <div className="component-grid">
+                        <div className="component-grid"
+                            data-wide={[
+                                "app-shell", "data-chart", "dashboard",
+                                "data-table", "resizable-panels", "sidebar", "stepper",
+                            ].includes(selected.id) ? "true" : undefined}>
                             <div className="preview-panel"><div className="panel-caption"><span>LIVE PREVIEW</span><span>Neutral Product</span></div><div className="preview-stage">{selected.preview()}</div></div>
                             <div className="code-panel"><div className="panel-caption"><span>REACT / TSX</span><span>Copy ready</span></div><Snippet className="docs-snippet" defaultValue="usage"><SnippetHeader><SnippetTabsList aria-label="코드 예시"><SnippetTabsTrigger value="usage">Usage</SnippetTabsTrigger></SnippetTabsList><SnippetCopyButton value={selected.code} /></SnippetHeader><SnippetContent value="usage">{selected.code}</SnippetContent></Snippet></div>
                         </div>
@@ -354,36 +365,19 @@ function App() {
                             >직접 조정 초기화</button>
                         </div>
                         <div className="colormap-fields">
-                            {colorTokens.map(({ name, token }) => {
-                                const draft = hexDrafts[token];
-                                const invalid = draft !== undefined && !hexColor.test(draft);
-                                return <div className="colormap-field" key={token}>
-                                    <label htmlFor={`hex-${token}`}>{name}</label>
-                                    <input
-                                        type="color"
-                                        aria-label={`${name} 색상 선택`}
-                                        value={values[token] ?? "#000000"}
-                                        onChange={(event) => chooseColor(token, event.target.value)}
-                                    />
-                                    <input
-                                        id={`hex-${token}`}
-                                        type="text"
-                                        inputMode="text"
-                                        spellCheck={false}
-                                        maxLength={7}
-                                        value={draft ?? values[token] ?? ""}
-                                        aria-invalid={invalid}
-                                        aria-describedby={invalid ? "colormap-error" : undefined}
-                                        onChange={(event) => updateHex(token, event.target.value)}
-                                        onBlur={() => clearHexDraft(token)}
-                                    />
-                                    <code>{token} → {token.replace("--", "--palette-")}</code>
-                                </div>;
-                            })}
+                            {colorTokens.map(({ name, token }) => (
+                                <ColorInput
+                                    key={`${mode}-${token}`}
+                                    label={name}
+                                    value={values[token] ?? "#000000"}
+                                    onValueChange={(next) => setColor(token, next)}
+                                >
+                                    <code className="col-span-2 break-all text-[10px] text-muted">
+                                        {token} → {token.replace("--", "--palette-")}
+                                    </code>
+                                </ColorInput>
+                            ))}
                         </div>
-                        <p id="colormap-error" className="colormap-error" role="status">
-                            {hasInvalidHex ? "색상은 #RRGGBB 형식으로 입력하세요." : ""}
-                        </p>
                         <div className="contrast-grid" aria-label="텍스트 대비">
                             {contrastPairs.map((pair) => {
                                 const ratio = contrastRatio(
@@ -404,9 +398,34 @@ function App() {
                         <div className="token-detail"><div><span className="meta-label">RADIUS</span><strong>5px</strong><span>컴포넌트 기본 radius</span></div><div><span className="meta-label">CONTROL</span><strong>36px</strong><span>기본 입력 및 버튼 높이</span></div><div><span className="meta-label">SHADOW</span><strong>0 4px 16px</strong><span>부유 표면에만 사용</span></div><div><span className="meta-label">MOTION</span><strong>150ms</strong><span>reduced motion 설정 존중</span></div></div>
                     </section>
 
-                    <section id="examples" className="doc-section" aria-labelledby="examples-heading"><div className="section-lead"><div><p className="section-index">04 / COMPOSED EXAMPLE</p><h2 id="examples-heading">Registry review</h2><p>입력, 표, 코드 블록을 조합한 요청 검토 화면입니다. 요청과 상태는 예시용이며 colormap도 위의 선택을 따릅니다.</p></div><a className="text-link" href={exampleUrl.href} target="_blank" rel="noreferrer">전체 화면으로 열기 <ArrowUpRight size={16} aria-hidden="true" /></a></div><div className="example-frame"><iframe ref={exampleFrame} title="pydemia UI registry review 예시 화면" src={`${import.meta.env.BASE_URL}examples/profile/`} loading="lazy" onLoad={sendColormapToExample} /></div></section>
+                    <section id="examples" className="doc-section" aria-labelledby="examples-heading"><div className="section-lead"><div><p className="section-index">04 / COMPOSED EXAMPLE</p><h2 id="examples-heading">Registry review</h2><p>입력, 표, 코드 블록을 조합한 요청 검토 화면입니다. 요청과 상태는 예시용이며 colormap도 위의 선택을 따릅니다.</p></div><a className="text-link" href={exampleUrl.href} target="_blank" rel="noreferrer">전체 화면으로 열기 <ArrowUpRight size={16} aria-hidden="true" /></a></div><div className="example-frame"><iframe ref={exampleFrame} title="pydemia UI registry review 예시 화면" src={`${import.meta.env.BASE_URL}examples/profile/index.html`} loading="lazy" onLoad={sendColormapToExample} /></div></section>
+                    <section id="analytics-example" className="doc-section" aria-labelledby="analytics-heading">
+                        <div className="section-lead">
+                            <div>
+                                <p className="section-index">05 / COMPOSED EXAMPLE</p>
+                                <h2 id="analytics-heading">Operations workspace</h2>
+                                <p>탐색, 지표, 차트, 로그와 실행 목록을 조합한
+                                    분석 작업 화면입니다. 재실행은 로컬 상태만 바꿉니다.</p>
+                            </div>
+                            <a className="text-link" target="_blank" rel="noreferrer"
+                                href="https://github.com/pydemia/ui/blob/main/apps/docs/src/analytics-workspace.tsx">
+                                예시 코드 <ArrowUpRight size={16} aria-hidden="true" />
+                            </a>
+                        </div>
+                        <div className="analytics-example-frame">
+                            <AnalyticsWorkspace />
+                        </div>
+                        <details className="analytics-install">
+                            <summary>이 화면에 사용한 registry item 설치</summary>
+                            <pre><code>npx shadcn@4.21.0 add {analyticsUrls} {tokensUrl}</code></pre>
+                            <p>소비자 CSS에 <code>@import "./components/ui/tokens.css";</code>를
+                                추가하세요. 예시 파일은 workspace package import를
+                                사용하므로 registry 소비자는 설치된 component
+                                경로로 import를 바꿔야 합니다.</p>
+                        </details>
+                    </section>
 
-                    <section id="installation" className="doc-section usage-section" aria-labelledby="usage-heading"><div className="section-lead"><div><p className="section-index">05 / USING THE SOURCE</p><h2 id="usage-heading">코드 사용</h2><p>현재 패키지는 이 저장소의 private workspace package이며 npm registry에 게시되지 않았습니다. 소스에서 실행하거나 필요한 컴포넌트를 registry로 복사할 수 있습니다.</p></div></div><div className="usage-columns"><div><h3>Repository</h3><p>소스를 내려받아 문서와 예시 화면을 실행합니다.</p><pre><code>git clone https://github.com/pydemia/ui.git{"\n"}cd ui &amp;&amp; npm ci{"\n"}npm run build &amp;&amp; npm run dev</code></pre></div><div><h3>Registry</h3><p>컴포넌트와 token stylesheet를 설치한 뒤 앱의 CSS에서 <code>tokens.css</code>를 import합니다.</p><pre><code>npx shadcn@latest add {registryUrl}{"\n"}npx shadcn@latest add {tokensUrl}</code></pre><pre><code>@import "./components/ui/tokens.css";</code></pre></div></div><p className="section-note">로컬 registry 설치 검사는 README의 base URL 설정 후 빌드해야 합니다. 공개 registry URL은 배포된 문서에서 사용할 수 있습니다.</p></section>
+                    <section id="installation" className="doc-section usage-section" aria-labelledby="usage-heading"><div className="section-lead"><div><p className="section-index">06 / USING THE SOURCE</p><h2 id="usage-heading">코드 사용</h2><p>현재 패키지는 이 저장소의 private workspace package이며 npm registry에 게시되지 않았습니다. 소스에서 실행하거나 필요한 컴포넌트를 registry로 복사할 수 있습니다.</p></div></div><div className="usage-columns"><div><h3>Repository</h3><p>소스를 내려받아 문서와 예시 화면을 실행합니다.</p><pre><code>git clone https://github.com/pydemia/ui.git{"\n"}cd ui &amp;&amp; npm ci{"\n"}npm run build &amp;&amp; npm run dev</code></pre></div><div><h3>Registry</h3><p>컴포넌트와 token stylesheet를 설치한 뒤 앱의 CSS에서 <code>tokens.css</code>를 import합니다.</p><pre><code>npx shadcn@4.21.0 add {registryUrls}{"\n"}npx shadcn@4.21.0 add {tokensUrl}</code></pre><pre><code>@import "./components/ui/tokens.css";</code></pre></div></div><p className="section-note">위 Usage 코드는 private package import입니다. registry 소비자는 설치된 파일 경로로 import를 바꿔야 합니다. 로컬 registry 설치 검사는 README의 base URL 설정 후 빌드해야 합니다.</p></section>
                     <footer className="footer"><span>pydemia UI · prototype v0.1.0</span><a href="https://github.com/pydemia/ui/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noreferrer">Third-party notices</a></footer>
                 </main>
             </div>
@@ -414,4 +433,6 @@ function App() {
     );
 }
 
-createRoot(document.getElementById("root")!).render(<App />);
+const root = createRoot(document.getElementById("root")!);
+root.render(<App />);
+import.meta.hot?.dispose(() => root.unmount());

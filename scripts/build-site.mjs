@@ -1,5 +1,6 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
+import { existsSync } from "node:fs";
 
 function run(args) {
     const npmCli = process.env.npm_execpath;
@@ -13,7 +14,13 @@ await rm("apps/profile-demo/dist", { recursive: true, force: true });
 run(["run", "build", "-w", "@pydemia/profile-demo", "--", "--base", "/examples/profile/"]);
 await rm("apps/profile-demo/dist/r", { recursive: true, force: true });
 await cp("apps/profile-demo/dist", "apps/docs/public/examples/profile", { recursive: true });
+await rm("apps/docs/public/r", { recursive: true, force: true });
 await cp("apps/profile-demo/public/r", "apps/docs/public/r", { recursive: true });
+if (existsSync("registry/releases")) {
+    await cp("registry/releases", "apps/docs/public/r/releases", {
+        recursive: true,
+    });
+}
 await rm("apps/docs/dist", { recursive: true, force: true });
 run(["run", "build", "-w", "@pydemia/docs"]);
 await rm("docs", { recursive: true, force: true });

@@ -13,13 +13,37 @@
     },
     {
       "name": "pyd-button", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["class-variance-authority", "pyd-utils"], "accessibility": { "semantics": "native button", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-button-group", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/radix/button-group", "scope": "grouped action layout and keyboard guidance; no source copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named group of native buttons; decorative separator", "keyboard": "native Tab and Enter/Space; browser check pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/input.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/input.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native input; consumer supplies label", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-search-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WHATWG HTML", "url": "https://html.spec.whatwg.org/multipage/input.html#text-(type=text)-state-and-search-state-(type=search)", "scope": "native search field and form submission; no source copied" },
+      "dependencies": ["pyd-input", "pyd-button"], "accessibility": { "semantics": "named search landmark, associated label, native search field and named actions", "keyboard": "Chromium: Enter submit, Escape/clear reset and focus verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-number-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/", "scope": "spinbutton semantics and keyboard behavior; no source copied" },
+      "dependencies": ["pyd-input"], "accessibility": { "semantics": "labeled spinbutton with numeric range, text value and invalid state; named step buttons", "keyboard": "Chromium: ArrowUp/Down, Home/End and form validity verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-tags-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/forms/labels/", "scope": "associated form label and instructions; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "labeled text input, list of removable tags, named buttons and form validation", "keyboard": "Chromium: Enter/comma add, Backspace/delete removal, paste and form validity verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-field", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
@@ -27,13 +51,19 @@
       "dependencies": ["pyd-label", "pyd-utils"], "accessibility": { "semantics": "label, description, error and required state connected to a supplied control", "keyboard": "Chromium: input entry and error association verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-color-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/forms/labels/", "scope": "form labels for both native inputs; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "visible label for hex field, named native color picker and associated error", "keyboard": "Chromium: text entry, invalid feedback and form submission verified; native picker unverified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-textarea", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/textarea.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/textarea.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native textarea; consumer supplies label", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-native-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/native-select.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/native-select.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["lucide-react", "pyd-utils"], "accessibility": { "semantics": "native select; consumer supplies label", "keyboard": "Chromium: value change verified", "screen_reader": "pending manual review" }
     },
     {
@@ -41,6 +71,18 @@
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Radix UI", "url": "https://www.radix-ui.com/primitives/docs/components/select" },
       "dependencies": ["@radix-ui/react-select@2.3.7 (MIT)", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "Radix single select with labeled trigger and form value", "keyboard": "Chromium: Enter, ArrowDown, selection and form value verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-combobox", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/", "scope": "behavior guidance only; no source copied" },
+      "dependencies": ["pyd-input", "pyd-utils"], "accessibility": { "semantics": "editable combobox with listbox, active descendant and selected-only form value", "keyboard": "Chromium: arrows, Enter, Escape, disabled item and form value verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-multi-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/forms/grouping/", "scope": "checkbox group guidance; no source copied" },
+      "dependencies": ["pyd-input", "pyd-popover", "pyd-utils"], "accessibility": { "semantics": "named popover, search and checkbox group; selected chips and multiple form values", "keyboard": "Chromium: Enter open, Tab to checkbox, Space select, Escape close and focus restore verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-label", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
@@ -51,112 +93,144 @@
     {
       "name": "pyd-badge", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
-      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/badge" },
-      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "text status; color not sole signal", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/radix/badge", "scope": "variant guidance; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "text status across four visual variants; color not sole signal", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-checkbox", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/checkbox.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/checkbox.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-checkbox", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "Radix checkbox; consumer supplies label", "keyboard": "Chromium: click and Space; mixed and disabled states verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-switch", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/switch.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/switch.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-switch", "pyd-utils"], "accessibility": { "semantics": "Radix switch; consumer supplies label", "keyboard": "Chromium: Space and checked state verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-radio-group", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/radio-group.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/radio-group.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-radio-group", "pyd-utils"], "accessibility": { "semantics": "Radix radio group; consumer supplies group label", "keyboard": "Chromium: ArrowDown selection verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-segmented-control", "category": "Selection",
+      "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/radio/", "scope": "radio group keyboard model; no source copied" },
+      "dependencies": ["pyd-utils"],
+      "accessibility": { "semantics": "named fieldset with visible text-labeled native radios and form value", "keyboard": "Chromium: click, ArrowLeft selection, disabled item and form value verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-dialog", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/dialog.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/dialog.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-dialog", "pyd-utils"], "accessibility": { "semantics": "Radix modal dialog; title required", "keyboard": "Chromium: Tab containment, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-command-palette", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/", "scope": "search and active descendant behavior; no source copied" },
+      "dependencies": ["pyd-dialog", "pyd-input"], "accessibility": { "semantics": "named modal dialog containing searchable combobox and grouped command listbox", "keyboard": "Chromium: Ctrl+K, arrows, Enter, Escape, disabled skip and focus return verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-alert", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["class-variance-authority", "pyd-utils"], "accessibility": { "semantics": "status for default; alert for destructive", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-progress", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/progress.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
-      "dependencies": ["@radix-ui/react-progress", "pyd-utils"], "accessibility": { "semantics": "Radix progressbar; consumer supplies accessible name", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/progress.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
+      "dependencies": ["@radix-ui/react-progress", "pyd-utils"], "accessibility": { "semantics": "Radix progressbar; linear and circular variants; null value is indeterminate; consumer supplies accessible name", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-skeleton", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/skeleton.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/skeleton.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "decorative placeholder; consumer announces loading state", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-card", "category": "Layout", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/card.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/card.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "grouping surface without imposed landmark or heading level", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-separator", "category": "Layout", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/separator.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/separator.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-separator", "pyd-utils"], "accessibility": { "semantics": "decorative by default; role separator when decorative=false", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-tooltip", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tooltip.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tooltip.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-tooltip", "pyd-utils"], "accessibility": { "semantics": "Radix tooltip description; trigger needs its own accessible name", "keyboard": "Chromium: focus, hover and Escape verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-accordion", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/accordion.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/accordion.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-accordion", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "Radix accordion heading and region", "keyboard": "Chromium: expand and ArrowDown focus verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-collapsible", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/collapsible.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/collapsible.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-collapsible"], "accessibility": { "semantics": "Radix disclosure trigger and content", "keyboard": "Chromium: expand state verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-popover", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/popover.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/popover.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-popover", "pyd-utils"], "accessibility": { "semantics": "Radix popover dialog and focus management", "keyboard": "Chromium: open, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-hover-card", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui Hover Card", "url": "https://ui.shadcn.com/docs/components/radix/hover-card", "revision": "98a1fe67b439324ddc857f47fbdce056600a4329", "license": "MIT" },
+      "dependencies": ["@radix-ui/react-hover-card@1.1.23", "pyd-utils"], "accessibility": { "semantics": "sighted-only supplemental preview attached to a real link; no essential content in the card", "keyboard": "Chromium: focus opens; Escape closes and keeps link focus", "screen_reader": "Radix hides preview content; manual review pending" }
+    },
+    {
       "name": "pyd-alert-dialog", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert-dialog.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert-dialog.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-alert-dialog", "pyd-utils"], "accessibility": { "semantics": "Radix alertdialog; title, description and cancel action required", "keyboard": "Chromium: open, Escape, action and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-avatar", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/avatar.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/avatar.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-avatar", "pyd-utils"], "accessibility": { "semantics": "image alt text or readable fallback", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-avatar-group", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-avatar", "pyd-utils"], "accessibility": { "semantics": "named native list; each member and overflow names exposed", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-breadcrumb", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/breadcrumb.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/breadcrumb.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["lucide-react", "pyd-utils"], "accessibility": { "semantics": "breadcrumb navigation and aria-current page", "keyboard": "native links", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-empty", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/empty.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/empty.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "heading, description and optional action", "keyboard": "native action", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-spinner", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/spinner.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/spinner.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["lucide-react", "pyd-utils"], "accessibility": { "semantics": "status with accessible name", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-toggle", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/toggle.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/toggle.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-toggle", "pyd-utils"], "accessibility": { "semantics": "Radix pressed button", "keyboard": "Chromium: click, Space and pressed state verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-toggle-group", "category": "Actions",
+      "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "design_reference": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/toggle-group.tsx", "license": "project-owned" },
+      "dependencies": ["@radix-ui/react-toggle-group", "pyd-utils"],
+      "accessibility": { "semantics": "Radix single radio or multiple pressed button group; consumer supplies group label", "keyboard": "Chromium: click, ArrowLeft focus, Space selection, disabled item and multiple pressed state verified in docs and consumer", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-slider", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/slider.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/slider.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-slider", "pyd-utils"], "accessibility": { "semantics": "named Radix slider thumb", "keyboard": "Chromium: ArrowRight and value update verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-calendar", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/calendar.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/calendar.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["react-day-picker", "pyd-utils"], "accessibility": { "semantics": "DayPicker grid, named dates and selected state", "keyboard": "Chromium: ArrowRight, Enter selection and month navigation verified", "screen_reader": "pending manual review" }
     },
     {
@@ -166,10 +240,33 @@
       "dependencies": ["pyd-calendar", "pyd-popover", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "button trigger, calendar grid and hidden form value; consumer supplies label", "keyboard": "Chromium: Enter, date selection, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-date-range-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "DayPicker", "url": "https://daypicker.dev/v9/selections/range-mode" },
+      "dependencies": ["pyd-calendar", "pyd-popover", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "button trigger, named range calendar, start/end hidden form values; consumer supplies label", "keyboard": "Chromium: Enter opens, Escape closes and restores focus; date bounds and range selection verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-time-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "React", "url": "https://react.dev/reference/react-dom/components/select", "scope": "native select form and keyboard semantics; no source copied" },
+      "dependencies": ["pyd-native-select", "pyd-utils"], "accessibility": { "semantics": "fieldset legend, named native hour/minute/period selects, one HH:mm hidden form value", "keyboard": "Chromium: required focus, ArrowDown selection and form submission verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-date-time-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-date-picker", "pyd-time-picker", "pyd-utils"], "accessibility": { "semantics": "named date and time group, calendar trigger, native time selects and paired local-time/time-zone form values", "keyboard": "Chromium selection and form submission verified; dedicated keyboard traversal pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-metric-card", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
-      "reference": { "provider": "Tremor", "url": "https://github.com/tremorlabs/tremor/blob/ca4d588f47820ff3d514d37fa4ee08a4222dec11/src/components/Card/Card.tsx", "license": "Apache-2.0" },
+      "reference": { "provider": "Tremor", "url": "https://github.com/tremorlabs/tremor/blob/ca4d588f47820ff3d514d37fa4ee08a4222dec11/src/components/Card/Card.tsx", "license": "Apache-2.0", "scope": "KPI card structure only; default, compact, and featured layouts are original pydemia/ui code" },
       "dependencies": ["pyd-card", "pyd-utils"], "accessibility": { "semantics": "named group with textual metric and change", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-image", "category": "File & media", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/images/", "scope": "alt text guidance; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native image alt text, decorative empty alt and visible loading/error/missing states", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-dropzone", "category": "File & media", "profiles": ["neutral-product", "developer-tool"],
@@ -178,10 +275,34 @@
       "dependencies": ["lucide-react", "pyd-utils"], "accessibility": { "semantics": "named native button opens file input; status and errors are announced", "keyboard": "pending browser check after rewrite", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-file-upload", "category": "File & media", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/practices/range-related-properties/", "scope": "progressbar semantics; no source copied" },
+      "dependencies": ["pyd-dropzone", "pyd-progress", "pyd-utils"], "accessibility": { "semantics": "named file list, text statuses, named progressbar and actions", "keyboard": "Chromium: Enter cancel and Space retry verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-message", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "AI Elements", "url": "https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/message.tsx", "license": "Apache-2.0" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named message groups by sender", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-conversation", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA 1.2", "url": "https://www.w3.org/TR/wai-aria-1.2/#log", "scope": "log semantics only; no component source copied" },
+      "dependencies": ["pyd-message", "pyd-utils"], "accessibility": { "semantics": "named log with append announcements, sender groups and new-message action", "keyboard": "Chromium: scroll position, new-message action, focus return and PromptInput Enter submit verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-reasoning", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/", "scope": "disclosure semantics only; no component source copied" },
+      "dependencies": ["pyd-collapsible", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "disclosure trigger with expanded state and status label", "keyboard": "Chromium: Enter and Space toggle, expanded state and status updates verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-tool-call", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA 1.2", "url": "https://www.w3.org/TR/wai-aria-1.2/#status", "scope": "status semantics only; no component source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named tool section with status and native input disclosure", "keyboard": "Chromium: Enter input disclosure and pending/running/succeeded/failed states verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-prompt-input", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
@@ -191,7 +312,7 @@
     },
     {
       "name": "pyd-tabs", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
-      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tabs.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md" },
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tabs.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-tabs", "pyd-utils"], "accessibility": { "semantics": "Radix tab roles", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
@@ -199,6 +320,12 @@
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/table" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native table; consumer supplies caption and scope", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-data-list", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "MDN", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl", "scope": "native term/value groups; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named group with native dl/dt/dd pairs and explicit missing-value text", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-affixed-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
@@ -211,6 +338,178 @@
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Kibo UI", "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/snippet/index.tsx", "license": "MIT" },
       "dependencies": ["pyd-button", "pyd-tabs", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "Radix tabs; named copy button; live status", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-code-block", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "MDN", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre", "scope": "native pre/code semantics; no source copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named figure and focusable pre/code; named native copy button and status", "keyboard": "Chromium: Enter copy status, wrap toggle, 390px internal scroll; clipboard content not independently verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-app-shell", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "header, named sidebars, main, named bottom and floating regions; bubble requires accessible name", "keyboard": "Chromium demo: bubble remains focused on open, Tab reaches close, Escape and close return focus", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-scroll-area", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/scroll-area.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
+      "dependencies": ["@radix-ui/react-scroll-area@1.2.18 (MIT)", "pyd-utils"], "accessibility": { "semantics": "named focusable scroll region with native viewport and orientation-specific scrollbar", "keyboard": "Chromium: End/ArrowRight and vertical/horizontal scrollbar drag verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-resizable-panels", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "two named regions and a range separator controlling the first panel", "keyboard": "Chromium: horizontal arrows, Shift step, Home/End, vertical arrow and pointer drag verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-navigation", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "MUI", "url": "https://mui.com/material-ui/react-bottom-navigation/", "revision": "ce3c596185a73b3c85b7702c0297163096b2e6c4", "scope": "bottom placement and primary destinations; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named navigation landmarks and links with aria-current page; bottom links retain visible labels", "keyboard": "native Tab and Enter; browser check pending", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-navigation-menu", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/radix/navigation-menu", "scope": "composition and interaction reference only; no source copied" },
+      "dependencies": ["@radix-ui/react-navigation-menu", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "named navigation with grouped links and disclosure triggers", "keyboard": "Chromium: click, ArrowDown to first link, Escape close and focus return verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-sidebar", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/aria/sidebar" },
+      "dependencies": ["pyd-button", "pyd-drawer", "pyd-navigation", "pyd-utils"], "accessibility": { "semantics": "named navigation, current-page links, collapse control; modal mobile navigation via Radix Dialog", "keyboard": "Chromium: collapse Enter, mobile open/close, Escape, link selection and focus return verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-tree", "category": "Navigation", "profiles": ["developer-tool", "neutral-product"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/treeview/", "scope": "interaction and accessibility pattern only; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named single-select tree with nested groups, declared level/position and separate focus/selection", "keyboard": "Chromium: arrows, Home/End, Enter, Space, typeahead, disabled skip and focus ring verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-stepper", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WCAG Technique ARIA26", "url": "https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA26" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named ordered steps, current step and visible status text", "keyboard": "Chromium: Enter on permitted step, completion persistence and error navigation verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-timeline", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WHATWG HTML Standard", "url": "https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-time-element" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named ordered events with time element when dateTime is supplied; visible status labels", "keyboard": "native links when href is supplied", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-log-console", "category": "Developer tools", "profiles": ["developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named log with text levels; live announcements disabled by default", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-json-viewer", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WHATWG HTML", "url": "https://html.spec.whatwg.org/multipage/interactive-elements.html#the-details-element", "scope": "native details and summary disclosure behavior; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named region, nested native disclosure, copy status", "keyboard": "native summary Enter/Space checked in browser", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-sparkline", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named SVG trend with first, last, minimum and maximum values; empty state text", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-page-header", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "semantic heading level with optional subtitle and actions", "keyboard": "native actions", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-content-list", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native unordered or ordered list according to variant", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-carousel", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/carousel/", "scope": "manual carousel semantics and controls; no source copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named carousel region; one mounted named slide and manual polite live region", "keyboard": "Chromium: Enter navigation, indicator selection, edge disabling and focus retention verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-data-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/base/chart" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, legend, hidden full data table and optional category inspector; stacked-area total is unknown when any series is missing", "keyboard": "Chromium: native select changes category values and totals; pointer selects plot category", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-donut-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/charts/pie", "scope": "design reference only; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, total, label-value-percentage list and empty state; SVG decorative", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-dashboard", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named metric and panel sections; consumer supplies child headings", "keyboard": "native child controls", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-toast", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA", "url": "https://www.w3.org/TR/wai-aria/#status" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "status for advisory updates, alert for errors, explicit text and named close button; queued items are mounted when visible", "keyboard": "Chromium: Enter dismisses, next item appears, focus returns to element active when toast appeared", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-drawer", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Radix Dialog", "url": "https://www.radix-ui.com/primitives/docs/components/dialog", "license": "MIT" },
+      "dependencies": ["@radix-ui/react-dialog@1.1.23", "pyd-utils"], "accessibility": { "semantics": "modal dialog with title and description", "keyboard": "Chromium: Enter open, Escape close and focus restoration verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-pagination", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-button", "pyd-native-select", "pyd-utils"], "accessibility": { "semantics": "named navigation with range, total and page status", "keyboard": "Chromium: next page, page size and zero-result state verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-data-table", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/" },
+      "dependencies": ["pyd-button", "pyd-checkbox", "pyd-input", "pyd-native-select", "pyd-pagination", "pyd-table", "pyd-utils"], "accessibility": { "semantics": "native table with caption, scoped column headings, aria-sort, named selection controls and scroll region", "keyboard": "Chromium: page, selection, search, filter, sort, action and narrow-screen horizontal scroll verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-filter-bar", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/", "scope": "named form semantics only; no component source copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named form, labeled consumer controls, status and applied-filter list", "keyboard": "Chromium: Enter submit and clear verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-dropdown-menu", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Radix Dropdown Menu", "url": "https://www.radix-ui.com/primitives/docs/components/dropdown-menu", "license": "MIT" },
+      "dependencies": ["@radix-ui/react-dropdown-menu@2.1.22", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "menu items, menuitemcheckbox, menuitemradio, submenu and disabled item via Radix", "keyboard": "Chromium: Enter, arrows, checkbox, radio, submenu, Escape and focus restoration verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-context-menu", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui Context Menu", "url": "https://ui.shadcn.com/docs/components/radix/context-menu", "revision": "98a1fe67b439324ddc857f47fbdce056600a4329", "license": "MIT" },
+      "dependencies": ["@radix-ui/react-context-menu@2.3.7", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "context menu with item, checkbox, radio, submenu and disabled item via Radix", "keyboard": "Chromium: right click, Shift+F10, arrows, checkbox, radio, submenu, Escape and focus restoration verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-password-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/button/" },
+      "dependencies": ["lucide-react", "pyd-button", "pyd-input", "pyd-utils"], "accessibility": { "semantics": "native password input with stable-name aria-pressed visibility toggle", "keyboard": "Chromium: Space toggles visibility, value stays, disabled state verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-pin-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui Input OTP", "url": "https://ui.shadcn.com/docs/components/radix/input-otp", "revision": "98a1fe67b439324ddc857f47fbdce056600a4329", "license": "MIT", "scope": "visual slot pattern; source and input-otp package not copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "one labeled native input with decorative slots and native form validity", "keyboard": "Chromium: typing, Backspace, middle insertion and full-code slot replacement, paste, required/pattern validity and form submit verified in docs and consumer", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-rating", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI Rating Radio Group Example", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/radio/examples/radio-rating/", "scope": "rating as a radio group; example source not copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native fieldset and radio inputs for editing; named image and visible numeric score for read-only display", "keyboard": "Chromium: required empty form, arrow selection, label click and form value verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-citation-list", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "AI Elements Inline Citation", "url": "https://elements.ai-sdk.dev/components/inline-citation", "revision": "6a9d5b1822ffb10bba4bd97175f01edd7d8651cd", "license": "Apache-2.0", "scope": "source title and destination presentation only; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named section, native ordered list and descriptive links with visible new-tab text", "keyboard": "native links; browser verification pending", "screen_reader": "pending manual review" }
     }
   ]
 }
