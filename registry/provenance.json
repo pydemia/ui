@@ -401,7 +401,7 @@
       "name": "pyd-tree", "category": "Navigation", "profiles": ["developer-tool", "neutral-product"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/treeview/", "scope": "interaction and accessibility pattern only; no source copied" },
-      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named single-select tree with nested groups, declared level/position and separate focus/selection", "keyboard": "Chromium: arrows, Home/End, Enter, Space, typeahead, disabled skip and focus ring verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named single-select tree with nested groups, declared level/position, separate focus/selection and described lazy loading/error states", "keyboard": "Chromium: arrows, Home/End, Enter, Space, typeahead, disabled skip, lazy expand/error retry/loaded child focus and focus ring verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-stepper", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],

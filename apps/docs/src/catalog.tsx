@@ -1744,6 +1744,18 @@ function SidebarPreview() {
 function TreePreview() {
     const [selectedId, setSelectedId] = useState<string | null>("overview");
     const [expandedIds, setExpandedIds] = useState(["workspace", "src"]);
+    const [remoteState, setRemoteState] = useState<
+        "unloaded" | "loading" | "error" | "loaded"
+    >("unloaded");
+    const [requestCount, setRequestCount] = useState(0);
+    const remoteNode: TreeNode = remoteState === "loaded"
+        ? { id: "remote", label: "Remote", children: [
+            { id: "remote-report", label: "Report.csv" },
+        ] }
+        : remoteState === "error"
+            ? { id: "remote", label: "Remote", childState: "error",
+                errorMessage: "파일 목록을 불러오지 못했습니다." }
+            : { id: "remote", label: "Remote", childState: remoteState };
     const items: TreeNode[] = [
         { id: "workspace", label: "Workspace", children: [
             { id: "overview", label: "Overview.md" },
@@ -1756,6 +1768,7 @@ function TreePreview() {
             { id: "inventory", label: "Source inventory.md" },
             { id: "verification", label: "Verification.md" },
         ] },
+        remoteNode,
         { id: "archive", label: "Archive", disabled: true,
             children: [{ id: "old", label: "Old report.md" }] },
     ];
@@ -1763,6 +1776,7 @@ function TreePreview() {
         workspace: "Workspace", overview: "Overview.md", src: "src",
         app: "App.tsx", routes: "Routes.tsx", research: "Research",
         inventory: "Source inventory.md", verification: "Verification.md",
+        remote: "Remote", "remote-report": "Report.csv",
     };
     const selectedLabel = selectedId === null ? "없음" : labels[selectedId];
 
@@ -1771,9 +1785,21 @@ function TreePreview() {
             <Tree label="작업 파일" items={items} selectedId={selectedId}
                 onSelectedIdChange={setSelectedId}
                 expandedIds={expandedIds}
-                onExpandedIdsChange={setExpandedIds} />
+                onExpandedIdsChange={setExpandedIds}
+                onLoadChildren={() => {
+                    setRequestCount((count) => count + 1);
+                    setRemoteState("loading");
+                }} />
+            {remoteState === "loading" && (
+                <div className="flex flex-wrap gap-2">
+                    <Button variant="outline" type="button"
+                        onClick={() => setRemoteState("error")}>응답 실패</Button>
+                    <Button type="button"
+                        onClick={() => setRemoteState("loaded")}>응답 완료</Button>
+                </div>
+            )}
             <p role="status" className="m-0 text-xs text-muted">
-                선택한 항목: {selectedLabel}
+                선택한 항목: {selectedLabel} · Remote 요청: {requestCount}회
             </p>
         </div>
     );
@@ -4258,25 +4284,30 @@ const sections = [
     },
     {
         id: "tree", name: "Tree", category: "Navigation",
-        description: "파일·리소스 계층을 확장하고 한 항목을 고릅니다. 방향키와 이름 검색으로 탐색하며 focus와 선택을 구분합니다.",
+        description: "파일·리소스 계층을 확장하고 한 항목을 고릅니다. 원격 폴더의 로딩·실패·재시도를 표시하며 focus와 선택을 구분합니다.",
         code: `import { useState } from "react";
 import { Tree, type TreeNode } from "@pydemia/ui";
 
-const items: TreeNode[] = [
-  { id: "workspace", label: "Workspace", children: [
-    { id: "overview", label: "Overview.md" },
-    { id: "src", label: "src", children: [
-      { id: "app", label: "App.tsx" },
-    ] },
-  ] },
-];
-
-function FileTree() {
+function RemoteTree({ loadFiles }: {
+  loadFiles: (id: string) => Promise<readonly TreeNode[]>;
+}) {
+  const [folder, setFolder] = useState<TreeNode>({
+    id: "remote", label: "Remote", childState: "unloaded",
+  });
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [expandedIds, setExpandedIds] = useState<string[]>(["workspace"]);
-  return <Tree label="작업 파일" items={items}
+  async function loadChildren(id: string) {
+    setFolder({ id, label: "Remote", childState: "loading" });
+    try {
+      const children = await loadFiles(id);
+      setFolder({ id, label: "Remote", children });
+    } catch {
+      setFolder({ id, label: "Remote", childState: "error",
+        errorMessage: "파일 목록을 불러오지 못했습니다." });
+    }
+  }
+  return <Tree label="작업 파일" items={[folder]}
     selectedId={selectedId} onSelectedIdChange={setSelectedId}
-    expandedIds={expandedIds} onExpandedIdsChange={setExpandedIds} />;
+    onLoadChildren={loadChildren} />;
 }`,
         preview: () => <TreePreview />,
     },

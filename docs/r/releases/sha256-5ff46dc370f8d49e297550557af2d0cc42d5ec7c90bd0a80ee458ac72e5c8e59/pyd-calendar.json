@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-calendar",
+  "title": "Calendar",
+  "dependencies": [
+    "react-day-picker@9.14.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-5ff46dc370f8d49e297550557af2d0cc42d5ec7c90bd0a80ee458ac72e5c8e59/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/calendar.tsx",
+      "content": "import { DayPicker, getDefaultClassNames } from \"react-day-picker\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Calendar({\n    className,\n    classNames,\n    showOutsideDays = true,\n    ...props\n}: ComponentProps<typeof DayPicker>) {\n    const defaults = getDefaultClassNames();\n\n    return (\n        <DayPicker\n            showOutsideDays={showOutsideDays}\n            className={cn(\n                \"relative w-fit rounded-sm border border-border bg-surface p-3\",\n                className,\n            )}\n            classNames={{\n                months: cn(\"flex flex-col gap-4 sm:flex-row\", defaults.months),\n                month: cn(\"relative space-y-3\", defaults.month),\n                month_caption: cn(\"flex h-9 items-center justify-center\", defaults.month_caption),\n                caption_label: cn(\"text-sm font-medium\", defaults.caption_label),\n                nav: cn(\n                    \"flex h-9 items-center justify-between\",\n                    defaults.nav,\n                ),\n                button_previous: cn(\n                    \"flex size-9 items-center justify-center rounded-sm \" +\n                    \"hover:bg-surface-subtle disabled:opacity-50\",\n                    defaults.button_previous,\n                ),\n                button_next: cn(\n                    \"flex size-9 items-center justify-center rounded-sm \" +\n                    \"hover:bg-surface-subtle disabled:opacity-50\",\n                    defaults.button_next,\n                ),\n                month_grid: cn(\"w-full border-collapse\", defaults.month_grid),\n                weekdays: cn(\"flex\", defaults.weekdays),\n                weekday: cn(\"w-9 text-center text-xs text-muted\", defaults.weekday),\n                week: cn(\"flex\", defaults.week),\n                day: cn(\"size-9 p-0 text-center\", defaults.day),\n                day_button: cn(\n                    \"size-9 rounded-sm text-sm hover:bg-surface-subtle \" +\n                    \"disabled:opacity-50\",\n                    defaults.day_button,\n                ),\n                selected: cn(\n                    \"[&_button]:bg-accent [&_button]:text-accent-foreground\",\n                    defaults.selected,\n                ),\n                today: cn(\"[&_button]:font-bold\", defaults.today),\n                outside: cn(\"[&_button]:text-muted\", defaults.outside),\n                disabled: cn(\"[&_button]:opacity-50\", defaults.disabled),\n                hidden: cn(\"invisible\", defaults.hidden),\n                ...classNames,\n            }}\n            {...props}\n        />\n    );\n}\n\nexport { Calendar };\n",
+      "type": "registry:ui",
+      "target": "@ui/calendar.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `c60dab6a82d6dc4db6d0efa1b46e899b051dae34`:\n<https://github.com/pydemia/ui/blob/c60dab6a82d6dc4db6d0efa1b46e899b051dae34/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`ecd3ccbe079f061258c8b007dc187ab4b47efcfc6798768797a3d017e716f81c`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

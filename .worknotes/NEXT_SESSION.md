@@ -1,5 +1,17 @@
 # Component 확장 작업 인계
 
+2026-09-30 Tree 원격 하위 항목 진행: `childState`와
+`onLoadChildren(id)`로 원격 폴더의 대기·로딩·오류·재시도를 추가했습니다.
+typecheck·테스트 75/75와 로컬 Chromium의 오류·재시도·자식 focus·
+390px light/dark 표시를 확인했습니다. 95개 item·14개 release 검사와
+별도 소비자 CLI 설치·typecheck·build·Chromium 동작도 통과했습니다.
+새 snapshot은 `sha256-5ff46dc370f8d49e297550557af2d0cc42d5ec7c90bd0a80ee458ac72e5c8e59`입니다.
+PR CI·배포는 아직 미검증입니다.
+[Tree 작업 기록](component-tree-lazy-2026-09-30.md)을
+참고하세요. 이전 Tree WIP stash는 작업 브랜치에 적용했으며 원본 stash는
+안전하게 남겨 두었습니다. 미공개 draft snapshot 네 디렉터리는
+stage하지 마세요.
+
 2026-09-30 모바일 SNB의 pointer 이전 위치 보정: 터치 focus가
 `click`보다 먼저 문서를 이동시킬 수 있어 `pointerdown`에서 문서·SNB
 좌표를 저장하고 즉시 복원하도록 변경했습니다. 390px Chromium의
@@ -10,7 +22,7 @@ build·registry 검사가 통과했습니다. 실제 touch·Safari·screen reade
 참고하세요. [PR #14](https://github.com/pydemia/ui/pull/14) 병합 뒤
 `main` Verify UI·Pages CI와 Vercel production이 성공했습니다. 공개
 393px Chromium 선택에서도 두 스크롤 위치와 버튼 focus를 확인했습니다.
-Tree 지연 로딩 WIP는 Git stash에 별도 보관했습니다.
+Tree 지연 로딩 WIP는 위 기록대로 작업 브랜치에 복원했습니다.
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 
 2026-09-30 RangeSlider 진행: 기존 Slider에 `thumbLabels`를 추가하고

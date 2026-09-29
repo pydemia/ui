@@ -201,14 +201,21 @@ card/inline 표현은 공통 색상 token을 사용합니다. 문서 Colormap
 
 ## 2026-09-29 계층형 리소스 탐색
 
-`Tree`는 파일·리소스 계층의 정적 노드 배열을 받습니다. 선택 ID와
+`Tree`는 파일·리소스 계층의 노드 배열을 받습니다. 선택 ID와
 확장 ID 목록은 controlled 또는 default 값으로 관리하고 callback으로
 변경을 전달합니다. keyboard focus와 선택값은 별개입니다. 방향키는
 보이는 항목 사이를 이동하며 disabled 노드와 그 하위는 조작에서
 제외합니다. `ArrowRight`·`ArrowLeft`는 계층을 열고 닫거나 부모·
 자식으로 이동하고 Enter·Space가 선택합니다. 일반 사이트 메뉴에는
-기존 `Navigation`·`Sidebar`를 사용합니다. 비동기 로딩·drag 이동·
-다중 선택은 현재 API에 포함하지 않습니다.
+기존 `Navigation`·`Sidebar`를 사용합니다. 원격 하위 항목은 children
+대신 `childState`를 `unloaded`·`loading`·`error` 중 하나로 지정합니다.
+`error`에는 이름 있는 `errorMessage`가 필요합니다. 소비자는
+`onLoadChildren(id)`에서 로딩을 시작하고 새 items로 성공·실패 상태를
+갱신합니다. 열린 `unloaded` 노드는 한 번 요청하며, 열린 오류 노드의
+`ArrowRight` 또는 재시도 표시를 선택하면 다시 요청합니다. 닫힌 노드를
+열면 focus는 부모에 남고, 로드 후 `ArrowRight`로 첫 자식에 이동합니다.
+선택값은 요청 상태와 독립적입니다. drag 이동·다중 선택은 API에
+포함하지 않습니다.
 
 ## 2026-09-29 대화 목록
 
