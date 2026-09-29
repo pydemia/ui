@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-checkbox",
+  "title": "Checkbox",
+  "dependencies": [
+    "@radix-ui/react-checkbox@1.3.11",
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-4405ce202eb10a7cb865a7609676349ed6e002ae1b49676d06f4438dd31c5449/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/checkbox.tsx",
+      "content": "import * as CheckboxPrimitive from \"@radix-ui/react-checkbox\";\nimport type { ComponentProps } from \"react\";\nimport { Check, Minus } from \"lucide-react\";\nimport { cn } from \"./utils\";\n\nfunction Checkbox({\n    className,\n    ...props\n}: ComponentProps<typeof CheckboxPrimitive.Root>) {\n    return (\n        <CheckboxPrimitive.Root\n            className={cn(\n                \"group relative inline-flex size-5 shrink-0 items-center \" +\n                \"justify-center after:absolute after:-inset-1 \" +\n                \"rounded-sm border border-border bg-surface text-accent-foreground \" +\n                \"data-[state=checked]:border-accent data-[state=checked]:bg-accent \" +\n                \"data-[state=indeterminate]:border-accent \" +\n                \"data-[state=indeterminate]:bg-accent \" +\n                \"aria-invalid:border-danger disabled:cursor-not-allowed \" +\n                \"disabled:opacity-50\",\n                className,\n            )}\n            {...props}\n        >\n            <CheckboxPrimitive.Indicator>\n                <Check\n                    aria-hidden=\"true\"\n                    className=\"size-3 group-data-[state=indeterminate]:hidden\"\n                />\n                <Minus\n                    aria-hidden=\"true\"\n                    className=\"hidden size-3 group-data-[state=indeterminate]:block\"\n                />\n            </CheckboxPrimitive.Indicator>\n        </CheckboxPrimitive.Root>\n    );\n}\n\nexport { Checkbox };\n",
+      "type": "registry:ui",
+      "target": "@ui/checkbox.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `2fe4624194165cd3db330c872ea056a022d37a30`:\n<https://github.com/pydemia/ui/blob/2fe4624194165cd3db330c872ea056a022d37a30/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`ed1e804372f4b5d6ca6a30e296c8e19b353aa41ff322655dffce33a7dd76b2a7`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

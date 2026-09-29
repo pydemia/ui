@@ -27,9 +27,14 @@
   native reset의 `20/80` 복원, 390px에서 가로 overflow 없음.
 - Radix의 thumb 교차 시 값 정렬과 focus 이동을 관찰했습니다. 이때
   endpoint 이름은 현재 작은 값·큰 값에 붙습니다.
-- 현재 작성 시점의 미완료: registry snapshot·독립 소비자·PR·production.
+- `npm run build`와 `registry:release-check`가 통과했습니다. 95개 item,
+  93개 component와 13개 snapshot을 검사했으며 새 ID는
+  `sha256-4405ce202eb10a7cb865a7609676349ed6e002ae1b49676d06f4438dd31c5449`입니다.
+- 별도 Vite 소비자에 `shadcn@4.21.0`으로 RangeSlider·tokens와 전이
+  의존성을 설치했습니다. 5개 파일의 LF 정규화 내용이 원본과 같고
+  TypeScript와 Vite build가 통과했습니다.
+- 현재 작성 시점의 미완료: 독립 소비자 브라우저·PR·production.
 - 실제 touch, touch 보조기술, Safari, screen reader, RTL은 미검증.
 
-다음 작업은 package 테스트 수정 후 재실행, metadata 고정 고지와
-snapshot 발행, 독립 소비자 설치, PR과 production 검증입니다. 이전
+다음 작업은 PR·CI와 production 검증입니다. 이전
 미공개 draft snapshot 네 디렉터리는 포함하지 않습니다.
