@@ -36,7 +36,15 @@
   설치했습니다. 세 파일의 내용이 registry JSON과 일치하고 typecheck·
   build가 통과했습니다. 390px Chromium에서 숫자 0·결측값·표 헤더와
   문서 가로 overflow가 없음을 확인했습니다.
-- PR CI·공개 배포와 공개 snapshot URL 소비자 설치는 미검증입니다.
+- [PR #16](https://github.com/pydemia/ui/pull/16)을 `main`에 병합했습니다.
+  PR·병합 커밋 Verify UI와 Pages CI가 통과했고 Vercel production
+  `dpl_6jtrE2RfShByxNXGhmWA3JRYB18P`는 READY입니다. 공개
+  `ui.pydemia.ai` 390px Chromium에서 표 헤더·0·결측값·빈 상태,
+  `ArrowRight` 내부 스크롤과 행 이름 고정을 확인했습니다.
+- 공개 현재·snapshot `pyd-heatmap`과 96개 item manifest를 조회했습니다.
+  snapshot URL을 새 Vite 소비자에 설치해 Heatmap·tokens·utils 파일 내용
+  일치와 typecheck·build를 확인했고, 390px Chromium에서 표·0·결측값을
+  확인했습니다.
 - 실제 screen reader·touch·Safari·RTL은 미검증입니다.
 
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.

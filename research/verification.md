@@ -1684,7 +1684,9 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | `npm run build`·`registry:release-check` | pass | 96개 item·94개 component·15개 불변 snapshot 및 현재 ID 일치 |
 | 별도 소비자 CLI·typecheck·build | pass | Heatmap·tokens·utils 3개 파일 내용 일치 |
 | 별도 소비자 Chromium | pass (limited) | 390px의 표 헤더·0·결측값·문서 가로 overflow 없음 |
-| PR CI·공개 배포·공개 snapshot 설치 | unverified | 현재 작업 브랜치 소스·문서 |
+| PR·`main` CI와 production | pass (limited) | PR #16·병합 커밋 Verify UI, Pages CI, Vercel READY, 공개 390px preview·현재/snapshot JSON |
+| 공개 snapshot 소비자 설치·typecheck·build | pass | Heatmap·tokens·utils 3개 파일 내용 일치 |
+| 공개 snapshot 소비자 Chromium | pass (limited) | 390px 표·0·결측값·문서 가로 overflow 없음 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 상세 기록과 화면은 `.worknotes/component-heatmap-2026-09-30.md`에

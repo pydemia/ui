@@ -9,7 +9,12 @@
 registry release 검사와 별도 소비자 CLI 설치·typecheck·build·Chromium
 표시가 통과했습니다. 새 snapshot은
 `sha256-34e05c67026d4eafde4bba89993145eef2718414d4312c4ff87c7b33a4cc6481`입니다.
-PR CI·공개 배포와 공개 snapshot 소비자 설치는 미검증입니다.
+[PR #16](https://github.com/pydemia/ui/pull/16)을 병합했고 PR·`main`
+Verify UI 및 Pages CI, Vercel production
+`dpl_6jtrE2RfShByxNXGhmWA3JRYB18P`가 통과했습니다. 공개 390px
+preview와 현재·snapshot item, 공개 snapshot의 별도 소비자 설치·
+typecheck·build·Chromium 표시도 확인했습니다. 실제 screen reader·
+touch·Safari·RTL은 미검증입니다.
 [Heatmap 기록](component-heatmap-2026-09-30.md)을
 참고하세요. 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 
