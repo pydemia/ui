@@ -393,6 +393,13 @@ modal focus와 Escape 동작을 설명합니다. 새 npm dependency는 없으며
 registry 전이 항목은 `pyd-button`, `pyd-drawer`, `pyd-navigation`,
 `pyd-utils`입니다.
 
+2026-09-30 섹션 탐색은 같은
+[shadcn/ui Sidebar 공식 문서](https://ui.shadcn.com/docs/components/aria/sidebar)의
+`SidebarGroup` 구성을 reference로 확인했습니다. `SidebarSection` 타입과
+렌더링·검증은 기존 `Sidebar` 원본 구현에 직접 추가했고 upstream 코드를
+복사하지 않았습니다. 기존 Radix Dialog revision·MIT LICENSE와 registry
+전이 항목은 그대로이며 새 npm dependency는 없습니다.
+
 ## 2026-09-29 단계·활동 표시 reference
 
 `Stepper`와 `Timeline`은 이 저장소의 원본 구현입니다.

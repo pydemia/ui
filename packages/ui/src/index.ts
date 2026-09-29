@@ -102,7 +102,9 @@ export type {
     NavigationMenuProps, NavigationMenuLinkProps,
 } from "./components/navigation-menu";
 export { Sidebar } from "./components/sidebar";
-export type { SidebarItem, SidebarProps } from "./components/sidebar";
+export type {
+    SidebarItem, SidebarSection, SidebarProps,
+} from "./components/sidebar";
 export { Tree } from "./components/tree";
 export type { TreeNode, TreeProps } from "./components/tree";
 export { Stepper } from "./components/stepper";

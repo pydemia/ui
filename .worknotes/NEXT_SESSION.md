@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-09-30 Sidebar 섹션 탐색 진행: 기존 `items`와 호환되는 이름 있는
+`sections` 입력, 데스크톱·모바일 그룹, 문서 preview를 구현했습니다.
+`build`·`typecheck`·패키지 테스트 59/59는 통과했습니다. registry
+metadata 변경으로 소비자 MIT 고지의 고정 commit·SHA-256 갱신이
+필요해 snapshot·배포는 진행 중입니다. 브라우저·소비자 검증도
+남았습니다. 자세한 상태와 미검증 항목은
+[Sidebar 섹션 기록](component-sidebar-groups-2026-09-30.md)을 참고하세요.
+component 90개·item 92개, goal 관리용 추정 약 70%는 유지합니다.
+
 2026-09-30 상단 GNB: `Components → category → component` 메뉴를
 기존 catalog와 `Popover`로 구현했습니다. [PR #5](https://github.com/pydemia/ui/pull/5)
 병합 뒤 main CI와 production READY, 운영 category·component 선택을

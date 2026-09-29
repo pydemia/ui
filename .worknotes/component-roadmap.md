@@ -207,7 +207,9 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 - [x] `Stepper` — 단계 위치·완료·오류와 단계 이동 정책. 실제 screen
   reader 발표와 touch 동작은 검증하지 않았습니다.
 - [x] `Sidebar` — `AppShell`의 container 폭에 따라 데스크톱
-  접힘·현재 링크와 좁은 화면의 modal drawer를 전환합니다.
+  접힘·현재 링크와 좁은 화면의 modal drawer를 전환합니다. 2026-09-30에
+  이름 있는 섹션 목록을 기존 API에 추가했습니다. 새 component로
+  세지 않습니다.
 - [x] `ScrollArea` — 세로·가로·양방향 native 스크롤과 이름이 있는
   keyboard focus 영역, 공통 token 스크롤바. 실제 screen reader·touch·RTL
   검사는 남았습니다.
