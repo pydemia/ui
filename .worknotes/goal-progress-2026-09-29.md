@@ -2,8 +2,8 @@
 
 2026-09-29: 현재 내용 해시 ID를 자동으로 고르는 release 검사를 추가하고,
 PR·`main` push용 CI workflow에 typecheck·테스트·build·snapshot 검사·
-생성 파일 diff 검사를 넣었습니다. 로컬 검사는 통과했으며 원격 workflow는
-아직 실행 전입니다. component 89개·registry item 91개, 공급·품질 조건
+생성 파일 diff 검사를 넣었습니다. 로컬 검사와 PR #1의 GitHub Actions
+run이 통과했습니다. component 89개·registry item 91개, 공급·품질 조건
 5/10, 관리용 전체 추정 약 70%는 유지합니다.
 [기록](component-ci-gate-2026-09-29.md)을 참고하세요.
 

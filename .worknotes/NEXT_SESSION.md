@@ -5,8 +5,10 @@
 기존 방식도 유지하며 fixture에서 현재·변경·게시 JSON 누락을 재검사했습니다.
 `.github/workflows/verify.yml`은 PR과 `main` push에서 Node 24로
 typecheck, package 테스트, build, 현재 snapshot 검사, 생성된 `docs/`
-diff를 확인합니다. 로컬 무인자 검사 결과는 통과했습니다. GitHub Actions의
-실제 실행 결과는 [CI 기록](component-ci-gate-2026-09-29.md)에 남깁니다.
+diff를 확인합니다. 로컬 검사와 PR #1의
+[GitHub Actions run](https://github.com/pydemia/ui/actions/runs/36572011594)이
+통과했습니다. 단계별 범위는
+[CI 기록](component-ci-gate-2026-09-29.md)에 있습니다.
 
 2026-09-29: draft PR 검토 중 DataChart의 유한한 양·음 극값에서 SVG 좌표가
 `NaN`이 되는 문제를 고쳤습니다. 현재 새 내용 해시 후보는
