@@ -73,7 +73,10 @@ function Toast({
                 "pointer-events-auto min-w-0 rounded-sm border border-border " +
                 "border-l-4 bg-surface p-[var(--space-4)] text-foreground " +
                 "shadow-[var(--shadow-float)]",
-                variant === "error" ? "border-l-danger" : "border-l-accent",
+                variant === "error" && "border-l-danger",
+                variant === "success" && "border-l-success",
+                variant === "warning" && "border-l-warning",
+                variant === "info" && "border-l-accent",
                 className,
             )}
             {...props}

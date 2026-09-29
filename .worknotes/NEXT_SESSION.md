@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-09-30 `codex/feedback-status-variants` 진행: Spinner 다섯 형태는
+기존 구현으로 확인했습니다. Alert에 info·success·warning을 추가하고
+Toast 상태색을 맞췄습니다. `--success`·`--warning`은 light/dark
+palette alias와 문서 Colormap에 연결했습니다. 테스트 66/66,
+typecheck·build·registry release 검사와 독립 소비자 CLI 설치·
+typecheck·build·Chromium 동작이 통과했습니다. 새 snapshot은
+`sha256-6315cfe1a0a88ffa25cd36cbfaa57dc5e278e800f8c257b387c4159aa58d1d6f`
+입니다. 같은 branch에서 모바일 SNB 선택 시 `#components` 해시를
+제거해 본문 앵커 이동을 막았습니다. 390px의 문서·SNB 위치와
+1280px의 기존 본문 이동을 확인했습니다.
+[Feedback 상태 기록](feedback-status-variants-2026-09-30.md)과
+[모바일 SNB 앵커 기록](mobile-snb-hash-2026-09-30.md)을 참고하세요.
+PR·CI·배포는 아직 남았습니다. 실제 touch·Safari·screen reader는
+미검증입니다. 기존 미공개 draft snapshot 네 디렉터리는 stage하지
+마세요.
+
 2026-09-30 [PR #10](https://github.com/pydemia/ui/pull/10) 배포:
 Workflow에 `Kanban`을 추가해 component 91개·registry item 93개입니다.
 공식 Kibo 문서·고정 revision 소스·MIT license를 확인하고 원본

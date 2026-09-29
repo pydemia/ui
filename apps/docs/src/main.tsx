@@ -22,6 +22,8 @@ const colorTokens = [
     { name: "Accent text", token: "--accent-foreground" },
     { name: "Focus", token: "--focus" },
     { name: "Danger", token: "--danger" },
+    { name: "Success", token: "--success" },
+    { name: "Warning", token: "--warning" },
     { name: "User message", token: "--message-user-background" },
     { name: "User message text", token: "--message-user-foreground" },
 ] as const;
@@ -72,6 +74,8 @@ const hexColor = /^#[0-9a-fA-F]{6}$/;
 const contrastPairs = [
     { name: "본문", foreground: "--foreground", background: "--background" },
     { name: "Accent", foreground: "--accent-foreground", background: "--accent" },
+    { name: "Success", foreground: "--success", background: "--surface" },
+    { name: "Warning", foreground: "--warning", background: "--surface" },
     {
         name: "User message", foreground: "--message-user-foreground",
         background: "--message-user-background",
@@ -216,7 +220,8 @@ function App() {
         setComponentMenuOpen(false);
         const url = new URL(window.location.href);
         url.searchParams.set("component", id);
-        url.hash = "components";
+        if (scrollToComponent) url.hash = "components";
+        else if (url.hash === "#components") url.hash = "";
         window.history.pushState({}, "", url);
         if (scrollToComponent) {
             document.getElementById("components")?.scrollIntoView({ behavior: "smooth" });

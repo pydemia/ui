@@ -1591,3 +1591,20 @@ PR·`main` Verify UI와 Pages CI, Vercel production 배포가
 통과했습니다. 공개 사이트의 실제 SNB 클릭에서 문서·SNB 위치가
 유지되고 Kanban 방향 버튼의 카드 이동을 확인했습니다. 공개
 `pyd-kanban` JSON과 93개 item snapshot manifest도 조회했습니다.
+
+## 2026-09-30 Feedback 상태 표시와 모바일 SNB 앵커
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| package 테스트·typecheck·build | pass | 66/66, UI·프로필·문서 TS와 정적 사이트 |
+| `registry:release-check` | pass | 93개 item, 11개 snapshot, 현재 빌드와 새 ID 일치 |
+| 로컬 Alert·Toast | pass (limited) | Chromium light/dark·Forest, 역할·상태색·warning live region |
+| 독립 소비자 | pass | CLI 설치, typecheck·build, Alert 역할·색과 Toast 열기·닫기·focus |
+| 390px 모바일 SNB | pass (limited) | 연속 선택 시 문서·SNB 위치 유지, 해시 제거와 선택 버튼 focus |
+| 1280px 데스크톱 SNB | pass (limited) | 기존 `#components` 이동과 제목 변경 |
+| 실제 touch·Safari·screen reader | unverified | 기기와 보조기술 테스트 미실행 |
+
+로컬 registry는 소비자 설치 때만 `127.0.0.1` 의존성 URL로 생성했고,
+게시용 URL로 다시 빌드한 뒤 현재 snapshot 검사를 통과했습니다.
+상세 기록은 `.worknotes/feedback-status-variants-2026-09-30.md`와
+`.worknotes/mobile-snb-hash-2026-09-30.md`에 남겼습니다.
