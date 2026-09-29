@@ -1620,9 +1620,10 @@ PR·`main` Verify UI와 Pages CI, Vercel production 배포가
 | 로컬 Chromium SNB | pass (limited) | 390px에서 문서 `scrollY=844`·SNB `scrollLeft=1875` 유지, 버튼 focus; 1280px 기존 `#components` 이동 |
 | `npm run build`·`registry:release-check` | pass | 94개 item·92개 component, 12개 immutable snapshot과 현재 빌드 일치 |
 | 독립 소비자 | pass | `shadcn@4.21.0`으로 InputGroup과 전이 의존성 설치, typecheck·build, 390px Chromium 제출·메모 저장·가로 overflow 없음 |
+| PR·`main` CI와 production | pass (limited) | PR #12 Verify UI, 병합 커밋 Verify UI·Pages CI, Vercel READY, 공개 390px SNB 연속 선택·새 item·snapshot URL |
 | 실제 touch·Safari·screen reader·RTL | unverified | 기기와 보조기술 실행 전 |
 
 새 snapshot은
 `sha256-d8219d9053fecc606f6219a9ec4ed62d4d47b0d682ec6411dfe77114280da271`입니다.
-공개 배포는 아직 확인 전입니다. 세부 기록은
+공개 배포 기록과 SNB 위치 수치는
 `.worknotes/component-input-group-2026-09-30.md`에 있습니다.

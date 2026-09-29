@@ -13,7 +13,12 @@ dark token을 확인했습니다. 새 snapshot은
 `research/source-inventory.md`에 있으며 세부 사항은
 [InputGroup 작업 기록](component-input-group-2026-09-30.md)을 보세요.
 독립 소비자 CLI 설치·typecheck·build·390px Chromium 동작은
-통과했습니다. CI·공개 배포는 아직 진행 전입니다.
+통과했습니다. [PR #12](https://github.com/pydemia/ui/pull/12)를
+`main`에 병합했고 PR·main Verify UI, Pages CI와 Vercel production
+`dpl_nMLXwMs66nUFLxCGorxD5Nf3nmJo`가 성공했습니다. 공개
+`ui.pydemia.ai`의 InputGroup preview, 새 item·snapshot URL과
+390px SNB 연속 선택의 문서·가로 위치 및 버튼 focus를 확인했습니다.
+실제 touch·Safari·screen reader·RTL은 미검증입니다.
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 
 2026-09-30 [PR #11](https://github.com/pydemia/ui/pull/11) 배포:

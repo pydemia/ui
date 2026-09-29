@@ -44,5 +44,18 @@ upstream 의존성을 `research/source-inventory.md`에 기록했습니다.
   공유 focus 테두리를 확인했습니다.
 
 실제 touch·Safari·screen reader·RTL은 검증하지 않았습니다.
-공개 배포 결과는 진행 후 이 파일에 추가합니다. 기존 미공개 draft
-snapshot 네 디렉터리는 이번 변경에 포함하지 않습니다.
+기존 미공개 draft snapshot 네 디렉터리는 이번 변경에 포함하지
+않았습니다.
+
+## 공개 배포
+
+[PR #12](https://github.com/pydemia/ui/pull/12)의 Verify UI job이
+성공한 뒤 `f7dc7fcc8904abee2c748b6596d556da4c9436d9`로
+병합했습니다. `main`의 Verify UI와 Pages CI가 통과했고 Vercel
+production `dpl_nMLXwMs66nUFLxCGorxD5Nf3nmJo`가 READY입니다.
+공개 `https://ui.pydemia.ai/?component=input-group`에서 92개
+component와 InputGroup preview·Usage를 확인했습니다. 공개
+`pyd-input-group.json`과 snapshot manifest는 HTTP 200이며 manifest의
+item 수는 94개입니다. 공개 사이트 390px에서 InputGroup →
+NumberInput → TagsInput을 선택할 때 `scrollY=844`, SNB
+`scrollLeft=1875`가 유지되고 focus는 선택한 버튼으로 이동했습니다.
