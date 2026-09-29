@@ -2,11 +2,11 @@
 
 2026-09-29 Markdown 후보: `codex/markdown-safe-renderer`에 90번째
 component와 92번째 registry item을 구현했습니다. 로컬 snapshot 후보는
-`sha256-ab03eb990472f506dbf903d0230c1894fe9d28c2f1f4893a3c6db512b94f387d`
+`sha256-70c4a56811508257fe1131e7ab65e3ab3836e60934bba5a16f58c0e8a66fe000`
 입니다. package 테스트·typecheck·build·release 검사, Markdown 단독
 소비자와 92개 item 전체 소비자 typecheck·build·브라우저 로딩을
-확인했습니다. 이 시점에는 PR·production 배포·공개 URL 설치를
-확인하지 않았습니다. 상세 범위는
+확인했습니다. [PR #4](https://github.com/pydemia/ui/pull/4)는 생성했고
+production 배포·공개 URL 설치는 아직 확인하지 않았습니다. 상세 범위는
 [Markdown 기록](component-markdown-2026-09-29.md)을 참고하세요.
 공급·품질 조건 5/10, 전체 goal의 관리용 추정 약 70%입니다. 이전
 미공개 draft snapshot 네 디렉터리는 계속 untracked로 둡니다.

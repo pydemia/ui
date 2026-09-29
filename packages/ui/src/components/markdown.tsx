@@ -1,7 +1,9 @@
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "./utils";
 
-type MarkdownProps = Omit<ComponentProps<"div">, "children"> & {
+type MarkdownProps = Omit<
+    ComponentProps<"div">, "children" | "dangerouslySetInnerHTML"
+> & {
     source: string;
 };
 
@@ -188,6 +190,9 @@ function renderBlocks(source: string): ReactNode[] {
 function Markdown({ source, className, ...props }: MarkdownProps) {
     if (typeof source !== "string") {
         throw new TypeError("Markdown source must be a string.");
+    }
+    if ("dangerouslySetInnerHTML" in props) {
+        throw new TypeError("Markdown does not accept raw HTML.");
     }
     return <div className={cn(
         "grid min-w-0 gap-[var(--space-3)] [overflow-wrap:anywhere] " +

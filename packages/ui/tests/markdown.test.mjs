@@ -82,3 +82,11 @@ test("non-string source reports invalid input", () => {
         name: "TypeError", message: "Markdown source must be a string.",
     });
 });
+
+test("raw HTML injection prop is rejected at runtime", () => {
+    assert.throws(() => renderToStaticMarkup(createElement(Markdown, {
+        source: "safe", dangerouslySetInnerHTML: { __html: "<img>" },
+    })), {
+        name: "TypeError", message: "Markdown does not accept raw HTML.",
+    });
+});
