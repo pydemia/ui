@@ -32,7 +32,14 @@
   `pyd-tokens`를 `shadcn@4.21.0 add`로 설치했습니다. 11개 파일이
   생성됐고 세 component 소스가 snapshot과 같았습니다. 조합 사용
   코드의 typecheck·build가 통과했습니다.
-- 원격 PR·배포는 아직 확인하지 않았습니다.
+- 390px viewport에서 문서 scroll width가 375px이었고 기간 필터와
+  dark mode preview가 표시됐습니다.
+- [PR #7](https://github.com/pydemia/ui/pull/7)을 `main`의
+  `4e5085fb42af9f22685adc134efee6d936cd45b2`로 병합했습니다.
+  PR [Verify UI](https://github.com/pydemia/ui/actions/runs/36594483605),
+  main [Verify UI](https://github.com/pydemia/ui/actions/runs/36594709198)와
+  Pages 작업이 성공했습니다. Vercel production은 READY이고 운영
+  preview에서 기간 picker가 열렸습니다.
 - 실제 screen reader·touch·다른 시간대 데이터 처리는 미검증입니다.
 
 기존 미공개 draft snapshot 네 디렉터리는 이번 변경에 포함하지 않습니다.
