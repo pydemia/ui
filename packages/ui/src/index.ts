@@ -205,6 +205,8 @@ export type { RangeSliderProps, RangeValue } from "./components/range-slider";
 export { Calendar } from "./components/calendar";
 export { DatePicker } from "./components/date-picker";
 export type { DatePickerProps } from "./components/date-picker";
+export { MonthPicker } from "./components/month-picker";
+export type { MonthPickerProps } from "./components/month-picker";
 export { DateRangePicker } from "./components/date-range-picker";
 export type {
     DateRangePickerProps, DateRangeValue,

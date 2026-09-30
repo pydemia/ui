@@ -1731,3 +1731,21 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 
 상세 내용은 `.worknotes/component-scatter-chart-2026-09-30.md`에
 있습니다.
+
+## 2026-09-30 MonthPicker
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript | pass | 저장소 `npm run typecheck` |
+| 패키지 테스트 | pass | 전체 91/91, form 값·disabled·잘못된 월·역전/범위 밖 값 포함 |
+| 저장소 build | pass | 99개 registry item과 문서 정적 빌드 |
+| 문서 Chromium | pass (limited) | 2025-11 하한, 2027-03 상한, 비활성 월·연도, 2026-09 keyboard 선택·제출, Escape 포커스 복원 |
+| 390px 문서 | pass (limited) | 팝오버 화면 안 배치, body 375px/viewport 390px, dark·Pydemia colormap |
+| 별도 소비자 CLI | pass | `shadcn@4.21.0` 설치 5개 파일, 4개 소스·스타일 원본 일치, typecheck·build |
+| 별도 소비자 Chromium | pass (limited) | 2027-03 선택·제출, 390px body 390px, console error 0 |
+| registry·snapshot | pass | 99개 item·97개 component·18개 snapshot, 현재 ID 일치 |
+| Windows·Linux 정적 JS 일치 | pass (local) | `scatter-chart.tsx` LF checkout 뒤 SHA-256 일치; PR CI 재실행 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+세부 사항은 `.worknotes/component-month-picker-2026-09-30.md`에
+기록합니다.

@@ -1,5 +1,22 @@
 # Component 확장 작업 인계
 
+2026-09-30 MonthPicker 진행: 월별 보고·필터용 `YYYY-MM` controlled 값을
+연도 이동·min/max·form 입력과 함께 구현했습니다. MUI X 공식 문서와
+고정 revision의 소스·manifest·MIT LICENSE를 확인했고 코드는 새로
+작성했습니다. typecheck·패키지 테스트 91/91, 로컬 Chromium의
+경계·키보드·제출·390px·dark/Pydemia colormap이 통과했습니다.
+별도 Vite 소비자 CLI 설치 5개 파일, 4개 원본 일치와 typecheck·build·
+Chromium 제출도 확인했습니다. `registry:release-check`는 99개 item·
+97개 component·18개 snapshot, 현재
+`sha256-cf9756bda03bc7dc75f4c9c0f496b1f83ac0d5c0808557b21ff543e9fd408de4`를
+확인했습니다. 공개 배포·snapshot 소비자 검사는 아직 진행 중입니다.
+PR #20 첫 CI는 Windows CRLF가 `ScatterChart`의 여러 줄 className에
+들어가 Linux 생성 bundle과 달라 실패했습니다. 해당 파일을 LF로 고정해
+두 환경의 JS SHA-256 일치를 확인했고 CI 재실행을 준비했습니다.
+실제 screen reader·touch·Safari·RTL은 미검증입니다.
+[작업 기록](component-month-picker-2026-09-30.md)을 참고하세요.
+기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
+
 2026-09-30 ScatterChart 진행: 두 연속 수치의 산점도, 결측값·0·빈 상태,
 native 선택기·데이터 표와 registry metadata, 문서 preview·Usage를
 작성했습니다. Recharts 공식 문서와 고정 revision의 소스·manifest·

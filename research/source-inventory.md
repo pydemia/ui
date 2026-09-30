@@ -1110,3 +1110,25 @@ revision `44bba29e74bbfdfc6715176f3eecea0392a95080`의
 native 선택기를 제공합니다. 새 registry 직접 의존성은 `pyd-utils`,
 새 npm runtime 의존성은 없습니다. 실제 screen reader·touch·Safari·
 RTL은 검증하지 않았습니다.
+
+## 2026-09-30 MonthPicker
+
+월 단위 보고·필터에 `YYYY-MM` 값을 직접 쓰기 위해 새 원본
+`MonthPicker`를 작성했습니다. 기존 `DatePicker`는 일자를 포함한
+`YYYY-MM-DD` 값이므로 월만 필요한 form에서 대체할 수 없습니다.
+[MUI X MonthCalendar API](https://mui.com/x/api/date-pickers/month-calendar/)의
+월 그리드, 선택·비활성 상태를 참고했습니다. 동일 revision
+`a87939ed420ab1d77102a3db121fdc918080c5c3`의
+[MonthCalendar 소스](https://github.com/mui/mui-x/blob/a87939ed420ab1d77102a3db121fdc918080c5c3/packages/x-date-pickers/src/MonthCalendar/MonthCalendar.tsx),
+[package manifest](https://github.com/mui/mui-x/blob/a87939ed420ab1d77102a3db121fdc918080c5c3/packages/x-date-pickers/package.json),
+[MIT LICENSE](https://github.com/mui/mui-x/blob/a87939ed420ab1d77102a3db121fdc918080c5c3/packages/x-date-pickers/LICENSE)를
+직접 확인했습니다. MUI 구현은 `@mui/utils`, `@mui/x-internals`,
+`clsx`, `prop-types`, `react-transition-group` 등을 사용하고
+`@mui/material`과 date adapter를 peer로 받습니다. 그 코드와
+의존성은 편입하지 않았습니다.
+
+새 구현은 기존 `pyd-popover`, `pyd-utils`, `lucide-react`를 사용합니다.
+Popover의 Radix 의존성과 라이선스는 기존 Popover 조사에 따릅니다.
+이름 있는 native 버튼, disabled 월, 선택 상태, Escape 닫기와 trigger
+포커스 복귀를 사용하며 키보드·브라우저 확인 범위는
+`research/verification.md`에 기록합니다.
