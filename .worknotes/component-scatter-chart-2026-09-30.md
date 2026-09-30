@@ -35,7 +35,18 @@ native 표에 남깁니다. 포인터 점 선택과 키보드 native 선택기�
   제거했습니다. 수정 후 preview와 펼친 표 모두 violation 0건,
   SVG 글자의 배경을 판정하지 못한 contrast incomplete 1건입니다.
 
-build·registry snapshot, 별도 소비자와 공개 사이트는 아직 검증하지
-않았습니다. 실제 screen reader·touch·Safari·RTL도 미검증입니다.
+- `npm run build`와 `npm run registry:release-check`가 통과했습니다.
+  98개 item·96개 component와 17개 불변 snapshot을 검사했습니다.
+  새 snapshot은
+  `sha256-5038d4cd248ea483b2cb492095fbdbea06038c0ec48a17618be610eae83c1b01`입니다.
+- 별도 Vite 소비자에 `shadcn@4.21.0`으로 로컬 registry의
+  ScatterChart·tokens·전이 utils를 설치했습니다. 세 파일이 저장소
+  원본과 일치하고 typecheck·build가 통과했습니다. 390px Chromium에서
+  `ArrowDown`과 plot 점 클릭이 controlled 선택·정확한 값에 반영됐고
+  문서 가로 overflow나 page error는 없었습니다. fixture는
+  `C:\Users\pydemia\AppData\Local\Temp\pydemia-scatter-consumer-20260930`입니다.
+
+공개 사이트·공개 snapshot은 배포 전이라 미검증입니다. 실제 screen
+reader·touch·Safari·RTL도 미검증입니다.
 
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.
