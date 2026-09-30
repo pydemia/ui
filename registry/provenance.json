@@ -558,6 +558,26 @@
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "AI Elements Inline Citation", "url": "https://elements.ai-sdk.dev/components/inline-citation", "revision": "6a9d5b1822ffb10bba4bd97175f01edd7d8651cd", "license": "Apache-2.0", "scope": "source title and destination presentation only; no source copied" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named section, native ordered list and descriptive links with visible new-tab text", "keyboard": "native links; browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-response-feedback", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["lucide-react", "pyd-button", "pyd-utils"], "accessibility": { "semantics": "named group of two native pressed buttons with stable names", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-favorite-toggle", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["lucide-react", "pyd-toggle", "pyd-utils"], "accessibility": { "semantics": "named pressed toggle button with optional visible count", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-board", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["lucide-react", "pyd-button", "pyd-utils"], "accessibility": { "semantics": "named section, list of native post-selection buttons, current selection and optional create action", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-thread", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-button", "pyd-textarea", "pyd-utils"], "accessibility": { "semantics": "named section, ordered comments with parent attribution, labeled composer, status and error alerts", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }
     }
   ]
 }

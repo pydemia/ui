@@ -1132,3 +1132,26 @@ Popover의 Radix 의존성과 라이선스는 기존 Popover 조사에 따릅니
 이름 있는 native 버튼, disabled 월, 선택 상태, Escape 닫기와 trigger
 포커스 복귀를 사용하며 키보드·브라우저 확인 범위는
 `research/verification.md`에 기록합니다.
+
+## 2026-09-30 답변 평가·즐겨찾기·게시판·대댓글
+
+`ResponseFeedback`, `FavoriteToggle`, `Board`, `Thread`의 소스는
+프로젝트에서 새로 작성했습니다. 외부 component 소스는 복사하지
+않았습니다. 답변 평가와 즐겨찾기는 기존 `Button`·`Toggle` 및
+`lucide-react@0.468.0` 아이콘을, 게시판과 댓글은 `Button`·`Textarea`를
+사용합니다. 새 npm runtime 의존성은 없습니다. 게시글 작성 modal은
+기존 `Dialog`를 조합합니다.
+
+기존 Dialog의 [공식 사용 문서](https://ui.shadcn.com/docs/components/radix/dialog),
+registry에 기록된 revision `98a1fe67b439324ddc857f47fbdce056600a4329`의
+[소스](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/dialog.tsx)와
+[MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+다시 확인했습니다. 해당 Dialog는 `@radix-ui/react-dialog`와
+`lucide-react`를 사용하며 MIT notice는 기존 registry 전달 경로를
+따릅니다. 새 네 컴포넌트 자체의 provenance는 `pydemia/ui` 원본으로
+기록했습니다. 공개 사용 조건은 저장소에서 아직 지정하지 않았습니다.
+
+[W3C WAI의 접근성 이름·설명 지침](https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/)에
+맞춰 평가·즐겨찾기의 안정적인 버튼 이름과 집계 설명, 게시판의 이름
+있는 section, 댓글 작성 field의 연결된 label을 사용합니다. 키보드와
+화면 낭독기 검증 범위는 `research/verification.md`에 구분합니다.

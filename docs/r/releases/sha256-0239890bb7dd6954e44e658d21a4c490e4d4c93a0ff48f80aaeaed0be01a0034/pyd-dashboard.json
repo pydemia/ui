@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-dashboard",
+  "title": "Dashboard Layout",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-0239890bb7dd6954e44e658d21a4c490e4d4c93a0ff48f80aaeaed0be01a0034/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/dashboard.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Dashboard({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\"@container grid min-w-0 gap-[var(--space-6)]\", className)}\n            {...props}\n        />\n    );\n}\n\ntype DashboardSectionProps = ComponentProps<\"section\"> & {\n    \"aria-label\": string;\n};\n\nfunction DashboardMetrics({ className, ...props }: DashboardSectionProps) {\n    return (\n        <section\n            className={cn(\n                \"grid min-w-0 grid-cols-1 gap-[var(--space-4)] \" +\n                \"@sm:grid-cols-2 @3xl:grid-cols-4\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nfunction DashboardPanels({ className, ...props }: DashboardSectionProps) {\n    return (\n        <section\n            className={cn(\n                \"grid min-w-0 grid-cols-1 items-start \" +\n                \"gap-[var(--space-4)] @3xl:grid-cols-2\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Dashboard, DashboardMetrics, DashboardPanels };\nexport type { DashboardSectionProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/dashboard.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -19,6 +19,12 @@ export { PinInput } from "./components/pin-input";
 export type { PinInputProps } from "./components/pin-input";
 export { Rating } from "./components/rating";
 export type { RatingProps } from "./components/rating";
+export { ResponseFeedback } from "./components/response-feedback";
+export type {
+    ResponseFeedbackValue, ResponseFeedbackCounts, ResponseFeedbackProps,
+} from "./components/response-feedback";
+export { FavoriteToggle } from "./components/favorite-toggle";
+export type { FavoriteToggleProps } from "./components/favorite-toggle";
 export { Combobox } from "./components/combobox";
 export type { ComboboxOption, ComboboxProps } from "./components/combobox";
 export { MultiSelect } from "./components/multi-select";
@@ -94,6 +100,10 @@ export { Kanban, moveKanbanCard } from "./components/kanban";
 export type {
     KanbanCard, KanbanColumn, KanbanMove, KanbanProps,
 } from "./components/kanban";
+export { Board } from "./components/board";
+export type { BoardPost, BoardProps } from "./components/board";
+export { Thread } from "./components/thread";
+export type { ThreadComment, ThreadProps } from "./components/thread";
 export { Gantt, changeGanttTask } from "./components/gantt";
 export type {
     GanttTask, GanttOperation, GanttChange, GanttProps,

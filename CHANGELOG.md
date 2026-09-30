@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-09-30 — 답변 평가·즐겨찾기·게시판·대댓글
+
+- `ResponseFeedback`, `FavoriteToggle`, `Board`, `Thread`를 원본
+  컴포넌트와 registry item으로 추가했습니다. 글 작성 modal은 기존
+  `Dialog`를 조합합니다.
+- 문서에 선택·게시·대댓글 작성 preview와 사용 코드를 추가했습니다.
+
 ## 2026-09-30 — MonthPicker
 
 - 월별 보고·필터에서 `YYYY-MM` 값을 고르는 `MonthPicker`를 추가했습니다.

@@ -630,6 +630,29 @@
       "name": "pyd-citation-list", "type": "registry:ui", "title": "Citation List",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/citation-list.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-response-feedback", "type": "registry:ui", "title": "Response Feedback",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/response-feedback.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-favorite-toggle", "type": "registry:ui", "title": "Favorite Toggle",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-toggle.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/favorite-toggle.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-board", "type": "registry:ui", "title": "Board",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/board.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-thread", "type": "registry:ui", "title": "Thread",
+      "registryDependencies": ["./pyd-button.json", "./pyd-textarea.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/thread.tsx", "type": "registry:ui" }]
     }
   ]
 }
