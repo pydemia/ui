@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-collapsible",
+  "title": "Collapsible",
+  "dependencies": [
+    "@radix-ui/react-collapsible@1.1.20"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-0239890bb7dd6954e44e658d21a4c490e4d4c93a0ff48f80aaeaed0be01a0034/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/collapsible.tsx",
+      "content": "import * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Collapsible = CollapsiblePrimitive.Root;\nconst CollapsibleTrigger = CollapsiblePrimitive.Trigger;\n\nfunction CollapsibleContent({\n    className,\n    ...props\n}: ComponentProps<typeof CollapsiblePrimitive.Content>) {\n    return (\n        <CollapsiblePrimitive.Content\n            className={cn(\"text-sm\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/collapsible.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `ae62c14d1e456543119448bd4b64b594bc6f5ad1`:\n<https://github.com/pydemia/ui/blob/ae62c14d1e456543119448bd4b64b594bc6f5ad1/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`0a439ef56644c4a089a46b44e052fbb44f04345a384e3e085e6db3fc526b258b`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

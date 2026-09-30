@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-toggle-group",
+  "title": "Toggle Group",
+  "dependencies": [
+    "@radix-ui/react-toggle-group@1.1.19"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-0239890bb7dd6954e44e658d21a4c490e4d4c93a0ff48f80aaeaed0be01a0034/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/toggle-group.tsx",
+      "content": "import * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction ToggleGroup({\n    className,\n    orientation = \"horizontal\",\n    ...props\n}: ComponentProps<typeof ToggleGroupPrimitive.Root>) {\n    return (\n        <ToggleGroupPrimitive.Root\n            orientation={orientation}\n            className={cn(\n                \"inline-flex max-w-full items-center gap-1 rounded-sm \" +\n                \"border border-border bg-surface-subtle p-1 \" +\n                (orientation === \"vertical\"\n                    ? \"flex-col items-stretch\"\n                    : \"flex-row overflow-x-auto\"),\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nfunction ToggleGroupItem({\n    className,\n    ...props\n}: ComponentProps<typeof ToggleGroupPrimitive.Item>) {\n    return (\n        <ToggleGroupPrimitive.Item\n            className={cn(\n                \"inline-flex min-h-[var(--control-height)] shrink-0 \" +\n                \"items-center justify-center rounded-sm px-[var(--space-3)] \" +\n                \"text-sm text-foreground hover:bg-surface \" +\n                \"data-[state=on]:bg-accent \" +\n                \"data-[state=on]:text-accent-foreground \" +\n                \"disabled:pointer-events-none disabled:opacity-50\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui",
+      "target": "@ui/toggle-group.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

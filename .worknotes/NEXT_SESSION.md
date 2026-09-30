@@ -1,5 +1,20 @@
 # Component 확장 작업 인계
 
+2026-09-30 답변 평가·즐겨찾기·게시판·대댓글 진행:
+`ResponseFeedback`, `FavoriteToggle`, `Board`, `Thread`를 원본 소스로
+추가했습니다. 기존 `Dialog`로 글 작성 modal을 구성하며 Escape로 닫으면
+글쓰기 버튼에 포커스가 돌아옵니다. 101개 component·103개 registry
+item입니다. typecheck, 패키지 테스트 96/96, build,
+`registry:release-check`가 통과했고 새 불변 snapshot은
+`sha256-0239890bb7dd6954e44e658d21a4c490e4d4c93a0ff48f80aaeaed0be01a0034`입니다.
+로컬 Chromium의 글 선택·게시·대댓글·평가·즐겨찾기와 별도 소비자
+`shadcn add` 11개 파일·typecheck·build·390px 상호작용을 확인했습니다.
+tracked snapshot은 이전 16개에서 17개가 됐습니다. 기존 작업 기록의
+18개는 원 checkout의 미추적 draft 두 개를 포함한 집계로 보입니다.
+해당 draft 디렉터리는 건드리지 않았습니다. PR·공개 배포·공개 URL 설치,
+실제 screen reader·touch·Safari·RTL은 아직 확인하지 않았습니다.
+[작업 기록](component-feedback-board-thread-2026-09-30.md)을 참고하세요.
+
 2026-09-30 MonthPicker 진행: 월별 보고·필터용 `YYYY-MM` controlled 값을
 연도 이동·min/max·form 입력과 함께 구현했습니다. MUI X 공식 문서와
 고정 revision의 소스·manifest·MIT LICENSE를 확인했고 코드는 새로

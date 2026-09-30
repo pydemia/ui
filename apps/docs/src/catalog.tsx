@@ -2923,6 +2923,7 @@ const initialBoardPosts: BoardPost[] = [
 function BoardPreview() {
     const [posts, setPosts] = useState(initialBoardPosts);
     const nextPostId = useRef(1);
+    const createButtonRef = useRef<HTMLElement | null>(null);
     const [selected, setSelected] = useState("guide");
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState("");
@@ -2945,11 +2946,18 @@ function BoardPreview() {
         <div className="preview-stack">
             <Board label="컴포넌트 게시판" posts={posts}
                 selectedPostId={selected} onSelectPost={setSelected}
-                onCreatePost={() => setOpen(true)} />
+                onCreatePost={() => {
+                    createButtonRef.current = document.activeElement as
+                        HTMLElement;
+                    setOpen(true);
+                }} />
             <p role="status">선택한 글: {posts.find((post) =>
                 post.id === selected)?.title}</p>
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent>
+                <DialogContent onCloseAutoFocus={(event) => {
+                    event.preventDefault();
+                    createButtonRef.current?.focus();
+                }}>
                     <DialogHeader>
                         <DialogTitle>글쓰기</DialogTitle>
                         <DialogDescription>제목과 내용을 입력하세요.</DialogDescription>
@@ -5108,39 +5116,53 @@ function FavoritePost() {
     },
     {
         id: "board", name: "Board", category: "Content",
+        installItems: ["board", "button", "dialog", "input", "label",
+            "textarea"],
         description: "게시글 제목·요약·작성자·댓글 수를 목록으로 표시하고 글 선택과 작성 시작을 알립니다. 글 작성 modal은 Dialog로 구성합니다.",
-        code: `import { useState } from "react";
+        code: `import { useRef, useState } from "react";
 import { Board, Button, Dialog, DialogContent, DialogDescription,
-  DialogHeader, DialogTitle, Input, Label,
+  DialogHeader, DialogTitle, Input, Label, Textarea,
   type BoardPost } from "@pydemia/ui";
 
 function NoticeBoard() {
+  const createButtonRef = useRef<HTMLElement | null>(null);
   const [posts, setPosts] = useState<BoardPost[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const [summary, setSummary] = useState("");
   return <>
     <Board label="게시판" posts={posts} selectedPostId={selected}
-      onSelectPost={setSelected} onCreatePost={() => setOpen(true)} />
+      onSelectPost={setSelected} onCreatePost={() => {
+        createButtonRef.current = document.activeElement as HTMLElement;
+        setOpen(true);
+      }} />
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent>
+      <DialogContent onCloseAutoFocus={(event) => {
+        event.preventDefault();
+        createButtonRef.current?.focus();
+      }}>
         <DialogHeader>
           <DialogTitle>글쓰기</DialogTitle>
-          <DialogDescription>제목을 입력하세요.</DialogDescription>
+          <DialogDescription>제목과 내용을 입력하세요.</DialogDescription>
         </DialogHeader>
         <form onSubmit={(event) => {
           event.preventDefault();
           const id = crypto.randomUUID();
-          setPosts((current) => [{ id, title, author: "나",
+          setPosts((current) => [{ id, title, summary, author: "나",
             createdAt: new Date().toISOString().slice(0, 10) },
             ...current]);
           setSelected(id);
           setOpen(false);
           setTitle("");
+          setSummary("");
         }}>
           <Label htmlFor="post-title">제목</Label>
           <Input id="post-title" required value={title}
             onChange={(event) => setTitle(event.target.value)} />
+          <Label htmlFor="post-summary">내용</Label>
+          <Textarea id="post-summary" required value={summary}
+            onChange={(event) => setSummary(event.target.value)} />
           <Button type="submit">게시</Button>
         </form>
       </DialogContent>
