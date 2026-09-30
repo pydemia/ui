@@ -1744,6 +1744,7 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | 별도 소비자 CLI | pass | `shadcn@4.21.0` 설치 5개 파일, 4개 소스·스타일 원본 일치, typecheck·build |
 | 별도 소비자 Chromium | pass (limited) | 2027-03 선택·제출, 390px body 390px, console error 0 |
 | registry·snapshot | pass | 99개 item·97개 component·18개 snapshot, 현재 ID 일치 |
+| Windows·Linux 정적 JS 일치 | pass (local) | `scatter-chart.tsx` LF checkout 뒤 SHA-256 일치; PR CI 재실행 전 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 세부 사항은 `.worknotes/component-month-picker-2026-09-30.md`에

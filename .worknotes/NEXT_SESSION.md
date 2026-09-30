@@ -10,6 +10,9 @@ Chromium 제출도 확인했습니다. `registry:release-check`는 99개 item·
 97개 component·18개 snapshot, 현재
 `sha256-cf9756bda03bc7dc75f4c9c0f496b1f83ac0d5c0808557b21ff543e9fd408de4`를
 확인했습니다. 공개 배포·snapshot 소비자 검사는 아직 진행 중입니다.
+PR #20 첫 CI는 Windows CRLF가 `ScatterChart`의 여러 줄 className에
+들어가 Linux 생성 bundle과 달라 실패했습니다. 해당 파일을 LF로 고정해
+두 환경의 JS SHA-256 일치를 확인했고 CI 재실행을 준비했습니다.
 실제 screen reader·touch·Safari·RTL은 미검증입니다.
 [작업 기록](component-month-picker-2026-09-30.md)을 참고하세요.
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.

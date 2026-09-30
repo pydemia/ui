@@ -45,4 +45,13 @@ in-app browser로 수행했습니다. provenance는 source commit
 확인했습니다. 공개 배포·소비자 재검증은 진행 중입니다.
 실제 screen reader·touch·Safari·RTL은 미검증입니다.
 
+PR #20의 첫 Verify UI는 정적 사이트 재생성 단계에서 실패했습니다.
+Windows checkout의 `scatter-chart.tsx`가 CRLF여서 기존 여러 줄
+className 문자열의 `\r`이 bundle에 남고 Linux CI의 LF bundle과
+해시가 달라졌습니다. 해당 파일에 LF checkout을 지정하고 working tree를
+LF로 맞춘 뒤 Windows·WSL Linux(Node 24.16.0) 빌드가 모두
+`index-BvASmG7m.js`를 생성하며 SHA-256
+`421592cecd733e081f6d08b1d9863798c04f8464a2f6a6eb4e03f1f0827a5951`로
+일치했습니다. CI 재실행은 새 commit push 뒤 확인합니다.
+
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.

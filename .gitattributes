@@ -1,5 +1,6 @@
 docs/assets/*.js -diff
 docs/examples/profile/assets/*.js -diff
+packages/ui/src/components/scatter-chart.tsx text eol=lf
 docs/r/*.json text eol=lf
 docs/r/releases/** text eol=lf
 registry/releases/** text eol=lf
