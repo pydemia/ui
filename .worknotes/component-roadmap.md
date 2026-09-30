@@ -13,9 +13,9 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-96개 component와 98개 registry item이 있습니다. 2026-09-30에
+97개 component와 99개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
-`ScatterChart`를 순차
+`ScatterChart`, `MonthPicker`를 순차
 편입했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
@@ -203,6 +203,9 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   시간대를 한 쌍의 form 값으로 전달합니다. 기존 DatePicker·TimePicker를
   조합하며 UTC 시각과 DST 중복·누락 시각의 해석은 호출자에게 둡니다.
   격리 registry 설치와 Chromium 제출 순서를 검증했습니다.
+- [x] `MonthPicker` — 월별 보고·필터를 위한 `YYYY-MM` 값과 연도 이동,
+  월 단위 min/max, form 값을 제공합니다. 실제 screen reader 검사는
+  남았습니다.
 - [x] `NavigationMenu` — 상단 그룹 탐색의 pointer 열기·링크 이동,
   키보드 진입·Escape 닫기. Hover·touch·screen reader 검사는 남았습니다.
 - [x] `BottomNav` — 기존 `pyd-navigation`에 하단 주요 목적지 링크를

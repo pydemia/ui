@@ -819,3 +819,15 @@ native 선택기를 사용합니다. 선택된 점의 정확한 값은 설명 �
 지정하면 `onPointSelect`가 필요합니다. `null`은 선택하지 않은 상태입니다.
 데이터 취득·분석·저장은 호출자가 소유합니다. 실제 screen reader와
 touch·RTL의 동작은 별도 검증 대상입니다.
+
+## 2026-09-30 월 선택
+
+`MonthPicker`는 `YYYY-MM` 또는 `null`을 controlled 값으로 받습니다.
+날짜와 시각을 포함하지 않으며 hidden input에는 선택 월 또는 빈 문자열을
+전달합니다. `min`·`max`는 월 단위의 포함 경계입니다. 연도 이동은
+허용된 연도 안에서만 가능하고 경계 밖 월은 disabled입니다. 월을 선택하면
+popover를 닫습니다. `required=false`면 선택한 월을 다시 눌러 지울 수
+있습니다. 필수값 오류는 `Field`를 사용하는 소비자 form이 검사합니다.
+각 월은 이름과 선택 상태가 있는 native 버튼입니다. Tab으로 이동하고
+Enter·Space로 고르며 Escape는 popover를 닫고 trigger로 돌아갑니다.
+별도의 날짜·시간대 변환은 하지 않습니다.

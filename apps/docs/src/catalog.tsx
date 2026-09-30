@@ -41,7 +41,7 @@ import {
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, JsonViewer, Kanban,
     Label, LogConsole, Markdown, Message, MessageContent, MetricCard,
-    MultiSelect,
+    MonthPicker, MultiSelect,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
     NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
     NativeSelect, NumberInput,
@@ -1380,6 +1380,45 @@ function DatePickerPreview() {
             <p role="status">
                 {submitted === null ? "아직 제출하지 않았습니다." :
                     submitted ? `제출한 값: ${submitted}` : "선택한 값이 없습니다."}
+            </p>
+        </form>
+    );
+}
+
+function MonthPickerPreview() {
+    const [month, setMonth] = useState<string | null>(null);
+    const [submitted, setSubmitted] = useState<string | null>(null);
+    const [tried, setTried] = useState(false);
+
+    return (
+        <form className="preview-stack" onSubmit={(event) => {
+            event.preventDefault();
+            setTried(true);
+            setSubmitted(String(new FormData(event.currentTarget)
+                .get("reportMonth") ?? ""));
+        }}>
+            <Field label="보고 월" required
+                error={tried && !month ? "월을 선택하세요." : undefined}>
+                {(control) => <MonthPicker {...control} name="reportMonth"
+                    value={month} min="2025-11" max="2027-03"
+                    onValueChange={(next) => {
+                        setMonth(next);
+                        setSubmitted(null);
+                        setTried(false);
+                    }} required />}
+            </Field>
+            <div className="flex gap-2">
+                <Button type="submit">폼 값 확인</Button>
+                <Button type="button" variant="outline" onClick={() => {
+                    setMonth(null);
+                    setSubmitted(null);
+                    setTried(false);
+                }}>초기화</Button>
+            </div>
+            <p role="status">
+                {submitted === null ? "아직 제출하지 않았습니다." :
+                    submitted ? `제출한 월: ${submitted}` :
+                        "선택한 월이 없습니다."}
             </p>
         </form>
     );
@@ -4172,6 +4211,30 @@ function ReviewDate() {
   );
 }`,
         preview: () => <DatePickerPreview />,
+    },
+    {
+        id: "month-picker", name: "MonthPicker", category: "Date & time",
+        installItems: ["month-picker", "field", "button"],
+        description: "월 단위 보고·필터 값을 YYYY-MM로 선택합니다. min/max는 선택 가능한 월을 제한하고 null은 미선택입니다.",
+        code: `import { useState } from "react";
+import { Button, Field, MonthPicker } from "@pydemia/ui";
+
+function ReportMonth() {
+  const [month, setMonth] = useState<string | null>(null);
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    if (!month) return;
+    console.log(new FormData(event.currentTarget).get("reportMonth"));
+  }}>
+    <Field label="보고 월" required>
+      {(control) => <MonthPicker {...control} name="reportMonth"
+        value={month} onValueChange={setMonth}
+        min="2025-11" max="2027-03" required />}
+    </Field>
+    <Button type="submit">월 적용</Button>
+  </form>;
+}`,
+        preview: () => <MonthPickerPreview />,
     },
     {
         id: "date-range-picker", name: "DateRangePicker",

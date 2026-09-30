@@ -252,6 +252,12 @@
       "dependencies": ["pyd-calendar", "pyd-popover", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "button trigger, calendar grid and hidden form value; consumer supplies label", "keyboard": "Chromium: Enter, date selection, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-month-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "MUI X", "url": "https://mui.com/x/api/date-pickers/month-calendar/", "scope": "month grid, selected and disabled states; no source copied" },
+      "dependencies": ["pyd-popover", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "labeled trigger, named month button group, selected state and hidden form value", "keyboard": "Chromium: Tab and Enter selection, Escape focus return verified; Space uses native button behavior", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-date-range-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "DayPicker", "url": "https://daypicker.dev/v9/selections/range-mode" },

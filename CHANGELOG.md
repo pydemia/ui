@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-09-30 — MonthPicker
+
+- 월별 보고·필터에서 `YYYY-MM` 값을 고르는 `MonthPicker`를 추가했습니다.
+  연도 이동, 월별 min/max, controlled 값과 form 제출을 지원합니다.
+- 문서 preview·사용 코드와 registry item을 추가했습니다. MUI X는
+  월 선택 동작의 참고 자료이며 구현 코드는 프로젝트에서 작성했습니다.
+
 ## 2026-09-30 — ScatterChart
 
 - 두 연속 수치의 관계를 표시하는 `ScatterChart`를 추가했습니다. 정확한
