@@ -478,6 +478,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native table with caption, row and column headers, visible values, missing data marker and named scroll region", "keyboard": "native keyboard scrolling; browser check pending", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-scatter-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Recharts ScatterChart", "url": "https://recharts.github.io/en-US/api/ScatterChart/", "revision": "44bba29e74bbfdfc6715176f3eecea0392a95080", "license": "MIT", "scope": "continuous x/y axes and plot concepts only; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "decorative plot, labeled native point select and expandable exact-value table with row and column headers", "keyboard": "Chromium: ArrowDown changes point and exact values; pointer plot selection and details expansion verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-dashboard", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named metric and panel sections; consumer supplies child headings", "keyboard": "native child controls", "screen_reader": "pending manual review" }

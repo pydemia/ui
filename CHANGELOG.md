@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-09-30 — ScatterChart
+
+- 두 연속 수치의 관계를 표시하는 `ScatterChart`를 추가했습니다. 정확한
+  좌표·결측값은 native 선택기와 펼칠 수 있는 데이터 표에서도 확인합니다.
+- 문서 preview와 사용 코드, registry item을 추가했습니다. Recharts는
+  설계 reference로만 확인했고 새 runtime 의존성은 없습니다.
+
 ## 2026-09-30 — Gantt
 
 - `Gantt`는 작업의 시작·끝, 진행률, 선행 관계를 일·7일 시간축에

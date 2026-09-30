@@ -48,7 +48,7 @@ import {
     PageHeader, Pagination, PasswordInput, PinInput, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
     RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
-    ResizablePanels, ScrollArea,
+    ResizablePanels, ScatterChart, ScrollArea,
     SearchInput,
     Select, SelectContent, SelectItem,
     SelectTrigger, SelectValue, Separator, Skeleton, Slider,
@@ -2115,6 +2115,38 @@ function HeatmapPreview() {
                 density={density} />
         </div>
     );
+}
+
+const scatterPoints = [
+    { id: "mon", label: "월", x: 120, y: 96 },
+    { id: "tue", label: "화", x: 220, y: 81 },
+    { id: "wed", label: "수", x: 310, y: 62 },
+    { id: "thu", label: "목", x: 410, y: 54 },
+    { id: "fri", label: "금", x: 380, y: 60 },
+    { id: "sat", label: "토", x: null, y: 70 },
+];
+
+function ScatterChartPreview() {
+    const [mode, setMode] = useState<"data" | "missing" | "empty">("data");
+    return <div className="preview-workspace grid gap-3">
+        <div className="flex flex-wrap gap-2" role="group"
+            aria-label="산점도 데이터 상태">
+            <Button variant={mode === "data" ? "primary" : "outline"}
+                aria-pressed={mode === "data"}
+                onClick={() => setMode("data")}>집계 결과</Button>
+            <Button variant={mode === "missing" ? "primary" : "outline"}
+                aria-pressed={mode === "missing"}
+                onClick={() => setMode("missing")}>결측만 보기</Button>
+            <Button variant={mode === "empty" ? "primary" : "outline"}
+                aria-pressed={mode === "empty"}
+                onClick={() => setMode("empty")}>빈 데이터</Button>
+        </div>
+        <ScatterChart title="처리량과 평균 지연" xLabel="처리량"
+            yLabel="평균 지연" xUnit="건/분" yUnit="ms"
+            description="월~금의 관계를 확인합니다. 토요일 처리량은 집계 전입니다."
+            points={mode === "empty" ? [] : mode === "missing"
+                ? scatterPoints.slice(-1) : scatterPoints} />
+    </div>;
 }
 
 function PageHeaderPreview() {
@@ -4801,6 +4833,24 @@ const rows = [
   description="결측값은 —로 표시합니다."
   columns={columns} rows={rows} density="compact" />;`,
         preview: () => <HeatmapPreview />,
+    },
+    {
+        id: "scatter-chart", name: "ScatterChart",
+        category: "Data & analytics",
+        description: "두 연속 수치의 관계를 점으로 표시합니다. 점 선택기와 데이터 표에서 정확한 값·결측값을 확인할 수 있습니다.",
+        code: `import { ScatterChart } from "@pydemia/ui";
+
+const points = [
+  { id: "mon", label: "월", x: 120, y: 96 },
+  { id: "tue", label: "화", x: 220, y: 81 },
+  { id: "wed", label: "수", x: 310, y: 62 },
+  { id: "sat", label: "토", x: null, y: 70 },
+];
+
+<ScatterChart title="처리량과 평균 지연" xLabel="처리량"
+  yLabel="평균 지연" xUnit="건/분" yUnit="ms"
+  points={points} />;`,
+        preview: () => <ScatterChartPreview />,
     },
     {
         id: "dashboard", name: "Dashboard", category: "Data & analytics",

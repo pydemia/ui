@@ -1,5 +1,17 @@
 # Component 확장 작업 인계
 
+2026-09-30 ScatterChart 진행: 두 연속 수치의 산점도, 결측값·0·빈 상태,
+native 선택기·데이터 표와 registry metadata, 문서 preview·Usage를
+작성했습니다. Recharts 공식 문서와 고정 revision의 소스·manifest·
+MIT LICENSE를 확인했으며 코드는 복사하지 않았습니다. typecheck와
+초기 패키지 테스트의 SVG `<title>` 경고를 수정해 전체 89/89를
+경고 없이 다시 통과했습니다. 로컬 Chromium의 1280px·390px 선택·
+표·결측/빈 상태·dark/colormap을 확인했습니다. axe preview는
+violation 0건, contrast incomplete 1건입니다. build·snapshot·
+소비자·공개 사이트는 미검증입니다.
+[작업 기록](component-scatter-chart-2026-09-30.md)을
+참고하세요. 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
+
 2026-09-30 Gantt 진행: 원본 React·Tailwind 일정 시간축, 선행 관계와
 하루 단위 변경 버튼, 일·7일 표시, registry metadata 및 동작하는 문서
 preview·Usage를 추가했습니다. Kibo 공식 문서·고정 revision 소스·MIT

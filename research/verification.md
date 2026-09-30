@@ -1712,3 +1712,18 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 
 상세 기록과 화면은 `.worknotes/component-gantt-2026-09-30.md`에
 있습니다.
+
+## 2026-09-30 ScatterChart
+
+| 검사 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| `npm run typecheck` | pass | UI·프로필·문서 TypeScript |
+| `npm test -w @pydemia/ui` | pass | SVG title 경고 수정 후 89/89 재실행, 경고 없음 |
+| 로컬 Chromium | pass (limited) | 1280px pointer·ArrowDown 선택, 표·결측·빈 상태; 390px 내부 스크롤·dark/Pydemia colormap |
+| axe 4.12.1 preview | incomplete | violation 0, SVG 배경 판정 불가 contrast 1건 |
+| build·registry·snapshot | unverified | 실행 전 |
+| 별도 소비자·공개 사이트 | unverified | 설치·배포 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+상세 내용은 `.worknotes/component-scatter-chart-2026-09-30.md`에
+있습니다.
