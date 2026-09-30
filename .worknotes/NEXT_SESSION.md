@@ -10,7 +10,11 @@ typecheck·테스트 98/98·build·registry release 검사(18개 snapshot),
 로컬 문서와 격리 소비자의 Chromium 실패·재시도·포커스 동작이
 통과했습니다. 현재 snapshot은
 `sha256-821598f3f128f4f00c0f44da23a3abdee79c1c6041f977b185ffc8fb0d34f890`입니다.
-공개 배포와 새 snapshot의 공개 설치는 아직 확인 전입니다.
+PR #22를 병합했고 PR·병합 commit의 Verify UI, Pages CI와 Vercel
+production READY를 확인했습니다. 공개 390px preview의 저장 실패·
+재시도·포커스 복귀, 현재·snapshot JSON/manifest의 저장소 파일 일치,
+새 소비자의 공개 snapshot 6개 파일 설치·원본 일치·typecheck·build·
+Chromium 상호작용도 확인했습니다.
 실제 screen reader·touch·Safari·RTL, 과거 배포 rollback 뒤 URL
 보존과 item별 공개 격리 설치는 남았습니다.
 [작업 기록](component-editable-2026-09-30.md)을 참고하세요.
