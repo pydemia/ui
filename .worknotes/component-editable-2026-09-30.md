@@ -39,4 +39,19 @@ revision은 `2d0786579661`입니다. 공식 source의 역할·접근·license �
   Chromium에서 저장 실패 뒤 초안·오류 유지, 재시도 후 값 갱신·
   편집 버튼 초점 복귀, 390px 가로 넘침 없음도 확인했습니다.
   fixture는 `%TEMP%/pydemia-editable-consumer-20260930`에 있습니다.
-- 공개 배포·실제 screen reader·touch·Safari·RTL: 미검증.
+- [PR #22](https://github.com/pydemia/ui/pull/22)를 병합했습니다.
+  PR head `46f45d5`의 Verify UI와 병합 commit `c4a6b97`의
+  [Verify UI](https://github.com/pydemia/ui/actions/runs/36693437511)·
+  [Pages CI](https://github.com/pydemia/ui/actions/runs/36693436293)가
+  통과했습니다. Vercel production
+  `dpl_9g4kTSZpQkVkhwkWAuAFCeZ5eSHf`가 READY입니다.
+- 공개 문서의 390px preview에서 저장 실패·재시도, 저장값과
+  포커스 복귀, body/viewport 390px를 확인했습니다. 현재 Editable JSON,
+  snapshot Editable JSON과 manifest는 저장소 `docs/r/`과 SHA-256이
+  각각 일치합니다.
+- 공개 snapshot을 새 소비자 `%TEMP%/pydemia-editable-public-consumer-20260930`
+  에 설치했습니다. 6개 파일 모두 원본과 일치했고 typecheck·build가
+  통과했습니다. 390px Chromium에서 실패 후 초안 보존, 재시도 성공,
+  편집 버튼 포커스 복귀와 body 가로 넘침 없음도 확인했습니다.
+- 실제 screen reader·touch·Safari·RTL, 과거 배포 rollback 뒤
+  snapshot URL 보존은 미검증입니다.

@@ -1785,7 +1785,9 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | 로컬 문서 Chromium | pass (limited) | 필수값·사용자 검사, 저장 실패·재시도, Enter/Escape, 포커스 복귀, 390px dark 가로 넘침 없음 |
 | 격리 소비자 CLI | pass | 6개 파일 설치, Editable·Button·Input·utils·고지 일치, typecheck·build |
 | 격리 소비자 Chromium | pass (limited) | 실패 뒤 초안 보존·재시도·값 갱신·포커스 복귀, 390px 가로 넘침 없음 |
-| 공개 배포·설치 | unverified | PR·병합·production 배포 전 |
+| PR·병합 CI·production | pass | PR #22, PR Verify UI 및 병합 commit Verify UI·Pages CI, Vercel READY |
+| 공개 preview·JSON | pass (limited) | 390px 저장 실패·재시도·포커스 복귀, 현재·snapshot Editable JSON과 manifest 원본 일치 |
+| 공개 snapshot 소비자 | pass (limited) | 6개 파일 원본 일치, CLI 설치·typecheck·build·390px Chromium 저장 실패·재시도 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 해당 기기·보조기술 실행 전 |
 
 새 snapshot ID는
