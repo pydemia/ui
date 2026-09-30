@@ -11,7 +11,12 @@ violation 0건, contrast incomplete 1건입니다. build·registry release
 검사(98개 item·96개 component, 17개 snapshot)와 별도 소비자
 CLI 설치·typecheck·build·390px Chromium이 통과했습니다. 새 snapshot은
 `sha256-5038d4cd248ea483b2cb492095fbdbea06038c0ec48a17618be610eae83c1b01`입니다.
-공개 사이트·snapshot은 배포 전이라 미검증입니다.
+PR #19를 `main`에 병합했고 PR·병합 commit Verify UI와 Pages CI가
+통과했습니다. Vercel production
+`dpl_5x7EvjnwyP8kG2awetmwnzXwYHwd`는 READY입니다. 공개
+390px preview의 키보드·점 선택, 결측·빈 상태와 현재·snapshot JSON,
+공개 snapshot의 별도 소비자 설치·typecheck·build·Chromium 동작을
+확인했습니다. 실제 screen reader·touch·Safari·RTL은 미검증입니다.
 [작업 기록](component-scatter-chart-2026-09-30.md)을
 참고하세요. 기존 미공개 draft snapshot 네 디렉터리는 stage하지 마세요.
 

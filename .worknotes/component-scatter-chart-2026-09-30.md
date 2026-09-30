@@ -45,8 +45,19 @@ native 표에 남깁니다. 포인터 점 선택과 키보드 native 선택기�
   `ArrowDown`과 plot 점 클릭이 controlled 선택·정확한 값에 반영됐고
   문서 가로 overflow나 page error는 없었습니다. fixture는
   `C:\Users\pydemia\AppData\Local\Temp\pydemia-scatter-consumer-20260930`입니다.
+- [PR #19](https://github.com/pydemia/ui/pull/19)를 `main`에 병합했습니다.
+  PR·병합 commit의 Verify UI와 Pages CI가 통과했고 Vercel production
+  `dpl_5x7EvjnwyP8kG2awetmwnzXwYHwd`가 READY로
+  `ui.pydemia.ai`에 연결됐습니다. 공개 390px preview에서
+  `ArrowDown`과 점 클릭으로 정확한 값이 바뀌고, 결측만 있는 목록과
+  빈 목록의 상태가 구분됐습니다. 문서 전체 가로 overflow는 없었습니다.
+- 공개 현재·snapshot `pyd-scatter-chart.json`, 98개 item manifest를
+  조회해 로컬 빌드 파일과 일치함을 확인했습니다. snapshot URL을 새
+  Vite 소비자에 `shadcn@4.21.0`으로 설치했고 세 파일 내용 일치,
+  typecheck·build, 390px Chromium의 controlled 선택을 확인했습니다.
+  fixture는
+  `C:\Users\pydemia\AppData\Local\Temp\pydemia-scatter-public-consumer-20260930`입니다.
 
-공개 사이트·공개 snapshot은 배포 전이라 미검증입니다. 실제 screen
-reader·touch·Safari·RTL도 미검증입니다.
+실제 screen reader·touch·Safari·RTL은 미검증입니다.
 
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.

@@ -1724,7 +1724,9 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | build·registry·snapshot | pass | 98개 item·96개 component·17개 불변 snapshot, 현재 ID 일치 |
 | 별도 소비자 CLI·typecheck·build | pass | ScatterChart·tokens·utils 3개 원본 일치 |
 | 별도 소비자 Chromium | pass (limited) | 390px native select·plot 클릭의 controlled 선택·정확한 값, page error 0 |
-| 공개 사이트·snapshot | unverified | 배포 전 |
+| PR·병합 CI·production | pass (limited) | PR #19·병합 Verify UI와 Pages CI 통과, Vercel production READY |
+| 공개 preview·현재/snapshot JSON | pass (limited) | 390px 키보드·점 선택, 결측·빈 상태, 공개 JSON과 로컬 파일 일치 |
+| 공개 snapshot 소비자 | pass (limited) | 3개 파일 일치, CLI 설치·typecheck·build·390px controlled 선택 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 상세 내용은 `.worknotes/component-scatter-chart-2026-09-30.md`에
