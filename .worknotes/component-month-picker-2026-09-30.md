@@ -34,6 +34,8 @@ revision은 `cda8c5e1016d`입니다. 연결된 GitHub source는 익명
   생성됐고 MonthPicker·Popover·utils·tokens는 원본과 내용이 같습니다.
   소비자 typecheck·build, Chromium의 2027-03 선택·제출, 390px
   body 390px와 console error 0건을 확인했습니다.
+  `required`를 제거한 fixture에서 선택된 2026-09를 다시 눌렀을 때
+  hidden form 값과 상태가 비워지는 것도 확인했습니다.
 
 `agent-browser` CLI가 현재 shell PATH에 없어 브라우저 조작은 Codex
 in-app browser로 수행했습니다. provenance는 source commit
@@ -42,7 +44,20 @@ in-app browser로 수행했습니다. provenance는 source commit
 고정했습니다. `registry:release-check`는 99개 item·97개 component·
 18개 snapshot과 현재 ID
 `sha256-cf9756bda03bc7dc75f4c9c0f496b1f83ac0d5c0808557b21ff543e9fd408de4`를
-확인했습니다. 공개 배포·소비자 재검증은 진행 중입니다.
+확인했습니다. PR #20의 수정 CI, 병합 commit `14830a6`의 Verify UI와
+Pages CI가 모두 통과했습니다. 공개 `ui.pydemia.ai`는 Vercel에서
+MonthPicker 문서와 현재·snapshot registry JSON을 제공하며, 세 JSON은
+로컬 `docs/` 출력과 줄바꿈 정규화 후 일치했습니다.
+
+공개 390px preview에서 2026-09 선택·form 제출, 팝오버 좌우 49~337px,
+body 375px/viewport 390px, console error 0건을 확인했습니다. 공개
+snapshot을 새 Vite 소비자에 `shadcn@4.21.0`으로 설치해 5개 파일을
+받았고 MonthPicker·Popover·utils·tokens가 원본과 일치했습니다.
+소비자 typecheck·build가 통과했고 Chromium에서 2027-03 선택·제출,
+범위 밖 월 비활성화와 390px 가로 overflow 없음, console error 0건을
+확인했습니다. 소비자 fixture는
+`C:\Users\pydemia\AppData\Local\Temp\pydemia-month-public-consumer-20260930`에
+있습니다.
 실제 screen reader·touch·Safari·RTL은 미검증입니다.
 
 PR #20의 첫 Verify UI는 정적 사이트 재생성 단계에서 실패했습니다.
@@ -52,6 +67,6 @@ className 문자열의 `\r`이 bundle에 남고 Linux CI의 LF bundle과
 LF로 맞춘 뒤 Windows·WSL Linux(Node 24.16.0) 빌드가 모두
 `index-BvASmG7m.js`를 생성하며 SHA-256
 `421592cecd733e081f6d08b1d9863798c04f8464a2f6a6eb4e03f1f0827a5951`로
-일치했습니다. CI 재실행은 새 commit push 뒤 확인합니다.
+일치했습니다. 수정 후 PR Verify UI도 통과했습니다.
 
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.
