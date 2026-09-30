@@ -1743,7 +1743,7 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | 390px 문서 | pass (limited) | 팝오버 화면 안 배치, body 375px/viewport 390px, dark·Pydemia colormap |
 | 별도 소비자 CLI | pass | `shadcn@4.21.0` 설치 5개 파일, 4개 소스·스타일 원본 일치, typecheck·build |
 | 별도 소비자 Chromium | pass (limited) | 2027-03 선택·제출, 390px body 390px, console error 0 |
-| registry 검사 | pending | provenance 고정·snapshot 생성 뒤 재실행 |
+| registry·snapshot | pass | 99개 item·97개 component·18개 snapshot, 현재 ID 일치 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 세부 사항은 `.worknotes/component-month-picker-2026-09-30.md`에

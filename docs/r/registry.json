@@ -344,6 +344,14 @@
       ]
     },
     {
+      "name": "pyd-month-picker", "type": "registry:ui", "title": "Month Picker",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-popover.json", "./pyd-utils.json"],
+      "files": [
+        { "path": "packages/ui/src/components/month-picker.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
       "name": "pyd-date-range-picker", "type": "registry:ui", "title": "Date Range Picker",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-calendar.json", "./pyd-popover.json", "./pyd-utils.json"],

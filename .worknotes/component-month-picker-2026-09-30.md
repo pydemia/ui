@@ -36,8 +36,13 @@ revision은 `cda8c5e1016d`입니다. 연결된 GitHub source는 익명
   body 390px와 console error 0건을 확인했습니다.
 
 `agent-browser` CLI가 현재 shell PATH에 없어 브라우저 조작은 Codex
-in-app browser로 수행했습니다. provenance pin, snapshot,
-`registry:check`, 공개 배포·소비자 재검증은 진행 중입니다.
+in-app browser로 수행했습니다. provenance는 source commit
+`f77fd2b4732920eeda6493defd142d40682af4c6`와 LF SHA-256
+`d13b41fee36fa94e6bd0241d377b1bcc368a6807a3e5e48ef9acf39060a5ba1b`로
+고정했습니다. `registry:release-check`는 99개 item·97개 component·
+18개 snapshot과 현재 ID
+`sha256-cf9756bda03bc7dc75f4c9c0f496b1f83ac0d5c0808557b21ff543e9fd408de4`를
+확인했습니다. 공개 배포·소비자 재검증은 진행 중입니다.
 실제 screen reader·touch·Safari·RTL은 미검증입니다.
 
 기존 미공개 draft snapshot 네 디렉터리는 stage하지 않습니다.

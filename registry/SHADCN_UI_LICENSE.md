@@ -4,10 +4,10 @@ This notice accompanies pydemia/ui registry components that adapt source
 from shadcn/ui at revision
 `98a1fe67b439324ddc857f47fbdce056600a4329`.
 The source file for each component is identified in the provenance records at
-commit `b6e4fe766805da9703fcc0c906b2885dad64940f`:
-<https://github.com/pydemia/ui/blob/b6e4fe766805da9703fcc0c906b2885dad64940f/registry/provenance.json>.
+commit `f77fd2b4732920eeda6493defd142d40682af4c6`:
+<https://github.com/pydemia/ui/blob/f77fd2b4732920eeda6493defd142d40682af4c6/registry/provenance.json>.
 SHA-256 of that file with LF line endings:
-`2c4df5f7cbee4073658c5d565d01ba7e92c8a230ad2d559f1617b53e88b7e7d0`.
+`d13b41fee36fa94e6bd0241d377b1bcc368a6807a3e5e48ef9acf39060a5ba1b`.
 
 MIT License
 
