@@ -45,5 +45,17 @@
   `.worknotes/NEXT_SESSION.md`의 18개 집계에는 원 checkout에만 있는
   미추적 draft 2개가 포함된 것으로 보이며 이 worktree에는 복사하지
   않았습니다. 원 checkout의 draft 네 디렉터리는 그대로 보존했습니다.
-- PR·공개 사이트·공개 URL 소비자 설치, 실제 screen reader·touch·
-  Safari·RTL은 아직 검증하지 않았습니다.
+- [PR #21](https://github.com/pydemia/ui/pull/21)의 Verify UI와 병합
+  commit `c5dfccd5905c9860d2afb1836d667305a26cf3c8`의 Verify UI·Pages
+  workflow가 통과했습니다. Vercel production
+  `dpl_DYDDLwfeCxaQJc1EfHM9peoUyuFg`는 같은 commit으로 READY입니다.
+- 공개 사이트의 390px Board·Thread·ResponseFeedback·FavoriteToggle
+  preview를 확인했습니다. 글쓰기 Dialog를 Escape로 닫은 뒤 버튼으로
+  초점이 돌아왔고, 두 번째 단계 대댓글의 등록, 평가·즐겨찾기 선택을
+  확인했습니다. 새 item 4개의 현재·snapshot JSON과 snapshot manifest는
+  로컬 `docs/r` 파일과 바이트 단위로 일치했습니다.
+- 별도 소비자에 공개 snapshot URL의 새 item 4개·Dialog·token을 설치해
+  11개 파일을 받았습니다. 로컬 registry 설치본의 11개 파일과 모두
+  바이트 단위로 같았고 typecheck·build가 통과했습니다. 공개 URL 설치
+  소비자의 브라우저 동작은 별도 실행하지 않았습니다.
+- 실제 screen reader·touch·Safari·RTL은 검증하지 않았습니다.

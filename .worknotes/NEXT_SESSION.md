@@ -11,8 +11,14 @@ item입니다. typecheck, 패키지 테스트 96/96, build,
 `shadcn add` 11개 파일·typecheck·build·390px 상호작용을 확인했습니다.
 tracked snapshot은 이전 16개에서 17개가 됐습니다. 기존 작업 기록의
 18개는 원 checkout의 미추적 draft 두 개를 포함한 집계로 보입니다.
-해당 draft 디렉터리는 건드리지 않았습니다. PR·공개 배포·공개 URL 설치,
-실제 screen reader·touch·Safari·RTL은 아직 확인하지 않았습니다.
+해당 draft 디렉터리는 건드리지 않았습니다. PR #21과 병합 commit
+`c5dfccd`의 Verify UI·Pages workflow가 통과했고 Vercel production
+`dpl_DYDDLwfeCxaQJc1EfHM9peoUyuFg`가 READY입니다. 공개 390px
+preview의 글쓰기 Dialog 초점 복귀·두 번째 단계 대댓글·평가·즐겨찾기,
+새 item 4개의 현재·snapshot JSON과 manifest의 로컬 파일 일치를
+확인했습니다. 공개 snapshot을 새 소비자에 설치해 11개 파일의 로컬
+설치본 일치·typecheck·build를 확인했습니다. 공개 snapshot 소비자의
+브라우저 동작과 실제 screen reader·touch·Safari·RTL은 미검증입니다.
 [작업 기록](component-feedback-board-thread-2026-09-30.md)을 참고하세요.
 
 2026-09-30 MonthPicker 진행: 월별 보고·필터용 `YYYY-MM` controlled 값을

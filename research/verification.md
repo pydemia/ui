@@ -1766,7 +1766,10 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | 별도 소비자 CLI·typecheck·build | pass | 로컬 registry에서 11개 파일 설치, 새 네 item·Dialog·token; Vite 소비자 검사 |
 | 별도 소비자 390px Chromium | pass (limited) | 평가·즐겨찾기 Space·글 작성·부모 답글, body 가로 넘침 없음 |
 | Dialog focus | pass (limited) | 로컬 문서 preview의 Escape 후 글쓰기 버튼으로 복귀 |
-| PR·공개 배포·공개 URL 소비자 | unverified | 진행 전 |
+| PR·병합 CI·production | pass | PR #21, 병합 commit의 Verify UI·Pages 성공; Vercel production READY |
+| 공개 390px preview | pass (limited) | Board Dialog Escape 초점 복귀, Thread 두 번째 단계 답글, 평가·즐겨찾기, 가로 넘침 없음 |
+| 공개 현재·snapshot JSON | pass | 새 item 4개의 두 URL과 manifest가 로컬 파일과 바이트 단위 일치 |
+| 공개 snapshot 소비자 | pass (limited) | CLI 11개 파일·로컬 설치본 일치, typecheck·build; 브라우저 동작 미실행 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 세부 기록은 `.worknotes/component-feedback-board-thread-2026-09-30.md`에
