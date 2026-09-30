@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-09-30 goal 재개·Editable 진행: goal은 완료되지 않았습니다.
+`Editable`을 이름·설정값의 인라인 수정에 필요한 별도 상태 소유로
+판정하고 원본 React·token 구현, public export, registry item과
+provenance, 문서 preview·Usage를 추가했습니다. 102개 component·
+104개 item입니다. Chakra UI 공식 문서와 고정 revision source·
+manifest·MIT LICENSE를 확인했고 코드는 복사하지 않았습니다.
+typecheck·테스트 98/98·build·registry release 검사(18개 snapshot),
+로컬 문서와 격리 소비자의 Chromium 실패·재시도·포커스 동작이
+통과했습니다. 현재 snapshot은
+`sha256-821598f3f128f4f00c0f44da23a3abdee79c1c6041f977b185ffc8fb0d34f890`입니다.
+공개 배포와 새 snapshot의 공개 설치는 아직 확인 전입니다.
+실제 screen reader·touch·Safari·RTL, 과거 배포 rollback 뒤 URL
+보존과 item별 공개 격리 설치는 남았습니다.
+[작업 기록](component-editable-2026-09-30.md)을 참고하세요.
+
+
 2026-09-30 답변 평가·즐겨찾기·게시판·대댓글 진행:
 `ResponseFeedback`, `FavoriteToggle`, `Board`, `Thread`를 원본 소스로
 추가했습니다. 기존 `Dialog`로 글 작성 modal을 구성하며 Escape로 닫으면

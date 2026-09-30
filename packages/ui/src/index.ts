@@ -2,6 +2,8 @@ export { Button } from "./components/button";
 export { ButtonGroup, ButtonGroupSeparator } from "./components/button-group";
 export type { ButtonGroupProps } from "./components/button-group";
 export { Input } from "./components/input";
+export { Editable } from "./components/editable";
+export type { EditableProps } from "./components/editable";
 export {
     InputGroup, InputGroupInput, InputGroupTextarea,
     InputGroupAddon, InputGroupText, InputGroupButton,

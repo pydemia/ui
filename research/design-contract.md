@@ -1,5 +1,20 @@
 # Prototype 설계 계약
 
+## 2026-09-30 Editable 값·포커스 규칙
+
+`Editable`의 `value`는 소비자가 소유하는 controlled 문자열입니다.
+`onSave`는 변경된 초안을 받으며, 비동기 저장이면 성공 시 `value`를
+갱신한 뒤 resolve해야 합니다. component는 편집 중 초안·대기·오류를
+관리합니다. Escape/취소는 저장 전 초안을 버리고 편집 버튼으로
+포커스를 돌립니다. Enter/저장은 필수값과 `validate`를 확인합니다.
+저장 실패는 초안을 보존하고 오류를 알립니다. 저장 중에는 중복 요청과
+취소를 막으며 input은 read-only로 유지해 포커스를 보존합니다.
+비활성 상태에서는 새 편집과 저장을 막습니다. 빈 값은 `required`가
+아니면 허용하고 preview에 placeholder를 표시합니다. 다른 locale의
+문구는 `label`, `placeholder`, `saveErrorMessage`, `validate`로 바꿀 수
+있지만 기본 버튼 문구는 한국어입니다. RTL은 native 흐름을 따르며
+별도 브라우저 검증 전까지 보장하지 않습니다.
+
 대상은 제품별 API와 디자인 체계가 정해지기 전의 `@pydemia/ui` 첫 vertical
 slice입니다. 기존 repository와 brand palette가 제공되지 않아 color는 임시
 내부 선택이며 사용자 승인 색상으로 기록하지 않습니다.
