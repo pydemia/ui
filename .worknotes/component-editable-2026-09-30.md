@@ -15,6 +15,12 @@ Chakra UI 공식 Editable 문서와 revision
 manifest, MIT LICENSE를 확인했습니다. 원본 코드는 복사하지 않았고
 기존 `Button`, `Input`, token만 사용합니다. 세부 출처는
 `research/source-inventory.md`에 있습니다.
+`skills.pydemia.ai`의 `reference-research`, `frontend-development`,
+`software-engineering` 공개 페이지를 확인했습니다. 페이지에 표시된
+revision은 `2d0786579661`입니다. 공식 source의 역할·접근·license 확인,
+기존 상태 소유와 keyboard/focus 규칙 보존, 작은 변경과 검증 범위 기록을
+적용했습니다. 연결된 원문 repository 파일의 내용 해시는 확인하지
+않았습니다.
 
 ## 검증 상태
 
