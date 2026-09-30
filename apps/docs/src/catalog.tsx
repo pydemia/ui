@@ -35,7 +35,7 @@ import {
     DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent,
     DropdownMenuSubTrigger, DropdownMenuTrigger, Dropzone,
     Empty, EmptyContent, EmptyDescription,
-    EmptyMedia, EmptyTitle, FavoriteToggle, Field, FileUpload,
+    EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
     FilterBar, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
     HoverCardTrigger, Heatmap, Image, Input, InputGroup, InputGroupAddon,
@@ -2716,6 +2716,32 @@ const workspaceOptions = [
     { value: "research", label: "Research Lab" },
 ];
 
+function EditablePreview() {
+    const [name, setName] = useState("Operations workspace");
+    const [failNext, setFailNext] = useState(false);
+
+    return (
+        <div className="preview-field">
+            <Editable label="작업 공간 이름" value={name} required
+                validate={(draft) => draft.trim().length < 2
+                    ? "두 글자 이상 입력하세요." : null}
+                onSave={async (draft) => {
+                    await new Promise((resolve) => setTimeout(resolve, 400));
+                    if (failNext) {
+                        setFailNext(false);
+                        throw new Error("Demo save failed");
+                    }
+                    setName(draft.trim());
+                }} />
+            <Button type="button" variant="outline"
+                onClick={() => setFailNext(true)} disabled={failNext}>
+                {failNext ? "다음 저장은 실패합니다" : "다음 저장 실패 시험"}
+            </Button>
+            <p role="status">현재 이름: {name}</p>
+        </div>
+    );
+}
+
 function ComboboxPreview() {
     const [value, setValue] = useState<string | null>(null);
     const [submitted, setSubmitted] = useState<string | null>(null);
@@ -4249,6 +4275,21 @@ function RoleSelect() {
   );
 }`,
         preview: () => <SelectPreview />,
+    },
+    {
+        id: "editable", name: "Editable", category: "Inputs",
+        description: "이름·설정값을 자리에서 수정합니다. 저장·취소, 필수값 검사와 비동기 저장 실패 뒤 초안 보존을 제공합니다. 값 저장은 사용 측이 소유합니다.",
+        code: `import { useState } from "react";
+import { Editable } from "@pydemia/ui";
+
+function WorkspaceName() {
+  const [name, setName] = useState("Operations workspace");
+  return <Editable label="작업 공간 이름" value={name} required
+    validate={(draft) => draft.trim().length < 2
+      ? "두 글자 이상 입력하세요." : null}
+    onSave={setName} />;
+}`,
+        preview: () => <EditablePreview />,
     },
     {
         id: "combobox", name: "Combobox", category: "Selection",

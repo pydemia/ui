@@ -1,5 +1,23 @@
 # Component taxonomy와 source 검토
 
+## 2026-09-30 Editable reference 확인
+
+[Chakra UI Editable 공식 문서](https://chakra-ui.com/docs/components/editable)는
+인라인 이름 수정과 명시적 편집·저장·취소 control, controlled 값을
+설명합니다. 같은 revision
+[`9611614`](https://github.com/chakra-ui/chakra-ui/tree/961161428b8c59157ad921dd23303b73c294d73f)의
+[component source](https://github.com/chakra-ui/chakra-ui/blob/961161428b8c59157ad921dd23303b73c294d73f/packages/react/src/components/editable/editable.tsx),
+[package manifest](https://github.com/chakra-ui/chakra-ui/blob/961161428b8c59157ad921dd23303b73c294d73f/packages/react/package.json),
+[LICENSE](https://github.com/chakra-ui/chakra-ui/blob/961161428b8c59157ad921dd23303b73c294d73f/LICENSE)를
+확인했습니다. MIT이며 source는 `@ark-ui/react/editable`, Chakra의
+스타일·prop 합성 계층과 React에 의존합니다. package manifest에는
+Ark UI, Emotion 계열, PandaCSS prop 검사와 React peer 의존성이
+있습니다. `pyd-editable`은 사용 사례와 명시적 control만 참고한
+원본 React 구현입니다. source를 복사하지 않았고 기존 `pyd-button`,
+`pyd-input`, `pyd-utils`만 registry 의존성으로 사용합니다.
+native input의 label, button, `aria-busy`, alert를 사용합니다.
+실제 screen reader 발표는 별도 검증 대상으로 남깁니다.
+
 ## 2026-09-30 Gantt reference 확인
 
 [Kibo Gantt 공식 문서](https://www.kibo-ui.com/components/gantt)는 일정

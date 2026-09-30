@@ -575,6 +575,12 @@
       "dependencies": ["lucide-react", "pyd-button", "pyd-utils"], "accessibility": { "semantics": "named section, list of native post-selection buttons, current selection and optional create action", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-editable", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Chakra UI Editable", "url": "https://chakra-ui.com/docs/components/editable", "revision": "961161428b8c59157ad921dd23303b73c294d73f", "license": "MIT", "scope": "inline rename use case and explicit controls only; source not copied" },
+      "dependencies": ["pyd-button", "pyd-input", "pyd-utils"], "accessibility": { "semantics": "named group, labeled native input, explicit edit/save/cancel buttons, alert on validation or save failure", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-thread", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-button", "pyd-textarea", "pyd-utils"], "accessibility": { "semantics": "named section, ordered comments with parent attribution, labeled composer, status and error alerts", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }

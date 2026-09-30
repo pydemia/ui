@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-09-30 — Editable
+
+- 자리에서 이름·설정값을 수정하는 `Editable`을 추가했습니다. 필수값과
+  사용자 검사, 비동기 저장·실패 후 초안 보존, 저장 중 중복 요청 방지와
+  편집 버튼으로 포커스 복귀를 제공합니다.
+- 문서의 저장 실패 preview·사용 코드와 registry item을 추가했습니다.
+  Chakra UI는 동작 reference로만 사용했고 코드는 새로 작성했습니다.
+
 ## 2026-09-30 — 답변 평가·즐겨찾기·게시판·대댓글
 
 - `ResponseFeedback`, `FavoriteToggle`, `Board`, `Thread`를 원본
