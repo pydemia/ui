@@ -1,5 +1,19 @@
 # Component 공급 목표 진행 상태
 
+2026-09-30 MonthPicker 공개 후 현재 97개 component와 99개 registry item이
+16개 catalog 범주에 있습니다. 약 100개라는 초기 규모 기준은 97%이고,
+[로드맵](component-roadmap.md)의 공급·품질 조건은 5/10(50%)입니다.
+기존 관리 방식대로 두 비율을 같은 비중으로 평균하면 73.5%이므로
+**전체 goal의 관리용 추정은 약 74%**입니다. 두 비중은 합의된 측정
+기준이 아니며, 100개도 완료 조건이 아닙니다. 16개 범주에는
+Framework·Navigation·Workflow·Data & analytics·AI & agent가 포함되며,
+화면 골격, 탐색, 분석 차트, 파일 작업, 복합 입력, AI 대화의 실제
+동작을 구현했습니다. 반면 기존 component의 실제 screen reader·touch·
+Safari·RTL 검증, 과거 snapshot의 rollback 뒤 URL 보존과 item별 공개
+설치·상호작용 검사는 완료되지 않았습니다. 후보 체크박스 63/70은
+기존 API 확장·조합 예시와 판정 대기 항목을 섞어 세므로 완료율의
+분모로 쓰지 않습니다.
+
 2026-09-29 Markdown 공개: [PR #4](https://github.com/pydemia/ui/pull/4)를
 병합하고 PR·main CI, Vercel production READY, 공개 Markdown preview와
 snapshot URL 설치 소비자 typecheck·build를 확인했습니다. 현재

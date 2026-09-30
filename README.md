@@ -1,7 +1,7 @@
 # pydemia UI
 
 React 19, Tailwind CSS 4, TypeScript와 shadcn registry convention으로 만든
-source-owned UI 컴포넌트 작업공간입니다. 현재 97개 컴포넌트를 포함합니다.
+source-owned UI 컴포넌트 작업공간입니다. 현재 101개 컴포넌트를 포함합니다.
 shadcn/ui 기반 항목은 원본 revision과 MIT notice를 유지합니다. Origin UI,
 Kibo UI, AI Elements, Tremor는 디자인·상호작용 reference로 기록하고
 해당 항목의 구현 코드는 `pydemia/ui`에서 관리합니다.

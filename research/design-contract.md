@@ -831,3 +831,26 @@ popover를 닫습니다. `required=false`면 선택한 월을 다시 눌러 지�
 각 월은 이름과 선택 상태가 있는 native 버튼입니다. Tab으로 이동하고
 Enter·Space로 고르며 Escape는 popover를 닫고 trigger로 돌아갑니다.
 별도의 날짜·시간대 변환은 하지 않습니다.
+
+## 2026-09-30 평가·즐겨찾기·게시판·대댓글
+
+`ResponseFeedback`은 `up | down | null` 값을 받는 controlled
+선택입니다. 같은 선택을 다시 누르면 `null`이 됩니다. 두 버튼은
+서로 배타적이며 `pending`·`disabled`일 때 변경을 막습니다. 집계 수는
+선택 사항이고 컴포넌트는 집계를 직접 바꾸지 않습니다.
+`FavoriteToggle`은 `Toggle`의 controlled/uncontrolled 눌림 상태를
+그대로 사용합니다. 선택 사항인 집계 수는 상태 변경과 별개입니다.
+
+`Board`는 고유 ID를 가진 게시글 목록을 렌더링하고 선택한 ID와
+글쓰기 action을 호출자에게 전달합니다. 검색, 페이지, 작성 form,
+저장과 권한은 호출자가 구현합니다. 문서 예제는 기존 `Dialog`로
+작성 form을 엽니다. `Thread`는 고유 댓글 ID와 `parentId`로
+대댓글 관계를 구성합니다. 부모 댓글이 입력 목록에서 뒤에 있어도
+부모 다음에 표시합니다. 없는 부모나 순환 관계는 오류로 알립니다.
+답글 작성은 `onReply(parentId, content)`로 전달합니다. 비동기 저장이
+실패하면 초안을 유지하고 오류를 표시합니다. 데이터 저장·수정·삭제와
+사용자 권한은 호출자가 소유합니다.
+
+네 컴포넌트는 공통 색상·간격 token을 사용합니다. 게시판은 native
+목록·버튼으로 선택하고 댓글은 부모 작성자를 텍스트로 명시합니다.
+실제 screen reader·touch·Safari·RTL은 별도 검증 대상입니다.

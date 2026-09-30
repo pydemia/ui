@@ -1752,3 +1752,18 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 
 세부 사항은 `.worknotes/component-month-picker-2026-09-30.md`에
 기록합니다.
+
+## 2026-09-30 답변 평가·즐겨찾기·게시판·대댓글
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript | pass | UI·프로필·문서 `npm run typecheck` |
+| 패키지 테스트 | pass | 전체 96/96; 새 회귀 5건, 접근성 집계 변경 뒤 새 테스트 5/5 재실행 |
+| 첫 저장소 build | pass | 103개 registry item과 문서 정적 출력; 이후 변경의 최종 build는 진행 중 |
+| 로컬 Chromium | pass (limited) | Board 글 선택·Dialog 작성·게시, Thread 부모 답글 작성·반영, 평가 배타 선택, 즐겨찾기 Space |
+| 390px Chromium | pass (limited) | Thread 문서 너비 390px, viewport 390px |
+| 최종 registry·snapshot·별도 소비자·공개 배포 | unverified | 진행 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+세부 기록은 `.worknotes/component-feedback-board-thread-2026-09-30.md`에
+있습니다.

@@ -8,7 +8,7 @@ import {
     AlertDialogTitle, AlertDialogTrigger, Avatar, AvatarFallback, AvatarImage,
     AvatarGroup, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
-    BreadcrumbPage, BreadcrumbSeparator, BottomNav, BottomNavLink,
+    BreadcrumbPage, BreadcrumbSeparator, Board, BottomNav, BottomNavLink,
     Button, ButtonGroup,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
@@ -35,7 +35,8 @@ import {
     DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent,
     DropdownMenuSubTrigger, DropdownMenuTrigger, Dropzone,
     Empty, EmptyContent, EmptyDescription,
-    EmptyMedia, EmptyTitle, Field, FileUpload, FilterBar, Gantt,
+    EmptyMedia, EmptyTitle, FavoriteToggle, Field, FileUpload,
+    FilterBar, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
     HoverCardTrigger, Heatmap, Image, Input, InputGroup, InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
@@ -48,6 +49,7 @@ import {
     PageHeader, Pagination, PasswordInput, PinInput, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
     RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
+    ResponseFeedback,
     ResizablePanels, ScatterChart, ScrollArea,
     SearchInput,
     Select, SelectContent, SelectItem,
@@ -56,7 +58,7 @@ import {
     Snippet, SnippetContent, SnippetCopyButton, SnippetHeader, Spinner,
     SnippetTabsList, SnippetTabsTrigger, SideNav, SideNavLink, Sidebar,
     Sparkline, Stepper, Switch, Table, TableCell, TagsInput, Timeline,
-    TimePicker, ToolCall, Tree,
+    Thread, TimePicker, ToolCall, Tree,
     ToastQueue, useToastQueue,
     TableHead, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toggle,
     ToggleGroup, ToggleGroupItem,
@@ -65,12 +67,16 @@ import {
 import { FolderOpen, Gauge, Inbox, Settings2 } from "lucide-react";
 import { TZDate, type DateRange } from "react-day-picker";
 import { ko } from "react-day-picker/locale";
-import { useId, useRef, useState, type ReactNode } from "react";
+import {
+    useId, useRef, useState, type FormEvent, type ReactNode,
+} from "react";
 import type {
-    AppliedFilter, ConversationMessage, DataTableColumn, DateRangeValue,
+    AppliedFilter, BoardPost, ConversationMessage, DataTableColumn,
+    DateRangeValue,
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
-    LogEntry, ReasoningStatus, ToolCallStatus, TreeNode,
+    LogEntry, ReasoningStatus, ResponseFeedbackValue, ThreadComment,
+    ToolCallStatus, TreeNode,
 } from "@pydemia/ui";
 
 export type ComponentEntry = {
@@ -2880,6 +2886,114 @@ function JsonViewerPreview() {
     );
 }
 
+function ResponseFeedbackPreview() {
+    const [value, setValue] = useState<ResponseFeedbackValue>(null);
+    return (
+        <div className="preview-stack">
+            <p>이 답변이 도움이 되었나요?</p>
+            <ResponseFeedback label="답변 평가" value={value}
+                onValueChange={setValue} counts={{ up: 12, down: 2 }} />
+            <p role="status">선택: {value === "up" ? "좋아요" :
+                value === "down" ? "싫어요" : "없음"}</p>
+        </div>
+    );
+}
+
+function FavoriteTogglePreview() {
+    const [favorite, setFavorite] = useState(false);
+    return (
+        <div className="preview-stack">
+            <FavoriteToggle label="이 글 즐겨찾기" count={24}
+                pressed={favorite} onPressedChange={setFavorite} />
+            <p role="status">{favorite ? "즐겨찾기에 추가됨" :
+                "즐겨찾기에 추가되지 않음"}</p>
+        </div>
+    );
+}
+
+const initialBoardPosts: BoardPost[] = [
+    { id: "guide", title: "컴포넌트 사용 가이드", author: "운영팀",
+        createdAt: "2026-09-30", category: "공지", replyCount: 2,
+        summary: "새 컴포넌트를 설치하고 적용하는 방법을 공유합니다." },
+    { id: "question", title: "테마 설정 질문", author: "민지",
+        createdAt: "2026-09-29", category: "질문", replyCount: 1,
+        summary: "색상 token을 어디에서 바꾸나요?" },
+];
+
+function BoardPreview() {
+    const [posts, setPosts] = useState(initialBoardPosts);
+    const nextPostId = useRef(1);
+    const [selected, setSelected] = useState("guide");
+    const [open, setOpen] = useState(false);
+    const [title, setTitle] = useState("");
+    const [summary, setSummary] = useState("");
+
+    function createPost(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const id = `post-${nextPostId.current++}`;
+        setPosts((current) => [{ id, title: title.trim(),
+            summary: summary.trim(), author: "나",
+            createdAt: new Date().toISOString().slice(0, 10),
+            replyCount: 0 }, ...current]);
+        setSelected(id);
+        setTitle("");
+        setSummary("");
+        setOpen(false);
+    }
+
+    return (
+        <div className="preview-stack">
+            <Board label="컴포넌트 게시판" posts={posts}
+                selectedPostId={selected} onSelectPost={setSelected}
+                onCreatePost={() => setOpen(true)} />
+            <p role="status">선택한 글: {posts.find((post) =>
+                post.id === selected)?.title}</p>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>글쓰기</DialogTitle>
+                        <DialogDescription>제목과 내용을 입력하세요.</DialogDescription>
+                    </DialogHeader>
+                    <form className="grid gap-3" onSubmit={createPost}>
+                        <Label htmlFor="board-post-title">제목</Label>
+                        <Input id="board-post-title" required value={title}
+                            onChange={(event) => setTitle(event.target.value)} />
+                        <Label htmlFor="board-post-summary">내용</Label>
+                        <Textarea id="board-post-summary" required
+                            value={summary} onChange={(event) =>
+                                setSummary(event.target.value)} />
+                        <DialogFooter>
+                            <Button type="submit" disabled={!title.trim() ||
+                                !summary.trim()}>게시</Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
+        </div>
+    );
+}
+
+const initialThreadComments: ThreadComment[] = [
+    { id: "first", parentId: null, author: "민지",
+        content: "테마 token은 어디에서 설정하나요?",
+        createdAt: "2026-09-30" },
+    { id: "reply", parentId: "first", author: "운영팀",
+        content: "Colormap 메뉴에서 확인하실 수 있습니다.",
+        createdAt: "2026-09-30" },
+];
+
+function ThreadPreview() {
+    const [comments, setComments] = useState(initialThreadComments);
+    const nextCommentId = useRef(1);
+    return <Thread label="댓글" comments={comments}
+        onReply={(parentId, content) => {
+            const id = `comment-${nextCommentId.current++}`;
+            setComments((current) => [...current, { id, parentId,
+                author: "나", content,
+                createdAt: new Date().toISOString().slice(0, 10) }]);
+        }} />;
+}
+
 export const catalog: ComponentEntry[] = [
     {
         id: "button", name: "Button", category: "Actions",
@@ -4963,5 +5077,94 @@ function SaveNotice() {
   </>;
 }`,
         preview: () => <ToastPreview />,
+    },
+    {
+        id: "response-feedback", name: "ResponseFeedback",
+        category: "Feedback",
+        description: "답변의 좋아요·싫어요를 서로 배타적인 선택으로 받습니다. 선택과 집계 저장은 사용 측에서 처리합니다.",
+        code: `import { useState } from "react";
+import { ResponseFeedback, type ResponseFeedbackValue } from "@pydemia/ui";
+
+function AnswerVote() {
+  const [vote, setVote] = useState<ResponseFeedbackValue>(null);
+  return <ResponseFeedback label="답변 평가" value={vote}
+    onValueChange={setVote} counts={{ up: 12, down: 2 }} />;
+}`,
+        preview: () => <ResponseFeedbackPreview />,
+    },
+    {
+        id: "favorite-toggle", name: "FavoriteToggle",
+        category: "Actions",
+        description: "글·항목을 즐겨찾기하는 별 모양 toggle입니다. 선택 상태와 집계는 사용 측에서 저장합니다.",
+        code: `import { useState } from "react";
+import { FavoriteToggle } from "@pydemia/ui";
+
+function FavoritePost() {
+  const [favorite, setFavorite] = useState(false);
+  return <FavoriteToggle label="이 글 즐겨찾기" count={24}
+    pressed={favorite} onPressedChange={setFavorite} />;
+}`,
+        preview: () => <FavoriteTogglePreview />,
+    },
+    {
+        id: "board", name: "Board", category: "Content",
+        description: "게시글 제목·요약·작성자·댓글 수를 목록으로 표시하고 글 선택과 작성 시작을 알립니다. 글 작성 modal은 Dialog로 구성합니다.",
+        code: `import { useState } from "react";
+import { Board, Button, Dialog, DialogContent, DialogDescription,
+  DialogHeader, DialogTitle, Input, Label,
+  type BoardPost } from "@pydemia/ui";
+
+function NoticeBoard() {
+  const [posts, setPosts] = useState<BoardPost[]>([]);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  return <>
+    <Board label="게시판" posts={posts} selectedPostId={selected}
+      onSelectPost={setSelected} onCreatePost={() => setOpen(true)} />
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>글쓰기</DialogTitle>
+          <DialogDescription>제목을 입력하세요.</DialogDescription>
+        </DialogHeader>
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          const id = crypto.randomUUID();
+          setPosts((current) => [{ id, title, author: "나",
+            createdAt: new Date().toISOString().slice(0, 10) },
+            ...current]);
+          setSelected(id);
+          setOpen(false);
+          setTitle("");
+        }}>
+          <Label htmlFor="post-title">제목</Label>
+          <Input id="post-title" required value={title}
+            onChange={(event) => setTitle(event.target.value)} />
+          <Button type="submit">게시</Button>
+        </form>
+      </DialogContent>
+    </Dialog>
+  </>;
+}`,
+        preview: () => <BoardPreview />,
+    },
+    {
+        id: "thread", name: "Thread", category: "Content",
+        description: "부모 댓글 ID로 대댓글을 표시하고 각 댓글에 답글을 작성합니다. 등록 실패 시 입력을 유지하며 저장은 onReply에서 처리합니다.",
+        code: `import { useState } from "react";
+import { Thread, type ThreadComment } from "@pydemia/ui";
+
+function Discussion() {
+  const [comments, setComments] = useState<ThreadComment[]>([]);
+  return <Thread label="댓글" comments={comments}
+    onReply={(parentId, content) => {
+      setComments((current) => [...current, {
+        id: crypto.randomUUID(), parentId, author: "나", content,
+        createdAt: new Date().toISOString().slice(0, 10),
+      }]);
+    }} />;
+}`,
+        preview: () => <ThreadPreview />,
     },
 ];
