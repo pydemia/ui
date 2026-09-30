@@ -1774,3 +1774,20 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 
 세부 기록은 `.worknotes/component-feedback-board-thread-2026-09-30.md`에
 있습니다.
+
+## 2026-09-30 Editable
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript | pass | 저장소 `npm run typecheck` |
+| 패키지 테스트 | pass | 전체 98/98, Editable SSR 2건 포함 |
+| build·registry·snapshot | pass | 104개 item·102개 component·18개 snapshot, 현재 ID 일치 |
+| 로컬 문서 Chromium | pass (limited) | 필수값·사용자 검사, 저장 실패·재시도, Enter/Escape, 포커스 복귀, 390px dark 가로 넘침 없음 |
+| 격리 소비자 CLI | pass | 6개 파일 설치, Editable·Button·Input·utils·고지 일치, typecheck·build |
+| 격리 소비자 Chromium | pass (limited) | 실패 뒤 초안 보존·재시도·값 갱신·포커스 복귀, 390px 가로 넘침 없음 |
+| 공개 배포·설치 | unverified | PR·병합·production 배포 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 해당 기기·보조기술 실행 전 |
+
+새 snapshot ID는
+`sha256-821598f3f128f4f00c0f44da23a3abdee79c1c6041f977b185ffc8fb0d34f890`입니다.
+세부 기록은 `.worknotes/component-editable-2026-09-30.md`에 있습니다.

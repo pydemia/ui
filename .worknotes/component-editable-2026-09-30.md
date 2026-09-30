@@ -22,5 +22,15 @@ manifest, MIT LICENSE를 확인했습니다. 원본 코드는 복사하지 않�
 - 로컬 Chromium에서 필수값·사용자 검사, 실패 후 초안 유지·재시도,
   Enter/Escape와 편집 버튼 포커스 복귀를 확인했습니다. 390px dark 화면의
   body 너비 390px이며 component가 화면 안에 표시됩니다.
-- registry/snapshot 검사와 격리 소비자 설치·브라우저: 대기.
+- `registry:release-check` 통과: 104개 item, 102개 component,
+  기존 17개와 새 snapshot 1개. 새 ID는
+  `sha256-821598f3f128f4f00c0f44da23a3abdee79c1c6041f977b185ffc8fb0d34f890`입니다.
+- 별도 Vite 소비자에 `shadcn@4.21.0 add`로 Editable·token을
+  설치해 6개 파일을 생성했습니다. Editable·Button·Input·utils와
+  고지는 저장소 원본과 같습니다. 전이 Button을 공개 최신 URL에서
+  먼저 받아 이전 고지가 설치되었고, 현재 로컬 Button URL로 고지를
+  덮어써 일치시켰습니다. 소비자 typecheck·build를 통과했습니다.
+  Chromium에서 저장 실패 뒤 초안·오류 유지, 재시도 후 값 갱신·
+  편집 버튼 초점 복귀, 390px 가로 넘침 없음도 확인했습니다.
+  fixture는 `%TEMP%/pydemia-editable-consumer-20260930`에 있습니다.
 - 공개 배포·실제 screen reader·touch·Safari·RTL: 미검증.

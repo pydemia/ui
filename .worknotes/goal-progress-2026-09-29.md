@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-09-30 Editable 로컬 검증 후 102개 component와 104개 registry item이
+있습니다. 기존 공급·품질 조건의 완료 표시는 5/10이며, 실제 보조기술·
+touch·Safari·RTL, item별 격리 공개 설치, rollback 뒤 snapshot URL
+보존이 남아 있어 goal은 완료되지 않았습니다. 100개는 규모 기준점이므로
+이를 넘었다는 이유로 완료율을 100%로 취급하지 않습니다. 이전의
+약 74%는 97/100 규모 비율과 5/10 조건을 같은 비중으로 평균한
+관리용 추정이었고, 현재 작업의 완료율로 재사용하지 않습니다.
+새 component 검증과 배포 상태는
+[Editable 작업 기록](component-editable-2026-09-30.md)에 남깁니다.
+
 2026-09-30 MonthPicker 공개 후 현재 97개 component와 99개 registry item이
 16개 catalog 범주에 있습니다. 약 100개라는 초기 규모 기준은 97%이고,
 [로드맵](component-roadmap.md)의 공급·품질 조건은 5/10(50%)입니다.

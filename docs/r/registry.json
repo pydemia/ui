@@ -650,6 +650,11 @@
       "files": [{ "path": "packages/ui/src/components/board.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-editable", "type": "registry:ui", "title": "Editable",
+      "registryDependencies": ["./pyd-button.json", "./pyd-input.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/editable.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-thread", "type": "registry:ui", "title": "Thread",
       "registryDependencies": ["./pyd-button.json", "./pyd-textarea.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/thread.tsx", "type": "registry:ui" }]
