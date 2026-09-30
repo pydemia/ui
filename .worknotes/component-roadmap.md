@@ -13,8 +13,9 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-95개 component와 97개 registry item이 있습니다. 2026-09-30에
-`Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`를 순차
+96개 component와 98개 registry item이 있습니다. 2026-09-30에
+`Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
+`ScatterChart`를 순차
 편입했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
@@ -250,6 +251,9 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
   실제 screen reader 발표는 미검증.
 - [x] `Heatmap` — 두 범주의 수치를 색 농도와 보이는 숫자로 함께
   표시합니다. 표 헤더·결측값·0·빈 목록과 내부 가로 스크롤을 제공합니다.
+  실제 screen reader 발표는 미검증입니다.
+- [x] `ScatterChart` — 두 연속 수치의 관계를 점으로 표시합니다.
+  native 선택기와 데이터 표로 정확한 좌표·결측값을 확인합니다.
   실제 screen reader 발표는 미검증입니다.
 - [x] `Legend` — 별도 component 대신 `DataChart`의 정적 범례와
   선택형 범례로 제공합니다. 선택형은 다중 계열의 표시·숨김에 따라

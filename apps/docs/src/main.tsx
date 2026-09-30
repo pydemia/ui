@@ -454,7 +454,8 @@ function App() {
                         <div className="component-grid"
                             data-wide={[
                                 "app-shell", "data-chart", "dashboard",
-                                "data-table", "gantt", "resizable-panels",
+                                "data-table", "gantt", "scatter-chart",
+                                "resizable-panels",
                                 "sidebar", "stepper",
                             ].includes(selected.id) ? "true" : undefined}>
                             <div className="preview-panel"><div className="panel-caption"><span>LIVE PREVIEW</span><span>Neutral Product</span></div><div className="preview-stage">{selected.preview()}</div></div>

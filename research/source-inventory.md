@@ -1085,3 +1085,28 @@ MIT LICENSE를 확인했습니다. Root의 단일 `name`으로는 두 endpoint�
 source를 복사하지 않았습니다. registry 의존성은 `pyd-slider`와
 `pyd-utils`, 새 npm runtime 의존성은 없습니다. 실제 touch 보조기술,
 screen reader, Safari, RTL은 검증하지 않았습니다.
+
+## 2026-09-30 ScatterChart 참고 범위
+
+두 연속 수치의 관계는 기존 `DataChart`의 범주형 x축으로 표현하기
+어려워 `ScatterChart`를 별도 component로 작성했습니다.
+[Recharts ScatterChart 공식 문서](https://recharts.github.io/en-US/api/ScatterChart/)와
+revision `44bba29e74bbfdfc6715176f3eecea0392a95080`의
+[ScatterChart source](https://github.com/recharts/recharts/blob/44bba29e74bbfdfc6715176f3eecea0392a95080/src/chart/ScatterChart.tsx),
+[Scatter source](https://github.com/recharts/recharts/blob/44bba29e74bbfdfc6715176f3eecea0392a95080/src/cartesian/Scatter.tsx),
+[package manifest](https://github.com/recharts/recharts/blob/44bba29e74bbfdfc6715176f3eecea0392a95080/package.json),
+[MIT LICENSE](https://github.com/recharts/recharts/blob/44bba29e74bbfdfc6715176f3eecea0392a95080/LICENSE)를
+같은 revision에서 확인했습니다. manifest의 runtime 의존성은
+`@reduxjs/toolkit`, `clsx`, `decimal.js-light`, `es-toolkit`,
+`eventemitter3`, `immer`, `react-redux`, `reselect`,
+`tiny-invariant`, `use-sync-external-store`, `victory-vendor`입니다.
+좌표축과 산점도 개념만 참고했고 소스·의존성은 편입하지 않았습니다.
+
+정확한 좌표는 native 선택기와 표로 제공합니다.
+[W3C APG Table Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/table/)의
+행·열 관계와
+[accessible name 지침](https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/)을
+참고했습니다. SVG는 장식으로 숨기며 pointer 점 선택에 대응하는
+native 선택기를 제공합니다. 새 registry 직접 의존성은 `pyd-utils`,
+새 npm runtime 의존성은 없습니다. 실제 screen reader·touch·Safari·
+RTL은 검증하지 않았습니다.

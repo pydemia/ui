@@ -139,6 +139,10 @@ export type {
 export { DonutChart } from "./components/donut-chart";
 export { Heatmap } from "./components/heatmap";
 export type { HeatmapProps, HeatmapRow } from "./components/heatmap";
+export { ScatterChart } from "./components/scatter-chart";
+export type {
+    ScatterChartProps, ScatterPoint,
+} from "./components/scatter-chart";
 export type { DonutChartProps, DonutSegment } from "./components/donut-chart";
 export {
     Dashboard, DashboardMetrics, DashboardPanels,

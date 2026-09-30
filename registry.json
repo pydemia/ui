@@ -555,6 +555,11 @@
       "files": [{ "path": "packages/ui/src/components/heatmap.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-scatter-chart", "type": "registry:ui", "title": "Scatter Chart",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/scatter-chart.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-dashboard", "type": "registry:ui", "title": "Dashboard Layout",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/dashboard.tsx", "type": "registry:ui" }]
