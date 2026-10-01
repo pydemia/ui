@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 공급·품질 기준 재검토: 전체 라이브러리의 기존 10개
+과제는 완료 5·부분 4·미검증 1입니다. 새 component의 출시 검증과
+전체 환경·rollback 검사를 분리했습니다. `5/10`은 완전히 닫힌
+축적 과제 수로만 남기고 공급률로 사용하지 않습니다. 이번 검토로
+component나 확인된 사용 사례가 늘지는 않아 goal 추정은
+**약 80% → 약 80%**입니다. [재검토 기록](quality-criteria-review-2026-10-01.md)에
+판정 근거와 출시 기준을 적었습니다.
+
 2026-10-01 TreeSelect 수정판 공개 검증 후: **약 80% → 약 80%**입니다.
 105개 component·107개 registry item·23개 불변 snapshot입니다. PR·
 병합 CI, Vercel production, 공개 preview와 수정판 snapshot의 별도
