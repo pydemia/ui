@@ -42,9 +42,13 @@
   실패했습니다. 로컬 base URL로 전체 사이트를 재생성해 소비자 설치를
   확인한 뒤 production base로 되돌려 빌드했습니다. 생성된
   `docs/r`에는 로컬 URL이 남지 않았습니다.
-- `registry:check`는 현재 provenance와 소비자 고지의 이전 SHA-256
-  불일치로 실패했습니다. source commit 뒤 고지를 그 commit·해시로
-  고정하고 snapshot·release 검사와 공개 소비자 검증을 진행합니다.
+- `registry:check`는 처음에 provenance와 소비자 고지의 이전 SHA-256
+  불일치로 실패했습니다. source commit `3bfed76`과 현재 metadata
+  해시로 고지를 고정한 뒤 통과했습니다. 27번째 snapshot
+  `sha256-c8bdf24d84b03bff8fe382f2b73e678e3cd5f6e0df86b649bdaa4f78676e01f5`
+  을 생성하고 `registry:release-check`로 111개 item·109개
+  export/catalog·27개 snapshot과 현재 빌드의 일치를 확인했습니다.
+- PR·production·공개 snapshot 소비자 검증은 남았습니다.
 - 실제 screen reader·touch·Safari·RTL과 rollback 뒤 snapshot URL은
   미검증입니다.
 

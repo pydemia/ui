@@ -4,9 +4,10 @@
 중복된 복사 동작을 공통 control로 편입했습니다. `DataTable`,
 `CodeBlock`, `Snippet` 소비자도 연결했습니다. typecheck·UI 테스트
 124/124·build, 문서와 새 소비자의 390px Chromium·CLI 설치가
-통과했습니다. 현재 provenance 변경으로 소비자 고지 SHA-256이
-달라 `registry:check`가 실패합니다. source commit 후 고지를
-고정하고 snapshot·공개 검증을 진행합니다. 공개 기준 goal 약 82%를
+통과했습니다. source commit `3bfed76`에 맞춰 소비자 고지를 갱신해
+`registry:check`가 통과했습니다. 27번째 snapshot과
+`registry:release-check`도 통과했으며 PR·공개 검증이 남았습니다.
+공개 기준 goal 약 82%를
 유지합니다. [작업 기록](action-copy-controls-2026-10-02.md)을
 참고하세요.
 
