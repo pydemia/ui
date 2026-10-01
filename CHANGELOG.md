@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-01 — 선택 카드 표시 형태
+
+- `Checkbox`와 `RadioGroupItem`에 `variant="card"`를 추가했습니다.
+  보이는 이름·설명과 카드 전체 선택 면적을 제공하며 기존 선택기와
+  form 값, 기본 표시 형태는 유지합니다.
+- 문서의 선택·제출 preview와 사용 코드를 추가했습니다. 별도
+  component나 runtime dependency는 늘리지 않았습니다.
+
 ## 2026-10-01 — TreeSelect
 
 - 계층에서 한 항목을 골라 form 값으로 제출하는 `TreeSelect`를

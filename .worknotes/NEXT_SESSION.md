@@ -1,5 +1,19 @@
 # Component 확장 작업 인계
 
+2026-10-01 선택 카드 표시 형태 작업 중: `Checkbox`·`RadioGroupItem`의
+`variant="card"`를 기존 item에 추가합니다. 별도 component 수는
+늘리지 않습니다. 시작 기준은 105개 component·107개 item·23개
+snapshot, goal 약 80%, 라이브러리 과제 완료 5·부분 4·미검증 1입니다.
+고정 upstream·MIT·Radix 의존성을 확인했고 최종 소스의 typecheck·
+UI 테스트 116/116·build가 통과했습니다. 390px Chromium의 카드
+선택·제출·light/dark를 확인했습니다. 자동화 방향키는 focus 이동만
+관찰해 선택 변경을 미검증으로 남겼습니다. provenance 변경에 따라
+소비자용 고지 hash를 source commit `3392144`로 고정했습니다.
+`registry:release-check`는 24번째 snapshot
+`sha256-1889f7c9f938bea5019bba5e20d480efc8a17244036c881451a616ceed14b68d`와
+현재 빌드의 일치를 확인했습니다. 공개 소비자 검증이 남았습니다.
+[작업 기록](selection-card-variants-2026-10-01.md)을 참고하세요.
+
 2026-10-01 공급·품질 기준 재검토: 기존 체크리스트는 완료 5·부분 4·
 미검증 1로 구분합니다. `5/10`은 완전히 닫힌 라이브러리 과제 수이며
 새 component 공급률이 아닙니다. 새 component의 ready-made 출시
