@@ -35,8 +35,20 @@ token을 사용합니다.
   빈 상태 구분 회귀 검사를 추가했습니다.
 - 로컬 Chromium에서 현재 결과에서 빠진 선택값의 label과 form 제출값을
   확인했습니다. 원격 검색 결과의 방향키·Enter와 실패 메시지도 확인했습니다.
+- `npm run build`, `npm run registry:release-check` 통과. 104개 item,
+  102개 component, 19개 불변 snapshot입니다. 새 snapshot ID는
+  `sha256-89e9ec939dea43db48bdacdd4c3555cc2072a5131be074c65eae592ec14ef7c1`
+  입니다.
+- 로컬 registry에서 별도 Vite 소비자에 `shadcn@4.21.0 add`로 5개 파일을
+  설치했습니다. Combobox·Input·utils·token·notice는 원본과 같고,
+  typecheck·build가 통과했습니다. Chromium에서 결과 교체 후 label·
+  제출값과 390px 가로 넘침 없음을 확인했습니다. fixture는
+  `%TEMP%/pydemia-combobox-consumer-20261001`에 있습니다.
+- 배포 전 새 snapshot URL의 내부 의존성은 아직 없는 production 경로라
+  공개 URL로 설치할 수 없습니다. 로컬 registry는 5176번에서 별도로
+  빌드했고 검증 뒤 기본 공개 base로 다시 생성했습니다.
 
 ## 미검증
 
 - 실제 screen reader의 로딩·오류 발표, touch, Safari, RTL.
-- 공개 배포와 별도 소비자 설치는 아직 진행하지 않았습니다.
+- 공개 배포와 공개 snapshot 소비자 설치는 아직 진행하지 않았습니다.

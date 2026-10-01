@@ -1803,7 +1803,12 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | build | pass | 문서와 104개 registry item 생성 |
 | 로컬 Chromium | pass (limited) | 목록에서 선택값 제거 뒤 label·form 값 유지, 원격 결과 방향키·Enter, 요청 실패 메시지 |
 | 390px Chromium | pass (limited) | body·viewport 모두 390px |
-| registry snapshot·격리 소비자·공개 배포 | pending | 아직 수행 전 |
+| registry snapshot | pass | 104개 item·102개 export/catalog·19개 snapshot, 현재 ID 일치 |
+| 격리 소비자 CLI·typecheck·build | pass | 로컬 registry에서 5개 파일 설치·원본 일치, Vite 소비자 검사 |
+| 격리 소비자 Chromium | pass (limited) | 선택값이 빠진 새 목록에서도 label·제출값 유지, 390px 가로 넘침 없음 |
+| 공개 배포·snapshot 소비자 | pending | 병합·배포 전 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 세부 결정은 `.worknotes/combobox-remote-results-2026-10-01.md`에 있습니다.
+snapshot ID는
+`sha256-89e9ec939dea43db48bdacdd4c3555cc2072a5131be074c65eae592ec14ef7c1`입니다.
