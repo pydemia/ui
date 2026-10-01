@@ -1948,3 +1948,22 @@ snapshot `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14
 로컬에서 생성했고 공개 설치를 재검사했습니다.
 수정판 `registry:release-check`는 107개 item·105개 export/catalog와
 23개 snapshot, 현재 ID 일치를 확인했습니다.
+
+## 2026-10-02 Menubar
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript·패키지 테스트 | pass | 저장소 typecheck, 전체 120/120, Menubar 2건 |
+| build·registry 검사 | pass | 109개 item·107개 export/catalog, 26개 snapshot과 현재 ID 일치 |
+| 문서 390px Chromium | pass (limited) | 상위 명령 방향키, 체크·라디오·submenu 작업, Escape focus, light/dark, 가로 넘침 없음 |
+| 로컬 격리 소비자 | pass (limited) | CLI 설치 3개 파일 원본 일치·typecheck·build·390px 명령 및 체크 변경 |
+| 공개 CI·production·snapshot 소비자 | unverified | PR 병합·배포 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+| rollback 뒤 snapshot URL | unverified | 과거 배포 rollback 시험 전 |
+
+처음 `registry:check`에서 소비자 고지의 provenance SHA-256이
+오래되어 실패했습니다. source commit `a7a3d71`과 현재 metadata의
+해시로 고지를 갱신한 뒤 `registry:check`와
+`registry:release-check`가 통과했습니다. snapshot ID는
+`sha256-37f075e6b3cb4520d6aa5aa08e6c4673c19917dc199f5d6fd355b2d097ddee77`입니다.
+세부 기록은 `.worknotes/menubar-2026-10-02.md`에 있습니다.

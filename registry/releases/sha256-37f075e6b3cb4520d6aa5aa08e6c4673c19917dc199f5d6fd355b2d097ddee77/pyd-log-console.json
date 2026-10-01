@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-log-console",
+  "title": "Log Console",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-37f075e6b3cb4520d6aa5aa08e6c4673c19917dc199f5d6fd355b2d097ddee77/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/log-console.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype LogEntry = {\n    id: string;\n    level: \"debug\" | \"info\" | \"warn\" | \"error\";\n    message: string;\n    timestamp?: string;\n};\n\ntype LogConsoleProps = Omit<ComponentProps<\"div\">, \"children\"> & {\n    entries: readonly LogEntry[];\n    label: string;\n    emptyMessage?: string;\n    live?: \"off\" | \"polite\";\n};\n\nconst levelColor: Record<LogEntry[\"level\"], string> = {\n    debug: \"text-muted\",\n    info: \"text-foreground\",\n    warn: \"text-accent\",\n    error: \"text-danger\",\n};\n\nfunction LogConsole({\n    entries,\n    label,\n    emptyMessage = \"No log entries\",\n    live = \"off\",\n    className,\n    ...props\n}: LogConsoleProps) {\n    return (\n        <div\n            role=\"log\"\n            aria-label={label}\n            aria-live={live}\n            className={cn(\n                \"max-h-64 min-w-0 overflow-auto rounded-sm border \" +\n                \"border-border bg-surface-subtle p-[var(--space-3)] \" +\n                \"font-mono text-xs text-foreground\",\n                className,\n            )}\n            {...props}\n        >\n            {entries.length === 0 ? (\n                <p className=\"m-0 text-muted\">{emptyMessage}</p>\n            ) : entries.map((entry) => (\n                <div\n                    key={entry.id}\n                    data-level={entry.level}\n                    className=\"flex min-w-0 gap-[var(--space-2)] py-1\"\n                >\n                    {entry.timestamp && (\n                        <time className=\"shrink-0 text-muted\">\n                            {entry.timestamp}\n                        </time>\n                    )}\n                    <span\n                        className={cn(\n                            \"w-12 shrink-0 uppercase\", levelColor[entry.level],\n                        )}\n                    >\n                        {entry.level}\n                    </span>\n                    <span className=\"min-w-0 whitespace-pre-wrap break-words\">\n                        {entry.message}\n                    </span>\n                </div>\n            ))}\n        </div>\n    );\n}\n\nexport { LogConsole };\nexport type { LogConsoleProps, LogEntry };\n",
+      "type": "registry:ui",
+      "target": "@ui/log-console.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
