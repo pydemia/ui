@@ -21,8 +21,19 @@ Vite overlay·page error는 없었습니다.
 기존 29개 snapshot에 대해 통과했습니다. 30번째 snapshot
 `sha256-cd80f1b518caf6306048ec6a2c73f314534cd57a3b01fe5004c631361bd80816`을
 생성했고, 재빌드 뒤 `npm run registry:release-check`가 현재 산출물과
-30개 snapshot을 확인했습니다. PR·원격 CI·공개 URL은 아직
-검증하지 않았습니다.
+30개 snapshot을 확인했습니다. 이 로컬 검사 시점에는 PR·원격 CI·
+공개 URL을 검증하지 않았습니다.
+
+## 2026-10-02 CodeEditorShell 공개 확인
+
+PR #49를 병합한 `b99b242`의 Verify UI·Pages와 Vercel 배포가
+성공했습니다. 공개 사이트의 component 화면은 111개 component를
+표시했고, `flat` 전환·form 제출(`제출: 2줄`)과 page error 0건을
+확인했습니다. `ui.pydemia.ai/r/pyd-code-editor-shell.json`은 HTTP
+200입니다. 고정 snapshot의 manifest ID·113개 item과 새 item의
+`pyd-textarea`·`pyd-utils` 의존 URL을 확인했습니다. 실제 screen
+reader·touch·Safari·RTL, rollback 뒤 URL 보존과 새 item의 개별
+소비자 CLI 설치는 미검증입니다.
 
 ## 2026-10-02 Card·Alert 공개 확인
 

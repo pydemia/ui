@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 CodeEditorShell 공개 확인: PR #49 병합 commit `b99b242`의
+Verify UI·Pages와 Vercel 상태가 성공했습니다. 공개 사이트에서
+`flat` 전환·form 제출·page error 없음, 30번째 snapshot manifest의
+113개 item과 새 item JSON·의존 URL을 확인했습니다. 공개 기준
+111개 component·113개 item·30개 snapshot, goal 관리용 추정은
+약 86%입니다. 실제 screen reader·touch·Safari·RTL과 새 item의
+개별 소비자 CLI 설치는 미검증입니다.
+[작업 기록](code-editor-shell-2026-10-02.md)을 참고하세요.
+
 2026-10-02 CodeEditorShell 로컬 구현: SQL·설정 조각의 일반 텍스트
 편집을 위한 이름 있는 textarea·줄 번호·form 값·오류 연결·panel/flat
 표시를 추가했습니다. typecheck·UI 테스트 132/132·build와 로컬
