@@ -6,6 +6,9 @@
 `npm run build`에서 117개 registry item과 문서가 생성됐습니다. 새 테스트
 4건은 구조·필드 오류, controlled 조건·그룹 편집과 이동, 유효하지 않은
 적용 차단, 날짜·숫자·선택지·값 없는 연산자 검사를 실행합니다.
+`registry:release-check`는 35번째 snapshot
+`sha256-3773dda79971f256f5d45dd8b4593f64b92063147ab2311f25a9c903bcaf5f94`와
+현재 빌드의 117개 item 일치를 확인했습니다.
 
 로컬 Chromium의 390px 문서에서 scrollWidth 390px, 조건 선택기
 너비 286px을 확인했습니다. 조건 추가→필드 오류→필드·값 수정→적용을

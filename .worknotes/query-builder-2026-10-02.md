@@ -41,3 +41,6 @@ component로 구현합니다. 외부 component 코드를 도입하지 않습니�
   다시 확인했습니다.
 - 실제 서버 조회·screen reader·touch·Safari·RTL, 개별 소비자
   설치와 공개 배포는 미검증입니다.
+- provenance를 source commit `b73cce7`에 고정하고 35번째 snapshot
+  `sha256-3773dda79971f256f5d45dd8b4593f64b92063147ab2311f25a9c903bcaf5f94`를
+  생성했습니다. `registry:release-check`가 통과했습니다.

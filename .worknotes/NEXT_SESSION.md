@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 QueryBuilder는 조건 트리 편집·적용, 원본 source와
+registry·문서 preview·Usage를 로컬에 구현했습니다. typecheck·UI
+테스트 152/152·build·release 검사와 Chromium 390px 배치·오류
+복구·적용을 확인했습니다. 35번째 snapshot은
+`sha256-3773dda79971f256f5d45dd8b4593f64b92063147ab2311f25a9c903bcaf5f94`입니다.
+PR·공개 배포는 아직 확인하지 않았고 goal 추정 약 89%입니다.
+[작업 기록](query-builder-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트를 다시 검토해 로드맵의 적용 기준을
 간결하게 정리했습니다. 기본 확인은 적용되는 CI, 변경한 핵심 사용
 흐름, export·registry·Usage·공개 경로입니다. 추가 검사는 외부 코드,

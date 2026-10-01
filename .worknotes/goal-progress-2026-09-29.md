@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 QueryBuilder 로컬 구현·검증: **약 89% → 약 89%**입니다.
+로컬 115개 component·117개 item과 35번째 snapshot을 만들고
+typecheck·UI 테스트 152/152·build·release 검사, 390px 조건
+편집·적용을 확인했습니다. PR·공개 배포는 아직 확인하지 않았으므로
+공개 기준 114개 component·116개 item·34개 snapshot을 유지합니다.
+[작업 기록](query-builder-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트 간소화 재검토:
 **약 89% → 약 89%**입니다. 릴리스마다 기본 확인은 적용되는 CI,
 변경한 핵심 사용 흐름, export·registry·Usage와 공개 경로로 좁혔습니다.
