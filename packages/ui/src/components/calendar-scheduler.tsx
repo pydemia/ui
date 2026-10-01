@@ -141,6 +141,13 @@ function CalendarScheduler({
                     aria-label={`${label} 날짜`}
                     locale={calendarLocale}
                     navLayout="around"
+                    classNames={{
+                        month: "relative grid " +
+                            "grid-cols-[2.25rem_minmax(0,1fr)_2.25rem] " +
+                            "items-center gap-y-3 rdp-month",
+                        month_grid: "col-span-3 w-full border-collapse " +
+                            "rdp-month_grid",
+                    }}
                     month={visibleMonth}
                     onMonthChange={setVisibleMonth}
                     selected={parseCalendarDate(currentDate)}

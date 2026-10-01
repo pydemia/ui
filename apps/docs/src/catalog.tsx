@@ -1585,7 +1585,10 @@ function CalendarSchedulerPreview() {
     return (
         <div className="preview-workspace grid gap-3">
             <CalendarScheduler label="팀 일정" initialDate="2026-10-07"
-                selectedDate={date} onSelectedDateChange={setDate}
+                selectedDate={date} onSelectedDateChange={(nextDate) => {
+                    setDate(nextDate);
+                    setLastAction(`${nextDate} 선택`);
+                }}
                 events={events} timeZone="Asia/Seoul" calendarLocale={ko}
                 onEventSelect={(event) =>
                     setLastAction(`${event.title} 선택`)}
