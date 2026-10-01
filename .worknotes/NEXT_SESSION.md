@@ -1,5 +1,22 @@
 # Component 확장 작업 인계
 
+2026-10-02 QueryBuilder는 조건 트리 편집·적용, 원본 source와
+registry·문서 preview·Usage를 로컬에 구현했습니다. typecheck·UI
+테스트 152/152·build·release 검사와 Chromium 390px 배치·오류
+복구·적용을 확인했습니다. 35번째 snapshot은
+`sha256-3773dda79971f256f5d45dd8b4593f64b92063147ab2311f25a9c903bcaf5f94`입니다.
+PR·공개 배포는 아직 확인하지 않았고 goal 추정 약 89%입니다.
+[작업 기록](query-builder-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 체크리스트를 다시 검토해 로드맵의 적용 기준을
+간결하게 정리했습니다. 기본 확인은 적용되는 CI, 변경한 핵심 사용
+흐름, export·registry·Usage·공개 경로입니다. 추가 검사는 외부 코드,
+browser 의존 동작, 새 설치 경로 등 실제 변경 위험에만 적용합니다.
+PR마다 전체 snapshot을 재생성하는 CI 절차와 provenance 고정 정보·
+검증 상태의 결합은 별도 개선 과제로 남겼습니다. 검사 코드·배포는
+바꾸지 않았고 goal 추정 약 89%를 유지합니다.
+[검토 기록](quality-checklist-lean-2026-10-02.md)을 참고하세요.
+
 2026-10-02 DataTable 원격 조회 공개 확인: 기존 전체 행 모드를 유지하고
 호출자가 조회 조건·총건수·로딩·오류를 소유하는 `remote` 모드를
 추가했습니다. UI 테스트 148/148, typecheck·build·release 검사가

@@ -1,5 +1,21 @@
 # 검증 기록
 
+## 2026-10-02 QueryBuilder 로컬 검증
+
+`npm run typecheck`와 UI 테스트 152/152가 통과했습니다.
+`npm run build`에서 117개 registry item과 문서가 생성됐습니다. 새 테스트
+4건은 구조·필드 오류, controlled 조건·그룹 편집과 이동, 유효하지 않은
+적용 차단, 날짜·숫자·선택지·값 없는 연산자 검사를 실행합니다.
+`registry:release-check`는 35번째 snapshot
+`sha256-3773dda79971f256f5d45dd8b4593f64b92063147ab2311f25a9c903bcaf5f94`와
+현재 빌드의 117개 item 일치를 확인했습니다.
+
+로컬 Chromium의 390px 문서에서 scrollWidth 390px, 조건 선택기
+너비 286px을 확인했습니다. 조건 추가→필드 오류→필드·값 수정→적용을
+실행했고 alert가 해소되며 적용 상태가 표시됐습니다. console error는
+없었습니다. 실제 서버 조회·screen reader·touch·Safari·RTL, 개별
+소비자 CLI 설치와 공개 배포는 아직 검증하지 않았습니다.
+
 ## 2026-10-02 DataTable 원격 조회 검증
 
 PR #58 Verify UI run 36936736308과 병합 commit `d89c304`의

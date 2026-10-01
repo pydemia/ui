@@ -67,48 +67,43 @@ component, 기존 API 확장, 설치 가능한 조합 예시, 보류 중 하나�
 
 ## 공급과 품질의 판정 단위
 
-2026-10-02 재검토 후에는 릴리스에 **실제로 적용되는 검사**로
-공급 여부를 판정합니다. 아래 10개 체크박스는 과거 전체 라이브러리의
-운영·품질 조사 기록이며 릴리스 승인 목록이나 품질 점수가 아닙니다.
+릴리스 판정에는 **변경분에 해당하는 증거만** 적용합니다. 새
+component는 실제 사용처와 기존 API의 중복 여부를 먼저 판단하고,
+export·registry·출처·동작하는 preview·Usage를 맞춥니다. 코드가
+바뀌면 해당 commit의 CI(typecheck, 테스트, build, registry 검사)를
+확인합니다. 변경한 핵심 사용 흐름은 자동 테스트 또는 브라우저에서
+한 번 실행합니다. 정적 표시 component는 preview가 그 증거가 될 수
+있습니다. 문서만 바뀌면 변경한 링크·Usage·preview와 문서 build를
+확인합니다.
 
-| 적용 시점 | 확인할 것 |
+| 변경으로 생긴 위험 | 추가 검사 |
 | --- | --- |
-| 새 component | 반복 사용처와 기존 API의 중복 여부, 적용되는 동작·접근성 규칙, export·registry·provenance, 동작하는 preview·Usage |
-| 외부 component 코드 도입 | 공식 문서, 같은 revision의 source·LICENSE, 의존성·접근성, 고지 전달. 같은 revision의 기존 조사 결과는 재사용 |
-| 코드·registry 변경 | 해당 commit의 typecheck·관련 테스트·build·`registry:release-check`. 통과한 CI 결과를 재사용 |
-| 값·form·keyboard 변경 | 변경한 핵심 흐름을 실제로 실행하는 자동 테스트 또는 브라우저 검사. callback 변경을 SSR 출력 검사만으로 판정하지 않음 |
-| browser 의존 동작 변경 | 새 focus 이동·pointer 좌표·browser API·핵심 반응형 배치는 해당 환경에서 실행. 검증된 기존 component의 동작을 그대로 쓰면 중복 실행하지 않음 |
-| 표시·token 변경 | 변경한 상태의 preview 확인. 새 배치나 명암이 사용성에 영향을 줄 때 해당 폭·theme의 시각 검사 |
-| 설치 형식·target·의존 경로 변경 | 별도 소비자 CLI 설치·typecheck·build. 설치·의존 URL 또는 배포 경로도 바뀌면 공개 URL 설치 |
-| registry 내용 공개 | 내용 해시 snapshot 검사, 공개 manifest와 변경 item URL 도달. 릴리스 묶음당 한 번 |
+| 외부 component 코드 도입 | 공식 문서, 같은 revision의 source·LICENSE, 의존성·접근성과 고지 전달 확인. 조사한 동일 revision은 재사용 |
+| 새 focus 이동·pointer 좌표·browser API·핵심 반응형 배치 | 해당 브라우저 흐름 실행. 기존 component에서 물려받은 동작은 재검사하지 않음 |
+| 색상·배치 변경 | 영향을 받는 상태·폭·theme의 preview 확인 |
+| 설치 형식·target·의존 경로 변경 | 별도 소비자 설치·typecheck·build. 공개 URL 경로도 바뀌면 그 URL에서 설치 |
+| registry 내용 공개 | 릴리스 묶음당 snapshot 검사와 공개 manifest·변경 item URL 확인 |
 
-문서만 바뀌면 변경한 링크·Usage·preview와 문서 build를 확인합니다.
-동일 commit의 검사를 로컬·PR·병합 후에 각각 반복하지 않습니다.
-같은 산출물의 변경 흐름을 로컬 브라우저에서 검증했다면 공개 사이트에서는
-배포와 변경 URL을 확인하며, 동작 검사를 다시 실행할 필요는 없습니다.
-외부 component 코드를 사용하지 않은 원본 구현에는 upstream source·
-LICENSE 대조를 적용하지 않습니다. 참고한 플랫폼 명세와 기존 의존
-component의 출처는 기록합니다.
-표준 registry 경로를 쓰는 item마다 새 소비자를 만들지 않으며,
-실행하지 않은 개별 CLI 설치는 미검증으로 적습니다. 상태가 없는
-표시 component에 상태 소유를 요구하지 않습니다. 자동 테스트가
-실제 변경 흐름을 실행했다면 브라우저에서 같은 조작을 반복하지
-않습니다. 변경된 핵심 흐름의 실행 증거가 없거나, browser 의존
-동작이 핵심인데 검사하지 못했다면 공개 공급 완료로 표시하지
-않습니다. 그 밖의 미실행 환경은 미검증으로 기록하고 지원을
-주장하지 않습니다.
+CI 결과는 같은 commit에 대해 재사용하고, 로컬에서 실행한 흐름을
+공개 사이트에서 다시 조작하지 않습니다. 표준 registry 경로의 새
+item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 않은
+원본 구현에는 upstream source·LICENSE 대조를 적용하지 않고,
+참고 자료와 기존 의존 component의 출처를 기록합니다.
 
-변경한 흐름에서 값 손실·제출 오류·keyboard 접근 불가·필수 고지
-누락·설치 실패가 재현되면 수정판을 확인할 때까지 출시 완료로
-표시하지 않습니다. 실제 보조기술·touch·Safari·RTL 표본 검사,
-오래된 component 재검사, 모든 item의 개별 설치와 rollback 뒤
-snapshot 주소 보존은 별도 품질 과제입니다. 특정 환경 지원을
-주장할 때는 그 환경을 검사하고, 그 밖의 미실행 항목은 미검증으로
-남깁니다.
+확인된 값 손실·제출 오류·keyboard 접근 불가·필수 고지 누락·설치
+실패, 적용되는 CI 실패는 수정판 확인 전까지 출시를 막습니다.
+핵심 흐름을 아직 실행하지 않았다면 구현 완료와 공급 완료를
+구분합니다. 실제 보조기술·touch·Safari·RTL, 전체 item의 개별
+설치, rollback 뒤 snapshot 주소 보존은 해당 환경을 지원한다고
+주장하거나 관련 경로를 변경할 때 검사합니다. 그 외에는 미검증으로
+기록합니다. 과거 라이브러리 전체의 10개 운영·품질 과제는
+[당시 조사 기록](quality-legacy-2026-09-29.md)에 남기며 릴리스
+점수로 사용하지 않습니다.
 
 전체 goal의 약 89%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이며 component 수나 과거 체크박스 수로 계산하지
 않습니다. 판정 근거는
+[이번 재검토](quality-checklist-lean-2026-10-02.md),
 [기준 재검토](quality-criteria-review-2026-10-01.md)와
 [후속 재검토](quality-criteria-followup-2026-10-01.md),
 [2026-10-02 재검토](quality-criteria-reassessment-2026-10-02.md)와
@@ -117,10 +112,6 @@ snapshot 주소 보존은 별도 품질 과제입니다. 특정 환경 지원을
 [위험 기준 재검토](quality-gates-risk-review-2026-10-02.md)와
 [검사 범위 재검토](quality-checklist-pragmatic-2026-10-02.md)에
 남겼습니다.
-
-2026-09-29의 누적 운영·품질 과제 10개는
-[당시 조사 기록](quality-legacy-2026-09-29.md)에 보관합니다.
-완료 개수는 현재 릴리스 승인이나 goal 진척도에 사용하지 않습니다.
 
 ## 추가 component 후보
 
@@ -263,6 +254,8 @@ snapshot 주소 보존은 별도 품질 과제입니다. 특정 환경 지원을
   구간별 값 패널을 추가했습니다. 부유 tooltip 필요성은 사용 사례로 판정.
 - [x] `FilterBar` — 여러 필터의 입력·적용·초기화와 적용된 조건 표시.
   데이터 필터링과 draft/applied 상태는 소비자가 관리합니다.
+- [x] `QueryBuilder` — 필드·연산자·값을 AND/OR 그룹에 넣고 순서를
+  바꿉니다. 미완성 조건은 적용하지 않고, 조회·저장은 호출자가 맡습니다.
 - [x] `DateRangeFilter` — 별도 component는 만들지 않습니다.
   `DateRangePicker`의 controlled 값·form 입력과 `FilterBar`의 적용·초기화로
   현재 기간 필터 동작을 조합할 수 있습니다. 오늘·최근 7일 같은 preset은

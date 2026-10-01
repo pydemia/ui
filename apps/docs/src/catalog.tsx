@@ -57,7 +57,7 @@ import {
     NativeSelect, NumberInput,
     PageHeader, Pagination, PasswordInput, PinInput, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
-    RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
+    QueryBuilder, RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
     ResponseFeedback,
     ResizablePanels, ScatterChart, ScrollArea,
     SearchInput,
@@ -86,7 +86,8 @@ import type {
     DateRangeValue,
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
-    LogEntry, ReasoningStatus, ResponseFeedbackValue, ThreadComment,
+    LogEntry, QueryField, QueryGroup, ReasoningStatus,
+    ResponseFeedbackValue, ThreadComment,
     TabsVariant, ToolCallStatus, TreeNode, TreeSelectItem,
 } from "@pydemia/ui";
 
@@ -3123,6 +3124,61 @@ function FilterBarPreview() {
     );
 }
 
+const auditQueryFields: QueryField[] = [
+    { id: "status", label: "상태", type: "select", options: [
+        { value: "failed", label: "실패" },
+        { value: "done", label: "완료" },
+    ] },
+    { id: "severity", label: "심각도", type: "number" },
+    { id: "owner", label: "담당자", type: "text" },
+    { id: "date", label: "발생일", type: "date" },
+];
+
+const initialAuditQuery: QueryGroup = {
+    kind: "group", id: "audit-root", combinator: "all", children: [
+        { kind: "condition", id: "audit-status", fieldId: "status",
+            operator: "equals", value: "failed" },
+        { kind: "group", id: "audit-alternatives", combinator: "any",
+            children: [
+                { kind: "condition", id: "audit-severity",
+                    fieldId: "severity", operator: "greater-than",
+                    value: "3" },
+                { kind: "condition", id: "audit-owner",
+                    fieldId: "owner", operator: "contains",
+                    value: "운영" },
+            ] },
+    ],
+};
+
+function QueryBuilderPreview() {
+    const [query, setQuery] = useState(initialAuditQuery);
+    const [applied, setApplied] = useState<QueryGroup | null>(null);
+    const [variant, setVariant] = useState<"panel" | "plain">("panel");
+
+    return (
+        <div className="preview-workspace grid gap-3">
+            <Button variant="outline" className="justify-self-start"
+                onClick={() => setVariant((current) => current === "panel"
+                    ? "plain" : "panel")}>
+                {variant === "panel" ? "Plain 형태 보기" :
+                    "Panel 형태 보기"}
+            </Button>
+            <QueryBuilder label="감사 이벤트 조건" fields={auditQueryFields}
+                value={query} onValueChange={setQuery}
+                onApply={setApplied} variant={variant} />
+            <div className="grid gap-1 text-sm">
+                <p role="status" className="m-0 text-muted">
+                    {applied ? "적용한 조건" : "조건을 적용해 보세요."}
+                </p>
+                {applied && <pre className={
+                    "max-h-48 overflow-auto rounded-sm border border-border " +
+                    "bg-surface p-[var(--space-3)] text-xs"
+                }>{JSON.stringify(applied, null, 2)}</pre>}
+            </div>
+        </div>
+    );
+}
+
 function PaginationPreview() {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(5);
@@ -6025,6 +6081,39 @@ function PeriodFilters() {
 }`,
         installItems: ["filter-bar", "date-range-picker", "field"],
         preview: () => <FilterBarPreview />,
+    },
+    {
+        id: "query-builder", name: "QueryBuilder",
+        category: "Data & analytics",
+        description: "필드·연산자·값을 AND/OR 그룹에 넣고 순서를 바꾸는 조건 편집기입니다. 미완성 조건은 보존하되 적용 callback에는 유효한 트리만 전달합니다. Panel·Plain 표시를 선택할 수 있으며 조회·저장은 호출자가 맡습니다.",
+        code: `import { useState } from "react";
+import {
+  QueryBuilder, type QueryField, type QueryGroup,
+} from "@pydemia/ui";
+
+const fields: QueryField[] = [
+  { id: "status", label: "상태", type: "select", options: [
+    { value: "failed", label: "실패" },
+    { value: "done", label: "완료" },
+  ] },
+  { id: "severity", label: "심각도", type: "number" },
+  { id: "owner", label: "담당자", type: "text" },
+];
+
+function AuditRules() {
+  const [query, setQuery] = useState<QueryGroup>({
+    kind: "group", id: "root", combinator: "all", children: [],
+  });
+  const [applied, setApplied] = useState<QueryGroup | null>(null);
+  return <div>
+    <QueryBuilder label="감사 이벤트 조건" fields={fields}
+      value={query} onValueChange={setQuery}
+      onApply={setApplied} variant="panel" />
+    {applied && <pre>{JSON.stringify(applied, null, 2)}</pre>}
+  </div>;
+}`,
+        installItems: ["query-builder"],
+        preview: () => <QueryBuilderPreview />,
     },
     {
         id: "log-console", name: "LogConsole", category: "Developer tools",

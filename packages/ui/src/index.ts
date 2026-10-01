@@ -224,6 +224,11 @@ export { FilterBar } from "./components/filter-bar";
 export type {
     AppliedFilter, FilterBarProps,
 } from "./components/filter-bar";
+export { QueryBuilder } from "./components/query-builder";
+export type {
+    QueryBuilderProps, QueryField, QueryCondition, QueryGroup,
+    QueryNode, QueryOperator,
+} from "./components/query-builder";
 export { PageHeader } from "./components/page-header";
 export type { PageHeaderProps } from "./components/page-header";
 export { ContentList } from "./components/content-list";
