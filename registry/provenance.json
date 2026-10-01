@@ -416,6 +416,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "header, named sidebars, main, named bottom and floating regions; bubble requires accessible name", "keyboard": "Chromium demo: bubble remains focused on open, Tab reaches close, Escape and close return focus", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-master-detail", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html", "scope": "single-column narrow layout guidance; no source copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named list and detail regions, native selection buttons, current item and narrow-view back control", "keyboard": "native button activation and focus transfer; browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-scroll-area", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/scroll-area.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-scroll-area@1.2.18 (MIT)", "pyd-utils"], "accessibility": { "semantics": "named focusable scroll region with native viewport and orientation-specific scrollbar", "keyboard": "Chromium: End/ArrowRight and vertical/horizontal scrollbar drag verified", "screen_reader": "pending manual review" }

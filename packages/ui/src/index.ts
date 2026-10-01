@@ -103,6 +103,10 @@ export type {
     AppMainProps, AppSidebarProps, AppFloatingPanelProps,
     AppFloatingBubbleProps,
 } from "./components/app-shell";
+export { MasterDetail } from "./components/master-detail";
+export type {
+    MasterDetailItem, MasterDetailProps,
+} from "./components/master-detail";
 export { ResizablePanels } from "./components/resizable-panels";
 export type { ResizablePanelsProps } from "./components/resizable-panels";
 export { Kanban, moveKanbanCard } from "./components/kanban";
