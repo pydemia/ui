@@ -48,5 +48,10 @@
   label을 보이게 표시하고 native select는 보조기술 트리에서 숨겼습니다.
 - 최종 `npm run typecheck`, 전체 패키지 테스트 113/113,
   `npm run build`가 통과했습니다. 107개 registry item과 문서·
-  프로필 예시를 생성했습니다. registry release·소비자·공개
+  프로필 예시를 생성했습니다. `registry:snapshot`에서 107개
+  item·105개 export/catalog 대응과 기존 21개 snapshot을 확인하고
+  22번째 ID
+  `sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690`을
+  만들었습니다. 다시 빌드한 뒤 `registry:release-check`가 22개
+  snapshot과 현재 빌드의 ID 일치를 확인했습니다. 소비자·공개
   배포는 아직 실행하지 않았습니다.

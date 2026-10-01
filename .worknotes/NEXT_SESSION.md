@@ -5,7 +5,11 @@
 구성합니다. Ant Design 고정 revision의 공식 문서·source·manifest·
 MIT LICENSE를 확인했고 코드는 복사하지 않았습니다. 시작 기준은
 104개 component·106개 item·21개 snapshot, goal 약 80%, 공급·품질
-조건 5/10입니다. 검증 상태는
+조건 5/10입니다. 로컬 typecheck·패키지 테스트 113/113·build와
+390px Chromium 동작, registry 22번째 snapshot 생성이 통과했습니다.
+현재 source는 105개 component·107개 item입니다. 새 snapshot은
+`sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690`입니다.
+공개 소비자와 배포는 진행 중이며, 검증 상태는
 [작업 기록](component-tree-select-2026-10-01.md)을 확인하세요.
 
 2026-10-01 DiffViewer 공개 완료: 변경 전후 줄 번호·추가·삭제·문맥을
