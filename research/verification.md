@@ -1,5 +1,21 @@
 # 검증 기록
 
+## 2026-10-02 MasterDetail 공개 검증
+
+PR #54의 Verify UI run 36922068750과 병합 commit `4007bb2`의
+Verify UI run 36922369852가 성공했습니다. 병합 commit의 Pages
+run 36922368767과 Vercel 상태도 성공했습니다. 공개
+`?component=master-detail#components`가 HTTP 200으로 응답하며
+로컬 build와 같은 asset을 가리킵니다. `/r/pyd-master-detail.json`,
+32번째 snapshot의 manifest와 item JSON이 응답했습니다. manifest는
+115개 item을 담고 새 item의 의존 URL 두 개가 snapshot에 고정됩니다.
+
+공개 브라우저 동작은 아래 로컬 검사와 중복해 실행하지 않았습니다.
+개별 소비자 CLI 설치, 실제 screen reader·touch·Safari·RTL,
+rollback 뒤 snapshot URL 보존은 미검증입니다. 공급 판정 기준의
+재검토는 [작업 기록](../.worknotes/quality-gates-risk-review-2026-10-02.md)에
+남겼습니다.
+
 ## 2026-10-02 MasterDetail 로컬 검증
 
 `npm run typecheck`, UI 테스트 138/138(신규 SSR 3건),

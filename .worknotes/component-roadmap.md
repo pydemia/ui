@@ -71,9 +71,9 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 | 적용 시점 | 확인할 것 |
 | --- | --- |
 | 새 component | 독립 사용처와 동작 규칙, export·registry·provenance, 동작하는 preview·Usage |
-| upstream을 참고하거나 수정 | 공식 문서, 같은 revision의 source·LICENSE, 의존성·접근성, 원본과 복사·수정 소스 구분. 같은 revision의 기존 조사 결과는 재사용 |
+| 외부 component 코드 도입 | 공식 문서, 같은 revision의 source·LICENSE, 의존성·접근성, 고지 전달. 같은 revision의 기존 조사 결과는 재사용 |
 | 코드·registry 변경 | 해당 commit의 typecheck·관련 테스트·build·`registry:release-check`. 통과한 CI 결과를 재사용 |
-| 값·form·keyboard·focus 변경 | 영향받은 흐름의 회귀 테스트와 대표 브라우저 동작 |
+| 값·form·keyboard·focus 변경 | 영향받은 대표 흐름을 자동 테스트 또는 브라우저에서 실행. focus·실제 배치가 판단에 필요하면 브라우저 실행 |
 | 표시·token 변경 | 변경한 상태의 preview. 배치·색상에 영향이 있으면 좁은 화면·관련 theme |
 | 설치 형식·target·의존 경로 변경 | 별도 소비자 CLI 설치·typecheck·build. 설치·의존 URL 또는 배포 경로도 바뀌면 공개 URL 설치 |
 | registry 내용 공개 | 내용 해시 snapshot 검사, 공개 manifest와 변경 item URL 도달. 릴리스 묶음당 한 번 |
@@ -88,8 +88,9 @@ component의 출처는 기록합니다.
 표준 registry 경로를 쓰는 item마다 새 소비자를 만들지 않으며,
 실행하지 않은 개별 CLI 설치는 미검증으로 적습니다. 브라우저도
 변경된 흐름을 대표하는 검사만 요구합니다.
-각 행은 적용 여부와 통과·미검증·차단 상태를 구분합니다. 적용되는
-필수 검사가 미검증이면 공개 공급 완료로 표시하지 않습니다.
+각 행은 적용 여부와 통과·미검증·차단 상태를 구분합니다. 필요한
+대표 흐름을 어떤 방식으로도 실행하지 못하면 공개 공급 완료로
+표시하지 않습니다.
 
 변경한 흐름에서 값 손실·제출 오류·keyboard 접근 불가·필수 고지
 누락·설치 실패가 재현되면 수정판을 확인할 때까지 출시 완료로
@@ -99,14 +100,15 @@ snapshot 주소 보존은 별도 품질 과제입니다. 특정 환경 지원을
 주장할 때는 그 환경을 검사하고, 그 밖의 미실행 항목은 미검증으로
 남깁니다.
 
-전체 goal의 약 86%는 사용 사례 범위와 공개 검증을 함께 보는
+전체 goal의 약 88%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이며 component 수나 과거 체크박스 수로 계산하지
 않습니다. 판정 근거는
 [기준 재검토](quality-criteria-review-2026-10-01.md)와
 [후속 재검토](quality-criteria-followup-2026-10-01.md),
 [2026-10-02 재검토](quality-criteria-reassessment-2026-10-02.md)와
 [반복 검사 축소](quality-criteria-simplification-2026-10-02.md),
-[이번 체크리스트 검토](quality-checklist-recalibration-2026-10-02.md)에
+[이번 체크리스트 검토](quality-checklist-recalibration-2026-10-02.md),
+[위험 기준 재검토](quality-gates-risk-review-2026-10-02.md)에
 남겼습니다.
 
 ## 라이브러리 전체의 운영·품질 과제
@@ -434,8 +436,10 @@ label을 가진 control, 새 trigger 기반 선택기의 label 소유자와
 1. 실제 소비자 화면의 반복 용례를 확인합니다. 후보마다 새 component,
    기존 API 확장, 설치 가능한 조합 예시, 보류 중 하나를 근거와 함께
    기록합니다. 별도 이름이 주는 편의와 유지 비용을 비교합니다.
-2. 공식 문서, **동일 revision**의 upstream 소스와 LICENSE, 직접·전이
-   의존성을 확인합니다. 참고만 한 코드와 복사·수정한 코드를 구분합니다.
+2. 외부 component 코드를 복사·수정한다면 공식 문서, **동일
+   revision**의 upstream 소스와 LICENSE, 직접·전이 의존성을
+   확인합니다. 원본 구현은 참고한 자료와 기존 의존 component의
+   출처를 기록합니다. 디자인 참고와 코드 도입을 구분합니다.
 3. 해당 component에 적용되는 값·상태·오류·이벤트, 빈 결과,
    disabled, locale·RTL, focus·keyboard 규칙을 짧은 명세로 정합니다.
    적용되지 않는 상태나 환경은 억지로 추가하지 않습니다.
@@ -444,9 +448,10 @@ label을 가진 control, 새 trigger 기반 선택기의 label 소유자와
    상태 예시, 사용 코드와 설치 명령을 제공합니다.
 5. 공개할 commit에서 typecheck·관련 테스트·build와
    `registry:release-check`를 확인합니다. CI의 동일 commit 결과를
-   재사용할 수 있습니다. 상호작용 변경은 영향받은 값·keyboard·focus
-   흐름을, 표시 변경은 변경한 상태를 브라우저에서 확인합니다.
-   theme·좁은 화면은 변경의 영향을 받을 때 검사합니다.
+   재사용할 수 있습니다. 상호작용 변경은 영향받은 대표 흐름을
+   자동 테스트나 브라우저에서 실행합니다. focus·실제 배치의 판단이
+   필요하면 브라우저에서 확인합니다. 표시 변경은 변경한 상태를
+   확인하고, theme·좁은 화면은 영향을 받을 때 검사합니다.
 6. 설치 형식·target·의존 경로가 새로우면 별도 소비자에 CLI로 설치해
    typecheck·build합니다. 표준 경로의 item에는 이를 반복하지 않고,
    미실행한 개별 설치는 미검증으로 적습니다. registry 내용이 바뀐

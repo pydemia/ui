@@ -38,3 +38,20 @@ source commit `8cae788`의 provenance 고지 핀을 갱신하고
 `pyd-button`·`pyd-utils` URL은 이 snapshot으로 고정됩니다.
 PR·공개 URL은 남았습니다. 실제 touch·screen reader·Safari·RTL과
 개별 item CLI 설치는 미검증입니다.
+
+## 공개 확인
+
+PR #54를 `main`의 `4007bb2`에 병합했습니다. PR Verify UI run
+36922068750과 병합 commit의 Verify UI run 36922369852가
+성공했습니다. Pages run 36922368767과 Vercel 배포 상태도
+성공했습니다. 공개 site의 `?component=master-detail#components`는
+HTTP 200으로 응답하고 빌드한 asset을 제공합니다. 최신
+`/r/pyd-master-detail.json`과 32번째 snapshot의 manifest·item URL이
+응답하며 manifest에는 115개 item, 새 item에는 고정된
+`pyd-button`·`pyd-utils` 의존 URL 2개가 있습니다.
+
+로컬 브라우저에서 변경 동작을 확인했으므로 공개 브라우저의 동일
+흐름은 다시 실행하지 않았습니다. 실제 touch·screen reader·Safari·
+RTL, 개별 item CLI 설치, rollback 뒤 snapshot URL 보존은 미검증입니다.
+공개 기준 113개 component·115개 registry item·32개 snapshot,
+goal 관리용 추정 약 88%입니다.
