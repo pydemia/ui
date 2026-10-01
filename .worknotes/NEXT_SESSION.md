@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-01 공급·품질 기준 재검토: 기존 체크리스트는 완료 5·부분 4·
+미검증 1로 구분합니다. `5/10`은 완전히 닫힌 라이브러리 과제 수이며
+새 component 공급률이 아닙니다. 새 component의 ready-made 출시
+검증과 전체 환경·rollback 검사를 분리했습니다. 새 구현이 없는
+이번 검토의 goal 추정은 약 80% 그대로입니다.
+[기준 재검토](quality-criteria-review-2026-10-01.md)를 참고하세요.
+
 2026-10-01 TreeSelect 수정판 공개 검증 완료: 현재 105개 component·
 107개 registry item·23개 불변 snapshot입니다. 수정판 ID는
 `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`입니다.
