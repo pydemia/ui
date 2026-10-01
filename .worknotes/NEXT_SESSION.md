@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 체크리스트 문구 정합성: 로드맵 하단의
+깨끗한 소비자 설치·직전 버전 갱신을 모든 구현 묶음의 완료 조건으로
+적은 오래된 문구를 수정했습니다. 표준 registry 경로는 CI 검사와
+변경 preview·동작으로 판정하고, 새로운 설치 형식·target·의존 경로에
+소비자 CLI 설치를 적용합니다. 이전 기준 문서에는 최신 기준 링크를
+추가했습니다. 코드·registry·검사 실행 변경은 없습니다. 공개 기준
+110개 component·112개 item·29개 snapshot, goal 추정 약 85%는
+그대로입니다. [검토 기록](quality-checklist-alignment-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 IconButton·Tabs 공개 검증 완료: PR #45와 병합 commit
 `adffdc0`의 Verify UI, Pages가 통과했고 Vercel 배포가 성공했습니다.
 공개 preview의 IconButton 클릭·Tabs contained 전환, 두 페이지의
