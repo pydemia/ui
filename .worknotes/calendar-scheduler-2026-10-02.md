@@ -1,5 +1,27 @@
 # CalendarScheduler 편입 작업
 
+## 후속 브라우저 검증과 snapshot 정리
+
+2026-10-02. commit `3cc7d4b`의 Vercel preview를 390px Chromium에서
+확인했습니다. 월 이동 버튼과 월 이름이 한 줄에 놓입니다. 날짜 선택,
+일정 선택·추가, 빈 날짜, 다음 달의 건수, ArrowRight·Enter 선택과
+선택 뒤 상태 문구 갱신을 실행했습니다. light·dark를 보던 중
+`Calendar`의 DayPicker chevron SVG가 dark에서 검게 렌더링되는
+결함을 발견해 `fill-current`를 적용했습니다. 이 마지막 색상 수정은
+아직 새 preview에서 시각 확인하지 않았습니다.
+
+수정 전 draft의 중간 snapshot 세 개는 `main`에 공개된 적이
+없습니다. 소스 수정 뒤 provenance 고지를 commit `67ba3c2`와
+metadata SHA-256으로 다시 고정했습니다. 최종 내용의
+`sha256-fd8ec05551fcbcbd9b62148bbf3e926af4025719d0ecf30290130adf1ee52529`
+하나만 PR diff에 남기도록 중간 경로를 정리했습니다. 공개 기준
+32개에 새 후보 하나를 더한 33개입니다. `npm run typecheck`, UI 테스트
+143/143, `npm run build`, `registry:release-check`가 통과했습니다.
+116개 item·114개 export/catalog, 33개 snapshot을 확인했습니다.
+수정 commit의 CI·새
+preview와 production 공개는 아직 미검증입니다.
+공개 기준 113개 component·115개 item, goal 약 88%를 유지합니다.
+
 2026-10-02. 공개 기준은 113개 component·115개 registry item·
 32개 snapshot, goal 관리용 추정 약 88%입니다. 로컬에는
 `CalendarScheduler`를 더해 114개 component·116개 item이 있습니다.

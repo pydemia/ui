@@ -1,5 +1,17 @@
 # Component 확장 작업 인계
 
+2026-10-02 CalendarScheduler Vercel preview를 390px Chromium에서
+확인했습니다. 월 탐색 배치와 날짜·일정 선택, 일정 추가, 빈 상태,
+ArrowRight·Enter 및 상태 문구가 동작했습니다. dark에서 기존
+`Calendar` 화살표 SVG의 색상 결함을 발견해 `fill-current`로
+수정했습니다. 미공개 draft snapshot 셋은 PR diff에서 정리하고 최종
+후보 하나만 남겼습니다. provenance 고지도 소스 commit `67ba3c2`에
+고정했습니다. typecheck·UI 테스트 143/143·build·최종 snapshot의
+release 검사가 통과했습니다. 새 preview·CI와 production
+확인은 남았습니다. 공개 113개 component·115개 item·32개 snapshot,
+goal 약 88%입니다. [작업 기록](calendar-scheduler-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 CalendarScheduler 핵심 동작 검증: client DOM 테스트 2건을
 추가해 날짜·월 이동, 일정 선택·추가 callback, controlled 날짜 갱신을
 실행했습니다. 테스트 전용 `jsdom@26.1.0`은 README의 Node 22+
