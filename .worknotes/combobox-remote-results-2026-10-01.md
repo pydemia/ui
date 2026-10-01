@@ -47,8 +47,24 @@ token을 사용합니다.
 - 배포 전 새 snapshot URL의 내부 의존성은 아직 없는 production 경로라
   공개 URL로 설치할 수 없습니다. 로컬 registry는 5176번에서 별도로
   빌드했고 검증 뒤 기본 공개 base로 다시 생성했습니다.
+- [PR #24](https://github.com/pydemia/ui/pull/24)를 병합했습니다. PR head
+  `5c4e0af`의 Verify UI와 병합 commit `7f0af30`의
+  [Verify UI](https://github.com/pydemia/ui/actions/runs/36834233446)·
+  [Pages CI](https://github.com/pydemia/ui/actions/runs/36834232642)가
+  통과했고 Vercel production
+  `dpl_3gHxcLVuf8hqBWgHMH1NGk3KmPE9`가 READY입니다.
+- 공개 `ui.pydemia.ai` 390px preview에서 결과 갱신 뒤 label·제출값
+  유지, 요청 실패 표시, body·viewport 390px를 확인했습니다.
+  최신 Combobox JSON, snapshot Combobox JSON과 manifest는 저장소
+  `docs/r/` 파일과 SHA-256이 각각 같습니다.
+- 공개 snapshot을 새 소비자
+  `%TEMP%/pydemia-combobox-public-consumer-20261001`에 설치했습니다.
+  생성된 5개 파일은 원본과 같고 typecheck·build가 통과했습니다.
+  390px Chromium에서도 결과 갱신 뒤 label·제출값과 가로 넘침 없음을
+  확인했습니다.
 
 ## 미검증
 
 - 실제 screen reader의 로딩·오류 발표, touch, Safari, RTL.
-- 공개 배포와 공개 snapshot 소비자 설치는 아직 진행하지 않았습니다.
+- 과거 Vercel 배포로 rollback했을 때 새 snapshot URL이 유지되는지와
+  전체 item별 공개 격리 설치는 확인하지 않았습니다.

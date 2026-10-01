@@ -1806,8 +1806,12 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 | registry snapshot | pass | 104개 item·102개 export/catalog·19개 snapshot, 현재 ID 일치 |
 | 격리 소비자 CLI·typecheck·build | pass | 로컬 registry에서 5개 파일 설치·원본 일치, Vite 소비자 검사 |
 | 격리 소비자 Chromium | pass (limited) | 선택값이 빠진 새 목록에서도 label·제출값 유지, 390px 가로 넘침 없음 |
-| 공개 배포·snapshot 소비자 | pending | 병합·배포 전 |
+| PR·병합 CI·production | pass | PR #24 및 병합 commit의 Verify UI·Pages CI 성공, Vercel READY |
+| 공개 390px preview | pass (limited) | 결과 갱신 뒤 label·form 값, 오류 표시, body 가로 넘침 없음 |
+| 공개 현재·snapshot JSON | pass | Combobox JSON 두 URL과 manifest가 저장소 원본과 SHA-256 일치 |
+| 공개 snapshot 소비자 | pass (limited) | CLI 설치 5개 파일 원본 일치·typecheck·build·390px Chromium 값 보존·제출 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+| rollback 뒤 snapshot URL | unverified | 과거 배포 rollback 시험 전 |
 
 세부 결정은 `.worknotes/combobox-remote-results-2026-10-01.md`에 있습니다.
 snapshot ID는
