@@ -278,6 +278,10 @@ export type {
     ApprovalCardProps, ApprovalDecision, ApprovalStatus,
 } from "./components/approval-card";
 export { PromptInput } from "./components/prompt-input";
+export { ActionBar } from "./components/action-bar";
+export type { ActionBarProps } from "./components/action-bar";
+export { CopyButton } from "./components/copy-button";
+export type { CopyButtonProps } from "./components/copy-button";
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/tabs";
 export { Table, TableHead, TableCell } from "./components/table";
 export { AffixedInput } from "./components/affixed-input";

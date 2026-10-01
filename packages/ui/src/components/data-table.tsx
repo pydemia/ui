@@ -1,4 +1,7 @@
-import { useEffect, useId, useMemo, useState, type ReactNode } from "react";
+import {
+    useEffect, useId, useMemo, useRef, useState, type ReactNode,
+} from "react";
+import { ActionBar } from "./action-bar";
 import { Button } from "./button";
 import { Checkbox } from "./checkbox";
 import { Input } from "./input";
@@ -74,6 +77,7 @@ function DataTable<Row>({
     const [selectedIds, setSelectedIds] = useState<Set<string>>(
         () => new Set(),
     );
+    const tableRegion = useRef<HTMLDivElement>(null);
     const activeFilterValue = filterValue && filter?.options.some(
         (option) => option.value === filterValue,
     ) ? filterValue : "";
@@ -158,6 +162,11 @@ function DataTable<Row>({
         setPage(1);
     }
 
+    function clearSelection() {
+        setSelectedIds(new Set());
+        tableRegion.current?.focus();
+    }
+
     return (
         <div className={cn("grid min-w-0 gap-3", className)}>
             <div className="flex flex-wrap items-end gap-2">
@@ -207,24 +216,16 @@ function DataTable<Row>({
                 )}
             </div>
             {selectable && selectedRows.length > 0 && (
-                <div
-                    role="group"
+                <ActionBar
                     aria-label="선택한 행 작업"
-                    className="flex flex-wrap items-center gap-2 text-sm"
+                    selectedCount={selectedRows.length}
+                    onClear={clearSelection}
                 >
-                    <span role="status">{selectedRows.length}건 선택</span>
-                    {renderActions?.(
-                        selectedRows, () => setSelectedIds(new Set()),
-                    )}
-                    <Button
-                        variant="ghost"
-                        onClick={() => setSelectedIds(new Set())}
-                    >
-                        선택 해제
-                    </Button>
-                </div>
+                    {renderActions?.(selectedRows, clearSelection)}
+                </ActionBar>
             )}
             <div role="region" aria-label={`${caption} 가로 스크롤`}
+                ref={tableRegion}
                 tabIndex={0}
                 className={
                     "min-w-0 overflow-x-auto rounded-sm " +

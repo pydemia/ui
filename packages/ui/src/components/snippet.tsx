@@ -1,6 +1,5 @@
-import { useId, useState, type ComponentProps } from "react";
-import { Check, Copy } from "lucide-react";
-import { Button } from "./button";
+import type { ComponentProps } from "react";
+import { CopyButton } from "./copy-button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import { cn } from "./utils";
 
@@ -23,35 +22,7 @@ function SnippetHeader({ className, ...props }: ComponentProps<"div">) {
 }
 
 function SnippetCopyButton({ value }: { value: string }) {
-    const statusId = useId();
-    const [feedback, setFeedback] = useState<{ value: string; message: string } | null>(null);
-    const message = feedback?.value === value ? feedback.message : "";
-
-    async function copy() {
-        try {
-            await navigator.clipboard.writeText(value);
-            setFeedback({ value, message: "복사되었습니다" });
-        } catch {
-            setFeedback({ value, message: "복사하지 못했습니다" });
-        }
-    }
-
-    return (
-        <div className="flex items-center gap-2">
-            <span id={statusId} className="text-xs text-muted" role="status">
-                {message}
-            </span>
-            <Button
-                variant="ghost"
-                size="icon"
-                aria-label="현재 코드 복사"
-                aria-describedby={message ? statusId : undefined}
-                onClick={copy}
-            >
-                {message === "복사되었습니다" ? <Check aria-hidden size={16} /> : <Copy aria-hidden size={16} />}
-            </Button>
-        </div>
-    );
+    return <CopyButton value={value} label="현재 코드 복사" />;
 }
 
 function SnippetContent({ className, children, ...props }: ComponentProps<typeof TabsContent>) {

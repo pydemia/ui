@@ -43,6 +43,12 @@
       "files": [{ "path": "packages/ui/src/components/button-group.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-copy-button", "type": "registry:ui", "title": "Copy Button",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/copy-button.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-search-input", "type": "registry:ui", "title": "Search Input",
       "registryDependencies": ["./pyd-input.json", "./pyd-button.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/search-input.tsx", "type": "registry:ui" }]
@@ -456,13 +462,12 @@
     },
     {
       "name": "pyd-snippet", "type": "registry:ui", "title": "Snippet",
-      "dependencies": ["lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-button.json", "./pyd-tabs.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-copy-button.json", "./pyd-tabs.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/snippet.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-code-block", "type": "registry:ui", "title": "Code Block",
-      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-copy-button.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/code-block.tsx", "type": "registry:ui" }]
     },
     {
@@ -620,8 +625,13 @@
     },
     {
       "name": "pyd-data-table", "type": "registry:ui", "title": "Data Table",
-      "registryDependencies": ["./pyd-button.json", "./pyd-checkbox.json", "./pyd-input.json", "./pyd-native-select.json", "./pyd-pagination.json", "./pyd-table.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-action-bar.json", "./pyd-button.json", "./pyd-checkbox.json", "./pyd-input.json", "./pyd-native-select.json", "./pyd-pagination.json", "./pyd-table.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/data-table.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-action-bar", "type": "registry:ui", "title": "Action Bar",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/action-bar.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-filter-bar", "type": "registry:ui", "title": "Filter Bar",

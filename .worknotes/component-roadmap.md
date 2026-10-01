@@ -346,12 +346,14 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 반복 사용처와 데이터 구조를 확인한 뒤 진행합니다. 사용처가 없으면
 후보를 보류하고 기존 component의 품질 보강에 시간을 씁니다.
 
-- [ ] `CopyButton` — Snippet 밖의 반복 사용을 확인하고 복사·성공·
-  실패 알림을 공통화할지 판정.
+- [ ] `CopyButton` — `CodeBlock`·`Snippet`의 중복 복사 동작을
+  공통화해 로컬 소비자에서 확인했습니다. 공개 snapshot 검증 후
+  ready-made로 판정합니다.
 - [x] `ContextMenu` — pointer 우클릭과 Shift+F10 호출, 항목·체크·
   라디오·서브메뉴·disabled 및 focus 복귀. screen reader 검사는 남았습니다.
-- [ ] `ActionBar` — `DataTable`의 선택 action slot으로 충분한지
-  확인하고 독립적인 다중 선택 화면이 있으면 분리.
+- [ ] `ActionBar` — `DataTable` 밖의 카드·파일 목록에서도 선택 건수·
+  일괄 작업·해제를 쓰도록 로컬 구현했습니다. 공개 snapshot 검증 후
+  ready-made로 판정합니다.
 - [x] `AppShell` — 공통 header·좌우 panel·content·하단·floating 영역의
   조합 골격. floating 도움말의 열림 상태·focus 복귀 조합을 문서와
   분석 화면에서 확인했습니다. 접히는 sidebar와 좁은 화면 drawer는

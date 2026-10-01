@@ -1,5 +1,25 @@
 # Prototype 설계 계약
 
+## 2026-10-02 선택 작업과 복사 동작
+
+`ActionBar`는 선택 상태를 소유하지 않습니다. 호출자가 선택 건수,
+일괄 작업과 해제 callback을 전달합니다. `DataTable`은 기존의
+`renderActions(selectedRows, clearSelection)` API를 유지하면서 같은
+영역을 사용합니다. 배치는 inline·floating 중 선택하며 DOM 순서는
+바꾸지 않습니다. `role="group"`과 필수 이름을 사용하고 숫자 변경은
+`role="status"`로 알립니다. 선택이 0건일 때는 해제 버튼이
+비활성화됩니다. 선택 해제 후 bar를 제거하는 화면은 호출자가 남아
+있는 선택 control로 focus를 돌립니다.
+
+`CopyButton`은 문자열 `value`와 동작의 accessible name을 필수로
+받습니다. icon·text 모양 모두 native button이고 값이 달라지면 이전
+성공·실패 문구를 표시하지 않습니다. 클립보드 Promise가 resolve하면
+성공, reject하거나 API가 없으면 실패 상태를 표시합니다. 복사할 수
+없는 값의 비활성화 여부는 호출자가 결정합니다. `CodeBlock`의 빈 코드
+비활성화와 기존 성공·실패 문구, `SnippetCopyButton`의 icon 형태와
+accessible name을 유지합니다. 복사 권한·secure context는 브라우저가
+결정하며 component는 숨겨진 fallback을 실행하지 않습니다.
+
 ## 2026-10-01 TreeSelect 계층 form 선택 규칙
 
 `TreeSelect`는 정적 계층의 단일 선택값을 가집니다. `id`는 전체
