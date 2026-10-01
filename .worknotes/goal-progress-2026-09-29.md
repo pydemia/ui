@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 CodeEditorShell 공개 확인: **약 85% → 약 86%**입니다.
+일반 텍스트 편집 작업 화면을 공개해 111개 component·113개 item·
+30개 snapshot이 됐습니다. PR #49와 병합 commit의 Verify UI,
+Pages·Vercel, 공개 preview의 표시 전환·form 값과 registry manifest·
+새 item URL을 확인했습니다. 실제 screen reader·touch·Safari·RTL,
+rollback 뒤 URL 보존, 개별 소비자 CLI 설치는 미검증입니다.
+[작업 기록](code-editor-shell-2026-10-02.md)을 참고하세요.
+
 2026-10-02 CodeEditorShell 로컬 검증: **약 85% → 약 85%**입니다.
 개발자 도구의 일반 텍스트 편집 영역을 추가해 로컬 111개 component,
 113개 registry item·30개 snapshot으로 늘었습니다. typecheck·UI 테스트

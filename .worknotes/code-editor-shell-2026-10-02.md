@@ -50,3 +50,20 @@ catalog 대응을 통과했습니다. 30번째 불변 snapshot
 생성하고 재빌드한 뒤 `registry:release-check`도 통과했습니다.
 현재 변경된 registry item의 공개 URL·원격 CI·production 동작은
 검증하지 않았습니다.
+
+## 공개 확인
+
+PR #49를 `main`의 `b99b242`에 병합했습니다. PR의 Verify UI run
+36911533221과 병합 commit의 Verify UI run 36911875681, Pages run
+36911874892가 통과했고 Vercel 배포 상태도 성공입니다. 공개
+`ui.pydemia.ai`에서 CodeEditorShell의 표시와 `flat` 전환,
+native form 값 제출(`제출: 2줄`)과 page error 0건을 확인했습니다.
+공개 최신 item URL은 HTTP 200이며, 30번째 snapshot manifest ID·
+113개 item과 새 item의 `pyd-textarea`·`pyd-utils` 의존 URL을
+확인했습니다. 공개 기준은 111개 component·113개 item·30개
+snapshot입니다. 편집 작업 화면의 독립 사용처가 추가돼 goal의
+관리용 추정을 약 85%에서 86%로 조정합니다.
+
+실제 screen reader·touch·Safari·RTL과 snapshot rollback 보존,
+새 item의 개별 소비자 CLI 설치는 미검증입니다. 새 설치 방식이나
+의존 경로가 없어 이번 공개 조건에는 포함하지 않았습니다.
