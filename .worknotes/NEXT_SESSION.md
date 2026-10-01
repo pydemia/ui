@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 IconButton·Tabs 공개 검증 완료: PR #45와 병합 commit
+`adffdc0`의 Verify UI, Pages가 통과했고 Vercel 배포가 성공했습니다.
+공개 preview의 IconButton 클릭·Tabs contained 전환, 두 페이지의
+page error 없음, 29번째 snapshot manifest의 112개 item과 변경
+JSON의 공개 URL을 확인했습니다. 현재 110개 component·112개 item·
+29개 snapshot, goal 관리용 추정 약 85%입니다. 실제 screen reader·
+touch·Safari·RTL과 rollback 뒤 URL 보존은 미검증입니다.
+[작업 기록](icon-button-tabs-2026-10-02.md)을 참고하세요.
+
 2026-10-02 IconButton·Tabs 로컬 구현: 이름이 필수인 원본 IconButton을
 추가해 PasswordInput·Carousel·Sidebar에 연결하고 Tabs의 line·
 contained 표시를 추가했습니다. typecheck·UI 테스트 128/128·build가
