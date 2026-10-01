@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-10-01 goal 재개·Combobox 원격 결과 갱신: 102개 component·104개
+registry item을 유지하며 선택값이 현재 검색 결과에서 빠져도
+`selectedOption`으로 label·form 값을 보존합니다. `filterOptions=false`와
+loading·error 상태를 추가했습니다. 로컬 typecheck·테스트 101/101·
+build·registry release 검사(19개 snapshot)·Chromium과 별도 소비자
+설치·typecheck·build·390px Chromium이 통과했습니다. 새 ID는
+`sha256-89e9ec939dea43db48bdacdd4c3555cc2072a5131be074c65eae592ec14ef7c1`
+입니다. 공개 병합·배포·snapshot 소비자 검사는 아직 진행 중입니다.
+실제 screen reader·touch·Safari·RTL은 미검증입니다.
+[작업 기록](combobox-remote-results-2026-10-01.md)을 참고하세요.
+
 2026-09-30 goal 재개·Editable 진행: goal은 완료되지 않았습니다.
 `Editable`을 이름·설정값의 인라인 수정에 필요한 별도 상태 소유로
 판정하고 원본 React·token 구현, public export, registry item과

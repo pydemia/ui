@@ -1173,3 +1173,13 @@ registry에 기록된 revision `98a1fe67b439324ddc857f47fbdce056600a4329`의
 맞춰 평가·즐겨찾기의 안정적인 버튼 이름과 집계 설명, 게시판의 이름
 있는 section, 댓글 작성 field의 연결된 label을 사용합니다. 키보드와
 화면 낭독기 검증 범위는 `research/verification.md`에 구분합니다.
+
+## 2026-10-01 Combobox 원격 결과 갱신
+
+기존 `Combobox`의 옵션 목록 교체·로딩·오류 상태를 프로젝트 원본
+소스에서 확장했습니다. 2026-10-01에
+[WAI-ARIA APG Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)의
+입력·listbox 역할, `aria-activedescendant`와 방향키·Enter·Escape 규칙을
+다시 확인했습니다. APG 구현 코드는 복사하지 않았습니다. 신규 npm
+dependency는 없으며 registry 의존성도 `pyd-input`·`pyd-utils` 그대로입니다.
+로딩·오류 발표의 실제 screen reader 확인은 남아 있습니다.
