@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 ImageCropper 공개 확인: PR #52 병합 commit `ffe9312`의
+Verify UI·Pages와 Vercel 상태가 성공했습니다. 공개 preview,
+현재 `pyd-image-cropper.json`, 31번째 snapshot manifest/item URL이
+HTTP 200으로 응답하며 manifest에 114개 item이 있습니다. 공개
+브라우저 동작은 반복하지 않았습니다. 현재 112개 component·114개
+registry item·31개 snapshot, goal 관리용 추정 약 87%입니다.
+[작업 기록](image-cropper-2026-10-02.md)을 참고하세요.
+
 2026-10-02 체크리스트 추가 재검토: 변경 흐름의 로컬 브라우저 검증을
 공개 사이트에서 반복하지 않고 배포·변경 URL을 확인합니다. 외부
 component 코드를 편입하지 않은 원본 구현에는 upstream 코드·LICENSE

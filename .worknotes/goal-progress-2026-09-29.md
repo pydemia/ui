@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 ImageCropper 공개 확인: **약 86% → 약 87%**입니다.
+112개 component·114개 registry item·31개 snapshot을 공개했습니다.
+PR #52와 병합 commit `ffe9312`의 Verify UI, Pages, Vercel이
+성공했고 공개 preview·변경 item·snapshot manifest/item URL이
+응답했습니다. 공개 브라우저 동작은 로컬 검증과 중복해 실행하지
+않았습니다. 개별 CLI 설치, 실제 touch·screen reader·Safari·RTL,
+rollback 뒤 URL 보존은 미검증입니다.
+[작업 기록](image-cropper-2026-10-02.md)을 참고하세요.
+
 2026-10-02 체크리스트 중복 검사 재검토: **약 86% → 약 86%**입니다.
 같은 산출물의 로컬·공개 브라우저 동작을 중복 실행하지 않고, 외부
 component 코드를 쓰지 않은 원본 구현에는 upstream 코드·LICENSE

@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 ImageCropper 공개 검증
+
+PR #52 Verify UI run 36918310698과 병합 commit `ffe9312`의
+Verify UI run 36918605313, Pages run 36918603236이 성공했습니다.
+Vercel 상태도 성공입니다. 공개 preview와 현재
+`pyd-image-cropper.json`, 31번째 snapshot manifest/item URL이
+HTTP 200으로 응답했습니다. manifest의 `itemCount`는 114이며
+snapshot item의 두 의존 URL은 같은 snapshot ID를 가리킵니다.
+공개 브라우저 동작은 아래 로컬 Chromium 검증과 중복해 실행하지
+않았습니다. 개별 CLI 설치, 실제 touch·screen reader·Safari·RTL,
+rollback 뒤 URL 보존은 미검증입니다.
+
 ## 2026-10-02 ImageCropper 로컬 검증
 
 `npm run typecheck`, UI 테스트 135/135(새 component 3건),
