@@ -1793,3 +1793,17 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 새 snapshot ID는
 `sha256-821598f3f128f4f00c0f44da23a3abdee79c1c6041f977b185ffc8fb0d34f890`입니다.
 세부 기록은 `.worknotes/component-editable-2026-09-30.md`에 있습니다.
+
+## 2026-10-01 Combobox 원격 결과 갱신
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript | pass | 저장소 `npm run typecheck` |
+| 패키지 테스트 | pass | 전체 101/101; 값 보존·잘못된 fallback·상태 메시지 회귀 3건 |
+| build | pass | 문서와 104개 registry item 생성 |
+| 로컬 Chromium | pass (limited) | 목록에서 선택값 제거 뒤 label·form 값 유지, 원격 결과 방향키·Enter, 요청 실패 메시지 |
+| 390px Chromium | pass (limited) | body·viewport 모두 390px |
+| registry snapshot·격리 소비자·공개 배포 | pending | 아직 수행 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+세부 결정은 `.worknotes/combobox-remote-results-2026-10-01.md`에 있습니다.

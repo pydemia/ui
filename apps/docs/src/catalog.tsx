@@ -68,7 +68,7 @@ import { FolderOpen, Gauge, Inbox, Settings2 } from "lucide-react";
 import { TZDate, type DateRange } from "react-day-picker";
 import { ko } from "react-day-picker/locale";
 import {
-    useId, useRef, useState, type FormEvent, type ReactNode,
+    useEffect, useId, useRef, useState, type FormEvent, type ReactNode,
 } from "react";
 import type {
     AppliedFilter, BoardPost, ConversationMessage, DataTableColumn,
@@ -2744,7 +2744,31 @@ function EditablePreview() {
 
 function ComboboxPreview() {
     const [value, setValue] = useState<string | null>(null);
+    const [selectedOption, setSelectedOption] = useState<
+        (typeof workspaceOptions)[number] | undefined
+    >();
+    const [options, setOptions] = useState(workspaceOptions);
+    const [query, setQuery] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const [submitted, setSubmitted] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (!query) {
+            setOptions(workspaceOptions);
+            setLoading(false);
+            return;
+        }
+        const timer = window.setTimeout(() => {
+            setOptions(workspaceOptions.filter((option) =>
+                option.label.toLocaleLowerCase().includes(
+                    query.toLocaleLowerCase(),
+                ),
+            ));
+            setLoading(false);
+        }, 300);
+        return () => window.clearTimeout(timer);
+    }, [query]);
 
     return (
         <form className="preview-field" onSubmit={(event) => {
@@ -2756,10 +2780,26 @@ function ComboboxPreview() {
             <Field label="작업 공간" required>
                 {(control) => <Combobox
                     {...control}
-                    options={workspaceOptions}
+                    options={options}
+                    selectedOption={selectedOption}
                     name="workspace"
                     value={value}
-                    onValueChange={setValue}
+                    onValueChange={(next) => {
+                        setValue(next);
+                        if (next) {
+                            setSelectedOption(options.find((option) =>
+                                option.value === next,
+                            ));
+                        }
+                    }}
+                    onQueryChange={(next) => {
+                        setQuery(next);
+                        setLoading(Boolean(next));
+                        setError(null);
+                    }}
+                    filterOptions={false}
+                    loading={loading}
+                    errorMessage={error}
                     placeholder="작업 공간 검색"
                     emptyMessage="일치하는 작업 공간이 없습니다."
                     requiredMessage="목록에서 작업 공간을 선택하세요."
@@ -2767,6 +2807,20 @@ function ComboboxPreview() {
                 />}
             </Field>
             <Button type="submit">적용</Button>
+            <Button type="button" variant="outline" disabled={!value}
+                onClick={() => setOptions((current) => current.filter(
+                    (option) => option.value !== value,
+                ))}>
+                선택 항목 없는 결과로 갱신
+            </Button>
+            <Button type="button" variant="outline"
+                onClick={() => {
+                    setOptions([]);
+                    setLoading(false);
+                    setError("검색 요청에 실패했습니다.");
+                }}>
+                검색 실패 시험
+            </Button>
             <p role="status">
                 선택: {value ?? "없음"} · 제출: {submitted ?? "없음"}
             </p>
@@ -4293,11 +4347,11 @@ function WorkspaceName() {
     },
     {
         id: "combobox", name: "Combobox", category: "Selection",
-        description: "검색해 단일 항목을 고릅니다. 선택한 값만 form에 보내며 disabled 항목과 빈 결과를 구분합니다.",
-        code: `import { useState } from "react";
+        description: "단일 항목을 검색해 선택합니다. 원격 결과가 바뀌어도 선택값을 보존하고 loading·오류·빈 결과를 구분합니다.",
+        code: `import { useEffect, useState } from "react";
 import { Button, Combobox, Field } from "@pydemia/ui";
 
-const options = [
+const allOptions = [
   { value: "studio", label: "Design Studio" },
   { value: "ops", label: "Operations" },
   { value: "archive", label: "Archive", disabled: true },
@@ -4305,6 +4359,24 @@ const options = [
 
 function WorkspaceForm() {
   const [value, setValue] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<
+    (typeof allOptions)[number] | undefined
+  >();
+  const [query, setQuery] = useState("");
+  const [options, setOptions] = useState(allOptions);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setOptions(allOptions.filter((option) =>
+        option.label.toLowerCase().includes(query.toLowerCase()),
+      ));
+      setLoading(false);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [query]);
+
   return <form onSubmit={(event) => {
     event.preventDefault();
     const selected = new FormData(event.currentTarget).get("workspace");
@@ -4312,7 +4384,18 @@ function WorkspaceForm() {
   }}>
     <Field label="작업 공간" required>
       {(control) => <Combobox {...control} options={options}
-        name="workspace" value={value} onValueChange={setValue}
+        selectedOption={selectedOption} filterOptions={false}
+        loading={loading} name="workspace" value={value}
+        onValueChange={(next) => {
+          setValue(next);
+          if (next) setSelectedOption(options.find(
+            (option) => option.value === next,
+          ));
+        }}
+        onQueryChange={(next) => {
+          setQuery(next);
+          setLoading(Boolean(next));
+        }}
         required requiredMessage="목록에서 선택하세요." />}
     </Field>
     <Button type="submit">적용</Button>

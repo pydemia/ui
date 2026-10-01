@@ -17,10 +17,15 @@ type ComboboxProps = Omit<
     "role" | "autoComplete" | "name"
 > & {
     options: readonly ComboboxOption[];
+    selectedOption?: ComboboxOption;
     value?: string | null;
     defaultValue?: string | null;
     onValueChange?: (value: string | null) => void;
     onQueryChange?: (query: string) => void;
+    filterOptions?: boolean;
+    loading?: boolean;
+    loadingMessage?: string;
+    errorMessage?: string | null;
     name?: string;
     emptyMessage?: string;
     requiredMessage?: string;
@@ -29,10 +34,15 @@ type ComboboxProps = Omit<
 
 function Combobox({
     options,
+    selectedOption: retainedOption,
     value,
     defaultValue = null,
     onValueChange,
     onQueryChange,
+    filterOptions = true,
+    loading = false,
+    loadingMessage = "항목을 불러오는 중입니다.",
+    errorMessage = null,
     name,
     id,
     disabled,
@@ -70,15 +80,17 @@ function Combobox({
         }
         knownValues.add(option.value);
     }
-    if (selectedValue !== null && !knownValues.has(selectedValue)) {
+    if (selectedValue !== null && (!selectedValue ||
+        (!knownValues.has(selectedValue) &&
+            retainedOption?.value !== selectedValue))) {
         throw new RangeError("Combobox value must match an option.");
     }
 
     const selectedOption = options.find(
         (option) => option.value === selectedValue,
-    );
-    const filtered = options.filter((option) =>
-        option.label.toLocaleLowerCase().includes(
+    ) ?? (retainedOption?.value === selectedValue ? retainedOption : undefined);
+    const filtered = loading || errorMessage ? [] : options.filter((option) =>
+        !filterOptions || option.label.toLocaleLowerCase().includes(
             (query ?? "").toLocaleLowerCase(),
         ),
     );
@@ -204,11 +216,12 @@ function Combobox({
                     const nextQuery = event.currentTarget.value;
                     setQuery(nextQuery);
                     setOpen(true);
-                    setActiveIndex(options.filter((option) =>
-                        option.label.toLocaleLowerCase().includes(
-                            nextQuery.toLocaleLowerCase(),
-                        ),
-                    ).findIndex((option) => !option.disabled));
+                    setActiveIndex(loading || errorMessage || !filterOptions
+                        ? -1 : options.filter((option) =>
+                            option.label.toLocaleLowerCase().includes(
+                                nextQuery.toLocaleLowerCase(),
+                            ),
+                        ).findIndex((option) => !option.disabled));
                     changeValue(null);
                     onQueryChange?.(nextQuery);
                 }}
@@ -237,7 +250,7 @@ function Combobox({
                     "bg-surface p-1 text-foreground " +
                     "shadow-[var(--shadow-float)]"
                 }>
-                    <ul id={listId} role="listbox"
+                    <ul id={listId} role="listbox" aria-busy={loading || undefined}
                         className="m-0 list-none p-0">
                         {filtered.map((option, index) => (
                             <li key={option.value}
@@ -265,7 +278,17 @@ function Combobox({
                             >{option.label}</li>
                         ))}
                     </ul>
-                    {filtered.length === 0 && (
+                    {loading && (
+                        <p role="status" className="m-0 px-3 py-2 text-sm text-muted">
+                            {loadingMessage}
+                        </p>
+                    )}
+                    {!loading && errorMessage && (
+                        <p role="alert" className="m-0 px-3 py-2 text-sm text-danger">
+                            {errorMessage}
+                        </p>
+                    )}
+                    {!loading && !errorMessage && filtered.length === 0 && (
                         <p role="status" className="m-0 px-3 py-2 text-sm text-muted">
                             {emptyMessage}
                         </p>

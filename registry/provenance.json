@@ -81,7 +81,7 @@
       "name": "pyd-combobox", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/", "scope": "behavior guidance only; no source copied" },
-      "dependencies": ["pyd-input", "pyd-utils"], "accessibility": { "semantics": "editable combobox with listbox, active descendant and selected-only form value", "keyboard": "Chromium: arrows, Enter, Escape, disabled item and form value verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-input", "pyd-utils"], "accessibility": { "semantics": "editable combobox with listbox, active descendant, selected-only form value, and loading/error status", "keyboard": "Chromium: arrows, Enter, Escape, disabled item and form value verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-multi-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
