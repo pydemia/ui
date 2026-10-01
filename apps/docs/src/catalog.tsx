@@ -12,7 +12,8 @@ import {
     Button, ButtonGroup, IconButton,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
-    Calendar, Card, CardContent, CardDescription, CardFooter, CardHeader,
+    Calendar, CalendarScheduler, Card, CardContent, CardDescription,
+    CardFooter, CardHeader,
     CardTitle,
     Carousel, Checkbox, CitationList, CodeBlock, CodeEditorShell,
     ColorInput, Combobox,
@@ -79,7 +80,8 @@ import {
     useEffect, useId, useRef, useState, type FormEvent, type ReactNode,
 } from "react";
 import type {
-    AppliedFilter, ApprovalStatus, BoardPost, ConversationMessage,
+    AppliedFilter, ApprovalStatus, BoardPost, CalendarSchedule,
+    ConversationMessage,
     DataTableColumn,
     DateRangeValue,
     DateTimeSelection,
@@ -1565,6 +1567,43 @@ function MonthPickerPreview() {
                         "선택한 월이 없습니다."}
             </p>
         </form>
+    );
+}
+
+function CalendarSchedulerPreview() {
+    const [date, setDate] = useState("2026-10-07");
+    const [events, setEvents] = useState<CalendarSchedule[]>([
+        { id: "review", date: "2026-10-07", title: "권한 검토",
+            startTime: "09:00", endTime: "09:30" },
+        { id: "planning", date: "2026-10-07", title: "주간 계획",
+            startTime: "14:00", description: "다음 릴리스 범위 확인" },
+        { id: "report", date: "2026-10-12", title: "월간 보고" },
+    ]);
+    const [nextId, setNextId] = useState(1);
+    const [lastAction, setLastAction] = useState("날짜나 일정을 선택하세요.");
+
+    return (
+        <div className="preview-workspace grid gap-3">
+            <CalendarScheduler label="팀 일정" initialDate="2026-10-07"
+                selectedDate={date} onSelectedDateChange={(nextDate) => {
+                    setDate(nextDate);
+                    setLastAction(`${nextDate} 선택`);
+                }}
+                events={events} timeZone="Asia/Seoul" calendarLocale={ko}
+                onEventSelect={(event) =>
+                    setLastAction(`${event.title} 선택`)}
+                onCreateEvent={(selectedDate) => {
+                    setEvents((current) => [...current, {
+                        id: `draft-${nextId}`, date: selectedDate,
+                        title: `새 일정 ${nextId}`,
+                    }]);
+                    setNextId((current) => current + 1);
+                    setLastAction(`${selectedDate}에 일정 추가`);
+                }} />
+            <p role="status" className="m-0 text-sm">
+                선택 날짜: {date} · {lastAction}
+            </p>
+        </div>
     );
 }
 
@@ -5573,6 +5612,28 @@ const teams = [
   <button type="submit">제출</button>
 </form>`,
         preview: () => <TreeSelectPreview />,
+    },
+    {
+        id: "calendar-scheduler", name: "CalendarScheduler",
+        category: "Workflow",
+        description: "일정이 있는 날짜와 건수를 달력에서 찾고 날짜별 안건을 확인합니다. 일정 선택·추가는 호출자가 처리합니다.",
+        code: `import { useState } from "react";
+import { ko } from "react-day-picker/locale";
+import { CalendarScheduler } from "@pydemia/ui";
+
+const events = [
+  { id: "review", date: "2026-10-07", title: "권한 검토",
+    startTime: "09:00", endTime: "09:30" },
+  { id: "report", date: "2026-10-12", title: "월간 보고" },
+];
+
+function TeamSchedule() {
+  const [date, setDate] = useState("2026-10-07");
+  return <CalendarScheduler label="팀 일정" initialDate="2026-10-07"
+    selectedDate={date} onSelectedDateChange={setDate}
+    events={events} timeZone="Asia/Seoul" calendarLocale={ko} />;
+}`,
+        preview: () => <CalendarSchedulerPreview />,
     },
     {
         id: "stepper", name: "Stepper", category: "Workflow",

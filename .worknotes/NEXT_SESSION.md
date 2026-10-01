@@ -1,5 +1,41 @@
 # Component 확장 작업 인계
 
+2026-10-02 CalendarScheduler Vercel preview를 390px Chromium에서
+확인했습니다. 월 탐색 배치와 날짜·일정 선택, 일정 추가, 빈 상태,
+ArrowRight·Enter 및 상태 문구가 동작했습니다. dark에서 기존
+`Calendar` 화살표 SVG의 색상 결함을 발견해 `fill-current`로
+수정했습니다. 미공개 draft snapshot 셋은 PR diff에서 정리하고 최종
+후보 하나만 남겼습니다. provenance 고지도 소스 commit `67ba3c2`에
+고정했습니다. typecheck·UI 테스트 143/143·build·최종 snapshot의
+release 검사와 PR head `eef5938`의 Verify UI가 통과했습니다.
+최종 Vercel preview의 390px·데스크톱 dark에서 화살표 fill과
+console error 0건을 확인했습니다. production 확인은 남았습니다.
+공개 113개 component·115개 item·32개 snapshot,
+goal 약 88%입니다. [작업 기록](calendar-scheduler-2026-10-02.md)을
+참고하세요.
+
+2026-10-02 CalendarScheduler 핵심 동작 검증: client DOM 테스트 2건을
+추가해 날짜·월 이동, 일정 선택·추가 callback, controlled 날짜 갱신을
+실행했습니다. 테스트 전용 `jsdom@26.1.0`은 README의 Node 22+
+범위를 지원합니다. UI 테스트 143/143, typecheck·build·
+`registry:release-check`와 commit `5fbe530`의 PR Verify UI run
+36929134624가 통과했습니다. 브라우저 preview는 이번에도
+`ERR_BLOCKED_BY_CLIENT`로 차단돼 390px·실제 focus가 미검증입니다.
+PR #56은 draft로 남고 공개 기준 113개 component·115개 item·32개
+snapshot, goal 약 88%는 그대로입니다.
+[작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
+
+2026-10-02 CalendarScheduler 로컬 작업: 기존 Calendar와 일정 목록을
+결합해 로컬 114개 component·116개 item이 됐습니다. typecheck·
+UI 테스트 141/141·build가 통과했습니다. provenance 고지를 source
+commit `390d9bb`에 고정하고 33번째 snapshot과 release 검사를
+통과했습니다. Browser Use의 localhost
+탐색이 차단되고 Windows Computer Use가 URL 확인 불가로 종료돼
+날짜·월·일정 조작과 390px/focus는 미검증입니다. draft PR #56의
+Verify UI run 36926628773은 통과했으나 ready 전환·병합·공개는
+보류했습니다. 공급 완료와 goal 추정 약 88%는 유지합니다.
+[작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 기준을 다시 검토했습니다. 값·keyboard 흐름의
 자동 테스트와 브라우저 검사를 모든 변경에 함께 요구하지 않습니다.
 대표 흐름을 한 방식으로 실행하되 focus·실제 배치는 브라우저에서

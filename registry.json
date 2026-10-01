@@ -346,6 +346,16 @@
       ]
     },
     {
+      "name": "pyd-calendar-scheduler", "type": "registry:ui",
+      "title": "Calendar Scheduler",
+      "dependencies": ["react-day-picker@9.14.0"],
+      "registryDependencies": ["./pyd-calendar.json", "./pyd-button.json", "./pyd-utils.json"],
+      "files": [
+        { "path": "packages/ui/src/components/calendar-scheduler.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/calendar-date.ts", "type": "registry:ui" }
+      ]
+    },
+    {
       "name": "pyd-date-picker", "type": "registry:ui", "title": "Date Picker",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-calendar.json", "./pyd-popover.json", "./pyd-utils.json"],

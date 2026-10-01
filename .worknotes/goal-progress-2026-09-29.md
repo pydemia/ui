@@ -1,5 +1,28 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 CalendarScheduler preview 검증: **약 88% → 약 88%**입니다.
+390px Chromium의 월 탐색 배치, 날짜·일정 선택, 추가, 빈 상태,
+ArrowRight·Enter와 상태 문구를 확인했습니다. dark에서 발견한
+`Calendar` 화살표 색상을 수정하고 미공개 snapshot 둘을 최종 후보
+하나로 정리했습니다. 마지막 수정의 새 preview·CI와 production은
+남아 있으므로 공개 113개 component·115개 item·32개 snapshot을
+유지합니다. [작업 기록](calendar-scheduler-2026-10-02.md)을
+참고하세요.
+
+2026-10-02 CalendarScheduler 동작 검증: **약 88% → 약 88%**입니다.
+client DOM에서 날짜·월 이동과 callback을 실행했고 UI 테스트
+143/143, typecheck·build·release 검사와 PR Verify UI run
+36929134624가 통과했습니다. 실제
+브라우저·공개 검증은 미완료여서 공개 component 수는 늘지 않았습니다.
+[작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
+
+2026-10-02 CalendarScheduler 로컬 검증: **약 88% → 약 88%**입니다.
+114개 component·116개 registry item을 로컬에 마련하고 typecheck·
+UI 테스트 141/141·build·provenance 핀·33번째 snapshot·release
+검사를 확인했습니다. 브라우저 동작·공개 검증이 남아 있어 공급
+완료로 세지 않습니다.
+[작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 위험 기준 재검토: **약 88% → 약 88%**입니다.
 값·keyboard 흐름마다 자동 테스트와 브라우저 검사를 중복 요구하던
 기준을 변경 위험에 맞췄습니다. 필요한 대표 흐름은 한 방식으로

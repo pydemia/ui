@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-113개 component와 115개 registry item이 있습니다. 2026-09-30에
+114개 component와 116개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
@@ -30,6 +30,9 @@ panel·flat 표시를 추가했습니다.
 별도 작업으로 편입했습니다.
 `MasterDetail`은 요청·파일 목록에서 항목 선택과 상세 면을 함께
 관리하고 좁은 화면에서 focus를 복원하는 작업으로 편입했습니다.
+`CalendarScheduler`는 날짜별 일정 건수와 시간순 안건을 달력과 함께
+표시하는 작업으로 로컬 편입했습니다. 브라우저 동작과 공개 검증은
+남아 있습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -508,7 +511,11 @@ token 전달 방식을 정할 때,
 - [x] `ImageCropper`: 로컬 파일의 고정 비율 영역을 끌기·native
   슬라이더로 조정해 PNG Blob으로 전달합니다. 업로드와 저장은
   호출자가 담당하며 실제 touch·screen reader·Safari는 미검증입니다.
-- [ ] `RichTextEditor`·`NodeCanvas`·`CalendarScheduler`: 제품별
+- [x] `CalendarScheduler`: 기존 Calendar에 날짜별 일정 건수와
+  agenda를 결합했습니다. 날짜 선택·일정 선택·추가 callback을 제공하고
+  저장·권한·시간대 변환은 호출자가 소유합니다. 브라우저 동작과
+  공개 검증은 남았습니다.
+- [ ] `RichTextEditor`·`NodeCanvas`: 제품별
   데이터·편집 모델과 유지 비용을 조사해 착수 여부를 판단합니다.
   숫자를 맞추기 위해 영구 제외하지 않습니다.
 

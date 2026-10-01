@@ -107,6 +107,10 @@ export { MasterDetail } from "./components/master-detail";
 export type {
     MasterDetailItem, MasterDetailProps,
 } from "./components/master-detail";
+export { CalendarScheduler } from "./components/calendar-scheduler";
+export type {
+    CalendarSchedule, CalendarSchedulerProps,
+} from "./components/calendar-scheduler";
 export { ResizablePanels } from "./components/resizable-panels";
 export type { ResizablePanelsProps } from "./components/resizable-panels";
 export { Kanban, moveKanbanCard } from "./components/kanban";
