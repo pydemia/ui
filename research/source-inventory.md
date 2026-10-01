@@ -1,5 +1,24 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-01 ApprovalCard reference 확인
+
+[AI Elements Confirmation 공식 문서](https://elements.ai-sdk.dev/components/confirmation)
+에서 도구 호출 승인 요청, 승인·거절과 응답 상태를 확인했습니다. 동일
+revision [`6a9d5b1`](https://github.com/vercel/ai-elements/tree/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd)의
+[source](https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/confirmation.tsx),
+[package manifest](https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/package.json),
+[LICENSE](https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/LICENSE)를
+확인했습니다. LICENSE는 Apache-2.0입니다. upstream source는 내부
+shadcn Alert·Button·utils, React와 AI SDK `ToolUIPart`를 사용하고,
+manifest는 `ai`, `lucide-react` 등 추가 의존성을 포함합니다.
+
+`pyd-approval-card`는 승인 상태의 용도만 참고해 새로 작성했습니다.
+`ToolCall`의 실행 상태와 별도이며 기존 `pyd-button`, `pyd-utils`와
+React만 사용합니다. native button, 이름·설명이 있는 section, 별도
+status·alert를 둡니다. [WAI-ARIA 1.2 status](https://www.w3.org/TR/wai-aria-1.2/#status)와
+[alert](https://www.w3.org/TR/wai-aria-1.2/#alert)의 발표 의미를
+참고했습니다. 실제 screen reader 발표는 아직 확인하지 않았습니다.
+
 ## 2026-09-30 Editable reference 확인
 
 [Chakra UI Editable 공식 문서](https://chakra-ui.com/docs/components/editable)는

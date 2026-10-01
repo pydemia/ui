@@ -256,6 +256,10 @@ export { ToolCall } from "./components/tool-call";
 export type {
     ToolCallProps, ToolCallStatus,
 } from "./components/tool-call";
+export { ApprovalCard } from "./components/approval-card";
+export type {
+    ApprovalCardProps, ApprovalDecision, ApprovalStatus,
+} from "./components/approval-card";
 export { PromptInput } from "./components/prompt-input";
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/tabs";
 export { Table, TableHead, TableCell } from "./components/table";

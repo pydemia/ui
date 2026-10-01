@@ -1816,3 +1816,18 @@ Chromium에서 확인했습니다. 배포·소비자 세부 사항은
 세부 결정은 `.worknotes/combobox-remote-results-2026-10-01.md`에 있습니다.
 snapshot ID는
 `sha256-89e9ec939dea43db48bdacdd4c3555cc2072a5131be074c65eae592ec14ef7c1`입니다.
+
+## 2026-10-01 ApprovalCard
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript | pass | 저장소 `npm run typecheck` |
+| 패키지 테스트 | pass | 전체 104/104; 승인 요청 의미·상태·잘못된 입력 3건 추가 |
+| 로컬 Chromium | pass (limited) | 이중 클릭 1회 전달, 실패·Enter 재시도·승인, Space 거절, 만료 시 버튼 제거 |
+| 390px Chromium | pass (limited) | 만료 카드 330px, body·viewport 390px |
+| build | pass | 105개 registry item과 문서·프로필 예시 생성 |
+| registry snapshot | pass | 105개 item·103개 export/catalog, 기존 19개 검증 후 20번째 생성 |
+| 소비자·공개 배포 | unverified | 격리 설치와 릴리스 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+세부 기록은 `.worknotes/component-approval-card-2026-10-01.md`에 있습니다.
