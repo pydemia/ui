@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 TreeSelect 수정판 공개 검증 후: **약 80% → 약 80%**입니다.
+105개 component·107개 registry item·23개 불변 snapshot입니다. PR·
+병합 CI, Vercel production, 공개 preview와 수정판 snapshot의 별도
+소비자 설치·typecheck·build·390px Chromium 동작을 확인했습니다.
+첫 snapshot에서 발견한 native reset 오류는 새 snapshot으로
+수정했으며 기존 snapshot은 불변으로 보존합니다. 실제 screen reader·
+touch·Safari·RTL, item별 공개 격리 설치와 rollback 뒤 URL 보존은
+미검증이므로 공급·품질 조건 5/10과 관리용 추정치를 유지합니다.
+[작업 기록](component-tree-select-2026-10-01.md)에 범위를 적었습니다.
+
 2026-10-01 TreeSelect 작업 시작: 관리용 기준값 **약 80%**,
 104개 component·106개 registry item·21개 snapshot, 공급·품질 조건
 5/10입니다. 계층의 한 항목을 form 값으로 제출하는 반복 흐름을 기존
