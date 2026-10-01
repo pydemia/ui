@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 체크리스트의 브라우저 조건을 좁혔습니다.
+새 focus 이동·pointer 좌표·browser API·핵심 반응형 배치에 해당
+환경 검사를 적용하고, 값·callback·form·keyboard의 핵심 흐름은
+실행하는 자동 테스트나 브라우저 검사로 확인합니다. 상태 없는
+표시 component에 상태 소유를 요구하지 않습니다. draft PR #56의
+`CalendarScheduler`는 callback 흐름이 아직 실행되지 않아 공급
+완료로 세지 않습니다. 공개 113개 component·115개 item·32개
+snapshot, goal 관리용 추정 약 88%는 그대로입니다.
+[검토 기록](quality-checklist-pragmatic-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 기준을 다시 검토했습니다. 값·keyboard 흐름의
 자동 테스트와 브라우저 검사를 모든 변경에 함께 요구하지 않습니다.
 대표 흐름을 한 방식으로 실행하되 focus·실제 배치는 브라우저에서

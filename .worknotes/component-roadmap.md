@@ -54,10 +54,10 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 속도와 시각·동작의 일관성을 높이는 것입니다. 약 100개는 규모를
 가늠하는 기준점이며 완료 조건이 아닙니다. 아래 목록은 taxonomy를
 검토하기 위한 후보입니다. 체크박스는 **구현 확정이 아니라 판정 또는
-구현이 남았음**을 뜻합니다. 실제 사용처, 독립된 상태·상호작용,
-설치·유지 비용을 확인해 새 component, 기존 API 확장, 설치 가능한
-조합 예시, 보류 중 하나로 판정합니다. 후보 수로 완료율을 계산하지
-않습니다.
+구현이 남았음**을 뜻합니다. 실제 사용처와 기존 API의 중복 여부,
+필요한 경우 상태·상호작용의 책임, 설치·유지 비용을 확인해 새
+component, 기존 API 확장, 설치 가능한 조합 예시, 보류 중 하나로
+판정합니다. 후보 수로 완료율을 계산하지 않습니다.
 
 [persona 교차 검토](reviews/roadmap-2026-09-28/decision.md)에서 판정한
 공급 조건과 API 경계를 아래 순서에 반영했습니다.
@@ -70,11 +70,12 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 
 | 적용 시점 | 확인할 것 |
 | --- | --- |
-| 새 component | 독립 사용처와 동작 규칙, export·registry·provenance, 동작하는 preview·Usage |
+| 새 component | 반복 사용처와 기존 API의 중복 여부, 적용되는 동작·접근성 규칙, export·registry·provenance, 동작하는 preview·Usage |
 | 외부 component 코드 도입 | 공식 문서, 같은 revision의 source·LICENSE, 의존성·접근성, 고지 전달. 같은 revision의 기존 조사 결과는 재사용 |
 | 코드·registry 변경 | 해당 commit의 typecheck·관련 테스트·build·`registry:release-check`. 통과한 CI 결과를 재사용 |
-| 값·form·keyboard·focus 변경 | 영향받은 대표 흐름을 자동 테스트 또는 브라우저에서 실행. focus·실제 배치가 판단에 필요하면 브라우저 실행 |
-| 표시·token 변경 | 변경한 상태의 preview. 배치·색상에 영향이 있으면 좁은 화면·관련 theme |
+| 값·form·keyboard 변경 | 변경한 핵심 흐름을 실제로 실행하는 자동 테스트 또는 브라우저 검사. callback 변경을 SSR 출력 검사만으로 판정하지 않음 |
+| browser 의존 동작 변경 | 새 focus 이동·pointer 좌표·browser API·핵심 반응형 배치는 해당 환경에서 실행. 검증된 기존 component의 동작을 그대로 쓰면 중복 실행하지 않음 |
+| 표시·token 변경 | 변경한 상태의 preview 확인. 새 배치나 명암이 사용성에 영향을 줄 때 해당 폭·theme의 시각 검사 |
 | 설치 형식·target·의존 경로 변경 | 별도 소비자 CLI 설치·typecheck·build. 설치·의존 URL 또는 배포 경로도 바뀌면 공개 URL 설치 |
 | registry 내용 공개 | 내용 해시 snapshot 검사, 공개 manifest와 변경 item URL 도달. 릴리스 묶음당 한 번 |
 
@@ -86,11 +87,13 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 LICENSE 대조를 적용하지 않습니다. 참고한 플랫폼 명세와 기존 의존
 component의 출처는 기록합니다.
 표준 registry 경로를 쓰는 item마다 새 소비자를 만들지 않으며,
-실행하지 않은 개별 CLI 설치는 미검증으로 적습니다. 브라우저도
-변경된 흐름을 대표하는 검사만 요구합니다.
-각 행은 적용 여부와 통과·미검증·차단 상태를 구분합니다. 필요한
-대표 흐름을 어떤 방식으로도 실행하지 못하면 공개 공급 완료로
-표시하지 않습니다.
+실행하지 않은 개별 CLI 설치는 미검증으로 적습니다. 상태가 없는
+표시 component에 상태 소유를 요구하지 않습니다. 자동 테스트가
+실제 변경 흐름을 실행했다면 브라우저에서 같은 조작을 반복하지
+않습니다. 변경된 핵심 흐름의 실행 증거가 없거나, browser 의존
+동작이 핵심인데 검사하지 못했다면 공개 공급 완료로 표시하지
+않습니다. 그 밖의 미실행 환경은 미검증으로 기록하고 지원을
+주장하지 않습니다.
 
 변경한 흐름에서 값 손실·제출 오류·keyboard 접근 불가·필수 고지
 누락·설치 실패가 재현되면 수정판을 확인할 때까지 출시 완료로
@@ -108,7 +111,8 @@ snapshot 주소 보존은 별도 품질 과제입니다. 특정 환경 지원을
 [2026-10-02 재검토](quality-criteria-reassessment-2026-10-02.md)와
 [반복 검사 축소](quality-criteria-simplification-2026-10-02.md),
 [이번 체크리스트 검토](quality-checklist-recalibration-2026-10-02.md),
-[위험 기준 재검토](quality-gates-risk-review-2026-10-02.md)에
+[위험 기준 재검토](quality-gates-risk-review-2026-10-02.md)와
+[검사 범위 재검토](quality-checklist-pragmatic-2026-10-02.md)에
 남겼습니다.
 
 ## 라이브러리 전체의 운영·품질 과제
@@ -449,9 +453,10 @@ label을 가진 control, 새 trigger 기반 선택기의 label 소유자와
 5. 공개할 commit에서 typecheck·관련 테스트·build와
    `registry:release-check`를 확인합니다. CI의 동일 commit 결과를
    재사용할 수 있습니다. 상호작용 변경은 영향받은 대표 흐름을
-   자동 테스트나 브라우저에서 실행합니다. focus·실제 배치의 판단이
-   필요하면 브라우저에서 확인합니다. 표시 변경은 변경한 상태를
-   확인하고, theme·좁은 화면은 영향을 받을 때 검사합니다.
+   자동 테스트나 브라우저에서 실제로 실행합니다. 새 focus 이동,
+   pointer 좌표·browser API·핵심 반응형 배치는 해당 환경에서
+   확인합니다. 표시 변경은 변경한 상태를 확인하고, theme·좁은
+   화면은 사용성에 영향을 받을 때 검사합니다.
 6. 설치 형식·target·의존 경로가 새로우면 별도 소비자에 CLI로 설치해
    typecheck·build합니다. 표준 경로의 item에는 이를 반복하지 않고,
    미실행한 개별 설치는 미검증으로 적습니다. registry 내용이 바뀐
