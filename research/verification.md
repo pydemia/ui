@@ -18,7 +18,8 @@ export/catalog와 현재 산출물을 확인했습니다.
 이번 턴의 UI 조작을 중단했습니다. 달력 날짜·월 탐색, 일정 선택·추가,
 390px 배치와 focus는 미검증입니다. 따라서 공개 공급 완료 판정도
 남아 있습니다. 실제 screen reader·touch·Safari·RTL, 개별 소비자
-CLI 설치와 공개 URL도 미검증입니다. 세부 내용은
+CLI 설치와 공개 URL도 미검증입니다. draft PR #56의 Verify UI
+run 36926628773은 통과했습니다. 세부 내용은
 [작업 기록](../.worknotes/calendar-scheduler-2026-10-02.md)에 남겼습니다.
 
 ## 2026-10-02 MasterDetail 공개 검증

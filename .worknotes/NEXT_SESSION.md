@@ -6,8 +6,9 @@ UI 테스트 141/141·build가 통과했습니다. provenance 고지를 source
 commit `390d9bb`에 고정하고 33번째 snapshot과 release 검사를
 통과했습니다. Browser Use의 localhost
 탐색이 차단되고 Windows Computer Use가 URL 확인 불가로 종료돼
-날짜·월·일정 조작과 390px/focus는 미검증입니다. 공급 완료와 goal
-추정 약 88%는 유지합니다.
+날짜·월·일정 조작과 390px/focus는 미검증입니다. draft PR #56의
+Verify UI run 36926628773은 통과했으나 ready 전환·병합·공개는
+보류했습니다. 공급 완료와 goal 추정 약 88%는 유지합니다.
 [작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
 
 2026-10-02 공급·품질 기준을 다시 검토했습니다. 값·keyboard 흐름의

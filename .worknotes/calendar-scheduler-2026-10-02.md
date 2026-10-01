@@ -42,3 +42,11 @@ callback이 반복되므로 handoff의 `CalendarScheduler` 후보를
 브라우저 검사입니다. 해당 검증 전에는 공급 완료로 표시하지 않습니다.
 실제 screen reader·touch·Safari·RTL, 개별 소비자 CLI 설치,
 공개 URL과 rollback 뒤 snapshot URL 보존도 미검증입니다.
+
+## Draft PR
+
+[PR #56](https://github.com/pydemia/ui/pull/56)을 draft로 열었습니다.
+source·snapshot commit은 `390d9bb`·`4ee1f99`입니다. PR Verify UI
+run 36926628773이 typecheck·UI 테스트·build·release 검사와 생성
+`docs/` 일치를 통과했습니다. 실제 브라우저 동작이 미검증이므로
+ready 전환·병합·production 공개는 보류합니다.
