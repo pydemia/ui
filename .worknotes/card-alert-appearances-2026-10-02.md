@@ -33,7 +33,20 @@
   현재 111개 item과 일치합니다. 공개 URL은 아직 확인하지
   않았습니다. 실제 screen reader·touch·Safari·RTL도 미검증입니다.
 
+## 공개 확인
+
+PR #43의 Verify UI와 병합 commit `a112a5f`의 Verify UI·Pages가
+통과했습니다. Vercel production 배포
+`dpl_AFsmY94mRePru7HeNxVitEdLaLZ2`는 READY입니다.
+공개 28번째 snapshot manifest의 ID·111개 item과 Card·Alert JSON의
+새 속성(`subtle`·`compact`, `soft`·`plain`)이 확인됐습니다.
+문서 URL은 HTTP 200입니다. 공개 페이지의 실제 브라우저 조작은
+실행하지 않았습니다.
+
 기존 component의 표시·타입 변경이고 설치 경로와 의존성 체인이
 그대로이므로 [재조정한 공급 기준](quality-criteria-reassessment-2026-10-02.md)에
-따라 새 소비자 CLI 재설치를 반복하지 않습니다. 공개 전 goal
-관리용 추정은 약 83%로 유지합니다.
+따라 새 소비자 CLI 재설치를 반복하지 않았습니다. 실제 screen
+reader·touch·Safari·RTL과 rollback 뒤 snapshot URL 보존도
+미검증입니다. 공개 기준 goal 관리용 추정은 **약 83% → 약 84%**로
+조정합니다. component 수가 늘어서가 아니라 기존 두 요소의
+디자인 선택지를 공개했기 때문입니다.

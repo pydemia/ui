@@ -1,5 +1,16 @@
 # 검증 기록
 
+## 2026-10-02 Card·Alert 공개 확인
+
+PR #43과 병합 commit `a112a5f`의 Verify UI, 병합 Pages가
+통과했고 Vercel production은 READY입니다. 공개 28번째 snapshot의
+manifest ID·111개 item, Card·Alert JSON의 새 속성을 확인했습니다.
+문서 URL은 HTTP 200입니다. 공개 브라우저 조작과 별도 소비자 CLI
+재설치는 실행하지 않았습니다. 설치 경로·의존성 체인에 변경은
+없습니다. 로컬 브라우저 검사와 미검증 범위는 아래 기록 및
+[작업 기록](../.worknotes/card-alert-appearances-2026-10-02.md)에
+있습니다.
+
 ## 2026-10-02 Card·Alert 로컬 검증
 
 `npm run typecheck`, UI 테스트 126/126, `npm run build`,
