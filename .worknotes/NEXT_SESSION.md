@@ -8,8 +8,10 @@ snapshot, goal 약 80%, 라이브러리 과제 완료 5·부분 4·미검증 1�
 UI 테스트 116/116·build가 통과했습니다. 390px Chromium의 카드
 선택·제출·light/dark를 확인했습니다. 자동화 방향키는 focus 이동만
 관찰해 선택 변경을 미검증으로 남겼습니다. provenance 변경에 따라
-소비자용 고지 hash를 source commit으로 고정한 뒤 registry·snapshot·
-공개 소비자 검증이 필요합니다.
+소비자용 고지 hash를 source commit `3392144`로 고정했습니다.
+`registry:release-check`는 24번째 snapshot
+`sha256-1889f7c9f938bea5019bba5e20d480efc8a17244036c881451a616ceed14b68d`와
+현재 빌드의 일치를 확인했습니다. 공개 소비자 검증이 남았습니다.
 [작업 기록](selection-card-variants-2026-10-01.md)을 참고하세요.
 
 2026-10-01 공급·품질 기준 재검토: 기존 체크리스트는 완료 5·부분 4·

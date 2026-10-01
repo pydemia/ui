@@ -28,7 +28,11 @@ disabled·native FormData 제출, Radio 카드 클릭·Space·제출과 설명
 방향키 선택은 검증 완료로 표시하지 않습니다.
 
 `registry:check`의 첫 실행은 provenance 수정 뒤 소비자용 고지의
-SHA-256이 예전 값이라 실패했습니다. source commit을 고정한 뒤
-고지의 revision·hash를 갱신하고 registry·snapshot 검사를 다시
-실행합니다. 공개 소비자 설치는 그다음 확인합니다. 실제 screen
+SHA-256이 예전 값이라 실패했습니다. source commit `3392144`에
+고정한 고지로 갱신한 뒤 `registry:check`가 107개 item·105개
+export/catalog와 기존 23개 snapshot을 확인했습니다. 새 24번째
+snapshot ID는
+`sha256-1889f7c9f938bea5019bba5e20d480efc8a17244036c881451a616ceed14b68d`입니다.
+재빌드한 후 `registry:release-check`가 현재 빌드와 ID 일치를
+확인했습니다. 공개 소비자 설치는 배포 뒤 확인합니다. 실제 screen
 reader·touch·Safari·RTL은 아직 검사하지 않았습니다.

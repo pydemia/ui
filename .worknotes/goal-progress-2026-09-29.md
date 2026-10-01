@@ -12,6 +12,7 @@ CheckboxCard·RadioCard를 별도 이름으로 세지 않고 기존 선택기의
 105·107로 유지합니다. typecheck·UI 테스트 116/116·build와 390px
 Chromium의 클릭·Space·제출·light/dark를 확인했습니다. 방향키의
 자동 선택과 공개 snapshot 설치는 아직 검증하지 않았습니다.
+24번째 snapshot 생성과 `registry:release-check`는 통과했습니다.
 공급·품질 기준을 변경 위험에 따라 적용하도록 다시 조정했으며,
 전체 과제 완료 5·부분 4·미검증 1은 공급률로 사용하지 않습니다.
 [작업 기록](selection-card-variants-2026-10-01.md)을 참고하세요.
