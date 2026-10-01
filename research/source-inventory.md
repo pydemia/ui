@@ -1,5 +1,31 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 ActionBar·CopyButton source 확인
+
+`ActionBar`는 기존 `DataTable.renderActions`의 선택 건수·해제 영역을
+표 밖의 카드·파일 목록에서도 쓰기 위해 직접 작성했습니다.
+[WAI-ARIA APG Toolbar](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/)는
+toolbar 역할에 단일 Tab 진입과 방향키 이동을 요구합니다. 여기서는
+일괄 작업이 1~2개일 수 있고 각 native button의 Tab 이동을 유지하므로
+이름 있는 `group`을 사용합니다. 상태 숫자는 `role="status"`입니다.
+외부 component source를 가져오지 않았고 직접 의존성은 기존
+`pyd-button`·`pyd-utils`뿐입니다.
+
+`CopyButton`은 기존 `CodeBlock`과 `SnippetCopyButton`의 중복된
+`navigator.clipboard.writeText`·상태 처리를 공통화한 원본입니다.
+[W3C Clipboard API 2026-06-24 초안](https://www.w3.org/TR/2026/WD-clipboard-apis-20260624/)의
+비동기 쓰기·권한 거부 동작을 참고했습니다. 브라우저 API의 성공은
+Promise resolve 뒤에만 표시하고 rejection은 실패 상태로 알립니다.
+기존 `pyd-button`·`pyd-utils`, `lucide-react@0.468.0`의 Copy·Check
+아이콘만 사용합니다. 정확한 npm 배포본
+[`lucide-react@0.468.0`](https://registry.npmjs.org/lucide-react/-/lucide-react-0.468.0.tgz)의
+package manifest, `dist/esm/icons/copy.js`·`check.js`와 ISC LICENSE를
+확인했습니다. 해당 manifest의 React peer 범위도 확인했습니다.
+shadcn Button의 기존 [고정 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx)와
+같은 revision의 [MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)는
+기존 `pyd-button` 고지로 유지합니다. 새 component에 upstream 구현을
+복사하지 않았습니다. 실제 screen reader 검사는 미검증입니다.
+
 ## 2026-10-01 TreeSelect reference 확인
 
 [Ant Design TreeSelect 공식 문서](https://github.com/ant-design/ant-design/blob/820e1a8c2dbb508b15e5ad0fc3eedcdef869d98b/components/tree-select/index.en-US.md)는

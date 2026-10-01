@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 ActionBar·CopyButton 로컬 검증: **약 82% → 약 82%**입니다.
+공개 기준은 107개 component·109개 item·26개 snapshot입니다.
+두 원본 component와 기존 3개 소비자를 연결하고 typecheck·테스트
+124/124·build, 로컬 문서·새 소비자의 설치·390px Chromium을
+확인했습니다. 공개 snapshot·production은 아직 검증하지 않았습니다.
+[작업 기록](action-copy-controls-2026-10-02.md)에 범위와 실패·
+미검증 항목을 적었습니다.
+
 2026-10-02 Menubar 공개 검증 후: **약 81% → 약 82%**입니다.
 107개 component·109개 registry item·26개 snapshot입니다. 여러
 상위 명령의 방향키 이동·체크·라디오·submenu를 문서 Chromium에서,

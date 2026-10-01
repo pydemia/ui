@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-drawer",
+  "title": "Drawer",
+  "dependencies": [
+    "@radix-ui/react-dialog@1.1.23"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-c8bdf24d84b03bff8fe382f2b73e678e3cd5f6e0df86b649bdaa4f78676e01f5/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/drawer.tsx",
+      "content": "import * as DialogPrimitive from \"@radix-ui/react-dialog\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Drawer = DialogPrimitive.Root;\nconst DrawerTrigger = DialogPrimitive.Trigger;\nconst DrawerClose = DialogPrimitive.Close;\nconst DrawerTitle = DialogPrimitive.Title;\nconst DrawerDescription = DialogPrimitive.Description;\n\ntype DrawerContentProps = ComponentProps<typeof DialogPrimitive.Content> & {\n    side?: \"left\" | \"right\" | \"bottom\";\n};\n\nfunction DrawerContent({\n    side = \"right\", className, children, ...props\n}: DrawerContentProps) {\n    const position = {\n        left: \"inset-y-0 left-0 w-[min(26rem,calc(100vw-2rem))]\",\n        right: \"inset-y-0 right-0 w-[min(26rem,calc(100vw-2rem))]\",\n        bottom: \"inset-x-0 bottom-0 max-h-[80dvh] w-full\",\n    }[side];\n\n    return (\n        <DialogPrimitive.Portal>\n            <DialogPrimitive.Overlay\n                className=\"fixed inset-0 z-50 bg-[var(--overlay)]\"\n            />\n            <DialogPrimitive.Content\n                className={cn(\n                    \"fixed z-50 overflow-y-auto border border-border \" +\n                    \"bg-surface p-[var(--space-6)] text-foreground \" +\n                    \"shadow-[var(--shadow-float)] focus-visible:outline-none \" +\n                    \"focus-visible:ring-2 focus-visible:ring-accent\",\n                    position,\n                    className,\n                )}\n                {...props}\n            >\n                {children}\n            </DialogPrimitive.Content>\n        </DialogPrimitive.Portal>\n    );\n}\n\nfunction DrawerHeader({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"grid gap-2\", className)} {...props} />;\n}\n\nfunction DrawerFooter({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\"mt-6 flex flex-wrap justify-end gap-2\", className)}\n            {...props}\n        />\n    );\n}\n\nexport {\n    Drawer, DrawerTrigger, DrawerClose, DrawerContent,\n    DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription,\n};\nexport type { DrawerContentProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/drawer.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,5 +1,5 @@
-import { useId, useState, type ComponentProps } from "react";
-import { Button } from "./button";
+import { useId, type ComponentProps } from "react";
+import { CopyButton } from "./copy-button";
 import { cn } from "./utils";
 
 type CodeBlockProps = Omit<
@@ -22,11 +22,6 @@ function CodeBlock({
     ...props
 }: CodeBlockProps) {
     const labelId = useId();
-    const [feedback, setFeedback] = useState<{
-        code: string;
-        message: string;
-    } | null>(null);
-    const message = feedback?.code === code ? feedback.message : "";
 
     if (typeof label !== "string" || !label.trim()) {
         throw new Error("CodeBlock requires a label.");
@@ -38,15 +33,6 @@ function CodeBlock({
         typeof language !== "string" || !language.trim()
     )) {
         throw new Error("CodeBlock language must not be empty.");
-    }
-
-    async function copyCode() {
-        try {
-            await navigator.clipboard.writeText(code);
-            setFeedback({ code, message: "코드를 복사했습니다" });
-        } catch {
-            setFeedback({ code, message: "코드를 복사하지 못했습니다" });
-        }
     }
 
     return (
@@ -69,15 +55,10 @@ function CodeBlock({
                     <span className="text-xs text-muted">{language}</span>
                 )}
                 {copyable && (
-                    <>
-                        <span role="status" className="text-xs text-muted">
-                            {message}
-                        </span>
-                        <Button variant="ghost" disabled={!code}
-                            onClick={copyCode} aria-label={`${label} 복사`}>
-                            복사
-                        </Button>
-                    </>
+                    <CopyButton value={code} label={`${label} 복사`}
+                        appearance="text" disabled={!code}
+                        successMessage="코드를 복사했습니다"
+                        errorMessage="코드를 복사하지 못했습니다" />
                 )}
             </figcaption>
             <pre tabIndex={0} aria-label={`${label} 코드`}

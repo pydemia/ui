@@ -1,5 +1,28 @@
 # 검증 기록
 
+## 2026-10-02 ActionBar·CopyButton 로컬 검증
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript·UI 테스트 | pass | 저장소 typecheck, 전체 124/124, 새 component 4건 |
+| build | pass | 111개 registry item·문서 preview·Usage 생성 |
+| 문서 390px Chromium | pass (limited) | 복사 성공·강제 거부·값 변경, 선택 2건·floating·해제 focus, DataTable focus·가로 넘침 없음 |
+| 로컬 격리 소비자 | pass (limited) | 변경 item 5개+의존 item 동시 설치, 15개 파일 생성, 변경 소스 5개 일치·typecheck·build·390px 동작 |
+| 실제 복사 내용 | pass (limited) | 소비자에서 입력을 바꾼 뒤 Ctrl+V로 이전 복사값 `REQ-2048` 확인 |
+| registry release | pass | 111개 item·109개 export/catalog, 27개 snapshot과 현재 ID 일치 |
+| 공개 공급 | unverified | PR 병합·production·snapshot 소비자 설치 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+처음 CLI 설치는 빌드된 `registryDependencies`가 production을
+가리켜 실패했습니다. 로컬 base URL로 빌드해 설치를 검증했고
+이후 production base로 다시 빌드해 로컬 URL이 남지 않음을
+확인했습니다. `registry:check`의 첫 실패는 source commit
+`3bfed76`·현재 metadata SHA-256으로 고지를 갱신해 해결했습니다.
+27번째 snapshot ID는
+`sha256-c8bdf24d84b03bff8fe382f2b73e678e3cd5f6e0df86b649bdaa4f78676e01f5`입니다.
+세부 기록은
+[작업 기록](../.worknotes/action-copy-controls-2026-10-02.md)에 있습니다.
+
 ## 2026-10-02 Menubar 로컬 검증
 
 `Menubar`는 아직 공개하지 않았습니다. 로컬에서 `npm run typecheck`,

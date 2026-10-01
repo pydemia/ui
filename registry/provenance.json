@@ -23,6 +23,12 @@
       "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named group of native buttons; decorative separator", "keyboard": "native Tab and Enter/Space; browser check pending", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-copy-button", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C Clipboard API", "url": "https://www.w3.org/TR/2026/WD-clipboard-apis-20260624/", "scope": "async writeText permission and rejection behavior; no source copied" },
+      "dependencies": ["pyd-button", "pyd-utils", "lucide-react@0.468.0"], "accessibility": { "semantics": "named native button with success or failure status", "keyboard": "native Enter/Space; browser check pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/input.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native input; consumer supplies label", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
@@ -366,13 +372,13 @@
       "name": "pyd-snippet", "category": "Developer tools", "profiles": ["developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Kibo UI", "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/snippet/index.tsx", "license": "MIT" },
-      "dependencies": ["pyd-button", "pyd-tabs", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "Radix tabs; named copy button; live status", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-copy-button", "pyd-tabs", "pyd-utils"], "accessibility": { "semantics": "Radix tabs; named copy button; live status", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-code-block", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "MDN", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre", "scope": "native pre/code semantics; no source copied" },
-      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named figure and focusable pre/code; named native copy button and status", "keyboard": "Chromium: Enter copy status, wrap toggle, 390px internal scroll; clipboard content not independently verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-copy-button", "pyd-utils"], "accessibility": { "semantics": "named figure and focusable pre/code; named native copy button and status", "keyboard": "Chromium: Enter copy status, wrap toggle, 390px internal scroll; clipboard content not independently verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-diff-viewer", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
@@ -544,7 +550,13 @@
       "name": "pyd-data-table", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/" },
-      "dependencies": ["pyd-button", "pyd-checkbox", "pyd-input", "pyd-native-select", "pyd-pagination", "pyd-table", "pyd-utils"], "accessibility": { "semantics": "native table with caption, scoped column headings, aria-sort, named selection controls and scroll region", "keyboard": "Chromium: page, selection, search, filter, sort, action and narrow-screen horizontal scroll verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-action-bar", "pyd-button", "pyd-checkbox", "pyd-input", "pyd-native-select", "pyd-pagination", "pyd-table", "pyd-utils"], "accessibility": { "semantics": "native table with caption, scoped column headings, aria-sort, named selection controls and scroll region", "keyboard": "Chromium: page, selection, search, filter, sort, action and narrow-screen horizontal scroll verified", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-action-bar", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/", "scope": "toolbar keyboard requirements reviewed; native-button group used so ordinary Tab navigation remains" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named group with selected-count status and native clear action", "keyboard": "native Tab and Enter/Space; browser check pending", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-filter-bar", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],

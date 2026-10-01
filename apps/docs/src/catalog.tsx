@@ -1,5 +1,5 @@
 import {
-    Accordion, AccordionContent, AccordionItem, AccordionTrigger,
+    Accordion, AccordionContent, AccordionItem, AccordionTrigger, ActionBar,
     AffixedInput, Alert, AlertDescription, AlertTitle,
     AppBody, AppBottomPanel, AppFloatingBubble, AppFloatingPanel,
     AppHeader, AppMain, AppShell, AppSidebar,
@@ -15,6 +15,7 @@ import {
     Calendar, Card, CardContent, CardDescription, CardFooter, CardHeader,
     CardTitle,
     Carousel, Checkbox, CitationList, CodeBlock, ColorInput, Combobox,
+    CopyButton,
     CommandPalette,
     ContentList,
     ContextMenu, ContextMenuCheckboxItem, ContextMenuContent,
@@ -1548,6 +1549,71 @@ function MonthPickerPreview() {
             </p>
         </form>
     );
+}
+
+function CopyButtonPreview() {
+    const [value, setValue] = useState("REQ-2048");
+    return <div className="preview-stack">
+        <label className="grid gap-1 text-sm">
+            복사할 요청 ID
+            <Input value={value} onChange={(event) =>
+                setValue(event.target.value)} />
+        </label>
+        <div className="flex flex-wrap items-center gap-3">
+            <CopyButton value={value} label="요청 ID 복사" />
+            <CopyButton value={value} label="요청 ID 텍스트 복사"
+                appearance="text" />
+        </div>
+    </div>;
+}
+
+function ActionBarPreview() {
+    const items = [
+        { id: "req-1", label: "월간 보고서" },
+        { id: "req-2", label: "접근 권한" },
+        { id: "req-3", label: "알림 설정" },
+    ];
+    const [selected, setSelected] = useState<string[]>([]);
+    const [placement, setPlacement] = useState<"inline" | "floating">(
+        "inline",
+    );
+    const [lastAction, setLastAction] = useState("없음");
+    const firstItem = useRef<HTMLInputElement>(null);
+
+    function clearSelection() {
+        setSelected([]);
+        firstItem.current?.focus();
+    }
+
+    return <div className="preview-stack">
+        <div className="flex flex-wrap gap-2">
+            <Button variant={placement === "inline" ? "primary" : "outline"}
+                onClick={() => setPlacement("inline")}>Inline</Button>
+            <Button variant={placement === "floating" ? "primary" : "outline"}
+                onClick={() => setPlacement("floating")}>Floating</Button>
+        </div>
+        <div className="grid gap-2 rounded-sm border border-border p-3">
+            {items.map((item, index) => <label key={item.id}
+                className="flex items-center gap-2 text-sm">
+                <input ref={index === 0 ? firstItem : undefined}
+                    type="checkbox" checked={selected.includes(item.id)}
+                    onChange={(event) => setSelected((current) =>
+                        event.target.checked
+                            ? [...current, item.id]
+                            : current.filter((id) => id !== item.id))} />
+                {item.label}
+            </label>)}
+        </div>
+        {selected.length > 0 && <ActionBar aria-label="요청 선택 작업"
+            selectedCount={selected.length} placement={placement}
+            onClear={clearSelection}>
+            <Button variant="outline" onClick={() => {
+                setLastAction(`${selected.length}건 보관`);
+                clearSelection();
+            }}>보관</Button>
+        </ActionBar>}
+        <p role="status" className="text-sm">마지막 작업: {lastAction}</p>
+    </div>;
 }
 
 function YearPickerPreview() {
@@ -3412,6 +3478,62 @@ function ReportActions() {
 }`,
         installItems: ["button-group", "button", "dropdown-menu"],
         preview: () => <ButtonGroupPreview />,
+    },
+    {
+        id: "copy-button", name: "CopyButton", category: "Actions",
+        description: "임의의 텍스트를 클립보드에 복사하고 성공·실패를 상태로 알립니다. icon·text 표시를 선택할 수 있습니다.",
+        code: `import { useState } from "react";
+import { CopyButton, Input } from "@pydemia/ui";
+
+function RequestIdCopy() {
+  const [value, setValue] = useState("REQ-2048");
+  return <div>
+    <label htmlFor="request-id">요청 ID</label>
+    <Input id="request-id" value={value}
+      onChange={(event) => setValue(event.target.value)} />
+    <CopyButton value={value} label="요청 ID 복사" />
+    <CopyButton value={value} label="요청 ID 텍스트 복사"
+      appearance="text" />
+  </div>;
+}`,
+        installItems: ["copy-button", "input"],
+        preview: () => <CopyButtonPreview />,
+    },
+    {
+        id: "action-bar", name: "ActionBar", category: "Actions",
+        description: "표·카드·파일 목록에서 선택 건수, 일괄 작업과 해제를 묶습니다. inline·floating 배치를 지원하며 선택 상태는 호출자가 소유합니다.",
+        code: `import { useRef, useState } from "react";
+import { ActionBar, Button } from "@pydemia/ui";
+
+function SelectedRequests() {
+  const [selected, setSelected] = useState<string[]>([]);
+  const first = useRef<HTMLInputElement>(null);
+  const ids = ["REQ-1", "REQ-2", "REQ-3"];
+  const clear = () => {
+    setSelected([]);
+    first.current?.focus();
+  };
+  return <div>
+    {ids.map((id, index) => <label key={id}>
+      <input ref={index === 0 ? first : undefined}
+        type="checkbox" checked={selected.includes(id)}
+        onChange={(event) => setSelected((current) =>
+          event.target.checked ? [...current, id] :
+          current.filter((item) => item !== id))} />
+      {id}
+    </label>)}
+    {selected.length > 0 && <ActionBar aria-label="요청 선택 작업"
+      selectedCount={selected.length} placement="floating"
+      onClear={clear}>
+      <Button variant="outline" onClick={() => {
+        console.log(selected);
+        clear();
+      }}>보관</Button>
+    </ActionBar>}
+  </div>;
+}`,
+        installItems: ["action-bar", "button"],
+        preview: () => <ActionBarPreview />,
     },
     {
         id: "input", name: "Input", category: "Inputs",

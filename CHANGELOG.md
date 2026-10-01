@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-02 — 선택 작업·복사 control
+
+- `ActionBar`를 추가해 표·카드·파일 목록의 선택 건수, 일괄 작업과
+  해제를 inline 또는 floating 영역에 배치할 수 있습니다. 기존
+  `DataTable.renderActions`는 이 영역을 사용하며 API는 유지합니다.
+- `CopyButton`을 추가해 임의 문자열의 복사 성공·실패를 표시합니다.
+  `CodeBlock`과 `SnippetCopyButton`의 복사 동작을 공통화했습니다.
+
 ## 2026-10-02 — Menubar
 
 - 작업 화면에서 파일·보기 등 여러 상위 명령을 유지하는 `Menubar`를
