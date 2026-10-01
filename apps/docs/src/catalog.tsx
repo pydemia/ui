@@ -40,7 +40,8 @@ import {
     EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
     FilterBar, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
-    HoverCardTrigger, Heatmap, Image, Input, InputGroup, InputGroupAddon,
+    HoverCardTrigger, Heatmap, Image, ImageCropper, Input, InputGroup,
+    InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, JsonViewer, Kanban,
     Label, LogConsole, Markdown, Menubar, MenubarCheckboxItem,
@@ -1854,6 +1855,90 @@ function DateTimePickerPreview() {
             {error && <p role="alert">날짜와 시각을 선택하세요.</p>}
             <p role="status">제출 값: {submitted ?? "없음"}</p>
         </form>
+    );
+}
+
+function ImageCropperPreview() {
+    const [file, setFile] = useState<File | null>(null);
+    const [result, setResult] = useState<Blob | null>(null);
+    const [resultUrl, setResultUrl] = useState<string | null>(null);
+    const [sampleError, setSampleError] = useState("");
+    const [aspectRatio, setAspectRatio] = useState(1);
+
+    useEffect(() => {
+        const controller = new AbortController();
+        fetch("/favicon.png", { signal: controller.signal })
+            .then((response) => {
+                if (!response.ok) throw new Error("샘플 이미지를 읽지 못했습니다.");
+                return response.blob();
+            })
+            .then((blob) => setFile((current) => current ??
+                new File([blob], "pydemia-ui.png", { type: "image/png" })))
+            .catch((error) => {
+                if (!controller.signal.aborted) {
+                    setSampleError(error instanceof Error
+                        ? error.message : "샘플 이미지를 읽지 못했습니다.");
+                }
+            });
+        return () => controller.abort();
+    }, []);
+
+    useEffect(() => {
+        if (!result) {
+            setResultUrl(null);
+            return;
+        }
+        const url = URL.createObjectURL(result);
+        setResultUrl(url);
+        return () => URL.revokeObjectURL(url);
+    }, [result]);
+
+    return (
+        <div className="preview-workspace grid max-w-xl gap-3">
+            <Dropzone label="자를 이미지 선택"
+                description="PNG, JPEG 또는 WebP 이미지"
+                accept={{
+                    "image/png": [".png"],
+                    "image/jpeg": [".jpg", ".jpeg"],
+                    "image/webp": [".webp"],
+                }}
+                onFilesSelected={(files) => {
+                    setFile(files[0]);
+                    setResult(null);
+                }} />
+            {sampleError && <p role="status">{sampleError}</p>}
+            <div role="group" aria-label="자르기 비율"
+                className="flex flex-wrap gap-2">
+                {[{ label: "정사각형 1:1", ratio: 1 },
+                    { label: "가로 16:9", ratio: 16 / 9 }].map((option) => (
+                    <Button key={option.label}
+                        variant={aspectRatio === option.ratio
+                            ? "primary" : "outline"}
+                        aria-pressed={aspectRatio === option.ratio}
+                        onClick={() => {
+                            setAspectRatio(option.ratio);
+                            setResult(null);
+                        }}>
+                        {option.label}
+                    </Button>
+                ))}
+            </div>
+            <ImageCropper file={file} label="이미지 자르기"
+                alt={file ? `${file.name} 자르기 미리보기`
+                    : "이미지 자르기 미리보기"}
+                aspectRatio={aspectRatio} outputWidth={256}
+                onCrop={setResult} />
+            {resultUrl && (
+                <div className="grid gap-2">
+                    <strong className="text-sm">잘린 결과</strong>
+                    <img src={resultUrl} alt="잘린 이미지 결과"
+                        className="size-28 rounded-sm border border-border" />
+                    <span role="status" className="text-xs text-muted">
+                        PNG 결과 {result?.size ?? 0}바이트
+                    </span>
+                </div>
+            )}
+        </div>
     );
 }
 
@@ -4550,6 +4635,35 @@ function DateExample() {
     aspectRatio="square" />
 </>;`,
         preview: () => <ImagePreview />,
+    },
+    {
+        id: "image-cropper", name: "ImageCropper",
+        category: "File & media",
+        description: "선택한 PNG·JPEG·WebP를 고정 비율로 자릅니다. 끌기 또는 이름 있는 위치·확대 슬라이더로 조정하고, PNG Blob을 앱에 전달합니다.",
+        installItems: ["image-cropper", "dropzone"],
+        code: `import { useState } from "react";
+import { Dropzone, ImageCropper } from "@pydemia/ui";
+
+function CropProfileImage() {
+  const [file, setFile] = useState<File | null>(null);
+  const [result, setResult] = useState<Blob | null>(null);
+  return <div>
+    <Dropzone label="사진 선택"
+      accept={{ "image/png": [".png"],
+        "image/jpeg": [".jpg", ".jpeg"],
+        "image/webp": [".webp"] }}
+      onFilesSelected={(files) => {
+        setFile(files[0]);
+        setResult(null);
+      }} />
+    <ImageCropper file={file} label="프로필 사진 자르기"
+      alt="선택한 프로필 사진의 자르기 미리보기"
+      aspectRatio={1} outputWidth={512}
+      onCrop={setResult} />
+    {result && <p role="status">PNG {result.size}바이트 준비됨</p>}
+  </div>;
+}`,
+        preview: () => <ImageCropperPreview />,
     },
     {
         id: "dropzone", name: "Dropzone", category: "File & media",

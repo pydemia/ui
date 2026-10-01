@@ -1,5 +1,36 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 ImageCropper source 확인
+
+`ImageCropper`는 `.worknotes/shadcn-component-library-handoff.md`의
+File & media 후보입니다. 파일 선택 뒤 프로필·게시물 이미지를
+정사각형이나 가로형으로 자르는 작업은 기존 `Image`의 표시나
+`FileUpload`의 전송 상태와 다릅니다. 구현은 pydemia/ui 원본이며
+외부 component 코드를 복사하지 않았습니다.
+
+[WHATWG HTML Canvas](https://html.spec.whatwg.org/multipage/canvas.html)의
+`drawImage` source rectangle·`toBlob` PNG 직렬화,
+[W3C File API](https://www.w3.org/TR/FileAPI/)의 blob URL 생성·해제,
+[W3C Pointer Events](https://www.w3.org/TR/pointerevents4/)의 pointer
+capture를 확인했습니다. [WAI form label 지침](https://www.w3.org/WAI/tutorials/forms/labels/)과
+[drag 대체 조작 지침](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements)은
+보이는 label과 native range 조작의 근거입니다. 이 자료는 웹 API·
+접근성 규칙의 참고 문서이고 component source로 복사하지 않았습니다.
+
+직접 의존성은 React와 기존 `pyd-button`·`pyd-utils`입니다. 새 npm
+의존성은 없습니다. `pyd-button`은 기존 shadcn/ui 수정 소스로,
+[공식 Button 문서](https://ui.shadcn.com/docs/components/radix/button),
+[고정 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+기존 provenance·고지와 함께 재사용합니다. 해당 registry item의
+직접 npm 의존성은 `class-variance-authority@0.7.1`이고 `pyd-utils`를
+거쳐 `clsx`·`tailwind-merge`를 사용합니다. ImageCropper 자체에는
+제3자 source notice가 추가되지 않습니다.
+
+보이는 세 range label과 native 버튼은 키보드 조작을 제공하며
+canvas의 포인터 끌기에는 같은 결과를 얻는 range 대안을 둡니다.
+실제 screen reader·touch·Safari 발표·조작은 미검증입니다.
+
 ## 2026-10-02 Card·Alert 표시 형태 source 확인
 
 기존 `Card`와 `Alert`는 shadcn/ui 고정 revision의 수정 소스입니다.

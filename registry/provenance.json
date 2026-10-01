@@ -304,6 +304,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native image alt text, decorative empty alt and visible loading/error/missing states", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-image-cropper", "category": "File & media", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WHATWG HTML", "url": "https://html.spec.whatwg.org/multipage/canvas.html", "scope": "canvas crop and PNG export behavior; no source copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named canvas preview, labeled native range controls, visible result and errors", "keyboard": "native range and button controls; browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-dropzone", "category": "File & media", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Kibo UI", "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx", "license": "MIT" },

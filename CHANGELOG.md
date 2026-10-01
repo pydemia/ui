@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-02 — ImageCropper
+
+- 로컬 PNG·JPEG·WebP 파일을 고정 비율로 자르는 `ImageCropper`를
+  추가했습니다. 포인터 끌기와 native 위치·확대 슬라이더를 제공하고
+  결과를 지정한 너비의 PNG Blob으로 호출자에게 전달합니다.
+- 파일 전송은 수행하지 않으며 잘린 결과를 저장하거나 업로드하는
+  작업은 호출자가 맡습니다.
+
 ## 2026-10-02 — CodeEditorShell
 
 - SQL·설정 조각의 일반 텍스트 편집을 위한 `CodeEditorShell`을

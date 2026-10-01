@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-111개 component와 113개 registry item이 있습니다. 2026-09-30에
+112개 component와 114개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
@@ -26,6 +26,8 @@ Markdown을
 `IconButton`을 편입하고 기존 `Tabs`에 line·contained 표시를
 추가했습니다. `CodeEditorShell`에는 줄 번호·form 값·오류 연결과
 panel·flat 표시를 추가했습니다.
+`ImageCropper`는 로컬 사진의 고정 비율 편집과 PNG 결과를 위한
+별도 작업으로 편입했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -76,6 +78,11 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 
 문서만 바뀌면 변경한 링크·Usage·preview와 문서 build를 확인합니다.
 동일 commit의 검사를 로컬·PR·병합 후에 각각 반복하지 않습니다.
+같은 산출물의 변경 흐름을 로컬 브라우저에서 검증했다면 공개 사이트에서는
+배포와 변경 URL을 확인하며, 동작 검사를 다시 실행할 필요는 없습니다.
+외부 component 코드를 사용하지 않은 원본 구현에는 upstream source·
+LICENSE 대조를 적용하지 않습니다. 참고한 플랫폼 명세와 기존 의존
+component의 출처는 기록합니다.
 표준 registry 경로를 쓰는 item마다 새 소비자를 만들지 않으며,
 실행하지 않은 개별 CLI 설치는 미검증으로 적습니다. 브라우저도
 변경된 흐름을 대표하는 검사만 요구합니다.
@@ -488,9 +495,12 @@ token 전달 방식을 정할 때,
 - [x] `CodeEditorShell`: SQL·설정 조각을 위한 이름 있는 일반 텍스트
   textarea에 줄 번호, 언어·작업 영역, 오류 연결을 결합했습니다.
   구문 강조·코드 실행은 이 component의 범위가 아닙니다.
-- [ ] `RichTextEditor`·`NodeCanvas`·`ImageCropper`·
-  `CalendarScheduler`: 제품별 데이터·편집 모델과 유지 비용을 조사해
-  착수 여부를 판단합니다. 숫자를 맞추기 위해 영구 제외하지 않습니다.
+- [x] `ImageCropper`: 로컬 파일의 고정 비율 영역을 끌기·native
+  슬라이더로 조정해 PNG Blob으로 전달합니다. 업로드와 저장은
+  호출자가 담당하며 실제 touch·screen reader·Safari는 미검증입니다.
+- [ ] `RichTextEditor`·`NodeCanvas`·`CalendarScheduler`: 제품별
+  데이터·편집 모델과 유지 비용을 조사해 착수 여부를 판단합니다.
+  숫자를 맞추기 위해 영구 제외하지 않습니다.
 
 `Stat`·`MetricCard`, `StatusIndicator`·`Badge`, `SegmentedControl`·
 `RadioGroup`/`ToggleGroup`, `CircularProgress`·`Progress`, `Legend`·

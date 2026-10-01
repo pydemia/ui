@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-code-block",
+  "title": "Code Block",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-7faa63bf1fee02d8ed644e96d9a7f41804f406317f66ed362737aa3b5a363066/pyd-copy-button.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-7faa63bf1fee02d8ed644e96d9a7f41804f406317f66ed362737aa3b5a363066/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/code-block.tsx",
+      "content": "import { useId, type ComponentProps } from \"react\";\nimport { CopyButton } from \"./copy-button\";\nimport { cn } from \"./utils\";\n\ntype CodeBlockProps = Omit<\n    ComponentProps<\"figure\">, \"children\" | \"aria-labelledby\"\n> & {\n    label: string;\n    code: string;\n    language?: string;\n    wrap?: boolean;\n    copyable?: boolean;\n};\n\nfunction CodeBlock({\n    label,\n    code,\n    language,\n    wrap = false,\n    copyable = true,\n    className,\n    ...props\n}: CodeBlockProps) {\n    const labelId = useId();\n\n    if (typeof label !== \"string\" || !label.trim()) {\n        throw new Error(\"CodeBlock requires a label.\");\n    }\n    if (typeof code !== \"string\") {\n        throw new TypeError(\"CodeBlock code must be a string.\");\n    }\n    if (language !== undefined && (\n        typeof language !== \"string\" || !language.trim()\n    )) {\n        throw new Error(\"CodeBlock language must not be empty.\");\n    }\n\n    return (\n        <figure {...props} aria-labelledby={labelId}\n            className={cn(\n                \"m-0 min-w-0 overflow-hidden rounded-sm border \" +\n                \"border-border bg-surface\",\n                className,\n            )}>\n            <figcaption id={labelId}\n                className={\n                    \"flex min-w-0 items-center gap-2 border-b \" +\n                    \"border-border bg-surface-subtle px-[var(--space-3)] \" +\n                    \"py-[var(--space-1)] text-sm text-foreground\"\n                }>\n                <span className=\"min-w-0 flex-1 truncate font-medium\">\n                    {label}\n                </span>\n                {language && (\n                    <span className=\"text-xs text-muted\">{language}</span>\n                )}\n                {copyable && (\n                    <CopyButton value={code} label={`${label} 복사`}\n                        appearance=\"text\" disabled={!code}\n                        successMessage=\"코드를 복사했습니다\"\n                        errorMessage=\"코드를 복사하지 못했습니다\" />\n                )}\n            </figcaption>\n            <pre tabIndex={0} aria-label={`${label} 코드`}\n                className={cn(\n                    \"m-0 max-w-full overflow-auto p-[var(--space-4)] \" +\n                    \"text-xs leading-6 text-foreground\",\n                    wrap ? \"whitespace-pre-wrap break-words\" :\n                        \"whitespace-pre\",\n                )}>\n                <code>{code}</code>\n            </pre>\n        </figure>\n    );\n}\n\nexport { CodeBlock };\nexport type { CodeBlockProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/code-block.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
