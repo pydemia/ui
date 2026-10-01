@@ -1,16 +1,27 @@
 # Component 확장 작업 인계
 
-2026-10-01 TreeSelect reset 수정 중: 첫 공개 snapshot
+2026-10-01 TreeSelect 수정판 공개 검증 완료: 현재 105개 component·
+107개 registry item·23개 불변 snapshot입니다. 수정판 ID는
+`sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`입니다.
+PR #31의 Verify UI와 병합 commit의 Verify UI·Pages가 통과했고
+Vercel production은 READY입니다. 공개 snapshot을 별도 소비자에
+설치해 6개 파일 원본 일치·typecheck·build·390px Chromium의
+반복 reset·필수 오류·키보드 선택·제출을 확인했습니다. 공개 preview와
+JSON·manifest도 확인했습니다. 실제 screen reader·touch·Safari·RTL,
+rollback 시험은 미검증입니다. Goal 약 80%, 공급·품질 5/10입니다.
+[작업 기록](component-tree-select-2026-10-01.md)을 참고하세요.
+
+2026-10-01 TreeSelect reset 수정 당시: 첫 공개 snapshot
 `sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690`의
 별도 소비자에서 기본값을 지운 뒤 reset하자 표시와 native form 값이
 달랐습니다. option의 기본 선택을 동기화해 수정했고 동일 소비자
 fixture의 390px Chromium에서 reset 2회, typecheck·build를 다시
 확인했습니다. 수정판 새 snapshot ID는
 `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`이며
-공개 배포·설치는 진행 중입니다. Goal 약 80%, 공급·품질 5/10입니다.
+공개 배포·설치를 준비했습니다. Goal 약 80%, 공급·품질 5/10입니다.
 [작업 기록](component-tree-select-2026-10-01.md)을 참고하세요.
 
-2026-10-01 TreeSelect 작업 중: 정적 조직 계층의 단일 항목 선택,
+2026-10-01 TreeSelect 최초 편입 기록: 정적 조직 계층의 단일 항목 선택,
 선택 경로·form 값·필수 선택·reset을 기존 Tree·Popover로
 구성합니다. Ant Design 고정 revision의 공식 문서·source·manifest·
 MIT LICENSE를 확인했고 코드는 복사하지 않았습니다. 시작 기준은
@@ -19,7 +30,7 @@ MIT LICENSE를 확인했고 코드는 복사하지 않았습니다. 시작 기�
 390px Chromium 동작, registry 22번째 snapshot 생성이 통과했습니다.
 현재 source는 105개 component·107개 item입니다. 새 snapshot은
 `sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690`입니다.
-공개 소비자와 배포는 진행 중이며, 검증 상태는
+당시 공개 소비자와 배포는 진행 전이었으며, 최종 검증 상태는
 [작업 기록](component-tree-select-2026-10-01.md)을 확인하세요.
 
 2026-10-01 DiffViewer 공개 완료: 변경 전후 줄 번호·추가·삭제·문맥을

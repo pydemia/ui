@@ -78,3 +78,26 @@
   `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`를
   생성했습니다. 다시 빌드한 뒤 `registry:release-check`가 23개
   snapshot과 현재 ID 일치를 확인했습니다. 공개 설치는 재검사 전입니다.
+
+## 수정판 공개 검증
+
+- Git index lock 삭제가 자동 승인 검토에서 거부되어 새 관리형 worktree로
+  수정판 snapshot과 문서 빌드를 옮겼습니다. 그 checkout의 build와
+  `registry:release-check`가 통과했습니다.
+- PR #31의 Verify UI, 병합 commit `47f4b86`의 Verify UI·Pages가
+  성공했고 Vercel production `dpl_GtZ82XrgbbnkatkGoUFxH5kctqKF`가
+  READY입니다.
+- 공개 snapshot URL을 별도 Vite 소비자에 설치했습니다. 설치된
+  tree-select·tree·popover·utils·tokens·license 6개 파일이 수정판
+  snapshot 원본과 일치하며 소비자 typecheck·build가 통과했습니다.
+  390px Chromium에서 Backup의 `ops`를 지우고 reset 2회 모두 표시와
+  native select 값이 `ops`로 복원됐습니다. 필수 오류, 방향키·Enter로
+  `design` 선택, FormData의 `design:ops` 제출도 확인했습니다.
+- 공개 390px preview에서 필수 오류, 방향키·Enter 선택, `design`
+  제출과 reset 후 빈 값을 확인했습니다. 공개 현재 TreeSelect JSON,
+  수정판 snapshot JSON·manifest는 저장소의 게시 파일과 일치하고
+  page error는 없었습니다.
+- 첫 공개 snapshot은 불변이므로 그 reset 오류가 남아 있습니다.
+  새 소비자는 수정판 ID를 사용해야 합니다. 실제 screen reader·touch·
+  Safari·RTL과 과거 배포 rollback은 실행하지 않았습니다.
+- 작업 종료 기준 goal 약 80%, 공급·품질 체크리스트 5/10입니다.
