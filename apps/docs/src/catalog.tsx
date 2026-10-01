@@ -24,7 +24,7 @@ import {
     Conversation, Dashboard, DashboardMetrics,
     DashboardPanels,
     DataChart, DataList, DataTable, DatePicker, DateRangePicker,
-    DateTimePicker,
+    DateTimePicker, DiffViewer,
     Dialog, DialogClose, DialogContent,
     DialogDescription, DialogFooter, DialogHeader, DialogTitle,
     DialogTrigger, DonutChart, Drawer, DrawerClose, DrawerContent,
@@ -1270,6 +1270,44 @@ function ToolCallPreview() {
                 error={status === "failed" ? "의존성 파일을 찾지 못했습니다." : undefined} />
             <ToolCall name="cache.read" status="succeeded"
                 output="캐시 적중" variant="compact" />
+        </div>
+    );
+}
+
+function DiffViewerPreview() {
+    const [view, setView] = useState<"unified" | "split">("unified");
+    const [wrap, setWrap] = useState(false);
+    const before = [
+        "export const settings = {",
+        "  region: 'west',",
+        "  cache: false,",
+        "  endpoint: 'https://example.test/api/v1/reports/monthly',",
+        "};",
+    ].join("\n");
+    const after = [
+        "export const settings = {",
+        "  region: 'west',",
+        "  cache: true,",
+        "  endpoint: 'https://example.test/api/v2/reports/monthly',",
+        "};",
+    ].join("\n");
+
+    return (
+        <div className="preview-workspace grid min-w-0 gap-3">
+            <div className="flex flex-wrap gap-2">
+                <Button variant={view === "unified" ? "primary" : "outline"}
+                    aria-pressed={view === "unified"}
+                    onClick={() => setView("unified")}>통합 보기</Button>
+                <Button variant={view === "split" ? "primary" : "outline"}
+                    aria-pressed={view === "split"}
+                    onClick={() => setView("split")}>좌우 보기</Button>
+                <Button variant="outline" aria-pressed={wrap}
+                    onClick={() => setWrap((value) => !value)}>
+                    긴 줄 {wrap ? "줄바꿈 해제" : "줄바꿈"}
+                </Button>
+            </div>
+            <DiffViewer label="settings.ts 변경" before={before}
+                after={after} view={view} wrap={wrap} />
         </div>
     );
 }
@@ -4322,6 +4360,19 @@ function Example() {
 />`,
         installItems: ["code-block"],
         preview: () => <CodeBlockPreview />,
+    },
+    {
+        id: "diff-viewer", name: "DiffViewer", category: "Developer tools",
+        description: "변경 전후의 줄 번호·추가·삭제·문맥을 통합 또는 좌우 표로 읽습니다. 큰 변경은 축약 비교임을 알립니다.",
+        code: `import { DiffViewer } from "@pydemia/ui";
+
+<DiffViewer
+  label="settings.ts 변경"
+  before={"region: 'west'\\ncache: false"}
+  after={"region: 'west'\\ncache: true"}
+  view="unified"
+/>`,
+        preview: () => <DiffViewerPreview />,
     },
     {
         id: "markdown", name: "Markdown", category: "Developer tools",

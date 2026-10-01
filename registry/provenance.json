@@ -370,6 +370,12 @@
       "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named figure and focusable pre/code; named native copy button and status", "keyboard": "Chromium: Enter copy status, wrap toggle, 390px internal scroll; clipboard content not independently verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-diff-viewer", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "react-diff-viewer", "url": "https://github.com/praneshr/react-diff-viewer/blob/5572d1c121ea095fe913a862b9e89e46a45f2599/README.md", "license": "MIT", "scope": "unified and split review concept only; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native comparison table with column headers, text change labels and named focusable scroll region", "keyboard": "Chromium: unified/split and wrap controls, 390px layout, ArrowRight internal scroll verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-markdown", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "CommonMark", "url": "https://spec.commonmark.org/0.31.2/", "scope": "syntax reference for a documented subset; no source or specification text copied" },

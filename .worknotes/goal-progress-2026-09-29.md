@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 DiffViewer 작업 시작: 관리용 기준값 **약 80%**,
+103개 component·105개 registry item·20개 snapshot, 공급·품질 조건
+5/10입니다. 변경 전후 줄 검토가 기존 `CodeBlock`·`LogConsole`과
+독립된 사용처인지 확인해 편입을 시작했습니다. 완료율은 component
+수/100으로 계산하지 않으며 종료값과 검증 범위는
+[DiffViewer 작업 기록](component-diff-viewer-2026-10-01.md)에 남깁니다.
+
 2026-10-01 ApprovalCard 공개 검증 후: **약 80% → 약 80%**입니다.
 `ApprovalCard`의 별도 승인 상태·중복 결정 방지·실패 후 재시도를
 공급하고 공개 preview·snapshot·새 소비자 설치까지 확인했습니다.
