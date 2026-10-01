@@ -508,6 +508,12 @@
       "files": [{ "path": "packages/ui/src/components/tree.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-tree-select", "type": "registry:ui", "title": "Tree Select",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-tree.json", "./pyd-popover.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/tree-select.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-stepper", "type": "registry:ui", "title": "Stepper",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/stepper.tsx", "type": "registry:ui" }]

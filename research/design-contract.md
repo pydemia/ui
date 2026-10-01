@@ -1,5 +1,23 @@
 # Prototype 설계 계약
 
+## 2026-10-01 TreeSelect 계층 form 선택 규칙
+
+`TreeSelect`는 정적 계층의 단일 선택값을 가집니다. `id`는 전체
+계층에서 고유하고 비어 있지 않아야 합니다. 비활성 노드와 그
+후손은 선택·form option 대상에서 제외합니다. 외부 `value`가 있으면
+소비자가 상태를 소유하고, 없으면 `defaultValue`로 시작해 내부에서
+관리합니다. 선택한 항목은 조상 경로와 함께 표시해 같은 이름의
+항목을 구분합니다.
+
+표시되는 label은 button과 연결합니다. `name`을 주면 보조기술
+트리에서 숨긴 native select가 선택한 `id`를 form 값으로 제출합니다.
+`required`는 native select의 유효성 검사를 사용하고 오류를
+표시하며 trigger에 초점을 둡니다. Uncontrolled 값은 form
+reset 때 `defaultValue`로 돌아갑니다. Controlled 값의 reset은
+소비자가 직접 처리합니다. `Tree`의 단일 선택·방향키 이동과
+`Popover`의 열기·닫기·Escape 동작을 유지합니다. 원격 로딩,
+다중 선택, 계층 검색은 이 API에 포함하지 않습니다.
+
 ## 2026-10-01 DiffViewer 줄 비교 규칙
 
 `DiffViewer`는 소비자가 소유한 `before`·`after` 문자열을 표시합니다.

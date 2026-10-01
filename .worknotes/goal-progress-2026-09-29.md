@@ -1,5 +1,11 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 TreeSelect 작업 시작: 관리용 기준값 **약 80%**,
+104개 component·106개 registry item·21개 snapshot, 공급·품질 조건
+5/10입니다. 계층의 한 항목을 form 값으로 제출하는 반복 흐름을 기존
+`Tree`·`Popover`와 구분해 구현합니다. 완료 후 검증 범위와 종료값은
+[TreeSelect 작업 기록](component-tree-select-2026-10-01.md)에 남깁니다.
+
 2026-10-01 DiffViewer 공개 검증 후: **약 80% → 약 80%**입니다.
 104개 component·106개 registry item·21개 snapshot입니다. 공개
 preview, 새 소비자의 snapshot 설치·typecheck·build·390px Chromium,

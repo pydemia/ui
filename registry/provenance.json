@@ -422,6 +422,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named single-select tree with nested groups, declared level/position, separate focus/selection and described lazy loading/error states", "keyboard": "Chromium: arrows, Home/End, Enter, Space, typeahead, disabled skip, lazy expand/error retry/loaded child focus and focus ring verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-tree-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Ant Design", "url": "https://github.com/ant-design/ant-design/blob/820e1a8c2dbb508b15e5ad0fc3eedcdef869d98b/components/tree-select/index.en-US.md", "license": "MIT", "scope": "hierarchical form selection concept only; no source copied" },
+      "dependencies": ["lucide-react", "pyd-tree", "pyd-popover", "pyd-utils"], "accessibility": { "semantics": "visible label, named trigger and single-select tree; screen-reader-hidden native select carries form value and required validation", "keyboard": "Chromium: arrows, Enter, Escape focus return, disabled skip, required error, submit and reset at 390px verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-stepper", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "W3C WCAG Technique ARIA26", "url": "https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA26" },

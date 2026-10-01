@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-sparkline",
+  "title": "Sparkline",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/sparkline.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype SparklineProps = Omit<ComponentProps<\"svg\">, \"children\" | \"values\"> & {\n    label: string;\n    values: readonly (number | null)[];\n    unit?: string;\n};\n\nfunction Sparkline({\n    label,\n    values,\n    unit = \"\",\n    className,\n    ...props\n}: SparklineProps) {\n    if (values.some((value) => value !== null && !Number.isFinite(value))) {\n        throw new RangeError(\"Sparkline values must be finite numbers or null.\");\n    }\n\n    const present = values.filter((value): value is number => value !== null);\n    const empty = present.length === 0;\n    let minimum = Infinity;\n    let maximum = -Infinity;\n    for (const value of present) {\n        minimum = Math.min(minimum, value);\n        maximum = Math.max(maximum, value);\n    }\n    if (empty) {\n        minimum = 0;\n        maximum = 0;\n    }\n    const spread = maximum - minimum;\n    let drawing = false;\n    let path = \"\";\n    let lastPoint: { x: number; y: number } | null = null;\n\n    for (let index = 0; index < values.length; index += 1) {\n        const value = values[index];\n        if (value === null) {\n            drawing = false;\n            continue;\n        }\n        const x = values.length === 1 ? 80 : 4 + index * 152 / (values.length - 1);\n        const y = spread === 0 ? 24 : 44 - (value - minimum) * 40 / spread;\n        path += `${drawing ? \" L\" : \" M\"}${x.toFixed(2)} ${y.toFixed(2)}`;\n        drawing = true;\n        lastPoint = { x, y };\n    }\n\n    const description = empty\n        ? `${label}: 데이터 없음`\n        : `${label}: 시작 ${present[0]}${unit}, 마지막 ` +\n          `${present[present.length - 1]}${unit}, 최저 ${minimum}${unit}, ` +\n          `최고 ${maximum}${unit}`;\n\n    return (\n        <svg\n            viewBox=\"0 0 160 48\"\n            role=\"img\"\n            aria-label={description}\n            className={cn(\"h-12 w-full text-accent\", className)}\n            {...props}\n        >\n            {empty ? (\n                <text x=\"80\" y=\"27\" textAnchor=\"middle\" fill=\"currentColor\"\n                    className=\"text-xs\">\n                    데이터 없음\n                </text>\n            ) : (\n                <>\n                    <path\n                        d={path}\n                        fill=\"none\"\n                        stroke=\"currentColor\"\n                        strokeWidth=\"2\"\n                        strokeLinecap=\"round\"\n                        strokeLinejoin=\"round\"\n                        vectorEffect=\"non-scaling-stroke\"\n                    />\n                    {lastPoint && (\n                        <circle cx={lastPoint.x} cy={lastPoint.y}\n                            r=\"2.5\" fill=\"currentColor\" />\n                    )}\n                </>\n            )}\n        </svg>\n    );\n}\n\nexport { Sparkline };\nexport type { SparklineProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/sparkline.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

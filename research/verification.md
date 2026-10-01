@@ -1854,3 +1854,17 @@ snapshot ID는
 | rollback 뒤 snapshot URL | unverified | 과거 배포 rollback 시험 전 |
 
 세부 기록은 `.worknotes/component-diff-viewer-2026-10-01.md`에 있습니다.
+
+## 2026-10-01 TreeSelect
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript | pass | 저장소 `npm run typecheck` |
+| 패키지 테스트 | pass | 전용 3/3, 전체 최종 113/113 |
+| 로컬 390px Chromium | pass (limited) | 필수 오류·초점, 하위 선택·제출·reset, Escape 복귀·비활성 건너뛰기, body 390px |
+| build | pass | 107개 registry item, 문서·프로필 예시 생성 |
+| registry release check | pass | 107개 item·105개 export/catalog, 22개 snapshot, 현재 ID 일치 |
+| 소비자·공개 배포 | unverified | 별도 소비자 설치와 릴리스 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+세부 기록은 `.worknotes/component-tree-select-2026-10-01.md`에 있습니다.

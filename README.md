@@ -1,7 +1,7 @@
 # pydemia UI
 
 React 19, Tailwind CSS 4, TypeScript와 shadcn registry convention으로 만든
-source-owned UI 컴포넌트 작업공간입니다. 현재 104개 컴포넌트를 포함합니다.
+source-owned UI 컴포넌트 작업공간입니다. 현재 105개 컴포넌트를 포함합니다.
 shadcn/ui 기반 항목은 원본 revision과 MIT notice를 유지합니다. Origin UI,
 Kibo UI, AI Elements, Tremor는 디자인·상호작용 reference로 기록하고
 해당 항목의 구현 코드는 `pydemia/ui`에서 관리합니다.
@@ -100,11 +100,11 @@ npm run registry:release-check
 [CHANGELOG.md](CHANGELOG.md)에
 기록하고, 배포 후 공개 snapshot URL의 설치를 별도 소비자에서 확인합니다.
 현재 source의 ID는
-`sha256-f2fbab67bddc01492523191362957921e38db65775b20a3ae9e37949dbf20f89`입니다.
-이 ID의 DiffViewer와 token을 별도 소비자에 설치하려면:
+`sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690`입니다.
+이 ID의 TreeSelect와 token을 별도 소비자에 설치하려면:
 
 ```bash
-npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-f2fbab67bddc01492523191362957921e38db65775b20a3ae9e37949dbf20f89/pyd-diff-viewer.json https://pydemia-ui.vercel.app/r/releases/sha256-f2fbab67bddc01492523191362957921e38db65775b20a3ae9e37949dbf20f89/pyd-tokens.json
+npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690/pyd-tree-select.json https://pydemia-ui.vercel.app/r/releases/sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690/pyd-tokens.json
 ```
 
 이전 DataChart snapshot
