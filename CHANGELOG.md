@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-02 — Card·Alert 표시 형태
+
+- `Card`에 `default`·`subtle`·`elevated` 표면과 기본·`compact`
+  간격을 추가했습니다. `MetricCard`의 기존 variant API는 유지합니다.
+- `Alert`에 상태와 독립적인 `outline`·`soft`·`plain` 표시를
+  추가했습니다. 기본 모양과 상태별 발표 역할은 유지합니다.
+
 ## 2026-10-02 — 선택 작업·복사 control
 
 - `ActionBar`를 추가해 표·카드·파일 목록의 선택 건수, 일괄 작업과

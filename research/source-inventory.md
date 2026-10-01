@@ -1,5 +1,24 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 Card·Alert 표시 형태 source 확인
+
+기존 `Card`와 `Alert`는 shadcn/ui 고정 revision의 수정 소스입니다.
+[Card 공식 문서](https://ui.shadcn.com/docs/components/radix/card)와
+[Alert 공식 문서](https://ui.shadcn.com/docs/components/radix/alert),
+같은 revision `98a1fe67b439324ddc857f47fbdce056600a4329`의
+[Card source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/card.tsx),
+[Alert source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert.tsx),
+[MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 이 작업의 표면·간격 선택은 pydemia/ui token으로
+작성했으며 새 upstream source나 runtime dependency를 가져오지
+않았습니다. Card는 React와 기존 `pyd-utils`, Alert는 여기에
+기존 `class-variance-authority@0.7.1`을 사용합니다.
+
+Card는 div 조합 요소로 남아 자동 landmark나 heading level을
+부여하지 않습니다. Alert의 일반 상태는 `role="status"`, 오류는
+`role="alert"`이고 표면을 바꿔도 제목·설명과 발표 역할을
+유지합니다. 실제 screen reader 발표는 미검증입니다.
+
 ## 2026-10-02 ActionBar·CopyButton source 확인
 
 `ActionBar`는 기존 `DataTable.renderActions`의 선택 건수·해제 영역을

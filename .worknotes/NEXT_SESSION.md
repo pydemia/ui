@@ -1,5 +1,19 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 기준 재조정: CI가 이미 검사하는 항목과 소비자
+설치를 릴리스마다 중복하지 않도록 [판정 기준](quality-criteria-reassessment-2026-10-02.md)을
+갱신했습니다. 기존 component의 표시·타입 변경은 typecheck·관련
+테스트·build·registry 검사와 변경 preview를 확인하며, 새 소비자
+설치는 새 component·설치 경로·의존성 체인에 적용합니다. registry
+변경의 공개 URL 도달 여부는 확인하되, 매번 공개 snapshot을 새
+소비자에 재설치하지 않습니다. 출처·LICENSE와 확인된 주요 결함의
+출시 차단 기준은 유지합니다. 이번 검토는 구현·배포를 추가하지 않아
+goal 약 83%, 109개 component·111개 item·27개 snapshot입니다.
+Card·Alert 표시 형태 확장은 로컬 typecheck·테스트 126/126·build·
+registry 검사와 390px Chromium을 통과했습니다. 28번째 snapshot을
+생성했고 PR·공개 URL 확인은 남았습니다.
+[작업 기록](card-alert-appearances-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ActionBar·CopyButton 공개 검증 완료: PR #41과 병합 commit
 `5f0fc5b`의 Verify UI·Pages, Vercel production이 통과했습니다.
 공개 preview·Usage와 27번째 snapshot의 변경 item·token·manifest

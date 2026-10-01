@@ -59,6 +59,7 @@ export { Skeleton } from "./components/skeleton";
 export {
     Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
 } from "./components/card";
+export type { CardProps } from "./components/card";
 export { Separator } from "./components/separator";
 export {
     Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader,

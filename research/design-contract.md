@@ -1,5 +1,21 @@
 # Prototype 설계 계약
 
+## 2026-10-02 Card·Alert 표시 규칙
+
+`Card.variant`는 `default`·`subtle`·`elevated` 표면을,
+`Card.size`는 기본 16px·`compact` 12px 간격을 선택합니다.
+기본값은 기존 border·surface·간격을 유지합니다. 간격은 Card
+root의 `--card-spacing`에서 Header·Content·Footer로 전달하며,
+그림자와 색은 공통 token을 사용합니다. `MetricCard.variant`는
+기존의 `default`·`compact`·`featured` 의미를 유지합니다.
+
+`Alert.variant`는 상태의 색과 발표 우선순위를 결정하고
+`appearance`는 `outline`·`soft`·`plain` 표면만 바꿉니다.
+기본 `outline`은 이전 표시와 같습니다. `soft`는 상태 색의
+낮은 불투명도 배경을, `plain`은 투명 배경과 보이지 않는 border의
+문장형 표시를 사용합니다. `destructive`만 `role="alert"`이며
+나머지는 `role="status"`입니다.
+
 ## 2026-10-02 선택 작업과 복사 동작
 
 `ActionBar`는 선택 상태를 소유하지 않습니다. 호출자가 선택 건수,

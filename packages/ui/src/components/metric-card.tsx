@@ -2,7 +2,9 @@ import type { ComponentProps, ReactNode } from "react";
 import { Card } from "./card";
 import { cn } from "./utils";
 
-type MetricCardProps = Omit<ComponentProps<typeof Card>, "children"> & {
+type MetricCardProps = Omit<
+    ComponentProps<typeof Card>, "children" | "variant" | "size"
+> & {
     label: string;
     value: ReactNode;
     change?: string;
