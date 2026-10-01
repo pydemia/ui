@@ -910,3 +910,18 @@ Enter·Space로 고르며 Escape는 popover를 닫고 trigger로 돌아갑니다
 네 컴포넌트는 공통 색상·간격 token을 사용합니다. 게시판은 native
 목록·버튼으로 선택하고 댓글은 부모 작성자를 텍스트로 명시합니다.
 실제 screen reader·touch·Safari·RTL은 별도 검증 대상입니다.
+## 2026-10-01 선택 카드 표시 형태
+
+`Checkbox`와 `RadioGroupItem`의 `variant="card"`는 기존 선택 상태와
+form 동작을 유지하면서 전체 카드 면적을 누를 수 있게 합니다.
+`label`은 필수인 보이는 이름이고 `description`은 선택적 보조 설명입니다.
+기본 표시 형태는 기존 외부 `Label` 연결을 유지합니다. 카드의 이름은
+`aria-labelledby`, 설명은 `aria-describedby`로 연결하며 호출자의
+`aria-label`·`aria-labelledby`를 우선합니다. 기존 `aria-describedby`가
+있으면 카드 설명 ID를 이어 붙입니다.
+
+RadioGroup은 단일 값과 방향키 이동을 Radix가 소유하고, 그룹 이름은
+호출자가 지정합니다. Checkbox는 독립된 값과 Space 전환을 Radix가
+소유합니다. 카드 안에 다른 버튼·링크를 중첩하지 않습니다. disabled는
+선택과 제출에서 제외됩니다. 좁은 화면에서도 카드는 한 열로 쌓이고
+색 외에 indicator와 텍스트로 상태를 구분합니다.

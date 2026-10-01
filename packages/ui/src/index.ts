@@ -44,8 +44,10 @@ export { Label } from "./components/label";
 export { Badge } from "./components/badge";
 export type { BadgeProps } from "./components/badge";
 export { Checkbox } from "./components/checkbox";
+export type { CheckboxProps } from "./components/checkbox";
 export { Switch } from "./components/switch";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group";
+export type { RadioGroupItemProps } from "./components/radio-group";
 export { SegmentedControl, SegmentedControlItem } from
     "./components/segmented-control";
 export type { SegmentedControlProps, SegmentedControlItemProps } from

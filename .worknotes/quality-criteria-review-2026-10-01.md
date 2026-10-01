@@ -32,16 +32,26 @@ snapshot에서 발견한 native reset 오류는 수정판에서 해결했습니�
 
 ## 앞으로의 판정
 
-새 component는 독립된 사용처와 명시된 동작 규칙을 먼저 확인합니다.
+검증 강도는 변경 범위에 맞춥니다. 모든 변경에 같은 목록을
+기계적으로 적용하지 않습니다.
+
+| 변경 범위 | 해당 릴리스에서 확인할 것 |
+| --- | --- |
+| 문서·예제만 변경 | 링크·사용 코드·preview의 변경 부분과 문서 build |
+| 기존 component의 모양·token 변경 | typecheck·build·registry 검사와 해당 상태의 좁은 화면·light/dark 표시 |
+| 값·focus·keyboard·form 동작 변경 | 위 검사와 영향받은 흐름의 회귀 테스트·브라우저 동작 |
+| 새 공개 API·registry item·의존성 변경 | export·provenance·사용 코드·공개 snapshot을 대조하고 별도 소비자에서 설치·typecheck·build |
+
+새 component는 독립된 사용처와 동작 규칙을 먼저 확인합니다.
 upstream을 참고하면 공식 문서, 같은 revision의 소스·LICENSE·
 의존성을 확인하고 자체 구현과 복사·수정 소스를 구분합니다.
-package export, registry item, provenance, preview, 사용 코드가
-일치해야 합니다. typecheck, 관련 회귀 테스트, build,
-`registry:release-check`를 실행합니다. 값·focus·keyboard·오류 등
-영향받는 동작을 브라우저에서 확인하고 공개 snapshot을 별도
-소비자에 설치해 typecheck·build를 확인합니다. 실행하지 못한
-환경은 미검증으로 적습니다. 관련 흐름의 주요 결함을 발견하면
-수정판을 공개 검증하기 전까지 완료로 표시하지 않습니다.
+공개 source가 바뀌는 릴리스는 `registry:release-check`와 snapshot
+주소 확인을 포함합니다. 동일한 릴리스에서 여러 item을 바꾸면
+소비자 검사는 변경된 dependency 조합을 대표하는 설치로 묶을 수
+있으며, 각 item의 단독 설치까지 통과했다고 표현하지 않습니다.
+영향받는 동작을 실행하지 못한 환경은 미검증으로 적습니다. 주요
+결함을 발견하면 수정판의 해당 흐름을 다시 확인하기 전까지 완료로
+표시하지 않습니다.
 
 오래된 component 전체의 실기기 검사, 보조기술·touch·Safari·RTL,
 item별 격리 설치, rollback 보존은 별도 품질 작업으로 추적합니다.

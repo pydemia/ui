@@ -354,6 +354,8 @@ function ButtonGroupPreview() {
 
 function CheckboxPreview() {
     const [checked, setChecked] = useState(false);
+    const [digest, setDigest] = useState(true);
+    const [submitted, setSubmitted] = useState("없음");
 
     return (
         <div className="preview-field">
@@ -374,6 +376,20 @@ function CheckboxPreview() {
                 <Checkbox id="demo-disabled" disabled />
                 <Label htmlFor="demo-disabled">사용할 수 없는 옵션</Label>
             </div>
+            <form className="grid gap-3" onSubmit={(event) => {
+                event.preventDefault();
+                setSubmitted(String(new FormData(event.currentTarget)
+                    .get("digest") ?? "없음"));
+            }}>
+                <Checkbox variant="card" label="일일 요약 받기"
+                    description="매일 오전에 변경 사항을 보냅니다."
+                    name="digest" value="daily" checked={digest}
+                    onCheckedChange={(value) => setDigest(value === true)} />
+                <Checkbox variant="card" label="관리자 전용 알림"
+                    description="현재 사용할 수 없습니다." disabled />
+                <Button type="submit" variant="outline">선택 제출</Button>
+                <p role="status">제출값: {submitted}</p>
+            </form>
         </div>
     );
 }
@@ -800,6 +816,8 @@ function SwitchPreview() {
 
 function RadioGroupPreview() {
     const [value, setValue] = useState("standard");
+    const [delivery, setDelivery] = useState("email");
+    const [submitted, setSubmitted] = useState("없음");
 
     return (
         <div className="preview-stack">
@@ -818,6 +836,23 @@ function RadioGroupPreview() {
                 </div>
             </RadioGroup>
             <p role="status">선택: {value === "standard" ? "기본" : "좁게"}</p>
+            <form className="grid gap-3" onSubmit={(event) => {
+                event.preventDefault();
+                setSubmitted(String(new FormData(event.currentTarget)
+                    .get("delivery") ?? "없음"));
+            }}>
+                <RadioGroup aria-label="보고서 수신 방식" name="delivery"
+                    value={delivery} onValueChange={setDelivery}>
+                    <RadioGroupItem variant="card" value="email"
+                        label="이메일" description="완료 후 이메일로 받습니다." />
+                    <RadioGroupItem variant="card" value="workspace"
+                        label="작업 공간" description="화면에서 바로 확인합니다." />
+                    <RadioGroupItem variant="card" value="sms"
+                        label="문자 메시지" disabled />
+                </RadioGroup>
+                <Button type="submit" variant="outline">선택 제출</Button>
+                <p role="status">제출값: {submitted}</p>
+            </form>
         </div>
     );
 }
@@ -3458,7 +3493,7 @@ function ReviewForm() {
     {
         id: "checkbox", name: "Checkbox", category: "Selection",
         installItems: ["checkbox", "label"],
-        description: "선택·비활성 상태를 공통 token으로 표시합니다. Label을 연결해 사용합니다.",
+        description: "작은 checkbox와 설명이 있는 카드형 checkbox를 선택합니다. 기본형은 Label을 연결합니다.",
         code: `import { Checkbox, Label } from "@pydemia/ui";
 
 <>
@@ -3466,6 +3501,9 @@ function ReviewForm() {
     <Checkbox id="notifications" defaultChecked />
     <Label htmlFor="notifications">알림 받기</Label>
   </div>
+  <Checkbox variant="card" label="일일 요약 받기"
+    description="매일 오전에 보냅니다." name="digest"
+    value="daily" defaultChecked />
   <Checkbox aria-label="일부 선택" defaultChecked="indeterminate" />
   <Checkbox aria-label="사용할 수 없는 옵션" disabled />
 </>;`,
@@ -3717,10 +3755,11 @@ function RequestContextMenu() {
     {
         id: "radio-group", name: "RadioGroup", category: "Selection",
         installItems: ["radio-group", "label"],
-        description: "한 옵션을 선택하는 radio group입니다. 방향키 이동과 그룹 이름을 지원합니다.",
+        description: "한 옵션을 선택하는 작은 radio와 설명이 있는 카드형 radio입니다. 방향키 이동과 form 값을 지원합니다.",
         code: `import { Label, RadioGroup, RadioGroupItem } from "@pydemia/ui";
 
-<RadioGroup aria-label="화면 밀도" defaultValue="standard">
+<RadioGroup aria-label="화면 밀도" name="density"
+  defaultValue="standard">
   <div>
     <RadioGroupItem id="standard" value="standard" />
     <Label htmlFor="standard">기본</Label>
@@ -3729,6 +3768,8 @@ function RequestContextMenu() {
     <RadioGroupItem id="compact" value="compact" />
     <Label htmlFor="compact">좁게</Label>
   </div>
+  <RadioGroupItem variant="card" value="detailed"
+    label="자세히" description="항목 설명까지 표시합니다." />
 </RadioGroup>`,
         preview: () => <RadioGroupPreview />,
     },

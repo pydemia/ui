@@ -104,7 +104,7 @@
     {
       "name": "pyd-checkbox", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/checkbox.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
-      "dependencies": ["@radix-ui/react-checkbox", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "Radix checkbox; consumer supplies label", "keyboard": "Chromium: click and Space; mixed and disabled states verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-checkbox", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "Radix checkbox; external label for default and built-in visible label and description for card", "keyboard": "Chromium: card click and Space toggled native form value; disabled card ignored", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-switch", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
@@ -114,7 +114,7 @@
     {
       "name": "pyd-radio-group", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/radio-group.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
-      "dependencies": ["@radix-ui/react-radio-group", "pyd-utils"], "accessibility": { "semantics": "Radix radio group; consumer supplies group label", "keyboard": "Chromium: ArrowDown selection verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-radio-group", "pyd-utils"], "accessibility": { "semantics": "Radix radio group with external group label; card item has built-in visible label and description", "keyboard": "Chromium: card click and Space select and submit; arrow moved focus but automated selection unverified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-segmented-control", "category": "Selection",

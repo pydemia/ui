@@ -1241,3 +1241,24 @@ registry에 기록된 revision `98a1fe67b439324ddc857f47fbdce056600a4329`의
 다시 확인했습니다. APG 구현 코드는 복사하지 않았습니다. 신규 npm
 dependency는 없으며 registry 의존성도 `pyd-input`·`pyd-utils` 그대로입니다.
 로딩·오류 발표의 실제 screen reader 확인은 남아 있습니다.
+## 2026-10-01 Checkbox·RadioGroup 카드 표시 형태
+
+기존 `pyd-checkbox`·`pyd-radio-group` item에 자체 카드 표시를
+추가했습니다. 별도 component나 npm 의존성은 없습니다. 기존
+shadcn/ui 고정 revision
+`98a1fe67b439324ddc857f47fbdce056600a4329`의
+[Checkbox source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/checkbox.tsx),
+[Radio Group source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/radio-group.tsx),
+[MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+다시 확인했습니다. 공식 [Checkbox](https://ui.shadcn.com/docs/components/radix/checkbox)와
+[Radio Group](https://ui.shadcn.com/docs/components/radix/radio-group),
+Radix [Checkbox](https://www.radix-ui.com/primitives/docs/components/checkbox)·
+[Radio Group](https://www.radix-ui.com/primitives/docs/components/radio-group)의
+상태·Space·방향키 규칙을 확인했습니다. 카드의 레이아웃과 이름·설명
+연결은 pydemia/ui에서 작성한 확장입니다.
+
+설치된 `@radix-ui/react-checkbox@1.3.11`의 직접 의존성 7개와
+`@radix-ui/react-radio-group@1.4.7`의 직접 의존성 9개를 해당
+package manifest에서 확인했습니다. 두 패키지의 LICENSE 파일과
+license metadata는 MIT이며 기존 lockfile의 전이 의존성 검토 범위를
+사용합니다. 이번 변경으로 전이 의존성은 늘지 않았습니다.
