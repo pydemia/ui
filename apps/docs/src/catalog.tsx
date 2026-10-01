@@ -6,7 +6,7 @@ import {
     AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
     AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
     AlertDialogTitle, AlertDialogTrigger, Avatar, AvatarFallback, AvatarImage,
-    AvatarGroup, Badge,
+    ApprovalCard, AvatarGroup, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, Board, BottomNav, BottomNavLink,
     Button, ButtonGroup,
@@ -71,7 +71,8 @@ import {
     useEffect, useId, useRef, useState, type FormEvent, type ReactNode,
 } from "react";
 import type {
-    AppliedFilter, BoardPost, ConversationMessage, DataTableColumn,
+    AppliedFilter, ApprovalStatus, BoardPost, ConversationMessage,
+    DataTableColumn,
     DateRangeValue,
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
@@ -1269,6 +1270,48 @@ function ToolCallPreview() {
                 error={status === "failed" ? "의존성 파일을 찾지 못했습니다." : undefined} />
             <ToolCall name="cache.read" status="succeeded"
                 output="캐시 적중" variant="compact" />
+        </div>
+    );
+}
+
+function ApprovalCardPreview() {
+    const [requestNumber, setRequestNumber] = useState(1);
+    const [status, setStatus] = useState<ApprovalStatus>("requested");
+    const [failNext, setFailNext] = useState(false);
+    const [attemptCount, setAttemptCount] = useState(0);
+
+    return (
+        <div className="preview-workspace grid max-w-lg gap-3">
+            <div className="flex flex-wrap gap-2">
+                <Button variant="outline" onClick={() => {
+                    setRequestNumber((number) => number + 1);
+                    setStatus("requested");
+                    setAttemptCount(0);
+                }}>새 요청</Button>
+                <Button variant="outline" disabled={status !== "requested"}
+                    onClick={() => setStatus("expired")}>요청 만료</Button>
+                <Button variant="outline" disabled={status !== "requested"}
+                    aria-pressed={failNext}
+                    onClick={() => setFailNext((value) => !value)}>
+                    다음 결정 실패 {failNext ? "켜짐" : "꺼짐"}
+                </Button>
+            </div>
+            <ApprovalCard requestId={`export-${requestNumber}`}
+                title="보고서 내보내기 승인"
+                description="이번 요청에서 요약 보고서를 외부 저장소로 내보냅니다."
+                status={status}
+                onDecision={async (decision) => {
+                    setAttemptCount((count) => count + 1);
+                    await new Promise((resolve) => setTimeout(resolve, 450));
+                    if (failNext) {
+                        setFailNext(false);
+                        throw new Error("데모 전달 실패");
+                    }
+                    setStatus(decision === "approve" ? "approved" : "rejected");
+                }} />
+            <p className="m-0 text-xs text-muted">
+                이 요청의 전달 시도 {attemptCount}회
+            </p>
         </div>
     );
 }
@@ -4132,6 +4175,29 @@ function SupportChat() {
   output="검사 66건 통과"
 />`,
         preview: () => <ToolCallPreview />,
+    },
+    {
+        id: "approval-card", name: "ApprovalCard", category: "AI & agent",
+        description: "도구 실행 승인 요청의 승인·거절·만료와 중복 결정 방지, 실패 후 재시도를 제공합니다.",
+        code: `import { useState } from "react";
+import { ApprovalCard, type ApprovalStatus } from "@pydemia/ui";
+
+function Example() {
+  const [status, setStatus] = useState<ApprovalStatus>("requested");
+
+  return <ApprovalCard
+    requestId="export-37"
+    title="보고서 내보내기 승인"
+    description="요약 보고서를 외부 저장소로 내보냅니다."
+    status={status}
+    onDecision={(decision, requestId) => {
+      // 서버에 requestId와 decision을 전달하고 결과로 status를 갱신합니다.
+      console.log(requestId, decision);
+      setStatus(decision === "approve" ? "approved" : "rejected");
+    }}
+  />;
+}`,
+        preview: () => <ApprovalCardPreview />,
     },
     {
         id: "prompt-input", name: "PromptInput", category: "AI & agent",

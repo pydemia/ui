@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 ApprovalCard 작업 시작: **약 80%**를 관리용 기준값으로
+기록합니다. 102개 component·104개 registry item의 공개 설치 경로가
+있으나 공급·품질 체크리스트는 5/10입니다. 100개를 분모로 쓰지 않으며
+검증되지 않은 screen reader·touch·Safari·RTL, 개별 item 공개 설치,
+rollback 뒤 snapshot URL 보존을 완료로 계산하지 않습니다. 각 작업의
+시작·종료값과 근거는 별도 `.worknotes` 작업 기록에 남깁니다.
+이번 범위는 [ApprovalCard 작업 기록](component-approval-card-2026-10-01.md)에
+있습니다.
+
 2026-09-30 Editable 로컬 검증 후 102개 component와 104개 registry item이
 있습니다. 기존 공급·품질 조건의 완료 표시는 5/10이며, 실제 보조기술·
 touch·Safari·RTL, item별 격리 공개 설치, rollback 뒤 snapshot URL
