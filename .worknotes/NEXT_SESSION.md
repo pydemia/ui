@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-01 ApprovalCard 공개 완료: 원본 React·기존 Button·token으로
+승인 요청·승인·거절·만료와 비동기 중복 결정 방지·실패 후 재시도를
+구현했습니다. 103개 component·105개 registry item·20개 snapshot입니다.
+PR #26 head·병합 CI와 Vercel production READY를 확인했습니다. 공개
+390px preview, 현재·snapshot JSON/manifest 원본 일치, 새 소비자
+CLI 설치 5개 파일·typecheck·build·390px Chromium 동작이 통과했습니다.
+현재 snapshot은
+`sha256-08426c9a767fdc4c69eba32819484ce7ef920d00de9999c3b85c2efe8772ebcc`
+입니다. 목표 관리용 진척도는 시작·종료 모두 약 80%, 공급·품질 조건
+5/10입니다. 실제 screen reader·touch·Safari·RTL, backend 중복 승인
+방지, 전체 item별 공개 격리 설치, rollback 뒤 snapshot URL 보존은
+미검증입니다. [작업 기록](component-approval-card-2026-10-01.md)을
+참고하세요. 다음 후보는 TreeSelect·DiffViewer이며 실제 소비자 용례와
+기존 Tree/CodeBlock과의 경계를 먼저 확인하세요.
+
+
 2026-10-01 goal 재개·Combobox 원격 결과 갱신: 102개 component·104개
 registry item을 유지하며 선택값이 현재 검색 결과에서 빠져도
 `selectedOption`으로 label·form 값을 보존합니다. `filterOptions=false`와

@@ -18,6 +18,10 @@
   필수로 둡니다. 두 버튼의 중복 제출과 실패 후 재시도를 처리합니다.
 - 원본 React·기존 Button·token 구현입니다. AI Elements Confirmation은
   동작 참고 자료이며 source를 복사하지 않습니다.
+- `skills.pydemia.ai`의 `frontend-design-workflow`, `reference-research`,
+  `frontend-development`, `software-engineering` 공개 페이지
+  (표시 revision `fab5b075d3e1`)를 확인했습니다. 기존 상태 소유 검토,
+  고정 source·license 확인, 작은 변경과 미검증 범위 기록을 적용했습니다.
 - 패키지 typecheck·테스트, 문서 build, registry 정합성, 브라우저
   승인·거절·만료·실패·재시도·키보드·좁은 화면을 확인합니다.
 - 실제 screen reader, touch, Safari, RTL은 별도 미검증 항목입니다.
@@ -47,3 +51,31 @@
   export/catalog·기존 19개 release를 확인하고 20번째 snapshot
   `sha256-08426c9a767fdc4c69eba32819484ce7ef920d00de9999c3b85c2efe8772ebcc`를
   만들었습니다.
+- [PR #26](https://github.com/pydemia/ui/pull/26)의 head
+  `02866c0e16f7dc0c53f123aa6f12ab71d67b7ba9` Verify UI가
+  통과했습니다. 병합 commit
+  `ffb3a149a2e357a1bb50c9bb8fe77dc241f9c2c7`의
+  [Verify UI](https://github.com/pydemia/ui/actions/runs/36838995880)와
+  [Pages CI](https://github.com/pydemia/ui/actions/runs/36838990812)도
+  통과했습니다. Vercel production
+  `dpl_DGyKoEMBiis2Xzd4Vf3vKSacbyGF`는 READY입니다.
+- 공개 `ui.pydemia.ai`의 390px preview에서 요청·실패·Enter 재시도·
+  승인, 빠른 이중 클릭 1회 전달, body·viewport 390px을 확인했습니다.
+  공개 현재·snapshot ApprovalCard JSON과 snapshot manifest가 저장소
+  파일과 byte 단위로 일치하고 HTTP 200입니다.
+- 공개 snapshot을 새 Vite 소비자
+  `%TEMP%/pydemia-approval-public-consumer-20261001`에
+  `shadcn@4.21.0 add`로 설치했습니다. ApprovalCard·Button·utils·
+  token·MIT 고지 5개 파일이 원본과 일치했고 typecheck·build가
+  통과했습니다. 390px Chromium에서 이중 클릭 1회 전달, 실패 alert,
+  Enter 재시도 후 승인과 가로 넘침 없음도 확인했습니다.
+
+## 종료 진척도와 남은 범위
+
+- 관리용 goal 진척도: 시작 약 80% → 종료 약 80%. 103개 component와
+  105개 item이 됐지만 공급·품질 체크리스트 완료 표시는 5/10 그대로입니다.
+  component 수/100을 완료율로 쓰지 않습니다.
+- 실제 screen reader의 status·alert 발표, touch, Safari, RTL,
+  소비자 서버의 중복 승인 idempotency, 실제 도구 실행은 미검증입니다.
+  전체 item별 공개 격리 설치와 과거 배포 rollback 뒤 새 snapshot
+  URL 보존도 확인하지 않았습니다.
