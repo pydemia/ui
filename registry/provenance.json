@@ -595,6 +595,12 @@
       "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named form, labeled consumer controls, status and applied-filter list", "keyboard": "Chromium: Enter submit and clear verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-query-builder", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI Forms Tutorial", "url": "https://www.w3.org/WAI/tutorials/forms/grouping/", "scope": "fieldset and legend grouping semantics; no component source copied" },
+      "dependencies": ["pyd-button", "pyd-input", "pyd-native-select", "pyd-utils"], "accessibility": { "semantics": "named form, nested fieldsets, labeled native controls, row-specific reorder actions and error messages", "keyboard": "native Tab and Enter; browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-dropdown-menu", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Radix Dropdown Menu", "url": "https://www.radix-ui.com/primitives/docs/components/dropdown-menu", "license": "MIT" },

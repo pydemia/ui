@@ -1469,3 +1469,15 @@ runtime dependency는 없습니다.
 `pyd-calendar`·`pyd-button`·`pyd-utils`이며 DayPicker 패키지 버전도
 item에 고정했습니다. 실제 screen reader·touch·Safari·RTL은
 검증하지 않았습니다.
+## 2026-10-02 QueryBuilder
+
+`QueryBuilder`는 pydemia/ui 원본 구현입니다. 외부 component 소스를
+복사하지 않았습니다. 직접 registry dependency는 `pyd-button`,
+`pyd-input`, `pyd-native-select`, `pyd-utils`입니다. 날짜 값 검사에
+기존 `calendar-date.ts`를 사용하며 새 npm 의존성은 없습니다.
+
+[W3C WAI의 form grouping 지침](https://www.w3.org/WAI/tutorials/forms/grouping/)에서
+관련 입력을 `fieldset`·`legend`로 묶는 방식을 참고했습니다. 명세
+설명만 참고했으며 예제 코드를 복사하지 않았습니다. 기존 Button·Input·
+NativeSelect의 source와 고지는 해당 registry item이 전달합니다.
+실제 screen reader·touch·Safari·RTL은 검증하지 않았습니다.

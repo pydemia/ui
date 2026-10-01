@@ -1135,3 +1135,20 @@ Calendar의 날짜 버튼에는 일정 건수를 읽을 수 있는 이름과 시
 `onCreateEvent`가 있으면 해당 날짜의 추가 버튼을 표시합니다.
 Calendar의 keyboard·focus는 기존 DayPicker가 소유합니다.
 실제 브라우저·screen reader·touch·Safari·RTL 동작은 미검증입니다.
+## 2026-10-02 QueryBuilder
+
+`fields`는 text·number·date·select 필드와 선택지를 정의합니다.
+`value`는 고유 ID를 가진 조건과 `all`/`any` 그룹의 controlled 트리입니다.
+추가·편집·삭제·순서 변경은 완전한 다음 트리를 `onValueChange`로
+전달합니다. 호출자는 값 보존, 조회·저장과 실제 필터 실행을 맡습니다.
+
+값 없는 연산자를 제외한 미완성·잘못된 조건은 편집 중 보존합니다.
+적용 시 각 조건의 오류를 표시하고, 전체 트리가 유효할 때만 `onApply`를
+호출합니다. 조건이 없는 최상위 그룹은 전체 결과를 뜻하는 빈
+쿼리로 허용합니다. 중첩 그룹은 비어 있으면 오류입니다. 그룹 깊이는
+기본 4단계, 최대 8단계입니다.
+
+form과 중첩 fieldset에 이름을 붙이고 native 입력·선택·버튼을
+사용합니다. 위·아래 버튼으로 순서를 바꾸므로 drag 동작이나 별도
+키보드 패턴은 필요하지 않습니다. `panel`·`plain`은 공통 token을
+사용합니다. 실제 보조기술 발표는 미검증입니다.

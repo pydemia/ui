@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 공급·품질 체크리스트 간소화 재검토:
+**약 89% → 약 89%**입니다. 릴리스마다 기본 확인은 적용되는 CI,
+변경한 핵심 사용 흐름, export·registry·Usage와 공개 경로로 좁혔습니다.
+외부 코드·browser 의존 동작·새 설치 경로에만 추가 검사를 적용합니다.
+이번 변경은 문서 판정 기준이며 검사 코드나 공개 결과를 바꾸지
+않았습니다. [검토 기록](quality-checklist-lean-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 DataTable 원격 조회 공개 확인: **약 89% → 약 89%**입니다.
 PR #58과 병합 commit `d89c304`의 CI·Pages, Vercel production이
 성공했습니다. 공개 DataTable 원격 preview·Usage와 현재 item,

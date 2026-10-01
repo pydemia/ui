@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-02 — QueryBuilder
+
+- 조건의 필드·연산자·값과 중첩 AND/OR 그룹을 편집하는
+  `QueryBuilder`를 추가했습니다. 유효한 조건 트리만 적용 callback으로
+  전달하며 조회·저장은 호출자가 맡습니다.
+- `panel`·`plain` 표시와 키보드로 조작할 수 있는 순서 변경 버튼을
+  제공합니다. 기존 Button·Input·NativeSelect·token을 사용합니다.
+
 ## 2026-10-02 — DataTable 원격 조회
 
 - `DataTable.remote`로 조회 조건과 총건수, 로딩·오류 상태를 호출자가
