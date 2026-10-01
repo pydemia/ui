@@ -62,17 +62,30 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 축적 과제입니다. 새 component 하나를 공개할 때마다 10개를 모두
 완료해야 한다는 뜻이 아닙니다.
 
-새 component를 ready-made로 기록하려면 독립 사용처와 동작 규칙,
-참고한 원본·의존성·LICENSE 검토, package export·registry·provenance·
-문서 예시의 일치, typecheck·관련 테스트·build·registry 검사와
-영향받는 상호작용의 브라우저 확인이 필요합니다. 공개 공급은
-component마다 별도 배포하지 않고 릴리스 단위로 판정합니다. 변경된
-item과 의존 item을 새 소비자에 함께 설치해 typecheck·build하고,
-배포 후 공개 snapshot에서도 같은 공급 경로를 확인합니다. 새로운
-의존성 체인이나 설치 target이 다를 때만 별도 소비자 검사를
-추가합니다. 검사한 환경과 검사하지 못한 환경을 따로 적습니다.
-관련 흐름에서 재현된 값 손실·제출 오류·접근성 차단 등 주요 결함은
-수정판 공개 검증 전까지 ready-made 완료로 표시하지 않습니다.
+새 component의 독립 사용처와 동작 규칙을 확인합니다. 참고한
+upstream의 공식 문서·고정 소스·LICENSE·의존성·접근성을 조사하고,
+원본 구현과 복사·수정 소스를 구분합니다. 같은 revision의 검토 결과는
+재사용하고, 원본이나 의존성이 바뀔 때 다시 확인합니다.
+
+릴리스 검사는 변경 위험에 맞춥니다. typecheck·관련 테스트·build·
+registry 검사는 CI 결과를 포함해 한 번 통과하면 같은 commit에 대해
+로컬·PR·병합 후 반복 실행을 요구하지 않습니다. 변경된 Usage와
+preview를 확인하고, 상호작용이 바뀌면 해당 값·keyboard·focus 흐름을
+브라우저에서 검사합니다. 표시만 바뀐 기존 component는 변경한
+variant와 관련 token을 확인합니다. 실제 보조기술이나 touch 등
+실행하지 않은 환경은 미검증으로 적습니다.
+
+새 component, 새로운 설치 경로·의존성 체인, registry 구조 변경은
+변경 item과 의존 item을 묶어 별도 소비자에서 설치·typecheck·build를
+한 번 확인합니다. 기존 component의 표시·API만 바뀌고 설치 경로가
+같다면 새 소비자 프로젝트와 공개 snapshot 재설치를 요구하지
+않습니다. registry 내용이 바뀌면 내용 해시 snapshot과 공개 URL의
+도달 여부를 확인합니다. 배포·registry 인프라가 바뀔 때는 공개 URL을
+통한 설치까지 검사합니다. 검증 범위는 릴리스 기록에 명시합니다.
+
+관련 흐름에서 재현된 값 손실·제출 오류·keyboard 접근 불가·필수
+고지 누락·설치 실패는 수정판을 검사하기 전까지 완료로 표시하지
+않습니다.
 
 전체 라이브러리의 보조기술·touch·Safari·RTL 표본 검사, 오래된
 component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
@@ -93,7 +106,9 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 관리용 추정치이고, component 수 또는 체크박스 수로 자동 계산하지
 않습니다. 판정 근거는
 [기준 재검토](quality-criteria-review-2026-10-01.md)와
-[후속 재검토](quality-criteria-followup-2026-10-01.md)에 남겼습니다.
+[후속 재검토](quality-criteria-followup-2026-10-01.md),
+[2026-10-02 재검토](quality-criteria-reassessment-2026-10-02.md)에
+남겼습니다.
 
 ## 라이브러리 전체의 공급·품질 공백
 

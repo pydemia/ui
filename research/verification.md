@@ -1,5 +1,20 @@
 # 검증 기록
 
+## 2026-10-02 Card·Alert 로컬 검증
+
+`npm run typecheck`, UI 테스트 126/126, `npm run build`,
+`npm run registry:check`, `npm run registry:release-check`가
+통과했습니다. 111개 item·109개 export/catalog와 28번째 현재
+snapshot이 일치합니다. 새 dependency나 registry item은 없습니다.
+
+390px Chromium에서 Card의 subtle 배경·compact 간격 12px·
+elevated 그림자와 dark token을 확인했습니다. Alert의 soft 상태별
+배경, plain 투명 표면, 일반 status와 오류 alert 역할을 확인했습니다.
+가로 넘침과 page error는 없었습니다. 공개 URL·배포, 실제 screen
+reader·touch·Safari·RTL은 미검증입니다. 상세 범위는
+[작업 기록](../.worknotes/card-alert-appearances-2026-10-02.md)에
+있습니다.
+
 ## 2026-10-02 ActionBar·CopyButton 로컬 검증
 
 | 항목 | 결과 | 확인 범위 |

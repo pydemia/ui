@@ -698,22 +698,36 @@ function CommandPalettePreview() {
 
 function AlertPreview() {
     const [showError, setShowError] = useState(false);
+    const [appearance, setAppearance] = useState<
+        "outline" | "soft" | "plain"
+    >("outline");
 
     return (
         <div className="preview-alerts">
-            <Alert>
+            <div className="flex flex-wrap gap-2" role="group"
+                aria-label="알림 표시 형태">
+                {(["outline", "soft", "plain"] as const).map((option) => (
+                    <Button key={option} type="button"
+                        variant={appearance === option ? "primary" : "outline"}
+                        aria-pressed={appearance === option}
+                        onClick={() => setAppearance(option)}>
+                        {option}
+                    </Button>
+                ))}
+            </div>
+            <Alert appearance={appearance}>
                 <AlertTitle>안내</AlertTitle>
                 <AlertDescription>변경 사항을 확인할 수 있습니다.</AlertDescription>
             </Alert>
-            <Alert variant="info">
+            <Alert variant="info" appearance={appearance}>
                 <AlertTitle>새 기능이 준비됐습니다</AlertTitle>
                 <AlertDescription>설정에서 사용할 수 있습니다.</AlertDescription>
             </Alert>
-            <Alert variant="success">
+            <Alert variant="success" appearance={appearance}>
                 <AlertTitle>저장되었습니다</AlertTitle>
                 <AlertDescription>변경 사항이 반영됐습니다.</AlertDescription>
             </Alert>
-            <Alert variant="warning">
+            <Alert variant="warning" appearance={appearance}>
                 <AlertTitle>확인이 필요합니다</AlertTitle>
                 <AlertDescription>만료 예정 항목을 검토하세요.</AlertDescription>
             </Alert>
@@ -721,7 +735,7 @@ function AlertPreview() {
                 {showError ? "오류 숨기기" : "오류 표시"}
             </Button>
             {showError && (
-                <Alert variant="destructive">
+                <Alert variant="destructive" appearance={appearance}>
                     <AlertTitle>저장하지 못했습니다</AlertTitle>
                     <AlertDescription>입력값을 확인하고 다시 시도하세요.</AlertDescription>
                 </Alert>
@@ -1653,6 +1667,48 @@ function YearPickerPreview() {
                         "선택한 연도가 없습니다."}
             </p>
         </form>
+    );
+}
+
+function CardPreview() {
+    const [variant, setVariant] = useState<
+        "default" | "subtle" | "elevated"
+    >("default");
+    const [size, setSize] = useState<"default" | "compact">("default");
+
+    return (
+        <div className="preview-stack">
+            <div className="flex flex-wrap gap-2" role="group"
+                aria-label="카드 표면">
+                {(["default", "subtle", "elevated"] as const).map((option) => (
+                    <Button key={option} type="button"
+                        variant={variant === option ? "primary" : "outline"}
+                        aria-pressed={variant === option}
+                        onClick={() => setVariant(option)}>
+                        {option}
+                    </Button>
+                ))}
+            </div>
+            <div className="flex flex-wrap gap-2" role="group"
+                aria-label="카드 밀도">
+                {(["default", "compact"] as const).map((option) => (
+                    <Button key={option} type="button"
+                        variant={size === option ? "primary" : "outline"}
+                        aria-pressed={size === option}
+                        onClick={() => setSize(option)}>
+                        {option}
+                    </Button>
+                ))}
+            </div>
+            <Card variant={variant} size={size}>
+                <CardHeader>
+                    <CardTitle>검토 대기</CardTitle>
+                    <CardDescription>새 component 3개</CardDescription>
+                </CardHeader>
+                <CardContent>등록 전 확인이 필요합니다.</CardContent>
+                <CardFooter><Badge>검토 대기</Badge></CardFooter>
+            </Card>
+        </div>
     );
 }
 
@@ -3929,7 +3985,7 @@ function RequestContextMenu() {
     },
     {
         id: "alert", name: "Alert", category: "Feedback",
-        description: "기본·정보·성공·주의·오류 상태를 token과 텍스트로 구분합니다. 오류만 긴급한 alert 역할을 사용합니다.",
+        description: "기본·정보·성공·주의·오류 상태와 outline·soft·plain 표시를 독립적으로 선택합니다. 오류만 긴급한 alert 역할을 사용합니다.",
         code: `import { Alert, AlertTitle, AlertDescription } from "@pydemia/ui";
 
 <>
@@ -3937,11 +3993,11 @@ function RequestContextMenu() {
     <AlertTitle>안내</AlertTitle>
     <AlertDescription>변경 사항을 확인하세요.</AlertDescription>
   </Alert>
-  <Alert variant="success">
+  <Alert variant="success" appearance="soft">
     <AlertTitle>저장되었습니다</AlertTitle>
     <AlertDescription>변경 사항이 반영됐습니다.</AlertDescription>
   </Alert>
-  <Alert variant="warning">
+  <Alert variant="warning" appearance="plain">
     <AlertTitle>확인이 필요합니다</AlertTitle>
     <AlertDescription>만료 예정 항목을 검토하세요.</AlertDescription>
   </Alert>
@@ -4041,13 +4097,13 @@ function DensitySetting() {
     {
         id: "card", name: "Card", category: "Layout",
         installItems: ["card", "badge"],
-        description: "제목·설명·본문·동작을 한 표면에 묶는 조합 요소입니다.",
+        description: "제목·설명·본문·동작을 묶고 default·subtle·elevated 표면과 기본·compact 간격을 선택합니다.",
         code: `import {
   Badge, Card, CardContent, CardDescription,
   CardFooter, CardHeader, CardTitle,
 } from "@pydemia/ui";
 
-<Card>
+<Card variant="subtle" size="compact">
   <CardHeader>
     <CardTitle>검토 대기</CardTitle>
     <CardDescription>새 component 3개</CardDescription>
@@ -4055,7 +4111,7 @@ function DensitySetting() {
   <CardContent>등록 전 확인이 필요합니다.</CardContent>
   <CardFooter><Badge>검토 대기</Badge></CardFooter>
 </Card>`,
-        preview: () => <div className="preview-stack"><Card><CardHeader><CardTitle>검토 대기</CardTitle><CardDescription>새 component 3개</CardDescription></CardHeader><CardContent>등록 전 확인이 필요합니다.</CardContent><CardFooter><Badge>검토 대기</Badge></CardFooter></Card></div>,
+        preview: () => <CardPreview />,
     },
     {
         id: "separator", name: "Separator", category: "Layout",

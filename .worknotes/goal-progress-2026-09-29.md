@@ -1,5 +1,24 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 Card·Alert 로컬 검증: **약 83% → 약 83%**입니다.
+기존 두 component의 표시 형태와 Card 간격을 확장했습니다.
+109개 component·111개 item으로 수는 그대로이고 28번째
+snapshot을 만들었습니다. typecheck·UI 테스트 126/126·build·
+registry 검사와 390px Chromium의 변경 상태가 통과했습니다.
+공개 URL·배포는 아직 확인하지 않았습니다.
+[작업 기록](card-alert-appearances-2026-10-02.md)에 범위를 남겼습니다.
+
+2026-10-02 공급·품질 기준 재조정: **약 83% → 약 83%**입니다.
+기존 component의 표시·타입 변경마다 소비자 프로젝트와 공개
+snapshot 설치를 되풀이하지 않도록 릴리스 검사를 변경 위험별로
+조정했습니다. CI가 같은 commit에서 통과한 결과를 인정하고,
+새 component·설치 경로·의존성 체인에는 대표 소비자 설치를
+유지합니다. 출처·LICENSE, 주요 결함의 수정판 검증, 미검증
+환경 표기도 유지합니다. 이번에는 구현·배포·실행 검증이 없어
+공개 기준 109개 component·111개 item·27개 snapshot은 그대로입니다.
+[재조정 기록](quality-criteria-reassessment-2026-10-02.md)에 판정
+근거를 남겼습니다.
+
 2026-10-02 ActionBar·CopyButton 공개 검증 후:
 **약 82% → 약 83%**입니다. 109개 component·111개 registry item·
 27개 snapshot입니다. 표 외 선택 작업과 임의 문자열 복사를 공개
