@@ -58,7 +58,7 @@ import {
     Snippet, SnippetContent, SnippetCopyButton, SnippetHeader, Spinner,
     SnippetTabsList, SnippetTabsTrigger, SideNav, SideNavLink, Sidebar,
     Sparkline, Stepper, Switch, Table, TableCell, TagsInput, Timeline,
-    Thread, TimePicker, ToolCall, Tree,
+    Thread, TimePicker, ToolCall, Tree, TreeSelect,
     ToastQueue, useToastQueue,
     TableHead, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toggle,
     ToggleGroup, ToggleGroupItem,
@@ -77,7 +77,7 @@ import type {
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
     LogEntry, ReasoningStatus, ResponseFeedbackValue, ThreadComment,
-    ToolCallStatus, TreeNode,
+    ToolCallStatus, TreeNode, TreeSelectItem,
 } from "@pydemia/ui";
 
 export type ComponentEntry = {
@@ -1958,6 +1958,41 @@ function TreePreview() {
                 선택한 항목: {selectedLabel} · Remote 요청: {requestCount}회
             </p>
         </div>
+    );
+}
+
+const organizationItems: TreeSelectItem[] = [
+    { id: "product", label: "제품", children: [
+        { id: "design", label: "디자인" },
+        { id: "frontend", label: "프론트엔드" },
+    ] },
+    { id: "operations", label: "운영", children: [
+        { id: "support", label: "고객 지원" },
+        { id: "finance", label: "재무", disabled: true },
+    ] },
+];
+
+function TreeSelectPreview() {
+    const [submitted, setSubmitted] = useState<string | null>(null);
+    return (
+        <form className="preview-workspace grid max-w-sm gap-3"
+            onReset={() => setSubmitted(null)}
+            onSubmit={(event) => {
+                event.preventDefault();
+                setSubmitted(String(new FormData(event.currentTarget)
+                    .get("team") ?? ""));
+            }}>
+            <TreeSelect label="담당 조직" name="team"
+                items={organizationItems} required
+                requiredMessage="담당 조직을 선택하세요." />
+            <div className="flex gap-2">
+                <Button type="submit">제출</Button>
+                <Button type="reset" variant="outline">초기화</Button>
+            </div>
+            <p role="status" className="m-0 text-xs text-muted">
+                제출한 값: {submitted ?? "없음"}
+            </p>
+        </form>
     );
 }
 
@@ -4838,6 +4873,29 @@ function RemoteTree({ loadFiles }: {
     onLoadChildren={loadChildren} />;
 }`,
         preview: () => <TreePreview />,
+    },
+    {
+        id: "tree-select", name: "TreeSelect", category: "Selection",
+        description: "계층의 한 항목을 골라 form 값으로 제출합니다. 경로를 표시하고 키보드 탐색·필수 선택·초기화를 지원합니다.",
+        code: `import { TreeSelect } from "@pydemia/ui";
+
+const teams = [
+  { id: "product", label: "제품", children: [
+    { id: "design", label: "디자인" },
+    { id: "frontend", label: "프론트엔드" },
+  ] },
+  { id: "operations", label: "운영" },
+];
+
+<form onSubmit={(event) => {
+  event.preventDefault();
+  const team = new FormData(event.currentTarget).get("team");
+  console.log(team);
+}}>
+  <TreeSelect label="담당 조직" name="team" items={teams} required />
+  <button type="submit">제출</button>
+</form>`,
+        preview: () => <TreeSelectPreview />,
     },
     {
         id: "stepper", name: "Stepper", category: "Workflow",

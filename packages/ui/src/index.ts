@@ -132,6 +132,10 @@ export type {
 } from "./components/sidebar";
 export { Tree } from "./components/tree";
 export type { TreeNode, TreeProps } from "./components/tree";
+export { TreeSelect } from "./components/tree-select";
+export type {
+    TreeSelectItem, TreeSelectProps,
+} from "./components/tree-select";
 export { Stepper } from "./components/stepper";
 export type { StepperProps, StepperStep } from "./components/stepper";
 export { Timeline } from "./components/timeline";

@@ -1,5 +1,24 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-01 TreeSelect reference 확인
+
+[Ant Design TreeSelect 공식 문서](https://github.com/ant-design/ant-design/blob/820e1a8c2dbb508b15e5ad0fc3eedcdef869d98b/components/tree-select/index.en-US.md)는
+기업 조직·디렉터리 같은 계층 데이터를 단일 선택기에 쓰는 경우를
+설명합니다. 동일 revision
+[`820e1a8`](https://github.com/ant-design/ant-design/commit/820e1a8c2dbb508b15e5ad0fc3eedcdef869d98b)의
+[component source](https://github.com/ant-design/ant-design/blob/820e1a8c2dbb508b15e5ad0fc3eedcdef869d98b/components/tree-select/index.tsx),
+[package manifest](https://github.com/ant-design/ant-design/blob/820e1a8c2dbb508b15e5ad0fc3eedcdef869d98b/package.json),
+[LICENSE](https://github.com/ant-design/ant-design/blob/820e1a8c2dbb508b15e5ad0fc3eedcdef869d98b/LICENSE)를
+확인했습니다. MIT이고 해당 구현은 `@rc-component/tree-select`와
+`@rc-component/select`, `@rc-component/trigger` 등에 의존합니다.
+
+`pyd-tree-select`는 선택기 용례만 참고하고 기존 pydemia/ui `Tree`와
+`Popover`, React, 공통 token으로 작성했습니다. 새로 추가되는 직접
+의존성은 기존 `lucide-react` 아이콘뿐입니다.
+[WAI-ARIA APG Tree View](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/)의
+키보드·선택 패턴을 기존 `Tree`에서 사용합니다. 실제 screen reader
+발표는 미검증입니다.
+
 ## 2026-10-01 DiffViewer reference 확인
 
 [React Diff Viewer 공식 README](https://github.com/praneshr/react-diff-viewer/blob/5572d1c121ea095fe913a862b9e89e46a45f2599/README.md)는

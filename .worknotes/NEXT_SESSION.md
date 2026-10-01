@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-01 TreeSelect 작업 중: 정적 조직 계층의 단일 항목 선택,
+선택 경로·form 값·필수 선택·reset을 기존 Tree·Popover로
+구성합니다. Ant Design 고정 revision의 공식 문서·source·manifest·
+MIT LICENSE를 확인했고 코드는 복사하지 않았습니다. 시작 기준은
+104개 component·106개 item·21개 snapshot, goal 약 80%, 공급·품질
+조건 5/10입니다. 검증 상태는
+[작업 기록](component-tree-select-2026-10-01.md)을 확인하세요.
+
 2026-10-01 DiffViewer 공개 완료: 변경 전후 줄 번호·추가·삭제·문맥을
 통합·좌우 표로 읽는 원본 component를 편입했습니다. 현재 104개
 component·106개 registry item이며 21번째 불변 snapshot ID는
