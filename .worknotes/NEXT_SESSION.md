@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-10-02 ActionBar·CopyButton 공개 검증 완료: PR #41과 병합 commit
+`5f0fc5b`의 Verify UI·Pages, Vercel production이 통과했습니다.
+공개 preview·Usage와 27번째 snapshot의 변경 item·token·manifest
+7개 파일이 저장소 SHA-256과 일치합니다. 별도 Vite 소비자에 변경
+item 5개와 의존 item을 함께 설치해 15개 파일 원본 일치·typecheck·
+build·390px Chromium 복사값·일괄 작업·focus를 확인했습니다.
+현재 109개 component·111개 item·27개 snapshot, goal 관리용 추정
+약 83%입니다. 실제 screen reader·touch·Safari·RTL과 rollback 뒤
+snapshot URL은 미검증입니다.
+[작업 기록](action-copy-controls-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ActionBar·CopyButton 로컬 구현: 표 밖의 선택 작업과
 중복된 복사 동작을 공통 control로 편입했습니다. `DataTable`,
 `CodeBlock`, `Snippet` 소비자도 연결했습니다. typecheck·UI 테스트

@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 ActionBar·CopyButton 공개 검증 후:
+**약 82% → 약 83%**입니다. 109개 component·111개 registry item·
+27개 snapshot입니다. 표 외 선택 작업과 임의 문자열 복사를 공개
+preview 및 새 소비자의 snapshot 설치·typecheck·build·390px Chromium
+에서 확인했습니다. 15개 설치 파일은 저장소 원본과 일치했습니다.
+PR #41과 병합 commit의 Verify UI·Pages, Vercel production이
+통과했습니다. 실제 screen reader·touch·Safari·RTL과 rollback 뒤
+snapshot URL은 미검증입니다.
+[작업 기록](action-copy-controls-2026-10-02.md)에 남겼습니다.
+
 2026-10-02 ActionBar·CopyButton 로컬 검증: **약 82% → 약 82%**입니다.
 공개 기준은 107개 component·109개 item·26개 snapshot입니다.
 두 원본 component와 기존 3개 소비자를 연결하고 typecheck·테스트
