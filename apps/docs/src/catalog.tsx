@@ -41,7 +41,11 @@ import {
     HoverCardTrigger, Heatmap, Image, Input, InputGroup, InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, JsonViewer, Kanban,
-    Label, LogConsole, Markdown, Message, MessageContent, MetricCard,
+    Label, LogConsole, Markdown, Menubar, MenubarCheckboxItem,
+    MenubarContent, MenubarGroup, MenubarItem, MenubarLabel,
+    MenubarMenu, MenubarRadioGroup, MenubarRadioItem,
+    MenubarSeparator, MenubarSub, MenubarSubContent,
+    MenubarSubTrigger, MenubarTrigger, Message, MessageContent, MetricCard,
     MonthPicker, MultiSelect, YearPicker,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
     NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
@@ -2817,6 +2821,79 @@ function DropdownMenuPreview() {
     );
 }
 
+function MenubarPreview() {
+    const [showGrid, setShowGrid] = useState(true);
+    const [density, setDensity] = useState("standard");
+    const [lastAction, setLastAction] = useState("아직 실행한 작업이 없습니다.");
+
+    return (
+        <div className="preview-stack w-full">
+            <Menubar aria-label="편집기 명령">
+                <MenubarMenu>
+                    <MenubarTrigger>파일</MenubarTrigger>
+                    <MenubarContent>
+                        <MenubarGroup>
+                            <MenubarLabel>문서</MenubarLabel>
+                            <MenubarItem onSelect={() =>
+                                setLastAction("새 문서 작업을 선택했습니다.")}>
+                                새 문서
+                            </MenubarItem>
+                            <MenubarItem onSelect={() =>
+                                setLastAction("사본 만들기를 선택했습니다.")}>
+                                사본 만들기
+                            </MenubarItem>
+                            <MenubarItem disabled>인쇄 준비 중</MenubarItem>
+                        </MenubarGroup>
+                        <MenubarSeparator />
+                        <MenubarSub>
+                            <MenubarSubTrigger>내보내기</MenubarSubTrigger>
+                            <MenubarSubContent>
+                                <MenubarItem onSelect={() =>
+                                    setLastAction("CSV 내보내기를 선택했습니다.")}>
+                                    CSV
+                                </MenubarItem>
+                            </MenubarSubContent>
+                        </MenubarSub>
+                    </MenubarContent>
+                </MenubarMenu>
+                <MenubarMenu>
+                    <MenubarTrigger>보기</MenubarTrigger>
+                    <MenubarContent>
+                        <MenubarCheckboxItem checked={showGrid}
+                            onCheckedChange={(value) =>
+                                setShowGrid(value === true)}>
+                            격자 표시
+                        </MenubarCheckboxItem>
+                        <MenubarSeparator />
+                        <MenubarRadioGroup value={density}
+                            onValueChange={setDensity}>
+                            <MenubarRadioItem value="standard">
+                                기본 밀도
+                            </MenubarRadioItem>
+                            <MenubarRadioItem value="compact">
+                                좁은 밀도
+                            </MenubarRadioItem>
+                        </MenubarRadioGroup>
+                    </MenubarContent>
+                </MenubarMenu>
+                <MenubarMenu>
+                    <MenubarTrigger>도움말</MenubarTrigger>
+                    <MenubarContent>
+                        <MenubarItem onSelect={() =>
+                            setLastAction("명령 안내를 선택했습니다.")}>
+                            명령 안내
+                        </MenubarItem>
+                    </MenubarContent>
+                </MenubarMenu>
+            </Menubar>
+            <p role="status">
+                {lastAction} 격자 {showGrid ? "표시" : "숨김"} ·
+                {density === "standard" ? " 기본" : " 좁은"} 밀도
+            </p>
+        </div>
+    );
+}
+
 function ContextMenuPreview() {
     const [showArchived, setShowArchived] = useState(false);
     const [density, setDensity] = useState("standard");
@@ -5159,6 +5236,44 @@ function ReleaseSchedule() {
                 </NavigationMenuList>
             </NavigationMenu>
         </div>,
+    },
+    {
+        id: "menubar", name: "Menubar", category: "Navigation",
+        description: "작업 화면의 파일·보기 명령을 상시 표시합니다. 상위 메뉴 사이의 방향키 이동과 항목·체크·라디오·서브메뉴 탐색을 지원합니다.",
+        code: `import { useState } from "react";
+import {
+  Menubar, MenubarMenu, MenubarTrigger, MenubarContent,
+  MenubarItem, MenubarCheckboxItem,
+} from "@pydemia/ui";
+
+function EditorCommands() {
+  const [showGrid, setShowGrid] = useState(true);
+  const [lastAction, setLastAction] = useState("");
+
+  return <>
+    <Menubar aria-label="편집기 명령">
+      <MenubarMenu>
+        <MenubarTrigger>파일</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem onSelect={() => setLastAction("새 문서")}>
+            새 문서
+          </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger>보기</MenubarTrigger>
+        <MenubarContent>
+          <MenubarCheckboxItem checked={showGrid}
+            onCheckedChange={(value) => setShowGrid(value === true)}>
+            격자 표시
+          </MenubarCheckboxItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+    <p role="status">{lastAction} 격자 {showGrid ? "표시" : "숨김"}</p>
+  </>;
+}`,
+        preview: () => <MenubarPreview />,
     },
     {
         id: "pagination", name: "Pagination", category: "Data display",

@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-02 — Menubar
+
+- 작업 화면에서 파일·보기 등 여러 상위 명령을 유지하는 `Menubar`를
+  추가했습니다. 항목·체크·라디오·서브메뉴·disabled 상태를 제공하고
+  Radix의 키보드 및 focus 동작을 사용합니다.
+- 공통 token을 사용하며 문서 preview·사용 코드와 registry item을
+  추가했습니다. `@radix-ui/react-menubar@1.1.24`를 사용합니다.
+
 ## 2026-10-01 — YearPicker
 
 - 연간 보고·예산에서 `YYYY` 값을 고르는 `YearPicker`를 추가했습니다.

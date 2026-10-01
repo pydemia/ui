@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 Menubar 로컬 구현: 공개 기준 106개 component·108개 item·
+25개 snapshot과 goal 약 81%를 유지합니다. 새 Menubar의 source·
+registry·문서 preview·Usage를 작성하고 typecheck·UI 테스트 120/120·
+build, 로컬 브라우저와 새 소비자 설치·typecheck·build·브라우저를
+통과했습니다. 공개 검증은 남아 있습니다. provenance 고지 해시
+갱신 전 `registry:check` 실패는 수정 후 다시 확인합니다.
+[작업 기록](menubar-2026-10-02.md)을 참고하세요.
+
 2026-10-01 공급·품질 기준 후속 재검토: 새 component마다 독립된 공개
 설치 검사를 반복하는 기준을 릴리스별 변경 item·의존 item 조합
 검사로 조정했습니다. 실제 보조기술·touch·Safari·RTL, 과거 snapshot의

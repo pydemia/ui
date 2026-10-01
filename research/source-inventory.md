@@ -763,6 +763,25 @@ Link·Trigger·Content 관계, 방향키·Escape 규칙을 확인했습니다.
 registry 의존성은 `pyd-utils`이며 추가 UI reference library 코드는
 사용하지 않았습니다.
 
+## 2026-10-02 Menubar reference
+
+`Menubar`는 이 저장소에서 직접 작성한 Radix primitive 조합입니다.
+[shadcn/ui 공식 문서](https://ui.shadcn.com/docs/components/radix/menubar),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/menubar.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. 메뉴 구성과 사용처만 참고했으며 source는 복사하지
+않았습니다. [Radix Menubar 공식 문서](https://www.radix-ui.com/primitives/docs/components/menubar)의
+상위 trigger 방향키 이동, 항목 탐색, submenu와 Escape 규칙을
+확인했습니다.
+
+직접 npm dependency는 `@radix-ui/react-menubar@1.1.24`와 기존
+`lucide-react@0.468.0`입니다. Radix 1.1.24의
+[배포 소스·manifest·MIT LICENSE](https://registry.npmjs.org/@radix-ui/react-menubar/-/react-menubar-1.1.24.tgz)를
+같은 tarball에서 확인했습니다. manifest에는 `@radix-ui/react-menu@2.1.24`,
+`@radix-ui/react-roving-focus@1.1.19` 등 직접 의존성이 있고 LICENSE에는
+WorkOS copyright가 있습니다. 직접 registry 의존성은 `pyd-utils`입니다.
+실제 보조기술 발표는 별도 미검증 항목입니다.
+
 ## 2026-09-29 DataChart 누적 막대
 
 기존 프로젝트 소유 `DataChart`에 누적 막대 계산과 SVG 도형을 직접

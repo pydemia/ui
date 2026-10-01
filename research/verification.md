@@ -1,5 +1,27 @@
 # 검증 기록
 
+## 2026-10-02 Menubar 로컬 검증
+
+`Menubar`는 아직 공개하지 않았습니다. 로컬에서 `npm run typecheck`,
+UI 테스트 120/120, `npm run build`가 통과했습니다. build는 109개
+registry item과 문서의 preview·Usage를 생성했습니다. 이름이 있는
+menubar와 두 trigger의 server-rendered semantics, 빈 이름 거부를
+별도 테스트로 확인했습니다.
+
+390px Chromium 문서 preview에서 파일 메뉴 열기, ArrowRight로 보기
+메뉴 전환, 체크·라디오 선택, submenu의 CSV 작업, Escape 후 파일
+trigger focus 복귀, light/dark와 가로 overflow 없음을 확인했습니다.
+별도 Vite 소비자에 로컬 registry URL로 Menubar·tokens를 설치해 세
+파일의 원본 일치, Radix 1.1.24·lucide 0.468.0 설치, typecheck·build,
+390px Chromium의 작업 선택·체크 상태 변경과 page error 0건을
+확인했습니다.
+
+`registry:check`는 provenance가 바뀐 뒤 소비자 고지의 SHA-256이
+이전 값이라 실패했습니다. source commit에 고지 링크·해시를 고정한
+다음 재실행해야 합니다. 공개 snapshot·production, 실제 screen
+reader·touch·Safari·RTL은 미검증입니다. 상세 절차와 소비자 경로는
+[작업 기록](../.worknotes/menubar-2026-10-02.md)에 남겼습니다.
+
 ## 2026-10-01 YearPicker 공개 검증
 
 `YearPicker`의 `YYYY` 단일 값·10년 탐색·min/max를 로컬에서
