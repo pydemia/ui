@@ -4,10 +4,10 @@
 편집을 위한 이름 있는 textarea·줄 번호·form 값·오류 연결·panel/flat
 표시를 추가했습니다. typecheck·UI 테스트 132/132·build와 로컬
 Chromium의 입력·제출·스크롤·390px dark 동작을 확인했습니다.
-provenance 변경 뒤 소비자 고지의 해시 핀을 갱신하기 전이라
-`registry:check`는 SHA-256 불일치로 중단됐습니다. 고지 갱신·
-snapshot·PR·공개 확인이 남았습니다. 로컬 111개 component·
-113개 item, 공개 110개·112개·29 snapshot, goal 추정 약 85%입니다.
+source commit `40f93b4`의 provenance 고지 핀을 갱신하고
+30번째 snapshot을 생성해 `registry:release-check`가 통과했습니다.
+PR·공개 확인이 남았습니다. 로컬 111개 component·113개 item·
+30 snapshot, 공개 110개·112개·29 snapshot, goal 추정 약 85%입니다.
 [작업 기록](code-editor-shell-2026-10-02.md)을 참고하세요.
 
 2026-10-02 체크리스트 정합성 문서 공개: PR #47을 병합한 `6a9056d`의
