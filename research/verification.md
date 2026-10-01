@@ -1,5 +1,16 @@
 # 검증 기록
 
+## 2026-10-02 QueryBuilder 공개 확인
+
+PR #60 Verify UI run 36941699556, 병합 commit `9e39afd`의 Verify
+UI·Pages 검사가 통과했습니다. Vercel production
+`dpl_A17dr1DLh81b9E3EwfSMiDfM5uT1`은 READY이며 공개
+QueryBuilder preview·Usage와 console error 0건을 확인했습니다.
+현재 registry manifest/item과 35번째 snapshot manifest/item URL은
+각각 HTTP 200이고 snapshot에는 117개 item이 있습니다. 공개
+component는 115개입니다. 실제 서버 조회·screen reader·touch·
+Safari·RTL, 개별 소비자 설치와 rollback 뒤 URL 보존은 미검증입니다.
+
 ## 2026-10-02 QueryBuilder 로컬 검증
 
 `npm run typecheck`와 UI 테스트 152/152가 통과했습니다.
