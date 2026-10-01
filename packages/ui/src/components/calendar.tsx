@@ -22,6 +22,7 @@ function Calendar({
                 month: cn("relative space-y-3", defaults.month),
                 month_caption: cn("flex h-9 items-center justify-center", defaults.month_caption),
                 caption_label: cn("text-sm font-medium", defaults.caption_label),
+                chevron: cn("fill-current", defaults.chevron),
                 nav: cn(
                     "flex h-9 items-center justify-between",
                     defaults.nav,
