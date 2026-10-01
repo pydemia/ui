@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-table",
+  "title": "Table",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/table.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Table({ className, ...props }: ComponentProps<\"table\">) {\n    return <table className={cn(\"w-full border-collapse text-sm\", className)} {...props} />;\n}\n\nfunction TableHead({ className, ...props }: ComponentProps<\"th\">) {\n    return (\n        <th\n            className={cn(\n                \"border-b border-border px-[var(--space-3)] py-2 text-left font-medium text-muted\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nfunction TableCell({ className, ...props }: ComponentProps<\"td\">) {\n    return (\n        <td\n            className={cn(\"border-b border-border px-[var(--space-3)] py-[var(--density-row-block)]\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Table, TableHead, TableCell };\n",
+      "type": "registry:ui",
+      "target": "@ui/table.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

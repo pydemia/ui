@@ -5,6 +5,9 @@
 - 계층에서 한 항목을 골라 form 값으로 제출하는 `TreeSelect`를
   추가했습니다. 선택 경로, 필수 선택 오류, 비활성 후손, form reset을
   처리하며 기존 Tree·Popover를 조합합니다.
+- 첫 snapshot에서 기본값을 지운 뒤 reset하면 표시와 제출값이
+  달라지던 문제를 수정했습니다. 수정판에는 새 snapshot ID를
+  사용합니다.
 
 ## 2026-10-01 — DiffViewer
 

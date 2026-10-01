@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-01 TreeSelect reset 수정 중: 첫 공개 snapshot
+`sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690`의
+별도 소비자에서 기본값을 지운 뒤 reset하자 표시와 native form 값이
+달랐습니다. option의 기본 선택을 동기화해 수정했고 동일 소비자
+fixture의 390px Chromium에서 reset 2회, typecheck·build를 다시
+확인했습니다. 수정판 새 snapshot ID는
+`sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`이며
+공개 배포·설치는 진행 중입니다. Goal 약 80%, 공급·품질 5/10입니다.
+[작업 기록](component-tree-select-2026-10-01.md)을 참고하세요.
+
 2026-10-01 TreeSelect 작업 중: 정적 조직 계층의 단일 항목 선택,
 선택 경로·form 값·필수 선택·reset을 기존 Tree·Popover로
 구성합니다. Ant Design 고정 revision의 공식 문서·source·manifest·

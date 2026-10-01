@@ -14,7 +14,9 @@
 `required`는 native select의 유효성 검사를 사용하고 오류를
 표시하며 trigger에 초점을 둡니다. Uncontrolled 값은 form
 reset 때 `defaultValue`로 돌아갑니다. Controlled 값의 reset은
-소비자가 직접 처리합니다. `Tree`의 단일 선택·방향키 이동과
+소비자가 직접 처리합니다. Native reset은 이벤트 뒤 option의
+`defaultSelected`를 읽으므로 component가 기본 option을 현재
+기본값에 맞춰 둡니다. `Tree`의 단일 선택·방향키 이동과
 `Popover`의 열기·닫기·Escape 동작을 유지합니다. 원격 로딩,
 다중 선택, 계층 검색은 이 API에 포함하지 않습니다.
 

@@ -100,11 +100,11 @@ npm run registry:release-check
 [CHANGELOG.md](CHANGELOG.md)에
 기록하고, 배포 후 공개 snapshot URL의 설치를 별도 소비자에서 확인합니다.
 현재 source의 ID는
-`sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690`입니다.
+`sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`입니다.
 이 ID의 TreeSelect와 token을 별도 소비자에 설치하려면:
 
 ```bash
-npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690/pyd-tree-select.json https://pydemia-ui.vercel.app/r/releases/sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690/pyd-tokens.json
+npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f/pyd-tree-select.json https://pydemia-ui.vercel.app/r/releases/sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f/pyd-tokens.json
 ```
 
 이전 DataChart snapshot

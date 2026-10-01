@@ -51,6 +51,7 @@ function TreeSelect({
     const contentRef = useRef<HTMLDivElement | null>(null);
     const selectRef = useRef<HTMLSelectElement | null>(null);
     const selectedId = value === undefined ? internalValue : value;
+    const resetValue = value === undefined ? defaultValue : value;
     const entries = new Map<string, {
         label: string;
         path: string;
@@ -96,16 +97,24 @@ function TreeSelect({
     const selected = selectedId === null ? undefined : entries.get(selectedId);
 
     useEffect(() => {
-        if (value !== undefined) return;
+        const select = selectRef.current;
+        if (!select) return;
+        // Native form reset reads defaultSelected after the reset event.
+        for (const option of select.options) {
+            option.defaultSelected = option.value === (resetValue ?? "");
+        }
+    }, [items, resetValue]);
+
+    useEffect(() => {
         const formElement = selectRef.current?.form;
         const reset = () => {
-            setInternalValue(defaultValue);
+            if (value === undefined) setInternalValue(defaultValue);
             setOpen(false);
             setInvalid(false);
         };
         formElement?.addEventListener("reset", reset);
         return () => formElement?.removeEventListener("reset", reset);
-    }, [defaultValue, value]);
+    }, [defaultValue, form, value]);
 
     function choose(next: string | null) {
         if (value === undefined) setInternalValue(next);
