@@ -1,5 +1,17 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 체크리스트 재검토: 릴리스에 적용되는 검사를
+변경 시점별로 정리하고, 기존 10개 체크박스를 당시 조사 기록으로
+명시했습니다. 표준 item별 소비자 설치와 동일 commit의 반복 실행은
+기본 조건이 아닙니다. 출처·LICENSE, 확인된 주요 결함 차단과
+미검증 환경 표기는 유지합니다. 코드·registry·실행 검증은 바뀌지
+않았습니다. 공개 기준 111개 component·113개 item·30개 snapshot,
+goal 관리용 추정 약 86%입니다.
+[검토 기록](quality-checklist-recalibration-2026-10-02.md)을 참고하세요.
+
+CodeEditorShell 공개 검증 기록 PR #50도 `7a80070`에 병합됐고,
+병합 commit의 Verify UI·Pages와 Vercel 상태가 성공했습니다.
+
 2026-10-02 CodeEditorShell 공개 확인: PR #49 병합 commit `b99b242`의
 Verify UI·Pages와 Vercel 상태가 성공했습니다. 공개 사이트에서
 `flat` 전환·form 제출·page error 없음, 30번째 snapshot manifest의
