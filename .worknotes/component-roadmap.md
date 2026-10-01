@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-109개 component와 111개 registry item이 있습니다. 2026-09-30에
+110개 component와 112개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
@@ -23,6 +23,8 @@ Markdown을
 편입했고 `YearPicker`를 추가했습니다. 2026-10-02에는 `Menubar`를
 편집기·관리 화면의 여러 상위 명령에 편입했습니다. `ActionBar`와
 `CopyButton`도 선택 작업·복사 상태의 반복 용례로 편입했습니다.
+`IconButton`을 편입하고 기존 `Tabs`에 line·contained 표시를
+추가했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -103,7 +105,7 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 수로만 사용하며 component 공급률이나 품질 점수로 해석하지 않습니다.
 이후 진행 보고에서는 이를 점수처럼 표시하지 않고 완료·부분·
 미검증 상태와 남은 위험을 적습니다.
-전체 goal의 약 84%는 사용 사례 범위와 공개 검증을 함께 보는
+전체 goal의 약 85%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이고, component 수 또는 체크박스 수로 자동 계산하지
 않습니다. 판정 근거는
 [기준 재검토](quality-criteria-review-2026-10-01.md)와

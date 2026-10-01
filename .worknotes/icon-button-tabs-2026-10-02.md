@@ -44,7 +44,19 @@ Radix 배포 버전과 접근성 근거는
   을 생성했고 `registry:release-check`가 현재 빌드와의 일치를
   확인했습니다.
 
-현재는 로컬 110개 component·112개 registry item·29개 snapshot입니다.
-PR·공개 확인은 남았습니다. 실제 screen
-reader·touch·Safari·RTL과 rollback 뒤 URL 보존은 미검증입니다.
-공개 기준 goal 관리용 추정은 아직 약 84%입니다.
+## 공개 확인
+
+PR #45의 Verify UI가 통과했고 병합 commit `adffdc0`의 Verify UI·
+Pages도 통과했습니다. Vercel 배포 상태는 success입니다. 공개
+`ui.pydemia.ai`에서 IconButton preview 클릭으로 수량이 바뀌고
+Tabs의 contained 선택이 적용되는 것을 Chromium에서 확인했습니다.
+두 페이지의 page error는 없었습니다. 공개 29번째 snapshot
+manifest의 ID·112개 item과 IconButton·Tabs JSON의 새 source를
+확인했으며 문서 URL은 HTTP 200입니다.
+
+공개 기준 110개 component·112개 registry item·29개 snapshot입니다.
+goal 관리용 추정을 **약 84% → 약 85%**로 조정합니다. 이름 있는
+아이콘 작업과 탭 표시 선택지가 공개됐고, 새 registry 의존 경로의
+소비자 설치가 확인된 점을 반영했습니다. 공개 snapshot의 별도
+소비자 재설치, 실제 screen reader·touch·Safari·RTL과 rollback 뒤
+URL 보존은 미검증입니다.

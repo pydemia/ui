@@ -2034,7 +2034,10 @@ Tabs 형태 전환·ArrowRight 선택·panel 전환과 dark 배경·가로 넘�
 변경 source 5개 일치·typecheck·build를 확인했습니다. 소비자의
 브라우저 동작은 실행하지 않았습니다. source commit `2a48e96`의
 provenance 고지 핀, 29번째 snapshot과 `registry:release-check`는
-통과했습니다. PR·공개 확인은 아직 실행하지 않았습니다. 실제
-screen reader·touch·Safari·RTL과
-rollback 뒤 URL 보존은 미검증입니다. 세부 범위는
+통과했습니다. PR #45와 병합 commit `adffdc0`의 Verify UI,
+Pages가 통과했고 Vercel 배포가 성공했습니다. 공개 Chromium에서
+IconButton 클릭·Tabs contained 전환과 page error 없음, 29번째
+snapshot manifest의 112개 item과 변경 JSON URL을 확인했습니다.
+공개 snapshot의 별도 소비자 재설치, 실제 screen reader·touch·
+Safari·RTL과 rollback 뒤 URL 보존은 미검증입니다. 세부 범위는
 [작업 기록](../.worknotes/icon-button-tabs-2026-10-02.md)에 있습니다.
