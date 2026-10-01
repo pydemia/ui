@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 YearPicker 공개 검증 후: **약 80% → 약 81%**입니다.
+106개 component·108개 registry item·25개 snapshot입니다. 연도만
+선택·제출하는 용례의 공개 preview와 별도 소비자 snapshot 설치·
+typecheck·build·390px Chromium 경계·선택·제출을 확인했습니다.
+PR #36의 병합 CI·Pages와 Vercel production도 통과했습니다.
+실제 보조기술·touch·Safari·RTL, rollback은 미검증입니다.
+라이브러리 과제 완료 5·부분 4·미검증 1은 그대로입니다.
+[작업 기록](year-picker-2026-10-01.md)에 증거를 남겼습니다.
+
 2026-10-01 YearPicker 로컬 검증: **약 80% → 약 80%**입니다.
 106개 component·108개 registry item·25개 snapshot입니다.
 연도 단위의 min/max·선택·제출·focus를 390px Chromium에서 확인했고

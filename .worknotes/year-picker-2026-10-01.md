@@ -26,3 +26,32 @@ snapshot을 확인했습니다. 새 25번째 snapshot ID는
 재빌드 뒤 `registry:release-check`가 현재 빌드와 ID 일치를
 확인했습니다. 공개 소비자 설치는 배포 후 확인합니다.
 실제 screen reader·touch·Safari·RTL은 미검증입니다.
+
+## 공개 검증
+
+- PR #36의 Verify UI와 병합 commit
+  `5ac0de7a34eb4477c301cf59a79b7e2d7ee9eaeb`의 Verify UI·Pages가
+  통과했습니다. Vercel production
+  `dpl_6epr2ERCA5VNw3MDwSayfgAnEkbW`는 READY입니다.
+- 공개 25번째 snapshot의 manifest, YearPicker, Popover, tokens
+  JSON이 HTTP 200으로 응답했습니다. `shadcn@4.0.0 add`로
+  YearPicker와 tokens를 별도 Vite 소비자에 설치했습니다. 설치된
+  YearPicker·Popover·utils·tokens·MIT 고지 5개 파일이 공개 JSON
+  원본과 줄바꿈 정규화 뒤 일치합니다. 소비자 typecheck·build가
+  통과했습니다.
+- 소비자 390px Chromium에서 `0001`의 선택 상태와 이전 이동
+  비활성화를 확인했습니다. 같은 연도를 다시 눌러 선택을 지우자
+  FormData가 빈 문자열이 됐습니다. Space로 `0012`, Enter로
+  `2028`을 고른 뒤 제출값이 `2028:0012`가 됐습니다. `0013` 이후는
+  비활성화됐고 가로 overflow와 page error는 없었습니다.
+- 공개 문서의 YearPicker preview와 Usage 코드가 표시되고 page
+  error가 없었습니다.
+
+소비자 fixture:
+`C:\Users\pydemia\AppData\Local\Temp\pydemia-year-picker-public-consumer-20261001`.
+완료 기준 goal 관리용 추정은 **약 80% → 약 81%**입니다. 연도만
+선택·제출하는 독립 용례가 공개 설치까지 확인되어 Date & time의
+남은 사용 사례 하나를 닫았습니다. 현재 106개 component·108개
+registry item·25개 snapshot이며 라이브러리 과제 완료 5·부분 4·
+미검증 1은 그대로입니다. 실제 screen reader·touch·Safari·RTL과
+과거 배포 rollback은 실행하지 않았습니다.

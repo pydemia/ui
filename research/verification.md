@@ -1,6 +1,6 @@
 # 검증 기록
 
-## 2026-10-01 YearPicker 로컬 검증
+## 2026-10-01 YearPicker 공개 검증
 
 `YearPicker`의 `YYYY` 단일 값·10년 탐색·min/max를 로컬에서
 검사했습니다. `npm run typecheck`, UI 테스트 118/118,
@@ -11,8 +11,15 @@ snapshot의 ID가 일치합니다.
 390px Chromium에서 경계 연도·이동 버튼 비활성화, Enter·Space
 선택, native FormData와 제출값, 빈 값 오류, Escape 후 trigger focus
 복귀, light/dark와 가로 overflow 없음을 확인했습니다. page error는
-없었습니다. 공개 snapshot 설치와 실제 screen reader·touch·Safari·
-RTL은 아직 실행하지 않았습니다.
+없었습니다. PR #36의 Verify UI와 병합 commit의 Verify UI·Pages가
+통과했고 Vercel production은 READY입니다. 공개 25번째 snapshot을
+별도 Vite 소비자에 설치해 5개 파일 원본 일치·typecheck·build를
+확인했습니다. 소비자 390px Chromium에서는 `0001` 선택 해제,
+`0012`·`2028` 재선택과 `2028:0012` 제출값을 확인했습니다. 공개
+preview·Usage도 표시됐고 page error는 없었습니다. 실제 screen
+reader·touch·Safari·RTL과 배포 rollback은 실행하지 않았습니다.
+상세 절차와 소비자 경로는
+[작업 기록](../.worknotes/year-picker-2026-10-01.md)에 남겼습니다.
 
 ## 2026-10-01 선택 카드 표시 형태 공개 검증
 

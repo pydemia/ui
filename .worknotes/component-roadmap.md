@@ -244,9 +244,10 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 - [x] `MonthPicker` — 월별 보고·필터를 위한 `YYYY-MM` 값과 연도 이동,
   월 단위 min/max, form 값을 제공합니다. 실제 screen reader 검사는
   남았습니다.
-- [ ] `YearPicker` — 연간 보고·예산의 `YYYY` 값, 10년 탐색과
-  min/max·form 제출을 로컬에서 구현·검사했습니다. 공개 snapshot과
-  별도 소비자 설치를 확인한 뒤 완료로 표시합니다.
+- [x] `YearPicker` — 연간 보고·예산의 `YYYY` 값, 10년 탐색과
+  min/max·form 제출을 구현했습니다. 공개 snapshot을 별도 소비자에
+  설치해 경계 연도·선택 해제·제출을 확인했습니다. 실제 screen
+  reader·touch·Safari·RTL은 남았습니다.
 - [x] `NavigationMenu` — 상단 그룹 탐색의 pointer 열기·링크 이동,
   키보드 진입·Escape 닫기. Hover·touch·screen reader 검사는 남았습니다.
 - [x] `BottomNav` — 기존 `pyd-navigation`에 하단 주요 목적지 링크를
