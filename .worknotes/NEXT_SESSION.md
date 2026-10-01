@@ -1,11 +1,18 @@
 # Component 확장 작업 인계
 
+2026-10-02 체크리스트 추가 재검토: 변경 흐름의 로컬 브라우저 검증을
+공개 사이트에서 반복하지 않고 배포·변경 URL을 확인합니다. 외부
+component 코드를 편입하지 않은 원본 구현에는 upstream 코드·LICENSE
+대조를 적용하지 않습니다. 공개 기준과 goal 약 86%는 그대로입니다.
+[검토 기록](quality-checklist-recalibration-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ImageCropper 로컬 검증: 파일 선택 뒤 고정 비율로 자르는
 원본 component를 추가해 로컬 112개 component·114개 registry item이
 됐습니다. typecheck·UI 테스트 135/135·build와 Chromium의 1:1·
 16:9 PNG export, 키보드 확대·포인터 이동, 390px light/dark를
-확인했습니다. provenance 고지 핀·31번째 snapshot과
-`registry:release-check`, PR·공개 확인은 남았습니다. 공개 기준
+확인했습니다. provenance 고지 핀과 31번째 snapshot,
+`registry:release-check`도 통과했습니다. PR·공개 확인은 남았습니다.
+공개 기준
 111개·113개·30 snapshot, goal 추정 약 86%를 유지합니다.
 [작업 기록](image-cropper-2026-10-02.md)을 참고하세요.
 

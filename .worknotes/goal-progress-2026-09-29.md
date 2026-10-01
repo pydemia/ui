@@ -1,10 +1,18 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 체크리스트 중복 검사 재검토: **약 86% → 약 86%**입니다.
+같은 산출물의 로컬·공개 브라우저 동작을 중복 실행하지 않고, 외부
+component 코드를 쓰지 않은 원본 구현에는 upstream 코드·LICENSE
+대조를 적용하지 않도록 범위를 명확히 했습니다. 배포 URL과 변경
+흐름의 확인은 유지합니다. 새 구현·공개 검증은 없었습니다.
+[검토 기록](quality-checklist-recalibration-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ImageCropper 로컬 검증: **약 86% → 약 86%**입니다.
 로컬에 112개 component·114개 registry item을 마련하고
 typecheck·테스트 135/135·build·관련 Chromium 동작을 확인했습니다.
-provenance 핀·snapshot·release 검사와 공개 확인은 남아 있습니다.
-공개 기준 111개·113개·30 snapshot은 그대로입니다.
+provenance 핀·31번째 snapshot·release 검사도 통과했고, 공개
+확인은 남아 있습니다. 공개 기준 111개·113개·30 snapshot은
+그대로입니다.
 [작업 기록](image-cropper-2026-10-02.md)을 참고하세요.
 
 2026-10-02 공급·품질 체크리스트 재검토: **약 86% → 약 86%**입니다.

@@ -40,9 +40,12 @@ shadcn/ui source와 동일 revision MIT 고지는 유지합니다.
   아래 노랑의 결과 중앙 픽셀을 확인.
 - 390px light/dark에서 가로 넘침 없음, page error 없음.
 
-소비자 MIT 고지의 provenance commit·SHA-256 갱신,
-31번째 snapshot과 `registry:release-check`, PR·공개 URL은
-남았습니다. 표준 registry 설치 경로를 재사용하므로 개별 item
+source commit `dc5b9d6`의 provenance 고지 핀을 갱신하고
+31번째 snapshot
+`sha256-7faa63bf1fee02d8ed644e96d9a7f41804f406317f66ed362737aa3b5a363066`을
+생성했습니다. 재빌드 뒤 `registry:release-check`가 114개 item·
+112개 export/catalog와 현재 snapshot을 확인했습니다. PR·공개
+URL은 남았습니다. 표준 registry 설치 경로를 재사용하므로 개별 item
 CLI 설치는 이번 릴리스의 필수 검사에 포함하지 않았지만
 실행 여부는 미검증으로 유지합니다. 실제 touch·screen reader·
 Safari·RTL과 rollback 뒤 URL 보존도 미검증입니다.

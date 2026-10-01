@@ -14,10 +14,15 @@ preview를 생성했습니다. 로컬 Chromium에서 문서의 샘플·파일 �
 100%·100%의 `[255,255,0,255]`를 확인했습니다. MIME 정보가 빈
 `.PNG` 파일의 로딩 경계는 SSR 회귀 검사에 포함했습니다.
 
-현재 source에 대한 provenance 고지 핀과 31번째 snapshot,
-`registry:release-check`는 아직 갱신·실행하지 않았습니다. PR·공개
-사이트, 개별 소비자 CLI 설치, 실제 touch·screen reader·Safari·
-RTL, rollback 뒤 snapshot URL 보존은 미검증입니다.
+source commit `dc5b9d6`의 provenance LF SHA-256을 소비자 MIT
+고지에 고정한 뒤 `npm run registry:check`가 114개 item·112개
+export/catalog와 기존 30개 snapshot에 대해 통과했습니다. 31번째
+snapshot `sha256-7faa63bf1fee02d8ed644e96d9a7f41804f406317f66ed362737aa3b5a363066`을
+생성했고 재빌드 뒤 `npm run registry:release-check`가 현재 출력과
+31개 snapshot을 확인했습니다. 새 item의 두 의존 URL은 같은
+snapshot ID를 가리킵니다. PR·공개 사이트, 개별 소비자 CLI 설치,
+실제 touch·screen reader·Safari·RTL, rollback 뒤 snapshot URL
+보존은 미검증입니다.
 [작업 기록](../.worknotes/image-cropper-2026-10-02.md)에 범위를
 남겼습니다.
 
