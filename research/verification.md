@@ -1957,7 +1957,10 @@ snapshot `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14
 | build·registry 검사 | pass | 109개 item·107개 export/catalog, 26개 snapshot과 현재 ID 일치 |
 | 문서 390px Chromium | pass (limited) | 상위 명령 방향키, 체크·라디오·submenu 작업, Escape focus, light/dark, 가로 넘침 없음 |
 | 로컬 격리 소비자 | pass (limited) | CLI 설치 3개 파일 원본 일치·typecheck·build·390px 명령 및 체크 변경 |
-| 공개 CI·production·snapshot 소비자 | unverified | PR 병합·배포 전 |
+| PR·병합 CI·production | pass | PR #39와 병합 commit Verify UI, Pages 성공, Vercel READY |
+| 공개 preview·Usage | pass (limited) | 390px Chromium 명령 선택과 가로 넘침 없음 |
+| 공개 JSON·manifest | pass | 현재·snapshot Menubar JSON과 manifest가 저장소 파일 SHA-256과 일치 |
+| 공개 snapshot 소비자 | pass (limited) | CLI 설치 3개 파일 원본 일치·typecheck·build·390px Chromium 명령·체크 변경 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 | rollback 뒤 snapshot URL | unverified | 과거 배포 rollback 시험 전 |
 
