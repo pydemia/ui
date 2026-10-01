@@ -1,14 +1,17 @@
 # Component 확장 작업 인계
 
-2026-10-02 DataTable 원격 조회 로컬 작업: 기존 전체 행 모드를 유지하고
+2026-10-02 DataTable 원격 조회 공개 확인: 기존 전체 행 모드를 유지하고
 호출자가 조회 조건·총건수·로딩·오류를 소유하는 `remote` 모드를
 추가했습니다. UI 테스트 148/148, typecheck·build·release 검사가
 통과했고 로컬 Chromium 390px와 주요 조회·선택 흐름을 확인했습니다.
 새 snapshot은
 `sha256-73ea6b31c38dfa074a5ad87dd94804ae8cc1217e15cf0adfaa14322ec569b303`입니다.
-PR CI·공개 검증은 남았으며 component 수는 114개, goal 추정은
-약 89%입니다. [작업 기록](data-table-remote-2026-10-02.md)을
-참고하세요.
+PR #58과 병합 commit `d89c304`의 Verify UI·Pages, Vercel
+production이 통과했습니다. 공개 preview·Usage, 현재 registry item과
+34번째 snapshot URL을 확인했습니다. 공개 component 114개·item
+116개, goal 추정 약 89%입니다. 실제 HTTP 경합·보조기술·touch·
+Safari·RTL은 미검증입니다.
+[작업 기록](data-table-remote-2026-10-02.md)을 참고하세요.
 
 2026-10-02 CalendarScheduler 공개 확인: PR #56 병합 commit `57749fe`의
 Verify UI, Vercel production과 Pages 배포가 성공했습니다. 공개 사이트에

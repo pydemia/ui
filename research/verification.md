@@ -1,6 +1,14 @@
 # 검증 기록
 
-## 2026-10-02 DataTable 원격 조회 로컬 검증
+## 2026-10-02 DataTable 원격 조회 검증
+
+PR #58 Verify UI run 36936736308과 병합 commit `d89c304`의
+Verify UI run 36936989888·Pages run 36936989012가 통과했습니다.
+Vercel production `dpl_2FCVG3HjufNEVCG1SoWoqoEtU99U`는
+READY이며 공개 DataTable 원격 preview·Usage와 114개 component
+표기를 브라우저에서 확인했습니다. console error는 0건입니다.
+현재 registry item, 34번째 snapshot manifest와 DataTable item은
+각각 HTTP 200이며 manifest에는 116개 item이 있습니다.
 
 `npm run typecheck`, UI 테스트 148/148, `npm run build`,
 `registry:release-check`가 통과했습니다. registry는 116개 item·
@@ -15,8 +23,8 @@ controlled 정렬·페이지·필터·초기화, 기존 로컬 선택의 페이�
 390px에서 문서 scrollWidth는 390px이며 표와 control이 화면 안에
 배치됐습니다. console error와 Vite overlay는 없었습니다. preview는
 로컬 데이터로 서버 응답을 모사합니다. 실제 HTTP 요청·경합 취소,
-실제 screen reader·touch·Safari·RTL, 개별 소비자 CLI 설치와 공개
-배포는 아직 검증하지 않았습니다.
+실제 screen reader·touch·Safari·RTL과 개별 소비자 CLI 설치는
+검증하지 않았습니다.
 
 ## 2026-10-02 CalendarScheduler 공개 확인
 
