@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 Card·Alert 공개 검증 후: **약 83% → 약 84%**입니다.
+기존 두 component에 실제 선택 가능한 표면·간격을 공개했습니다.
+109개 component·111개 item·28개 snapshot입니다. PR #43과
+병합 commit의 Verify UI·Pages, Vercel production, 공개 manifest와
+Card·Alert JSON 도달을 확인했습니다. 문서의 390px 동작은 로컬에서
+검사했으며 공개 브라우저·실제 보조기술·touch·Safari·RTL,
+rollback 뒤 URL 보존은 미검증입니다. 소비자 설치 경로와 의존성이
+그대로여서 별도 CLI 재설치는 요구하지 않았습니다.
+[작업 기록](card-alert-appearances-2026-10-02.md)에 근거가 있습니다.
+
 2026-10-02 Card·Alert 로컬 검증: **약 83% → 약 83%**입니다.
 기존 두 component의 표시 형태와 Card 간격을 확장했습니다.
 109개 component·111개 item으로 수는 그대로이고 28번째

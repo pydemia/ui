@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-10-02 Card·Alert 공개 검증 완료: PR #43의 Verify UI와 병합
+commit `a112a5f`의 Verify UI·Pages가 통과했고 Vercel production은
+READY입니다. 공개 28번째 snapshot manifest는 111개 item이며,
+Card·Alert JSON에서 새 표시 속성을 확인했습니다. 문서 URL은
+HTTP 200입니다. 표시·역할·390px 동작은 로컬 Chromium에서
+검사했고 공개 소비자 CLI 재설치와 공개 브라우저 동작은 이번
+변경의 출시 조건에 포함하지 않았습니다. 109개 component·111개
+item·28개 snapshot, goal 관리용 추정 약 84%입니다. 실제 screen
+reader·touch·Safari·RTL과 rollback 뒤 URL 보존은 미검증입니다.
+[작업 기록](card-alert-appearances-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 기준 재조정: CI가 이미 검사하는 항목과 소비자
 설치를 릴리스마다 중복하지 않도록 [판정 기준](quality-criteria-reassessment-2026-10-02.md)을
 갱신했습니다. 기존 component의 표시·타입 변경은 typecheck·관련
@@ -11,7 +22,7 @@
 goal 약 83%, 109개 component·111개 item·27개 snapshot입니다.
 Card·Alert 표시 형태 확장은 로컬 typecheck·테스트 126/126·build·
 registry 검사와 390px Chromium을 통과했습니다. 28번째 snapshot을
-생성했고 PR·공개 URL 확인은 남았습니다.
+생성했습니다. 당시에는 PR·공개 URL 확인이 남아 있었습니다.
 [작업 기록](card-alert-appearances-2026-10-02.md)을 참고하세요.
 
 2026-10-02 ActionBar·CopyButton 공개 검증 완료: PR #41과 병합 commit
