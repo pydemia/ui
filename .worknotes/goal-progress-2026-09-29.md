@@ -3,8 +3,9 @@
 2026-10-02 MasterDetail 로컬 검증: **약 87% → 약 87%**입니다.
 로컬에 113개 component·115개 registry item을 마련하고
 typecheck·UI 테스트 138/138·build·데스크톱 및 390px 브라우저
-동작을 확인했습니다. provenance 핀·snapshot·공개 확인은 남아
-있습니다. 공개 기준은 112개·114개·31 snapshot입니다.
+동작을 확인했습니다. provenance 핀·32번째 snapshot·release 검사도
+통과했고 공개 확인은 남아 있습니다. 공개 기준은
+112개·114개·31 snapshot입니다.
 [작업 기록](master-detail-2026-10-02.md)을 참고하세요.
 
 2026-10-02 ImageCropper 공개 확인: **약 86% → 약 87%**입니다.

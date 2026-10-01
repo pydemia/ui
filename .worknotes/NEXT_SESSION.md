@@ -4,8 +4,9 @@
 전환·focus 복귀를 원본 component로 편입해 로컬 113개 component·
 115개 registry item이 됐습니다. typecheck·UI 테스트 138/138·build와
 브라우저의 데스크톱 선택, 390px 목록→상세→돌아가기, Enter 선택,
-light/dark를 확인했습니다. provenance 핀·snapshot·공개 확인은
-남았습니다. 공개 기준 112개·114개·31 snapshot, goal 약 87%입니다.
+light/dark를 확인했습니다. provenance 핀과 32번째 snapshot,
+`registry:release-check`도 통과했습니다. PR·공개 확인은 남았습니다.
+공개 기준 112개·114개·31 snapshot, goal 약 87%입니다.
 [작업 기록](master-detail-2026-10-02.md)을 참고하세요.
 
 2026-10-02 ImageCropper 공개 확인: PR #52 병합 commit `ffe9312`의

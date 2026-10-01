@@ -30,6 +30,11 @@ container 기준으로 두 면 또는 단일 면을 표시하고 모바일 상�
 - 390px에서 목록→상세, 돌아간 뒤 선택 버튼 focus, Enter 선택,
   light/dark 표시 확인.
 
-provenance 고지 핀·새 snapshot·release 검사와 PR·공개 URL은
-남았습니다. 실제 touch·screen reader·Safari·RTL과 개별 item
-CLI 설치는 미검증입니다.
+source commit `8cae788`의 provenance 고지 핀을 갱신하고
+32번째 snapshot
+`sha256-3418e56a4bb9ffff2d0a71b5f418d95b22ae36d91b5b27b709a0481d9a3f55e2`을
+생성했습니다. 재빌드 뒤 `registry:release-check`가 115개 item·
+113개 export/catalog와 현재 snapshot을 확인했습니다. 새 item의
+`pyd-button`·`pyd-utils` URL은 이 snapshot으로 고정됩니다.
+PR·공개 URL은 남았습니다. 실제 touch·screen reader·Safari·RTL과
+개별 item CLI 설치는 미검증입니다.

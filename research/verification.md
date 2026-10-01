@@ -10,8 +10,12 @@
 돌아가기 후 선택 버튼 focus 복귀, Enter 선택과 light/dark 표시를
 확인했습니다. 실제 touch·screen reader·Safari·RTL, 개별 소비자
 CLI 설치는 미검증입니다. 표준 `pyd-button`·`pyd-utils` 의존 경로를
-재사용합니다. provenance 고지 핀·새 snapshot·PR·공개 URL은
-아직 검증하지 않았습니다.
+재사용합니다. source commit `8cae788`의 provenance LF SHA-256을
+소비자 MIT 고지에 고정했습니다. `npm run registry:check`와
+`npm run registry:release-check`가 115개 item·113개 export/catalog,
+32개 snapshot을 통과했고 현재 산출물과 새 snapshot이 일치합니다.
+새 item의 두 의존 URL은 같은 snapshot ID를 가리킵니다. PR·공개
+URL은 아직 검증하지 않았습니다.
 [작업 기록](../.worknotes/master-detail-2026-10-02.md)을 참고하세요.
 
 ## 2026-10-02 ImageCropper 공개 검증
