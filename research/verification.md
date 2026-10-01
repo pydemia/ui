@@ -1,5 +1,64 @@
 # 검증 기록
 
+## 2026-10-02 CalendarScheduler 공개 확인
+
+PR #56 병합 commit `57749fe`의 Verify UI run 36933097687,
+Vercel production과 GitHub Pages가 성공했습니다. 공개 사이트에서
+CalendarScheduler preview·Usage,
+114개 component 표기를 확인했습니다. 현재 registry item과
+33번째 snapshot manifest·item URL은 각각 HTTP 200이며 manifest에
+116개 item이 있습니다.
+실제 screen reader·touch·Safari·RTL, 개별 소비자 CLI 설치,
+rollback 뒤 snapshot URL 보존은 미검증입니다.
+
+## 2026-10-02 CalendarScheduler preview 검증 후속
+
+Vercel preview(commit `3cc7d4b`)의 390px Chromium에서 달력 헤더의
+월 탐색 가로 배치, 날짜·일정 선택, 일정 추가, 빈 날짜와 월별 건수,
+ArrowRight·Enter 선택, 날짜 선택 뒤 상태 문구를 확인했습니다.
+light·dark를 시각 확인하던 중 기존 `Calendar`의 chevron SVG가
+dark에서 검게 보이는 결함을 발견해 `fill-current`를 적용했습니다.
+최종 Vercel preview(commit `eef5938`)의 390px·데스크톱 dark에서
+화살표가 밝게 보이고 SVG fill이 `rgb(233, 238, 242)`인 것을
+확인했습니다. 브라우저 console error는 0건입니다.
+
+수정 코드 기준 `npm run typecheck`, UI 테스트 143/143,
+`npm run build`, 최종 provenance 고지와 snapshot을 반영한
+`registry:release-check`가 통과했습니다. 116개 item·114개
+export/catalog, 공개 32개와 새 후보 1개로 정리한 33개 snapshot을
+확인했습니다. PR head `eef5938`의 Verify UI run 36932500537과
+Vercel preview는 성공했습니다. production 공개, 실제 screen
+reader·touch·Safari·RTL, 개별
+소비자 CLI 설치와 rollback 뒤 URL 보존은 미검증입니다.
+
+## 2026-10-02 CalendarScheduler 로컬 정적·client 검증
+
+`npm run typecheck`, UI 테스트 143/143(신규 SSR 3건·client DOM 2건),
+`npm run build`가 통과했습니다. 빌드는 116개 registry item과
+문서 preview를 생성합니다.
+SSR에서는 날짜별 일정 건수의 버튼 이름, 선택 날짜의 시간순 agenda,
+빈 날짜, 잘못된 ID·날짜·시간·시간대 거부를 확인했습니다.
+client DOM에서는 날짜 선택·월 이동·일정 선택·추가 callback과
+controlled 값 갱신을 실행했습니다. 테스트 전용 `jsdom@26.1.0`은
+런타임·registry 의존성에 포함되지 않습니다.
+
+첫 `npm run registry:check`는 출처 metadata 변경 후 소비자 고지의
+SHA-256이 이전 값이어서 실패했습니다. 소스 commit `390d9bb`로
+고지 commit과 LF SHA-256을 고정한 뒤 `registry:check`가 통과했습니다.
+33번째 snapshot
+`sha256-d5b1be19e7e59cb89730fbb44ff2feea7487d1a7e775d37720c4a1ad65f5a119`을
+생성하고 재빌드 뒤 `registry:release-check`가 116개 item·114개
+export/catalog와 현재 산출물을 확인했습니다.
+앞선 Windows 브라우저 제어는 현재 URL을 확인하지 못해 종료됐고,
+이번 in-app browser 재시도는 `ERR_BLOCKED_BY_CLIENT`로 차단됐습니다.
+날짜·월·callback의 client DOM 동작은 확인했으나 실제 브라우저의
+390px 배치와 focus는 미검증입니다. 따라서 공개 공급 완료 판정도
+남아 있습니다. 실제 screen reader·touch·Safari·RTL, 개별 소비자
+CLI 설치와 공개 URL도 미검증입니다. draft PR #56의 Verify UI
+run 36926628773과 새 client 테스트 commit `5fbe530`의 run
+36929134624는 통과했습니다. 세부 내용은
+[작업 기록](../.worknotes/calendar-scheduler-2026-10-02.md)에 남겼습니다.
+
 ## 2026-10-02 MasterDetail 공개 검증
 
 PR #54의 Verify UI run 36922068750과 병합 commit `4007bb2`의

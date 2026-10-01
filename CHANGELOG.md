@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 2026-10-02 — CalendarScheduler
+
+- `CalendarScheduler`는 일정이 있는 날짜와 건수를 달력에 표시하고
+  선택 날짜의 일정을 시간순으로 보여줍니다. 일정 선택·추가 callback은
+  호출자가 저장·권한 검사를 처리하도록 분리했습니다.
+- 날짜는 `YYYY-MM-DD`, 시간은 지정한 시간대의 `HH:mm` 값으로 받고
+  자동 변환하지 않습니다. 기존 Calendar와 Button을 조합하며 새 npm
+  의존성은 없습니다.
+
 ## 2026-10-02 — MasterDetail
 
 - 목록 선택과 상세 표시를 묶는 `MasterDetail`을 추가했습니다. 넓은

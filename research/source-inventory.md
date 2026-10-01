@@ -1449,3 +1449,23 @@ multiline 값·form 제출·readonly·disabled와
 `clsx`·`tailwind-merge`는 기존 `pyd-utils`의 의존성입니다.
 새 npm 또는 전이 dependency는 없습니다. 화면 낭독기 발표는
 직접 확인하지 않았습니다.
+
+## 2026-10-02 CalendarScheduler
+
+`CalendarScheduler`는 pydemia/ui 원본입니다. 날짜와 시간순 일정 목록을
+묶고 선택·추가 callback만 호출합니다. 외부 일정 component 코드는
+복사하지 않았습니다. 기존 `pyd-calendar`·`pyd-button`·`pyd-utils`와
+`react-day-picker@9.14.0`의 공개 `labelDayButton`을 사용합니다. 새 npm
+runtime dependency는 없습니다.
+
+[DayPicker v9.14.0 custom modifiers](https://daypicker.dev/v9/guides/custom-modifiers)와
+[접근성 지침](https://daypicker.dev/v9/guides/custom-components#keep-accessibility-and-behavior-intact)의
+날짜 표시·이름 규칙을 확인했습니다. 설치된 v9.14.0의
+`DayButton.d.ts`·`DayButton.js`·`labelDayButton.d.ts`와
+[같은 태그의 원본](https://github.com/gpbl/react-day-picker/blob/v9.14.0/src/labels/labelDayButton.ts),
+[MIT LICENSE](https://github.com/gpbl/react-day-picker/blob/v9.14.0/LICENSE)를
+대조했습니다. 이미 고정한 `pyd-calendar`의 shadcn/ui 원본과 고지는
+기존 registry dependency가 전달합니다. 직접 registry dependency는
+`pyd-calendar`·`pyd-button`·`pyd-utils`이며 DayPicker 패키지 버전도
+item에 고정했습니다. 실제 screen reader·touch·Safari·RTL은
+검증하지 않았습니다.

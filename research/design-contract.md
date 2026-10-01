@@ -1093,3 +1093,27 @@ focus 대상으로 이동하며 editor 안에 가두지 않습니다. `rows`는
 선택적 표시 텍스트이고 parsing·구문 강조·실행을 하지 않습니다.
 `actions`에는 호출자 버튼을 넣으며 실행 결과와 오류 처리는 호출자가
 소유합니다. 실제 screen reader·touch·Safari·RTL 검사는 남았습니다.
+
+## 2026-10-02 CalendarScheduler
+
+`CalendarScheduler`는 `initialDate`로 최초 선택일과 표시 월을
+고정합니다. 날짜는 `YYYY-MM-DD` 달력 날짜이며 `selectedDate`가 있으면
+호출자가 선택을 소유합니다. 없으면 내부 상태로 선택합니다.
+`onSelectedDateChange`는 다른 날짜를 선택할 때만 호출합니다. 월 이동은
+선택 날짜를 임의로 바꾸지 않습니다. 외부에서 controlled 날짜를 바꾸면
+그 날짜의 월을 표시합니다.
+
+`events`는 고유 ID·날짜·제목을 가진 단일 날짜 일정입니다. `startTime`과
+`endTime`은 24시간제 `HH:mm`이며 종료는 시작보다 늦어야 합니다.
+시간이 없으면 종일 일정입니다. 시간이 있는 일정에는 IANA
+`timeZone`을 지정합니다. 컴포넌트는 값을 변환하지 않고 이 시간대를
+일정 목록에 표시합니다. 시간·ID 순서로 목록을 안정적으로 정렬하고
+빈 날짜는 별도 문구를 표시합니다. 반복 일정, 여러 날에 걸친 일정,
+시간대 변환, 저장, 충돌·권한 판단은 호출자가 맡습니다.
+
+Calendar의 날짜 버튼에는 일정 건수를 읽을 수 있는 이름과 시각적
+밑줄을 제공합니다. 선택한 날짜의 agenda는 이름 있는 영역이며
+`onEventSelect`가 있으면 일정은 native 버튼이 됩니다.
+`onCreateEvent`가 있으면 해당 날짜의 추가 버튼을 표시합니다.
+Calendar의 keyboard·focus는 기존 DayPicker가 소유합니다.
+실제 브라우저·screen reader·touch·Safari·RTL 동작은 미검증입니다.
