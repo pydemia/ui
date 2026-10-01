@@ -1,12 +1,17 @@
 # Component 확장 작업 인계
 
-2026-10-01 DiffViewer 진행: 변경 전후 줄 번호·추가·삭제·문맥을
+2026-10-01 DiffViewer 공개 완료: 변경 전후 줄 번호·추가·삭제·문맥을
 통합·좌우 표로 읽는 원본 component를 편입했습니다. 현재 104개
 component·106개 registry item이며 21번째 불변 snapshot ID는
 `sha256-f2fbab67bddc01492523191362957921e38db65775b20a3ae9e37949dbf20f89`입니다.
 typecheck, 패키지 테스트 110/110, build, registry release 검사와
 로컬 390px Chromium의 두 보기·줄바꿈·내부 키보드 스크롤을
-확인했습니다. 별도 소비자 설치와 공개 배포는 진행 중입니다.
+확인했습니다. PR #28 및 병합 commit의 Verify UI, Pages CI와 Vercel
+production READY를 확인했습니다. 공개 390px preview의 보기 전환·
+줄바꿈·dark·키보드 스크롤, 현재·snapshot JSON과 manifest 원본 일치,
+새 소비자 CLI 설치 3개 파일·typecheck·build·390px Chromium도
+통과했습니다. 실제 screen reader·touch·Safari·RTL, 전체 item별
+격리 설치, rollback 뒤 snapshot URL 보존은 미검증입니다.
 goal 관리용 진척도는 약 80%, 공급·품질 조건 완료 5/10입니다.
 [작업 기록](component-diff-viewer-2026-10-01.md)을 참고하세요.
 
