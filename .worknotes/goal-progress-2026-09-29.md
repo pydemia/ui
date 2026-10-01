@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 ApprovalCard 공개 검증 후: **약 80% → 약 80%**입니다.
+`ApprovalCard`의 별도 승인 상태·중복 결정 방지·실패 후 재시도를
+공급하고 공개 preview·snapshot·새 소비자 설치까지 확인했습니다.
+103개 component·105개 registry item·20개 snapshot이지만 기존
+공급·품질 조건 완료 표시는 5/10 그대로입니다. 실제 보조기술·touch·
+Safari·RTL, item별 공개 격리 설치, rollback 뒤 URL 보존 등 남은
+조건을 닫지 않아 관리용 추정치를 올리지 않았습니다.
+[작업 기록](component-approval-card-2026-10-01.md)에 실행 증거와
+미검증 범위를 남겼습니다.
+
 2026-10-01 ApprovalCard 작업 시작: **약 80%**를 관리용 기준값으로
 기록합니다. 102개 component·104개 registry item의 공개 설치 경로가
 있으나 공급·품질 체크리스트는 5/10입니다. 100개를 분모로 쓰지 않으며
