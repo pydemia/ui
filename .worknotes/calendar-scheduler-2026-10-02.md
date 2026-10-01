@@ -27,8 +27,13 @@ callback이 반복되므로 handoff의 `CalendarScheduler` 후보를
 - `npm run typecheck` 통과.
 - UI 테스트 141/141, 신규 SSR 3건 통과.
 - `npm run build` 통과, 116개 registry item과 문서 preview 생성.
-- `npm run registry:check`는 provenance 고지의 SHA-256이 이전 값이라
-  실패. 소스 commit 이후 핀 갱신과 snapshot이 필요합니다.
+- 첫 `npm run registry:check`는 provenance 고지의 이전 SHA-256으로
+  실패했습니다. 소스 commit `390d9bb`에 고지 commit·해시를 고정한
+  뒤 통과했습니다.
+- 33번째 snapshot
+  `sha256-d5b1be19e7e59cb89730fbb44ff2feea7487d1a7e775d37720c4a1ad65f5a119`을
+  만들고 재빌드 뒤 `registry:release-check`가 116개 item·114개
+  export/catalog와 현재 산출물을 확인했습니다.
 - Browser Use의 localhost 탐색은 `ERR_BLOCKED_BY_CLIENT`, Windows
   Computer Use는 현재 URL 확인 불가로 종료됐습니다. 이 경로를
   우회해 UI 조작을 재시도하지 않았습니다.

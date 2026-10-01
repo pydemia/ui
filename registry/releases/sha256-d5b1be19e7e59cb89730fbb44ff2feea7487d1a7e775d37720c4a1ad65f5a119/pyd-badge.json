@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-badge",
+  "title": "Badge",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-d5b1be19e7e59cb89730fbb44ff2feea7487d1a7e775d37720c4a1ad65f5a119/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/badge.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype BadgeProps = ComponentProps<\"span\"> & {\n    variant?: \"default\" | \"outline\" | \"accent\" | \"danger\";\n};\n\nconst variantClasses = {\n    default: \"border-border bg-surface-subtle text-foreground\",\n    outline: \"border-border bg-transparent text-foreground\",\n    accent: \"border-accent bg-accent text-accent-foreground\",\n    danger: \"border-danger bg-surface text-danger\",\n} as const;\n\nfunction Badge({\n    className,\n    variant = \"default\",\n    ...props\n}: BadgeProps) {\n    if (!Object.hasOwn(variantClasses, variant)) {\n        throw new RangeError(\"Badge variant is not supported.\");\n    }\n\n    return (\n        <span\n            className={cn(\n                \"inline-flex items-center rounded-sm border px-2 py-0.5 \" +\n                \"text-xs font-medium\",\n                variantClasses[variant],\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Badge };\nexport type { BadgeProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/badge.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -7,9 +7,13 @@
 SSR에서는 날짜별 일정 건수의 버튼 이름, 선택 날짜의 시간순 agenda,
 빈 날짜, 잘못된 ID·날짜·시간·시간대 거부를 확인했습니다.
 
-`npm run registry:check`는 출처 metadata 변경 후 소비자 고지의
-SHA-256이 아직 이전 값이어서 실패했습니다. 소스 commit에 맞춰
-고지를 다시 고정하고 snapshot·release 검사를 실행해야 합니다.
+첫 `npm run registry:check`는 출처 metadata 변경 후 소비자 고지의
+SHA-256이 이전 값이어서 실패했습니다. 소스 commit `390d9bb`로
+고지 commit과 LF SHA-256을 고정한 뒤 `registry:check`가 통과했습니다.
+33번째 snapshot
+`sha256-d5b1be19e7e59cb89730fbb44ff2feea7487d1a7e775d37720c4a1ad65f5a119`을
+생성하고 재빌드 뒤 `registry:release-check`가 116개 item·114개
+export/catalog와 현재 산출물을 확인했습니다.
 브라우저 제어 도구가 Windows 브라우저의 현재 URL을 확인하지 못해
 이번 턴의 UI 조작을 중단했습니다. 달력 날짜·월 탐색, 일정 선택·추가,
 390px 배치와 focus는 미검증입니다. 따라서 공개 공급 완료 판정도

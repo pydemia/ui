@@ -2,8 +2,9 @@
 
 2026-10-02 CalendarScheduler 로컬 작업: 기존 Calendar와 일정 목록을
 결합해 로컬 114개 component·116개 item이 됐습니다. typecheck·
-UI 테스트 141/141·build가 통과했습니다. provenance 고지 핀과
-snapshot은 소스 commit 이후 갱신해야 합니다. Browser Use의 localhost
+UI 테스트 141/141·build가 통과했습니다. provenance 고지를 source
+commit `390d9bb`에 고정하고 33번째 snapshot과 release 검사를
+통과했습니다. Browser Use의 localhost
 탐색이 차단되고 Windows Computer Use가 URL 확인 불가로 종료돼
 날짜·월·일정 조작과 390px/focus는 미검증입니다. 공급 완료와 goal
 추정 약 88%는 유지합니다.

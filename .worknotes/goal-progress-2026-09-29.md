@@ -2,8 +2,9 @@
 
 2026-10-02 CalendarScheduler 로컬 검증: **약 88% → 약 88%**입니다.
 114개 component·116개 registry item을 로컬에 마련하고 typecheck·
-UI 테스트 141/141·build를 확인했습니다. provenance 핀·snapshot,
-브라우저 동작·공개 검증이 남아 있어 공급 완료로 세지 않습니다.
+UI 테스트 141/141·build·provenance 핀·33번째 snapshot·release
+검사를 확인했습니다. 브라우저 동작·공개 검증이 남아 있어 공급
+완료로 세지 않습니다.
 [작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
 
 2026-10-02 공급·품질 위험 기준 재검토: **약 88% → 약 88%**입니다.
