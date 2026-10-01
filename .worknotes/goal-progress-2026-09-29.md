@@ -1,5 +1,22 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 공급·품질 위험 기준 재검토: **약 88% → 약 88%**입니다.
+값·keyboard 흐름마다 자동 테스트와 브라우저 검사를 중복 요구하던
+기준을 변경 위험에 맞췄습니다. 필요한 대표 흐름은 한 방식으로
+실행하고, focus·실제 배치는 브라우저에서 확인합니다. 확인된 주요
+결함과 CI·출처·배포 오류는 계속 차단합니다. 기준 조정 자체로
+진척도를 올리지 않았습니다.
+[검토 기록](quality-gates-risk-review-2026-10-02.md)을 참고하세요.
+
+2026-10-02 MasterDetail 공개 확인: **약 87% → 약 88%**입니다.
+113개 component·115개 registry item·32개 snapshot을 공개했습니다.
+PR #54와 병합 commit `4007bb2`의 Verify UI, Pages, Vercel이
+성공했고 공개 preview·변경 item·snapshot manifest/item URL이
+응답했습니다. 공개 브라우저 동작은 로컬 검증과 중복하지 않았습니다.
+개별 CLI 설치, 실제 touch·screen reader·Safari·RTL, rollback 뒤
+URL 보존은 미검증입니다.
+[작업 기록](master-detail-2026-10-02.md)을 참고하세요.
+
 2026-10-02 MasterDetail 로컬 검증: **약 87% → 약 87%**입니다.
 로컬에 113개 component·115개 registry item을 마련하고
 typecheck·UI 테스트 138/138·build·데스크톱 및 390px 브라우저

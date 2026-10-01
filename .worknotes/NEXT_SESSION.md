@@ -1,5 +1,20 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 기준을 다시 검토했습니다. 값·keyboard 흐름의
+자동 테스트와 브라우저 검사를 모든 변경에 함께 요구하지 않습니다.
+대표 흐름을 한 방식으로 실행하되 focus·실제 배치는 브라우저에서
+확인합니다. CI 실패, 확인된 주요 결함, 필수 고지·공개 URL 실패는
+공급 완료를 막습니다. 기준 조정만으로 goal 추정은 올리지 않았습니다.
+[검토 기록](quality-gates-risk-review-2026-10-02.md)을 참고하세요.
+
+2026-10-02 MasterDetail 공개 확인: PR #54 병합 commit `4007bb2`의
+Verify UI·Pages와 Vercel 상태가 성공했습니다. 공개 preview,
+현재 `pyd-master-detail.json`, 32번째 snapshot manifest/item URL이
+응답하며 manifest에 115개 item이 있습니다. 현재 113개 component·
+115개 registry item·32개 snapshot, goal 관리용 추정 약 88%입니다.
+공개 브라우저 동작은 반복하지 않았습니다.
+[작업 기록](master-detail-2026-10-02.md)을 참고하세요.
+
 2026-10-02 MasterDetail 로컬 검증: 목록 선택과 좁은 화면의 상세
 전환·focus 복귀를 원본 component로 편입해 로컬 113개 component·
 115개 registry item이 됐습니다. typecheck·UI 테스트 138/138·build와
