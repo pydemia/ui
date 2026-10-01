@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-01 YearPicker 공개 검증 완료: PR #36이 병합됐고 병합
+Verify UI·Pages·Vercel production이 통과했습니다. 공개 25번째
+snapshot을 별도 Vite 소비자에 설치해 5개 파일 원본 일치·typecheck·
+build와 390px Chromium의 `0001` 해제·`0012`·`2028` 선택·제출을
+확인했습니다. 공개 preview·Usage도 표시됩니다. 현재 106개
+component·108개 registry item·25개 snapshot, goal 관리용 추정
+약 81%, 라이브러리 과제 완료 5·부분 4·미검증 1입니다. 실제
+screen reader·touch·Safari·RTL과 rollback은 미검증입니다.
+[작업 기록](year-picker-2026-10-01.md)을 참고하세요.
+
 2026-10-01 YearPicker 작업 중: 연간 보고·예산을 위한 `YYYY` 단일
 선택, 10년 탐색, min/max와 form 값을 기존 Popover로 구현합니다.
 시작 기준 105개 component·107개 item·24개 snapshot, goal 약 80%,
