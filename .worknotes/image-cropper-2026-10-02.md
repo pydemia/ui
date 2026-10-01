@@ -49,3 +49,17 @@ URL은 남았습니다. 표준 registry 설치 경로를 재사용하므로 개�
 CLI 설치는 이번 릴리스의 필수 검사에 포함하지 않았지만
 실행 여부는 미검증으로 유지합니다. 실제 touch·screen reader·
 Safari·RTL과 rollback 뒤 URL 보존도 미검증입니다.
+
+## 공개 확인
+
+PR #52의 Verify UI run 36918310698과 병합 commit `ffe9312`의
+Verify UI run 36918605313, Pages run 36918603236이 통과했고
+Vercel 상태도 성공입니다. `ui.pydemia.ai`의 ImageCropper preview,
+현재 item JSON, 31번째 snapshot manifest와 item JSON이 각각
+HTTP 200으로 응답했습니다. manifest의 `itemCount`는 114이고
+snapshot item의 `pyd-button`·`pyd-utils` 의존 URL은 같은 snapshot
+ID를 가리킵니다. 공개 브라우저 동작은 로컬 검증과 중복해 실행하지
+않았습니다. 개별 CLI 설치, 실제 touch·screen reader·Safari·RTL,
+rollback 뒤 URL 보존은 계속 미검증입니다. 공개 기준은 112개
+component·114개 registry item·31개 snapshot, goal 관리용 추정은
+약 86%에서 약 87%입니다.
