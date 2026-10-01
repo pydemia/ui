@@ -1,5 +1,22 @@
 # 검증 기록
 
+## 2026-10-02 CodeEditorShell 로컬 검증
+
+`npm run typecheck`, UI 테스트 132/132(새 component 4/4),
+`npm run build`가 통과했습니다. registry JSON 113개와 docs 출력이
+생성됐습니다. `registry:check`는 provenance 변경에 따른 소비자
+MIT 고지의 해시 핀을 갱신하기 전이라 SHA-256 불일치로 중단됐습니다.
+고지 갱신과 snapshot 생성 후 다시 검사합니다.
+로컬 docs의 Chromium에서 입력·Enter 줄 추가, 줄 번호 갱신,
+native FormData 제출값, 9줄일 때 textarea와 gutter의 scrollTop
+84px 일치, 빈 값의 `aria-invalid`·오류 발표, Tab 이탈을 확인했습니다.
+390px dark 화면에서 `flat` 표시와 가로 넘침 없음(390px)을 확인했고
+Vite overlay·page error는 없었습니다. 본 문서 기록 시 최종
+registry·snapshot·공개 URL은 아직 검증하지 않았습니다.
+별도 소비자 CLI 설치는 표준 `pyd-textarea` 경로를 그대로 사용해
+이번 변경의 필수 조건에 포함하지 않았습니다. 해당 item의 개별
+소비자 설치, 실제 screen reader·touch·Safari·RTL은 미검증입니다.
+
 ## 2026-10-02 Card·Alert 공개 확인
 
 PR #43과 병합 commit `a112a5f`의 Verify UI, 병합 Pages가

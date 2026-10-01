@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-110개 component와 112개 registry item이 있습니다. 2026-09-30에
+111개 component와 113개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
@@ -24,7 +24,8 @@ Markdown을
 편집기·관리 화면의 여러 상위 명령에 편입했습니다. `ActionBar`와
 `CopyButton`도 선택 작업·복사 상태의 반복 용례로 편입했습니다.
 `IconButton`을 편입하고 기존 `Tabs`에 line·contained 표시를
-추가했습니다.
+추가했습니다. `CodeEditorShell`에는 줄 번호·form 값·오류 연결과
+panel·flat 표시를 추가했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -498,7 +499,10 @@ token 전달 방식을 정할 때,
 - [ ] `EmptyState`·`Empty`: 결과별 독립 상태가 필요한지 비교합니다.
 - [ ] `ModelSelector`·`ApprovalCard`·`AgentStatus`: AI workspace에서
   실제 반복 작업과 독립 상태가 확인되면 D 후보로 올립니다.
-- [ ] `RichTextEditor`·`CodeEditorShell`·`NodeCanvas`·`ImageCropper`·
+- [x] `CodeEditorShell`: SQL·설정 조각을 위한 이름 있는 일반 텍스트
+  textarea에 줄 번호, 언어·작업 영역, 오류 연결을 결합했습니다.
+  구문 강조·코드 실행은 이 component의 범위가 아닙니다.
+- [ ] `RichTextEditor`·`NodeCanvas`·`ImageCropper`·
   `CalendarScheduler`: 제품별 데이터·편집 모델과 유지 비용을 조사해
   착수 여부를 판단합니다. 숫자를 맞추기 위해 영구 제외하지 않습니다.
 
