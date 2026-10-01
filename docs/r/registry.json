@@ -22,6 +22,11 @@
       ]
     },
     {
+      "name": "pyd-icon-button", "type": "registry:ui", "title": "Icon Button",
+      "registryDependencies": ["./pyd-button.json"],
+      "files": [{ "path": "packages/ui/src/components/icon-button.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-input", "type": "registry:ui", "title": "Input",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [
@@ -518,7 +523,7 @@
     },
     {
       "name": "pyd-sidebar", "type": "registry:ui", "title": "Sidebar",
-      "registryDependencies": ["./pyd-button.json", "./pyd-drawer.json", "./pyd-navigation.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-drawer.json", "./pyd-icon-button.json", "./pyd-navigation.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/sidebar.tsx", "type": "registry:ui" }]
     },
     {
@@ -579,7 +584,7 @@
     },
     {
       "name": "pyd-carousel", "type": "registry:ui", "title": "Carousel",
-      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-icon-button.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/carousel.tsx", "type": "registry:ui" }]
     },
     {
@@ -653,7 +658,7 @@
     {
       "name": "pyd-password-input", "type": "registry:ui", "title": "Password Input",
       "dependencies": ["lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-button.json", "./pyd-input.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-icon-button.json", "./pyd-input.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/password-input.tsx", "type": "registry:ui" }]
     },
     {

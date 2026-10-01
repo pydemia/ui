@@ -1,4 +1,6 @@
 export { Button } from "./components/button";
+export { IconButton } from "./components/icon-button";
+export type { IconButtonProps } from "./components/icon-button";
 export { ButtonGroup, ButtonGroupSeparator } from "./components/button-group";
 export type { ButtonGroupProps } from "./components/button-group";
 export { Input } from "./components/input";
@@ -284,6 +286,7 @@ export type { ActionBarProps } from "./components/action-bar";
 export { CopyButton } from "./components/copy-button";
 export type { CopyButtonProps } from "./components/copy-button";
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/tabs";
+export type { TabsListProps, TabsVariant } from "./components/tabs";
 export { Table, TableHead, TableCell } from "./components/table";
 export { AffixedInput } from "./components/affixed-input";
 export {

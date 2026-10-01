@@ -1,5 +1,27 @@
 # Component 확장 작업 인계
 
+2026-10-02 IconButton·Tabs 로컬 구현: 이름이 필수인 원본 IconButton을
+추가해 PasswordInput·Carousel·Sidebar에 연결하고 Tabs의 line·
+contained 표시를 추가했습니다. typecheck·UI 테스트 128/128·build가
+통과했고 390px dark Chromium과 기존 세 소비자의 키보드 흐름을
+검사했습니다. 새 Vite 소비자에 변경 item과 전이 의존성 12개 파일을
+CLI로 설치해 변경 source 5개 일치·typecheck·build를 확인했습니다.
+source commit `2a48e96`의 provenance 고지 핀과 29번째 snapshot,
+`registry:release-check`도 통과했습니다. 로컬 110개 component·
+112개 item·29개 snapshot이며 PR·공개 검증은 남았습니다. 공개 기준 goal
+추정은 약 84%입니다.
+[작업 기록](icon-button-tabs-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 기준 추가 재검토: 표준 registry 경로의 신규
+component마다 소비자 CLI 설치를 필수로 두지 않습니다. 저장소 검사와
+변경 preview·Usage로 판정하며 별도 설치를 하지 않은 item은 미검증으로
+기록합니다. 새 설치 형식·의존 경로·target·CLI/배포 경로에는 소비자
+설치와 typecheck·build를 적용합니다. 릴리스 묶음의 snapshot과
+공개 manifest·변경 item URL을 확인합니다. 누적 과제 10개는 공급률
+점수로 사용하지 않습니다. 이번에는 코드·검사·배포 변경이 없어
+109개 component·111개 item·28개 snapshot, goal 추정 약 84%입니다.
+[판정 기록](quality-criteria-simplification-2026-10-02.md)을 참고하세요.
+
 2026-10-02 Card·Alert 공개 검증 완료: PR #43의 Verify UI와 병합
 commit `a112a5f`의 Verify UI·Pages가 통과했고 Vercel production은
 READY입니다. 공개 28번째 snapshot manifest는 111개 item이며,

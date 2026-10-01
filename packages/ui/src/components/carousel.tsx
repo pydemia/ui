@@ -3,6 +3,7 @@ import {
     type ComponentProps, type PointerEvent, type ReactNode,
 } from "react";
 import { Button } from "./button";
+import { IconButton } from "./icon-button";
 import { cn } from "./utils";
 
 const focusRingClass =
@@ -172,28 +173,24 @@ function Carousel({
                     </div>
                     <div className="mt-4 flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
-                            <Button
+                            <IconButton
                                 variant="outline"
-                                size="icon"
-                                aria-label="이전 슬라이드"
+                                label="이전 슬라이드"
+                                icon="←"
                                 disabled={slides.length < 2 ||
                                     (!loop && currentIndex === 0)}
                                 className={focusRingClass}
                                 onClick={() => moveBy(-1)}
-                            >
-                                <span aria-hidden="true">←</span>
-                            </Button>
-                            <Button
+                            />
+                            <IconButton
                                 variant="outline"
-                                size="icon"
-                                aria-label="다음 슬라이드"
+                                label="다음 슬라이드"
+                                icon="→"
                                 disabled={slides.length < 2 || (!loop &&
                                     currentIndex === slides.length - 1)}
                                 className={focusRingClass}
                                 onClick={() => moveBy(1)}
-                            >
-                                <span aria-hidden="true">→</span>
-                            </Button>
+                            />
                         </div>
                         <span className="text-xs tabular-nums text-muted">
                             {currentIndex + 1} / {slides.length}

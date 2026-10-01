@@ -9,7 +9,7 @@ import {
     ApprovalCard, AvatarGroup, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, Board, BottomNav, BottomNavLink,
-    Button, ButtonGroup,
+    Button, ButtonGroup, IconButton,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
     Calendar, Card, CardContent, CardDescription, CardFooter, CardHeader,
@@ -69,7 +69,7 @@ import {
     ToggleGroup, ToggleGroupItem,
     Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@pydemia/ui";
-import { FolderOpen, Gauge, Inbox, Settings2 } from "lucide-react";
+import { FolderOpen, Gauge, Inbox, Plus, Settings2 } from "lucide-react";
 import { TZDate, type DateRange } from "react-day-picker";
 import { ko } from "react-day-picker/locale";
 import {
@@ -82,7 +82,7 @@ import type {
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
     LogEntry, ReasoningStatus, ResponseFeedbackValue, ThreadComment,
-    ToolCallStatus, TreeNode, TreeSelectItem,
+    TabsVariant, ToolCallStatus, TreeNode, TreeSelectItem,
 } from "@pydemia/ui";
 
 export type ComponentEntry = {
@@ -3472,6 +3472,45 @@ function ThreadPreview() {
         }} />;
 }
 
+function IconButtonPreview() {
+    const [count, setCount] = useState(0);
+    return <div className="preview-row">
+        <IconButton label="항목 추가" icon={<Plus size={16} />}
+            variant="primary" onClick={() => setCount((value) => value + 1)} />
+        <IconButton label="항목 추가" icon={<Plus size={16} />}
+            variant="outline" onClick={() => setCount((value) => value + 1)} />
+        <IconButton label="항목 추가" icon={<Plus size={16} />}
+            variant="ghost" onClick={() => setCount((value) => value + 1)} />
+        <span role="status">추가한 항목 {count}개</span>
+    </div>;
+}
+
+function TabsVariantPreview() {
+    const [variant, setVariant] = useState<TabsVariant>("default");
+    return <div className="space-y-4">
+        <div className="preview-row" aria-label="탭 표시 형태">
+            <Button variant={variant === "default" ? "primary" : "outline"}
+                onClick={() => setVariant("default")}>기본</Button>
+            <Button variant={variant === "line" ? "primary" : "outline"}
+                onClick={() => setVariant("line")}>밑줄</Button>
+            <Button variant={variant === "contained" ? "primary" : "outline"}
+                onClick={() => setVariant("contained")}>채움</Button>
+        </div>
+        <Tabs defaultValue="overview">
+            <TabsList variant={variant} aria-label="항목 보기">
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="details">Details</TabsTrigger>
+            </TabsList>
+            <TabsContent value="overview">
+                <p className="preview-tabs-content">프로젝트의 주요 정보입니다.</p>
+            </TabsContent>
+            <TabsContent value="details">
+                <p className="preview-tabs-content">선택한 항목의 상세 내용입니다.</p>
+            </TabsContent>
+        </Tabs>
+    </div>;
+}
+
 export const catalog: ComponentEntry[] = [
     {
         id: "button", name: "Button", category: "Actions",
@@ -3484,6 +3523,23 @@ export const catalog: ComponentEntry[] = [
   <Button variant="ghost" disabled>사용 불가</Button>
 </>;`,
         preview: () => <div className="preview-row"><Button>저장하기</Button><Button variant="outline">취소</Button><Button variant="ghost">자세히 보기</Button><Button disabled>사용 불가</Button></div>,
+    },
+    {
+        id: "icon-button", name: "IconButton", category: "Actions",
+        description: "아이콘 전용 작업에 필수 이름을 부여하고 세 가지 Button 표시 형태를 사용합니다.",
+        code: `import { useState } from "react";
+import { Plus } from "lucide-react";
+import { IconButton } from "@pydemia/ui";
+
+function AddItem() {
+  const [count, setCount] = useState(0);
+  return <>
+    <IconButton label="항목 추가" icon={<Plus size={16} />}
+      variant="outline" onClick={() => setCount((value) => value + 1)} />
+    <span role="status">추가한 항목 {count}개</span>
+  </>;
+}`,
+        preview: () => <IconButtonPreview />,
     },
     {
         id: "button-group", name: "ButtonGroup", category: "Actions",
@@ -4618,18 +4674,18 @@ function Example() {
     },
     {
         id: "tabs", name: "Tabs", category: "Navigation",
-        description: "탭 전환, 키보드 이동, 선택 상태를 제공합니다.",
+        description: "탭 전환과 키보드 이동을 제공하며 기본·밑줄·채움 표시 형태를 선택할 수 있습니다.",
         code: `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@pydemia/ui";
 
 <Tabs defaultValue="overview">
-  <TabsList aria-label="항목 보기">
+  <TabsList variant="line" aria-label="항목 보기">
     <TabsTrigger value="overview">Overview</TabsTrigger>
     <TabsTrigger value="details">Details</TabsTrigger>
   </TabsList>
   <TabsContent value="overview">개요</TabsContent>
   <TabsContent value="details">상세 내용</TabsContent>
 </Tabs>`,
-        preview: () => <Tabs defaultValue="overview"><TabsList aria-label="항목 보기"><TabsTrigger value="overview">Overview</TabsTrigger><TabsTrigger value="details">Details</TabsTrigger></TabsList><TabsContent value="overview"><p className="preview-tabs-content">프로젝트의 주요 정보입니다.</p></TabsContent><TabsContent value="details"><p className="preview-tabs-content">선택한 항목의 상세 내용입니다.</p></TabsContent></Tabs>,
+        preview: () => <TabsVariantPreview />,
     },
     {
         id: "table", name: "Table", category: "Data display",

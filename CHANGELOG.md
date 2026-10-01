@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-02 — IconButton·Tabs 표시 형태
+
+- `IconButton`을 추가해 아이콘 전용 작업의 접근 가능한 이름을
+  필수로 받습니다. PasswordInput·Carousel·Sidebar에서 사용합니다.
+- `TabsList`에 `default`·`line`·`contained` 표시 형태를 추가했습니다.
+  기본 표시와 Radix 탭 동작은 유지합니다.
+
 ## 2026-10-02 — Card·Alert 표시 형태
 
 - `Card`에 `default`·`subtle`·`elevated` 표면과 기본·`compact`
