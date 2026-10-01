@@ -256,6 +256,9 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
   reader·touch·Safari·RTL은 남았습니다.
 - [x] `NavigationMenu` — 상단 그룹 탐색의 pointer 열기·링크 이동,
   키보드 진입·Escape 닫기. Hover·touch·screen reader 검사는 남았습니다.
+- [ ] `Menubar` — 편집기·관리 화면의 여러 상위 명령을 상시 표시하고
+  방향키로 이동합니다. 로컬 구현·typecheck·기본 semantics 테스트를
+  마쳤으며 브라우저·소비자·공개 검증이 남았습니다.
 - [x] `BottomNav` — 기존 `pyd-navigation`에 하단 주요 목적지 링크를
   추가했습니다. 각 링크의 이름을 항상 표시하고 현재 페이지는 호출자가
   `aria-current`로 지정합니다. 별도 component 수는 늘리지 않습니다.

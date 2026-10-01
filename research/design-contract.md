@@ -398,6 +398,22 @@ focus 복귀를 처리합니다. 토큰은 surface·foreground·border·focus와
 floating shadow를 사용합니다. 작은 화면의 별도 drawer 전환은 기존
 `Sidebar`가 맡습니다.
 
+## 2026-10-02 Menubar
+
+`Menubar`는 화면 사이를 이동하는 링크가 아니라 편집기·관리 화면의
+상시 명령 모음입니다. Root에는 접근 가능한 이름이 필수이며, 상위
+`Menu`·`Trigger`마다 `Content`를 둡니다. 항목은 `onSelect`로 앱의
+작업에 연결합니다. 체크·라디오의 값과 작업 결과는 소비자가 소유하고
+`checked`·`onCheckedChange`, `value`·`onValueChange`로 전달합니다.
+
+Radix primitive가 상위 trigger 간 방향키 이동, 메뉴 안의 방향키·
+typeahead, submenu, Escape 닫기와 focus 복귀를 담당합니다. 래퍼는
+`Menu`·`Group`·`Item`·`CheckboxItem`·`RadioGroup`·`RadioItem`·`Sub`를
+token 색·간격·focus 표시로 조합합니다. Content는 Portal에 나타나며
+좁은 화면에서는 상위 trigger 행만 가로로 스크롤합니다. `disabled`
+항목은 실행되지 않습니다. 표시용 단축키와 전역 단축키 실행은
+제공하지 않습니다.
+
 ## 2026-09-29 DataChart 누적 막대
 
 `DataChart`의 `stacked-bar` variant는 기존 `categories`·`series` 또는

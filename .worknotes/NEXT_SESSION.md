@@ -1,5 +1,17 @@
 # Component 확장 작업 인계
 
+2026-10-02 Menubar 진행: 작업 화면의 여러 상위 명령을 위한 Radix 기반
+`Menubar`를 직접 작성하고 public export·registry metadata·문서
+preview·Usage를 추가했습니다. shadcn/ui 고정 revision과 Radix 1.1.24의
+source·LICENSE·의존성을 확인했습니다. typecheck와 Menubar 서버 렌더
+테스트 120/120, build가 통과했습니다. 문서와 새 Vite 소비자의 390px
+Chromium 동작, 소비자 설치 파일 3개 원본 일치·typecheck·build도
+확인했습니다. source commit `a7a3d71`에 맞춰 소비자 고지를 갱신해
+`registry:check`가 통과했습니다. 26번째 snapshot을 만들고
+`registry:release-check`도 통과했습니다. PR·공개 검증이 남았습니다.
+시작 goal 약 81%를 유지합니다.
+[작업 기록](menubar-2026-10-02.md)을 참고하세요.
+
 2026-10-01 공급·품질 기준 후속 재검토: 10개 누적 과제를 새 component의
 릴리스 게이트나 품질 점수로 사용하지 않습니다. 변경분의 source·
 LICENSE·의존성, export·registry·문서, 관련 테스트·브라우저 동작은

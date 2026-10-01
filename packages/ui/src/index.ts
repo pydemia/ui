@@ -128,6 +128,13 @@ export {
 export type {
     NavigationMenuProps, NavigationMenuLinkProps,
 } from "./components/navigation-menu";
+export {
+    Menubar, MenubarMenu, MenubarGroup, MenubarRadioGroup,
+    MenubarSub, MenubarTrigger, MenubarContent, MenubarItem,
+    MenubarLabel, MenubarSeparator, MenubarCheckboxItem,
+    MenubarRadioItem, MenubarSubTrigger, MenubarSubContent,
+} from "./components/menubar";
+export type { MenubarProps, MenubarItemProps } from "./components/menubar";
 export { Sidebar } from "./components/sidebar";
 export type {
     SidebarItem, SidebarSection, SidebarProps,

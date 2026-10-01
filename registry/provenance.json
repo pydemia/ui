@@ -415,6 +415,12 @@
       "dependencies": ["@radix-ui/react-navigation-menu", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "named navigation with grouped links and disclosure triggers", "keyboard": "Chromium: click, ArrowDown to first link, Escape close and focus return verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-menubar", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn/ui Menubar", "url": "https://ui.shadcn.com/docs/components/radix/menubar", "revision": "98a1fe67b439324ddc857f47fbdce056600a4329", "license": "MIT", "scope": "application command grouping and Radix composition only; no source copied" },
+      "dependencies": ["@radix-ui/react-menubar@1.1.24", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "named menubar with menu triggers, items, checkboxes, radio items, disabled items and submenus via Radix", "keyboard": "Chromium: top-menu ArrowRight, checkbox and radio selection, submenu action, Escape and focus return verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-sidebar", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/aria/sidebar", "scope": "section grouping and responsive layout reference only; no source copied" },
