@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 CalendarScheduler 동작 검증: **약 88% → 약 88%**입니다.
+client DOM에서 날짜·월 이동과 callback을 실행했고 UI 테스트
+143/143, typecheck·build·release 검사와 PR Verify UI run
+36929134624가 통과했습니다. 실제
+브라우저·공개 검증은 미완료여서 공개 component 수는 늘지 않았습니다.
+[작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
+
 2026-10-02 CalendarScheduler 로컬 검증: **약 88% → 약 88%**입니다.
 114개 component·116개 registry item을 로컬에 마련하고 typecheck·
 UI 테스트 141/141·build·provenance 핀·33번째 snapshot·release

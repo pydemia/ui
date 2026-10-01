@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-10-02 CalendarScheduler 핵심 동작 검증: client DOM 테스트 2건을
+추가해 날짜·월 이동, 일정 선택·추가 callback, controlled 날짜 갱신을
+실행했습니다. 테스트 전용 `jsdom@26.1.0`은 README의 Node 22+
+범위를 지원합니다. UI 테스트 143/143, typecheck·build·
+`registry:release-check`와 commit `5fbe530`의 PR Verify UI run
+36929134624가 통과했습니다. 브라우저 preview는 이번에도
+`ERR_BLOCKED_BY_CLIENT`로 차단돼 390px·실제 focus가 미검증입니다.
+PR #56은 draft로 남고 공개 기준 113개 component·115개 item·32개
+snapshot, goal 약 88%는 그대로입니다.
+[작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
+
 2026-10-02 CalendarScheduler 로컬 작업: 기존 Calendar와 일정 목록을
 결합해 로컬 114개 component·116개 item이 됐습니다. typecheck·
 UI 테스트 141/141·build가 통과했습니다. provenance 고지를 source

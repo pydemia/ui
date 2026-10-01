@@ -1,11 +1,15 @@
 # 검증 기록
 
-## 2026-10-02 CalendarScheduler 로컬 정적 검증
+## 2026-10-02 CalendarScheduler 로컬 정적·client 검증
 
-`npm run typecheck`, UI 테스트 141/141(신규 SSR 3건), `npm run build`가
-통과했습니다. 빌드는 116개 registry item과 문서 preview를 생성합니다.
+`npm run typecheck`, UI 테스트 143/143(신규 SSR 3건·client DOM 2건),
+`npm run build`가 통과했습니다. 빌드는 116개 registry item과
+문서 preview를 생성합니다.
 SSR에서는 날짜별 일정 건수의 버튼 이름, 선택 날짜의 시간순 agenda,
 빈 날짜, 잘못된 ID·날짜·시간·시간대 거부를 확인했습니다.
+client DOM에서는 날짜 선택·월 이동·일정 선택·추가 callback과
+controlled 값 갱신을 실행했습니다. 테스트 전용 `jsdom@26.1.0`은
+런타임·registry 의존성에 포함되지 않습니다.
 
 첫 `npm run registry:check`는 출처 metadata 변경 후 소비자 고지의
 SHA-256이 이전 값이어서 실패했습니다. 소스 commit `390d9bb`로
@@ -14,12 +18,14 @@ SHA-256이 이전 값이어서 실패했습니다. 소스 commit `390d9bb`로
 `sha256-d5b1be19e7e59cb89730fbb44ff2feea7487d1a7e775d37720c4a1ad65f5a119`을
 생성하고 재빌드 뒤 `registry:release-check`가 116개 item·114개
 export/catalog와 현재 산출물을 확인했습니다.
-브라우저 제어 도구가 Windows 브라우저의 현재 URL을 확인하지 못해
-이번 턴의 UI 조작을 중단했습니다. 달력 날짜·월 탐색, 일정 선택·추가,
+앞선 Windows 브라우저 제어는 현재 URL을 확인하지 못해 종료됐고,
+이번 in-app browser 재시도는 `ERR_BLOCKED_BY_CLIENT`로 차단됐습니다.
+날짜·월·callback의 client DOM 동작은 확인했으나 실제 브라우저의
 390px 배치와 focus는 미검증입니다. 따라서 공개 공급 완료 판정도
 남아 있습니다. 실제 screen reader·touch·Safari·RTL, 개별 소비자
 CLI 설치와 공개 URL도 미검증입니다. draft PR #56의 Verify UI
-run 36926628773은 통과했습니다. 세부 내용은
+run 36926628773과 새 client 테스트 commit `5fbe530`의 run
+36929134624는 통과했습니다. 세부 내용은
 [작업 기록](../.worknotes/calendar-scheduler-2026-10-02.md)에 남겼습니다.
 
 ## 2026-10-02 MasterDetail 공개 검증

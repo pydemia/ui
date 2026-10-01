@@ -3,7 +3,7 @@
 2026-10-02. 공개 기준은 113개 component·115개 registry item·
 32개 snapshot, goal 관리용 추정 약 88%입니다. 로컬에는
 `CalendarScheduler`를 더해 114개 component·116개 item이 있습니다.
-브라우저와 공개 검증 전까지 goal 추정은 유지합니다.
+실제 브라우저 표시와 공개 검증 전까지 goal 추정은 유지합니다.
 
 ## 선정과 API
 
@@ -25,7 +25,10 @@ callback이 반복되므로 handoff의 `CalendarScheduler` 후보를
 ## 검증과 인계
 
 - `npm run typecheck` 통과.
-- UI 테스트 141/141, 신규 SSR 3건 통과.
+- UI 테스트 143/143, 신규 SSR 3건과 client DOM 2건 통과.
+- client DOM에서 날짜·월 이동, 일정 선택·추가 callback, controlled
+  날짜 갱신을 실행했습니다. `jsdom@26.1.0`은 테스트 전용 의존성이고
+  Node.js 18 이상을 지원해 README의 Node.js 22 이상 범위에 맞습니다.
 - `npm run build` 통과, 116개 registry item과 문서 preview 생성.
 - 첫 `npm run registry:check`는 provenance 고지의 이전 SHA-256으로
   실패했습니다. 소스 commit `390d9bb`에 고지 commit·해시를 고정한
@@ -34,12 +37,14 @@ callback이 반복되므로 handoff의 `CalendarScheduler` 후보를
   `sha256-d5b1be19e7e59cb89730fbb44ff2feea7487d1a7e775d37720c4a1ad65f5a119`을
   만들고 재빌드 뒤 `registry:release-check`가 116개 item·114개
   export/catalog와 현재 산출물을 확인했습니다.
-- Browser Use의 localhost 탐색은 `ERR_BLOCKED_BY_CLIENT`, Windows
-  Computer Use는 현재 URL 확인 불가로 종료됐습니다. 이 경로를
-  우회해 UI 조작을 재시도하지 않았습니다.
+- Browser Use의 localhost 탐색은 이번에도 `ERR_BLOCKED_BY_CLIENT`로
+  차단됐습니다. 앞선 Windows Computer Use는 현재 URL 확인 불가로
+  종료됐습니다. 다른 경로로 UI 조작을 우회하지 않았습니다.
 
-다음 작업은 날짜·월 탐색, 일정 선택·추가, 390px와 focus의 실제
-브라우저 검사입니다. 해당 검증 전에는 공급 완료로 표시하지 않습니다.
+날짜·월 탐색과 일정 선택·추가의 client DOM 동작은 확인했습니다.
+390px 배치·실제 focus·실제 브라우저 preview는 미검증입니다.
+원래 goal에 포함된 관련 브라우저 검증과 공개 검증이 남아 있으므로
+공급 완료로 표시하지 않습니다.
 실제 screen reader·touch·Safari·RTL, 개별 소비자 CLI 설치,
 공개 URL과 rollback 뒤 snapshot URL 보존도 미검증입니다.
 
@@ -47,6 +52,7 @@ callback이 반복되므로 handoff의 `CalendarScheduler` 후보를
 
 [PR #56](https://github.com/pydemia/ui/pull/56)을 draft로 열었습니다.
 source·snapshot commit은 `390d9bb`·`4ee1f99`입니다. PR Verify UI
-run 36926628773이 typecheck·UI 테스트·build·release 검사와 생성
-`docs/` 일치를 통과했습니다. 실제 브라우저 동작이 미검증이므로
-ready 전환·병합·production 공개는 보류합니다.
+run 36926628773이 당시 typecheck·UI 테스트·build·release 검사와
+생성 `docs/` 일치를 통과했습니다. client DOM 테스트 commit
+`5fbe530`의 Verify UI run 36929134624도 통과했습니다. 실제 브라우저
+동작이 미검증이므로 ready 전환·병합·production 공개는 보류합니다.
