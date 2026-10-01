@@ -1,5 +1,23 @@
 # 검증 기록
 
+## 2026-10-02 DataTable 원격 조회 로컬 검증
+
+`npm run typecheck`, UI 테스트 148/148, `npm run build`,
+`registry:release-check`가 통과했습니다. registry는 116개 item·
+114개 export/catalog이며 새 snapshot은
+`sha256-73ea6b31c38dfa074a5ad87dd94804ae8cc1217e15cf0adfaa14322ec569b303`입니다.
+새 테스트 5건은 서버 행·총건수, 로딩·오류, 잘못된 페이지 값,
+controlled 정렬·페이지·필터·초기화, 기존 로컬 선택의 페이지 간
+유지를 확인합니다.
+
+로컬 Chromium 문서에서 원격 모드의 검색·필터 빈 결과·정렬·페이지
+이동·로딩·오류·재시도와 페이지 변경 후 선택 해제를 실행했습니다.
+390px에서 문서 scrollWidth는 390px이며 표와 control이 화면 안에
+배치됐습니다. console error와 Vite overlay는 없었습니다. preview는
+로컬 데이터로 서버 응답을 모사합니다. 실제 HTTP 요청·경합 취소,
+실제 screen reader·touch·Safari·RTL, 개별 소비자 CLI 설치와 공개
+배포는 아직 검증하지 않았습니다.
+
 ## 2026-10-02 CalendarScheduler 공개 확인
 
 PR #56 병합 commit `57749fe`의 Verify UI run 36933097687,

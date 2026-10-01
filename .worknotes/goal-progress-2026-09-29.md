@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 DataTable 원격 조회 로컬 검증: **약 89% → 약 89%**입니다.
+서버 소유 검색·필터·정렬·페이지와 총건수·로딩·오류를 기존
+`DataTable`에 추가했습니다. typecheck·UI 테스트 148/148·build·
+release 검사, 로컬 Chromium의 원격 동작과 390px 배치를 확인했습니다.
+공개 배포와 URL 확인 전이므로 공개 기준 114개 component·116개
+item·33개 snapshot을 유지합니다.
+[작업 기록](data-table-remote-2026-10-02.md)을 참고하세요.
+
 2026-10-02 CalendarScheduler 공개 확인: **약 88% → 약 89%**입니다.
 PR #56 병합 commit `57749fe`의 Verify UI·Vercel production·Pages가 성공했고,
 공개 사이트에서 114개 component와 CalendarScheduler preview·Usage,

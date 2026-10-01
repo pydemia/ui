@@ -157,7 +157,9 @@ snapshot 주소 보존은 별도 품질 과제입니다. 특정 환경 지원을
   그룹·disabled·빈 결과와 keyboard 실행. 실제 screen reader 발표는
   남았습니다.
 - [x] `DataTable` — 기존 `Table` 위에 client-side 검색·필터·정렬·
-  선택·페이지 상태. 서버 데이터 요청은 사용처가 소유합니다.
+  선택·페이지 상태. `remote` 모드는 호출자가 조회 조건과 서버 총건수·
+  로딩·오류를 소유하고 현재 페이지 행만 전달합니다. 서버 데이터 요청은
+  사용처가 소유합니다.
 - [x] `DatePicker` — 기존 `Calendar`와 `Popover`의 단일 날짜 입력.
 - [x] `DateRangePicker` — 시작·종료·부분 선택·제한 날짜와 기간 길이 처리.
   실제 screen reader·touch·RTL 검사는 남았습니다.

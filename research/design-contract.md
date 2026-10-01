@@ -73,6 +73,24 @@ root의 `--card-spacing`에서 Header·Content·Footer로 전달하며,
 문장형 표시를 사용합니다. `destructive`만 `role="alert"`이며
 나머지는 `role="status"`입니다.
 
+## 2026-10-02 DataTable 원격 조회
+
+기본 모드는 전달된 전체 `rows`를 내부에서 검색·필터·정렬·페이지로
+나눕니다. `remote`를 전달하면 `rows`는 현재 페이지의 서버 응답이며
+`remote.view`의 query·filterValue·sort·page·pageSize와
+`remote.totalItems`는 호출자가 소유합니다. 입력 변경은
+`onViewChange`로 완전한 다음 view를 전달합니다. 검색·필터·정렬·
+페이지 크기 변경은 1페이지로 돌아갑니다. 호출자는 view에 맞는
+요청을 보내고 최신 결과만 `rows`에 전달해야 합니다.
+
+`loading`과 `error`에서는 이전 행을 숨기고 상태를 표 안에 표시합니다.
+오류의 재시도 버튼은 `onRetry`가 있을 때만 표시합니다. 원격 선택은
+현재 페이지 행에 한정하며 view나 로딩·오류 상태가 바뀌면 해제합니다.
+서버 페이지를 넘나드는 선택 ID와 일괄 작업은 호출자가 별도로
+관리해야 합니다. 원격 view의 page·pageSize는 양의 정수이고 총건수는
+0 이상의 정수여야 합니다. 실제 HTTP 요청·취소·경합 처리는 이
+component가 수행하지 않습니다.
+
 ## 2026-10-02 선택 작업과 복사 동작
 
 `ActionBar`는 선택 상태를 소유하지 않습니다. 호출자가 선택 건수,
