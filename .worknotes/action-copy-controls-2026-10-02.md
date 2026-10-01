@@ -48,8 +48,18 @@
   `sha256-c8bdf24d84b03bff8fe382f2b73e678e3cd5f6e0df86b649bdaa4f78676e01f5`
   을 생성하고 `registry:release-check`로 111개 item·109개
   export/catalog·27개 snapshot과 현재 빌드의 일치를 확인했습니다.
-- PR·production·공개 snapshot 소비자 검증은 남았습니다.
+- PR #41의 Verify UI와 병합 commit `5f0fc5b`의 Verify UI·Pages,
+  Vercel production이 통과했습니다. 공개 preview·Usage를 390px
+  Chromium에서 확인했습니다. 27번째 snapshot의 변경 item 5개,
+  token과 manifest는 저장소 파일의 SHA-256과 일치했습니다.
+- 공개 snapshot을 별도 Vite 소비자에 CLI로 설치했습니다. 변경
+  item·의존 item을 포함한 15개 파일이 저장소 원본과 일치했고
+  typecheck·build가 통과했습니다. 390px Chromium에서 복사값을
+  다른 입력에 붙여넣고, ActionBar·DataTable 작업 및 focus 복귀,
+  가로 넘침 없음도 확인했습니다.
 - 실제 screen reader·touch·Safari·RTL과 rollback 뒤 snapshot URL은
   미검증입니다.
 
-공개 확인 전에는 goal 추정 약 82%를 유지합니다.
+공개 공급을 확인했습니다. goal 관리용 추정은 약 82%에서 약 83%로
+올립니다. 이는 component 수/100 계산값이 아니라 반복 사용처 두
+가지의 공통화와 공개 설치·동작 검증을 반영한 판정입니다.

@@ -10,7 +10,10 @@
 | 로컬 격리 소비자 | pass (limited) | 변경 item 5개+의존 item 동시 설치, 15개 파일 생성, 변경 소스 5개 일치·typecheck·build·390px 동작 |
 | 실제 복사 내용 | pass (limited) | 소비자에서 입력을 바꾼 뒤 Ctrl+V로 이전 복사값 `REQ-2048` 확인 |
 | registry release | pass | 111개 item·109개 export/catalog, 27개 snapshot과 현재 ID 일치 |
-| 공개 공급 | unverified | PR 병합·production·snapshot 소비자 설치 전 |
+| PR·병합 CI·production | pass | PR #41과 병합 commit Verify UI·Pages 성공, Vercel READY |
+| 공개 preview·Usage | pass (limited) | 390px Chromium 복사·선택·focus, 가로 넘침 없음 |
+| 공개 JSON·manifest | pass | 변경 item 5개·token·manifest가 저장소 SHA-256과 일치 |
+| 공개 snapshot 소비자 | pass (limited) | 15개 파일 원본 일치·typecheck·build·390px Chromium 복사값·일괄 작업·focus |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 처음 CLI 설치는 빌드된 `registryDependencies`가 production을

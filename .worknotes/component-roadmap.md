@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-107개 component와 109개 registry item이 있습니다. 2026-09-30에
+109개 component와 111개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
@@ -21,7 +21,8 @@ Markdown을
 2026-10-01에는 `ApprovalCard`와 `DiffViewer`를 편입했습니다.
 `TreeSelect`도 계층 항목을 form 값으로 제출하는 독립 사용처로
 편입했고 `YearPicker`를 추가했습니다. 2026-10-02에는 `Menubar`를
-편집기·관리 화면의 여러 상위 명령에 편입했습니다.
+편집기·관리 화면의 여러 상위 명령에 편입했습니다. `ActionBar`와
+`CopyButton`도 선택 작업·복사 상태의 반복 용례로 편입했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -88,7 +89,7 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 수로만 사용하며 component 공급률이나 품질 점수로 해석하지 않습니다.
 이후 진행 보고에서는 이를 점수처럼 표시하지 않고 완료·부분·
 미검증 상태와 남은 위험을 적습니다.
-전체 goal의 약 82%는 사용 사례 범위와 공개 검증을 함께 보는
+전체 goal의 약 83%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이고, component 수 또는 체크박스 수로 자동 계산하지
 않습니다. 판정 근거는
 [기준 재검토](quality-criteria-review-2026-10-01.md)와
@@ -346,14 +347,14 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 반복 사용처와 데이터 구조를 확인한 뒤 진행합니다. 사용처가 없으면
 후보를 보류하고 기존 component의 품질 보강에 시간을 씁니다.
 
-- [ ] `CopyButton` — `CodeBlock`·`Snippet`의 중복 복사 동작을
-  공통화해 로컬 소비자에서 확인했습니다. 공개 snapshot 검증 후
-  ready-made로 판정합니다.
+- [x] `CopyButton` — `CodeBlock`·`Snippet`의 중복 복사 동작을
+  공통화했습니다. 공개 snapshot 소비자에서 실제 복사값·상태와
+  typecheck·build를 확인했습니다.
 - [x] `ContextMenu` — pointer 우클릭과 Shift+F10 호출, 항목·체크·
   라디오·서브메뉴·disabled 및 focus 복귀. screen reader 검사는 남았습니다.
-- [ ] `ActionBar` — `DataTable` 밖의 카드·파일 목록에서도 선택 건수·
-  일괄 작업·해제를 쓰도록 로컬 구현했습니다. 공개 snapshot 검증 후
-  ready-made로 판정합니다.
+- [x] `ActionBar` — `DataTable` 밖의 카드·파일 목록에서도 선택 건수·
+  일괄 작업·해제를 씁니다. 공개 snapshot 소비자에서 작업·focus
+  복귀·typecheck·build를 확인했습니다.
 - [x] `AppShell` — 공통 header·좌우 panel·content·하단·floating 영역의
   조합 골격. floating 도움말의 열림 상태·focus 복귀 조합을 문서와
   분석 화면에서 확인했습니다. 접히는 sidebar와 좁은 화면 drawer는
