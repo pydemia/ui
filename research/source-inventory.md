@@ -1345,3 +1345,30 @@ license metadata는 MIT이며 기존 lockfile의 전이 의존성 검토 범위�
 ISC입니다. 두 package 모두 기존 의존성이며 lockfile을 변경하지
 않습니다. Popover의 수정 소스·MIT 고지는 기존 registry item이
 전달합니다.
+
+## 2026-10-02 IconButton·Tabs 표시 형태
+
+`IconButton`은 pydemia/ui에서 작성한 원본 wrapper입니다.
+[shadcn/ui Button 공식 문서](https://ui.shadcn.com/docs/components/radix/button),
+[고정 revision의 Button source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+대조했습니다. 기존 `pyd-button`의 `size="icon"`을 조합하며 upstream
+소스를 새로 복사하지 않습니다.
+[WAI-ARIA APG Button 패턴](https://www.w3.org/WAI/ARIA/apg/patterns/button/)의
+접근 가능한 이름과 Enter·Space 규칙을 적용했습니다. 직접 registry
+의존성은 `pyd-button`이고 새 npm 의존성은 없습니다.
+
+`Tabs`는 기존 shadcn/ui 기반 수정 source에 pydemia/ui의 token
+표시 형태를 추가했습니다.
+[shadcn/ui Tabs 공식 문서](https://ui.shadcn.com/docs/components/radix/tabs),
+[고정 revision의 Tabs source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tabs.tsx),
+위 MIT LICENSE와
+[Radix Tabs 공식 문서](https://www.radix-ui.com/primitives/docs/components/tabs),
+[WAI-ARIA APG Tabs 패턴](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)을
+확인했습니다. 설치된 `@radix-ui/react-tabs@1.1.21`의
+`package.json`·`dist/index.mjs`·MIT `LICENSE`는 같은 배포판의
+파일입니다. manifest의 직접 의존성은 Radix context 1.2.2,
+direction 1.1.4, id 1.1.4, react-primitive 2.1.10,
+presence 1.1.10, roving-focus 1.1.19,
+use-controllable-state 1.2.6과 primitive 1.1.7입니다.
+React·React DOM은 peer dependency입니다. 새 npm 의존성은 없습니다.

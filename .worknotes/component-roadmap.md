@@ -75,13 +75,14 @@ preview를 확인하고, 상호작용이 바뀌면 해당 값·keyboard·focus �
 variant와 관련 token을 확인합니다. 실제 보조기술이나 touch 등
 실행하지 않은 환경은 미검증으로 적습니다.
 
-새 component, 새로운 설치 경로·의존성 체인, registry 구조 변경은
-변경 item과 의존 item을 묶어 별도 소비자에서 설치·typecheck·build를
-한 번 확인합니다. 기존 component의 표시·API만 바뀌고 설치 경로가
-같다면 새 소비자 프로젝트와 공개 snapshot 재설치를 요구하지
-않습니다. registry 내용이 바뀌면 내용 해시 snapshot과 공개 URL의
-도달 여부를 확인합니다. 배포·registry 인프라가 바뀔 때는 공개 URL을
-통한 설치까지 검사합니다. 검증 범위는 릴리스 기록에 명시합니다.
+별도 소비자 설치·typecheck·build는 설치 방식이나 의존 경로가 새로울
+때 수행합니다. 표준 registry 경로를 그대로 쓰는 신규 item은 저장소
+검사와 preview로 판정하고, 해당 item의 별도 설치를 하지 않았다면
+미검증으로 기록합니다. 기존 component의 표시·API만 바뀌고 설치
+경로가 같을 때도 새 소비자 프로젝트를 요구하지 않습니다. registry
+내용이 바뀌면 내용 해시 snapshot과 공개 URL 도달 여부를 확인합니다.
+설치·의존 URL이나 배포 경로가 바뀔 때는 공개 URL로 설치합니다.
+하나의 릴리스 묶음에서 공개 확인을 한 번 수행합니다.
 
 관련 흐름에서 재현된 값 손실·제출 오류·keyboard 접근 불가·필수
 고지 누락·설치 실패는 수정판을 검사하기 전까지 완료로 표시하지
@@ -107,10 +108,15 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 않습니다. 판정 근거는
 [기준 재검토](quality-criteria-review-2026-10-01.md)와
 [후속 재검토](quality-criteria-followup-2026-10-01.md),
-[2026-10-02 재검토](quality-criteria-reassessment-2026-10-02.md)에
+[2026-10-02 재검토](quality-criteria-reassessment-2026-10-02.md)와
+[반복 검사 축소](quality-criteria-simplification-2026-10-02.md)에
 남겼습니다.
 
-## 라이브러리 전체의 공급·품질 공백
+## 라이브러리 전체의 운영·품질 과제
+
+아래 체크박스는 누적 조사 기록입니다. 새 component의 공개 조건이나
+goal 완료율의 분모로 사용하지 않습니다. 릴리스별 검사는 위의 변경
+범위 기준을 적용합니다.
 
 - [ ] component의 public export와 registry item,
   provenance, 문서 예시가 서로 일치하는지 확인하고 변경을 검토
@@ -467,8 +473,10 @@ token 전달 방식을 정할 때,
 다음은 이전 목록에서 제외하거나 묶었던 항목의 **미결정 경계**입니다.
 개수에서 제외했다는 이유로 이미 해결됐다고 취급하지 않습니다.
 
-- [ ] `IconButton`: `Button size="icon"`이 accessible name을 보장하는지
-  확인하고 이름을 필수화할 wrapper가 필요한지 판정합니다.
+- [x] `IconButton`: `Button size="icon"`에는 필수 이름이 없으므로
+  `label`·`icon`을 받는 원본 wrapper를 추가했습니다. PasswordInput,
+  Carousel, Sidebar의 아이콘 전용 작업에도 사용합니다. 공개 검증은
+  [작업 기록](icon-button-tabs-2026-10-02.md)에서 추적합니다.
 - [x] `InputGroup`: 입력 옆의 버튼과 textarea 아래 작업을 독립된
   focus 대상과 native form 동작으로 구성했습니다. 선택기 결합은
   사용 사례와 키보드 순서를 별도로 확인해야 합니다.

@@ -2022,3 +2022,17 @@ snapshot `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14
 `registry:release-check`가 통과했습니다. snapshot ID는
 `sha256-37f075e6b3cb4520d6aa5aa08e6c4673c19917dc199f5d6fd355b2d097ddee77`입니다.
 세부 기록은 `.worknotes/menubar-2026-10-02.md`에 있습니다.
+
+## 2026-10-02 IconButton·Tabs 표시 형태
+
+로컬 `npm run typecheck`, UI 테스트 128/128, `npm run build`가
+통과했습니다. 390px Chromium에서 IconButton 클릭·Space,
+Tabs 형태 전환·ArrowRight 선택·panel 전환과 dark 배경·가로 넘침
+없음을 확인했습니다. PasswordInput 표시 toggle·값 유지, Carousel
+슬라이드 이동·focus 유지, Sidebar 접기·이름과 상태 변경도 확인했습니다.
+변경 item과 전이 의존성 12개 파일을 새 Vite 소비자에 CLI로 설치했고
+변경 source 5개 일치·typecheck·build를 확인했습니다. 소비자의
+브라우저 동작, provenance 고지 핀, snapshot, PR·공개 확인은
+아직 실행하지 않았습니다. 실제 screen reader·touch·Safari·RTL과
+rollback 뒤 URL 보존은 미검증입니다. 세부 범위는
+[작업 기록](../.worknotes/icon-button-tabs-2026-10-02.md)에 있습니다.

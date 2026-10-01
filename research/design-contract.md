@@ -999,3 +999,18 @@ Popover의 Escape·focus 복귀는 기존 Radix 기반 구현을 사용합니다
 연도를 바꾸는 별도 grid 규칙은 제공하지 않습니다. 표시와 focus
 스타일은 공통 token을 사용하며 실제 screen reader·touch·Safari·
 RTL 동작은 별도 검증 대상입니다.
+
+## 2026-10-02 IconButton·Tabs 표시 형태
+
+`IconButton`은 아이콘 전용 native 버튼입니다. 호출자는 `label`과
+`icon`을 제공해야 합니다. `Button`의 `size="icon"`과 공통 token을
+사용하고 `variant`·disabled·`aria-pressed` 등 버튼 속성을 전달합니다.
+아이콘은 발표에서 숨기며 `label`을 접근 가능한 이름으로 설정합니다.
+빈 이름과 빈 아이콘은 오류로 알립니다. 기본 variant는 `ghost`입니다.
+
+`TabsList.variant`는 `default | line | contained`입니다. 생략하면
+기존 표시를 유지합니다. `line`은 활성 탭에 token 색상의 밑줄을,
+`contained`는 옅은 목록 표면과 활성 탭 표면을 적용합니다. 선택 상태,
+방향키, panel 연결은 기존 Radix primitive가 소유합니다. 한 목록의
+trigger는 목록 variant를 공유합니다. 실제 screen reader·touch·
+Safari·RTL 발표와 조작은 미검증입니다.

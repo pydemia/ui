@@ -1,5 +1,6 @@
 import { useId, useState, type ReactNode } from "react";
 import { Button } from "./button";
+import { IconButton } from "./icon-button";
 import {
     Drawer, DrawerClose, DrawerContent, DrawerDescription,
     DrawerTitle, DrawerTrigger,
@@ -168,20 +169,18 @@ function Sidebar({
                             {label}
                         </strong>
                     )}
-                    <Button
+                    <IconButton
                         variant="ghost"
-                        size="icon"
-                        aria-label={isCollapsed ? "탐색 펼치기" : "탐색 접기"}
-                        aria-expanded={!isCollapsed}
-                        aria-controls={navId}
-                        onClick={() => changeCollapsed(!isCollapsed)}
-                    >
-                        <span aria-hidden="true" className="text-lg leading-none">
+                        label={isCollapsed ? "탐색 펼치기" : "탐색 접기"}
+                        icon={<span className="text-lg leading-none">
                             {side === "left"
                                 ? isCollapsed ? "»" : "«"
                                 : isCollapsed ? "«" : "»"}
-                        </span>
-                    </Button>
+                        </span>}
+                        aria-expanded={!isCollapsed}
+                        aria-controls={navId}
+                        onClick={() => changeCollapsed(!isCollapsed)}
+                    />
                 </div>
                 <SideNav id={navId} aria-label={label}
                     className="min-h-0 flex-1 content-start overflow-y-auto p-2">

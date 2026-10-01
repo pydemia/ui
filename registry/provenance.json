@@ -1,5 +1,5 @@
 {
-  "reviewed_at": "2026-09-30",
+  "reviewed_at": "2026-10-02",
   "items": [
     {
       "name": "pyd-utils", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
@@ -15,6 +15,12 @@
       "name": "pyd-button", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["class-variance-authority", "pyd-utils"], "accessibility": { "semantics": "native button", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-icon-button", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/button/", "scope": "accessible name and native button keyboard behavior; no source copied" },
+      "dependencies": ["pyd-button"], "accessibility": { "semantics": "native icon-only button with required accessible name and hidden decorative icon", "keyboard": "Chromium click and Space actions verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-button-group", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
@@ -348,7 +354,7 @@
     {
       "name": "pyd-tabs", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tabs.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
-      "dependencies": ["@radix-ui/react-tabs", "pyd-utils"], "accessibility": { "semantics": "Radix tab roles", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-tabs", "pyd-utils"], "accessibility": { "semantics": "Radix tab roles and linked panels across three visual variants", "keyboard": "Chromium ArrowRight selection and panel change verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-table", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
@@ -430,7 +436,7 @@
       "name": "pyd-sidebar", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/aria/sidebar", "scope": "section grouping and responsive layout reference only; no source copied" },
-      "dependencies": ["pyd-button", "pyd-drawer", "pyd-navigation", "pyd-utils"], "accessibility": { "semantics": "named navigation with optional labelled section groups, current-page links, collapse control; modal mobile navigation via Radix Dialog", "keyboard": "Chromium: collapse Enter, mobile open/close, Escape, link selection and focus return verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-button", "pyd-drawer", "pyd-icon-button", "pyd-navigation", "pyd-utils"], "accessibility": { "semantics": "named navigation with optional labelled section groups, current-page links, collapse control; modal mobile navigation via Radix Dialog", "keyboard": "Chromium: collapse Enter, mobile open/close, Escape, link selection and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-tree", "category": "Navigation", "profiles": ["developer-tool", "neutral-product"],
@@ -498,7 +504,7 @@
       "name": "pyd-carousel", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/carousel/", "scope": "manual carousel semantics and controls; no source copied" },
-      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named carousel region; one mounted named slide and manual polite live region", "keyboard": "Chromium: Enter navigation, indicator selection, edge disabling and focus retention verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-button", "pyd-icon-button", "pyd-utils"], "accessibility": { "semantics": "named carousel region; one mounted named slide and manual polite live region", "keyboard": "Chromium: Enter navigation, indicator selection, edge disabling and focus retention verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-data-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
@@ -580,7 +586,7 @@
       "name": "pyd-password-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/button/" },
-      "dependencies": ["lucide-react", "pyd-button", "pyd-input", "pyd-utils"], "accessibility": { "semantics": "native password input with stable-name aria-pressed visibility toggle", "keyboard": "Chromium: Space toggles visibility, value stays, disabled state verified", "screen_reader": "pending manual review" }
+      "dependencies": ["lucide-react", "pyd-icon-button", "pyd-input", "pyd-utils"], "accessibility": { "semantics": "native password input with stable-name aria-pressed visibility toggle", "keyboard": "Chromium: Space toggles visibility, value stays, disabled state verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-pin-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
