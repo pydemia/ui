@@ -44,3 +44,17 @@ component로 구현합니다. 외부 component 코드를 도입하지 않습니�
 - provenance를 source commit `b73cce7`에 고정하고 35번째 snapshot
   `sha256-3773dda79971f256f5d45dd8b4593f64b92063147ab2311f25a9c903bcaf5f94`를
   생성했습니다. `registry:release-check`가 통과했습니다.
+
+## 공개 확인
+
+PR #60의 Verify UI run 36941699556이 통과하고 merge commit
+`9e39afd`의 Verify UI·Pages 검사도 통과했습니다. Vercel production
+`dpl_A17dr1DLh81b9E3EwfSMiDfM5uT1`은 READY이며
+`ui.pydemia.ai`에 연결됐습니다. 공개 QueryBuilder preview·Usage가
+열리고 console error는 없었습니다. 현재 registry manifest와
+`pyd-query-builder.json`, 35번째 snapshot manifest와 같은 item URL은
+모두 HTTP 200입니다. Snapshot manifest에는 117개 item이 있습니다.
+
+공개 115개 component·117개 item·35개 snapshot입니다. Goal 관리용
+추정은 약 90%입니다. 실제 서버 조회·screen reader·touch·Safari·
+RTL, 개별 소비자 CLI 설치와 rollback 뒤 URL 보존은 미검증입니다.

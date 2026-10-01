@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 QueryBuilder 공개 확인: PR #60 병합 commit `9e39afd`의
+Verify UI·Pages와 Vercel production이 성공했습니다. 공개 preview·
+Usage, 현재 registry item과 35번째 snapshot manifest/item URL을
+확인했습니다. 공개 115개 component·117개 item·35개 snapshot,
+goal 관리용 추정 약 90%입니다. 실제 서버 조회·screen reader·touch·
+Safari·RTL과 개별 소비자 설치는 미검증입니다.
+[작업 기록](query-builder-2026-10-02.md)을 참고하세요.
+
 2026-10-02 QueryBuilder는 조건 트리 편집·적용, 원본 source와
 registry·문서 preview·Usage를 로컬에 구현했습니다. typecheck·UI
 테스트 152/152·build·release 검사와 Chromium 390px 배치·오류

@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 QueryBuilder 공개 확인: **약 89% → 약 90%**입니다.
+PR #60과 병합 commit `9e39afd`의 Verify UI·Pages, Vercel
+production이 성공했습니다. 공개 preview·Usage, 현재 registry item,
+35번째 snapshot manifest/item URL을 확인했습니다. 공개 115개
+component·117개 item·35개 snapshot입니다.
+[작업 기록](query-builder-2026-10-02.md)을 참고하세요.
+
 2026-10-02 QueryBuilder 로컬 구현·검증: **약 89% → 약 89%**입니다.
 로컬 115개 component·117개 item과 35번째 snapshot을 만들고
 typecheck·UI 테스트 152/152·build·release 검사, 390px 조건
