@@ -1863,15 +1863,19 @@ snapshot ID는
 | 패키지 테스트 | pass | 전용 3/3, 전체 최종 113/113 |
 | 로컬 390px Chromium | pass (limited) | 필수 오류·초점, 하위 선택·제출·reset, Escape 복귀·비활성 건너뛰기, body 390px |
 | build | pass | 107개 registry item, 문서·프로필 예시 생성 |
-| registry release check | pass | 107개 item·105개 export/catalog, 22개 snapshot, 현재 ID 일치 |
-| 소비자·공개 배포 | unverified | 별도 소비자 설치와 릴리스 전 |
+| registry release check | pass | 107개 item·105개 export/catalog, 23개 snapshot, 수정판 현재 ID 일치 |
+| PR·병합 CI·production | pass | PR #31 Verify UI, 병합 commit Verify UI·Pages, Vercel READY |
+| 공개 390px preview | pass (limited) | 필수 오류, 키보드 선택, `design` 제출과 reset, page error 0건 |
+| 공개 JSON·manifest | pass | 현재 TreeSelect, 수정판 snapshot JSON·manifest가 저장소 게시 파일과 일치 |
+| 공개 snapshot 소비자 | pass (limited) | CLI 설치 6개 파일 원본 일치·typecheck·build·390px Chromium reset 2회·키보드 선택·FormData 제출 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+| rollback 뒤 snapshot URL | unverified | 과거 배포 rollback 시험 전 |
 
 세부 기록은 `.worknotes/component-tree-select-2026-10-01.md`에 있습니다.
 첫 공개 snapshot의 별도 소비자에서 기본값을 지운 뒤 reset하면
 표시가 `ops`, 제출값은 빈 문자열로 달랐습니다. 수정 소스를 소비자
 fixture에 적용해 같은 흐름과 반복 reset을 재검증했습니다. 수정판
 snapshot `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`를
-로컬에서 생성했고 공개 설치는 진행 중입니다.
+로컬에서 생성했고 공개 설치를 재검사했습니다.
 수정판 `registry:release-check`는 107개 item·105개 export/catalog와
 23개 snapshot, 현재 ID 일치를 확인했습니다.
