@@ -387,6 +387,12 @@
       "dependencies": ["pyd-copy-button", "pyd-utils"], "accessibility": { "semantics": "named figure and focusable pre/code; named native copy button and status", "keyboard": "Chromium: Enter copy status, wrap toggle, 390px internal scroll; clipboard content not independently verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-code-editor-shell", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WHATWG HTML", "url": "https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element", "scope": "native multiline value, form submission, readonly and keyboard behavior; no source copied" },
+      "dependencies": ["pyd-textarea", "pyd-utils"], "accessibility": { "semantics": "visible associated label, native textarea, decorative line numbers, linked description and error", "keyboard": "Chromium: Enter newline, Tab exit, form submit and synchronized line-number scroll verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-diff-viewer", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "react-diff-viewer", "url": "https://github.com/praneshr/react-diff-viewer/blob/5572d1c121ea095fe913a862b9e89e46a45f2599/README.md", "license": "MIT", "scope": "unified and split review concept only; no source copied" },

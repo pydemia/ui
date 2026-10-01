@@ -1372,3 +1372,24 @@ direction 1.1.4, id 1.1.4, react-primitive 2.1.10,
 presence 1.1.10, roving-focus 1.1.19,
 use-controllable-state 1.2.6과 primitive 1.1.7입니다.
 React·React DOM은 peer dependency입니다. 새 npm 의존성은 없습니다.
+
+## 2026-10-02 CodeEditorShell
+
+`CodeEditorShell`은 pydemia/ui에서 작성한 원본입니다. SQL·설정 조각의
+일반 텍스트 편집 화면을 구성하며 외부 editor 구현 코드는 복사하지
+않았습니다. 기존 `Textarea`를 사용합니다. 이 dependency는
+[shadcn/ui 공식 Textarea 문서](https://ui.shadcn.com/docs/components/radix/textarea),
+[고정 revision의 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/textarea.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+직접 확인했습니다. 수정된 `pyd-textarea` item이 원본 고지를
+소비자에게 전달합니다.
+
+[WHATWG HTML textarea 명세](https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element)의
+multiline 값·form 제출·readonly·disabled와
+[W3C WAI label 지침](https://www.w3.org/WAI/tutorials/forms/labels/)의
+명시적 label 연결을 참고했습니다. 두 문서는 동작·접근성 참고이며
+소스 코드를 복사하지 않았습니다. 직접 registry dependency는
+`pyd-textarea`와 `pyd-utils`입니다. React 19는 기존 peer dependency,
+`clsx`·`tailwind-merge`는 기존 `pyd-utils`의 의존성입니다.
+새 npm 또는 전이 dependency는 없습니다. 화면 낭독기 발표는
+직접 확인하지 않았습니다.

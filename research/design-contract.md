@@ -1014,3 +1014,25 @@ RTL 동작은 별도 검증 대상입니다.
 방향키, panel 연결은 기존 Radix primitive가 소유합니다. 한 목록의
 trigger는 목록 variant를 공유합니다. 실제 screen reader·touch·
 Safari·RTL 발표와 조작은 미검증입니다.
+
+## 2026-10-02 CodeEditorShell
+
+`CodeEditorShell`은 SQL·설정 조각의 일반 텍스트 값을 편집합니다.
+`value`와 `onValueChange`는 필수이며 상태는 호출자가 소유합니다.
+`name`을 주면 native textarea 값이 form에 제출됩니다. reset 시
+호출자가 controlled 값을 되돌립니다. `required`, `disabled`,
+`readOnly`는 native textarea 규칙을 따릅니다. 빈 문자열은 편집 가능한
+값이며 필수값 판단은 native form 또는 호출자가 담당합니다.
+
+보이는 `label`은 textarea의 `id`와 연결합니다. 선택적 설명과 오류는
+`aria-describedby`에 연결하고 오류는 `aria-invalid` 및 `role="alert"`로
+표시합니다. 줄 번호는 현재 값의 LF 개수에 1을 더해 표시하되
+발표에서 숨깁니다. `wrap="off"`로 코드의 원본 줄바꿈을 유지하고
+textarea와 줄 번호 gutter의 세로 scroll을 동기화합니다. Tab은 다음
+focus 대상으로 이동하며 editor 안에 가두지 않습니다. `rows`는
+보이는 줄 수를 정하고 양의 정수여야 합니다.
+
+`panel`과 `flat`은 공통 token의 두 표시 형태입니다. 언어 이름은
+선택적 표시 텍스트이고 parsing·구문 강조·실행을 하지 않습니다.
+`actions`에는 호출자 버튼을 넣으며 실행 결과와 오류 처리는 호출자가
+소유합니다. 실제 screen reader·touch·Safari·RTL 검사는 남았습니다.

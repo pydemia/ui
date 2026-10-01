@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-02 — CodeEditorShell
+
+- SQL·설정 조각의 일반 텍스트 편집을 위한 `CodeEditorShell`을
+  추가했습니다. native textarea의 form 값과 keyboard 동작을 유지하고
+  줄 번호, 언어 표시, 작업 slot, 오류 연결을 제공합니다.
+- `panel`·`flat` 표시를 공통 token으로 제공하며 구문 강조와
+  코드 실행은 호출자가 선택한 별도 기능으로 둡니다.
+
 ## 2026-10-02 — IconButton·Tabs 표시 형태
 
 - `IconButton`을 추가해 아이콘 전용 작업의 접근 가능한 이름을

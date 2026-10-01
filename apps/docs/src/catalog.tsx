@@ -14,7 +14,8 @@ import {
     CollapsibleContent, CollapsibleTrigger,
     Calendar, Card, CardContent, CardDescription, CardFooter, CardHeader,
     CardTitle,
-    Carousel, Checkbox, CitationList, CodeBlock, ColorInput, Combobox,
+    Carousel, Checkbox, CitationList, CodeBlock, CodeEditorShell,
+    ColorInput, Combobox,
     CopyButton,
     CommandPalette,
     ContentList,
@@ -1561,6 +1562,42 @@ function MonthPickerPreview() {
                     submitted ? `제출한 월: ${submitted}` :
                         "선택한 월이 없습니다."}
             </p>
+        </form>
+    );
+}
+
+function CodeEditorShellPreview() {
+    const initialQuery = "SELECT request_id, status\nFROM requests;";
+    const [query, setQuery] = useState(initialQuery);
+    const [variant, setVariant] = useState<"panel" | "flat">("panel");
+    const [submitted, setSubmitted] = useState("실행 전");
+
+    return (
+        <form className="preview-stack min-w-0" onSubmit={(event) => {
+            event.preventDefault();
+            const value = new FormData(event.currentTarget).get("query");
+            setSubmitted(value === query ? `제출: ${query.split("\n").length}줄`
+                : "제출 값이 다릅니다.");
+        }} onReset={() => {
+            setQuery(initialQuery);
+            setSubmitted("실행 전");
+        }}>
+            <div className="flex flex-wrap gap-2">
+                <Button type="button"
+                    variant={variant === "panel" ? "primary" : "outline"}
+                    onClick={() => setVariant("panel")}>Panel</Button>
+                <Button type="button"
+                    variant={variant === "flat" ? "primary" : "outline"}
+                    onClick={() => setVariant("flat")}>Flat</Button>
+                <Button type="reset" variant="ghost">초기화</Button>
+            </div>
+            <CodeEditorShell label="요청 조회 쿼리" language="SQL"
+                description="일반 텍스트 편집기이며 구문 강조는 제공하지 않습니다."
+                value={query} onValueChange={setQuery} name="query"
+                rows={5} required variant={variant}
+                error={query.trim() ? undefined : "쿼리를 입력하세요."}
+                actions={<Button type="submit">값 확인</Button>} />
+            <p role="status" className="m-0 text-sm">{submitted}</p>
         </form>
     );
 }
@@ -4787,6 +4824,31 @@ function Example() {
 />`,
         installItems: ["code-block"],
         preview: () => <CodeBlockPreview />,
+    },
+    {
+        id: "code-editor-shell", name: "CodeEditorShell",
+        category: "Developer tools",
+        description: "SQL·설정 조각을 편집하는 이름 있는 일반 텍스트 영역입니다. 줄 번호·언어·작업 slot과 panel·flat 표시를 제공하며, 값과 실행 결과는 호출자가 관리합니다. 구문 강조는 제공하지 않습니다.",
+        code: `import { useState } from "react";
+import { Button, CodeEditorShell } from "@pydemia/ui";
+
+function QueryEditor() {
+  const [query, setQuery] = useState("SELECT request_id\\nFROM requests;");
+  const [submitted, setSubmitted] = useState("");
+
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    setSubmitted(String(new FormData(event.currentTarget).get("query")));
+  }}>
+    <CodeEditorShell label="요청 조회 쿼리" language="SQL"
+      name="query" value={query} onValueChange={setQuery}
+      rows={6} required variant="panel"
+      actions={<Button type="submit">값 확인</Button>} />
+    <p role="status">제출 값: {submitted || "없음"}</p>
+  </form>;
+}`,
+        installItems: ["code-editor-shell", "button"],
+        preview: () => <CodeEditorShellPreview />,
     },
     {
         id: "diff-viewer", name: "DiffViewer", category: "Developer tools",
