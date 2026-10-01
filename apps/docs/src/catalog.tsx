@@ -82,7 +82,7 @@ import {
 import type {
     AppliedFilter, ApprovalStatus, BoardPost, CalendarSchedule,
     ConversationMessage,
-    DataTableColumn,
+    DataTableColumn, DataTableView,
     DateRangeValue,
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
@@ -2866,13 +2866,92 @@ const initialReviewRows: ReviewRow[] = [
     { id: "6", request: "접근 권한", owner: "개발팀", status: "완료" },
 ];
 
+function RemoteDataTablePreview() {
+    const [view, setView] = useState<DataTableView>({
+        query: "", filterValue: "", sort: null, page: 1, pageSize: 2,
+    });
+    const [status, setStatus] = useState<"ready" | "loading" | "error">(
+        "ready",
+    );
+    const [lastAction, setLastAction] = useState("");
+    const matching = initialReviewRows.filter((row) =>
+        (!view.query || `${row.request} ${row.owner} ${row.status}`
+            .includes(view.query)) &&
+        (!view.filterValue || row.status === view.filterValue),
+    );
+    const ordered = [...matching].sort((first, second) => {
+        const sortId = view.sort?.id;
+        if (sortId !== "request" && sortId !== "status") return 0;
+        const compared = first[sortId].localeCompare(second[sortId], "ko");
+        return view.sort?.direction === "descending" ? -compared : compared;
+    });
+    const pageRows = ordered.slice(
+        (view.page - 1) * view.pageSize, view.page * view.pageSize,
+    );
+
+    return (
+        <div className="grid gap-3">
+            <div className="flex flex-wrap gap-2">
+                <Button variant="outline" onClick={() => setStatus("loading")}>
+                    로딩 상태 보기
+                </Button>
+                <Button variant="outline" onClick={() => setStatus("error")}>
+                    오류 상태 보기
+                </Button>
+                <Button variant="outline" onClick={() => setStatus("ready")}>
+                    조회 결과 보기
+                </Button>
+            </div>
+            <DataTable
+                caption="원격 요청 목록"
+                rows={pageRows}
+                columns={reviewColumns}
+                getRowId={(row) => row.id}
+                getRowLabel={(row) => row.request}
+                filter={{ label: "상태", options: reviewFilter.options }}
+                pageSizeOptions={[2, 3]}
+                selectable
+                renderActions={(selected, clear) => (
+                    <Button variant="outline" onClick={() => {
+                        setLastAction(`${selected.length}건을 선택했습니다.`);
+                        clear();
+                    }}>
+                        선택 확인
+                    </Button>
+                )}
+                remote={{
+                    view, totalItems: matching.length, searchable: true,
+                    status, onViewChange: (next) => {
+                        setView(next);
+                        setStatus("ready");
+                    },
+                    errorMessage: "요청 목록을 불러오지 못했습니다.",
+                    onRetry: () => setStatus("ready"),
+                }}
+            />
+            {lastAction && <p role="status">{lastAction}</p>}
+        </div>
+    );
+}
+
 function DataTablePreview() {
     const [rows, setRows] = useState(initialReviewRows);
     const [lastAction, setLastAction] = useState("");
+    const [mode, setMode] = useState<"local" | "remote">("local");
 
     return (
         <div className="preview-workspace">
-            <DataTable
+            <div className="mb-3 flex flex-wrap gap-2">
+                <Button variant="outline" aria-pressed={mode === "local"}
+                    onClick={() => setMode("local")}>
+                    전체 행
+                </Button>
+                <Button variant="outline" aria-pressed={mode === "remote"}
+                    onClick={() => setMode("remote")}>
+                    원격 페이지
+                </Button>
+            </div>
+            {mode === "remote" ? <RemoteDataTablePreview /> : <DataTable
                 caption="화면 개선 요청"
                 rows={rows}
                 columns={reviewColumns}
@@ -2896,7 +2975,7 @@ function DataTablePreview() {
                         선택 항목 보관
                     </Button>
                 )}
-            />
+            />}
             {lastAction && <p role="status">{lastAction}</p>}
         </div>
     );
@@ -5850,7 +5929,7 @@ function RequestPages() {
     },
     {
         id: "data-table", name: "DataTable", category: "Data display",
-        description: "행 ID를 기준으로 검색·상태 필터·정렬·페이지·선택 상태를 관리하는 client-side 목록입니다. 좁은 폭에서는 표만 가로로 스크롤합니다. 선택 작업은 renderActions로 연결합니다.",
+        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. remote에서는 전달된 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업은 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
         code: `import { Button, DataTable } from "@pydemia/ui";
 import type { DataTableColumn } from "@pydemia/ui";
 
@@ -5876,7 +5955,32 @@ const columns: DataTableColumn<Request>[] = [
       console.log(selected.map((row) => row.id));
       clear();
     }}>선택 항목 처리</Button>
-  )} />`,
+  )} />
+
+// 서버 응답과 조회 상태를 소유하는 상위 화면에서 사용합니다.
+// view가 바뀌면 해당 조건으로 다시 조회해 page를 갱신합니다.
+import type { DataTableView } from "@pydemia/ui";
+type RequestPage = {
+  rows: Request[];
+  totalItems: number;
+  status: "ready" | "loading" | "error";
+};
+function RemoteRequests({ page, view, onViewChange, retry }: {
+  page: RequestPage;
+  view: DataTableView;
+  onViewChange: (next: DataTableView) => void;
+  retry: () => void;
+}) {
+  return <DataTable caption="원격 요청 목록" rows={page.rows}
+    columns={columns} getRowId={(row) => row.id}
+    filter={{ label: "상태", options: [
+      { value: "대기", label: "대기" },
+      { value: "완료", label: "완료" },
+    ] }}
+    remote={{ view, totalItems: page.totalItems,
+      status: page.status, searchable: true,
+      onViewChange, onRetry: retry }} />;
+}`,
         installItems: ["data-table", "button"],
         preview: () => <DataTablePreview />,
     },

@@ -15,6 +15,7 @@ type DataTableColumn<Row> = {
     header: string;
     cell: (row: Row) => ReactNode;
     sortValue?: (row: Row) => string | number | null | undefined;
+    sortable?: boolean;
     className?: string;
 };
 
@@ -24,7 +25,10 @@ type DataTableFilter<Row> = {
     options: readonly { value: string; label: string }[];
 };
 
-type DataTableProps<Row> = {
+type DataTableRemoteFilter = Pick<DataTableFilter<unknown>,
+    "label" | "options">;
+
+type DataTableBaseProps<Row> = {
     caption: string;
     rows: readonly Row[];
     columns: readonly DataTableColumn<Row>[];
@@ -32,7 +36,6 @@ type DataTableProps<Row> = {
     getRowLabel?: (row: Row) => string;
     getSearchText?: (row: Row) => string;
     searchPlaceholder?: string;
-    filter?: DataTableFilter<Row>;
     defaultPageSize?: number;
     pageSizeOptions?: readonly number[];
     selectable?: boolean;
@@ -43,7 +46,30 @@ type DataTableProps<Row> = {
     className?: string;
 };
 
-type SortState = { id: string; direction: "ascending" | "descending" };
+type DataTableProps<Row> = DataTableBaseProps<Row> & (
+    { filter?: DataTableFilter<Row>; remote?: undefined } |
+    { filter?: DataTableRemoteFilter; remote: DataTableRemote }
+);
+
+type DataTableSort = { id: string; direction: "ascending" | "descending" };
+
+type DataTableView = {
+    query: string;
+    filterValue: string;
+    sort: DataTableSort | null;
+    page: number;
+    pageSize: number;
+};
+
+type DataTableRemote = {
+    view: DataTableView;
+    totalItems: number;
+    onViewChange: (view: DataTableView) => void;
+    searchable?: boolean;
+    status?: "ready" | "loading" | "error";
+    errorMessage?: string;
+    onRetry?: () => void;
+};
 
 function compareSortValues(
     first: string | number | null | undefined,
@@ -65,15 +91,26 @@ function DataTable<Row>({
     caption, rows, columns, getRowId, getRowLabel, getSearchText,
     searchPlaceholder = "검색", filter, defaultPageSize = 10,
     pageSizeOptions = [10, 25, 50], selectable = false,
-    renderActions, emptyMessage = "표시할 항목이 없습니다.", className,
+    renderActions, emptyMessage = "표시할 항목이 없습니다.", remote,
+    className,
 }: DataTableProps<Row>) {
     const searchId = useId();
     const filterId = useId();
-    const [query, setQuery] = useState("");
-    const [filterValue, setFilterValue] = useState("");
-    const [sort, setSort] = useState<SortState | null>(null);
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(defaultPageSize);
+    const [localView, setLocalView] = useState<DataTableView>(() => ({
+        query: "", filterValue: "", sort: null,
+        page: 1, pageSize: defaultPageSize,
+    }));
+    const remoteView = useRef(remote?.view);
+    remoteView.current = remote?.view;
+    const isRemote = remote !== undefined;
+    const { query, filterValue, sort, page, pageSize } =
+        remote?.view ?? localView;
+    if (remote && (!Number.isSafeInteger(remote.totalItems) ||
+        remote.totalItems < 0 || !Number.isSafeInteger(page) || page < 1 ||
+        !Number.isSafeInteger(pageSize) || pageSize < 1)) {
+        throw new Error("DataTable remote view requires valid page, " +
+            "pageSize, and totalItems values");
+    }
     const [selectedIds, setSelectedIds] = useState<Set<string>>(
         () => new Set(),
     );
@@ -83,8 +120,31 @@ function DataTable<Row>({
     ) ? filterValue : "";
 
     useEffect(() => {
-        if (filterValue && !activeFilterValue) setFilterValue("");
-    }, [filterValue, activeFilterValue]);
+        if (!isRemote && filterValue && !activeFilterValue) {
+            setLocalView((current) => ({ ...current, filterValue: "" }));
+        }
+    }, [isRemote, filterValue, activeFilterValue]);
+
+    const remoteViewKey = remote ? JSON.stringify([
+        query, filterValue, sort?.id, sort?.direction, page, pageSize,
+    ]) : null;
+    useEffect(() => {
+        if (remoteViewKey !== null ||
+            remote?.status === "loading" || remote?.status === "error") {
+            setSelectedIds((current) => current.size > 0
+                ? new Set() : current);
+        }
+    }, [remoteViewKey, remote?.status]);
+
+    function changeView(patch: Partial<DataTableView>) {
+        if (remote) {
+            const next = { ...(remoteView.current ?? remote.view), ...patch };
+            remoteView.current = next;
+            remote.onViewChange(next);
+        } else {
+            setLocalView((current) => ({ ...current, ...patch }));
+        }
+    }
 
     useEffect(() => {
         const availableIds = new Set(rows.map(getRowId));
@@ -97,6 +157,7 @@ function DataTable<Row>({
     }, [rows, getRowId]);
 
     const visibleRows = useMemo(() => {
+        if (isRemote) return rows;
         const needle = query.trim().toLowerCase();
         const matches = rows
             .map((row, index) => ({ row, index }))
@@ -104,7 +165,8 @@ function DataTable<Row>({
                 (!needle || !getSearchText ||
                     getSearchText(row).toLowerCase().includes(needle)) &&
                 (!activeFilterValue || !filter ||
-                    filter.getValue(row) === activeFilterValue),
+                    ("getValue" in filter &&
+                        filter.getValue(row) === activeFilterValue)),
             );
         const column = columns.find((item) => item.id === sort?.id);
         if (column?.sortValue) {
@@ -125,21 +187,31 @@ function DataTable<Row>({
             });
         }
         return matches.map(({ row }) => row);
-    }, [rows, query, activeFilterValue, getSearchText, filter, columns, sort]);
+    }, [rows, query, activeFilterValue, getSearchText, filter, columns,
+        sort, isRemote]);
 
     const validPageSize = Number.isInteger(pageSize) && pageSize > 0
         ? pageSize : 1;
     const pageCount = Math.max(
-        1, Math.ceil(visibleRows.length / validPageSize),
+        1, Math.ceil((remote?.totalItems ?? visibleRows.length) /
+            validPageSize),
     );
     useEffect(() => {
-        setPage((current) => Math.min(current, pageCount));
-    }, [pageCount]);
+        if (!isRemote) {
+            setLocalView((current) => current.page > pageCount
+                ? { ...current, page: pageCount } : current);
+        }
+    }, [pageCount, isRemote]);
     const currentPage = Math.min(page, pageCount);
-    const pageRows = visibleRows.slice(
-        (currentPage - 1) * validPageSize, currentPage * validPageSize,
+    const pageRows = remote
+        ? remote.status === "loading" || remote.status === "error"
+            ? [] : visibleRows
+        : visibleRows.slice(
+            (currentPage - 1) * validPageSize, currentPage * validPageSize,
+        );
+    const selectedRows = (remote ? pageRows : rows).filter(
+        (row) => selectedIds.has(getRowId(row)),
     );
-    const selectedRows = rows.filter((row) => selectedIds.has(getRowId(row)));
     const selectedOnPage = pageRows.filter(
         (row) => selectedIds.has(getRowId(row)),
     ).length;
@@ -156,10 +228,7 @@ function DataTable<Row>({
     }
 
     function resetView() {
-        setQuery("");
-        setFilterValue("");
-        setSort(null);
-        setPage(1);
+        changeView({ query: "", filterValue: "", sort: null, page: 1 });
     }
 
     function clearSelection() {
@@ -170,7 +239,7 @@ function DataTable<Row>({
     return (
         <div className={cn("grid min-w-0 gap-3", className)}>
             <div className="flex flex-wrap items-end gap-2">
-                {getSearchText && (
+                {(getSearchText || remote?.searchable) && (
                     <div className="min-w-40 flex-1">
                         <label className="sr-only" htmlFor={searchId}>
                             {caption} 검색
@@ -181,8 +250,8 @@ function DataTable<Row>({
                             placeholder={searchPlaceholder}
                             value={query}
                             onChange={(event) => {
-                                setQuery(event.target.value);
-                                setPage(1);
+                                changeView({ query: event.target.value,
+                                    page: 1 });
                             }}
                         />
                     </div>
@@ -196,8 +265,8 @@ function DataTable<Row>({
                             id={filterId}
                             value={activeFilterValue}
                             onChange={(event) => {
-                                setFilterValue(event.target.value);
-                                setPage(1);
+                                changeView({ filterValue: event.target.value,
+                                    page: 1 });
                             }}
                         >
                             <option value="">{filter.label}: 전체</option>
@@ -209,7 +278,7 @@ function DataTable<Row>({
                         </NativeSelect>
                     </div>
                 )}
-                {(getSearchText || filter || sort) && (
+                {(getSearchText || remote?.searchable || filter || sort) && (
                     <Button variant="ghost" onClick={resetView}>
                         보기 초기화
                     </Button>
@@ -225,6 +294,7 @@ function DataTable<Row>({
                 </ActionBar>
             )}
             <div role="region" aria-label={`${caption} 가로 스크롤`}
+                aria-busy={remote?.status === "loading" || undefined}
                 ref={tableRegion}
                 tabIndex={0}
                 className={
@@ -257,7 +327,8 @@ function DataTable<Row>({
                                         ? sort.direction : undefined}
                                     className={column.className}
                                 >
-                                    {column.sortValue ? (
+                                    {(column.sortValue ||
+                                        (remote && column.sortable)) ? (
                                         <button
                                             type="button"
                                             className={
@@ -265,18 +336,14 @@ function DataTable<Row>({
                                                 "gap-1 text-left text-foreground"
                                             }
                                             onClick={() => {
-                                                setSort((current) => {
-                                                    if (current?.id !== column.id) {
-                                                        return { id: column.id,
-                                                            direction: "ascending" };
-                                                    }
-                                                    if (current.direction === "ascending") {
-                                                        return { id: column.id,
-                                                            direction: "descending" };
-                                                    }
-                                                    return null;
-                                                });
-                                                setPage(1);
+                                                const next = sort?.id !== column.id
+                                                    ? { id: column.id,
+                                                        direction: "ascending" as const }
+                                                    : sort.direction === "ascending"
+                                                        ? { id: column.id,
+                                                            direction: "descending" as const }
+                                                        : null;
+                                                changeView({ sort: next, page: 1 });
                                             }}
                                         >
                                             {column.header}
@@ -292,13 +359,29 @@ function DataTable<Row>({
                         </tr>
                     </thead>
                     <tbody>
-                        {pageRows.length === 0 ? (
+                        {(remote?.status === "loading" ||
+                            remote?.status === "error" ||
+                            pageRows.length === 0) ? (
                             <tr>
                                 <TableCell
                                     colSpan={columns.length + (selectable ? 1 : 0)}
                                     className="py-8 text-center text-muted"
                                 >
-                                    {emptyMessage}
+                                    {remote?.status === "loading" ? (
+                                        <span role="status">불러오는 중…</span>
+                                    ) : remote?.status === "error" ? (
+                                        <span role="alert">
+                                            {remote.errorMessage ??
+                                                "데이터를 불러오지 못했습니다."}
+                                            {remote.onRetry && (
+                                                <Button variant="outline"
+                                                    className="ml-2"
+                                                    onClick={remote.onRetry}>
+                                                    다시 시도
+                                                </Button>
+                                            )}
+                                        </span>
+                                    ) : emptyMessage}
                                 </TableCell>
                             </tr>
                         ) : pageRows.map((row) => {
@@ -338,12 +421,11 @@ function DataTable<Row>({
             <Pagination
                 page={currentPage}
                 pageSize={validPageSize}
-                totalItems={visibleRows.length}
-                onPageChange={setPage}
+                totalItems={remote?.totalItems ?? visibleRows.length}
+                onPageChange={(next) => changeView({ page: next })}
                 pageSizeOptions={pageSizeOptions}
                 onPageSizeChange={(size) => {
-                    setPageSize(size);
-                    setPage(1);
+                    changeView({ pageSize: size, page: 1 });
                 }}
             />
         </div>
@@ -351,4 +433,8 @@ function DataTable<Row>({
 }
 
 export { DataTable };
-export type { DataTableProps, DataTableColumn, DataTableFilter };
+export type {
+    DataTableProps, DataTableColumn, DataTableFilter,
+    DataTableRemoteFilter,
+    DataTableView, DataTableSort, DataTableRemote,
+};

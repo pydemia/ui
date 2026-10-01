@@ -36,10 +36,10 @@
 
 ## 기존 component에서 먼저 해결할 범위
 
-- `DataTable`: 서버 소유 정렬·필터·페이지, 행 편집, 큰 데이터의 표시
-  성능을 실제 데이터 규모와 함께 검토합니다. 현재 구현은 client-side
-  검색·필터·정렬·페이지와 `renderActions`를 제공합니다. 새 `DataGrid`를
-  먼저 만들 근거는 아직 없습니다.
+- `DataTable`: 2026-10-02에 서버 소유 검색·필터·정렬·페이지,
+  총건수·로딩·오류를 기존 API의 `remote` 모드로 추가했습니다.
+  행 편집과 큰 데이터의 표시 성능은 실제 데이터 규모와 함께
+  검토합니다. 새 `DataGrid`를 먼저 만들 근거는 아직 없습니다.
 - `Combobox`: `onQueryChange`는 있지만 선택값이 현재 `options`에서
   사라지면 오류가 납니다. 원격 검색의 loading·error·선택값 보존은
   별도 `AsyncCombobox`보다 기존 API 확장 여부를 먼저 검토합니다.

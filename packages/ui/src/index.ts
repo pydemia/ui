@@ -217,6 +217,8 @@ export type { PaginationProps } from "./components/pagination";
 export { DataTable } from "./components/data-table";
 export type {
     DataTableProps, DataTableColumn, DataTableFilter,
+    DataTableRemoteFilter,
+    DataTableView, DataTableSort, DataTableRemote,
 } from "./components/data-table";
 export { FilterBar } from "./components/filter-bar";
 export type {
