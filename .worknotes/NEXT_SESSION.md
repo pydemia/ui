@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-02 Menubar 공개 검증 완료: PR #39와 병합 commit
+`9ce19fc`의 Verify UI·Pages, Vercel production이 통과했습니다.
+공개 preview·Usage, 현재·26번째 snapshot JSON과 manifest의
+저장소 파일 SHA-256 일치를 확인했습니다. 공개 snapshot을 새 Vite
+소비자에 설치해 3개 파일 원본 일치·typecheck·build·390px Chromium
+명령과 체크 변경을 확인했습니다. 현재 107개 component·109개 item·
+26개 snapshot, goal 관리용 추정 약 82%입니다. 실제 screen reader·
+touch·Safari·RTL, rollback 뒤 snapshot URL은 미검증입니다.
+[작업 기록](menubar-2026-10-02.md)을 참고하세요.
+
 2026-10-02 Menubar 진행: 작업 화면의 여러 상위 명령을 위한 Radix 기반
 `Menubar`를 직접 작성하고 public export·registry metadata·문서
 preview·Usage를 추가했습니다. shadcn/ui 고정 revision과 Radix 1.1.24의

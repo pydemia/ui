@@ -1,11 +1,21 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 Menubar 공개 검증 후: **약 81% → 약 82%**입니다.
+107개 component·109개 registry item·26개 snapshot입니다. 여러
+상위 명령의 방향키 이동·체크·라디오·submenu를 문서 Chromium에서,
+공개 snapshot의 명령·체크 변경을 별도 소비자 390px Chromium에서
+확인했습니다. PR #39와 병합 commit의 Verify UI, Pages, Vercel
+production이 통과했습니다. 10개 축적 과제는 완료 5·부분 4·미검증
+1로 유지합니다. 실제 screen reader·touch·Safari·RTL과 rollback
+뒤 snapshot URL은 미검증입니다.
+[작업 기록](menubar-2026-10-02.md)에 증거를 남겼습니다.
+
 2026-10-02 Menubar 로컬 구현: 공개 기준 106개 component·108개 item·
 25개 snapshot과 goal 약 81%를 유지합니다. 새 Menubar의 source·
 registry·문서 preview·Usage를 작성하고 typecheck·UI 테스트 120/120·
 build, 로컬 브라우저와 새 소비자 설치·typecheck·build·브라우저를
 통과했습니다. 공개 검증은 남아 있습니다. provenance 고지 해시
-갱신 전 `registry:check` 실패는 수정 후 다시 확인합니다.
+갱신 전 `registry:check` 실패는 같은 작업에서 수정해 재검사했습니다.
 [작업 기록](menubar-2026-10-02.md)을 참고하세요.
 
 2026-10-01 공급·품질 기준 후속 재검토: 새 component마다 독립된 공개

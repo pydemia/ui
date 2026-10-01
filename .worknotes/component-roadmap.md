@@ -13,14 +13,15 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-106개 component와 108개 registry item이 있습니다. 2026-09-30에
+107개 component와 109개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
 편입했습니다.
 2026-10-01에는 `ApprovalCard`와 `DiffViewer`를 편입했습니다.
 `TreeSelect`도 계층 항목을 form 값으로 제출하는 독립 사용처로
-편입했고 `YearPicker`를 추가했습니다.
+편입했고 `YearPicker`를 추가했습니다. 2026-10-02에는 `Menubar`를
+편집기·관리 화면의 여러 상위 명령에 편입했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -87,7 +88,7 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 수로만 사용하며 component 공급률이나 품질 점수로 해석하지 않습니다.
 이후 진행 보고에서는 이를 점수처럼 표시하지 않고 완료·부분·
 미검증 상태와 남은 위험을 적습니다.
-전체 goal의 약 81%는 사용 사례 범위와 공개 검증을 함께 보는
+전체 goal의 약 82%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이고, component 수 또는 체크박스 수로 자동 계산하지
 않습니다. 판정 근거는
 [기준 재검토](quality-criteria-review-2026-10-01.md)와
@@ -256,9 +257,10 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
   reader·touch·Safari·RTL은 남았습니다.
 - [x] `NavigationMenu` — 상단 그룹 탐색의 pointer 열기·링크 이동,
   키보드 진입·Escape 닫기. Hover·touch·screen reader 검사는 남았습니다.
-- [ ] `Menubar` — 편집기·관리 화면의 여러 상위 명령을 상시 표시하고
-  방향키로 이동합니다. 로컬 구현·typecheck·기본 semantics 테스트를
-  마쳤으며 브라우저·소비자·공개 검증이 남았습니다.
+- [x] `Menubar` — 편집기·관리 화면의 여러 상위 명령을 상시 표시하고
+  방향키로 이동합니다. 공개 snapshot을 별도 소비자에 설치해
+  명령·체크 변경과 typecheck·build를 확인했습니다. 실제 screen
+  reader·touch·Safari·RTL은 남았습니다.
 - [x] `BottomNav` — 기존 `pyd-navigation`에 하단 주요 목적지 링크를
   추가했습니다. 각 링크의 이름을 항상 표시하고 현재 페이지는 호출자가
   `aria-current`로 지정합니다. 별도 component 수는 늘리지 않습니다.
