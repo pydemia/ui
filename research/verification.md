@@ -7,14 +7,17 @@ Vercel preview(commit `3cc7d4b`)의 390px Chromium에서 달력 헤더의
 ArrowRight·Enter 선택, 날짜 선택 뒤 상태 문구를 확인했습니다.
 light·dark를 시각 확인하던 중 기존 `Calendar`의 chevron SVG가
 dark에서 검게 보이는 결함을 발견해 `fill-current`를 적용했습니다.
-이 색상 수정의 새 preview는 아직 확인하지 않았습니다.
+최종 Vercel preview(commit `eef5938`)의 390px·데스크톱 dark에서
+화살표가 밝게 보이고 SVG fill이 `rgb(233, 238, 242)`인 것을
+확인했습니다. 브라우저 console error는 0건입니다.
 
 수정 코드 기준 `npm run typecheck`, UI 테스트 143/143,
 `npm run build`, 최종 provenance 고지와 snapshot을 반영한
 `registry:release-check`가 통과했습니다. 116개 item·114개
 export/catalog, 공개 32개와 새 후보 1개로 정리한 33개 snapshot을
-확인했습니다. 마지막 수정의 CI·새 preview와
-production 공개, 실제 screen reader·touch·Safari·RTL, 개별
+확인했습니다. PR head `eef5938`의 Verify UI run 36932500537과
+Vercel preview는 성공했습니다. production 공개, 실제 screen
+reader·touch·Safari·RTL, 개별
 소비자 CLI 설치와 rollback 뒤 URL 보존은 미검증입니다.
 
 ## 2026-10-02 CalendarScheduler 로컬 정적·client 검증

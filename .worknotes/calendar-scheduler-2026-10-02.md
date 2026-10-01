@@ -7,8 +7,10 @@
 일정 선택·추가, 빈 날짜, 다음 달의 건수, ArrowRight·Enter 선택과
 선택 뒤 상태 문구 갱신을 실행했습니다. light·dark를 보던 중
 `Calendar`의 DayPicker chevron SVG가 dark에서 검게 렌더링되는
-결함을 발견해 `fill-current`를 적용했습니다. 이 마지막 색상 수정은
-아직 새 preview에서 시각 확인하지 않았습니다.
+결함을 발견해 `fill-current`를 적용했습니다. 최종 Vercel preview
+commit `eef5938`의 390px과 데스크톱 dark에서 화살표가 밝게
+표시되고 SVG fill이 `rgb(233, 238, 242)`인 것을 확인했습니다.
+브라우저 console error는 0건입니다.
 
 수정 전 draft의 중간 snapshot 세 개는 `main`에 공개된 적이
 없습니다. 소스 수정 뒤 provenance 고지를 commit `67ba3c2`와
@@ -18,8 +20,8 @@ metadata SHA-256으로 다시 고정했습니다. 최종 내용의
 32개에 새 후보 하나를 더한 33개입니다. `npm run typecheck`, UI 테스트
 143/143, `npm run build`, `registry:release-check`가 통과했습니다.
 116개 item·114개 export/catalog, 33개 snapshot을 확인했습니다.
-수정 commit의 CI·새
-preview와 production 공개는 아직 미검증입니다.
+최종 PR head `eef5938`의 Verify UI run 36932500537과 Vercel
+preview가 성공했습니다. production 공개는 아직 미검증입니다.
 공개 기준 113개 component·115개 item, goal 약 88%를 유지합니다.
 
 2026-10-02. 공개 기준은 113개 component·115개 registry item·

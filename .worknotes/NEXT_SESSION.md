@@ -7,8 +7,10 @@ ArrowRight·Enter 및 상태 문구가 동작했습니다. dark에서 기존
 수정했습니다. 미공개 draft snapshot 셋은 PR diff에서 정리하고 최종
 후보 하나만 남겼습니다. provenance 고지도 소스 commit `67ba3c2`에
 고정했습니다. typecheck·UI 테스트 143/143·build·최종 snapshot의
-release 검사가 통과했습니다. 새 preview·CI와 production
-확인은 남았습니다. 공개 113개 component·115개 item·32개 snapshot,
+release 검사와 PR head `eef5938`의 Verify UI가 통과했습니다.
+최종 Vercel preview의 390px·데스크톱 dark에서 화살표 fill과
+console error 0건을 확인했습니다. production 확인은 남았습니다.
+공개 113개 component·115개 item·32개 snapshot,
 goal 약 88%입니다. [작업 기록](calendar-scheduler-2026-10-02.md)을
 참고하세요.
 
