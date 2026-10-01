@@ -6,8 +6,9 @@ contained 표시를 추가했습니다. typecheck·UI 테스트 128/128·build�
 통과했고 390px dark Chromium과 기존 세 소비자의 키보드 흐름을
 검사했습니다. 새 Vite 소비자에 변경 item과 전이 의존성 12개 파일을
 CLI로 설치해 변경 source 5개 일치·typecheck·build를 확인했습니다.
-로컬 110개 component·112개 item이며 고지 핀·snapshot·PR·공개
-검증은 남았습니다. 공개 기준 goal
+source commit `2a48e96`의 provenance 고지 핀과 29번째 snapshot,
+`registry:release-check`도 통과했습니다. 로컬 110개 component·
+112개 item·29개 snapshot이며 PR·공개 검증은 남았습니다. 공개 기준 goal
 추정은 약 84%입니다.
 [작업 기록](icon-button-tabs-2026-10-02.md)을 참고하세요.
 

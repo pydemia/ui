@@ -2032,7 +2032,9 @@ Tabs 형태 전환·ArrowRight 선택·panel 전환과 dark 배경·가로 넘�
 슬라이드 이동·focus 유지, Sidebar 접기·이름과 상태 변경도 확인했습니다.
 변경 item과 전이 의존성 12개 파일을 새 Vite 소비자에 CLI로 설치했고
 변경 source 5개 일치·typecheck·build를 확인했습니다. 소비자의
-브라우저 동작, provenance 고지 핀, snapshot, PR·공개 확인은
-아직 실행하지 않았습니다. 실제 screen reader·touch·Safari·RTL과
+브라우저 동작은 실행하지 않았습니다. source commit `2a48e96`의
+provenance 고지 핀, 29번째 snapshot과 `registry:release-check`는
+통과했습니다. PR·공개 확인은 아직 실행하지 않았습니다. 실제
+screen reader·touch·Safari·RTL과
 rollback 뒤 URL 보존은 미검증입니다. 세부 범위는
 [작업 기록](../.worknotes/icon-button-tabs-2026-10-02.md)에 있습니다.

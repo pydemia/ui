@@ -36,9 +36,15 @@ Radix 배포 버전과 접근성 근거는
   typecheck·build가 통과했습니다. 설치된 소비자의 브라우저 동작은
   별도로 실행하지 않았습니다. 이후 production base로 registry와
   문서를 재생성했고 `docs/r`에 로컬 URL이 남지 않았습니다.
+- source commit `2a48e96`의 provenance와 LF SHA-256을 소비자
+  MIT 고지에 고정했습니다. `registry:check`는 112개 item·110개
+  export/catalog 대응과 기존 28개 snapshot을 확인했습니다.
+  29번째 snapshot
+  `sha256-42069de52f0bbf1f184a08610fc1a18c86b53cf2737bd259d616bb446db8cb1c`
+  을 생성했고 `registry:release-check`가 현재 빌드와의 일치를
+  확인했습니다.
 
-현재는 로컬 110개 component·112개 registry item입니다.
-provenance 고지 핀, 새 snapshot,
-`registry:release-check`, PR·공개 확인은 남았습니다. 실제 screen
+현재는 로컬 110개 component·112개 registry item·29개 snapshot입니다.
+PR·공개 확인은 남았습니다. 실제 screen
 reader·touch·Safari·RTL과 rollback 뒤 URL 보존은 미검증입니다.
 공개 기준 goal 관리용 추정은 아직 약 84%입니다.
