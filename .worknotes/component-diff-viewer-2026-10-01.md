@@ -52,5 +52,28 @@
   기존 20개 snapshot을 확인한 뒤 21번째 ID
   `sha256-f2fbab67bddc01492523191362957921e38db65775b20a3ae9e37949dbf20f89`를
   생성했습니다. 다시 빌드한 뒤 `registry:release-check`가 21개
-  snapshot과 현재 빌드의 해당 ID 일치를 확인했습니다. 소비자·공개
-  배포는 아직 실행하지 않았습니다.
+  snapshot과 현재 빌드의 해당 ID 일치를 확인했습니다.
+- PR #28의 Verify UI가 성공해 병합했습니다. 병합 commit
+  `f439be01d92914c8ae50f6996e5f6b68bc8acb67`의 Verify UI·Pages CI가
+  성공했고 Vercel production `dpl_7kQfR7USBiqjgiGPq2pCRdpKftF1`은
+  같은 commit을 가리키며 READY입니다.
+- 공개 `ui.pydemia.ai`의 390px Chromium에서 통합 7행, 좌우 4열·5행,
+  줄바꿈, dark와 `+`·`−` 표식을 확인했습니다. 좌우 줄바꿈에서 내부
+  영역 328px/내용 640px, ArrowRight 후 `scrollLeft` 40px, body
+  390px이며 page error는 없었습니다.
+- 공개 현재·snapshot의 DiffViewer·utils·tokens JSON과 snapshot
+  manifest가 저장소 파일과 byte 단위로 일치합니다.
+- 새 Vite 소비자에 공개 snapshot의 DiffViewer·utils·tokens 3개
+  파일을 `shadcn@4.21.0`으로 설치했습니다. 설치 내용이 snapshot
+  원본과 일치했고 typecheck·build가 통과했습니다. 390px Chromium에서
+  통합 5행과 좌우 4열, 줄바꿈·내부 ArrowRight 40px, body 390px,
+  page error 0건을 확인했습니다. fixture는
+  `%TEMP%/pydemia-diff-public-consumer-20261001`에 있습니다.
+
+## 종료 상태
+
+- 104개 component·106개 registry item·21개 snapshot입니다. goal
+  관리용 진척도는 **약 80% → 약 80%**, 공급·품질 조건 완료는 5/10입니다.
+  개별 component의 공개 공급 경로를 하나 더 검증했지만 실제 보조기술·
+  touch·Safari·RTL, 전체 item별 격리 설치, 과거 배포 rollback 뒤
+  snapshot URL 보존은 완료되지 않았습니다.

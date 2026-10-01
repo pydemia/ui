@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 DiffViewer 공개 검증 후: **약 80% → 약 80%**입니다.
+104개 component·106개 registry item·21개 snapshot입니다. 공개
+preview, 새 소비자의 snapshot 설치·typecheck·build·390px Chromium,
+PR·병합 CI와 production을 확인했습니다. 공급·품질 조건 완료 표시는
+5/10으로 그대로입니다. 실제 보조기술·touch·Safari·RTL, item별
+격리 공개 설치와 rollback 뒤 URL 보존을 검증하지 않았으므로 관리용
+추정치를 올리지 않았습니다. 검사 범위와 남은 조건은
+[작업 기록](component-diff-viewer-2026-10-01.md)에 남겼습니다.
+
 2026-10-01 DiffViewer 작업 시작: 관리용 기준값 **약 80%**,
 103개 component·105개 registry item·20개 snapshot, 공급·품질 조건
 5/10입니다. 변경 전후 줄 검토가 기존 `CodeBlock`·`LogConsole`과
