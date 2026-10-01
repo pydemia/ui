@@ -1,5 +1,16 @@
 # 검증 기록
 
+## 2026-10-02 CalendarScheduler 공개 확인
+
+PR #56 병합 commit `57749fe`의 Verify UI run 36933097687,
+Vercel production과 GitHub Pages가 성공했습니다. 공개 사이트에서
+CalendarScheduler preview·Usage,
+114개 component 표기를 확인했습니다. 현재 registry item과
+33번째 snapshot manifest·item URL은 각각 HTTP 200이며 manifest에
+116개 item이 있습니다.
+실제 screen reader·touch·Safari·RTL, 개별 소비자 CLI 설치,
+rollback 뒤 snapshot URL 보존은 미검증입니다.
+
 ## 2026-10-02 CalendarScheduler preview 검증 후속
 
 Vercel preview(commit `3cc7d4b`)의 390px Chromium에서 달력 헤더의

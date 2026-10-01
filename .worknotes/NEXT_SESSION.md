@@ -1,5 +1,31 @@
 # Component 확장 작업 인계
 
+2026-10-02 CalendarScheduler 공개 확인: PR #56 병합 commit `57749fe`의
+Verify UI, Vercel production과 Pages 배포가 성공했습니다. 공개 사이트에
+114개 component가 표시되고 `CalendarScheduler` preview·Usage, 현재
+item, 33번째 snapshot manifest/item URL이 응답합니다. manifest에는
+116개 item이 있습니다. Goal 관리용 추정은 약 89%입니다.
+[작업 기록](calendar-scheduler-2026-10-02.md)을
+참고하세요.
+
+2026-10-02 체크리스트 부담을 다시 검토했습니다. 현행 위험별 검사는
+대체로 적절하지만 10개 옛 체크박스를 같은 로드맵에 두는 표현과
+PR마다 미공개 전체 snapshot을 누적하는 절차가 과합니다. 공개
+릴리스 묶음당 snapshot 하나로 조정하려면 CI와 정리 절차를 함께
+바꿔야 합니다. 이번에는 판정·코드·배포를 바꾸지 않았고 goal 약
+88%를 유지합니다. [검토 기록](quality-checklist-overhead-review-2026-10-02.md)을
+참고하세요.
+
+2026-10-02 공급·품질 체크리스트의 브라우저 조건을 좁혔습니다.
+새 focus 이동·pointer 좌표·browser API·핵심 반응형 배치에 해당
+환경 검사를 적용하고, 값·callback·form·keyboard의 핵심 흐름은
+실행하는 자동 테스트나 브라우저 검사로 확인합니다. 상태 없는
+표시 component에 상태 소유를 요구하지 않습니다. draft PR #56의
+`CalendarScheduler`는 callback 흐름이 아직 실행되지 않아 공급
+완료로 세지 않습니다. 공개 113개 component·115개 item·32개
+snapshot, goal 관리용 추정 약 88%는 그대로입니다.
+[검토 기록](quality-checklist-pragmatic-2026-10-02.md)을 참고하세요.
+
 2026-10-02 CalendarScheduler Vercel preview를 390px Chromium에서
 확인했습니다. 월 탐색 배치와 날짜·일정 선택, 일정 추가, 빈 상태,
 ArrowRight·Enter 및 상태 문구가 동작했습니다. dark에서 기존

@@ -1,5 +1,26 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 CalendarScheduler 공개 확인: **약 88% → 약 89%**입니다.
+PR #56 병합 commit `57749fe`의 Verify UI·Vercel production·Pages가 성공했고,
+공개 사이트에서 114개 component와 CalendarScheduler preview·Usage,
+현재 item 및 33번째 snapshot의 manifest/item URL을 확인했습니다.
+공개 114개 component·
+116개 item·33개 snapshot입니다.
+[작업 기록](calendar-scheduler-2026-10-02.md)을 참고하세요.
+
+2026-10-02 체크리스트 부담 재검토: **약 88% → 약 88%**입니다.
+현행 위험별 검사는 유지하되, 10개 과거 체크박스의 노출과 미공개
+draft snapshot 누적이 실제 개발 부담을 늘리는 것으로 확인했습니다.
+이번 검토는 판정·구현·공개 검증을 바꾸지 않았습니다.
+[검토 기록](quality-checklist-overhead-review-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 체크리스트 재검토: **약 88% → 약 88%**입니다.
+상태 없는 component에 상태 소유를 요구하지 않고, browser 의존
+동작에만 해당 환경 검사를 적용합니다. 값·callback·form·keyboard의
+변경 핵심 흐름은 실제로 실행해야 합니다. `CalendarScheduler`의
+callback과 날짜·월 변경은 미검증이므로 draft 공급 상태 그대로입니다.
+[검토 기록](quality-checklist-pragmatic-2026-10-02.md)을 참고하세요.
+
 2026-10-02 CalendarScheduler preview 검증: **약 88% → 약 88%**입니다.
 390px Chromium의 월 탐색 배치, 날짜·일정 선택, 추가, 빈 상태,
 ArrowRight·Enter와 상태 문구를 확인했습니다. dark에서 발견한

@@ -1,5 +1,17 @@
 # CalendarScheduler 편입 작업
 
+## 공개 확인
+
+2026-10-02. PR #56의 병합 commit `57749fe`의 Verify UI run
+36933097687, Vercel production과 GitHub Pages가 성공했습니다. 공개
+`https://ui.pydemia.ai/?component=calendar-scheduler#components`에서
+preview·Usage와 114개 component 표기를 확인했습니다. 현재
+`pyd-calendar-scheduler.json`, 33번째 snapshot manifest·item URL은
+각각 HTTP 200이고 manifest에는 116개 item이 있습니다.
+goal 관리용 추정은 약
+89%입니다. 실제 screen reader·touch·Safari·RTL, 개별 소비자 CLI
+설치, rollback 뒤 snapshot URL 보존은 미검증입니다.
+
 ## 후속 브라우저 검증과 snapshot 정리
 
 2026-10-02. commit `3cc7d4b`의 Vercel preview를 390px Chromium에서
