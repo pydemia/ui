@@ -1,5 +1,10 @@
 # 공급·품질 기준 후속 재검토
 
+이 문서는 당시의 판정 기록입니다. 현재 적용 기준은
+[반복 검사 축소](quality-criteria-simplification-2026-10-02.md)와
+[로드맵의 판정 단위](component-roadmap.md#공급과-품질의-판정-단위)를
+참고하세요.
+
 2026-10-01. [앞선 재검토](quality-criteria-review-2026-10-01.md)와
 [로드맵](component-roadmap.md)의 판정 문구를 다시 읽었습니다. 코드를
 실행하거나 새 환경에서 품질을 검증한 작업은 아닙니다.
