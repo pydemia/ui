@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 공급·품질 기준 후속 재검토: 새 component마다 독립된 공개
+설치 검사를 반복하는 기준을 릴리스별 변경 item·의존 item 조합
+검사로 조정했습니다. 실제 보조기술·touch·Safari·RTL, 과거 snapshot의
+rollback 보존은 별도 품질 과제입니다. 기존 10개 과제의 완료 5·부분 4·
+미검증 1을 공급 점수로 환산하지 않습니다. 새 구현·배포·검증은 없어
+goal 추정은 **약 81% → 약 81%**입니다.
+[후속 재검토](quality-criteria-followup-2026-10-01.md)에 근거와
+남은 위험을 적었습니다.
+
 2026-10-01 YearPicker 공개 검증 후: **약 80% → 약 81%**입니다.
 106개 component·108개 registry item·25개 snapshot입니다. 연도만
 선택·제출하는 용례의 공개 preview와 별도 소비자 snapshot 설치·

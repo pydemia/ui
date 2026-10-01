@@ -1,5 +1,17 @@
 # Component 확장 작업 인계
 
+2026-10-01 공급·품질 기준 후속 재검토: 10개 누적 과제를 새 component의
+릴리스 게이트나 품질 점수로 사용하지 않습니다. 변경분의 source·
+LICENSE·의존성, export·registry·문서, 관련 테스트·브라우저 동작은
+확인하되, 새 소비자 설치는 같은 릴리스의 변경 item과 의존 item을
+묶어 검증합니다. 새 의존성 체인이나 설치 target에만 별도 검사를
+추가합니다.
+rollback 뒤 snapshot URL 보존과 보조기술·touch 등은 전체 품질
+과제로 계속 추적합니다. 새 구현·검증은 없어 goal 추정 약 81%,
+106개 component·108개 item·25개 snapshot, 전체 과제 완료 5·부분 4·
+미검증 1은 그대로입니다.
+[후속 재검토](quality-criteria-followup-2026-10-01.md)를 참고하세요.
+
 2026-10-01 YearPicker 공개 검증 완료: PR #36이 병합됐고 병합
 Verify UI·Pages·Vercel production이 통과했습니다. 공개 25번째
 snapshot을 별도 Vite 소비자에 설치해 5개 파일 원본 일치·typecheck·

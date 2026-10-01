@@ -13,15 +13,14 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-105개 component와 107개 registry item이 있습니다. 2026-09-30에
+106개 component와 108개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
 편입했습니다.
-2026-10-01에는 `ApprovalCard`를 편입했습니다.
-이어 `DiffViewer`를 편입했습니다.
+2026-10-01에는 `ApprovalCard`와 `DiffViewer`를 편입했습니다.
 `TreeSelect`도 계층 항목을 form 값으로 제출하는 독립 사용처로
-편입했습니다.
+편입했고 `YearPicker`를 추가했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -62,10 +61,14 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 완료해야 한다는 뜻이 아닙니다.
 
 새 component를 ready-made로 기록하려면 독립 사용처와 동작 규칙,
-원본·의존성·LICENSE 검토, package export·registry·provenance·문서
-예시의 일치, typecheck·관련 테스트·build·registry 검사, 영향받는
-상호작용의 브라우저 확인, 공개 snapshot의 별도 소비자 설치·build를
-확인합니다. 검사한 환경과 검사하지 못한 환경을 따로 적습니다.
+참고한 원본·의존성·LICENSE 검토, package export·registry·provenance·
+문서 예시의 일치, typecheck·관련 테스트·build·registry 검사와
+영향받는 상호작용의 브라우저 확인이 필요합니다. 공개 공급은
+component마다 별도 배포하지 않고 릴리스 단위로 판정합니다. 변경된
+item과 의존 item을 새 소비자에 함께 설치해 typecheck·build하고,
+배포 후 공개 snapshot에서도 같은 공급 경로를 확인합니다. 새로운
+의존성 체인이나 설치 target이 다를 때만 별도 소비자 검사를
+추가합니다. 검사한 환경과 검사하지 못한 환경을 따로 적습니다.
 관련 흐름에서 재현된 값 손실·제출 오류·접근성 차단 등 주요 결함은
 수정판 공개 검증 전까지 ready-made 완료로 표시하지 않습니다.
 
@@ -82,14 +85,17 @@ component 재검사, 모든 item의 개별 설치, rollback 뒤 snapshot
 6번(내용 해시 snapshot, rollback 보존 잔여)입니다. 4번의 실제
 보조기술 검사는 미검증입니다. 종전 `5/10`은 완전히 닫힌 과제
 수로만 사용하며 component 공급률이나 품질 점수로 해석하지 않습니다.
-전체 goal의 약 80%는 사용 사례 범위와 공개 검증을 함께 보는
+이후 진행 보고에서는 이를 점수처럼 표시하지 않고 완료·부분·
+미검증 상태와 남은 위험을 적습니다.
+전체 goal의 약 81%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이고, component 수 또는 체크박스 수로 자동 계산하지
 않습니다. 판정 근거는
-[기준 재검토](quality-criteria-review-2026-10-01.md)에 남겼습니다.
+[기준 재검토](quality-criteria-review-2026-10-01.md)와
+[후속 재검토](quality-criteria-followup-2026-10-01.md)에 남겼습니다.
 
 ## 라이브러리 전체의 공급·품질 공백
 
-- [ ] 현재 90개 component의 public export와 registry item,
+- [ ] component의 public export와 registry item,
   provenance, 문서 예시가 서로 일치하는지 확인하고 변경을 검토
   가능한 단위로 정리합니다. 현재 90개 component 모듈·public export·
   registry·catalog ID의 1:1 대응을 `registry:check`에 넣고
