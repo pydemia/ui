@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 DataTable 원격 조회 공개 확인: **약 89% → 약 89%**입니다.
+PR #58과 병합 commit `d89c304`의 CI·Pages, Vercel production이
+성공했습니다. 공개 DataTable 원격 preview·Usage와 현재 item,
+34번째 snapshot manifest/item URL을 확인했습니다. 공개 114개
+component·116개 item·34개 snapshot입니다.
+[작업 기록](data-table-remote-2026-10-02.md)을 참고하세요.
+
 2026-10-02 DataTable 원격 조회 로컬 검증: **약 89% → 약 89%**입니다.
 서버 소유 검색·필터·정렬·페이지와 총건수·로딩·오류를 기존
 `DataTable`에 추가했습니다. typecheck·UI 테스트 148/148·build·

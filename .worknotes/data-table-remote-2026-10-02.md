@@ -42,7 +42,15 @@
 
 ## 남은 검증
 
-PR CI, 공개 preview·registry item·snapshot URL, 실제 HTTP 응답
-경합, screen reader·touch·Safari·RTL, 개별 소비자 CLI 설치, rollback
-뒤 snapshot URL 보존은 아직 확인하지 않았습니다. 공개 component 수는
-변하지 않습니다. Goal 관리용 추정은 로컬 단계에서 약 89%입니다.
+PR #58의 Verify UI run 36936736308과 병합 commit `d89c304`의
+Verify UI run 36936989888·Pages run 36936989012가 성공했습니다.
+Vercel production 배포 `dpl_2FCVG3HjufNEVCG1SoWoqoEtU99U`는
+READY이며 `ui.pydemia.ai`에 연결됐습니다. 공개 브라우저에서
+DataTable의 원격 preview·Usage·전체 114개 표기와 console error
+0건을 확인했습니다. 현재 registry item과 34번째 snapshot의
+manifest·DataTable item URL은 HTTP 200이고 manifest는 116개
+item을 표시합니다.
+
+실제 HTTP 응답 경합, screen reader·touch·Safari·RTL, 개별 소비자
+CLI 설치, rollback 뒤 snapshot URL 보존은 미검증입니다. 공개
+component 수는 114개이며 goal 관리용 추정은 약 89%입니다.
