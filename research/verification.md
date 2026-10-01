@@ -1845,7 +1845,8 @@ snapshot ID는
 | 패키지 테스트 | pass | 전용 6/6, 전체 최종 110/110 |
 | 로컬 390px Chromium | pass (limited) | 통합·좌우 보기, +/− 표식, 내부 ArrowRight 0→40px, 줄바꿈·dark, body 390px |
 | build | pass | 106개 registry item, 문서·프로필 예시 생성 |
-| registry·소비자·공개 배포 | unverified | 이번 source 변경의 릴리스 검사 전 |
+| registry release check | pass | 106개 item·104개 export/catalog, 21개 snapshot, 현재 ID 일치 |
+| 소비자·공개 배포 | unverified | 별도 소비자 설치와 릴리스 전 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 세부 기록은 `.worknotes/component-diff-viewer-2026-10-01.md`에 있습니다.

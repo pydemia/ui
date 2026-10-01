@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-scroll-area",
+  "title": "Scroll Area",
+  "dependencies": [
+    "@radix-ui/react-scroll-area@1.2.18"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-f2fbab67bddc01492523191362957921e38db65775b20a3ae9e37949dbf20f89/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/scroll-area.tsx",
+      "content": "import * as ScrollAreaPrimitive from \"@radix-ui/react-scroll-area\";\nimport type { ComponentProps, Ref } from \"react\";\nimport { cn } from \"./utils\";\n\ntype ScrollAreaProps = ComponentProps<typeof ScrollAreaPrimitive.Root> & {\n    label: string;\n    orientation?: \"vertical\" | \"horizontal\" | \"both\";\n    viewportRef?: Ref<HTMLDivElement>;\n};\n\nfunction ScrollArea({\n    label,\n    orientation = \"vertical\",\n    viewportRef,\n    type = \"auto\",\n    className,\n    children,\n    ...props\n}: ScrollAreaProps) {\n    if (!label.trim()) throw new Error(\"ScrollArea requires a label.\");\n    if (![\"vertical\", \"horizontal\", \"both\"].includes(orientation)) {\n        throw new RangeError(\"ScrollArea orientation is not supported.\");\n    }\n\n    return (\n        <ScrollAreaPrimitive.Root\n            type={type}\n            className={cn(\"relative\", className)}\n            {...props}\n        >\n            <ScrollAreaPrimitive.Viewport\n                ref={viewportRef}\n                role=\"region\"\n                aria-label={label}\n                tabIndex={0}\n                className=\"size-full rounded-[inherit]\"\n            >\n                {children}\n            </ScrollAreaPrimitive.Viewport>\n            {(orientation === \"vertical\" || orientation === \"both\") && (\n                <ScrollBar orientation=\"vertical\" />\n            )}\n            {(orientation === \"horizontal\" || orientation === \"both\") && (\n                <ScrollBar orientation=\"horizontal\" />\n            )}\n            {orientation === \"both\" && <ScrollAreaPrimitive.Corner />}\n        </ScrollAreaPrimitive.Root>\n    );\n}\n\nfunction ScrollBar({\n    orientation,\n}: { orientation: \"vertical\" | \"horizontal\" }) {\n    return (\n        <ScrollAreaPrimitive.Scrollbar\n            orientation={orientation}\n            className={cn(\n                \"flex touch-none select-none p-px transition-colors\",\n                orientation === \"vertical\"\n                    ? \"h-full w-2.5\"\n                    : \"h-2.5 flex-col\",\n            )}\n        >\n            <ScrollAreaPrimitive.Thumb\n                className=\"relative flex-1 rounded-full bg-muted\"\n            />\n        </ScrollAreaPrimitive.Scrollbar>\n    );\n}\n\nexport { ScrollArea };\nexport type { ScrollAreaProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/scroll-area.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `493cb46505433738e0e50efee1422e35a90a6a7c`:\n<https://github.com/pydemia/ui/blob/493cb46505433738e0e50efee1422e35a90a6a7c/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`5befe8fd36cf56b5d0dacb83af844351f35c7bd108962ff026c7e7eb60b73d02`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

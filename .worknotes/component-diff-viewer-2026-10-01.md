@@ -48,4 +48,9 @@
   끊겼습니다. 최소 표 너비를 준 뒤 light·dark 화면을 이미지로 다시
   확인했습니다. 추가·삭제 줄에 색 외에 보이는 `+`·`−`를 넣고
   최종 통합 보기의 표식도 Chromium에서 확인했습니다.
-- registry release 검사·소비자·공개 배포는 아직 실행하지 않았습니다.
+- `registry:snapshot`에서 106개 item·104개 export/catalog 대응과
+  기존 20개 snapshot을 확인한 뒤 21번째 ID
+  `sha256-f2fbab67bddc01492523191362957921e38db65775b20a3ae9e37949dbf20f89`를
+  생성했습니다. 다시 빌드한 뒤 `registry:release-check`가 21개
+  snapshot과 현재 빌드의 해당 ID 일치를 확인했습니다. 소비자·공개
+  배포는 아직 실행하지 않았습니다.
