@@ -5,8 +5,10 @@
 시작 기준 105개 component·107개 item·24개 snapshot, goal 약 80%,
 라이브러리 과제 완료 5·부분 4·미검증 1입니다. 초기 typecheck·
 UI 테스트 118/118과 전체 build가 통과했습니다. 390px Chromium에서
-경계·선택·제출·focus·light/dark를 확인했습니다. registry snapshot·
-공개 소비자 검증이 남았습니다. [작업 기록](year-picker-2026-10-01.md)을
+경계·선택·제출·focus·light/dark를 확인했습니다. 25번째 snapshot
+`sha256-9359658dc14d7054deddfe546fefde00b784bb50c163c93de8a883ab1610d9a8`과
+`registry:release-check`가 통과했습니다. 공개 소비자 검증이
+남았습니다. [작업 기록](year-picker-2026-10-01.md)을
 참고하세요.
 
 2026-10-01 선택 카드 표시 형태 공개 검증 완료: PR #34가 병합됐고

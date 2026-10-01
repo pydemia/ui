@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 YearPicker 로컬 검증: **약 80% → 약 80%**입니다.
+106개 component·108개 registry item·25개 snapshot입니다.
+연도 단위의 min/max·선택·제출·focus를 390px Chromium에서 확인했고
+typecheck·UI 테스트 118/118·build·`registry:release-check`가
+통과했습니다. 공개 설치와 배포는 아직 검증하지 않아 goal 추정치를
+유지합니다. [작업 기록](year-picker-2026-10-01.md)에 남겼습니다.
+
 2026-10-01 YearPicker 작업 시작: 관리용 추정 **약 80%**,
 105개 component·107개 registry item·24개 snapshot입니다. 연도
 단위 보고·예산의 값을 별도로 선택·제출할 수 있도록 합니다. 완료 후
