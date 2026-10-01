@@ -7,8 +7,12 @@ loading·error 상태를 추가했습니다. 로컬 typecheck·테스트 101/101
 build·registry release 검사(19개 snapshot)·Chromium과 별도 소비자
 설치·typecheck·build·390px Chromium이 통과했습니다. 새 ID는
 `sha256-89e9ec939dea43db48bdacdd4c3555cc2072a5131be074c65eae592ec14ef7c1`
-입니다. 공개 병합·배포·snapshot 소비자 검사는 아직 진행 중입니다.
-실제 screen reader·touch·Safari·RTL은 미검증입니다.
+입니다. PR #24 병합 commit `7f0af30`의 Verify UI·Pages CI가 통과했고
+Vercel production `dpl_3gHxcLVuf8hqBWgHMH1NGk3KmPE9`가 READY입니다.
+공개 390px preview의 값 보존·제출·오류, 현재·snapshot JSON/manifest
+원본 일치, 새 소비자의 공개 snapshot 설치 5개 파일·원본 일치·typecheck·
+build·390px Chromium도 확인했습니다. 실제 screen reader·touch·Safari·
+RTL과 과거 배포 rollback 뒤 URL 보존은 미검증입니다.
 [작업 기록](combobox-remote-results-2026-10-01.md)을 참고하세요.
 
 2026-09-30 goal 재개·Editable 진행: goal은 완료되지 않았습니다.
