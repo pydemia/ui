@@ -204,6 +204,8 @@ export { DataList } from "./components/data-list";
 export type { DataListItem, DataListProps } from "./components/data-list";
 export { CodeBlock } from "./components/code-block";
 export type { CodeBlockProps } from "./components/code-block";
+export { DiffViewer } from "./components/diff-viewer";
+export type { DiffViewerProps, DiffView } from "./components/diff-viewer";
 export { Markdown } from "./components/markdown";
 export type { MarkdownProps } from "./components/markdown";
 export { Carousel } from "./components/carousel";

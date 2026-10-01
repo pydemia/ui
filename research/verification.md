@@ -1836,3 +1836,17 @@ snapshot ID는
 | rollback 뒤 snapshot URL | unverified | 과거 배포 rollback 시험 전 |
 
 세부 기록은 `.worknotes/component-approval-card-2026-10-01.md`에 있습니다.
+
+## 2026-10-01 DiffViewer
+
+| 항목 | 결과 | 확인 범위 |
+| --- | --- | --- |
+| TypeScript | pass | 저장소 `npm run typecheck` |
+| 패키지 테스트 | pass | 전용 6/6, 전체 최종 110/110 |
+| 로컬 390px Chromium | pass (limited) | 통합·좌우 보기, +/− 표식, 내부 ArrowRight 0→40px, 줄바꿈·dark, body 390px |
+| build | pass | 106개 registry item, 문서·프로필 예시 생성 |
+| registry release check | pass | 106개 item·104개 export/catalog, 21개 snapshot, 현재 ID 일치 |
+| 소비자·공개 배포 | unverified | 별도 소비자 설치와 릴리스 전 |
+| 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
+
+세부 기록은 `.worknotes/component-diff-viewer-2026-10-01.md`에 있습니다.

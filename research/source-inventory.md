@@ -1,5 +1,25 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-01 DiffViewer reference 확인
+
+[React Diff Viewer 공식 README](https://github.com/praneshr/react-diff-viewer/blob/5572d1c121ea095fe913a862b9e89e46a45f2599/README.md)는
+통합·좌우 비교, 줄 번호와 접힌 문맥을 설명합니다. 동일 revision
+[`5572d1c`](https://github.com/praneshr/react-diff-viewer/commit/5572d1c121ea095fe913a862b9e89e46a45f2599)의
+[component source](https://github.com/praneshr/react-diff-viewer/blob/5572d1c121ea095fe913a862b9e89e46a45f2599/src/index.tsx),
+[line computation](https://github.com/praneshr/react-diff-viewer/blob/5572d1c121ea095fe913a862b9e89e46a45f2599/src/compute-lines.ts),
+[package manifest](https://github.com/praneshr/react-diff-viewer/blob/5572d1c121ea095fe913a862b9e89e46a45f2599/package.json),
+[LICENSE](https://github.com/praneshr/react-diff-viewer/blob/5572d1c121ea095fe913a862b9e89e46a45f2599/LICENSE)를
+확인했습니다. MIT이며 upstream은 `diff`, `classnames`, Emotion,
+`memoize-one`, `prop-types`와 React에 의존합니다.
+
+`pyd-diff-viewer`는 비교 용례만 참고해 새 줄 비교와 native table을
+작성했습니다. upstream source를 복사하지 않았고 새 runtime dependency
+없이 React·기존 `pyd-utils`·공통 token을 사용합니다.
+[W3C WAI table 지침](https://www.w3.org/WAI/tutorials/tables/)의
+열 제목과 [W3C Design System의 스크롤 가능한 표](https://design-system.w3.org/styles/tables.html)를
+접근성 참고 자료로 확인했습니다. 실제 screen reader 발표는
+미검증입니다.
+
 ## 2026-10-01 ApprovalCard reference 확인
 
 [AI Elements Confirmation 공식 문서](https://elements.ai-sdk.dev/components/confirmation)
