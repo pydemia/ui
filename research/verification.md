@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-01 YearPicker 로컬 검증
+
+`YearPicker`의 `YYYY` 단일 값·10년 탐색·min/max를 로컬에서
+검사했습니다. `npm run typecheck`, UI 테스트 118/118,
+`npm run build`, `npm run registry:release-check`가 통과했습니다.
+106개 export/catalog와 108개 registry item, 현재 빌드와 25번째
+snapshot의 ID가 일치합니다.
+
+390px Chromium에서 경계 연도·이동 버튼 비활성화, Enter·Space
+선택, native FormData와 제출값, 빈 값 오류, Escape 후 trigger focus
+복귀, light/dark와 가로 overflow 없음을 확인했습니다. page error는
+없었습니다. 공개 snapshot 설치와 실제 screen reader·touch·Safari·
+RTL은 아직 실행하지 않았습니다.
+
 ## 2026-10-01 선택 카드 표시 형태 공개 검증
 
 `Checkbox`·`RadioGroupItem`의 `variant="card"`를 공개했습니다.

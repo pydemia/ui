@@ -42,7 +42,7 @@ import {
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, JsonViewer, Kanban,
     Label, LogConsole, Markdown, Message, MessageContent, MetricCard,
-    MonthPicker, MultiSelect,
+    MonthPicker, MultiSelect, YearPicker,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
     NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
     NativeSelect, NumberInput,
@@ -1541,6 +1541,46 @@ function MonthPickerPreview() {
                 {submitted === null ? "아직 제출하지 않았습니다." :
                     submitted ? `제출한 월: ${submitted}` :
                         "선택한 월이 없습니다."}
+            </p>
+        </form>
+    );
+}
+
+function YearPickerPreview() {
+    const [year, setYear] = useState<string | null>(null);
+    const [submitted, setSubmitted] = useState<string | null>(null);
+    const [tried, setTried] = useState(false);
+
+    return (
+        <form className="preview-stack" onSubmit={(event) => {
+            event.preventDefault();
+            setTried(true);
+            setSubmitted(String(new FormData(event.currentTarget)
+                .get("reportYear") ?? ""));
+        }}>
+            <Field label="보고 연도" required
+                description="2022년부터 2033년까지 선택할 수 있습니다."
+                error={tried && !year ? "연도를 선택하세요." : undefined}>
+                {(control) => <YearPicker {...control} name="reportYear"
+                    value={year} min="2022" max="2033"
+                    onValueChange={(next) => {
+                        setYear(next);
+                        setSubmitted(null);
+                        setTried(false);
+                    }} required />}
+            </Field>
+            <div className="flex gap-2">
+                <Button type="submit">폼 값 확인</Button>
+                <Button type="button" variant="outline" onClick={() => {
+                    setYear(null);
+                    setSubmitted(null);
+                    setTried(false);
+                }}>초기화</Button>
+            </div>
+            <p role="status">
+                {submitted === null ? "아직 제출하지 않았습니다." :
+                    submitted ? `제출한 연도: ${submitted}` :
+                        "선택한 연도가 없습니다."}
             </p>
         </form>
     );
@@ -4674,6 +4714,30 @@ function ReportMonth() {
   </form>;
 }`,
         preview: () => <MonthPickerPreview />,
+    },
+    {
+        id: "year-picker", name: "YearPicker", category: "Date & time",
+        installItems: ["year-picker", "field", "button"],
+        description: "연간 보고·예산의 YYYY 값을 10년 단위로 탐색합니다. min/max와 빈 값, form 제출을 구분합니다.",
+        code: `import { useState } from "react";
+import { Button, Field, YearPicker } from "@pydemia/ui";
+
+function ReportYear() {
+  const [year, setYear] = useState<string | null>(null);
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    if (!year) return;
+    console.log(new FormData(event.currentTarget).get("reportYear"));
+  }}>
+    <Field label="보고 연도" required>
+      {(control) => <YearPicker {...control} name="reportYear"
+        value={year} onValueChange={setYear}
+        min="2022" max="2033" required />}
+    </Field>
+    <Button type="submit">연도 적용</Button>
+  </form>;
+}`,
+        preview: () => <YearPickerPreview />,
     },
     {
         id: "date-range-picker", name: "DateRangePicker",

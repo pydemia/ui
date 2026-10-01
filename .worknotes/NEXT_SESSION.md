@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-10-01 YearPicker 작업 중: 연간 보고·예산을 위한 `YYYY` 단일
+선택, 10년 탐색, min/max와 form 값을 기존 Popover로 구현합니다.
+시작 기준 105개 component·107개 item·24개 snapshot, goal 약 80%,
+라이브러리 과제 완료 5·부분 4·미검증 1입니다. 초기 typecheck·
+UI 테스트 118/118과 전체 build가 통과했습니다. 390px Chromium에서
+경계·선택·제출·focus·light/dark를 확인했습니다. 25번째 snapshot
+`sha256-9359658dc14d7054deddfe546fefde00b784bb50c163c93de8a883ab1610d9a8`과
+`registry:release-check`가 통과했습니다. 공개 소비자 검증이
+남았습니다. [작업 기록](year-picker-2026-10-01.md)을
+참고하세요.
+
 2026-10-01 선택 카드 표시 형태 공개 검증 완료: PR #34가 병합됐고
 병합 CI·Pages·Vercel production이 통과했습니다. 공개 24번째
 snapshot을 별도 Vite 소비자에 설치해 6개 파일 원본 일치·typecheck·
