@@ -50,3 +50,13 @@ registry item 대응, import의 의존 선언, provenance·고지,
 완료 수는 신규 component 공급률이나 goal 완료율로 사용하지
 않습니다. 이번 변경으로 공급 수량이나 goal 진척도를 올리지
 않습니다.
+
+## 공개 확인
+
+PR #47을 `main`의 `6a9056d`에 병합했습니다. PR의 Verify UI
+run 36906701048과 병합 commit의 Verify UI run 36906948027은
+typecheck·UI 테스트·build·`registry:release-check`를 통과했습니다.
+병합 commit의 Pages run 36906945869과 Vercel 상태도 성공입니다.
+이번 변경에는 제품 코드와 사이트 화면 변경이 없어 별도 브라우저
+동작 검사는 적용하지 않았습니다. 110개 component·112개 item·
+29개 snapshot과 goal 추정 약 85%는 그대로입니다.
