@@ -502,6 +502,11 @@
       "files": [{ "path": "packages/ui/src/components/app-shell.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-master-detail", "type": "registry:ui", "title": "Master Detail",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/master-detail.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-scroll-area", "type": "registry:ui", "title": "Scroll Area",
       "dependencies": ["@radix-ui/react-scroll-area@1.2.18"],
       "registryDependencies": ["./pyd-utils.json"],

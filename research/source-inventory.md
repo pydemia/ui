@@ -1,5 +1,30 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 MasterDetail source 확인
+
+`MasterDetail`은 handoff의 Workflow & Productivity 후보이며 요청·
+파일·알림 목록에서 선택한 항목의 상세를 보이는 반복 용례입니다.
+기존 `AppShell`은 영역만 배치하고 `Board`는 게시글 메타데이터를
+고정하므로, 목록 선택·상세 전환·모바일 focus 복귀는 별도 구현이
+필요합니다. 외부 component 소스는 복사하지 않았습니다.
+
+[W3C WAI Reflow 지침](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html)의
+좁은 폭 단일 열 배치와
+[WHATWG button 명세](https://html.spec.whatwg.org/dev/form-elements.html#the-button-element)의
+native 활성화 동작을 참고했습니다. 플랫폼 명세를 소스로 편입하지
+않았습니다. React와 기존 `pyd-button`·`pyd-utils`만 사용하며 새 npm
+의존성은 없습니다. `pyd-button`의 [공식 문서](https://ui.shadcn.com/docs/components/radix/button),
+[고정 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx),
+[같은 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)는
+기존 조사·고지를 재사용합니다. 이 item의 registry 의존성은
+`pyd-button`과 `pyd-utils`이며 Button의 npm 의존성은 기존
+`class-variance-authority@0.7.1`입니다.
+
+목록은 native button과 현재 항목 표시를, 상세는 이름 있는 영역을
+사용합니다. 좁은 화면에서 선택 후 상세로 focus를 이동하고 돌아갈
+때 선택 버튼으로 복원합니다. 실제 screen reader·touch·Safari·RTL은
+미검증입니다.
+
 ## 2026-10-02 ImageCropper source 확인
 
 `ImageCropper`는 `.worknotes/shadcn-component-library-handoff.md`의

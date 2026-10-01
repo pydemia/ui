@@ -1,5 +1,29 @@
 # Prototype 설계 계약
 
+## 2026-10-02 MasterDetail
+
+`items`의 각 `id`와 `title`은 비어 있지 않고 ID는 고유해야 합니다.
+`description`·`meta`는 선택 사항이며 `disabled` 항목은 선택할 수
+없습니다. 목록은 전달받은 순서를 유지하고 자동 정렬·자동 선택을
+하지 않습니다. 호출자는 `renderDetail(item)`으로 상세를 채우고
+빈 목록·선택 전 표시는 바꿀 수 있습니다. 서버 요청·로딩·저장은
+호출자가 관리합니다.
+
+`selectedId`가 공급되면 호출자가 선택값을 소유하고, 없으면
+`defaultSelectedId`에서 시작해 내부에서 관리합니다. 명시적인
+`null`은 선택 없음이며, 현재 목록에 없는 ID도 다른 항목으로
+대체하지 않습니다. 선택 버튼을 누르면 값이 달라졌을 때만
+`onSelectedIdChange(id)`를 호출합니다. controlled 값이 아직
+변경되지 않았다면 좁은 화면에서도 이전 상세를 새 선택으로
+보여주지 않습니다.
+
+42rem 이상인 component container에는 목록과 상세를 함께 표시합니다.
+그보다 좁으면 목록에서 시작하고 항목 선택 시 상세만 표시합니다.
+상세 영역으로 focus를 옮기며, 돌아가기는 선택 버튼으로 focus를
+복원합니다. 선택 버튼은 native keyboard 동작과 `aria-current`를
+사용합니다. 공통 surface·border·focus token을 사용하며 실제 touch·
+screen reader·Safari·RTL 검사는 남았습니다.
+
 ## 2026-10-02 ImageCropper
 
 `file`은 호출자가 선택한 로컬 `File | null`이며 PNG·JPEG·WebP만

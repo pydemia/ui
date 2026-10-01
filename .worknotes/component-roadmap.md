@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-112개 component와 114개 registry item이 있습니다. 2026-09-30에
+113개 component와 115개 registry item이 있습니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
@@ -28,6 +28,8 @@ Markdown을
 panel·flat 표시를 추가했습니다.
 `ImageCropper`는 로컬 사진의 고정 비율 편집과 PNG 결과를 위한
 별도 작업으로 편입했습니다.
+`MasterDetail`은 요청·파일 목록에서 항목 선택과 상세 면을 함께
+관리하고 좁은 화면에서 focus를 복원하는 작업으로 편입했습니다.
 PR #1을 `main`에 병합해
 production 배포와 현재·이전 snapshot의 공개 URL 설치를 확인했습니다.
 현재 92개 item의 로컬 전체 설치는 새 소비자 fixture에서 확인했습니다.
@@ -376,6 +378,9 @@ snapshot 주소 보존은 별도 품질 과제입니다. 특정 환경 지원을
   조합 골격. floating 도움말의 열림 상태·focus 복귀 조합을 문서와
   분석 화면에서 확인했습니다. 접히는 sidebar와 좁은 화면 drawer는
   별도 범위입니다.
+- [x] `MasterDetail` — 목록 선택과 상세 표시, 좁은 영역에서 목록·
+  상세 전환과 돌아갈 때 선택 항목 focus 복귀를 구현했습니다. 외부
+  데이터 요청과 상세 내용은 호출자가 소유합니다.
 - [ ] `List` — native 목록과 기존 component 조합으로 해결되지 않는
   반복 항목·보조 내용·action 규칙이 있는지 판정.
 - [ ] `Kbd` — native `kbd`와 token 사용 예시 이상이 필요한지 판정.

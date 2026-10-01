@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-02 MasterDetail 로컬 검증
+
+`npm run typecheck`, UI 테스트 138/138(신규 SSR 3건),
+`npm run build`가 통과했습니다. 115개 registry item과 문서 preview를
+생성했습니다. 로컬 브라우저에서 데스크톱 목록 선택 시 상세와
+현재 항목이 갱신되고, 상세 버튼의 Enter 실행이 완료 상태를
+보이는 것을 확인했습니다. 390px iframe에서 목록→상세 전환,
+돌아가기 후 선택 버튼 focus 복귀, Enter 선택과 light/dark 표시를
+확인했습니다. 실제 touch·screen reader·Safari·RTL, 개별 소비자
+CLI 설치는 미검증입니다. 표준 `pyd-button`·`pyd-utils` 의존 경로를
+재사용합니다. provenance 고지 핀·새 snapshot·PR·공개 URL은
+아직 검증하지 않았습니다.
+[작업 기록](../.worknotes/master-detail-2026-10-02.md)을 참고하세요.
+
 ## 2026-10-02 ImageCropper 공개 검증
 
 PR #52 Verify UI run 36918310698과 병합 commit `ffe9312`의

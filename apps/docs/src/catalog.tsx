@@ -48,7 +48,8 @@ import {
     MenubarContent, MenubarGroup, MenubarItem, MenubarLabel,
     MenubarMenu, MenubarRadioGroup, MenubarRadioItem,
     MenubarSeparator, MenubarSub, MenubarSubContent,
-    MenubarSubTrigger, MenubarTrigger, Message, MessageContent, MetricCard,
+    MenubarSubTrigger, MenubarTrigger, MasterDetail,
+    Message, MessageContent, MetricCard,
     MonthPicker, MultiSelect, YearPicker,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
     NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
@@ -2010,6 +2011,68 @@ function FileUploadPreview() {
                     전송 실패
                 </Button>
             </div>
+        </div>
+    );
+}
+
+const masterDetailRequests = [
+    {
+        id: "invoice-1042", title: "청구서 발행 확인",
+        description: "9월 청구서의 수신 주소를 검토합니다.",
+        meta: "재무 · 오늘",
+    },
+    {
+        id: "access-238", title: "접근 권한 요청",
+        description: "프로젝트 분석 화면의 편집 권한입니다.",
+        meta: "관리 · 어제",
+    },
+    {
+        id: "report-731", title: "주간 보고서 검토",
+        description: "새 지표의 표시 단위를 확인합니다.",
+        meta: "분석 · 2일 전",
+    },
+];
+
+function MasterDetailPreview() {
+    const [selectedId, setSelectedId] = useState<string | null>(
+        "invoice-1042",
+    );
+    const [reviewedIds, setReviewedIds] = useState<string[]>([]);
+
+    return (
+        <div className="preview-workspace">
+            <MasterDetail
+                label="검토 요청"
+                items={masterDetailRequests}
+                selectedId={selectedId}
+                onSelectedIdChange={setSelectedId}
+                className="min-h-80"
+                renderDetail={(item) => (
+                    <div className="grid gap-[var(--space-3)] text-sm">
+                        <div>
+                            <h3 className="m-0 text-base font-semibold">
+                                {item.title}
+                            </h3>
+                            <p className="mt-1 text-muted">{item.meta}</p>
+                        </div>
+                        <p className="m-0">{item.description}</p>
+                        <Button
+                            variant="outline"
+                            disabled={reviewedIds.includes(item.id)}
+                            onClick={() => setReviewedIds((current) =>
+                                [...current, item.id])}
+                        >
+                            {reviewedIds.includes(item.id)
+                                ? "검토 완료" : "검토 완료로 표시"}
+                        </Button>
+                        <p role="status" className="m-0 text-xs text-muted">
+                            {reviewedIds.includes(item.id)
+                                ? "이 요청을 검토했습니다."
+                                : "검토 대기 중입니다."}
+                        </p>
+                    </div>
+                )}
+            />
         </div>
     );
 }
@@ -5320,6 +5383,28 @@ function ScheduleForm() {
 }`,
         installItems: ["date-time-picker", "button"],
         preview: () => <DateTimePickerPreview />,
+    },
+    {
+        id: "master-detail", name: "MasterDetail", category: "Framework",
+        installItems: ["master-detail"],
+        description: "목록 선택과 상세 표시를 묶습니다. 좁은 영역에서는 목록·상세를 전환하고 돌아갈 때 선택 항목으로 focus를 복원합니다.",
+        code: `import { useState } from "react";
+import { MasterDetail } from "@pydemia/ui";
+
+const requests = [
+  { id: "invoice", title: "청구서 확인", description: "수신 주소 검토" },
+  { id: "access", title: "접근 권한", description: "편집 권한 요청" },
+];
+
+function RequestWorkspace() {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  return <MasterDetail label="검토 요청" items={requests}
+    selectedId={selectedId} onSelectedIdChange={setSelectedId}
+    renderDetail={(item) => <article>
+      <h3>{item.title}</h3><p>{item.description}</p>
+    </article>} />;
+}`,
+        preview: () => <MasterDetailPreview />,
     },
     {
         id: "app-shell", name: "AppShell", category: "Framework",
