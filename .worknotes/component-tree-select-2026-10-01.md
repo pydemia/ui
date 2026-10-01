@@ -55,3 +55,21 @@
   만들었습니다. 다시 빌드한 뒤 `registry:release-check`가 22개
   snapshot과 현재 빌드의 ID 일치를 확인했습니다. 소비자·공개
   배포는 아직 실행하지 않았습니다.
+
+## 공개 소비자에서 발견한 reset 문제
+
+- PR #30을 병합한 뒤 첫 공개 snapshot
+  `sha256-9a66acf0b0dea05be3123e7c613e2d384c5e9bf58662579357bfdfbeb980b690`을
+  새 Vite 소비자에 설치했습니다. 6개 파일은 snapshot 원본과
+  일치했고 typecheck·build, 공개 preview의 선택·제출·reset이
+  통과했습니다. 그러나 소비자에서 선택값 `ops`를 지우고 form
+  reset을 실행하자 button은 `ops`로 돌아왔지만 native select의
+  제출값은 빈 문자열로 남았습니다. 이 snapshot의 소비자 reset은
+  실패이며 수정 전 공개 상태를 완료로 취급하지 않습니다.
+- native reset은 reset 이벤트 뒤 `option.defaultSelected`를 기준으로
+  select를 복원합니다. 현재 controlled value와 별개로, 기본 선택
+  option을 `defaultValue`에 맞춰 DOM에 지정하도록 수정했습니다.
+  수정 소스를 별도 소비자 fixture에 적용해 `ops` 선택값 제거 뒤
+  reset 2회 모두 button과 native select가 `ops`로 돌아오는 것을
+  390px Chromium에서 확인했습니다. fixture의 typecheck·build도
+  통과했습니다. 새 snapshot과 공개 설치 재검사가 남았습니다.

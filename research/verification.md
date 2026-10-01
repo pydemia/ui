@@ -1868,3 +1868,7 @@ snapshot ID는
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 
 세부 기록은 `.worknotes/component-tree-select-2026-10-01.md`에 있습니다.
+첫 공개 snapshot의 별도 소비자에서 기본값을 지운 뒤 reset하면
+표시가 `ops`, 제출값은 빈 문자열로 달랐습니다. 수정 소스를 소비자
+fixture에 적용해 같은 흐름과 반복 reset을 재검증했습니다. 수정판
+snapshot의 공개 설치는 진행 중입니다.
