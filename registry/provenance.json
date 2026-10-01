@@ -258,6 +258,12 @@
       "dependencies": ["react-day-picker", "pyd-utils"], "accessibility": { "semantics": "DayPicker grid, named dates and selected state", "keyboard": "Chromium: ArrowRight, Enter selection and month navigation verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-calendar-scheduler", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "React DayPicker", "url": "https://daypicker.dev/v9/guides/custom-modifiers", "scope": "calendar event-day modifier and accessible day labels; no source copied" },
+      "dependencies": ["pyd-calendar", "pyd-button", "pyd-utils", "react-day-picker"], "accessibility": { "semantics": "named calendar and daily agenda, day labels include event counts, native event and create buttons", "keyboard": "DayPicker grid and native button behavior; browser check pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-date-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "DayPicker", "url": "https://daypicker.dev/selections/selection-modes" },

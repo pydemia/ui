@@ -1,5 +1,22 @@
 # 검증 기록
 
+## 2026-10-02 CalendarScheduler 로컬 정적 검증
+
+`npm run typecheck`, UI 테스트 141/141(신규 SSR 3건), `npm run build`가
+통과했습니다. 빌드는 116개 registry item과 문서 preview를 생성합니다.
+SSR에서는 날짜별 일정 건수의 버튼 이름, 선택 날짜의 시간순 agenda,
+빈 날짜, 잘못된 ID·날짜·시간·시간대 거부를 확인했습니다.
+
+`npm run registry:check`는 출처 metadata 변경 후 소비자 고지의
+SHA-256이 아직 이전 값이어서 실패했습니다. 소스 commit에 맞춰
+고지를 다시 고정하고 snapshot·release 검사를 실행해야 합니다.
+브라우저 제어 도구가 Windows 브라우저의 현재 URL을 확인하지 못해
+이번 턴의 UI 조작을 중단했습니다. 달력 날짜·월 탐색, 일정 선택·추가,
+390px 배치와 focus는 미검증입니다. 따라서 공개 공급 완료 판정도
+남아 있습니다. 실제 screen reader·touch·Safari·RTL, 개별 소비자
+CLI 설치와 공개 URL도 미검증입니다. 세부 내용은
+[작업 기록](../.worknotes/calendar-scheduler-2026-10-02.md)에 남겼습니다.
+
 ## 2026-10-02 MasterDetail 공개 검증
 
 PR #54의 Verify UI run 36922068750과 병합 commit `4007bb2`의
