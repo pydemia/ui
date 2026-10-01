@@ -1826,7 +1826,7 @@ snapshot ID는
 | 로컬 Chromium | pass (limited) | 이중 클릭 1회 전달, 실패·Enter 재시도·승인, Space 거절, 만료 시 버튼 제거 |
 | 390px Chromium | pass (limited) | 만료 카드 330px, body·viewport 390px |
 | build | pass | 105개 registry item과 문서·프로필 예시 생성 |
-| registry | pending | provenance 고정 commit·해시 갱신 후 재검사 필요 |
+| registry snapshot | pass | 105개 item·103개 export/catalog, 기존 19개 검증 후 20번째 생성 |
 | 소비자·공개 배포 | unverified | 격리 설치와 릴리스 전 |
 | 실제 screen reader·touch·Safari·RTL | unverified | 기기·보조기술 실행 전 |
 

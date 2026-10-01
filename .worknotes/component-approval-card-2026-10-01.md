@@ -40,3 +40,10 @@
   갱신하고 다시 검사합니다.
 - 이 브라우저 검사는 데모 callback의 로컬 상태만 확인합니다. 서버
   idempotency, 실제 도구 실행, 보조기술 발표는 확인하지 않았습니다.
+- source commit `1ee626a4597accbc3898794df3c8a05b0b8f0dc4`와
+  provenance SHA-256
+  `4b094b388af9204d56df8796c2ea95763d604cf9a0b9742da6cc98bacc2e6bcd`를
+  소비자 고지에 고정했습니다. `registry:snapshot`이 105개 item·103개
+  export/catalog·기존 19개 release를 확인하고 20번째 snapshot
+  `sha256-08426c9a767fdc4c69eba32819484ce7ef920d00de9999c3b85c2efe8772ebcc`를
+  만들었습니다.

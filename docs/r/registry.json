@@ -413,6 +413,11 @@
       "files": [{ "path": "packages/ui/src/components/tool-call.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-approval-card", "type": "registry:ui", "title": "Approval Card",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/approval-card.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-prompt-input", "type": "registry:ui", "title": "Prompt Input",
       "registryDependencies": ["./pyd-button.json", "./pyd-textarea.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/prompt-input.tsx", "type": "registry:ui" }]
