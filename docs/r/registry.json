@@ -400,6 +400,11 @@
       "files": [{ "path": "packages/ui/src/components/image.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-image-cropper", "type": "registry:ui", "title": "Image Cropper",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/image-cropper.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-dropzone", "type": "registry:ui", "title": "Dropzone",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],

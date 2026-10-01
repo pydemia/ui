@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 ImageCropper 로컬 검증: 파일 선택 뒤 고정 비율로 자르는
+원본 component를 추가해 로컬 112개 component·114개 registry item이
+됐습니다. typecheck·UI 테스트 135/135·build와 Chromium의 1:1·
+16:9 PNG export, 키보드 확대·포인터 이동, 390px light/dark를
+확인했습니다. provenance 고지 핀·31번째 snapshot과
+`registry:release-check`, PR·공개 확인은 남았습니다. 공개 기준
+111개·113개·30 snapshot, goal 추정 약 86%를 유지합니다.
+[작업 기록](image-cropper-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트 재검토: 릴리스에 적용되는 검사를
 변경 시점별로 정리하고, 기존 10개 체크박스를 당시 조사 기록으로
 명시했습니다. 표준 item별 소비자 설치와 동일 commit의 반복 실행은

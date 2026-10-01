@@ -1,5 +1,26 @@
 # 검증 기록
 
+## 2026-10-02 ImageCropper 로컬 검증
+
+`npm run typecheck`, UI 테스트 135/135(새 component 3건),
+`npm run build`가 통과했습니다. build는 114개 registry item과 문서
+preview를 생성했습니다. 로컬 Chromium에서 문서의 샘플·파일 선택,
+키보드 확대 100→300%, 포인터 끌기 후 위치 39%·47%, PNG 결과를
+확인했습니다. 1:1 결과는 256×256px, 16:9 결과는 256×144px이며
+둘 다 `image/png`입니다. 비율 전환·결과 갱신, 390px light/dark
+표시와 가로 넘침 없음(390px), page error 0건을 확인했습니다.
+빨강·초록·파랑·노랑 사분면의 120×120px PNG를 선택해 300% 확대,
+위치 0%·0%의 결과 중앙 픽셀 `[255,0,0,255]`와
+100%·100%의 `[255,255,0,255]`를 확인했습니다. MIME 정보가 빈
+`.PNG` 파일의 로딩 경계는 SSR 회귀 검사에 포함했습니다.
+
+현재 source에 대한 provenance 고지 핀과 31번째 snapshot,
+`registry:release-check`는 아직 갱신·실행하지 않았습니다. PR·공개
+사이트, 개별 소비자 CLI 설치, 실제 touch·screen reader·Safari·
+RTL, rollback 뒤 snapshot URL 보존은 미검증입니다.
+[작업 기록](../.worknotes/image-cropper-2026-10-02.md)에 범위를
+남겼습니다.
+
 ## 2026-10-02 CodeEditorShell 로컬 검증
 
 `npm run typecheck`, UI 테스트 132/132(새 component 4/4),

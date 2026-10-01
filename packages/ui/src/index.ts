@@ -256,6 +256,8 @@ export type { ColorInputProps } from "./components/color-input";
 export { MetricCard } from "./components/metric-card";
 export { Image } from "./components/image";
 export type { ImageProps } from "./components/image";
+export { ImageCropper } from "./components/image-cropper";
+export type { ImageCropperProps } from "./components/image-cropper";
 export { Dropzone } from "./components/dropzone";
 export { FileUpload } from "./components/file-upload";
 export type {

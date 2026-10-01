@@ -1,5 +1,38 @@
 # Prototype 설계 계약
 
+## 2026-10-02 ImageCropper
+
+`file`은 호출자가 선택한 로컬 `File | null`이며 PNG·JPEG·WebP만
+디코딩합니다. MIME이 비어 있으면 파일 확장자로 형식을 판정한 뒤
+브라우저 디코딩 성공을 확인합니다. null은 선택 전이고 지원하지 않는
+형식과 읽기 실패는 서로 다른 표시 상태입니다. 원격 URL 입력은
+제공하지 않아 Canvas의
+cross-origin export 실패 경로를 만들지 않습니다. object URL은
+파일 교체·unmount 때 해제합니다. 파일 선택과 업로드는 호출자가
+관리하고, `onCrop`에는 완성된 PNG `Blob`만 전달합니다.
+
+`aspectRatio`는 양의 유한수이며 기본 1입니다. 브라우저가 디코딩한
+원본의 중앙에서 요청 비율로 들어가는 최대 사각형을 잡고 확대
+1–3배에 따라 원본 사각형의 크기를 줄입니다. 가로·세로 위치는
+남은 원본 길이의 0–100%로 정의하며 가장자리 밖으로 나가지
+않습니다. 포인터로 이미지를 오른쪽·아래로 끌면 crop 영역은
+원본에서 왼쪽·위쪽으로 이동합니다. native range의 키보드·
+단일 pointer 조작도 같은 상태를 바꿉니다. 초기화는 확대 1배,
+위치 50%로 돌아갑니다.
+
+`outputWidth`는 기본 512px이고 1–4096 정수여야 합니다.
+`round(outputWidth / aspectRatio)`로 계산한 높이도 1–4096px이어야
+합니다. preview와 export는 같은 source rectangle을 `drawImage`에
+전달합니다. `toBlob("image/png")` 실패와 canvas 오류는 보이는
+`role="alert"`로 알리고 성공했을 때만 callback을 호출합니다.
+파일 변경 중 완료된 이전 비동기 export는 전달하지 않습니다.
+
+필수 `label`은 영역 제목, 필수 `alt`는 이름 있는 canvas preview에
+사용합니다. 세 native range는 보이는 label과 현재 백분율을 가지며
+파일 준비 전 또는 `disabled` 상태에는 조작되지 않습니다.
+결과 이미지는 호출자가 보관·미리보기·제출합니다. 실제 touch·
+screen reader·Safari·RTL 검사는 남았습니다.
+
 ## 2026-10-02 Card·Alert 표시 규칙
 
 `Card.variant`는 `default`·`subtle`·`elevated` 표면을,
