@@ -258,6 +258,11 @@
       "dependencies": ["pyd-popover", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "labeled trigger, named month button group, selected state and hidden form value", "keyboard": "Chromium: Tab and Enter selection, Escape focus return verified; Space uses native button behavior", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-year-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-popover", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "named trigger, decade button group, selected state and hidden form value", "keyboard": "Chromium: Enter and Space selection, Escape close and trigger focus return verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-date-range-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "DayPicker", "url": "https://daypicker.dev/v9/selections/range-mode" },

@@ -1,5 +1,11 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 YearPicker 작업 시작: 관리용 추정 **약 80%**,
+105개 component·107개 registry item·24개 snapshot입니다. 연도
+단위 보고·예산의 값을 별도로 선택·제출할 수 있도록 합니다. 완료 후
+검증 범위와 진척도는 [작업 기록](year-picker-2026-10-01.md)에
+남깁니다.
+
 2026-10-01 선택 카드 표시 형태 공개 검증 후: **약 80% → 약 80%**입니다.
 105개 component·107개 registry item·24개 snapshot입니다. PR #34의
 병합 CI·Pages와 Vercel production, 공개 preview, 별도 소비자의

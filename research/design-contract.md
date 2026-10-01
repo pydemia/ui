@@ -925,3 +925,25 @@ RadioGroup은 단일 값과 방향키 이동을 Radix가 소유하고, 그룹 �
 소유합니다. 카드 안에 다른 버튼·링크를 중첩하지 않습니다. disabled는
 선택과 제출에서 제외됩니다. 좁은 화면에서도 카드는 한 열로 쌓이고
 색 외에 indicator와 텍스트로 상태를 구분합니다.
+
+## 2026-10-01 YearPicker
+
+`YearPicker`는 연간 보고·예산의 연도 하나를 `YYYY` 문자열로
+선택합니다. `value: string | null`은 호출자가 소유하고 빈 값은
+`null`입니다. `0001`부터 `9999`까지 허용하며 `min`·`max`도 같은
+형식입니다. 역전된 범위와 범위 밖 값은 오류로 알립니다. 이름을
+주면 hidden input 하나에 선택값 또는 빈 문자열을 넣습니다.
+
+Popover는 선택 연도가 속한 10년 구간을 열고 이전·다음 10년으로
+이동합니다. 범위 밖 연도와 해당 범위에 선택 가능한 연도가 없는
+이동 버튼은 비활성화합니다. 연도는 native 버튼이며 선택 상태를
+`aria-pressed`로 표시합니다. 필수가 아니면 선택 연도를 다시 눌러
+해제할 수 있고, `required`면 유지합니다. `required`는 선택 정책이며
+hidden input의 native 필수값 검사를 대신하지 않습니다. Field나
+소비자 form이 제출 시 빈 값을 검사합니다.
+
+Popover의 Escape·focus 복귀는 기존 Radix 기반 구현을 사용합니다.
+연도 그룹은 Tab으로 이동하고 Enter·Space로 선택합니다. 방향키로
+연도를 바꾸는 별도 grid 규칙은 제공하지 않습니다. 표시와 focus
+스타일은 공통 token을 사용하며 실제 screen reader·touch·Safari·
+RTL 동작은 별도 검증 대상입니다.

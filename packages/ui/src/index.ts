@@ -227,6 +227,8 @@ export { DatePicker } from "./components/date-picker";
 export type { DatePickerProps } from "./components/date-picker";
 export { MonthPicker } from "./components/month-picker";
 export type { MonthPickerProps } from "./components/month-picker";
+export { YearPicker } from "./components/year-picker";
+export type { YearPickerProps } from "./components/year-picker";
 export { DateRangePicker } from "./components/date-range-picker";
 export type {
     DateRangePickerProps, DateRangeValue,

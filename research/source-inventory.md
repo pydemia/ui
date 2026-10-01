@@ -1262,3 +1262,22 @@ Radix [Checkbox](https://www.radix-ui.com/primitives/docs/components/checkbox)·
 package manifest에서 확인했습니다. 두 패키지의 LICENSE 파일과
 license metadata는 MIT이며 기존 lockfile의 전이 의존성 검토 범위를
 사용합니다. 이번 변경으로 전이 의존성은 늘지 않았습니다.
+
+## 2026-10-01 YearPicker
+
+`YearPicker`의 10년 탐색과 `YYYY` 값 처리는 pydemia/ui에서
+작성했습니다. `MonthPicker`의 controlled form 값과 기존 Popover
+조합을 참고했으며 외부 YearPicker 소스를 복사하지 않았습니다.
+별도 npm runtime 의존성은 없습니다.
+
+사용한 Popover의 [shadcn/ui 공식 문서](https://ui.shadcn.com/docs/components/radix/popover),
+고정 revision `98a1fe67b439324ddc857f47fbdce056600a4329`의
+[Popover 소스](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/popover.tsx)와
+[MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+직접 확인했습니다. [Radix Popover 문서](https://www.radix-ui.com/primitives/docs/components/popover)의
+열기·닫기·focus 동작도 확인했습니다. 설치된
+`@radix-ui/react-popover@1.1.23`의 manifest와 LICENSE는 MIT이고
+직접 의존성은 15개입니다. `lucide-react@0.468.0`의 manifest는
+ISC입니다. 두 package 모두 기존 의존성이며 lockfile을 변경하지
+않습니다. Popover의 수정 소스·MIT 고지는 기존 registry item이
+전달합니다.

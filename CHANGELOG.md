@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-01 — YearPicker
+
+- 연간 보고·예산에서 `YYYY` 값을 고르는 `YearPicker`를 추가했습니다.
+  10년 단위 탐색, 연도별 min/max, controlled 값과 form 제출을
+  지원합니다.
+- 문서 preview·사용 코드와 registry item을 추가했습니다. 기존
+  Popover를 사용하며 새 runtime 의존성은 없습니다.
+
 ## 2026-10-01 — 선택 카드 표시 형태
 
 - `Checkbox`와 `RadioGroupItem`에 `variant="card"`를 추가했습니다.

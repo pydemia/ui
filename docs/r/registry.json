@@ -352,6 +352,14 @@
       ]
     },
     {
+      "name": "pyd-year-picker", "type": "registry:ui", "title": "Year Picker",
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-popover.json", "./pyd-utils.json"],
+      "files": [
+        { "path": "packages/ui/src/components/year-picker.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
       "name": "pyd-date-range-picker", "type": "registry:ui", "title": "Date Range Picker",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-calendar.json", "./pyd-popover.json", "./pyd-utils.json"],
