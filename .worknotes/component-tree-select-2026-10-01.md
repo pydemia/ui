@@ -73,3 +73,8 @@
   reset 2회 모두 button과 native select가 `ops`로 돌아오는 것을
   390px Chromium에서 확인했습니다. fixture의 typecheck·build도
   통과했습니다. 새 snapshot과 공개 설치 재검사가 남았습니다.
+- 수정 소스의 저장소 typecheck·전체 패키지 테스트 113/113과 build가
+  통과했습니다. 기존 22개 snapshot을 검증한 뒤 수정판의 23번째 ID
+  `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`를
+  생성했습니다. 다시 빌드한 뒤 `registry:release-check`가 23개
+  snapshot과 현재 ID 일치를 확인했습니다. 공개 설치는 재검사 전입니다.

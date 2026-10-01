@@ -1871,4 +1871,7 @@ snapshot ID는
 첫 공개 snapshot의 별도 소비자에서 기본값을 지운 뒤 reset하면
 표시가 `ops`, 제출값은 빈 문자열로 달랐습니다. 수정 소스를 소비자
 fixture에 적용해 같은 흐름과 반복 reset을 재검증했습니다. 수정판
-snapshot의 공개 설치는 진행 중입니다.
+snapshot `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f`를
+로컬에서 생성했고 공개 설치는 진행 중입니다.
+수정판 `registry:release-check`는 107개 item·105개 export/catalog와
+23개 snapshot, 현재 ID 일치를 확인했습니다.
