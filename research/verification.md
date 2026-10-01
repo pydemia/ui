@@ -1,4 +1,30 @@
-# 첫 milestone 검증 기록
+# 검증 기록
+
+## 2026-10-01 선택 카드 표시 형태 공개 검증
+
+`Checkbox`·`RadioGroupItem`의 `variant="card"`를 공개했습니다.
+`npm run typecheck`, UI 테스트 116/116, `npm run build`,
+`npm run registry:release-check`가 통과했습니다. 107개 registry item,
+105개 export/catalog, 24개 불변 snapshot이 일치합니다. PR #34와
+병합 commit의 Verify UI, Pages가 통과했고 Vercel production은
+READY입니다.
+
+공개 snapshot
+`sha256-1889f7c9f938bea5019bba5e20d480efc8a17244036c881451a616ceed14b68d`의
+item을 새 Vite 소비자에 `shadcn@4.0.0 add`로 설치했습니다. 설치된
+6개 파일은 공개 JSON과 일치하며 소비자 typecheck·build가
+통과했습니다. 390px Chromium에서 카드 클릭·Space에 따라
+native FormData와 제출값이 바뀌고 disabled 옵션은 선택되지
+않았습니다. 가로 overflow와 page error는 없었습니다. 공개
+Checkbox·RadioGroup preview와 Usage 코드도 확인했습니다.
+
+방향키 자동 선택은 자동화 입력에서 focus 이동만 관찰되어
+미검증입니다. 실제 screen reader·touch·Safari·RTL과 배포
+rollback은 실행하지 않았습니다. 상세 절차와 소비자 경로는
+[작업 기록](../.worknotes/selection-card-variants-2026-10-01.md)에
+남겼습니다.
+
+## 첫 milestone 검증
 
 검사 시점: 2026-09-28 UTC. 테스트 데이터는 데모에서 만든 합성 fixture입니다.
 실제 제품 backend나 영구 저장을 사용하지 않습니다.

@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-01 선택 카드 표시 형태 공개 검증 완료: PR #34가 병합됐고
+병합 CI·Pages·Vercel production이 통과했습니다. 공개 24번째
+snapshot을 별도 Vite 소비자에 설치해 6개 파일 원본 일치·typecheck·
+build와 390px Chromium의 클릭·Space·제출을 확인했습니다. 공개
+preview·Usage도 표시됩니다. 카드 방향키 자동 선택, 실제 screen
+reader·touch·Safari·RTL과 rollback은 미검증입니다. 현재 105개
+component·107개 registry item·24개 snapshot, goal 약 80%,
+라이브러리 과제 완료 5·부분 4·미검증 1입니다.
+[작업 기록](selection-card-variants-2026-10-01.md)을 참고하세요.
+
 2026-10-01 선택 카드 표시 형태 작업 중: `Checkbox`·`RadioGroupItem`의
 `variant="card"`를 기존 item에 추가합니다. 별도 component 수는
 늘리지 않습니다. 시작 기준은 105개 component·107개 item·23개

@@ -36,3 +36,31 @@ snapshot ID는
 재빌드한 후 `registry:release-check`가 현재 빌드와 ID 일치를
 확인했습니다. 공개 소비자 설치는 배포 뒤 확인합니다. 실제 screen
 reader·touch·Safari·RTL은 아직 검사하지 않았습니다.
+
+## 공개 검증
+
+- PR #34의 Verify UI와 병합 commit
+  `27d75a5f919d8fe6f86f997bb64f528b0fde6192`의 Verify UI·Pages가
+  통과했습니다. Vercel production
+  `dpl_HeyP77YFYePqTZanUdF4EmF2YvXm`는 READY입니다.
+- 공개 24번째 snapshot의 manifest, checkbox, radio-group, tokens
+  JSON은 HTTP 200으로 응답했습니다. `shadcn@4.0.0 add`로 이
+  item들을 별도 Vite 소비자에 설치했습니다. checkbox·radio-group·
+  utils·tokens·MIT 고지의 6개 설치 파일은 공개 JSON 원본과
+  줄바꿈 정규화 뒤 일치합니다. 소비자 typecheck·build가 통과했습니다.
+- 소비자 390px Chromium에서 카드 클릭으로 checkbox를 해제하고
+  radio를 Workspace로 고른 뒤 FormData와 제출 상태가
+  `none:workspace`가 됐습니다. Space로 되돌린 뒤에는
+  `daily:email`이 됐습니다. disabled 옵션은 선택되지 않았고
+  가로 overflow와 page error는 없었습니다. 이름·설명 연결도 DOM에서
+  확인했습니다.
+- 공개 문서의 Checkbox·RadioGroup 페이지에서 카드 preview와 Usage
+  코드를 확인했고 page error는 없었습니다.
+
+소비자 fixture:
+`C:\Users\pydemia\AppData\Local\Temp\pydemia-selection-card-public-consumer-20261001`.
+완료 기준 goal 관리용 추정은 **약 80% → 약 80%**입니다.
+105개 component·107개 registry item·24개 snapshot이며 라이브러리
+과제는 완료 5·부분 4·미검증 1입니다. 카드 방향키 자동 선택은
+자동화 도구에서 focus만 이동해 미검증입니다. 실제 screen reader·
+touch·Safari·RTL, 과거 배포 rollback도 실행하지 않았습니다.

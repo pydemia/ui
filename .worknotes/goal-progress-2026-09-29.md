@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-10-01 선택 카드 표시 형태 공개 검증 후: **약 80% → 약 80%**입니다.
+105개 component·107개 registry item·24개 snapshot입니다. PR #34의
+병합 CI·Pages와 Vercel production, 공개 preview, 별도 소비자의
+snapshot 설치·파일 일치·typecheck·build·390px Chromium 선택·제출을
+확인했습니다. component 수를 늘리지 않고 두 기존 선택기에 카드형을
+추가했습니다. 방향키 자동 선택과 실제 보조기술·touch·Safari·RTL,
+rollback은 미검증입니다. 라이브러리 과제 완료 5·부분 4·미검증 1은
+그대로입니다. [작업 기록](selection-card-variants-2026-10-01.md)에
+증거와 한계를 적었습니다.
+
 2026-10-01 선택 카드 표시 형태 시작: 관리용 추정 **약 80%**,
 105개 component·107개 registry item·23개 snapshot입니다.
 CheckboxCard·RadioCard를 별도 이름으로 세지 않고 기존 선택기의

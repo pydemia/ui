@@ -39,8 +39,8 @@ snapshot에서 발견한 native reset 오류는 수정판에서 해결했습니�
 | --- | --- |
 | 문서·예제만 변경 | 링크·사용 코드·preview의 변경 부분과 문서 build |
 | 기존 component의 모양·token 변경 | typecheck·build·registry 검사와 해당 상태의 좁은 화면·light/dark 표시 |
-| 값·focus·keyboard·form 동작 변경 | 위 검사와 영향받은 흐름의 회귀 테스트·브라우저 동작 |
-| 새 공개 API·registry item·의존성 변경 | export·provenance·사용 코드·공개 snapshot을 대조하고 별도 소비자에서 설치·typecheck·build |
+| 값·focus·keyboard·form 동작 변경 | typecheck·build·registry 검사, 영향받은 흐름의 회귀 테스트·브라우저 동작 |
+| 새 공개 API·registry item·의존성 변경 | typecheck·build·registry 검사, export·provenance·사용 코드·공개 snapshot 대조와 별도 소비자 설치·typecheck·build |
 
 새 component는 독립된 사용처와 동작 규칙을 먼저 확인합니다.
 upstream을 참고하면 공식 문서, 같은 revision의 소스·LICENSE·
