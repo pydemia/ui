@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 `BlockEditor` 공개 확인: PR #98을 `d7aba59`로 병합했고
+Verify UI·Pages·Vercel production이 성공했습니다. 공개 preview·
+Usage와 현재 item·53번째 snapshot URL의 byte 일치, 대표 소비자의
+공개 snapshot CLI 설치·typecheck·build를 확인했습니다. 공개 수량은
+128개 component·130개 item·53개 snapshot이며 goal 관리용 추정은
+약 97%입니다. 실제 screen reader·touch·Safari·RTL은 미검증입니다.
+[작업 기록](block-editor-2026-10-02.md)을 참고하세요.
+
 2026-10-02 `BlockEditor` 로컬 후보를 구현했습니다. 일곱 블록 형식의
 편집·이동·JSON 제출과 `BlockDocument`의 의미 구조 렌더링입니다.
 typecheck·UI 테스트 196/196·build, 로컬 Chromium과 격리 소비자

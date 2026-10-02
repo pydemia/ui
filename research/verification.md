@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-02 BlockEditor — 공개
+
+PR #98의 Verify UI run `37009912447`, 병합 commit `d7aba59`의
+Verify UI run `37010268815`과 Pages run `37010267603`이
+성공했습니다. Vercel production 배포도 완료됐습니다. 공개
+preview·Usage가 표시되고 console error는 0건입니다. 현재
+`pyd-block-editor` item과 53번째 snapshot manifest·item URL은
+HTTP 200이며 저장소 파일과 byte 단위로 일치합니다. Manifest에는
+130개 item이 있습니다. 공개 snapshot을 격리 소비자에 CLI로
+설치한 뒤 typecheck·build가 통과했고 고지 pin을 확인했습니다.
+실제 screen reader·touch·Safari·RTL은 미검증입니다.
+[작업 기록](../.worknotes/block-editor-2026-10-02.md)을 참고하세요.
+
 ## 2026-10-02 BlockEditor — 로컬
 
 `npm run typecheck`, UI 테스트 196/196, `npm run build`가
