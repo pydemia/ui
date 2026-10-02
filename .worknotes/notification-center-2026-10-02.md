@@ -13,11 +13,14 @@ snapshot, goal 관리용 추정은 약 97%입니다. 이번 변경의 새
 로컬 typecheck·대상 테스트 3/3·build를 통과했습니다. Chromium에서
 필터, 개별/전체 읽음, 빈 결과, 열기 요청, Enter, 사라지는 행에서
 필터로의 focus 이동을 확인했습니다. 390px 가로 넘침과 dark 표시를
-확인했고 console error는 0건입니다. registry 고지 pin, snapshot,
-PR CI와 공개 URL은 아직 확인하지 않았습니다. 실제 screen reader
-발화는 미검증입니다.
+확인했고 console error는 0건입니다. provenance 고지를 commit
+`e456c9495f35fc4da5337af7a192370e230a7c61`에 고정했습니다.
+`registry:release-check`는 128개 item과 51개 snapshot을 검사했고
+현재 빌드와 새 snapshot
+`sha256-df24f09932e37b9810eca0349087ef73e4fa1bef16098cc73d1f165ba4c5469d`
+의 일치를 확인했습니다. PR CI와 공개 URL은 아직 확인하지 않았습니다.
+실제 screen reader 발화는 미검증입니다.
 
-다음 작업은 provenance 고지 pin과 snapshot 생성, registry 검사,
-PR·공개 경로 확인입니다. 같은 commit의 CI와 릴리스당 한 번의 공개
+다음 작업은 PR·공개 경로 확인입니다. 같은 commit의 CI와 릴리스당 한 번의 공개
 manifest·변경 item URL 확인을 적용합니다. 기존 component 전체의
 개별 설치나 보조기술 전수 검사는 이 릴리스의 차단 조건이 아닙니다.

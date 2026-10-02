@@ -2,8 +2,9 @@
 
 2026-10-02 NotificationCenter 로컬 후보: 지속 알림의 읽음 상태·필터와
 열기 요청을 추가했습니다. typecheck·대상 테스트·build 및 Chromium의
-핵심 흐름·390px dark 배치를 확인했습니다. provenance 고지 pin,
-snapshot, PR CI·공개 확인은 남았습니다. 공개 125개 component·127개
+핵심 흐름·390px dark 배치를 확인했습니다. provenance 고지를 고정하고
+51번째 snapshot의 registry 검사를 통과했습니다. PR CI·공개 확인은
+남았습니다. 공개 125개 component·127개
 item·50개 snapshot과 goal 관리용 추정 약 97%는 유지합니다.
 [작업 기록](notification-center-2026-10-02.md)을 참고하세요.
 

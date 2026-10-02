@@ -18,6 +18,9 @@ docs build, 기존 component의 표시·동작 변경은 영향받은 상태와
 줄었다고 기록하지 않습니다. CI의 문서 전용 분기와 snapshot 중복
 저장은 별도 구현·검증 대상입니다. 이 재검토만으로 goal 관리용
 추정 약 97%를 올리지 않습니다.
+실제로 `NotificationCenter`의 51번째 snapshot과 고지 갱신은
+291개 파일을 변경합니다. 검사 수준보다 snapshot 전체 복제 방식이
+한 component 릴리스의 diff를 크게 만드는 직접 원인입니다.
 
 2026-10-02. 공개 기준은 125개 component, 127개 registry item,
 48개 snapshot입니다. Goal 관리용 추정은 약 97%입니다. 이번 검토는
