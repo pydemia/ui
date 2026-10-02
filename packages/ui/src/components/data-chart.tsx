@@ -15,6 +15,7 @@ type DataChartBaseProps = Omit<
     description?: string;
     variant?: "line" | "bar" | "area" | "stacked-bar" |
         "stacked-area";
+    appearance?: "panel" | "plain";
     inspectable?: boolean;
     hoverSummary?: boolean;
     unit?: string;
@@ -52,6 +53,7 @@ function DataChart({
     series,
     toggleableSeries = false,
     variant = "line",
+    appearance = "panel",
     inspectable = false,
     hoverSummary = false,
     unit = "",
@@ -83,6 +85,9 @@ function DataChart({
     if (!["line", "bar", "area", "stacked-bar", "stacked-area"]
         .includes(variant)) {
         throw new RangeError("DataChart variant is not supported.");
+    }
+    if (appearance !== "panel" && appearance !== "plain") {
+        throw new RangeError("DataChart appearance is not supported.");
     }
     const inputPoints = points;
     if (points === undefined) {
@@ -349,10 +354,13 @@ function DataChart({
     return (
         <figure
             className={cn(
-                "m-0 min-w-0 rounded-sm border border-border " +
-                "bg-surface p-[var(--space-4)] text-foreground",
+                "m-0 min-w-0 text-foreground",
+                appearance === "panel" &&
+                    "rounded-sm border border-border bg-surface " +
+                    "p-[var(--space-4)]",
                 className,
             )}
+            data-appearance={appearance}
             {...props}
         >
             <figcaption className="mb-[var(--space-3)]">

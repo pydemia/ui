@@ -3419,6 +3419,9 @@ function DataChartPreview() {
     const [empty, setEmpty] = useState(false);
     const [multiple, setMultiple] = useState(false);
     const [hoverSummary, setHoverSummary] = useState(false);
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
 
     return (
         <div className="preview-workspace grid gap-3">
@@ -3456,6 +3459,13 @@ function DataChartPreview() {
                 <Button variant="ghost" onClick={() => setEmpty(!empty)}>
                     {empty ? "데이터 표시" : "빈 데이터"}
                 </Button>
+                <Button variant="outline"
+                    onClick={() => setAppearance((current) =>
+                        current === "panel" ? "plain" : "panel"
+                    )}>
+                    {appearance === "panel" ? "테두리 없이 보기" :
+                        "카드형으로 보기"}
+                </Button>
             </div>
             {multiple ? (
                 <DataChart title="요일별 요청 상태" unit="건"
@@ -3469,13 +3479,15 @@ function DataChartPreview() {
                     categories={empty ? [] : chartCategories}
                     series={empty ? [] : variant === "stacked-area"
                         ? stackedAreaSeries : chartSeries}
-                    variant={variant} inspectable hoverSummary={hoverSummary}
+                    variant={variant} appearance={appearance}
+                    inspectable hoverSummary={hoverSummary}
                     toggleableSeries />
             ) : (
                 <DataChart title="요일별 검토 완료" unit="건"
                     description="목요일 데이터는 집계되지 않았습니다."
                     points={empty ? [] : chartPoints}
-                    variant={variant} inspectable hoverSummary={hoverSummary} />
+                    variant={variant} appearance={appearance}
+                    inspectable hoverSummary={hoverSummary} />
             )}
         </div>
     );
@@ -3490,17 +3502,30 @@ const donutSegments = [
 
 function DonutChartPreview() {
     const [empty, setEmpty] = useState(false);
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
 
     return (
         <div className="preview-workspace grid gap-3">
-            <Button variant="outline" className="justify-self-start"
-                onClick={() => setEmpty((current) => !current)}>
-                {empty ? "데이터 표시" : "빈 데이터"}
-            </Button>
+            <div className="preview-row">
+                <Button variant="outline"
+                    onClick={() => setEmpty((current) => !current)}>
+                    {empty ? "데이터 표시" : "빈 데이터"}
+                </Button>
+                <Button variant="outline"
+                    onClick={() => setAppearance((current) =>
+                        current === "panel" ? "plain" : "panel"
+                    )}>
+                    {appearance === "panel" ? "테두리 없이 보기" :
+                        "카드형으로 보기"}
+                </Button>
+            </div>
             <DonutChart title="요청 처리 상태"
                 description="각 상태의 요청 수와 전체 비율입니다."
                 totalLabel="전체 요청" unit="건"
-                segments={empty ? [] : donutSegments} />
+                segments={empty ? [] : donutSegments}
+                appearance={appearance} />
         </div>
     );
 }
@@ -7659,7 +7684,7 @@ const slides = [
     },
     {
         id: "data-chart", name: "DataChart", category: "Data & analytics",
-        description: "단일·다중 계열을 선형·그룹 막대·누적 막대·영역·누적 영역으로 표시합니다. 선택형 범례로 계열을 숨기고 축·누적값을 다시 계산할 수 있습니다. 구간 선택기와 데이터 표로 값을 확인하며, 선택적으로 그래프 위에 포인터 구간의 요약을 띄울 수 있습니다.",
+        description: "단일·다중 계열을 선형·그룹 막대·누적 막대·영역·누적 영역으로 표시합니다. 선택형 범례로 계열을 숨기고 축·누적값을 다시 계산할 수 있습니다. 구간 선택기와 데이터 표로 값을 확인하며, 선택적으로 그래프 위에 포인터 구간의 요약을 띄울 수 있습니다. 기본 카드형과 다른 panel 안에 넣는 테두리 없는 형태를 선택할 수 있습니다.",
         code: `import { DataChart } from "@pydemia/ui";
 
 const points = [
@@ -7695,13 +7720,15 @@ const series = [
     categories={["월", "화", "수", "목"]}
     series={series} unit="건" variant="stacked-area"
     inspectable toggleableSeries />
+  <DataChart title="요일별 완료" points={points}
+    unit="건" appearance="plain" />
 </>;`,
         preview: () => <DataChartPreview />,
     },
     {
         id: "donut-chart", name: "DonutChart",
         category: "Data & analytics",
-        description: "음수가 없는 범주별 수치를 비율로 표시합니다. 총합·값·비율을 텍스트로 함께 제공하고 0건을 구분합니다.",
+        description: "음수가 없는 범주별 수치를 비율로 표시합니다. 총합·값·비율을 텍스트로 함께 제공하고 0건을 구분합니다. 기본 카드형과 다른 panel 안에 넣는 테두리 없는 형태를 선택할 수 있습니다.",
         code: `import { DonutChart } from "@pydemia/ui";
 
 const segments = [
@@ -7711,7 +7738,10 @@ const segments = [
 ];
 
 <DonutChart title="요청 처리 상태" segments={segments}
-  unit="건" totalLabel="전체 요청" />`,
+  unit="건" totalLabel="전체 요청" />;
+
+<DonutChart title="요청 처리 상태" segments={segments}
+  unit="건" totalLabel="전체 요청" appearance="plain" />`,
         preview: () => <DonutChartPreview />,
     },
     {
