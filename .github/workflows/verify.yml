@@ -17,54 +17,66 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 2
-      - name: Determine pull request scope
+      - name: Determine verification scope
         id: scope
-        if: github.event_name == 'pull_request'
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PUSH_BASE_SHA: ${{ github.event.before }}
         run: |
-          if ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
-            git fetch --no-tags --depth=1 origin "$BASE_SHA"
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            BASE_SHA="$PR_BASE_SHA"
+          else
+            BASE_SHA="$PUSH_BASE_SHA"
           fi
-          git cat-file -e "$BASE_SHA^{commit}"
-          full=false
-          found=false
-          while IFS= read -r -d '' path; do
-            found=true
-            case "$path" in
-              .worknotes/*.md|research/*.md|README.md|CHANGELOG.md|NEXT_SESSION.md)
-                ;;
-              *) full=true ;;
-            esac
-          done < <(git diff --name-only -z "$BASE_SHA" HEAD)
-          if [[ "$found" == false ]]; then full=true; fi
+          full=true
+          if [[ "$BASE_SHA" =~ ^[0-9a-f]{40}$ ]] &&
+             [[ "$BASE_SHA" != 0000000000000000000000000000000000000000 ]]; then
+            if ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+              git fetch --no-tags --depth=1 origin "$BASE_SHA" || true
+            fi
+            if git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null &&
+               git diff --name-only -z "$BASE_SHA" HEAD > "$RUNNER_TEMP/changed-paths"; then
+              full=false
+              found=false
+              while IFS= read -r -d '' path; do
+                found=true
+                case "$path" in
+                  .worknotes/*.md|research/*.md|README.md|CHANGELOG.md|NEXT_SESSION.md)
+                    ;;
+                  *) full=true ;;
+                esac
+              done < "$RUNNER_TEMP/changed-paths"
+              if [[ "$found" == false ]]; then full=true; fi
+              echo "base=$BASE_SHA" >> "$GITHUB_OUTPUT"
+            fi
+          fi
           echo "full=$full" >> "$GITHUB_OUTPUT"
           echo "Full verification: $full"
-      - name: Check pull request diff
-        if: github.event_name == 'pull_request'
+      - name: Check changed diff
+        if: steps.scope.outputs.base != ''
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          BASE_SHA: ${{ steps.scope.outputs.base }}
         run: git diff --check "$BASE_SHA" HEAD
       - uses: actions/setup-node@v7
-        if: github.event_name == 'push' || steps.scope.outputs.full == 'true'
+        if: steps.scope.outputs.full == 'true'
         with:
           node-version: 24
           cache: npm
       - run: npm ci
-        if: github.event_name == 'push' || steps.scope.outputs.full == 'true'
+        if: steps.scope.outputs.full == 'true'
       - run: npm run typecheck
-        if: github.event_name == 'push' || steps.scope.outputs.full == 'true'
+        if: steps.scope.outputs.full == 'true'
       - run: npm run test -w @pydemia/ui
-        if: github.event_name == 'push' || steps.scope.outputs.full == 'true'
+        if: steps.scope.outputs.full == 'true'
       - run: npm run build
-        if: github.event_name == 'push' || steps.scope.outputs.full == 'true'
+        if: steps.scope.outputs.full == 'true'
       - name: Verify registry and published snapshots
-        if: github.event_name == 'push' || steps.scope.outputs.full == 'true'
+        if: steps.scope.outputs.full == 'true'
         run: npm run registry:check
       - name: Verify current release candidate
-        if: ${{ (github.event_name == 'push' || steps.scope.outputs.full == 'true') && (github.event_name == 'push' || !github.event.pull_request.draft) }}
+        if: ${{ steps.scope.outputs.full == 'true' && (github.event_name == 'push' || !github.event.pull_request.draft) }}
         run: node scripts/registry-release.mjs verify-current
       - run: git diff --exit-code -- docs
-        if: github.event_name == 'push' || steps.scope.outputs.full == 'true'
+        if: steps.scope.outputs.full == 'true'
       - run: test -z "$(git ls-files --others --exclude-standard -- docs)"
-        if: github.event_name == 'push' || steps.scope.outputs.full == 'true'
+        if: steps.scope.outputs.full == 'true'
