@@ -304,6 +304,9 @@ function NavigationPreview() {
     const [sideVariant, setSideVariant] = useState<
         "rail" | "filled"
     >("rail");
+    const [bottomAppearance, setBottomAppearance] = useState<
+        "bar" | "dock"
+    >("bar");
     const destinations = [
         { id: "overview", label: "개요", icon: <Gauge className="size-5" /> },
         { id: "inbox", label: "받은 편지함", icon: <Inbox className="size-5" /> },
@@ -340,6 +343,11 @@ function NavigationPreview() {
                     컴포넌트
                 </SideNavLink>
             </SideNav>
+            <Button variant="outline" onClick={() => setBottomAppearance(
+                bottomAppearance === "bar" ? "dock" : "bar",
+            )}>
+                하단 탐색: {bottomAppearance === "bar" ? "막대형" : "독형"}
+            </Button>
             <div className={
                 "w-full max-w-sm overflow-hidden rounded-sm border " +
                 "border-border bg-background"
@@ -347,7 +355,8 @@ function NavigationPreview() {
                 <p className="grid min-h-20 place-items-center text-sm">
                     {destinations.find((item) => item.id === current)?.label}
                 </p>
-                <BottomNav aria-label="작업 공간 하단 탐색">
+                <BottomNav aria-label="작업 공간 하단 탐색"
+                    appearance={bottomAppearance}>
                     {destinations.map((item) => (
                         <BottomNavLink key={item.id}
                             href={`#${item.id}`} label={item.label}
@@ -6584,7 +6593,7 @@ function RequestFlow() {
     },
     {
         id: "navigation", name: "Navigation", category: "Navigation",
-        description: "전역·측면·하단 탐색을 현재 페이지 상태와 함께 표시합니다. 전역 링크는 표면형·밑줄형, 측면 링크는 선형·채움형을 고를 수 있습니다.",
+        description: "전역·측면·하단 탐색을 현재 페이지 상태와 함께 표시합니다. 전역 링크는 표면형·밑줄형, 측면 링크는 선형·채움형, 하단 탐색은 막대형·독형을 고를 수 있습니다.",
         code: `import {
   GlobalNav, GlobalNavLink, SideNav, SideNavLink,
   BottomNav, BottomNavLink,
@@ -6603,7 +6612,7 @@ function RequestFlow() {
     <SideNavLink href="/settings" variant="filled">설정</SideNavLink>
   </SideNav>
 
-  <BottomNav aria-label="모바일 주요 탐색">
+  <BottomNav aria-label="모바일 주요 탐색" appearance="dock">
     <BottomNavLink href="/overview" label="개요" aria-current="page" />
     <BottomNavLink href="/inbox" label="받은 편지함" />
     <BottomNavLink href="/settings" label="설정" />

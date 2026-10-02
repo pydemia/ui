@@ -1,5 +1,22 @@
 # Review workspace 조합 예시
 
+## 공개 확인
+
+PR #90의 Verify UI run `36987986397`과 병합 commit `024038e`의
+Verify UI run `36988253094`, Pages run `36988252836`이
+성공했습니다. Vercel production
+`dpl_A6pMNJH2Dpt7QwGhouodLkM5gRiL`은 READY이며
+`ui.pydemia.ai` alias에 연결됐습니다. 공개 사이트에서 Review
+workspace preview와 설치 명령을 확인했고, browser console error는
+0건이었습니다. 현재 `pyd-approval-card.json`, `pyd-tokens.json`,
+48번째 snapshot manifest의 공개 URL은 HTTP 200입니다.
+
+공개 수량은 125개 component·127개 registry item·48개 snapshot으로
+같습니다. 공개 사이트에서 로컬 상호작용을 반복하지 않았습니다.
+관리용 goal 추정은 약 97%를 유지합니다.
+
+## 구현과 로컬 검증
+
 2026-10-02. 공개 기준 125개 component·127개 registry item·48개
 snapshot에서 시작했습니다. 검토 화면의 검색·상태 필터·요청 선택,
 변경 비교·대댓글·승인 결정을 `@pydemia/ui` component로 연결했습니다.

@@ -1,5 +1,22 @@
 # Component 확장 작업 인계
 
+2026-10-02 BottomNav 디자인 선택 초안: 기존 `pyd-navigation`의 하단
+탐색에 `bar`·`dock` 표시를 추가했습니다. 기본값은 `bar`입니다.
+typecheck·UI 테스트 185/185·build·`registry:release-check`가
+통과했고 390px Chromium에서 클릭·Enter·dark·가로 넘침을
+확인했습니다. 49번째 snapshot을 만들었으며 PR·공개 배포는 아직
+확인하지 않았습니다. component/item 수는 125/127, goal 관리용 추정은
+약 97%입니다. [작업 기록](navigation-dock-2026-10-02.md)을
+참고하세요.
+
+2026-10-02 Review workspace 공개 확인: PR #90을 병합한
+`024038e`의 Verify UI·Pages와 Vercel production이 성공했습니다.
+공개 사이트에서 예시와 설치 명령을 확인했고 기존 registry item·token,
+48번째 manifest 표본 URL은 HTTP 200입니다. 공개 수량은 125개
+component·127개 item·48개 snapshot으로 같고 goal 추정 약 97%를
+유지합니다. [작업 기록](review-workspace-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 Review workspace 로컬 예시: 요청 검색·상태 필터,
 `MasterDetail` 선택, `DiffViewer` 비교, `Thread` 대댓글과
 `ApprovalCard` 결정을 연결했습니다. 브라우저에서 요청 전환 시

@@ -2,6 +2,9 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "./utils";
 
 type NamedNavProps = ComponentProps<"nav"> & { "aria-label": string };
+type BottomNavProps = NamedNavProps & {
+    appearance?: "bar" | "dock";
+};
 
 function GlobalNav({ className, ...props }: NamedNavProps) {
     return (
@@ -85,14 +88,28 @@ function SideNavLink({
     );
 }
 
-function BottomNav({ className, ...props }: NamedNavProps) {
+function BottomNav({
+    appearance = "bar",
+    className,
+    ...props
+}: BottomNavProps) {
+    if (appearance !== "bar" && appearance !== "dock") {
+        throw new RangeError("BottomNav appearance is not supported.");
+    }
+
     return (
         <nav
             className={cn(
-                "flex min-w-0 overflow-x-auto border-t border-border " +
+                "group/bottom-nav flex min-w-0 overflow-x-auto " +
                 "bg-surface text-foreground",
+                appearance === "bar" && "border-t border-border",
+                appearance === "dock" &&
+                    "mx-[var(--space-3)] mb-[var(--space-3)] " +
+                    "rounded-full border border-border p-[var(--space-1)] " +
+                    "shadow-[var(--shadow-float)]",
                 className,
             )}
+            data-appearance={appearance}
             {...props}
         />
     );
@@ -123,7 +140,10 @@ function BottomNavLink({
                 "text-center text-xs text-muted hover:bg-surface-subtle " +
                 "hover:text-foreground aria-[current=page]:bg-surface-subtle " +
                 "aria-[current=page]:font-semibold " +
-                "aria-[current=page]:text-accent",
+                "aria-[current=page]:text-accent " +
+                "group-data-[appearance=dock]/bottom-nav:rounded-full " +
+                "group-data-[appearance=dock]/bottom-nav:aria-[current=page]:bg-accent " +
+                "group-data-[appearance=dock]/bottom-nav:aria-[current=page]:text-accent-foreground",
                 className,
             )}
             {...props}
@@ -139,5 +159,6 @@ export {
     BottomNav, BottomNavLink,
 };
 export type {
-    GlobalNavLinkProps, SideNavLinkProps, BottomNavLinkProps,
+    GlobalNavLinkProps, SideNavLinkProps, BottomNavProps,
+    BottomNavLinkProps,
 };

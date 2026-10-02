@@ -213,7 +213,8 @@ provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
   reader·touch·Safari·RTL은 남았습니다.
 - [x] `BottomNav` — 기존 `pyd-navigation`에 하단 주요 목적지 링크를
   추가했습니다. 각 링크의 이름을 항상 표시하고 현재 페이지는 호출자가
-  `aria-current`로 지정합니다. 별도 component 수는 늘리지 않습니다.
+  `aria-current`로 지정합니다. 전체 너비 `bar`와 여백 있는 `dock`
+  표시를 고를 수 있습니다. 별도 component 수는 늘리지 않습니다.
 - [x] `AnchorNav` — 같은 문서의 섹션으로 이동하고 스크롤 위치를
   현재 링크에 반영합니다. 내부 스크롤 영역과 URL hash 뒤로 가기,
   rail·inline 표시를 제공합니다.
