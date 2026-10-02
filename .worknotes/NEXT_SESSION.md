@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-03 `BarList`를 PR #105로 `main`에 병합했습니다. PR·main
+Verify UI와 Pages는 성공했습니다. Vercel의 24시간 배포 제한으로
+production 배포가 없고 공개 `pyd-bar-list.json`은 404입니다.
+저장소 131개 component·133개 item·59개 snapshot, 사용자 사이트
+130개·132개·58개입니다. 제한 해제 뒤 production 배포와 공개
+item·snapshot URL을 확인하고 로드맵 완료 표시를 갱신하세요.
+이번 검토로 goal 관리용 추정 약 97%는 올리지 않았습니다.
+[작업 기록](bar-list-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `BarList` 로컬 후보: 범주별 값·0건·빈 목록을 가로
 막대와 정확한 텍스트로 표시합니다. Operations workspace의 실행
 상태와 연결했고 typecheck·UI 테스트 212/212·build, 로컬 Chromium의
