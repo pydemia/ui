@@ -1,5 +1,20 @@
 # 검증 기록
 
+## 2026-10-02 MarkdownEditor — 로컬 초안
+
+`npm run typecheck`, UI 테스트 180/180, `npm run build`가
+통과했습니다. build는 126개 registry item을 생성했습니다.
+로컬 Chromium에서 원문 입력·`Ctrl+Z`·native form 제출 값과
+미리보기 표시 전환을 확인하고 390px 어두운 화면을 시각적으로
+검토했습니다. 초기 서식 버튼의 삽입은 browser undo에 포함되지
+않아 제거한 뒤 다시 확인했습니다.
+
+`registry:check`는 provenance metadata 수정으로 소비자 고지의
+SHA-256이 달라 실패했습니다. source revision을 고정한 뒤
+고지를 갱신하고 snapshot을 만들어 재검사해야 합니다. 실제
+screen reader·touch·Safari·RTL, 별도 소비자 설치와 공개 URL은
+검증하지 않았습니다. 공개 수량과 goal 추정은 변하지 않습니다.
+
 ## 2026-10-02 NodeCanvas — 공개
 
 PR #80의 Verify UI run `36972876685`와 병합 commit `772d988`의

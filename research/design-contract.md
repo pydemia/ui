@@ -1309,3 +1309,22 @@ pointer 이동량은 현재 zoom으로 나눕니다. 호출자가 상태를 갱�
 목록에 따로 노출합니다. zoom은 버튼으로 75–150%를 선택하고
 작업 영역을 native scroll로 탐색합니다. 실제 보조기술 발표,
 touch·Safari·RTL은 아직 확인하지 않았습니다.
+## 2026-10-02 MarkdownEditor
+
+`MarkdownEditor`는 게시글·문서 원문을 Markdown으로 작성하고
+결과를 같은 화면에서 확인합니다. 호출자가 `value`와 `onValueChange`로 원문을
+소유하며 저장·권한·서버 검증도 호출자가 담당합니다. `name`을
+주면 native textarea가 form에 현재 원문을 제출합니다.
+
+textarea는 미리보기 표시 여부와 관계없이 화면에
+남습니다. 따라서 입력 focus와 form validation이 preview 전환으로
+사라지지 않습니다. 미리보기는 `Markdown`이 지원하는 제목 1–3,
+단층 목록, 강조, 인라인·블록 코드, 절대 HTTP(S) 링크만 렌더링합니다.
+원시 HTML과 지원하지 않는 문법은 텍스트로 남깁니다. WYSIWYG,
+문서 모델 변환, 이미지 업로드, 공동 편집은 이 API에 포함되지
+않습니다. 별도 `RichTextEditor` 후보는 유지합니다.
+
+label·description·error는 textarea에 연결되고 preview는 제목이
+있는 region입니다. 기본 입력·붙여넣기·선택·undo는 native
+textarea의 동작을 따릅니다. 별도 WYSIWYG 서식 버튼은 제공하지
+않습니다.

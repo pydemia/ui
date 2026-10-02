@@ -1615,3 +1615,14 @@ component 소스를 복사하지 않았습니다. 새 npm 의존성은 없으며
 추가하고 목록의 버튼으로 제거합니다. 이 자료의 예제 코드는
 복사하지 않았습니다. Chromium에서 조작을 확인했지만 실제
 screen reader 발표와 touch·Safari·RTL은 검사하지 않았습니다.
+## 2026-10-02 MarkdownEditor
+
+`MarkdownEditor`는 pydemia/ui 원본 React·Tailwind 구현입니다. 외부
+editor 코드를 복사하지 않았습니다. 기존 `pyd-markdown`·
+`pyd-textarea`·`pyd-utils`를 조합하며 새 npm 의존성은 없습니다.
+WHATWG [textarea 명세](https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element)의
+native multiline 값·form control을 참고했습니다. 원문은
+`onValueChange`로 호출자에게 전달합니다. 미리보기 문법과 안전한
+링크 처리는 기존 `Markdown`의
+범위를 그대로 사용합니다. 실제 screen reader·touch·Safari·RTL은
+검증하지 않았습니다.

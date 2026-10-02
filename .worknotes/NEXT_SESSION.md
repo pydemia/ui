@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-02 MarkdownEditor 로컬 초안: 원문 textarea·미리보기·form 값을
+묶었습니다. typecheck·UI 테스트 180/180·build, Chromium의 입력·
+undo·제출·390px dark를 확인했습니다. provenance 고지 hash와 45번째
+snapshot을 아직 갱신하지 않아 공개 기준 123개 component·125개
+item·44개 snapshot, goal 관리용 추정 약 97%는 유지합니다.
+[작업 기록](markdown-editor-2026-10-02.md)을 참고하세요.
+
 2026-10-02 NodeCanvas 공개 확인: PR #80과 병합 commit `772d988`의
 Verify UI·Pages, Vercel production이 성공했습니다. 공개
 preview·Usage, 현재 item과 44번째 snapshot manifest·item URL을
