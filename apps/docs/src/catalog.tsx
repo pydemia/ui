@@ -2622,12 +2622,22 @@ function AppShellPreview() {
                         <p className="m-0 text-xs text-muted">이번 주 변경 3건</p>
                     </AppSidebar>
                 </AppBody>
-                <AppBottomPanel aria-label="작업 상태" className={
-                    floatingSide === "left"
-                        ? "pl-28 text-xs" : "pr-28 text-xs"
-                }>
-                    모든 변경 사항이 저장되었습니다.
-                </AppBottomPanel>
+                <Collapsible defaultOpen>
+                    <AppBottomPanel aria-label="프로젝트 작업 상태" className={
+                        floatingSide === "left"
+                            ? "pl-28 text-xs" : "pr-28 text-xs"
+                    }>
+                        <CollapsibleTrigger asChild>
+                            <Button variant="ghost">작업 상태</Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="mt-2 pb-1 text-xs">
+                            <p className="m-0">모든 변경 사항이 저장되었습니다.</p>
+                            <p className="m-0 mt-1 text-muted">
+                                마지막 검토: 10:42 · 변경 3건
+                            </p>
+                        </CollapsibleContent>
+                    </AppBottomPanel>
+                </Collapsible>
                 <AppFloatingDisclosure
                     appearance={bubbleAppearance}
                     side={floatingSide}
@@ -6645,10 +6655,12 @@ function RequestWorkspace() {
     },
     {
         id: "app-shell", name: "AppShell", category: "Framework",
-        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. 테두리 있는 framed와 전체 화면용 canvas, 원형·pill 도움말 버튼을 선택할 수 있습니다. AppFloatingDisclosure는 열림·닫힘·focus 복귀를 함께 처리합니다.",
+        installItems: ["app-shell", "button", "collapsible"],
+        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. framed·canvas와 원형·pill 도움말을 선택하고, 하단 panel은 Collapsible로 접을 수 있습니다.",
         code: `import {
   AppShell, AppHeader, AppBody, AppSidebar, AppMain,
   AppBottomPanel, AppFloatingDisclosure,
+  Button, Collapsible, CollapsibleTrigger, CollapsibleContent,
 } from "@pydemia/ui";
 
 function Workspace() {
@@ -6659,9 +6671,16 @@ function Workspace() {
       <AppMain>화면 본문</AppMain>
       <AppSidebar side="right" aria-label="상세 정보">...</AppSidebar>
     </AppBody>
-    <AppBottomPanel aria-label="작업 상태" className="pl-28">
-      저장됨
-    </AppBottomPanel>
+    <Collapsible defaultOpen>
+      <AppBottomPanel aria-label="프로젝트 작업 상태" className="pl-28">
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost">작업 상태</Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="mt-2">
+          모든 변경 사항이 저장되었습니다.
+        </CollapsibleContent>
+      </AppBottomPanel>
+    </Collapsible>
     <AppFloatingDisclosure appearance="pill" side="left"
       label="도움말">
       <p>도움말</p>

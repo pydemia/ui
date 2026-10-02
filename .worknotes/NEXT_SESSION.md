@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 AppShell 하단 패널 예시: 기존 `AppBottomPanel`·
+`Collapsible`·`Button`으로 접히는 상태 패널의 preview·Usage를
+작성했습니다. typecheck·build·registry release 검사와 Chromium
+클릭·Enter·focus·390px, 해당 영역 axe violation 0건을 확인했습니다.
+새 component·registry item은 없고 goal 추정 약 97%도 그대로입니다.
+공개 preview와 실제 screen reader 발표는 미검증입니다.
+[작업 기록](app-bottom-disclosure-recipe-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `FunnelChart` 로컬 후보: 전환 단계의 값·첫 단계 대비
 도달률·결측값·0건을 별도 원본 component로 구현했습니다.
 typecheck·UI 테스트 218/218·build·registry(135개 item, 133개

@@ -1,5 +1,20 @@
 # 검증 기록
 
+## 2026-10-03 AppShell 하단 패널 조합
+
+기존 `AppBottomPanel`·`Collapsible`·`Button`의 문서 preview와 Usage를
+결합했습니다. `npm run typecheck`, `npm run build`,
+`npm run registry:release-check`가 통과했습니다. 로컬 Chromium에서
+클릭으로 접고 Enter로 다시 열 때 내용 표시·button focus·
+`aria-expanded`를 확인했습니다. 390px viewport와 document scroll
+width는 모두 390px입니다. 처음 axe 검사에서 다른 예시와 같은
+`작업 상태` landmark가 중복됐고, 이름을 `프로젝트 작업 상태`로
+바꾼 뒤 해당 영역의 axe-core 4.12.1 검사는 violation 0건,
+incomplete 0건이었습니다. 실제 screen reader 발표와 공개 URL은
+검증하지 않았습니다.
+[작업 기록](../.worknotes/app-bottom-disclosure-recipe-2026-10-03.md)에
+판정과 범위를 남겼습니다.
+
 ## 2026-10-03 FunnelChart — 공개 후보
 
 `npm run typecheck`, UI 테스트 218/218, `npm run build`,

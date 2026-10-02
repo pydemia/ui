@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 AppShell 하단 패널 조합: **약 97% → 약 97%**입니다.
+기존 `Collapsible`·`AppBottomPanel`로 접히는 작업 상태 영역의
+preview·Usage를 추가했습니다. typecheck·build·registry release
+검사와 Chromium의 클릭·Enter·focus·390px, axe 위반 0건을
+확인했습니다. component·item 수는 브랜치 133개·135개, 사용자
+사이트 130개·132개로 같습니다. 공개 preview는 아직 미검증입니다.
+[작업 기록](app-bottom-disclosure-recipe-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `FunnelChart` 로컬 후보: **약 97% → 약 97%**입니다.
 단계별 전환값과 첫 단계 대비 도달률을 원본 component로 구현해
 Data & analytics 범위가 넓어졌습니다. 로컬 typecheck·UI 테스트
