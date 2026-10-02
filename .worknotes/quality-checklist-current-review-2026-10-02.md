@@ -47,11 +47,12 @@ rollback 뒤 URL 보존은 해당 지원을 주장하거나 관련 경로를 바
 
 변경 전 `.github/workflows/verify.yml`은 모든 PR과 `main` push에
 전체 UI 검사를 실행했습니다. 병합 commit `802831d`의 Verify UI는
-약 2분 9초
-걸렸습니다. `registry-release.mjs`는 새 snapshot마다 126개 item을
+약 2분 9초 걸렸습니다. `registry-release.mjs`는 새 snapshot마다
+126개 item을
 `registry/releases/`와 `docs/r/releases/`에 각각 복제합니다.
-비렌더링 Markdown PR의 CI 분기는 초안을 작성했고 실제 CI 검증이
-남았습니다. snapshot 저장 방식은 기존 URL·dependency·rollback
-동작을 보존하는 별도 구현 과제입니다. 과거 판단과 사례는
+비렌더링 Markdown PR의 CI 분기는 PR #95에서 단계 생략을 확인했고,
+`main`의 전체 CI도 통과했습니다. snapshot 저장 방식은 기존 URL·
+dependency·rollback 동작을 보존하는 별도 구현 과제입니다.
+과거 판단과 사례는
 [이전 검토](quality-checklist-pragmatic-2026-10-02.md)와
 [누적 과제](quality-legacy-2026-09-29.md)에 남아 있습니다.
