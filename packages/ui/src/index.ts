@@ -174,6 +174,8 @@ export type {
 } from "./components/timeline";
 export { LogConsole } from "./components/log-console";
 export type { LogConsoleProps, LogEntry } from "./components/log-console";
+export { Terminal } from "./components/terminal";
+export type { TerminalLine, TerminalProps } from "./components/terminal";
 export { JsonViewer } from "./components/json-viewer";
 export type { JsonValue, JsonViewerProps } from "./components/json-viewer";
 export { Sparkline } from "./components/sparkline";

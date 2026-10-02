@@ -1577,3 +1577,24 @@ item은 shadcn/ui의 고정 revision
 native 동작 참고 자료로 확인했습니다. 파일 입력·버튼의 native
 keyboard 동작, 결과와 오류의 표시를 Chromium에서 확인했습니다.
 실제 screen reader 발표는 검사하지 않았습니다.
+
+## 2026-10-02 Terminal
+
+`Terminal`은 pydemia/ui 원본 구현입니다. 외부 component 소스를
+복사하지 않았고 React, 기존 `pyd-button`·`pyd-utils` 외에 새 npm
+의존성이 없습니다. `pyd-button`의
+[공식 문서](https://ui.shadcn.com/docs/components/radix/button),
+[고정 source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)는
+기존 조사를 재사용합니다. Button의 npm 의존성은 기존
+`class-variance-authority@0.7.1`입니다.
+
+[W3C WAI의 log role 지침](https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA23.html)에서
+순차적 출력의 의미 구조를 확인했습니다. 예제 코드는 복사하지
+않았습니다. 명령 입력은 native form을 사용하고 출력의 음성 발표는
+빠른 로그가 많을 수 있어 기본으로 끕니다. 실제 screen reader
+발표는 검사하지 않았습니다.
+
+로컬 Chromium에서 native Enter 제출과 위·아래 방향키 이력,
+390px dark 화면을 확인했습니다. 빠른 출력의 실제 보조기술 발표는
+확인하지 않았습니다.

@@ -537,6 +537,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named log with text levels; live announcements disabled by default", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-terminal", "category": "Developer tools", "profiles": ["developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA23.html", "scope": "sequential log semantics; example source not copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named sequential log, labeled native command input, visible error and pending state", "keyboard": "Chromium: Enter submit, Up/Down history and 390px dark layout verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-json-viewer", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WHATWG HTML", "url": "https://html.spec.whatwg.org/multipage/interactive-elements.html#the-details-element", "scope": "native details and summary disclosure behavior; no source copied" },

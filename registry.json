@@ -619,6 +619,11 @@
       "files": [{ "path": "packages/ui/src/components/log-console.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-terminal", "type": "registry:ui", "title": "Terminal",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/terminal.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-json-viewer", "type": "registry:ui", "title": "JSON Viewer",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/json-viewer.tsx", "type": "registry:ui" }]
