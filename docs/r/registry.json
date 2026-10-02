@@ -676,6 +676,11 @@
       "files": [{ "path": "packages/ui/src/components/sparkline.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-bar-list", "type": "registry:ui", "title": "Bar List",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/bar-list.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-page-header", "type": "registry:ui", "title": "Page Header",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/page-header.tsx", "type": "registry:ui" }]

@@ -206,6 +206,8 @@ export { JsonViewer } from "./components/json-viewer";
 export type { JsonValue, JsonViewerProps } from "./components/json-viewer";
 export { Sparkline } from "./components/sparkline";
 export type { SparklineProps } from "./components/sparkline";
+export { BarList } from "./components/bar-list";
+export type { BarListItem, BarListProps } from "./components/bar-list";
 export { DataChart } from "./components/data-chart";
 export type {
     DataChartProps, ChartPoint, ChartSeries,

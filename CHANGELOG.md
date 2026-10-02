@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-03 — BarList
+
+- 범주별 수치를 긴 이름·정확한 값·가로 막대로 비교하는 `BarList`를
+  추가했습니다. 빈 목록과 0건을 구분하고, 호출자 순서와 선택한
+  최댓값을 유지합니다. Operations workspace의 실행 상태도 표시합니다.
+
 ## 2026-10-03 — AppShell floating 도움말
 
 - `AppFloatingDisclosure`가 bubble과 panel의 열림 상태, 외부 이동 시

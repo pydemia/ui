@@ -1,5 +1,30 @@
 # Component 확장 작업 인계
 
+2026-10-03 `BarList` 로컬 후보: 범주별 값·0건·빈 목록을 가로
+막대와 정확한 텍스트로 표시합니다. Operations workspace의 실행
+상태와 연결했고 typecheck·UI 테스트 212/212·build, 로컬 Chromium의
+390px 표시·상태 갱신을 확인했습니다. registry 검사·59번째
+snapshot·release check가 통과했고 PR CI·공개 URL은 진행 중입니다.
+공개 130개 component·132개
+item·58개 snapshot, 로컬 131개·133개, goal 추정 약 97%입니다.
+[작업 기록](bar-list-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 체크리스트 재검토: 기존 설치 경로의 새 item에
+매 릴리스 대표 소비자 설치를 요구하던 로드맵 문구를 고쳤습니다.
+API·preview·Usage·출처, 변경한 핵심 동작, 적용 CI·공개 경로의
+증거는 유지합니다. 검사 코드·snapshot 형식은 그대로이며 공개
+130개 component·132개 item·58개 snapshot, goal 추정 약 97%입니다.
+[현재 기준](quality-checklist-current-review-2026-10-02.md)을 참고하세요.
+
+2026-10-03 `AppFloatingDisclosure` 공개 확인: PR #104를
+`7f40cc3d3`로 병합했습니다. PR·`main` Verify UI, Pages,
+Vercel production이 성공했고 현재 item·58번째 snapshot
+manifest·item·문서 JS asset이 로컬 빌드와 일치합니다. 공개
+130개 component·132개 item·58개 snapshot, goal 추정 약
+97%입니다. 공개 뒤 기록은 별도 문서 commit에 두었으므로 다음
+제품 변경에 포함하세요.
+[작업 기록](app-floating-disclosure-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `AppFloatingDisclosure` 로컬 후보: `AppShell`의 floating
 bubble·panel에 열림 상태, 닫기·Escape의 focus 복귀와 외부 이동
 닫기를 묶었습니다. typecheck·UI 테스트 209/209·build·registry

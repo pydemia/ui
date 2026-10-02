@@ -11,7 +11,7 @@ import {
     AvatarGroup, AvatarUploader, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, BlockDocument, BlockEditor,
-    Board, BottomNav, BottomNavLink,
+    BarList, Board, BottomNav, BottomNavLink,
     Button, ButtonGroup, IconButton,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
@@ -3184,6 +3184,34 @@ function SparklinePreview() {
             </div>
             <Sparkline label="일별 요청" unit="건"
                 values={empty ? [] : [8, 12, 10, null, 15, 13, 19, 17]} />
+        </div>
+    );
+}
+
+function BarListPreview() {
+    const [variant, setVariant] = useState<"panel" | "plain">("panel");
+    const [empty, setEmpty] = useState(false);
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setVariant(
+                    variant === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {variant === "panel" ? "패널" : "평면"}
+                </Button>
+                <Button variant="outline" onClick={() => setEmpty(!empty)}>
+                    {empty ? "데이터 표시" : "빈 데이터"}
+                </Button>
+            </div>
+            <BarList title="작업별 처리 건수"
+                description="범주별 수치와 길이를 함께 비교합니다."
+                items={empty ? [] : [
+                    { id: "usage", label: "일일 사용량 집계", value: 128 },
+                    { id: "audit", label: "이벤트 정합성 검사", value: 86 },
+                    { id: "notify", label: "알림 발송 준비", value: 0 },
+                ]}
+                unit="건" variant={variant} />
         </div>
     );
 }
@@ -7253,6 +7281,19 @@ function JobTerminal() {
 <Sparkline label="일별 요청" unit="건"
   values={[8, 12, 10, null, 15, 13, 19, 17]} />`,
         preview: () => <SparklinePreview />,
+    },
+    {
+        id: "bar-list", name: "BarList", category: "Data & analytics",
+        description: "범주별 음수가 없는 값을 가로 막대와 수치로 비교합니다. 긴 이름과 0건을 유지하며 기준 최댓값을 지정할 수 있습니다.",
+        code: `import { BarList } from "@pydemia/ui";
+
+<BarList title="작업별 처리 건수" unit="건"
+  items={[
+    { id: "usage", label: "일일 사용량 집계", value: 128 },
+    { id: "audit", label: "이벤트 정합성 검사", value: 86 },
+    { id: "notify", label: "알림 발송 준비", value: 0 },
+  ]} />`,
+        preview: () => <BarListPreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",

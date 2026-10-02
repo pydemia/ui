@@ -1,5 +1,17 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 BarList
+
+`DataChart`는 시계열·다중 계열 차트에 맞고 `DataList`에는 크기
+비교가 없습니다. 긴 범주 이름과 단일 수치를 운영 화면에서 함께
+비교하도록 `BarList`를 원본 React·Tailwind로 구현했습니다.
+외부 component 소스를 복사하지 않았고 새 npm 의존성도 없습니다.
+registry 의존성은 기존 `pyd-utils`뿐입니다.
+[W3C WAI의 Use of Color 해설](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color)을
+참고해 범주 이름과 정확한 값을 항상 텍스트로 보여 주고 막대는
+장식으로 처리했습니다. 이 문서의 예제 코드는 사용하지 않았습니다.
+실제 screen reader·touch·Safari는 아직 확인하지 않았습니다.
+
 ## 2026-10-03 AppShell floating disclosure
 
 문서 preview와 분석 화면이 같은 floating bubble·panel의 열림 상태,

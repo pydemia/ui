@@ -1,7 +1,7 @@
 import { useId, useRef, useState } from "react";
 import {
     AppBody, AppBottomPanel, AppFloatingDisclosure,
-    AppHeader, AppMain, AppShell, AppSidebar, Badge, Button,
+    AppHeader, AppMain, AppShell, AppSidebar, Badge, BarList, Button,
     ContentList, Dashboard, DashboardMetrics, DashboardPanels,
     DataChart, DataList, DataTable, GlobalNav, GlobalNavLink, LogConsole,
     MetricCard, NativeSelect, PageHeader, SideNav, SideNavLink,
@@ -100,6 +100,10 @@ function AnalyticsWorkspace() {
     const [logs, setLogs] = useState(initialLogs);
     const [lastAction, setLastAction] = useState("최근 실행을 확인하세요.");
     const data = periodData[period];
+    const statusCounts: Record<RunStatus, number> = {
+        completed: 0, running: 0, failed: 0,
+    };
+    for (const run of runs) statusCounts[run.status] += 1;
 
     function retryRuns(selected: readonly Run[], clearSelection: () => void) {
         const ids = new Set(selected.map(rowId));
@@ -175,6 +179,16 @@ function AnalyticsWorkspace() {
                                 variant="area" inspectable />
                             <LogConsole label="최근 실행 로그"
                                 entries={logs} />
+                            <BarList title="현재 실행 상태"
+                                description="재실행을 요청하면 건수가 즉시 갱신됩니다."
+                                items={([
+                                    "completed", "running", "failed",
+                                ] as const).map((status) => ({
+                                    id: status,
+                                    label: statusLabel[status],
+                                    value: statusCounts[status],
+                                }))}
+                                unit="건" className="@3xl:col-span-2" />
                         </DashboardPanels>
                     </Dashboard>
                     <section id="analytics-runs" className="space-y-3"
