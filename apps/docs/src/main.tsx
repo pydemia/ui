@@ -8,6 +8,7 @@ import {
 } from "@pydemia/ui";
 import provenance from "../../../registry/provenance.json";
 import { AnalyticsWorkspace } from "./analytics-workspace";
+import { ReviewWorkspace } from "./review-workspace";
 import { catalog } from "./catalog";
 import "./styles.css";
 
@@ -88,6 +89,11 @@ const analyticsItems = [
     "metric-card", "native-select", "page-header",
 ];
 
+const reviewItems = [
+    "approval-card", "badge", "diff-viewer", "master-detail",
+    "native-select", "page-header", "search-input", "thread",
+];
+
 function expandHex(value: string) {
     const color = value.trim().toLowerCase();
     if (/^#[0-9a-f]{3}$/.test(color)) {
@@ -165,6 +171,10 @@ function App() {
         .join(" ");
     const tokensUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-tokens.json`, window.location.origin).href;
     const analyticsUrls = analyticsItems.map((item) => new URL(
+        `${import.meta.env.BASE_URL}r/pyd-${item}.json`,
+        window.location.origin,
+    ).href).join(" ");
+    const reviewUrls = reviewItems.map((item) => new URL(
         `${import.meta.env.BASE_URL}r/pyd-${item}.json`,
         window.location.origin,
     ).href).join(" ");
@@ -438,7 +448,7 @@ function App() {
                                     )}
                             </div>
                         ))}
-                        <div className="sidebar-lower"><a href="#colormap">Colormap</a><a href="#tokens">Design tokens</a><a href="#examples">Profile example</a><a href="#analytics-example">Operations workspace</a><a href="#installation">Using the source</a></div>
+                        <div className="sidebar-lower"><a href="#colormap">Colormap</a><a href="#tokens">Design tokens</a><a href="#examples">Profile example</a><a href="#analytics-example">Operations workspace</a><a href="#review-example">Review workspace</a><a href="#installation">Using the source</a></div>
                     </div>
                 </aside>
 
@@ -590,7 +600,36 @@ function App() {
                         </details>
                     </section>
 
-                    <section id="installation" className="doc-section usage-section" aria-labelledby="usage-heading"><div className="section-lead"><div><p className="section-index">06 / USING THE SOURCE</p><h2 id="usage-heading">코드 사용</h2><p>현재 패키지는 이 저장소의 private workspace package이며 npm registry에 게시되지 않았습니다. 소스에서 실행하거나 필요한 컴포넌트를 registry로 복사할 수 있습니다.</p></div></div><div className="usage-columns"><div><h3>Repository</h3><p>소스를 내려받아 문서와 예시 화면을 실행합니다.</p><pre><code>git clone https://github.com/pydemia/ui.git{"\n"}cd ui &amp;&amp; npm ci{"\n"}npm run build &amp;&amp; npm run dev</code></pre></div><div><h3>Registry</h3><p>컴포넌트와 token stylesheet를 설치한 뒤 앱의 CSS에서 <code>tokens.css</code>를 import합니다.</p><pre><code>npx shadcn@4.21.0 add {registryUrls}{"\n"}npx shadcn@4.21.0 add {tokensUrl}</code></pre><pre><code>@import "./components/ui/tokens.css";</code></pre></div></div><p className="section-note">위 Usage 코드는 private package import입니다. registry 소비자는 설치된 파일 경로로 import를 바꿔야 합니다. 로컬 registry 설치 검사는 README의 base URL 설정 후 빌드해야 합니다.</p></section>
+                    <section id="review-example" className="doc-section"
+                        aria-labelledby="review-heading">
+                        <div className="section-lead">
+                            <div>
+                                <p className="section-index">06 / COMPOSED EXAMPLE</p>
+                                <h2 id="review-heading">Review workspace</h2>
+                                <p>검색·선택·변경 비교·대댓글·승인을 연결한
+                                    검토 화면입니다. 입력 결과는 로컬 상태로
+                                    유지됩니다.</p>
+                            </div>
+                            <a className="text-link" target="_blank"
+                                rel="noreferrer"
+                                href="https://github.com/pydemia/ui/blob/main/apps/docs/src/review-workspace.tsx">
+                                예시 코드 <ArrowUpRight size={16}
+                                    aria-hidden="true" />
+                            </a>
+                        </div>
+                        <div className="analytics-example-frame">
+                            <ReviewWorkspace />
+                        </div>
+                        <details className="analytics-install">
+                            <summary>이 화면에 사용한 registry item 설치</summary>
+                            <pre><code>npx shadcn@4.21.0 add {reviewUrls} {tokensUrl}</code></pre>
+                            <p>소비자 CSS에 <code>@import "./components/ui/tokens.css";</code>를
+                                추가하세요. 예시 파일의 package import는 설치된
+                                component 경로로 바꿔야 합니다.</p>
+                        </details>
+                    </section>
+
+                    <section id="installation" className="doc-section usage-section" aria-labelledby="usage-heading"><div className="section-lead"><div><p className="section-index">07 / USING THE SOURCE</p><h2 id="usage-heading">코드 사용</h2><p>현재 패키지는 이 저장소의 private workspace package이며 npm registry에 게시되지 않았습니다. 소스에서 실행하거나 필요한 컴포넌트를 registry로 복사할 수 있습니다.</p></div></div><div className="usage-columns"><div><h3>Repository</h3><p>소스를 내려받아 문서와 예시 화면을 실행합니다.</p><pre><code>git clone https://github.com/pydemia/ui.git{"\n"}cd ui &amp;&amp; npm ci{"\n"}npm run build &amp;&amp; npm run dev</code></pre></div><div><h3>Registry</h3><p>컴포넌트와 token stylesheet를 설치한 뒤 앱의 CSS에서 <code>tokens.css</code>를 import합니다.</p><pre><code>npx shadcn@4.21.0 add {registryUrls}{"\n"}npx shadcn@4.21.0 add {tokensUrl}</code></pre><pre><code>@import "./components/ui/tokens.css";</code></pre></div></div><p className="section-note">위 Usage 코드는 private package import입니다. registry 소비자는 설치된 파일 경로로 import를 바꿔야 합니다. 로컬 registry 설치 검사는 README의 base URL 설정 후 빌드해야 합니다.</p></section>
                     <footer className="footer"><span>pydemia UI · prototype v0.1.0</span><a href="https://github.com/pydemia/ui/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noreferrer">Third-party notices</a></footer>
                 </main>
             </div>
