@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 BottomNav 표시 형태 로컬 검증: **약 97% → 약 97%**입니다.
+하단 탐색에 `dock` 표시를 추가해 기존 `bar`와 고를 수 있습니다.
+typecheck·UI 테스트 185/185·build·현재 snapshot 검사를 통과했고
+390px Chromium에서 링크 클릭·Enter·dark 배치와 가로 넘침 없음을
+확인했습니다. 125개 component·127개 registry item은 그대로이며
+49번째 snapshot은 아직 공개 검증 전입니다.
+[작업 기록](navigation-dock-2026-10-02.md)을 참고하세요.
+
 2026-10-02 MarkdownEditor 공개 확인: **약 97% → 약 97%**입니다.
 PR #82와 병합 commit `e898927`의 CI·Pages, Vercel production,
 공개 preview·Usage와 현재 item·45번째 snapshot URL을

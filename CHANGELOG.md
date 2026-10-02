@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-02 — BottomNav 표시 형태
+
+- `BottomNav`에 콘텐츠 위에 놓는 `dock` 표시를 추가했습니다. 기존
+  전체 너비 `bar`가 기본값입니다. 링크의 이름과 `aria-current` 의미는
+  그대로 유지하며 새 의존성은 없습니다.
+
 ## 2026-10-02 — LogViewer
 
 - `LogConsole`의 panel·flat 표시를 선택할 수 있게 했습니다. 기존

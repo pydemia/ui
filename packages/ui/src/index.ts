@@ -142,7 +142,8 @@ export {
     BottomNav, BottomNavLink,
 } from "./components/navigation";
 export type {
-    GlobalNavLinkProps, SideNavLinkProps, BottomNavLinkProps,
+    GlobalNavLinkProps, SideNavLinkProps, BottomNavProps,
+    BottomNavLinkProps,
 } from "./components/navigation";
 export { AnchorNav } from "./components/anchor-nav";
 export type {

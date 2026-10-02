@@ -37,11 +37,30 @@ test("bottom navigation keeps destination links and current page semantics", () 
     ));
 
     assert.match(markup, /<nav[^>]*aria-label="모바일 주요 탐색"/);
+    assert.match(markup, /data-appearance="bar"/);
     assert.match(markup, /href="\/overview"[^>]*aria-current="page"/);
     assert.match(markup, /<span aria-hidden="true"[^>]*>●<\/span>/);
     assert.match(markup, /<span>개요<\/span>/);
     assert.match(markup, /href="\/inbox"/);
     assert.match(markup, /<span>받은 편지함<\/span>/);
+});
+
+test("dock appearance preserves navigation links and labels", () => {
+    const markup = renderToStaticMarkup(createElement(
+        BottomNav,
+        { "aria-label": "모바일 주요 탐색", appearance: "dock" },
+        createElement(BottomNavLink, {
+            href: "/overview", label: "개요", "aria-current": "page",
+        }),
+    ));
+
+    assert.match(markup, /data-appearance="dock"/);
+    assert.match(markup, /shadow-\[var\(--shadow-float\)\]/);
+    assert.match(markup, /href="\/overview"[^>]*aria-current="page"/);
+    assert.match(markup, /<span>개요<\/span>/);
+    assert.throws(() => renderToStaticMarkup(createElement(
+        BottomNav, { "aria-label": "탐색", appearance: "floating" },
+    )), RangeError);
 });
 
 test("bottom destination requires a visible name and a real href", () => {

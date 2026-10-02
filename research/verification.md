@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 BottomNav 표시 선택 로컬 검증
+
+`BottomNav`의 기존 `bar`와 새 `dock` 표시에서 링크 이름과
+`aria-current` 의미를 유지합니다. `npm run typecheck`, UI 테스트
+185/185, `npm run build`, `npm run registry:release-check`가
+통과했습니다. 로컬 Chromium 문서 preview에서 표시 전환, 클릭·Enter
+선택, 390px 배치와 dark 표시를 확인했고 페이지 가로 넘침과 console
+error는 없었습니다. 현재 빌드와 49번째 snapshot의 127개 item이
+일치합니다. PR·공개 배포와 실제 screen reader·touch·Safari·RTL은
+검증하지 않았습니다. [작업 기록](../.worknotes/navigation-dock-2026-10-02.md)에
+범위를 남겼습니다.
+
 ## 2026-10-02 Review workspace — 공개
 
 PR #90의 Verify UI run `36987986397`, 병합 commit `024038e`의
