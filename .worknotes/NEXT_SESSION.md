@@ -1,11 +1,23 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 체크리스트 재검토: 현행 변경분 중심 하한은
+유지하고 구현·공개 후보·공개 공급을 별도 상태로 보고합니다.
+`BarList`는 품질 검사 후 Vercel 제한으로 공개 대기, `BulletChart`는
+로컬·draft PR #106 CI를 통과한 구현 후보입니다. CI 중복·snapshot
+전체 복제·공통 고지 hash 전파는 품질 체크박스를 줄이는 대신 별도
+구현 과제로 분류했습니다. 제품 코드·공개 수량과 goal 추정 약 97%는
+그대로입니다.
+[판정 기록](quality-checklist-review-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `BulletChart` 로컬 후보: 목표 대비 실적을 명시한 상한과
 함께 표시합니다. 0·미수집을 구분하고 Operations workspace의 완료
 건수에 연결했습니다. typecheck·UI 테스트 215/215·build·registry와
 로컬 Chromium 표시·상태 갱신을 확인했습니다. Vercel 제한 중에는
 추가 snapshot을 만들지 않았습니다. `main` 131개 component·133개
 item·59개 snapshot, 로컬 132개·134개, goal 추정 약 97%입니다.
+[draft PR #106](https://github.com/pydemia/ui/pull/106)의 Verify UI
+run `37045189665`는 성공했습니다. 새 snapshot·production 공급은
+아직 확인하지 않았습니다.
 [작업 기록](bullet-chart-2026-10-03.md)을 참고하세요.
 
 2026-10-03 `BarList`를 PR #105로 `main`에 병합했습니다. PR·main

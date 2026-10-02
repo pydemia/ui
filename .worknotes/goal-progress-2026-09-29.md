@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 공급·품질 체크리스트 재검토: **약 97% → 약 97%**입니다.
+구현 후보, 공개 준비, 공개 공급을 별도 상태로 기록하기로 했습니다.
+draft PR #106의 Verify UI는 성공했지만 새 snapshot·production은
+미검증입니다. BarList는 병합·CI 성공 후 Vercel 배포 제한으로 공개
+대기 중입니다. 검사 기준을 낮추거나 공개 수량을 바꾸지 않았습니다.
+[판정 기록](quality-checklist-review-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `BulletChart` 로컬 후보: **약 97% → 약 97%**입니다.
 목표 대비 실적과 0·미수집 값을 구분하는 분석 UI를 구현하고
 Operations workspace에 연결했습니다. typecheck와 UI 테스트
