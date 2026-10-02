@@ -1,5 +1,13 @@
 # 검증 기록
 
+## 2026-10-03 FormWizard — 공개
+
+PR #103과 병합 `e921800e8`의 Verify UI·GitHub Pages,
+Vercel production이 성공했습니다. 공개 현재 item과 57번째
+snapshot의 manifest·item, 문서 JS asset이 로컬 빌드와 byte
+단위로 일치합니다. 공개 상호작용은 재실행하지 않았습니다.
+로컬 Chromium 결과와 미검증 환경은 아래 기록을 참고하세요.
+
 ## 2026-10-03 FormWizard — 로컬 후보
 
 `npm run typecheck`, UI 테스트 206/206, `npm run build`,
