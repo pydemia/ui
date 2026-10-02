@@ -37,10 +37,14 @@ preview·Usage를 연결했습니다. [출처 조사](../research/source-invento
   오류는 없었습니다. 제거 후 새 파일 선택 시 이전 상태 문구가
   남지 않도록 수정했습니다.
 
-`registry:check`는 provenance 고지의 이전 SHA-256 때문에 멈췄습니다.
-출처 commit을 고정하고 새 hash를 기입한 뒤 다시 검사해야 합니다.
-공개 preview·item URL·snapshot·CI·배포도 아직 확인하지 않았습니다.
-실제 저장 API와 보조기술 발표는 이
+source commit `86cb975fbd7fda4a5e30cef1d79d3aa5cda5c9ac`의
+provenance SHA-256을 소비자 고지에 고정했습니다. 초기
+`registry:check` 실패는 이전 hash가 남아 있었기 때문이며, 고지
+갱신 후 검사와 `registry:release-check`가 통과했습니다. 123개 item과
+121개 export/catalog가 일치하고 42번째 snapshot
+`sha256-1fe7e3c31000b32e5f0865a208e818c05c6a1a4ea186e4313128ae75808dc8cf`를
+현재 빌드와 대조했습니다. 공개 preview·item URL·CI·배포는 아직
+확인하지 않았습니다. 실제 저장 API와 보조기술 발표는 이
 component가 제공하는 범위 밖이거나 별도 환경 검사가 필요합니다.
 공개 확인 전까지 공급 수량과 goal 추정 약 95%를 올리지 않습니다.
 

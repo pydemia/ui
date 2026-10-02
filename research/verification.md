@@ -10,9 +10,12 @@ dark 배치와 브라우저 오류 없음도 확인했습니다. 이후 status �
 작은 변경은 새 파일을 고른 동안 이전 제거 문구를 숨깁니다.
 
 `npm run build`는 123개 registry item과 문서 사이트를 생성해
-통과했습니다. `registry:check`는 provenance 고지의 이전 SHA-256
-때문에 실패했고 source commit·hash 고정 후 재검사해야 합니다.
-공개 CI·배포·item URL은 미검증입니다. 실제
+통과했습니다. 이전 provenance SHA-256 때문에 처음 실패한
+`registry:check`는 source commit `86cb975`와 새 hash를 고지에
+고정한 뒤 통과했습니다. `registry:release-check`는 123개 item,
+121개 export/catalog와 42번째 snapshot
+`sha256-1fe7e3c31000b32e5f0865a208e818c05c6a1a4ea186e4313128ae75808dc8cf`를
+현재 빌드와 대조했습니다. 공개 CI·배포·item URL은 미검증입니다. 실제
 저장 API와 screen reader 발표도 검사하지 않았습니다. 공개 기준은
 120개 component·122개 item·41개 snapshot, goal 관리용 추정 약
 95%입니다. [작업 기록](../.worknotes/avatar-uploader-2026-10-02.md)에

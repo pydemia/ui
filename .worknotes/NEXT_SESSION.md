@@ -12,8 +12,9 @@
 미리보기·제거를 원본 component로 조합했습니다. typecheck와 UI
 테스트 172/172, 로컬 Chromium의 파일 선택·crop·focus·390px dark를
 확인했습니다. build도 123개 registry item을 생성해 통과했습니다.
-registry 검사는 provenance 고지의 이전 hash 때문에 멈춰 source
-commit·고지 갱신이 필요합니다. PR·공개 경로도 남았습니다.
+source commit `86cb975`의 provenance hash를 고지에 고정한 뒤
+registry 검사와 42번째 snapshot의 release 검사가 통과했습니다.
+PR·공개 경로는 남았습니다.
 로컬 121개 component·123개 item, 공개 120개·122개·41개
 snapshot이며 goal 관리용 추정 약 95%는 그대로입니다.
 [작업 기록](avatar-uploader-2026-10-02.md)을 참고하세요.
