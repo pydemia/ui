@@ -33,6 +33,10 @@ registry item, 문서 catalog ID의 1:1 대응도 확인합니다.
 시험할 수 있습니다. 예시 원본은
 [`apps/docs/src/analytics-workspace.tsx`](apps/docs/src/analytics-workspace.tsx)에
 있으며 별도 registry item으로 세지 않습니다.
+Review workspace는 요청 검색·상태 필터, 변경 비교, 대댓글,
+승인·거절을 기존 component로 연결한 예시입니다. 원본은
+[`apps/docs/src/review-workspace.tsx`](apps/docs/src/review-workspace.tsx)에
+있으며 의견과 결정은 화면을 새로 고치면 초기화됩니다.
 
 `@pydemia/ui`는 이 workspace 안에서 사용하는 **private 패키지**이며 npm에
 게시되지 않았습니다. 컴포넌트 소스를 프로젝트에 편입할 때는 원하는

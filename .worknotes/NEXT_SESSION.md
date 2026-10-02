@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 Review workspace 로컬 예시: 요청 검색·상태 필터,
+`MasterDetail` 선택, `DiffViewer` 비교, `Thread` 대댓글과
+`ApprovalCard` 결정을 연결했습니다. 브라우저에서 요청 전환 시
+댓글 중복을 발견해 고쳤고 핵심 흐름과 좁은 화면을 확인했습니다.
+수정판 docs typecheck·전체 build·registry 검사와 새 브라우저 탭의 오류 0건을
+확인했습니다. 공개는 진행 중이며 goal 추정 약 97%를 유지합니다.
+[작업 기록](review-workspace-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트의 경직성을 재검토했습니다. 현재
 판정은 이미 변경분 중심이지만 문서 PR에도 전체 CI를 실행하고 새
 snapshot마다 전체 registry item을 복제하는 절차 비용이 남아 있습니다.

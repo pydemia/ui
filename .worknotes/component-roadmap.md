@@ -52,6 +52,10 @@ item의 개별 격리 설치·전체 동작은 미검증입니다.
 동작 예시입니다. 재실행은 로컬 상태만 바꾸며 새 component로 세지
 않습니다. 검증 범위는
 [분석 예시 기록](component-analytics-workspace-2026-09-29.md)에 있습니다.
+문서의 Review workspace는 `MasterDetail`·`DiffViewer`·`Thread`·
+`ApprovalCard`를 연결한 검토 흐름입니다. 기존 component를 조합한
+예시여서 component 수에는 포함하지 않습니다. 검증 범위는
+[작업 기록](review-workspace-2026-10-02.md)에 남겼습니다.
 세부 검증 상태는 [verification.md](../research/verification.md)에 있습니다.
 
 목표는 제품 화면에서 반복되는 UI를 바로 가져다 쓸 수 있게 만들어 개발

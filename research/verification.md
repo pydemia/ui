@@ -1,5 +1,21 @@
 # 검증 기록
 
+## 2026-10-02 Review workspace — 로컬 예시
+
+기존 `MasterDetail`·`DiffViewer`·`Thread`·`ApprovalCard`를 연결한
+문서 예시에서 요청 검색·상태 필터, 대댓글 등록, 승인 뒤 목록 상태
+변경을 Chromium에서 실행했습니다. 요청 전환 시 두 의견 영역이
+중복되던 초안은 상세 wrapper의 key로 수정했고, 새 브라우저 탭에서
+의견 영역 1개와 console error·React key 경고 0건을 확인했습니다.
+좁은 화면에서 목록→상세 이동과 페이지 가로 overflow가 없음을
+확인했습니다. 수정판 docs typecheck·전체 build·`registry:check`는
+통과했습니다.
+실제 keyboard-only 탐색·screen reader·touch·Safari·RTL과 별도
+registry 소비자 설치는 미검증입니다. 공개 CI·배포·URL도 남았습니다.
+새 component·registry item은 없으며 goal 추정 약 97%를 유지합니다.
+[작업 기록](../.worknotes/review-workspace-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 LogViewer — 공개
 
 PR #88의 Verify UI run `36984294369`, 병합 commit `de243eb`의
