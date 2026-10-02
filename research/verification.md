@@ -1,5 +1,21 @@
 # 검증 기록
 
+## 2026-10-02 LogViewer — 공개
+
+PR #88의 Verify UI run `36984294369`, 병합 commit `de243eb`의
+Verify UI run `36984532856`와 Pages run `36984531749`이
+성공했습니다. Vercel production
+`dpl_B5wnfggC6hab3UKD5UUywyrRw9wt`는 READY입니다. 공개
+preview·Usage와 125개 component 표시를 확인했습니다. 현재
+`pyd-log-viewer.json`, 48번째 snapshot manifest·item URL은
+HTTP 200이고 itemCount는 127입니다. 네 registry dependency는
+같은 snapshot URL을 사용합니다. 변경한 검색·필터 동작은 로컬
+Chromium에서 확인했고 공개 사이트에서 반복하지 않았습니다.
+실제 keyboard-only·screen reader·touch·Safari·RTL과 별도
+소비자 설치는 미검증입니다. 공개 수량은 125개 component·127개
+item·48개 snapshot, goal 관리용 추정은 약 97%입니다.
+[작업 기록](../.worknotes/log-viewer-2026-10-02.md)을 참고하세요.
+
 ## 2026-10-02 LogViewer — 로컬 후보
 
 `npm run typecheck`, `npm run build`와 UI 테스트 184/184가
