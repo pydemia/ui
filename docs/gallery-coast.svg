@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <title>로즈색 하늘 아래 남색 해안</title>
+  <rect width="640" height="360" fill="#f3dbe3"/>
+  <circle cx="144" cy="113" r="55" fill="#ba365b"/>
+  <path d="M0 223c106-27 179-26 269 6 93 33 188 27 371-12v143H0Z"
+        fill="#a6c5d0"/>
+  <path d="M0 263c93 29 162 25 242-6 104-39 167-41 398 16v87H0Z"
+        fill="#245d70"/>
+  <path d="M0 314c95-35 156-19 250 8 83 24 145 14 212-16 63-29 120-25 178-8v62H0Z"
+        fill="#103344"/>
+</svg>

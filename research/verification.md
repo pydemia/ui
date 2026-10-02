@@ -15,7 +15,11 @@ dark 화면에서 immersive modal은 390px, frame modal은 358px였고
 새 외부 source·npm 의존성은 없습니다. 기존 `pyd-button`·
 `pyd-dialog`·`pyd-image`·`pyd-utils`를 사용합니다. `npm run build`는
 120개 registry item과 문서 사이트를 생성해 통과했습니다.
-registry 정합성 검사와 공개 배포는 아직 확인하지 않았습니다.
+`registry:check`는 118개 component export/catalog와 120개 item·
+provenance 대응을 확인했고, `registry:release-check`는 39번째
+snapshot `sha256-dea2f171b25188f27f7de81b2fefe2294be42a457bf3aef07fadbb6cf9d3c0bc`가
+현재 빌드와 일치함을 확인했습니다. 공개 배포는 아직 확인하지
+않았습니다.
 실제 screen reader·
 touch·Safari·RTL과 개별 소비자 설치는 실행하지 않았습니다.
 
