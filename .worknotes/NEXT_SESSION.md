@@ -3,9 +3,10 @@
 2026-10-03 `ItemList` 로컬 후보: 제목·설명·메타 정보·별도 작업을
 같은 native 목록에 배치하고 panel/plain·comfortable/compact를
 선택합니다. typecheck·전체 UI 테스트 226/226, Chromium 390px·1280px
-preview와 작업 버튼·디자인 전환을 확인했습니다. 전체 테스트·
-registry release·PR·공개 경로는 남았습니다. 공개 134개 component·
-136개 item·63개 snapshot, Goal 추정 약 98%입니다.
+preview와 작업 버튼·디자인 전환을 확인했습니다. build·registry
+release 검사가 64번째 snapshot과 135개 component·137개 item의
+정합성을 확인했습니다. PR·공개 경로는 남았습니다. production은
+134개·136개·63개이며 Goal 추정 약 98%입니다.
 [작업 기록](item-list-2026-10-03.md)을 참고하세요.
 
 2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개: 정적 원본

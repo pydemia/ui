@@ -2,8 +2,9 @@
 
 2026-10-03 `ItemList` 로컬 후보: **약 98% → 약 98%**입니다.
 일반 작업 목록의 제목·설명·메타·작업 배치와 두 표시 형태·간격을
-추가했습니다. typecheck·대상 테스트·로컬 preview는 확인했지만
-registry release와 공개 공급은 아직 확인하지 않았습니다.
+추가했습니다. typecheck·전체 UI 테스트·로컬 preview와 64번째
+snapshot의 registry release 검사를 확인했습니다. PR·공개 공급은
+아직 확인하지 않았습니다.
 [작업 기록](item-list-2026-10-03.md)을 참고하세요.
 
 2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개:
