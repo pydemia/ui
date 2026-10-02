@@ -305,6 +305,8 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
 - [x] `Conversation` — Message 목록, 새 메시지 위치와 스크롤.
 - [x] `Reasoning` — 펼침 상태, streaming 상태와 접근 가능한 제목.
 - [x] `ToolCall` — 호출 입력·진행·결과·오류의 구분.
+- [x] `AgentStatus` — 전체 AI 작업의 상태, 여러 단계의 처리 수와
+  취소·재시도 요청을 표시합니다. 실행과 상태 갱신은 호출자가 맡습니다.
 - [x] `Citation` — `CitationList`로 출처 제목·위치·절대 HTTP(S)
   링크와 빈 상태를 제공합니다. pointer·keyboard preview와 새 소비자
   설치를 확인했고 실제 screen reader 발표는 남았습니다.
@@ -417,8 +419,10 @@ token 전달 방식을 정할 때,
   값 제출·초기화를 확인했습니다. 실제 touch·screen reader·Safari는
   미검증이며 [작업 기록](component-range-slider-2026-09-30.md)에 남겼습니다.
 - [ ] `EmptyState`·`Empty`: 결과별 독립 상태가 필요한지 비교합니다.
-- [ ] `ModelSelector`·`ApprovalCard`·`AgentStatus`: AI workspace에서
-  실제 반복 작업과 독립 상태가 확인되면 D 후보로 올립니다.
+- [ ] `ModelSelector`: 실제 모델 선택·권한·비용 정보를 소유할 화면이
+  확인되면 기존 Select·Combobox와 비교합니다.
+- [x] `ApprovalCard`·`AgentStatus`: 각각 승인 결정과 전체 작업 진행을
+  별도 상태로 구현했습니다. 실제 실행·저장은 호출자가 맡습니다.
 - [x] `CodeEditorShell`: SQL·설정 조각을 위한 이름 있는 일반 텍스트
   textarea에 줄 번호, 언어·작업 영역, 오류 연결을 결합했습니다.
   구문 강조·코드 실행은 이 component의 범위가 아닙니다.

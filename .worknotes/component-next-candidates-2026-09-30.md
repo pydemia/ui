@@ -29,8 +29,10 @@
   축약 비교 고지를 구현했습니다. 공개 설치 검증 결과는
   [작업 기록](component-diff-viewer-2026-10-01.md)에 남깁니다.
 
-`AgentStatus`는 여러 도구와 단계의 전체 작업 상태를 표시하는 화면이
-반복될 때 `ToolCall`과 별도 상태 모델로 검토합니다. `CalendarScheduler`,
+`AgentStatus`는 2026-10-02에 여러 도구·단계의 전체 작업 상태,
+처리한 단계 수와 취소·재시도를 `ToolCall`과 분리해 로컬에
+구현했습니다. 검증 범위는
+[작업 기록](agent-status-2026-10-02.md)에 남깁니다. `CalendarScheduler`,
 `ImageCropper`, `RichTextEditor`는 각각 일정 편집, 이미지 후처리, 서식
 문서 작성이라는 실제 제품 용례와 유지 비용이 확인되기 전에는 보류합니다.
 
@@ -40,9 +42,9 @@
   총건수·로딩·오류를 기존 API의 `remote` 모드로 추가했습니다.
   행 편집과 큰 데이터의 표시 성능은 실제 데이터 규모와 함께
   검토합니다. 새 `DataGrid`를 먼저 만들 근거는 아직 없습니다.
-- `Combobox`: `onQueryChange`는 있지만 선택값이 현재 `options`에서
-  사라지면 오류가 납니다. 원격 검색의 loading·error·선택값 보존은
-  별도 `AsyncCombobox`보다 기존 API 확장 여부를 먼저 검토합니다.
+- `Combobox`: 2026-10-01에 원격 검색의 loading·error·선택값 보존을
+  기존 API에 추가했습니다. 범위는
+  [작업 기록](combobox-remote-results-2026-10-01.md)에 있습니다.
 - `ChartTooltip`, `ActionBar`, `CopyButton`, `Stat`, `EmptyState`는 각각
   기존 값 확인 패널, `DataTable.renderActions`, 복사 가능한 코드 표시,
   `MetricCard` 변형, `Empty` 조합과 중복을 비교합니다.

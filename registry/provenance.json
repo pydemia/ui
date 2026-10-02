@@ -352,6 +352,11 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named tool section with status and native input disclosure", "keyboard": "Chromium: Enter input disclosure and pending/running/succeeded/failed states verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-agent-status", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named run section with native progress, ordered stages, visible status and native cancel/retry buttons", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-approval-card", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "AI Elements", "url": "https://github.com/vercel/ai-elements/blob/6a9d5b1822ffb10bba4bd97175f01edd7d8651cd/packages/elements/src/confirmation.tsx", "license": "Apache-2.0", "scope": "approval state concept only; no source copied" },

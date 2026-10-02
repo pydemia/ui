@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-02 — AgentStatus
+
+- `AgentStatus`는 AI 작업 전체 상태와 단계별 진행·완료·실패·건너뜀,
+  처리한 단계 수를 표시합니다. 취소·재시도 요청은 호출자 callback으로
+  전달하고 실제 작업 상태는 호출자가 소유합니다.
+- `panel`·`compact` 표시와 native progress·ordered list·버튼을
+  공통 token으로 제공합니다.
+
 ## 2026-10-02 — QueryBuilder
 
 - 조건의 필드·연산자·값과 중첩 AND/OR 그룹을 편집하는

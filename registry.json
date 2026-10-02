@@ -447,6 +447,11 @@
       "files": [{ "path": "packages/ui/src/components/tool-call.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-agent-status", "type": "registry:ui", "title": "Agent Status",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/agent-status.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-approval-card", "type": "registry:ui", "title": "Approval Card",
       "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/approval-card.tsx", "type": "registry:ui" }]

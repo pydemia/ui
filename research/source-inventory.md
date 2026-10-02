@@ -1481,3 +1481,11 @@ item에 고정했습니다. 실제 screen reader·touch·Safari·RTL은
 설명만 참고했으며 예제 코드를 복사하지 않았습니다. 기존 Button·Input·
 NativeSelect의 source와 고지는 해당 registry item이 전달합니다.
 실제 screen reader·touch·Safari·RTL은 검증하지 않았습니다.
+## 2026-10-02 AgentStatus
+
+`AgentStatus`는 pydemia/ui 원본 구현입니다. 외부 component 코드는
+복사하지 않았습니다. 기존 `pyd-button`·`pyd-utils`만 registry
+dependency로 사용하며 새 npm 의존성은 없습니다. 전체 상태와 단계
+상태의 표시는 native section·ordered list·progress·button을
+사용합니다. 기존 Button의 source와 고지는 해당 registry item이
+전달합니다. 실제 screen reader·touch·Safari·RTL은 미검증입니다.

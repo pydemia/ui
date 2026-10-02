@@ -6,7 +6,7 @@ import {
     AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
     AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
     AlertDialogTitle, AlertDialogTrigger, Avatar, AvatarFallback, AvatarImage,
-    ApprovalCard, AvatarGroup, Badge,
+    AgentStatus, ApprovalCard, AvatarGroup, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, Board, BottomNav, BottomNavLink,
     Button, ButtonGroup, IconButton,
@@ -80,7 +80,8 @@ import {
     useEffect, useId, useRef, useState, type FormEvent, type ReactNode,
 } from "react";
 import type {
-    AppliedFilter, ApprovalStatus, BoardPost, CalendarSchedule,
+    AgentRunStatus, AgentStage, AppliedFilter, ApprovalStatus, BoardPost,
+    CalendarSchedule,
     ConversationMessage,
     DataTableColumn, DataTableView,
     DateRangeValue,
@@ -1330,6 +1331,48 @@ function ToolCallPreview() {
                 error={status === "failed" ? "의존성 파일을 찾지 못했습니다." : undefined} />
             <ToolCall name="cache.read" status="succeeded"
                 output="캐시 적중" variant="compact" />
+        </div>
+    );
+}
+
+function AgentStatusPreview() {
+    const [status, setStatus] = useState<AgentRunStatus>("running");
+    const [variant, setVariant] = useState<"panel" | "compact">("panel");
+    const stageStatus: Record<AgentRunStatus,
+        AgentStage["status"][]> = {
+        queued: ["pending", "pending", "pending"],
+        running: ["completed", "running", "pending"],
+        completed: ["completed", "completed", "completed"],
+        failed: ["completed", "failed", "pending"],
+        cancelled: ["completed", "pending", "pending"],
+    };
+    const labels = ["요청 해석", "데이터 조회", "답변 구성"];
+    const stages: AgentStage[] = labels.map((label, index) => ({
+        id: `stage-${index}`, label, status: stageStatus[status][index],
+        detail: index === 1 ? "운영 지표를 확인합니다." : undefined,
+    }));
+
+    return (
+        <div className="preview-workspace grid max-w-lg gap-3">
+            <div className="flex flex-wrap gap-2">
+                {(["queued", "running", "completed", "failed"] as const)
+                    .map((next) => (
+                        <Button key={next} variant={status === next
+                            ? "primary" : "outline"}
+                            aria-pressed={status === next}
+                            onClick={() => setStatus(next)}>
+                            {{ queued: "대기", running: "진행 중",
+                                completed: "완료", failed: "실패" }[next]}
+                        </Button>
+                    ))}
+                <Button variant="ghost" onClick={() => setVariant(
+                    (current) => current === "panel" ? "compact" : "panel"
+                )}>{variant === "panel" ? "Compact 보기" : "Panel 보기"}</Button>
+            </div>
+            <AgentStatus label="분석 요청" status={status} stages={stages}
+                variant={variant}
+                onCancelTask={() => setStatus("cancelled")}
+                onRetryTask={() => setStatus("running")} />
         </div>
     );
 }
@@ -5028,6 +5071,23 @@ function SupportChat() {
   output="검사 66건 통과"
 />`,
         preview: () => <ToolCallPreview />,
+    },
+    {
+        id: "agent-status", name: "AgentStatus", category: "AI & agent",
+        description: "AI 작업 전체 상태와 단계별 진행·실패·건너뜀을 함께 표시합니다. 작업 취소·재시도는 호출자 callback으로 전달하고 panel·compact 표시를 선택합니다.",
+        code: `import {
+  AgentStatus, type AgentStage,
+} from "@pydemia/ui";
+
+const stages: AgentStage[] = [
+  { id: "parse", label: "요청 해석", status: "completed" },
+  { id: "lookup", label: "데이터 조회", status: "running" },
+  { id: "answer", label: "답변 구성", status: "pending" },
+];
+
+<AgentStatus label="분석 요청" status="running" stages={stages} />`,
+        installItems: ["agent-status"],
+        preview: () => <AgentStatusPreview />,
     },
     {
         id: "approval-card", name: "ApprovalCard", category: "AI & agent",
