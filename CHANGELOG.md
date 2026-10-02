@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-02 — BlockEditor
+
+- 구조화 문서의 블록 형식·내용·순서를 편집하는 `BlockEditor`와
+  저장된 배열을 의미 있는 HTML로 표시하는 `BlockDocument`를
+  추가했습니다. JSON form 값과 panel·plain 표시를 제공하며
+  외부 editor 의존성은 없습니다.
+
 ## 2026-10-02 — ResultState
 
 - 한 비동기 작업의 진행·완료·실패와 실패 재시도를 표시하는

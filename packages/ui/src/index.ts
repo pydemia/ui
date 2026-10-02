@@ -42,6 +42,10 @@ export { CodeEditorShell } from "./components/code-editor-shell";
 export type { CodeEditorShellProps } from "./components/code-editor-shell";
 export { MarkdownEditor } from "./components/markdown-editor";
 export type { MarkdownEditorProps } from "./components/markdown-editor";
+export { BlockDocument, BlockEditor } from "./components/block-editor";
+export type {
+    BlockDocumentProps, BlockEditorBlock, BlockEditorProps, BlockKind,
+} from "./components/block-editor";
 export { NativeSelect } from "./components/native-select";
 export {
     Select, SelectValue, SelectGroup, SelectTrigger, SelectContent, SelectItem,

@@ -9,7 +9,8 @@ import {
     AlertDialogTitle, AlertDialogTrigger, Avatar, AvatarFallback, AvatarImage,
     AgentStatus, ApprovalCard, AvatarGroup, AvatarUploader, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
-    BreadcrumbPage, BreadcrumbSeparator, Board, BottomNav, BottomNavLink,
+    BreadcrumbPage, BreadcrumbSeparator, BlockDocument, BlockEditor,
+    Board, BottomNav, BottomNavLink,
     Button, ButtonGroup, IconButton,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
@@ -83,7 +84,8 @@ import {
     useEffect, useId, useRef, useState, type FormEvent, type ReactNode,
 } from "react";
 import type {
-    AgentRunStatus, AgentStage, AppliedFilter, ApprovalStatus, BoardPost,
+    AgentRunStatus, AgentStage, AppliedFilter, ApprovalStatus,
+    BlockEditorBlock, BoardPost,
     CalendarSchedule,
     AnchorNavItem, ConversationMessage,
     DataTableColumn, DataTableView,
@@ -397,6 +399,49 @@ function MarkdownEditorPreview() {
                 <Button type="submit">값 확인</Button>
                 <Button type="reset" variant="outline">초기화</Button>
                 <p role="status" className="m-0 text-sm">{submitted}</p>
+            </div>
+        </form>
+    );
+}
+
+const initialBlockDocument: BlockEditorBlock[] = [
+    { id: "title", kind: "heading", text: "운영 안내" },
+    { id: "intro", kind: "paragraph", text: "다음 작업을 확인합니다." },
+    { id: "first", kind: "bullet", text: "요청 검토" },
+    { id: "second", kind: "bullet", text: "결과 공유" },
+];
+
+function BlockEditorPreview() {
+    const [blocks, setBlocks] = useState(initialBlockDocument);
+    const [saved, setSaved] = useState<BlockEditorBlock[]>([]);
+    const [message, setMessage] = useState("제출 전");
+
+    return (
+        <form className="preview-stack min-w-0" onSubmit={(event) => {
+            event.preventDefault();
+            const value = new FormData(event.currentTarget).get("document");
+            if (value !== JSON.stringify(blocks)) {
+                setMessage("제출 값이 화면과 다릅니다.");
+                return;
+            }
+            setSaved(JSON.parse(value) as BlockEditorBlock[]);
+            setMessage(`${blocks.length}개 블록을 저장했습니다.`);
+        }} onReset={() => {
+            setBlocks(initialBlockDocument);
+            setSaved([]);
+            setMessage("제출 전");
+        }}>
+            <BlockEditor label="운영 문서" name="document"
+                blocks={blocks} onBlocksChange={setBlocks}
+                description="형식을 고르고 블록을 추가하거나 순서를 바꾸세요."
+                appearance="panel" />
+            <div className="flex flex-wrap items-center gap-2">
+                <Button type="submit">문서 저장</Button>
+                <Button type="reset" variant="outline">초기화</Button>
+                <p role="status" className="m-0 text-sm">{message}</p>
+            </div>
+            <div className="rounded-sm border border-border p-4">
+                <BlockDocument label="저장된 문서" blocks={saved} />
             </div>
         </form>
     );
@@ -7125,6 +7170,36 @@ function JobTerminal() {
                 <li>결과 검토</li>
             </ContentList>
         </div>,
+    },
+    {
+        id: "block-editor", name: "BlockEditor", category: "Content",
+        description: "제목·문단·목록·인용·코드의 순서를 편집해 JSON 블록 배열로 제출합니다. 일반 텍스트 입력은 native textarea가 맡고, BlockDocument가 저장된 구조를 의미 있는 HTML로 표시합니다. HTML 붙여넣기와 인라인 서식은 제공하지 않습니다.",
+        code: `import { useState } from "react";
+import { BlockDocument, BlockEditor } from "@pydemia/ui";
+import type { BlockEditorBlock } from "@pydemia/ui";
+
+function ArticleForm() {
+  const [blocks, setBlocks] = useState<BlockEditorBlock[]>([
+    { id: "title", kind: "heading", text: "운영 안내" },
+    { id: "body", kind: "paragraph", text: "검토 내용을 적습니다." },
+  ]);
+  const [saved, setSaved] = useState<BlockEditorBlock[]>([]);
+
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    const value = new FormData(event.currentTarget).get("document");
+    if (typeof value === "string") {
+      setSaved(JSON.parse(value) as BlockEditorBlock[]);
+    }
+  }}>
+    <BlockEditor label="문서 본문" name="document"
+      blocks={blocks} onBlocksChange={setBlocks} />
+    <button type="submit">저장</button>
+    <BlockDocument label="저장된 본문" blocks={saved} />
+  </form>;
+}`,
+        installItems: ["block-editor"],
+        preview: () => <BlockEditorPreview />,
     },
     {
         id: "carousel", name: "Carousel", category: "Content",
