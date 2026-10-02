@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-02 Empty·Skeleton 표시 확장 공개 확인: PR #84와 병합
+commit `95a1d3e`의 Verify UI·Pages, Vercel production이
+성공했습니다. 공개 preview·Usage, 현재 두 registry item과 46번째
+snapshot manifest·item URL을 확인했습니다. 공개 124개 component·
+126개 item·46개 snapshot, goal 관리용 추정 약 97%입니다.
+[작업 기록](feedback-appearances-2026-10-02.md)을 참고하세요.
+
 2026-10-02 Empty·Skeleton 표시 확장 로컬 후보: 점선·panel·plain
 빈 상태와 직사각형·줄·원형 loading 자리를 한 릴리스로 묶었습니다.
 typecheck·대상 테스트 2/2·build·registry release 검사와 로컬
