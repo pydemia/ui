@@ -1,5 +1,17 @@
 # ModelSelector 편입
 
+## 공개 확인
+
+PR #66은 `main`의 `64282d6`에 병합했습니다. PR의 Verify UI,
+병합 commit의 Verify UI·Pages가 통과했고 Vercel production
+`dpl_5NBbmMoRN7m7q1gHubVZPTJMcEYd`는 READY입니다. 공개
+preview에는 `ModelSelector`와 Usage가 표시되고 브라우저 오류·
+Vite overlay는 없었습니다. 현재 registry manifest·item과 38번째
+snapshot manifest·item URL이 모두 HTTP 200이며 snapshot에는
+119개 item이 있습니다. 공개 117개 component·119개 item,
+goal 관리용 추정 약 92%입니다. 실제 screen reader·touch·Safari·
+RTL과 개별 소비자 설치는 실행하지 않았습니다.
+
 2026-10-02. 공개 기준은 116개 component, 118개 registry item,
 37개 snapshot이며 goal 관리용 추정은 약 91%입니다. 이번 작업은
 AI 작성 화면에서 모델을 검색·선택하고 기능·제공자·사용량 문구,

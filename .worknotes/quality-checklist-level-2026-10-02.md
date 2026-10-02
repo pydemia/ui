@@ -1,8 +1,10 @@
 # 공급·품질 체크리스트 수준 재검토
 
-2026-10-02. 공개 기준은 116개 component, 118개 registry item,
-37개 snapshot입니다. Goal 관리용 추정은 약 91%입니다. 현재
-`ModelSelector`는 로컬 초안이며 공개 수량에 포함하지 않습니다.
+2026-10-02 검토 당시 공개 기준은 116개 component, 118개
+registry item, 37개 snapshot이었습니다. Goal 관리용 추정은 약
+91%였고 `ModelSelector`는 로컬 초안이어서 공개 수량에 포함하지
+않았습니다. 후속 공개 결과는
+[편입 기록](model-selector-2026-10-02.md)을 참고하세요.
 
 ## 판단
 
@@ -20,6 +22,11 @@ registry가 바뀌면 `verify-current` 때문에 전체 item의 새 snapshot을
 PR에 포함해야 합니다. provenance의 검증 문구만 바뀌어도 소비자
 고지의 hash와 전체 snapshot이 연쇄 변경됩니다. 이 비용은 개별
 component의 위험과 비례하지 않습니다.
+
+이번 `ModelSelector` 공개 후보에서도 새 component 1개를 위한
+snapshot과 문서 산출물로 277개 파일, 5,895줄이 변경됐습니다.
+`registry:release-check`는 통과했지만 PR diff의 크기는 기능 변경의
+검토 범위보다 훨씬 큽니다.
 
 현재 판정은 아래 세 가지만 기본으로 읽는 것이 적절합니다.
 

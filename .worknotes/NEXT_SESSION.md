@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 ModelSelector 공개 확인: PR #66의 Verify UI와 병합 commit
+`64282d6`의 Verify UI·Pages가 통과했고 Vercel production
+`dpl_5NBbmMoRN7m7q1gHubVZPTJMcEYd`는 READY입니다. 공개
+preview·Usage와 현재 registry item, 38번째 snapshot manifest·item
+URL을 확인했습니다. 공개 117개 component·119개 item·38개
+snapshot, goal 관리용 추정 약 92%입니다. 실제 screen reader·touch·
+Safari·RTL, 개별 소비자 설치는 미검증입니다.
+[작업 기록](model-selector-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ModelSelector 로컬 검증: 기존 Combobox에 제공자·기능·
 사용량 문구와 사용 불가 이유를 결합했습니다. typecheck·UI 테스트
 161/161·build·release 검사가 통과했고 로컬 Chromium에서 모델
