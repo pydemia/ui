@@ -1,5 +1,15 @@
 # BoxPlotChart 공급 작업
 
+2026-10-03 공개 상태: [PR #116](https://github.com/pydemia/ui/pull/116)을
+`main` commit `10dc6ae02cda58db1bf687c7ee6a99a1d329248f`로 병합했습니다.
+PR Verify UI `37079300575`, `main` Verify UI `37079545727`, Pages
+`37079545263`이 성공했습니다. Vercel production은 배포 횟수 제한으로
+실패했습니다. `ui.pydemia.ai`와 `pydemia-ui.vercel.app`의 현재
+`pyd-box-plot-chart.json`, 사용자 도메인의 66번째 manifest는 HTTP
+404입니다. 따라서 저장소의 공급 후보는 검증됐지만 사용자 사이트의
+공개 공급은 대기 중입니다. 제한 해제 후 production 배포와 해당
+경로를 다시 확인해야 합니다. 실제 screen reader 발표도 미검증입니다.
+
 2026-10-03. 그룹별 다섯 수치 요약을 같은 척도에서 비교하는 원본
 `BoxPlotChart`를 추가했습니다. `DataChart`는 시간·범주별 값의 추이,
 `BulletChart`는 목표 대비 실적을 다루므로 이 용례를 대신하지

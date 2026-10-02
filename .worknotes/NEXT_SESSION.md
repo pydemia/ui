@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #116 병합: `BoxPlotChart`와 66번째 snapshot, 체크리스트
+재검토가 `main`에 들어갔습니다. PR·`main` Verify UI와 Pages는
+성공했지만 Vercel production은 배포 제한으로 실패했고 새 item과
+manifest URL은 404입니다. [작업 기록](box-plot-chart-2026-10-03.md)을
+참고해 제한 해제 뒤 공개 경로를 다시 확인하세요. Goal 관리용 추정은
+약 98%입니다.
+
 2026-10-03 `BoxPlotChart` 공개 준비: 원본 component, catalog와
 registry를 추가하고 로컬 preview·typecheck·대상 테스트·build·
 `registry:release-check`를 확인했습니다. 66번째 snapshot을 생성했으며
