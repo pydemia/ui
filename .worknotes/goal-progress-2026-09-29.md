@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 MarkdownEditor 공개 확인: **약 97% → 약 97%**입니다.
+PR #82와 병합 commit `e898927`의 CI·Pages, Vercel production,
+공개 preview·Usage와 현재 item·45번째 snapshot URL을
+확인했습니다. 공개 124개 component·126개 item·45개 snapshot입니다.
+원문 작성·미리보기·form 값의 조합은 공급했지만 기존 `Markdown`
+preview의 일부를 제품 component로 묶은 것이므로 진척도를
+기계적으로 올리지 않았습니다. RichTextEditor의 문서 모델과
+선택·붙여넣기·undo를 포함한 서식 편집은 남아 있습니다.
+[작업 기록](markdown-editor-2026-10-02.md)을 참고하세요.
+
 2026-10-02 NodeCanvas 공개 확인: **약 96% → 약 97%**입니다.
 PR #80과 병합 commit `772d988`의 CI·Pages, Vercel production,
 공개 preview·Usage와 현재 item·44번째 snapshot URL을
