@@ -2,9 +2,12 @@
 
 2026-10-03 `ItemList` 로컬 후보: **약 98% → 약 98%**입니다.
 일반 작업 목록의 제목·설명·메타·작업 배치와 두 표시 형태·간격을
-추가했습니다. typecheck·전체 UI 테스트·로컬 preview와 64번째
-snapshot의 registry release 검사를 확인했습니다. PR·공개 공급은
-아직 확인하지 않았습니다.
+추가했습니다. typecheck·전체 UI 테스트·로컬 preview, 64번째
+snapshot의 registry release 검사와 PR #110·`main` CI, Pages를
+확인했습니다. Vercel production은 배포 제한으로 실패했고 현재
+item·snapshot manifest는 HTTP 404입니다. 저장소는 135개
+component·137개 item·64개 snapshot, 공개 사이트는 직전
+134개·136개·63개 기준입니다.
 [작업 기록](item-list-2026-10-03.md)을 참고하세요.
 
 2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개:

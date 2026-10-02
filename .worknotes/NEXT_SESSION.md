@@ -1,12 +1,15 @@
 # Component 확장 작업 인계
 
-2026-10-03 `ItemList` 로컬 후보: 제목·설명·메타 정보·별도 작업을
+2026-10-03 `ItemList` 저장소 편입·공개 대기: 제목·설명·메타 정보·별도 작업을
 같은 native 목록에 배치하고 panel/plain·comfortable/compact를
 선택합니다. typecheck·전체 UI 테스트 226/226, Chromium 390px·1280px
 preview와 작업 버튼·디자인 전환을 확인했습니다. build·registry
 release 검사가 64번째 snapshot과 135개 component·137개 item의
-정합성을 확인했습니다. PR·공개 경로는 남았습니다. production은
-134개·136개·63개이며 Goal 추정 약 98%입니다.
+정합성을 확인했습니다. PR #110과 `main` Verify UI, Pages는
+성공했습니다. Vercel production은 `build-rate-limit`로 실패했고
+사용자 사이트의 새 item·snapshot manifest는 404입니다. 제한
+해제 뒤 production 재배포와 공개 파일 일치를 확인하세요. 공개
+기준은 134개·136개·63개, Goal 추정 약 98%입니다.
 [작업 기록](item-list-2026-10-03.md)을 참고하세요.
 
 2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개: 정적 원본
