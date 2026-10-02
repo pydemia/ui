@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-02 DataTable 표시 선택 — 공개
+
+PR #64의 Verify UI와 병합 commit `adccef5`의 Verify UI·Pages 검사가
+통과했습니다. Vercel production
+`dpl_CnMbnvpvSwZe3U1wbkjAemXr4p74`는 READY입니다. 공개
+DataTable preview·Usage를 확인했고 console error는 없었습니다.
+현재 registry manifest·item과 37번째 snapshot manifest·DataTable
+item URL이 HTTP 200입니다. Snapshot은 118개 item을 담고, 현재
+DataTable JSON에는 `density`·`striped` 속성이 있습니다. 공개
+component 수는 116개입니다. 별도 소비자 설치, 실제 screen reader·
+touch·Safari·RTL과 rollback 뒤 snapshot URL 보존은 확인하지
+않았습니다.
+
 ## 2026-10-02 DataTable 표시 선택 — 로컬
 
 `npm run typecheck`, UI 테스트 156/156, `npm run build`와
