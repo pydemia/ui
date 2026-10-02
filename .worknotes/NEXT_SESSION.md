@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-03 `BlockEditor` 구조 이력 공개 확인: PR #101을 `1172fc7`로
+병합했습니다. PR·`main` Verify UI, Pages와 Vercel production이
+성공했습니다. 공개 preview·Usage, 현재 item과 55번째 snapshot의
+manifest·변경 item URL이 저장소 파일과 일치합니다. 공개 수량은
+129개 component·131개 item·55개 snapshot이며 goal 관리용 추정은
+약 97%입니다. 이번 공개 확인 기록은 배포 중복을 피하기 위해 다음
+제품 변경에 포함하세요.
+[작업 기록](block-editor-structure-history-2026-10-02.md)을 참고하세요.
+
 2026-10-02 `BlockEditor` 구조 이력 로컬 후보: 추가·삭제·이동·형식
 변경의 되돌리기·다시 실행을 구현했습니다. 초기화 뒤 형식 select가
 잘못 표시되던 preview 오류도 수정했습니다. typecheck·UI 테스트
