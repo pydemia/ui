@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 `LogViewer` 최신 로그 따라가기: 기존 component에
+선택형 자동 스크롤과 일시정지·재개를 추가했습니다. 로컬 검사와
+390px Chromium 동작은 [작업 기록](log-viewer-follow-tail-2026-10-03.md)에
+있습니다. 62번째 snapshot 후보를 만들었고 공개 배포는 미확인입니다.
+Goal 관리용 추정 약 97%입니다. 체크리스트의 실제 고정 비용은
+[추가 검토](quality-checklist-review-2026-10-03.md)에 기록했습니다.
+
 2026-10-03 Dashboard 배치 선택: 3열 지표와 2:1 상세 panel을
 기존 API에 추가했습니다. typecheck·build·registry release 검사와
 852px·390px 문서 preview를 확인했습니다. PR #107을 `main`에

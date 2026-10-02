@@ -3129,14 +3129,18 @@ function LogViewerPreview() {
                     onClick={() => setVariant("flat")}>flat</Button>
                 <Button variant="outline" onClick={() => setEntries((current) => [
                     ...current,
-                    { id: `done-${current.length}`, timestamp: "10:42:08",
-                        level: "info", message: "재시도 완료" },
-                ])}>항목 추가</Button>
+                    ...Array.from({ length: 5 }, (_, index) => ({
+                        id: `done-${current.length + index}`,
+                        timestamp: "10:42:08", level: "info" as const,
+                        message: `작업 ${current.length + index + 1} 완료`,
+                    })),
+                ])}>항목 5개 추가</Button>
                 <Button variant="ghost" onClick={() => setEntries([])}>
                     비우기
                 </Button>
             </div>
-            <LogViewer label="배포 로그" entries={entries} variant={variant} />
+            <LogViewer label="배포 로그" entries={entries}
+                variant={variant} followTail />
         </div>
     );
 }
@@ -7332,15 +7336,24 @@ function AuditRules() {
     },
     {
         id: "log-viewer", name: "LogViewer", category: "Developer tools",
-        description: "로그를 검색하고 수준별로 걸러 봅니다. 결과 건수와 빈 결과를 구분하고 panel·flat 표시를 선택합니다. 기록의 갱신과 삭제는 앱이 맡습니다.",
-        code: `import { LogViewer } from "@pydemia/ui";
+        installItems: ["log-viewer", "button"],
+        description: "로그를 검색·수준별로 필터링하고 최신 항목을 따라갑니다. 따라가기 버튼으로 일시정지·재개할 수 있으며 기록의 갱신·삭제는 앱이 맡습니다.",
+        code: `import { useState } from "react";
+import { Button, LogViewer, type LogEntry } from "@pydemia/ui";
 
-<LogViewer label="배포 로그" variant="panel" entries={[
-  { id: "start", timestamp: "10:42:01", level: "info",
-    message: "빌드 시작" },
-  { id: "retry", timestamp: "10:42:04", level: "error",
-    message: "배포를 재시도해야 합니다" },
-]} />`,
+function DeploymentLog() {
+  const [entries, setEntries] = useState<LogEntry[]>([
+    { id: "start", timestamp: "10:42:01", level: "info",
+      message: "빌드 시작" },
+  ]);
+  return <>
+    <Button onClick={() => setEntries((current) => [...current, {
+      id: String(current.length), level: "info", message: "단계 완료",
+    }])}>항목 추가</Button>
+    <LogViewer label="배포 로그" variant="panel"
+      entries={entries} followTail />
+  </>;
+}`,
         preview: () => <LogViewerPreview />,
     },
     {

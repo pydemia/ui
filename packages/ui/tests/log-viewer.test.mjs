@@ -39,6 +39,7 @@ test("viewer exposes named filters, count, and separate empty states", () => {
     assert.equal(search.getAttribute("aria-controls"), log.id);
     assert.equal(level.getAttribute("aria-controls"), log.id);
     assert.equal(log.getAttribute("aria-live"), "off");
+    assert.equal(view.querySelector('button[aria-pressed]'), null);
     assert.match(view.querySelector('[role="status"]').textContent, /3 \/ 3건/);
     assert.match(log.textContent, /Started.*Cache miss.*Retry/s);
 
@@ -58,6 +59,49 @@ test("viewer exposes named filters, count, and separate empty states", () => {
     assert.match(renderToStaticMarkup(createElement(LogConsole, {
         label: "Raw log", entries, variant: "flat",
     })), /data-variant="flat"/);
+});
+
+test("follow mode tracks appended entries and can be paused", async () => {
+    const container = document.createElement("div");
+    document.body.append(container);
+    const root = createRoot(container);
+    const append = (id) => ({
+        id, level: "info", message: `Entry ${id}`,
+    });
+
+    try {
+        await act(async () => root.render(createElement(LogViewer, {
+            label: "Build log", entries, followTail: true,
+        })));
+        const log = container.querySelector('[role="log"]');
+        const toggle = container.querySelector('button[aria-pressed]');
+        Object.defineProperty(log, "scrollHeight", { value: 450 });
+        assert.equal(toggle.getAttribute("aria-controls"), log.id);
+        assert.equal(toggle.getAttribute("aria-pressed"), "true");
+
+        await act(async () => root.render(createElement(LogViewer, {
+            label: "Build log", entries: [...entries, append("next")],
+            followTail: true,
+        })));
+        assert.equal(log.scrollTop, 450);
+
+        await act(async () => toggle.click());
+        assert.equal(toggle.getAttribute("aria-pressed"), "false");
+        log.scrollTop = 31;
+        await act(async () => root.render(createElement(LogViewer, {
+            label: "Build log",
+            entries: [...entries, append("next"), append("later")],
+            followTail: true,
+        })));
+        assert.equal(log.scrollTop, 31);
+
+        await act(async () => toggle.click());
+        assert.equal(toggle.getAttribute("aria-pressed"), "true");
+        assert.equal(log.scrollTop, 450);
+    } finally {
+        await act(async () => root.unmount());
+        container.remove();
+    }
 });
 
 test("search and level filters update visible rows without changing input", async () => {
