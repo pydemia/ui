@@ -28,8 +28,13 @@
   확인합니다. 마지막 중복 연결·빈 상태 보강 뒤 targeted 테스트
   3/3과 typecheck를 재실행했습니다.
 - `npm run build` 통과. 125개 registry item과 docs 산출물을
-  최종 코드로 재생성했습니다. provenance 고지 pin과 새 snapshot은 아직
-  반영하지 않았습니다.
+  최종 코드로 재생성했습니다. source commit `96ab61b`의
+  provenance LF SHA-256을 소비자 고지에 고정했습니다.
+  `registry:check`는 125개 item·123개 export/catalog와 과거
+  43개 snapshot을 확인했습니다. 44번째 snapshot
+  `sha256-2ef4e9d48b58fbb25c5d3bf24236b693aa69d07d9f3b7f1dcfd69ec805958be3`를
+  만들고 재빌드 뒤 `registry:release-check`에서 현재 빌드와
+  일치함을 확인했습니다.
 - 로컬 Chromium에서 preview·Usage, 방향키 이동,
   125% 확대 뒤 pointer 끌기, 390px dark 배치, 연결 조작 요소를
   확인했습니다. pointer 이동 뒤 live 상태 문구가 덮이는 문제를
@@ -42,7 +47,5 @@
 ## 공급 상태
 
 public export·registry metadata·문서 preview·Usage를 추가했습니다.
-로컬 `registry:check`는 고지의 provenance hash를 새 source
-commit에 고정한 뒤 실행해야 합니다. 불변 snapshot, PR CI,
-공개 배포·item URL은 아직 확인하지 않았습니다. 따라서 공개
+PR CI, 공개 배포·item URL은 아직 확인하지 않았습니다. 따라서 공개
 component 수와 goal 추정 약 96%는 유지합니다.

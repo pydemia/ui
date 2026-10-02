@@ -16,9 +16,14 @@ Y 28→58 이동과 최종 안내를 다시 확인했습니다. 브라우저 오
 축소 기호의 색 대비 자동 판정 보류 1건입니다. 실제 screen
 reader·touch·Safari·RTL은 검사하지 않았습니다.
 
-로컬 123개 component·125개 registry item입니다. source commit의
-provenance hash를 고지에 고정하고 snapshot·release 검사를 수행한
-뒤 공개 공급을 판정합니다. 현재 공개 기준은 122개 component·
+로컬 123개 component·125개 registry item입니다. source commit
+`96ab61b`의 provenance hash를 고지에 고정한 뒤
+`registry:check`가 125개 item·123개 export/catalog와 기존
+43개 snapshot을 확인했습니다. 44번째 snapshot
+`sha256-2ef4e9d48b58fbb25c5d3bf24236b693aa69d07d9f3b7f1dcfd69ec805958be3`를
+만들고 재빌드 뒤 `registry:release-check`에서 현재 빌드와
+일치시켰습니다. PR CI·공개 URL은 미검증입니다.
+현재 공개 기준은 122개 component·
 124개 item·43개 snapshot, goal 관리용 추정 약 96%입니다.
 [작업 기록](../.worknotes/node-canvas-2026-10-02.md)을 참고하세요.
 
