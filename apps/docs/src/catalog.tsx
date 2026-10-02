@@ -7,7 +7,7 @@ import {
     AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
     AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
     AlertDialogTitle, AlertDialogTrigger, Avatar, AvatarFallback, AvatarImage,
-    AgentStatus, ApprovalCard, AvatarGroup, Badge,
+    AgentStatus, ApprovalCard, AvatarGroup, AvatarUploader, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, Board, BottomNav, BottomNavLink,
     Button, ButtonGroup, IconButton,
@@ -2128,6 +2128,23 @@ function ImageCropperPreview() {
                     </span>
                 </div>
             )}
+        </div>
+    );
+}
+
+function AvatarUploaderPreview() {
+    const [change, setChange] = useState<Blob | null | undefined>(undefined);
+
+    return (
+        <div className="preview-workspace grid max-w-xl gap-3">
+            <AvatarUploader label="프로필 사진" alt="김하나의 프로필 사진"
+                fallback="김" src={`${import.meta.env.BASE_URL}avatar-demo.svg`}
+                maxBytes={5 * 1024 * 1024} outputWidth={256}
+                onImageChange={setChange} />
+            <p role="status" className="m-0 text-sm text-muted">
+                {change === undefined ? "변경 없음" : change === null
+                    ? "사진 제거 요청" : `PNG ${change.size}바이트 준비됨`}
+            </p>
         </div>
     );
 }
@@ -5214,6 +5231,27 @@ function CropProfileImage() {
   </div>;
 }`,
         preview: () => <ImageCropperPreview />,
+    },
+    {
+        id: "avatar-uploader", name: "AvatarUploader",
+        category: "File & media",
+        description: "프로필 사진 선택·정사각형 자르기·미리보기·제거를 한 흐름으로 제공합니다. PNG Blob 또는 제거 요청을 앱에 전달하며 저장은 앱이 담당합니다.",
+        code: `import { useState } from "react";
+import { AvatarUploader } from "@pydemia/ui";
+
+function ProfilePhoto() {
+  const [change, setChange] = useState<Blob | null | undefined>(undefined);
+
+  return <div>
+    <AvatarUploader label="프로필 사진"
+      alt="김하나의 프로필 사진" fallback="김"
+      src="/profile.jpg" maxBytes={5 * 1024 * 1024}
+      onImageChange={setChange} />
+    <p>{change === undefined ? "변경 없음" : change === null
+      ? "사진 제거 요청" : "PNG " + change.size + "바이트 준비됨"}</p>
+  </div>;
+}`,
+        preview: () => <AvatarUploaderPreview />,
     },
     {
         id: "dropzone", name: "Dropzone", category: "File & media",

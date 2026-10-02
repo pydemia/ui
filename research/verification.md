@@ -1,5 +1,23 @@
 # 검증 기록
 
+## 2026-10-02 AvatarUploader — 로컬 초안
+
+`npm run typecheck`와 UI 테스트 172/172가 통과했습니다. 새 테스트
+3건은 입력 의미 구조, 허용 형식·빈 파일·크기 제한, PNG crop 결과,
+미리보기·focus·제거·`src` 갱신을 확인합니다. 로컬 Chromium에서
+실제 PNG 파일 선택과 crop, Blob preview, 제거 후 focus, 390px
+dark 배치와 브라우저 오류 없음도 확인했습니다. 이후 status 조건의
+작은 변경은 새 파일을 고른 동안 이전 제거 문구를 숨깁니다.
+
+`npm run build`는 123개 registry item과 문서 사이트를 생성해
+통과했습니다. `registry:check`는 provenance 고지의 이전 SHA-256
+때문에 실패했고 source commit·hash 고정 후 재검사해야 합니다.
+공개 CI·배포·item URL은 미검증입니다. 실제
+저장 API와 screen reader 발표도 검사하지 않았습니다. 공개 기준은
+120개 component·122개 item·41개 snapshot, goal 관리용 추정 약
+95%입니다. [작업 기록](../.worknotes/avatar-uploader-2026-10-02.md)에
+범위와 남은 공급 단계를 적었습니다.
+
 ## 2026-10-02 Lightbox — 공개
 
 PR #68의 Verify UI와 병합 commit `3657163`의 Verify UI·Pages가

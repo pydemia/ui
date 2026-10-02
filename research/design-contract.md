@@ -1254,3 +1254,18 @@ native Tab·Enter·Space를 사용합니다. 초기에는 현재 페이지의
 동작에 공통 token을 적용한 표시 형태입니다. 중복 ID, 순환
 구조, 대상 없는 그룹, 잘못된 현재 ID와 지원하지 않는 URL
 scheme은 오류로 알립니다.
+
+## 2026-10-02 AvatarUploader
+
+`AvatarUploader`는 기존 `Avatar`와 `ImageCropper`를 프로필 사진의
+선택·정사각형 자르기·미리보기·제거 흐름으로 묶습니다. 이름 있는
+native 파일 입력은 PNG·JPEG·WebP를 받고 빈 파일과 선택적
+`maxBytes` 초과를 구분해 알립니다. 자르기 전에는 앱의 원본
+`src`를 유지하며, 자른 PNG는 로컬 Blob URL로 미리 봅니다.
+
+`onImageChange`는 자른 `Blob`이나 제거를 뜻하는 `null`을
+전달합니다. 호출자는 업로드·저장·실패·재시도를 소유합니다.
+`src`가 바뀌면 로컬 미리보기와 제거 상태를 비웁니다. Blob URL은
+교체·제거·unmount 때 해제합니다. 취소·자르기 완료·제거 뒤
+파일 입력으로 focus를 돌립니다. 실제 사진이 없으면 읽을 수 있는
+fallback을 표시합니다.

@@ -321,6 +321,12 @@
       "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named canvas preview, labeled native range controls, visible result and errors", "keyboard": "native range and button controls; browser verification pending", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-avatar-uploader", "category": "File & media", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WHATWG HTML", "url": "https://html.spec.whatwg.org/multipage/input.html#file-upload-state-(type=file)", "scope": "native file selection; no source copied" },
+      "dependencies": ["pyd-avatar", "pyd-button", "pyd-image-cropper", "pyd-utils"], "accessibility": { "semantics": "labeled native file input, image alt/fallback, named crop and remove actions, visible status and errors", "keyboard": "Chromium: file pick, crop, focus return, remove and 390px dark layout verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-dropzone", "category": "File & media", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Kibo UI", "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/dropzone/index.tsx", "license": "MIT" },

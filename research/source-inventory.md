@@ -1557,3 +1557,23 @@ dependency로 사용하며 새 npm 의존성은 없습니다. 전체 상태와 �
 예제 코드는 복사하지 않았습니다. Chromium에서 native keyboard
 조작과 현재 링크 표시를 확인했으며 실제 보조기술 발표는
 검사하지 않았습니다.
+
+## 2026-10-02 AvatarUploader
+
+`AvatarUploader`는 pydemia/ui 원본 조합입니다. 외부 component
+코드를 복사하지 않았고 새 npm 의존성도 없습니다. 기존 `Avatar`
+item은 shadcn/ui의 고정 revision
+`98a1fe67b439324ddc857f47fbdce056600a4329`를 기준으로
+[공식 문서](https://ui.shadcn.com/docs/components/radix/avatar),
+[source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/avatar.tsx),
+[같은 revision의 MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+확인했습니다. pydemia/ui의 기존 `Avatar` item에는
+`@radix-ui/react-avatar@1.2.6` 의존성이 기록돼 있습니다.
+`ImageCropper`·`Button`·`pyd-utils`도 기존 item을
+재사용합니다.
+
+[WHATWG HTML 파일 입력 명세](https://html.spec.whatwg.org/multipage/input.html#file-upload-state-(type=file))와
+[W3C File API의 Blob URL 생성·해제](https://w3c.github.io/FileAPI/#dfn-createObjectURL)를
+native 동작 참고 자료로 확인했습니다. 파일 입력·버튼의 native
+keyboard 동작, 결과와 오류의 표시를 Chromium에서 확인했습니다.
+실제 screen reader 발표는 검사하지 않았습니다.

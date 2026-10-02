@@ -85,6 +85,8 @@ export {
 } from "./components/alert-dialog";
 export { Avatar, AvatarImage, AvatarFallback } from "./components/avatar";
 export { AvatarGroup } from "./components/avatar-group";
+export { AvatarUploader } from "./components/avatar-uploader";
+export type { AvatarUploaderProps } from "./components/avatar-uploader";
 export type {
     AvatarGroupMember, AvatarGroupProps,
 } from "./components/avatar-group";
