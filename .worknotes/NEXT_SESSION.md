@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #113 병합 후 상태: 공개 snapshot 소비자 조합 검사와
+`Thread`의 게시글별 `key` 안내가 `main`에 들어갔습니다. PR·`main`
+Verify UI와 Pages가 통과했습니다. Vercel은 배포 횟수 제한으로 실패해
+새 catalog 설명의 production 공개는 대기 중입니다. 기존 65번째
+snapshot의 소비자 설치·동작 검증은 완료했고 Goal 추정은 약 98%입니다.
+[검사·배포 기록](public-composite-consumer-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공개 registry 조합 소비자: 65번째 snapshot의 13개 item을
 새 Vite 프로젝트에 설치하고 20개 생성 파일의 typecheck·build와
 390px·1280px 화면의 탐색·분석·게시판·대댓글 흐름을 확인했습니다.
