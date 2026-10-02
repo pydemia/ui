@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `AppFloatingDisclosure` 공개 확인:
+**약 97% → 약 97%**입니다. PR #104와 병합 `7f40cc3d3`의
+Verify UI·Pages·Vercel production, 공개 item·58번째
+snapshot·문서 asset을 확인했습니다. 공개 130개 component·
+132개 item·58개 snapshot입니다. 기존 AppShell의 실사용 흐름을
+줄였으며 component 수를 늘린 것은 아닙니다.
+[작업 기록](app-floating-disclosure-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `AppFloatingDisclosure` 로컬 후보:
 **약 97% → 약 97%**입니다. 두 실제 화면에서 반복하던 floating
 도움말의 상태·키보드·focus 처리를 기존 `pyd-app-shell`에 묶고

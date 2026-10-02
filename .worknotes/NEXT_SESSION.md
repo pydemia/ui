@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-03 `AppFloatingDisclosure` 공개 확인: PR #104를
+`7f40cc3d3`로 병합했습니다. PR·`main` Verify UI, Pages,
+Vercel production이 성공했고 현재 item·58번째 snapshot
+manifest·item·문서 JS asset이 로컬 빌드와 일치합니다. 공개
+130개 component·132개 item·58개 snapshot, goal 추정 약
+97%입니다. 공개 뒤 기록은 별도 문서 commit에 두었으므로 다음
+제품 변경에 포함하세요.
+[작업 기록](app-floating-disclosure-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `AppFloatingDisclosure` 로컬 후보: `AppShell`의 floating
 bubble·panel에 열림 상태, 닫기·Escape의 focus 복귀와 외부 이동
 닫기를 묶었습니다. typecheck·UI 테스트 209/209·build·registry
