@@ -1,4 +1,4 @@
-import { useId, useState, type ComponentProps } from "react";
+import { useEffect, useId, useRef, useState, type ComponentProps } from "react";
 import { Input } from "./input";
 import { LogConsole, type LogEntry } from "./log-console";
 import { NativeSelect } from "./native-select";
@@ -8,6 +8,7 @@ type LogViewerProps = Omit<ComponentProps<"div">, "children"> & {
     entries: readonly LogEntry[];
     label: string;
     variant?: "panel" | "flat";
+    followTail?: boolean;
     emptyMessage?: string;
     noMatchesMessage?: string;
 };
@@ -16,6 +17,7 @@ function LogViewer({
     entries,
     label,
     variant = "panel",
+    followTail = false,
     emptyMessage = "표시할 로그가 없습니다.",
     noMatchesMessage = "일치하는 로그가 없습니다.",
     className,
@@ -27,6 +29,8 @@ function LogViewer({
     const logId = useId();
     const [query, setQuery] = useState("");
     const [level, setLevel] = useState("all");
+    const [following, setFollowing] = useState(true);
+    const logRef = useRef<HTMLDivElement>(null);
 
     if (typeof label !== "string" || !label.trim()) {
         throw new Error("LogViewer requires a label.");
@@ -57,6 +61,17 @@ function LogViewer({
         `${entry.timestamp ?? ""} ${entry.level} ${entry.message}`
             .toLowerCase().includes(term),
     );
+    const latest = visibleEntries.at(-1);
+
+    useEffect(() => {
+        if (followTail && following && logRef.current) {
+            logRef.current.scrollTop = logRef.current.scrollHeight;
+        }
+    }, [
+        followTail, following, visibleEntries.length,
+        latest?.id, latest?.message, latest?.timestamp, latest?.level,
+        term, level,
+    ]);
 
     return (
         <div
@@ -79,9 +94,25 @@ function LogViewer({
                 <span id={titleId} className="text-sm font-medium">
                     {label}
                 </span>
-                <span role="status" className="text-xs text-muted">
-                    {visibleEntries.length} / {entries.length}건
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                    <span role="status" className="text-xs text-muted">
+                        {visibleEntries.length} / {entries.length}건
+                    </span>
+                    {followTail && (
+                        <button type="button" aria-pressed={following}
+                            aria-controls={logId}
+                            className={cn(
+                                "rounded-sm px-2 py-1 text-xs " +
+                                "hover:bg-surface-subtle " +
+                                "focus-visible:outline-2 " +
+                                "focus-visible:outline-focus",
+                                following ? "text-accent" : "text-muted",
+                            )}
+                            onClick={() => setFollowing((current) => !current)}>
+                            최신 로그 따라가기
+                        </button>
+                    )}
+                </div>
             </div>
             <div className={
                 "grid gap-[var(--space-2)] px-[var(--space-3)] " +
@@ -110,7 +141,7 @@ function LogViewer({
                     </NativeSelect>
                 </div>
             </div>
-            <LogConsole id={logId} label={`${label} 항목`}
+            <LogConsole ref={logRef} id={logId} label={`${label} 항목`}
                 entries={visibleEntries} variant="flat"
                 emptyMessage={entries.length === 0
                     ? emptyMessage : noMatchesMessage} />

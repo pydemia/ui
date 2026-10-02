@@ -25,7 +25,17 @@ Usage에는 3열 지표·차트+로그 조합을 넣었습니다. 설치 목록�
 없었습니다.
 
 실제 screen reader 발표와 다른 브라우저는 검증하지 않았습니다.
-PR CI·preview 배포·production 공급은 아직 확인하지 않았습니다.
-저장소는 133개 component·135개 item·61개 snapshot의 후보이고,
-마지막 공개 확인 기준 사이트는 130개·132개·58개입니다.
+PR #107의 Verify UI run `37058414243`과 preview 배포는 성공했습니다.
+Preview의 문서 HTML·현재 `pyd-dashboard.json`·61번째 snapshot
+manifest는 HTTP 200입니다. PR은 `main`의 `f3a01620992d9979df3688f96e28b392f0365577`로
+병합됐고 Pages run `37058835322`와 `main` Verify UI run
+`37058836209`는 성공했습니다.
+
+Vercel은 병합 commit의 production 빌드를 배포 횟수 제한으로
+거절했습니다. 사용자 도메인의 `pyd-dashboard.json`은 기존 구현이고
+앞서 추가한 분석 item 세 개는 각각 HTTP 404입니다. 저장소는
+133개 component·135개 item·61개 snapshot이며 마지막 공개 확인
+기준 사이트는 130개·132개·58개입니다. 배포 제한 해제 뒤 공개
+manifest와 `pyd-dashboard.json`, 분석 item 세 개, 61번째 snapshot의
+대표 URL을 확인해야 합니다.
 Goal 관리용 추정은 약 97%로 유지합니다.

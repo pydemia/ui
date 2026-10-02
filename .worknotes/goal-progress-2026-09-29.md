@@ -1,9 +1,21 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `LogViewer` 자동 스크롤·체크리스트 추가 검토:
+**약 97% → 약 97%**입니다. 기존 component의 반복 로그 용례를
+확장했고 대상 테스트·typecheck·build·registry release 검사와
+390px Chromium 스크롤을 확인했습니다. 저장소 후보는 133개
+component·135개 item·62개 snapshot입니다. 공개 사이트는 마지막
+확인 기준 130개·132개·58개이므로 공급 증가로 계산하지 않습니다.
+[작업 기록](log-viewer-follow-tail-2026-10-03.md)과
+[체크리스트 판단](quality-checklist-review-2026-10-03.md)에 근거를
+남겼습니다.
+
 2026-10-03 Dashboard 배치 선택: **약 97% → 약 97%**입니다.
 기존 Dashboard의 지표 2·3·4열과 상세 panel의 균등·2:1 배치를
-선택할 수 있게 했습니다. 새 component 없이 61번째 snapshot 후보를
-만들고 로컬 빌드·registry·브라우저 배치를 확인했습니다. 공개 전이라
+선택할 수 있게 했습니다. 새 component 없이 61번째 snapshot을
+만들고 로컬 빌드·registry·브라우저 배치를 확인했습니다. PR #107의
+CI·preview와 병합 commit의 Verify UI·Pages는 성공했습니다.
+Vercel production은 배포 제한으로 이전 버전이므로 공개 공급 전이라
 추정치는 유지합니다.
 [작업 기록](dashboard-layouts-2026-10-03.md)에 검증 범위를 남겼습니다.
 

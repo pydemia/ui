@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-separator",
+  "title": "Separator",
+  "dependencies": [
+    "@radix-ui/react-separator@1.1.15"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-2e4fde9098e359a1be6506393e229e2aed327b2c6be3899d9b16784958d03d18/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/separator.tsx",
+      "content": "import * as SeparatorPrimitive from \"@radix-ui/react-separator\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Separator({\n    className,\n    orientation = \"horizontal\",\n    decorative = true,\n    ...props\n}: ComponentProps<typeof SeparatorPrimitive.Root>) {\n    return (\n        <SeparatorPrimitive.Root\n            orientation={orientation}\n            decorative={decorative}\n            className={cn(\n                \"shrink-0 bg-border data-[orientation=horizontal]:h-px \" +\n                \"data-[orientation=horizontal]:w-full \" +\n                \"data-[orientation=vertical]:h-full \" +\n                \"data-[orientation=vertical]:w-px\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Separator };\n",
+      "type": "registry:ui",
+      "target": "@ui/separator.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `2fabc8a2691e17d0cffaef98a32ae260324f936c`:\n<https://github.com/pydemia/ui/blob/2fabc8a2691e17d0cffaef98a32ae260324f936c/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`58129142293a7031509679d8d7ca283c106f5545b636ada8ed079c1bb8e57962`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}
