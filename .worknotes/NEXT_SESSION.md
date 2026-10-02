@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 공개 검증 기록 PR #99를 `0e3ba12`로 병합했습니다.
+비렌더링 문서 PR의 경량 Verify UI와 병합 뒤 Verify UI·Pages는
+성공했습니다. Vercel은 이 문서 전용 commit의 새 배포를 24시간
+횟수 제한으로 거부했습니다. 제품 PR #98의 공개 배포·preview·
+registry URL 검증은 완료된 상태입니다. 이 기록은 배포를 다시
+유발하지 않도록 다음 제품 변경에 포함하세요. goal 추정은 약
+97%입니다.
+
 2026-10-02 `BlockEditor` 공개 확인: PR #98을 `d7aba59`로 병합했고
 Verify UI·Pages·Vercel production이 성공했습니다. 공개 preview·
 Usage와 현재 item·53번째 snapshot URL의 byte 일치, 대표 소비자의
