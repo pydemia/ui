@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 Terminal — 공개
+
+PR #78의 Verify UI run `36969232546`과 병합 commit `c3f5269`의
+Verify UI run `36969458903`, Pages run `36969458619`가
+통과했습니다. Vercel production
+`dpl_G7ztrpfAJ9RmxK1Tdv3bLqZowuXt`는 READY입니다. 공개
+브라우저에서 Terminal preview·Usage를 확인했고 현재 item과
+43번째 snapshot manifest·item URL은 HTTP 200입니다. Manifest의
+`itemCount`는 124입니다. 실제 명령 실행 backend와 screen reader
+발표는 검사하지 않았습니다. 공개 기준은 122개 component·124개
+item·43개 snapshot이며 goal 관리용 추정 약 96%는 유지합니다.
+
 ## 2026-10-02 Terminal — 로컬 초안
 
 `npm run typecheck`와 전체 UI 테스트 174/174가 통과했습니다.
