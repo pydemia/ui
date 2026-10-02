@@ -50,7 +50,7 @@ import {
     MenubarMenu, MenubarRadioGroup, MenubarRadioItem,
     MenubarSeparator, MenubarSub, MenubarSubContent,
     MenubarSubTrigger, MenubarTrigger, MasterDetail,
-    Message, MessageContent, MetricCard,
+    Message, MessageContent, MetricCard, ModelSelector,
     MonthPicker, MultiSelect, YearPicker,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
     NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
@@ -88,6 +88,7 @@ import type {
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
     LogEntry, QueryField, QueryGroup, ReasoningStatus,
+    ModelChoice,
     ResponseFeedbackValue, ThreadComment,
     TabsVariant, ToolCallStatus, TreeNode, TreeSelectItem,
 } from "@pydemia/ui";
@@ -1331,6 +1332,57 @@ function ToolCallPreview() {
                 error={status === "failed" ? "의존성 파일을 찾지 못했습니다." : undefined} />
             <ToolCall name="cache.read" status="succeeded"
                 output="캐시 적중" variant="compact" />
+        </div>
+    );
+}
+
+const exampleModels: ModelChoice[] = [
+    {
+        id: "quick", label: "빠른 응답", provider: "예시 제공자",
+        description: "짧은 질문과 요약에 맞춘 모델입니다.",
+        capabilities: ["텍스트", "요약"], costLabel: "표준 사용량",
+    },
+    {
+        id: "analysis", label: "문서 분석", provider: "예시 제공자",
+        description: "긴 문서와 표를 살펴보는 작업에 사용합니다.",
+        capabilities: ["긴 문서", "표 분석"], costLabel: "확장 사용량",
+    },
+    {
+        id: "image", label: "이미지 검토", provider: "예시 제공자",
+        description: "이미지 내용을 검토합니다.",
+        capabilities: ["이미지"],
+        disabledReason: "이 작업 공간에서 사용할 수 없습니다.",
+    },
+];
+
+function ModelSelectorPreview() {
+    const [modelId, setModelId] = useState<string | null>("quick");
+    const [variant, setVariant] = useState<"panel" | "compact">("panel");
+    const [lastSent, setLastSent] = useState("");
+    const selected = exampleModels.find((model) => model.id === modelId);
+
+    return (
+        <div className="preview-stack">
+            <div className="flex flex-wrap gap-2">
+                <Button variant="outline" onClick={() => setVariant(
+                    variant === "panel" ? "compact" : "panel"
+                )}>
+                    표시: {variant === "panel" ? "상세" : "간결"}
+                </Button>
+                <Button variant="outline" onClick={() => setModelId("image")}>
+                    사용 불가 모델 보기
+                </Button>
+            </div>
+            <ModelSelector label="예시 모델" name="model"
+                models={exampleModels} value={modelId}
+                onValueChange={setModelId} variant={variant} required />
+            <PromptInput disabled={!selected || !!selected.disabledReason}
+                onSend={(text) => setLastSent(
+                    `${selected?.label ?? "모델 없음"}: ${text}`,
+                )} />
+            {lastSent && <p role="status" className="m-0 text-sm">
+                전송: {lastSent}
+            </p>}
         </div>
     );
 }
@@ -5146,6 +5198,37 @@ function Example() {
 
 <PromptInput onSend={(text) => console.log(text)} />`,
         preview: () => <PromptInputPreview />,
+    },
+    {
+        id: "model-selector", name: "ModelSelector", category: "AI & agent",
+        description: "검색 가능한 모델 선택과 제공자·기능·사용량 설명, 사용할 수 없는 이유를 한곳에 표시합니다. 모델 목록과 비용 문구는 앱이 제공하며 panel·compact 표시를 선택합니다.",
+        code: `import { useState } from "react";
+import {
+  ModelSelector, PromptInput, type ModelChoice,
+} from "@pydemia/ui";
+
+const models: ModelChoice[] = [
+  { id: "quick", label: "빠른 응답", provider: "예시 제공자",
+    description: "짧은 질문과 요약에 사용합니다.",
+    capabilities: ["텍스트", "요약"], costLabel: "표준 사용량" },
+  { id: "analysis", label: "문서 분석", provider: "예시 제공자",
+    description: "긴 문서와 표를 분석합니다.",
+    capabilities: ["긴 문서", "표 분석"], costLabel: "확장 사용량" },
+];
+
+function Composer() {
+  const [modelId, setModelId] = useState<string | null>("quick");
+  const [lastSent, setLastSent] = useState("");
+  return <div className="grid gap-3">
+    <ModelSelector label="응답 모델" name="model" models={models}
+      value={modelId} onValueChange={setModelId} required />
+    <PromptInput disabled={!modelId} onSend={(text) =>
+      setLastSent(modelId + ": " + text)} />
+    <p role="status">{lastSent}</p>
+  </div>;
+}`,
+        installItems: ["model-selector", "prompt-input"],
+        preview: () => <ModelSelectorPreview />,
     },
     {
         id: "tabs", name: "Tabs", category: "Navigation",

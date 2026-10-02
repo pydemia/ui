@@ -304,6 +304,9 @@ export type {
     ApprovalCardProps, ApprovalDecision, ApprovalStatus,
 } from "./components/approval-card";
 export { PromptInput } from "./components/prompt-input";
+export { ModelSelector } from "./components/model-selector";
+export type { ModelChoice, ModelSelectorProps } from
+    "./components/model-selector";
 export { ActionBar } from "./components/action-bar";
 export type { ActionBarProps } from "./components/action-bar";
 export { CopyButton } from "./components/copy-button";

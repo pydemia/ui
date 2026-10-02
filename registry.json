@@ -462,6 +462,11 @@
       "files": [{ "path": "packages/ui/src/components/prompt-input.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-model-selector", "type": "registry:ui", "title": "Model Selector",
+      "registryDependencies": ["./pyd-combobox.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/model-selector.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-tabs", "type": "registry:ui", "title": "Tabs",
       "dependencies": ["@radix-ui/react-tabs@1.1.21"],
       "registryDependencies": ["./pyd-utils.json"],

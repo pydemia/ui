@@ -1,5 +1,29 @@
 # 검증 기록
 
+## 2026-10-02 ModelSelector — 로컬
+
+`npm run typecheck`, UI 테스트 161/161과 `npm run build`가
+통과했습니다. 새 테스트 5건은 이름 있는 검색 선택, 설명·사용량
+표시, 사용 불가 모델의 제출 차단, 로딩 중 일시적으로 빠진 모델,
+잘못된 메타데이터·선택값, 선택·form reset을 확인합니다.
+
+로컬 Chromium의 문서 preview에서 모델을 바꾸면 hidden form ID와
+설명이 함께 바뀌고 `PromptInput` 전송 결과가 선택한 모델을
+반영했습니다. 사용 불가 모델을 표시하면 ID가 빈 값으로 바뀌고
+이유를 알리며 전송 버튼이 비활성화됩니다. `panel`·`compact`
+전환과 390px dark 화면을 확인했고 문서 scrollWidth는 390px,
+브라우저 오류·Vite overlay는 없었습니다. 기존 `Combobox`에서
+물려받은 방향키·Escape를 이번 component에서 별도로 재실행하지
+않았습니다.
+
+새 외부 source·npm 의존성은 없으며 기존 `pyd-combobox`·
+`pyd-utils`를 사용합니다. `registry:check`는 119개 item·117개
+component 대응을 확인했고 `registry:release-check`는 38번째
+snapshot `sha256-d2020273e3a064ac334ce6628d09e4cfbc01b4fc007209d660ffc49d2502465c`와
+현재 빌드가 일치함을 확인했습니다. PR CI·공개 배포는 이 기록
+시점에 남았습니다. 실제 screen reader·touch·
+Safari·RTL 및 별도 소비자 설치는 실행하지 않았습니다.
+
 ## 2026-10-02 DataTable 표시 선택 — 공개
 
 PR #64의 Verify UI와 병합 commit `adccef5`의 Verify UI·Pages 검사가

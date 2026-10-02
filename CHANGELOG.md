@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-02 — ModelSelector
+
+- AI 작업 화면에서 검색 가능한 모델 선택과 제공자·기능·사용량 문구,
+  선택 불가 이유를 표시하는 `ModelSelector`를 추가했습니다.
+- 목록·권한·비용 문구·실제 모델 호출은 앱이 소유합니다. 사용할 수
+  없는 모델 ID는 form 값으로 제출하지 않습니다.
+
 ## 2026-10-02 — DataTable 표시 선택
 
 - `DataTable`에 `compact`·`standard`·`comfortable` 행 밀도와 선택형

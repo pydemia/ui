@@ -1,5 +1,27 @@
 # Prototype 설계 계약
 
+## 2026-10-02 ModelSelector
+
+호출자가 `models`의 ID·이름·제공자·설명과 선택 가능 여부,
+`costLabel` 문구를 제공합니다. 실제 권한 판정·요금 계산·모델 호출은
+호출자가 소유합니다. ID는 고유한 비공백 문자열이고 선택값은 목록에
+있어야 합니다. 목록을 새로 불러오는 중이거나 오류가 난 동안에는
+기존 선택 ID가 임시로 빠져도 허용하지만 form 값은 빈 문자열로
+보냅니다. 권한이 없어 `disabledReason`이 붙은 선택값도 제출하지
+않고 이유를 표시합니다. 목록이 복구되면 해당 ID의 표시가 돌아옵니다.
+
+`value`를 주면 호출자가 선택값을 관리하고, 생략하면
+`defaultValue`로 시작합니다. 값이 달라질 때만
+`onValueChange(id | null)`를 호출합니다. 비제어 선택은 form reset에
+따라 초기값으로 돌아갑니다. `name`의 hidden input은 선택 가능한
+ID만 담습니다. 필수 선택은 내부 `Combobox`의 검증을 사용합니다.
+
+검색·방향키·Enter·Escape와 비활성 option 건너뛰기는 기존
+`Combobox`를 사용합니다. `panel`은 설명·기능·사용량 문구를,
+`compact`는 제공자·사용량 문구를 보여줍니다. 공통 surface·border·
+foreground token을 사용합니다. 실제 요금이나 제공자별 기능을
+하드코딩하지 않습니다.
+
 ## 2026-10-02 DataTable 표시 선택
 
 `density`의 기본값 `standard`는 기존 `--density-row-block` token을

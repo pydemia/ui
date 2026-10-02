@@ -13,7 +13,8 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-116개 component와 118개 registry item이 있습니다. 2026-09-30에
+로컬 117개 component와 119개 registry item이 있습니다.
+공개 기준은 116개 component와 118개 item입니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차
@@ -420,8 +421,9 @@ token 전달 방식을 정할 때,
   값 제출·초기화를 확인했습니다. 실제 touch·screen reader·Safari는
   미검증이며 [작업 기록](component-range-slider-2026-09-30.md)에 남겼습니다.
 - [ ] `EmptyState`·`Empty`: 결과별 독립 상태가 필요한지 비교합니다.
-- [ ] `ModelSelector`: 실제 모델 선택·권한·비용 정보를 소유할 화면이
-  확인되면 기존 Select·Combobox와 비교합니다.
+- [x] `ModelSelector`: AI 작성 화면에서 기존 `Combobox`로 검색·
+  선택을 수행하고 제공자·기능·사용량 문구와 선택 불가 이유를
+  표시합니다. 목록·권한·비용·실제 모델 호출은 앱이 소유합니다.
 - [x] `ApprovalCard`·`AgentStatus`: 각각 승인 결정과 전체 작업 진행을
   별도 상태로 구현했습니다. 실제 실행·저장은 호출자가 맡습니다.
 - [x] `CodeEditorShell`: SQL·설정 조각을 위한 이름 있는 일반 텍스트

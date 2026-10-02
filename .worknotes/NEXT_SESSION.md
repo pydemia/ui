@@ -1,5 +1,23 @@
 # Component 확장 작업 인계
 
+2026-10-02 ModelSelector 로컬 검증: 기존 Combobox에 제공자·기능·
+사용량 문구와 사용 불가 이유를 결합했습니다. typecheck·UI 테스트
+161/161·build·release 검사가 통과했고 로컬 Chromium에서 모델
+변경·form 값·PromptInput 전송·사용 불가 차단·390px dark를
+확인했습니다. 로컬 117개 component·119개 item, 38번째 snapshot
+`sha256-d2020273e3a064ac334ce6628d09e4cfbc01b4fc007209d660ffc49d2502465c`입니다.
+공개는 남아 있어 공개 116개·118개, goal 약 91%를 유지합니다.
+[작업 기록](model-selector-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 체크리스트 수준 재검토: 품질 하한은 유지하고
+중복된 여섯 단계와 PR마다 전체 snapshot을 다시 만드는 절차를
+경직성의 원인으로 확인했습니다. 기본 판정은 변경한 핵심 흐름,
+export·registry·preview·Usage 및 공개 경로, 해당 commit CI로
+읽고 위험이 생긴 경우에만 검사를 추가합니다. CI·출시 판정은
+변경하지 않았습니다. 공개 116개 component·118개 item·37개
+snapshot, goal 추정 약 91%입니다.
+[검토 기록](quality-checklist-level-2026-10-02.md)을 참고하세요.
+
 2026-10-02 DataTable 표시 선택 공개 확인: PR #64를 병합한
 `adccef5`의 Verify UI·Pages와 Vercel production이 성공했습니다.
 공개 preview·Usage, 현재 registry item과 37번째 snapshot

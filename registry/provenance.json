@@ -369,6 +369,11 @@
       "dependencies": ["pyd-button", "pyd-textarea", "pyd-utils"], "accessibility": { "semantics": "labeled textarea and submit button", "keyboard": "Chromium: Enter submit, Shift+Enter newline and empty disable verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-model-selector", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-combobox", "pyd-utils"], "accessibility": { "semantics": "labeled searchable combobox, selected model details, unavailable and loading/error status", "keyboard": "Chromium: model selection, unavailable reason, form value and PromptInput submission verified; inherits Combobox arrow and Escape behavior", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-tabs", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tabs.tsx", "license": "MIT", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-tabs", "pyd-utils"], "accessibility": { "semantics": "Radix tab roles and linked panels across three visual variants", "keyboard": "Chromium ArrowRight selection and panel change verified", "screen_reader": "pending manual review" }
