@@ -1,5 +1,20 @@
 # Empty·Skeleton 표시 확장
 
+## 공개 확인
+
+PR #84의 Verify UI run `36978948136`과 병합 commit `95a1d3e`의
+Verify UI run `36979247522`, Pages run `36979246337`이
+성공했습니다. Vercel production
+`dpl_CWjfrjgUSU7MCvU1Vx2EGf5vY9dL`은 READY입니다. 공개
+`ui.pydemia.ai`에서 Empty·Skeleton의 preview와 Usage를 확인했습니다.
+현재 registry의 두 item, 46번째 snapshot의 manifest와 두 item
+URL은 HTTP 200이고 manifest의 `itemCount`는 126입니다.
+
+공개 기준은 124개 component·126개 item·46개 snapshot입니다.
+표시 선택 확장은 goal의 디자인 범위에 직접 기여하지만 새로운
+독립 사용처를 추가하지 않아 관리용 추정 약 97%를 유지합니다.
+실제 OS reduced-motion 설정 전환은 실행하지 않았습니다.
+
 기준: 공개 124개 component·126개 registry item·45개 snapshot,
 goal 관리용 추정 약 97%. 새 component를 만들지 않고 기존
 `Empty`·`Skeleton`에 화면 위치별 표시를 추가합니다. 이미 있는

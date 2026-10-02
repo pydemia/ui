@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-02 Empty·Skeleton 표시 형태 — 공개
+
+PR #84 Verify UI run `36978948136`, 병합 commit `95a1d3e`의
+Verify UI run `36979247522`와 Pages run `36979246337`이
+성공했습니다. Vercel production
+`dpl_CWjfrjgUSU7MCvU1Vx2EGf5vY9dL`은 READY입니다. 공개
+사이트에서 두 preview·Usage를 확인했습니다. 현재 두 registry item,
+46번째 snapshot manifest·두 item URL은 HTTP 200이며 manifest에는
+126개 item이 있습니다. Reduced motion의 실제 OS 설정 전환은
+검증하지 않았습니다. 공개 수량은 124개 component·126개 item·
+46개 snapshot, goal 관리용 추정은 약 97%입니다.
+[작업 기록](../.worknotes/feedback-appearances-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 Empty·Skeleton 표시 형태 — 로컬
 
 `npm run typecheck`, 대상 회귀 테스트 2/2, `npm run build`와
