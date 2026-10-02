@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 체크리스트의 현재 적용 문서를 간결하게 정리했습니다.
+릴리스 판정은 변경분의 API·Usage·preview·고지 일치, 핵심 동작의
+테스트 또는 브라우저 증거, 적용 CI와 공개 경로 확인으로 합니다.
+위험별 추가 검사를 구분하고, 반복 CI·snapshot 복제 비용은 별도
+구현 과제로 기록했습니다. 공개 수량과 goal 추정 약 97%는 그대로입니다.
+[현재 기준](quality-checklist-current-review-2026-10-02.md)을 참고하세요.
+
+2026-10-03 `DataTable` 행 상세 로컬 후보: `renderRowDetails`를 추가하고
+로컬·remote preview와 Usage를 갱신했습니다. typecheck, UI 테스트
+202/202, build, registry:check와 로컬 Chromium 동작·390px 배치를
+확인했습니다. 56번째 snapshot 생성·재빌드·release check를 마쳤고
+PR CI·공개 URL 확인은 남았습니다. 새 component 수는 없습니다.
+공개 수량은 129개 component·131개 item·55개 snapshot이며 goal
+관리용 추정은 약 97%입니다.
+[작업 기록](data-table-details-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `BlockEditor` 구조 이력 공개 확인: PR #101을 `1172fc7`로
 병합했습니다. PR·`main` Verify UI, Pages와 Vercel production이
 성공했습니다. 공개 preview·Usage, 현재 item과 55번째 snapshot의

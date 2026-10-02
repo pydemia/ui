@@ -1,5 +1,15 @@
 # 검증 기록
 
+## 2026-10-03 DataTable 행 상세 — 로컬
+
+`npm run typecheck`, UI 테스트 202/202, `npm run build`,
+`npm run registry:check`가 통과했습니다. 로컬 Chromium에서 기본·remote
+모드의 상세 펼침, Enter 닫기·focus 유지, loading 전환 시 닫힘과
+390px 배치를 확인했습니다. 56번째 snapshot을 생성·재빌드했고
+`registry:release-check`가 통과했습니다. PR CI·공개 경로는 아직
+확인하지 않았습니다.
+[작업 기록](../.worknotes/data-table-details-2026-10-03.md)을 참고하세요.
+
 ## 2026-10-03 BlockEditor 구조 이력 — 공개
 
 PR #101과 병합 `1172fc7`의 Verify UI·Pages, Vercel production이

@@ -1,5 +1,16 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 DataTable 행 상세 source 확인
+
+기존 `DataTable`의 pydemia/ui 원본 React 구현을 확장했습니다.
+Table·Button 등 기존 registry dependency만 사용하며 새 npm
+의존성이나 외부 component source는 없습니다. 이름 있는 native
+버튼의 열림 상태와 키보드 활성화는
+[WAI-ARIA APG Disclosure Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)을
+참고했습니다. `renderRowDetails`의 내용은 호출자가 제공하고
+DataTable은 임의 HTML을 해석하지 않습니다. 실제 screen reader
+발표는 검사하지 않았습니다.
+
 ## 2026-10-02 BlockEditor 구조 이력 source 확인
 
 구조 변경 이력은 기존 `BlockEditor`의 원본 React 구현입니다. 새

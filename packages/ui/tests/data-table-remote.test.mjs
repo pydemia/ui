@@ -187,4 +187,90 @@ test("local selection remains available after changing pages", async () => {
     }
 });
 
+test("row details keep table columns and local page state", async () => {
+    const container = document.createElement("div");
+    document.body.append(container);
+    const root = createRoot(container);
+    const props = {
+        caption: "요청", rows, columns,
+        getRowId: (row) => row.id,
+        getRowLabel: (row) => row.name,
+        renderRowDetails: (row) => createElement("p", null,
+            `${row.name}의 설명`),
+        defaultPageSize: 1, pageSizeOptions: [1], selectable: true,
+    };
+
+    try {
+        await act(async () => root.render(createElement(DataTable, props)));
+        const toggle = () => container.querySelector(
+            '[aria-label="권한 검토 상세 펼치기"], ' +
+            '[aria-label="권한 검토 상세 접기"]',
+        );
+        assert.equal(toggle().getAttribute("aria-expanded"), "false");
+        assert.doesNotMatch(container.textContent, /권한 검토의 설명/);
+
+        await act(async () => toggle().click());
+        const panelId = toggle().getAttribute("aria-controls");
+        assert.equal(toggle().getAttribute("aria-expanded"), "true");
+        assert.equal(document.getElementById(panelId)
+            .textContent.includes("권한 검토의 설명"), true);
+        assert.equal(container.querySelector("tbody tr:nth-child(2) td")
+            .colSpan, 4);
+        await act(async () => [...container.querySelectorAll("button")]
+            .find((button) => button.textContent === "다음").click());
+        assert.doesNotMatch(container.textContent, /권한 검토의 설명/);
+        await act(async () => [...container.querySelectorAll("button")]
+            .find((button) => button.textContent === "이전").click());
+        assert.equal(toggle().getAttribute("aria-expanded"), "true");
+
+        await act(async () => root.render(createElement(DataTable, {
+            ...props, rows: rows.slice(1),
+        })));
+        await act(async () => root.render(createElement(DataTable, props)));
+        assert.equal(toggle().getAttribute("aria-expanded"), "false");
+    } finally {
+        await act(async () => root.unmount());
+        container.remove();
+    }
+});
+
+test("remote loading clears expanded details", async () => {
+    const container = document.createElement("div");
+    document.body.append(container);
+    const root = createRoot(container);
+    const remote = { view: { ...initialView, page: 1 },
+        totalItems: 2, onViewChange: () => {} };
+    const props = {
+        caption: "요청", rows, columns,
+        getRowId: (row) => row.id,
+        getRowLabel: (row) => row.name,
+        renderRowDetails: (row) => row.name,
+    };
+
+    try {
+        await act(async () => root.render(createElement(DataTable, {
+            ...props, remote,
+        })));
+        const toggle = () => container.querySelector(
+            '[aria-label="권한 검토 상세 펼치기"], ' +
+            '[aria-label="권한 검토 상세 접기"]',
+        );
+        await act(async () => toggle().click());
+        assert.equal(toggle().getAttribute("aria-expanded"), "true");
+
+        await act(async () => root.render(createElement(DataTable, {
+            ...props, remote: { ...remote, status: "loading" },
+        })));
+        assert.equal(container.querySelector("[aria-busy=true]") !== null,
+            true);
+        await act(async () => root.render(createElement(DataTable, {
+            ...props, remote,
+        })));
+        assert.equal(toggle().getAttribute("aria-expanded"), "false");
+    } finally {
+        await act(async () => root.unmount());
+        container.remove();
+    }
+});
+
 test.after(() => dom.window.close());
