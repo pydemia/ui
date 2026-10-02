@@ -1,5 +1,19 @@
 # Component 확장 작업 인계
 
+2026-10-02 문서 PR 검사 범위 초안: 비렌더링 Markdown 기록만 바뀐 PR은
+`Verify UI`의 diff 공백 검사만 실행하고 제품·설치 경로 변경과
+`main` push는 전체 검사를 유지하도록 workflow를 수정했습니다.
+PR·문서 전용 PR·`main` 실행 결과는 아직 확인하지 않았습니다.
+goal 관리용 추정 약 97%는 유지합니다.
+[작업 기록](ci-scope-2026-10-02.md)을 참고하세요.
+
+2026-10-02 NotificationCenter 공개 확인: PR #93을 병합한 `130da82`의
+Verify UI·Pages와 Vercel production이 성공했습니다. 공개 preview·
+Usage와 현재 item·51번째 snapshot manifest·변경 item URL을
+확인했습니다. 공개 126개 component·128개 item·51개 snapshot이며
+goal 관리용 추정 약 97%입니다.
+[작업 기록](notification-center-2026-10-02.md)을 참고하세요.
+
 2026-10-02 NotificationCenter 로컬 후보: 지속 알림의 읽음 상태·필터와
 열기 요청을 추가했습니다. typecheck·대상 테스트·build 및 Chromium의
 핵심 흐름·390px dark 배치를 확인했습니다. provenance 고지를 고정하고
