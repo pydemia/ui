@@ -1,5 +1,29 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 ModelSelector source 확인
+
+AI 작업 화면의 `PromptInput` 앞에서 모델을 고르고, 제공자·기능·
+사용량 문구와 사용할 수 없는 이유를 확인하는 용례입니다. 일반
+`Combobox`는 검색·선택과 form 값을 제공하지만 이 메타데이터와
+권한 변경 시 제출 차단은 제공하지 않습니다. `ModelSelector`는
+이 저장소에서 작성한 원본 조합이며 외부 component 코드를
+복사하지 않았습니다. 외부 구현의 동일 revision source·LICENSE를
+새로 대조할 대상은 없습니다.
+
+직접 registry 의존성은 기존 `pyd-combobox`·`pyd-utils`이며 새 npm
+의존성은 없습니다. `Combobox`는 원본 구현으로
+[WAI-ARIA APG Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)을
+동작 지침으로 참고한 기존 조사 결과를 재사용합니다. 그 내부의
+`pyd-input`은
+[고정 shadcn/ui source](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/input.tsx)와
+[같은 revision MIT LICENSE](https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md)를
+기존 provenance·고지에 기록했습니다. 새 source 도입은 없습니다.
+
+보이는 label이 검색 input을 지칭하고 listbox option의 비활성 상태는
+기존 `Combobox`가 전달합니다. 선택 불가 이유와 로딩·오류는 문자
+상태로 표시합니다. 실제 screen reader·touch·Safari·RTL은 별도로
+검사하지 않았습니다.
+
 ## 2026-10-02 MasterDetail source 확인
 
 `MasterDetail`은 handoff의 Workflow & Productivity 후보이며 요청·
