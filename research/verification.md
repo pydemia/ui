@@ -1,5 +1,20 @@
 # 검증 기록
 
+## 2026-10-02 AppShell 표시 형태 — 공개
+
+PR #86과 병합 commit `802831d`의 Verify UI run `36981731971`,
+Pages run `36981731150`이 성공했습니다. Vercel production
+`dpl_5fSdHa4KhYLRLwSrbGSfwrHjUz3T`는 READY입니다. 공개
+preview에 framed·canvas, circle·pill, 좌우 선택이 표시되고 Usage에
+`appearance="canvas"`·`appearance="pill"`이 포함된 것을 확인했습니다.
+현재 `pyd-app-shell.json`과 47번째 snapshot manifest·item URL은
+HTTP 200이고 itemCount는 126입니다. 변경한 상호작용은 로컬
+Chromium에서 실행했으며 공개 사이트에서는 반복하지 않았습니다.
+공개 수량은 124개 component·126개 item·47개 snapshot, goal
+관리용 추정은 약 97%입니다.
+[작업 기록](../.worknotes/app-shell-appearances-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 AppShell 표시 형태 — 로컬
 
 `npm run typecheck`, `npm run build`와
