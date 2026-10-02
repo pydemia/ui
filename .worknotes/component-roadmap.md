@@ -421,6 +421,9 @@ token 전달 방식을 정할 때,
 - [x] `CodeEditorShell`: SQL·설정 조각을 위한 이름 있는 일반 텍스트
   textarea에 줄 번호, 언어·작업 영역, 오류 연결을 결합했습니다.
   구문 강조·코드 실행은 이 component의 범위가 아닙니다.
+- [x] `Terminal`: 명령 입력·순서 있는 출력·이력 탐색을 묶었습니다.
+  실제 실행과 결과 저장은 호출자가 맡습니다. 로컬 검증 후 공개
+  공급 경로를 확인할 예정입니다.
 - [x] `ImageCropper`: 로컬 파일의 고정 비율 영역을 끌기·native
   슬라이더로 조정해 PNG Blob으로 전달합니다. 업로드와 저장은
   호출자가 담당하며 실제 touch·screen reader·Safari는 미검증입니다.

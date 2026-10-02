@@ -67,7 +67,8 @@ import {
     SegmentedControl, SegmentedControlItem,
     Snippet, SnippetContent, SnippetCopyButton, SnippetHeader, Spinner,
     SnippetTabsList, SnippetTabsTrigger, SideNav, SideNavLink, Sidebar,
-    Sparkline, Stepper, Switch, Table, TableCell, TagsInput, Timeline,
+    Sparkline, Stepper, Switch, Table, TableCell, TagsInput, Terminal,
+    Timeline,
     Thread, TimePicker, ToolCall, Tree, TreeNav, TreeSelect,
     ToastQueue, useToastQueue,
     TableHead, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toggle,
@@ -91,7 +92,8 @@ import type {
     LightboxItem, LogEntry, QueryField, QueryGroup, ReasoningStatus,
     ModelChoice,
     ResponseFeedbackValue, ThreadComment,
-    TabsVariant, ToolCallStatus, TreeNavItem, TreeNode, TreeSelectItem,
+    TabsVariant, TerminalLine, ToolCallStatus, TreeNavItem, TreeNode,
+    TreeSelectItem,
 } from "@pydemia/ui";
 
 export type ComponentEntry = {
@@ -2755,6 +2757,40 @@ function LogConsolePreview() {
             </div>
             <LogConsole label="빌드 로그" entries={entries}
                 emptyMessage="표시할 로그가 없습니다." />
+        </div>
+    );
+}
+
+function TerminalPreview() {
+    const [lines, setLines] = useState<TerminalLine[]>([
+        { id: "welcome", kind: "notice",
+            text: "예시 명령: help, status" },
+    ]);
+    const [variant, setVariant] = useState<"panel" | "flat">("panel");
+    const nextId = useRef(0);
+
+    function run(command: string) {
+        const id = ++nextId.current;
+        const response = command === "help"
+            ? "help · status"
+            : command === "status" ? "작업 3건 완료"
+                : `지원하지 않는 예시 명령: ${command}`;
+        setLines((current) => [...current,
+            { id: `${id}-command`, kind: "command", text: command },
+            { id: `${id}-response`,
+                kind: command === "help" || command === "status"
+                    ? "output" : "error", text: response },
+        ]);
+    }
+
+    return (
+        <div className="preview-stack">
+            <Button type="button" variant="outline"
+                onClick={() => setVariant(variant === "panel" ? "flat" : "panel")}>
+                표시: {variant === "panel" ? "패널" : "평면"}
+            </Button>
+            <Terminal label="작업 명령" lines={lines} onCommand={run}
+                variant={variant} />
         </div>
     );
 }
@@ -6569,6 +6605,31 @@ function AuditRules() {
     message: "캐시를 다시 생성했습니다" },
 ]} />`,
         preview: () => <LogConsolePreview />,
+    },
+    {
+        id: "terminal", name: "Terminal", category: "Developer tools",
+        description: "명령 입력·실행 요청과 출력 기록을 한 곳에 둡니다. 위·아래 방향키로 이전 명령을 찾고, 실행과 결과 저장은 앱이 담당합니다.",
+        code: `import { useRef, useState } from "react";
+import { Terminal, type TerminalLine } from "@pydemia/ui";
+
+function JobTerminal() {
+  const [lines, setLines] = useState<TerminalLine[]>([]);
+  const nextId = useRef(0);
+
+  function run(command: string) {
+    const id = ++nextId.current;
+    setLines((current) => [...current,
+      { id: String(id) + "-command", kind: "command", text: command },
+      { id: String(id) + "-output", kind: command === "status"
+          ? "output" : "error", text: command === "status"
+          ? "모든 작업 정상" : "지원하지 않는 명령" },
+    ]);
+  }
+
+  return <Terminal label="작업 명령" lines={lines}
+    onCommand={run} variant="panel" />;
+}`,
+        preview: () => <TerminalPreview />,
     },
     {
         id: "json-viewer", name: "JsonViewer",

@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 Terminal 로컬 초안: **약 96% → 약 96%**입니다.
+로컬 122개 component·124개 item이며 typecheck·UI 테스트
+174/174, build와 명령·이력·390px dark 브라우저 흐름을
+확인했습니다.
+공개 공급 검증 전이므로 추정은 유지합니다.
+[작업 기록](terminal-2026-10-02.md)을 참고하세요.
+
 2026-10-02 AvatarUploader 공개 확인: **약 95% → 약 96%**입니다.
 PR #76과 병합 commit `413c081`의 CI·Pages, Vercel production,
 공개 preview·Usage와 현재 item·42번째 snapshot URL을
