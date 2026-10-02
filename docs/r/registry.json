@@ -578,6 +578,11 @@
       "files": [{ "path": "packages/ui/src/components/tree.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-tree-nav", "type": "registry:ui", "title": "Tree Navigation",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/tree-nav.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-tree-select", "type": "registry:ui", "title": "Tree Select",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-tree.json", "./pyd-popover.json", "./pyd-utils.json"],

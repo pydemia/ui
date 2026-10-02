@@ -2421,5 +2421,9 @@ button focus가 유지됐습니다. 현재 경로를 바꾸면 새 가지와
 반영됐습니다. 390px dark에서 가로 넘침과 page error가
 없었습니다.
 
-build·registry 검사와 공개 배포·URL은 아직
-확인 전입니다. 실제 보조기술 발표는 실행하지 않았습니다.
+`npm run build`, `npm run registry:check`와
+`npm run registry:release-check`가 통과했습니다. 현재 122개 item과
+120개 export/catalog가 일치하며 41번째 불변 snapshot
+`sha256-cff50645081e11f6f107609d76b572284192851f091051337c7ea6592beea753`
+의 현재 빌드 일치를 확인했습니다. 공개 배포·URL은 확인 전입니다.
+실제 보조기술 발표는 실행하지 않았습니다.

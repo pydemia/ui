@@ -8,9 +8,9 @@
 
 2026-10-02 TreeNav 로컬 구현·검증: **약 94% → 약 94%**입니다.
 중첩 페이지 탐색을 구현하고 targeted 테스트 3/3, UI 테스트 169/169,
-typecheck와
-로컬 Chromium의 disclosure·경로 변경·390px dark를 확인했습니다.
-build·registry 검사와 공개 공급 전이므로 공개 119개 component·121개
+typecheck·build·registry 검사와 로컬 Chromium의 disclosure·경로
+변경·390px dark를 확인했습니다. 공개 공급 전이므로 공개 119개
+component·121개
 item·40개 snapshot은 유지합니다.
 [작업 기록](tree-nav-2026-10-02.md)을 참고하세요.
 

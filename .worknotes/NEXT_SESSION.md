@@ -11,8 +11,9 @@ component마다 별도 PR·snapshot을 요구하지 않고 검토 가능한
 2026-10-02 TreeNav 로컬 초안: 중첩 페이지 링크의 펼침·현재 경로
 표시와 rail·filled 형태를 원본 component로 구현했습니다.
 targeted 테스트 3/3, 전체 UI 테스트 169/169, typecheck와 로컬
-Chromium의 Enter·Space·경로 변경·390px dark를 확인했습니다. build·
-registry·공개 공급은 남아 있습니다. 공개 119개 component·
+Chromium의 Enter·Space·경로 변경·390px dark를 확인했습니다.
+build·registry 검사와 로컬 120개 component·122개 item의 41번째
+snapshot도 통과했습니다. 공개 공급은 남아 있습니다. 공개 119개 component·
 121개 item·40개 snapshot, goal 관리용 추정 약 94%입니다.
 [작업 기록](tree-nav-2026-10-02.md)을 참고하세요.
 
