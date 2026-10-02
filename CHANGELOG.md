@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-02 — ResultState
+
+- 한 비동기 작업의 진행·완료·실패와 실패 재시도를 표시하는
+  `ResultState`를 추가했습니다. 요청 실행과 상태는 호출자가
+  관리하며 기존 `Empty`·`Spinner`·`Button`을 사용합니다.
+
 ## 2026-10-02 — NotificationCenter
 
 - 읽음 상태를 호출자가 소유하는 `NotificationCenter`를 추가했습니다.

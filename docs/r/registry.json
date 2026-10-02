@@ -303,6 +303,15 @@
       ]
     },
     {
+      "name": "pyd-result-state", "type": "registry:ui",
+      "title": "Result State",
+      "registryDependencies": [
+        "./pyd-button.json", "./pyd-empty.json", "./pyd-spinner.json",
+        "./pyd-utils.json"
+      ],
+      "files": [{ "path": "packages/ui/src/components/result-state.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-toggle", "type": "registry:ui", "title": "Toggle",
       "dependencies": ["@radix-ui/react-toggle@1.1.18"],
       "registryDependencies": ["./pyd-utils.json"],

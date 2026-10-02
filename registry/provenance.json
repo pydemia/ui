@@ -229,6 +229,12 @@
       "dependencies": ["lucide-react", "pyd-utils"], "accessibility": { "semantics": "status with accessible name", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-result-state", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-button", "pyd-empty", "pyd-spinner", "pyd-utils"],
+      "accessibility": { "semantics": "named pending and success status, assertive error, visible status label and native retry button", "keyboard": "Chromium: Enter retry, status update and focus retained on result region", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-toggle", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/toggle.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["@radix-ui/react-toggle", "pyd-utils"], "accessibility": { "semantics": "Radix pressed button", "keyboard": "Chromium: click, Space and pressed state verified", "screen_reader": "pending manual review" }

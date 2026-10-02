@@ -60,7 +60,7 @@ import {
     PageHeader, Pagination, PasswordInput, PinInput, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
     QueryBuilder, RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
-    ResponseFeedback,
+    ResponseFeedback, ResultState,
     ResizablePanels, ScatterChart, ScrollArea,
     SearchInput,
     Select, SelectContent, SelectItem,
@@ -93,7 +93,7 @@ import type {
     NodeCanvasEdge, NodeCanvasNode,
     LightboxItem, LogEntry, QueryField, QueryGroup, ReasoningStatus,
     ModelChoice, NotificationItem,
-    ResponseFeedbackValue, ThreadComment,
+    ResponseFeedbackValue, ResultStatus, ThreadComment,
     TabsVariant, TerminalLine, ToolCallStatus, TreeNavItem, TreeNode,
     TreeSelectItem,
 } from "@pydemia/ui";
@@ -1148,6 +1148,48 @@ function EmptyPreview() {
                     </EmptyContent>
                 </Empty>
             )}
+        </div>
+    );
+}
+
+function ResultStatePreview() {
+    const [status, setStatus] = useState<ResultStatus>("error");
+    const copy = {
+        pending: {
+            title: "자료를 저장하는 중입니다",
+            description: "작업이 끝나면 결과가 이 자리에 표시됩니다.",
+        },
+        success: {
+            title: "자료를 저장했습니다",
+            description: "이제 다음 작업을 진행할 수 있습니다.",
+        },
+        error: {
+            title: "자료를 저장하지 못했습니다",
+            description: "연결을 확인하고 다시 시도해 주세요.",
+        },
+    };
+
+    return (
+        <div className="preview-stack min-w-0">
+            <div role="group" aria-label="작업 결과 선택"
+                className="flex flex-wrap gap-2">
+                {(["pending", "success", "error"] as const)
+                    .map((option) => (
+                        <Button key={option} type="button"
+                            variant={status === option ? "primary" : "outline"}
+                            aria-pressed={status === option}
+                            onClick={() => setStatus(option)}>
+                            {option}
+                        </Button>
+                    ))}
+            </div>
+            <ResultState status={status} title={copy[status].title}
+                description={copy[status].description}
+                onRetry={() => setStatus("success")}
+                actions={status === "success" ? (
+                    <Button variant="outline" onClick={() =>
+                        setStatus("error")}>다시 보기</Button>
+                ) : undefined} />
         </div>
     );
 }
@@ -5350,6 +5392,38 @@ function ItemList() {
   </Empty>;
 }`,
         preview: () => <EmptyPreview />,
+    },
+    {
+        id: "result-state", name: "ResultState", category: "Feedback",
+        installItems: ["result-state"],
+        description: "한 작업의 진행·성공·실패 결과를 같은 위치에 표시하고 실패 시 재시도를 요청합니다. 상태와 실제 요청은 호출자가 관리합니다.",
+        code: `import { useState } from "react";
+import { ResultState, type ResultStatus } from "@pydemia/ui";
+
+function SaveResult({ retrySave }: { retrySave: () => Promise<void> }) {
+  const [status, setStatus] = useState<ResultStatus>("error");
+
+  async function retry() {
+    setStatus("pending");
+    try {
+      await retrySave();
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  return <ResultState status={status}
+    title={{
+      pending: "저장하는 중입니다",
+      success: "저장했습니다",
+      error: "저장하지 못했습니다",
+    }[status]}
+    description={status === "error"
+      ? "연결을 확인하고 다시 시도해 주세요." : undefined}
+    onRetry={retry} />;
+}`,
+        preview: () => <ResultStatePreview />,
     },
     {
         id: "spinner", name: "Spinner", category: "Feedback",

@@ -1,5 +1,17 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 ResultState source 확인
+
+저장·가져오기 등 비동기 작업의 진행·성공·실패와 재시도를 반복해
+구성하는 사용처입니다. `ResultState`는 pydemia/ui의 원본 React·
+Tailwind 조합이며 외부 component 코드를 복사하지 않았습니다.
+기존 `pyd-empty`·`pyd-spinner`·`pyd-button`·`pyd-utils`만 사용하고
+새 npm 의존성은 없습니다. 의존 component의 shadcn/ui 고정 revision
+`98a1fe67b439324ddc857f47fbdce056600a4329` source와 MIT
+LICENSE는 기존 provenance·소비자 고지를 재사용합니다. 이름 있는
+상태·오류와 native 재시도 버튼을 제공하며 실제 screen reader
+발화는 미검증입니다.
+
 ## 2026-10-02 NotificationCenter source 확인
 
 제품 화면에서 다시 확인할 알림의 읽음 상태와 필터를 유지하는 용례입니다.

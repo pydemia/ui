@@ -101,6 +101,10 @@ export { Empty, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from ".
 export type { EmptyProps } from "./components/empty";
 export { Spinner } from "./components/spinner";
 export type { SpinnerProps } from "./components/spinner";
+export { ResultState } from "./components/result-state";
+export type {
+    ResultStateProps, ResultStatus,
+} from "./components/result-state";
 export {
     AppShell, AppHeader, AppBody, AppSidebar, AppMain, AppBottomPanel,
     AppFloatingPanel, AppFloatingBubble,
