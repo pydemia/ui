@@ -1,91 +1,52 @@
-# 공급·품질 체크리스트 현재 적용 검토
+# 공급·품질 판정 — 현재 기준
 
-## 2026-10-02 재판정 — 공개 124개 기준
+2026-10-02 공개 기준은 124개 component·126개 registry item·47개
+snapshot입니다. Goal 관리용 추정은 약 97%입니다. 검사 기준을 바꿨다는
+이유로 공급 수량이나 목표 달성률을 올리지 않습니다.
 
-현행 로드맵의 위험별 검사와 출시 차단 조건은 유지합니다. 경직된 부분은
-품질 하한이 아니라 **검사와 기록을 적용하는 단위**입니다. 공개 기준은
-124개 component·126개 registry item·45개 snapshot, goal 관리용
-추정은 약 97%입니다. 기준 재판정만으로 수치나 추정을 올리지 않습니다.
+## 릴리스마다 확인할 것
 
-릴리스 기록에는 변경 유형, 그 변경에 적용한 증거, 실제 차단 결함만
-적습니다. 정적 표시 변경은 해당 preview 확인과 CI로 판정합니다.
-상태·값·focus를 바꾸면 그 흐름을 테스트나 브라우저에서 실행합니다.
-새 component의 export·registry·사용 코드·출처는 기존 자동 검사와
-문서로 확인합니다. 이미 검증한 동일 upstream revision은 다시 조사하지
-않고, 검증 결과를 설명하려고 provenance의 고정 metadata를 매번
-고치지 않습니다. 이번 `Empty`·`Skeleton` 표시 확장도 기존 source와
-LICENSE 기록을 재사용하며 두 변경을 한 릴리스로 묶습니다.
+1. 코드·registry 변경은 해당 commit의 CI(typecheck, UI 테스트,
+   build, registry 검사)를 확인합니다. 문서만 바뀌면 변경한 링크·
+   Usage·preview와 문서 build가 적합한 검사입니다. 현재 workflow는
+   문서 PR에도 전체 UI 검사를 실행하므로 그 결과를 사용하고 로컬에서
+   중복 실행하지 않습니다.
+2. 새 component는 독립 사용처, public export·registry·출처,
+   동작하는 preview·Usage를 갖춥니다. 바뀐 핵심 흐름은 자동 테스트
+   **또는** 브라우저에서 한 번 실행합니다. 정적 표시 변경은 해당
+   preview 확인으로 충분합니다.
+3. 공개는 릴리스 묶음당 배포 상태, 변경한 preview, manifest와 변경
+   registry item URL을 확인합니다. 로컬에서 실행한 상호작용을 공개
+   사이트에서 반복하지 않고, 표준 경로의 item마다 별도 소비자를
+   만들지 않습니다.
 
-CI가 같은 commit에서 확인한 typecheck·테스트·build를 사람이 재실행해
-중복 근거를 만들지 않습니다. 공개 URL은 릴리스 묶음의 변경 item과
-manifest만 확인합니다. 새 설치 경로나 의존성 변화가 없으면 매번 별도
-소비자 프로젝트를 만들지 않습니다. 보조기술·touch·Safari·RTL·rollback
-시험은 영향을 받은 기능이나 명시한 지원 범위에 적용하고, 나머지를
-개별 릴리스의 실패 또는 미검증 항목으로 반복하지 않습니다.
+## 변경 내용에 따라 추가할 것
 
-현재 workflow는 문서만 바뀐 PR에도 전체 UI 검사를 수행하고 새
-registry 릴리스는 모든 item을 복제합니다. 이는 실제 실행 비용이며
-체크리스트 문구만으로 사라지지 않습니다. workflow의 변경 경로별
-검사와 snapshot 저장 방식 개선은 별도 구현·검증 과제로 둡니다.
-검사 축소 전에는 CI의 현재 차단 규칙을 우회하지 않습니다.
+| 바뀐 영역 | 추가 증거 |
+| --- | --- |
+| 외부 코드 도입 | 공식 문서, 같은 revision의 source·LICENSE, 의존성·접근성과 고지. 이미 확인한 revision은 기록 재사용 |
+| focus·pointer·browser API·핵심 반응형 배치 | 영향을 받은 브라우저 흐름 실행 |
+| 색상·배치 | 영향을 받는 상태·폭·theme의 preview 확인 |
+| 설치 형식·target·의존 경로 | 별도 소비자 설치·typecheck·build. 공개 URL 경로가 바뀌면 그 URL에서 설치 |
 
-이전 검토 당시 공개 기준은 122개 component, 124개 registry item,
-43개 불변 snapshot이었습니다. Goal 관리용 추정은 약 96%였습니다.
-이전 검토는 코드·CI·배포를 변경하거나 새 검사를 실행하지 않았습니다.
+확인된 값 손실·제출 오류·keyboard 접근 불가·필수 고지 누락·설치
+실패, 적용되는 CI 실패와 공개 경로 실패는 공급 완료를 막습니다.
+변경한 핵심 흐름을 실행하지 못했으면 구현 완료와 공급 완료를
+구분합니다. 실제 보조기술·touch·Safari·RTL, 모든 item의 개별 설치,
+rollback 뒤 URL 보존은 해당 지원을 주장하거나 관련 경로를 바꿀 때
+검사합니다. 그 외에는 라이브러리 전체의 운영 과제로 추적합니다.
+과거 10개 누적 과제의 완료 수는 릴리스 점수나 goal 진척도로 쓰지
+않습니다. 기록에는 적용한 증거와 실제 차단 결함만 남깁니다.
 
-## 판단
+## 확인된 절차 부담
 
-체크리스트의 품질 하한보다 **실행 절차와 기록 방식**이 과합니다.
-현재 로드맵은 변경 위험별 검사를 이미 허용하지만, 문서만 바뀐 PR에도
-전체 typecheck·UI 테스트·build·snapshot 검사가 실행됩니다.
-`registry-release.mjs`는 새 릴리스에서 모든 item을 복제하고
-`docs/r/releases/`에 다시 복사합니다. Terminal 릴리스에서도 새
-component 한 개에 생성 파일을 포함한 303개 파일이 바뀌었습니다.
-`registry/provenance.json`의 접근성 검증 문구 수정까지 소비자 고지의
-SHA-256과 전체 snapshot을 바꾸는 구조입니다. 이 비용은 component의
-실제 위험이나 품질과 비례하지 않습니다.
-
-같은 주제의 과거 검토 파일이 `.worknotes/`에 여러 개 있고, 날짜별
-수량과 미검증 환경을 반복해 적었습니다. 과거 기록은 보존하되 현재
-릴리스 판정에는 이 문서와 `component-roadmap.md`의 적용 기준만
-사용합니다. 체크박스 수나 과거 조사 항목 수를 공급률로 환산하지
-않습니다.
-
-## 릴리스에 적용할 최소 기준
-
-- 새 component는 독립 사용처, public export·registry, 필요한 출처·
-  LICENSE 고지, 동작하는 preview·Usage를 갖춥니다.
-- 바뀐 핵심 흐름을 적합한 자동 테스트 **또는** 브라우저에서 한 번
-  확인합니다. 정적 표시 변경은 해당 preview 확인으로 충분합니다.
-  같은 commit의 CI 결과를 로컬에서 반복하지 않습니다.
-- 공개 시 배포 상태와 변경한 preview·registry item URL을 릴리스
-  묶음에서 확인합니다. component마다 별도 PR·snapshot·소비자
-  프로젝트를 만들지 않습니다.
-
-외부 코드를 도입할 때만 공식 문서와 같은 revision의 source·LICENSE,
-의존성·접근성을 확인합니다. 설치 형식이나 의존 경로가 바뀌면 별도
-소비자 설치를 검사합니다. 새 focus·pointer·browser API 또는 핵심
-반응형 동작은 영향을 받은 브라우저 흐름을 실행합니다. 실제
-screen reader·touch·Safari·RTL이나 rollback 뒤 URL 보존은 해당
-지원 범위를 주장하거나 관련 경로가 바뀔 때 검사하고, 그 외에는
-라이브러리 전체의 표본·운영 과제로 추적합니다.
-
-확인된 값 손실·제출 오류·keyboard 접근 불가·설치 실패·필수 고지
-누락, 적용되는 CI 실패는 수정판을 확인할 때까지 출시를 막습니다.
-적용되는 핵심 동작을 어느 방식으로도 실행하지 못했으면 공급 완료로
-표시하지 않습니다. 기록에는 `통과`, `해당 없음`, `미검증`, `차단`을
-구분하며, 해당 없는 환경을 매 릴리스의 미검증 결함으로 나열하지
-않습니다.
-
-## 절차 개선 과제
-
-1. 문서만 바뀐 PR의 필수 검사를 문서 build와 변경 링크·Usage 확인에
-   맞추되, status check가 항상 결과를 보고하도록 workflow를 조정합니다.
-2. 출처·LICENSE처럼 고정되는 metadata와 시점별 접근성 검증 기록을
-   분리합니다. 소비자 고지의 출처 정확성은 유지합니다.
-3. 불변 URL을 유지하면서 snapshot의 전체 item 이중 복제를 줄이는
-   저장 형식을 검토합니다. 기존 URL·manifest·dependency 설치와
-   rollback 동작은 변경 전후에 확인해야 합니다.
-
-위 세 과제는 이번 검토에서 구현하거나 검증하지 않았습니다.
-체크리스트 문구의 재해석만으로 goal 추정 약 96%를 올리지 않습니다.
+`.github/workflows/verify.yml`은 모든 PR과 `main` push에 전체 UI
+검사를 실행합니다. 병합 commit `802831d`의 Verify UI는 약 2분 9초
+걸렸습니다. `registry-release.mjs`는 새 snapshot마다 126개 item을
+`registry/releases/`와 `docs/r/releases/`에 각각 복제합니다.
+이는 현재 자동화 비용이며 품질 판정 문구만 바꿔도 줄지 않습니다.
+문서 전용 변경의 CI 경로 분기와 snapshot 저장 방식은 기존 URL·
+dependency·rollback 동작을 보존하는 별도 구현 과제로 둡니다.
+현재 검사를 우회하지 않습니다. 과거 판단과 사례는
+[이전 검토](quality-checklist-pragmatic-2026-10-02.md)와
+[누적 과제](quality-legacy-2026-09-29.md)에 남아 있습니다.

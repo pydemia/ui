@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-02 AppShell 표시 확장 공개 확인: PR #86과 병합 commit
+`802831d`의 Verify UI·Pages, Vercel production이 성공했습니다.
+공개 preview·Usage, 현재 item과 47번째 snapshot manifest·item
+URL을 확인했습니다. 공개 124개 component·126개 item·47개
+snapshot, goal 관리용 추정 약 97%입니다.
+[작업 기록](app-shell-appearances-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 체크리스트를 다시 줄였습니다. 릴리스마다
+같은 commit의 자동 검사, 변경한 핵심 흐름 한 번 실행, 공개 묶음의
+배포·경로 확인만 요구합니다. 외부 코드·브라우저 동작·설치 경로
+변경에는 해당 검사만 추가하고 과거 10개 누적 과제는 점수로 세지
+않습니다. 현재 workflow의 문서 PR 전체 UI 검사와 snapshot 복제는
+별도 구현 과제입니다. 기준 변경만으로 goal 추정 약 97%는 그대로입니다.
+[현재 기준](quality-checklist-current-review-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 AppShell 표시 확장 로컬 초안: `framed`·`canvas` 골격과
 원형·pill floating bubble을 구현했습니다. Operations 예시에서
 canvas를 사용하고 문서 preview에서 세 표시 축을 전환합니다.

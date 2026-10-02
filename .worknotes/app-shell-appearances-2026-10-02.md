@@ -1,5 +1,20 @@
 # AppShell 표시 확장
 
+## 공개 확인
+
+PR #86과 병합 commit `802831d`의 Verify UI run `36981731971`,
+Pages run `36981731150`이 성공했습니다. Vercel production
+`dpl_5fSdHa4KhYLRLwSrbGSfwrHjUz3T`는 READY입니다. 공개
+사이트에서 AppShell preview의 표시 선택과 Usage를 확인했습니다.
+현재 `pyd-app-shell.json`, 47번째 snapshot의 manifest·item URL은
+HTTP 200입니다. Manifest에는 126개 item이 있으며 현재·snapshot
+item 모두 `canvas` 소스를 포함합니다. 공개 수량은 124개 component·
+126개 item·47개 snapshot입니다. Goal 관리용 추정은 약 97%를
+유지합니다. 변경한 상호작용은 로컬 Chromium에서 실행했고 공개
+사이트에서 같은 동작을 반복하지 않았습니다.
+
+## 로컬 구현과 검증
+
 시작 기준은 공개 124개 component·126개 registry item·46개
 snapshot, goal 관리용 추정 약 97%입니다. 이 작업은 component를
 추가하지 않고 기존 framework 재료의 표시 선택을 늘립니다.
