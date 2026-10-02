@@ -1086,13 +1086,59 @@ function SkeletonPreview() {
             </Button>
             <div role="status">
                 {loading ? (
-                    <>
+                    <div className="flex flex-wrap items-center gap-3">
                         <span className="sr-only">내용을 불러오는 중</span>
-                        <Skeleton className="mb-2 h-4 w-40" />
-                        <Skeleton className="h-4 w-64 max-w-full" />
-                    </>
+                        <Skeleton shape="circle" />
+                        <div className="grid min-w-32 gap-2">
+                            <Skeleton shape="line" className="w-32" />
+                            <Skeleton shape="line" className="w-24" />
+                        </div>
+                        <Skeleton shape="rectangle" className="h-12 w-20" />
+                    </div>
                 ) : "불러온 내용입니다."}
             </div>
+        </div>
+    );
+}
+
+function EmptyPreview() {
+    const [appearance, setAppearance] = useState<
+        "dashed" | "panel" | "plain"
+    >("dashed");
+    const [added, setAdded] = useState(false);
+
+    return (
+        <div className="preview-stack min-w-0">
+            <div role="group" aria-label="빈 상태 표시 형태"
+                className="flex flex-wrap gap-2">
+                {(["dashed", "panel", "plain"] as const).map((option) => (
+                    <Button key={option} type="button"
+                        variant={appearance === option ? "primary" : "outline"}
+                        aria-pressed={appearance === option}
+                        onClick={() => setAppearance(option)}>
+                        {option}
+                    </Button>
+                ))}
+            </div>
+            {added ? (
+                <div role="status" className="grid gap-2 text-sm">
+                    항목을 추가했습니다.
+                    <Button variant="outline" onClick={() =>
+                        setAdded(false)}>빈 상태로 돌아가기</Button>
+                </div>
+            ) : (
+                <Empty appearance={appearance}>
+                    <EmptyMedia><Inbox /></EmptyMedia>
+                    <EmptyTitle>아직 항목이 없습니다</EmptyTitle>
+                    <EmptyDescription>
+                        새 항목을 추가해 시작하세요.
+                    </EmptyDescription>
+                    <EmptyContent>
+                        <Button variant="outline" onClick={() =>
+                            setAdded(true)}>항목 추가</Button>
+                    </EmptyContent>
+                </Empty>
+            )}
         </div>
     );
 }
@@ -4974,12 +5020,14 @@ function DensitySetting() {
     },
     {
         id: "skeleton", name: "Skeleton", category: "Feedback",
-        description: "불러오는 동안 자리만 표시합니다. 로딩 상태 텍스트는 상위 요소가 제공합니다.",
+        description: "불러오는 동안 직사각형·텍스트 줄·원형 자리를 표시합니다. 움직임 줄이기 설정을 따르며 로딩 상태 텍스트는 상위 요소가 제공합니다.",
         code: `import { Skeleton } from "@pydemia/ui";
 
 <div role="status">
   <span className="sr-only">내용을 불러오는 중</span>
-  <Skeleton className="h-4 w-40" />
+  <Skeleton shape="circle" />
+  <Skeleton shape="line" className="w-40" />
+  <Skeleton shape="rectangle" className="h-12 w-24" />
 </div>`,
         preview: () => <SkeletonPreview />,
     },
@@ -5136,15 +5184,22 @@ const reviewers = [
     {
         id: "empty", name: "Empty", category: "Feedback",
         installItems: ["empty", "button"],
-        description: "항목이 없는 상태와 다음 동작을 제목, 설명, 버튼으로 전달합니다.",
-        code: `import { Empty, EmptyTitle, EmptyDescription, EmptyContent, Button } from "@pydemia/ui";
+        description: "항목이 없는 상태와 다음 동작을 제목·설명·버튼으로 전달합니다. dashed·panel·plain 표시를 위치에 맞게 고를 수 있습니다.",
+        code: `import { useState } from "react";
+import { Empty, EmptyTitle, EmptyDescription, EmptyContent, Button } from "@pydemia/ui";
 
-<Empty>
-  <EmptyTitle>아직 항목이 없습니다</EmptyTitle>
-  <EmptyDescription>새 항목을 추가해 시작하세요.</EmptyDescription>
-  <EmptyContent><Button>항목 추가</Button></EmptyContent>
-</Empty>`,
-        preview: () => <Empty><EmptyMedia><Inbox /></EmptyMedia><EmptyTitle>아직 항목이 없습니다</EmptyTitle><EmptyDescription>새 항목을 추가해 시작하세요.</EmptyDescription><EmptyContent><Button variant="outline">항목 추가</Button></EmptyContent></Empty>,
+function ItemList() {
+  const [items, setItems] = useState<string[]>([]);
+  if (items.length) return <ul>{items.map((item) =>
+    <li key={item}>{item}</li>)}</ul>;
+  return <Empty appearance="plain">
+    <EmptyTitle>아직 항목이 없습니다</EmptyTitle>
+    <EmptyDescription>새 항목을 추가해 시작하세요.</EmptyDescription>
+    <EmptyContent><Button onClick={() =>
+      setItems(["새 항목"])}>항목 추가</Button></EmptyContent>
+  </Empty>;
+}`,
+        preview: () => <EmptyPreview />,
     },
     {
         id: "spinner", name: "Spinner", category: "Feedback",

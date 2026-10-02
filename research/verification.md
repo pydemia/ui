@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-02 Empty·Skeleton 표시 형태 — 로컬
+
+`npm run typecheck`, 대상 회귀 테스트 2/2, `npm run build`와
+`npm run registry:release-check`가 통과했습니다. build는 기존
+124개 component·126개 registry item을 유지했고 두 item 변경을
+46번째 snapshot
+`sha256-ea992a80d6d5a7e8c27918e9f7cf7a4880facb2e8ea2e350ed5e2e27bbe7b4b2`
+하나로 묶었습니다. 로컬 Chromium에서 `Empty`의 panel·plain 선택과
+동작, `Skeleton`의 세 형태·로딩 완료 전환을 확인했습니다. 390px
+dark 화면에서 token 색과 배치를 확인했습니다. Reduced motion은
+출력 class와 build만 확인했으며 실제 OS 설정 전환은 실행하지
+않았습니다. PR CI·공개 배포·item URL은 아직 검증하지 않았습니다.
+기존 공개 수량과 goal 관리용 추정 약 97%는 유지합니다.
+
 ## 2026-10-02 MarkdownEditor — 공개
 
 PR #82 Verify UI run `36976223007`, 병합 commit `e898927`의

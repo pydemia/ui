@@ -1,5 +1,19 @@
 # Prototype 설계 계약
 
+## 2026-10-02 Empty·Skeleton 표시 형태
+
+`Empty.appearance`는 `dashed`(기본값), `panel`, `plain` 중 하나입니다.
+기본값은 기존 점선 border와 `surface-subtle` 배경을 유지합니다.
+`panel`은 실선 border와 `surface`, `plain`은 border 없는 투명 배경을
+사용합니다. 세 형태 모두 같은 제목·설명·선택적 동작 구조를 씁니다.
+상태 판정과 동작 실행은 소비자가 소유합니다.
+
+`Skeleton.shape`는 `rectangle`(기본값), `line`, `circle` 중 하나입니다.
+기본값은 기존 class를 유지하고, `line`은 텍스트 줄, `circle`은 아바타
+자리를 표시합니다. 크기는 `className`으로 덮어쓸 수 있습니다.
+Skeleton은 장식 요소이고 loading 상태 설명은 상위 영역이 제공합니다.
+움직임 줄이기 설정에서는 pulse animation을 멈춥니다.
+
 ## 2026-10-02 Lightbox
 
 호출자가 고유한 `id`와 `src`·`alt`, 선택적 `caption`·`aspectRatio`를

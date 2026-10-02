@@ -62,6 +62,7 @@ export { Alert, AlertTitle, AlertDescription } from "./components/alert";
 export { Progress } from "./components/progress";
 export type { ProgressProps } from "./components/progress";
 export { Skeleton } from "./components/skeleton";
+export type { SkeletonProps } from "./components/skeleton";
 export {
     Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
 } from "./components/card";
@@ -97,6 +98,7 @@ export {
     BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis,
 } from "./components/breadcrumb";
 export { Empty, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from "./components/empty";
+export type { EmptyProps } from "./components/empty";
 export { Spinner } from "./components/spinner";
 export type { SpinnerProps } from "./components/spinner";
 export {
