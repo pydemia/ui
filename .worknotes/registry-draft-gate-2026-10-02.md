@@ -32,4 +32,12 @@ run `36958128057`에서는 registry·기존 snapshot 검사가 통과하고
 현재 snapshot 단계가 `skipped`였습니다. Ready 전환만으로 시작된
 run `36958306206`에서는 현재 snapshot 단계까지 통과했습니다.
 따라서 전환 이벤트와 두 검사 시점이 실제 GitHub Actions에서
-동작합니다. `main` push 검사는 병합 뒤 확인합니다.
+동작합니다. PR #70 병합 commit `331dcb5`의 Verify UI run
+`36958691424`에서는 기존 snapshot 검사와 `verify-current`가
+모두 통과했습니다. Pages run `36958690442`도 성공했고 Vercel
+production `dpl_CpFu4uJfGLVF3vw3qhrxtY6Ej6om`은 READY입니다.
+
+남은 절차 비용은 모든 PR의 과거 snapshot 전수 검사, 문서·기록 변경에도
+실행되는 전체 typecheck·테스트·build, provenance 검증 문구의 수정이
+전체 snapshot을 바꾸는 구조입니다. 이번 작업에서는 이를 변경하지
+않았습니다.

@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-02 registry draft 검사 공개 확인: PR #70 병합 commit
+`331dcb5`의 Verify UI run `36958691424`에서 기존 snapshot과
+현재 빌드 snapshot 검사가 모두 통과했습니다. Pages run
+`36958690442`도 성공했고 Vercel production
+`dpl_CpFu4uJfGLVF3vw3qhrxtY6Ej6om`은 READY입니다. Draft PR에서는
+현재 snapshot 단계가 건너뛰어지고 ready 전환에서 실행되는 것을
+별도로 확인했습니다. 공개 component 118개·item 120개·snapshot
+39개, goal 관리용 추정 약 93%는 그대로입니다.
+[작업 기록](registry-draft-gate-2026-10-02.md)을 참고하세요.
+
 2026-10-02 registry draft 검사 개선: 초안 PR은 registry 정합성과
 이미 공개한 snapshot만 검사하고, ready PR·main에서 현재 빌드의
 불변 snapshot을 요구하도록 `Verify UI` workflow를 조정했습니다.
