@@ -1,5 +1,16 @@
 # Prototype 설계 계약
 
+## 2026-10-02 DataTable 표시 선택
+
+`density`의 기본값 `standard`는 기존 `--density-row-block` token을
+그대로 사용합니다. `compact`는 `--space-1`, `comfortable`은
+`--space-4`를 행의 세로 여백에 적용합니다. 이 값은 해당 표 안에서만
+덮어쓰며 상위 화면의 밀도 token이나 다른 Table에는 영향을 주지
+않습니다. `striped`는 기본 `false`이고 짝수 데이터 행의 배경에
+`surface-subtle` token을 씁니다. 색상으로 상태를 전달하지 않으며
+caption·heading·sort·selection·pagination 규칙은 바꾸지 않습니다.
+두 속성은 전체 행 모드와 `remote` 모드에 동일하게 적용합니다.
+
 ## 2026-10-02 MasterDetail
 
 `items`의 각 `id`와 `title`은 비어 있지 않고 ID는 고유해야 합니다.

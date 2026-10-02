@@ -2910,7 +2910,10 @@ const initialReviewRows: ReviewRow[] = [
     { id: "6", request: "접근 권한", owner: "개발팀", status: "완료" },
 ];
 
-function RemoteDataTablePreview() {
+function RemoteDataTablePreview({ density, striped }: {
+    density: "compact" | "standard" | "comfortable";
+    striped: boolean;
+}) {
     const [view, setView] = useState<DataTableView>({
         query: "", filterValue: "", sort: null, page: 1, pageSize: 2,
     });
@@ -2948,6 +2951,7 @@ function RemoteDataTablePreview() {
             </div>
             <DataTable
                 caption="원격 요청 목록"
+                density={density} striped={striped}
                 rows={pageRows}
                 columns={reviewColumns}
                 getRowId={(row) => row.id}
@@ -2982,6 +2986,10 @@ function DataTablePreview() {
     const [rows, setRows] = useState(initialReviewRows);
     const [lastAction, setLastAction] = useState("");
     const [mode, setMode] = useState<"local" | "remote">("local");
+    const [density, setDensity] = useState<
+        "compact" | "standard" | "comfortable"
+    >("standard");
+    const [striped, setStriped] = useState(false);
 
     return (
         <div className="preview-workspace">
@@ -2995,8 +3003,27 @@ function DataTablePreview() {
                     원격 페이지
                 </Button>
             </div>
-            {mode === "remote" ? <RemoteDataTablePreview /> : <DataTable
+            <div className="mb-3 flex flex-wrap items-end gap-3">
+                <div className="grid gap-1">
+                    <label htmlFor="demo-table-density">행 밀도</label>
+                    <NativeSelect id="demo-table-density" value={density}
+                        onChange={(event) => setDensity(event.target.value as
+                            typeof density)}>
+                        <option value="compact">좁게</option>
+                        <option value="standard">기본</option>
+                        <option value="comfortable">넓게</option>
+                    </NativeSelect>
+                </div>
+                <label className="flex min-h-9 items-center gap-2">
+                    <input type="checkbox" checked={striped}
+                        onChange={(event) => setStriped(event.target.checked)} />
+                    줄무늬 행
+                </label>
+            </div>
+            {mode === "remote" ? <RemoteDataTablePreview density={density}
+                striped={striped} /> : <DataTable
                 caption="화면 개선 요청"
+                density={density} striped={striped}
                 rows={rows}
                 columns={reviewColumns}
                 getRowId={(row) => row.id}
@@ -6045,7 +6072,7 @@ function RequestPages() {
     },
     {
         id: "data-table", name: "DataTable", category: "Data display",
-        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. remote에서는 전달된 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업은 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
+        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. 행 밀도와 줄무늬 표시를 선택할 수 있습니다. remote에서는 전달된 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업은 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
         code: `import { Button, DataTable } from "@pydemia/ui";
 import type { DataTableColumn } from "@pydemia/ui";
 
@@ -6061,6 +6088,7 @@ const columns: DataTableColumn<Request>[] = [
 ];
 
 <DataTable caption="화면 개선 요청" rows={rows} columns={columns}
+  density="compact" striped
   getRowId={(row) => row.id} getRowLabel={(row) => row.name}
   getSearchText={(row) => row.name}
   filter={{ label: "상태", getValue: (row) => row.status,

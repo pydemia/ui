@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-02 — DataTable 표시 선택
+
+- `DataTable`에 `compact`·`standard`·`comfortable` 행 밀도와 선택형
+  줄무늬 행을 추가했습니다. 기본 표시는 이전과 같습니다.
+- 문서 preview에서 전체 행·원격 페이지 모두 같은 표시 설정을 바꿔
+  비교할 수 있습니다.
+
 ## 2026-10-02 — AgentStatus
 
 - `AgentStatus`는 AI 작업 전체 상태와 단계별 진행·완료·실패·건너뜀,
