@@ -13,8 +13,8 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
-사이트에는 126개 component와 128개 registry item이 있습니다.
-`ResultState`를 포함한 로컬 후보는 127개·129개입니다.
+사이트에는 127개 component와 129개 registry item이 있습니다.
+`ResultState`의 공개 preview와 52번째 snapshot 경로를 확인했습니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
@@ -93,7 +93,9 @@ diff 공백 검사를 확인합니다.
 
 CI 결과는 같은 commit에 대해 재사용하고, 로컬에서 실행한 흐름을
 공개 사이트에서 다시 조작하지 않습니다. 표준 registry 경로의 새
-item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 않은
+item마다 별도 소비자를 만들지 않습니다. 기존 설치 방식은 릴리스
+묶음의 대표 item을 설치하고, 설치 형식이나 의존 경로가 달라질 때
+해당 경로를 별도로 확인합니다. 외부 코드를 쓰지 않은
 원본 구현에는 upstream source·LICENSE 대조를 적용하지 않고,
 참고 자료와 기존 의존 component의 출처를 기록합니다.
 기존 component의 표시만 바꾸면 독립 사용처·새 upstream 조사처럼
@@ -127,6 +129,8 @@ provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
 확인할 수 있습니다.
 [실무 기준 재검토](quality-checklist-practical-review-2026-10-02.md)는
 릴리스 묶음과 검사 기록의 적용 범위를 정리했습니다.
+[최신 재검토](quality-checklist-reassessment-2026-10-02.md)는 문서
+기준과 실제 실행의 차이 및 반복 비용을 확인했습니다.
 
 ## 추가 component 후보
 

@@ -1,5 +1,16 @@
 # 검증 기록
 
+## 2026-10-02 ResultState — 공개
+
+PR #97 Verify UI run `37004809867`, 병합 commit `65e2dac`의 Verify UI
+run `37005118820`과 Pages run `37005117809`이 성공했습니다.
+Vercel production `dpl_6A1fcDfEynDARqDpnBAXFdBaQUtJ`는 READY이며
+공개 preview·Usage와 Enter 재시도·focus를 확인했습니다. 공개 현재
+item과 52번째 snapshot manifest·item URL이 HTTP 200이고 로컬 게시
+파일과 바이트 단위로 일치합니다. Manifest에는 129개 item이 있습니다.
+console error는 0건이었고 실제 screen reader 발화는 미검증입니다.
+[작업 기록](../.worknotes/result-state-2026-10-02.md)에 남겼습니다.
+
 ## 2026-10-02 ResultState — 로컬
 
 `npm run typecheck`, UI 테스트 192/192, `npm run build`가
