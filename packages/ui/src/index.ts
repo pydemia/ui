@@ -216,6 +216,10 @@ export { WaterfallChart } from "./components/waterfall-chart";
 export type {
     WaterfallChartProps, WaterfallChange,
 } from "./components/waterfall-chart";
+export { BoxPlotChart } from "./components/box-plot-chart";
+export type {
+    BoxPlotChartProps, BoxPlotSummary,
+} from "./components/box-plot-chart";
 export { DataChart } from "./components/data-chart";
 export type {
     DataChartProps, ChartPoint, ChartSeries,

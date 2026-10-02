@@ -1798,3 +1798,19 @@ native multiline 값·form control을 참고했습니다. 원문은
 링크 처리는 기존 `Markdown`의
 범위를 그대로 사용합니다. 실제 screen reader·touch·Safari·RTL은
 검증하지 않았습니다.
+
+## 2026-10-03 BoxPlotChart
+
+`BoxPlotChart`는 pydemia/ui에서 새로 작성한 React·Tailwind 원본입니다.
+외부 component 소스·그림을 복사하지 않았고 새 npm 의존성도 없습니다.
+registry 의존성은 기존 `pyd-utils`뿐입니다. 따라서 편입한 upstream
+revision이나 외부 component LICENSE는 없습니다. 현재 공급물의
+소스 표기는 `project-owned`이며 공개 사용 조건은 별도로 정하지
+않았습니다.
+
+[NIST의 Box Plot 설명](https://itl.nist.gov/div898/handbook/eda/section3/boxplot.htm)에서
+사분위 상자와 최솟값·최댓값 수염의 의미를 확인했습니다. NIST가
+설명하는 이상치 fence 변형은 구현하지 않습니다.
+[W3C WAI의 표 지침](https://www.w3.org/WAI/tutorials/tables/)을
+참고해 도형과 별도로 제목·열/행 머리글이 있는 정확한 값 표를
+제공합니다. 실제 screen reader 발표는 아직 확인하지 않았습니다.

@@ -11,7 +11,7 @@ import {
     AvatarGroup, AvatarUploader, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, BlockDocument, BlockEditor,
-    BarList, Board, BottomNav, BottomNavLink, BulletChart,
+    BarList, Board, BoxPlotChart, BottomNav, BottomNavLink, BulletChart,
     Button, ButtonGroup, IconButton,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
@@ -3383,6 +3383,51 @@ function WaterfallChartPreview() {
                 startValue={scenario === "negative" ? 20 : 100}
                 changes={scenario === "empty" ? [] : changes}
                 variant={variant} />
+        </div>
+    );
+}
+
+function BoxPlotChartPreview() {
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const [scenario, setScenario] = useState<"data" | "equal" | "empty">(
+        "data",
+    );
+    const summaries = scenario === "empty" ? [] : scenario === "equal" ? [
+        { id: "stable", label: "고정 응답", min: 80, q1: 80,
+            median: 80, q3: 80, max: 80 },
+    ] : [
+        { id: "search", label: "검색 API", min: 35, q1: 48,
+            median: 62, q3: 85, max: 140 },
+        { id: "reports", label: "보고서 생성", min: 50, q1: 78,
+            median: 110, q3: 150, max: 260 },
+        { id: "events", label: "이벤트 처리", min: 20, q1: 40,
+            median: 55, q3: 72, max: 105 },
+    ];
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "equal" ? "data" : "equal",
+                )}>
+                    {scenario === "equal" ? "그룹 비교" : "동일한 값"}
+                </Button>
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "empty" ? "data" : "empty",
+                )}>
+                    {scenario === "empty" ? "데이터 표시" : "빈 데이터"}
+                </Button>
+                <Button variant="outline" onClick={() => setAppearance(
+                    appearance === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {appearance === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <BoxPlotChart title="서비스별 응답 시간" unit="ms"
+                description="수염은 관측 최솟값과 최댓값입니다."
+                summaries={summaries} appearance={appearance} />
         </div>
     );
 }
@@ -7595,6 +7640,22 @@ function JobTerminal() {
     { id: "other", label: "기타", value: 0 },
   ]} />`,
         preview: () => <WaterfallChartPreview />,
+    },
+    {
+        id: "box-plot-chart", name: "BoxPlotChart",
+        category: "Data & analytics",
+        description: "그룹별 최솟값·1사분위·중앙값·3사분위·최댓값을 같은 척도에서 비교합니다. 수염은 최솟값·최댓값이며 정확한 수치는 표로 제공합니다. 입력값 계산과 이상치 판정은 호출자가 맡습니다.",
+        code: `import { BoxPlotChart } from "@pydemia/ui";
+
+<BoxPlotChart title="서비스별 응답 시간" unit="ms"
+  description="수염은 관측 최솟값과 최댓값입니다."
+  summaries={[
+    { id: "search", label: "검색 API", min: 35, q1: 48,
+      median: 62, q3: 85, max: 140 },
+    { id: "reports", label: "보고서 생성", min: 50, q1: 78,
+      median: 110, q3: 150, max: 260 },
+  ]} />`,
+        preview: () => <BoxPlotChartPreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",
