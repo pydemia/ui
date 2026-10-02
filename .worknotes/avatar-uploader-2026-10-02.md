@@ -51,3 +51,20 @@ component가 제공하는 범위 밖이거나 별도 환경 검사가 필요합�
 공급·품질 판정은 [현재 적용 검토](quality-checklist-current-review-2026-10-02.md)의
 변경 위험 기준을 따릅니다. 이미 통과한 같은 commit의 CI나 로컬에서
 실행한 브라우저 흐름을 반복할 필요는 없습니다.
+
+## 공개 확인
+
+PR [#76](https://github.com/pydemia/ui/pull/76)의 Verify UI run
+`36967165317`과 병합 commit `413c0814983d830cb1d631c20f564086c47d261f`의
+Verify UI run `36967341555`, Pages run `36967341232`가 통과했습니다.
+Vercel production `dpl_ErGFax8WHqeFc2b2XAnuLxxWFJYo`는 READY이며
+`ui.pydemia.ai` alias에 연결됐습니다. 공개 브라우저에서
+AvatarUploader preview·Usage를 확인했습니다. 현재
+`/r/pyd-avatar-uploader.json`과 42번째 snapshot의 manifest·item
+URL은 HTTP 200이고 manifest의 `itemCount`는 123입니다.
+
+로컬에서 확인한 선택·crop 흐름은 공개 사이트에서 다시 실행하지
+않았습니다. 실제 저장 API와 screen reader 발표는 검사하지
+않았습니다. 공개 기준은 121개 component·123개 item·42개
+snapshot입니다. 프로필 사진 준비의 완결된 반복 용례를 공급해
+goal 관리용 추정을 약 95%에서 약 96%로 조정합니다.

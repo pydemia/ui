@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 AvatarUploader 공개 확인: **약 95% → 약 96%**입니다.
+PR #76과 병합 commit `413c081`의 CI·Pages, Vercel production,
+공개 preview·Usage와 현재 item·42번째 snapshot URL을
+확인했습니다. 공개 121개 component·123개 item·42개 snapshot이며
+프로필 사진 선택·crop·제거의 반복 용례가 공급됐습니다.
+[작업 기록](avatar-uploader-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트 후속 검토: **약 95% → 약 95%**입니다.
 같은 commit과 흐름의 중복 검사를 줄이고 변경 위험에 맞는 근거만
 적용합니다. 품질 하한과 CI 차단 조건은 유지합니다. 새 공개 공급은
