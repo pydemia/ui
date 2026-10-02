@@ -1,5 +1,20 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `BarList` 로컬 후보: **약 97% → 약 97%**입니다.
+범주별 단일 수치를 가로 막대·정확한 텍스트로 표시하고 Operations
+workspace에 연결했습니다. typecheck·UI 테스트 212/212·build와
+로컬 Chromium 표시·상태 갱신을 확인했습니다. 공개 전이므로 공개
+130개 component·132개 item·58개 snapshot은 그대로이며 로컬
+후보는 131개·133개입니다.
+[작업 기록](bar-list-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 체크리스트 경직성 재검토:
+**약 97% → 약 97%**입니다. 로드맵의 매 릴리스 대표 소비자 설치로
+읽히던 문구를 설치 형식·target·의존 경로 변경 시 재검사로
+고쳤습니다. 제품·CI·공개 수량은 바뀌지 않았으며, snapshot 복제와
+공통 고지 hash 전파는 별도 구현 과제입니다.
+[현재 기준](quality-checklist-current-review-2026-10-02.md)을 참고하세요.
+
 2026-10-03 `AppFloatingDisclosure` 공개 확인:
 **약 97% → 약 97%**입니다. PR #104와 병합 `7f40cc3d3`의
 Verify UI·Pages·Vercel production, 공개 item·58번째

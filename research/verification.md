@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-03 BarList — 로컬 후보
+
+`npm run typecheck`, UI 테스트 212/212, `npm run build`,
+`npm run registry:check`가 통과했습니다. 59번째 snapshot을 생성하고
+재빌드한 뒤 `npm run registry:release-check`도 통과했습니다.
+로컬 Chromium에서 목록·0건·빈 상태·평면 표시를
+확인했고 390px 화면의 문서 가로 넘침과 console error는 없었습니다.
+Operations workspace에서 작업 재실행 뒤 완료 3→2건, 실행 중
+1→2건으로 갱신되는 것도 확인했습니다. PR CI·공개 경로는 아직
+확인하지 않았습니다. 실제 screen reader·
+touch·Safari는 이번 변경의 적용 검사로 실행하지 않았습니다.
+[작업 기록](../.worknotes/bar-list-2026-10-03.md)을 참고하세요.
+
 ## 2026-10-03 AppShell floating disclosure — 공개
 
 PR #104와 병합 `7f40cc3d3`의 Verify UI·GitHub Pages,

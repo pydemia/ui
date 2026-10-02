@@ -1,5 +1,19 @@
 # Prototype 설계 계약
 
+## 2026-10-03 BarList
+
+`BarList`는 호출자가 전달한 범주의 순서를 유지합니다. 각 항목은
+고유한 ID, 표시 이름, 음수가 아닌 유한한 수치를 갖습니다.
+`max`를 주면 모든 값 이상인 양의 유한한 수여야 합니다. 없으면
+가장 큰 항목을 막대의 기준으로 쓰며 전부 0일 때도 0건을
+표시합니다. 빈 배열은 값 0인 항목과 구분해 빈 상태를 보여 줍니다.
+
+`panel`·`plain`은 같은 데이터의 표시 형태입니다. 막대는 보조
+시각 요소이며 `figure`의 제목과 native 목록에 범주·정확한 값을
+텍스트로 둡니다. `valueText`는 소비자의 형식 지정에 사용하지만
+막대 길이는 원래 `value`로 계산합니다. `DataChart`의 시계열·
+다중 계열, `DataList`의 일반 key/value 표시는 그대로 담당합니다.
+
 ## 2026-10-03 AppFloatingDisclosure
 
 `AppFloatingDisclosure`는 `AppShell` 안에서 기존 bubble·panel을
