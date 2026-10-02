@@ -1,5 +1,15 @@
 # 검증 기록
 
+## 2026-10-02 ArtifactViewer 공개 확인
+
+PR #100과 병합 `026378c`의 Verify UI, Pages, Vercel production이
+성공했습니다. 공개 preview·Usage와 현재 item, 54번째 snapshot의
+manifest·대표 item이 저장소 파일과 byte 단위로 일치했습니다.
+공개 snapshot을 격리 소비자에 설치해 typecheck·build와 고지 pin을
+확인했습니다. 실제 screen reader·touch·Safari·RTL은 검사하지
+않았습니다. [작업 기록](../.worknotes/artifact-viewer-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 ArtifactViewer — 로컬
 
 `npm run typecheck`, UI 테스트 199/199, `npm run build`가 통과했습니다.

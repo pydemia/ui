@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 `ArtifactViewer` 공개 확인: PR #100을 `026378c`로
+병합했습니다. PR·`main` Verify UI, Pages와 Vercel production이
+성공했습니다. 공개 preview·Usage와 현재 item, 54번째 snapshot의
+manifest·대표 item이 저장소 파일과 byte 단위로 일치합니다. 공개
+snapshot의 소비자 설치·typecheck·build, provenance 고지 pin도
+확인했습니다. 공개 129개 component·131개 item·54개 snapshot이며
+goal 관리용 추정은 약 97%입니다. [작업 기록](artifact-viewer-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 공급·품질 재판정: 자동 검사가 전체 item을 대조한 경우
 공개 URL은 manifest와 의존 경로별 대표 변경 item을 확인합니다.
 `ArtifactViewer`의 공통 고지 pin은 기존 item 29개를 바꾸고 새

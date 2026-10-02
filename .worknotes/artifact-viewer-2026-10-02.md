@@ -1,5 +1,29 @@
 # ArtifactViewer 작업 기록
 
+## 공개 확인
+
+PR #100을 `026378ce489cc71a35e68de6ec122a304dcd3354`로
+병합했습니다. PR Verify UI run `37017176684`, `main` Verify UI
+run `37017556674`, Pages run `37017555042`가 통과했습니다.
+Vercel production deployment
+`dpl_5WxanSPp6oXUZReSFJqMh6hkZiFf`는 READY입니다.
+
+공개 문서에서 `ArtifactViewer` preview·Usage와 129개 component
+표시를 확인했습니다. `ui.pydemia.ai`의 현재 item과 54번째
+snapshot의 manifest·대표 item을 내려받아 저장소 `docs/r` 파일과
+byte 단위로 비교했습니다. 세 파일 모두 일치했습니다.
+격리 Vite 소비자에서 공개 snapshot의 item·token을
+`shadcn@4.21.0`으로 다시 설치했고 typecheck·build가 통과했습니다.
+소비자 고지는 source commit `2fabc8a`와 provenance SHA-256
+`08bd431142b8305c537db768bee28101ee9d92ab8fcc48064f787a3d5b8ff8fc`를
+포함합니다. 공개 상호작용은 로컬 Chromium 실행 결과를 재사용해
+반복하지 않았습니다. 실제 screen reader·touch·Safari·RTL은
+지원 범위 확인을 위한 후속 과제입니다.
+
+공개 수량은 129개 component·131개 item·54개 snapshot입니다.
+RichTextEditor의 인라인 서식·구조 undo와 더 넓은 소비자 조합
+검증이 남아 goal 관리용 추정은 약 97%입니다.
+
 ## 사용처와 경계
 
 AI 초안·코드 결과물을 revision별로 검토하고 직전 revision과 비교하는
