@@ -1,5 +1,22 @@
 # 검증 기록
 
+## 2026-10-02 AppShell 표시 형태 — 로컬
+
+`npm run typecheck`, `npm run build`와
+`npm run registry:release-check`가 통과했습니다. 기존 124개
+component·126개 item을 유지하고 `pyd-app-shell` 변경을 47번째
+snapshot
+`sha256-7859cbc5c103067747d27f285f0ad97a9fe4b16f991a1bc4ec11b2332aeaceee`
+으로 묶었습니다. 로컬 Chromium에서 framed·canvas의 border·radius,
+원형·pill 크기, 좌우 배치, 도움말 열림·Escape·focus 복귀와 390px
+dark token을 확인했습니다. 왼쪽 pill이 bottom panel 문구를 가리는
+문제를 문서 예시의 여백으로 해결하고 계산된 간격을 다시 확인했습니다.
+전체 UI 테스트는 로컬에서 재실행하지 않았고 PR CI 결과를 기다립니다.
+공개 배포·item URL도 미검증이므로 기존 공개 수량과 goal 관리용
+추정 약 97%를 유지합니다.
+[작업 기록](../.worknotes/app-shell-appearances-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 Empty·Skeleton 표시 형태 — 공개
 
 PR #84 Verify UI run `36978948136`, 병합 commit `95a1d3e`의

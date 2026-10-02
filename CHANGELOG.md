@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 2026-10-02 — AppShell 표시 형태
+
+- `AppShell`에 전체 화면용 `canvas`를 추가했습니다. 기존 테두리 있는
+  `framed`가 기본값입니다. Operations 예시의 border·radius 덮어쓰기를
+  `canvas`로 교체했습니다.
+- `AppFloatingBubble`에 글자가 들어가는 `pill` 표시를 추가했습니다.
+  기존 원형 버튼이 기본값이며 좌우 배치와 도움말 열림 동작은 같습니다.
+  새 의존성은 없습니다.
+
 ## 2026-10-02 — Empty·Skeleton 표시 형태
 
 - `Empty`에 `dashed`·`panel`·`plain` 표시를 추가했습니다. 기본값은

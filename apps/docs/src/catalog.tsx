@@ -2412,6 +2412,15 @@ function MasterDetailPreview() {
 }
 
 function AppShellPreview() {
+    const [appearance, setAppearance] = useState<"framed" | "canvas">(
+        "framed",
+    );
+    const [bubbleAppearance, setBubbleAppearance] = useState<
+        "circle" | "pill"
+    >("circle");
+    const [floatingSide, setFloatingSide] = useState<"left" | "right">(
+        "right",
+    );
     const [panelOpen, setPanelOpen] = useState(false);
     const panelId = useId();
     const bubbleRef = useRef<HTMLButtonElement>(null);
@@ -2422,8 +2431,44 @@ function AppShellPreview() {
     }
 
     return (
-        <div className="preview-workspace">
-            <AppShell className="min-h-72">
+        <div className="preview-workspace grid gap-3">
+            <div className="flex flex-wrap gap-2">
+                <div role="group" aria-label="화면 골격 표시"
+                    className="flex gap-2">
+                    {(["framed", "canvas"] as const).map((option) => (
+                        <Button key={option} variant={
+                            appearance === option ? "primary" : "outline"
+                        } aria-pressed={appearance === option}
+                            onClick={() => setAppearance(option)}>
+                            {option}
+                        </Button>
+                    ))}
+                </div>
+                <div role="group" aria-label="도움말 버튼 표시"
+                    className="flex gap-2">
+                    {(["circle", "pill"] as const).map((option) => (
+                        <Button key={option} variant={
+                            bubbleAppearance === option
+                                ? "primary" : "outline"
+                        } aria-pressed={bubbleAppearance === option}
+                            onClick={() => setBubbleAppearance(option)}>
+                            {option}
+                        </Button>
+                    ))}
+                </div>
+                <div role="group" aria-label="도움말 위치"
+                    className="flex gap-2">
+                    {(["left", "right"] as const).map((option) => (
+                        <Button key={option} variant={
+                            floatingSide === option ? "primary" : "outline"
+                        } aria-pressed={floatingSide === option}
+                            onClick={() => setFloatingSide(option)}>
+                            {option}
+                        </Button>
+                    ))}
+                </div>
+            </div>
+            <AppShell appearance={appearance} className="min-h-72">
                 <AppHeader>
                     <strong className="text-sm">Workspace</strong>
                     <GlobalNav aria-label="작업 공간 상단 탐색" className="ml-auto">
@@ -2460,16 +2505,22 @@ function AppShellPreview() {
                         <p className="m-0 text-xs text-muted">이번 주 변경 3건</p>
                     </AppSidebar>
                 </AppBody>
-                <AppBottomPanel aria-label="작업 상태" className="text-xs">
+                <AppBottomPanel aria-label="작업 상태" className={
+                    floatingSide === "left"
+                        ? "pl-28 text-xs" : "pr-28 text-xs"
+                }>
                     모든 변경 사항이 저장되었습니다.
                 </AppBottomPanel>
                 <AppFloatingBubble ref={bubbleRef}
+                    appearance={bubbleAppearance}
+                    side={floatingSide}
                     aria-label="도움말"
                     aria-expanded={panelOpen} aria-controls={panelId}
                     onClick={() => setPanelOpen((open) => !open)}>
-                    ?
+                    {bubbleAppearance === "circle" ? "?" : "도움말"}
                 </AppFloatingBubble>
                 <AppFloatingPanel id={panelId} aria-label="도움말"
+                    side={floatingSide}
                     hidden={!panelOpen}
                     className={
                         "bottom-[calc(var(--space-4)+2.5rem+var(--space-2))] " +
@@ -6176,7 +6227,7 @@ function RequestWorkspace() {
     {
         id: "app-shell", name: "AppShell", category: "Framework",
         installItems: ["app-shell", "button"],
-        description: "header, 좌우 panel, 본문, 하단 panel과 floating UI를 조합하는 화면 골격입니다.",
+        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. 테두리 있는 framed와 전체 화면용 canvas, 원형·pill 도움말 버튼을 선택할 수 있습니다.",
         code: `import { useId, useRef, useState } from "react";
 import {
   AppShell, AppHeader, AppBody, AppSidebar, AppMain,
@@ -6191,18 +6242,22 @@ function Workspace() {
     setOpen(false);
     bubbleRef.current?.focus();
   }
-  return <AppShell>
+  return <AppShell appearance="canvas">
     <AppHeader>제품 이름과 전역 탐색</AppHeader>
     <AppBody>
       <AppSidebar aria-label="프로젝트 탐색">...</AppSidebar>
       <AppMain>화면 본문</AppMain>
       <AppSidebar side="right" aria-label="상세 정보">...</AppSidebar>
     </AppBody>
-    <AppBottomPanel aria-label="작업 상태">저장됨</AppBottomPanel>
-    <AppFloatingBubble ref={bubbleRef} aria-label="도움말"
+    <AppBottomPanel aria-label="작업 상태" className="pl-28">
+      저장됨
+    </AppBottomPanel>
+    <AppFloatingBubble ref={bubbleRef} appearance="pill" side="left"
+      aria-label="도움말"
       aria-expanded={open} aria-controls={panelId}
-      onClick={() => setOpen((value) => !value)}>?</AppFloatingBubble>
-    <AppFloatingPanel id={panelId} aria-label="도움말" hidden={!open}
+      onClick={() => setOpen((value) => !value)}>도움말</AppFloatingBubble>
+    <AppFloatingPanel id={panelId} aria-label="도움말"
+      side="left" hidden={!open}
       className="bottom-[calc(var(--space-4)+2.5rem+var(--space-2))]"
       onKeyDown={(event) => {
         if (event.key === "Escape") close();

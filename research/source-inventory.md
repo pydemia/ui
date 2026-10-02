@@ -1,5 +1,14 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 AppShell 표시 형태
+
+기존 `AppShell`은 border·radius를 직접 덮어써 전체 화면에 넣었고,
+floating 도움말은 원형 버튼만 제공했습니다. 이 저장소의 원본
+React·Tailwind 구현에 `canvas`와 `pill` 표시를 추가했습니다. 기존
+`pyd-utils`와 공통 token만 사용하며 새 npm 의존성이나 외부 component
+source는 없습니다. provenance의 원본 출처·의존성·접근성 설명은
+그대로 정확해 수정하지 않았습니다.
+
 ## 2026-10-02 Empty·Skeleton 표시 형태
 
 기존 `Empty`·`Skeleton`의 표시 선택을 확장했습니다. 두 component는

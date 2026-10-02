@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-02 AppShell 표시 확장 로컬 초안: `framed`·`canvas` 골격과
+원형·pill floating bubble을 구현했습니다. Operations 예시에서
+canvas를 사용하고 문서 preview에서 세 표시 축을 전환합니다.
+로컬 Chromium의 기본·변형, 좌측 도움말 열기·Escape·focus 복귀,
+390px dark와 하단 상태 문구 간격을 확인했습니다. typecheck·build·
+registry release 검사는 47번째 snapshot으로 통과했습니다. PR CI·
+공개 배포는 아직 남았습니다. 공개 수량 124개 component·126개 item·
+46개 snapshot과 goal 관리용 추정 약 97%는 유지합니다.
+[작업 기록](app-shell-appearances-2026-10-02.md)을 참고하세요.
+
 2026-10-02 Empty·Skeleton 표시 확장 공개 확인: PR #84와 병합
 commit `95a1d3e`의 Verify UI·Pages, Vercel production이
 성공했습니다. 공개 preview·Usage, 현재 두 registry item과 46번째
