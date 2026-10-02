@@ -622,6 +622,11 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "status for advisory updates, alert for errors, explicit text and named close button; queued items are mounted when visible", "keyboard": "Chromium: Enter dismisses, next item appears, focus returns to element active when toast appeared", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-notification-center", "category": "Feedback", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named section and notification list, text unread state, native filter and read controls, count live region", "keyboard": "Chromium: unread filter, item read toggle, Enter on mark-all; focus returns to unread filter when visible rows disappear", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-drawer", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Radix Dialog", "url": "https://www.radix-ui.com/primitives/docs/components/dialog", "license": "MIT" },

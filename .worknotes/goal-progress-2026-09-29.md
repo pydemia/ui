@@ -1,5 +1,21 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 NotificationCenter 로컬 후보: **약 97% → 약 97%**입니다.
+지속 알림의 읽음 상태와 필터를 새 사용처로 구현하고 로컬 동작을
+확인했습니다. 고지 pin과 51번째 snapshot 검사를 통과했지만 PR CI·
+공개 URL 검증 전이어서
+공개 수량 125개 component·127개 item·50개 snapshot과 관리용
+추정은 유지합니다. [작업 기록](notification-center-2026-10-02.md)을
+참고하세요.
+
+2026-10-02 DataChart 포인터 요약 공개 확인: **약 97% → 약 97%**입니다.
+PR #92와 병합 commit `893ab26`의 CI·Pages·Vercel production,
+공개 preview·Usage, 현재 chart item·50번째 snapshot URL을
+확인했습니다. 공개 125개 component·127개 item·50개 snapshot입니다.
+기존 차트의 값 탐색이 빨라졌지만 독립 사용 사례의 수가 늘어난 것은
+아닙니다. [작업 기록](data-chart-hover-summary-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 DataChart 포인터 요약 로컬 검증: **약 97% → 약 97%**입니다.
 기존 차트에서 포인터 구간 값과 누적 합계를 빠르게 확인하는 표시를
 추가했습니다. typecheck·대상 테스트·build·50번째 snapshot 검사는

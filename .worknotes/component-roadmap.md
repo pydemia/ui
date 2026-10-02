@@ -156,6 +156,8 @@ provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
 - [x] `Toast` — 단일 controlled 알림에 FIFO queue를 더했습니다.
   최대 표시 수와 선택적 중복 억제, 수동 닫기·focus 복귀를 확인했습니다.
   실제 screen reader 발표는 남았습니다.
+- [x] `NotificationCenter` — 읽음 상태를 호출자가 소유하는 지속 알림
+  목록입니다. 필터·개별/전체 읽음 변경·열기 요청을 제공합니다.
 - [x] `Pagination` — 전체 건수·범위·페이지 크기·0건 표시와 이동.
 - [x] `CommandPalette` — 검색 가능한 command, Ctrl/Cmd+K 단축키,
   그룹·disabled·빈 결과와 keyboard 실행. 실제 screen reader 발표는

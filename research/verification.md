@@ -1,5 +1,31 @@
 # 검증 기록
 
+## 2026-10-02 NotificationCenter — 로컬
+
+`npm run typecheck`, 대상 테스트 3/3, `npm run build`를 통과했습니다.
+Chromium에서 읽지 않음 필터와 개별 읽음 전환, 빈 결과, 전체 보기와
+읽지 않음 복귀, 열기 요청, Enter로 전체 읽음 처리를 확인했습니다.
+읽지 않음 목록에서 행이 사라지면 focus가 필터 버튼에 남았습니다.
+390px에서는 문서 가로 넘침이 없었고 plain·dark 표시와 console error
+0건을 확인했습니다. `registry:release-check`는 128개 item, 51개
+snapshot과 현재 빌드의 일치를 확인했습니다. PR CI·공개 URL은 아직
+확인하지 않았습니다. 실제 screen reader 발화는 미검증입니다.
+[작업 기록](../.worknotes/notification-center-2026-10-02.md)에 범위를
+남겼습니다.
+
+## 2026-10-02 DataChart 포인터 요약 — 공개
+
+PR #92의 Verify UI run `36994087333`, 병합 commit `893ab26`의
+Verify UI run `36994339617`과 Pages run `36994339072`가
+성공했습니다. Vercel production
+`dpl_B4zzBiPkxYyCkFmbJiZg6bzQL9Uy`는 READY입니다.
+공개 preview의 포인터 요약 전환·결측값과 Usage, console error
+0건을 확인했습니다. 현재 chart item, 50번째 snapshot manifest·
+chart item URL이 HTTP 200이며 manifest에는 127개 item이 있습니다.
+실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다.
+[작업 기록](../.worknotes/data-chart-hover-summary-2026-10-02.md)에
+범위를 남겼습니다.
+
 ## 2026-10-02 DataChart 포인터 요약 — 로컬
 
 `hoverSummary`를 켠 단일 계열의 결측값, 다중 계열 누적 영역의

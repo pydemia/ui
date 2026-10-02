@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-02 — NotificationCenter
+
+- 읽음 상태를 호출자가 소유하는 `NotificationCenter`를 추가했습니다.
+  전체·읽지 않음 필터, 개별·전체 읽음 변경, 열기 요청과 panel·plain
+  표시를 제공합니다. 새 npm 의존성은 없습니다.
+
 ## 2026-10-02 — DataChart 포인터 요약
 
 - `DataChart`의 `hoverSummary`로 단일·다중 계열의 구간 값을 그래프 위에
