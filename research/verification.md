@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 ModelSelector — 공개
+
+PR #66의 Verify UI와 병합 commit `64282d6`의 Verify UI·Pages가
+통과했습니다. Vercel production
+`dpl_5NBbmMoRN7m7q1gHubVZPTJMcEYd`는 READY입니다. 공개
+사이트에서 ModelSelector preview·Usage와 브라우저 오류 0건을
+확인했습니다. 현재 registry manifest·item과 38번째 snapshot
+manifest·item URL은 모두 HTTP 200이며 snapshot에는 119개 item이
+있습니다. 공개 component는 117개입니다. 실제 screen reader·
+touch·Safari·RTL, 개별 소비자 설치와 rollback 뒤 URL 보존은
+이번 공개 확인 범위에 포함하지 않았습니다.
+
 ## 2026-10-02 ModelSelector — 로컬
 
 `npm run typecheck`, UI 테스트 161/161과 `npm run build`가

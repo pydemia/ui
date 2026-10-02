@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 ModelSelector 공개 확인: **약 91% → 약 92%**입니다.
+PR #66과 병합 commit `64282d6`의 Verify UI·Pages, Vercel
+production이 성공했습니다. 공개 preview·Usage, 현재 registry item,
+38번째 snapshot manifest/item URL을 확인했습니다. 공개 117개
+component·119개 item·38개 snapshot입니다.
+[작업 기록](model-selector-2026-10-02.md)을 참고하세요.
+
 2026-10-02 AgentStatus 공개 확인: **약 90% → 약 91%**입니다.
 PR #62와 병합 commit `3411490`의 Verify UI·Pages, Vercel
 production이 성공했습니다. 공개 preview·Usage, 현재 registry item,
