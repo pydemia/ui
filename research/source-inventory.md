@@ -1,5 +1,20 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 ArtifactViewer source 확인
+
+AI 초안·코드 결과물의 revision을 읽고 직전 revision과 비교하는
+사용처입니다. `ToolCall`의 일회성 결과나 `CodeBlock`의 단일 소스와
+달리 선택한 revision·보기 방식을 함께 관리합니다. React·Tailwind
+원본 구현이며 외부 component 코드를 복사하지 않았습니다.
+기존 `Button`·`CopyButton`·`DiffViewer`·`Markdown`·`utils`만
+사용하고 새 npm 의존성은 없습니다. shadcn/ui에서 수정한 하위
+component의 고정 revision·MIT 고지는 기존 provenance를 재사용합니다.
+
+[WAI-ARIA APG Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/)의
+native 버튼과 `aria-pressed` 의미만 참고했습니다. 결과물은 React
+텍스트와 저장소의 안전한 Markdown 부분집합으로 표시하고 임의 HTML을
+실행하지 않습니다. 실제 screen reader 발표는 확인하지 않았습니다.
+
 ## 2026-10-02 BlockEditor source 확인
 
 공지·운영 문서를 작성할 때 제목·문단·목록의 순서를 구조화해 저장하는

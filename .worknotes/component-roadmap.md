@@ -15,7 +15,8 @@ Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
 사이트에는 128개 component와 130개 registry item이 있습니다.
 `BlockEditor`의 공개 preview와 53번째 snapshot 경로·대표 소비자
-설치를 확인했습니다.
+설치를 확인했습니다. `ArtifactViewer`는 129번째 component·131번째
+registry item으로 로컬 검증 중이며 공개 수에는 아직 넣지 않습니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
@@ -90,7 +91,7 @@ diff 공백 검사를 확인합니다.
 | 새 focus 이동·pointer 좌표·browser API·핵심 반응형 배치 | 해당 브라우저 흐름 실행. 기존 component에서 물려받은 동작은 재검사하지 않음 |
 | 색상·배치 변경 | 영향을 받는 상태·폭·theme의 preview 확인 |
 | 설치 형식·target·의존 경로 변경 | 별도 소비자 설치·typecheck·build. 공개 URL 경로도 바뀌면 그 URL에서 설치 |
-| registry 내용 공개 | 릴리스 묶음당 snapshot 검사와 공개 manifest·변경 item URL 확인 |
+| registry 내용 공개 | 릴리스 묶음당 snapshot 검사와 공개 manifest·의존 경로별 대표 변경 item URL 확인 |
 
 CI 결과는 같은 commit에 대해 재사용하고, 로컬에서 실행한 흐름을
 공개 사이트에서 다시 조작하지 않습니다. 표준 registry 경로의 새
@@ -107,7 +108,9 @@ provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
 
 서로 독립적인 component도 검토 가능한 범위에서 한 릴리스로 묶을 수
 있습니다. component마다 별도 PR이나 불변 snapshot을 만들 필요는
-없습니다. 공개 manifest와 변경 item URL은 릴리스 묶음당 확인합니다.
+없습니다. 공개 manifest와 의존 경로별 대표 변경 item URL은 릴리스
+묶음당 확인합니다. 자동 검사가 item 전체의 내용을 대조한 경우 공개
+URL을 사람이 하나씩 열지 않습니다.
 묶음 크기를 맞추려고 완성된 component의 공개를 지연하거나 후보를
 추가하지 않습니다.
 
@@ -340,6 +343,9 @@ provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
   반복 항목·보조 내용·action 규칙이 있는지 판정.
 - [ ] `Kbd` — native `kbd`와 token 사용 예시 이상이 필요한지 판정.
 - [x] `Conversation` — Message 목록, 새 메시지 위치와 스크롤.
+- [x] `ArtifactViewer` — AI·개발 결과물의 controlled revision을
+  선택해 Markdown·코드·일반 텍스트를 읽고 직전 revision과 비교합니다.
+  내용 저장과 실행은 호출자가 맡습니다. 공개 검증은 진행 중입니다.
 - [x] `Reasoning` — 펼침 상태, streaming 상태와 접근 가능한 제목.
 - [x] `ToolCall` — 호출 입력·진행·결과·오류의 구분.
 - [x] `AgentStatus` — 전체 AI 작업의 상태, 여러 단계의 처리 수와
@@ -466,7 +472,7 @@ token 전달 방식을 정할 때,
 - [x] `BlockEditor`: 제목·문단·목록·인용·코드의 ID 있는 배열을
   편집·제출하고 `BlockDocument`로 읽습니다. native 일반 텍스트의
   선택·붙여넣기·undo를 사용하며 구조 변경의 undo·인라인 서식은
-  제공하지 않습니다. 로컬 후보로 검증 중이며 공개 수에 넣지 않습니다.
+  제공하지 않습니다. 53번째 snapshot으로 공개했습니다.
 - [ ] `RichTextEditor`: 제품별 문서 모델, 붙여넣기·선택·undo
   동작과 유지 비용을 조사해 착수 여부를 판단합니다. 숫자를
   맞추기 위해 영구 제외하지 않습니다.

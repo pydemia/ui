@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-02 ArtifactViewer — 로컬
+
+`npm run typecheck`, UI 테스트 199/199, `npm run build`가 통과했습니다.
+Chromium에서 revision 비교·선택·원문과 Enter 키 전환을 실행했고
+390px의 문서 가로 넘침과 console error는 0건입니다. provenance
+고지 pin과 54번째 snapshot을 만들고 `registry:check`가 131개 item·
+129개 export/catalog를 통과했습니다. 새 Vite 소비자의 로컬 item·
+token CLI 설치와 typecheck·build가 통과했습니다. 재빌드한 현재
+registry와 54개 snapshot의 `registry:release-check`도 통과했습니다.
+PR CI·공개 URL은 아직 확인하지 않았습니다. 실제 screen
+reader·touch·Safari·RTL도 미검증입니다.
+[작업 기록](../.worknotes/artifact-viewer-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 BlockEditor — 공개
 
 PR #98의 Verify UI run `37009912447`, 병합 commit `d7aba59`의

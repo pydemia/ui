@@ -357,6 +357,12 @@
       "dependencies": ["pyd-message", "pyd-utils"], "accessibility": { "semantics": "named log with append announcements, sender groups and new-message action", "keyboard": "Chromium: scroll position, new-message action, focus return and PromptInput Enter submit verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-artifact-viewer", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/button/", "scope": "named native buttons and pressed view state; no component source copied" },
+      "dependencies": ["pyd-button", "pyd-copy-button", "pyd-diff-viewer", "pyd-markdown", "pyd-utils"], "accessibility": { "semantics": "named result region, native revision select, pressed view buttons, semantic Markdown and named comparison", "keyboard": "native select and button behavior; browser check pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-reasoning", "category": "AI & agent", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/", "scope": "disclosure semantics only; no component source copied" },

@@ -7,7 +7,8 @@ import {
     AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
     AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
     AlertDialogTitle, AlertDialogTrigger, Avatar, AvatarFallback, AvatarImage,
-    AgentStatus, ApprovalCard, AvatarGroup, AvatarUploader, Badge,
+    AgentStatus, ApprovalCard, ArtifactViewer,
+    AvatarGroup, AvatarUploader, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, BlockDocument, BlockEditor,
     Board, BottomNav, BottomNavLink,
@@ -85,6 +86,7 @@ import {
 } from "react";
 import type {
     AgentRunStatus, AgentStage, AppliedFilter, ApprovalStatus,
+    ArtifactRevision,
     BlockEditorBlock, BoardPost,
     CalendarSchedule,
     AnchorNavItem, ConversationMessage,
@@ -445,6 +447,31 @@ function BlockEditorPreview() {
             </div>
         </form>
     );
+}
+
+const artifactRevisions: ArtifactRevision[] = [
+    {
+        id: "draft", label: "v1 · 초안",
+        content: "# 점검 안내\n\n금요일에 점검합니다.",
+    },
+    {
+        id: "review", label: "v2 · 검토",
+        content: "# 점검 안내\n\n금요일 18:00에 점검합니다.\n\n담당: 운영팀",
+    },
+    {
+        id: "final", label: "v3 · 확정",
+        content: "# 점검 안내\n\n금요일 18:00에 점검합니다.\n\n" +
+            "**담당: 운영팀**",
+    },
+];
+
+function ArtifactViewerPreview() {
+    const [revisionId, setRevisionId] = useState("final");
+
+    return <ArtifactViewer label="점검 안내 결과물" kind="markdown"
+        description="revision을 고르고 원문이나 직전 revision과의 차이를 확인하세요."
+        revisions={artifactRevisions} revisionId={revisionId}
+        onRevisionChange={setRevisionId} />;
 }
 
 const anchorSections: AnchorNavItem[] = [
@@ -5793,6 +5820,28 @@ function SupportChat() {
   ]}
 />`,
         preview: () => <CitationListPreview />,
+    },
+    {
+        id: "artifact-viewer", name: "ArtifactViewer",
+        category: "AI & agent",
+        description: "생성된 문서·코드·일반 텍스트를 revision별로 읽습니다. Markdown은 안전한 부분집합으로 미리 보고 원문·직전 revision과의 차이를 전환합니다. 실행 가능한 HTML은 렌더링하지 않습니다.",
+        code: `import { useState } from "react";
+import { ArtifactViewer } from "@pydemia/ui";
+import type { ArtifactRevision } from "@pydemia/ui";
+
+const revisions: ArtifactRevision[] = [
+  { id: "draft", label: "초안", content: "# 점검 안내\\n\\n금요일 점검" },
+  { id: "review", label: "검토", content: "# 점검 안내\\n\\n금요일 18:00 점검" },
+];
+
+function ReviewArtifact() {
+  const [revisionId, setRevisionId] = useState("review");
+  return <ArtifactViewer label="점검 안내" kind="markdown"
+    revisions={revisions} revisionId={revisionId}
+    onRevisionChange={setRevisionId} />;
+}`,
+        installItems: ["artifact-viewer"],
+        preview: () => <ArtifactViewerPreview />,
     },
     {
         id: "reasoning", name: "Reasoning", category: "AI & agent",
