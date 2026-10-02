@@ -4,8 +4,9 @@
 현재 위치 표시를 원본 component로 구현했습니다. typecheck·UI
 테스트 166/166, build·release 검사와 로컬 Chromium의 내부
 스크롤·hash 뒤로 가기·390px dark를 확인했습니다. 로컬 119개
-component·121개 item·40번째 snapshot을 만들었고 PR·공개
-공급은 아직 확인하지 않았습니다. 공개 118개·120개·39개,
+component·121개 item·40번째 snapshot을 만들었습니다.
+공개 후보 PR #72의 CI와 배포·공개 URL은 아직 확인하지
+않았습니다. 공개 118개·120개·39개,
 goal 관리용 추정 약 93%입니다.
 [작업 기록](anchor-nav-2026-10-02.md)을 참고하세요.
 
