@@ -414,6 +414,11 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named group with native dl/dt/dd pairs and explicit missing-value text", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-item-list", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named section with native list; title links and trailing actions remain separate controls", "keyboard": "native link and action activation", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-affixed-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Origin UI", "url": "https://github.com/shadcn/originui/blob/f4f366ae39759248d46b1252c52fbdc0bc01c285/registry/default/components/comp-13.tsx", "license": "MIT" },

@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 `ItemList` 로컬 후보: 제목·설명·메타 정보·별도 작업을
+같은 native 목록에 배치하고 panel/plain·comfortable/compact를
+선택합니다. typecheck·전체 UI 테스트 226/226, Chromium 390px·1280px
+preview와 작업 버튼·디자인 전환을 확인했습니다. 전체 테스트·
+registry release·PR·공개 경로는 남았습니다. 공개 134개 component·
+136개 item·63개 snapshot, Goal 추정 약 98%입니다.
+[작업 기록](item-list-2026-10-03.md)을 참고하세요.
+
 2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개: 정적 원본
 차트에는 정확한 값 표·경계값 테스트·preview를 적용하고 일반 개념
 참고를 외부 코드 편입 검사로 취급하지 않습니다. 현행 draft PR은

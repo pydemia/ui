@@ -367,8 +367,9 @@ URL을 사람이 하나씩 열지 않습니다.
 - [x] `MasterDetail` — 목록 선택과 상세 표시, 좁은 영역에서 목록·
   상세 전환과 돌아갈 때 선택 항목 focus 복귀를 구현했습니다. 외부
   데이터 요청과 상세 내용은 호출자가 소유합니다.
-- [ ] `List` — native 목록과 기존 component 조합으로 해결되지 않는
-  반복 항목·보조 내용·action 규칙이 있는지 판정.
+- [x] `List` — `ItemList`로 제목·보조 설명·메타 정보·개별 작업을
+  같은 행에 배치합니다. `ContentList`의 본문 목록이나
+  `MasterDetail`의 선택·상세 전환과 다른 용례입니다.
 - [ ] `Kbd` — native `kbd`와 token 사용 예시 이상이 필요한지 판정.
 - [x] `Conversation` — Message 목록, 새 메시지 위치와 스크롤.
 - [x] `ArtifactViewer` — AI·개발 결과물의 controlled revision을

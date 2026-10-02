@@ -47,7 +47,7 @@ import {
     HoverCardTrigger, Heatmap, Image, ImageCropper, Input, InputGroup,
     InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
-    InputGroupTextarea, JsonViewer, Kanban, NodeCanvas,
+    InputGroupTextarea, ItemList, JsonViewer, Kanban, NodeCanvas,
     Label, Lightbox, LogConsole, LogViewer, Markdown, MarkdownEditor,
     Menubar, MenubarCheckboxItem,
     MenubarContent, MenubarGroup, MenubarItem, MenubarLabel,
@@ -296,6 +296,51 @@ function DataListPreview() {
                     value: <Badge>검토 중</Badge> },
                 { id: "reviewer", label: "검토자", value: null },
             ]} />
+        </div>
+    );
+}
+
+function ItemListPreview() {
+    const [appearance, setAppearance] = useState<"panel" | "plain">("panel");
+    const [density, setDensity] = useState<
+        "comfortable" | "compact"
+    >("comfortable");
+    const [retried, setRetried] = useState(false);
+
+    return (
+        <div className="preview-stack min-w-0">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setAppearance(
+                    appearance === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {appearance === "panel" ? "패널" : "평면"}
+                </Button>
+                <Button variant="outline" onClick={() => setDensity(
+                    density === "comfortable" ? "compact" : "comfortable",
+                )}>
+                    간격: {density === "comfortable" ? "기본" : "좁게"}
+                </Button>
+            </div>
+            <ItemList label="최근 작업" appearance={appearance}
+                density={density} items={[
+                    { id: "daily", title: "일일 지표 집계",
+                        description: "운영 지표를 갱신했습니다.",
+                        meta: "오늘 09:20",
+                        leading: <Gauge aria-hidden="true" className="size-5" />,
+                        trailing: <Badge variant="accent">완료</Badge> },
+                    { id: "audit", title: "권한 감사",
+                        description: "확인할 검사 1건이 남았습니다.",
+                        meta: "오늘 09:15",
+                        leading: <FolderOpen aria-hidden="true"
+                            className="size-5" />,
+                        trailing: retried
+                            ? <Badge>다시 요청함</Badge>
+                            : <Button variant="outline"
+                                className="h-8 px-2 text-xs"
+                                onClick={() => setRetried(true)}>
+                                다시 실행
+                            </Button> },
+                ]} />
         </div>
     );
 }
@@ -6245,6 +6290,26 @@ function Composer() {
 ]} />`,
         installItems: ["data-list", "badge"],
         preview: () => <DataListPreview />,
+    },
+    {
+        id: "item-list", name: "ItemList", category: "Data display",
+        description: "작업·파일처럼 제목, 설명, 메타 정보와 개별 작업을 한 목록에 배치합니다. 링크와 행 작업은 별도 focus 대상이며 패널·평면과 두 가지 간격을 선택할 수 있습니다.",
+        code: `import { Badge, Button, ItemList } from "@pydemia/ui";
+
+function RecentJobs({ onRetry }: { onRetry: () => void }) {
+  return <ItemList label="최근 작업" items={[
+    { id: "daily", title: "일일 지표 집계",
+      description: "운영 지표를 갱신했습니다.", meta: "오늘 09:20",
+      href: "/jobs/daily", trailing: <Badge>완료</Badge> },
+    { id: "audit", title: "권한 감사",
+      description: "확인할 검사 1건이 남았습니다.",
+      trailing: <Button variant="outline" onClick={onRetry}>
+        다시 실행
+      </Button> },
+  ]} />;
+}`,
+        installItems: ["item-list", "button", "badge"],
+        preview: () => <ItemListPreview />,
     },
     {
         id: "affixed-input", name: "AffixedInput", category: "Inputs",
