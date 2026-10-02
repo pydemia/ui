@@ -9,9 +9,12 @@
 검토했습니다. 초기 서식 버튼의 삽입은 browser undo에 포함되지
 않아 제거한 뒤 다시 확인했습니다.
 
-`registry:check`는 provenance metadata 수정으로 소비자 고지의
-SHA-256이 달라 실패했습니다. source revision을 고정한 뒤
-고지를 갱신하고 snapshot을 만들어 재검사해야 합니다. 실제
+첫 `registry:check`는 provenance metadata 수정으로 소비자 고지의
+SHA-256이 달라 실패했습니다. source revision `6569c24`의 hash를
+고지에 고정하고 재빌드한 뒤 126개 item·124개 export/catalog
+검사가 통과했습니다. 45번째 snapshot
+`sha256-cc579f24116bf186bc851b49eceaf7a29f37afc11b36e33728a54e0265c941c6`을
+생성하고 `registry:release-check`가 통과했습니다. 실제
 screen reader·touch·Safari·RTL, 별도 소비자 설치와 공개 URL은
 검증하지 않았습니다. 공개 수량과 goal 추정은 변하지 않습니다.
 
