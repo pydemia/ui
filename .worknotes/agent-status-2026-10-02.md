@@ -47,3 +47,18 @@ provenance를 source commit `59eba4f`에 고정했습니다.
 36번째 snapshot
 `sha256-e226f4f19d9ee39e05548f7d6bcddee6d364e0238c910b2b811a0e2f5fc2a84e`를
 확인했습니다. PR·공개 배포는 아직 검증하지 않았습니다.
+
+## 공개 확인
+
+PR #62의 Verify UI run 36945827683과 병합 commit `3411490`의
+Verify UI·Pages 검사가 통과했습니다. Vercel production
+`dpl_2WBqXSqkrp9Yw2xuY8uU7Ejmtj4v`는 READY이며
+`ui.pydemia.ai`에 연결됐습니다. 공개 AgentStatus preview·Usage가
+열리고 console error는 없었습니다. 현재 registry manifest와
+`pyd-agent-status.json`, 36번째 snapshot manifest와 같은 item URL은
+모두 HTTP 200입니다. Snapshot manifest에는 118개 item이 있습니다.
+
+공개 116개 component·118개 item·36개 snapshot입니다. Goal 관리용
+추정은 약 91%입니다. 실제 backend 작업 취소·재시도, screen reader·
+touch·Safari·RTL, 개별 소비자 CLI 설치와 rollback 뒤 URL 보존은
+미검증입니다.
