@@ -3,8 +3,9 @@
 2026-10-02 `ResultState` 로컬 후보를 구현했습니다. `Empty`·`Spinner`·
 `Button` 조합으로 진행·완료·실패와 실패 재시도를 제공합니다.
 typecheck·UI 테스트 192/192·build, Chromium의 Enter 재시도·focus와
-390px dark 배치를 확인했습니다. provenance pin·snapshot·PR CI·
-공개 URL은 남았습니다. 공개 수량 126개 component·128개 item·51개
+390px dark 배치를 확인했습니다. provenance 고지 pin과 52번째
+snapshot의 `registry:release-check`를 통과했습니다. PR CI·공개 URL은
+남았습니다. 공개 수량 126개 component·128개 item·51개
 snapshot, goal 관리용 추정 약 97%를 유지합니다.
 [작업 기록](result-state-2026-10-02.md)을 참고하세요.
 

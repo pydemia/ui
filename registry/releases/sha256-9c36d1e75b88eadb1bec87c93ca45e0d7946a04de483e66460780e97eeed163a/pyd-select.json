@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-select",
+  "title": "Select",
+  "dependencies": [
+    "@radix-ui/react-select@2.3.7",
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-9c36d1e75b88eadb1bec87c93ca45e0d7946a04de483e66460780e97eeed163a/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/select.tsx",
+      "content": "import * as SelectPrimitive from \"@radix-ui/react-select\";\nimport { Check, ChevronDown } from \"lucide-react\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Select = SelectPrimitive.Root;\nconst SelectValue = SelectPrimitive.Value;\nconst SelectGroup = SelectPrimitive.Group;\n\nfunction SelectTrigger({\n    className,\n    children,\n    ...props\n}: ComponentProps<typeof SelectPrimitive.Trigger>) {\n    return (\n        <SelectPrimitive.Trigger\n            className={cn(\n                \"flex h-[var(--control-height)] w-full items-center \" +\n                \"justify-between gap-2 rounded-sm border border-border \" +\n                \"bg-surface px-[var(--space-3)] text-sm text-foreground \" +\n                \"data-[placeholder]:text-muted disabled:cursor-not-allowed \" +\n                \"disabled:opacity-50 aria-invalid:border-danger\",\n                className,\n            )}\n            {...props}\n        >\n            {children}\n            <SelectPrimitive.Icon asChild>\n                <ChevronDown aria-hidden=\"true\" className=\"size-4 shrink-0\" />\n            </SelectPrimitive.Icon>\n        </SelectPrimitive.Trigger>\n    );\n}\n\nfunction SelectContent({\n    className,\n    children,\n    position = \"popper\",\n    sideOffset = 4,\n    ...props\n}: ComponentProps<typeof SelectPrimitive.Content>) {\n    return (\n        <SelectPrimitive.Portal>\n            <SelectPrimitive.Content\n                position={position}\n                sideOffset={sideOffset}\n                className={cn(\n                    \"z-50 max-h-64 min-w-[var(--radix-select-trigger-width)] \" +\n                    \"overflow-hidden rounded-sm border border-border bg-surface \" +\n                    \"text-foreground shadow-[var(--shadow-float)]\",\n                    className,\n                )}\n                {...props}\n            >\n                <SelectPrimitive.Viewport className=\"p-1\">\n                    {children}\n                </SelectPrimitive.Viewport>\n            </SelectPrimitive.Content>\n        </SelectPrimitive.Portal>\n    );\n}\n\nfunction SelectItem({\n    className,\n    children,\n    ...props\n}: ComponentProps<typeof SelectPrimitive.Item>) {\n    return (\n        <SelectPrimitive.Item\n            className={cn(\n                \"relative flex min-h-9 cursor-default select-none items-center \" +\n                \"rounded-sm py-2 pl-8 pr-2 text-sm outline-none \" +\n                \"data-[highlighted]:bg-surface-subtle \" +\n                \"data-[disabled]:pointer-events-none data-[disabled]:opacity-50\",\n                className,\n            )}\n            {...props}\n        >\n            <span className=\"absolute left-2 flex size-4 items-center justify-center\">\n                <SelectPrimitive.ItemIndicator>\n                    <Check aria-hidden=\"true\" className=\"size-4\" />\n                </SelectPrimitive.ItemIndicator>\n            </span>\n            <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>\n        </SelectPrimitive.Item>\n    );\n}\n\nexport { Select, SelectValue, SelectGroup, SelectTrigger, SelectContent, SelectItem };\n",
+      "type": "registry:ui",
+      "target": "@ui/select.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

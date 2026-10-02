@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-button-group",
+  "title": "Button Group",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-9c36d1e75b88eadb1bec87c93ca45e0d7946a04de483e66460780e97eeed163a/pyd-button.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-9c36d1e75b88eadb1bec87c93ca45e0d7946a04de483e66460780e97eeed163a/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/button-group.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype ButtonGroupProps = Omit<ComponentProps<\"div\">, \"aria-label\"> & {\n    label: string;\n    orientation?: \"horizontal\" | \"vertical\";\n};\n\nfunction ButtonGroup({\n    label,\n    orientation = \"horizontal\",\n    className,\n    ...props\n}: ButtonGroupProps) {\n    if (typeof label !== \"string\" || !label.trim()) {\n        throw new Error(\"ButtonGroup requires a label.\");\n    }\n    if (orientation !== \"horizontal\" && orientation !== \"vertical\") {\n        throw new RangeError(\"ButtonGroup orientation is not supported.\");\n    }\n\n    return (\n        <div\n            {...props}\n            role=\"group\"\n            aria-label={label}\n            data-orientation={orientation}\n            className={cn(\n                \"inline-flex w-fit max-w-full items-stretch \" +\n                \"[&>button]:relative [&>button:focus-visible]:z-10\",\n                orientation === \"horizontal\"\n                    ? \"flex-row [&>button]:rounded-none \" +\n                      \"[&>button:first-child]:rounded-s-sm \" +\n                      \"[&>button:last-child]:rounded-e-sm \" +\n                      \"[&>button:not(:first-child)]:border-s-0 \" +\n                      \"[&>[data-slot=button-group-separator]]:w-px \" +\n                      \"[&>[data-slot=button-group-separator]]:self-stretch\"\n                    : \"flex-col [&>button]:rounded-none \" +\n                      \"[&>button:first-child]:rounded-t-sm \" +\n                      \"[&>button:last-child]:rounded-b-sm \" +\n                      \"[&>button:not(:first-child)]:border-t-0 \" +\n                      \"[&>[data-slot=button-group-separator]]:h-px \" +\n                      \"[&>[data-slot=button-group-separator]]:self-stretch\",\n                className,\n            )}\n        />\n    );\n}\n\nfunction ButtonGroupSeparator({\n    className,\n    ...props\n}: Omit<ComponentProps<\"span\">, \"aria-hidden\">) {\n    return (\n        <span\n            {...props}\n            aria-hidden=\"true\"\n            data-slot=\"button-group-separator\"\n            className={cn(\"shrink-0 bg-border\", className)}\n        />\n    );\n}\n\nexport { ButtonGroup, ButtonGroupSeparator };\nexport type { ButtonGroupProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/button-group.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

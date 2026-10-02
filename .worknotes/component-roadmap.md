@@ -12,8 +12,9 @@ ContextMenu, NumberInput, TagsInput, NavigationMenu, HoverCard,
 ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
-추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-125개 component와 127개 registry item이 공개돼 있습니다.
+추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
+사이트에는 126개 component와 128개 registry item이 있습니다.
+`ResultState`를 포함한 로컬 후보는 127개·129개입니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,

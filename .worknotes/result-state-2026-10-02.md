@@ -23,6 +23,12 @@ preview·Usage와 정적·client 테스트를 추가했습니다. 외부 compone
 넘침 없음과 console error 0건을 확인했습니다. 실제 screen reader
 발화는 미검증입니다.
 
-provenance 고지 pin, 현재 registry 검사, 새 고정 snapshot과 PR·공개
-URL 검증은 아직 남았습니다. 현재 공개 수량은 126개 component·128개
-item·51개 snapshot, goal 관리용 추정은 약 97%입니다.
+source commit `3235716`의 provenance SHA-256
+`1e39279005635b5cc54ecbd925da3e96d51318f004df3b916d213a19519d9e0c`를
+소비자 고지에 고정했습니다. `registry:check`가 129개 item·127개
+export/catalog 대응을 확인했고 52번째 snapshot
+`sha256-9c36d1e75b88eadb1bec87c93ca45e0d7946a04de483e66460780e97eeed163a`를
+생성했습니다. 재빌드 뒤 `registry:release-check`가 52개 snapshot과
+현재 빌드의 일치를 확인했습니다. PR CI·공개 URL은 아직 남았습니다.
+현재 공개 수량은 126개 component·128개 item·51개 snapshot,
+goal 관리용 추정은 약 97%입니다.
