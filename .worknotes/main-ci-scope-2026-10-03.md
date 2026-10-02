@@ -1,5 +1,14 @@
 # `main` 검증 범위 조정
 
+2026-10-03 문서 전용 PR #115의 Verify UI `37077273228`과 병합 commit
+`a1dd8267`의 Verify UI `37077334518`이 통과했습니다. 두 run 모두
+변경 범위 판정과 diff 검사를 실행하고 Node 설치·typecheck·테스트·
+build·registry·snapshot 단계를 생략했습니다. 병합 commit의 Pages
+`37077334645`도 통과했습니다. Vercel은 배포 횟수 제한으로 실패했으며
+production 반영은 확인하지 않았습니다. 이 결과는 workflow의 문서
+전용 분기 동작을 증명하지만 제품 변경의 검사를 대체하지 않습니다.
+새 component/item/snapshot은 없고 Goal 추정은 약 98%입니다.
+
 2026-10-03 PR #114를 `main`에 병합했습니다. 수정 commit의 Verify UI
 `37076759075`와 병합 commit `66a70cc2`의 Verify UI
 `37076968547`, Pages `37076968432`가 통과했습니다. workflow 파일이
@@ -36,7 +45,7 @@ PR은 base commit을 사용합니다. 기준 commit을 fetch할 수 없는
   이전 source와 새 Markdown 경로를 모두 보고함을 확인했습니다.
 - `git diff --check`가 통과했습니다.
 
-문서 전용 PR·`main` push의 단계 생략은 아직 확인하지 않았습니다.
+문서 전용 PR·`main` push의 단계 생략은 위 run에서 확인했습니다.
 Vercel 빌드 여부는 이 workflow가 결정하지 않으며, 배포 횟수 제한도
 이 변경으로 해소되지 않습니다. 새 component/item/snapshot 수는
 없고 Goal 관리용 추정은 약 98%입니다.

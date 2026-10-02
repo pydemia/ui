@@ -1,5 +1,11 @@
 # Component 확장 작업 인계
 
+2026-10-03 문서 전용 CI 실측: PR #115와 병합 뒤 `main` Verify UI가
+diff 검사만 실행하고 UI·registry 검사를 생략해 성공했습니다. Pages도
+통과했고 Vercel production은 배포 횟수 제한으로 확인하지 못했습니다.
+새 component 수는 없으며 Goal 추정은 약 98%입니다.
+[검증 기록](main-ci-scope-2026-10-03.md)을 참고하세요.
+
 2026-10-03 PR #114 병합: 변경 경로별 Verify UI를 `main`에 반영했고
 PR·`main` Verify UI와 Pages가 통과했습니다. workflow 변경이므로
 `main`은 전체 검사를 실행했습니다. 문서 전용 `main` push의 단계
