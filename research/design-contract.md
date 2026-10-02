@@ -1152,3 +1152,18 @@ form과 중첩 fieldset에 이름을 붙이고 native 입력·선택·버튼을
 사용합니다. 위·아래 버튼으로 순서를 바꾸므로 drag 동작이나 별도
 키보드 패턴은 필요하지 않습니다. `panel`·`plain`은 공통 token을
 사용합니다. 실제 보조기술 발표는 미검증입니다.
+## 2026-10-02 AgentStatus
+
+`AgentStatus`는 호출자가 소유한 전체 작업 상태와 단계 목록을
+표시합니다. 전체 상태는 `queued`·`running`·`completed`·`failed`·
+`cancelled`, 단계 상태는 `pending`·`running`·`completed`·`failed`·
+`skipped`입니다. 단계는 고유 ID와 이름이 필요하며 한 개 이상이어야
+합니다. 완료와 건너뜀을 처리된 단계로 세어 전체 수와 함께 native
+progress에 전달합니다.
+
+대기·실행 중에는 `onCancelTask`, 실패·취소 후에는 `onRetryTask`가
+있을 때만 버튼을 표시합니다. `actionPending`은 해당 버튼을
+비활성화합니다. callback은 요청만 전달하며 실제 취소·재시도와
+상태 갱신은 호출자가 맡습니다. 전체 상태와 단계별 상태가 일시적으로
+다르면 내부에서 추측해 바꾸지 않습니다. `panel`과 `compact`는
+같은 이름·진행·작업 규칙을 공유하는 표시 형태입니다.

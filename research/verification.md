@@ -1,5 +1,21 @@
 # 검증 기록
 
+## 2026-10-02 AgentStatus 로컬 검증
+
+`npm run typecheck`, UI 테스트 156/156과 `npm run build`가
+통과했습니다. 신규 테스트 4건은
+이름 있는 native progress·단계 목록, 상태별 취소·재시도 노출,
+잘못된 ID·상태 거부와 controlled callback을 확인합니다.
+
+로컬 Chromium에서 panel·compact와 취소→재시도를 실행했습니다.
+390px에서 문서 scrollWidth는 390px이고 panel 너비는 330px입니다.
+light/dark progress와 상태 표시를 확인했고 console error는
+없었습니다. `registry:release-check`는 로컬 116개 export/catalog·
+118개 item과 36번째 snapshot
+`sha256-e226f4f19d9ee39e05548f7d6bcddee6d364e0238c910b2b811a0e2f5fc2a84e`를
+확인했습니다. 공개 배포, 실제 screen reader·touch·Safari·RTL은
+아직 검증하지 않았습니다.
+
 ## 2026-10-02 QueryBuilder 공개 확인
 
 PR #60 Verify UI run 36941699556, 병합 commit `9e39afd`의 Verify

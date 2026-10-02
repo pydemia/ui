@@ -295,6 +295,10 @@ export { ToolCall } from "./components/tool-call";
 export type {
     ToolCallProps, ToolCallStatus,
 } from "./components/tool-call";
+export { AgentStatus } from "./components/agent-status";
+export type {
+    AgentStage, AgentStageStatus, AgentRunStatus, AgentStatusProps,
+} from "./components/agent-status";
 export { ApprovalCard } from "./components/approval-card";
 export type {
     ApprovalCardProps, ApprovalDecision, ApprovalStatus,
