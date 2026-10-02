@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #111 배포: 두 chart의 `plain` 표시와 65번째 snapshot을
+`main`에 병합했습니다. PR·`main` Verify UI와 Pages, Vercel production이
+성공했고 공개 JSON·manifest의 내용이 로컬 생성물과 일치합니다.
+이전에 404였던 `ItemList`도 현재 공개 URL에서 HTTP 200입니다.
+[차트 작업 기록](chart-appearances-2026-10-03.md)에 근거를 남겼습니다.
+Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 공급·품질 기준 재검토: 차트의 작은 표시 변경에도 276개
 snapshot 파일이 생성됐습니다. 변경분의 사람 검토와 자동 릴리스
 비용을 분리하고, CI·snapshot·고지 생성의 고정 비용을 개선 대상으로

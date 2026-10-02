@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 두 chart의 `plain` 공개와 체크리스트 재판정:
+**약 98% → 약 98%**입니다. PR #111과 `main` CI, Pages, Vercel
+production 및 최신 item·65번째 snapshot의 공개 일치를 확인했습니다.
+기존 component의 표시 선택을 넓혔으며 새 component 수는 없습니다.
+검사 기준의 해석을 바꾼 것만으로 완료율을 올리지 않았습니다.
+[차트 작업 기록](chart-appearances-2026-10-03.md)과
+[체크리스트 판단](quality-checklist-review-2026-10-03.md)을 참고하세요.
+
 2026-10-03 DataChart·DonutChart 표시 형태 로컬 후보:
 **약 98% → 약 98%**입니다. 중첩 panel에서 이중 테두리와 여백을
 없애는 `plain`을 추가했고 기본 `panel`은 유지했습니다. typecheck·
