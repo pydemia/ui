@@ -4,8 +4,10 @@
 이미 공개한 snapshot만 검사하고, ready PR·main에서 현재 빌드의
 불변 snapshot을 요구하도록 `Verify UI` workflow를 조정했습니다.
 로드맵의 중복된 여섯 단계도 앞의 위험별 기준으로 합쳤습니다.
-원격 draft→ready CI 검증과 공개는 아직 남아 있습니다. Goal 관리용
-진척은 약 93% 그대로입니다.
+PR #70의 draft run `36958128057`에서 현재 snapshot 검사가
+`skipped`, ready 전환 run `36958306206`에서는 통과했습니다.
+병합과 `main` push 검사는 남아 있습니다. Goal 관리용 진척은
+약 93% 그대로입니다.
 [작업 기록](registry-draft-gate-2026-10-02.md)을 참고하세요.
 
 2026-10-02 Lightbox 공개 확인: PR #68과 병합 commit `3657163`의

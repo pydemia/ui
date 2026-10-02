@@ -26,7 +26,10 @@ ready 전 병합 불가를 명시합니다. 기존 `Verify UI` job 이름은
 합쳤습니다. 품질 하한이나 공개 후보의 snapshot 조건은 바꾸지
 않았습니다. Goal 관리용 진척은 약 93% 그대로입니다.
 
-YAML을 `js-yaml`로 파싱해 이벤트와 조건식을 확인했습니다. Draft
-PR에서 `verify-current`가 건너뛰어지고 ready 전환 시 실행되는지,
-`main` push에서 검사되는지는 원격 workflow로 확인한 뒤 이 기록을
-갱신합니다.
+YAML을 `js-yaml`로 파싱해 이벤트와 조건식을 확인했습니다. 로컬
+`registry:check`와 `verify-current`도 통과했습니다. PR #70의 draft
+run `36958128057`에서는 registry·기존 snapshot 검사가 통과하고
+현재 snapshot 단계가 `skipped`였습니다. Ready 전환만으로 시작된
+run `36958306206`에서는 현재 snapshot 단계까지 통과했습니다.
+따라서 전환 이벤트와 두 검사 시점이 실제 GitHub Actions에서
+동작합니다. `main` push 검사는 병합 뒤 확인합니다.
