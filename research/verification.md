@@ -1,5 +1,21 @@
 # 검증 기록
 
+## 2026-10-02 MarkdownEditor — 공개
+
+PR #82 Verify UI run `36976223007`, 병합 commit `e898927`의
+Verify UI run `36976468218`과 Pages run `36976467603`이
+통과했습니다. Vercel production
+`dpl_F6jkcd4CE9QHuHeKpCxijrWDNroD`는 READY입니다. 공개
+브라우저에서 preview·Usage와 124개 component 표시를 확인했습니다.
+현재 `pyd-markdown-editor.json`, 45번째 snapshot manifest·item
+URL은 HTTP 200입니다. Manifest의 `itemCount`는 126이고 새
+item의 세 의존 URL도 같은 snapshot에 고정돼 있습니다.
+
+실제 screen reader·touch·Safari·RTL, 별도 소비자 설치와 rollback
+뒤 URL 보존은 검사하지 않았습니다. goal 관리용 추정은 약 97%를
+유지합니다. [작업 기록](../.worknotes/markdown-editor-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 MarkdownEditor — 로컬 초안
 
 `npm run typecheck`, UI 테스트 180/180, `npm run build`가

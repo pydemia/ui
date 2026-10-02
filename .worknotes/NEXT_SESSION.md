@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 MarkdownEditor 공개 확인: PR #82와 병합 commit `e898927`의
+Verify UI·Pages, Vercel production이 성공했습니다. 공개
+preview·Usage, 현재 item과 45번째 snapshot manifest·item URL을
+확인했습니다. 공개 124개 component·126개 item·45개 snapshot,
+goal 관리용 추정 약 97%입니다. 원문 편집과 반응형 미리보기를
+공급했지만 RichTextEditor의 문서 모델·서식 편집은 남았습니다.
+[작업 기록](markdown-editor-2026-10-02.md)을 참고하세요.
+
 2026-10-02 MarkdownEditor 로컬 후보: 원문 textarea·미리보기·form 값을
 묶었습니다. typecheck·UI 테스트 180/180·build, Chromium의 입력·
 undo·제출·390px dark를 확인했습니다. provenance 고지와 45번째

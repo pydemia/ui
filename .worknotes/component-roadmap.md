@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-123개 component와 125개 registry item이 공개돼 있습니다.
+124개 component와 126개 registry item이 공개돼 있습니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
@@ -436,7 +436,7 @@ token 전달 방식을 정할 때,
   44번째 snapshot으로 공개했습니다.
 - [x] `MarkdownEditor`: 원문 textarea·실시간 미리보기·form 값을
   결합했습니다. 서식 버튼의 undo 문제를 확인해 제외했고, native
-  입력·붙여넣기·undo를 유지합니다. 공개 검증은 남았습니다.
+  입력·붙여넣기·undo를 유지합니다. 45번째 snapshot으로 공개했습니다.
 - [ ] `RichTextEditor`: 제품별 문서 모델, 붙여넣기·선택·undo
   동작과 유지 비용을 조사해 착수 여부를 판단합니다. 숫자를
   맞추기 위해 영구 제외하지 않습니다.

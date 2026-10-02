@@ -31,3 +31,19 @@ item·124개 export/catalog를 확인했고 45번째 snapshot
 공개 PR·CI·URL은 미검증이므로
 공개 123개 component·125개 item·44개 snapshot, goal 추정 약 97%를
 유지합니다.
+
+## 공개 확인
+
+PR #82 Verify UI run `36976223007`이 통과했고 병합 commit
+`e898927`의 Verify UI run `36976468218`과 Pages run
+`36976467603`도 성공했습니다. Vercel production
+`dpl_F6jkcd4CE9QHuHeKpCxijrWDNroD`는 READY입니다. 공개
+브라우저에서 MarkdownEditor preview·Usage·124개 component 표시를
+확인했습니다. 현재 item, 45번째 snapshot manifest·item URL은
+HTTP 200입니다. Manifest에는 126개 item이 있고 새 item의
+`pyd-markdown`·`pyd-textarea`·`pyd-utils` 의존 URL은 같은
+snapshot에 고정돼 있습니다.
+
+공개 기준은 124개 component·126개 item·45개 snapshot입니다.
+goal 관리용 추정은 약 97%를 유지합니다. 실제 screen reader·touch·
+Safari·RTL, 별도 소비자 설치는 확인하지 않았습니다.
