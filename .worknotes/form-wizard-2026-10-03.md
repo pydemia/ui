@@ -1,5 +1,19 @@
 # FormWizard 공급 작업
 
+## 공개 확인
+
+PR #103을 `e921800e872d11ae3ba098c3e668b362a7f80d9a`로 병합했습니다.
+PR과 `main`의 Verify UI, GitHub Pages, Vercel production이
+성공했습니다. 공개 현재 item, 57번째 snapshot의 manifest·item,
+문서 사이트 JS asset은 로컬 빌드와 byte 단위로 일치합니다.
+`ui.pydemia.ai`의 같은 JS asset도 일치합니다. 공개 사이트의
+상호작용은 재실행하지 않았고, 아래 로컬 Chromium 결과를
+사용했습니다. 실제 screen reader·touch·Safari 동작은 검사하지
+않았습니다. 공개 수량은 130개 component·132개 registry item·
+57개 snapshot이며 goal 관리용 추정은 약 97%입니다.
+
+## 구현과 로컬 검증
+
 `Stepper`는 현재·완료·오류 상태를 보여주지만 단계별 입력 검증과
 제출 흐름은 제공하지 않습니다. 신규 `FormWizard`는 여러 단계의
 설정·게시·신청 form에서 이 반복 코드를 줄입니다. 숫자만 늘리는
@@ -27,6 +41,7 @@ item·130개 export/catalog가 통과했습니다. 로컬 Chromium에서
 가로 넘침·console error·Vite error overlay는 없었습니다.
 57번째 snapshot `sha256-2703ecc5913caf2a736415e2fd98c6276a48d6e0b955d8eca4b2a4024fdd16b5`를
 생성·재빌드했고 `registry:release-check`가 현재 132개 item과 57개
-snapshot을 통과했습니다. PR CI·공개 경로는 아직 확인하지 않았습니다.
-공개 기준은 129개 component·131개 item·56개 snapshot, 로컬은
-130개·132개·57개이며 goal 관리용 추정은 약 97%입니다.
+snapshot을 통과했습니다. 이 시점에는 PR CI·공개 경로를
+확인하지 않았습니다. 당시 공개 기준은 129개 component·131개
+item·56개 snapshot, 로컬은 130개·132개·57개였으며 goal 관리용
+추정은 약 97%였습니다.

@@ -464,7 +464,8 @@
     {
       "name": "pyd-app-shell", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
-      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "header, named sidebars, main, named bottom and floating regions; bubble requires accessible name", "keyboard": "Chromium demo: bubble remains focused on open, Tab reaches close, Escape and close return focus", "screen_reader": "pending manual review" }
+      "reference": { "provider": "W3C WAI APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/", "scope": "disclosure button state and keyboard activation; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "header, named sidebars, main, named bottom and floating regions; disclosure owns named button, expanded state, controlled region and close action", "keyboard": "Chromium: Tab reaches close, Escape returns focus, 390px pill panel verified; test covers outside focus and pointer dismissal", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-master-detail", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],

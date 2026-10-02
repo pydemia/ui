@@ -1,5 +1,26 @@
 # 검증 기록
 
+## 2026-10-03 AppShell floating disclosure — 로컬 후보
+
+`npm run typecheck`, UI 테스트 209/209, `npm run build`,
+`npm run registry:check`가 통과했습니다. 로컬 Chromium에서
+이름·열림 상태와 panel 연결, Tab·Escape·focus 복귀, 390px 왼쪽
+pill 배치와 밝은·어두운 모드를 확인했습니다. 가로 넘침·console
+error·Vite error overlay는 없었습니다. 58번째 snapshot을
+생성·재빌드하고 `registry:release-check`가 132개 item·58개
+snapshot을 통과했습니다. 실제 screen reader·touch·Safari와
+공개 경로는 확인하지 않았습니다.
+[작업 기록](../.worknotes/app-floating-disclosure-2026-10-03.md)을
+참고하세요.
+
+## 2026-10-03 FormWizard — 공개
+
+PR #103과 병합 `e921800e8`의 Verify UI·GitHub Pages,
+Vercel production이 성공했습니다. 공개 현재 item과 57번째
+snapshot의 manifest·item, 문서 JS asset이 로컬 빌드와 byte
+단위로 일치합니다. 공개 상호작용은 재실행하지 않았습니다.
+로컬 Chromium 결과와 미검증 환경은 아래 기록을 참고하세요.
+
 ## 2026-10-03 FormWizard — 로컬 후보
 
 `npm run typecheck`, UI 테스트 206/206, `npm run build`,

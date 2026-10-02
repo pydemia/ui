@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-03 — AppShell floating 도움말
+
+- `AppFloatingDisclosure`가 bubble과 panel의 열림 상태, 외부 이동 시
+  닫기, Escape·닫기 버튼의 focus 복귀를 제공합니다. 기존 저수준
+  `AppFloatingBubble`·`AppFloatingPanel`은 유지합니다.
+
 ## 2026-10-03 — FormWizard
 
 - 여러 단계의 form에서 현재 단계 필수값·비동기 검증, 다음·이전 이동과

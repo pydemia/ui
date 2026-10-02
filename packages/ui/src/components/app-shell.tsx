@@ -1,4 +1,7 @@
-import type { ComponentProps } from "react";
+import {
+    useEffect, useId, useRef, useState, type ComponentProps,
+    type KeyboardEvent, type ReactNode,
+} from "react";
 import { cn } from "./utils";
 
 type AppShellProps = ComponentProps<"div"> & {
@@ -162,11 +165,100 @@ function AppFloatingBubble({
     );
 }
 
+type AppFloatingDisclosureProps = {
+    label: string;
+    children: ReactNode;
+    triggerContent?: ReactNode;
+    side?: "left" | "right";
+    appearance?: "circle" | "pill";
+    closeLabel?: string;
+    bubbleClassName?: string;
+    panelClassName?: string;
+};
+
+function AppFloatingDisclosure({
+    label,
+    children,
+    triggerContent,
+    side = "right",
+    appearance = "circle",
+    closeLabel = "닫기",
+    bubbleClassName,
+    panelClassName,
+}: AppFloatingDisclosureProps) {
+    const panelId = useId();
+    const bubble = useRef<HTMLButtonElement>(null);
+    const panel = useRef<HTMLElement>(null);
+    const [open, setOpen] = useState(false);
+
+    if (!label.trim() || !closeLabel.trim()) {
+        throw new Error("AppFloatingDisclosure needs button labels.");
+    }
+
+    useEffect(() => {
+        if (!open) return;
+        function outside(event: Event) {
+            const target = event.target as Node;
+            if (!bubble.current?.contains(target) &&
+                !panel.current?.contains(target)) {
+                setOpen(false);
+            }
+        }
+        document.addEventListener("pointerdown", outside);
+        document.addEventListener("focusin", outside);
+        return () => {
+            document.removeEventListener("pointerdown", outside);
+            document.removeEventListener("focusin", outside);
+        };
+    }, [open]);
+
+    function closePanel() {
+        setOpen(false);
+        bubble.current?.focus({ preventScroll: true });
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+        if (event.key !== "Escape" || !open) return;
+        event.preventDefault();
+        event.stopPropagation();
+        closePanel();
+    }
+
+    return <>
+        <AppFloatingBubble ref={bubble} side={side}
+            appearance={appearance} aria-label={label}
+            aria-expanded={open} aria-controls={panelId}
+            className={bubbleClassName}
+            onClick={() => setOpen((value) => !value)}
+            onKeyDown={handleEscape}>
+            {triggerContent ?? (appearance === "pill" ? label : "?")}
+        </AppFloatingBubble>
+        <AppFloatingPanel ref={panel} id={panelId} side={side}
+            aria-label={label} hidden={!open}
+            onKeyDown={handleEscape}
+            className={cn(
+                "bottom-[calc(var(--space-4)+2.5rem+var(--space-2))] " +
+                "max-h-[calc(100%-6rem)] w-72 overflow-y-auto text-sm",
+                panelClassName,
+            )}>
+            {children}
+            <button type="button" onClick={closePanel}
+                className={
+                    "mt-3 rounded-sm border border-border bg-surface " +
+                    "px-3 py-1.5 text-sm hover:bg-surface-subtle " +
+                    "focus-visible:outline-2 focus-visible:outline-focus"
+                }>
+                {closeLabel}
+            </button>
+        </AppFloatingPanel>
+    </>;
+}
+
 export {
     AppShell, AppHeader, AppBody, AppSidebar, AppMain, AppBottomPanel,
-    AppFloatingPanel, AppFloatingBubble,
+    AppFloatingPanel, AppFloatingBubble, AppFloatingDisclosure,
 };
 export type {
     AppShellProps, AppMainProps, AppSidebarProps, AppFloatingPanelProps,
-    AppFloatingBubbleProps,
+    AppFloatingBubbleProps, AppFloatingDisclosureProps,
 };

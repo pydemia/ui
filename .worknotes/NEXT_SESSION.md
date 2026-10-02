@@ -1,5 +1,22 @@
 # Component 확장 작업 인계
 
+2026-10-03 `AppFloatingDisclosure` 로컬 후보: `AppShell`의 floating
+bubble·panel에 열림 상태, 닫기·Escape의 focus 복귀와 외부 이동
+닫기를 묶었습니다. typecheck·UI 테스트 209/209·build·registry
+검사, 로컬 Chromium의 Tab·Escape·390px·light/dark를 확인했습니다.
+58번째 snapshot을 생성·재빌드하고 release check가 통과했습니다.
+PR CI·공개 URL은 남았습니다. 공개 130개 component·132개 item·
+57개 snapshot, 로컬 58개 snapshot이며 goal 추정 약 97%입니다.
+[작업 기록](app-floating-disclosure-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `FormWizard` 공개 확인: PR #103을 `e921800e8`로
+병합했고 PR·`main` Verify UI, Pages, Vercel production이
+성공했습니다. 공개 item·57번째 snapshot manifest·item·사이트
+JS asset이 로컬과 일치합니다. 공개 130개 component·132개 item·
+57개 snapshot, goal 추정 약 97%입니다. 공개 뒤 기록은 이번
+제품 변경에 포함합니다.
+[작업 기록](form-wizard-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 체크리스트를 다시 검토했습니다. 현행 필수
 증거는 변경분 중심이며, 과도한 비용은 snapshot 전체 복제와
 출처 고지 hash의 전파에서 발생합니다. README의 매 릴리스 별도

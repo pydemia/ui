@@ -1,5 +1,18 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 AppShell floating disclosure
+
+문서 preview와 분석 화면이 같은 floating bubble·panel의 열림 상태,
+Escape 닫기와 focus 복귀를 각각 구현하고 있었습니다. 기존
+`AppFloatingBubble`·`AppFloatingPanel`을 조합한
+`AppFloatingDisclosure`로 공통 동작을 공급합니다. pydemia/ui 원본
+React·Tailwind 코드이며 새 npm 의존성이나 외부 component source는
+없습니다. 기존 `pyd-utils`만 사용합니다.
+[WAI APG Disclosure Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)의
+button·`aria-expanded`·`aria-controls`·Enter/Space 동작을 확인했고
+source는 복사하지 않았습니다. 실제 screen reader·touch·Safari는
+검사하지 않았습니다.
+
 ## 2026-10-03 FormWizard source 확인
 
 여러 단계의 입력·검증·완료 요청은 기존 `Stepper`의 상태 표시와

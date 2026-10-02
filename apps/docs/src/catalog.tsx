@@ -2,7 +2,7 @@ import {
     Accordion, AccordionContent, AccordionItem, AccordionTrigger, ActionBar,
     AnchorNav,
     AffixedInput, Alert, AlertDescription, AlertTitle,
-    AppBody, AppBottomPanel, AppFloatingBubble, AppFloatingPanel,
+    AppBody, AppBottomPanel, AppFloatingDisclosure,
     AppHeader, AppMain, AppShell, AppSidebar,
     AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
     AlertDialogDescription, AlertDialogFooter, AlertDialogHeader,
@@ -82,7 +82,7 @@ import { FolderOpen, Gauge, Inbox, Plus, Settings2 } from "lucide-react";
 import { TZDate, type DateRange } from "react-day-picker";
 import { ko } from "react-day-picker/locale";
 import {
-    useEffect, useId, useRef, useState, type FormEvent, type ReactNode,
+    useEffect, useRef, useState, type FormEvent, type ReactNode,
 } from "react";
 import type {
     AgentRunStatus, AgentStage, AppliedFilter, ApprovalStatus,
@@ -2547,15 +2547,6 @@ function AppShellPreview() {
     const [floatingSide, setFloatingSide] = useState<"left" | "right">(
         "right",
     );
-    const [panelOpen, setPanelOpen] = useState(false);
-    const panelId = useId();
-    const bubbleRef = useRef<HTMLButtonElement>(null);
-
-    function closePanel() {
-        setPanelOpen(false);
-        bubbleRef.current?.focus();
-    }
-
     return (
         <div className="preview-workspace grid gap-3">
             <div className="flex flex-wrap gap-2">
@@ -2637,29 +2628,12 @@ function AppShellPreview() {
                 }>
                     모든 변경 사항이 저장되었습니다.
                 </AppBottomPanel>
-                <AppFloatingBubble ref={bubbleRef}
+                <AppFloatingDisclosure
                     appearance={bubbleAppearance}
                     side={floatingSide}
-                    aria-label="도움말"
-                    aria-expanded={panelOpen} aria-controls={panelId}
-                    onClick={() => setPanelOpen((open) => !open)}>
-                    {bubbleAppearance === "circle" ? "?" : "도움말"}
-                </AppFloatingBubble>
-                <AppFloatingPanel id={panelId} aria-label="도움말"
-                    side={floatingSide}
-                    hidden={!panelOpen}
-                    className={
-                        "bottom-[calc(var(--space-4)+2.5rem+var(--space-2))] " +
-                        "w-40 text-xs"
-                    }
-                    onKeyDown={(event) => {
-                        if (event.key === "Escape") closePanel();
-                    }}>
+                    label="도움말" panelClassName="w-40 text-xs">
                     <p className="m-0">도움말 패널입니다.</p>
-                    <Button variant="ghost" onClick={closePanel}>
-                        닫기
-                    </Button>
-                </AppFloatingPanel>
+                </AppFloatingDisclosure>
             </AppShell>
         </div>
     );
@@ -6571,22 +6545,13 @@ function RequestWorkspace() {
     },
     {
         id: "app-shell", name: "AppShell", category: "Framework",
-        installItems: ["app-shell", "button"],
-        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. 테두리 있는 framed와 전체 화면용 canvas, 원형·pill 도움말 버튼을 선택할 수 있습니다.",
-        code: `import { useId, useRef, useState } from "react";
-import {
+        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. 테두리 있는 framed와 전체 화면용 canvas, 원형·pill 도움말 버튼을 선택할 수 있습니다. AppFloatingDisclosure는 열림·닫힘·focus 복귀를 함께 처리합니다.",
+        code: `import {
   AppShell, AppHeader, AppBody, AppSidebar, AppMain,
-  AppBottomPanel, AppFloatingPanel, AppFloatingBubble, Button,
+  AppBottomPanel, AppFloatingDisclosure,
 } from "@pydemia/ui";
 
 function Workspace() {
-  const [open, setOpen] = useState(false);
-  const panelId = useId();
-  const bubbleRef = useRef<HTMLButtonElement>(null);
-  function close() {
-    setOpen(false);
-    bubbleRef.current?.focus();
-  }
   return <AppShell appearance="canvas">
     <AppHeader>제품 이름과 전역 탐색</AppHeader>
     <AppBody>
@@ -6597,19 +6562,10 @@ function Workspace() {
     <AppBottomPanel aria-label="작업 상태" className="pl-28">
       저장됨
     </AppBottomPanel>
-    <AppFloatingBubble ref={bubbleRef} appearance="pill" side="left"
-      aria-label="도움말"
-      aria-expanded={open} aria-controls={panelId}
-      onClick={() => setOpen((value) => !value)}>도움말</AppFloatingBubble>
-    <AppFloatingPanel id={panelId} aria-label="도움말"
-      side="left" hidden={!open}
-      className="bottom-[calc(var(--space-4)+2.5rem+var(--space-2))]"
-      onKeyDown={(event) => {
-        if (event.key === "Escape") close();
-      }}>
+    <AppFloatingDisclosure appearance="pill" side="left"
+      label="도움말">
       <p>도움말</p>
-      <Button onClick={close}>닫기</Button>
-    </AppFloatingPanel>
+    </AppFloatingDisclosure>
   </AppShell>;
 }`,
         preview: () => <AppShellPreview />,
