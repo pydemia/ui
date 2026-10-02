@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 DataTable 표시 선택 공개 확인: PR #64를 병합한
+`adccef5`의 Verify UI·Pages와 Vercel production이 성공했습니다.
+공개 preview·Usage, 현재 registry item과 37번째 snapshot
+manifest/item URL을 확인했습니다. 공개 116개 component·118개
+item·37개 snapshot, goal 관리용 추정 약 91%입니다. 실제
+screen reader·touch·Safari·RTL 및 개별 소비자 설치는 미검증입니다.
+[작업 기록](data-table-presentation-2026-10-02.md)을 참고하세요.
+
 2026-10-02 DataTable 표시 선택 로컬 구현: 전체 행·원격 페이지에
 `compact`·`standard`·`comfortable` 행 밀도와 줄무늬를 추가했습니다.
 typecheck·UI 테스트 156/156·build·release 검사, Chromium의

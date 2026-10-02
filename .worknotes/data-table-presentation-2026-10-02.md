@@ -1,5 +1,16 @@
 # DataTable 표시 선택
 
+## 공개 확인
+
+PR #64는 `main`의 `adccef5`에 병합했습니다. PR Verify UI와 병합
+commit의 Verify UI·Pages가 통과했고 Vercel production
+`dpl_CnMbnvpvSwZe3U1wbkjAemXr4p74`는 READY입니다. 공개
+DataTable preview·Usage와 console error 0건을 확인했습니다. 현재
+registry manifest·item, 37번째 snapshot manifest·item URL이 모두
+HTTP 200이고 snapshot에 118개 item이 있습니다. 공개 component
+수는 116개이며 goal 관리용 추정은 약 91%입니다. 새 component
+종류가 추가된 것은 아니므로 수량을 올리지 않았습니다.
+
 2026-10-02. 목표는 같은 DataTable을 일반 관리 목록과 행이 많은
 운영 화면에 모두 사용할 수 있도록 행 간격과 줄무늬를 선택하게 하는
 것입니다. 기존 DataTable은 검색·필터·정렬·선택·페이지와 원격 조회를
@@ -26,7 +37,8 @@
 - 37번째 snapshot ID는
   `sha256-72ff812680d65d8deb1063f8e571d2c4d649813668343209e631f8800b1cb0ab`입니다.
 
-PR CI, 공개 배포·URL, 별도 소비자 설치는 아직 확인하지 않았습니다.
+로컬 검사 시점에는 PR CI와 공개 배포·URL을 확인하지 않았습니다.
+공개 결과는 위에 기록했습니다. 별도 소비자 설치는 확인하지 않았습니다.
 실제 screen reader·touch·Safari·RTL도 이번 범위에서 실행하지
 않았습니다. 공개 component 수는 아직 116개이고 goal 관리용 추정은
 약 91%로 유지합니다. 이번 변경은 기존 component의 사용 범위를
