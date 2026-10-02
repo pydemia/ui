@@ -1,5 +1,33 @@
 # Component 확장 작업 인계
 
+2026-10-02 `BlockEditor` 구조 이력 로컬 후보: 추가·삭제·이동·형식
+변경의 되돌리기·다시 실행을 구현했습니다. 초기화 뒤 형식 select가
+잘못 표시되던 preview 오류도 수정했습니다. typecheck·UI 테스트
+200/200·build·registry:check와 로컬 Chromium의 텍스트 보존·초기화
+흐름을 확인했습니다. 55번째 snapshot을 생성·재빌드해
+`registry:release-check`를 통과했습니다. PR·공개 경로는 남았습니다.
+공개 129개 component·131개 item·54개 snapshot, 로컬 55개,
+goal 관리용 추정
+약 97%는 그대로입니다.
+[작업 기록](block-editor-structure-history-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 판정 범위를 다시 검토했습니다. 개발 중에는
+영향받은 검사만 실행하고, 공개 후보 commit에서 적용 CI를 확인합니다.
+focus·pointer·browser API 변경도 관련 자동 테스트가 실제 흐름을
+검증하면 별도 브라우저 재실행을 요구하지 않습니다. CI와 snapshot의
+반복 비용은 별도 구현 과제로 남겼습니다. 제품·배포 상태와 goal
+관리용 추정 약 97%는 그대로입니다.
+[검토 기록](quality-checklist-scope-2026-10-02.md)을 참고하세요.
+
+2026-10-02 `ArtifactViewer` 공개 확인: PR #100을 `026378c`로
+병합했습니다. PR·`main` Verify UI, Pages와 Vercel production이
+성공했습니다. 공개 preview·Usage와 현재 item, 54번째 snapshot의
+manifest·대표 item이 저장소 파일과 byte 단위로 일치합니다. 공개
+snapshot의 소비자 설치·typecheck·build, provenance 고지 pin도
+확인했습니다. 공개 129개 component·131개 item·54개 snapshot이며
+goal 관리용 추정은 약 97%입니다. [작업 기록](artifact-viewer-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 공급·품질 재판정: 자동 검사가 전체 item을 대조한 경우
 공개 URL은 manifest와 의존 경로별 대표 변경 item을 확인합니다.
 `ArtifactViewer`의 공통 고지 pin은 기존 item 29개를 바꾸고 새

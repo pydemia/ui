@@ -417,6 +417,7 @@ function BlockEditorPreview() {
     const [blocks, setBlocks] = useState(initialBlockDocument);
     const [saved, setSaved] = useState<BlockEditorBlock[]>([]);
     const [message, setMessage] = useState("제출 전");
+    const [editorKey, setEditorKey] = useState(0);
 
     return (
         <form className="preview-stack min-w-0" onSubmit={(event) => {
@@ -428,14 +429,16 @@ function BlockEditorPreview() {
             }
             setSaved(JSON.parse(value) as BlockEditorBlock[]);
             setMessage(`${blocks.length}개 블록을 저장했습니다.`);
-        }} onReset={() => {
+        }} onReset={(event) => {
+            event.preventDefault();
             setBlocks(initialBlockDocument);
             setSaved([]);
             setMessage("제출 전");
+            setEditorKey((key) => key + 1);
         }}>
-            <BlockEditor label="운영 문서" name="document"
+            <BlockEditor key={editorKey} label="운영 문서" name="document"
                 blocks={blocks} onBlocksChange={setBlocks}
-                description="형식을 고르고 블록을 추가하거나 순서를 바꾸세요."
+                description="형식·순서를 바꾸고 구조 작업을 되돌려 보세요."
                 appearance="panel" />
             <div className="flex flex-wrap items-center gap-2">
                 <Button type="submit">문서 저장</Button>
@@ -7222,7 +7225,7 @@ function JobTerminal() {
     },
     {
         id: "block-editor", name: "BlockEditor", category: "Content",
-        description: "제목·문단·목록·인용·코드의 순서를 편집해 JSON 블록 배열로 제출합니다. 일반 텍스트 입력은 native textarea가 맡고, BlockDocument가 저장된 구조를 의미 있는 HTML로 표시합니다. HTML 붙여넣기와 인라인 서식은 제공하지 않습니다.",
+        description: "제목·문단·목록·인용·코드의 순서를 편집해 JSON 블록 배열로 제출합니다. 추가·삭제·이동·형식 변경은 구조 되돌리기·다시 실행으로 복구하고, 일반 텍스트 입력은 native textarea의 undo를 사용합니다. BlockDocument는 저장된 구조를 의미 있는 HTML로 표시합니다. HTML 붙여넣기와 인라인 서식은 제공하지 않습니다.",
         code: `import { useState } from "react";
 import { BlockDocument, BlockEditor } from "@pydemia/ui";
 import type { BlockEditorBlock } from "@pydemia/ui";

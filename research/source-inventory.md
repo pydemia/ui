@@ -1,5 +1,17 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 BlockEditor 구조 이력 source 확인
+
+구조 변경 이력은 기존 `BlockEditor`의 원본 React 구현입니다. 새
+npm 의존성이나 외부 editor source를 추가하지 않았습니다. native
+textarea의 입력·붙여넣기·undo는 그대로 두고 블록의 추가·삭제·이동·
+형식 변경만 별도 이력으로 기록합니다. [W3C Input Events Level 2](https://www.w3.org/TR/input-events-2/)와
+[Selection API](https://www.w3.org/TR/selection-api/),
+[WHATWG contenteditable 명세](https://html.spec.whatwg.org/multipage/interaction.html#making-document-regions-editable-the-contenteditable-content-attribute)를
+검토했습니다. `contenteditable`의 선택·입력·undo를 섞어 반쪽짜리
+WYSIWYG를 제공하지 않으며, `RichTextEditor`의 별도 조사 대상으로
+남깁니다.
+
 ## 2026-10-02 ArtifactViewer source 확인
 
 AI 초안·코드 결과물의 revision을 읽고 직전 revision과 비교하는

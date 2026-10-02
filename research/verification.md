@@ -1,5 +1,28 @@
 # 검증 기록
 
+## 2026-10-02 BlockEditor 구조 이력 — 로컬
+
+`npm run typecheck`, UI 테스트 200/200, `npm run build`,
+`npm run registry:check`가 통과했습니다. 로컬 Chromium에서 블록
+추가 뒤 텍스트 입력, 구조 되돌리기·다시 실행과 텍스트 보존을
+확인했습니다. preview의 reset에서 형식 select가 잘못 표시되던
+오류를 수정한 뒤 초기값과 이력 버튼 상태를 확인했습니다.
+55번째 snapshot을 생성하고 재빌드한 뒤 `registry:release-check`가
+현재 빌드와 55개 snapshot을 통과했습니다. PR CI·공개 URL은 아직
+확인하지 않았습니다.
+[작업 기록](../.worknotes/block-editor-structure-history-2026-10-02.md)을
+참고하세요.
+
+## 2026-10-02 ArtifactViewer 공개 확인
+
+PR #100과 병합 `026378c`의 Verify UI, Pages, Vercel production이
+성공했습니다. 공개 preview·Usage와 현재 item, 54번째 snapshot의
+manifest·대표 item이 저장소 파일과 byte 단위로 일치했습니다.
+공개 snapshot을 격리 소비자에 설치해 typecheck·build와 고지 pin을
+확인했습니다. 실제 screen reader·touch·Safari·RTL은 검사하지
+않았습니다. [작업 기록](../.worknotes/artifact-viewer-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 ArtifactViewer — 로컬
 
 `npm run typecheck`, UI 테스트 199/199, `npm run build`가 통과했습니다.
