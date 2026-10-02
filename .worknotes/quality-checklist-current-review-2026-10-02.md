@@ -7,11 +7,15 @@ item·47개 snapshot이 공개돼 있었습니다. Goal 관리용 추정은 약
 
 ## 릴리스마다 확인할 것
 
-1. 코드·registry 변경은 해당 commit의 CI(typecheck, UI 테스트,
-   build, registry 검사)를 확인합니다. 문서만 바뀌면 변경한 링크·
-   Usage·preview와 문서 build가 적합한 검사입니다. 현재 workflow는
-   문서 PR에도 전체 UI 검사를 실행하므로 그 결과를 사용하고 로컬에서
-   중복 실행하지 않습니다.
+비렌더링 Markdown 기록만 바뀐 PR에는 제품 build가 적용되지 않습니다.
+사이트의 Usage·preview를 바꾸는 `apps/docs/`와 생성된 `docs/`는
+제품 변경으로 분류해 전체 CI를 실행합니다. `main` push도 전체
+검사를 유지합니다. 경로별 CI 적용 상태는
+[작업 기록](ci-scope-2026-10-02.md)에 남깁니다.
+
+1. 코드·registry·사이트 문서 변경은 해당 commit의 CI(typecheck,
+   UI 테스트, build, registry 검사)를 확인합니다. 비렌더링 Markdown
+   기록만 바뀐 PR은 diff 공백 검사와 변경한 링크·문구를 확인합니다.
 2. 새 component는 독립 사용처, public export·registry·출처,
    동작하는 preview·Usage를 갖춥니다. 바뀐 핵심 흐름은 자동 테스트
    **또는** 브라우저에서 한 번 실행합니다. 정적 표시 변경은 해당
@@ -41,13 +45,13 @@ rollback 뒤 URL 보존은 해당 지원을 주장하거나 관련 경로를 바
 
 ## 확인된 절차 부담
 
-`.github/workflows/verify.yml`은 모든 PR과 `main` push에 전체 UI
-검사를 실행합니다. 병합 commit `802831d`의 Verify UI는 약 2분 9초
+변경 전 `.github/workflows/verify.yml`은 모든 PR과 `main` push에
+전체 UI 검사를 실행했습니다. 병합 commit `802831d`의 Verify UI는
+약 2분 9초
 걸렸습니다. `registry-release.mjs`는 새 snapshot마다 126개 item을
 `registry/releases/`와 `docs/r/releases/`에 각각 복제합니다.
-이는 현재 자동화 비용이며 품질 판정 문구만 바꿔도 줄지 않습니다.
-문서 전용 변경의 CI 경로 분기와 snapshot 저장 방식은 기존 URL·
-dependency·rollback 동작을 보존하는 별도 구현 과제로 둡니다.
-현재 검사를 우회하지 않습니다. 과거 판단과 사례는
+비렌더링 Markdown PR의 CI 분기는 초안을 작성했고 실제 CI 검증이
+남았습니다. snapshot 저장 방식은 기존 URL·dependency·rollback
+동작을 보존하는 별도 구현 과제입니다. 과거 판단과 사례는
 [이전 검토](quality-checklist-pragmatic-2026-10-02.md)와
 [누적 과제](quality-legacy-2026-09-29.md)에 남아 있습니다.

@@ -78,8 +78,9 @@ export·registry·출처·동작하는 preview·Usage를 맞춥니다. 코드가
 바뀌면 해당 commit의 CI(typecheck, 테스트, build, registry 검사)를
 확인합니다. 변경한 핵심 사용 흐름은 자동 테스트 또는 브라우저에서
 한 번 실행합니다. 정적 표시 component는 preview가 그 증거가 될 수
-있습니다. 문서만 바뀌면 변경한 링크·Usage·preview와 문서 build를
-확인합니다.
+있습니다. 사이트의 Usage·preview를 바꾸면 해당 동작과 전체 CI를
+확인합니다. 비렌더링 Markdown 기록만 바뀌면 변경한 링크·문구와
+diff 공백 검사를 확인합니다.
 
 | 변경으로 생긴 위험 | 추가 검사 |
 | --- | --- |

@@ -1,5 +1,11 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 문서 PR 검사 범위 초안: **약 97% → 약 97%**입니다.
+비렌더링 Markdown 기록만 변경한 PR의 전체 UI 검사를 줄이는
+workflow를 작성했습니다. PR과 `main`의 실제 CI 결과는 아직
+확인하지 않아 공급 능력 증가나 goal 진척도로 계산하지 않습니다.
+[작업 기록](ci-scope-2026-10-02.md)을 참고하세요.
+
 2026-10-02 NotificationCenter 공개 확인: **약 97% → 약 97%**입니다.
 PR #93의 CI와 병합 commit `130da82`의 Verify UI·Pages, Vercel
 production, 공개 preview·Usage와 현재 item·51번째 snapshot URL을
