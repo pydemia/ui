@@ -1,5 +1,20 @@
 # Prototype 설계 계약
 
+## 2026-10-02 Lightbox
+
+호출자가 고유한 `id`와 `src`·`alt`, 선택적 `caption`·`aspectRatio`를
+가진 이미지 목록을 전달합니다. `open`·`activeId`는 호출자가 소유하고
+`onOpenChange`·`onActiveIdChange`로 변경 요청을 받습니다. 열린 상태의
+선택 ID는 목록에 있어야 합니다. 빈 목록은 닫힌 상태에서만 허용합니다.
+컴포넌트는 업로드·이미지 저장·원격 요청을 수행하지 않습니다.
+
+`frame`은 폭을 제한한 modal, `immersive`는 viewport 전체 modal입니다.
+제목·순서·이미지 대체 텍스트·선택적 caption을 표시합니다. 이전·다음
+버튼은 목록 끝에서 비활성화되고 ArrowLeft·ArrowRight로 같은 이동을
+요청합니다. 썸네일은 기본으로 표시하며 `showThumbnails`로 숨길 수
+있습니다. Escape와 닫기 버튼은 modal을 닫고 열었던 요소로 focus를
+돌려줍니다. 로드·오류 표시는 기존 `Image`를 사용합니다.
+
 ## 2026-10-02 ModelSelector
 
 호출자가 `models`의 ID·이름·제공자·설명과 선택 가능 여부,

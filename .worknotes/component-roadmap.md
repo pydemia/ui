@@ -14,6 +14,8 @@ ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
 117개 component와 119개 registry item이 공개돼 있습니다.
+로컬 draft에는 `Lightbox`를 더해 118개 component와 120개 item이
+있으며 공개 공급 수량에는 아직 포함하지 않습니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
@@ -273,6 +275,8 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
   native 이미지의 `alt`·`srcSet`·`sizes`·`loading`을 사용합니다.
 - [x] `Carousel` — 이전·다음·위치·선택 버튼과 터치 넘김을 구현했습니다.
   자동 재생은 제공하지 않으며 비활성 슬라이드는 DOM에서 제거합니다.
+- [x] `Lightbox` — 갤러리의 modal 확대·이전/다음·썸네일 이동과
+  닫은 뒤 focus 복귀를 구현했습니다. 로컬 draft로 검증 중입니다.
 - [x] `CodeBlock` — 이름 있는 단일 코드 블록의 언어 표시, 복사
   상태, 긴 줄의 내부 scroll·줄바꿈을 구현했습니다. 실제 clipboard
   내용과 screen reader 발표는 검증하지 않았습니다.

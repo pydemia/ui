@@ -45,7 +45,7 @@ import {
     InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, JsonViewer, Kanban,
-    Label, LogConsole, Markdown, Menubar, MenubarCheckboxItem,
+    Label, Lightbox, LogConsole, Markdown, Menubar, MenubarCheckboxItem,
     MenubarContent, MenubarGroup, MenubarItem, MenubarLabel,
     MenubarMenu, MenubarRadioGroup, MenubarRadioItem,
     MenubarSeparator, MenubarSub, MenubarSubContent,
@@ -87,7 +87,7 @@ import type {
     DateRangeValue,
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
-    LogEntry, QueryField, QueryGroup, ReasoningStatus,
+    LightboxItem, LogEntry, QueryField, QueryGroup, ReasoningStatus,
     ModelChoice,
     ResponseFeedbackValue, ThreadComment,
     TabsVariant, ToolCallStatus, TreeNode, TreeSelectItem,
@@ -3807,6 +3807,53 @@ function ImagePreview() {
     );
 }
 
+const galleryImages: LightboxItem[] = [
+    { id: "mountain", src: `${import.meta.env.BASE_URL}image-preview.svg`,
+        alt: "남색 산과 로즈색 태양", caption: "산과 태양" },
+    { id: "coast", src: `${import.meta.env.BASE_URL}gallery-coast.svg`,
+        alt: "로즈색 하늘 아래 남색 해안", caption: "해안의 물결" },
+    { id: "city", src: `${import.meta.env.BASE_URL}gallery-city.svg`,
+        alt: "남색 도시 위의 로즈색 달", caption: "도시의 밤" },
+];
+
+function LightboxPreview() {
+    const [activeId, setActiveId] = useState<string | null>(null);
+    const [open, setOpen] = useState(false);
+    const [variant, setVariant] = useState<"frame" | "immersive">("frame");
+
+    return (
+        <div className="preview-stack">
+            <Button variant="outline" onClick={() => setVariant((current) =>
+                current === "frame" ? "immersive" : "frame"
+            )}>
+                보기: {variant === "frame" ? "프레임" : "전체 화면"}
+            </Button>
+            <div className="grid grid-cols-3 gap-2">
+                {galleryImages.map((item) => (
+                    <button key={item.id} type="button"
+                        aria-label={`${item.alt} 확대 보기`}
+                        className={
+                            "overflow-hidden rounded-sm border border-border " +
+                            "bg-surface-subtle focus-visible:outline-2 " +
+                            "focus-visible:outline-focus"
+                        }
+                        onClick={() => {
+                            setActiveId(item.id);
+                            setOpen(true);
+                        }}>
+                        <img src={item.src} alt=""
+                            className="aspect-video w-full object-cover" />
+                    </button>
+                ))}
+            </div>
+            <Lightbox title="작업 이미지" items={galleryImages}
+                activeId={activeId} open={open}
+                onOpenChange={setOpen}
+                onActiveIdChange={setActiveId} variant={variant} />
+        </div>
+    );
+}
+
 const previewJsonValue: JsonValue = {
     status: "ready",
     total: 5,
@@ -4994,6 +5041,34 @@ function DateExample() {
     aspectRatio="square" />
 </>;`,
         preview: () => <ImagePreview />,
+    },
+    {
+        id: "lightbox", name: "Lightbox", category: "File & media",
+        description: "이미지를 modal로 확대하고 이전·다음 이미지나 썸네일로 이동합니다. 방향키·Escape와 닫은 뒤 focus 복귀를 지원하며 프레임·전체 화면 표시를 선택할 수 있습니다.",
+        code: `import { useState } from "react";
+import { Lightbox, type LightboxItem } from "@pydemia/ui";
+
+const images: LightboxItem[] = [
+  { id: "mountain", src: "/images/mountain.webp",
+    alt: "산과 태양", caption: "산과 태양" },
+  { id: "coast", src: "/images/coast.webp",
+    alt: "바다와 해안", caption: "해안의 물결" },
+];
+
+function Gallery() {
+  const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  return <div>
+    {images.map((image) => <button key={image.id} type="button"
+      onClick={() => { setActiveId(image.id); setOpen(true); }}>
+      <img src={image.src} alt={image.alt} width="160" />
+    </button>)}
+    <Lightbox title="여행 사진" items={images} activeId={activeId}
+      open={open} onOpenChange={setOpen}
+      onActiveIdChange={setActiveId} />
+  </div>;
+}`,
+        preview: () => <LightboxPreview />,
     },
     {
         id: "image-cropper", name: "ImageCropper",

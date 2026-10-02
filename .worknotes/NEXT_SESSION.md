@@ -1,5 +1,20 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 체크리스트 후속 검토: 공개 117개 component·
+119개 item·38개 snapshot 기준으로, 검사 하한보다 로드맵의 중복된
+여섯 단계와 모든 PR의 전체 snapshot 생성이 실제 경직성입니다.
+현재 릴리스 기준은 유지하고 초안 검사·공개 후보 snapshot 분리와
+provenance 고정 정보·검증 문구 분리를 후속 도구 작업으로 지정했습니다.
+기준 해석만으로 goal 관리용 진척 약 92%를 올리지 않았습니다.
+[검토 기록](quality-checklist-level-2026-10-02.md)을 참고하세요.
+
+2026-10-02 Lightbox 로컬 작업: 원본 갤러리 modal과 프레임·전체 화면
+표시, 이미지 이동, Escape·focus 복귀를 구현했습니다. Chromium에서
+방향키 1→2→3, 끝 버튼 비활성화, 닫은 뒤 opener focus 복귀,
+390px dark의 가로 넘침 없음과 브라우저 오류 0건을 확인했습니다.
+배포 전 draft이며 공개 수량과 goal 추정에는 포함하지 않습니다.
+[작업 기록](lightbox-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ModelSelector 공개 확인: PR #66의 Verify UI와 병합 commit
 `64282d6`의 Verify UI·Pages가 통과했고 Vercel production
 `dpl_5NBbmMoRN7m7q1gHubVZPTJMcEYd`는 READY입니다. 공개

@@ -1,5 +1,26 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 Lightbox source 확인
+
+갤러리 이미지 확대·이전/다음 탐색·닫은 뒤 focus 복귀가 반복되는
+사용처입니다. 기존 `Image`는 단일 그림의 로드 상태, `Carousel`은
+페이지 내 슬라이드, `Dialog`는 일반 modal이므로 이 조합의 사용
+규칙을 `Lightbox`로 제공합니다. 이 저장소에서 작성한 원본 구현이며
+외부 component 코드를 복사하지 않았습니다.
+
+registry 의존성은 기존 `pyd-button`·`pyd-dialog`·`pyd-image`·
+`pyd-utils`이며 새 npm 의존성은 없습니다. `Dialog`가 사용하는
+`@radix-ui/react-dialog@1.1.23`과 shadcn/ui 수정 source의 고정
+revision `98a1fe67b439324ddc857f47fbdce056600a4329`·MIT
+LICENSE는 기존 provenance와 소비자 고지를 재사용합니다. 새로운
+upstream 코드를 도입하지 않았으므로 별도의 upstream revision
+대조 대상은 없습니다.
+
+제목 있는 modal, 이미지 alt·caption, 현재 위치, native 탐색 버튼과
+썸네일의 현재 상태를 제공합니다. Chromium에서 방향키·Escape·focus
+복귀와 좁은 화면을 확인했습니다. 실제 screen reader·touch·Safari·
+RTL은 검증하지 않았습니다.
+
 ## 2026-10-02 ModelSelector source 확인
 
 AI 작업 화면의 `PromptInput` 앞에서 모델을 고르고, 제공자·기능·

@@ -271,6 +271,8 @@ export type { ColorInputProps } from "./components/color-input";
 export { MetricCard } from "./components/metric-card";
 export { Image } from "./components/image";
 export type { ImageProps } from "./components/image";
+export { Lightbox } from "./components/lightbox";
+export type { LightboxItem, LightboxProps } from "./components/lightbox";
 export { ImageCropper } from "./components/image-cropper";
 export type { ImageCropperProps } from "./components/image-cropper";
 export { Dropzone } from "./components/dropzone";
