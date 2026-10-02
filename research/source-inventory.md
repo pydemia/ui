@@ -1,5 +1,16 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 NotificationCenter source 확인
+
+제품 화면에서 다시 확인할 알림의 읽음 상태와 필터를 유지하는 용례입니다.
+기존 `Toast`는 일시적인 안내이며 `Timeline`은 사건을 읽는 목록입니다.
+`NotificationCenter`는 pydemia/ui에서 작성한 React·Tailwind 원본으로
+외부 component source를 복사하지 않았습니다. `pyd-utils`와 공통 token만
+사용하며 새 npm 의존성은 없습니다. 고정 upstream source·LICENSE를 새로
+대조할 대상은 없습니다. 목록·상태 텍스트·native button/link를 사용했고
+Chromium에서 필터·읽음·초점과 390px·dark 배치를 확인했습니다. 실제
+screen reader 발화는 확인하지 않았습니다.
+
 ## 2026-10-02 LogViewer source 확인
 
 운영·배포 화면은 시간순 로그를 읽는 것 외에 메시지 검색과 수준별

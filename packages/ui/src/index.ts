@@ -214,6 +214,10 @@ export type {
     ToastRegionProps, ToastProps, ToastDraft, ToastNotice,
     ToastQueueProps,
 } from "./components/toast";
+export { NotificationCenter } from "./components/notification-center";
+export type {
+    NotificationCenterProps, NotificationItem,
+} from "./components/notification-center";
 export {
     DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
     DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,

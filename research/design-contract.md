@@ -1384,3 +1384,17 @@ label·description·error는 textarea에 연결되고 preview는 제목이
 있는 region입니다. 기본 입력·붙여넣기·선택·undo는 native
 textarea의 동작을 따릅니다. 별도 WYSIWYG 서식 버튼은 제공하지
 않습니다.
+
+## 2026-10-02 NotificationCenter
+
+`NotificationCenter`는 호출자가 제공하는 `notifications`를 전달 순서로
+표시합니다. 항목 ID는 고유하고 제목·시간 표시·읽음 상태가 필요합니다.
+`onReadChange`와 선택적인 `onMarkAllRead`·`onOpen`은 변경 요청을
+전달합니다. 저장·동기화·읽음 상태 갱신은 호출자가 맡습니다. 열기
+요청만으로 읽음 상태를 바꾸지 않습니다.
+
+전체·읽지 않음 필터는 component 내부 상태이며 읽지 않음 목록에서
+항목을 읽음으로 바꾸거나 모두 읽음 처리하면 필터 버튼으로 focus를
+옮깁니다. 목록이 비어 있을 때와 읽지 않은 항목이 없을 때의 안내를
+구분합니다. `panel`·`plain`은 같은 동작을 공유합니다. 실제 보조기술
+발화는 아직 검증하지 않았습니다.

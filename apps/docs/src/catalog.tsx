@@ -56,7 +56,7 @@ import {
     MonthPicker, MultiSelect, YearPicker,
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
     NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
-    NativeSelect, NumberInput,
+    NativeSelect, NotificationCenter, NumberInput,
     PageHeader, Pagination, PasswordInput, PinInput, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
     QueryBuilder, RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
@@ -92,7 +92,7 @@ import type {
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
     NodeCanvasEdge, NodeCanvasNode,
     LightboxItem, LogEntry, QueryField, QueryGroup, ReasoningStatus,
-    ModelChoice,
+    ModelChoice, NotificationItem,
     ResponseFeedbackValue, ThreadComment,
     TabsVariant, TerminalLine, ToolCallStatus, TreeNavItem, TreeNode,
     TreeSelectItem,
@@ -3424,6 +3424,57 @@ function RemoteDataTablePreview({ density, striped }: {
                 }}
             />
             {lastAction && <p role="status">{lastAction}</p>}
+        </div>
+    );
+}
+
+const initialNotifications: NotificationItem[] = [
+    { id: "review", title: "권한 변경 검토",
+        message: "운영팀의 변경 요청을 확인해 주세요.",
+        timestamp: "오늘 09:42", dateTime: "2026-10-02T09:42:00+09:00",
+        read: false },
+    { id: "report", title: "주간 보고서 준비 완료",
+        message: "새 보고서를 열어 결과를 확인할 수 있습니다.",
+        timestamp: "어제 16:20", dateTime: "2026-10-01T16:20:00+09:00",
+        read: false },
+    { id: "saved", title: "설정 저장 완료",
+        timestamp: "9월 30일", dateTime: "2026-09-30", read: true },
+];
+
+function NotificationCenterPreview() {
+    const [notifications, setNotifications] = useState(initialNotifications);
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const [opened, setOpened] = useState<string | null>(null);
+
+    return (
+        <div className="preview-workspace grid gap-3">
+            <div className="flex flex-wrap gap-2">
+                <Button variant="outline" onClick={() => setAppearance(
+                    appearance === "panel" ? "plain" : "panel",
+                )}>
+                    {appearance === "panel" ? "테두리 없이" : "패널로"} 보기
+                </Button>
+                <Button variant="ghost" onClick={() => {
+                    setNotifications(initialNotifications);
+                    setOpened(null);
+                }}>
+                    알림 초기화
+                </Button>
+            </div>
+            <NotificationCenter label="알림" notifications={notifications}
+                appearance={appearance}
+                onReadChange={(id, read) => setNotifications((current) =>
+                    current.map((item) => item.id === id
+                        ? { ...item, read } : item))}
+                onMarkAllRead={() => setNotifications((current) =>
+                    current.map((item) => ({ ...item, read: true })))}
+                onOpen={(id) => setOpened(id)} />
+            {opened && <p role="status" className="m-0 text-sm text-muted">
+                {notifications.find((item) => item.id === opened)?.title}
+                {" 열기를 요청했습니다."}
+            </p>}
         </div>
     );
 }
@@ -7161,6 +7212,36 @@ function SaveNotice() {
   </>;
 }`,
         preview: () => <ToastPreview />,
+    },
+    {
+        id: "notification-center", name: "NotificationCenter",
+        category: "Feedback",
+        description: "읽음 상태를 호출자가 저장하는 알림 목록입니다. 전체·읽지 않음 필터, 항목별 읽음 변경, 전체 읽음과 panel·plain 표시를 제공합니다. Toast와 달리 화면을 닫아도 데이터는 호출자에게 남습니다.",
+        code: `import { useState } from "react";
+import { NotificationCenter, type NotificationItem } from "@pydemia/ui";
+
+const initial: NotificationItem[] = [
+  { id: "review", title: "검토 요청", message: "권한 변경을 확인하세요.",
+    timestamp: "오늘 09:42", read: false },
+  { id: "saved", title: "설정 저장 완료",
+    timestamp: "어제", read: true },
+];
+
+function Notifications() {
+  const [items, setItems] = useState(initial);
+  const [opened, setOpened] = useState<string | null>(null);
+  return <>
+    <NotificationCenter label="알림" notifications={items}
+      onReadChange={(id, read) => setItems((current) =>
+        current.map((item) => item.id === id
+          ? { ...item, read } : item))}
+      onMarkAllRead={() => setItems((current) =>
+        current.map((item) => ({ ...item, read: true })))}
+      onOpen={setOpened} />
+    {opened && <p>{opened} 열기를 요청했습니다.</p>}
+  </>;
+}`,
+        preview: () => <NotificationCenterPreview />,
     },
     {
         id: "response-feedback", name: "ResponseFeedback",
