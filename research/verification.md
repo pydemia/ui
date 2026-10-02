@@ -8,7 +8,10 @@ PR #106 리뷰에서 단위를 붙이기 전 빈 formatter 결과가 거부되�
 `npm run registry:release-check`가 통과했습니다. 기존 미공개
 snapshot을 교체해 60개 release와 현재
 `sha256-039468e6ad1e0f9b4c9adad72b6627274d4bee35f1b18857a098f2dc7c9b664f`의 일치를 확인했습니다. 수정 후 전체 UI 테스트와
-PR CI·공개 URL은 아직 확인하지 않았습니다.
+PR #106의 최신 Verify UI run `37053186912`도 통과했습니다.
+Vercel preview의 현재 item과 새 snapshot manifest는 HTTP 200이며
+사용자 도메인의 `BarList`·`BulletChart`·`FunnelChart` item은
+각각 HTTP 404입니다. Production 공급은 아직 완료되지 않았습니다.
 
 ## 2026-10-03 AppShell 하단 패널 조합
 

@@ -34,4 +34,7 @@ PR #106 리뷰에서 `formatValue`가 빈 문자열을 돌려주면 단위만
 formatter 결과를 검사하도록 수정했습니다. 대상 테스트 4/4,
 typecheck·build·registry release 검사가 통과했습니다. 앞서 만든
 미공개 snapshot은 교체했으며 새 ID는 위와 같습니다. 이번 수정의
-PR CI와 공개 공급은 아직 확인하지 않았습니다.
+PR #106의 최신 Verify UI run `37053186912`가 성공했고 Vercel
+preview의 현재 item과 새 snapshot manifest가 HTTP 200입니다.
+리뷰 thread는 해결했습니다. production 공급은 아직 확인하지
+않았습니다.

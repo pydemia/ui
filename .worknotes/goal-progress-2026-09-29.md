@@ -1,9 +1,19 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 AppShell 반응형 탐색 조합: **약 97% → 약 97%**입니다.
+기존 `Sidebar`를 AppShell preview·Usage에 결합해 모바일 drawer와
+데스크톱 측면 탐색을 바로 가져다 쓸 수 있게 했습니다. 새 component나
+item은 없습니다. 문서 typecheck·build와 390px 클릭·Enter·Escape·
+링크 선택·focus 복귀, 1280px 배치를 확인했습니다. 공개 공급 전이라
+진척도 추정은 유지합니다.
+[작업 기록](app-shell-sidebar-recipe-2026-10-03.md)을 참고하세요.
+
 2026-10-03 BulletChart 리뷰 수정: **약 97% → 약 97%**입니다.
 빈 formatter 결과에 단위만 붙여 표시하던 결함을 수정하고
 대상 테스트 4/4, typecheck·build·registry release 검사를
 통과했습니다. 미공개 60번째 snapshot을 교체했습니다.
+PR #106 최신 commit의 Verify UI는 성공했고 preview의 현재 item·
+snapshot manifest는 HTTP 200입니다.
 브랜치 133개 component·135개 item, 공개 사이트 130개·132개는
 그대로입니다. [작업 기록](bullet-chart-2026-10-03.md)에 범위와
 미검증 항목을 남겼습니다.

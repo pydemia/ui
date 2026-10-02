@@ -360,9 +360,9 @@ URL을 사람이 하나씩 열지 않습니다.
   도움말 버튼을 선택할 수 있습니다. 반복하던 상태·Escape·focus
   처리를 `AppFloatingDisclosure`에 묶었고, 직접 제어할 때는 기존
   bubble·panel을 사용합니다. 하단 작업 패널은 기존 `Collapsible`와
-  결합한 문서 preview·Usage로 접기 동작을 제공합니다. component
-  수는 늘리지 않았습니다. 접히는 sidebar와 좁은 화면 drawer는
-  별도 범위입니다.
+  결합한 문서 preview·Usage로 접기 동작을 제공합니다. 왼쪽 탐색은
+  `Sidebar`와 결합해 넓은 화면의 접기와 좁은 화면 drawer를 같은
+  예시에서 제공합니다. component 수는 늘리지 않았습니다.
 - [x] `MasterDetail` — 목록 선택과 상세 표시, 좁은 영역에서 목록·
   상세 전환과 돌아갈 때 선택 항목 focus 복귀를 구현했습니다. 외부
   데이터 요청과 상세 내용은 호출자가 소유합니다.
