@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-118개 component와 120개 registry item이 공개돼 있습니다.
+120개 component와 122개 registry item이 공개돼 있습니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
@@ -108,7 +108,7 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
 [당시 조사 기록](quality-legacy-2026-09-29.md)에 남기며 릴리스
 점수로 사용하지 않습니다.
 
-전체 goal의 약 94%는 사용 사례 범위와 공개 검증을 함께 보는
+전체 goal의 약 95%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이며 component 수나 과거 체크박스 수로 계산하지
 않습니다. 현재 적용 판단은
 [체크리스트 검토](quality-checklist-current-review-2026-10-02.md)에
@@ -210,7 +210,7 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
   rail·inline 표시를 제공합니다.
 - [x] `TreeNav` — 중첩 페이지 링크와 별도의 disclosure 버튼,
   현재 경로의 자동 펼침, rail·filled 표시를 제공합니다.
-  공개 공급 확인은 진행 중입니다.
+  공개 preview·registry item과 41번째 snapshot URL을 확인했습니다.
 - [x] `Stepper` — 단계 위치·완료·오류와 단계 이동 정책. 실제 screen
   reader 발표와 touch 동작은 검증하지 않았습니다.
 - [x] `Sidebar` — `AppShell`의 container 폭에 따라 데스크톱

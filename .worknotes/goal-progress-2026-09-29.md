@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 TreeNav 공개 확인: **약 94% → 약 95%**입니다.
+PR #74와 병합 commit `64a1f1a`의 Verify UI·Pages,
+Vercel production이 성공했습니다. 공개 preview·Usage와 현재
+registry item, 41번째 snapshot manifest·item URL을 확인했습니다.
+공개 120개 component·122개 item·41개 snapshot입니다. 중첩 앱
+경로 탐색의 독립 사용처가 실제 공급된 점을 반영한 관리용 추정입니다.
+[작업 기록](tree-nav-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트 실무 재검토: **약 94% → 약 94%**입니다.
 변경 위험별 증거를 유지하고 component별 별도 snapshot 요구를
 없애 릴리스 묶음을 허용했습니다. 새 공개 공급이나 CI 변경은
@@ -9,9 +17,8 @@
 2026-10-02 TreeNav 로컬 구현·검증: **약 94% → 약 94%**입니다.
 중첩 페이지 탐색을 구현하고 targeted 테스트 3/3, UI 테스트 169/169,
 typecheck·build·registry 검사와 로컬 Chromium의 disclosure·경로
-변경·390px dark를 확인했습니다. 공개 공급 전이므로 공개 119개
-component·121개
-item·40개 snapshot은 유지합니다.
+변경·390px dark를 확인했습니다. 당시에는 공개 공급 전이므로 공개
+119개 component·121개 item·40개 snapshot을 유지했습니다.
 [작업 기록](tree-nav-2026-10-02.md)을 참고하세요.
 
 2026-10-02 AnchorNav 공개 확인: **약 93% → 약 94%**입니다.

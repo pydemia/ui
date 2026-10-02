@@ -2427,3 +2427,15 @@ button focus가 유지됐습니다. 현재 경로를 바꾸면 새 가지와
 `sha256-cff50645081e11f6f107609d76b572284192851f091051337c7ea6592beea753`
 의 현재 빌드 일치를 확인했습니다. 공개 배포·URL은 확인 전입니다.
 실제 보조기술 발표는 실행하지 않았습니다.
+
+## 2026-10-02 TreeNav 공개 검증
+
+PR #74의 Verify UI run `36963665742`, 병합 commit `64a1f1a`의
+Verify UI run `36963869092`와 Pages run `36963868107`이
+성공했습니다. Vercel production
+`dpl_FhfpDXVez9LDZR7KAcFo6Prafbcd`는 READY입니다. 공개 문서의
+TreeNav preview·Usage가 렌더링됐고 현재 `pyd-tree-nav.json` 및
+41번째 snapshot manifest·item URL은 HTTP 200입니다. Manifest의
+`itemCount`는 122입니다. 로컬 Chromium의 핵심 조작 검사를
+공개 사이트에서 반복하지 않았습니다. 실제 보조기술 발표는
+확인하지 않았습니다.
