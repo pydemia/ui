@@ -1,5 +1,25 @@
 # Component 확장 작업 인계
 
+2026-10-03 `main` CI 범위 조정 후보: 문서 전용 push는 diff 공백 검사만
+실행하고 코드·생성물 변경이나 기준 commit 확인 실패 시 전체 검사를
+유지하도록 workflow를 수정했습니다. 로컬 분기 시험은 통과했고
+PR·`main` Actions 결과는 아직 확인하지 않았습니다. Goal 추정은
+약 98%입니다. [작업 기록](main-ci-scope-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 기준 재검토: 현행 릴리스 하한은 변경분 중심이며,
+반복 비용은 `main`의 문서 전용 전체 CI와 snapshot 전체 복제에 있습니다.
+운영 개선을 릴리스 점수와 분리했습니다. 코드·workflow는 바꾸지 않았고
+Goal 추정은 약 98%입니다.
+[현재 기준과 근거](quality-checklist-current-review-2026-10-02.md)를
+참고하세요.
+
+2026-10-03 PR #113 병합 후 상태: 공개 snapshot 소비자 조합 검사와
+`Thread`의 게시글별 `key` 안내가 `main`에 들어갔습니다. PR·`main`
+Verify UI와 Pages가 통과했습니다. Vercel은 배포 횟수 제한으로 실패해
+새 catalog 설명의 production 공개는 대기 중입니다. 기존 65번째
+snapshot의 소비자 설치·동작 검증은 완료했고 Goal 추정은 약 98%입니다.
+[검사·배포 기록](public-composite-consumer-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공개 registry 조합 소비자: 65번째 snapshot의 13개 item을
 새 Vite 프로젝트에 설치하고 20개 생성 파일의 typecheck·build와
 390px·1280px 화면의 탐색·분석·게시판·대댓글 흐름을 확인했습니다.
