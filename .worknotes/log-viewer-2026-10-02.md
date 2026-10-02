@@ -1,5 +1,25 @@
 # LogViewer 편입
 
+## 공개 확인
+
+PR #88의 Verify UI run `36984294369`, 병합 commit `de243eb`의
+Verify UI run `36984532856`와 Pages run `36984531749`이
+성공했습니다. Vercel production
+`dpl_B5wnfggC6hab3UKD5UUywyrRw9wt`는 READY입니다. 공개
+사이트에서 LogViewer preview·Usage와 125개 component 표시를
+확인했습니다. 현재 item과 48번째 snapshot manifest·item URL은
+HTTP 200이고 manifest의 itemCount는 127입니다. 새 item의 네
+registry dependency URL은 같은 snapshot에 고정돼 있습니다.
+
+공개 수량은 125개 component·127개 item·48개 snapshot입니다.
+검색·필터 동작은 로컬 Chromium에서 실행했으며 공개 사이트에서
+반복하지 않았습니다. 실제 keyboard-only·screen reader·touch·
+Safari·RTL과 별도 소비자 설치는 미검증입니다. goal 관리용
+추정은 약 97%로 유지합니다. 실제 사용 재료는 늘었지만 열린
+RichTextEditor·chart 조합과 디자인 선택의 범위를 닫지 못했습니다.
+
+## 구현과 로컬 검증
+
 시작 기준은 공개 124개 component·126개 registry item·47개 snapshot,
 goal 관리용 추정 약 97%입니다. handoff의 `LogViewer`는 기존
 `LogConsole`과 별도 사용처가 있습니다. 운영·배포 화면에서 수십 건의
