@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 TreeNav 공개 확인: PR #74와 병합 commit `64a1f1a`의
+Verify UI·Pages가 성공했고 Vercel production
+`dpl_FhfpDXVez9LDZR7KAcFo6Prafbcd`는 READY입니다. 공개
+preview·Usage, 현재 registry item과 41번째 snapshot manifest·item
+URL을 확인했습니다. 공개 120개 component·122개 item·41개
+snapshot이며 goal 관리용 추정은 약 94%에서 약 95%로
+올렸습니다. [작업 기록](tree-nav-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트 실무 재검토: 변경 흐름은 테스트 또는
 브라우저에서 확인하고, 추가 검사는 변경 위험에만 적용합니다.
 component마다 별도 PR·snapshot을 요구하지 않고 검토 가능한
