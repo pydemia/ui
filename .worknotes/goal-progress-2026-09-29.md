@@ -1,10 +1,18 @@
 # Component 공급 목표 진행 상태
 
-2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개 후보:
+2026-10-03 `ItemList` 로컬 후보: **약 98% → 약 98%**입니다.
+일반 작업 목록의 제목·설명·메타·작업 배치와 두 표시 형태·간격을
+추가했습니다. typecheck·전체 UI 테스트·로컬 preview와 64번째
+snapshot의 registry release 검사를 확인했습니다. PR·공개 공급은
+아직 확인하지 않았습니다.
+[작업 기록](item-list-2026-10-03.md)을 참고하세요.
+
+2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개:
 **약 98% → 약 98%**입니다. 정적 원본 차트의 검증 범위와 릴리스
-고정 비용을 분리했습니다. 로컬 134개 component·136개 item·63개
-snapshot의 검사와 preview가 통과했으나 PR CI·production 경로는
-남았습니다. [차트 기록](waterfall-chart-2026-10-03.md)과
+고정 비용을 분리했습니다. PR #109와 `main`의 CI, Pages, Vercel
+production과 현재 item·63번째 snapshot·문서 JS의 공개 일치를
+확인했습니다. 공개 134개 component·136개 item·63개 snapshot입니다.
+[차트 기록](waterfall-chart-2026-10-03.md)과
 [체크리스트 판단](quality-checklist-review-2026-10-03.md)에 근거를
 남겼습니다.
 

@@ -287,6 +287,8 @@ export { ContentList } from "./components/content-list";
 export type { ContentListProps } from "./components/content-list";
 export { DataList } from "./components/data-list";
 export type { DataListItem, DataListProps } from "./components/data-list";
+export { ItemList } from "./components/item-list";
+export type { ItemListItem, ItemListProps } from "./components/item-list";
 export { CodeBlock } from "./components/code-block";
 export type { CodeBlockProps } from "./components/code-block";
 export { DiffViewer } from "./components/diff-viewer";

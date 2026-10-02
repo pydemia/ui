@@ -1065,6 +1065,21 @@ ReactNode이며 `null`이면 `missingText`(기본 `값 없음`)로
 interaction을 추가하지 않습니다. 실제 screen reader 발표는
 확인하지 않았습니다.
 
+## 2026-10-03 ItemList
+
+`ItemList`는 작업·파일 등 선택 상세 화면이 필요하지 않은 반복 항목을
+이름 있는 native `ul`로 표시합니다. 각 항목에는 고유 `id`와 제목이
+필수이며 설명·메타 정보·앞쪽 시각 요소·뒤쪽 작업을 선택해 넣습니다.
+`href`가 있으면 제목만 링크가 되고 뒤쪽 작업은 별도 focus 대상에
+놓입니다. 링크는 상대 경로와 HTTP(S) 주소를 허용하며 다른 scheme은
+거부합니다. 빈 목록은 별도 문구를 표시합니다.
+
+`appearance`는 `panel`·`plain`, `density`는 `comfortable`·`compact`를
+지원합니다. 두 속성은 배치만 바꾸고 항목 순서나 링크·작업 동작을
+바꾸지 않습니다. 항목의 상태와 작업 실행은 호출자가 소유합니다.
+`ContentList`는 본문 bullet/번호 목록, `DataList`는 이름·값 쌍,
+`MasterDetail`은 항목 선택과 상세 화면을 담당합니다.
+
 ## 2026-09-29 Badge 표시 형태
 
 `Badge`는 기존 native `span`과 전달된 텍스트를 유지합니다.

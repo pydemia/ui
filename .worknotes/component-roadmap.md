@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
-사이트에는 133개 component와 135개 registry item이 있습니다.
+사이트에는 134개 component와 136개 registry item이 있습니다.
 `ArtifactViewer`의 공개 preview·Usage와 54번째 snapshot 경로·대표
 소비자 설치를 확인했습니다.
 2026-09-30에
@@ -297,7 +297,7 @@ URL을 사람이 하나씩 열지 않습니다.
   production item을 확인했습니다.
 - [x] `WaterfallChart` — 시작값에서 순서대로 적용한 양수·음수 변화를
   부동 막대와 정확한 증감·누적값 표로 표시합니다. 0·음수·빈 목록을
-  구분하며 공개 공급 여부는 작업 기록에서 추적합니다.
+  구분하며 production item을 확인했습니다.
 - [x] `Heatmap` — 두 범주의 수치를 색 농도와 보이는 숫자로 함께
   표시합니다. 표 헤더·결측값·0·빈 목록과 내부 가로 스크롤을 제공합니다.
   실제 screen reader 발표는 미검증입니다.
@@ -367,8 +367,9 @@ URL을 사람이 하나씩 열지 않습니다.
 - [x] `MasterDetail` — 목록 선택과 상세 표시, 좁은 영역에서 목록·
   상세 전환과 돌아갈 때 선택 항목 focus 복귀를 구현했습니다. 외부
   데이터 요청과 상세 내용은 호출자가 소유합니다.
-- [ ] `List` — native 목록과 기존 component 조합으로 해결되지 않는
-  반복 항목·보조 내용·action 규칙이 있는지 판정.
+- [x] `List` — `ItemList`로 제목·보조 설명·메타 정보·개별 작업을
+  같은 행에 배치합니다. `ContentList`의 본문 목록이나
+  `MasterDetail`의 선택·상세 전환과 다른 용례입니다.
 - [ ] `Kbd` — native `kbd`와 token 사용 예시 이상이 필요한지 판정.
 - [x] `Conversation` — Message 목록, 새 메시지 위치와 스크롤.
 - [x] `ArtifactViewer` — AI·개발 결과물의 controlled revision을

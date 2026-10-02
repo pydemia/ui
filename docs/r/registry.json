@@ -511,6 +511,11 @@
       "files": [{ "path": "packages/ui/src/components/data-list.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-item-list", "type": "registry:ui", "title": "Item List",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/item-list.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-affixed-input", "type": "registry:ui", "title": "Affixed Input",
       "registryDependencies": ["./pyd-input.json", "./pyd-label.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/affixed-input.tsx", "type": "registry:ui" }]
