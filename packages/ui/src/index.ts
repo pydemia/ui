@@ -115,11 +115,11 @@ export type {
 } from "./components/result-state";
 export {
     AppShell, AppHeader, AppBody, AppSidebar, AppMain, AppBottomPanel,
-    AppFloatingPanel, AppFloatingBubble,
+    AppFloatingPanel, AppFloatingBubble, AppFloatingDisclosure,
 } from "./components/app-shell";
 export type {
     AppShellProps, AppMainProps, AppSidebarProps, AppFloatingPanelProps,
-    AppFloatingBubbleProps,
+    AppFloatingBubbleProps, AppFloatingDisclosureProps,
 } from "./components/app-shell";
 export { MasterDetail } from "./components/master-detail";
 export type {

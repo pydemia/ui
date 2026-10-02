@@ -1,6 +1,6 @@
 import { useId, useRef, useState } from "react";
 import {
-    AppBody, AppBottomPanel, AppFloatingBubble, AppFloatingPanel,
+    AppBody, AppBottomPanel, AppFloatingDisclosure,
     AppHeader, AppMain, AppShell, AppSidebar, Badge, Button,
     ContentList, Dashboard, DashboardMetrics, DashboardPanels,
     DataChart, DataList, DataTable, GlobalNav, GlobalNavLink, LogConsole,
@@ -94,20 +94,12 @@ const searchText = (run: Run) => `${run.name} ${run.team} ${run.id}`;
 
 function AnalyticsWorkspace() {
     const periodId = useId();
-    const helpPanelId = useId();
-    const helpBubbleRef = useRef<HTMLButtonElement>(null);
     const nextLogId = useRef(3);
     const [period, setPeriod] = useState<"week" | "month">("week");
     const [runs, setRuns] = useState(initialRuns);
     const [logs, setLogs] = useState(initialLogs);
-    const [helpOpen, setHelpOpen] = useState(false);
     const [lastAction, setLastAction] = useState("최근 실행을 확인하세요.");
     const data = periodData[period];
-
-    function closeHelp() {
-        setHelpOpen(false);
-        helpBubbleRef.current?.focus();
-    }
 
     function retryRuns(selected: readonly Run[], clearSelection: () => void) {
         const ids = new Set(selected.map(rowId));
@@ -216,21 +208,8 @@ function AnalyticsWorkspace() {
                 <span role="status">{lastAction}</span>
                 <span className="ml-2">데모 데이터 · 서버 요청 없음</span>
             </AppBottomPanel>
-            <AppFloatingBubble ref={helpBubbleRef}
-                aria-label="작업 공간 도움말"
-                aria-expanded={helpOpen} aria-controls={helpPanelId}
-                onClick={() => setHelpOpen((open) => !open)}>
-                ?
-            </AppFloatingBubble>
-            <AppFloatingPanel id={helpPanelId} hidden={!helpOpen}
-                aria-label="작업 공간 도움말"
-                className={
-                    "bottom-[calc(var(--space-4)+2.5rem+var(--space-2))] " +
-                    "max-h-[calc(100%-6rem)] w-64 overflow-y-auto text-sm"
-                }
-                onKeyDown={(event) => {
-                    if (event.key === "Escape") closeHelp();
-                }}>
+            <AppFloatingDisclosure label="작업 공간 도움말"
+                panelClassName="w-64">
                 <strong>작업 공간 사용법</strong>
                 <ContentList className="mt-2">
                     <li>기간을 바꿔 지표와 추세를 비교합니다.</li>
@@ -244,9 +223,7 @@ function AnalyticsWorkspace() {
                     { id: "logs", label: "로그",
                         value: `${logs.length}건` },
                 ]} />
-                <Button variant="outline" className="mt-3"
-                    onClick={closeHelp}>닫기</Button>
-            </AppFloatingPanel>
+            </AppFloatingDisclosure>
         </AppShell>
     );
 }

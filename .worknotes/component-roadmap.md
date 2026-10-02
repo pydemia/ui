@@ -339,8 +339,10 @@ URL을 사람이 하나씩 열지 않습니다.
 - [x] `AppShell` — 공통 header·좌우 panel·content·하단·floating 영역의
   조합 골격. floating 도움말의 열림 상태·focus 복귀 조합을 문서와
   분석 화면에서 확인했습니다. `framed`·`canvas` 골격과 원형·pill
-  도움말 버튼을 선택할 수 있습니다. 접히는 sidebar와 좁은 화면
-  drawer는 별도 범위입니다.
+  도움말 버튼을 선택할 수 있습니다. 반복하던 상태·Escape·focus
+  처리를 `AppFloatingDisclosure`에 묶었고, 직접 제어할 때는 기존
+  bubble·panel을 사용합니다. 접히는 sidebar와 좁은 화면 drawer는
+  별도 범위입니다.
 - [x] `MasterDetail` — 목록 선택과 상세 표시, 좁은 영역에서 목록·
   상세 전환과 돌아갈 때 선택 항목 focus 복귀를 구현했습니다. 외부
   데이터 요청과 상세 내용은 호출자가 소유합니다.

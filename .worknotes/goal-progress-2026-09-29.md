@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `AppFloatingDisclosure` 로컬 후보:
+**약 97% → 약 97%**입니다. 두 실제 화면에서 반복하던 floating
+도움말의 상태·키보드·focus 처리를 기존 `pyd-app-shell`에 묶고
+typecheck·UI 테스트 209/209·build·registry 검사와 로컬
+Chromium 동작을 확인했습니다. 새 component 수를 늘리지 않고
+화면 조립에 필요한 코드를 줄였습니다. 공개 검증 전이므로
+130개 component·132개 item·57개 snapshot은 그대로입니다.
+[작업 기록](app-floating-disclosure-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `FormWizard` 공개 확인: **약 97% → 약 97%**입니다.
 PR #103과 병합 `e921800e8`의 Verify UI·Pages·Vercel production,
 공개 item·57번째 snapshot과 문서 asset을 확인했습니다. 공개

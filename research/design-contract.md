@@ -1,5 +1,17 @@
 # Prototype 설계 계약
 
+## 2026-10-03 AppFloatingDisclosure
+
+`AppFloatingDisclosure`는 `AppShell` 안에서 기존 bubble·panel을
+그대로 조합합니다. 이름 있는 native button은 `aria-expanded`와
+`aria-controls`로 panel과 연결되고, 닫힌 panel은 `hidden`입니다.
+열린 뒤에는 bubble에 focus를 두어 다음 Tab으로 panel의 동작에
+진입합니다. 닫기 버튼과 panel 안의 Escape는 bubble로 focus를
+돌립니다. 외부 pointer·focus 이동은 panel만 닫고 이동한 focus를
+가져오지 않습니다. 원형·pill, 좌·우 위치를 고를 수 있습니다.
+패널 내용은 호출자가 제공하고, 기존 저수준 부품을 사용한 별도
+상태 제어도 유지합니다.
+
 ## 2026-10-03 FormWizard
 
 `FormWizard`는 ID가 있는 단계 배열과 controlled `currentIndex`를
