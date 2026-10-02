@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 Lightbox — 공개
+
+PR #68의 Verify UI와 병합 commit `3657163`의 Verify UI·Pages가
+통과했습니다. Vercel production
+`dpl_4B3nXyN7dTSw2cUcZkKHAkAddRbi`는 READY입니다. 공개
+사이트와 현재 registry `pyd-lightbox.json`, 39번째 snapshot의
+manifest·item URL이 HTTP 200입니다. Manifest의 `itemCount`는
+120이고 공개 component는 118개입니다. 로컬 Chromium에서
+확인한 동작을 공개 사이트에서 다시 조작하지 않았습니다. 실제
+screen reader·touch·Safari·RTL, 개별 소비자 설치와 rollback 뒤
+snapshot URL 보존은 검사하지 않았습니다.
+
 ## 2026-10-02 Lightbox — 로컬 draft
 
 `npm run typecheck`와 UI 테스트 163/163이 통과했습니다. 새 테스트는

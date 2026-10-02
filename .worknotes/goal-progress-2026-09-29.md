@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 Lightbox 공개 확인: **약 92% → 약 93%**입니다.
+PR #68과 병합 commit `3657163`의 Verify UI·Pages, Vercel
+production이 성공했습니다. 갤러리 탐색·focus 복귀의 로컬 브라우저
+동작과 공개 사이트·registry item·39번째 snapshot URL을 확인했습니다.
+공개 118개 component·120개 item·39개 snapshot입니다. 체크리스트
+재해석만으로 올린 수치가 아닙니다.
+[작업 기록](lightbox-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ModelSelector 공개 확인: **약 91% → 약 92%**입니다.
 PR #66과 병합 commit `64282d6`의 Verify UI·Pages, Vercel
 production이 성공했습니다. 공개 preview·Usage, 현재 registry item,
