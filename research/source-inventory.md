@@ -1,5 +1,16 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 BulletChart
+
+운영 화면에서는 범주 간 크기(`BarList`)와 별개로 한 실적을 목표와
+비교해야 합니다. `Progress`의 작업 진행률은 이 목표 표시와 의미가
+다릅니다. `BulletChart`는 pydemia/ui 원본 React·Tailwind 코드로
+만들었고 외부 component source와 새 npm 의존성은 없습니다.
+registry 의존성은 기존 `pyd-utils`뿐입니다.
+[W3C WAI의 Use of Color 해설](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color)을
+참고해 현재 값·목표·최대를 텍스트로 표시하고 막대와 목표선을
+장식으로 처리했습니다. 문서의 예제 코드는 복사하지 않았습니다.
+
 ## 2026-10-03 BarList
 
 `DataChart`는 시계열·다중 계열 차트에 맞고 `DataList`에는 크기

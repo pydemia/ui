@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 `BulletChart` 로컬 후보: 목표 대비 실적을 명시한 상한과
+함께 표시합니다. 0·미수집을 구분하고 Operations workspace의 완료
+건수에 연결했습니다. typecheck·UI 테스트 215/215·build·registry와
+로컬 Chromium 표시·상태 갱신을 확인했습니다. Vercel 제한 중에는
+추가 snapshot을 만들지 않았습니다. `main` 131개 component·133개
+item·59개 snapshot, 로컬 132개·134개, goal 추정 약 97%입니다.
+[작업 기록](bullet-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `BarList`를 PR #105로 `main`에 병합했습니다. PR·main
 Verify UI와 Pages는 성공했습니다. Vercel의 24시간 배포 제한으로
 production 배포가 없고 공개 `pyd-bar-list.json`은 404입니다.

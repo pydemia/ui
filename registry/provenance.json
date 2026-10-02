@@ -602,6 +602,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, native list, exact label and value text; decorative bars", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-bullet-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color", "scope": "visible actual, target and scale values; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure and native description list of actual, target and maximum; decorative bar and marker", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-page-header", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "semantic heading level with optional subtitle and actions", "keyboard": "native actions", "screen_reader": "pending manual review" }

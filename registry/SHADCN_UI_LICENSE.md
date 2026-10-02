@@ -7,7 +7,7 @@ The source file for each component is identified in the provenance records at
 commit `2fabc8a2691e17d0cffaef98a32ae260324f936c`:
 <https://github.com/pydemia/ui/blob/2fabc8a2691e17d0cffaef98a32ae260324f936c/registry/provenance.json>.
 SHA-256 of that file with LF line endings:
-`2d04b68885b9b5ca9baf6d569ca09d7210e55297c3de51e992730764d549441c`.
+`802c6312bf55795ec19fbf1db30e637595ec5cf9caae2a5c42370e2ecfa6d0ea`.
 
 MIT License
 

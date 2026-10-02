@@ -208,6 +208,8 @@ export { Sparkline } from "./components/sparkline";
 export type { SparklineProps } from "./components/sparkline";
 export { BarList } from "./components/bar-list";
 export type { BarListItem, BarListProps } from "./components/bar-list";
+export { BulletChart } from "./components/bullet-chart";
+export type { BulletChartProps } from "./components/bullet-chart";
 export { DataChart } from "./components/data-chart";
 export type {
     DataChartProps, ChartPoint, ChartSeries,

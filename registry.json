@@ -681,6 +681,11 @@
       "files": [{ "path": "packages/ui/src/components/bar-list.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-bullet-chart", "type": "registry:ui", "title": "Bullet Chart",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/bullet-chart.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-page-header", "type": "registry:ui", "title": "Page Header",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/page-header.tsx", "type": "registry:ui" }]

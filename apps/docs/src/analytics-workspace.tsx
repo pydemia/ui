@@ -1,7 +1,8 @@
 import { useId, useRef, useState } from "react";
 import {
     AppBody, AppBottomPanel, AppFloatingDisclosure,
-    AppHeader, AppMain, AppShell, AppSidebar, Badge, BarList, Button,
+    AppHeader, AppMain, AppShell, AppSidebar, Badge, BarList, BulletChart,
+    Button,
     ContentList, Dashboard, DashboardMetrics, DashboardPanels,
     DataChart, DataList, DataTable, GlobalNav, GlobalNavLink, LogConsole,
     MetricCard, NativeSelect, PageHeader, SideNav, SideNavLink,
@@ -188,7 +189,11 @@ function AnalyticsWorkspace() {
                                     label: statusLabel[status],
                                     value: statusCounts[status],
                                 }))}
-                                unit="건" className="@3xl:col-span-2" />
+                                unit="건" />
+                            <BulletChart title="완료 작업 목표"
+                                description="6개 작업 중 5개 완료를 목표로 합니다."
+                                value={statusCounts.completed}
+                                target={5} max={runs.length} unit="건" />
                         </DashboardPanels>
                     </Dashboard>
                     <section id="analytics-runs" className="space-y-3"

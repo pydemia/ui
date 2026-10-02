@@ -11,7 +11,7 @@ import {
     AvatarGroup, AvatarUploader, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, BlockDocument, BlockEditor,
-    BarList, Board, BottomNav, BottomNavLink,
+    BarList, Board, BottomNav, BottomNavLink, BulletChart,
     Button, ButtonGroup, IconButton,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
@@ -3212,6 +3212,38 @@ function BarListPreview() {
                     { id: "notify", label: "알림 발송 준비", value: 0 },
                 ]}
                 unit="건" variant={variant} />
+        </div>
+    );
+}
+
+function BulletChartPreview() {
+    const [value, setValue] = useState<number | null>(74);
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setValue(
+                    value === 74 ? 88 : 74,
+                )}>
+                    목표 {value === 88 ? "미달" : "초과"}
+                </Button>
+                <Button variant="outline" onClick={() => setValue(
+                    value === null ? 74 : null,
+                )}>
+                    {value === null ? "값 표시" : "값 없음"}
+                </Button>
+                <Button variant="outline" onClick={() => setAppearance(
+                    appearance === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {appearance === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <BulletChart title="완료율" description="현재 값과 목표를 100% 척도에서 비교합니다."
+                value={value} target={80} max={100} unit="%"
+                appearance={appearance} />
         </div>
     );
 }
@@ -7294,6 +7326,16 @@ function JobTerminal() {
     { id: "notify", label: "알림 발송 준비", value: 0 },
   ]} />`,
         preview: () => <BarListPreview />,
+    },
+    {
+        id: "bullet-chart", name: "BulletChart",
+        category: "Data & analytics",
+        description: "실제 값과 목표를 명시한 최대 범위 안에서 비교합니다. 실제 값이 없거나 0인 상태를 구분하고 세 수치를 텍스트로 보여 줍니다.",
+        code: `import { BulletChart } from "@pydemia/ui";
+
+<BulletChart title="완료율" value={74} target={80}
+  max={100} unit="%" />`,
+        preview: () => <BulletChartPreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",

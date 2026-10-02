@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `BulletChart` 로컬 후보: **약 97% → 약 97%**입니다.
+목표 대비 실적과 0·미수집 값을 구분하는 분석 UI를 구현하고
+Operations workspace에 연결했습니다. typecheck와 UI 테스트
+215/215, build·registry 검사와 로컬 Chromium 표시·상태 갱신이
+통과했으며 공개 검증 전입니다. 저장소 `main`은
+131개 component·133개 item·59개 snapshot, 로컬 후보는
+132개·134개입니다. 사용자 사이트는 Vercel 제한으로 이전 공개
+130개·132개·58개 기준입니다.
+[작업 기록](bullet-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `BarList` 병합·공개 지연: **약 97% → 약 97%**입니다.
 PR #105와 `main` CI·Pages는 성공했지만 Vercel의 24시간 배포
 제한으로 사용자 사이트의 새 item은 404입니다. 저장소는 131개

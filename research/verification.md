@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-03 BulletChart — 로컬 후보
+
+`npm run typecheck`, UI 테스트 215/215, `npm run build`,
+`npm run registry:check`가 통과했습니다. registry 검사는 134개
+item·132개 export/catalog와 기존 59개 snapshot을 확인했습니다.
+고유 label 검사를 추가한 뒤 대상 테스트 3/3을 다시 실행했습니다.
+로컬 Chromium에서 현재 74%·목표 80%·최대 100%의 텍스트와
+목표 초과 88%, 미수집 값, 평면 표시를 확인했습니다. 390px 화면의
+가로 넘침과 console error는 없었습니다. Operations workspace에서
+재실행 후 현재 완료 건수가 3→2로 바뀌었습니다. 새 snapshot,
+PR CI, 공개 경로는 아직 확인하지 않았습니다. 실제 screen reader·
+touch·Safari는 검사하지 않았습니다.
+[작업 기록](../.worknotes/bullet-chart-2026-10-03.md)을 참고하세요.
+
 ## 2026-10-03 BarList — 병합 후 공개 지연
 
 PR #105, 병합 `d020a2063`의 Verify UI와 GitHub Pages가
