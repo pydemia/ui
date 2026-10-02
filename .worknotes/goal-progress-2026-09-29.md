@@ -1,11 +1,20 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 공급·품질 체크리스트 재판정: **약 97% → 약 97%**입니다.
+`ArtifactViewer` item 하나의 고지 pin 변경이 기존 item JSON 29개를
+바꿨고 새 snapshot은 두 위치에 각각 132개 파일을 추가합니다.
+자동 대조가 통과한 릴리스의 공개 URL은 의존 경로별 대표 item으로
+확인하도록 사람의 검사 범위를 좁혔습니다. 제품·CI·배포 결과는
+바뀌지 않았습니다.
+[검토 기록](quality-checklist-reassessment-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ArtifactViewer 로컬 후보: **약 97% → 약 97%**입니다.
 revision 선택과 Markdown·코드·일반 텍스트 보기, 직전 revision
-비교라는 별도 사용처를 구현했습니다. typecheck·build·대상 테스트와
-로컬 Chromium 동작은 확인했으나 고지 pin·snapshot·공개 경로는
+비교라는 별도 사용처를 구현했습니다. typecheck·build·UI 테스트
+199/199, 로컬 Chromium, 고지 pin·54번째 snapshot과 격리 소비자
+설치·`registry:release-check`를 확인했습니다. 공개 경로는
 남았습니다. 공개 128개 component·130개 item·53개 snapshot,
-로컬 후보 129개·131개입니다. 복합 편집과 소비자 적용 범위를
+로컬 후보 129개·131개·54개 snapshot입니다. 복합 편집과 소비자 적용 범위를
 고려해 관리용 추정은 유지합니다.
 [작업 기록](artifact-viewer-2026-10-02.md)을 참고하세요.
 

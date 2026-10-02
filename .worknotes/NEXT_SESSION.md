@@ -1,11 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 재판정: 자동 검사가 전체 item을 대조한 경우
+공개 URL은 manifest와 의존 경로별 대표 변경 item을 확인합니다.
+`ArtifactViewer`의 공통 고지 pin은 기존 item 29개를 바꾸고 새
+snapshot을 두 위치에 각각 132개 파일씩 만듭니다. 사람의 중복
+검사 범위만 줄였고 CI·생성 방식은 바꾸지 않았습니다. 공개 후보
+검증과 goal 추정 약 97%는 그대로입니다.
+[검토 기록](quality-checklist-reassessment-2026-10-02.md)을 참고하세요.
+
 2026-10-02 `ArtifactViewer` 로컬 후보: revision 선택·Markdown 표시·
 원문·직전 revision 비교를 구현했습니다. typecheck·build·UI
 테스트 199/199와 로컬 Chromium 핵심 흐름, 390px 가로 넘침·console
-error 0건을 확인했습니다. provenance 고지 pin·snapshot·
-소비자 설치·PR·공개 검증은 남았습니다. 공개 128개 component·
-130개 item·53개 snapshot, 로컬 129개·131개이며 goal 추정은
+error 0건을 확인했습니다. 고지 pin과 54번째 snapshot, 로컬
+대표 소비자 설치·typecheck·build와 현재 빌드의
+`registry:release-check`를 확인했습니다. PR·공개 검증은 남았습니다.
+공개 128개 component·
+130개 item·53개 snapshot, 로컬 129개·131개·54개이며 goal 추정은
 약 97%입니다. [작업 기록](artifact-viewer-2026-10-02.md)을 보세요.
 
 2026-10-02 공개 검증 기록 PR #99를 `0e3ba12`로 병합했습니다.

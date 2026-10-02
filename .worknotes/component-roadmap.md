@@ -91,7 +91,7 @@ diff 공백 검사를 확인합니다.
 | 새 focus 이동·pointer 좌표·browser API·핵심 반응형 배치 | 해당 브라우저 흐름 실행. 기존 component에서 물려받은 동작은 재검사하지 않음 |
 | 색상·배치 변경 | 영향을 받는 상태·폭·theme의 preview 확인 |
 | 설치 형식·target·의존 경로 변경 | 별도 소비자 설치·typecheck·build. 공개 URL 경로도 바뀌면 그 URL에서 설치 |
-| registry 내용 공개 | 릴리스 묶음당 snapshot 검사와 공개 manifest·변경 item URL 확인 |
+| registry 내용 공개 | 릴리스 묶음당 snapshot 검사와 공개 manifest·의존 경로별 대표 변경 item URL 확인 |
 
 CI 결과는 같은 commit에 대해 재사용하고, 로컬에서 실행한 흐름을
 공개 사이트에서 다시 조작하지 않습니다. 표준 registry 경로의 새
@@ -108,7 +108,9 @@ provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
 
 서로 독립적인 component도 검토 가능한 범위에서 한 릴리스로 묶을 수
 있습니다. component마다 별도 PR이나 불변 snapshot을 만들 필요는
-없습니다. 공개 manifest와 변경 item URL은 릴리스 묶음당 확인합니다.
+없습니다. 공개 manifest와 의존 경로별 대표 변경 item URL은 릴리스
+묶음당 확인합니다. 자동 검사가 item 전체의 내용을 대조한 경우 공개
+URL을 사람이 하나씩 열지 않습니다.
 묶음 크기를 맞추려고 완성된 component의 공개를 지연하거나 후보를
 추가하지 않습니다.
 
