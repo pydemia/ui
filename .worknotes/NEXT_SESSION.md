@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 `FormWizard` 공개 확인: PR #103을 `e921800e8`로
+병합했고 PR·`main` Verify UI, Pages, Vercel production이
+성공했습니다. 공개 item·57번째 snapshot manifest·item·사이트
+JS asset이 로컬과 일치합니다. 공개 130개 component·132개 item·
+57개 snapshot, goal 추정 약 97%입니다. 공개 뒤 기록은 별도
+문서 commit에 두었으므로 다음 제품 변경에서 포함하세요.
+[작업 기록](form-wizard-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 체크리스트를 다시 검토했습니다. 현행 필수
 증거는 변경분 중심이며, 과도한 비용은 snapshot 전체 복제와
 출처 고지 hash의 전파에서 발생합니다. README의 매 릴리스 별도
