@@ -34,5 +34,10 @@ design-contract에 이 조합 규칙을 추가했습니다. 이는 컴포넌트�
 장기 URL 보존은 이번 검사의 범위에 포함하지 않았습니다.
 
 새 component·registry item·snapshot은 없습니다. Goal 관리용 추정은
-약 98%로 유지합니다. 문서 변경의 CI·공개 반영은 아직 확인하지
-않았습니다.
+약 98%로 유지합니다. PR #113을 `main`에 squash 병합했습니다
+(`6c049aa9`). PR Verify UI run `37074532215`, `main` Verify UI run
+`37074783774`, Pages run `37074783088`이 성공했습니다. Vercel의
+`main` commit status는 `Deployment rate limited — retry in 24 hours`로
+실패했습니다. 따라서 catalog 설명은 저장소와 Pages에는 반영됐지만
+`ui.pydemia.ai`의 새 JS 배포는 공개 대기입니다. 기존 component JSON과
+65번째 snapshot의 공급 상태가 실패했다는 뜻은 아닙니다.

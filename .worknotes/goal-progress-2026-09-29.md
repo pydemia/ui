@@ -1,5 +1,11 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 PR #113 병합·문서 공개 대기: **약 98% → 약 98%**입니다.
+공개 registry 소비자 검증은 완료됐고 PR·`main` CI와 Pages도
+통과했습니다. Vercel 배포 횟수 제한으로 새 catalog 설명은 production에
+아직 반영되지 않았습니다. [검사 기록](public-composite-consumer-2026-10-03.md)에
+상태와 근거를 남겼습니다.
+
 2026-10-03 공개 registry 조합 소비자 검사: **약 98% → 약 98%**입니다.
 13개 공개 item의 새 소비자 설치·typecheck·build와 분석·탐색·게시판·
 대댓글의 브라우저 조합을 확인했습니다. 새 component 수는 없으며
