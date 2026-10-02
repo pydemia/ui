@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 NodeCanvas 공개 확인: **약 96% → 약 97%**입니다.
+PR #80과 병합 commit `772d988`의 CI·Pages, Vercel production,
+공개 preview·Usage와 현재 item·44번째 snapshot URL을
+확인했습니다. 공개 123개 component·125개 item·44개 snapshot입니다.
+노드·연결의 위치 편집과 끌기 외 키보드·좌표 조작이라는 독립
+workflow 사용처가 공급된 점을 반영했습니다. RichTextEditor와
+복합 화면의 소비자 적용·보조기술 검증은 남아 있습니다.
+[작업 기록](node-canvas-2026-10-02.md)을 참고하세요.
+
 2026-10-02 Terminal 공개 확인: **약 96% → 약 96%**입니다.
 PR #78과 병합 commit `c3f5269`의 CI·Pages, Vercel production,
 공개 preview·Usage와 현재 item·43번째 snapshot URL을
