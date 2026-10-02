@@ -2,6 +2,7 @@ name: Verify UI
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
   push:
     branches: [main]
 
@@ -23,6 +24,10 @@ jobs:
       - run: npm run typecheck
       - run: npm run test -w @pydemia/ui
       - run: npm run build
-      - run: npm run registry:release-check
+      - name: Verify registry and published snapshots
+        run: npm run registry:check
+      - name: Verify current release candidate
+        if: ${{ github.event_name == 'push' || !github.event.pull_request.draft }}
+        run: node scripts/registry-release.mjs verify-current
       - run: git diff --exit-code -- docs
       - run: test -z "$(git ls-files --others --exclude-standard -- docs)"

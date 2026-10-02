@@ -355,34 +355,12 @@ label을 가진 control, 새 trigger 기반 선택기의 label 소유자와
 파일 묶음에서는 `Dropzone`의 선택·거부와 전송의 진행·실패·취소·
 재시도 발표가 서로 모순되지 않도록 상태 소유와 우선순위를 정합니다.
 
-1. 실제 소비자 화면의 반복 용례를 확인합니다. 후보마다 새 component,
-   기존 API 확장, 설치 가능한 조합 예시, 보류 중 하나를 근거와 함께
-   기록합니다. 별도 이름이 주는 편의와 유지 비용을 비교합니다.
-2. 외부 component 코드를 복사·수정한다면 공식 문서, **동일
-   revision**의 upstream 소스와 LICENSE, 직접·전이 의존성을
-   확인합니다. 원본 구현은 참고한 자료와 기존 의존 component의
-   출처를 기록합니다. 디자인 참고와 코드 도입을 구분합니다.
-3. 해당 component에 적용되는 값·상태·오류·이벤트, 빈 결과,
-   disabled, locale·RTL, focus·keyboard 규칙을 짧은 명세로 정합니다.
-   적용되지 않는 상태나 환경은 억지로 추가하지 않습니다.
-4. 공통 token으로 구현하고 공개 경로별 export·registry·provenance·
-   notice를 동기화합니다. 문서에 실제 component를 사용한 preview,
-   상태 예시, 사용 코드와 설치 명령을 제공합니다.
-5. 공개할 commit에서 typecheck·관련 테스트·build와
-   `registry:release-check`를 확인합니다. CI의 동일 commit 결과를
-   재사용할 수 있습니다. 상호작용 변경은 영향받은 대표 흐름을
-   자동 테스트나 브라우저에서 실제로 실행합니다. 새 focus 이동,
-   pointer 좌표·browser API·핵심 반응형 배치는 해당 환경에서
-   확인합니다. 표시 변경은 변경한 상태를 확인하고, theme·좁은
-   화면은 사용성에 영향을 받을 때 검사합니다.
-6. 설치 형식·target·의존 경로가 새로우면 별도 소비자에 CLI로 설치해
-   typecheck·build합니다. 표준 경로의 item에는 이를 반복하지 않고,
-   미실행한 개별 설치는 미검증으로 적습니다. registry 내용이 바뀐
-   릴리스 묶음은 snapshot과 공개 manifest·변경 item URL을 한 번
-   확인합니다. 직전 소비자의 갱신·충돌·복구와 rollback 뒤 URL
-   보존은 라이브러리 전체의 품질 작업으로 추적합니다. 독립 사용처와
-   동작·문서·해당 변경의 검사를 갖추고 확인된 주요 결함이 없으면
-   ready-made로 표시합니다.
+릴리스 판정은 위 [공급과 품질의 판정 단위](#공급과-품질의-판정-단위)를
+적용합니다. Draft PR에서는 registry 정합성과 이미 공개한 snapshot을
+검사합니다. Review 준비를 마친 PR과 `main`에서는 현재 빌드와 일치하는
+불변 snapshot까지 확인합니다. 이때까지 새 snapshot을 만들지 않아도
+초안의 CI 결과를 볼 수 있습니다. 소비자 갱신·충돌·복구와 rollback
+뒤 URL 보존은 라이브러리 전체의 별도 품질 작업으로 추적합니다.
 
 `DataTable`은 단순 `Table`과 다르게 상태 소유가 핵심입니다. headless
 엔진을 채택할 경우 버전의 실제 API와 license를 확인하고 기본 제공 범위
