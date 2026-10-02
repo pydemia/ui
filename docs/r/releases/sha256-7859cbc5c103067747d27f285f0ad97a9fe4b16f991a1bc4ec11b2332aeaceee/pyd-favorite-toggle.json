@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-favorite-toggle",
+  "title": "Favorite Toggle",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-7859cbc5c103067747d27f285f0ad97a9fe4b16f991a1bc4ec11b2332aeaceee/pyd-toggle.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-7859cbc5c103067747d27f285f0ad97a9fe4b16f991a1bc4ec11b2332aeaceee/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/favorite-toggle.tsx",
+      "content": "import { Star } from \"lucide-react\";\nimport { useId, type ComponentProps } from \"react\";\nimport { Toggle } from \"./toggle\";\nimport { cn } from \"./utils\";\n\ntype FavoriteToggleProps = Omit<\n    ComponentProps<typeof Toggle>, \"children\" | \"aria-label\"\n> & {\n    label?: string;\n    count?: number;\n};\n\nfunction FavoriteToggle({\n    label = \"즐겨찾기\", count, className, ...props\n}: FavoriteToggleProps) {\n    const countId = useId();\n    if (!label.trim()) throw new Error(\"FavoriteToggle requires a label.\");\n    if (count !== undefined &&\n        (!Number.isSafeInteger(count) || count < 0)) {\n        throw new RangeError(\"FavoriteToggle count must be a nonnegative integer.\");\n    }\n\n    return (\n        <Toggle aria-label={label}\n            aria-describedby={count !== undefined ? countId : undefined}\n            className={cn(\n                \"gap-2 data-[state=on]:[&_svg]:fill-current\",\n                className,\n            )}\n            {...props}>\n            <Star aria-hidden=\"true\" className=\"size-4\" />\n            {count !== undefined && <span id={countId}>{count}명 선택</span>}\n        </Toggle>\n    );\n}\n\nexport { FavoriteToggle };\nexport type { FavoriteToggleProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/favorite-toggle.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

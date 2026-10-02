@@ -1,12 +1,25 @@
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
 
-function AppShell({ className, ...props }: ComponentProps<"div">) {
+type AppShellProps = ComponentProps<"div"> & {
+    appearance?: "framed" | "canvas";
+};
+
+function AppShell({
+    appearance = "framed", className, ...props
+}: AppShellProps) {
+    if (!["framed", "canvas"].includes(appearance)) {
+        throw new RangeError("AppShell appearance is not supported.");
+    }
+
     return (
         <div
+            data-appearance={appearance}
             className={cn(
                 "@container relative flex min-h-0 w-full flex-col overflow-hidden " +
-                "rounded-sm border border-border bg-background text-foreground",
+                "bg-background text-foreground",
+                appearance === "framed" && "rounded-sm border border-border",
+                appearance === "canvas" && "rounded-none border-0",
                 className,
             )}
             {...props}
@@ -115,23 +128,32 @@ function AppFloatingPanel({
 
 type AppFloatingBubbleProps = ComponentProps<"button"> & {
     "aria-label": string;
+    appearance?: "circle" | "pill";
     side?: "left" | "right";
 };
 
 function AppFloatingBubble({
+    appearance = "circle",
     side = "right",
     type = "button",
     className,
     ...props
 }: AppFloatingBubbleProps) {
+    if (!["circle", "pill"].includes(appearance)) {
+        throw new RangeError("AppFloatingBubble appearance is not supported.");
+    }
+
     return (
         <button
             type={type}
+            data-appearance={appearance}
             className={cn(
-                "absolute bottom-[var(--space-4)] z-10 grid size-10 " +
+                "absolute bottom-[var(--space-4)] z-10 grid h-10 " +
                 "place-items-center rounded-full border border-border " +
                 "bg-accent text-accent-foreground " +
                 "shadow-[var(--shadow-float)]",
+                appearance === "circle" && "w-10",
+                appearance === "pill" && "min-w-10 px-4",
                 side === "left" ? "left-[var(--space-4)]" : "right-[var(--space-4)]",
                 className,
             )}
@@ -145,6 +167,6 @@ export {
     AppFloatingPanel, AppFloatingBubble,
 };
 export type {
-    AppMainProps, AppSidebarProps, AppFloatingPanelProps,
+    AppShellProps, AppMainProps, AppSidebarProps, AppFloatingPanelProps,
     AppFloatingBubbleProps,
 };

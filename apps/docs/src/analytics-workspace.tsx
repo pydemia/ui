@@ -125,7 +125,7 @@ function AnalyticsWorkspace() {
     }
 
     return (
-        <AppShell className="min-h-[42rem] rounded-none border-0">
+        <AppShell appearance="canvas" className="min-h-[42rem]">
             <AppHeader className="flex-wrap justify-between py-2">
                 <strong className="text-sm">pydemia / operations</strong>
                 <GlobalNav aria-label="작업 공간 전역 탐색">

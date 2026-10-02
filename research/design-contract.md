@@ -1,5 +1,22 @@
 # Prototype 설계 계약
 
+## 2026-10-02 AppShell 표시 형태
+
+`AppShell.appearance`의 기본값 `framed`는 기존 border·radius를
+유지합니다. `canvas`는 외부 border·radius 없이 전체 작업 화면을
+채웁니다. header·좌우 sidebar·main·bottom·floating 영역의 DOM과
+반응형 배치는 두 형태에서 같습니다.
+
+`AppFloatingBubble.appearance`의 기본값 `circle`은 기존 40px 원형
+버튼입니다. `pill`은 같은 높이에 텍스트가 들어갈 수 있는 너비와
+수평 여백을 제공합니다. 두 형태 모두 이름 있는 native button이며
+`side`에 따른 배치, `aria-expanded`·`aria-controls` 연결과 열림 상태는
+호출자가 관리합니다. `AppFloatingPanel.side`는 bubble과 같은 값을
+전달합니다. 닫기·Escape 후 focus 복귀도 호출자가 구현합니다.
+Floating UI는 내용을 덮는 영역이므로 bottom panel에 상태 문구를
+함께 놓으면 해당 쪽 여백을 확보합니다. 문서 preview는 bubble의
+좌우 위치에 맞춰 bottom panel의 여백을 바꿉니다.
+
 ## 2026-10-02 Empty·Skeleton 표시 형태
 
 `Empty.appearance`는 `dashed`(기본값), `panel`, `plain` 중 하나입니다.
