@@ -30,8 +30,8 @@
   [작업 기록](component-diff-viewer-2026-10-01.md)에 남깁니다.
 
 `AgentStatus`는 2026-10-02에 여러 도구·단계의 전체 작업 상태,
-처리한 단계 수와 취소·재시도를 `ToolCall`과 분리해 로컬에
-구현했습니다. 검증 범위는
+처리한 단계 수와 취소·재시도를 `ToolCall`과 분리해
+공개했습니다. 검증 범위는
 [작업 기록](agent-status-2026-10-02.md)에 남깁니다. `CalendarScheduler`,
 `ImageCropper`, `RichTextEditor`는 각각 일정 편집, 이미지 후처리, 서식
 문서 작성이라는 실제 제품 용례와 유지 비용이 확인되기 전에는 보류합니다.

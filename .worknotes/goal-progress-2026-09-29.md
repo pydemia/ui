@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 AgentStatus 공개 확인: **약 90% → 약 91%**입니다.
+PR #62와 병합 commit `3411490`의 Verify UI·Pages, Vercel
+production이 성공했습니다. 공개 preview·Usage, 현재 registry item,
+36번째 snapshot manifest/item URL을 확인했습니다. 공개 116개
+component·118개 item·36개 snapshot입니다.
+[작업 기록](agent-status-2026-10-02.md)을 참고하세요.
+
 2026-10-02 AgentStatus 로컬 구현·검증: **약 90% → 약 90%**입니다.
 전체 AI 작업과 단계별 상태·진행, 취소·재시도를 원본 component로
 구현하고 typecheck·UI 테스트 156/156·build·로컬 Chromium

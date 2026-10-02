@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 AgentStatus 공개 확인
+
+PR #62 Verify UI run 36945827683과 병합 commit `3411490`의
+Verify UI·Pages 검사가 통과했습니다. Vercel production
+`dpl_2WBqXSqkrp9Yw2xuY8uU7Ejmtj4v`는 READY입니다. 공개
+AgentStatus preview·Usage와 console error 0건을 확인했습니다.
+현재 registry manifest/item과 36번째 snapshot manifest/item URL은
+각각 HTTP 200이며 snapshot에는 118개 item이 있습니다. 공개
+component는 116개입니다. 실제 backend 취소·재시도, screen reader·
+touch·Safari·RTL, 개별 소비자 설치와 rollback 뒤 URL 보존은
+미검증입니다.
+
 ## 2026-10-02 AgentStatus 로컬 검증
 
 `npm run typecheck`, UI 테스트 156/156과 `npm run build`가
