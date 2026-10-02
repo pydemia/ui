@@ -7,6 +7,7 @@ PR과 push 모두 변경 전 commit에서 현재 checkout까지의 경로를
 `CHANGELOG.md`, `NEXT_SESSION.md`만 바뀌면 diff 공백 검사만
 실행합니다. 코드, workflow, 생성된 `docs/`, registry 등은 기존 전체
 typecheck·테스트·build·registry·현재 snapshot 검사를 유지합니다.
+rename은 이전 경로의 삭제와 새 경로의 추가로 보아 둘 다 분류합니다.
 기준 commit이 없거나 diff를 구할 수 없으면 전체 검사로 처리합니다.
 
 GitHub의 [push payload](https://docs.github.com/en/webhooks/webhook-events-and-payloads#push)
@@ -23,6 +24,9 @@ PR은 base commit을 사용합니다. 기준 commit을 fetch할 수 없는
 - 생성된 docs 파일을 포함한 `origin/main^`부터 현재 HEAD까지는
   `full=true`가 나왔습니다.
 - push 기준 SHA가 40개 0이면 `full=true`가 나왔습니다.
+- PR 자동 리뷰가 지적한 source→Markdown rename은 임시 Git tree에서
+  기본 diff가 `R100`으로 새 경로만 보고하고, `--no-renames`는
+  이전 source와 새 Markdown 경로를 모두 보고함을 확인했습니다.
 - `git diff --check`가 통과했습니다.
 
 PR·`main`의 실제 Actions 실행은 아직 확인하지 않았습니다.
