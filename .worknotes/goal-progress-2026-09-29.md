@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 BlockEditor 공개 확인: **약 97% → 약 97%**입니다.
+PR #98과 병합 `d7aba59`의 Verify UI·Pages, Vercel production,
+공개 preview·Usage, 현재 item·53번째 snapshot의 byte 일치와
+대표 소비자 설치·typecheck·build를 확인했습니다. 공개 128개
+component·130개 item·53개 snapshot입니다. 인라인 서식과 구조
+undo를 제공하는 RichTextEditor 후보는 남아 있습니다.
+[작업 기록](block-editor-2026-10-02.md)을 참고하세요.
+
 2026-10-02 BlockEditor 로컬 후보: **약 97% → 약 97%**입니다.
 구조화 문서의 블록 편집·순서 변경·JSON 제출과 읽기 전용 렌더링을
 추가했습니다. typecheck·UI 테스트 196/196·build·registry:release-check,

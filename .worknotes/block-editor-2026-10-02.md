@@ -47,3 +47,20 @@ reader 발표와 구조 변경의 undo도 검증 범위가 아닙니다. 공개 
 127개 component·129개 item·52개 snapshot이며 로컬 후보는
 128개 component·130개 item·53개 snapshot입니다. Goal 관리용 추정은
 약 97%로 유지합니다.
+
+## 공개 확인
+
+PR #98의 Verify UI run `37009912447`과 병합 commit `d7aba59`의
+Verify UI run `37010268815`·Pages run `37010267603`이 성공했습니다.
+Vercel production 배포도 완료됐습니다. `ui.pydemia.ai`에서
+BlockEditor preview·Usage가 표시되고 console error는 0건입니다.
+공개 현재 item과 53번째 snapshot manifest·변경 item URL은 HTTP
+200이며 저장소 게시 파일과 byte 단위로 일치합니다. Manifest에는
+130개 item이 있습니다. 공개 snapshot의 BlockEditor·token을 기존
+격리 Vite 소비자에 CLI로 설치했고 typecheck·build가 통과했습니다.
+고지 파일에는 source commit과 SHA-256이 전달됐습니다.
+
+공개 수량은 128개 component·130개 item·53개 snapshot입니다.
+로컬에서 확인한 편집 동작은 공개 사이트에서 반복하지 않았습니다.
+실제 screen reader·touch·Safari·RTL은 미검증이며 해당 지원을
+주장하지 않습니다. Goal 관리용 추정은 약 97%입니다.
