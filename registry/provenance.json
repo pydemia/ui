@@ -532,6 +532,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named chart and task list, native date-change buttons, dependency names and live change announcement", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-node-canvas", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WCAG 2.2", "url": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements", "scope": "single-pointer alternative to dragging; no source copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named scrollable canvas, selectable node buttons, labeled coordinate inputs and connection list", "keyboard": "Chromium: arrow-key move, zoom, pointer drag, coordinate and connection controls, 390px dark verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-log-console", "category": "Developer tools", "profiles": ["developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named log with text levels; live announcements disabled by default", "keyboard": "pending browser check", "screen_reader": "pending manual review" }

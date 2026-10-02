@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-breadcrumb",
+  "title": "Breadcrumb",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-2ef4e9d48b58fbb25c5d3bf24236b693aa69d07d9f3b7f1dcfd69ec805958be3/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/breadcrumb.tsx",
+      "content": "import { ChevronRight, MoreHorizontal } from \"lucide-react\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Breadcrumb({ className, ...props }: ComponentProps<\"nav\">) {\n    return <nav aria-label=\"breadcrumb\" className={cn(\"text-sm\", className)} {...props} />;\n}\n\nfunction BreadcrumbList({ className, ...props }: ComponentProps<\"ol\">) {\n    return (\n        <ol\n            className={cn(\"flex flex-wrap items-center gap-2\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction BreadcrumbItem({ className, ...props }: ComponentProps<\"li\">) {\n    return <li className={cn(\"inline-flex items-center\", className)} {...props} />;\n}\n\nfunction BreadcrumbLink({ className, ...props }: ComponentProps<\"a\">) {\n    return (\n        <a\n            className={cn(\"text-muted underline-offset-4 hover:underline\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction BreadcrumbPage({ className, ...props }: ComponentProps<\"span\">) {\n    return (\n        <span\n            aria-current=\"page\"\n            className={cn(\"font-medium text-foreground\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction BreadcrumbSeparator({\n    className,\n    children,\n    ...props\n}: ComponentProps<\"li\">) {\n    return (\n        <li\n            role=\"presentation\"\n            aria-hidden=\"true\"\n            className={cn(\"text-muted [&_svg]:size-4\", className)}\n            {...props}\n        >\n            {children ?? <ChevronRight className=\"rtl:rotate-180\" />}\n        </li>\n    );\n}\n\nfunction BreadcrumbEllipsis({ className, ...props }: ComponentProps<\"span\">) {\n    return (\n        <span\n            aria-hidden=\"true\"\n            className={cn(\"inline-flex text-muted\", className)}\n            {...props}\n        >\n            <MoreHorizontal className=\"size-4\" />\n        </span>\n    );\n}\n\nexport {\n    Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink,\n    BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis,\n};\n",
+      "type": "registry:ui",
+      "target": "@ui/breadcrumb.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `96ab61bb51d4af01c8f6249fdf26cca65de29ad6`:\n<https://github.com/pydemia/ui/blob/96ab61bb51d4af01c8f6249fdf26cca65de29ad6/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`c7f42caf959e44b39e4855a32c28c63fd79b54cbafb5f7782748e4d8f2f8a32f`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

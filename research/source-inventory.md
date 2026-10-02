@@ -1598,3 +1598,20 @@ keyboard 동작, 결과와 오류의 표시를 Chromium에서 확인했습니다
 로컬 Chromium에서 native Enter 제출과 위·아래 방향키 이력,
 390px dark 화면을 확인했습니다. 빠른 출력의 실제 보조기술 발표는
 확인하지 않았습니다.
+
+## 2026-10-02 NodeCanvas
+
+`NodeCanvas`는 pydemia/ui 원본 React·Tailwind 구현입니다. 외부
+component 소스를 복사하지 않았습니다. 새 npm 의존성은 없으며
+기존 `pyd-button`·`pyd-utils`만 registry 의존성으로 사용합니다.
+`pyd-button`의 공식 문서, 고정 source·같은 revision의 MIT LICENSE,
+`class-variance-authority@0.7.1` 의존성은 위 Terminal 조사와
+동일한 item을 재사용합니다.
+
+[W3C WCAG 2.2의 dragging movements 해설](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements)은
+끌기 외에 단일 pointer 조작 수단도 필요하다고 설명합니다.
+노드 이동은 pointer 끌기와 함께 X·Y native 숫자 입력·적용 버튼,
+키보드 방향키를 제공합니다. 연결은 native select와 버튼으로
+추가하고 목록의 버튼으로 제거합니다. 이 자료의 예제 코드는
+복사하지 않았습니다. Chromium에서 조작을 확인했지만 실제
+screen reader 발표와 touch·Safari·RTL은 검사하지 않았습니다.

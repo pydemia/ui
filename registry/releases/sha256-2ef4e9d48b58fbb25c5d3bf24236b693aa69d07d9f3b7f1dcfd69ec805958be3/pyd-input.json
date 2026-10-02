@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-input",
+  "title": "Input",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-2ef4e9d48b58fbb25c5d3bf24236b693aa69d07d9f3b7f1dcfd69ec805958be3/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/input.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Input({ className, type = \"text\", ...props }: ComponentProps<\"input\">) {\n    return (\n        <input\n            type={type}\n            className={cn(\n                \"h-[var(--control-height)] w-full min-w-0 rounded-sm border \" +\n                \"border-border bg-surface px-[var(--space-3)] text-sm text-foreground \" +\n                \"placeholder:text-muted disabled:cursor-not-allowed \" +\n                \"disabled:opacity-50 aria-invalid:border-danger\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Input };\n",
+      "type": "registry:ui",
+      "target": "@ui/input.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `96ab61bb51d4af01c8f6249fdf26cca65de29ad6`:\n<https://github.com/pydemia/ui/blob/96ab61bb51d4af01c8f6249fdf26cca65de29ad6/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`c7f42caf959e44b39e4855a32c28c63fd79b54cbafb5f7782748e4d8f2f8a32f`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

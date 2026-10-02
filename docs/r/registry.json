@@ -614,6 +614,11 @@
       "files": [{ "path": "packages/ui/src/components/gantt.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-node-canvas", "type": "registry:ui", "title": "Node Canvas",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/node-canvas.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-log-console", "type": "registry:ui", "title": "Log Console",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/log-console.tsx", "type": "registry:ui" }]

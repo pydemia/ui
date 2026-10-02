@@ -1,5 +1,32 @@
 # 검증 기록
 
+## 2026-10-02 NodeCanvas — 로컬 초안
+
+`npm run typecheck`, 전체 UI 테스트 177/177, `npm run build`가
+통과했습니다. 최종 연결 중복 방지·빈 상태 보강 뒤 targeted
+`node-canvas.test.mjs` 3/3과 typecheck·build를 다시 실행했습니다.
+새 테스트는 입력 그래프 거부, 이름 있는 작업 영역·연결 텍스트,
+키보드·좌표·연결 변경 callback을 확인합니다.
+
+로컬 Chromium에서 preview·Usage, 방향키 10px 이동, 125% 확대
+뒤 pointer 이동, 390px dark 배치를 확인했습니다. pointer 이동
+뒤 상태 문구가 선택 문구로 덮이는 문제를 수정하고 X 72→102,
+Y 28→58 이동과 최종 안내를 다시 확인했습니다. 브라우저 오류는
+없었습니다. axe-core의 `NodeCanvas` 범위 검사에서 위반 0건,
+축소 기호의 색 대비 자동 판정 보류 1건입니다. 실제 screen
+reader·touch·Safari·RTL은 검사하지 않았습니다.
+
+로컬 123개 component·125개 registry item입니다. source commit
+`96ab61b`의 provenance hash를 고지에 고정한 뒤
+`registry:check`가 125개 item·123개 export/catalog와 기존
+43개 snapshot을 확인했습니다. 44번째 snapshot
+`sha256-2ef4e9d48b58fbb25c5d3bf24236b693aa69d07d9f3b7f1dcfd69ec805958be3`를
+만들고 재빌드 뒤 `registry:release-check`에서 현재 빌드와
+일치시켰습니다. PR CI·공개 URL은 미검증입니다.
+현재 공개 기준은 122개 component·
+124개 item·43개 snapshot, goal 관리용 추정 약 96%입니다.
+[작업 기록](../.worknotes/node-canvas-2026-10-02.md)을 참고하세요.
+
 ## 2026-10-02 Terminal — 공개
 
 PR #78의 Verify UI run `36969232546`과 병합 commit `c3f5269`의
