@@ -24,12 +24,16 @@
   본문 전체의 페이지 가로 overflow는 보이지 않았고 값 표에는
   의도한 내부 가로 스크롤이 있습니다.
 - `git diff --check` 통과.
+- 출처 고지를 원본 commit `e15783d5146d20486e8319f4fee8ef6a8ce3b011`에
+  고정한 뒤 `registry:check`가 138개 item·136개 export/catalog와
+  기존 65개 snapshot을 확인했습니다. 66번째 snapshot
+  `sha256-b3c820bc3e43f9c5dbf6e0cb1aac8f746bd80d42c39681b6335b7563dbd7c4e6`
+  생성 후 `registry:release-check`가 현재 빌드와의 일치를 확인했습니다.
 
 첫 `registry:check`는 provenance를 바꾼 뒤 공통 MIT 고지의 SHA-256이
-이전 값인 상태라 실패했습니다. 원본 commit을 고지에 고정하고
-재생성한 뒤 다시 검사해야 합니다. 공개 후보 CI, snapshot 검사,
-production item URL은 아직 확인하지 않았습니다. 이 상태는
-구현 검토이며 공개 공급으로 계산하지 않습니다.
+이전 값인 상태라 실패했습니다. 위 pin과 재생성으로 해결했습니다.
+공개 후보 CI와 production item URL은 아직 확인하지 않았습니다.
+따라서 현재 상태는 공개 준비이며 공개 공급으로 계산하지 않습니다.
 
 Goal 관리용 추정은 약 98%입니다. 현행 공급·품질 적용 판단은
 [재검토 기록](quality-checklist-decision-2026-10-03.md)을 따릅니다.

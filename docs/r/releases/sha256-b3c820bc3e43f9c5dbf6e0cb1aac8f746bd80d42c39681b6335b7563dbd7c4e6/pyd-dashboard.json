@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-dashboard",
+  "title": "Dashboard Layout",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-b3c820bc3e43f9c5dbf6e0cb1aac8f746bd80d42c39681b6335b7563dbd7c4e6/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/dashboard.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Dashboard({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\"@container grid min-w-0 gap-[var(--space-6)]\", className)}\n            {...props}\n        />\n    );\n}\n\ntype DashboardSectionProps = ComponentProps<\"section\"> & {\n    \"aria-label\": string;\n};\n\ntype DashboardMetricsProps = DashboardSectionProps & {\n    columns?: 2 | 3 | 4;\n};\n\nconst metricColumns = {\n    2: \"@3xl:grid-cols-2\",\n    3: \"@3xl:grid-cols-3\",\n    4: \"@3xl:grid-cols-4\",\n} as const;\n\nfunction DashboardMetrics({\n    columns = 4, className, ...props\n}: DashboardMetricsProps) {\n    if (!Object.hasOwn(metricColumns, columns)) {\n        throw new RangeError(\"DashboardMetrics columns is not supported.\");\n    }\n\n    return (\n        <section\n            data-columns={columns}\n            className={cn(\n                \"grid min-w-0 grid-cols-1 gap-[var(--space-4)] \" +\n                \"@sm:grid-cols-2\",\n                metricColumns[columns],\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\ntype DashboardPanelsProps = DashboardSectionProps & {\n    layout?: \"balanced\" | \"primary\";\n};\n\nconst panelLayouts = {\n    balanced: \"@3xl:grid-cols-2\",\n    primary: \"@3xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]\",\n} as const;\n\nfunction DashboardPanels({\n    layout = \"balanced\", className, ...props\n}: DashboardPanelsProps) {\n    if (!Object.hasOwn(panelLayouts, layout)) {\n        throw new RangeError(\"DashboardPanels layout is not supported.\");\n    }\n\n    return (\n        <section\n            data-layout={layout}\n            className={cn(\n                \"grid min-w-0 grid-cols-1 items-start \" +\n                \"gap-[var(--space-4)]\",\n                panelLayouts[layout],\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Dashboard, DashboardMetrics, DashboardPanels };\nexport type {\n    DashboardSectionProps, DashboardMetricsProps, DashboardPanelsProps,\n};\n",
+      "type": "registry:ui",
+      "target": "@ui/dashboard.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

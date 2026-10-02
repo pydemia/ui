@@ -1,5 +1,11 @@
 # Component 확장 작업 인계
 
+2026-10-03 `BoxPlotChart` 공개 준비: 원본 component, catalog와
+registry를 추가하고 로컬 preview·typecheck·대상 테스트·build·
+`registry:release-check`를 확인했습니다. 66번째 snapshot을 생성했으며
+공개 CI와 production URL은 남았습니다. [작업 기록](box-plot-chart-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 공급·품질 체크리스트 적용 재검토: 구현 검토·공개 준비·
 공개 확인의 증거를 분리했습니다. 이미 확인된 문서 전용 `main` CI
 개선을 남은 비용에서 제외하고, provenance hash 전파와 snapshot 전체
