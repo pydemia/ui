@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-02 Review workspace — 공개
+
+PR #90의 Verify UI run `36987986397`, 병합 commit `024038e`의
+Verify UI run `36988253094`와 Pages run `36988252836`이
+성공했습니다. Vercel production
+`dpl_A6pMNJH2Dpt7QwGhouodLkM5gRiL`은 READY입니다. 공개
+사이트에서 Review workspace preview·설치 명령과 console error
+0건을 확인했습니다. 현재 registry item·token, 48번째 snapshot
+manifest의 표본 URL은 HTTP 200입니다. 새 component·item은 없어
+125개·127개·48개 snapshot과 goal 추정 약 97%를 유지합니다.
+[작업 기록](../.worknotes/review-workspace-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 Review workspace — 로컬 예시
 
 기존 `MasterDetail`·`DiffViewer`·`Thread`·`ApprovalCard`를 연결한
