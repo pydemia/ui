@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-02 DataChart 포인터 요약 — 로컬
+
+`hoverSummary`를 켠 단일 계열의 결측값, 다중 계열 누적 영역의
+8+4=12·19+5=24와 결측 합계, 범례 숨김 뒤 7건 합계를 Chromium에서
+확인했습니다. native 선택기 값 변경·Escape 닫기·pointer leave·
+390px 가로 스크롤에서 패널 경계·dark 표시를 확인했고 console
+error는 0건입니다. `npm run typecheck`, DataChart 테스트 12/12,
+`npm run build`, `npm run registry:release-check`가 통과했습니다.
+50번째 snapshot의 127개 item이 현재 build와 일치합니다. PR CI·
+공개 배포·공개 URL, 실제 screen reader·touch·Safari·RTL은 아직
+검증하지 않았습니다.
+[작업 기록](../.worknotes/data-chart-hover-summary-2026-10-02.md)에
+범위를 남겼습니다.
+
 ## 2026-10-02 BottomNav 표시 선택 공개 확인
 
 PR #91의 Verify UI run `36990865356`, 병합 commit `fc12a8f`의

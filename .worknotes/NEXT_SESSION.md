@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-02 DataChart 포인터 요약 로컬 검증: 기존 `DataChart`에
+`hoverSummary`를 추가하고 단일·다중 계열과 누적 영역의 현재 값을
+그래프 위에 표시했습니다. 390px 가로 스크롤 좌표를 고쳤고 native
+선택기·데이터 표는 유지합니다. typecheck·대상 테스트 12/12·build·
+`registry:release-check`와 Chromium의 결측·범례·390px dark 동작을
+확인했습니다. 50번째 snapshot은 로컬 생성 상태이며 PR·공개 확인은
+남았습니다. 공개 수량 125개 component·127개 item·49개 snapshot과
+goal 추정 약 97%는 유지합니다.
+[작업 기록](data-chart-hover-summary-2026-10-02.md)을 참고하세요.
+
 2026-10-02 BottomNav 표시 선택 공개 확인: PR #91을 병합한
 `fc12a8f`의 Verify UI·Pages와 Vercel production이 성공했습니다.
 공개 Navigation preview의 `dock` 전환·Usage, 현재 navigation item,

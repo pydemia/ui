@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-tabs",
+  "title": "Tabs",
+  "dependencies": [
+    "@radix-ui/react-tabs@1.1.21"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-e0293a75171845edf2ae2579c84a9eb7f5d67e9bd9fff725d905dcefe9f0fb0b/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/tabs.tsx",
+      "content": "import * as TabsPrimitive from \"@radix-ui/react-tabs\";\nimport { createContext, useContext, type ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Tabs = TabsPrimitive.Root;\ntype TabsVariant = \"default\" | \"line\" | \"contained\";\ntype TabsListProps = ComponentProps<typeof TabsPrimitive.List> & {\n    variant?: TabsVariant;\n};\nconst TabsVariantContext = createContext<TabsVariant>(\"default\");\n\nfunction TabsList({ className, variant = \"default\", ...props }: TabsListProps) {\n    if (variant !== \"default\" && variant !== \"line\" &&\n        variant !== \"contained\") {\n        throw new RangeError(\"TabsList variant is not supported.\");\n    }\n\n    return (\n        <TabsVariantContext.Provider value={variant}>\n            <TabsPrimitive.List\n                className={cn(\n                    \"inline-flex gap-1\",\n                    variant === \"line\" && \"border-b border-border\",\n                    variant === \"contained\" &&\n                        \"rounded-sm bg-surface-subtle p-1\",\n                    className,\n                )}\n                {...props}\n                data-variant={variant}\n            />\n        </TabsVariantContext.Provider>\n    );\n}\n\nfunction TabsTrigger({ className, ...props }: ComponentProps<typeof TabsPrimitive.Trigger>) {\n    const variant = useContext(TabsVariantContext);\n    return (\n        <TabsPrimitive.Trigger\n            className={cn(\n                \"px-3 py-1.5 text-sm text-muted hover:text-foreground \" +\n                \"data-[state=active]:font-medium\",\n                variant === \"line\"\n                    ? \"-mb-px border-b-2 border-transparent \" +\n                        \"data-[state=active]:border-accent \" +\n                        \"data-[state=active]:text-foreground\"\n                    : \"rounded-sm data-[state=active]:bg-surface \" +\n                        \"data-[state=active]:text-foreground\",\n                variant === \"contained\" &&\n                    \"data-[state=active]:shadow-sm\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nfunction TabsContent({ className, ...props }: ComponentProps<typeof TabsPrimitive.Content>) {\n    return <TabsPrimitive.Content className={cn(className)} {...props} />;\n}\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\nexport type { TabsListProps, TabsVariant };\n",
+      "type": "registry:ui",
+      "target": "@ui/tabs.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `f5becfdcd15608f32da674cb0f4463fcbbe53ec6`:\n<https://github.com/pydemia/ui/blob/f5becfdcd15608f32da674cb0f4463fcbbe53ec6/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`be1c99c3dd70d389189d9979e382cde5d142a4d60da3a33ae4f4595ee60a8315`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

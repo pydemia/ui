@@ -169,6 +169,16 @@ test("optional inspector exposes exact and missing category values", () => {
     assert.match(missingOnly, /<dt[^>]*>One<\/dt><dd[^>]*>데이터 없음<\/dd>/);
 });
 
+test("hover summary requires the keyboard-accessible inspector", () => {
+    assert.throws(() => renderChart({ hoverSummary: true }),
+        /requires inspectable/);
+    const markup = renderChart({
+        inspectable: true, hoverSummary: true,
+    });
+    assert.match(markup, /<select[^>]*>/);
+    assert.match(markup, /data-category-index="0"/);
+});
+
 test("stacked area uses complete non-negative categories and totals", () => {
     const markup = renderChart({
         variant: "stacked-area",

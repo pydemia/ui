@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 DataChart 포인터 요약 로컬 검증: **약 97% → 약 97%**입니다.
+기존 차트에서 포인터 구간 값과 누적 합계를 빠르게 확인하는 표시를
+추가했습니다. typecheck·대상 테스트·build·50번째 snapshot 검사는
+통과했고 390px Chromium에서 결측·범례·dark 배치를 확인했습니다.
+새 독립 component는 아니며 공개 전이어서 공개 125개 component·
+127개 item·49개 snapshot과 추정은 유지합니다.
+[작업 기록](data-chart-hover-summary-2026-10-02.md)을 참고하세요.
+
 2026-10-02 BottomNav 표시 형태 공개 확인: **약 97% → 약 97%**입니다.
 PR #91과 병합 commit `fc12a8f`의 CI·Pages, Vercel production,
 공개 preview·Usage와 navigation item·49번째 snapshot URL을
