@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 CI scope 기록 배포 상태: PR #96의 기록을 `f178553`으로
+병합했고 Verify UI·Pages가 성공했습니다. Vercel은 PR #95·#96의
+기록 전용 병합 commit을 24시간 배포 횟수 제한으로 거부했습니다.
+production은 PR #94의 READY deployment를 가리키며 제품 산출물은
+같습니다. 다음 제품 변경의 Vercel 배포는 다시 확인해야 합니다.
+goal 관리용 추정 약 97%입니다.
+[작업 기록](ci-scope-2026-10-02.md)을 참고하세요.
+
 2026-10-02 문서 PR 경량 검사 확인: PR #94와 병합 `75db345`에서
 전체 CI가 통과했습니다. 기록 전용 PR #95는 diff 검사만 통과하고
 npm·UI·registry 단계가 생략됐습니다. 병합 `c858cdf`의 `main`
