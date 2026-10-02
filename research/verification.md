@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-02 BottomNav 표시 선택 공개 확인
+
+PR #91의 Verify UI run `36990865356`, 병합 commit `fc12a8f`의
+Verify UI run `36991146756`과 Pages run `36991145804`가
+성공했습니다. Vercel production
+`dpl_3aeb4rBTHisaB1T1iUZCshbQj4oq`는 READY입니다. 공개
+Navigation preview에서 `dock` 전환과 Usage를 확인했고 console
+error는 0건이었습니다. 현재 navigation item, 49번째 snapshot
+manifest·navigation item URL이 HTTP 200이며 manifest는 127개
+item을 기록합니다. 실제 screen reader·touch·Safari·RTL은 실행하지
+않았습니다. [작업 기록](../.worknotes/navigation-dock-2026-10-02.md)에
+범위를 남겼습니다.
+
 ## 2026-10-02 BottomNav 표시 선택 로컬 검증
 
 `BottomNav`의 기존 `bar`와 새 `dock` 표시에서 링크 이름과

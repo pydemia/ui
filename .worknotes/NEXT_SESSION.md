@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 BottomNav 표시 선택 공개 확인: PR #91을 병합한
+`fc12a8f`의 Verify UI·Pages와 Vercel production이 성공했습니다.
+공개 Navigation preview의 `dock` 전환·Usage, 현재 navigation item,
+49번째 snapshot manifest·navigation item URL을 확인했습니다.
+공개 125개 component·127개 item·49개 snapshot이며 goal 추정은
+약 97%입니다. [작업 기록](navigation-dock-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 BottomNav 디자인 선택 초안: 기존 `pyd-navigation`의 하단
 탐색에 `bar`·`dock` 표시를 추가했습니다. 기본값은 `bar`입니다.
 typecheck·UI 테스트 185/185·build·`registry:release-check`가

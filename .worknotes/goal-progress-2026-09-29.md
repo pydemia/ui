@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 BottomNav 표시 형태 공개 확인: **약 97% → 약 97%**입니다.
+PR #91과 병합 commit `fc12a8f`의 CI·Pages, Vercel production,
+공개 preview·Usage와 navigation item·49번째 snapshot URL을
+확인했습니다. 공개 125개 component·127개 item·49개 snapshot입니다.
+기존 하단 탐색의 디자인 선택 폭이 넓어졌으나 새 독립 사용 사례나
+component 수가 늘어난 것은 아닙니다.
+[작업 기록](navigation-dock-2026-10-02.md)을 참고하세요.
+
 2026-10-02 BottomNav 표시 형태 로컬 검증: **약 97% → 약 97%**입니다.
 하단 탐색에 `dock` 표시를 추가해 기존 `bar`와 고를 수 있습니다.
 typecheck·UI 테스트 185/185·build·현재 snapshot 검사를 통과했고
