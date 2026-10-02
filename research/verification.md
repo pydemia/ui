@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-02 BlockEditor — 로컬
+
+`npm run typecheck`, UI 테스트 196/196, `npm run build`가
+통과했습니다. 대상 테스트와 Chromium에서 블록 추가·이동·형식·
+내용 변경, native 텍스트 undo, JSON form 값과 저장된 의미 구조를
+확인했습니다. 390px dark 화면은 문서 가로 넘침이 없고 console
+error는 0건이었습니다. 원본 소스의 격리 소비자 CLI 설치·typecheck·
+build를 확인했습니다. 의존 item은 직전 공개 경로에서 설치됐습니다.
+고지 pin, 130개 registry item·128개 export/catalog와 53번째
+snapshot의 `registry:release-check`가 통과했습니다. PR CI·공개
+릴리스 경로는 미검증입니다.
+[작업 기록](../.worknotes/block-editor-2026-10-02.md)을 참고하세요.
+
 ## 2026-10-02 ResultState — 공개
 
 PR #97 Verify UI run `37004809867`, 병합 commit `65e2dac`의 Verify UI

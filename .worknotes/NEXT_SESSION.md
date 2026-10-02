@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 `BlockEditor` 로컬 후보를 구현했습니다. 일곱 블록 형식의
+편집·이동·JSON 제출과 `BlockDocument`의 의미 구조 렌더링입니다.
+typecheck·UI 테스트 196/196·build, 로컬 Chromium과 격리 소비자
+CLI 설치·typecheck·build, 고지 pin 및 53번째 snapshot의
+`registry:release-check`를 확인했습니다. PR CI·공개 URL은 남았고
+공개 수량은 127개 component·129개 item·52개 snapshot입니다.
+로컬은 128개·130개·53개, goal 관리용 추정은 약 97%입니다.
+[작업 기록](block-editor-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트를 재검토했습니다. 현행 변경 위험별
 기준은 유지하되 실제로 반복한 로컬·공개 상호작용 검사, 52개
 snapshot의 전체 복제와 문서 전용 병합의 CI·배포 비용을 구분했습니다.

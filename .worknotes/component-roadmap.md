@@ -15,6 +15,8 @@ Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
 사이트에는 127개 component와 129개 registry item이 있습니다.
 `ResultState`의 공개 preview와 52번째 snapshot 경로를 확인했습니다.
+`BlockEditor`는 로컬 후보 128번째 component·130번째 item이며
+53번째 snapshot을 아직 공개하지 않았습니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,

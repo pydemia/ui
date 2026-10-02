@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-alert",
+  "title": "Alert",
+  "dependencies": [
+    "class-variance-authority@0.7.1"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-7fa2055d71c6840ab5edc0e4e347e499aff36647b781bce81e7b15d1c36f62eb/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/alert.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"./utils\";\n\nconst alertVariants = cva(\n    \"grid gap-1 rounded-sm border p-[var(--space-4)] text-sm\",\n    {\n        variants: {\n            variant: {\n                default: \"text-foreground\",\n                info: \"text-accent\",\n                success: \"text-success\",\n                warning: \"text-warning\",\n                destructive: \"text-danger\",\n            },\n            appearance: {\n                outline: \"bg-surface\",\n                soft: \"border-transparent\",\n                plain: \"border-transparent bg-transparent px-0 \" +\n                    \"py-[var(--space-2)]\",\n            },\n        },\n        compoundVariants: [\n            { variant: \"default\", appearance: \"outline\",\n                class: \"border-border\" },\n            { variant: \"info\", appearance: \"outline\",\n                class: \"border-accent\" },\n            { variant: \"success\", appearance: \"outline\",\n                class: \"border-success\" },\n            { variant: \"warning\", appearance: \"outline\",\n                class: \"border-warning\" },\n            { variant: \"destructive\", appearance: \"outline\",\n                class: \"border-danger\" },\n            { variant: \"default\", appearance: \"soft\",\n                class: \"bg-surface-subtle\" },\n            { variant: \"info\", appearance: \"soft\",\n                class: \"bg-accent/10\" },\n            { variant: \"success\", appearance: \"soft\",\n                class: \"bg-success/10\" },\n            { variant: \"warning\", appearance: \"soft\",\n                class: \"bg-warning/10\" },\n            { variant: \"destructive\", appearance: \"soft\",\n                class: \"bg-danger/10\" },\n        ],\n        defaultVariants: { variant: \"default\", appearance: \"outline\" },\n    },\n);\n\ntype AlertProps = ComponentProps<\"div\"> & VariantProps<typeof alertVariants>;\n\nfunction Alert({\n    className,\n    variant = \"default\",\n    appearance = \"outline\",\n    ...props\n}: AlertProps) {\n    return (\n        <div\n            role={variant === \"destructive\" ? \"alert\" : \"status\"}\n            data-variant={variant}\n            data-appearance={appearance}\n            className={cn(alertVariants({ variant, appearance }), className)}\n            {...props}\n        />\n    );\n}\n\nfunction AlertTitle({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"font-semibold\", className)} {...props} />;\n}\n\nfunction AlertDescription({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"leading-relaxed\", className)} {...props} />;\n}\n\nexport { Alert, AlertTitle, AlertDescription };\nexport type { AlertProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/alert.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `68f1786aaae9ab04d6d59eb1670cc280e3d91e21`:\n<https://github.com/pydemia/ui/blob/68f1786aaae9ab04d6d59eb1670cc280e3d91e21/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`e1bd8819e43f77014f29714c6bc053f6e99cd885252cf1eb53a948e06f405e6d`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}
