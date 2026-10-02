@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 기준 재검토: 현행 릴리스 하한은 변경분 중심이며,
+반복 비용은 `main`의 문서 전용 전체 CI와 snapshot 전체 복제에 있습니다.
+운영 개선을 릴리스 점수와 분리했습니다. 코드·workflow는 바꾸지 않았고
+Goal 추정은 약 98%입니다.
+[현재 기준과 근거](quality-checklist-current-review-2026-10-02.md)를
+참고하세요.
+
 2026-10-03 PR #113 병합 후 상태: 공개 snapshot 소비자 조합 검사와
 `Thread`의 게시글별 `key` 안내가 `main`에 들어갔습니다. PR·`main`
 Verify UI와 Pages가 통과했습니다. Vercel은 배포 횟수 제한으로 실패해
