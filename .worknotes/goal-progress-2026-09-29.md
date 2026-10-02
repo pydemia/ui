@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 NotificationCenter 공개 확인: **약 97% → 약 97%**입니다.
+PR #93의 CI와 병합 commit `130da82`의 Verify UI·Pages, Vercel
+production, 공개 preview·Usage와 현재 item·51번째 snapshot URL을
+확인했습니다. 공개 126개 component·128개 item·51개 snapshot입니다.
+지속 알림 사용처를 공급했지만 남은 복합 편집·소비자 적용 범위를 고려해
+관리용 추정은 유지합니다.
+[작업 기록](notification-center-2026-10-02.md)을 참고하세요.
+
 2026-10-02 NotificationCenter 로컬 후보: **약 97% → 약 97%**입니다.
 지속 알림의 읽음 상태와 필터를 새 사용처로 구현하고 로컬 동작을
 확인했습니다. 고지 pin과 51번째 snapshot 검사를 통과했지만 PR CI·

@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 NotificationCenter — 공개
+
+PR #93의 Verify UI run `36998027643`, 병합 commit `130da82`의
+Verify UI run `36998331998`과 Pages run `36998331246`이
+성공했습니다. Vercel production `dpl_CMUja4pBJCSfhRznJ7VfApFdyGVE`는
+READY입니다. 공개 preview·Usage가 표시됐고 console error는
+0건입니다. 현재 `pyd-notification-center` item과 51번째 snapshot의
+manifest·변경 item URL이 HTTP 200이며 manifest에는 128개 item이
+있습니다. 실제 screen reader 발화는 실행하지 않았습니다.
+[작업 기록](../.worknotes/notification-center-2026-10-02.md)에
+범위를 남겼습니다.
+
 ## 2026-10-02 NotificationCenter — 로컬
 
 `npm run typecheck`, 대상 테스트 3/3, `npm run build`를 통과했습니다.

@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-02 NotificationCenter 공개 확인: PR #93을 병합한 `130da82`의
+Verify UI·Pages와 Vercel production이 성공했습니다. 공개 preview·
+Usage와 현재 item·51번째 snapshot manifest·변경 item URL을
+확인했습니다. 공개 126개 component·128개 item·51개 snapshot이며
+goal 관리용 추정 약 97%입니다.
+[작업 기록](notification-center-2026-10-02.md)을 참고하세요.
+
 2026-10-02 NotificationCenter 로컬 후보: 지속 알림의 읽음 상태·필터와
 열기 요청을 추가했습니다. typecheck·대상 테스트·build 및 Chromium의
 핵심 흐름·390px dark 배치를 확인했습니다. provenance 고지를 고정하고
