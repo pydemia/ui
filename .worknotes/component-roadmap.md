@@ -236,6 +236,10 @@ URL을 사람이 하나씩 열지 않습니다.
   공개 preview·registry item과 41번째 snapshot URL을 확인했습니다.
 - [x] `Stepper` — 단계 위치·완료·오류와 단계 이동 정책. 실제 screen
   reader 발표와 touch 동작은 검증하지 않았습니다.
+- [x] `FormWizard` — 현재 단계의 native 필수값 검사와 선택적 비동기
+  검증을 거쳐 이동합니다. 단계·입력값·저장 결과는 호출자가 소유하고
+  component는 중복 이동·검증 상태와 다음·이전·완료 작업을 맡습니다.
+  `Stepper`의 상태 표시만으로는 이 제출 흐름을 제공하지 못합니다.
 - [x] `Sidebar` — `AppShell`의 container 폭에 따라 데스크톱
   접힘·현재 링크와 좁은 화면의 modal drawer를 전환합니다. 2026-09-30에
   이름 있는 섹션 목록을 기존 API에 추가했습니다. 새 component로

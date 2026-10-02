@@ -1,5 +1,25 @@
 # 검증 기록
 
+## 2026-10-03 FormWizard — 로컬 후보
+
+`npm run typecheck`, UI 테스트 206/206, `npm run build`,
+`npm run registry:check`가 통과했습니다. 로컬 Chromium에서 필수값
+차단, 사용자 검증 실패, Enter 이동, 제목 focus, 뒤로 가기 뒤 값
+유지와 완료 요청을 확인했습니다. 390px 세로 배치에서 문서 가로
+넘침·console error·Vite error overlay는 없었습니다. 57번째
+snapshot을 생성·재빌드하고 `registry:release-check`가 132개 item·
+57개 snapshot을 통과했습니다. 공개 경로는 아직 확인하지 않았습니다.
+[작업 기록](../.worknotes/form-wizard-2026-10-03.md)을 참고하세요.
+
+## 2026-10-03 DataTable 행 상세 — 공개
+
+PR #102와 병합 `3c2fa29`의 Verify UI·Pages, Vercel production이
+성공했습니다. 공개 DataTable item, 56번째 snapshot manifest·item과
+사이트 JS asset이 저장소 파일과 byte 단위로 일치합니다. 공개
+브라우저의 시각 동작은 도구 응답 실패로 확인하지 못했습니다.
+로컬 Chromium의 동작 검증은 아래에 구분해 기록합니다.
+[작업 기록](../.worknotes/data-table-details-2026-10-03.md)을 참고하세요.
+
 ## 2026-10-03 DataTable 행 상세 — 로컬
 
 `npm run typecheck`, UI 테스트 202/202, `npm run build`,

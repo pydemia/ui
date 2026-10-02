@@ -189,6 +189,9 @@ export type {
 } from "./components/tree-select";
 export { Stepper } from "./components/stepper";
 export type { StepperProps, StepperStep } from "./components/stepper";
+export { FormWizard } from "./components/form-wizard";
+export type { FormWizardProps, FormWizardStep } from
+    "./components/form-wizard";
 export { Timeline } from "./components/timeline";
 export type {
     TimelineProps, TimelineEntry, TimelineStatus,

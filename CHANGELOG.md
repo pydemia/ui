@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-03 — FormWizard
+
+- 여러 단계의 form에서 현재 단계 필수값·비동기 검증, 다음·이전 이동과
+  최종 완료 요청을 묶는 `FormWizard`를 추가했습니다. 입력값은 호출자가
+  보관하며 기존 `Stepper`·`Button`과 공통 token을 사용합니다.
+
 ## 2026-10-03 — DataTable 행 상세
 
 - `renderRowDetails`가 있는 표에서 행별 상세를 펼쳐 읽습니다.

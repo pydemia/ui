@@ -102,8 +102,9 @@ npm run registry:release-check
 해시 ID를 계산해 해당 snapshot과 `docs/r/`의 최신 JSON을 대조합니다.
 특정 후보를 검사할 때는 `-- sha256-<digest>`를 덧붙일 수 있습니다.
 전달한 ID가 현재 빌드와 다르면 실패합니다. 배포 전 변경 내용은
-[CHANGELOG.md](CHANGELOG.md)에
-기록하고, 배포 후 공개 snapshot URL의 설치를 별도 소비자에서 확인합니다.
+[CHANGELOG.md](CHANGELOG.md)에 기록하고, 배포 후 공개 manifest와
+변경 item URL을 확인합니다. 설치 형식·target·의존 경로가 바뀌면
+해당 경로의 별도 소비자 설치·typecheck·build도 확인합니다.
 다음은 이전 TreeSelect 릴리스의 고정 ID와 token을 별도 소비자에
 설치하는 예시입니다.
 

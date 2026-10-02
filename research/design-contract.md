@@ -1,5 +1,24 @@
 # Prototype 설계 계약
 
+## 2026-10-03 FormWizard
+
+`FormWizard`는 ID가 있는 단계 배열과 controlled `currentIndex`를
+받습니다. 각 단계의 `content`는 현재 단계에서만 DOM에 둡니다.
+호출자는 단계 입력값을 controlled 상태로 보관해 되돌아온 뒤에도
+값을 유지합니다. 단계 content에 별도의 `form`을 중첩하지 않습니다.
+
+다음·완료 버튼은 native form submit이므로 현재 단계의 `required` 등
+브라우저 유효성 검사를 먼저 받습니다. 중간 단계의
+`validateStep(index)`는 `true`를 반환해야 이동하며 Promise 동안
+입력과 이동을 비활성화합니다. `false`와 throw/reject는 현재 단계에
+머물면서 구분된 오류 문구를 표시합니다. 외부에서 단계가 바뀌면
+이전 비동기 응답을 버립니다. 첫 단계의 이전 버튼은 비활성화합니다.
+마지막 단계의 `onFinish`는 완료 요청만 전달하고, 서버 저장·권한·
+오류·`submitting` 상태는 호출자가 소유합니다. 단계 변경 후 현재
+제목으로 focus를 옮기며 가로·세로 단계와 panel·plain 외관은 같은
+동작을 사용합니다. 기본 단계 배치는 좁은 폭에서도 전부 보이는
+세로 방향입니다.
+
 ## 2026-10-03 DataTable 행 상세
 
 `renderRowDetails(row)`를 제공하면 각 행 앞에 상세 펼침 버튼을

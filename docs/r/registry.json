@@ -626,6 +626,11 @@
       "files": [{ "path": "packages/ui/src/components/stepper.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-form-wizard", "type": "registry:ui", "title": "Form Wizard",
+      "registryDependencies": ["./pyd-button.json", "./pyd-stepper.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/form-wizard.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-timeline", "type": "registry:ui", "title": "Timeline",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/timeline.tsx", "type": "registry:ui" }]

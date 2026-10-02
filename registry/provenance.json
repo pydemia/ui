@@ -538,6 +538,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named ordered steps, current step and visible status text", "keyboard": "Chromium: Enter on permitted step, completion persistence and error navigation verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-form-wizard", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WHATWG HTML Standard", "url": "https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#constraint-validation", "scope": "native form constraint validation and submit behavior; no source copied" },
+      "dependencies": ["pyd-button", "pyd-stepper", "pyd-utils"], "accessibility": { "semantics": "named native form, current step heading and ordered step list, native submit controls and alert for custom validation", "keyboard": "Chromium: required blocking, Enter advance, heading focus, back navigation, value retention and finish verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-timeline", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WHATWG HTML Standard", "url": "https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-time-element" },
