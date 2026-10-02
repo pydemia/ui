@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 DataChart 포인터 요약 공개 확인: PR #92를 병합한
+`893ab26`의 Verify UI·Pages와 Vercel production이 성공했습니다.
+공개 preview의 요약 전환·결측값·Usage와 현재 chart item,
+50번째 snapshot manifest·chart item URL을 확인했습니다. 공개
+125개 component·127개 item·50개 snapshot이며 goal 관리용 추정은
+약 97%입니다. [작업 기록](data-chart-hover-summary-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 DataChart 포인터 요약 로컬 검증: 기존 `DataChart`에
 `hoverSummary`를 추가하고 단일·다중 계열과 누적 영역의 현재 값을
 그래프 위에 표시했습니다. 390px 가로 스크롤 좌표를 고쳤고 native

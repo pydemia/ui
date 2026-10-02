@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 DataChart 포인터 요약 공개 확인: **약 97% → 약 97%**입니다.
+PR #92와 병합 commit `893ab26`의 CI·Pages·Vercel production,
+공개 preview·Usage, 현재 chart item·50번째 snapshot URL을
+확인했습니다. 공개 125개 component·127개 item·50개 snapshot입니다.
+기존 차트의 값 탐색이 빨라졌지만 독립 사용 사례의 수가 늘어난 것은
+아닙니다. [작업 기록](data-chart-hover-summary-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 DataChart 포인터 요약 로컬 검증: **약 97% → 약 97%**입니다.
 기존 차트에서 포인터 구간 값과 누적 합계를 빠르게 확인하는 표시를
 추가했습니다. typecheck·대상 테스트·build·50번째 snapshot 검사는

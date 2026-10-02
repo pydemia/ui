@@ -1,6 +1,22 @@
 # DataChart 포인터 구간 요약
 
-2026-10-02. 공개 기준은 125개 component·127개 registry item·49개
+## 공개 확인
+
+PR #92를 병합한 commit `893ab26`의 Verify UI run
+`36994339617`과 Pages run `36994339072`가 성공했습니다. PR의
+Verify UI run `36994087333`도 성공했습니다. Vercel production
+`dpl_B4zzBiPkxYyCkFmbJiZg6bzQL9Uy`는 READY이며
+`ui.pydemia.ai` alias가 연결됐습니다. 공개 DataChart preview에서
+포인터 요약을 켜고 목요일의 `데이터 없음` 표시와 Usage를 확인했고
+console error는 0건입니다. 현재 `pyd-data-chart` item과 50번째
+snapshot의 manifest·chart item URL은 HTTP 200입니다. manifest는
+127개 item을 기록하고 현재 item에는 `hoverSummary`가 포함됩니다.
+
+공개 기준은 125개 component·127개 item·50개 snapshot입니다.
+Goal 관리용 추정은 약 97%입니다. 실제 screen reader·touch·Safari·
+RTL은 실행하지 않았습니다.
+
+로컬 구현 당시 공개 기준은 125개 component·127개 registry item·49개
 snapshot입니다. 이번 변경은 기존 `DataChart`의 표시 선택이므로 수량을
 늘리지 않습니다. Goal 관리용 추정은 약 97%를 유지합니다.
 
@@ -37,7 +53,7 @@ license·의존성·접근성 설명은 변경 뒤에도 정확합니다.
   구간의 패널 경계가 차트의 보이는 영역 안에 있으며 dark 표시와
   console error 0건을 확인했습니다.
 
-PR CI·공개 배포·공개 URL은 아직 확인하지 않았습니다. 실제 screen
+로컬 검증 당시 PR CI·공개 배포·공개 URL은 확인 전이었습니다. 실제 screen
 reader·touch·Safari·RTL과 별도 소비자 설치는 실행하지 않았습니다.
 기존 설치 경로를 변경하지 않아 별도 소비자 재설치는 이번 릴리스의
 필수 조건으로 적용하지 않습니다.

@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-02 DataChart 포인터 요약 — 공개
+
+PR #92의 Verify UI run `36994087333`, 병합 commit `893ab26`의
+Verify UI run `36994339617`과 Pages run `36994339072`가
+성공했습니다. Vercel production
+`dpl_B4zzBiPkxYyCkFmbJiZg6bzQL9Uy`는 READY입니다.
+공개 preview의 포인터 요약 전환·결측값과 Usage, console error
+0건을 확인했습니다. 현재 chart item, 50번째 snapshot manifest·
+chart item URL이 HTTP 200이며 manifest에는 127개 item이 있습니다.
+실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다.
+[작업 기록](../.worknotes/data-chart-hover-summary-2026-10-02.md)에
+범위를 남겼습니다.
+
 ## 2026-10-02 DataChart 포인터 요약 — 로컬
 
 `hoverSummary`를 켠 단일 계열의 결측값, 다중 계열 누적 영역의
