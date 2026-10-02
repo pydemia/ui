@@ -1,5 +1,23 @@
 # Component 확장 작업 인계
 
+2026-10-02 AnchorNav 로컬 공개 후보: 같은 문서의 섹션 목차와
+현재 위치 표시를 원본 component로 구현했습니다. typecheck·UI
+테스트 166/166, build·release 검사와 로컬 Chromium의 내부
+스크롤·hash 뒤로 가기·390px dark를 확인했습니다. 로컬 119개
+component·121개 item·40번째 snapshot을 만들었습니다.
+공개 후보 PR #72의 CI와 배포·공개 URL은 아직 확인하지
+않았습니다. 공개 118개·120개·39개,
+goal 관리용 추정 약 93%입니다.
+[작업 기록](anchor-nav-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 체크리스트 현재 적용 검토: PR #70으로 draft
+snapshot 강제는 해결됐습니다. 남은 부담은 문서 변경에도 전체
+UI 검사를 실행하는 CI와 적용되지 않는 환경까지 릴리스마다
+`미검증`으로 열거하는 기록 방식입니다. 기준 검토만으로 goal
+관리용 추정 약 93%를 올리지 않았습니다.
+[검토 기록](quality-checklist-current-review-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 registry draft 검사 공개 확인: PR #70 병합 commit
 `331dcb5`의 Verify UI run `36958691424`에서 기존 snapshot과
 현재 빌드 snapshot 검사가 모두 통과했습니다. Pages run

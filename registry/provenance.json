@@ -460,6 +460,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named navigation landmarks and links with aria-current page; bottom links retain visible labels", "keyboard": "native Tab and Enter; browser check pending", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-anchor-nav", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA26", "scope": "named navigation and aria-current for current location; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named native navigation links with aria-current location and scroll position tracking", "keyboard": "native Tab and Enter; browser check pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-navigation-menu", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/radix/navigation-menu", "scope": "composition and interaction reference only; no source copied" },

@@ -1534,3 +1534,14 @@ dependency로 사용하며 새 npm 의존성은 없습니다. 전체 상태와 �
 상태의 표시는 native section·ordered list·progress·button을
 사용합니다. 기존 Button의 source와 고지는 해당 registry item이
 전달합니다. 실제 screen reader·touch·Safari·RTL은 미검증입니다.
+
+## 2026-10-02 AnchorNav
+
+`AnchorNav`는 pydemia/ui 원본 구현입니다. 외부 component 소스는
+복사하지 않았습니다. native nav·a와 React state, 기존
+`pyd-utils`만 사용하며 새 npm 의존성은 없습니다.
+
+[W3C WAI의 `aria-current` 지침](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA26)을
+현재 위치 링크의 의미 참고 자료로 확인했습니다. 문서의 예제
+코드는 복사하지 않았습니다. 내부 스크롤과 hash 이동은 브라우저
+동작으로 확인했으며 실제 보조기술 발표는 검사하지 않았습니다.

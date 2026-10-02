@@ -96,23 +96,18 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
 핵심 흐름을 아직 실행하지 않았다면 구현 완료와 공급 완료를
 구분합니다. 실제 보조기술·touch·Safari·RTL, 전체 item의 개별
 설치, rollback 뒤 snapshot 주소 보존은 해당 환경을 지원한다고
-주장하거나 관련 경로를 변경할 때 검사합니다. 그 외에는 미검증으로
-기록합니다. 과거 라이브러리 전체의 10개 운영·품질 과제는
+주장하거나 관련 경로를 변경할 때 검사합니다. 그 외에는 개별
+릴리스의 미검증 목록에 반복해서 적지 않습니다. 과거 라이브러리
+전체의 10개 운영·품질 과제는
 [당시 조사 기록](quality-legacy-2026-09-29.md)에 남기며 릴리스
 점수로 사용하지 않습니다.
 
 전체 goal의 약 93%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이며 component 수나 과거 체크박스 수로 계산하지
-않습니다. 판정 근거는
-[이번 재검토](quality-checklist-lean-2026-10-02.md),
-[기준 재검토](quality-criteria-review-2026-10-01.md)와
-[후속 재검토](quality-criteria-followup-2026-10-01.md),
-[2026-10-02 재검토](quality-criteria-reassessment-2026-10-02.md)와
-[반복 검사 축소](quality-criteria-simplification-2026-10-02.md),
-[이번 체크리스트 검토](quality-checklist-recalibration-2026-10-02.md),
-[위험 기준 재검토](quality-gates-risk-review-2026-10-02.md)와
-[검사 범위 재검토](quality-checklist-pragmatic-2026-10-02.md)에
-남겼습니다.
+않습니다. 현재 적용 판단은
+[체크리스트 검토](quality-checklist-current-review-2026-10-02.md)에
+남겼습니다. 이전 검토와 변경 이력은 그 문서와 기존 작업 기록에서
+확인할 수 있습니다.
 
 ## 추가 component 후보
 
@@ -202,6 +197,9 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
 - [x] `BottomNav` — 기존 `pyd-navigation`에 하단 주요 목적지 링크를
   추가했습니다. 각 링크의 이름을 항상 표시하고 현재 페이지는 호출자가
   `aria-current`로 지정합니다. 별도 component 수는 늘리지 않습니다.
+- [x] `AnchorNav` — 같은 문서의 섹션으로 이동하고 스크롤 위치를
+  현재 링크에 반영합니다. 내부 스크롤 영역과 URL hash 뒤로 가기,
+  rail·inline 표시를 제공합니다.
 - [x] `Stepper` — 단계 위치·완료·오류와 단계 이동 정책. 실제 screen
   reader 발표와 touch 동작은 검증하지 않았습니다.
 - [x] `Sidebar` — `AppShell`의 container 폭에 따라 데스크톱

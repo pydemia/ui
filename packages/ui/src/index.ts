@@ -134,6 +134,10 @@ export {
 export type {
     GlobalNavLinkProps, SideNavLinkProps, BottomNavLinkProps,
 } from "./components/navigation";
+export { AnchorNav } from "./components/anchor-nav";
+export type {
+    AnchorNavItem, AnchorNavProps,
+} from "./components/anchor-nav";
 export {
     NavigationMenu, NavigationMenuList, NavigationMenuItem,
     NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink,
