@@ -1,10 +1,23 @@
 # Component 확장 작업 인계
 
+2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개 후보: 정적 원본
+차트에는 정확한 값 표·경계값 테스트·preview를 적용하고 일반 개념
+참고를 외부 코드 편입 검사로 취급하지 않습니다. 현행 draft PR은
+현재 snapshot 검사를 생략하지만 공개 후보와 `main`은 확인합니다.
+판단은 [체크리스트 기록](quality-checklist-review-2026-10-03.md)에
+있습니다. 차트는 typecheck·UI 테스트 223/223·build·registry release
+검사와 390px·1280px preview를 통과했습니다. 로컬 134개 component·
+136개 item·63개 snapshot, production은 133개·135개·62개입니다.
+PR·공개 경로 검증은 남았고 Goal 추정은 약 98%입니다.
+[차트 작업 기록](waterfall-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `LogViewer` 최신 로그 따라가기: 기존 component에
-선택형 자동 스크롤과 일시정지·재개를 추가했습니다. 로컬 검사와
-390px Chromium 동작은 [작업 기록](log-viewer-follow-tail-2026-10-03.md)에
-있습니다. 62번째 snapshot 후보를 만들었고 공개 배포는 미확인입니다.
-Goal 관리용 추정 약 97%입니다. 체크리스트의 실제 고정 비용은
+선택형 자동 스크롤과 일시정지·재개를 추가했습니다. PR #108을
+`main`에 병합했고 CI·Pages·Vercel production과 공개 registry
+경로를 확인했습니다. 133개 component·135개 item·62개 snapshot이
+공개됐으며 Goal 관리용 추정은 약 98%입니다. 로컬 동작과 공급
+근거는 [작업 기록](log-viewer-follow-tail-2026-10-03.md)에 있습니다.
+체크리스트의 실제 고정 비용은
 [추가 검토](quality-checklist-review-2026-10-03.md)에 기록했습니다.
 
 2026-10-03 Dashboard 배치 선택: 3열 지표와 2:1 상세 panel을

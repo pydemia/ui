@@ -1,11 +1,21 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 체크리스트 재검토와 `WaterfallChart` 공개 후보:
+**약 98% → 약 98%**입니다. 정적 원본 차트의 검증 범위와 릴리스
+고정 비용을 분리했습니다. 로컬 134개 component·136개 item·63개
+snapshot의 검사와 preview가 통과했으나 PR CI·production 경로는
+남았습니다. [차트 기록](waterfall-chart-2026-10-03.md)과
+[체크리스트 판단](quality-checklist-review-2026-10-03.md)에 근거를
+남겼습니다.
+
 2026-10-03 `LogViewer` 자동 스크롤·체크리스트 추가 검토:
-**약 97% → 약 97%**입니다. 기존 component의 반복 로그 용례를
+**약 97% → 약 98%**입니다. 기존 component의 반복 로그 용례를
 확장했고 대상 테스트·typecheck·build·registry release 검사와
-390px Chromium 스크롤을 확인했습니다. 저장소 후보는 133개
-component·135개 item·62개 snapshot입니다. 공개 사이트는 마지막
-확인 기준 130개·132개·58개이므로 공급 증가로 계산하지 않습니다.
+390px Chromium 스크롤을 확인했습니다. PR #108과 `main`의 CI,
+Pages, Vercel production이 통과했습니다. 공개 registry는
+133개 component·135개 item·62개 snapshot이며, 이전에 404였던
+분석 item 세 개도 공개 경로에서 HTTP 200입니다. 진척도 변화는
+공개 지연 해소를 반영한 관리용 추정이며 체크리스트 점수가 아닙니다.
 [작업 기록](log-viewer-follow-tail-2026-10-03.md)과
 [체크리스트 판단](quality-checklist-review-2026-10-03.md)에 근거를
 남겼습니다.

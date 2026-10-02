@@ -212,6 +212,10 @@ export { BulletChart } from "./components/bullet-chart";
 export type { BulletChartProps } from "./components/bullet-chart";
 export { FunnelChart } from "./components/funnel-chart";
 export type { FunnelChartProps, FunnelStage } from "./components/funnel-chart";
+export { WaterfallChart } from "./components/waterfall-chart";
+export type {
+    WaterfallChartProps, WaterfallChange,
+} from "./components/waterfall-chart";
 export { DataChart } from "./components/data-chart";
 export type {
     DataChartProps, ChartPoint, ChartSeries,

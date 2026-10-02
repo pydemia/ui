@@ -42,7 +42,7 @@ import {
     DropdownMenuSubTrigger, DropdownMenuTrigger, Dropzone,
     Empty, EmptyContent, EmptyDescription,
     EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
-    FilterBar, FormWizard, FunnelChart, Gantt,
+    FilterBar, FormWizard, FunnelChart, WaterfallChart, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
     HoverCardTrigger, Heatmap, Image, ImageCropper, Input, InputGroup,
     InputGroupAddon,
@@ -3295,6 +3295,48 @@ function FunnelChartPreview() {
             <FunnelChart title="가입 전환 단계" unit="명"
                 description="첫 방문부터 첫 사용까지의 도달률입니다."
                 stages={state === "empty" ? [] : stages}
+                variant={variant} />
+        </div>
+    );
+}
+
+function WaterfallChartPreview() {
+    const [variant, setVariant] = useState<"panel" | "plain">("panel");
+    const [scenario, setScenario] = useState<
+        "data" | "negative" | "empty"
+    >("data");
+    const changes = scenario === "negative" ? [
+        { id: "cost", label: "추가 비용", value: -40 },
+        { id: "recovery", label: "회수", value: 5 },
+    ] : [
+        { id: "new", label: "신규 계약", value: 30 },
+        { id: "discount", label: "할인", value: -12 },
+        { id: "other", label: "기타", value: 0 },
+    ];
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "negative" ? "data" : "negative",
+                )}>
+                    {scenario === "negative" ? "일반 변화" : "음수 최종값"}
+                </Button>
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "empty" ? "data" : "empty",
+                )}>
+                    {scenario === "empty" ? "데이터 표시" : "빈 데이터"}
+                </Button>
+                <Button variant="outline" onClick={() => setVariant(
+                    variant === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {variant === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <WaterfallChart title="월간 처리량 변화" unit="건"
+                description="시작값에서 증감을 순서대로 적용합니다."
+                startValue={scenario === "negative" ? 20 : 100}
+                changes={scenario === "empty" ? [] : changes}
                 variant={variant} />
         </div>
     );
@@ -7448,6 +7490,21 @@ function JobTerminal() {
     { id: "first-use", label: "첫 사용", value: 23 },
   ]} />`,
         preview: () => <FunnelChartPreview />,
+    },
+    {
+        id: "waterfall-chart", name: "WaterfallChart",
+        category: "Data & analytics",
+        description: "시작값에 양수·음수 증감을 순서대로 적용한 누적 변화와 최종값을 표시합니다. 부동 막대는 장식이며 정확한 증감·누적값을 표로 제공합니다. 미수집 수치를 0으로 대체하지 않습니다.",
+        code: `import { WaterfallChart } from "@pydemia/ui";
+
+<WaterfallChart title="월간 처리량 변화" unit="건"
+  startValue={100}
+  changes={[
+    { id: "new", label: "신규 계약", value: 30 },
+    { id: "discount", label: "할인", value: -12 },
+    { id: "other", label: "기타", value: 0 },
+  ]} />`,
+        preview: () => <WaterfallChartPreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",

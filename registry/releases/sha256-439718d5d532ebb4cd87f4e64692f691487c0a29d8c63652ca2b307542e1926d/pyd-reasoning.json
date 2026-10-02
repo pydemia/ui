@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-reasoning",
+  "title": "Reasoning",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-439718d5d532ebb4cd87f4e64692f691487c0a29d8c63652ca2b307542e1926d/pyd-collapsible.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-439718d5d532ebb4cd87f4e64692f691487c0a29d8c63652ca2b307542e1926d/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/reasoning.tsx",
+      "content": "import type { ComponentProps, ReactNode } from \"react\";\nimport { ChevronRight } from \"lucide-react\";\nimport {\n    Collapsible, CollapsibleContent, CollapsibleTrigger,\n} from \"./collapsible\";\nimport { cn } from \"./utils\";\n\ntype ReasoningStatus = \"streaming\" | \"complete\" | \"failed\";\n\ntype ReasoningProps = Omit<\n    ComponentProps<typeof Collapsible>, \"children\"\n> & {\n    label: string;\n    status?: ReasoningStatus;\n    variant?: \"inline\" | \"card\";\n    children?: ReactNode;\n};\n\nconst statusLabel: Record<ReasoningStatus, string> = {\n    streaming: \"작성 중\",\n    complete: \"완료\",\n    failed: \"중단됨\",\n};\n\nfunction Reasoning({\n    label,\n    status,\n    variant = \"inline\",\n    className,\n    children,\n    ...props\n}: ReasoningProps) {\n    if (!label.trim()) throw new Error(\"Reasoning requires a label.\");\n\n    return (\n        <Collapsible className={cn(\n            \"group min-w-0 text-sm text-foreground\",\n            variant === \"card\"\n                ? \"rounded-sm border border-border bg-surface\"\n                : \"border-l-2 border-border pl-[var(--space-3)]\",\n            className,\n        )} {...props}>\n            <div className={cn(\n                \"flex min-w-0 items-center gap-[var(--space-2)]\",\n                variant === \"card\" && \"px-[var(--space-3)] py-[var(--space-2)]\",\n            )}>\n                <CollapsibleTrigger className={\n                    \"flex min-w-0 flex-1 items-center gap-1 text-left \" +\n                    \"font-medium hover:text-accent focus-visible:outline-2 \" +\n                    \"focus-visible:outline-focus\"\n                }>\n                    <ChevronRight aria-hidden=\"true\" className={\n                        \"size-4 shrink-0 transition-transform \" +\n                        \"group-data-[state=open]:rotate-90\"\n                    } />\n                    <span className=\"truncate\">{label}</span>\n                </CollapsibleTrigger>\n                {status && (\n                    <span role=\"status\" className={cn(\n                        \"shrink-0 text-xs\",\n                        status === \"failed\" ? \"text-danger\" : \"text-muted\",\n                    )}>\n                        {statusLabel[status]}\n                    </span>\n                )}\n            </div>\n            <CollapsibleContent aria-busy={status === \"streaming\"}\n                className={cn(\n                    \"min-w-0 whitespace-pre-wrap break-words \" +\n                    \"text-sm leading-relaxed text-muted\",\n                    variant === \"card\"\n                        ? \"border-t border-border px-[var(--space-3)] \" +\n                        \"py-[var(--space-2)]\"\n                        : \"pb-[var(--space-2)] pl-5 pt-1\",\n                )}>\n                {children ?? (status === \"streaming\"\n                    ? \"내용을 작성하고 있습니다.\" : null)}\n            </CollapsibleContent>\n        </Collapsible>\n    );\n}\n\nexport { Reasoning };\nexport type { ReasoningProps, ReasoningStatus };\n",
+      "type": "registry:ui",
+      "target": "@ui/reasoning.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

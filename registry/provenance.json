@@ -614,6 +614,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with ordered list of stages, counts and first-stage conversion; decorative bars", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-waterfall-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "Microsoft Learn", "url": "https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-waterfall-charts", "scope": "running total and floating change bars; no code or artwork copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with exact starting, change and cumulative values in a native table; decorative SVG bars", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-page-header", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "semantic heading level with optional subtitle and actions", "keyboard": "native actions", "screen_reader": "pending manual review" }
