@@ -1,5 +1,16 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 FormWizard source 확인
+
+여러 단계의 입력·검증·완료 요청은 기존 `Stepper`의 상태 표시와
+구분됩니다. pydemia/ui의 원본 React·Tailwind 구현이며 외부
+component source를 복사하지 않았습니다. 기존 `pyd-stepper`·
+`pyd-button`·`pyd-utils`만 사용하고 새 npm 의존성은 없습니다.
+native form의 constraint validation과 submit 순서는
+[WHATWG HTML Standard](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#constraint-validation)에서
+확인했습니다. 입력값과 완료 저장은 호출자가 관리하며 실제 screen
+reader·touch·Safari 검증은 남았습니다.
+
 ## 2026-10-03 DataTable 행 상세 source 확인
 
 기존 `DataTable`의 pydemia/ui 원본 React 구현을 확장했습니다.

@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 체크리스트를 다시 검토했습니다. 현행 필수
+증거는 변경분 중심이며, 과도한 비용은 snapshot 전체 복제와
+출처 고지 hash의 전파에서 발생합니다. README의 매 릴리스 별도
+소비자 설치 문장을 설치 경로 변경 시 검사로 고쳤습니다. 검사
+코드·snapshot 형식과 goal 추정 약 97%는 바꾸지 않았습니다.
+[현재 판정](quality-checklist-current-review-2026-10-02.md)을 참고하세요.
+
+2026-10-03 `FormWizard` 로컬 후보: 단계별 native·비동기 검증,
+이전·다음·완료 작업과 가로·세로, panel·plain 표시를 추가했습니다.
+typecheck·UI 테스트 206/206·build·registry 검사와 로컬 Chromium
+핵심 흐름·390px 배치를 확인했습니다. 57번째 snapshot 생성·재빌드·
+release check도 통과했습니다. PR CI·공개 URL은 남았습니다.
+공개 129개 component·131개 item·56개 snapshot, 로컬
+130개·132개·57개이며 goal 추정은 약 97%입니다.
+[작업 기록](form-wizard-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `DataTable` 행 상세 공개 확인: PR #102를 `3c2fa29`로
 병합했습니다. PR·`main` Verify UI, Pages와 Vercel production이
 성공했습니다. 공개 item과 56번째 snapshot의 manifest·item, 사이트

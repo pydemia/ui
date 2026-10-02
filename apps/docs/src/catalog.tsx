@@ -42,7 +42,7 @@ import {
     DropdownMenuSubTrigger, DropdownMenuTrigger, Dropzone,
     Empty, EmptyContent, EmptyDescription,
     EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
-    FilterBar, Gantt,
+    FilterBar, FormWizard, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
     HoverCardTrigger, Heatmap, Image, ImageCropper, Input, InputGroup,
     InputGroupAddon,
@@ -3010,6 +3010,68 @@ function StepperPreview() {
             </p>
         </div>
     );
+}
+
+function FormWizardPreview() {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [saved, setSaved] = useState<string | null>(null);
+    const [orientation, setOrientation] = useState<
+        "horizontal" | "vertical"
+    >("vertical");
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const steps = [
+        { id: "title", label: "기본 정보",
+            description: "이름은 세 글자 이상 입력하세요.",
+            content: <Field label="요청 이름" required>
+                {(control) => <Input {...control} required value={title}
+                    onChange={(event) => {
+                        setTitle(event.target.value);
+                        setSaved(null);
+                    }} />}
+            </Field> },
+        { id: "description", label: "설명",
+            content: <Field label="검토 내용">
+                {(control) => <Textarea {...control} rows={3}
+                    value={description} onChange={(event) => {
+                        setDescription(event.target.value);
+                        setSaved(null);
+                    }} />}
+            </Field> },
+        { id: "confirm", label: "확인",
+            content: <div className="grid gap-1 text-sm">
+                <p className="m-0">요청: {title}</p>
+                <p className="m-0">설명: {description || "없음"}</p>
+            </div> },
+    ];
+
+    return <div className="preview-workspace grid gap-3">
+        <div className="flex flex-wrap gap-2">
+            <Button variant="outline" onClick={() => setOrientation(
+                (value) => value === "horizontal" ? "vertical" :
+                    "horizontal",
+            )}>
+                {orientation === "horizontal" ? "세로 배치" : "가로 배치"}
+            </Button>
+            <Button variant="outline" onClick={() => setAppearance(
+                (value) => value === "panel" ? "plain" : "panel",
+            )}>
+                {appearance === "panel" ? "Plain" : "Panel"}
+            </Button>
+        </div>
+        <FormWizard label="화면 개선 요청" steps={steps}
+            currentIndex={currentIndex} onStepChange={setCurrentIndex}
+            orientation={orientation} appearance={appearance}
+            validateStep={(index) => index !== 0 || title.trim().length >= 3}
+            onFinish={() => setSaved(`${title} · ${description || "설명 없음"}`)}
+            finishLabel="요청 저장" />
+        <p role="status" className="m-0 text-sm text-muted">
+            저장 결과: {saved ?? "없음"}
+        </p>
+    </div>;
 }
 
 function TimelinePreview() {
@@ -6741,6 +6803,36 @@ function PublishFlow() {
     onStepChange={setCurrentIndex} />;
 }`,
         preview: () => <StepperPreview />,
+    },
+    {
+        id: "form-wizard", name: "FormWizard", category: "Workflow",
+        installItems: ["form-wizard", "input"],
+        description: "현재 단계의 native form 유효성 검사와 선택적 비동기 검증을 거쳐 다음 단계로 이동합니다. 입력값과 현재 단계는 호출자가 소유하고, 최종 단계에서 완료 요청을 전달합니다. 가로·세로 단계와 panel·plain 표시를 선택할 수 있습니다.",
+        code: `import { useState } from "react";
+import { FormWizard, Input } from "@pydemia/ui";
+
+function RequestWizard() {
+  const [step, setStep] = useState(0);
+  const [title, setTitle] = useState("");
+  const [saved, setSaved] = useState("");
+  const steps = [
+    { id: "name", label: "이름", content:
+      <label className="grid gap-1">요청 이름
+        <Input required value={title}
+          onChange={(event) => setTitle(event.target.value)} />
+      </label> },
+    { id: "review", label: "검토", content:
+      <p>저장할 요청: {title}</p> },
+  ];
+  return <>
+    <FormWizard label="요청 작성" steps={steps}
+      currentIndex={step} onStepChange={setStep}
+      validateStep={(index) => index !== 0 || title.trim().length >= 3}
+      onFinish={() => setSaved(title)} finishLabel="저장" />
+    <p role="status">저장 결과: {saved || "없음"}</p>
+  </>;
+}`,
+        preview: () => <FormWizardPreview />,
     },
     {
         id: "timeline", name: "Timeline", category: "Workflow",
