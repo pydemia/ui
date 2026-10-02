@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 ResultState — 로컬
+
+`npm run typecheck`, UI 테스트 192/192, `npm run build`가
+통과했습니다. 문서 preview에서 실패→완료 재시도와 진행·완료·실패
+전환, Enter 재시도 뒤 focus 유지, 390px dark 배치와 console error
+0건을 Chromium에서 확인했습니다. provenance 고지를 고정하고
+`registry:release-check`가 129개 item·127개 export/catalog와 52개
+snapshot, 현재 빌드의 내용을 통과했습니다. PR CI·공개 URL은 아직
+미검증입니다. 실제 screen reader 발화도 확인하지 않았습니다.
+[작업 기록](../.worknotes/result-state-2026-10-02.md)에 범위를
+남겼습니다.
+
 ## 2026-10-02 NotificationCenter — 공개
 
 PR #93의 Verify UI run `36998027643`, 병합 commit `130da82`의

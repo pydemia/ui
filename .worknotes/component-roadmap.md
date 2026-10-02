@@ -12,8 +12,9 @@ ContextMenu, NumberInput, TagsInput, NavigationMenu, HoverCard,
 ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
-추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-125개 component와 127개 registry item이 공개돼 있습니다.
+추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
+사이트에는 126개 component와 128개 registry item이 있습니다.
+`ResultState`를 포함한 로컬 후보는 127개·129개입니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
@@ -431,7 +432,8 @@ token 전달 방식을 정할 때,
   별도 form 값을 제공합니다. SSR과 Chromium에서 thumb 이름, 키보드,
   값 제출·초기화를 확인했습니다. 실제 touch·screen reader·Safari는
   미검증이며 [작업 기록](component-range-slider-2026-09-30.md)에 남겼습니다.
-- [ ] `EmptyState`·`Empty`: 결과별 독립 상태가 필요한지 비교합니다.
+- [x] `EmptyState`·`Empty`: 항목 부재에는 기존 `Empty`를 사용합니다.
+  비동기 작업 결과와 재시도는 `ResultState`로 구분했습니다.
 - [x] `ModelSelector`: AI 작성 화면에서 기존 `Combobox`로 검색·
   선택을 수행하고 제공자·기능·사용량 문구와 선택 불가 이유를
   표시합니다. 목록·권한·비용·실제 모델 호출은 앱이 소유합니다.
