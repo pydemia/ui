@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 Lightbox 공개 확인: PR #68과 병합 commit `3657163`의
+Verify UI·Pages, Vercel production이 성공했습니다. 공개 사이트,
+현재 item, 39번째 snapshot manifest·Lightbox item URL이 HTTP 200이며
+manifest의 `itemCount`는 120입니다. 공개 118개 component·120개
+item·39개 snapshot, goal 관리용 추정 약 93%입니다. 로컬 Chromium의
+방향키·Escape·focus 복귀·390px dark는 확인했고 실제 screen reader·
+touch·Safari·RTL과 개별 소비자 설치는 미검증입니다.
+[작업 기록](lightbox-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트 후속 검토: 공개 117개 component·
 119개 item·38개 snapshot 기준으로, 검사 하한보다 로드맵의 중복된
 여섯 단계와 모든 PR의 전체 snapshot 생성이 실제 경직성입니다.
