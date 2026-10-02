@@ -30,6 +30,13 @@ Ready PR과 `main`에서는 현재 snapshot까지 검사합니다. 이 결과가
 형식·제품 코드를 바꾸지 않았으며 공개 공급 120개와 goal 관리용
 추정 약 95%를 그대로 둡니다.
 
+후속 AvatarUploader 공개 작업은 source commit과 고지·snapshot
+commit으로 나뉘었고 두 번째 commit에서 290개 파일이 바뀌었습니다.
+이 중 123개 item을 복제한 snapshot이 두 위치에 생깁니다. 새
+component의 품질 위험보다 훨씬 큰 diff가 되는 실제 절차 비용을
+확인했습니다. 별도 PR로 snapshot 형식과 provenance hash 입력을
+개선하기 전까지는 릴리스 묶음으로 생성 횟수를 줄입니다.
+
 2026-10-02 현재 공개 기준은 118개 component, 120개 registry item,
 39개 snapshot입니다. Goal 관리용 추정은 약 93%입니다. 이번 검토는
 릴리스 상태나 검사 코드를 바꾸지 않습니다.

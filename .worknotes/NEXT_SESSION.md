@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-02 AvatarUploader 공개 확인: PR #76, 병합 commit `413c081`의
+Verify UI·Pages, Vercel production이 성공했습니다. 공개
+preview·Usage, 현재 item과 42번째 snapshot manifest·item URL을
+확인했습니다. 공개 121개 component·123개 item·42개 snapshot이며
+goal 관리용 추정은 약 95%에서 약 96%로 조정했습니다.
+[작업 기록](avatar-uploader-2026-10-02.md)을 참고하세요.
+
 2026-10-02 공급·품질 체크리스트 후속 검토: 공개 120개 component·
 122개 item·41개 snapshot과 goal 관리용 추정 약 95%는 그대로입니다.
 변경한 흐름의 한 번 실행, 같은 commit의 CI, 릴리스 묶음의 공개

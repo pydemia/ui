@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-02 AvatarUploader — 공개
+
+PR #76의 Verify UI run `36967165317`과 병합 commit `413c081`의
+Verify UI run `36967341555`, Pages run `36967341232`가 통과했습니다.
+Vercel production `dpl_ErGFax8WHqeFc2b2XAnuLxxWFJYo`는 READY입니다.
+공개 브라우저에서 AvatarUploader preview·Usage가 보이고, 현재
+registry item과 42번째 snapshot의 manifest·item URL은 HTTP
+200입니다. Manifest `itemCount`는 123입니다. 로컬에서 실행한
+파일 선택·crop·focus 흐름은 공개 사이트에서 반복하지 않았습니다.
+실제 저장 API와 screen reader 발표는 검사하지 않았습니다.
+공개 기준은 121개 component·123개 item·42개 snapshot, goal
+관리용 추정 약 96%입니다.
+
 ## 2026-10-02 AvatarUploader — 로컬 초안
 
 `npm run typecheck`와 UI 테스트 172/172가 통과했습니다. 새 테스트

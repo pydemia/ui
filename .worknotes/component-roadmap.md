@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-120개 component와 122개 registry item이 공개돼 있습니다.
+121개 component와 123개 registry item이 공개돼 있습니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
@@ -282,7 +282,7 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
   native 이미지의 `alt`·`srcSet`·`sizes`·`loading`을 사용합니다.
 - [x] `AvatarUploader` — 프로필 사진을 선택·자르고 PNG로 미리 본 뒤
   제거할 수 있습니다. 결과 Blob·제거 요청의 저장은 앱이 담당합니다.
-  공개 공급 확인은 진행 중입니다.
+  공개 preview·Usage와 42번째 snapshot 경로를 확인했습니다.
 - [x] `Carousel` — 이전·다음·위치·선택 버튼과 터치 넘김을 구현했습니다.
   자동 재생은 제공하지 않으며 비활성 슬라이드는 DOM에서 제거합니다.
 - [x] `Lightbox` — 갤러리의 modal 확대·이전/다음·썸네일 이동과
