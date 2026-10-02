@@ -1,5 +1,20 @@
 # 검증 기록
 
+## 2026-10-03 공개 registry 갱신
+
+PR #108의 `main` 병합 commit `720eb7d98357a04392345922100323f881c5fdff`에
+대해 Verify UI와 Pages가 통과했고 Vercel production이 READY입니다.
+`ui.pydemia.ai/r/registry.json`은 135개 item을 제공하며,
+`pyd-log-viewer.json`과 이전에 404였던 `pyd-bar-list.json`·
+`pyd-bullet-chart.json`·`pyd-funnel-chart.json`, 62번째 snapshot
+manifest가 모두 HTTP 200입니다. registry dependency가 가리키는
+`pydemia-ui.vercel.app`의 LogViewer item·snapshot manifest도
+HTTP 200입니다. 이전 절의 404 기록은 당시 배포 상태입니다.
+현재 공개 수량은 133개 component·135개 item·62개 snapshot입니다.
+실제 screen reader 발표와 다른 브라우저는 이 배포에서 검사하지
+않았습니다. 세부 근거는 [작업 기록](../.worknotes/log-viewer-follow-tail-2026-10-03.md)에
+남겼습니다.
+
 ## 2026-10-03 BulletChart formatter 회귀
 
 PR #106 리뷰에서 단위를 붙이기 전 빈 formatter 결과가 거부되지

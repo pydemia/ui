@@ -26,7 +26,18 @@ native 버튼에 focus를 둔 뒤 Space로 `aria-pressed=false`가 되는
 `sha256-2e4fde9098e359a1be6506393e229e2aed327b2c6be3899d9b16784958d03d18`입니다.
 이전 snapshot과 비교해 파일 본문이 바뀐 item은
 `pyd-log-viewer.json`뿐입니다. 실제 screen reader 발표와 다른
-브라우저, production 배포는 확인하지 않았습니다. 공개 수량은
-마지막 확인 기준 130개 component·132개 registry item·58개
-snapshot이고, 저장소 후보는 133개·135개·62개입니다.
-Goal 관리용 추정은 약 97%로 유지합니다.
+브라우저는 확인하지 않았습니다.
+
+PR #108의 Verify UI run `37061924782`가 통과했고 Vercel preview의
+문서·현재 item·62번째 snapshot manifest는 각각 HTTP 200입니다.
+`main` 병합 commit은 `720eb7d98357a04392345922100323f881c5fdff`입니다.
+Pages run `37062162762`와 Verify UI run `37062163281`이 통과했고
+해당 Vercel production 배포가 READY입니다. 사용자 도메인의
+registry는 135개 item이며 `pyd-log-viewer.json`, 이전에 404였던
+`pyd-bar-list.json`·`pyd-bullet-chart.json`·`pyd-funnel-chart.json`,
+62번째 snapshot manifest가 모두 HTTP 200입니다. registry가
+의존 경로로 쓰는 `pydemia-ui.vercel.app`의 현재 LogViewer item과
+snapshot manifest도 HTTP 200입니다. 공개 수량은 133개
+component·135개 registry item·62개 snapshot입니다.
+Goal 관리용 추정은 공개 지연 해소를 반영해 약 97%에서
+약 98%로 조정합니다.

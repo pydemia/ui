@@ -32,7 +32,10 @@ metadata와 라이선스 고지의 결합, 전체 item snapshot 복제,
 검토 준비 PR·`main`의 중복 CI는 자동화 개선 대상으로 남깁니다.
 이 문서만으로 workflow나 snapshot 형식이 바뀐 것은 아닙니다.
 과거 10개 조사 항목의 완료 수와 Vercel 배포 지연을 component
-품질 점수로 사용하지 않습니다. Goal 관리용 추정은 약 97%입니다.
+품질 점수로 사용하지 않습니다. 검토 시점의 Goal 관리용 추정은
+약 97%였고 PR #108의 production 공개 확인 뒤 약 98%로
+조정했습니다. 공개 근거는
+[LogViewer 작업 기록](log-viewer-follow-tail-2026-10-03.md)에 있습니다.
 
 2026-10-03 후속 판정: 이전 표는 `구현 후보`에도 export·registry·
 preview·Usage를 모두 요구해, 작업 중인 component와 공개 가능한
