@@ -91,6 +91,12 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
 원본 구현에는 upstream source·LICENSE 대조를 적용하지 않고,
 참고 자료와 기존 의존 component의 출처를 기록합니다.
 
+서로 독립적인 component도 검토 가능한 범위에서 한 릴리스로 묶을 수
+있습니다. component마다 별도 PR이나 불변 snapshot을 만들 필요는
+없습니다. 공개 manifest와 변경 item URL은 릴리스 묶음당 확인합니다.
+묶음 크기를 맞추려고 완성된 component의 공개를 지연하거나 후보를
+추가하지 않습니다.
+
 확인된 값 손실·제출 오류·keyboard 접근 불가·필수 고지 누락·설치
 실패, 적용되는 CI 실패는 수정판 확인 전까지 출시를 막습니다.
 핵심 흐름을 아직 실행하지 않았다면 구현 완료와 공급 완료를
@@ -108,6 +114,8 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
 [체크리스트 검토](quality-checklist-current-review-2026-10-02.md)에
 남겼습니다. 이전 검토와 변경 이력은 그 문서와 기존 작업 기록에서
 확인할 수 있습니다.
+[실무 기준 재검토](quality-checklist-practical-review-2026-10-02.md)는
+릴리스 묶음과 검사 기록의 적용 범위를 정리했습니다.
 
 ## 추가 component 후보
 
@@ -200,6 +208,9 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
 - [x] `AnchorNav` — 같은 문서의 섹션으로 이동하고 스크롤 위치를
   현재 링크에 반영합니다. 내부 스크롤 영역과 URL hash 뒤로 가기,
   rail·inline 표시를 제공합니다.
+- [x] `TreeNav` — 중첩 페이지 링크와 별도의 disclosure 버튼,
+  현재 경로의 자동 펼침, rail·filled 표시를 제공합니다.
+  공개 공급 확인은 진행 중입니다.
 - [x] `Stepper` — 단계 위치·완료·오류와 단계 이동 정책. 실제 screen
   reader 발표와 touch 동작은 검증하지 않았습니다.
 - [x] `Sidebar` — `AppShell`의 container 폭에 따라 데스크톱

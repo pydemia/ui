@@ -2408,3 +2408,18 @@ snapshot manifest의 112개 item과 변경 JSON URL을 확인했습니다.
 공개 snapshot의 별도 소비자 재설치, 실제 screen reader·touch·
 Safari·RTL과 rollback 뒤 URL 보존은 미검증입니다. 세부 범위는
 [작업 기록](../.worknotes/icon-button-tabs-2026-10-02.md)에 있습니다.
+
+## 2026-10-02 TreeNav 로컬 검증
+
+`npm run typecheck`, 전체 UI 테스트 169/169와 targeted 테스트 3/3이
+통과했습니다.
+테스트는 중첩 링크·현재 페이지·초기 경로, 잘못된 ID·URL·
+controlled 상태, disclosure와 현재 경로 변경을 확인합니다.
+로컬 Chromium에서 Enter·Space로 자식 목록을 접고 펼쳤고,
+button focus가 유지됐습니다. 현재 경로를 바꾸면 새 가지와
+`aria-current`가 갱신됐으며 링크 클릭도 현재 페이지 표시에
+반영됐습니다. 390px dark에서 가로 넘침과 page error가
+없었습니다.
+
+build·registry 검사와 공개 배포·URL은 아직
+확인 전입니다. 실제 보조기술 발표는 실행하지 않았습니다.

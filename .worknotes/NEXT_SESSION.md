@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 체크리스트 실무 재검토: 변경 흐름은 테스트 또는
+브라우저에서 확인하고, 추가 검사는 변경 위험에만 적용합니다.
+component마다 별도 PR·snapshot을 요구하지 않고 검토 가능한
+범위에서 묶음 릴리스를 허용합니다. CI와 출시 차단 결함은 그대로이며
+새 공개 공급이 없어 goal 관리용 추정 약 94%입니다.
+[검토 기록](quality-checklist-practical-review-2026-10-02.md)을
+참고하세요.
+
+2026-10-02 TreeNav 로컬 초안: 중첩 페이지 링크의 펼침·현재 경로
+표시와 rail·filled 형태를 원본 component로 구현했습니다.
+targeted 테스트 3/3, 전체 UI 테스트 169/169, typecheck와 로컬
+Chromium의 Enter·Space·경로 변경·390px dark를 확인했습니다. build·
+registry·공개 공급은 남아 있습니다. 공개 119개 component·
+121개 item·40개 snapshot, goal 관리용 추정 약 94%입니다.
+[작업 기록](tree-nav-2026-10-02.md)을 참고하세요.
+
 2026-10-02 AnchorNav 공개 확인: PR #72와 병합 commit `2803fcb`의
 Verify UI·Pages가 성공했고 Vercel production
 `dpl_ocsnTecZBSVwP4URqrFLeeSYPaM9`은 READY입니다. 공개

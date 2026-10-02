@@ -158,6 +158,8 @@ export type {
 } from "./components/sidebar";
 export { Tree } from "./components/tree";
 export type { TreeNode, TreeProps } from "./components/tree";
+export { TreeNav } from "./components/tree-nav";
+export type { TreeNavItem, TreeNavProps } from "./components/tree-nav";
 export { TreeSelect } from "./components/tree-select";
 export type {
     TreeSelectItem, TreeSelectProps,
