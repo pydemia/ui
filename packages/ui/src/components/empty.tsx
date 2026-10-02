@@ -1,13 +1,30 @@
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
 
-function Empty({ className, ...props }: ComponentProps<"div">) {
+type EmptyProps = ComponentProps<"div"> & {
+    appearance?: "dashed" | "panel" | "plain";
+};
+
+function Empty({
+    appearance = "dashed", className, ...props
+}: EmptyProps) {
+    if (!["dashed", "panel", "plain"].includes(appearance)) {
+        throw new RangeError("Empty appearance is not supported.");
+    }
+
     return (
         <div
+            data-appearance={appearance}
             className={cn(
-                "flex min-w-0 flex-col items-center gap-3 rounded-sm border " +
-                "border-dashed border-border bg-surface-subtle " +
-                "p-[var(--space-6)] text-center",
+                "flex min-w-0 flex-col items-center gap-3 rounded-sm " +
+                "text-center",
+                appearance === "dashed" &&
+                    "border border-dashed border-border " +
+                    "bg-surface-subtle p-[var(--space-6)]",
+                appearance === "panel" &&
+                    "border border-border bg-surface p-[var(--space-6)]",
+                appearance === "plain" &&
+                    "bg-transparent p-[var(--space-4)]",
                 className,
             )}
             {...props}
@@ -38,3 +55,4 @@ function EmptyContent({ className, ...props }: ComponentProps<"div">) {
 }
 
 export { Empty, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent };
+export type { EmptyProps };

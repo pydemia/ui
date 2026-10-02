@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-02 Empty·Skeleton 표시 확장 로컬 후보: 점선·panel·plain
+빈 상태와 직사각형·줄·원형 loading 자리를 한 릴리스로 묶었습니다.
+typecheck·대상 테스트 2/2·build·registry release 검사와 로컬
+Chromium의 preview 동작·390px dark를 확인했습니다. 공개 수량은
+124개 component·126개 item·45개 snapshot, goal 관리용 추정은
+약 97%입니다. 로컬 46번째 snapshot은 공개 전이므로 수량에 넣지
+않습니다. PR CI·배포·공개 URL은 남았습니다.
+[작업 기록](feedback-appearances-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 체크리스트 재판정: 변경 유형별 증거와 실제
+차단 결함만 릴리스 기록에 남기고, 동일 revision의 조사와 같은
+commit의 CI 검사를 반복하지 않도록 정리했습니다. 기준 변경만으로
+goal 관리용 추정 약 97%는 유지합니다.
+[현재 적용 검토](quality-checklist-current-review-2026-10-02.md)를
+참고하세요.
+
 2026-10-02 MarkdownEditor 공개 확인: PR #82와 병합 commit `e898927`의
 Verify UI·Pages, Vercel production이 성공했습니다. 공개
 preview·Usage, 현재 item과 45번째 snapshot manifest·item URL을

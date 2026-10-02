@@ -1,5 +1,15 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 Empty·Skeleton 표시 형태
+
+기존 `Empty`·`Skeleton`의 표시 선택을 확장했습니다. 두 component는
+이미 조사한 shadcn/ui revision
+`98a1fe67b439324ddc857f47fbdce056600a4329`의 수정본입니다.
+공식 문서·같은 revision의 원본 파일과 MIT LICENSE는 아래 foundation
+조사와 `registry/provenance.json`에 기록돼 있습니다. 이번 변경은 새
+upstream code를 가져오지 않고 기존 React·`pyd-utils`와 공통 token만
+사용합니다. media의 장식 처리와 상위 loading 설명 규칙도 유지합니다.
+
 ## 2026-10-02 Lightbox source 확인
 
 갤러리 이미지 확대·이전/다음 탐색·닫은 뒤 focus 복귀가 반복되는

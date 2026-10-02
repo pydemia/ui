@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-02 — Empty·Skeleton 표시 형태
+
+- `Empty`에 `dashed`·`panel`·`plain` 표시를 추가했습니다. 기본값은
+  기존 점선 상자입니다. 제목·설명·동작의 구조는 유지합니다.
+- `Skeleton`에 `rectangle`·`line`·`circle` 형태를 추가했습니다.
+  기본값은 기존 직사각형이며 움직임 줄이기 설정에서는 pulse를 멈춥니다.
+  새 의존성은 없습니다.
+
 ## 2026-10-02 — MarkdownEditor
 
 - Markdown 원문 입력, 실시간 미리보기와 form 값을

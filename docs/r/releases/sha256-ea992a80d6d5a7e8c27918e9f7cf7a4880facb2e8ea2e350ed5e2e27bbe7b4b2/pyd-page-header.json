@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-page-header",
+  "title": "Page Header",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-ea992a80d6d5a7e8c27918e9f7cf7a4880facb2e8ea2e350ed5e2e27bbe7b4b2/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/page-header.tsx",
+      "content": "import type { ComponentProps, ReactNode } from \"react\";\nimport { cn } from \"./utils\";\n\ntype PageHeaderProps = Omit<ComponentProps<\"header\">, \"children\" | \"title\"> & {\n    title: ReactNode;\n    subtitle?: ReactNode;\n    eyebrow?: ReactNode;\n    actions?: ReactNode;\n    level?: 1 | 2;\n    size?: \"compact\" | \"default\" | \"hero\";\n};\n\nconst sizeClasses = {\n    compact: {\n        spacing: \"gap-[var(--space-2)]\",\n        title: \"text-lg\",\n        subtitle: \"text-xs\",\n    },\n    default: {\n        spacing: \"gap-[var(--space-4)]\",\n        title: \"text-2xl\",\n        subtitle: \"text-sm\",\n    },\n    hero: {\n        spacing: \"gap-[var(--space-6)]\",\n        title: \"text-4xl sm:text-5xl\",\n        subtitle: \"text-base\",\n    },\n} as const;\n\nfunction PageHeader({\n    title,\n    subtitle,\n    eyebrow,\n    actions,\n    level = 1,\n    size = \"default\",\n    className,\n    ...props\n}: PageHeaderProps) {\n    if (!Object.hasOwn(sizeClasses, size)) {\n        throw new RangeError(\"PageHeader size is not supported.\");\n    }\n    const Heading = level === 1 ? \"h1\" : \"h2\";\n    const styles = sizeClasses[size];\n\n    return (\n        <header\n            className={cn(\n                \"flex min-w-0 flex-wrap items-end justify-between\",\n                styles.spacing,\n                className,\n            )}\n            {...props}\n        >\n            <div className=\"min-w-0\">\n                {eyebrow && (\n                    <p className={\n                        \"mb-[var(--space-2)] text-xs font-semibold \" +\n                        \"uppercase tracking-wide text-accent\"\n                    }>\n                        {eyebrow}\n                    </p>\n                )}\n                <Heading className={cn(\n                    \"m-0 font-semibold leading-tight tracking-tight \" +\n                    \"text-foreground\",\n                    styles.title,\n                )}>\n                    {title}\n                </Heading>\n                {subtitle && (\n                    <p className={cn(\n                        \"mb-0 mt-[var(--space-2)] text-muted\",\n                        styles.subtitle,\n                    )}>\n                        {subtitle}\n                    </p>\n                )}\n            </div>\n            {actions && <div className=\"flex flex-wrap gap-2\">{actions}</div>}\n        </header>\n    );\n}\n\nexport { PageHeader };\nexport type { PageHeaderProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/page-header.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

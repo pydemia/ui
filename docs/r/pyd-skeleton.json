@@ -8,7 +8,7 @@
   "files": [
     {
       "path": "packages/ui/src/components/skeleton.tsx",
-      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Skeleton({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            aria-hidden=\"true\"\n            className={cn(\"animate-pulse rounded-sm bg-border/60\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Skeleton };\n",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype SkeletonProps = ComponentProps<\"div\"> & {\n    shape?: \"rectangle\" | \"line\" | \"circle\";\n};\n\nfunction Skeleton({\n    shape = \"rectangle\", className, ...props\n}: SkeletonProps) {\n    if (![\"rectangle\", \"line\", \"circle\"].includes(shape)) {\n        throw new RangeError(\"Skeleton shape is not supported.\");\n    }\n\n    return (\n        <div\n            aria-hidden=\"true\"\n            data-shape={shape}\n            className={cn(\n                \"animate-pulse bg-border/60 motion-reduce:animate-none\",\n                shape === \"rectangle\" && \"rounded-sm\",\n                shape === \"line\" && \"h-3 w-full rounded-full\",\n                shape === \"circle\" && \"size-10 rounded-full\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Skeleton };\nexport type { SkeletonProps };\n",
       "type": "registry:ui",
       "target": "@ui/skeleton.tsx"
     },

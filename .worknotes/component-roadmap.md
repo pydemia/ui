@@ -90,6 +90,11 @@ CI 결과는 같은 commit에 대해 재사용하고, 로컬에서 실행한 흐
 item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 않은
 원본 구현에는 upstream source·LICENSE 대조를 적용하지 않고,
 참고 자료와 기존 의존 component의 출처를 기록합니다.
+기존 component의 표시만 바꾸면 독립 사용처·새 upstream 조사처럼
+새 component에 해당하는 항목을 다시 요구하지 않습니다. 기존
+provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
+수정하지 않습니다. 릴리스 기록에는 적용한 증거와 실제 차단 결함만
+적고, 적용되지 않는 검사를 나열하지 않습니다.
 
 서로 독립적인 component도 검토 가능한 범위에서 한 릴리스로 묶을 수
 있습니다. component마다 별도 PR이나 불변 snapshot을 만들 필요는
