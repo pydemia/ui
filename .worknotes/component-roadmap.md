@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-122개 component와 124개 registry item이 공개돼 있습니다.
+123개 component와 125개 registry item이 공개돼 있습니다.
 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
@@ -108,7 +108,7 @@ item마다 별도 소비자를 만들지 않습니다. 외부 코드를 쓰지 �
 [당시 조사 기록](quality-legacy-2026-09-29.md)에 남기며 릴리스
 점수로 사용하지 않습니다.
 
-전체 goal의 약 96%는 사용 사례 범위와 공개 검증을 함께 보는
+전체 goal의 약 97%는 사용 사례 범위와 공개 검증을 함께 보는
 관리용 추정치이며 component 수나 과거 체크박스 수로 계산하지
 않습니다. 현재 적용 판단은
 [체크리스트 검토](quality-checklist-current-review-2026-10-02.md)에
@@ -431,9 +431,12 @@ token 전달 방식을 정할 때,
   agenda를 결합했습니다. 날짜 선택·일정 선택·추가 callback을 제공하고
   저장·권한·시간대 변환은 호출자가 소유합니다. 브라우저 동작과
   공개 검증은 남았습니다.
-- [ ] `RichTextEditor`·`NodeCanvas`: 제품별
-  데이터·편집 모델과 유지 비용을 조사해 착수 여부를 판단합니다.
-  숫자를 맞추기 위해 영구 제외하지 않습니다.
+- [x] `NodeCanvas`: 노드 위치·연결을 호출자 소유 데이터로
+  편집합니다. 끌기·키보드·좌표 입력과 확대·연결 목록을 제공하고
+  44번째 snapshot으로 공개했습니다.
+- [ ] `RichTextEditor`: 제품별 문서 모델, 붙여넣기·선택·undo
+  동작과 유지 비용을 조사해 착수 여부를 판단합니다. 숫자를
+  맞추기 위해 영구 제외하지 않습니다.
 
 `Stat`·`MetricCard`, `StatusIndicator`·`Badge`, `SegmentedControl`·
 `RadioGroup`/`ToggleGroup`, `CircularProgress`·`Progress`, `Legend`·

@@ -47,5 +47,16 @@
 ## 공급 상태
 
 public export·registry metadata·문서 preview·Usage를 추가했습니다.
-PR CI, 공개 배포·item URL은 아직 확인하지 않았습니다. 따라서 공개
-component 수와 goal 추정 약 96%는 유지합니다.
+PR #80의 Verify UI run `36972876685`, 병합 commit `772d988`의
+Verify UI run `36973117594`와 Pages run `36973116871`가
+통과했습니다. Vercel production `dpl_6KvkFTN5s9CfK6tY8druSYKJtARw`는
+READY입니다. 공개 브라우저에서 preview·Usage·123개 component
+표시를 확인했습니다. 현재 `pyd-node-canvas.json`, 44번째 snapshot
+manifest·item URL은 HTTP 200이며 manifest는 125개 item을
+담습니다. 새 item의 `pyd-button`·`pyd-utils` 의존 URL도 해당
+snapshot에 고정돼 있습니다.
+
+공개 기준은 123개 component·125개 registry item·44개 snapshot입니다.
+NodeCanvas의 위치·연결 편집이라는 독립 workflow 사용처가 공개돼
+goal 관리용 추정을 약 96%에서 약 97%로 조정합니다. 실제
+screen reader·touch·Safari·RTL과 별도 소비자 설치는 미검증입니다.

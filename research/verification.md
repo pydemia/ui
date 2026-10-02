@@ -1,5 +1,23 @@
 # 검증 기록
 
+## 2026-10-02 NodeCanvas — 공개
+
+PR #80의 Verify UI run `36972876685`와 병합 commit `772d988`의
+Verify UI run `36973117594`, Pages run `36973116871`이
+통과했습니다. Vercel production
+`dpl_6KvkFTN5s9CfK6tY8druSYKJtARw`는 READY입니다. 공개
+브라우저에서 NodeCanvas preview·Usage와 123개 component 표시를
+확인했습니다. 현재 `pyd-node-canvas.json`, 44번째 snapshot
+manifest·item URL은 HTTP 200입니다. Manifest의 `itemCount`는
+125이고 새 item의 `pyd-button`·`pyd-utils` 의존 URL도 같은
+snapshot을 가리킵니다.
+
+실제 screen reader·touch·Safari·RTL, 별도 소비자 설치와 rollback
+뒤 URL 보존은 검사하지 않았습니다. 공개 기준은 123개 component·
+125개 item·44개 snapshot이며 goal 관리용 추정을 약 97%로
+조정합니다. [작업 기록](../.worknotes/node-canvas-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 NodeCanvas — 로컬 초안
 
 `npm run typecheck`, 전체 UI 테스트 177/177, `npm run build`가

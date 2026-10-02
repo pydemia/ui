@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 NodeCanvas 공개 확인: PR #80과 병합 commit `772d988`의
+Verify UI·Pages, Vercel production이 성공했습니다. 공개
+preview·Usage, 현재 item과 44번째 snapshot manifest·item URL을
+확인했습니다. 공개 123개 component·125개 item·44개 snapshot,
+goal 관리용 추정 약 97%입니다. 노드·연결의 위치 편집과
+키보드·좌표 대체 조작을 공급했습니다. 실제 screen reader·touch·
+Safari·RTL과 별도 소비자 설치는 미검증입니다.
+[작업 기록](node-canvas-2026-10-02.md)을 참고하세요.
+
 2026-10-02 Terminal 공개 확인: PR #78과 병합 commit `c3f5269`의
 Verify UI·Pages, Vercel production이 성공했습니다. 공개
 preview·Usage와 현재 item, 43번째 snapshot manifest·item URL을
