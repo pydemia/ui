@@ -1,5 +1,14 @@
 # 검증 기록
 
+## 2026-10-03 BarList — 병합 후 공개 지연
+
+PR #105, 병합 `d020a2063`의 Verify UI와 GitHub Pages가
+성공했습니다. Vercel 상태는 `Deployment rate limited — retry
+in 24 hours.`이며 해당 commit의 production 배포가 없습니다.
+`ui.pydemia.ai`와 `pydemia-ui.vercel.app`의 새 item URL은
+404입니다. 공개 component·snapshot의 byte 일치와 공개 preview는
+검증하지 못했습니다. 로컬 결과는 아래 기록을 참고하세요.
+
 ## 2026-10-03 BarList — 로컬 후보
 
 `npm run typecheck`, UI 테스트 212/212, `npm run build`,
