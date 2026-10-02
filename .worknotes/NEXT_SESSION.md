@@ -3,8 +3,9 @@
 2026-10-02 AgentStatus 로컬 작업: 전체 AI 작업과 단계별 상태·진행률,
 취소·재시도 callback을 원본 component로 구현했습니다. typecheck·
 UI 테스트 156/156·build, Chromium 390px·light/dark·취소→재시도를
-확인했습니다. registry 릴리스 검사와 공개 배포는
-남아 있습니다. 공개 115개 component·117개 item·35개 snapshot,
+확인했습니다. 로컬 116개 component·118개 item과 36번째
+snapshot의 릴리스 검사가 통과했습니다. 공개 배포는 남아 있습니다.
+공개 115개 component·117개 item·35개 snapshot,
 goal 추정 약 90%입니다.
 [작업 기록](agent-status-2026-10-02.md)을 참고하세요.
 

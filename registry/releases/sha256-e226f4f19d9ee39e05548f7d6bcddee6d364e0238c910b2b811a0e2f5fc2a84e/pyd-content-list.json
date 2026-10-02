@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-content-list",
+  "title": "Content List",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-e226f4f19d9ee39e05548f7d6bcddee6d364e0238c910b2b811a0e2f5fc2a84e/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/content-list.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype ContentListProps = Omit<ComponentProps<\"ul\">, \"type\" | \"ref\"> & {\n    variant?: \"bullet\" | \"numbered\" | \"plain\";\n};\n\nfunction ContentList({\n    variant = \"bullet\",\n    className,\n    ...props\n}: ContentListProps) {\n    const Element = variant === \"numbered\" ? \"ol\" : \"ul\";\n\n    return (\n        <Element\n            className={cn(\n                \"my-0 space-y-1 text-sm leading-relaxed text-foreground\",\n                variant === \"bullet\" &&\n                    \"list-outside list-disc pl-5 marker:text-accent\",\n                variant === \"numbered\" &&\n                    \"list-outside list-decimal pl-5 marker:text-accent\",\n                variant === \"plain\" && \"list-none pl-0\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { ContentList };\nexport type { ContentListProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/content-list.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

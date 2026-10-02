@@ -37,5 +37,13 @@ typecheck·테스트·build·release 검사와 공개 경로를 확인합니다.
   확인했습니다. 390px 문서와 panel은 각각 390px·330px이며
   console error는 없었습니다.
 - native progress의 기본 초록색을 발견해 공통 accent token으로
-  고쳤습니다. registry 릴리스 검사와 공개 배포는 아직
-  검증하지 않았습니다.
+  고쳤습니다. 이 시점에는 registry 릴리스 검사와 공개 배포가
+  남아 있었습니다.
+
+## 릴리스 후보 검사
+
+provenance를 source commit `59eba4f`에 고정했습니다.
+`registry:release-check`가 로컬 116개 component·118개 item과
+36번째 snapshot
+`sha256-e226f4f19d9ee39e05548f7d6bcddee6d364e0238c910b2b811a0e2f5fc2a84e`를
+확인했습니다. PR·공개 배포는 아직 검증하지 않았습니다.
