@@ -1,5 +1,17 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 공급·품질 체크리스트 후속 검토: **약 95% → 약 95%**입니다.
+같은 commit과 흐름의 중복 검사를 줄이고 변경 위험에 맞는 근거만
+적용합니다. 품질 하한과 CI 차단 조건은 유지합니다. 새 공개 공급은
+없습니다. [검토 기록](quality-checklist-current-review-2026-10-02.md)을
+참고하세요.
+
+2026-10-02 AvatarUploader 로컬 초안: **약 95% → 약 95%**입니다.
+로컬 121개 component·123개 item이며 typecheck·UI 테스트
+172/172, build와 사진 선택·crop·focus·제거의 로컬 브라우저 검증을
+마쳤습니다. 공개 확인 전이므로 공급 수량과 추정은 유지합니다.
+[작업 기록](avatar-uploader-2026-10-02.md)을 참고하세요.
+
 2026-10-02 TreeNav 공개 확인: **약 94% → 약 95%**입니다.
 PR #74와 병합 commit `64a1f1a`의 Verify UI·Pages,
 Vercel production이 성공했습니다. 공개 preview·Usage와 현재

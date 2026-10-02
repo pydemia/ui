@@ -420,6 +420,11 @@
       "files": [{ "path": "packages/ui/src/components/image-cropper.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-avatar-uploader", "type": "registry:ui", "title": "Avatar Uploader",
+      "registryDependencies": ["./pyd-avatar.json", "./pyd-button.json", "./pyd-image-cropper.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/avatar-uploader.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-dropzone", "type": "registry:ui", "title": "Dropzone",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],

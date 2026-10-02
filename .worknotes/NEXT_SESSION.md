@@ -1,5 +1,24 @@
 # Component 확장 작업 인계
 
+2026-10-02 공급·품질 체크리스트 후속 검토: 공개 120개 component·
+122개 item·41개 snapshot과 goal 관리용 추정 약 95%는 그대로입니다.
+변경한 흐름의 한 번 실행, 같은 commit의 CI, 릴리스 묶음의 공개
+경로만 공통 근거로 사용합니다. 확인된 주요 결함은 차단하고
+적용되지 않는 환경은 매 릴리스의 미검증 결함처럼 적지 않습니다.
+[현재 적용 검토](quality-checklist-current-review-2026-10-02.md)를
+참고하세요.
+
+2026-10-02 AvatarUploader 로컬 초안: 사진 선택·정사각형 crop·PNG
+미리보기·제거를 원본 component로 조합했습니다. typecheck와 UI
+테스트 172/172, 로컬 Chromium의 파일 선택·crop·focus·390px dark를
+확인했습니다. build도 123개 registry item을 생성해 통과했습니다.
+source commit `86cb975`의 provenance hash를 고지에 고정한 뒤
+registry 검사와 42번째 snapshot의 release 검사가 통과했습니다.
+PR·공개 경로는 남았습니다.
+로컬 121개 component·123개 item, 공개 120개·122개·41개
+snapshot이며 goal 관리용 추정 약 95%는 그대로입니다.
+[작업 기록](avatar-uploader-2026-10-02.md)을 참고하세요.
+
 2026-10-02 TreeNav 공개 확인: PR #74와 병합 commit `64a1f1a`의
 Verify UI·Pages가 성공했고 Vercel production
 `dpl_FhfpDXVez9LDZR7KAcFo6Prafbcd`는 READY입니다. 공개
