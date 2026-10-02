@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-02 LogViewer 로컬 후보: 로그 검색·수준 선택·결과 건수와
+panel·flat 표시를 기존 LogConsole 위에 구현했습니다. 로컬
+typecheck·build·UI 테스트 184/184와 Chromium의 검색·빈 결과·390px
+dark 배치를 확인했습니다. 125개 component·127개 registry item을
+로컬에서 만들었으며 provenance pin·snapshot·PR·공개 공급은
+남았습니다. 공개 기준 124개·126개·47개 snapshot과 goal 관리용
+추정 약 97%는 유지합니다.
+[작업 기록](log-viewer-2026-10-02.md)을 참고하세요.
+
 2026-10-02 AppShell 표시 확장 공개 확인: PR #86과 병합 commit
 `802831d`의 Verify UI·Pages, Vercel production이 성공했습니다.
 공개 preview·Usage, 현재 item과 47번째 snapshot manifest·item

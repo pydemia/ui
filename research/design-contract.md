@@ -1,5 +1,21 @@
 # Prototype 설계 계약
 
+## 2026-10-02 LogViewer
+
+`LogViewer`는 호출자가 제공한 `LogEntry[]`를 검색·수준 선택으로
+좁혀 보여줍니다. 검색어와 선택 수준은 component 내부 상태이며 로그의
+추가·삭제·저장·원격 요청은 호출자가 맡습니다. 검색어 양끝 공백을
+제거하고 timestamp·level·message에서 대소문자 구분 없이 찾습니다.
+수준은 전체 또는 debug·info·warn·error 중 하나를 선택합니다.
+각 entry는 고유한 ID, 문자열 message와 유효한 level을 가집니다.
+원본이 비었을 때와 필터 결과가 없을 때는 다른 문구를 표시합니다.
+
+표시 이름·검색·수준 select·결과 건수와 `role="log"` 영역을 함께
+제공합니다. 필터 control은 native 입력을 사용하고 로그의 자동 음성
+발표는 끕니다. 결과 건수는 `role="status"`입니다. `panel`(기본값)은
+테두리 있는 표면, `flat`은 주변 화면에 붙는 투명 표면입니다.
+기존 `LogConsole`도 같은 표시 형태를 받되 기본 모양을 유지합니다.
+
 ## 2026-10-02 AppShell 표시 형태
 
 `AppShell.appearance`의 기본값 `framed`는 기존 border·radius를

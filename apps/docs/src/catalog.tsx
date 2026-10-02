@@ -46,7 +46,7 @@ import {
     InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, JsonViewer, Kanban, NodeCanvas,
-    Label, Lightbox, LogConsole, Markdown, MarkdownEditor,
+    Label, Lightbox, LogConsole, LogViewer, Markdown, MarkdownEditor,
     Menubar, MenubarCheckboxItem,
     MenubarContent, MenubarGroup, MenubarItem, MenubarLabel,
     MenubarMenu, MenubarRadioGroup, MenubarRadioItem,
@@ -2934,6 +2934,39 @@ function LogConsolePreview() {
             </div>
             <LogConsole label="빌드 로그" entries={entries}
                 emptyMessage="표시할 로그가 없습니다." />
+        </div>
+    );
+}
+
+function LogViewerPreview() {
+    const [variant, setVariant] = useState<"panel" | "flat">("panel");
+    const [entries, setEntries] = useState<LogEntry[]>([
+        { id: "start", timestamp: "10:42:01", level: "info",
+            message: "빌드 시작" },
+        { id: "cache", timestamp: "10:42:03", level: "warn",
+            message: "캐시를 다시 생성했습니다" },
+        { id: "retry", timestamp: "10:42:04", level: "error",
+            message: "배포를 재시도해야 합니다" },
+    ]);
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row" role="group"
+                aria-label="로그 뷰어 표시">
+                <Button variant={variant === "panel" ? "primary" : "outline"}
+                    onClick={() => setVariant("panel")}>panel</Button>
+                <Button variant={variant === "flat" ? "primary" : "outline"}
+                    onClick={() => setVariant("flat")}>flat</Button>
+                <Button variant="outline" onClick={() => setEntries((current) => [
+                    ...current,
+                    { id: `done-${current.length}`, timestamp: "10:42:08",
+                        level: "info", message: "재시도 완료" },
+                ])}>항목 추가</Button>
+                <Button variant="ghost" onClick={() => setEntries([])}>
+                    비우기
+                </Button>
+            </div>
+            <LogViewer label="배포 로그" entries={entries} variant={variant} />
         </div>
     );
 }
@@ -6849,6 +6882,19 @@ function AuditRules() {
     message: "캐시를 다시 생성했습니다" },
 ]} />`,
         preview: () => <LogConsolePreview />,
+    },
+    {
+        id: "log-viewer", name: "LogViewer", category: "Developer tools",
+        description: "로그를 검색하고 수준별로 걸러 봅니다. 결과 건수와 빈 결과를 구분하고 panel·flat 표시를 선택합니다. 기록의 갱신과 삭제는 앱이 맡습니다.",
+        code: `import { LogViewer } from "@pydemia/ui";
+
+<LogViewer label="배포 로그" variant="panel" entries={[
+  { id: "start", timestamp: "10:42:01", level: "info",
+    message: "빌드 시작" },
+  { id: "retry", timestamp: "10:42:04", level: "error",
+    message: "배포를 재시도해야 합니다" },
+]} />`,
+        preview: () => <LogViewerPreview />,
     },
     {
         id: "terminal", name: "Terminal", category: "Developer tools",

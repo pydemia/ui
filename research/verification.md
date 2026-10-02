@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-02 LogViewer — 로컬 후보
+
+`npm run typecheck`, `npm run build`와 UI 테스트 184/184가
+통과했습니다. 로컬 Chromium에서 검색 1/3, 수준 변경 후 빈 결과
+0/3, 원본을 비운 0/0, flat 표시와 390px dark의 가로 overflow
+없음을 확인했습니다. 실제 keyboard-only·screen reader·touch·
+Safari·RTL은 미검증입니다. 125개 component·127개 item은
+로컬 후보이며 provenance 고지·snapshot·PR CI·공개 URL을 확인할
+때까지 공개 수량 124개·126개·47개 snapshot과 goal 추정 약 97%를
+유지합니다. [작업 기록](../.worknotes/log-viewer-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 AppShell 표시 형태 — 공개
 
 PR #86과 병합 commit `802831d`의 Verify UI run `36981731971`,
