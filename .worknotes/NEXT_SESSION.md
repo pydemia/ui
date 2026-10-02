@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 Terminal 공개 확인: PR #78과 병합 commit `c3f5269`의
+Verify UI·Pages, Vercel production이 성공했습니다. 공개
+preview·Usage와 현재 item, 43번째 snapshot manifest·item URL을
+확인했습니다. 공개 122개 component·124개 item·43개 snapshot,
+goal 관리용 추정 약 96%입니다. 이력·명령 실행은 로컬 브라우저에서
+확인했고 실제 backend·screen reader는 검사하지 않았습니다.
+[작업 기록](terminal-2026-10-02.md)을 참고하세요.
+
 2026-10-02 Terminal 로컬 초안: 개발 도구용 명령 입력·이력·순서 있는
 출력을 원본 component로 추가했습니다. typecheck·UI 테스트 174/174,
 로컬 Chromium의 Enter 실행·이력 방향키·390px dark를 확인했습니다.

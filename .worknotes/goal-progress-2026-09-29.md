@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 Terminal 공개 확인: **약 96% → 약 96%**입니다.
+PR #78과 병합 commit `c3f5269`의 CI·Pages, Vercel production,
+공개 preview·Usage와 현재 item·43번째 snapshot URL을
+확인했습니다. 공개 122개 component·124개 item·43개 snapshot입니다.
+개발 도구의 명령·이력 흐름이 추가됐지만 남은 복합 편집·시각
+workflow 범위를 감안해 관리용 추정은 유지합니다.
+[작업 기록](terminal-2026-10-02.md)을 참고하세요.
+
 2026-10-02 Terminal 로컬 초안: **약 96% → 약 96%**입니다.
 로컬 122개 component·124개 item이며 typecheck·UI 테스트
 174/174, build와 명령·이력·390px dark 브라우저 흐름을
