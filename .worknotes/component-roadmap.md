@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
-사이트에는 129개 component와 131개 registry item이 있습니다.
+사이트에는 130개 component와 132개 registry item이 있습니다.
 `ArtifactViewer`의 공개 preview·Usage와 54번째 snapshot 경로·대표
 소비자 설치를 확인했습니다.
 2026-09-30에
@@ -75,15 +75,17 @@ component, 기존 API 확장, 설치 가능한 조합 예시, 보류 중 하나�
 ## 공급과 품질의 판정 단위
 
 릴리스 판정에는 **변경분에 해당하는 증거만** 적용합니다. 개발 중에는
-영향받은 검사로 확인하고, 공개 후보 commit에서 적용되는 CI 결과를
-확인합니다. 새 component는 실제 사용처와 기존 API의 중복 여부를
-먼저 판단하고,
-export·registry·출처·동작하는 preview·Usage를 맞춥니다. 코드가
+영향받은 검사만 실행합니다. 전체 테스트·snapshot·공개 URL 확인은
+개발 중 후보의 필수 조건이 아닙니다. 공개 후보 commit에서 적용되는
+CI 결과를 확인합니다. 새 component는 실제 사용처와 기존 API의
+중복 여부를 먼저 판단하고, 공개 후보에서 export·registry·출처·
+동작하는 preview·Usage를 맞춥니다. 코드가
 바뀐 공개 후보의 CI(typecheck, 테스트, build, registry 검사)를
 확인합니다. 변경한 핵심 사용 흐름은 관련 자동 테스트 또는 브라우저에서
 한 번 실행합니다. 정적 표시 component는 preview가 그 증거가 될 수
-있습니다. 사이트의 Usage·preview를 바꾸면 해당 동작과 전체 CI를
-확인합니다. 비렌더링 Markdown 기록만 바뀌면 변경한 링크·문구와
+있습니다. 사이트의 Usage·preview를 바꾸면 해당 화면과 공개 후보의
+CI를 확인합니다. 같은 전체 검사를 로컬에서 다시 실행할 필요는
+없습니다. 비렌더링 Markdown 기록만 바뀌면 변경한 링크·문구와
 diff 공백 검사를 확인합니다.
 
 | 변경으로 생긴 위험 | 추가 검사 |
@@ -102,11 +104,16 @@ item마다 별도 소비자를 만들지 않습니다. 설치 형식·target·�
 외부 코드를 쓰지 않은
 원본 구현에는 upstream source·LICENSE 대조를 적용하지 않고,
 참고 자료와 기존 의존 component의 출처를 기록합니다.
+릴리스 기록은 작업별 `.worknotes` 문서 하나에 적용한 증거, 확인된
+결함, 실제로 필요한 미검증 항목만 적습니다. `NEXT_SESSION.md`에는
+현재 상태와 그 기록의 링크만 남기고, 같은 검사 결과를 여러 문서에
+복제하지 않습니다.
+
 기존 component의 표시만 바꾸면 독립 사용처·새 upstream 조사처럼
 새 component에 해당하는 항목을 다시 요구하지 않습니다. 기존
 provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
-수정하지 않습니다. 릴리스 기록에는 적용한 증거와 실제 차단 결함만
-적고, 적용되지 않는 검사를 나열하지 않습니다.
+수정하지 않습니다. 적용되지 않는 검사를 릴리스 기록에 나열하지
+않습니다.
 
 서로 독립적인 component도 검토 가능한 범위에서 한 릴리스로 묶을 수
 있습니다. component마다 별도 PR이나 불변 snapshot을 만들 필요는
@@ -282,6 +289,14 @@ URL을 사람이 하나씩 열지 않습니다.
   실제 screen reader 발표는 미검증.
 - [ ] `BarList` — 범주별 크기를 긴 이름·정확한 값·가로 막대로
   표시하는 로컬 후보입니다. 공개 registry·preview 검증 뒤 완료 처리합니다.
+- [ ] `BulletChart` — 실제 값과 목표를 명시한 최대 범위에서 비교하는
+  PR #106의 공개 후보입니다. `Progress`의 작업 진행·`BarList`의
+  범주 비교와 다른 목표 대비 실적을 다룹니다. snapshot·CI는
+  통과했고 production 공급 확인 뒤 완료 처리합니다.
+- [ ] `FunnelChart` — 가입·구매처럼 순서 있는 전환 단계의 값과 첫
+  단계 대비 도달률을 비교하는 PR #106의 공개 후보입니다.
+  결측값·0건을 구분하며 snapshot·CI는 통과했습니다.
+  production 공급 확인 뒤 완료 처리합니다.
 - [x] `Heatmap` — 두 범주의 수치를 색 농도와 보이는 숫자로 함께
   표시합니다. 표 헤더·결측값·0·빈 목록과 내부 가로 스크롤을 제공합니다.
   실제 screen reader 발표는 미검증입니다.
@@ -344,8 +359,10 @@ URL을 사람이 하나씩 열지 않습니다.
   분석 화면에서 확인했습니다. `framed`·`canvas` 골격과 원형·pill
   도움말 버튼을 선택할 수 있습니다. 반복하던 상태·Escape·focus
   처리를 `AppFloatingDisclosure`에 묶었고, 직접 제어할 때는 기존
-  bubble·panel을 사용합니다. 접히는 sidebar와 좁은 화면 drawer는
-  별도 범위입니다.
+  bubble·panel을 사용합니다. 하단 작업 패널은 기존 `Collapsible`와
+  결합한 문서 preview·Usage로 접기 동작을 제공합니다. 왼쪽 탐색은
+  `Sidebar`와 결합해 넓은 화면의 접기와 좁은 화면 drawer를 같은
+  예시에서 제공합니다. component 수는 늘리지 않았습니다.
 - [x] `MasterDetail` — 목록 선택과 상세 표시, 좁은 영역에서 목록·
   상세 전환과 돌아갈 때 선택 항목 focus 복귀를 구현했습니다. 외부
   데이터 요청과 상세 내용은 호출자가 소유합니다.

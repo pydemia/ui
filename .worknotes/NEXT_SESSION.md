@@ -1,5 +1,81 @@
 # Component 확장 작업 인계
 
+2026-10-03 AppShell 반응형 탐색: 기존 `Sidebar`의 desktop 접기·
+mobile drawer를 AppShell preview와 Usage에 연결했습니다. 문서
+typecheck·build, Chromium의 390px·1280px 배치와 열기·닫기·링크
+선택·focus 복귀를 확인했습니다. 새 component·snapshot은 없고
+goal 추정 약 97%입니다. 세부 범위는
+[작업 기록](app-shell-sidebar-recipe-2026-10-03.md)에 있습니다.
+
+2026-10-03 PR #106 리뷰 수정: `BulletChart`의 빈 formatter 결과가
+단위만 표시되던 문제를 고쳤습니다. 대상 테스트 4/4,
+typecheck·build·registry release 검사가 통과했고 미공개
+60번째 snapshot을 교체했습니다. 새 ID와 남은 검증은
+[작업 기록](bullet-chart-2026-10-03.md)에 있습니다. 최신 PR CI는
+성공했고 preview의 현재 item·snapshot manifest는 HTTP 200입니다.
+production 공급은 아직 확인하지 않았습니다. Goal 추정 약 97%입니다.
+사용자 도메인의 세 새 item은 각각 HTTP 404였습니다. 이 CI·URL
+결과를 반영한 문서 수정은 로컬 작업 트리에만 있습니다.
+
+2026-10-03 체크리스트 후속 재검토: 개발 중 후보에는 영향받은 검사만
+적용하고, 공개 후보에서 공급물·CI·snapshot을 판정하도록
+[기준](component-roadmap.md#공급과-품질의-판정-단위)을 명확히 했습니다.
+같은 검증을 여러 문서에 복제하지 않는 기록 원칙과 확인 근거는
+[재판정 기록](quality-checklist-review-2026-10-03.md)에 있습니다.
+PR #106 최신 commit의 Verify UI는 성공, preview는 READY이며
+production은 이전 배포입니다. 공개 130개·132개, 브랜치
+133개·135개, goal 관리용 추정 약 97%입니다.
+
+2026-10-03 AppShell 하단 패널 예시: 기존 `AppBottomPanel`·
+`Collapsible`·`Button`으로 접히는 상태 패널의 preview·Usage를
+작성했습니다. typecheck·build·registry release 검사와 Chromium
+클릭·Enter·focus·390px, 해당 영역 axe violation 0건을 확인했습니다.
+새 component·registry item은 없고 goal 추정 약 97%도 그대로입니다.
+공개 preview와 실제 screen reader 발표는 미검증입니다.
+[작업 기록](app-bottom-disclosure-recipe-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `FunnelChart` 로컬 후보: 전환 단계의 값·첫 단계 대비
+도달률·결측값·0건을 별도 원본 component로 구현했습니다.
+typecheck·UI 테스트 218/218·build·registry(135개 item, 133개
+export/catalog)가 통과했고 Chromium의 기본·미수집·빈 목록·390px
+표시와 차트 axe violation 0건을 확인했습니다. 표시 번호 조정 뒤
+대상 테스트 3/3이 통과했습니다. `BulletChart`와 60번째 snapshot을
+함께 묶어 `registry:release-check`가 통과했습니다. PR #106의
+검토 준비 Verify UI run `37049005305`도 성공했습니다. Vercel
+preview는 READY, 사용자 production의 세 새 item은 404입니다.
+브랜치는 133개 component·135개 item, 공개 사이트는 130개·
+132개이며 goal 추정은 약 97%입니다.
+[작업 기록](funnel-chart-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 체크리스트 재검토: 현행 변경분 중심 하한은
+유지하고 구현·공개 후보·공개 공급을 별도 상태로 보고합니다.
+`BarList`는 품질 검사 후 Vercel 제한으로 공개 대기, `BulletChart`는
+로컬·draft PR #106 CI를 통과한 구현 후보입니다. CI 중복·snapshot
+전체 복제·공통 고지 hash 전파는 품질 체크박스를 줄이는 대신 별도
+구현 과제로 분류했습니다. 제품 코드·공개 수량과 goal 추정 약 97%는
+그대로입니다.
+[판정 기록](quality-checklist-review-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `BulletChart` 로컬 후보: 목표 대비 실적을 명시한 상한과
+함께 표시합니다. 0·미수집을 구분하고 Operations workspace의 완료
+건수에 연결했습니다. typecheck·UI 테스트 215/215·build·registry와
+로컬 Chromium 표시·상태 갱신을 확인했습니다. Vercel 제한 중에는
+추가 snapshot을 만들지 않았습니다. `main` 131개 component·133개
+item·59개 snapshot, 로컬 132개·134개, goal 추정 약 97%입니다.
+[draft PR #106](https://github.com/pydemia/ui/pull/106)의 Verify UI
+run `37045189665`는 성공했습니다. 새 snapshot·production 공급은
+아직 확인하지 않았습니다.
+[작업 기록](bullet-chart-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `BarList`를 PR #105로 `main`에 병합했습니다. PR·main
+Verify UI와 Pages는 성공했습니다. Vercel의 24시간 배포 제한으로
+production 배포가 없고 공개 `pyd-bar-list.json`은 404입니다.
+저장소 131개 component·133개 item·59개 snapshot, 사용자 사이트
+130개·132개·58개입니다. 제한 해제 뒤 production 배포와 공개
+item·snapshot URL을 확인하고 로드맵 완료 표시를 갱신하세요.
+이번 검토로 goal 관리용 추정 약 97%는 올리지 않았습니다.
+[작업 기록](bar-list-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `BarList` 로컬 후보: 범주별 값·0건·빈 목록을 가로
 막대와 정확한 텍스트로 표시합니다. Operations workspace의 실행
 상태와 연결했고 typecheck·UI 테스트 212/212·build, 로컬 Chromium의

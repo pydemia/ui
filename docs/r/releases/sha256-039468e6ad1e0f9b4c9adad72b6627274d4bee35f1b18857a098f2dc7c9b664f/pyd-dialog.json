@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-dialog",
+  "title": "Dialog",
+  "dependencies": [
+    "@radix-ui/react-dialog@1.1.23"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-039468e6ad1e0f9b4c9adad72b6627274d4bee35f1b18857a098f2dc7c9b664f/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/dialog.tsx",
+      "content": "import * as DialogPrimitive from \"@radix-ui/react-dialog\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Dialog = DialogPrimitive.Root;\nconst DialogTrigger = DialogPrimitive.Trigger;\nconst DialogClose = DialogPrimitive.Close;\n\nfunction DialogContent({\n    className,\n    children,\n    ...props\n}: ComponentProps<typeof DialogPrimitive.Content>) {\n    return (\n        <DialogPrimitive.Portal>\n            <DialogPrimitive.Overlay\n                className=\"fixed inset-0 z-50 bg-[var(--overlay)]\"\n            />\n            <DialogPrimitive.Content\n                className={cn(\n                    \"fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] \" +\n                    \"w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 \" +\n                    \"-translate-y-1/2 overflow-y-auto rounded-sm border \" +\n                    \"border-border bg-surface p-[var(--space-6)] \" +\n                    \"text-foreground shadow-[var(--shadow-float)]\",\n                    className,\n                )}\n                {...props}\n            >\n                {children}\n            </DialogPrimitive.Content>\n        </DialogPrimitive.Portal>\n    );\n}\n\nfunction DialogHeader({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"grid gap-2\", className)} {...props} />;\n}\n\nfunction DialogFooter({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\"mt-6 flex flex-wrap justify-end gap-2\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction DialogTitle({\n    className,\n    ...props\n}: ComponentProps<typeof DialogPrimitive.Title>) {\n    return (\n        <DialogPrimitive.Title\n            className={cn(\"text-base font-semibold\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction DialogDescription({\n    className,\n    ...props\n}: ComponentProps<typeof DialogPrimitive.Description>) {\n    return (\n        <DialogPrimitive.Description\n            className={cn(\"text-sm text-muted\", className)}\n            {...props}\n        />\n    );\n}\n\nexport {\n    Dialog,\n    DialogTrigger,\n    DialogClose,\n    DialogContent,\n    DialogHeader,\n    DialogFooter,\n    DialogTitle,\n    DialogDescription,\n};\n",
+      "type": "registry:ui",
+      "target": "@ui/dialog.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `2fabc8a2691e17d0cffaef98a32ae260324f936c`:\n<https://github.com/pydemia/ui/blob/2fabc8a2691e17d0cffaef98a32ae260324f936c/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`58129142293a7031509679d8d7ca283c106f5545b636ada8ed079c1bb8e57962`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

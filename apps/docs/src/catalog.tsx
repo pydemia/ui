@@ -11,7 +11,7 @@ import {
     AvatarGroup, AvatarUploader, Badge,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, BlockDocument, BlockEditor,
-    BarList, Board, BottomNav, BottomNavLink,
+    BarList, Board, BottomNav, BottomNavLink, BulletChart,
     Button, ButtonGroup, IconButton,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
@@ -42,7 +42,7 @@ import {
     DropdownMenuSubTrigger, DropdownMenuTrigger, Dropzone,
     Empty, EmptyContent, EmptyDescription,
     EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
-    FilterBar, FormWizard, Gantt,
+    FilterBar, FormWizard, FunnelChart, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
     HoverCardTrigger, Heatmap, Image, ImageCropper, Input, InputGroup,
     InputGroupAddon,
@@ -2596,14 +2596,12 @@ function AppShellPreview() {
                     </GlobalNav>
                 </AppHeader>
                 <AppBody>
-                    <AppSidebar aria-label="프로젝트 탐색" className="@3xl:w-28">
-                        <SideNav aria-label="프로젝트">
-                            <SideNavLink href="#overview" aria-current="page">
-                                대시보드
-                            </SideNavLink>
-                            <SideNavLink href="#components">목록</SideNavLink>
-                        </SideNav>
-                    </AppSidebar>
+                    <Sidebar label="프로젝트 탐색" items={[
+                        { id: "overview", label: "대시보드",
+                            href: "#overview", current: true },
+                        { id: "components", label: "목록",
+                            href: "#components" },
+                    ]} />
                     <AppMain as="div">
                         <h3 className="m-0 text-sm font-semibold">프로젝트 현황</h3>
                         <div className="mt-3 grid gap-2">
@@ -2622,12 +2620,22 @@ function AppShellPreview() {
                         <p className="m-0 text-xs text-muted">이번 주 변경 3건</p>
                     </AppSidebar>
                 </AppBody>
-                <AppBottomPanel aria-label="작업 상태" className={
-                    floatingSide === "left"
-                        ? "pl-28 text-xs" : "pr-28 text-xs"
-                }>
-                    모든 변경 사항이 저장되었습니다.
-                </AppBottomPanel>
+                <Collapsible defaultOpen>
+                    <AppBottomPanel aria-label="프로젝트 작업 상태" className={
+                        floatingSide === "left"
+                            ? "pl-28 text-xs" : "pr-28 text-xs"
+                    }>
+                        <CollapsibleTrigger asChild>
+                            <Button variant="ghost">작업 상태</Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="mt-2 pb-1 text-xs">
+                            <p className="m-0">모든 변경 사항이 저장되었습니다.</p>
+                            <p className="m-0 mt-1 text-muted">
+                                마지막 검토: 10:42 · 변경 3건
+                            </p>
+                        </CollapsibleContent>
+                    </AppBottomPanel>
+                </Collapsible>
                 <AppFloatingDisclosure
                     appearance={bubbleAppearance}
                     side={floatingSide}
@@ -3212,6 +3220,78 @@ function BarListPreview() {
                     { id: "notify", label: "알림 발송 준비", value: 0 },
                 ]}
                 unit="건" variant={variant} />
+        </div>
+    );
+}
+
+function BulletChartPreview() {
+    const [value, setValue] = useState<number | null>(74);
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setValue(
+                    value === 74 ? 88 : 74,
+                )}>
+                    목표 {value === 88 ? "미달" : "초과"}
+                </Button>
+                <Button variant="outline" onClick={() => setValue(
+                    value === null ? 74 : null,
+                )}>
+                    {value === null ? "값 표시" : "값 없음"}
+                </Button>
+                <Button variant="outline" onClick={() => setAppearance(
+                    appearance === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {appearance === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <BulletChart title="완료율" description="현재 값과 목표를 100% 척도에서 비교합니다."
+                value={value} target={80} max={100} unit="%"
+                appearance={appearance} />
+        </div>
+    );
+}
+
+function FunnelChartPreview() {
+    const [variant, setVariant] = useState<"panel" | "plain">("panel");
+    const [state, setState] = useState<"data" | "missing" | "empty">(
+        "data",
+    );
+    const stages = [
+        { id: "visit", label: "방문", value: 120 },
+        { id: "signup", label: "가입", value: 96 },
+        { id: "verify", label: "인증", value: state === "missing"
+            ? null : 54 },
+        { id: "first-use", label: "첫 사용", value: 23 },
+    ];
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setState(
+                    state === "data" ? "missing" : "data",
+                )}>
+                    {state === "missing" ? "인증값 표시" : "인증값 숨기기"}
+                </Button>
+                <Button variant="outline" onClick={() => setState(
+                    state === "empty" ? "data" : "empty",
+                )}>
+                    {state === "empty" ? "데이터 표시" : "빈 데이터"}
+                </Button>
+                <Button variant="outline" onClick={() => setVariant(
+                    variant === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {variant === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <FunnelChart title="가입 전환 단계" unit="명"
+                description="첫 방문부터 첫 사용까지의 도달률입니다."
+                stages={state === "empty" ? [] : stages}
+                variant={variant} />
         </div>
     );
 }
@@ -6573,23 +6653,37 @@ function RequestWorkspace() {
     },
     {
         id: "app-shell", name: "AppShell", category: "Framework",
-        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. 테두리 있는 framed와 전체 화면용 canvas, 원형·pill 도움말 버튼을 선택할 수 있습니다. AppFloatingDisclosure는 열림·닫힘·focus 복귀를 함께 처리합니다.",
+        installItems: ["app-shell", "sidebar", "button", "collapsible"],
+        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. Sidebar는 모바일 drawer로 열리고 하단 panel은 접을 수 있으며, framed·canvas와 도움말 표시를 선택합니다.",
         code: `import {
   AppShell, AppHeader, AppBody, AppSidebar, AppMain,
   AppBottomPanel, AppFloatingDisclosure,
+  Sidebar, Button, Collapsible, CollapsibleTrigger, CollapsibleContent,
 } from "@pydemia/ui";
+
+const projectPages = [
+  { id: "overview", label: "개요", href: "/overview", current: true },
+  { id: "requests", label: "요청", href: "/requests" },
+];
 
 function Workspace() {
   return <AppShell appearance="canvas">
     <AppHeader>제품 이름과 전역 탐색</AppHeader>
     <AppBody>
-      <AppSidebar aria-label="프로젝트 탐색">...</AppSidebar>
+      <Sidebar label="프로젝트 탐색" items={projectPages} />
       <AppMain>화면 본문</AppMain>
       <AppSidebar side="right" aria-label="상세 정보">...</AppSidebar>
     </AppBody>
-    <AppBottomPanel aria-label="작업 상태" className="pl-28">
-      저장됨
-    </AppBottomPanel>
+    <Collapsible defaultOpen>
+      <AppBottomPanel aria-label="프로젝트 작업 상태" className="pl-28">
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost">작업 상태</Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="mt-2">
+          모든 변경 사항이 저장되었습니다.
+        </CollapsibleContent>
+      </AppBottomPanel>
+    </Collapsible>
     <AppFloatingDisclosure appearance="pill" side="left"
       label="도움말">
       <p>도움말</p>
@@ -7294,6 +7388,31 @@ function JobTerminal() {
     { id: "notify", label: "알림 발송 준비", value: 0 },
   ]} />`,
         preview: () => <BarListPreview />,
+    },
+    {
+        id: "bullet-chart", name: "BulletChart",
+        category: "Data & analytics",
+        description: "실제 값과 목표를 명시한 최대 범위 안에서 비교합니다. 실제 값이 없거나 0인 상태를 구분하고 세 수치를 텍스트로 보여 줍니다.",
+        code: `import { BulletChart } from "@pydemia/ui";
+
+<BulletChart title="완료율" value={74} target={80}
+  max={100} unit="%" />`,
+        preview: () => <BulletChartPreview />,
+    },
+    {
+        id: "funnel-chart", name: "FunnelChart",
+        category: "Data & analytics",
+        description: "순서 있는 전환 단계의 건수와 첫 단계 대비 도달률을 표시합니다. 결측값·0건·빈 목록을 구분하고 증가하는 단계 수는 거부합니다.",
+        code: `import { FunnelChart } from "@pydemia/ui";
+
+<FunnelChart title="가입 전환 단계" unit="명"
+  stages={[
+    { id: "visit", label: "방문", value: 120 },
+    { id: "signup", label: "가입", value: 96 },
+    { id: "verify", label: "인증", value: 54 },
+    { id: "first-use", label: "첫 사용", value: 23 },
+  ]} />`,
+        preview: () => <FunnelChartPreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",

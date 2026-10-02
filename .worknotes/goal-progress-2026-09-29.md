@@ -1,5 +1,75 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 AppShell 반응형 탐색 조합: **약 97% → 약 97%**입니다.
+기존 `Sidebar`를 AppShell preview·Usage에 결합해 모바일 drawer와
+데스크톱 측면 탐색을 바로 가져다 쓸 수 있게 했습니다. 새 component나
+item은 없습니다. 문서 typecheck·build와 390px 클릭·Enter·Escape·
+링크 선택·focus 복귀, 1280px 배치를 확인했습니다. 공개 공급 전이라
+진척도 추정은 유지합니다.
+[작업 기록](app-shell-sidebar-recipe-2026-10-03.md)을 참고하세요.
+
+2026-10-03 BulletChart 리뷰 수정: **약 97% → 약 97%**입니다.
+빈 formatter 결과에 단위만 붙여 표시하던 결함을 수정하고
+대상 테스트 4/4, typecheck·build·registry release 검사를
+통과했습니다. 미공개 60번째 snapshot을 교체했습니다.
+PR #106 최신 commit의 Verify UI는 성공했고 preview의 현재 item·
+snapshot manifest는 HTTP 200입니다.
+브랜치 133개 component·135개 item, 공개 사이트 130개·132개는
+그대로입니다. [작업 기록](bullet-chart-2026-10-03.md)에 범위와
+미검증 항목을 남겼습니다.
+
+2026-10-03 체크리스트 적용 시점 재검토: **약 97% → 약 97%**입니다.
+개발 중 후보에는 영향받은 검사만 적용하고, export·registry·preview·
+Usage·snapshot·전체 CI는 공개 후보에서 판정하도록 로드맵을
+명확히 했습니다. 같은 검증 내용을 여러 기록에 옮기는 관행도
+줄입니다. PR #106 최신 commit의 Verify UI는 성공하고 Vercel
+preview는 READY지만 production은 이전 배포여서 공개 수량은
+130개 component·132개 item으로 유지합니다.
+[재판정 기록](quality-checklist-review-2026-10-03.md)을 참고하세요.
+
+2026-10-03 AppShell 하단 패널 조합: **약 97% → 약 97%**입니다.
+기존 `Collapsible`·`AppBottomPanel`로 접히는 작업 상태 영역의
+preview·Usage를 추가했습니다. typecheck·build·registry release
+검사와 Chromium의 클릭·Enter·focus·390px, axe 위반 0건을
+확인했습니다. component·item 수는 브랜치 133개·135개, 사용자
+사이트 130개·132개로 같습니다. 공개 preview는 아직 미검증입니다.
+[작업 기록](app-bottom-disclosure-recipe-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `FunnelChart` 로컬 후보: **약 97% → 약 97%**입니다.
+단계별 전환값과 첫 단계 대비 도달률을 원본 component로 구현해
+Data & analytics 범위가 넓어졌습니다. 로컬 typecheck·UI 테스트
+218/218·build·registry와 Chromium preview·390px·axe를 확인했습니다.
+`BulletChart`와 60번째 snapshot을 묶어 release check와 PR #106의
+검토 준비 CI도 통과했습니다. Vercel preview는 READY입니다.
+브랜치는 133개 component·135개 item, 공개 사이트는 Vercel 제한으로
+130개·132개 기준입니다. 세 새 item의 production JSON은 404이므로
+관리용 추정은 올리지 않았습니다.
+[작업 기록](funnel-chart-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 체크리스트 재검토: **약 97% → 약 97%**입니다.
+구현 후보, 공개 준비, 공개 공급을 별도 상태로 기록하기로 했습니다.
+draft PR #106의 Verify UI는 성공했지만 새 snapshot·production은
+미검증입니다. BarList는 병합·CI 성공 후 Vercel 배포 제한으로 공개
+대기 중입니다. 검사 기준을 낮추거나 공개 수량을 바꾸지 않았습니다.
+[판정 기록](quality-checklist-review-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `BulletChart` 로컬 후보: **약 97% → 약 97%**입니다.
+목표 대비 실적과 0·미수집 값을 구분하는 분석 UI를 구현하고
+Operations workspace에 연결했습니다. typecheck와 UI 테스트
+215/215, build·registry 검사와 로컬 Chromium 표시·상태 갱신이
+통과했으며 공개 검증 전입니다. 저장소 `main`은
+131개 component·133개 item·59개 snapshot, 로컬 후보는
+132개·134개입니다. 사용자 사이트는 Vercel 제한으로 이전 공개
+130개·132개·58개 기준입니다.
+[작업 기록](bullet-chart-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `BarList` 병합·공개 지연: **약 97% → 약 97%**입니다.
+PR #105와 `main` CI·Pages는 성공했지만 Vercel의 24시간 배포
+제한으로 사용자 사이트의 새 item은 404입니다. 저장소는 131개
+component·133개 item·59개 snapshot이고 공개 사이트는 이전
+130개·132개·58개 기준입니다. 공개 공급으로 계산하지 않습니다.
+[작업 기록](bar-list-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `BarList` 로컬 후보: **약 97% → 약 97%**입니다.
 범주별 단일 수치를 가로 막대·정확한 텍스트로 표시하고 Operations
 workspace에 연결했습니다. typecheck·UI 테스트 212/212·build와
