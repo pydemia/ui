@@ -549,6 +549,11 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named log with text levels; live announcements disabled by default", "keyboard": "pending browser check", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-log-viewer", "category": "Developer tools", "profiles": ["developer-tool", "neutral-product"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-input", "pyd-log-console", "pyd-native-select", "pyd-utils"], "accessibility": { "semantics": "named log group with labeled search, native level filter, visible result count and named log", "keyboard": "Chromium: search input, level selection and empty results verified; keyboard-only navigation pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-terminal", "category": "Developer tools", "profiles": ["developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/WCAG22/Techniques/aria/ARIA23.html", "scope": "sequential log semantics; example source not copied" },

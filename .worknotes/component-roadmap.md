@@ -329,6 +329,10 @@ provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
 - [x] `ToolCall` — 호출 입력·진행·결과·오류의 구분.
 - [x] `AgentStatus` — 전체 AI 작업의 상태, 여러 단계의 처리 수와
   취소·재시도 요청을 표시합니다. 실행과 상태 갱신은 호출자가 맡습니다.
+- [x] `LogViewer` — 기존 `LogConsole`을 검색·수준 선택·결과 건수와
+  결합했습니다. 로그 데이터의 갱신·삭제는 앱이 맡으며 원본이 빈
+  상태와 필터 결과가 빈 상태를 구분합니다. panel·flat 표시를
+  선택할 수 있습니다.
 - [x] `Citation` — `CitationList`로 출처 제목·위치·절대 HTTP(S)
   링크와 빈 상태를 제공합니다. pointer·keyboard preview와 새 소비자
   설치를 확인했고 실제 screen reader 발표는 남았습니다.

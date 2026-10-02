@@ -182,6 +182,8 @@ export type {
 } from "./components/timeline";
 export { LogConsole } from "./components/log-console";
 export type { LogConsoleProps, LogEntry } from "./components/log-console";
+export { LogViewer } from "./components/log-viewer";
+export type { LogViewerProps } from "./components/log-viewer";
 export { Terminal } from "./components/terminal";
 export type { TerminalLine, TerminalProps } from "./components/terminal";
 export { JsonViewer } from "./components/json-viewer";

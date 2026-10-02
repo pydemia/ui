@@ -13,6 +13,7 @@ type LogConsoleProps = Omit<ComponentProps<"div">, "children"> & {
     label: string;
     emptyMessage?: string;
     live?: "off" | "polite";
+    variant?: "panel" | "flat";
 };
 
 const levelColor: Record<LogEntry["level"], string> = {
@@ -27,18 +28,26 @@ function LogConsole({
     label,
     emptyMessage = "No log entries",
     live = "off",
+    variant = "panel",
     className,
     ...props
 }: LogConsoleProps) {
+    if (variant !== "panel" && variant !== "flat") {
+        throw new RangeError("LogConsole variant is not supported.");
+    }
+
     return (
         <div
             role="log"
             aria-label={label}
             aria-live={live}
+            data-variant={variant}
             className={cn(
-                "max-h-64 min-w-0 overflow-auto rounded-sm border " +
-                "border-border bg-surface-subtle p-[var(--space-3)] " +
+                "max-h-64 min-w-0 overflow-auto p-[var(--space-3)] " +
                 "font-mono text-xs text-foreground",
+                variant === "panel" &&
+                    "rounded-sm border border-border bg-surface-subtle",
+                variant === "flat" && "bg-transparent",
                 className,
             )}
             {...props}

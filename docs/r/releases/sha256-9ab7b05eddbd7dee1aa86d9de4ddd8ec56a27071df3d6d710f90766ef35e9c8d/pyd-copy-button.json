@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-copy-button",
+  "title": "Copy Button",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-9ab7b05eddbd7dee1aa86d9de4ddd8ec56a27071df3d6d710f90766ef35e9c8d/pyd-button.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-9ab7b05eddbd7dee1aa86d9de4ddd8ec56a27071df3d6d710f90766ef35e9c8d/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/copy-button.tsx",
+      "content": "import { Check, Copy } from \"lucide-react\";\nimport { useId, useState } from \"react\";\nimport { Button, type ButtonProps } from \"./button\";\nimport { cn } from \"./utils\";\n\ntype CopyButtonProps = Omit<\n    ButtonProps, \"aria-label\" | \"children\" | \"onClick\"\n> & {\n    value: string;\n    label: string;\n    appearance?: \"icon\" | \"text\";\n    buttonText?: string;\n    successMessage?: string;\n    errorMessage?: string;\n};\n\nfunction CopyButton({\n    value,\n    label,\n    appearance = \"icon\",\n    buttonText = \"복사\",\n    successMessage = \"복사되었습니다\",\n    errorMessage = \"복사하지 못했습니다\",\n    variant = \"ghost\",\n    size,\n    className,\n    \"aria-describedby\": describedBy,\n    ...props\n}: CopyButtonProps) {\n    const statusId = useId();\n    const [feedback, setFeedback] = useState<{\n        value: string;\n        success: boolean;\n    } | null>(null);\n\n    if (typeof value !== \"string\") {\n        throw new TypeError(\"CopyButton value must be a string.\");\n    }\n    if (typeof label !== \"string\" || !label.trim()) {\n        throw new Error(\"CopyButton requires a label.\");\n    }\n    if (appearance !== \"icon\" && appearance !== \"text\") {\n        throw new RangeError(\"CopyButton appearance is not supported.\");\n    }\n\n    const currentFeedback = feedback?.value === value ? feedback : null;\n    const message = currentFeedback\n        ? currentFeedback.success ? successMessage : errorMessage\n        : \"\";\n    const description = [describedBy, message ? statusId : undefined]\n        .filter(Boolean).join(\" \") || undefined;\n\n    async function copyValue() {\n        try {\n            await navigator.clipboard.writeText(value);\n            setFeedback({ value, success: true });\n        } catch {\n            setFeedback({ value, success: false });\n        }\n    }\n\n    return (\n        <span className=\"inline-flex items-center gap-2\">\n            <span id={statusId} role=\"status\"\n                className=\"text-xs text-muted\">{message}</span>\n            <Button\n                {...props}\n                variant={variant}\n                size={size ?? (appearance === \"icon\" ? \"icon\" : \"default\")}\n                className={cn(\"shrink-0\", className)}\n                aria-label={label}\n                aria-describedby={description}\n                onClick={copyValue}\n            >\n                {appearance === \"icon\"\n                    ? currentFeedback?.success\n                        ? <Check aria-hidden=\"true\" size={16} />\n                        : <Copy aria-hidden=\"true\" size={16} />\n                    : buttonText}\n            </Button>\n        </span>\n    );\n}\n\nexport { CopyButton };\nexport type { CopyButtonProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/copy-button.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

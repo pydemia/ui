@@ -1,5 +1,19 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 LogViewer source 확인
+
+운영·배포 화면은 시간순 로그를 읽는 것 외에 메시지 검색과 수준별
+검토가 필요합니다. 기존 `LogConsole`은 로그 표시만 제공하고
+`Terminal`은 명령 실행을 요청하므로, 이 사용처를 `LogViewer`로
+묶었습니다. pydemia/ui에서 작성한 원본 React 조합이며 외부 source
+코드를 복사하지 않았습니다.
+
+기존 `pyd-log-console`·`pyd-input`·`pyd-native-select`·`pyd-utils`에
+의존하고 새 npm 패키지는 없습니다. 의존 component의 고정 upstream
+revision과 LICENSE는 기존 provenance와 소비자 고지를 재사용합니다.
+이름 있는 로그와 검색·수준 control, 결과 건수, 빈 원본·빈 결과를
+구분합니다. 실제 screen reader·touch·Safari·RTL은 미검증입니다.
+
 ## 2026-10-02 AppShell 표시 형태
 
 기존 `AppShell`은 border·radius를 직접 덮어써 전체 화면에 넣었고,
