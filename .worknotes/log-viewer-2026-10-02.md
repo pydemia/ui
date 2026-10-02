@@ -21,6 +21,10 @@ component의 upstream revision·LICENSE는 provenance 기록을
 가로 overflow 없음을 확인했습니다. 실제 keyboard-only 탐색,
 screen reader·touch·Safari·RTL은 검사하지 않았습니다.
 
-127개 registry item과 125개 component의 로컬 후보입니다.
-provenance 고지 pin, 불변 snapshot, PR CI와 공개 URL은 아직
+`registry/SHADCN_UI_LICENSE.md`의 provenance 링크를 source commit
+`f5becfd`와 SHA-256에 고정했습니다. `registry:release-check`는
+125개 export/catalog·127개 item과 48번째 snapshot
+`sha256-9ab7b05eddbd7dee1aa86d9de4ddd8ec56a27071df3d6d710f90766ef35e9c8d`
+의 현재 빌드 일치를 확인했습니다. 새 설치 경로는 아니므로 별도
+소비자 설치는 실행하지 않았습니다. PR CI와 공개 URL은 아직
 확인하지 않았으므로 공개 수량과 goal 추정은 유지합니다.

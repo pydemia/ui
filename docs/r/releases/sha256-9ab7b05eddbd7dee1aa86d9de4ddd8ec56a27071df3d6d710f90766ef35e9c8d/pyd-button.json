@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-button",
+  "title": "Button",
+  "dependencies": [
+    "class-variance-authority@0.7.1"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-9ab7b05eddbd7dee1aa86d9de4ddd8ec56a27071df3d6d710f90766ef35e9c8d/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/button.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"./utils\";\n\nconst buttonVariants = cva(\n    \"inline-flex h-[var(--control-height)] items-center justify-center \" +\n    \"gap-2 rounded-sm border px-[var(--space-3)] text-sm font-medium \" +\n    \"transition-colors duration-[var(--motion-fast)] \" +\n    \"disabled:pointer-events-none disabled:opacity-50\",\n    {\n        variants: {\n            variant: {\n                primary: \"border-accent bg-accent text-accent-foreground \" +\n                    \"hover:opacity-90\",\n                outline: \"border-border bg-surface text-foreground \" +\n                    \"hover:bg-surface-subtle\",\n                ghost: \"border-transparent bg-transparent text-foreground \" +\n                    \"hover:bg-surface-subtle\",\n            },\n            size: {\n                default: \"px-[var(--space-3)]\",\n                icon: \"w-[var(--control-height)] px-0\",\n            },\n        },\n        defaultVariants: { variant: \"primary\", size: \"default\" },\n    },\n);\n\ntype ButtonProps = ComponentProps<\"button\"> &\n    VariantProps<typeof buttonVariants>;\n\nfunction Button({ className, variant, size, type = \"button\", ...props }: ButtonProps) {\n    return (\n        <button\n            type={type}\n            className={cn(buttonVariants({ variant, size }), className)}\n            {...props}\n        />\n    );\n}\n\nexport { Button, buttonVariants };\nexport type { ButtonProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/button.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `f5becfdcd15608f32da674cb0f4463fcbbe53ec6`:\n<https://github.com/pydemia/ui/blob/f5becfdcd15608f32da674cb0f4463fcbbe53ec6/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`be1c99c3dd70d389189d9979e382cde5d142a4d60da3a33ae4f4595ee60a8315`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}
