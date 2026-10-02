@@ -1,5 +1,20 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 BlockEditor 구조 이력 로컬 후보: **약 97% → 약 97%**입니다.
+추가·삭제·이동·형식 변경의 되돌리기·다시 실행과 reset 오류 수정을
+로컬에서 확인했습니다. 새 component는 없어 공개 수량은 129개
+component·131개 item·54개 snapshot입니다. 로컬에는 55번째
+snapshot을 생성하고 release check를 통과했습니다. PR·공개 경로는
+아직 확인하지 않았습니다.
+[작업 기록](block-editor-structure-history-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 판정 범위 재검토: **약 97% → 약 97%**입니다.
+개발 중 전체 CI와 focus·pointer 변경의 별도 브라우저 실행을 일률적으로
+요구하던 문구를 바꿨습니다. 공개 후보의 적용 CI, 변경 흐름의 실행
+증거, 실제 차단 결함 기준은 유지합니다. 공개 수량은 129개
+component·131개 item·54개 snapshot으로 같습니다.
+[검토 기록](quality-checklist-scope-2026-10-02.md)을 참고하세요.
+
 2026-10-02 ArtifactViewer 공개 확인: **약 97% → 약 97%**입니다.
 PR #100과 병합 `026378c`의 Verify UI·Pages, Vercel production,
 공개 preview·Usage, 현재 item·54번째 snapshot의 byte 일치와

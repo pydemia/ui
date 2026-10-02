@@ -1,5 +1,6 @@
 import {
-    useEffect, useId, useRef, type ComponentProps, type ReactNode,
+    useEffect, useId, useRef, useState, type ComponentProps,
+    type ReactNode,
 } from "react";
 import { Button } from "./button";
 import { Textarea } from "./textarea";
@@ -37,6 +38,11 @@ type BlockDocumentProps = Omit<
     emptyMessage?: string;
 };
 
+type StructureChange = {
+    before: BlockEditorBlock[];
+    after: BlockEditorBlock[];
+};
+
 const kindLabels: Record<BlockKind, string> = {
     paragraph: "문단",
     heading: "제목",
@@ -46,6 +52,7 @@ const kindLabels: Record<BlockKind, string> = {
     quote: "인용",
     code: "코드",
 };
+const structureHistoryLimit = 50;
 
 function checkBlocks(blocks: readonly BlockEditorBlock[]) {
     if (!Array.isArray(blocks)) {
@@ -72,6 +79,23 @@ function nextBlockId(blocks: readonly BlockEditorBlock[]) {
     return `block-${sequence}`;
 }
 
+function sameStructure(
+    left: readonly BlockEditorBlock[], right: readonly BlockEditorBlock[],
+) {
+    return left.length === right.length && left.every((block, index) =>
+        block.id === right[index].id && block.kind === right[index].kind
+    );
+}
+
+function restoreStructure(
+    target: readonly BlockEditorBlock[], current: readonly BlockEditorBlock[],
+) {
+    const currentById = new Map(current.map((block) => [block.id, block]));
+    return target.map((block) => ({
+        ...(currentById.get(block.id) ?? block), kind: block.kind,
+    }));
+}
+
 function BlockEditor({
     label,
     blocks,
@@ -91,6 +115,10 @@ function BlockEditor({
     const inputs = useRef(new Map<string, HTMLTextAreaElement>());
     const addButton = useRef<HTMLButtonElement>(null);
     const pendingFocus = useRef<{ id: string | null } | null>(null);
+    const history = useRef<{
+        past: StructureChange[]; future: StructureChange[];
+    }>({ past: [], future: [] });
+    const [, redrawHistory] = useState(0);
 
     if (typeof label !== "string" || !label.trim()) {
         throw new Error("BlockEditor requires a label.");
@@ -123,10 +151,30 @@ function BlockEditor({
         }
     }, [blocks]);
 
+    function changeStructure(next: BlockEditorBlock[]) {
+        const { past } = history.current;
+        if (past.length && !sameStructure(past[past.length - 1].after,
+            blocks)) {
+            history.current.past = [];
+        }
+        history.current.past.push({
+            before: blocks.map((block) => ({ ...block })),
+            after: next.map((block) => ({ ...block })),
+        });
+        if (history.current.past.length > structureHistoryLimit) {
+            history.current.past.shift();
+        }
+        history.current.future = [];
+        redrawHistory((value) => value + 1);
+        onBlocksChange(next);
+    }
+
     function replaceBlock(id: string, change: Partial<BlockEditorBlock>) {
-        onBlocksChange(blocks.map((block) =>
+        const next = blocks.map((block) =>
             block.id === id ? { ...block, ...change } : block
-        ));
+        );
+        if (change.kind !== undefined) changeStructure(next);
+        else onBlocksChange(next);
     }
 
     function insertBlock(afterId?: string) {
@@ -140,21 +188,46 @@ function BlockEditor({
         const next = [...blocks];
         next.splice(index, 0, { id, kind: "paragraph", text: "" });
         pendingFocus.current = { id };
-        onBlocksChange(next);
+        changeStructure(next);
     }
 
     function removeBlock(id: string, index: number) {
         const next = blocks.filter((block) => block.id !== id);
         pendingFocus.current = { id: next[Math.min(index, next.length - 1)]
             ?.id ?? null };
-        onBlocksChange(next);
+        changeStructure(next);
     }
 
     function moveBlock(index: number, offset: number) {
         const next = [...blocks];
         const [block] = next.splice(index, 1);
         next.splice(index + offset, 0, block);
-        onBlocksChange(next);
+        changeStructure(next);
+    }
+
+    const past = history.current.past;
+    const future = history.current.future;
+    const canUndo = past.length > 0 &&
+        sameStructure(past[past.length - 1].after, blocks);
+    const canRedo = future.length > 0 &&
+        sameStructure(future[future.length - 1].before, blocks);
+
+    function undoStructure() {
+        if (!canUndo) return;
+        const change = history.current.past.pop()!;
+        change.after = blocks.map((block) => ({ ...block }));
+        history.current.future.push(change);
+        redrawHistory((value) => value + 1);
+        onBlocksChange(restoreStructure(change.before, blocks));
+    }
+
+    function redoStructure() {
+        if (!canRedo) return;
+        const change = history.current.future.pop()!;
+        change.before = blocks.map((block) => ({ ...block }));
+        history.current.past.push(change);
+        redrawHistory((value) => value + 1);
+        onBlocksChange(restoreStructure(change.after, blocks));
     }
 
     const describedBy = [
@@ -177,9 +250,18 @@ function BlockEditor({
                 "grid gap-1 px-[var(--space-4)] py-[var(--space-3)]",
                 appearance === "panel" && "border-b border-border",
             )}>
-                <h3 id={titleId} className="m-0 text-base font-semibold">
-                    {label}
-                </h3>
+                <div className="flex flex-wrap items-center gap-2">
+                    <h3 id={titleId}
+                        className="m-0 mr-auto text-base font-semibold">
+                        {label}
+                    </h3>
+                    <Button variant="ghost" disabled={disabled || !canUndo}
+                        className="h-8 px-2 text-xs"
+                        onClick={undoStructure}>구조 되돌리기</Button>
+                    <Button variant="ghost" disabled={disabled || !canRedo}
+                        className="h-8 px-2 text-xs"
+                        onClick={redoStructure}>구조 다시 실행</Button>
+                </div>
                 {description && <p id={descriptionId}
                     className="m-0 text-xs text-muted">{description}</p>}
                 {error && <p id={errorId} role="alert"

@@ -107,6 +107,80 @@ test("insertion, ordering and deletion update the controlled form value", async 
     }
 });
 
+test("structural undo preserves later text edits and redo restores a block", async () => {
+    const container = document.createElement("div");
+    document.body.append(container);
+    const root = createRoot(container);
+    let updateBlocks;
+
+    function Example() {
+        const [blocks, setBlocks] = useState(initial);
+        updateBlocks = setBlocks;
+        return createElement(BlockEditor, {
+            label: "문서", name: "content", blocks,
+            onBlocksChange: setBlocks,
+        });
+    }
+
+    const historyButton = (label) => [...container.querySelectorAll("button")]
+        .find((button) => button.textContent === label);
+
+    try {
+        await act(async () => root.render(createElement(Example)));
+        assert.equal(historyButton("구조 되돌리기").disabled, true);
+        await act(async () => container.querySelector(
+            'button[aria-label="1번 블록 다음에 추가"]').click());
+        await act(async () => updateBlocks((blocks) => blocks.map((block) =>
+            block.id === "block-3" ? { ...block, text: "새 문장" }
+                : block.id === "body" ? { ...block, text: "고친 본문" }
+                    : block
+        )));
+
+        await act(async () => historyButton("구조 되돌리기").click());
+        let value = JSON.parse(container.querySelector(
+            'input[name="content"]').value);
+        assert.deepEqual(value.map((block) => block.id), ["title", "body"]);
+        assert.equal(value[1].text, "고친 본문");
+
+        await act(async () => historyButton("구조 다시 실행").click());
+        value = JSON.parse(container.querySelector('input[name="content"]').value);
+        assert.deepEqual(value.map((block) => block.id),
+            ["title", "block-3", "body"]);
+        assert.equal(value[1].text, "새 문장");
+        assert.equal(value[2].text, "고친 본문");
+
+        await act(async () => container.querySelector(
+            'button[aria-label="2번 블록 삭제"]').click());
+        assert.deepEqual(JSON.parse(container.querySelector(
+            'input[name="content"]').value).map((block) => block.id),
+        ["title", "body"]);
+        await act(async () => historyButton("구조 되돌리기").click());
+        value = JSON.parse(container.querySelector('input[name="content"]').value);
+        assert.equal(value[1].text, "새 문장");
+
+        await act(async () => {
+            const select = container.querySelector(
+                '[data-block-id="body"] select');
+            select.value = "quote";
+            select.dispatchEvent(new window.Event("change", { bubbles: true }));
+        });
+        value = JSON.parse(container.querySelector('input[name="content"]').value);
+        assert.equal(value[2].kind, "quote");
+        await act(async () => historyButton("구조 되돌리기").click());
+        value = JSON.parse(container.querySelector('input[name="content"]').value);
+        assert.equal(value[2].kind, "paragraph");
+        assert.equal(value[2].text, "고친 본문");
+
+        await act(async () => updateBlocks((blocks) => [
+            ...blocks, { id: "external", kind: "quote", text: "외부 변경" },
+        ]));
+        assert.equal(historyButton("구조 되돌리기").disabled, true);
+    } finally {
+        await act(async () => root.unmount());
+        container.remove();
+    }
+});
+
 test("disabled editor does not submit or expose active controls", () => {
     const html = renderToStaticMarkup(createElement(BlockEditor, {
         label: "문서", name: "content", blocks: initial,
