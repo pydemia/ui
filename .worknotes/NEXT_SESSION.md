@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 `DataTable` 행 상세 공개 확인: PR #102를 `3c2fa29`로
+병합했습니다. PR·`main` Verify UI, Pages와 Vercel production이
+성공했습니다. 공개 item과 56번째 snapshot의 manifest·item, 사이트
+JS asset이 로컬 빌드와 일치합니다. 공개 브라우저 시각 동작은 도구
+응답 실패로 미검증이며 로컬 Chromium 동작은 확인했습니다. 공개
+129개 component·131개 item·56개 snapshot, goal 추정 약 97%입니다.
+[작업 기록](data-table-details-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 체크리스트의 현재 적용 문서를 간결하게 정리했습니다.
 릴리스 판정은 변경분의 API·Usage·preview·고지 일치, 핵심 동작의
 테스트 또는 브라우저 증거, 적용 CI와 공개 경로 확인으로 합니다.

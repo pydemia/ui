@@ -1,6 +1,6 @@
 # 공급·품질 판정 — 현재 기준
 
-2026-10-03 재검토. 공개 수량은 129개 component, 131개 registry item,
+2026-10-03 재검토 당시 공개 수량은 129개 component, 131개 registry item,
 55개 snapshot입니다. Goal 관리용 추정은 약 97%이며 이번 기준 정리로
 올리지 않습니다.
 
