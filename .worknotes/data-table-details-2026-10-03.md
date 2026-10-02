@@ -25,6 +25,10 @@ Chromium preview에서 기본·remote 상세 펼침과 Enter 닫기, 버튼 focu
 유지, remote loading 전환 시 닫힘을 확인했습니다. 390px에서 문서의
 가로 넘침과 console error는 없었습니다. 56번째 snapshot을 생성하고
 재빌드한 현재 registry의 `registry:release-check`가 통과했습니다.
-PR CI와 공개 URL은 아직 확인하지 않았습니다.
-공개 수량은 129개 component·131개 item·55개 snapshot이며 goal
-관리용 추정은 약 97%입니다.
+PR #102를 `3c2fa29`로 병합했습니다. PR과 `main`의 Verify UI, Pages와
+Vercel production이 성공했습니다. 공개 DataTable item, 56번째
+snapshot manifest·item과 문서 사이트 JS asset이 로컬 빌드와 byte
+단위로 일치합니다. 공개 브라우저의 시각 동작은 도구 응답 실패로
+확인하지 못했습니다. 로컬 Chromium의 상호작용 증거는 위에
+기록했습니다. 공개 수량은 129개 component·131개 item·56개
+snapshot이며 goal 관리용 추정은 약 97%입니다.
