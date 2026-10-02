@@ -410,6 +410,11 @@
       "files": [{ "path": "packages/ui/src/components/image.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-lightbox", "type": "registry:ui", "title": "Lightbox",
+      "registryDependencies": ["./pyd-button.json", "./pyd-dialog.json", "./pyd-image.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/lightbox.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-image-cropper", "type": "registry:ui", "title": "Image Cropper",
       "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/image-cropper.tsx", "type": "registry:ui" }]

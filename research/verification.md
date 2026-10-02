@@ -1,5 +1,28 @@
 # 검증 기록
 
+## 2026-10-02 Lightbox — 로컬 draft
+
+`npm run typecheck`와 UI 테스트 163/163이 통과했습니다. 새 테스트는
+잘못된 갤러리 ID·alt·비율·선택값 거부와 modal의 이전·다음·썸네일
+이동, 양 끝의 비활성화를 확인합니다.
+
+로컬 Chromium 문서 preview에서 첫 이미지를 열어 방향키로 세 번째
+이미지까지 이동하고, 끝의 다음 버튼이 비활성화되는 것을 확인했습니다.
+Escape로 닫으면 열었던 이미지 버튼에 focus가 복귀했습니다. 390px
+dark 화면에서 immersive modal은 390px, frame modal은 358px였고
+가로 넘침·브라우저 오류·Vite overlay는 없었습니다.
+
+새 외부 source·npm 의존성은 없습니다. 기존 `pyd-button`·
+`pyd-dialog`·`pyd-image`·`pyd-utils`를 사용합니다. `npm run build`는
+120개 registry item과 문서 사이트를 생성해 통과했습니다.
+`registry:check`는 118개 component export/catalog와 120개 item·
+provenance 대응을 확인했고, `registry:release-check`는 39번째
+snapshot `sha256-dea2f171b25188f27f7de81b2fefe2294be42a457bf3aef07fadbb6cf9d3c0bc`가
+현재 빌드와 일치함을 확인했습니다. 공개 배포는 아직 확인하지
+않았습니다.
+실제 screen reader·
+touch·Safari·RTL과 개별 소비자 설치는 실행하지 않았습니다.
+
 ## 2026-10-02 ModelSelector — 공개
 
 PR #66의 Verify UI와 병합 commit `64282d6`의 Verify UI·Pages가

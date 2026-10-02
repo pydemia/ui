@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <title>남색 도시 위의 로즈색 달</title>
+  <rect width="640" height="360" fill="#17384e"/>
+  <circle cx="474" cy="88" r="43" fill="#d06b85"/>
+  <path d="M0 282h62V167h82v115h35V121h74v161h40V195h69v87h47V145h93v137h41V211h97v149H0Z"
+        fill="#4d8799"/>
+  <path d="M0 315h108V215h67v100h51V181h88v134h53V244h75v71h50V198h72v117h76v45H0Z"
+        fill="#0b2638"/>
+  <path d="M123 236h11m-11 24h11m126-52h11m-11 26h11m-11 26h11m126 9h11m126-45h11m-11 24h11"
+        stroke="#f0b2c4" stroke-width="6" stroke-linecap="square"/>
+</svg>

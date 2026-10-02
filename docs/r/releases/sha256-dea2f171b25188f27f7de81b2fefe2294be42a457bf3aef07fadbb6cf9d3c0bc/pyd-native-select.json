@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-native-select",
+  "title": "Native Select",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-dea2f171b25188f27f7de81b2fefe2294be42a457bf3aef07fadbb6cf9d3c0bc/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/native-select.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { ChevronDown } from \"lucide-react\";\nimport { cn } from \"./utils\";\n\nfunction NativeSelect({ className, ...props }: ComponentProps<\"select\">) {\n    return (\n        <div className=\"relative w-full\">\n            <select\n                className={cn(\n                    \"h-[var(--control-height)] w-full appearance-none rounded-sm \" +\n                    \"border border-border bg-surface px-[var(--space-3)] \" +\n                    \"pr-9 text-sm text-foreground disabled:cursor-not-allowed \" +\n                    \"disabled:opacity-50 aria-invalid:border-danger\",\n                    className,\n                )}\n                {...props}\n            />\n            <ChevronDown\n                aria-hidden=\"true\"\n                className={\n                    \"pointer-events-none absolute right-3 top-1/2 size-4 \" +\n                    \"-translate-y-1/2 text-muted\"\n                }\n            />\n        </div>\n    );\n}\n\nexport { NativeSelect };\n",
+      "type": "registry:ui",
+      "target": "@ui/native-select.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `f1b8101605dc68d06d783b34a1550129e7596395`:\n<https://github.com/pydemia/ui/blob/f1b8101605dc68d06d783b34a1550129e7596395/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`559e0455849a70a52790dba4a334c7913fcb89a0cb1f318e13056deca8b5ff9b`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}
