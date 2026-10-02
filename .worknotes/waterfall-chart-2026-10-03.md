@@ -26,5 +26,15 @@ Chromium 문서 preview에서 기본·음수 최종값·빈 데이터·panel/pla
 실제 screen reader 발표와 다른 브라우저는 이번 변경의 기본 판정에
 적용하지 않았으며 실행하지 않았습니다.
 
-출시 상태와 registry 검사 결과는 릴리스 후보를 만들고 갱신합니다.
-Goal 관리용 추정은 착수와 로컬 검증 시 약 98%입니다.
+`npm run build`와 `npm run registry:release-check`가 통과했습니다.
+`registry:check`는 134개 component export/catalog와 136개 item·
+provenance의 대응을 확인했습니다. 63번째 불변 snapshot
+`sha256-439718d5d532ebb4cd87f4e64692f691487c0a29d8c63652ca2b307542e1926d`를
+생성하고 배포용 복사본과 현재 registry의 일치를 확인했습니다.
+이번 고지는 commit `78145967366dc3b0f3ec1b1a3dca2a5ee8f3f1f6`의
+provenance와 SHA-256으로 고정했습니다.
+
+PR CI·production 배포와 공개 registry URL은 아직 확인하지 않았습니다.
+로컬 공개 후보는 134개 component·136개 item·63개 snapshot,
+공개 production은 직전 133개·135개·62개 기준입니다. Goal 관리용
+추정은 공개 전 약 98%로 유지합니다.

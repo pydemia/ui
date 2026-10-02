@@ -691,6 +691,11 @@
       "files": [{ "path": "packages/ui/src/components/funnel-chart.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-waterfall-chart", "type": "registry:ui", "title": "Waterfall Chart",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/waterfall-chart.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-page-header", "type": "registry:ui", "title": "Page Header",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/page-header.tsx", "type": "registry:ui" }]
