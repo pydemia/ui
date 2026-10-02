@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 AnchorNav 공개 확인: PR #72와 병합 commit `2803fcb`의
+Verify UI·Pages가 성공했고 Vercel production
+`dpl_ocsnTecZBSVwP4URqrFLeeSYPaM9`은 READY입니다. 공개
+preview·Usage, 현재 item, 40번째 snapshot manifest·item
+URL을 확인했습니다. 공개 119개 component·121개 item·40개
+snapshot, goal 관리용 추정 약 94%입니다.
+[작업 기록](anchor-nav-2026-10-02.md)을 참고하세요.
+
 2026-10-02 AnchorNav 로컬 공개 후보: 같은 문서의 섹션 목차와
 현재 위치 표시를 원본 component로 구현했습니다. typecheck·UI
 테스트 166/166, build·release 검사와 로컬 Chromium의 내부

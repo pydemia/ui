@@ -32,7 +32,14 @@ Chromium 문서 preview에서 첫 링크 표시, 내부 링크 이동,
 snapshot은
 `sha256-e191ffd3a0f29bf8f2b62df77be2f4dc0c6f58f0017b30bc23ae773767672980`입니다.
 
-현재는 로컬 공개 후보입니다. PR·배포·공개 URL은 아직 확인하지
-않았습니다. 공개 수량 118개 component·120개 item·39개
-snapshot과 goal 관리용 추정 약 93%는 유지합니다. 실제 보조기술
-발표는 확인하지 않았습니다.
+PR #72의 Verify UI run `36961179647`과 병합 commit
+`2803fcb`의 Verify UI run `36961360715`, Pages run
+`36961360211`이 성공했습니다. Vercel production
+`dpl_ocsnTecZBSVwP4URqrFLeeSYPaM9`은 READY입니다.
+공개 사이트의 AnchorNav preview·Usage, 현재 item,
+40번째 snapshot manifest·item URL이 응답했고 manifest의
+`itemCount`는 121입니다. 공개 119개 component·121개 item·
+40개 snapshot입니다. goal 관리용 추정은 **약 93% → 약 94%**로
+올렸습니다. 이는 개수 비율이 아니라 새로운 문서 내 탐색
+용례와 공개 공급 경로를 확인한 관리용 판단입니다. 실제
+보조기술 발표는 확인하지 않았습니다.

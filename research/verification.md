@@ -2384,8 +2384,11 @@ dark의 가로 넘침 없음, page error 0건을 확인했습니다.
 `npm run build`와 `registry:check`·`registry:release-check`도
 통과했습니다. 40번째 snapshot은
 `sha256-e191ffd3a0f29bf8f2b62df77be2f4dc0c6f58f0017b30bc23ae773767672980`이며
-121개 item을 포함합니다. 공개 배포·URL은 아직 확인 전입니다.
-실제 보조기술 발표는 실행하지 않았습니다.
+121개 item을 포함합니다. PR #72와 병합 commit `2803fcb`의
+Verify UI·Pages가 성공했고 Vercel production은 READY입니다.
+공개 AnchorNav preview·Usage와 현재 item, 40번째 snapshot
+manifest·item URL을 확인했습니다. 실제 보조기술 발표는
+실행하지 않았습니다.
 
 ## 2026-10-02 IconButton·Tabs 표시 형태
 

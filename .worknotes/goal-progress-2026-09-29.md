@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 AnchorNav 공개 확인: **약 93% → 약 94%**입니다.
+PR #72와 병합 commit `2803fcb`의 Verify UI·Pages,
+Vercel production이 성공했습니다. 공개 preview·Usage, 현재
+item과 40번째 snapshot URL을 확인했습니다. 공개 119개
+component·121개 item·40개 snapshot입니다. 개수의 단순
+비율이나 체크리스트 재해석으로 올린 수치가 아닙니다.
+[작업 기록](anchor-nav-2026-10-02.md)을 참고하세요.
+
 2026-10-02 AnchorNav 로컬 구현·검증: **약 93% → 약 93%**입니다.
 같은 문서 섹션 목차를 추가하고 typecheck·UI 테스트 166/166,
 build·release 검사와 로컬 Chromium의 스크롤·hash 뒤로 가기·
