@@ -34,7 +34,12 @@ provenance의 대응을 확인했습니다. 63번째 불변 snapshot
 이번 고지는 commit `78145967366dc3b0f3ec1b1a3dca2a5ee8f3f1f6`의
 provenance와 SHA-256으로 고정했습니다.
 
-PR CI·production 배포와 공개 registry URL은 아직 확인하지 않았습니다.
-로컬 공개 후보는 134개 component·136개 item·63개 snapshot,
-공개 production은 직전 133개·135개·62개 기준입니다. Goal 관리용
-추정은 공개 전 약 98%로 유지합니다.
+PR #109를 `2589cea1bbea0e18d734628208022923146cccf2`로 병합했습니다.
+PR Verify UI run `37065584717`, `main` Verify UI run `37065901145`,
+Pages run `37065899543`이 성공했습니다. Vercel PR preview와
+production 상태도 성공입니다. `https://ui.pydemia.ai/`의 문서 JS,
+현재 `pyd-waterfall-chart.json`, 63번째 snapshot의 manifest·item이
+모두 HTTP 200이고 로컬 빌드와 바이트 단위로 일치합니다. 공개
+사이트의 상호작용을 반복 조작하지는 않았고 로컬 Chromium 흐름을
+증거로 사용했습니다. 공개 134개 component·136개 item·63개
+snapshot입니다. Goal 관리용 추정은 약 98%로 유지합니다.
