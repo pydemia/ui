@@ -31,7 +31,15 @@ item에 불필요한 설치 의존성을 추가하지 않고 Usage에서 상위 
   또는 목록은 유지됐습니다. DonutChart의 첫 preview는 변경 전 package
   빌드를 읽어 재빌드 후 새 파일로 다시 확인했습니다.
 
-공개 후보의 PR·CI와 production URL은 아직 확인하지 않았습니다.
 새 appearance에 해당하는 별도 설치 경로는 없으므로 소비자 설치를
 반복하지 않았습니다. 이 변경은 component 수를 늘리지 않으며 Goal
 관리용 추정 약 98%를 유지합니다.
+
+PR #111을 `main`에 squash 병합했습니다(`a34b150c`). PR Verify UI run
+`37072043757`, `main` Verify UI run `37072341311`, Pages run
+`37072340881`이 성공했습니다. Vercel production 배포
+`dpl_9FoKbTRfVrxXPdQBzpsu6iC8kgEC`는 READY입니다.
+`ui.pydemia.ai`에서 최신 두 item과 65번째 manifest·두 item이
+HTTP 200이며, 최신 item과 manifest 내용이 로컬 `docs/r/` 파일과
+일치합니다. 로컬에서 실행한 전환 흐름은 공개 사이트에서 반복하지
+않았습니다. 이전에 404였던 `pyd-item-list.json`도 HTTP 200입니다.
