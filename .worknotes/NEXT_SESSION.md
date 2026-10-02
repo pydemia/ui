@@ -1,5 +1,29 @@
 # Component 확장 작업 인계
 
+2026-10-02 `BlockEditor` 로컬 후보를 구현했습니다. 일곱 블록 형식의
+편집·이동·JSON 제출과 `BlockDocument`의 의미 구조 렌더링입니다.
+typecheck·UI 테스트 196/196·build, 로컬 Chromium과 격리 소비자
+CLI 설치·typecheck·build, 고지 pin 및 53번째 snapshot의
+`registry:release-check`를 확인했습니다. PR CI·공개 URL은 남았고
+공개 수량은 127개 component·129개 item·52개 snapshot입니다.
+로컬은 128개·130개·53개, goal 관리용 추정은 약 97%입니다.
+[작업 기록](block-editor-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 체크리스트를 재검토했습니다. 현행 변경 위험별
+기준은 유지하되 실제로 반복한 로컬·공개 상호작용 검사, 52개
+snapshot의 전체 복제와 문서 전용 병합의 CI·배포 비용을 구분했습니다.
+다음 릴리스에는 적용한 증거와 차단 결함만 기록하고, 공개 사이트에서
+같은 상호작용을 재실행하지 않습니다. 제품·CI·게시 형식은 변경하지
+않았고 goal 관리용 추정은 약 97%입니다.
+[검토 기록](quality-checklist-reassessment-2026-10-02.md)을 참고하세요.
+
+2026-10-02 ResultState 공개 확인: PR #97을 병합한 `65e2dac`의
+Verify UI·Pages와 Vercel production이 성공했습니다. 공개
+preview·Usage, Enter 재시도·focus, 현재 item과 52번째 snapshot
+manifest·item URL을 확인했습니다. 공개 127개 component·129개 item·
+52개 snapshot이며 goal 관리용 추정은 약 97%입니다.
+[작업 기록](result-state-2026-10-02.md)을 참고하세요.
+
 2026-10-02 `ResultState` 로컬 후보를 구현했습니다. `Empty`·`Spinner`·
 `Button` 조합으로 진행·완료·실패와 실패 재시도를 제공합니다.
 typecheck·UI 테스트 192/192·build, Chromium의 Enter 재시도·focus와

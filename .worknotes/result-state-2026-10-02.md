@@ -32,3 +32,20 @@ export/catalog 대응을 확인했고 52번째 snapshot
 현재 빌드의 일치를 확인했습니다. PR CI·공개 URL은 아직 남았습니다.
 현재 공개 수량은 126개 component·128개 item·51개 snapshot,
 goal 관리용 추정은 약 97%입니다.
+
+## 공개 확인
+
+PR #97의 Verify UI run `37004809867`이 통과했고 병합 commit
+`65e2dac`의 Verify UI run `37005118820`과 Pages run
+`37005117809`도 성공했습니다. Vercel production
+`dpl_6A1fcDfEynDARqDpnBAXFdBaQUtJ`는 READY이며
+`ui.pydemia.ai`에 연결됐습니다.
+
+공개 preview·Usage가 표시됐고 Enter 재시도 뒤 완료 상태와 결과
+영역의 focus, console error 0건을 확인했습니다. 현재
+`pyd-result-state.json`, 52번째 snapshot의 manifest·item URL은
+HTTP 200이며 저장소 `docs/r/` 파일과 바이트 단위로 같습니다.
+Manifest에는 129개 item이 있습니다. 공개 수량은 127개
+component·129개 item·52개 snapshot입니다. RichTextEditor와 분석
+조합 등 남은 사용처가 있어 goal 관리용 추정은 약 97%로 유지합니다.
+실제 screen reader 발화는 검증하지 않았습니다.

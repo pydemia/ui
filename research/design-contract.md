@@ -1,5 +1,29 @@
 # Prototype 설계 계약
 
+## 2026-10-02 BlockEditor
+
+`BlockEditor`는 문서의 제목·소제목·문단·글머리/번호 목록·인용·코드를
+`{ id, kind, text }[]`로 편집합니다. `blocks`와 저장은 호출자가
+소유하고, component는 `onBlocksChange`로 변경을 요청합니다. 각 ID는
+문서 안에서 고유해야 합니다. 추가 시 기본 ID는 현재 배열에 없는
+`block-N`을 고르며, 외부 저장소의 ID 정책이 있으면
+`createBlockId`로 지정합니다. 형식 변경과 이동은 기존 ID를 유지합니다.
+`name`이 있으면 현재 배열을 JSON 문자열로 form에 제출합니다.
+controlled 값의 form reset은 호출자가 처리합니다.
+
+각 블록은 이름 있는 native `textarea`와 형식 `select`, 이동·추가·삭제
+버튼을 사용합니다. 추가 뒤 새 입력으로, 삭제 뒤 인접 입력으로 focus를
+옮깁니다. `disabled`는 입력과 form 값을 함께 비활성화합니다.
+일반 텍스트의 선택·붙여넣기·undo는 브라우저 입력이 담당합니다.
+구조 변경의 undo, HTML 붙여넣기 해석과 인라인 서식은 제공하지
+않습니다. 이는 WYSIWYG `RichTextEditor`의 완료를 뜻하지 않습니다.
+
+`BlockDocument`는 같은 배열을 읽기 전용으로 표시합니다. 인접한
+동종 목록 블록을 하나의 native 목록으로 묶고 제목·문단·인용·코드에
+해당하는 HTML을 렌더링합니다. `text`를 HTML로 해석하지 않으며
+React의 텍스트 이스케이프를 사용합니다. `panel`과 `plain` 편집
+표시는 같은 공통 token을 사용합니다.
+
 ## 2026-10-02 ResultState
 
 `ResultState`는 한 비동기 작업의 `pending`·`success`·`error`를 같은

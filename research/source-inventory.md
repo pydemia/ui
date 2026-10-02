@@ -1,5 +1,22 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-02 BlockEditor source 확인
+
+공지·운영 문서를 작성할 때 제목·문단·목록의 순서를 구조화해 저장하는
+사용처입니다. Markdown 문자열을 입력하는 `MarkdownEditor`와 데이터
+형식이 다릅니다. pydemia/ui에서 React·Tailwind로 원본 구현했으며
+외부 editor source를 복사하지 않았습니다. `pyd-button`·
+`pyd-textarea`·`pyd-utils`를 사용하고 새 npm 의존성은 없습니다.
+의존한 shadcn/ui 수정 component의 기존 고정 revision·MIT 고지는
+provenance 기록을 재사용합니다.
+
+[WHATWG HTML textarea 명세](https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element)는
+native 다중 행 일반 텍스트 편집의 의미를 확인하는 참고 자료입니다.
+블록 작성과 읽기 전용 렌더링은 이 저장소의 원본이며 upstream
+component revision이나 별도 upstream LICENSE를 새로 가져오지
+않았습니다. 이름 있는 입력·형식 선택·버튼과 native heading/list를
+사용합니다. 실제 screen reader 발표는 확인하지 않았습니다.
+
 ## 2026-10-02 ResultState source 확인
 
 저장·가져오기 등 비동기 작업의 진행·성공·실패와 재시도를 반복해

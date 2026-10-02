@@ -542,6 +542,12 @@
       "files": [{ "path": "packages/ui/src/components/markdown-editor.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-block-editor", "type": "registry:ui",
+      "title": "Block Editor",
+      "registryDependencies": ["./pyd-button.json", "./pyd-textarea.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/block-editor.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-app-shell", "type": "registry:ui", "title": "App Shell",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/app-shell.tsx", "type": "registry:ui" }]
