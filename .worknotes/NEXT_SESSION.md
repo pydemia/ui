@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 공개 registry 조합 소비자: 65번째 snapshot의 13개 item을
+새 Vite 프로젝트에 설치하고 20개 생성 파일의 typecheck·build와
+390px·1280px 화면의 탐색·분석·게시판·대댓글 흐름을 확인했습니다.
+게시글 전환 시 `Thread`에 `key={postId}`가 필요한 조합 규칙을 catalog에
+추가했습니다. 문서 PR·공개 반영은 남았으며 Goal 추정 약 98%입니다.
+[소비자 검사 기록](public-composite-consumer-2026-10-03.md)을 참고하세요.
+
 2026-10-03 PR #111 배포: 두 chart의 `plain` 표시와 65번째 snapshot을
 `main`에 병합했습니다. PR·`main` Verify UI와 Pages, Vercel production이
 성공했고 공개 JSON·manifest의 내용이 로컬 생성물과 일치합니다.

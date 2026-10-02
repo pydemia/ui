@@ -7949,7 +7949,7 @@ function NoticeBoard() {
     },
     {
         id: "thread", name: "Thread", category: "Content",
-        description: "부모 댓글 ID로 대댓글을 표시하고 각 댓글에 답글을 작성합니다. 등록 실패 시 입력을 유지하며 저장은 onReply에서 처리합니다.",
+        description: "부모 댓글 ID로 대댓글을 표시하고 각 댓글에 답글을 작성합니다. 등록 실패 시 입력을 유지하며 저장은 onReply에서 처리합니다. 게시글을 전환할 때는 key={postId}로 작성 상태를 분리합니다.",
         code: `import { useState } from "react";
 import { Thread, type ThreadComment } from "@pydemia/ui";
 

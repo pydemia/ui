@@ -1,5 +1,11 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 공개 registry 조합 소비자 검사: **약 98% → 약 98%**입니다.
+13개 공개 item의 새 소비자 설치·typecheck·build와 분석·탐색·게시판·
+대댓글의 브라우저 조합을 확인했습니다. 새 component 수는 없으며
+실제 사용 코드의 상태 분리 규칙을 문서에 추가했습니다.
+[검사 기록](public-composite-consumer-2026-10-03.md)에 범위를 남겼습니다.
+
 2026-10-03 두 chart의 `plain` 공개와 체크리스트 재판정:
 **약 98% → 약 98%**입니다. PR #111과 `main` CI, Pages, Vercel
 production 및 최신 item·65번째 snapshot의 공개 일치를 확인했습니다.
