@@ -1,5 +1,6 @@
 import {
     Accordion, AccordionContent, AccordionItem, AccordionTrigger, ActionBar,
+    AnchorNav,
     AffixedInput, Alert, AlertDescription, AlertTitle,
     AppBody, AppBottomPanel, AppFloatingBubble, AppFloatingPanel,
     AppHeader, AppMain, AppShell, AppSidebar,
@@ -82,7 +83,7 @@ import {
 import type {
     AgentRunStatus, AgentStage, AppliedFilter, ApprovalStatus, BoardPost,
     CalendarSchedule,
-    ConversationMessage,
+    AnchorNavItem, ConversationMessage,
     DataTableColumn, DataTableView,
     DateRangeValue,
     DateTimeSelection,
@@ -305,6 +306,59 @@ function NavigationPreview() {
                             }} />
                     ))}
                 </BottomNav>
+            </div>
+        </div>
+    );
+}
+
+const anchorSections: AnchorNavItem[] = [
+    { id: "anchor-demo-overview", label: "요약" },
+    { id: "anchor-demo-metrics", label: "핵심 지표", depth: 2 },
+    { id: "anchor-demo-method", label: "분석 방법" },
+    { id: "anchor-demo-next", label: "다음 작업" },
+];
+
+function AnchorNavPreview() {
+    const [variant, setVariant] = useState<"rail" | "inline">("rail");
+    const [current, setCurrent] = useState<string | null>(null);
+
+    return (
+        <div className="preview-stack">
+            <Button variant="outline" onClick={() => setVariant(
+                variant === "rail" ? "inline" : "rail",
+            )}>
+                표시: {variant === "rail" ? "측면 선형" : "가로형"}
+            </Button>
+            <div className="grid min-w-0 gap-4 md:grid-cols-[9rem_minmax(0,1fr)]">
+                <div className="min-w-0">
+                    <AnchorNav label="보고서 목차" items={anchorSections}
+                        scrollRootId="anchor-nav-demo-scroll" offset={16}
+                        variant={variant} onCurrentIdChange={setCurrent} />
+                    <p role="status" className="text-xs text-muted">
+                        현재: {anchorSections.find((item) =>
+                            item.id === current)?.label ?? "없음"}
+                    </p>
+                </div>
+                <div id="anchor-nav-demo-scroll" role="region"
+                    aria-label="보고서 내용" tabIndex={0}
+                    className={
+                        "max-h-60 min-w-0 overflow-y-auto rounded-sm " +
+                        "border border-border bg-surface p-4 " +
+                        "focus-visible:outline-2 focus-visible:outline-focus"
+                    }>
+                    {anchorSections.map((item) => (
+                        <section key={item.id} id={item.id}
+                            className="min-h-40 scroll-mt-4 border-b border-border">
+                            <h3 className="m-0 text-sm font-semibold">
+                                {item.label}
+                            </h3>
+                            <p className="text-sm text-muted">
+                                이 섹션을 읽거나 목차 링크로 이동해 보세요.
+                                스크롤 위치에 따라 현재 항목이 바뀝니다.
+                            </p>
+                        </section>
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -6123,6 +6177,28 @@ function ReleaseSchedule() {
   </BottomNav>
 </>;`,
         preview: () => <NavigationPreview />,
+    },
+    {
+        id: "anchor-nav", name: "AnchorNav", category: "Navigation",
+        description: "긴 문서의 섹션으로 이동하고 스크롤 위치를 현재 링크에 반영합니다. 측면 선형·가로형 표시와 내부 스크롤 영역을 지원하며 focus는 이동시키지 않습니다.",
+        code: `import { AnchorNav, type AnchorNavItem } from "@pydemia/ui";
+
+const sections: AnchorNavItem[] = [
+  { id: "summary", label: "요약" },
+  { id: "metrics", label: "핵심 지표", depth: 2 },
+  { id: "method", label: "분석 방법" },
+];
+
+<div className="grid grid-cols-[10rem_1fr] gap-4">
+  <AnchorNav label="보고서 목차" items={sections}
+    scrollRootId="report-scroll" offset={16} />
+  <article id="report-scroll" className="max-h-96 overflow-y-auto">
+    <section id="summary"><h2>요약</h2></section>
+    <section id="metrics"><h2>핵심 지표</h2></section>
+    <section id="method"><h2>분석 방법</h2></section>
+  </article>
+</div>`,
+        preview: () => <AnchorNavPreview />,
     },
     {
         id: "navigation-menu", name: "NavigationMenu",

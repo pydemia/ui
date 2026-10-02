@@ -2371,6 +2371,19 @@ snapshot `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14
 `sha256-37f075e6b3cb4520d6aa5aa08e6c4673c19917dc199f5d6fd355b2d097ddee77`입니다.
 세부 기록은 `.worknotes/menubar-2026-10-02.md`에 있습니다.
 
+## 2026-10-02 AnchorNav 로컬 검증
+
+`npm run typecheck`와 전체 UI 테스트 166/166이 통과했습니다.
+새 테스트 3건은 nav·native 링크·표시 형태, 잘못된 섹션 ID,
+스크롤 위치별 `aria-current`와 callback의 중복 호출 방지를
+확인했습니다. 로컬 Chromium 문서 preview에서 링크 클릭 후
+내부 영역만 스크롤하고 hash가 바뀌는 것, 스크롤에 따른 현재
+항목 변경, 뒤로 가기 시 hash·위치 복원, 두 표시 형태와 390px
+dark의 가로 넘침 없음, page error 0건을 확인했습니다.
+
+이 기록 시점의 build·registry 검사와 공개 배포·URL은 별도
+확인 전입니다. 실제 보조기술 발표는 실행하지 않았습니다.
+
 ## 2026-10-02 IconButton·Tabs 표시 형태
 
 로컬 `npm run typecheck`, UI 테스트 128/128, `npm run build`가

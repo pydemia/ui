@@ -1,5 +1,19 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 AnchorNav 로컬 구현·검증: **약 93% → 약 93%**입니다.
+같은 문서 섹션 목차를 추가하고 typecheck·UI 테스트 166/166,
+로컬 Chromium의 스크롤·hash 뒤로 가기·390px dark를 확인했습니다.
+build·registry·공개 공급 확인 전이므로 공개 118개 component·
+120개 item·39개 snapshot을 유지합니다.
+[작업 기록](anchor-nav-2026-10-02.md)을 참고하세요.
+
+2026-10-02 체크리스트 현재 적용 검토: **약 93% → 약 93%**입니다.
+draft snapshot 부담은 해결됐고, 문서 변경의 전체 검사와 적용되지
+않는 환경의 반복 기록이 남은 절차 비용입니다. 기준 검토만으로
+공급 완료나 goal 진척도를 올리지 않았습니다.
+[검토 기록](quality-checklist-current-review-2026-10-02.md)을
+참고하세요.
+
 2026-10-02 Lightbox 공개 확인: **약 92% → 약 93%**입니다.
 PR #68과 병합 commit `3657163`의 Verify UI·Pages, Vercel
 production이 성공했습니다. 갤러리 탐색·focus 복귀의 로컬 브라우저
