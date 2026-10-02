@@ -68,7 +68,7 @@ import {
     Snippet, SnippetContent, SnippetCopyButton, SnippetHeader, Spinner,
     SnippetTabsList, SnippetTabsTrigger, SideNav, SideNavLink, Sidebar,
     Sparkline, Stepper, Switch, Table, TableCell, TagsInput, Timeline,
-    Thread, TimePicker, ToolCall, Tree, TreeSelect,
+    Thread, TimePicker, ToolCall, Tree, TreeNav, TreeSelect,
     ToastQueue, useToastQueue,
     TableHead, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toggle,
     ToggleGroup, ToggleGroupItem,
@@ -91,7 +91,7 @@ import type {
     LightboxItem, LogEntry, QueryField, QueryGroup, ReasoningStatus,
     ModelChoice,
     ResponseFeedbackValue, ThreadComment,
-    TabsVariant, ToolCallStatus, TreeNode, TreeSelectItem,
+    TabsVariant, ToolCallStatus, TreeNavItem, TreeNode, TreeSelectItem,
 } from "@pydemia/ui";
 
 export type ComponentEntry = {
@@ -2532,6 +2532,68 @@ function TreePreview() {
             <p role="status" className="m-0 text-xs text-muted">
                 선택한 항목: {selectedLabel} · Remote 요청: {requestCount}회
             </p>
+        </div>
+    );
+}
+
+const treeNavPages: TreeNavItem[] = [
+    { id: "overview", label: "개요", href: "#tree-nav-overview" },
+    { id: "projects", label: "프로젝트", children: [
+        { id: "atlas", label: "Atlas", href: "#tree-nav-atlas",
+            children: [
+                { id: "atlas-builds", label: "빌드 기록",
+                    href: "#tree-nav-atlas-builds" },
+                { id: "atlas-files", label: "파일",
+                    href: "#tree-nav-atlas-files" },
+            ] },
+        { id: "beacon", label: "Beacon", href: "#tree-nav-beacon" },
+    ] },
+    { id: "settings", label: "설정", href: "#tree-nav-settings",
+        children: [
+            { id: "members", label: "구성원", href: "#tree-nav-members" },
+            { id: "billing", label: "결제", href: "#tree-nav-billing" },
+        ] },
+];
+
+function TreeNavPreview() {
+    const [currentId, setCurrentId] = useState("atlas-builds");
+    const [variant, setVariant] = useState<"rail" | "filled">("rail");
+    const labels: Record<string, string> = {
+        overview: "개요", atlas: "Atlas", "atlas-builds": "빌드 기록",
+        "atlas-files": "파일", beacon: "Beacon", settings: "설정",
+        members: "구성원", billing: "결제",
+    };
+
+    return (
+        <div className="preview-stack">
+            <div className="flex flex-wrap gap-2">
+                <Button variant="outline" onClick={() => setVariant(
+                    variant === "rail" ? "filled" : "rail",
+                )}>
+                    표시: {variant === "rail" ? "선형" : "채움형"}
+                </Button>
+                <Button variant="outline"
+                    onClick={() => setCurrentId("billing")}>
+                    설정 경로 열기
+                </Button>
+            </div>
+            <div className="grid min-w-0 gap-4">
+                <TreeNav label="프로젝트 페이지" items={treeNavPages}
+                    currentId={currentId} variant={variant}
+                    onNavigate={setCurrentId} />
+                <section aria-label="선택한 페이지"
+                    className={
+                        "min-h-40 rounded-sm border border-border " +
+                        "bg-surface p-4"
+                    }>
+                    <h3 className="m-0 text-base font-semibold">
+                        {labels[currentId]}
+                    </h3>
+                    <p role="status" className="text-sm text-muted">
+                        현재 페이지: {labels[currentId]}
+                    </p>
+                </section>
+            </div>
         </div>
     );
 }
@@ -6023,6 +6085,26 @@ function RemoteTree({ loadFiles }: {
     onLoadChildren={loadChildren} />;
 }`,
         preview: () => <TreePreview />,
+    },
+    {
+        id: "tree-nav", name: "TreeNav", category: "Navigation",
+        description: "여러 단계의 페이지 링크를 펼치고 현재 경로를 표시합니다. 링크와 하위 페이지 버튼을 분리하고 선형·채움형 표시를 제공합니다.",
+        code: `import { TreeNav, type TreeNavItem } from "@pydemia/ui";
+
+const pages: TreeNavItem[] = [
+  { id: "overview", label: "개요", href: "/overview" },
+  { id: "projects", label: "프로젝트", children: [
+    { id: "atlas", label: "Atlas", href: "/projects/atlas",
+      children: [
+        { id: "builds", label: "빌드 기록",
+          href: "/projects/atlas/builds" },
+      ] },
+  ] },
+];
+
+<TreeNav label="프로젝트 페이지" items={pages}
+  currentId="builds" variant="rail" />`,
+        preview: () => <TreeNavPreview />,
     },
     {
         id: "tree-select", name: "TreeSelect", category: "Selection",

@@ -490,6 +490,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named single-select tree with nested groups, declared level/position, separate focus/selection and described lazy loading/error states", "keyboard": "Chromium: arrows, Home/End, Enter, Space, typeahead, disabled skip, lazy expand/error retry/loaded child focus and focus ring verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-tree-nav", "category": "Navigation", "profiles": ["developer-tool", "neutral-product"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation-hybrid/", "scope": "native nested navigation, separate page links and disclosure controls; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named native nested lists and links with current page; branch buttons disclose child lists", "keyboard": "Chromium: Enter and Space disclosure, focus retention and link navigation verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-tree-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Ant Design", "url": "https://github.com/ant-design/ant-design/blob/820e1a8c2dbb508b15e5ad0fc3eedcdef869d98b/components/tree-select/index.en-US.md", "license": "MIT", "scope": "hierarchical form selection concept only; no source copied" },

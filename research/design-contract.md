@@ -1231,3 +1231,26 @@ native hash 링크로 이동하고 현재 섹션에는
 focus는 강제로 옮기지 않습니다. `onCurrentIdChange`는 현재
 섹션이 달라질 때만 알리며 스크롤 상태 자체는 component가
 관리합니다. `rail`·`inline`은 공통 token을 쓰는 표시 형태입니다.
+
+## 2026-10-02 TreeNav
+
+`TreeNav`는 여러 단계의 페이지 링크를 이름 있는 native nav·중첩
+목록으로 표시합니다. 호출자가 페이지 ID·label·href와 현재 페이지
+ID를 제공합니다. 실제 라우팅은 링크와 소비자 앱이 담당하며
+`onNavigate`는 클릭한 ID만 알립니다. 현재 링크에는
+`aria-current="page"`를 붙입니다.
+
+자식이 있는 페이지는 링크와 별도의 disclosure 버튼을 가집니다.
+href가 없는 그룹은 이름 있는 버튼 자체가 자식을 펼칩니다.
+버튼은 `aria-expanded`·`aria-controls`로 자식 목록을 연결하며
+native Tab·Enter·Space를 사용합니다. 초기에는 현재 페이지의
+조상 경로를 열고, 현재 ID가 바뀌면 새 경로를 엽니다. 사용자가
+현재 경로를 접는 것은 허용합니다.
+
+확장 상태는 기본적으로 component가 소유하고 `expandedIds`를
+제공하면 호출자가 소유합니다. controlled 상태에는
+`onExpandedIdsChange`가 필요하며, 이 경우 현재 경로를 여는
+책임도 호출자에게 있습니다. `rail`·`filled`는 같은 링크·확장
+동작에 공통 token을 적용한 표시 형태입니다. 중복 ID, 순환
+구조, 대상 없는 그룹, 잘못된 현재 ID와 지원하지 않는 URL
+scheme은 오류로 알립니다.
