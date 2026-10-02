@@ -1,5 +1,17 @@
 # Component 확장 작업 인계
 
+2026-10-03 `FunnelChart` 로컬 후보: 전환 단계의 값·첫 단계 대비
+도달률·결측값·0건을 별도 원본 component로 구현했습니다.
+typecheck·UI 테스트 218/218·build·registry(135개 item, 133개
+export/catalog)가 통과했고 Chromium의 기본·미수집·빈 목록·390px
+표시와 차트 axe violation 0건을 확인했습니다. 표시 번호 조정 뒤
+대상 테스트 3/3이 통과했습니다. `BulletChart`와 60번째 snapshot을
+함께 묶어 `registry:release-check`가 통과했습니다. 공개 CI·
+production은 남았습니다. 브랜치 133개 component·135개 item,
+공개 사이트 130개·132개,
+goal 추정 약 97%입니다.
+[작업 기록](funnel-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 체크리스트 재검토: 현행 변경분 중심 하한은
 유지하고 구현·공개 후보·공개 공급을 별도 상태로 보고합니다.
 `BarList`는 품질 검사 후 Vercel 제한으로 공개 대기, `BulletChart`는

@@ -1,5 +1,22 @@
 # 검증 기록
 
+## 2026-10-03 FunnelChart — 로컬 후보
+
+`npm run typecheck`, UI 테스트 218/218, `npm run build`,
+`npm run registry:release-check`가 통과했습니다. 새 snapshot
+`sha256-b289f7efbbc948fa611fa36747c94568dc176f2d7753aba85385426358bf10ec`
+은 `BulletChart`와 `FunnelChart`를 함께 포함합니다. registry 검사는
+135개 item·133개 export/catalog와 60개 snapshot을 확인했습니다.
+로컬 Chromium 문서 preview에서 120→96→54→23명과 첫 단계 대비
+100→80→45→19.2%, 미수집 단계·빈 목록·`plain`을 확인했습니다.
+390px viewport와 document scroll width가 모두 390px였고 해당
+차트 영역의 axe-core 4.12.1 검사는 violation 0건,
+incomplete 0건이었습니다. 표시 번호를 `aria-hidden` 처리한 뒤
+대상 테스트 3/3과 재빌드·registry release 검사가 다시 통과했습니다.
+공개 CI·production URL과 실제 screen reader 발표는 아직
+확인하지 않았습니다.
+[작업 기록](../.worknotes/funnel-chart-2026-10-03.md)을 참고하세요.
+
 ## 2026-10-03 BulletChart — 로컬 후보
 
 `npm run typecheck`, UI 테스트 215/215, `npm run build`,
@@ -10,7 +27,9 @@ item·132개 export/catalog와 기존 59개 snapshot을 확인했습니다.
 목표 초과 88%, 미수집 값, 평면 표시를 확인했습니다. 390px 화면의
 가로 넘침과 console error는 없었습니다. Operations workspace에서
 재실행 후 현재 완료 건수가 3→2로 바뀌었습니다. 새 snapshot,
-PR CI, 공개 경로는 아직 확인하지 않았습니다. 실제 screen reader·
+공개 경로는 아직 확인하지 않았습니다. draft PR #106의 제품 commit
+`44ae44a`와 기록 commit `964e6a8`의 Verify UI는 성공했습니다.
+실제 screen reader·
 touch·Safari는 검사하지 않았습니다.
 [작업 기록](../.worknotes/bullet-chart-2026-10-03.md)을 참고하세요.
 

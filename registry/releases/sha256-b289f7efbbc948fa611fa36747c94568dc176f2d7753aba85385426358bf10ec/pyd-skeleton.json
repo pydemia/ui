@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-skeleton",
+  "title": "Skeleton",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-b289f7efbbc948fa611fa36747c94568dc176f2d7753aba85385426358bf10ec/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/skeleton.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype SkeletonProps = ComponentProps<\"div\"> & {\n    shape?: \"rectangle\" | \"line\" | \"circle\";\n};\n\nfunction Skeleton({\n    shape = \"rectangle\", className, ...props\n}: SkeletonProps) {\n    if (![\"rectangle\", \"line\", \"circle\"].includes(shape)) {\n        throw new RangeError(\"Skeleton shape is not supported.\");\n    }\n\n    return (\n        <div\n            aria-hidden=\"true\"\n            data-shape={shape}\n            className={cn(\n                \"animate-pulse bg-border/60 motion-reduce:animate-none\",\n                shape === \"rectangle\" && \"rounded-sm\",\n                shape === \"line\" && \"h-3 w-full rounded-full\",\n                shape === \"circle\" && \"size-10 rounded-full\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Skeleton };\nexport type { SkeletonProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/skeleton.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `2fabc8a2691e17d0cffaef98a32ae260324f936c`:\n<https://github.com/pydemia/ui/blob/2fabc8a2691e17d0cffaef98a32ae260324f936c/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`58129142293a7031509679d8d7ca283c106f5545b636ada8ed079c1bb8e57962`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

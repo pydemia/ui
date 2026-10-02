@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
-사이트에는 129개 component와 131개 registry item이 있습니다.
+사이트에는 130개 component와 132개 registry item이 있습니다.
 `ArtifactViewer`의 공개 preview·Usage와 54번째 snapshot 경로·대표
 소비자 설치를 확인했습니다.
 2026-09-30에
@@ -285,6 +285,9 @@ URL을 사람이 하나씩 열지 않습니다.
 - [ ] `BulletChart` — 실제 값과 목표를 명시한 최대 범위에서 비교하는
   로컬 후보입니다. `Progress`의 작업 진행·`BarList`의 범주 비교와
   다른 목표 대비 실적을 다룹니다. 공개 검증 뒤 완료 처리합니다.
+- [ ] `FunnelChart` — 가입·구매처럼 순서 있는 전환 단계의 값과 첫
+  단계 대비 도달률을 비교하는 로컬 후보입니다. 결측값·0건을
+  구분하며 공개 검증 뒤 완료 처리합니다.
 - [x] `Heatmap` — 두 범주의 수치를 색 농도와 보이는 숫자로 함께
   표시합니다. 표 헤더·결측값·0·빈 목록과 내부 가로 스크롤을 제공합니다.
   실제 screen reader 발표는 미검증입니다.

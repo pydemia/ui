@@ -1,5 +1,19 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 FunnelChart
+
+가입·구매 등의 단계별 도달률은 `BarList`의 독립 범주 비교나
+`BulletChart`의 단일 목표 비교와 다릅니다. `FunnelChart`는
+pydemia/ui 원본 React·Tailwind 코드입니다. 외부 component 소스를
+복사하지 않았고 새 npm 의존성도 없습니다. registry 의존성은
+기존 `pyd-utils`뿐입니다. 외부 component upstream은 없으므로
+동일 revision의 소스·LICENSE 대조 대상도 없습니다.
+
+[W3C WAI의 Use of Color 해설](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color)을
+확인했습니다. 색·막대 길이만으로 전환 정보를 전하지 않도록 단계명,
+정확한 건수와 도달률을 텍스트로 표시합니다. W3C 예제 코드는
+복사하지 않았습니다.
+
 ## 2026-10-03 BulletChart
 
 운영 화면에서는 범주 간 크기(`BarList`)와 별개로 한 실적을 목표와

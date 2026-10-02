@@ -1,5 +1,15 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `FunnelChart` 로컬 후보: **약 97% → 약 97%**입니다.
+단계별 전환값과 첫 단계 대비 도달률을 원본 component로 구현해
+Data & analytics 범위가 넓어졌습니다. 로컬 typecheck·UI 테스트
+218/218·build·registry와 Chromium preview·390px·axe를 확인했습니다.
+`BulletChart`와 60번째 snapshot을 묶어 release check도 통과했습니다.
+브랜치는 133개 component·135개 item, 공개 사이트는 Vercel 제한으로
+130개·132개 기준입니다. 공개 CI·production 공급은
+아직 확인하지 않았으므로 관리용 추정은 올리지 않았습니다.
+[작업 기록](funnel-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 체크리스트 재검토: **약 97% → 약 97%**입니다.
 구현 후보, 공개 준비, 공개 공급을 별도 상태로 기록하기로 했습니다.
 draft PR #106의 Verify UI는 성공했지만 새 snapshot·production은

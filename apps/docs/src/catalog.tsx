@@ -42,7 +42,7 @@ import {
     DropdownMenuSubTrigger, DropdownMenuTrigger, Dropzone,
     Empty, EmptyContent, EmptyDescription,
     EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
-    FilterBar, FormWizard, Gantt,
+    FilterBar, FormWizard, FunnelChart, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
     HoverCardTrigger, Heatmap, Image, ImageCropper, Input, InputGroup,
     InputGroupAddon,
@@ -3244,6 +3244,46 @@ function BulletChartPreview() {
             <BulletChart title="완료율" description="현재 값과 목표를 100% 척도에서 비교합니다."
                 value={value} target={80} max={100} unit="%"
                 appearance={appearance} />
+        </div>
+    );
+}
+
+function FunnelChartPreview() {
+    const [variant, setVariant] = useState<"panel" | "plain">("panel");
+    const [state, setState] = useState<"data" | "missing" | "empty">(
+        "data",
+    );
+    const stages = [
+        { id: "visit", label: "방문", value: 120 },
+        { id: "signup", label: "가입", value: 96 },
+        { id: "verify", label: "인증", value: state === "missing"
+            ? null : 54 },
+        { id: "first-use", label: "첫 사용", value: 23 },
+    ];
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setState(
+                    state === "data" ? "missing" : "data",
+                )}>
+                    {state === "missing" ? "인증값 표시" : "인증값 숨기기"}
+                </Button>
+                <Button variant="outline" onClick={() => setState(
+                    state === "empty" ? "data" : "empty",
+                )}>
+                    {state === "empty" ? "데이터 표시" : "빈 데이터"}
+                </Button>
+                <Button variant="outline" onClick={() => setVariant(
+                    variant === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {variant === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <FunnelChart title="가입 전환 단계" unit="명"
+                description="첫 방문부터 첫 사용까지의 도달률입니다."
+                stages={state === "empty" ? [] : stages}
+                variant={variant} />
         </div>
     );
 }
@@ -7336,6 +7376,21 @@ function JobTerminal() {
 <BulletChart title="완료율" value={74} target={80}
   max={100} unit="%" />`,
         preview: () => <BulletChartPreview />,
+    },
+    {
+        id: "funnel-chart", name: "FunnelChart",
+        category: "Data & analytics",
+        description: "순서 있는 전환 단계의 건수와 첫 단계 대비 도달률을 표시합니다. 결측값·0건·빈 목록을 구분하고 증가하는 단계 수는 거부합니다.",
+        code: `import { FunnelChart } from "@pydemia/ui";
+
+<FunnelChart title="가입 전환 단계" unit="명"
+  stages={[
+    { id: "visit", label: "방문", value: 120 },
+    { id: "signup", label: "가입", value: 96 },
+    { id: "verify", label: "인증", value: 54 },
+    { id: "first-use", label: "첫 사용", value: 23 },
+  ]} />`,
+        preview: () => <FunnelChartPreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",

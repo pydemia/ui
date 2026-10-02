@@ -210,6 +210,8 @@ export { BarList } from "./components/bar-list";
 export type { BarListItem, BarListProps } from "./components/bar-list";
 export { BulletChart } from "./components/bullet-chart";
 export type { BulletChartProps } from "./components/bullet-chart";
+export { FunnelChart } from "./components/funnel-chart";
+export type { FunnelChartProps, FunnelStage } from "./components/funnel-chart";
 export { DataChart } from "./components/data-chart";
 export type {
     DataChartProps, ChartPoint, ChartSeries,
