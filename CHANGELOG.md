@@ -1,5 +1,13 @@
 # 변경 기록
 
+## 2026-10-02 — MarkdownEditor
+
+- Markdown 원문 입력, 실시간 미리보기와 form 값을
+  제공하는 `MarkdownEditor`를 추가했습니다. 기존 `Markdown`의
+  지원 문법만 미리보기에 사용합니다.
+- native textarea의 입력·붙여넣기·선택·undo를 유지하며, 값과 저장은
+  앱이 소유합니다. 새 npm 의존성은 없습니다.
+
 ## 2026-10-02 — NodeCanvas
 
 - 노드 위치와 방향 있는 연결을 표시·편집하는 `NodeCanvas`를

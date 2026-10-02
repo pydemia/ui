@@ -46,7 +46,8 @@ import {
     InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, JsonViewer, Kanban, NodeCanvas,
-    Label, Lightbox, LogConsole, Markdown, Menubar, MenubarCheckboxItem,
+    Label, Lightbox, LogConsole, Markdown, MarkdownEditor,
+    Menubar, MenubarCheckboxItem,
     MenubarContent, MenubarGroup, MenubarItem, MenubarLabel,
     MenubarMenu, MenubarRadioGroup, MenubarRadioItem,
     MenubarSeparator, MenubarSub, MenubarSubContent,
@@ -360,6 +361,35 @@ function NavigationPreview() {
                 </BottomNav>
             </div>
         </div>
+    );
+}
+
+function MarkdownEditorPreview() {
+    const initial = "## 게시글 초안\n\n**검토할 내용**을 적어 주세요.";
+    const [source, setSource] = useState(initial);
+    const [submitted, setSubmitted] = useState("제출 전");
+
+    return (
+        <form className="preview-stack min-w-0" onSubmit={(event) => {
+            event.preventDefault();
+            const formValue = new FormData(event.currentTarget).get("body");
+            setSubmitted(formValue === source
+                ? `제출: ${source.length}자` : "제출 값이 다릅니다.");
+        }} onReset={() => {
+            setSource(initial);
+            setSubmitted("제출 전");
+        }}>
+            <MarkdownEditor label="게시글 본문" name="body"
+                value={source} onValueChange={setSource} rows={7}
+                required description={
+                    "제목·강조·목록·코드 문법을 입력하고 미리보기를 확인합니다."
+                } />
+            <div className="flex flex-wrap items-center gap-2">
+                <Button type="submit">값 확인</Button>
+                <Button type="reset" variant="outline">초기화</Button>
+                <p role="status" className="m-0 text-sm">{submitted}</p>
+            </div>
+        </form>
     );
 }
 
@@ -5717,6 +5747,29 @@ const answer = [
 </Message>`,
         installItems: ["markdown", "message"],
         preview: () => <MarkdownPreview />,
+    },
+    {
+        id: "markdown-editor", name: "MarkdownEditor",
+        category: "Developer tools",
+        description: "Markdown 원문을 입력하면서 결과를 함께 미리봅니다. native textarea의 선택·붙여넣기·undo·form 제출을 유지하며, 표시 문법은 Markdown component의 지원 범위를 따릅니다.",
+        code: `import { useState } from "react";
+import { MarkdownEditor } from "@pydemia/ui";
+
+function ArticleForm() {
+  const [body, setBody] = useState("## 새 글");
+  const [saved, setSaved] = useState("");
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    setSaved(String(new FormData(event.currentTarget).get("body")));
+  }}>
+    <MarkdownEditor label="본문" name="body" value={body}
+      onValueChange={setBody} rows={10} required />
+    <button type="submit">저장</button>
+    <p role="status">저장 값: {saved || "없음"}</p>
+  </form>;
+}`,
+        installItems: ["markdown-editor"],
+        preview: () => <MarkdownEditorPreview />,
     },
     {
         id: "field", name: "Field", category: "Inputs",

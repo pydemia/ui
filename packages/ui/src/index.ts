@@ -40,6 +40,8 @@ export type { FieldControlProps, FieldProps } from "./components/field";
 export { Textarea } from "./components/textarea";
 export { CodeEditorShell } from "./components/code-editor-shell";
 export type { CodeEditorShellProps } from "./components/code-editor-shell";
+export { MarkdownEditor } from "./components/markdown-editor";
+export type { MarkdownEditorProps } from "./components/markdown-editor";
 export { NativeSelect } from "./components/native-select";
 export {
     Select, SelectValue, SelectGroup, SelectTrigger, SelectContent, SelectItem,
