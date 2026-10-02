@@ -1,5 +1,14 @@
 # 검증 기록
 
+## 2026-10-03 AppShell floating disclosure — 공개
+
+PR #104와 병합 `7f40cc3d3`의 Verify UI·GitHub Pages,
+Vercel production이 성공했습니다. 공개 현재 `pyd-app-shell`
+item과 58번째 snapshot manifest·item, 문서 JS asset이
+로컬 빌드와 byte 단위로 일치합니다. 공개 상호작용은 재실행하지
+않았습니다. 로컬 Chromium 결과와 미검증 환경은 아래 기록을
+참고하세요.
+
 ## 2026-10-03 AppShell floating disclosure — 로컬 후보
 
 `npm run typecheck`, UI 테스트 209/209, `npm run build`,
