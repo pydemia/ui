@@ -1,5 +1,22 @@
 # 검증 기록
 
+## 2026-10-02 DataTable 표시 선택 — 로컬
+
+`npm run typecheck`, UI 테스트 156/156, `npm run build`와
+`registry:release-check`가 통과했습니다. 현재 116개 component·
+118개 registry item과 37번째 snapshot
+`sha256-72ff812680d65d8deb1063f8e571d2c4d649813668343209e631f8800b1cb0ab`를
+확인했습니다.
+
+로컬 Chromium에서 DataTable preview의 기본 10px·compact 4px·
+comfortable 16px 행 세로 여백을 computed style로 확인했습니다.
+줄무늬를 켜면 두 번째 데이터 행에 `surface-subtle` 배경이 적용되고
+전체 행·원격 페이지 모드에서 같은 설정이 유지됩니다. 390px에서
+문서 scrollWidth는 390px이었고, light/dark에서 해당 행의 배경색과
+글자색을 확인했습니다. console error와 Vite overlay는 없었습니다.
+별도 소비자 설치, 실제 screen reader·touch·Safari·RTL 및 공개
+배포는 이번 로컬 검사에 포함하지 않았습니다.
+
 ## 2026-10-02 AgentStatus 공개 확인
 
 PR #62 Verify UI run 36945827683과 병합 commit `3411490`의

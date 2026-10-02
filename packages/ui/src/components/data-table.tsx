@@ -43,6 +43,8 @@ type DataTableBaseProps<Row> = {
         selectedRows: readonly Row[], clearSelection: () => void,
     ) => ReactNode;
     emptyMessage?: string;
+    density?: "compact" | "standard" | "comfortable";
+    striped?: boolean;
     className?: string;
 };
 
@@ -92,6 +94,7 @@ function DataTable<Row>({
     searchPlaceholder = "검색", filter, defaultPageSize = 10,
     pageSizeOptions = [10, 25, 50], selectable = false,
     renderActions, emptyMessage = "표시할 항목이 없습니다.", remote,
+    density = "standard", striped = false,
     className,
 }: DataTableProps<Row>) {
     const searchId = useId();
@@ -301,7 +304,13 @@ function DataTable<Row>({
                     "min-w-0 overflow-x-auto rounded-sm " +
                     "focus-visible:outline-2 focus-visible:outline-focus"
                 }>
-                <Table className="min-w-max">
+                <Table className={cn(
+                    "min-w-max",
+                    density === "compact" &&
+                        "[--density-row-block:var(--space-1)]",
+                    density === "comfortable" &&
+                        "[--density-row-block:var(--space-4)]",
+                )}>
                     <caption className="sr-only">{caption}</caption>
                     <thead>
                         <tr>
@@ -387,7 +396,9 @@ function DataTable<Row>({
                         ) : pageRows.map((row) => {
                             const id = getRowId(row);
                             return (
-                                <tr key={id}>
+                                <tr key={id}
+                                    className={striped ? "even:bg-surface-subtle" :
+                                        undefined}>
                                     {selectable && (
                                         <TableCell>
                                             <Checkbox

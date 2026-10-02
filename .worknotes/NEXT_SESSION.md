@@ -1,5 +1,23 @@
 # Component 확장 작업 인계
 
+2026-10-02 DataTable 표시 선택 로컬 구현: 전체 행·원격 페이지에
+`compact`·`standard`·`comfortable` 행 밀도와 줄무늬를 추가했습니다.
+typecheck·UI 테스트 156/156·build·release 검사, Chromium의
+10/4/16px 여백과 390px·dark 표시를 확인했습니다. 37번째 snapshot은
+`sha256-72ff812680d65d8deb1063f8e571d2c4d649813668343209e631f8800b1cb0ab`입니다.
+공개는 남아 있으며 공개 116개 component·118개 item·36개
+snapshot, goal 약 91%를 유지합니다.
+[작업 기록](data-table-presentation-2026-10-02.md)을 참고하세요.
+
+2026-10-02 공급·품질 체크리스트 부담 재검토: 적용 기준은 이미
+위험별 검사이며, 남은 경직성은 로드맵의 중복된 여섯 단계와
+PR마다 전체 현재 snapshot을 요구하는 CI 절차에 있습니다.
+검사 상태를 `통과`·`해당 없음`·`미검증`·`차단`으로 구분하고,
+CI 절차 변경은 공개 후보의 snapshot 검사 보존과 함께 설계할 것을
+권장합니다. 코드·CI·공개 판정은 변경하지 않았습니다. 공개
+116개 component·118개 item·36개 snapshot, goal 약 91%입니다.
+[검토 기록](quality-checklist-friction-2026-10-02.md)을 참고하세요.
+
 2026-10-02 AgentStatus 공개 확인: PR #62 병합 commit `3411490`의
 Verify UI·Pages와 Vercel production이 성공했습니다. 공개 preview·
 Usage, 현재 registry item과 36번째 snapshot manifest/item URL을
