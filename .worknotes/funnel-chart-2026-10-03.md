@@ -19,8 +19,11 @@ incomplete 0건입니다. 이후 표시 번호를 `aria-hidden`으로 조정했�
 대상 테스트 3/3과 재빌드가 통과했습니다. `BulletChart`와 함께
 60번째 불변 snapshot
 `sha256-b289f7efbbc948fa611fa36747c94568dc176f2d7753aba85385426358bf10ec`
-을 생성해 `registry:release-check`를 통과했습니다. 공개 CI·
-production 경로와 실제 screen reader 발표는 미검증입니다.
+을 생성해 `registry:release-check`를 통과했습니다. PR #106의 draft
+Verify UI run `37048696452`와 검토 준비 run `37049005305`가
+성공했고 Vercel preview는 READY입니다. 사용자 production의
+`pyd-funnel-chart.json`은 404입니다. 공개 공급과 실제 screen
+reader 발표는 미검증입니다.
 
 `main`은 131개 component·133개 item·59개 snapshot, 이번 브랜치는
 133개 component·135개 item·60개 snapshot입니다. 사용자 사이트는 Vercel 배포

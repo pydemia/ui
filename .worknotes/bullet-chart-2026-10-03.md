@@ -20,8 +20,11 @@ BarList까지 131개·133개·59개이며 goal 관리용 추정은 약 97%입니
 workspace의 재실행 후 현재 완료 건수는 3→2로 바뀌었습니다.
 고유 label 검사를 추가한 뒤 대상 테스트 3/3을 재실행했습니다.
 [draft PR #106](https://github.com/pydemia/ui/pull/106)의 Verify UI
-run `37045189665`가 성공했습니다. Vercel 제한 중에 snapshot을 하나
-더 공개하지 않고 다음 릴리스 묶음에서 생성합니다. 새 snapshot·
-production 공개 경로는 미검증입니다.
-현재 로컬 후보는 132개 component·134개 item입니다. 공개 공급이
+run `37045189665`가 성공했습니다. 이후 `FunnelChart`와 함께
+60번째 snapshot
+`sha256-b289f7efbbc948fa611fa36747c94568dc176f2d7753aba85385426358bf10ec`
+을 만들었고 `registry:release-check` 및 PR #106의 검토 준비 Verify UI
+run `37049005305`가 통과했습니다. Vercel preview는 READY이나
+사용자 production의 `pyd-bullet-chart.json`은 404입니다.
+현재 브랜치는 133개 component·135개 item입니다. 공개 공급이
 아니므로 goal 관리용 추정 약 97%를 유지합니다.

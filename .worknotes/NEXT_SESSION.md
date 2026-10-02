@@ -6,10 +6,11 @@ typecheck·UI 테스트 218/218·build·registry(135개 item, 133개
 export/catalog)가 통과했고 Chromium의 기본·미수집·빈 목록·390px
 표시와 차트 axe violation 0건을 확인했습니다. 표시 번호 조정 뒤
 대상 테스트 3/3이 통과했습니다. `BulletChart`와 60번째 snapshot을
-함께 묶어 `registry:release-check`가 통과했습니다. 공개 CI·
-production은 남았습니다. 브랜치 133개 component·135개 item,
-공개 사이트 130개·132개,
-goal 추정 약 97%입니다.
+함께 묶어 `registry:release-check`가 통과했습니다. PR #106의
+검토 준비 Verify UI run `37049005305`도 성공했습니다. Vercel
+preview는 READY, 사용자 production의 세 새 item은 404입니다.
+브랜치는 133개 component·135개 item, 공개 사이트는 130개·
+132개이며 goal 추정은 약 97%입니다.
 [작업 기록](funnel-chart-2026-10-03.md)을 참고하세요.
 
 2026-10-03 공급·품질 체크리스트 재검토: 현행 변경분 중심 하한은

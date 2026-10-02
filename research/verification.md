@@ -1,6 +1,6 @@
 # 검증 기록
 
-## 2026-10-03 FunnelChart — 로컬 후보
+## 2026-10-03 FunnelChart — 공개 후보
 
 `npm run typecheck`, UI 테스트 218/218, `npm run build`,
 `npm run registry:release-check`가 통과했습니다. 새 snapshot
@@ -13,11 +13,13 @@
 차트 영역의 axe-core 4.12.1 검사는 violation 0건,
 incomplete 0건이었습니다. 표시 번호를 `aria-hidden` 처리한 뒤
 대상 테스트 3/3과 재빌드·registry release 검사가 다시 통과했습니다.
-공개 CI·production URL과 실제 screen reader 발표는 아직
-확인하지 않았습니다.
+PR #106의 draft Verify UI run `37048696452`와 검토 준비 run
+`37049005305`가 성공했고 Vercel preview는 READY입니다. 사용자
+production의 `pyd-funnel-chart.json`은 404입니다. 공개 공급과 실제
+screen reader 발표는 아직 확인하지 않았습니다.
 [작업 기록](../.worknotes/funnel-chart-2026-10-03.md)을 참고하세요.
 
-## 2026-10-03 BulletChart — 로컬 후보
+## 2026-10-03 BulletChart — 공개 후보
 
 `npm run typecheck`, UI 테스트 215/215, `npm run build`,
 `npm run registry:check`가 통과했습니다. registry 검사는 134개
@@ -26,11 +28,12 @@ item·132개 export/catalog와 기존 59개 snapshot을 확인했습니다.
 로컬 Chromium에서 현재 74%·목표 80%·최대 100%의 텍스트와
 목표 초과 88%, 미수집 값, 평면 표시를 확인했습니다. 390px 화면의
 가로 넘침과 console error는 없었습니다. Operations workspace에서
-재실행 후 현재 완료 건수가 3→2로 바뀌었습니다. 새 snapshot,
-공개 경로는 아직 확인하지 않았습니다. draft PR #106의 제품 commit
-`44ae44a`와 기록 commit `964e6a8`의 Verify UI는 성공했습니다.
-실제 screen reader·
-touch·Safari는 검사하지 않았습니다.
+재실행 후 현재 완료 건수가 3→2로 바뀌었습니다. 이후
+`FunnelChart`와 함께 60번째 snapshot을 만들고
+`registry:release-check`와 PR #106의 검토 준비 Verify UI run
+`37049005305`를 통과했습니다. 사용자 production의
+`pyd-bullet-chart.json`은 404입니다. 실제 screen reader·touch·
+Safari는 검사하지 않았습니다.
 [작업 기록](../.worknotes/bullet-chart-2026-10-03.md)을 참고하세요.
 
 ## 2026-10-03 BarList — 병합 후 공개 지연

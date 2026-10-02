@@ -32,11 +32,12 @@ revision의 source·LICENSE, 의존성과 접근성 검토를 유지합니다. �
 
 `BarList`는 PR·`main` CI와 Pages가 통과했지만 Vercel 배포 제한으로
 공개 item이 404입니다. 이는 **품질 실패가 아니라 공개 대기**이며,
-공개 공급 완료로도 세지 않습니다. `BulletChart`는 로컬 검증과
-[draft PR #106](https://github.com/pydemia/ui/pull/106)의 Verify UI를
-통과한 구현 후보입니다. 새 snapshot·production 검증 전이므로
-공개 준비·공개 공급 완료로 세지 않습니다. 이 두 상태를 하나의
-체크리스트 점수로 합치지 않습니다.
+공개 공급 완료로도 세지 않습니다. `BulletChart`와 `FunnelChart`는
+[PR #106](https://github.com/pydemia/ui/pull/106)의 같은 60번째
+snapshot에 묶였고 검토 준비 Verify UI를 통과한 공개 후보입니다.
+production JSON은 404이므로 공개 공급 완료로 세지 않습니다.
+구현 검증, 공개 준비, 공개 공급을 하나의 체크리스트 점수로
+합치지 않습니다.
 
 ## 실제 경직성이 있는 곳
 
