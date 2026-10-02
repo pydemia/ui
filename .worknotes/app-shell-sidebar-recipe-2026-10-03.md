@@ -18,6 +18,9 @@ drawer는 기존 `Sidebar`가 담당합니다. 오른쪽 상세 영역은
 화면으로 확인했습니다. 실제 screen reader 발표와 touch 조작은
 검증하지 않았습니다.
 
-이 조합은 [PR #106](https://github.com/pydemia/ui/pull/106)에 추가할
-문서 변경입니다. 사용자 production에는 아직 반영되지 않았습니다.
+이 조합은 [PR #106](https://github.com/pydemia/ui/pull/106)에 병합한
+문서 변경입니다. 최신 commit `e37d7d8`의 Verify UI run
+`37054845942`가 성공하고 Vercel preview가 READY입니다. Preview
+문서 HTML은 HTTP 200이며 로컬 build와 같은 JS asset을 가리킵니다.
+사용자 production에는 Vercel 배포 제한으로 아직 반영되지 않았습니다.
 Goal 관리용 추정은 약 97%로 유지합니다.

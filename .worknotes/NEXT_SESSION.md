@@ -1,11 +1,18 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #106 병합·공개 상태: `main`의 Verify UI와 Pages는
+성공했지만 Vercel production은 배포 제한으로 이전 버전입니다.
+새 item 세 개의 공개 URL은 404이며 goal 추정 약 97%입니다.
+배포 재확인 범위는 [릴리스 기록](release-pr106-2026-10-03.md)에
+남겼습니다.
+
 2026-10-03 AppShell 반응형 탐색: 기존 `Sidebar`의 desktop 접기·
 mobile drawer를 AppShell preview와 Usage에 연결했습니다. 문서
 typecheck·build, Chromium의 390px·1280px 배치와 열기·닫기·링크
 선택·focus 복귀를 확인했습니다. 새 component·snapshot은 없고
 goal 추정 약 97%입니다. 세부 범위는
 [작업 기록](app-shell-sidebar-recipe-2026-10-03.md)에 있습니다.
+PR #106 최신 commit의 Verify UI와 preview 배포가 성공했습니다.
 
 2026-10-03 PR #106 리뷰 수정: `BulletChart`의 빈 formatter 결과가
 단위만 표시되던 문제를 고쳤습니다. 대상 테스트 4/4,

@@ -288,13 +288,13 @@ URL을 사람이 하나씩 열지 않습니다.
 - [x] `Sparkline` — 작은 영역의 추세와 수치 대체 텍스트. 소비자 설치와
   실제 screen reader 발표는 미검증.
 - [ ] `BarList` — 범주별 크기를 긴 이름·정확한 값·가로 막대로
-  표시하는 로컬 후보입니다. 공개 registry·preview 검증 뒤 완료 처리합니다.
+  표시합니다. `main`에 병합됐으며 production 공급 확인 뒤 완료 처리합니다.
 - [ ] `BulletChart` — 실제 값과 목표를 명시한 최대 범위에서 비교하는
-  PR #106의 공개 후보입니다. `Progress`의 작업 진행·`BarList`의
+  component입니다. `main`에 병합됐습니다. `Progress`의 작업 진행·`BarList`의
   범주 비교와 다른 목표 대비 실적을 다룹니다. snapshot·CI는
   통과했고 production 공급 확인 뒤 완료 처리합니다.
 - [ ] `FunnelChart` — 가입·구매처럼 순서 있는 전환 단계의 값과 첫
-  단계 대비 도달률을 비교하는 PR #106의 공개 후보입니다.
+  단계 대비 도달률을 비교합니다. `main`에 병합됐습니다.
   결측값·0건을 구분하며 snapshot·CI는 통과했습니다.
   production 공급 확인 뒤 완료 처리합니다.
 - [x] `Heatmap` — 두 범주의 수치를 색 농도와 보이는 숫자로 함께

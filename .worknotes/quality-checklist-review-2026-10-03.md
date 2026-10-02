@@ -16,9 +16,11 @@ CI를 변경하지 않았습니다.
 
 이 구분은 개발 중 후보를 공개된 component로 세거나 확인된 값 손실·
 제출 오류·keyboard 접근 불가·필수 고지 누락·설치 실패·적용 CI 실패를
-허용한다는 뜻이 아닙니다. PR #106의 최신 commit은 Verify UI가 통과했고
-Vercel preview가 READY입니다. production은 이전 배포를 가리키므로
-공개 공급 상태와 goal 관리용 추정 약 97%는 그대로입니다.
+허용한다는 뜻이 아닙니다. PR #106의 병합 commit은 Verify UI가
+통과했고 마지막 PR commit의 Vercel preview는 READY입니다.
+production은 이전 배포를 가리킵니다. 공개 공급 상태와 goal 관리용
+추정 약 97%는 그대로입니다.
+[병합·공개 상태](release-pr106-2026-10-03.md)에 근거를 남겼습니다.
 이 문서 변경은 PR #106의 최신 commit에 포함됐고 Verify UI run
 `37053186912`가 통과했습니다.
 

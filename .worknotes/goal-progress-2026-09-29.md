@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 PR #106 병합·공개 지연: **약 97% → 약 97%**입니다.
+`main`의 Verify UI·Pages는 성공했지만 Vercel 배포 제한으로
+production은 이전 버전이고 새 item 세 개는 공개 URL에서 404입니다.
+저장소는 133개 component·135개 item·60개 snapshot이며 사용자
+사이트는 130개·132개·58개입니다.
+[릴리스 기록](release-pr106-2026-10-03.md)에 근거와 다음 검사를
+남겼습니다.
+
 2026-10-03 AppShell 반응형 탐색 조합: **약 97% → 약 97%**입니다.
 기존 `Sidebar`를 AppShell preview·Usage에 결합해 모바일 drawer와
 데스크톱 측면 탐색을 바로 가져다 쓸 수 있게 했습니다. 새 component나
