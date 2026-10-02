@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
-사이트에는 133개 component와 135개 registry item이 있습니다.
+사이트에는 134개 component와 136개 registry item이 있습니다.
 `ArtifactViewer`의 공개 preview·Usage와 54번째 snapshot 경로·대표
 소비자 설치를 확인했습니다.
 2026-09-30에
@@ -297,7 +297,7 @@ URL을 사람이 하나씩 열지 않습니다.
   production item을 확인했습니다.
 - [x] `WaterfallChart` — 시작값에서 순서대로 적용한 양수·음수 변화를
   부동 막대와 정확한 증감·누적값 표로 표시합니다. 0·음수·빈 목록을
-  구분하며 공개 공급 여부는 작업 기록에서 추적합니다.
+  구분하며 production item을 확인했습니다.
 - [x] `Heatmap` — 두 범주의 수치를 색 농도와 보이는 숫자로 함께
   표시합니다. 표 헤더·결측값·0·빈 목록과 내부 가로 스크롤을 제공합니다.
   실제 screen reader 발표는 미검증입니다.
