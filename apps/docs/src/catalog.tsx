@@ -3066,6 +3066,7 @@ function DataChartPreview() {
     >("line");
     const [empty, setEmpty] = useState(false);
     const [multiple, setMultiple] = useState(false);
+    const [hoverSummary, setHoverSummary] = useState(false);
 
     return (
         <div className="preview-workspace grid gap-3">
@@ -3096,6 +3097,10 @@ function DataChartPreview() {
                     onClick={() => setMultiple(!multiple)}>
                     {multiple ? "단일 계열" : "계열 비교"}
                 </Button>
+                <Button variant={hoverSummary ? "primary" : "outline"}
+                    onClick={() => setHoverSummary(!hoverSummary)}>
+                    {hoverSummary ? "포인터 요약 켜짐" : "포인터 요약 꺼짐"}
+                </Button>
                 <Button variant="ghost" onClick={() => setEmpty(!empty)}>
                     {empty ? "데이터 표시" : "빈 데이터"}
                 </Button>
@@ -3112,12 +3117,13 @@ function DataChartPreview() {
                     categories={empty ? [] : chartCategories}
                     series={empty ? [] : variant === "stacked-area"
                         ? stackedAreaSeries : chartSeries}
-                    variant={variant} inspectable toggleableSeries />
+                    variant={variant} inspectable hoverSummary={hoverSummary}
+                    toggleableSeries />
             ) : (
                 <DataChart title="요일별 검토 완료" unit="건"
                     description="목요일 데이터는 집계되지 않았습니다."
                     points={empty ? [] : chartPoints}
-                    variant={variant} inspectable />
+                    variant={variant} inspectable hoverSummary={hoverSummary} />
             )}
         </div>
     );
@@ -7018,7 +7024,7 @@ const slides = [
     },
     {
         id: "data-chart", name: "DataChart", category: "Data & analytics",
-        description: "단일·다중 계열을 선형·그룹 막대·누적 막대·영역·누적 영역으로 표시합니다. 선택형 범례로 계열을 숨기고 축·누적값을 다시 계산할 수 있습니다. 구간 선택기와 데이터 표는 현재 표시한 계열의 값을 제공합니다.",
+        description: "단일·다중 계열을 선형·그룹 막대·누적 막대·영역·누적 영역으로 표시합니다. 선택형 범례로 계열을 숨기고 축·누적값을 다시 계산할 수 있습니다. 구간 선택기와 데이터 표로 값을 확인하며, 선택적으로 그래프 위에 포인터 구간의 요약을 띄울 수 있습니다.",
         code: `import { DataChart } from "@pydemia/ui";
 
 const points = [
@@ -7030,7 +7036,7 @@ const points = [
 
 <>
   <DataChart title="요일별 완료" points={points}
-    unit="건" inspectable />
+    unit="건" inspectable hoverSummary />
   <DataChart title="요일별 완료" points={points}
     unit="건" variant="bar" />
   <DataChart title="요일별 완료" points={points}

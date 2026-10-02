@@ -1,4 +1,4 @@
-import { useId, useState, type ComponentProps } from "react";
+import { useEffect, useId, useState, type ComponentProps } from "react";
 import { cn } from "./utils";
 
 type ChartPoint = { label: string; value: number | null };
@@ -16,6 +16,7 @@ type DataChartBaseProps = Omit<
     variant?: "line" | "bar" | "area" | "stacked-bar" |
         "stacked-area";
     inspectable?: boolean;
+    hoverSummary?: boolean;
     unit?: string;
     formatValue?: (value: number) => string;
 };
@@ -52,6 +53,7 @@ function DataChart({
     toggleableSeries = false,
     variant = "line",
     inspectable = false,
+    hoverSummary = false,
     unit = "",
     formatValue = String,
     className,
@@ -59,9 +61,24 @@ function DataChart({
 }: DataChartProps) {
     const inspectorId = useId();
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [hoverLeft, setHoverLeft] = useState(0);
     const [hiddenSeriesIds, setHiddenSeriesIds] = useState<Set<string>>(
         () => new Set(),
     );
+
+    useEffect(() => {
+        if (hoveredIndex === null) return;
+        const dismiss = (event: KeyboardEvent) => {
+            if (event.key === "Escape") setHoveredIndex(null);
+        };
+        document.addEventListener("keydown", dismiss);
+        return () => document.removeEventListener("keydown", dismiss);
+    }, [hoveredIndex]);
+
+    if (hoverSummary && !inspectable) {
+        throw new Error("DataChart hover summary requires inspectable.");
+    }
 
     if (!["line", "bar", "area", "stacked-bar", "stacked-area"]
         .includes(variant)) {
@@ -359,7 +376,9 @@ function DataChart({
                 </p>
             ) : (
                 <>
-                    <div className="min-w-0 overflow-x-auto">
+                    <div className="relative min-w-0 overflow-x-auto"
+                        onPointerLeave={() => setHoveredIndex(null)}
+                        onScroll={() => setHoveredIndex(null)}>
                         <svg
                             viewBox={`0 0 ${width} 260`}
                             aria-hidden="true"
@@ -524,10 +543,83 @@ function DataChart({
                                     width={plotWidth / labels.length}
                                     height={bottom - top}
                                     fill="transparent"
-                                    onPointerEnter={() => setSelectedIndex(index)}
+                                    onPointerEnter={(event) => {
+                                        setSelectedIndex(index);
+                                        if (!hoverSummary ||
+                                            event.pointerType === "touch") {
+                                            return;
+                                        }
+                                        const scroller = event.currentTarget
+                                            .ownerSVGElement?.parentElement;
+                                        if (!scroller) return;
+                                        const bounds = scroller
+                                            .getBoundingClientRect();
+                                        const viewportLeft = Math.max(
+                                            8, Math.min(
+                                                bounds.width - 200,
+                                                event.clientX - bounds.left - 96,
+                                            ),
+                                        );
+                                        setHoverLeft(
+                                            scroller.scrollLeft + viewportLeft,
+                                        );
+                                        setHoveredIndex(index);
+                                    }}
                                     onClick={() => setSelectedIndex(index)} />
                             ))}
                         </svg>
+                        {hoverSummary && hoveredIndex !== null &&
+                            hoveredIndex < labels.length &&
+                            chartSeries.length > 0 && (
+                            <div aria-hidden="true"
+                                className={
+                                    "absolute top-2 z-10 w-48 max-w-[calc(100%-1rem)] " +
+                                    "rounded-sm border border-border bg-surface " +
+                                    "p-[var(--space-3)] text-xs text-foreground " +
+                                    "shadow-[var(--shadow-float)]"
+                                }
+                                style={{ left: hoverLeft }}>
+                                <strong className="block font-semibold">
+                                    {labels[hoveredIndex]?.trim() ||
+                                        `구간 ${hoveredIndex + 1}`}
+                                </strong>
+                                <dl className="mt-2 grid gap-1">
+                                    {chartSeries.map((item) => {
+                                        const value = item.values[hoveredIndex];
+                                        return (
+                                            <div key={item.id}
+                                                className="flex justify-between gap-2">
+                                                <dt className="min-w-0 text-muted">
+                                                    {item.label}
+                                                </dt>
+                                                <dd className="m-0 tabular-nums">
+                                                    {value === null
+                                                        ? "데이터 없음"
+                                                        : `${formatValue(value)}${unit}`}
+                                                </dd>
+                                            </div>
+                                        );
+                                    })}
+                                    {variant === "stacked-area" && (
+                                        <div className="flex justify-between gap-2">
+                                            <dt className="min-w-0 text-muted">
+                                                합계
+                                            </dt>
+                                            <dd className="m-0 tabular-nums">
+                                                {stackedAreaTotals[
+                                                    hoveredIndex] === null
+                                                    ? "데이터 없음"
+                                                    : `${formatValue(
+                                                        stackedAreaTotals[
+                                                            hoveredIndex
+                                                        ] as number,
+                                                    )}${unit}`}
+                                            </dd>
+                                        </div>
+                                    )}
+                                </dl>
+                            </div>
+                        )}
                     </div>
                 </>
             )}
@@ -611,9 +703,10 @@ function DataChart({
                             구간 확인
                         </label>
                         <select id={inspectorId} value={inspectedIndex}
-                            onChange={(event) => setSelectedIndex(
-                                Number(event.target.value),
-                            )}
+                            onChange={(event) => {
+                                setSelectedIndex(Number(event.target.value));
+                                setHoveredIndex(null);
+                            }}
                             className={
                                 "h-[var(--control-height)] min-w-28 " +
                                 "rounded-sm border border-border bg-surface " +

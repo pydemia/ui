@@ -1,5 +1,21 @@
 # BottomNav 표시 선택
 
+## 공개 확인
+
+PR #91의 Verify UI run `36990865356`, 병합 commit `fc12a8f`의
+Verify UI run `36991146756`과 Pages run `36991145804`가
+성공했습니다. Vercel production
+`dpl_3aeb4rBTHisaB1T1iUZCshbQj4oq`는 READY이며
+`ui.pydemia.ai` alias에 연결됐습니다. 공개 Navigation preview에서
+`dock`으로 전환했을 때 선택 링크가 accent 배경으로 표시됐고 Usage에
+새 prop이 보였습니다. 공개 browser console error는 0건입니다.
+현재 `pyd-navigation.json`, 49번째 snapshot manifest와 같은
+snapshot의 navigation item URL은 HTTP 200이고 manifest의 itemCount는
+127입니다. 공개 사이트에서 로컬 keyboard·반응형 검사를 반복하지
+않았습니다. Goal 관리용 추정은 약 97%로 유지합니다.
+
+## 구현과 로컬 검증
+
 2026-10-02. 공개 기준 125개 component·127개 registry item·48개
 snapshot에서 시작했습니다. `Navigation`은 전역·측면 링크의 표시를
 고를 수 있지만 하단 탐색은 전체 너비 막대 한 형태였습니다.
@@ -23,7 +39,7 @@ source·license·dependency 기록은 그대로 정확합니다.
 색상과 focus 표시를 확인했습니다. browser console error는 0건입니다.
 실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다. 기존
 설치 형식과 의존 경로는 그대로여서 별도 소비자 재설치는 적용하지
-않았습니다. PR CI·공개 URL·production 배포는 아직 확인 전입니다.
+않았습니다. PR CI·공개 URL·production 결과는 위에 기록했습니다.
 
 Goal 관리용 추정은 약 97%를 유지합니다. 표시 선택 폭은 넓어졌지만
 독립 사용 사례와 component 수는 늘지 않았습니다.

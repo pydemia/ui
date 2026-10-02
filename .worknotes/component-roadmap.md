@@ -271,8 +271,9 @@ provenance가 여전히 정확하면 검증 문구를 위해 고정 metadata를
 - [x] `Legend` — 별도 component 대신 `DataChart`의 정적 범례와
   선택형 범례로 제공합니다. 선택형은 다중 계열의 표시·숨김에 따라
   축·누적값·구간 값·접근 가능한 데이터 표를 함께 갱신합니다.
-- [ ] `ChartTooltip` — `DataChart`에 포인터·native select로 조작하는
-  구간별 값 패널을 추가했습니다. 부유 tooltip 필요성은 사용 사례로 판정.
+- [x] `ChartTooltip` — 별도 component 대신 `DataChart`의 선택적
+  `hoverSummary`로 그래프 위에 구간별 값을 표시합니다. 기존 native
+  구간 선택기와 데이터 표는 keyboard·보조기술 경로로 유지합니다.
 - [x] `FilterBar` — 여러 필터의 입력·적용·초기화와 적용된 조건 표시.
   데이터 필터링과 draft/applied 상태는 소비자가 관리합니다.
 - [x] `QueryBuilder` — 필드·연산자·값을 AND/OR 그룹에 넣고 순서를
@@ -457,6 +458,7 @@ token 전달 방식을 정할 때,
   맞추기 위해 영구 제외하지 않습니다.
 
 `Stat`·`MetricCard`, `StatusIndicator`·`Badge`, `SegmentedControl`·
-`RadioGroup`/`ToggleGroup`, `CircularProgress`·`Progress`, `Legend`·
-`ChartTooltip`·chart 본체의 경계도 해당 범주에 착수할 때 결정합니다.
-결정 전에는 어느 쪽도 독립 구현 수로 확정하지 않습니다.
+`RadioGroup`/`ToggleGroup`, `CircularProgress`·`Progress`의 경계도
+해당 범주에 착수할 때 결정합니다. `Legend`와 `ChartTooltip` 후보는
+기존 `DataChart`의 API로 제공하기로 판정했습니다. 경계가 남은 후보는
+결정 전까지 독립 구현 수로 확정하지 않습니다.
