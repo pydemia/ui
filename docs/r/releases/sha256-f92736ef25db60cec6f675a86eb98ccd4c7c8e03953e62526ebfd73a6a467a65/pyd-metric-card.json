@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-metric-card",
+  "title": "Metric Card",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-f92736ef25db60cec6f675a86eb98ccd4c7c8e03953e62526ebfd73a6a467a65/pyd-card.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-f92736ef25db60cec6f675a86eb98ccd4c7c8e03953e62526ebfd73a6a467a65/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/metric-card.tsx",
+      "content": "import type { ComponentProps, ReactNode } from \"react\";\nimport { Card } from \"./card\";\nimport { cn } from \"./utils\";\n\ntype MetricCardProps = Omit<\n    ComponentProps<typeof Card>, \"children\" | \"variant\" | \"size\"\n> & {\n    label: string;\n    value: ReactNode;\n    change?: string;\n    detail?: string;\n    variant?: \"default\" | \"compact\" | \"featured\";\n};\n\nconst variantClasses = {\n    default: \"min-w-0 p-[var(--space-4)]\",\n    compact: \"grid min-w-0 grid-cols-[minmax(0,1fr)_auto] \" +\n        \"items-baseline gap-x-[var(--space-3)] gap-y-[var(--space-1)] \" +\n        \"p-[var(--space-3)]\",\n    featured: \"min-w-0 border-accent bg-accent p-[var(--space-6)] \" +\n        \"text-accent-foreground\",\n} as const;\n\nfunction MetricCard({\n    className,\n    label,\n    value,\n    change,\n    detail,\n    variant = \"default\",\n    ...props\n}: MetricCardProps) {\n    if (!Object.hasOwn(variantClasses, variant)) {\n        throw new RangeError(\"MetricCard variant is not supported.\");\n    }\n\n    return (\n        <Card\n            role=\"group\"\n            aria-label={label}\n            data-variant={variant}\n            className={cn(variantClasses[variant], className)}\n            {...props}\n        >\n            <p className={cn(\n                \"text-sm text-muted\",\n                variant === \"compact\" && \"text-xs\",\n                variant === \"featured\" && \"text-accent-foreground\",\n            )}>{label}</p>\n            <p className={cn(\n                \"mt-2 text-2xl font-semibold tabular-nums\",\n                variant === \"compact\" && \"mt-0 text-lg\",\n                variant === \"featured\" && \"text-3xl\",\n            )}>{value}</p>\n            {(change || detail) && (\n                <p className={cn(\n                    \"mt-2 text-xs text-muted\",\n                    variant === \"compact\" && \"col-span-2 mt-0\",\n                    variant === \"featured\" &&\n                        \"text-sm text-accent-foreground\",\n                )}>\n                    {change && <span className={cn(\n                        \"font-medium text-foreground\",\n                        variant === \"featured\" && \"text-accent-foreground\",\n                    )}>{change}</span>}\n                    {change && detail && \" · \"}\n                    {detail}\n                </p>\n            )}\n        </Card>\n    );\n}\n\nexport { MetricCard };\nexport type { MetricCardProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/metric-card.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

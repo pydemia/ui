@@ -4,7 +4,8 @@
 출력을 원본 component로 추가했습니다. typecheck·UI 테스트 174/174,
 로컬 Chromium의 Enter 실행·이력 방향키·390px dark를 확인했습니다.
 build는 124개 registry item을 생성해 통과했습니다. provenance
-고지 pin·registry 검사와 공개 CI·URL은 남았습니다. 로컬 122개
+고지 pin 뒤 registry 검사와 43번째 snapshot의 release 검사도
+통과했습니다. 공개 CI·URL은 남았습니다. 로컬 122개
 component·124개 item, 공개 121개·123개·42개 snapshot이며
 goal 관리용 추정은 약 96% 그대로입니다.
 [작업 기록](terminal-2026-10-02.md)을 참고하세요.

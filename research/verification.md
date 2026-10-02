@@ -9,8 +9,12 @@ pending 차단을 확인합니다. 로컬 Chromium에서 `help` Enter 실행과
 브라우저 오류 없음을 확인했습니다.
 
 `npm run build`는 registry item 124개와 문서 사이트를 생성해
-통과했습니다. provenance 고지의 source commit·hash 고정 전이므로
-registry 검사와 공개 CI·배포·item URL은 미검증입니다. 실제
+통과했습니다. source commit `5ac1fbd`의 provenance hash를
+고지에 고정한 뒤 `registry:check`가 124개 item과 122개
+export/catalog를 확인했습니다. 43번째 snapshot
+`sha256-f92736ef25db60cec6f675a86eb98ccd4c7c8e03953e62526ebfd73a6a467a65`는
+`registry:release-check`에서 현재 빌드와 일치했습니다. 공개
+CI·배포·item URL은 미검증입니다. 실제
 명령 실행 backend와 screen reader 발표도 검사하지 않았습니다.
 공개 기준은 121개 component·123개 item·42개 snapshot, goal
 관리용 추정 약 96%입니다.
