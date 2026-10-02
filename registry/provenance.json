@@ -625,6 +625,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with exact starting, change and cumulative values in a native table; decorative SVG bars", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-box-plot-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "NIST", "url": "https://itl.nist.gov/div898/handbook/eda/section3/boxplot.htm", "scope": "five-number summary and min/max whiskers; no code or artwork copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title and native table of five exact values per group; decorative box plots", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-page-header", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "semantic heading level with optional subtitle and actions", "keyboard": "native actions", "screen_reader": "pending manual review" }

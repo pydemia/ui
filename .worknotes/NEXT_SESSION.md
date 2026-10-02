@@ -1,5 +1,24 @@
 # Component 확장 작업 인계
 
+2026-10-03 `BoxPlotChart` 공개 준비: 원본 component, catalog와
+registry를 추가하고 로컬 preview·typecheck·대상 테스트·build·
+`registry:release-check`를 확인했습니다. 66번째 snapshot을 생성했으며
+공개 CI와 production URL은 남았습니다. [작업 기록](box-plot-chart-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 98%입니다.
+
+2026-10-03 공급·품질 체크리스트 적용 재검토: 구현 검토·공개 준비·
+공개 확인의 증거를 분리했습니다. 이미 확인된 문서 전용 `main` CI
+개선을 남은 비용에서 제외하고, provenance hash 전파와 snapshot 전체
+복제를 별도 개선 과제로 남겼습니다. [판정 기록](quality-checklist-decision-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 98%입니다. `BoxPlotChart`는 아직
+로컬 후보이며 작업 브랜치의 검증·릴리스를 이어가야 합니다.
+
+2026-10-03 문서 전용 CI 실측: PR #115와 병합 뒤 `main` Verify UI가
+diff 검사만 실행하고 UI·registry 검사를 생략해 성공했습니다. Pages도
+통과했고 Vercel production은 배포 횟수 제한으로 확인하지 못했습니다.
+새 component 수는 없으며 Goal 추정은 약 98%입니다.
+[검증 기록](main-ci-scope-2026-10-03.md)을 참고하세요.
+
 2026-10-03 PR #114 병합: 변경 경로별 Verify UI를 `main`에 반영했고
 PR·`main` Verify UI와 Pages가 통과했습니다. workflow 변경이므로
 `main`은 전체 검사를 실행했습니다. 문서 전용 `main` push의 단계
