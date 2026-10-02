@@ -45,7 +45,7 @@ import {
     HoverCardTrigger, Heatmap, Image, ImageCropper, Input, InputGroup,
     InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
-    InputGroupTextarea, JsonViewer, Kanban,
+    InputGroupTextarea, JsonViewer, Kanban, NodeCanvas,
     Label, Lightbox, LogConsole, Markdown, Menubar, MenubarCheckboxItem,
     MenubarContent, MenubarGroup, MenubarItem, MenubarLabel,
     MenubarMenu, MenubarRadioGroup, MenubarRadioItem,
@@ -89,6 +89,7 @@ import type {
     DateRangeValue,
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
+    NodeCanvasEdge, NodeCanvasNode,
     LightboxItem, LogEntry, QueryField, QueryGroup, ReasoningStatus,
     ModelChoice,
     ResponseFeedbackValue, ThreadComment,
@@ -191,6 +192,55 @@ function GanttPreview() {
             <Gantt label="출시 일정" rangeStart="2026-10-01"
                 rangeEnd="2026-10-25" tasks={tasks} scale={scale}
                 onTasksChange={setTasks} />
+        </div>
+    );
+}
+
+const initialCanvasNodes: NodeCanvasNode[] = [
+    { id: "request", title: "요청 접수",
+        description: "입력과 기본값 확인", x: 72, y: 28 },
+    { id: "review", title: "검토",
+        description: "담당자 승인", x: 72, y: 202 },
+    { id: "publish", title: "공개",
+        description: "변경 사항 게시", x: 72, y: 376 },
+];
+const initialCanvasEdges: NodeCanvasEdge[] = [
+    { id: "request-review", from: "request", to: "review" },
+    { id: "review-publish", from: "review", to: "publish",
+        label: "승인 후" },
+];
+
+function NodeCanvasPreview() {
+    const [nodes, setNodes] = useState(initialCanvasNodes);
+    const [edges, setEdges] = useState(initialCanvasEdges);
+    const [variant, setVariant] = useState<"grid" | "plain">("grid");
+    const nextEdgeId = useRef(0);
+
+    return (
+        <div className="preview-workspace grid min-w-0 gap-3">
+            <div className="flex flex-wrap gap-2">
+                <Button variant="outline" onClick={() =>
+                    setVariant(variant === "grid" ? "plain" : "grid")}>
+                    배경: {variant === "grid" ? "격자" : "평면"}
+                </Button>
+                <Button variant="outline" onClick={() => {
+                    setNodes(initialCanvasNodes);
+                    setEdges(initialCanvasEdges);
+                }}>
+                    흐름 초기화
+                </Button>
+            </div>
+            <NodeCanvas label="요청 처리 흐름" nodes={nodes} edges={edges}
+                width={320} height={500} variant={variant}
+                onNodesChange={setNodes}
+                onConnect={(from, to) => setEdges((current) => [
+                    ...current, {
+                        id: `added-${++nextEdgeId.current}`,
+                        from, to,
+                    },
+                ])}
+                onDisconnect={(id) => setEdges((current) =>
+                    current.filter((edge) => edge.id !== id))} />
         </div>
     );
 }
@@ -6304,6 +6354,37 @@ function ReleaseSchedule() {
     onTasksChange={setTasks} />;
 }`,
         preview: () => <GanttPreview />,
+    },
+    {
+        id: "node-canvas", name: "NodeCanvas", category: "Workflow",
+        description: "노드와 연결을 배치하고, 노드 이동·연결 추가·제거를 수행합니다. 끌기 외에 방향키와 좌표 입력을 제공합니다.",
+        code: `import { useRef, useState } from "react";
+import {
+  NodeCanvas, type NodeCanvasEdge, type NodeCanvasNode,
+} from "@pydemia/ui";
+
+const initialNodes: NodeCanvasNode[] = [
+  { id: "request", title: "요청 접수", x: 64, y: 96 },
+  { id: "review", title: "검토", x: 350, y: 96 },
+];
+const initialEdges: NodeCanvasEdge[] = [
+  { id: "request-review", from: "request", to: "review" },
+];
+
+function RequestFlow() {
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState(initialEdges);
+  const nextEdgeId = useRef(0);
+  return <NodeCanvas label="요청 처리 흐름" nodes={nodes} edges={edges}
+    width={880} height={440} onNodesChange={setNodes}
+    onConnect={(from, to) => setEdges((current) => [
+      ...current, { id: "added-" + ++nextEdgeId.current,
+        from, to },
+    ])}
+    onDisconnect={(id) => setEdges((current) =>
+      current.filter((edge) => edge.id !== id))} />;
+}`,
+        preview: () => <NodeCanvasPreview />,
     },
     {
         id: "navigation", name: "Navigation", category: "Navigation",

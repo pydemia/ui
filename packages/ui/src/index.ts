@@ -127,6 +127,10 @@ export { Gantt, changeGanttTask } from "./components/gantt";
 export type {
     GanttTask, GanttOperation, GanttChange, GanttProps,
 } from "./components/gantt";
+export { NodeCanvas } from "./components/node-canvas";
+export type {
+    NodeCanvasNode, NodeCanvasEdge, NodeCanvasMove, NodeCanvasProps,
+} from "./components/node-canvas";
 export { ScrollArea } from "./components/scroll-area";
 export type { ScrollAreaProps } from "./components/scroll-area";
 export {
