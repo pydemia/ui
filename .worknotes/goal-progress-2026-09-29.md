@@ -1,5 +1,26 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 공급·품질 체크리스트 적용 수준 재검토:
+**약 97% → 약 97%**입니다. 현재 기준을 변경분의 공급 증거와
+차단 결함에 집중하도록 간결하게 정리했습니다. 10개 누적 운영 과제의
+완료 수로 공급률을 계산하지 않습니다. 제품·CI·배포 방식과 공개
+수량은 바뀌지 않았습니다.
+[현재 기준](quality-checklist-current-review-2026-10-02.md)을 참고하세요.
+
+2026-10-03 `DataTable` 행 상세 로컬 후보: **약 97% → 약 97%**입니다.
+기존 component의 용례를 늘렸고 typecheck·UI 테스트 202/202·build·
+registry 검사와 로컬 Chromium 동작을 확인했습니다. 56번째 snapshot
+후보의 공개 검증이 남아 있으며 component 수는 늘지 않았습니다.
+[작업 기록](data-table-details-2026-10-03.md)을 참고하세요.
+
+2026-10-03 BlockEditor 구조 이력 공개 확인: **약 97% → 약 97%**입니다.
+PR #101과 병합 `1172fc7`의 Verify UI·Pages·Vercel production,
+공개 preview·Usage와 현재 item·55번째 snapshot 경로를 확인했습니다.
+공개 수량은 129개 component·131개 item·55개 snapshot입니다.
+복합 인라인 편집과 실제 소비자 적용 범위를 고려해 관리용 추정을
+유지합니다.
+[작업 기록](block-editor-structure-history-2026-10-02.md)을 참고하세요.
+
 2026-10-02 BlockEditor 구조 이력 로컬 후보: **약 97% → 약 97%**입니다.
 추가·삭제·이동·형식 변경의 되돌리기·다시 실행과 reset 오류 수정을
 로컬에서 확인했습니다. 새 component는 없어 공개 수량은 129개

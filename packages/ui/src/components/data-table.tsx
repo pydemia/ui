@@ -1,5 +1,6 @@
 import {
-    useEffect, useId, useMemo, useRef, useState, type ReactNode,
+    Fragment, useEffect, useId, useMemo, useRef, useState,
+    type ReactNode,
 } from "react";
 import { ActionBar } from "./action-bar";
 import { Button } from "./button";
@@ -42,6 +43,7 @@ type DataTableBaseProps<Row> = {
     renderActions?: (
         selectedRows: readonly Row[], clearSelection: () => void,
     ) => ReactNode;
+    renderRowDetails?: (row: Row) => ReactNode;
     emptyMessage?: string;
     density?: "compact" | "standard" | "comfortable";
     striped?: boolean;
@@ -93,12 +95,14 @@ function DataTable<Row>({
     caption, rows, columns, getRowId, getRowLabel, getSearchText,
     searchPlaceholder = "검색", filter, defaultPageSize = 10,
     pageSizeOptions = [10, 25, 50], selectable = false,
-    renderActions, emptyMessage = "표시할 항목이 없습니다.", remote,
+    renderActions, renderRowDetails,
+    emptyMessage = "표시할 항목이 없습니다.", remote,
     density = "standard", striped = false,
     className,
 }: DataTableProps<Row>) {
     const searchId = useId();
     const filterId = useId();
+    const detailsId = useId();
     const [localView, setLocalView] = useState<DataTableView>(() => ({
         query: "", filterValue: "", sort: null,
         page: 1, pageSize: defaultPageSize,
@@ -115,6 +119,9 @@ function DataTable<Row>({
             "pageSize, and totalItems values");
     }
     const [selectedIds, setSelectedIds] = useState<Set<string>>(
+        () => new Set(),
+    );
+    const [expandedIds, setExpandedIds] = useState<Set<string>>(
         () => new Set(),
     );
     const tableRegion = useRef<HTMLDivElement>(null);
@@ -136,6 +143,8 @@ function DataTable<Row>({
             remote?.status === "loading" || remote?.status === "error") {
             setSelectedIds((current) => current.size > 0
                 ? new Set() : current);
+            setExpandedIds((current) => current.size > 0
+                ? new Set() : current);
         }
     }, [remoteViewKey, remote?.status]);
 
@@ -152,6 +161,12 @@ function DataTable<Row>({
     useEffect(() => {
         const availableIds = new Set(rows.map(getRowId));
         setSelectedIds((current) => {
+            const next = new Set(
+                [...current].filter((id) => availableIds.has(id)),
+            );
+            return next.size === current.size ? current : next;
+        });
+        setExpandedIds((current) => {
             const next = new Set(
                 [...current].filter((id) => availableIds.has(id)),
             );
@@ -218,6 +233,8 @@ function DataTable<Row>({
     const selectedOnPage = pageRows.filter(
         (row) => selectedIds.has(getRowId(row)),
     ).length;
+    const columnCount = columns.length + (selectable ? 1 : 0) +
+        (renderRowDetails ? 1 : 0);
 
     function togglePage(checked: boolean) {
         setSelectedIds((current) => {
@@ -237,6 +254,15 @@ function DataTable<Row>({
     function clearSelection() {
         setSelectedIds(new Set());
         tableRegion.current?.focus();
+    }
+
+    function toggleDetails(id: string) {
+        setExpandedIds((current) => {
+            const next = new Set(current);
+            if (next.has(id)) next.delete(id);
+            else next.add(id);
+            return next;
+        });
     }
 
     return (
@@ -314,6 +340,11 @@ function DataTable<Row>({
                     <caption className="sr-only">{caption}</caption>
                     <thead>
                         <tr>
+                            {renderRowDetails && (
+                                <TableHead scope="col" className="w-10">
+                                    <span className="sr-only">상세</span>
+                                </TableHead>
+                            )}
                             {selectable && (
                                 <TableHead scope="col" className="w-10">
                                     <Checkbox
@@ -373,7 +404,7 @@ function DataTable<Row>({
                             pageRows.length === 0) ? (
                             <tr>
                                 <TableCell
-                                    colSpan={columns.length + (selectable ? 1 : 0)}
+                                    colSpan={columnCount}
                                     className="py-8 text-center text-muted"
                                 >
                                     {remote?.status === "loading" ? (
@@ -393,37 +424,77 @@ function DataTable<Row>({
                                     ) : emptyMessage}
                                 </TableCell>
                             </tr>
-                        ) : pageRows.map((row) => {
+                        ) : pageRows.map((row, index) => {
                             const id = getRowId(row);
+                            const label = getRowLabel?.(row) ?? id;
+                            const expanded = expandedIds.has(id);
+                            const panelId = `${detailsId}-row-${index}`;
+                            const detailLabel = `${label} 상세 ${
+                                expanded ? "접기" : "펼치기"}`;
                             return (
-                                <tr key={id}
-                                    className={striped ? "even:bg-surface-subtle" :
-                                        undefined}>
-                                    {selectable && (
-                                        <TableCell>
-                                            <Checkbox
-                                                aria-label={`${getRowLabel?.(row) ?? id} 선택`}
-                                                checked={selectedIds.has(id)}
-                                                onCheckedChange={(checked) => {
-                                                    setSelectedIds((current) => {
-                                                        const next = new Set(current);
-                                                        if (checked === true) next.add(id);
-                                                        else next.delete(id);
-                                                        return next;
-                                                    });
-                                                }}
-                                            />
-                                        </TableCell>
+                                <Fragment key={id}>
+                                    <tr className={striped && index % 2 === 1
+                                        ? "bg-surface-subtle" : undefined}>
+                                        {renderRowDetails && (
+                                            <TableCell>
+                                                <button type="button"
+                                                    aria-label={detailLabel}
+                                                    aria-expanded={expanded}
+                                                    aria-controls={expanded
+                                                        ? panelId : undefined}
+                                                    className={
+                                                        "grid size-7 place-items-center " +
+                                                        "rounded-sm text-foreground " +
+                                                        "hover:bg-surface-subtle " +
+                                                        "focus-visible:outline-2 " +
+                                                        "focus-visible:outline-focus"
+                                                    }
+                                                    onClick={() =>
+                                                        toggleDetails(id)}>
+                                                    <span aria-hidden="true">
+                                                        {expanded ? "−" : "+"}
+                                                    </span>
+                                                </button>
+                                            </TableCell>
+                                        )}
+                                        {selectable && (
+                                            <TableCell>
+                                                <Checkbox
+                                                    aria-label={`${label} 선택`}
+                                                    checked={selectedIds.has(id)}
+                                                    onCheckedChange={(checked) => {
+                                                        setSelectedIds((current) => {
+                                                            const next = new Set(current);
+                                                            if (checked === true) next.add(id);
+                                                            else next.delete(id);
+                                                            return next;
+                                                        });
+                                                    }}
+                                                />
+                                            </TableCell>
+                                        )}
+                                        {columns.map((column) => (
+                                            <TableCell
+                                                key={column.id}
+                                                className={column.className}
+                                            >
+                                                {column.cell(row)}
+                                            </TableCell>
+                                        ))}
+                                    </tr>
+                                    {renderRowDetails && expanded && (
+                                        <tr className="bg-surface-subtle">
+                                            <TableCell colSpan={columnCount}>
+                                                <div id={panelId} className="min-w-0">
+                                                    <span className="sr-only">
+                                                        {label} 상세
+                                                    </span>
+                                                    {renderRowDetails(row)}
+                                                </div>
+                                            </TableCell>
+                                        </tr>
                                     )}
-                                    {columns.map((column) => (
-                                        <TableCell
-                                            key={column.id}
-                                            className={column.className}
-                                        >
-                                            {column.cell(row)}
-                                        </TableCell>
-                                    ))}
-                                </tr>
+                                </Fragment>
                             );
                         })}
                     </tbody>

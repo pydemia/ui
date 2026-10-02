@@ -3444,6 +3444,7 @@ type ReviewRow = {
     request: string;
     owner: string;
     status: "대기" | "진행" | "완료";
+    detail: string;
 };
 
 const reviewColumns: DataTableColumn<ReviewRow>[] = [
@@ -3465,12 +3466,18 @@ const reviewFilter = {
 };
 
 const initialReviewRows: ReviewRow[] = [
-    { id: "1", request: "검색 필터", owner: "운영팀", status: "대기" },
-    { id: "2", request: "초대 화면", owner: "제품팀", status: "진행" },
-    { id: "3", request: "설정 저장", owner: "개발팀", status: "완료" },
-    { id: "4", request: "상태 알림", owner: "제품팀", status: "대기" },
-    { id: "5", request: "내보내기", owner: "운영팀", status: "진행" },
-    { id: "6", request: "접근 권한", owner: "개발팀", status: "완료" },
+    { id: "1", request: "검색 필터", owner: "운영팀", status: "대기",
+        detail: "담당자와 상태로 요청을 좁혀 확인합니다." },
+    { id: "2", request: "초대 화면", owner: "제품팀", status: "진행",
+        detail: "초대 링크 만료일을 안내합니다." },
+    { id: "3", request: "설정 저장", owner: "개발팀", status: "완료",
+        detail: "저장 실패 시 입력값을 유지합니다." },
+    { id: "4", request: "상태 알림", owner: "제품팀", status: "대기",
+        detail: "변경 결과와 다시 시도할 수 있는 작업을 표시합니다." },
+    { id: "5", request: "내보내기", owner: "운영팀", status: "진행",
+        detail: "선택한 기간과 파일 형식을 결과에 포함합니다." },
+    { id: "6", request: "접근 권한", owner: "개발팀", status: "완료",
+        detail: "변경 전후 권한을 검토 화면에서 비교합니다." },
 ];
 
 function RemoteDataTablePreview({ density, striped }: {
@@ -3519,6 +3526,9 @@ function RemoteDataTablePreview({ density, striped }: {
                 columns={reviewColumns}
                 getRowId={(row) => row.id}
                 getRowLabel={(row) => row.request}
+                renderRowDetails={(row) => <p className="m-0 py-2">
+                    {row.detail}
+                </p>}
                 filter={{ label: "상태", options: reviewFilter.options }}
                 pageSizeOptions={[2, 3]}
                 selectable
@@ -3642,6 +3652,9 @@ function DataTablePreview() {
                 columns={reviewColumns}
                 getRowId={(row) => row.id}
                 getRowLabel={(row) => row.request}
+                renderRowDetails={(row) => <p className="m-0 py-2">
+                    {row.detail}
+                </p>}
                 getSearchText={(row) =>
                     `${row.request} ${row.owner} ${row.status}`}
                 filter={reviewFilter}
@@ -6976,14 +6989,17 @@ function RequestPages() {
     },
     {
         id: "data-table", name: "DataTable", category: "Data display",
-        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. 행 밀도와 줄무늬 표시를 선택할 수 있습니다. remote에서는 전달된 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업은 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
+        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. 행 밀도·줄무늬와 행별 상세 펼침을 선택할 수 있습니다. remote에서는 전달된 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업과 상세는 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
         code: `import { Button, DataTable } from "@pydemia/ui";
 import type { DataTableColumn } from "@pydemia/ui";
 
-type Request = { id: string; name: string; status: string };
+type Request = { id: string; name: string; status: string;
+  detail: string };
 const rows: Request[] = [
-  { id: "1", name: "검색 필터", status: "대기" },
-  { id: "2", name: "초대 화면", status: "완료" },
+  { id: "1", name: "검색 필터", status: "대기",
+    detail: "담당자와 상태로 요청을 좁힙니다." },
+  { id: "2", name: "초대 화면", status: "완료",
+    detail: "초대 링크의 만료일을 안내합니다." },
 ];
 const columns: DataTableColumn<Request>[] = [
   { id: "name", header: "요청", cell: (row) => row.name,
@@ -6994,6 +7010,7 @@ const columns: DataTableColumn<Request>[] = [
 <DataTable caption="화면 개선 요청" rows={rows} columns={columns}
   density="compact" striped
   getRowId={(row) => row.id} getRowLabel={(row) => row.name}
+  renderRowDetails={(row) => <p>{row.detail}</p>}
   getSearchText={(row) => row.name}
   filter={{ label: "상태", getValue: (row) => row.status,
     options: [{ value: "대기", label: "대기" },
@@ -7021,6 +7038,7 @@ function RemoteRequests({ page, view, onViewChange, retry }: {
 }) {
   return <DataTable caption="원격 요청 목록" rows={page.rows}
     columns={columns} getRowId={(row) => row.id}
+    renderRowDetails={(row) => <p>{row.detail}</p>}
     filter={{ label: "상태", options: [
       { value: "대기", label: "대기" },
       { value: "완료", label: "완료" },

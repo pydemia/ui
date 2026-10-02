@@ -1,5 +1,26 @@
 # 검증 기록
 
+## 2026-10-03 DataTable 행 상세 — 로컬
+
+`npm run typecheck`, UI 테스트 202/202, `npm run build`,
+`npm run registry:check`가 통과했습니다. 로컬 Chromium에서 기본·remote
+모드의 상세 펼침, Enter 닫기·focus 유지, loading 전환 시 닫힘과
+390px 배치를 확인했습니다. 56번째 snapshot을 생성·재빌드했고
+`registry:release-check`가 통과했습니다. PR CI·공개 경로는 아직
+확인하지 않았습니다.
+[작업 기록](../.worknotes/data-table-details-2026-10-03.md)을 참고하세요.
+
+## 2026-10-03 BlockEditor 구조 이력 — 공개
+
+PR #101과 병합 `1172fc7`의 Verify UI·Pages, Vercel production이
+성공했습니다. 공개 preview·Usage, 현재 item과 55번째 snapshot의
+manifest·변경 item URL을 확인했고 파일 내용이 저장소와 일치합니다.
+기존 설치 형식·의존 경로는 그대로라 별도 소비자 설치는 반복하지
+않았습니다. 공개 수량은 129개 component·131개 item·55개
+snapshot입니다.
+[작업 기록](../.worknotes/block-editor-structure-history-2026-10-02.md)을
+참고하세요.
+
 ## 2026-10-02 BlockEditor 구조 이력 — 로컬
 
 `npm run typecheck`, UI 테스트 200/200, `npm run build`,
@@ -8,8 +29,8 @@
 확인했습니다. preview의 reset에서 형식 select가 잘못 표시되던
 오류를 수정한 뒤 초기값과 이력 버튼 상태를 확인했습니다.
 55번째 snapshot을 생성하고 재빌드한 뒤 `registry:release-check`가
-현재 빌드와 55개 snapshot을 통과했습니다. PR CI·공개 URL은 아직
-확인하지 않았습니다.
+현재 빌드와 55개 snapshot을 통과했습니다. 이 시점에는 PR CI·공개
+URL을 확인하지 않았습니다.
 [작업 기록](../.worknotes/block-editor-structure-history-2026-10-02.md)을
 참고하세요.
 
