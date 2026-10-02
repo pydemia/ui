@@ -3514,18 +3514,40 @@ function PageHeaderPreview() {
 }
 
 function DashboardPreview() {
+    const [layout, setLayout] = useState<"balanced" | "primary">(
+        "balanced",
+    );
+    const primary = layout === "primary";
+
     return (
-        <div className="preview-workspace">
+        <div className="preview-workspace grid gap-3">
+            <div className="flex flex-wrap gap-2" role="group"
+                aria-label="대시보드 배치">
+                <Button type="button"
+                    variant={primary ? "outline" : "primary"}
+                    aria-pressed={!primary}
+                    onClick={() => setLayout("balanced")}>
+                    균형 배치
+                </Button>
+                <Button type="button"
+                    variant={primary ? "primary" : "outline"}
+                    aria-pressed={primary}
+                    onClick={() => setLayout("primary")}>
+                    분석 중심
+                </Button>
+            </div>
             <Dashboard>
                 <PageHeader level={2} title="운영 대시보드"
                     subtitle="이번 주 요청과 실행 상태" />
-                <DashboardMetrics aria-label="주요 지표">
+                <DashboardMetrics aria-label="주요 지표"
+                    columns={primary ? 3 : 4}>
                     <MetricCard label="요청" value="1,284" />
                     <MetricCard label="완료" value="1,216" />
                     <MetricCard label="대기" value="52" />
-                    <MetricCard label="오류" value="16" />
+                    {!primary && <MetricCard label="오류" value="16" />}
                 </DashboardMetrics>
-                <DashboardPanels aria-label="추세와 로그">
+                <DashboardPanels aria-label="추세와 로그"
+                    layout={layout}>
                     <DataChart title="요일별 완료" points={chartPoints}
                         unit="건" variant="bar" />
                     <LogConsole label="최근 실행" entries={[
@@ -7595,23 +7617,28 @@ const points = [
         id: "dashboard", name: "Dashboard", category: "Data & analytics",
         installItems: [
             "dashboard", "page-header", "metric-card", "data-chart",
+            "log-console",
         ],
-        description: "지표와 상세 panel을 container 폭에 따라 배치합니다. 각 영역에 이름을 주고 기존 카드·차트를 조합합니다.",
+        description: "지표를 2·3·4열로, 상세 panel을 균등 또는 분석 중심 비율로 배치합니다. 좁은 container에서는 한 열로 쌓고 각 영역에 이름을 줍니다.",
         code: `import {
   Dashboard, DashboardMetrics, DashboardPanels,
-  MetricCard, DataChart, PageHeader,
+  MetricCard, DataChart, LogConsole, PageHeader,
 } from "@pydemia/ui";
 
 <Dashboard>
   <PageHeader title="운영 대시보드" />
-  <DashboardMetrics aria-label="주요 지표">
+  <DashboardMetrics aria-label="주요 지표" columns={3}>
     <MetricCard label="요청" value="1,284" />
     <MetricCard label="완료" value="1,216" />
+    <MetricCard label="대기" value="52" />
   </DashboardMetrics>
-  <DashboardPanels aria-label="상세 분석">
+  <DashboardPanels aria-label="추세와 로그" layout="primary">
     <DataChart title="요일별 완료" unit="건"
       points={[{ label: "월", value: 8 },
         { label: "화", value: 12 }]} />
+    <LogConsole label="최근 실행" entries={[
+      { id: "1", level: "info", message: "집계 완료" },
+    ]} />
   </DashboardPanels>
 </Dashboard>`,
         preview: () => <DashboardPreview />,

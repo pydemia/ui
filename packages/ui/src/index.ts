@@ -227,7 +227,9 @@ export type { DonutChartProps, DonutSegment } from "./components/donut-chart";
 export {
     Dashboard, DashboardMetrics, DashboardPanels,
 } from "./components/dashboard";
-export type { DashboardSectionProps } from "./components/dashboard";
+export type {
+    DashboardSectionProps, DashboardMetricsProps, DashboardPanelsProps,
+} from "./components/dashboard";
 export {
     ToastRegion, Toast, ToastQueue, useToastQueue,
 } from "./components/toast";
