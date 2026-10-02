@@ -22,9 +22,16 @@ workspace의 재실행 후 현재 완료 건수는 3→2로 바뀌었습니다.
 [draft PR #106](https://github.com/pydemia/ui/pull/106)의 Verify UI
 run `37045189665`가 성공했습니다. 이후 `FunnelChart`와 함께
 60번째 snapshot
-`sha256-b289f7efbbc948fa611fa36747c94568dc176f2d7753aba85385426358bf10ec`
+`sha256-039468e6ad1e0f9b4c9adad72b6627274d4bee35f1b18857a098f2dc7c9b664f`
 을 만들었고 `registry:release-check` 및 PR #106의 검토 준비 Verify UI
 run `37049005305`가 통과했습니다. Vercel preview는 READY이나
 사용자 production의 `pyd-bullet-chart.json`은 404입니다.
 현재 브랜치는 133개 component·135개 item입니다. 공개 공급이
 아니므로 goal 관리용 추정 약 97%를 유지합니다.
+
+PR #106 리뷰에서 `formatValue`가 빈 문자열을 돌려주면 단위만
+표시되는 문제를 발견했습니다. 단위를 붙이기 전에 현재·목표·최대의
+formatter 결과를 검사하도록 수정했습니다. 대상 테스트 4/4,
+typecheck·build·registry release 검사가 통과했습니다. 앞서 만든
+미공개 snapshot은 교체했으며 새 ID는 위와 같습니다. 이번 수정의
+PR CI와 공개 공급은 아직 확인하지 않았습니다.

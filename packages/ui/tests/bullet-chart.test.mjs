@@ -62,3 +62,14 @@ test("out-of-range and ambiguous values are rejected", () => {
     assert.throws(() => renderChart({ valueLabel: "목표" }),
         /requires value and range labels/);
 });
+
+test("rejects blank formatter output before appending the unit", () => {
+    for (const value of [3, 5, 10]) {
+        assert.throws(() => renderChart({
+            formatValue: (amount) => amount === value ? "  " : String(amount),
+        }), /formatted values must be text/);
+    }
+    assert.throws(() => renderChart({
+        formatValue: () => "",
+    }), /formatted values must be text/);
+});

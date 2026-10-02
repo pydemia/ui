@@ -1,5 +1,22 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #106 리뷰 수정: `BulletChart`의 빈 formatter 결과가
+단위만 표시되던 문제를 고쳤습니다. 대상 테스트 4/4,
+typecheck·build·registry release 검사가 통과했고 미공개
+60번째 snapshot을 교체했습니다. 새 ID와 남은 검증은
+[작업 기록](bullet-chart-2026-10-03.md)에 있습니다. 수정 후 PR CI와
+production 공급은 아직 확인하지 않았습니다. Goal 추정 약 97%입니다.
+
+2026-10-03 체크리스트 후속 재검토: 개발 중 후보에는 영향받은 검사만
+적용하고, 공개 후보에서 공급물·CI·snapshot을 판정하도록
+[기준](component-roadmap.md#공급과-품질의-판정-단위)을 명확히 했습니다.
+같은 검증을 여러 문서에 복제하지 않는 기록 원칙과 확인 근거는
+[재판정 기록](quality-checklist-review-2026-10-03.md)에 있습니다.
+PR #106 최신 commit의 Verify UI는 성공, preview는 READY이며
+production은 이전 배포입니다. 공개 130개·132개, 브랜치
+133개·135개, goal 관리용 추정 약 97%입니다.
+이번 재검토 문서 수정은 로컬 작업 트리에 있으며 PR에는 미반영입니다.
+
 2026-10-03 AppShell 하단 패널 예시: 기존 `AppBottomPanel`·
 `Collapsible`·`Button`으로 접히는 상태 패널의 preview·Usage를
 작성했습니다. typecheck·build·registry release 검사와 Chromium

@@ -18,7 +18,7 @@ Chromium에서 기본 전환값, 미수집·빈 목록·평면 표시를 확인�
 incomplete 0건입니다. 이후 표시 번호를 `aria-hidden`으로 조정했고
 대상 테스트 3/3과 재빌드가 통과했습니다. `BulletChart`와 함께
 60번째 불변 snapshot
-`sha256-b289f7efbbc948fa611fa36747c94568dc176f2d7753aba85385426358bf10ec`
+`sha256-039468e6ad1e0f9b4c9adad72b6627274d4bee35f1b18857a098f2dc7c9b664f`
 을 생성해 `registry:release-check`를 통과했습니다. PR #106의 draft
 Verify UI run `37048696452`와 검토 준비 run `37049005305`가
 성공했고 Vercel preview는 READY입니다. 사용자 production의

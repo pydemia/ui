@@ -1,5 +1,22 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 BulletChart 리뷰 수정: **약 97% → 약 97%**입니다.
+빈 formatter 결과에 단위만 붙여 표시하던 결함을 수정하고
+대상 테스트 4/4, typecheck·build·registry release 검사를
+통과했습니다. 미공개 60번째 snapshot을 교체했습니다.
+브랜치 133개 component·135개 item, 공개 사이트 130개·132개는
+그대로입니다. [작업 기록](bullet-chart-2026-10-03.md)에 범위와
+미검증 항목을 남겼습니다.
+
+2026-10-03 체크리스트 적용 시점 재검토: **약 97% → 약 97%**입니다.
+개발 중 후보에는 영향받은 검사만 적용하고, export·registry·preview·
+Usage·snapshot·전체 CI는 공개 후보에서 판정하도록 로드맵을
+명확히 했습니다. 같은 검증 내용을 여러 기록에 옮기는 관행도
+줄입니다. PR #106 최신 commit의 Verify UI는 성공하고 Vercel
+preview는 READY지만 production은 이전 배포여서 공개 수량은
+130개 component·132개 item으로 유지합니다.
+[재판정 기록](quality-checklist-review-2026-10-03.md)을 참고하세요.
+
 2026-10-03 AppShell 하단 패널 조합: **약 97% → 약 97%**입니다.
 기존 `Collapsible`·`AppBottomPanel`로 접히는 작업 상태 영역의
 preview·Usage를 추가했습니다. typecheck·build·registry release

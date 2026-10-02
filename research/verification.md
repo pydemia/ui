@@ -1,5 +1,15 @@
 # 검증 기록
 
+## 2026-10-03 BulletChart formatter 회귀
+
+PR #106 리뷰에서 단위를 붙이기 전 빈 formatter 결과가 거부되지
+않는 경우를 확인했습니다. 현재·목표·최대의 빈 결과를 거부하도록
+수정했고 대상 테스트 4/4, `npm run typecheck`, `npm run build`,
+`npm run registry:release-check`가 통과했습니다. 기존 미공개
+snapshot을 교체해 60개 release와 현재
+`sha256-039468e6ad1e0f9b4c9adad72b6627274d4bee35f1b18857a098f2dc7c9b664f`의 일치를 확인했습니다. 수정 후 전체 UI 테스트와
+PR CI·공개 URL은 아직 확인하지 않았습니다.
+
 ## 2026-10-03 AppShell 하단 패널 조합
 
 기존 `AppBottomPanel`·`Collapsible`·`Button`의 문서 preview와 Usage를
@@ -19,7 +29,7 @@ incomplete 0건이었습니다. 실제 screen reader 발표와 공개 URL은
 
 `npm run typecheck`, UI 테스트 218/218, `npm run build`,
 `npm run registry:release-check`가 통과했습니다. 새 snapshot
-`sha256-b289f7efbbc948fa611fa36747c94568dc176f2d7753aba85385426358bf10ec`
+`sha256-039468e6ad1e0f9b4c9adad72b6627274d4bee35f1b18857a098f2dc7c9b664f`
 은 `BulletChart`와 `FunnelChart`를 함께 포함합니다. registry 검사는
 135개 item·133개 export/catalog와 60개 snapshot을 확인했습니다.
 로컬 Chromium 문서 preview에서 120→96→54→23명과 첫 단계 대비

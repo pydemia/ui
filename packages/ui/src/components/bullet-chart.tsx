@@ -55,14 +55,16 @@ function BulletChart({
         throw new RangeError("BulletChart appearance is not supported.");
     }
 
-    const actualText = value === null ? missingText : formatValue(value) + unit;
-    const targetText = formatValue(target) + unit;
-    const maxText = formatValue(max) + unit;
-    if (![actualText, targetText, maxText].every((text) =>
-        typeof text === "string" && text.trim()
-    )) {
-        throw new Error("BulletChart formatted values must be text.");
+    function formatMeasure(amount: number) {
+        const text = formatValue(amount);
+        if (typeof text !== "string" || !text.trim()) {
+            throw new Error("BulletChart formatted values must be text.");
+        }
+        return text + unit;
     }
+    const actualText = value === null ? missingText : formatMeasure(value);
+    const targetText = formatMeasure(target);
+    const maxText = formatMeasure(max);
 
     return (
         <figure {...props} data-appearance={appearance}
