@@ -1,5 +1,11 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 기준 재검토: 차트의 작은 표시 변경에도 276개
+snapshot 파일이 생성됐습니다. 변경분의 사람 검토와 자동 릴리스
+비용을 분리하고, CI·snapshot·고지 생성의 고정 비용을 개선 대상으로
+기록했습니다. [판단 근거](quality-checklist-review-2026-10-03.md)를
+참고하세요. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 DataChart·DonutChart 표시 형태 로컬 후보: 상위 panel에
 중첩할 때 chart 자체의 테두리·배경·외곽 여백을 제거하는 `plain`을
 추가했습니다. 기존 `panel`은 기본값입니다. typecheck·UI 테스트
