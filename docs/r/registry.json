@@ -551,6 +551,11 @@
       "files": [{ "path": "packages/ui/src/components/navigation.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-anchor-nav", "type": "registry:ui", "title": "Anchor Navigation",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/anchor-nav.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-navigation-menu", "type": "registry:ui", "title": "Navigation Menu",
       "dependencies": ["@radix-ui/react-navigation-menu@1.2.22", "lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],

@@ -2381,8 +2381,11 @@ snapshot `sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14
 항목 변경, 뒤로 가기 시 hash·위치 복원, 두 표시 형태와 390px
 dark의 가로 넘침 없음, page error 0건을 확인했습니다.
 
-이 기록 시점의 build·registry 검사와 공개 배포·URL은 별도
-확인 전입니다. 실제 보조기술 발표는 실행하지 않았습니다.
+`npm run build`와 `registry:check`·`registry:release-check`도
+통과했습니다. 40번째 snapshot은
+`sha256-e191ffd3a0f29bf8f2b62df77be2f4dc0c6f58f0017b30bc23ae773767672980`이며
+121개 item을 포함합니다. 공개 배포·URL은 아직 확인 전입니다.
+실제 보조기술 발표는 실행하지 않았습니다.
 
 ## 2026-10-02 IconButton·Tabs 표시 형태
 

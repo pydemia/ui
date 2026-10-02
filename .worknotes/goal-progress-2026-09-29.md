@@ -2,9 +2,10 @@
 
 2026-10-02 AnchorNav 로컬 구현·검증: **약 93% → 약 93%**입니다.
 같은 문서 섹션 목차를 추가하고 typecheck·UI 테스트 166/166,
-로컬 Chromium의 스크롤·hash 뒤로 가기·390px dark를 확인했습니다.
-build·registry·공개 공급 확인 전이므로 공개 118개 component·
-120개 item·39개 snapshot을 유지합니다.
+build·release 검사와 로컬 Chromium의 스크롤·hash 뒤로 가기·
+390px dark를 확인했습니다. 로컬 119개 component·121개 item의
+40번째 snapshot을 만들었지만 공개 공급 확인 전이므로 공개
+118개·120개·39개를 유지합니다.
 [작업 기록](anchor-nav-2026-10-02.md)을 참고하세요.
 
 2026-10-02 체크리스트 현재 적용 검토: **약 93% → 약 93%**입니다.
