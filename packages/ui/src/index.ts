@@ -46,6 +46,10 @@ export { BlockDocument, BlockEditor } from "./components/block-editor";
 export type {
     BlockDocumentProps, BlockEditorBlock, BlockEditorProps, BlockKind,
 } from "./components/block-editor";
+export { ArtifactViewer } from "./components/artifact-viewer";
+export type {
+    ArtifactKind, ArtifactRevision, ArtifactView, ArtifactViewerProps,
+} from "./components/artifact-viewer";
 export { NativeSelect } from "./components/native-select";
 export {
     Select, SelectValue, SelectGroup, SelectTrigger, SelectContent, SelectItem,

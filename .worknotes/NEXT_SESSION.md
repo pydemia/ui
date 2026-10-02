@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-02 `ArtifactViewer` 로컬 후보: revision 선택·Markdown 표시·
+원문·직전 revision 비교를 구현했습니다. typecheck·build·UI
+테스트 199/199와 로컬 Chromium 핵심 흐름, 390px 가로 넘침·console
+error 0건을 확인했습니다. provenance 고지 pin·snapshot·
+소비자 설치·PR·공개 검증은 남았습니다. 공개 128개 component·
+130개 item·53개 snapshot, 로컬 129개·131개이며 goal 추정은
+약 97%입니다. [작업 기록](artifact-viewer-2026-10-02.md)을 보세요.
+
 2026-10-02 공개 검증 기록 PR #99를 `0e3ba12`로 병합했습니다.
 비렌더링 문서 PR의 경량 Verify UI와 병합 뒤 Verify UI·Pages는
 성공했습니다. Vercel은 이 문서 전용 commit의 새 배포를 24시간

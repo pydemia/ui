@@ -1,5 +1,24 @@
 # Prototype 설계 계약
 
+## 2026-10-02 ArtifactViewer
+
+`ArtifactViewer`는 오래된 것부터 나열한 `revisions`와 현재
+`revisionId`를 받습니다. 목록이 비었을 때만 ID가 `null`이고,
+목록이 있으면 고유한 ID 중 하나를 가리켜야 합니다. 선택 변경은
+`onRevisionChange`로 요청하며 원본 내용·revision 저장은 호출자가
+소유합니다. Markdown·code·일반 텍스트를 읽고 원문을 복사합니다.
+Markdown만 미리보기와 원문을 전환합니다. 선택한 revision이 첫 번째가
+아니면 바로 앞 revision과 line diff를 표시합니다. 선택 변경 시
+보기 방식은 내용으로 돌아갑니다.
+
+이 component는 결과물을 편집하거나 실행하지 않습니다. Markdown은
+기존 안전한 부분집합만 렌더링하고 원문·code·일반 텍스트는 React
+텍스트로 표시합니다. `panel`·`plain`은 같은 token을 사용합니다.
+이름 있는 native revision `select`, `aria-pressed` 보기 버튼,
+결과 region과 `DiffViewer`의 비교 표를 제공합니다. 닫기 요청이
+있으면 호출자가 panel 제거와 focus 복귀를 처리합니다. 별도의
+streaming 발표·저장·다운로드는 호출자 책임입니다.
+
 ## 2026-10-02 BlockEditor
 
 `BlockEditor`는 문서의 제목·소제목·문단·글머리/번호 목록·인용·코드를

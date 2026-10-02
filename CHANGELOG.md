@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-02 — ArtifactViewer
+
+- AI·개발 결과물의 revision 선택, Markdown 미리보기·원문과 직전
+  revision 비교를 제공하는 `ArtifactViewer`를 추가했습니다. 코드·
+  일반 텍스트는 실행하지 않고 원문으로 표시합니다. 기존 component만
+  조합하며 새 npm 의존성은 없습니다.
+
 ## 2026-10-02 — BlockEditor
 
 - 구조화 문서의 블록 형식·내용·순서를 편집하는 `BlockEditor`와

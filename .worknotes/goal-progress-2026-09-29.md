@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-02 ArtifactViewer 로컬 후보: **약 97% → 약 97%**입니다.
+revision 선택과 Markdown·코드·일반 텍스트 보기, 직전 revision
+비교라는 별도 사용처를 구현했습니다. typecheck·build·대상 테스트와
+로컬 Chromium 동작은 확인했으나 고지 pin·snapshot·공개 경로는
+남았습니다. 공개 128개 component·130개 item·53개 snapshot,
+로컬 후보 129개·131개입니다. 복합 편집과 소비자 적용 범위를
+고려해 관리용 추정은 유지합니다.
+[작업 기록](artifact-viewer-2026-10-02.md)을 참고하세요.
+
 2026-10-02 BlockEditor 공개 확인: **약 97% → 약 97%**입니다.
 PR #98과 병합 `d7aba59`의 Verify UI·Pages, Vercel production,
 공개 preview·Usage, 현재 item·53번째 snapshot의 byte 일치와

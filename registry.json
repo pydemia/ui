@@ -455,6 +455,12 @@
       "files": [{ "path": "packages/ui/src/components/conversation.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-artifact-viewer", "type": "registry:ui",
+      "title": "Artifact Viewer",
+      "registryDependencies": ["./pyd-button.json", "./pyd-copy-button.json", "./pyd-diff-viewer.json", "./pyd-markdown.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/artifact-viewer.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-reasoning", "type": "registry:ui", "title": "Reasoning",
       "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-collapsible.json", "./pyd-utils.json"],
