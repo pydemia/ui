@@ -13,7 +13,8 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 저장소에는
-116개 component와 118개 registry item이 있습니다. 2026-09-30에
+로컬 117개 component와 119개 registry item이 있습니다.
+공개 기준은 116개 component와 118개 item입니다. 2026-09-30에
 `Kanban`, `InputGroup`, `RangeSlider`, `Heatmap`, `Gantt`,
 `ScatterChart`, `MonthPicker`, `ResponseFeedback`, `FavoriteToggle`,
 `Board`, `Thread`, `Editable`을 순차

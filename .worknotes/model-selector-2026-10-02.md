@@ -14,6 +14,10 @@ AI 작성 화면에서 모델을 검색·선택하고 기능·제공자·사용�
 ## 확인한 범위
 
 - `npm run typecheck`, UI 테스트 161/161, `npm run build` 통과.
+- `registry:check`는 119개 item·117개 component 대응과 기존
+  snapshot을 확인했습니다. `registry:release-check`는 38번째
+  snapshot `sha256-d2020273e3a064ac334ce6628d09e4cfbc01b4fc007209d660ffc49d2502465c`를
+  현재 빌드와 대조해 통과했습니다.
 - 로컬 Chromium에서 모델 선택 후 form 값과 설명 변경,
   `PromptInput` 전송, 사용 불가 모델의 제출 차단과 이유,
   `panel`·`compact` 표시를 확인했습니다.
@@ -21,9 +25,8 @@ AI 작성 화면에서 모델을 검색·선택하고 기능·제공자·사용�
 
 ## 공급 상태
 
-Registry와 provenance 항목은 작성했지만 이 기록 시점에 고지의
-provenance 고정값, 새 snapshot, `registry:release-check`, PR CI와
-공개 URL은 아직 확인하지 않았습니다. 실제 screen reader·touch·
+Registry·provenance·고지의 고정값과 snapshot을 확인했습니다.
+PR CI와 공개 URL은 아직 확인하지 않았습니다. 실제 screen reader·touch·
 Safari·RTL과 별도 소비자 설치는 이번 변경의 공통 차단 조건으로
 적용하지 않았고 지원 검증도 주장하지 않습니다. 공개 전까지
 goal 추정 약 91%를 유지합니다.

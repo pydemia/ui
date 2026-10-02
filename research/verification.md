@@ -17,8 +17,11 @@
 않았습니다.
 
 새 외부 source·npm 의존성은 없으며 기존 `pyd-combobox`·
-`pyd-utils`를 사용합니다. Registry 검사·snapshot·PR CI·공개
-배포는 이 기록 시점에 남았습니다. 실제 screen reader·touch·
+`pyd-utils`를 사용합니다. `registry:check`는 119개 item·117개
+component 대응을 확인했고 `registry:release-check`는 38번째
+snapshot `sha256-d2020273e3a064ac334ce6628d09e4cfbc01b4fc007209d660ffc49d2502465c`와
+현재 빌드가 일치함을 확인했습니다. PR CI·공개 배포는 이 기록
+시점에 남았습니다. 실제 screen reader·touch·
 Safari·RTL 및 별도 소비자 설치는 실행하지 않았습니다.
 
 ## 2026-10-02 DataTable 표시 선택 — 공개
