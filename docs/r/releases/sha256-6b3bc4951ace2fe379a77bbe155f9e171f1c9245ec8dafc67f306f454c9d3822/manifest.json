@@ -1,0 +1,557 @@
+{
+  "schemaVersion": 1,
+  "id": "sha256-6b3bc4951ace2fe379a77bbe155f9e171f1c9245ec8dafc67f306f454c9d3822",
+  "baseUrl": "https://pydemia-ui.vercel.app/r/releases/sha256-6b3bc4951ace2fe379a77bbe155f9e171f1c9245ec8dafc67f306f454c9d3822/",
+  "sourceDigest": "6b3bc4951ace2fe379a77bbe155f9e171f1c9245ec8dafc67f306f454c9d3822",
+  "itemCount": 137,
+  "files": [
+    {
+      "name": "pyd-accordion",
+      "sha256": "a08aabb23281f27de9925dbccade7be71f5f50c60559fcae358626e010e4780a"
+    },
+    {
+      "name": "pyd-action-bar",
+      "sha256": "3fabc6eb210405d48727bac42202445a3f68a32bf067c0c865e7a362d83e5b8d"
+    },
+    {
+      "name": "pyd-affixed-input",
+      "sha256": "f698a70e678035ea275c7a393a8d2ee27e02edee40f72fdd53e176e22c1f4317"
+    },
+    {
+      "name": "pyd-agent-status",
+      "sha256": "f8a95a2bffdc2cce425ec86d6101ba2f3227554b2decc6c478859aee25aaf1f5"
+    },
+    {
+      "name": "pyd-alert",
+      "sha256": "5d0dc9f874caaca44346bd9661ab6059f5b254dd5ed4e3ceb676c64b5f0138ef"
+    },
+    {
+      "name": "pyd-alert-dialog",
+      "sha256": "b2c711768c865eba01a5164008f334e51b577f1575d43b273847fba9a94c11a2"
+    },
+    {
+      "name": "pyd-anchor-nav",
+      "sha256": "ad8a00e6908f76ddd93281b285bda6eefaab84488c87eea2dd8c052fcd0230b1"
+    },
+    {
+      "name": "pyd-app-shell",
+      "sha256": "a6594cfca20872a63fae7d81128ac560d210524f7edc71c57e8d8b95bd8cb1c0"
+    },
+    {
+      "name": "pyd-approval-card",
+      "sha256": "78dca014f54c8bda69cac5b8c2b2e8e7a64888a06d15dc32c7cc8f9be5a74464"
+    },
+    {
+      "name": "pyd-artifact-viewer",
+      "sha256": "a6b95dda5cce0ff6391c214fea8af29588ee0d9ca3cd4e09050e2582d2edbca1"
+    },
+    {
+      "name": "pyd-avatar",
+      "sha256": "9e92d82005ac43a7bf12745bc4517198c79bce418acf4b7985f1cdc0fe689dec"
+    },
+    {
+      "name": "pyd-avatar-group",
+      "sha256": "8bd3c7c20c8a680620bad91bff5d83f0bc86e38f99125cf829ed999b8ad19f58"
+    },
+    {
+      "name": "pyd-avatar-uploader",
+      "sha256": "10a96833d034473d40ea4d8c4ec455f1b2a4763881feb88055315b1fe42d9544"
+    },
+    {
+      "name": "pyd-badge",
+      "sha256": "d323ac7b9b311b0175c4cecd7862d3f9fc7a56726d1d9d9783f75993bfc1b981"
+    },
+    {
+      "name": "pyd-bar-list",
+      "sha256": "65ac07b336c53e401cae8e1447568f3da7eeb30ef5422a1934fc790726b802d5"
+    },
+    {
+      "name": "pyd-block-editor",
+      "sha256": "89eb5b8de87b27cd0abf08ed759fa1f6b47f5beee003da1ab1b6ff8fb4c87f6c"
+    },
+    {
+      "name": "pyd-board",
+      "sha256": "5767ba1bec684b31c7f45243f36acc11c1c09f28279f75c2e03b4cfcff5eb5da"
+    },
+    {
+      "name": "pyd-breadcrumb",
+      "sha256": "51a88be08ee802a68ae5b3cde96071e113fb05a9c5f38a8a36b2307256b8084c"
+    },
+    {
+      "name": "pyd-bullet-chart",
+      "sha256": "84c13719daff328abb9097d69c68659a1151683e0a4b0c92226520296459352f"
+    },
+    {
+      "name": "pyd-button",
+      "sha256": "fb05085861ff1c20d56837c05c0e16e4cef0b667c653b062198b686cac4582c9"
+    },
+    {
+      "name": "pyd-button-group",
+      "sha256": "4cf4637496d2a4d86eb9fe08facc4b06ba4cd6ab716df07241164c040e7c3ab7"
+    },
+    {
+      "name": "pyd-calendar",
+      "sha256": "0f2534b691bd954c97b27a7cee868b1704954d90f579205f7ac66a31017a0681"
+    },
+    {
+      "name": "pyd-calendar-scheduler",
+      "sha256": "1e9de6eb4cc58aa3af3abbb3c0b5cdaa28799d4825c0f0da28a23d90516a401d"
+    },
+    {
+      "name": "pyd-card",
+      "sha256": "4fe5380ad433d8de3b91246e26248c3733c3f3c8c65450e260378369f0abc44d"
+    },
+    {
+      "name": "pyd-carousel",
+      "sha256": "07881c2a70654a73d82ec537deef2411b2b5eb3e4fb26f0a407d388b0bde5530"
+    },
+    {
+      "name": "pyd-checkbox",
+      "sha256": "1c5fb22a0ed01af40863175dd27ea62ad5bba3e92e8fe0bd9ee37d43511698ca"
+    },
+    {
+      "name": "pyd-citation-list",
+      "sha256": "64ee6446381e251cb2b9f807494cb24954e1c7e5af81080a2522d7e8c7666188"
+    },
+    {
+      "name": "pyd-code-block",
+      "sha256": "d52e39680ee46782fdd1e5bd7ae9f11a8fcda89571162e405d7741ff3a45a31f"
+    },
+    {
+      "name": "pyd-code-editor-shell",
+      "sha256": "49b513fbe1a3d6166428d98d77441a1dee59d407cdae5f84cfebbb13988015ff"
+    },
+    {
+      "name": "pyd-collapsible",
+      "sha256": "352ff83d8bdfa2f4fb6609f868ae9794ae25d27709a67ffed76af06096d2f8c6"
+    },
+    {
+      "name": "pyd-color-input",
+      "sha256": "0c57fb44f9ec3fe125e0d521b6e965f3e35a6fd95656fb7104f9118b58559ac3"
+    },
+    {
+      "name": "pyd-combobox",
+      "sha256": "9fafcae6acca15fbb54028f5e49a1b836c903c3f5d80d166eef65b4b1c785e3d"
+    },
+    {
+      "name": "pyd-command-palette",
+      "sha256": "1153af8800f8749e5be8f969d3abdc62f91494729785a9cb8003b63de78f5374"
+    },
+    {
+      "name": "pyd-content-list",
+      "sha256": "6f9326e2b81717ac79041696e31687d919ea38d74b3fcdf48407d5a641e4731f"
+    },
+    {
+      "name": "pyd-context-menu",
+      "sha256": "98713232a3b9c66f4f6d0d534ea860c68e9d3e166bab3151d6d5c4887d33bc7a"
+    },
+    {
+      "name": "pyd-conversation",
+      "sha256": "ad1ae0f996a09c963f65a37ec3712b88b5bb1e2caf4933a2a8670d00ea8d20cf"
+    },
+    {
+      "name": "pyd-copy-button",
+      "sha256": "f2ca8967c4b1c734e34e6a112740061fab26172d2fb2c2220982dda2498c3801"
+    },
+    {
+      "name": "pyd-dashboard",
+      "sha256": "0b52bf4298b21c3507d24d4bbbf800763ea63f76d8d4c992bf2521d23520e2a1"
+    },
+    {
+      "name": "pyd-data-chart",
+      "sha256": "a5e92485b76726809988e792becbe1d3beb4e8d58844fb977dc74db29a015d0d"
+    },
+    {
+      "name": "pyd-data-list",
+      "sha256": "8767a4093547285d89b5993f865af790e55dfb1eba3dfd0e043dd3177bde1ad2"
+    },
+    {
+      "name": "pyd-data-table",
+      "sha256": "d6538a9f016b4709ab91dccf30946e48cfedee566910afb5f1bd2f9e43fb47f5"
+    },
+    {
+      "name": "pyd-date-picker",
+      "sha256": "7feaf9f46d4a574486a77e79c1287c9cae285e93338067bfe93746358afb83a4"
+    },
+    {
+      "name": "pyd-date-range-picker",
+      "sha256": "0aa499dde78be6554f319a8b99b9ad62234f0306cadb5c8402c941d33ca30ca7"
+    },
+    {
+      "name": "pyd-date-time-picker",
+      "sha256": "ba6fd00b41c231f4f538df58882c5f518e5cdbe260de8e075e2093e31ee4c165"
+    },
+    {
+      "name": "pyd-dialog",
+      "sha256": "8e492e3ef0a944dc74c8fbac0cde85bdd17167be77b1d023c5d3fbbf9d2df678"
+    },
+    {
+      "name": "pyd-diff-viewer",
+      "sha256": "019d631df127483fc6556484788f9794f5f8ebb23fa0cd12f9416a504087bd6b"
+    },
+    {
+      "name": "pyd-donut-chart",
+      "sha256": "8eac898ad5c4a50a40e900244503217b38d6df36d2cc950c1f20ae3ebac863a2"
+    },
+    {
+      "name": "pyd-drawer",
+      "sha256": "25f3f04af74dbf6b1a49b217284895abb7a72098783c4de6b0de855e3bcd4cfc"
+    },
+    {
+      "name": "pyd-dropdown-menu",
+      "sha256": "42ca4faf5f50ee44e5443ba0b087fccdffbd241a5ce6d9b62481edb19f9ea471"
+    },
+    {
+      "name": "pyd-dropzone",
+      "sha256": "4a66a8cec1391c8cf20f76919d3a2b77b1c93bad2e4c98f59a1ec30b04ec4be4"
+    },
+    {
+      "name": "pyd-editable",
+      "sha256": "d899ff51dc40a5ccec41c39128d54fb7f9a62ba0fc046b4dcea9d769d7d325dd"
+    },
+    {
+      "name": "pyd-empty",
+      "sha256": "9afd41d36c8e68fb91ff20af0e3448cb5aa990eb86a44c7fb42fbe783f36ee35"
+    },
+    {
+      "name": "pyd-favorite-toggle",
+      "sha256": "e82a5255bd1ccd442c8c2acd81b2bccf6035bffc7df5996881dc7d1c8dd955f9"
+    },
+    {
+      "name": "pyd-field",
+      "sha256": "d9f0026cd1f3b649b583d3e8227b63bbe2ebf63dadf550ada6f6bf056fff0a3f"
+    },
+    {
+      "name": "pyd-file-upload",
+      "sha256": "e8e0f5d59581444caa30977cf8d3d827030cb3ab06d9df1c5c5c4d8cac44b6e6"
+    },
+    {
+      "name": "pyd-filter-bar",
+      "sha256": "faf66fbce5446812f2f50fdef31312528dff53689d6291d6924daca21c5580fe"
+    },
+    {
+      "name": "pyd-form-wizard",
+      "sha256": "8de5fa5ecd37a55655b57f66710ce291dd3fd8a7376425c9d1120254437ccac1"
+    },
+    {
+      "name": "pyd-funnel-chart",
+      "sha256": "94c89ed970f53b3dbc47d94336235c0a2ba898f9ec502e223203592ac2699fcd"
+    },
+    {
+      "name": "pyd-gantt",
+      "sha256": "20ad62ecaf48bf0bb6634ecfac2485948505fbfae78a7b2060d779f41cc65bce"
+    },
+    {
+      "name": "pyd-heatmap",
+      "sha256": "50ad18dbee04aea10fb5727062ebd6b59aa6499c7598c38ba966819c0f471f7e"
+    },
+    {
+      "name": "pyd-hover-card",
+      "sha256": "297b4692c0562d4d87fe48a88e7725768c4446317880e08f0a532c026dcce3a7"
+    },
+    {
+      "name": "pyd-icon-button",
+      "sha256": "afb663dd750cb5051e82a87833f4552c7f1fda42860ad7a034042a373a0f65a6"
+    },
+    {
+      "name": "pyd-image",
+      "sha256": "edf7f59ef8afce0e9ad2057f1aa106f3bef6356627101a8aaa257094ab0ac81a"
+    },
+    {
+      "name": "pyd-image-cropper",
+      "sha256": "6bf4460376e28eeed81826ecff40d3ddc99d0340d749cca01c1452fe61c44523"
+    },
+    {
+      "name": "pyd-input",
+      "sha256": "e98f56fb34a90437bbda2e75037dbcab1165898507405cb0a8f2c4c3cb4d113d"
+    },
+    {
+      "name": "pyd-input-group",
+      "sha256": "c294021086add9312d70314661a53ff150c25d3e197b60098d2ab7bd8b9665a3"
+    },
+    {
+      "name": "pyd-item-list",
+      "sha256": "2560e5fb88ecf9d2105924c64c50d3cb4c5352e73c91ca5452e68d42c4208b30"
+    },
+    {
+      "name": "pyd-json-viewer",
+      "sha256": "9b54c8714327a5d6d325657c8a3b732cd2ddb3f12e6a2374f4b21d88d269d9b7"
+    },
+    {
+      "name": "pyd-kanban",
+      "sha256": "4186e4ad5db4cd79779b9830b2981352ea3ec73e6fd7f9b81759d1198b5800c6"
+    },
+    {
+      "name": "pyd-label",
+      "sha256": "0a5e0576f777e9d416ccbbfee232244111b4da02d0ccbfaf0f1ceffc608dcb93"
+    },
+    {
+      "name": "pyd-lightbox",
+      "sha256": "79f183253c22838748c9bae6d04d0b1012034f9107cdd23c94193d2e96ac19a7"
+    },
+    {
+      "name": "pyd-log-console",
+      "sha256": "03bf4c069e93665570742851dda38a35d0bc3787f8fbb92ee743abcc397910e7"
+    },
+    {
+      "name": "pyd-log-viewer",
+      "sha256": "87a462fe08db4987f983a07f29ccbc47d579d4272f76c2ead81405a089b04a4d"
+    },
+    {
+      "name": "pyd-markdown",
+      "sha256": "0f2c41d0273d4169b05372528ce20d8590d7cf5a5f17d01ced1c4d7900d2a6ef"
+    },
+    {
+      "name": "pyd-markdown-editor",
+      "sha256": "8fe0f37a5173b89b66244365bbd7c47ab2d8e5b4c85d4520eded61c94c6d28fc"
+    },
+    {
+      "name": "pyd-master-detail",
+      "sha256": "2caa0d90e7596d5f1b2ee6452ffbcac4664e0763dc7eed6de752b4e5fb7c0b68"
+    },
+    {
+      "name": "pyd-menubar",
+      "sha256": "7bc059286a6de82f0e82f02395f4f63c3d2ff51d06e6f91a1e24baead6bb10dd"
+    },
+    {
+      "name": "pyd-message",
+      "sha256": "5ad54cbfdfbcf4649cb20dcedcb4f8858dba2d8b6e96d567bb3a8cbc2bad0682"
+    },
+    {
+      "name": "pyd-metric-card",
+      "sha256": "74b64261b6316676767011ca905849c95d06ba974fdbc25e0d97494b92575388"
+    },
+    {
+      "name": "pyd-model-selector",
+      "sha256": "29930f3c789fd5f1ad7657aeaaca4913bf7b7ce4991156c72435cf1c75ab8bbd"
+    },
+    {
+      "name": "pyd-month-picker",
+      "sha256": "7dcf7ae713ee73995043cc32fe37dd00826d8011089b44e58e6b26100bdf9b57"
+    },
+    {
+      "name": "pyd-multi-select",
+      "sha256": "2b79bab316dd79dcfdef63ee008dc3f87d59a7810e354031c9763ff2ee2e85d3"
+    },
+    {
+      "name": "pyd-native-select",
+      "sha256": "a9602f63f823f82596c030c79b859adf4d92f161f5aed5757a22dab448d9357b"
+    },
+    {
+      "name": "pyd-navigation",
+      "sha256": "e52e8579a58d3ab3cad51ffaf70022ddcc83196be7688e1a00fd0a3884be9303"
+    },
+    {
+      "name": "pyd-navigation-menu",
+      "sha256": "39e361513d84a3328b689a360fec7bdfa37bb7aa8cb267b21488cbf8ce5e185f"
+    },
+    {
+      "name": "pyd-node-canvas",
+      "sha256": "c8ca53a5236934e31c80fdfa1d0fdbb2fc65d1f637abfc781c35b0abb8d127e5"
+    },
+    {
+      "name": "pyd-notification-center",
+      "sha256": "e9af48608b56262f621e54298859cb5777ab6761cdd7a63a16f0e2806a8f2b73"
+    },
+    {
+      "name": "pyd-number-input",
+      "sha256": "c9851f904f6b958811f087cd81c7f681321dafe56dcca19527595f9053132957"
+    },
+    {
+      "name": "pyd-page-header",
+      "sha256": "dc998bb39d2749febba09be257d98bf12462acc0b20d56d4f6b91016d1742b45"
+    },
+    {
+      "name": "pyd-pagination",
+      "sha256": "c42cb129da5a7876e7530c427809db4f0641696c0ddcf168d6a6291a4717cb64"
+    },
+    {
+      "name": "pyd-password-input",
+      "sha256": "554c1efc0c6cc36223a012c1ec9438f525387a458bc0ac6b67a48740c2f30b84"
+    },
+    {
+      "name": "pyd-pin-input",
+      "sha256": "ec1cacbbd2220489d2069d208b2e4db2229bc3d4822a7c8d16b297c5583b950d"
+    },
+    {
+      "name": "pyd-popover",
+      "sha256": "1deb88fe098d057512d2d07b391fe75aa1172bd9a5e2c303a82c63fd65cea615"
+    },
+    {
+      "name": "pyd-progress",
+      "sha256": "6db9ae1a6256be41ad275915d2bd37f6a45ec031609a75eda8210724e0a92936"
+    },
+    {
+      "name": "pyd-prompt-input",
+      "sha256": "f74be0573a9ac25acae923d5ad642dbfb1245d7f9a1494133859ad5def4226ff"
+    },
+    {
+      "name": "pyd-query-builder",
+      "sha256": "636ef99ca79aeec81f91585ad46a742b9f3b9102fe6c201d15dee1f8db034341"
+    },
+    {
+      "name": "pyd-radio-group",
+      "sha256": "c7d2080e5e989c612445b8a9875fd60f13efa0887259baad533c3c5b5a52219a"
+    },
+    {
+      "name": "pyd-range-slider",
+      "sha256": "255927e6cb3ca01bf4a44d3d3a5831aee932a3b70e8c4876e7aedeba9eb5f5f9"
+    },
+    {
+      "name": "pyd-rating",
+      "sha256": "252bc477fc326fc34a7abb859d43fa7d6d62c2a19a51fb13203b5248a3cf5434"
+    },
+    {
+      "name": "pyd-reasoning",
+      "sha256": "859b0c661f156f69aa324e333d45ceeabad384ae062076622ad35a0821f9860b"
+    },
+    {
+      "name": "pyd-resizable-panels",
+      "sha256": "9d5e0a9263e0eb4f714be67b6136de7ed43947a1c28fbcb3350a9b2e65f18cbd"
+    },
+    {
+      "name": "pyd-response-feedback",
+      "sha256": "7c12375b873fb18ef4a2ec1071b00eecf26d77ef680890e8cfaa3455e124a7c2"
+    },
+    {
+      "name": "pyd-result-state",
+      "sha256": "e66523162f4b0172da9d76b51585c59b16f9e8f67609b21f8785fd65725c3f9a"
+    },
+    {
+      "name": "pyd-scatter-chart",
+      "sha256": "3491c3a0f076870ee6db1ec57c73a6c7c4e8196cd4ae48913d34f95b82cdbb3f"
+    },
+    {
+      "name": "pyd-scroll-area",
+      "sha256": "d75db409fd8af0d2ed376ec13362879d8a0a07f103e46868386444fcb5939768"
+    },
+    {
+      "name": "pyd-search-input",
+      "sha256": "6f87ee2dcac8dd57b81e2fa5956d69ab476445e09979fc9087569da0abee8e25"
+    },
+    {
+      "name": "pyd-segmented-control",
+      "sha256": "be55093a3227d9e0671704c3d0a36a38d9b549c9e8e07b1dad23f55198827124"
+    },
+    {
+      "name": "pyd-select",
+      "sha256": "fa21381a96f73a82ea030a92e268c88935cb75fc3b2ea2cb13b611e35a87d032"
+    },
+    {
+      "name": "pyd-separator",
+      "sha256": "8eea080043dbbfbde3013c15bc4dcc4547ee0c07c007383255b80115b41e51d5"
+    },
+    {
+      "name": "pyd-sidebar",
+      "sha256": "ee91d1018d581d50dcac25992e86223fa6c39866fbc8cdb076ae9cec34e1aa82"
+    },
+    {
+      "name": "pyd-skeleton",
+      "sha256": "18b611760deed5fcee61e891f49be15734e6d5f20e15260b811a4ef48f7f168c"
+    },
+    {
+      "name": "pyd-slider",
+      "sha256": "23cd97d241dc0e8ebed1a2dac6b24d7ac75ca210e8a3dd61c7799e113618ff38"
+    },
+    {
+      "name": "pyd-snippet",
+      "sha256": "c170dba54771edd15a4d478dd763a564583bb0758523db3690f37f62704d6cca"
+    },
+    {
+      "name": "pyd-sparkline",
+      "sha256": "91e20b1b8df17bcc2dee043e5313b18504b9d1e12357ea0204d7644dbc5429dc"
+    },
+    {
+      "name": "pyd-spinner",
+      "sha256": "ba37f35b920f9a6c498c9e388ab32fcaead2f264b85a148dc999941e68e222d0"
+    },
+    {
+      "name": "pyd-stepper",
+      "sha256": "006d91bcc6ee3fa60b27f4917456e11dc0a3701819535aad352aae0fff9c5452"
+    },
+    {
+      "name": "pyd-switch",
+      "sha256": "2ed23acb94ac72985cb459dfaf79be6b1be952cbcf94857f847d7dda61beb056"
+    },
+    {
+      "name": "pyd-table",
+      "sha256": "a16d11110048a5180f724a633a70f5e6bb63d0d18b20e471e4eed5126fbf98f6"
+    },
+    {
+      "name": "pyd-tabs",
+      "sha256": "380fd60a3c189e8ce00d6fdfd638fef06a29f891629fcd840f9b9991e99e7d48"
+    },
+    {
+      "name": "pyd-tags-input",
+      "sha256": "d53ab1dc31b1b8ff76dca42571c31cac101a8f74268bf26d3c602b249e13595a"
+    },
+    {
+      "name": "pyd-terminal",
+      "sha256": "ef0bd9158e34e90c2c918ce01062b0079f7270875f103f92cb42f4f4f667a276"
+    },
+    {
+      "name": "pyd-textarea",
+      "sha256": "272749f85786c253b74e543e663b2c29bb4a37325a363382c0aecdaf3ff41f9c"
+    },
+    {
+      "name": "pyd-thread",
+      "sha256": "5f16a2a730479e89081a72c99fff232ce2d52beb09cc4864dd734d03d435a1dc"
+    },
+    {
+      "name": "pyd-time-picker",
+      "sha256": "7affe5b48ba8689841e347729f81badf003d972b35691000cb8e660aac47770b"
+    },
+    {
+      "name": "pyd-timeline",
+      "sha256": "b87bc7fe41b806673fc81518f791d7cbc2c639125b028462a9e47bf48c5f79af"
+    },
+    {
+      "name": "pyd-toast",
+      "sha256": "742ce8bcbfeb6142c59d9be08a87056cd6bf344d858aa4dadcbcd0054fc621fb"
+    },
+    {
+      "name": "pyd-toggle",
+      "sha256": "2bfc94e574b15b5617590bd8e486b17669a4464fbd8a48fe76a8d531066133dd"
+    },
+    {
+      "name": "pyd-toggle-group",
+      "sha256": "d5667d8db395703d462293b3f39980e841f4e6d1eaf8752061111e0ba564720b"
+    },
+    {
+      "name": "pyd-tokens",
+      "sha256": "7fee277da807b238961f8e1466660e4635fed0fd5c69610cc7f50555ae144b77"
+    },
+    {
+      "name": "pyd-tool-call",
+      "sha256": "8b534601fc80cadb908a80e1915397381ec963ceefe8731562c3f6aeb0fa8868"
+    },
+    {
+      "name": "pyd-tooltip",
+      "sha256": "417c8dd75fba8fe0b4d3c51d531a204b913063af0fd5da85c75ae4e16054b55e"
+    },
+    {
+      "name": "pyd-tree",
+      "sha256": "ca2e97c3ed8c349931ecf3cfaa9511c0257160f25e058ac59cbb80d2862a316f"
+    },
+    {
+      "name": "pyd-tree-nav",
+      "sha256": "035dfdb7738850a353d6c7bd28405cff809cd9135a95aec89e1d4c2486654335"
+    },
+    {
+      "name": "pyd-tree-select",
+      "sha256": "0cea24808f8470035152dda960a947e403a737c3819b755f293a41161eebb2bb"
+    },
+    {
+      "name": "pyd-utils",
+      "sha256": "19ec0eb3d09c20679d3ab4fe7afc921dc493675a41a526e6af2c910b37255999"
+    },
+    {
+      "name": "pyd-waterfall-chart",
+      "sha256": "87c1edffbcadcf7d6aa8cc06948286806bcdebb22a1d3cddbfcb93e53efc9f94"
+    },
+    {
+      "name": "pyd-year-picker",
+      "sha256": "2945e67198f8d6db94a55f2f8cb6d60ef17ed4430f6b95a17da44c79cef753dc"
+    }
+  ]
+}

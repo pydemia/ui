@@ -7,6 +7,7 @@ type DonutChartProps = Omit<ComponentProps<"figure">, "children" | "title"> & {
     title: string;
     description?: string;
     segments: readonly DonutSegment[];
+    appearance?: "panel" | "plain";
     unit?: string;
     totalLabel?: string;
     formatValue?: (value: number) => string;
@@ -25,12 +26,16 @@ function DonutChart({
     title,
     description,
     segments,
+    appearance = "panel",
     unit = "",
     totalLabel = "Total",
     formatValue = String,
     className,
     ...props
 }: DonutChartProps) {
+    if (appearance !== "panel" && appearance !== "plain") {
+        throw new RangeError("DonutChart appearance is not supported.");
+    }
     if (segments.some(({ label, value }) =>
         !label.trim() || !Number.isFinite(value) || value < 0
     )) {
@@ -49,10 +54,13 @@ function DonutChart({
     return (
         <figure
             className={cn(
-                "@container m-0 min-w-0 rounded-sm border border-border " +
-                "bg-surface p-[var(--space-4)] text-foreground",
+                "@container m-0 min-w-0 text-foreground",
+                appearance === "panel" &&
+                    "rounded-sm border border-border bg-surface " +
+                    "p-[var(--space-4)]",
                 className,
             )}
+            data-appearance={appearance}
             {...props}
         >
             <figcaption className="mb-[var(--space-3)]">

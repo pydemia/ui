@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 기준 재검토: 차트의 작은 표시 변경에도 276개
+snapshot 파일이 생성됐습니다. 변경분의 사람 검토와 자동 릴리스
+비용을 분리하고, CI·snapshot·고지 생성의 고정 비용을 개선 대상으로
+기록했습니다. [판단 근거](quality-checklist-review-2026-10-03.md)를
+참고하세요. Goal 관리용 추정은 약 98%입니다.
+
+2026-10-03 DataChart·DonutChart 표시 형태 로컬 후보: 상위 panel에
+중첩할 때 chart 자체의 테두리·배경·외곽 여백을 제거하는 `plain`을
+추가했습니다. 기존 `panel`은 기본값입니다. typecheck·UI 테스트
+226/226·build·65번째 registry snapshot 검사와 두 preview의 전환을
+확인했습니다. 새 component/item 수는 없고 공개 CI·URL은 미검증입니다.
+`ItemList`는 PR #110으로 `main`에 병합됐으나 마지막 확인에서
+production item과 snapshot manifest는 404였습니다. Goal 관리용
+추정은 약 98%입니다.
+[차트 작업 기록](chart-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `ItemList` 로컬 후보: 제목·설명·메타 정보·별도 작업을
 같은 native 목록에 배치하고 panel/plain·comfortable/compact를
 선택합니다. typecheck·전체 UI 테스트 226/226, Chromium 390px·1280px

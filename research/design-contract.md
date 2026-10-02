@@ -930,6 +930,15 @@ native radio를 1부터 `max`까지 만듭니다. `name`을 생략해도 인스�
 `데이터 없음`으로 표시합니다. SVG는 장식으로 숨기고 표와 선택기에
 값을 남깁니다.
 
+## 2026-10-03 DataChart·DonutChart 표시 형태
+
+두 chart에서 `appearance="panel"`이 기본값이며 기존 테두리·배경·
+여백을 유지합니다.
+`appearance="plain"`은 차트 자체의 테두리·배경·외곽 여백을 제거해
+`CardContent` 같은 상위 panel 안에 배치합니다. 제목·설명·범례·값
+표시와 계산은 두 형태에서 같습니다. 지원하지 않는 값은
+`RangeError`로 거부합니다.
+
 ## 2026-09-29 TimePicker
 
 `TimePicker`는 `value: string | null`과 `onValueChange`로 제어합니다.

@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 DataChart·DonutChart 표시 형태 로컬 후보:
+**약 98% → 약 98%**입니다. 중첩 panel에서 이중 테두리와 여백을
+없애는 `plain`을 추가했고 기본 `panel`은 유지했습니다. typecheck·
+UI 테스트 226/226·build·65번째 snapshot의 registry release 검사와
+로컬 preview 전환을 확인했습니다. 새 component/item은 없으며
+공개 후보 CI·production URL은 아직 확인하지 않았습니다.
+[작업 기록](chart-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `ItemList` 로컬 후보: **약 98% → 약 98%**입니다.
 일반 작업 목록의 제목·설명·메타·작업 배치와 두 표시 형태·간격을
 추가했습니다. typecheck·전체 UI 테스트·로컬 preview와 64번째
