@@ -590,8 +590,8 @@ import { PrismNoticeForm } from "@/components/ui/prism-domain-forms";
 
 ## Profile print pages / Repeated header
 인쇄 전용 Profile 머리말·경력·Risk·경험과 반복 표 머리말
-Contract: 출력 페이지는 190mm 폭과 최소 280mm 높이를 사용합니다. repeatHeader는 table thead를 사용해 출력 머리말을 반복합니다. 읽기 전용 경험 영역·대표 항목·누락 Risk 값을 표시하며 페이지 분할과 인쇄 실행은 호스트가 소유합니다.
-States: default, empty
+Contract: 출력 미리보기는 190mm 폭과 최소 280mm 높이를 사용합니다. 인쇄 시 최소 높이를 해제해 짧은 내용의 빈 다음 페이지를 방지합니다. repeatHeader는 table thead를 사용해 출력 머리말을 반복합니다. 읽기 전용 경험 영역·대표 항목·누락 Risk 값을 표시하며 페이지 분할과 인쇄 실행은 호스트가 소유합니다.
+States: default, empty, long
 Registry: /prism/r/prism-print.json
 Source: packages/prism/src/prism-print.tsx
 Usage kind: integration-fragment
