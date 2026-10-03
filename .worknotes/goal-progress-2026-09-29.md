@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 AppShell panel 디자인 선택 병합·공개 대기:
+**약 98% → 약 98%**입니다. `main`의 137개 component·139개 item과
+68번째 snapshot은 CI를 통과했습니다. Vercel 배포 제한으로 새
+manifest가 404이고 현재 item도 새 소스와 다르므로 공개 공급은
+보류합니다. [작업 기록](app-shell-panel-appearances-2026-10-03.md)을
+참고하세요.
+
 2026-10-03 AppShell panel 디자인 선택 구현 후보:
 **약 98% → 약 98%**입니다. 공개 component 수를 늘리지 않고 측면·
 하단 영역에 `attached`·`inset`을 선택하도록 했습니다. 로컬 typecheck·
