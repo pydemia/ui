@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-admin",
+  "type": "registry:ui",
+  "title": "Admin layout / Attachments / Sync",
+  "description": "관리 페이지의 검색·목록·등록·첨부·갱신 상태 구성",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json",
+    "https://ui.pydemia.ai/prism/r/prism-utility.json",
+    "https://ui.pydemia.ai/prism/r/prism-button.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-admin.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-admin.tsx",
+      "content": "import { useLayoutEffect, useRef, useState, type ReactNode } from \"react\";\nimport { RefreshCw } from \"lucide-react\";\nimport { PrismFileTextGlyph as FileText } from \"./prism-icon\";\nimport { PrismTooltip } from \"./prism-utility\";\nimport { PrismButton } from \"./prism-button\";\n\nexport function PrismAdminLayout({ title, description, actions, filters, toolbar, children, pagination }: {\n    title: string; description?: string; actions?: ReactNode; filters?: ReactNode; toolbar?: ReactNode; children: ReactNode; pagination?: ReactNode;\n}) {\n    return <section className=\"prism-admin\"><header className=\"prism-admin-header\"><div><h1>{title}</h1>{description && <p>{description}</p>}</div>{actions}</header>\n        <div className=\"prism-admin-body\">{filters && <div className=\"prism-admin-filters\">{filters}</div>}{toolbar && <div className=\"prism-admin-toolbar\">{toolbar}</div>}\n            <div className=\"prism-admin-content\">{children}</div>{pagination}</div></section>;\n}\nexport type PrismAttachment = { id: string; name: string; href?: string; sizeLabel?: string; status?: \"ready\" | \"uploading\" | \"error\"; error?: string };\nexport function PrismAttachmentList({ files, onRemove, onDownload }: { files: readonly PrismAttachment[]; onRemove?: (id: string) => void; onDownload?: (file: PrismAttachment) => void }) {\n    return <ul className=\"prism-attachments\">{files.length ? files.map(file => <li key={file.id}><FileText aria-hidden=\"true\" /><div>\n        {file.href && /^(https?:\\/\\/|\\/[^/])/.test(file.href) ? <a href={file.href} download>{file.name}</a> : onDownload ? <button type=\"button\" onClick={() => onDownload(file)}>{file.name}</button> : <span>{file.name}</span>}\n        {file.sizeLabel && <small>{file.sizeLabel}</small>}{file.status === \"uploading\" && <span role=\"status\">업로드 중</span>}{file.status === \"error\" && <p role=\"alert\" className=\"prism-error\">{file.error ?? \"첨부하지 못했습니다.\"}</p>}</div>\n        {onRemove && <PrismButton variant=\"shape\" size=\"small\" aria-label={`${file.name} 제거`} onClick={() => onRemove(file.id)}>제거</PrismButton>}</li>) : <li className=\"prism-help\">첨부파일이 없습니다.</li>}</ul>;\n}\nexport function PrismSyncStatus({ status, updatedAt, onRefresh }: { status: \"idle\" | \"syncing\" | \"error\"; updatedAt?: string; onRefresh?: () => void }) {\n    return <div className=\"prism-sync-status\"><span role={status === \"error\" ? \"alert\" : \"status\"}>{status === \"syncing\" ? \"동기화 중입니다.\" : status === \"error\" ? \"동기화에 실패했습니다.\" : `최근 갱신: ${updatedAt ?? \"기록 없음\"}`}</span>\n        {onRefresh && <PrismButton variant=\"shape\" size=\"small\" icon={<RefreshCw />} disabled={status === \"syncing\"} onClick={onRefresh}>새로고침</PrismButton>}</div>;\n}\nexport function PrismTruncatedText({ text, maxLength = 60 }: { text: string; maxLength?: number }) {\n    const ref=useRef<HTMLSpanElement>(null); const [truncated,setTruncated]=useState(false);\n    useLayoutEffect(() => {const node=ref.current;if(!node)return;const measure=()=>setTruncated(node.scrollWidth>node.clientWidth);measure();const observer=new ResizeObserver(measure);observer.observe(node);return ()=>observer.disconnect();},[text,maxLength]);\n    const content=<span ref={ref} className=\"prism-truncated\" style={{maxWidth:`${maxLength}ch`}} tabIndex={truncated ? 0 : undefined}>{text}</span>;\n    return truncated ? <PrismTooltip content={text}>{content}</PrismTooltip> : content;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "c9b5540684a464897983be640e615c3f229e64da50d15b5e36e5ff353b13efe5",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

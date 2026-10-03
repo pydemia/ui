@@ -1,0 +1,279 @@
+# PRISM UI
+
+Isolated PRISM-DEV design and interaction references using React 19, pydemia/ui and shadcn/Radix primitives.
+
+- [Contracts and source mapping](/prism/components.json)
+- [Ground rules](/prism/research/design-rules.md)
+- [Original inventory](/prism/research/source-inventory.json)
+- [Verification and known differences](/prism/research/verification.md)
+- [Registry](/prism/r/registry.json)
+
+Use data-prism="light" at the application root. Load pydemia tokens then prism.css; prism.css imports the installed Pretendard variable font. Keep the installed PRISM_ASSET_NOTICES.md. There is no verified source dark theme. Registry imports point to local installed files, not private workspace packages. Do not infer API, authorization, persistence or HR decision logic from a component demo. null assessment scores are insufficient evidence, never zero.
+
+## Button / New chat
+일반·파괴적·아이콘 작업과 새 대화 진입
+Contract: variant solid/line/shape, size large/medium/small/x-small, tone primary/danger. iconOnly는 접근 가능한 이름이 필요합니다. 기본 type은 button입니다.
+States: default, disabled
+Registry: /prism/r/prism-button.json
+Source: packages/prism/src/prism-button.tsx
+
+## Input / Textarea / Select
+레이블·필수·읽기 전용·입력 오류를 포함한 값 입력
+Contract: label은 필수이며 description·error를 aria-describedby로 연결합니다. Select의 required·name은 native form validation·FormData와 연동하며 미선택 오류 시 trigger로 포커스를 옮깁니다. uncontrolled Select는 form reset 시 defaultValue로 돌아갑니다. readonly 값은 전송되지만 변경할 수 없습니다. onClear는 controlled 값의 초기화 의도를 전달하고 입력 포커스를 유지합니다. endAdornment를 넣을 수 있으며 저장과 업무 검증은 호출자 책임입니다.
+States: default, disabled, readonly, error, long
+Registry: /prism/r/prism-field.json
+Source: packages/prism/src/prism-field.tsx
+
+## ELP / Count / Tag / Chip
+ELP 구분·건수·필터 제거·평가 상태 표시
+Contract: ELP와 s-ELP는 별도 색·16px 규격입니다. Count는 0 이상 정수입니다. 제거 가능한 Tag에는 label과 onRemove를 제공합니다. Chip의 상태는 텍스트로도 표현합니다.
+States: default
+Registry: /prism/r/prism-badge.json
+Source: packages/prism/src/prism-badge.tsx
+
+## Avatar / Chips / Table
+사용자·후보 식별, 프로필 선택, 표 검색·정렬
+Contract: PrismTable은 native table과 caption을 사용합니다. 대량 데이터 검색·정렬·페이지·원격 요청은 기존 DataTable 계약을 공유합니다. 이름 선택은 호출자의 onOpen으로 전달합니다.
+States: default, disabled, empty
+Registry: /prism/r/prism-display.json
+Source: packages/prism/src/prism-display.tsx
+
+## Tabs
+프로필·경력·메모를 한 영역에서 전환
+Contract: Radix의 value/onValueChange, Arrow/Home/End, 연결된 tabpanel을 사용합니다. line 44px와 fill 32px를 구분합니다.
+States: default
+Registry: /prism/r/prism-tabs.json
+Source: packages/prism/src/prism-tabs.tsx
+
+## Dialog
+명시적 확인과 짧은 정보 편집
+Contract: Radix dialog의 focus containment·Escape·focus restoration을 사용합니다. 기본 폭은 620px이며 width로 440/560/620px 등을 지정할 수 있습니다. 일반 Dialog의 title과 description은 필수입니다. ConfirmDialog는 성공·오류 아이콘, 선택적 취소, busy/error 상태와 확인 의도 callback을 제공합니다. onConfirm 이후 닫기와 실제 작업 성공 처리는 호출자가 소유합니다. Portal의 light profile을 직접 선언합니다.
+States: default, disabled, loading, error
+Registry: /prism/r/prism-dialog.json
+Source: packages/prism/src/prism-dialog.tsx
+
+## Toast / Request state
+알림과 로딩·빈 결과·실패·재시도 구분
+Contract: 오류는 alert, 일반 알림은 status로 표시합니다. 요청 실패를 빈 결과로 바꾸지 않습니다. 자동 닫힘·queue·서버 재시도 정책은 호출자가 결정합니다.
+States: default, loading, empty, error
+Registry: /prism/r/prism-feedback.json
+Source: packages/prism/src/prism-feedback.tsx
+
+## Chat sidebar
+새 대화·후보자·즐겨찾기·관리·대화기록 탐색
+Contract: collapsed/onCollapsedChange와 activeId/onNavigate는 controlled입니다. 펼침 280px·접힘 72px. 원본 벡터·관리 하위 메뉴·대화기록 접기·사용자 팝오버를 제공합니다. expandedIds와 historyOpen은 선택적 controlled입니다. 이름 변경은 IME를 보존하고 Enter/blur로 확정, Escape로 취소합니다. 삭제 요청·프로필 작업·방침은 callback이며 권한과 실제 저장은 소비자가 소유합니다.
+States: default, loading, empty
+Registry: /prism/r/prism-sidebar.json
+Source: packages/prism/src/prism-sidebar.tsx
+
+## Message / Composer / Criteria
+질문 입력·전송·중단, 답변 상태와 판단 기준 표시
+Contract: value/onValueChange/onSubmit은 controlled이며 Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공합니다. busy는 전송을 막고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다.
+States: default, disabled, loading, error
+Registry: /prism/r/prism-chat.json
+Source: packages/prism/src/prism-chat.tsx
+
+## Candidate / Evaluation
+후보자 프로필·즐겨찾기·목록·평가 근거 표시
+Contract: onOpen과 onFavoriteChange는 의도만 전달합니다. stack/pair/grid와 panel 배치를 제공합니다. PrismCandidateBrief의 날짜·평가 이력·보상 문자열은 소비자가 준비하며 금액 환산이나 평가를 계산하지 않습니다. 평가 점수는 0–5 또는 null이며 null을 0으로 바꾸지 않습니다.
+States: default, loading, empty, error
+Registry: /prism/r/prism-candidate.json
+Source: packages/prism/src/prism-candidate.tsx
+
+## Side panel / Detail / Memo
+후보자·포지션 상세와 작성자·날짜가 있는 메모 확인
+Contract: 패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 메모 actions는 호출자가 제공합니다.
+States: default
+Registry: /prism/r/prism-detail.json
+Source: packages/prism/src/prism-detail.tsx
+
+## Inline panel
+채팅과 상세를 동시에 사용하며 패널 확대·축소
+Contract: 비모달 aside이며 기본 너비 440px와 64px header를 사용합니다. resizable을 켜면 드래그·방향키·Shift·Home/End로 조절하고 double click으로 초기화합니다. width/onWidthChange는 controlled 계약이며 minWidth/maxWidth는 부모 폭 안에서 적용합니다. responsive는 좁은 부모에서 전체 폭을 사용합니다. open/expanded는 호출자가 제어합니다. 부모는 position relative flex 컨테이너입니다.
+States: default
+Registry: /prism/r/prism-panel.json
+Source: packages/prism/src/prism-panel.tsx
+
+## 6-frame comparison
+리더 유형·경험·역량·자질을 후보별로 비교
+Contract: 열 ID는 고유하며 값은 ReactNode 또는 null입니다. null은 정보 없음으로 표시합니다. 첫 두 열과 header를 고정하고 경험·역량 행을 병합합니다. 비교 점수나 순위는 계산하지 않습니다.
+States: default, empty, long
+Registry: /prism/r/prism-six-frame.json
+Source: packages/prism/src/prism-six-frame.tsx
+
+## Selection / Date / Pagination
+검색·다중 선택·기간 검증·페이지 탐색
+Contract: 선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 중복을 추가하지 않으며 첫 칩을 해제해도 나머지 값은 보존합니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다.
+States: default, disabled, readonly, loading, error, empty
+Registry: /prism/r/prism-selection.json
+Source: packages/prism/src/prism-selection.tsx
+
+## Candidate profile / Evidence
+후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시
+Contract: PrismProfileTab은 종합·전문성·성공경험·Design·Agility·Attitude·Leadership·Mgmt Comments의 안정 ID입니다. 분류별 sections는 독립 컴포넌트 slot입니다. 누락된 근거는 정보 없음으로 남기고 UI가 평가하지 않습니다.
+States: default, empty, loading, error
+Registry: /prism/r/prism-profile.json
+Source: packages/prism/src/prism-profile.tsx
+
+## Markdown / Suggestions / Position
+답변 구조·생성 상태·후속 질문·포지션 안내
+Contract: Markdown은 GFM 표·목록을 지원하며 raw HTML을 건너뜁니다. remote image는 alt로 표시합니다. 제안 선택·포지션 열기는 callback으로 전달하고 자동 전송·생성은 하지 않습니다.
+States: default, disabled, loading, error
+Registry: /prism/r/prism-content.json
+Source: packages/prism/src/prism-content.tsx
+
+## Admin layout / Attachments / Sync
+관리 페이지의 검색·목록·등록·첨부·갱신 상태 구성
+Contract: 관리 chrome은 filters·toolbar·actions·pagination slot으로 구성합니다. 첨부파일 삭제·다운로드·갱신은 callback만 호출하며 실제 업로드와 저장은 소비자가 담당합니다. 파일 URL은 http(s) 또는 단일 slash 경로입니다.
+States: default, empty, loading, error
+Registry: /prism/r/prism-admin.json
+Source: packages/prism/src/prism-admin.tsx
+
+## PDF / Print
+문서 페이지·배율·맞춤·다운로드와 출력 정보 선택
+Contract: PDF.js로 실제 PDF를 렌더링하며 workerUrl은 설치한 pdfjs-dist와 같은 버전이어야 합니다. 페이지는 1부터, 수동 배율 기본 범위는 30–100%이며 minZoom/maxZoom으로 확장할 수 있습니다. height로 높이를 지정하고 페이지/너비 맞춤은 실제 viewport 여백을 반영합니다. 확대 문서는 내부 스크롤하며 비동기 렌더를 취소합니다. 출력 섹션·선택·인쇄 callback은 소비자가 소유합니다.
+States: default, error
+Registry: /prism/r/prism-document.json
+Source: packages/prism/src/prism-document.tsx
+
+## Workspace shell
+LNB·64px header·스크롤 본문·상세 패널 조합
+Contract: sidebar·header·panel은 slot입니다. height/minHeight를 지정할 수 있고 responsive는 컨테이너 폭이 breakpoint(기본 768px)보다 작으면 탐색 Drawer를 사용합니다. navigationOpen/onNavigationOpenChange로 메뉴를 제어할 수 있으며 넓은 화면으로 전환하면 메뉴를 닫고 header에 포커스를 옮깁니다. 경로·로그인·서버 상태는 소비자가 소유합니다.
+States: default
+Registry: /prism/r/prism-workspace.json
+Source: packages/prism/src/prism-workspace.tsx
+
+## Radar / Trend chart
+성격·리더십 진단 값과 시계열·누락값 표시
+Contract: 값은 0..max 또는 null이고 축·시점 수와 일치해야 합니다. 누락값을 0으로 그리거나 보간하지 않습니다. SVG와 접근 가능한 데이터 표를 함께 제공합니다. 분류나 인사 평가를 계산하지 않습니다.
+States: default, empty
+Registry: /prism/r/prism-chart.json
+Source: packages/prism/src/prism-chart.tsx
+
+## Switch / Tooltip / Progress / Files
+환경 선택·도움말·진행률·파일 선택과 제거
+Contract: Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip은 focus와 hover에서 열리며 side/align/small/arrow로 배치를 지정합니다. Progress null은 indeterminate이며 showPercent 기본값은 false, displayValue와 color는 소비자가 지정합니다. Dropzone은 형식·크기·개수를 검사하고 callback으로 File만 전달합니다. 서버 업로드는 실행하지 않습니다.
+States: default, disabled, loading
+Registry: /prism/r/prism-utility.json
+Source: packages/prism/src/prism-utility.tsx
+
+## History / Compensation / Validation / Comment
+평가 이력·연도별 보상·검증 근거·경험 사례·의견 편집
+Contract: 이력·등급·금액·검증 상태는 이미 결정된 외부 값을 표시합니다. 보상 합계 계산이나 평가 확정은 하지 않습니다. 의견은 controlled 입력이며 공백 제출과 busy 중 저장을 막고 onSave로 의도를 전달합니다.
+States: default, empty, loading, error
+Registry: /prism/r/prism-record.json
+Source: packages/prism/src/prism-record.tsx
+
+## Management forms / Criteria
+회사 그룹·사용자·공지·포지션 정보 편집, 기준·영향 포지션 확인
+Contract: 분류된 Field schema와 controlled values로 관리 양식을 구성합니다. 필수 값과 native 이메일 검증을 제공하며 저장·생성·기준 추가/편집/제거는 callback입니다. 역할 변경의 권한과 API 검증은 서버 책임입니다. 원본 양식의 업무 검증을 모두 재구현한 것은 아닙니다.
+States: default, readonly, loading, error
+Registry: /prism/r/prism-management.json
+Source: packages/prism/src/prism-management.tsx
+
+## Context / Option card
+맥락 정보 입력과 필수 값·문자 수·최대 선택 개수
+Contract: values와 제출·취소는 controlled callback입니다. textarea는 기본 800자이고 maxSelections에 도달하면 미선택 항목만 비활성화합니다. 필수 값을 입력해야 등록할 수 있습니다.
+States: default, loading
+Registry: /prism/r/prism-context.json
+Source: packages/prism/src/prism-context.tsx
+
+## Logo / Profile / Popover / Skeleton / More
+텍스트 브랜드·사용자 요약·팝오버·즐겨찾기·접기·로딩
+Contract: SkeletonGroup은 기본 3개·120px 블록과 16px 간격을 사용하며 rows·height를 조절할 수 있습니다. 브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 사내 SVG 로고와 인증 검사는 포함하지 않습니다.
+States: default, disabled, empty
+Registry: /prism/r/prism-primitives.json
+Source: packages/prism/src/prism-primitives.tsx
+
+## Position detail / Requirements
+포지션 기본 정보와 Mission·요구 사항 그룹 표시
+Contract: 회사·포지션·메타데이터와 그룹 항목은 외부 값입니다. 빈 요구 사항과 null 내용은 관련 데이터 없음으로 표시합니다. 로드 상태와 retry는 소비자가 소유합니다.
+States: default, empty, loading, error
+Registry: /prism/r/prism-position.json
+Source: packages/prism/src/prism-position.tsx
+
+## Diagnosis / Risk / Essay / Matrix / Analysis
+성격·가치관·Risk·경험·전문성·리더십 근거와 현재 위치
+Contract: Risk의 true·false·null을 구분하고 전 항목 누락 열만 병합합니다. 점수와 비중은 외부 값이며 범위만 검증합니다. Matrix 현재 위치는 row/column ID로 지정합니다. 평가를 계산하지 않습니다.
+States: default, empty
+Registry: /prism/r/prism-assessment.json
+Source: packages/prism/src/prism-assessment.tsx
+
+## Filters / Candidate list / Board / Memo
+후보 필터·카드/표 보기·후계자 Board·메모 작성
+Contract: 필터·조회·초기화·뷰 모드는 controlled입니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지를 지원합니다.
+States: default, empty, loading, error
+Registry: /prism/r/prism-collection.json
+Source: packages/prism/src/prism-collection.tsx
+
+## Notice / Inquiry / Policy
+공지 목록·상세·비모달 팝업·문의 내역·방침 버전
+Contract: 공지 팝업은 비모달입니다. 목록·선택·정렬·버전은 소비자 소유이며 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서 높이를 관찰합니다.
+States: default, empty, loading, error
+Registry: /prism/r/prism-notice.json
+Source: packages/prism/src/prism-notice.tsx
+
+## Structured response / Rich text / Conversation
+Typed blocks, rich text, actionable references and streaming status
+Contract: Consumers adapt backend payloads into a discriminated block union and own action callbacks. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur.
+States: default, empty, loading, error
+Registry: /prism/r/prism-response.json
+Source: packages/prism/src/prism-response.tsx
+
+## Criteria editor / Remap / Company context
+Criterion editing, sub-jobs, affected positions and replacement mapping
+Contract: Draft fields, duplicate check status, generation and replacement mappings are controlled. Criteria deletion emits only a callback after every affected position has a valid replacement. The target itself cannot be a replacement. API, permissions and transactions belong to the consumer.
+States: default, loading, error
+Registry: /prism/r/prism-management-tools.json
+Source: packages/prism/src/prism-management-tools.tsx
+
+## Selectable directory / Admin table
+Accessible remote sort and row selection with eligibility constraints
+Contract: Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. Candidate favorites in the directory are read-only.
+States: default, empty, loading
+Registry: /prism/r/prism-directory.json
+Source: packages/prism/src/prism-directory.tsx
+
+## Error / Access / Blank layout
+Error pages, access states and service contact layout
+Contract: Error code, icon, message and action are presentation props. Access status comes from the host authentication layer; this component does not request a session or change routes. Original brand illustrations can be supplied through the icon slot.
+States: default
+Registry: /prism/r/prism-page-state.json
+Source: packages/prism/src/prism-page-state.tsx
+
+## Notice / Group / User / Position forms
+공지 노출 범위·게시기간, 역할별 회사 그룹과 포지션 요구 사항 입력
+Contract: 양식 값과 선택지는 외부에서 전달합니다. 조건부 필드·선택 제한·중복 직무 표시를 제공하고 저장·취소·생성·상태 변경은 callback입니다. 이메일·이름 중복 검사 결과와 편집 권한은 소비자가 결정합니다. 팝업을 끄면 게시기간 입력값을 null로 변경합니다.
+States: default, readonly, loading, error
+Registry: /prism/r/prism-domain-forms.json
+Source: packages/prism/src/prism-domain-forms.tsx
+
+## Profile print pages / Repeated header
+인쇄 전용 Profile 머리말·경력·Risk·경험과 반복 표 머리말
+Contract: 출력 페이지는 190mm 폭과 최소 280mm 높이를 사용합니다. repeatHeader는 table thead를 사용해 출력 머리말을 반복합니다. 읽기 전용 경험 영역·대표 항목·누락 Risk 값을 표시하며 페이지 분할과 인쇄 실행은 호스트가 소유합니다.
+States: default, empty
+Registry: /prism/r/prism-print.json
+Source: packages/prism/src/prism-print.tsx
+
+## Chat intro / Prompt cards
+초기 인사말·즐겨찾기 카드·시작 질문·대화 입력
+Contract: 이름·카드·최대 5개 시작 질문을 표시합니다. 질문 선택은 onPromptSelect로 전달하고 textarea에 포커스를 이동합니다. 카드는 명시적 onOpen callback으로 동작하며 인증·라우팅을 수행하지 않습니다.
+States: default, empty, disabled, loading
+Registry: /prism/r/prism-intro.json
+Source: packages/prism/src/prism-intro.tsx
+
+## Profile tab recipes / Compensation / Trends
+8개 프로필 분류를 조합하는 typed recipe와 보상·리더십 추이 표
+Contract: API 결과를 외부에서 typed 표시 모델로 변환해 각 분류 recipe에 전달합니다. null 근거와 실제 0을 구분합니다. 보상 표의 행은 구분, 열은 연도이며 원화·외화·통화 단위를 별도로 표시합니다. 상태와 재시도는 소비자 소유입니다.
+States: default, empty, loading, error
+Registry: /prism/r/prism-profile-sections.json
+Source: packages/prism/src/prism-profile-sections.tsx
+
+## PRISM vector icons
+기존 PRISM 아이콘과 브랜드·빈 상태·오류 화면의 벡터 디자인 자산
+Contract: 원본 87개 벡터의 형상을 보존하고 React adapter와 인스턴스별 SVG ID를 제공합니다. name은 PrismIconName, size는 px입니다. label을 주면 이미지로 이름을 노출하고 생략하면 장식으로 처리합니다. 디자인 자산의 권리는 원본 권리자에게 있습니다.
+States: default
+Registry: /prism/r/prism-icon.json
+Source: packages/prism/src/prism-icon.tsx
+
+Visual parity is pending until reference comparison has completed; read verification.md.

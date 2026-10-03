@@ -116,3 +116,11 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 저장한 원본 default DOM 및 SCSS를 비교해 Toast 아이콘/본문 gap이12px로 잘못 공유되던 부분을6px로 수정했고 close20px·contentgap4px을 맞췄다. 해당 수정의 소스 근거는 있지만 새 런타임 증거는 아직 없다. 전체 build 및 소비자 검증을 이 변경 뒤 다시 갱신한다.
 
 - Toast 수정 후 전체 npm run build와 docs typecheck 및 PRISM source/registry check 통과. 최종 독립 소비자39items/62files 설치·tsc/Vite·font bytes·notice 검증 성공: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-Xx25Y4. 소비자는 모든 설치 모듈을 컴파일하지만 runtime demo는 Button 하나이며 모든 컴포넌트의 실제 브라우저 실행 증거로 해석하지 않는다.
+
+## 2026-10-03 최신 원격 및 최종 gates
+
+- 최종 fetch에서 origin/main이43d1b3c까지 추가2commits 앞서 있어 TreemapChart와 public release 기록도 반영했다. 원격 기준 f3a0162 이후 총17commits다. 작업 두 커밋을 다시 rebase하여4503dea/637b521로 보존했다.
+- 병합 source에서 전체 build·docs/profile-demo typecheck·generic242 tests·PRISM23tests 통과. generic140 registry items/138 catalog entries/69 immutable releases와 current sha256-89c86a0be4705c8b66e8ba4bb6d9c83cc3e4fce2a499314871c130c73dbd63e7 검증 통과.
+- 최신 generic 의존성까지 사용한 최종 독립 설치39items/62files·tsc/Vite·폰트bytes·notice 확인 성공: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-2b8kAS. PRISM registry SHA256 de0aa212f77f0528b3713e87818927baa4e4d6b0170e0a089c3394536a41db2f.
+- 115개 상태/320px 결과는 portable font 및 Toast 구조 수정 전의 실제 브라우저 결과이며4503dea 기준으로 명시했다. 이후 브라우저 disconnected 상태이므로 최신 runtime이라고 표시하지 않는다. 소스/build/소비자 검증과 런타임 근거를 분리했다.
+- standalone font/Toast 소스 후 전체 스타일·모든 상태 비교·로그인 domain·print 실페이지·hover/focus·공개 배포/readback 미완료. Goal은 active다. 원본일치 전체완료를 주장하지 않는다.

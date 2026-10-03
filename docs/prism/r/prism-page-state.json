@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-page-state",
+  "type": "registry:ui",
+  "title": "Error / Access / Blank layout",
+  "description": "Error pages, access states and service contact layout",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json",
+    "https://ui.pydemia.ai/prism/r/prism-button.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-page-state.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-page-state.tsx",
+      "content": "import type { ReactNode } from \"react\";\nimport { PrismIcon } from \"./prism-icon\";\nimport { PrismButton } from \"./prism-button\";\n\nexport function PrismBlankLayout({ gradient = true, children }: { gradient?: boolean; children: ReactNode }) { return <div className=\"prism-blank-layout\" data-gradient={gradient || undefined}>{children}</div>; }\nexport function PrismErrorContent({ code, message, buttonLabel, onAction, icon }: { code?: string; message: string; buttonLabel: string; onAction: () => void; icon?: ReactNode }) {\n    return <section className=\"prism-error-content\" aria-label={code ? `오류 ${code}` : \"접근 안내\"}><div><div className=\"prism-error-illustration\" aria-hidden=\"true\">{icon ?? <PrismIcon name={code === \"404\" ? \"NotFoundIcon\" : code === \"401\" ? \"UnauthorizedIcon\" : \"AccessDeniedIcon\"} size={140} />}</div>{code && <p className=\"prism-error-code\">{code}</p>}<p>{message}</p></div><PrismButton variant=\"line\" onClick={onAction}>{buttonLabel}</PrismButton></section>;\n}\nexport function PrismServiceContact({ label = \"서비스 관련 문의\", email }: { label?: string; email: string }) {\n    return <div className=\"prism-service-contact\"><span>{label}</span><span aria-hidden=\"true\" />{email}</div>;\n}\nexport function PrismAccessGate({ status, children, fallback }: { status:\"ready\" | \"loading\" | \"denied\"; children:ReactNode; fallback?:ReactNode }) {\n    return status === \"ready\" ? children : status === \"loading\" ? <div className=\"prism-access-loading\" role=\"status\">접근 정보를 확인하는 중입니다.</div> : fallback;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "c3796c67c086b27c5c9914f4315bd383e06a74fd166bb49108131c5e7ec26fc3",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

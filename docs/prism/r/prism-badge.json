@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-badge",
+  "type": "registry:ui",
+  "title": "ELP / Count / Tag / Chip",
+  "description": "ELP 구분·건수·필터 제거·평가 상태 표시",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-badge.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-badge.tsx",
+      "content": "import type { ComponentProps, CSSProperties, ReactNode } from \"react\";\nimport { PrismXGlyph as X } from \"./prism-icon\";\n\nexport function PrismElpBadge({ type, className = \"\", ...props }: ComponentProps<\"span\"> & { type: \"ELP\" | \"s-ELP\" }) {\n    return <span {...props} className={`prism-elp ${className}`} data-type={type}>{type}</span>;\n}\nexport function PrismCountBadge({ count, max = 99, children, showZero = false }: { count: number; max?: number; children?: ReactNode; showZero?: boolean }) {\n    if (!Number.isSafeInteger(count) || count < 0 || !Number.isSafeInteger(max) || max < 1) throw new RangeError(\"Count must be a nonnegative integer and max a positive integer.\");\n    const badge = count || showZero ? <span className=\"prism-count\" aria-label={`${count}건`}>{count > max ? `${max}+` : count}</span> : null;\n    return children ? <span className=\"prism-count-anchor\">{children}{badge}</span> : badge;\n}\nexport function PrismTag({ children, variant = \"gray\", onRemove, label, className = \"\", ...props }: ComponentProps<\"span\"> & {\n    variant?: \"gray\" | \"blue\" | \"mainBlue\"; onRemove?: () => void; label?: string;\n}) {\n    if (onRemove && !label) throw new Error(\"Removable PrismTag requires label.\");\n    return <span {...props} className={`prism-tag ${className}`} data-variant={variant}>{children}\n        {onRemove && <button type=\"button\" aria-label={`${label} 삭제`} onClick={onRemove}><X size={16} aria-hidden=\"true\" /></button>}</span>;\n}\nexport function PrismChip({ children, tone = \"primary\", color, variant = \"soft\", ...props }: ComponentProps<\"span\"> & {\n    tone?: \"primary\" | \"success\" | \"warning\" | \"danger\"; color?: string; variant?: \"soft\" | \"solid\";\n}) {\n    return <span {...props} className={`prism-chip ${props.className ?? \"\"}`} data-variant={variant}\n        style={{ \"--chip-tone\": color ?? `var(--${tone === \"primary\" ? \"accent\" : tone})`, ...props.style } as CSSProperties}>{children}</span>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "31405e258fec4dbe1b116f84e4429709439db701eb6ca7d1a2b8d8ba74d11dc0",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}
