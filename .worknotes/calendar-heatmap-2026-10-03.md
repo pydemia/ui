@@ -24,10 +24,17 @@
 
 실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다.
 registry 고지 hash 갱신, snapshot, PR CI와 공개 공급 경로는
-아직 확인하지 않았습니다. 적용한
+처음 로컬 검사에서는 확인하지 않았습니다. source commit
+`81d4c45e1497e38c983656ea472f6f2a1dcd42ae`를
+provenance 고지에 고정한 뒤 `registry:release-check`가 145개
+item·143개 export/catalog와 74개 snapshot의 현재 일치를
+확인했습니다. 현재 ID는
+`sha256-5b2308017e3b8a975e9ffdd15ed520e79b7640e079ba824eb30084e2b9537b76`입니다.
+PR CI와 공개 공급 경로는 남았습니다. 적용한
 [공급·품질 기준](quality-checklist-decision-2026-10-03.md)은
 component별 수동
 검사 횟수를 고정하지 않고 변경한 동작의 증거를 사용합니다.
 
-Goal 관리용 추정은 약 98%로 유지합니다. 로컬 후보는 143개
-component·145개 registry item이며 공개 확인은 142개·144개입니다.
+Goal 관리용 추정은 약 98%로 유지합니다. 로컬 릴리스 후보는
+143개 component·145개 registry item이며 공개 확인은
+142개·144개입니다.

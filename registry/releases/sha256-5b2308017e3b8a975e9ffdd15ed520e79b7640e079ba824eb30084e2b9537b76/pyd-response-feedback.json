@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-response-feedback",
+  "title": "Response Feedback",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-5b2308017e3b8a975e9ffdd15ed520e79b7640e079ba824eb30084e2b9537b76/pyd-button.json",
+    "https://pydemia-ui.vercel.app/r/releases/sha256-5b2308017e3b8a975e9ffdd15ed520e79b7640e079ba824eb30084e2b9537b76/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/response-feedback.tsx",
+      "content": "import { ThumbsDown, ThumbsUp } from \"lucide-react\";\nimport { useId, type ComponentProps } from \"react\";\nimport { Button } from \"./button\";\nimport { cn } from \"./utils\";\n\ntype ResponseFeedbackValue = \"up\" | \"down\" | null;\ntype ResponseFeedbackCounts = { up: number; down: number };\ntype ResponseFeedbackProps = Omit<ComponentProps<\"div\">, \"children\"> & {\n    label: string;\n    value: ResponseFeedbackValue;\n    onValueChange: (value: ResponseFeedbackValue) => void;\n    counts?: ResponseFeedbackCounts;\n    disabled?: boolean;\n    pending?: boolean;\n};\n\nfunction ResponseFeedback({\n    label, value, onValueChange, counts, disabled = false,\n    pending = false, className, ...props\n}: ResponseFeedbackProps) {\n    const countId = useId();\n    if (!label.trim()) throw new Error(\"ResponseFeedback requires a label.\");\n    if (value !== null && value !== \"up\" && value !== \"down\") {\n        throw new RangeError(\"ResponseFeedback value must be up, down or null.\");\n    }\n    if (counts && [counts.up, counts.down].some(\n        (count) => !Number.isSafeInteger(count) || count < 0,\n    )) {\n        throw new RangeError(\"ResponseFeedback counts must be nonnegative integers.\");\n    }\n\n    return (\n        <div role=\"group\" aria-label={label} aria-busy={pending}\n            className={cn(\"inline-flex flex-wrap items-center gap-2\", className)}\n            {...props}>\n            <Button variant=\"outline\" type=\"button\" aria-pressed={value === \"up\"}\n                aria-label=\"도움이 됨\" disabled={disabled || pending}\n                aria-describedby={counts ? `${countId}-up` : undefined}\n                className={cn(\"gap-2\", value === \"up\" &&\n                    \"border-accent bg-accent text-accent-foreground\")}\n                onClick={() => onValueChange(value === \"up\" ? null : \"up\")}>\n                <ThumbsUp aria-hidden=\"true\" className=\"size-4\" />\n                <span>좋아요</span>\n                {counts && <span id={`${countId}-up`}>\n                    {counts.up}명 선택\n                </span>}\n            </Button>\n            <Button variant=\"outline\" type=\"button\"\n                aria-pressed={value === \"down\"}\n                aria-label=\"도움이 되지 않음\" disabled={disabled || pending}\n                aria-describedby={counts ? `${countId}-down` : undefined}\n                className={cn(\"gap-2\", value === \"down\" &&\n                    \"border-accent bg-accent text-accent-foreground\")}\n                onClick={() => onValueChange(value === \"down\" ? null : \"down\")}>\n                <ThumbsDown aria-hidden=\"true\" className=\"size-4\" />\n                <span>싫어요</span>\n                {counts && <span id={`${countId}-down`}>\n                    {counts.down}명 선택\n                </span>}\n            </Button>\n        </div>\n    );\n}\n\nexport { ResponseFeedback };\nexport type { ResponseFeedbackValue, ResponseFeedbackCounts,\n    ResponseFeedbackProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/response-feedback.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

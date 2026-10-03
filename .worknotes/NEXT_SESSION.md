@@ -7,12 +7,12 @@ component별 PR·snapshot을 요구하지 않습니다. 구현 증거와 릴리�
 정리했습니다. 공개 수량과 Goal 관리용 추정 약 98%는 바뀌지
 않았습니다.
 
-2026-10-03 `CalendarHeatmap` 로컬 후보: 원본 날짜 활동 격자와
-정확한 값 표를 추가했고 대상 테스트·전체 UI·typecheck·build·
-로컬 Chromium 경로를 확인했습니다. registry 고지·snapshot·PR CI·
-공개 URL은 남았습니다.
+2026-10-03 `CalendarHeatmap` 릴리스 후보: 원본 날짜 활동 격자와
+정확한 값 표의 대상 테스트·전체 UI·typecheck·build·로컬 Chromium
+경로를 확인했습니다. source commit 고지와 74번째 snapshot도
+`registry:release-check`를 통과했습니다. PR CI·공개 URL은 남았습니다.
 [작업 기록](calendar-heatmap-2026-10-03.md)에 검증 범위가 있습니다.
-로컬 143개 component·145개 item, 공개 확인 142개·144개,
+로컬 후보 143개 component·145개 item, 공개 확인 142개·144개,
 Goal 관리용 추정 약 98%입니다.
 
 2026-10-03 `SankeyChart` PR #131 병합·공개 확인: `main` Verify UI와

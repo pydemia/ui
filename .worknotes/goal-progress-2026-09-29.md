@@ -6,11 +6,11 @@
 [현행 기준](quality-checklist-decision-2026-10-03.md)을 줄여
 정리했습니다. 이번 판정만으로 공개 수량은 늘지 않았습니다.
 
-2026-10-03 `CalendarHeatmap` 로컬 후보: **약 98% → 약 98%**입니다.
+2026-10-03 `CalendarHeatmap` 릴리스 후보: **약 98% → 약 98%**입니다.
 날짜 활동 격자의 윤년·희소 값·0·미수집과 좁은 화면 preview를
-확인했습니다. 로컬 후보는 143개 component·145개 item,
-공개 확인은 142개·144개입니다. registry 고지·snapshot·
-PR CI·공개 경로는 남았습니다.
+확인했습니다. source commit 고지와 74번째 snapshot의 registry
+검사도 통과했습니다. 로컬 후보는 143개 component·145개 item,
+공개 확인은 142개·144개입니다. PR CI·공개 경로는 남았습니다.
 [작업 기록](calendar-heatmap-2026-10-03.md)을 참고하세요.
 
 2026-10-03 `SankeyChart` 병합·공개 확인: **약 98% → 약 98%**입니다.
