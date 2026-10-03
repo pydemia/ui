@@ -22,15 +22,17 @@
 | 패널·Workspace | 440→520px 드래그, 방향키·Home/End·초기화, 320/390/768/1024px 레이아웃, Drawer 자동 닫기·포커스·draft 보존 | 원본 shell 비교·모든 도메인의 popup/long 조합 |
 | 파일 | 로컬 가상 PDF 선택 후 attachment tile | 삭제·거부·drag/drop |
 
-PRISM 계약 테스트 23개가 통과했습니다. 38개 예시의 115개 공개 상태를 실제 320px iframe에서 렌더링했으며 렌더 누락·중첩 버튼·페이지 가로 넘침은 없었습니다. 표시 입력 이름 검사는 기존 114개 상태와 이후 수정한 입력 5개 상태에서 통과했습니다. 이 검사는 픽셀 동일성을 뜻하지 않습니다. 원본 Candidate Common의 Skeleton·NoData·Summary 및 empty/error 영역은 크기·색상·여백을 비교하고 수정했습니다. Summary 설명의 클릭·Escape는 확인했으며 hover/focus만으로 열리는 동작은 런타임 미검증입니다.
+PRISM 계약 테스트 25개가 통과했습니다. 4503dea 기준의 38개 예시·115개 공개 상태를 실제 320px iframe에서 렌더링했으며 렌더 누락·중첩 버튼·페이지 가로 넘침은 없었습니다. 표시 입력 이름 검사는 기존 114개 상태와 이후 수정한 입력 5개 상태에서 통과했습니다. 이 검사는 픽셀 동일성을 뜻하지 않습니다. 원본 Candidate Common의 Skeleton·NoData·Summary 및 empty/error 영역은 크기·색상·여백을 비교하고 수정했습니다. Summary 설명의 클릭·Escape는 확인했으며 hover/focus만으로 열리는 동작은 런타임 미검증입니다.
 
-원격 main의 PivotTable까지 반영한 ef8d2c6 기준에서 전체 build·TypeScript·일반 UI 테스트 247개와 registry 검증을 통과했습니다. 현재 일반 registry는 141개·카탈로그 139개·불변 release 70개입니다. 별도 소비자에 PRISM 39개 항목·62개 파일을 설치하고 tsc/Vite·폰트 bytes·자산 고지를 확인했습니다. Toast 본문 gap을 원본 소스의 6px로 수정한 뒤에도 전체 build와 독립 소비자 설치·tsc/Vite 검증을 통과했습니다. 소비자 검증은 39개 전체 소스를 컴파일하며 실제 렌더 demo는 Button입니다.
+원격 main의 Autocomplete까지 반영한 8e60a65 기준에서 전체 build·TypeScript·일반 UI 테스트 251개와 registry 검증을 통과했습니다. 현재 일반 registry는 142개·카탈로그 140개·불변 release 71개입니다. 별도 소비자에 PRISM 39개 항목·62개 파일을 설치하고 tsc/Vite·폰트 bytes·자산 고지를 확인했습니다. Toast 본문 gap을 원본 소스의 6px로 수정한 뒤에도 전체 build와 독립 소비자 설치·tsc/Vite 검증을 통과했습니다. 소비자 검증은 39개 전체 소스를 컴파일하며 실제 렌더 demo는 Button입니다.
 
-import만 있던 10개 그룹의 Usage를 합성 데이터와 상태를 포함한 React 예시로 보완했습니다. 설치된 registry 소스를 참조하는 10개 예시의 타입 검사가 통과했고 기존 CI의 PRISM 검사에도 workspace 예시 타입 검사를 연결했습니다. 38개 그룹 모두 설치용 import를 제공하며 각 예시의 import가 해당 항목의 설치 의존성 안에 있는지 검사합니다. 나머지 28개는 데이터·상태·callback을 소비자가 정의하는 연동 코드 일부로 표시합니다. 새 예시와 Usage 경로 선택·복사 UI의 브라우저 실행은 미확인입니다.
+import만 있던 10개 그룹의 Usage를 합성 데이터와 상태를 포함한 React 예시로 보완했습니다. 설치된 registry 소스를 참조하는 10개 예시의 타입 검사가 통과했고 기존 CI의 PRISM 검사에도 workspace 예시 타입 검사를 연결했습니다. 38개 그룹 모두 설치용 import를 제공하며 각 예시의 import가 해당 항목의 설치 의존성 안에 있는지 검사합니다. 나머지 28개는 데이터·상태·callback을 소비자가 정의하는 연동 코드 일부로 표시합니다. 새 예시와 Usage 경로 선택·복사 UI의 브라우저 실행은 미확인입니다. Avatar/Table의 독립 예시를 추가한 현재 버전은 완전한 예시 11개와 연동 코드 일부 27개입니다. 현재 버전의 설치 소비자 타입 검사도 통과했습니다.
 
 b533c5c의 기존 Vercel Git 배포가 완료됐습니다. 앞선 일일 제한 실패는 배포 이력에 남겼으며 `apps/docs`가 배포 입력에서 빠지던 문제는 `/docs/` 제외 규칙으로 수정했습니다. `/prism`과 `/prism/`은 HTTP 200이며 manifest·registry·단위 context 항목·llms.txt·폰트 파일의 bytes가 로컬 빌드와 일치합니다. b533c5c의 GitHub Verify UI와 Pages도 통과했습니다. `node scripts/verify-prism-consumer.mjs --public`으로 공개 URL에서 39개 항목·62개 파일을 직접 설치하고 예시 10개의 타입 검사·Vite 빌드·폰트 bytes·자산 고지를 확인했습니다. HTTP 응답과 설치 검증은 실제 브라우저 렌더 증거가 아닙니다.
 
 자체 브라우저는 디스크 공간을 확보한 뒤에도 연결되지 않았으며 현재 browser inventory가 비어 있습니다. 공개 주소로 IAB를 생성해 보았으나 Browser is not available 응답이었습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
+
+Avatar는 원본처럼 영역·이름·팀 폭을 측정해 긴 쪽을 줄이고 양쪽이 길면 함께 줄이도록 보완했습니다. ResizeObserver·텍스트 변경·폰트 로딩 재측정과 잘린 텍스트의 hover/focus Tooltip을 연결했습니다. 모의 DOM에서 폭 배분·폰트 이벤트·키보드 도움말·cleanup을 검사한 결과이며 실제 CSS 배치 검증은 아닙니다. 긴 내용의 크기 조절 예시를 추가해 현재 공개 fixture는 116개입니다. 이 추가 상태와 최신 Avatar/Tooltip의 브라우저 검증은 남아 있습니다. 공개 배포·설치 결과는 b533c5c 기준이며 Avatar 변경에는 아직 적용되지 않습니다.
 
 [기계 판독 검증 기록](verification.json)은 component별 확인 범위와 미검증 항목을 제공합니다. 원본 AX·JPEG는 gitignore된 `.worknotes/browser-evidence/`에만 보관하며 공개 사이트에 포함하지 않습니다.
 

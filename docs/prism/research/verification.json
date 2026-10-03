@@ -536,12 +536,30 @@
       "remaining": [
         "updated Toast runtime metrics and open source sample states"
       ]
+    },
+    "prism-display": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Source SCSS and stored default avatar metrics establish 40px image, 25px radius and 12px gap",
+        "Avatar text allocation preserves the shorter name/team and limits both when both exceed half the available width",
+        "Mock DOM geometry checks resize, text changes, font readiness/loadingdone and observer cleanup",
+        "Mock DOM focus opens the full truncated label; showInfo=false retains a screen-reader name"
+      ],
+      "evidence": [
+        "reference-ui-avatar"
+      ],
+      "remaining": [
+        "actual browser geometry for natural/name/team/both truncation",
+        "hover/focus Tooltip placement and variable font metrics",
+        "all chip and table visual/interactive states"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 23,
+      "passed": 25,
       "failed": 0
     },
     "registry": {
@@ -555,13 +573,13 @@
       "files": 62,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "registrySha256": "de0aa212f77f0528b3713e87818927baa4e4d6b0170e0a089c3394536a41db2f",
-      "method": "isolated shadcn install against local registry mirror; no workspace package imports",
+      "registrySha256": "432d3672c026575a0d0daa291dbaf669cf6012a6d94a11c9c8a1e1d5e815bcb2",
+      "method": "isolated shadcn install against local registry mirror; final registry CSS synced and rebuilt; no workspace package imports",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "all 39 installed items compiled and 10 component examples typechecked; demo renders Button only",
+      "sourceScope": "all 39 installed items compiled and 11 component examples typechecked; demo renders Button only",
       "completeExamples": {
-        "count": 10,
+        "count": 11,
         "status": "typechecked-against-installed-sources",
         "runtime": "not-executed"
       }
@@ -610,34 +628,41 @@
         "portableFont": "emitted package font bytes matched",
         "assetNotice": "installed and checked",
         "browserRuntime": "not-executed"
-      }
+      },
+      "scope": "previous published b533c5c implementation; avatar allocation update pending"
     },
     "generalComponentTests": {
-      "passed": 247,
+      "passed": 251,
       "failed": 0
     },
     "genericRegistry": {
-      "items": 141,
-      "catalogEntries": 139,
-      "immutableReleases": 70,
+      "items": 142,
+      "catalogEntries": 140,
+      "immutableReleases": 71,
       "status": "passed",
-      "currentRelease": "sha256-32c8c4110dd838fedd10716915c72849dd5e35f6977b0dbd010fe9a559d507b9",
-      "upstreamRevision": "ef8d2c6"
+      "currentRelease": "sha256-ab149be9df7a468a1002ed3461c04dce1c3442fe0a32a796ad06ec010688a458",
+      "upstreamRevision": "8e60a65"
     },
     "githubVerification": {
       "sourceCommit": "b533c5c9e0adea0e2fd79310ffd107a1e0cdcff6",
       "status": "passed",
       "url": "https://github.com/pydemia/ui/actions/runs/37091054547",
-      "scope": "installed usage examples and CI example typecheck"
+      "scope": "previous published commit; avatar allocation update has local gates only"
     },
     "usageContracts": {
       "groups": 38,
-      "componentExamples": 10,
-      "integrationFragments": 28,
+      "componentExamples": 11,
+      "integrationFragments": 27,
       "workspaceTypecheck": "passed in check-prism.mjs; runs in existing CI PRISM gate",
       "installedTypecheck": "passed in isolated consumer",
       "installationDependencyClosure": "all 38 installed usage imports resolve within their registry dependency graph",
       "usagePathControlRuntime": "pending"
+    },
+    "currentFixtureStates": {
+      "count": 116,
+      "status": "pending-current-browser-render",
+      "previousVerifiedStates": 115,
+      "previousCheckpoint": "4503dea"
     }
   },
   "unverified": [
@@ -719,7 +744,8 @@
     "newChangesPendingRuntime": [
       "portable package font loading",
       "Toast body 6px gap and close control geometry",
-      "Usage registry/workspace path selection and copied code"
+      "Usage registry/workspace path selection and copied code",
+      "Avatar adaptive name/team allocation, truncated-label Tooltip and new long-content fixture"
     ]
   }
 }

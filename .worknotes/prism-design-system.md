@@ -171,3 +171,22 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 
 - 일반 /r/registry.json(141items) 및 배포 module assets index-CiHEio8y.js/page-D_d2rXKp.js/page-DrlmIlnL.css도 HTTP200 및 로컬 bytes 일치 확인. 최신 공개 설치 이후 이전 NTZkpM/FVI3xS의 node_modules만 정리하고 source·lockfile·dist 및 최신 CQmxAY 의존성은 보존했다.
 - 공개 기록은 published-http-verified로 갱신하고 별도로 browserRender=pending을 유지한다. 최종 전체 site build와 PRISM contracts/10예시 타입 검사는 통과했다. --public 재현 명령과 공개 검증 기록을 소스/생성 문서에 반영한다.
+
+- 최종 b373eff5656ae102778d379bef8102b63efb6325의 main push/ls-remote 일치 및 credential config 보존 확인. Verify UI run37091888289/job111113788126 completed success·실패 step0, Pages run37091887993 success, Vercel Deployment has completed. 공개 research/verification.json은 HTTP200이며 최종 로컬 bytes와 일치한다. URL: https://github.com/pydemia/ui/actions/runs/37091888289.
+- 마지막 상태는 작업 기록만 local modified다. 구현·생성 문서·재현 verifier는 모두 원격에 반영했다. Goal은 active이며 source/설치/공개 HTTP 확인을 최신 UI의 브라우저 검증이나 전체 원본 디자인 일치로 해석하지 않는다.
+
+## 2026-10-03 Avatar 배분과 말줄임 보완
+
+- 이전 goal turn은 source/공개 배포/live registry 설치를 완료한 progress였다. 이번 turn의 own browser inventory도 []다. 전체 스타일 비교나 실제 인쇄 완료를 선언하지 않고 저장된 source default 근거와 원본 소스의 기능 누락을 점검했다.
+- 원본 HRXAvatar와 _avatar.scss에는 실제 이름·팀 폭에 따라 자연 배치/이름 축약/팀 축약/양쪽 축약을 선택하고 잘린 텍스트만 도움말로 표시하는 동작이 있다. 기존 PrismAvatar는 기본 flex 축약과 native title만 제공해 짧은 텍스트 보존·양쪽 배분·원본 Tooltip을 구현하지 않았다.
+- pydemia Avatar와 Tooltip을 조합해 실제 scroll/clientWidth와 ResizeObserver로 배분을 결정한다. window resize·텍스트 변경·document.fonts.ready/loadingdone에도 재측정하고 cleanup한다. 말줄임된 텍스트만 focus/hover 도움말로 전체 label을 보여 준다. 잘리지 않은 라벨의 hover 상태를 저장하지 않아 재축약만으로 Tooltip이 다시 열리지 않는다.
+- div native props/style을 받아 consumer가 폭을 정할 수 있고 원본 규격40px 이미지·25px radius·12px gap을 유지한다. showInfo=false도 이름을 screen reader에 제공한다. long fixture에140–440px slider와 네 가지 길이 조합을 추가했다. 현재116 fixture 상태이며 종전115개/4503dea 실제 browser evidence와 구분한다.
+- Avatar/Table의 self-contained 사용 예시를 추가해 complete examples11개, integration fragments27개다. 새 2tests는 mock DOM geometry로 배분/텍스트/폰트 이벤트/키보드 Tooltip/observer cleanup을 검사한다. CSS 레이아웃이나 실제 browser geometry 검증이 아니다.
+- fetch에서 원격main이8e60a65로7commits 전진했다. Autocomplete와 Windows virtual usage 경로 정규화를 fast-forward로 반영했다. 소스 변경은 stash로 보존했고 generated docs 자산/HTML 충돌만 upstream 복구 후 병합 source로 재생성했다. generic UI·catalog·registry/release source는 원격과 차이가 없다.
+- 병합 후 전체 build·docs/profile-demo typecheck·PRISM25tests·generic251tests 통과. 일반registry142/catalog140/immutable71 및 sha256-ab149be9df7a468a1002ed3461c04dce1c3442fe0a32a796ad06ec010688a458 검증 통과. complete examples11개 workspace 타입 검사도 통과했다.
+- 새 독립 소비자 설치는 ui.shadcn.com/r/colors/neutral.json의10초 connect timeout으로 중단됐다. registry/schema 검사는 통과했고 dependency 설치 뒤 외부 색상 파일 요청이 실패했다. 버전 downgrade나 network 설정 변경 없이 같은4.21 CLI로 재검증 중이다. 실패 소비자eyXieL의 source/lockfile은 보존한다.
+- 새 Avatar·Tooltip·116-state fixture의 실제 렌더 및 전체 원본 상태/로그인 domain/print pagination 검증은 browser 연결 복구 후 필요하다. 기존 공개 b533c5c의 검증을 이 Avatar 변경에 재사용하지 않는다. Goal active다.
+
+- 같은4.21 CLI 재시도의 consumer-Ukms7T는39items/62files 설치·11예시 tsc·Vite·font bytes·notice 확인이 성공했다. 경로: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-Ukms7T. 이후 원본 Tooltip SCSS의 white-space:normal/word-break:break-word도 반영했다. registry CSS와 source bytes 일치를 확인하고 마지막 CSS를 해당 소비자에 동기화해 Vite 재빌드했다. 독립 설치와 CSS 빌드를 browser visual 검증으로 해석하지 않는다.
+
+- 마지막 CSS 동기화 소비자 Vite build도 성공했다. 최종 전체 site build와 11예시 workspace 타입 검사도 통과했다. 실패eyXieL와 이전공개소비자CQmxAY의 node_modules만 정리했으며 source/lockfile/dist와 최신Ukms7T 의존성은 보존했다.
