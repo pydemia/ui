@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-03 `TransferList` 구현 검토: Selection의 두 목록 배정 용례를
+원본 구현으로 추가했습니다. export·registry·provenance·Usage·preview와
+76번째 snapshot 후보를 준비했습니다. typecheck·전체 UI 테스트
+268/268·build·registry snapshot 검사와 로컬 Chromium의 keyboard,
+form 제출, 390px 표시와 PRISM 32/32를 확인했습니다.
+`registry:release-check`도 통과했습니다. PR CI·공개 공급은 아직
+확인 전입니다. 공개 수량 143개 component·145개 item은 그대로이며,
+후보는 144개·146개입니다. Goal 관리용 추정은 약 99%입니다.
+[작업 기록](transfer-list-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Intake workspace 공개: 기존 10개 component로 단계별
 요청 입력·기간·첨부 예정 목록과 접수 표를 연결했습니다. 공백 제목과
 기간 누락 차단, 파일 선택·제출·표 반영·390px 내부 스크롤을 로컬

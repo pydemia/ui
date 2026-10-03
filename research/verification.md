@@ -3157,3 +3157,15 @@ TreeNav preview·Usage가 렌더링됐고 현재 `pyd-tree-nav.json` 및
 `itemCount`는 122입니다. 로컬 Chromium의 핵심 조작 검사를
 공개 사이트에서 반복하지 않았습니다. 실제 보조기술 발표는
 확인하지 않았습니다.
+
+## 2026-10-03 TransferList 구현 검토
+
+`npm run typecheck`, UI 테스트 268/268, `npm run build`,
+`registry:release-check`, PRISM 테스트 32/32와 76번째 snapshot
+생성이 통과했습니다. 로컬
+Chromium에서 Space 선택·Enter 일괄 배정과 제거, disabled 항목,
+form 제출값, `Panel`·`Plain`, 390px 세로 배치·가로 넘침 없음과
+다크 테마를 확인했습니다. PR CI·공개 배포·공개 URL은 확인 전입니다.
+실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다.
+증거와 판정은 [작업 기록](../.worknotes/transfer-list-2026-10-03.md)에
+있습니다.

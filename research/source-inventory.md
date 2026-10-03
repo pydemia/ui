@@ -969,6 +969,23 @@ focus·Escape 동작을 확인하고 기존 `pyd-popover`를 조합했습니다.
 component source를 복사하지 않았고 새 npm dependency는 없습니다.
 직접 registry 의존성은 `pyd-input`, `pyd-popover`, `pyd-utils`입니다.
 
+## 2026-10-03 두 목록 배정 reference
+
+`TransferList`는 구성원·권한을 두 목록 사이에 일괄 배정하는 원본
+구현입니다. [MUI 공식 Transfer List 문서](https://mui.com/material-ui/react-transfer-list/)에서
+사용 흐름과 데스크톱 전용 예제의 한계를 확인했습니다. 동일 upstream
+revision `27565bf06476f6ce2f8eb0c67393c67477968fa2`의
+[기본 예제 source](https://github.com/mui/material-ui/blob/27565bf06476f6ce2f8eb0c67393c67477968fa2/docs/data/material/components/transfer-list/TransferList.tsx),
+[확장 예제 source](https://github.com/mui/material-ui/blob/27565bf06476f6ce2f8eb0c67393c67477968fa2/docs/data/material/components/transfer-list/SelectAllTransferList.tsx),
+[MIT LICENSE](https://github.com/mui/material-ui/blob/27565bf06476f6ce2f8eb0c67393c67477968fa2/LICENSE),
+[package manifest](https://github.com/mui/material-ui/blob/27565bf06476f6ce2f8eb0c67393c67477968fa2/packages/mui-material/package.json)를
+확인했습니다. MUI source와 의존성은 편입하지 않았습니다.
+[W3C WAI form grouping](https://www.w3.org/WAI/tutorials/forms/grouping/)과
+[checkbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/)을
+참고해 native fieldset·legend·checkbox·button으로 구성했습니다.
+직접 registry 의존성은 기존 `pyd-button`, `pyd-utils`이며 새 npm
+dependency는 없습니다.
+
 ## 2026-09-29 명령 팔레트 reference
 
 `CommandPalette`는 이 저장소의 원본 구현입니다.

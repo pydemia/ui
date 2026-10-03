@@ -75,7 +75,8 @@ import {
     SnippetTabsList, SnippetTabsTrigger, SideNav, SideNavLink, Sidebar,
     Sparkline, Stepper, Switch, Table, TableCell, TagsInput, Terminal,
     Timeline,
-    Thread, TimePicker, ToolCall, Tree, TreeNav, TreeSelect, TreemapChart,
+    Thread, TimePicker, ToolCall, TransferList, Tree, TreeNav, TreeSelect,
+    TreemapChart,
     ToastQueue, useToastQueue,
     TableHead, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toggle,
     ToggleGroup, ToggleGroupItem,
@@ -4966,6 +4967,40 @@ function MultiSelectPreview() {
     );
 }
 
+const transferMembers = [
+    { value: "mina", label: "김민아", description: "디자인" },
+    { value: "june", label: "이준", description: "개발" },
+    { value: "sora", label: "박소라", description: "운영" },
+    { value: "admin", label: "관리자", disabled: true },
+];
+
+function TransferListPreview() {
+    const [members, setMembers] = useState<string[]>(["sora"]);
+    const [submitted, setSubmitted] = useState<string[]>([]);
+    const [appearance, setAppearance] = useState<"panel" | "plain">("panel");
+
+    return (
+        <form className="preview-field" onSubmit={(event) => {
+            event.preventDefault();
+            setSubmitted(new FormData(event.currentTarget)
+                .getAll("reviewer").map(String));
+        }}>
+            <div className="flex gap-2">
+                <Button variant={appearance === "panel" ? "primary" : "outline"}
+                    onClick={() => setAppearance("panel")}>Panel</Button>
+                <Button variant={appearance === "plain" ? "primary" : "outline"}
+                    onClick={() => setAppearance("plain")}>Plain</Button>
+            </div>
+            <TransferList label="검토 담당자" items={transferMembers}
+                value={members} onValueChange={setMembers}
+                name="reviewer" availableLabel="전체 구성원"
+                assignedLabel="검토 담당" appearance={appearance} />
+            <Button type="submit">배정 저장</Button>
+            <p role="status">제출: {submitted.join(", ") || "없음"}</p>
+        </form>
+    );
+}
+
 function CarouselPreview() {
     const [variant, setVariant] = useState<"card" | "plain">("card");
     const slides = [
@@ -7019,6 +7054,37 @@ function WorkspaceForm() {
 }`,
         installItems: ["multi-select", "field", "button"],
         preview: () => <MultiSelectPreview />,
+    },
+    {
+        id: "transfer-list", name: "TransferList", category: "Selection",
+        description: "두 목록에서 구성원을 선택해 일괄 배정하거나 제거합니다. 배정된 값만 form에 전달합니다.",
+        code: `import { useState } from "react";
+import { Button, TransferList } from "@pydemia/ui";
+
+const members = [
+  { value: "mina", label: "김민아" },
+  { value: "june", label: "이준" },
+  { value: "sora", label: "박소라" },
+];
+
+function ReviewerForm() {
+  const [assigned, setAssigned] = useState<string[]>(["sora"]);
+  const [submitted, setSubmitted] = useState<string[]>([]);
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    setSubmitted(new FormData(event.currentTarget)
+      .getAll("reviewer").map(String));
+  }}>
+    <TransferList label="검토 담당자" items={members}
+      value={assigned} onValueChange={setAssigned}
+      name="reviewer" availableLabel="전체 구성원"
+      assignedLabel="검토 담당" appearance="panel" />
+    <Button type="submit">배정 저장</Button>
+    <p role="status">제출: {submitted.join(", ") || "없음"}</p>
+  </form>;
+}`,
+        installItems: ["transfer-list", "button"],
+        preview: () => <TransferListPreview />,
     },
     {
         id: "date-picker", name: "DatePicker", category: "Date & time",

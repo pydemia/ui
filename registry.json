@@ -117,6 +117,11 @@
       "files": [{ "path": "packages/ui/src/components/multi-select.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-transfer-list", "type": "registry:ui", "title": "Transfer List",
+      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/transfer-list.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-label", "type": "registry:ui", "title": "Label",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/label.tsx", "type": "registry:ui" }]
