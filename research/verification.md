@@ -1,5 +1,16 @@
 # 검증 기록
 
+## 2026-10-03 shadcn/ui 출처 고지 범위 조정
+
+28개 수정 소스 항목을 별도 manifest에 고정하고 현재 provenance와
+일치하는지 검사합니다. `npm run build`와
+`npm run registry:check`가 145개 item·143개 export/catalog·
+75개 snapshot과 현재 빌드의 일치를 확인했습니다. 원본 항목 추가와
+수정 소스 변경의 회귀 테스트 2개가 통과했습니다. PR CI·공개
+URL은 아직 확인하지 않았습니다.
+[작업 기록](../.worknotes/shadcn-provenance-scope-2026-10-03.md)을
+참고하세요.
+
 ## 2026-10-03 CalendarHeatmap — 릴리스 후보
 
 윤년 366일·평년 365일, 0·미수집·희소 날짜·빈 목록, 잘못된 날짜와
@@ -11,9 +22,10 @@ Chromium 408px에서 366개 날짜, 내부 가로 스크롤, `plain` 전환,
 고지를 source commit에 고정한 뒤 `registry:release-check`가
 145개 item·143개 export/catalog와 74번째 snapshot의 현재
 일치를 확인했습니다. PR #133과 `main`의 Verify UI, Pages는
-통과했습니다. Vercel production은 배포 횟수 제한으로 실패했고
-새 item과 manifest는 사용자 도메인에서 HTTP 404입니다.
-공개 공급 확인은 남았습니다.
+통과했습니다. 병합 직후 Vercel production은 배포 횟수 제한으로
+실패했지만 이후 사용자 도메인의 현재 item과 74번째 manifest·
+snapshot item, 의존 도메인의 item을 HTTP 200으로 확인했습니다.
+응답 JSON은 저장소 게시 파일과 일치합니다.
 세부 상태는 [작업 기록](../.worknotes/calendar-heatmap-2026-10-03.md)에
 남깁니다.
 

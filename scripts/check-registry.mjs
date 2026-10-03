@@ -4,6 +4,7 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { basename, join, posix } from "node:path";
 import { fileURLToPath } from "node:url";
 import ts from "typescript";
+import { shadcnSourceRecords } from "./shadcn-sources.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
@@ -11,26 +12,45 @@ const provenanceContent = readFileSync(
     join(root, "registry/provenance.json"), "utf8",
 ).replace(/\r\n/g, "\n");
 const provenance = JSON.parse(provenanceContent);
+const sourceManifestContent = readFileSync(
+    join(root, "registry/shadcn-sources.json"), "utf8",
+).replace(/\r\n/g, "\n");
+const sourceManifest = JSON.parse(sourceManifestContent);
+assert.deepEqual(
+    sourceManifest.items,
+    shadcnSourceRecords(provenance),
+    "Adapted shadcn source manifest differs from current provenance",
+);
 const output = join(root, "apps/profile-demo/public/r");
 const noticePath = "registry/SHADCN_UI_LICENSE.md";
 const noticeTarget = "@ui/SHADCN_UI_LICENSE.md";
 const noticeContent = readFileSync(join(root, noticePath), "utf8")
     .replace(/\r\n/g, "\n");
-const pinnedProvenance = noticeContent.match(
-    /github\.com\/pydemia\/ui\/blob\/([a-f0-9]{40})\/registry\/provenance\.json>/,
+const noticeRevision = noticeContent.match(
+    /from shadcn\/ui at revision\n`([a-f0-9]{40})`/,
 );
-assert(pinnedProvenance,
-    "Consumer notice must link to a pinned provenance revision");
-assert(noticeContent.includes(`commit \`${pinnedProvenance[1]}\``),
+assert(noticeRevision, "Consumer notice needs an upstream revision");
+for (const { name, source } of sourceManifest.items) {
+    assert(source.upstream?.includes(`/blob/${noticeRevision[1]}/`),
+        `Consumer notice revision differs for ${name}`);
+    assert.equal(source.license, "MIT",
+        `Consumer notice license differs for ${name}`);
+}
+const pinnedSourceManifest = noticeContent.match(
+    /github\.com\/pydemia\/ui\/blob\/([a-f0-9]{40})\/registry\/shadcn-sources\.json>/,
+);
+assert(pinnedSourceManifest,
+    "Consumer notice must link to a pinned source manifest");
+assert(noticeContent.includes(`commit \`${pinnedSourceManifest[1]}\``),
     "Consumer notice revision and link differ");
-const provenanceHash = noticeContent.match(
+const sourceHash = noticeContent.match(
     /SHA-256 of that file with LF line endings:\n`([a-f0-9]{64})`/,
 );
-assert(provenanceHash, "Consumer notice needs a provenance SHA-256");
+assert(sourceHash, "Consumer notice needs a source manifest SHA-256");
 assert.equal(
-    provenanceHash[1],
-    createHash("sha256").update(provenanceContent).digest("hex"),
-    "Consumer notice provenance SHA-256 differs from current metadata",
+    sourceHash[1],
+    createHash("sha256").update(sourceManifestContent).digest("hex"),
+    "Consumer notice source SHA-256 differs from current manifest",
 );
 const base = new URL(
     process.env.PYDEMIA_REGISTRY_BASE_URL ??

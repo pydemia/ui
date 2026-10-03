@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
-사이트에는 142개 component와 144개 registry item이 있습니다.
+사이트에는 143개 component와 145개 registry item이 있습니다.
 `ArtifactViewer`의 공개 preview·Usage와 54번째 snapshot 경로·대표
 소비자 설치를 확인했습니다.
 2026-09-30에
@@ -278,7 +278,8 @@ Usage와 동작하는 preview를 확인합니다. 관련 테스트와 브라우�
   실제 screen reader 발표는 미검증입니다.
 - [x] `CalendarHeatmap` — 날짜별 활동량을 주·요일 위치의 색으로
   표시하고 윤년·0·미수집을 구분합니다. 정확한 값은 날짜별 표에
-  제공합니다. [작업 기록](calendar-heatmap-2026-10-03.md)에 있습니다.
+  제공합니다. 공개 경로는
+  [작업 기록](calendar-heatmap-2026-10-03.md)에 있습니다.
 - [x] `ScatterChart` — 두 연속 수치의 관계를 점으로 표시합니다.
   native 선택기와 데이터 표로 정확한 좌표·결측값을 확인합니다.
   실제 screen reader 발표는 미검증입니다.
