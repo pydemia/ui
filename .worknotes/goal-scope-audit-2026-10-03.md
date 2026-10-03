@@ -22,10 +22,12 @@ featured가 있습니다. Operations workspace에서 기간을 최근 7일에서
 Verify UI와 Pages가 통과했습니다. 83번째 manifest는 GitHub raw에서
 HTTP 200이지만 `ui.pydemia.ai`에서는 HTTP 404입니다. Vercel
 production은 여전히 82번째 release의 `82b760b7`을 가리키며,
-최신 Dialog preview의 공개 공급은 완료되지 않았습니다. 계정 로그인이
-필요한 Vercel 배포 화면은 사용자에게 인계했습니다. 이 상태를
-component 품질 실패로 세지 않으며 Goal 관리용 추정은 약 99%로
-유지합니다. 실제 screen reader·touch·Safari·RTL의 전수 동작은
+최신 Dialog preview의 공개 공급은 완료되지 않았습니다. 병합 commit
+`78af088d`의 GitHub Vercel status는 `failure`이며 설명은
+`Deployment rate limited — retry in 24 hours.`입니다. 계정 로그인은
+필요하지 않습니다. 이 상태를 component 품질 실패로 세지 않습니다.
+Goal 관리용 추정은 약 99%로 유지합니다. 실제 screen reader·touch·
+Safari·RTL의 전수 동작은
 이번 재확인에서 실행하지 않았습니다.
 
 후속 판정: 아래 점검 당시에는 rollback 중 이전 snapshot URL 보존을

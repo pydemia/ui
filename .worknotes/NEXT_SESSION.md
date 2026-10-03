@@ -4,7 +4,8 @@
 item·83개 release가 검사에 통과했습니다. 공개 AppShell·Spinner·
 MetricCard와 Operations workspace의 실제 동작으로 원래 Goal의
 대표 범위를 확인했습니다. 최신 Dialog preview는 production 배포가
-남아 있어 Goal 관리용 추정은 약 99%입니다.
+Vercel의 24시간 배포 횟수 제한으로 남아 있습니다. Goal 관리용
+추정은 약 99%입니다.
 [범위 점검](goal-scope-audit-2026-10-03.md)을 참고하세요.
 
 2026-10-03 공급·품질 기준 재검토: 로컬에서는 변경 동작을 대상으로

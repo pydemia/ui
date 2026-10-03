@@ -4,6 +4,9 @@ PR #156을 `main`의 `78af088d`로 병합했습니다. PR과 `main`의
 Verify UI, `main`의 Pages가 통과했습니다. Vercel production은 아직
 이전 배포를 가리키고 83번째 manifest·item은 사용자 도메인에서
 HTTP 404입니다. 따라서 공개 공급 확인은 대기 중입니다.
+병합 commit `78af088d`의 GitHub Vercel status는 `failure`이고
+설명은 `Deployment rate limited — retry in 24 hours.`입니다.
+83번째 manifest·Dialog item은 GitHub raw에서 HTTP 200입니다.
 
 복합 폼과 편집 화면을 같은 모달 API로 표시하기 위해
 `DialogContent`에 `default`(기존 크기), `wide`, `fullscreen`을
