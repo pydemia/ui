@@ -34,7 +34,7 @@
 
 ## 빌드와 독립 설치
 
-원격 RadarChart까지 반영한 `634c365` 기준에서 전체 build·TypeScript·PRISM 계약 25개·일반 UI 테스트 255개를 통과했습니다. 일반 registry 143개·catalog 141개·불변 release 72개와 현재 snapshot `sha256-20c21ec393c800ad995dca9c302e79fc9c1dfe71d3b953648cc7e9c1710e2625` 검증을 통과했습니다. 이후 폰트·인쇄 변경의 전체 build, 문서 TypeScript와 PRISM 예시 계약 검사도 통과했습니다.
+원격 SankeyChart까지 반영한 `b5ccface` 기준에서 전체 build·TypeScript·PRISM 계약 25개·일반 UI 테스트 260개를 통과했습니다. 일반 registry 144개·catalog 142개·불변 release 73개와 현재 snapshot `sha256-9bf65f08c6e3daa55815c07059472e3b3fbf73651f55169bbbc23398927e88d0` 검증을 통과했습니다. 이후 폰트·인쇄 변경의 전체 build, 문서 TypeScript와 PRISM 예시 계약 검사도 통과했습니다.
 
 38그룹 모두 설치용 import와 typed contract를 제공합니다. 완전한 React 예시는 11개, 소비자 데이터·상태·callback이 필요한 연동 코드 일부는 27개입니다. workspace 예시 타입 검사와 설치 의존성 내 import 검사를 기존 CI에서 실행합니다.
 

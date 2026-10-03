@@ -655,6 +655,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, text legend and native table of exact dimension values; decorative SVG", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-sankey-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/images/complex/", "scope": "a visible exact-value table for a complex chart; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, labeled scroll region, exact native flow table and decorative SVG", "keyboard": "390px Chromium ArrowRight scroll verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-pivot-table", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/tables/two-headers/", "scope": "native row and column header relationships; no source copied" },

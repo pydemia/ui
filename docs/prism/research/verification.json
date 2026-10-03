@@ -669,16 +669,16 @@
       }
     },
     "generalComponentTests": {
-      "passed": 255,
+      "passed": 260,
       "failed": 0
     },
     "genericRegistry": {
-      "items": 143,
-      "catalogEntries": 141,
-      "immutableReleases": 72,
+      "items": 144,
+      "catalogEntries": 142,
+      "immutableReleases": 73,
       "status": "passed",
-      "currentRelease": "sha256-20c21ec393c800ad995dca9c302e79fc9c1dfe71d3b953648cc7e9c1710e2625",
-      "upstreamRevision": "634c365"
+      "currentRelease": "sha256-9bf65f08c6e3daa55815c07059472e3b3fbf73651f55169bbbc23398927e88d0",
+      "upstreamRevision": "b5ccface"
     },
     "githubVerification": {
       "sourceCommit": "ff1f27a1cb8fcea58692b2a8e430306d89adc743",

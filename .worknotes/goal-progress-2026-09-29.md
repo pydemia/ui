@@ -1,5 +1,25 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 공급·품질 운영 범위 재평가: **약 98% → 약 98%**입니다.
+후보 선정, 변경 동작 확인, 릴리스 공급을 별도로 판정합니다. 수동 검사는
+변경한 핵심 동작의 증거 한 가지와 preview·Usage 확인으로 제한하고,
+CI·snapshot은 릴리스 묶음에 적용합니다. 자동화는 아직 바꾸지
+않았습니다. [판정 기록](quality-checklist-decision-2026-10-03.md)을
+참고하세요.
+
+2026-10-03 `SankeyChart` 릴리스 후보: **약 98% → 약 98%**입니다.
+원본 구현·문서·registry와 73번째 snapshot의 정합성 검사가
+통과했습니다. 저장소 후보는 142개 component·144개 item·73개
+snapshot이며 공개 확인은 140개·142개입니다. PR CI와 배포 경로는
+남았습니다. [작업 기록](sankey-chart-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `SankeyChart` 로컬 후보: **약 98% → 약 98%**입니다.
+이동 수량을 다단계 경로로 보여 주는 원본 component의 대상 검사·
+typecheck·build·로컬 preview를 확인했습니다. 로컬 후보는
+142개 component·144개 registry item이고 공개 확인은 140개·
+142개입니다. 고지·snapshot·CI·공개 경로 검사는 남았습니다.
+[작업 기록](sankey-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `RadarChart` 병합·공개 대기: **약 98% → 약 98%**입니다.
 PR #129와 `main`의 Verify UI·Pages가 통과했습니다. 저장소는
 141개 component·143개 item·72개 snapshot이며 Vercel 배포 제한으로

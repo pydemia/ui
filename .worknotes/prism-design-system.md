@@ -206,3 +206,5 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 폰트수정본의Toast도320px·6px/4pxgap·close20x20·dismiss0을확인했다. UsageRegistry/Workspace표시코드가manifest와일치한다. Clipboard는기존사용자내용을바꾸지않으려고실행하지않았다.
 - 공개설치consumer-rIByQh의finalregistryCSS를bytes동일하게동기화하고tsc/Vite재빌드와woffbytes를확인했다. 새독립설치로표현하지않는다. currentPRISMregistrySHA2560e2ae1a01a72962924feafe4833b848a316fea8a7c2e91aa20f9da0c34c75e40이다.
 - 재현코드는/tmp/prism-headless-browser.py(owned namespace/session, pinned0.38.2), /tmp/prism-headless-runtime-local.py, /tmp/prism-headless-fixtures.js다. rawJSON/PNG/PDF는ignored.worknotes/browser-evidence에보관했다. source/render/install과원본스타일일치는구분한다. freshsource상태·인증domain·전체popup/long·nativeprint검증이남아goalactive다.
+
+- push 직전 origin/main이b5ccface(SankeyChart)로4commits전진해일반push가거부됐다. local commits를보존하는merge를선택해source73be258검증checkpoint를유지했다. conflict는generateddocsassetrename/HTML뿐이며병합source의build가docs를재생성하고git add로해결했다. generic source/catalog/main/style/registry와origin차이0, mergedbuild/docsTypeScript/11usagecheck/generic260tests/registry144/catalog142/immutable73및sha256-9bf65f08c6e3daa55815c07059472e3b3fbf73651f55169bbbc23398927e88d0를확인했다.
