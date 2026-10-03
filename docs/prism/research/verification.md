@@ -26,7 +26,7 @@ PRISM 계약 테스트 23개가 통과했습니다. 38개 예시의 115개 공�
 
 원격 main의 새 커밋 17개를 반영한 뒤 전체 build·TypeScript·일반 UI 테스트 242개와 registry 검증을 통과했습니다. 현재 일반 registry는 140개·카탈로그 138개·불변 release 69개입니다. 별도 소비자에 PRISM 39개 항목·62개 파일을 설치하고 tsc/Vite·폰트 bytes·자산 고지를 확인했습니다. Toast 본문 gap을 원본 소스의 6px로 수정한 뒤에도 전체 build와 독립 소비자 설치·tsc/Vite 검증을 통과했습니다. 소비자 검증은 39개 전체 소스를 컴파일하며 실제 렌더 demo는 Button입니다.
 
-공개 `/prism`은 마지막 관찰에서 404였으며 Vercel 일일 배포 횟수 한도로 배포 생성이 실패했습니다. 디스크 공간 부족으로 끊긴 자체 브라우저는 임시 의존성 폴더를 정리해 공간을 확보한 뒤에도 다시 연결되지 않았습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
+bb351eb push 뒤 공개 `/prism`·manifest·registry는 HTTP 404였으며 CLI 배포 생성은 Vercel 일일 배포 횟수 한도로 실패했습니다. 이후 원격 push가 만든 기존 Git 배포에서는 `.vercelignore`의 `docs/` 규칙이 `apps/docs` 소스까지 제외해 빌드가 실패했습니다. 루트 생성 폴더만 제외하도록 `/docs/`로 수정했습니다. 디스크 공간 부족으로 끊긴 자체 브라우저는 임시 의존성 폴더를 정리해 공간을 확보한 뒤에도 다시 연결되지 않았습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
 
 [기계 판독 검증 기록](verification.json)은 component별 확인 범위와 미검증 항목을 제공합니다. 원본 AX·JPEG는 gitignore된 `.worknotes/browser-evidence/`에만 보관하며 공개 사이트에 포함하지 않습니다.
 

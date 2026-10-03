@@ -2,7 +2,7 @@
 .vercel/
 node_modules/
 .worknotes/
-docs/
+/docs/
 *.log
 .DS_Store
 .env*

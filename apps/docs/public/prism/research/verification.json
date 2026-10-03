@@ -563,9 +563,9 @@
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
-      "status": "service-limit",
+      "status": "pending-ignore-scope-fix-deployment",
       "url": "https://ui.pydemia.ai/prism",
-      "readback": "404",
+      "readback": "HTTP 404 for route, components.json and registry.json after bb351eb push",
       "attempts": [
         {
           "method": "normal-upload",
@@ -574,9 +574,15 @@
         {
           "method": "archive-tgz",
           "result": "archive upload completed; api-deployments-free-per-day limit exceeded (100/day)"
+        },
+        {
+          "method": "existing-git-deployment",
+          "sourceCommit": "bb351eb",
+          "result": "Vercel created deployment but build failed: ENOENT apps/docs/public/prism/research/verification.json",
+          "fix": "anchor generated output exclusion to /docs/ instead of docs/"
         }
       ],
-      "retryCondition": "Vercel daily quota reset"
+      "retryCondition": "existing Git deployment after source-ignore fix"
     },
     "generalComponentTests": {
       "passed": 242,
@@ -589,6 +595,11 @@
       "status": "passed",
       "currentRelease": "sha256-89c86a0be4705c8b66e8ba4bb6d9c83cc3e4fce2a499314871c130c73dbd63e7",
       "upstreamRevision": "43d1b3c"
+    },
+    "githubVerification": {
+      "sourceCommit": "bb351eb76634bbd72b06291ffa4270fa9332a0ae",
+      "status": "passed",
+      "url": "https://github.com/pydemia/ui/actions/runs/37087870423"
     }
   },
   "unverified": [

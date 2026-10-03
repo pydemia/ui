@@ -124,3 +124,11 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 최신 generic 의존성까지 사용한 최종 독립 설치39items/62files·tsc/Vite·폰트bytes·notice 확인 성공: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-2b8kAS. PRISM registry SHA256 de0aa212f77f0528b3713e87818927baa4e4d6b0170e0a089c3394536a41db2f.
 - 115개 상태/320px 결과는 portable font 및 Toast 구조 수정 전의 실제 브라우저 결과이며4503dea 기준으로 명시했다. 이후 브라우저 disconnected 상태이므로 최신 runtime이라고 표시하지 않는다. 소스/build/소비자 검증과 런타임 근거를 분리했다.
 - standalone font/Toast 소스 후 전체 스타일·모든 상태 비교·로그인 domain·print 실페이지·hover/focus·공개 배포/readback 미완료. Goal은 active다. 원본일치 전체완료를 주장하지 않는다.
+
+## 2026-10-03 원격 push 및 배포 실패 원인 수정
+
+- bb351eb76634bbd72b06291ffa4270fa9332a0ae를 main에 push 성공. ls-remote가 로컬HEAD와 일치했다. credential source config hash 보존 및 변경된 commit 파일 credential exact-match 0개 확인. checkout clean.
+- GitHub Verify UI run37087870423가 모든 step 성공했다. Pages run37087870261 build/deploy/report도 성공했다. 기존 Pages 설정은 main:/docs, CNAME ui.pydemia.ai다. 하지만 요청 domain의 /prism·components.json·registry.json은 실제 HTTP404다.
+- 기존 Vercel Git 연동이 dpl_2DW976XT6nZiYWsvs5gh7xkqUabv를 만들었으나 npm run build 중 ENOENT apps/docs/public/prism/research/verification.json으로 실패했다. CLI 일일 quota와 다른 새 원인이다. inspect --logs에서 확인했다.
+- .vercelignore docs/가 모든 basename docs 폴더를 제외하는 것이 원인이다. 루트 output만 제외하는 /docs/로 변경했다. installed ignore parser로 before/after를 확인: docs/index.html 제외 유지, apps/docs의 package.json·catalog.tsx·verification.json은 이제 포함된다. 기존 Git 배포에 source fix를 반영한다.
+- AI usage audit에서 추가9그룹+page-state의 code가 import-only인 것을 발견했다. 목적/typed props는 존재하지만 이 그룹의 구체적인 usage snippets와 consumer example typecheck 보강을 후속으로 진행해야 한다. 원본 style/state 전체 비교를 대체하지 않는다.
