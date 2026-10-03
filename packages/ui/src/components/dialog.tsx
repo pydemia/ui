@@ -6,23 +6,38 @@ const Dialog = DialogPrimitive.Root;
 const DialogTrigger = DialogPrimitive.Trigger;
 const DialogClose = DialogPrimitive.Close;
 
+type DialogContentProps = ComponentProps<typeof DialogPrimitive.Content> & {
+    size?: "default" | "wide" | "fullscreen";
+};
+
 function DialogContent({
+    size = "default",
     className,
     children,
     ...props
-}: ComponentProps<typeof DialogPrimitive.Content>) {
+}: DialogContentProps) {
+    if (size !== "default" && size !== "wide" && size !== "fullscreen") {
+        throw new RangeError("DialogContent size is not supported.");
+    }
+
     return (
         <DialogPrimitive.Portal>
             <DialogPrimitive.Overlay
                 className="fixed inset-0 z-50 bg-[var(--overlay)]"
             />
             <DialogPrimitive.Content
+                data-size={size}
                 className={cn(
-                    "fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] " +
-                    "w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 " +
-                    "-translate-y-1/2 overflow-y-auto rounded-sm border " +
-                    "border-border bg-surface p-[var(--space-6)] " +
-                    "text-foreground shadow-[var(--shadow-float)]",
+                    "fixed z-50 overflow-y-auto border border-border " +
+                    "bg-surface p-[var(--space-6)] text-foreground " +
+                    "shadow-[var(--shadow-float)]",
+                    size === "fullscreen"
+                        ? "inset-0 h-dvh w-full rounded-none border-0"
+                        : "left-1/2 top-1/2 max-h-[calc(100dvh-2rem)] " +
+                          "w-[calc(100vw-2rem)] -translate-x-1/2 " +
+                          "-translate-y-1/2 rounded-sm",
+                    size === "default" && "max-w-lg",
+                    size === "wide" && "max-w-4xl",
                     className,
                 )}
                 {...props}
@@ -80,3 +95,4 @@ export {
     DialogTitle,
     DialogDescription,
 };
+export type { DialogContentProps };

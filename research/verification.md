@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-03 Dialog 크기 — 로컬 후보
+
+`DialogContent`에 기본·넓은·전체 화면 크기를 추가하고 문서 preview에서
+열 수 있게 했습니다. 제목 있는 모달의 크기와 미지원 값 거부를 대상
+테스트 2/2로 확인했습니다. `npm run typecheck`, UI 전체 테스트
+280/280, `npm run build`와 83번째 registry release 검사가
+통과했습니다. 로컬 Chromium에서 기본 512px·넓은 896px, 전체
+화면의 viewport 맞춤(1280×720, 390×844), 열 때 닫기 버튼
+focus와 Escape 후 열기 버튼 focus 복원을 확인했습니다. PR CI와
+공개 게시 검증은 진행 중입니다.
+[작업 기록](../.worknotes/dialog-sizes-2026-10-03.md)에 결과와
+미검증 범위를 갱신합니다.
+
 ## 2026-10-03 분석 화면 간격 — 공개 확인
 
 PR #154와 `main` `82b760b7`의 Verify UI, `main` Pages가
