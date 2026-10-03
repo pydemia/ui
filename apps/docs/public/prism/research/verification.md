@@ -24,9 +24,11 @@
 
 PRISM 계약 테스트 23개가 통과했습니다. 38개 예시의 115개 공개 상태를 실제 320px iframe에서 렌더링했으며 렌더 누락·중첩 버튼·페이지 가로 넘침은 없었습니다. 표시 입력 이름 검사는 기존 114개 상태와 이후 수정한 입력 5개 상태에서 통과했습니다. 이 검사는 픽셀 동일성을 뜻하지 않습니다. 원본 Candidate Common의 Skeleton·NoData·Summary 및 empty/error 영역은 크기·색상·여백을 비교하고 수정했습니다. Summary 설명의 클릭·Escape는 확인했으며 hover/focus만으로 열리는 동작은 런타임 미검증입니다.
 
-원격 main의 새 커밋 17개를 반영한 뒤 전체 build·TypeScript·일반 UI 테스트 242개와 registry 검증을 통과했습니다. 현재 일반 registry는 140개·카탈로그 138개·불변 release 69개입니다. 별도 소비자에 PRISM 39개 항목·62개 파일을 설치하고 tsc/Vite·폰트 bytes·자산 고지를 확인했습니다. Toast 본문 gap을 원본 소스의 6px로 수정한 뒤에도 전체 build와 독립 소비자 설치·tsc/Vite 검증을 통과했습니다. 소비자 검증은 39개 전체 소스를 컴파일하며 실제 렌더 demo는 Button입니다.
+원격 main의 PivotTable까지 반영한 ef8d2c6 기준에서 전체 build·TypeScript·일반 UI 테스트 247개와 registry 검증을 통과했습니다. 현재 일반 registry는 141개·카탈로그 139개·불변 release 70개입니다. 별도 소비자에 PRISM 39개 항목·62개 파일을 설치하고 tsc/Vite·폰트 bytes·자산 고지를 확인했습니다. Toast 본문 gap을 원본 소스의 6px로 수정한 뒤에도 전체 build와 독립 소비자 설치·tsc/Vite 검증을 통과했습니다. 소비자 검증은 39개 전체 소스를 컴파일하며 실제 렌더 demo는 Button입니다.
 
-bb351eb push 뒤 공개 `/prism`·manifest·registry는 HTTP 404였으며 CLI 배포 생성은 Vercel 일일 배포 횟수 한도로 실패했습니다. 이후 원격 push가 만든 기존 Git 배포에서는 `.vercelignore`의 `docs/` 규칙이 `apps/docs` 소스까지 제외해 빌드가 실패했습니다. 루트 생성 폴더만 제외하도록 `/docs/`로 수정했습니다. 디스크 공간 부족으로 끊긴 자체 브라우저는 임시 의존성 폴더를 정리해 공간을 확보한 뒤에도 다시 연결되지 않았습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
+import만 있던 10개 그룹의 Usage를 합성 데이터와 상태를 포함한 React 예시로 보완했습니다. 설치된 registry 소스를 참조하는 10개 예시의 타입 검사가 통과했고 기존 CI의 PRISM 검사에도 workspace 예시 타입 검사를 연결했습니다. 38개 그룹 모두 설치용 import를 제공하며 각 예시의 import가 해당 항목의 설치 의존성 안에 있는지 검사합니다. 나머지 28개는 데이터·상태·callback을 소비자가 정의하는 연동 코드 일부로 표시합니다. 새 예시와 Usage 경로 선택·복사 UI의 브라우저 실행은 미확인입니다.
+
+공개 `/prism`·manifest·registry는 ef8d2c6까지 반영된 원격 상태에서도 HTTP 404입니다. CLI 배포 생성은 Vercel 일일 배포 횟수 한도로 실패했습니다. 기존 Git 배포의 `.vercelignore`가 `apps/docs` 소스까지 제외하던 문제는 루트 생성 폴더만 제외하는 `/docs/` 규칙으로 수정했습니다. 수정 후 d263741와 ef8d2c6의 Vercel commit status는 일일 제한 오류입니다. d263741의 GitHub Verify UI는 통과했습니다. 자체 브라우저는 디스크 공간을 확보한 뒤에도 연결되지 않았으며 현재 browser inventory가 비어 있습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
 
 [기계 판독 검증 기록](verification.json)은 component별 확인 범위와 미검증 항목을 제공합니다. 원본 AX·JPEG는 gitignore된 `.worknotes/browser-evidence/`에만 보관하며 공개 사이트에 포함하지 않습니다.
 
@@ -37,4 +39,4 @@ bb351eb push 뒤 공개 `/prism`·manifest·registry는 HTTP 404였으며 CLI �
 - 반응형·직접 크기 조절·dynamic sizing을 명시적인 확장으로 기록합니다. 115개 공개 상태의 작은 화면 검사는 마쳤으며 긴 내용·popup 조합의 검증은 남아 있습니다.
 - 전체 build, 독립 registry 소비자 설치, 기존 일반 catalogue 보존, 공개 배포와 URL readback을 확인합니다.
 
-Mac 잠금 상태에서도 자체 브라우저의 공개 sample 관찰은 가능합니다. 자체 브라우저의 인증 `/chat`은 렌더링되지 않아 공개 sample을 넘어선 로그인 화면의 시각 검증은 아직 제한됩니다. 기존 Chrome 로그인 세션은 유지했습니다.
+Mac 잠금을 해제하지 않고 자체 브라우저로 공개 sample을 관찰했으나 현재는 브라우저 연결이 없습니다. 연결 당시에도 인증 `/chat`은 렌더링되지 않아 로그인 화면의 시각 검증은 제한됐습니다. 기존 Chrome 로그인 세션을 변경하지 않았습니다.

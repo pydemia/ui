@@ -10,6 +10,7 @@ import { spawn } from "node:child_process";
 const repo = new URL("../",import.meta.url);
 const workdir = await mkdtemp(join(tmpdir(),"prism-consumer-"));
 const prism = JSON.parse(await readFile(new URL("apps/docs/public/prism/r/registry.json",repo),"utf8"));
+const manifest = JSON.parse(await readFile(new URL("apps/docs/public/prism/components.json",repo),"utf8"));
 const generic = JSON.parse(await readFile(new URL("registry.json",repo),"utf8"));
 const sources = new Map();
 for (const item of generic.items) sources.set(`/r/${item.name}.json`,new URL(`apps/profile-demo/public/r/${item.name}.json`,repo));
@@ -45,6 +46,10 @@ try {
     console.log(`Installing all ${prism.items.length} PRISM registry items into ${workdir}`);
     await run(new URL("node_modules/.bin/shadcn",repo).pathname,["add","--yes","--overwrite",...prism.items.map(item => `${base}/prism/r/${item.name}.json`)]);
     await writeFile(join(workdir,"src/main.tsx"),`import {createRoot} from "react-dom/client"; import "./style.css";\n${prism.items.filter(item => item.name !== "prism-tokens").map(item => `import * as ${item.name.replaceAll("-","_")} from "./components/ui/${item.name}";`).join("\n")}\nconst installed = {${prism.items.filter(item => item.name !== "prism-tokens").map(item => item.name.replaceAll("-","_")).join(",")}};\ncreateRoot(document.getElementById("root")!).render(<main data-prism="light">Installed {Object.keys(installed).length} PRISM modules<prism_button.PrismButton>저장</prism_button.PrismButton></main>);`);
+    const examples = manifest.components.filter(entry => entry.usageKind === "component-example");
+    for (const example of examples) {
+        await writeFile(join(workdir,"src/components/ui",`${example.id}.example.tsx`),example.registryUsage+"\n");
+    }
     await run(join(workdir,"node_modules/.bin/tsc"),["--noEmit"]);
     await run(join(workdir,"node_modules/.bin/vite"),["build"]);
     const fontAsset = (await readdir(join(workdir,"dist/assets"))).find(file => file.startsWith("PretendardVariable-") && file.endsWith(".woff2"));
@@ -55,5 +60,6 @@ try {
     assert.ok(notices.includes("Original artwork and branding rights remain"));
     assert.ok(notices.includes("7ecfc9a"));
     console.log("Verified portable font bytes and installed PRISM asset notices.");
+    console.log(`Typechecked ${examples.length} self-contained component examples against installed registry sources.`);
     console.log(`PASS: isolated install, TypeScript and Vite build. Consumer preserved at ${workdir}`);
 } finally { await new Promise(resolve => server.close(resolve)); }

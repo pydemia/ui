@@ -8,7 +8,7 @@ Isolated PRISM-DEV design and interaction references using React 19, pydemia/ui 
 - [Verification and known differences](/prism/research/verification.md)
 - [Registry](/prism/r/registry.json)
 
-Use data-prism="light" at the application root. Load pydemia tokens then prism.css; prism.css imports the installed Pretendard variable font. Keep the installed PRISM_ASSET_NOTICES.md. There is no verified source dark theme. Registry imports point to local installed files, not private workspace packages. Do not infer API, authorization, persistence or HR decision logic from a component demo. null assessment scores are insufficient evidence, never zero.
+Use data-prism="light" at the application root. Load pydemia tokens then prism.css; prism.css imports the installed Pretendard variable font. Keep the installed PRISM_ASSET_NOTICES.md. There is no verified source dark theme. The manifest registryUsage field uses @/components/ui/prism-*; adjust this path to components.json aliases.ui. The usage field is for the private @pydemia/prism workspace. usageKind=component-example identifies a self-contained exported React component; usageKind=integration-fragment requires consumer-owned data, state and callbacks. The isolated consumer check typechecks component examples against installed registry sources. Do not infer API, authorization, persistence or HR decision logic from a component demo. null assessment scores are insufficient evidence, never zero.
 
 ## Button / New chat
 일반·파괴적·아이콘 작업과 새 대화 진입
@@ -16,6 +16,12 @@ Contract: variant solid/line/shape, size large/medium/small/x-small, tone primar
 States: default, disabled
 Registry: /prism/r/prism-button.json
 Source: packages/prism/src/prism-button.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismButton } from "@/components/ui/prism-button";
+<PrismButton variant="solid" size="medium" onClick={save}>저장</PrismButton>;
+```
 
 ## Input / Textarea / Select
 레이블·필수·읽기 전용·입력 오류를 포함한 값 입력
@@ -23,6 +29,12 @@ Contract: label은 필수이며 description·error를 aria-describedby로 연결
 States: default, disabled, readonly, error, long
 Registry: /prism/r/prism-field.json
 Source: packages/prism/src/prism-field.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismInput } from "@/components/ui/prism-field";
+<PrismInput label="포지션명" value={name} onChange={e => setName(e.target.value)} required error={error} />;
+```
 
 ## ELP / Count / Tag / Chip
 ELP 구분·건수·필터 제거·평가 상태 표시
@@ -30,6 +42,12 @@ Contract: ELP와 s-ELP는 별도 색·16px 규격입니다. Count는 0 이상 �
 States: default
 Registry: /prism/r/prism-badge.json
 Source: packages/prism/src/prism-badge.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismElpBadge, PrismTag } from "@/components/ui/prism-badge";
+<><PrismElpBadge type="s-ELP" /><PrismTag variant="blue" label="재무" onRemove={remove}>재무</PrismTag></>;
+```
 
 ## Avatar / Chips / Table
 사용자·후보 식별, 프로필 선택, 표 검색·정렬
@@ -37,6 +55,12 @@ Contract: PrismTable은 native table과 caption을 사용합니다. 대량 데�
 States: default, disabled, empty
 Registry: /prism/r/prism-display.json
 Source: packages/prism/src/prism-display.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismTable } from "@/components/ui/prism-display";
+<PrismTable caption="포지션 목록"><thead><tr><th scope="col">포지션</th></tr></thead><tbody><tr><td>기술전략담당</td></tr></tbody></PrismTable>;
+```
 
 ## Tabs
 프로필·경력·메모를 한 영역에서 전환
@@ -44,6 +68,12 @@ Contract: Radix의 value/onValueChange, Arrow/Home/End, 연결된 tabpanel을 �
 States: default
 Registry: /prism/r/prism-tabs.json
 Source: packages/prism/src/prism-tabs.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "@/components/ui/prism-tabs";
+<PrismTabs defaultValue="profile"><PrismTabsList><PrismTabsTrigger value="profile">프로필</PrismTabsTrigger></PrismTabsList><PrismTabsContent value="profile">내용</PrismTabsContent></PrismTabs>;
+```
 
 ## Dialog
 명시적 확인과 짧은 정보 편집
@@ -51,6 +81,13 @@ Contract: Radix dialog의 focus containment·Escape·focus restoration을 사용
 States: default, disabled, loading, error
 Registry: /prism/r/prism-dialog.json
 Source: packages/prism/src/prism-dialog.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismDialog } from "@/components/ui/prism-dialog";
+import { PrismButton } from "@/components/ui/prism-button";
+<PrismDialog title="정보 확인" description="변경 사항을 확인하세요." trigger={<PrismButton>열기</PrismButton>}>내용</PrismDialog>;
+```
 
 ## Toast / Request state
 알림과 로딩·빈 결과·실패·재시도 구분
@@ -58,6 +95,12 @@ Contract: 오류는 alert, 일반 알림은 status로 표시합니다. 요청 �
 States: default, loading, empty, error
 Registry: /prism/r/prism-feedback.json
 Source: packages/prism/src/prism-feedback.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismRequestState } from "@/components/ui/prism-feedback";
+<PrismRequestState status="error" error="조회에 실패했습니다." onRetry={retry} />;
+```
 
 ## Chat sidebar
 새 대화·후보자·즐겨찾기·관리·대화기록 탐색
@@ -65,6 +108,12 @@ Contract: collapsed/onCollapsedChange와 activeId/onNavigate는 controlled입니
 States: default, loading, empty
 Registry: /prism/r/prism-sidebar.json
 Source: packages/prism/src/prism-sidebar.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismSidebar } from "@/components/ui/prism-sidebar";
+<PrismSidebar items={items} activeId={active} onNavigate={setActive} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={newChat} />;
+```
 
 ## Message / Composer / Criteria
 질문 입력·전송·중단, 답변 상태와 판단 기준 표시
@@ -72,6 +121,12 @@ Contract: value/onValueChange/onSubmit은 controlled이며 Enter 전송·Shift+E
 States: default, disabled, loading, error
 Registry: /prism/r/prism-chat.json
 Source: packages/prism/src/prism-chat.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismChatInput } from "@/components/ui/prism-chat";
+<PrismChatInput value={text} onValueChange={setText} onSubmit={send} busy={busy} onStop={stop} />;
+```
 
 ## Candidate / Evaluation
 후보자 프로필·즐겨찾기·목록·평가 근거 표시
@@ -79,6 +134,12 @@ Contract: onOpen과 onFavoriteChange는 의도만 전달합니다. stack/pair/gr
 States: default, loading, empty, error
 Registry: /prism/r/prism-candidate.json
 Source: packages/prism/src/prism-candidate.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismCandidateCard } from "@/components/ui/prism-candidate";
+<PrismCandidateCard candidate={candidate} favorite={favorite} onOpen={openProfile} onFavoriteChange={setFavorite} />;
+```
 
 ## Side panel / Detail / Memo
 후보자·포지션 상세와 작성자·날짜가 있는 메모 확인
@@ -86,6 +147,12 @@ Contract: 패널 440px, 작은 화면에서는 viewport 안에 배치합니다. 
 States: default
 Registry: /prism/r/prism-detail.json
 Source: packages/prism/src/prism-detail.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismSidePanel, PrismDetailList } from "@/components/ui/prism-detail";
+<PrismSidePanel title="프로필" description="후보 정보" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;
+```
 
 ## Inline panel
 채팅과 상세를 동시에 사용하며 패널 확대·축소
@@ -93,6 +160,12 @@ Contract: 비모달 aside이며 기본 너비 440px와 64px header를 사용합�
 States: default
 Registry: /prism/r/prism-panel.json
 Source: packages/prism/src/prism-panel.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismPanel } from "@/components/ui/prism-panel";
+<PrismPanel title="상세" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}>내용</PrismPanel>;
+```
 
 ## 6-frame comparison
 리더 유형·경험·역량·자질을 후보별로 비교
@@ -100,6 +173,12 @@ Contract: 열 ID는 고유하며 값은 ReactNode 또는 null입니다. null은 
 States: default, empty, long
 Registry: /prism/r/prism-six-frame.json
 Source: packages/prism/src/prism-six-frame.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismSixFrame } from "@/components/ui/prism-six-frame";
+<PrismSixFrame columns={columns} panel={false} />;
+```
 
 ## Selection / Date / Pagination
 검색·다중 선택·기간 검증·페이지 탐색
@@ -107,6 +186,12 @@ Contract: 선택값·날짜·페이지는 controlled입니다. 검색은 방향�
 States: default, disabled, readonly, loading, error, empty
 Registry: /prism/r/prism-selection.json
 Source: packages/prism/src/prism-selection.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismMultiSelect } from "@/components/ui/prism-selection";
+<PrismMultiSelect label="분야" options={options} value={value} onValueChange={setValue} />;
+```
 
 ## Candidate profile / Evidence
 후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시
@@ -114,6 +199,12 @@ Contract: PrismProfileTab은 종합·전문성·성공경험·Design·Agility·A
 States: default, empty, loading, error
 Registry: /prism/r/prism-profile.json
 Source: packages/prism/src/prism-profile.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismProfile } from "@/components/ui/prism-profile";
+<PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab} sections={sections} />;
+```
 
 ## Markdown / Suggestions / Position
 답변 구조·생성 상태·후속 질문·포지션 안내
@@ -121,6 +212,12 @@ Contract: Markdown은 GFM 표·목록을 지원하며 raw HTML을 건너뜁니�
 States: default, disabled, loading, error
 Registry: /prism/r/prism-content.json
 Source: packages/prism/src/prism-content.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismMarkdown } from "@/components/ui/prism-content";
+<PrismMarkdown source={answer} />;
+```
 
 ## Admin layout / Attachments / Sync
 관리 페이지의 검색·목록·등록·첨부·갱신 상태 구성
@@ -128,6 +225,12 @@ Contract: 관리 chrome은 filters·toolbar·actions·pagination slot으로 구�
 States: default, empty, loading, error
 Registry: /prism/r/prism-admin.json
 Source: packages/prism/src/prism-admin.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismAdminLayout } from "@/components/ui/prism-admin";
+<PrismAdminLayout title="관리" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;
+```
 
 ## PDF / Print
 문서 페이지·배율·맞춤·다운로드와 출력 정보 선택
@@ -135,6 +238,13 @@ Contract: PDF.js로 실제 PDF를 렌더링하며 workerUrl은 설치한 pdfjs-d
 States: default, error
 Registry: /prism/r/prism-document.json
 Source: packages/prism/src/prism-document.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismPdfViewer } from "@/components/ui/prism-document";
+import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+<PrismPdfViewer title="문서" url="/document.pdf" workerUrl={workerUrl} />;
+```
 
 ## Workspace shell
 LNB·64px header·스크롤 본문·상세 패널 조합
@@ -142,6 +252,12 @@ Contract: sidebar·header·panel은 slot입니다. height/minHeight를 지정할
 States: default
 Registry: /prism/r/prism-workspace.json
 Source: packages/prism/src/prism-workspace.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismWorkspace } from "@/components/ui/prism-workspace";
+<PrismWorkspace sidebar={sidebar} header={header} panel={panel}>{content}</PrismWorkspace>;
+```
 
 ## Radar / Trend chart
 성격·리더십 진단 값과 시계열·누락값 표시
@@ -149,6 +265,12 @@ Contract: 값은 0..max 또는 null이고 축·시점 수와 일치해야 합니
 States: default, empty
 Registry: /prism/r/prism-chart.json
 Source: packages/prism/src/prism-chart.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismRadarChart } from "@/components/ui/prism-chart";
+<PrismRadarChart title="진단" axes={axes} series={series} max={10} />;
+```
 
 ## Switch / Tooltip / Progress / Files
 환경 선택·도움말·진행률·파일 선택과 제거
@@ -156,6 +278,12 @@ Contract: Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip은
 States: default, disabled, loading
 Registry: /prism/r/prism-utility.json
 Source: packages/prism/src/prism-utility.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismProgress } from "@/components/ui/prism-utility";
+<PrismProgress value={progress} label="처리 진행률" />;
+```
 
 ## History / Compensation / Validation / Comment
 평가 이력·연도별 보상·검증 근거·경험 사례·의견 편집
@@ -163,6 +291,12 @@ Contract: 이력·등급·금액·검증 상태는 이미 결정된 외부 값�
 States: default, empty, loading, error
 Registry: /prism/r/prism-record.json
 Source: packages/prism/src/prism-record.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismCommentEditor } from "@/components/ui/prism-record";
+<PrismCommentEditor value={value} onValueChange={setValue} onSave={save} />;
+```
 
 ## Management forms / Criteria
 회사 그룹·사용자·공지·포지션 정보 편집, 기준·영향 포지션 확인
@@ -170,6 +304,12 @@ Contract: 분류된 Field schema와 controlled values로 관리 양식을 구성
 States: default, readonly, loading, error
 Registry: /prism/r/prism-management.json
 Source: packages/prism/src/prism-management.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismManagementForm } from "@/components/ui/prism-management";
+<PrismManagementForm title="관리 정보" fields={fields} values={values} onValueChange={change} onSubmit={save} />;
+```
 
 ## Context / Option card
 맥락 정보 입력과 필수 값·문자 수·최대 선택 개수
@@ -177,6 +317,25 @@ Contract: values와 제출·취소는 controlled callback입니다. textarea는 
 States: default, loading
 Registry: /prism/r/prism-context.json
 Source: packages/prism/src/prism-context.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismContextForm, type PrismContextValues } from "@/components/ui/prism-context";
+
+export function ContextExample() {
+  const [values, setValues] = useState<PrismContextValues>({ mission: "", areas: [] });
+  const [submitted, setSubmitted] = useState<PrismContextValues | null>(null);
+  return <section>
+    <PrismContextForm fields={[
+      { key: "mission", label: "포지션 Mission", type: "textarea", required: true, maxLength: 800 },
+      { key: "areas", label: "주요 분야", type: "options", maxSelections: 2,
+        options: [{ value: "research", label: "연구개발" }, { value: "strategy", label: "전략" }] },
+    ]} values={values} onValueChange={setValues} onSubmit={setSubmitted} />
+    <p role="status">{submitted ? "입력 의도가 전달되었습니다." : ""}</p>
+  </section>;
+}
+```
 
 ## Logo / Profile / Popover / Skeleton / More
 텍스트 브랜드·사용자 요약·팝오버·즐겨찾기·접기·로딩
@@ -184,6 +343,17 @@ Contract: SkeletonGroup은 기본 3개·120px 블록과 16px 간격을 사용하
 States: default, disabled, empty
 Registry: /prism/r/prism-primitives.json
 Source: packages/prism/src/prism-primitives.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { PrismSkeletonGroup } from "@/components/ui/prism-primitives";
+
+export function SkeletonExample() {
+  return <section aria-label="프로필 로딩" aria-busy="true">
+    <PrismSkeletonGroup rows={3} height={120} />
+  </section>;
+}
+```
 
 ## Position detail / Requirements
 포지션 기본 정보와 Mission·요구 사항 그룹 표시
@@ -191,6 +361,24 @@ Contract: 회사·포지션·메타데이터와 그룹 항목은 외부 값입�
 States: default, empty, loading, error
 Registry: /prism/r/prism-position.json
 Source: packages/prism/src/prism-position.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { PrismPositionDetail } from "@/components/ui/prism-position";
+
+export function PositionExample() {
+  return <PrismPositionDetail company="가상전자" role="기술전략담당"
+    items={[{ label: "직무", value: "연구개발" }]}
+    groups={[
+      { id: "mission", title: "Mission", items: [
+        { id: "mission-1", title: "담당 업무", content: "가상 연구개발 조직의 기술전략을 수립합니다." },
+      ] },
+      { id: "requirements", title: "요구 사항", items: [
+        { id: "requirement-1", title: "추가 근거", content: null },
+      ] },
+    ]} />;
+}
+```
 
 ## Diagnosis / Risk / Essay / Matrix / Analysis
 성격·가치관·Risk·경험·전문성·리더십 근거와 현재 위치
@@ -198,6 +386,19 @@ Contract: Risk의 true·false·null을 구분하고 전 항목 누락 열만 병
 States: default, empty
 Registry: /prism/r/prism-assessment.json
 Source: packages/prism/src/prism-assessment.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { PrismRiskTable } from "@/components/ui/prism-assessment";
+
+export function RiskExample() {
+  // 합성 데이터입니다. null은 평가 근거가 없다는 뜻입니다.
+  return <PrismRiskTable items={[
+    { id: "demo-a", label: "가상 항목 A", latent: false, manifest: null },
+    { id: "demo-b", label: "가상 항목 B", latent: true, manifest: null },
+  ]} />;
+}
+```
 
 ## Filters / Candidate list / Board / Memo
 후보 필터·카드/표 보기·후계자 Board·메모 작성
@@ -205,6 +406,31 @@ Contract: 필터·조회·초기화·뷰 모드는 controlled입니다. Board는
 States: default, empty, loading, error
 Registry: /prism/r/prism-collection.json
 Source: packages/prism/src/prism-collection.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismCandidateCollection } from "@/components/ui/prism-collection";
+import { type PrismCandidate } from "@/components/ui/prism-candidate";
+
+const candidates: PrismCandidate[] = [
+  { id: "demo-1", name: "김가상", company: "가상전자", position: "기술전략담당" },
+  { id: "demo-2", name: "이예시", company: "예시사업", position: "연구개발담당" },
+];
+
+export function CollectionExample() {
+  const [view, setView] = useState<"cards" | "table">("cards");
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [opened, setOpened] = useState<PrismCandidate | null>(null);
+  return <section>
+    <PrismCandidateCollection title="가상 후보자 목록" candidates={candidates}
+      view={view} onViewChange={setView} onOpen={setOpened} favorites={favorites}
+      onFavoriteChange={(candidate, checked) => setFavorites(ids =>
+        checked ? [...new Set([...ids, candidate.id])] : ids.filter(id => id !== candidate.id))} />
+    <p role="status">{opened ? opened.name + " 상세 조회 의도" : ""}</p>
+  </section>;
+}
+```
 
 ## Notice / Inquiry / Policy
 공지 목록·상세·비모달 팝업·문의 내역·방침 버전
@@ -212,6 +438,28 @@ Contract: 공지 팝업은 비모달입니다. 목록·선택·정렬·버전은
 States: default, empty, loading, error
 Registry: /prism/r/prism-notice.json
 Source: packages/prism/src/prism-notice.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismButton } from "@/components/ui/prism-button";
+import { PrismNoticeDialog, type PrismNotice } from "@/components/ui/prism-notice";
+
+const notices: PrismNotice[] = [
+  { id: "notice-demo", title: "가상 서비스 안내", date: "2026-10-03",
+    author: "예시 운영자", content: "공지 목록과 상세 전환을 확인하는 합성 데이터입니다." },
+];
+
+export function NoticeExample() {
+  const [open, setOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  return <section>
+    <PrismButton onClick={() => { setSelectedId(null); setOpen(true); }}>공지사항 열기</PrismButton>
+    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={notices}
+      selectedId={selectedId} onSelect={setSelectedId} />
+  </section>;
+}
+```
 
 ## Structured response / Rich text / Conversation
 Typed blocks, rich text, actionable references and streaming status
@@ -219,6 +467,24 @@ Contract: Consumers adapt backend payloads into a discriminated block union and 
 States: default, empty, loading, error
 Registry: /prism/r/prism-response.json
 Source: packages/prism/src/prism-response.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismResponse, type PrismResponseBlock } from "@/components/ui/prism-response";
+
+export function ResponseExample() {
+  const [selected, setSelected] = useState("");
+  const blocks: PrismResponseBlock[] = [
+    { id: "text", type: "text", content: "표시 계약을 확인하는 가상 응답입니다." },
+    { id: "table", type: "table", title: "자료 상태", columns: ["영역", "값"],
+      rows: [{ id: "row-1", cells: ["진단 점수", null] }] },
+    { id: "options", type: "options", title: "다음 조회", selected,
+      options: [{ id: "profile", label: "프로필 조회" }, { id: "comparison", label: "비교 조회" }] },
+  ];
+  return <PrismResponse blocks={blocks} status="complete" onOptionSelect={setSelected} />;
+}
+```
 
 ## Criteria editor / Remap / Company context
 Criterion editing, sub-jobs, affected positions and replacement mapping
@@ -226,6 +492,27 @@ Contract: Draft fields, duplicate check status, generation and replacement mappi
 States: default, loading, error
 Registry: /prism/r/prism-management-tools.json
 Source: packages/prism/src/prism-management-tools.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismButton } from "@/components/ui/prism-button";
+import { PrismCriteriaEditor, type PrismCriteriaDraft } from "@/components/ui/prism-management-tools";
+
+export function CriteriaExample() {
+  const [open, setOpen] = useState(false);
+  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: "", description: "", categoryId: "" });
+  const [submitted, setSubmitted] = useState<PrismCriteriaDraft | null>(null);
+  return <section>
+    <PrismButton onClick={() => setOpen(true)}>기준 편집</PrismButton>
+    <PrismCriteriaEditor title="가상 기준" open={open} onOpenChange={setOpen}
+      value={draft} onValueChange={setDraft} categories={[{ id: "technology", label: "기술" }]}
+      positions={[{ id: "position-demo", name: "기술전략담당", company: "가상전자" }]}
+      onSubmit={value => { setSubmitted(value); setOpen(false); }} />
+    <p role="status">{submitted ? submitted.name + " 저장 의도" : ""}</p>
+  </section>;
+}
+```
 
 ## Selectable directory / Admin table
 Accessible remote sort and row selection with eligibility constraints
@@ -233,6 +520,26 @@ Contract: Rows, sort and selection are supplied by the consumer. Select-all incl
 States: default, empty, loading
 Registry: /prism/r/prism-directory.json
 Source: packages/prism/src/prism-directory.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismDirectoryTable } from "@/components/ui/prism-directory";
+
+const rows = [
+  { id: "demo-1", name: "김가상", selectable: true },
+  { id: "demo-2", name: "이예시", selectable: false },
+];
+
+export function DirectoryExample() {
+  const [selected, setSelected] = useState<string[]>(["other-page-row"]);
+  return <PrismDirectoryTable title="가상 후보자 선택" rows={rows}
+    getRowId={row => row.id} getRowLabel={row => row.name}
+    columns={[{ id: "name", label: "이름", cell: row => row.name }]}
+    selected={selected} onSelectionChange={setSelected}
+    isRowSelectable={row => row.selectable} />;
+}
+```
 
 ## Error / Access / Blank layout
 Error pages, access states and service contact layout
@@ -240,6 +547,23 @@ Contract: Error code, icon, message and action are presentation props. Access st
 States: default
 Registry: /prism/r/prism-page-state.json
 Source: packages/prism/src/prism-page-state.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { PrismAccessGate, PrismErrorContent } from "@/components/ui/prism-page-state";
+
+export function AccessExample({ status, onRetry }: {
+  status: "ready" | "loading" | "denied";
+  onRetry: () => void;
+}) {
+  // status는 호스트의 인증 계층에서 제공합니다.
+  return <PrismAccessGate status={status}
+    fallback={<PrismErrorContent code="403" message="접근 권한을 확인해 주세요."
+      buttonLabel="다시 확인" onAction={onRetry} />}>
+    <p>호스트에서 접근을 승인한 화면입니다.</p>
+  </PrismAccessGate>;
+}
+```
 
 ## Notice / Group / User / Position forms
 공지 노출 범위·게시기간, 역할별 회사 그룹과 포지션 요구 사항 입력
@@ -247,6 +571,12 @@ Contract: 양식 값과 선택지는 외부에서 전달합니다. 조건부 필
 States: default, readonly, loading, error
 Registry: /prism/r/prism-domain-forms.json
 Source: packages/prism/src/prism-domain-forms.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismNoticeForm } from "@/components/ui/prism-domain-forms";
+<PrismNoticeForm value={draft} onValueChange={setDraft} companies={companies} files={files} onFilesSelected={attach} onSubmit={save} onCancel={cancel} />;
+```
 
 ## Profile print pages / Repeated header
 인쇄 전용 Profile 머리말·경력·Risk·경험과 반복 표 머리말
@@ -254,6 +584,12 @@ Contract: 출력 페이지는 190mm 폭과 최소 280mm 높이를 사용합니�
 States: default, empty
 Registry: /prism/r/prism-print.json
 Source: packages/prism/src/prism-print.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismPrintPage } from "@/components/ui/prism-print";
+<PrismPrintPage name="김가상" repeatHeader>{content}</PrismPrintPage>;
+```
 
 ## Chat intro / Prompt cards
 초기 인사말·즐겨찾기 카드·시작 질문·대화 입력
@@ -261,6 +597,12 @@ Contract: 이름·카드·최대 5개 시작 질문을 표시합니다. 질문 �
 States: default, empty, disabled, loading
 Registry: /prism/r/prism-intro.json
 Source: packages/prism/src/prism-intro.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismChatIntro } from "@/components/ui/prism-intro";
+<PrismChatIntro name="김가상" cards={cards} questions={questions} onPromptSelect={setDraft} composer={composer} />;
+```
 
 ## Profile tab recipes / Compensation / Trends
 8개 프로필 분류를 조합하는 typed recipe와 보상·리더십 추이 표
@@ -268,6 +610,12 @@ Contract: API 결과를 외부에서 typed 표시 모델로 변환해 각 분류
 States: default, empty, loading, error
 Registry: /prism/r/prism-profile-sections.json
 Source: packages/prism/src/prism-profile-sections.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismProfileSectionState, PrismTotalSection } from "@/components/ui/prism-profile-sections";
+<PrismProfileSectionState status={status} onRetry={retry}><PrismTotalSection {...overview} /></PrismProfileSectionState>;
+```
 
 ## PRISM vector icons
 기존 PRISM 아이콘과 브랜드·빈 상태·오류 화면의 벡터 디자인 자산
@@ -275,5 +623,11 @@ Contract: 원본 87개 벡터의 형상을 보존하고 React adapter와 인스�
 States: default
 Registry: /prism/r/prism-icon.json
 Source: packages/prism/src/prism-icon.tsx
+Usage kind: integration-fragment
+Installed usage:
+```tsx
+import { PrismIcon } from "@/components/ui/prism-icon";
+<PrismIcon name="SearchIcon" size={20} />;
+```
 
 Visual parity is pending until reference comparison has completed; read verification.md.

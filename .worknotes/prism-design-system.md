@@ -132,3 +132,28 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 기존 Vercel Git 연동이 dpl_2DW976XT6nZiYWsvs5gh7xkqUabv를 만들었으나 npm run build 중 ENOENT apps/docs/public/prism/research/verification.json으로 실패했다. CLI 일일 quota와 다른 새 원인이다. inspect --logs에서 확인했다.
 - .vercelignore docs/가 모든 basename docs 폴더를 제외하는 것이 원인이다. 루트 output만 제외하는 /docs/로 변경했다. installed ignore parser로 before/after를 확인: docs/index.html 제외 유지, apps/docs의 package.json·catalog.tsx·verification.json은 이제 포함된다. 기존 Git 배포에 source fix를 반영한다.
 - AI usage audit에서 추가9그룹+page-state의 code가 import-only인 것을 발견했다. 목적/typed props는 존재하지만 이 그룹의 구체적인 usage snippets와 consumer example typecheck 보강을 후속으로 진행해야 한다. 원본 style/state 전체 비교를 대체하지 않는다.
+
+## 2026-10-03 배포 제한 재확인 및 다음 작업
+
+- source-ignore fix와 PRISM의 명시적 pretendard dependency를 d263741341f86cd8c1dcc2423dd6a5b5af68c9fd로 push했고 원격 SHA 일치 및 demian credential config 보존을 확인했다.
+- 최신 Vercel commit status: failure, Deployment rate limited — retry in 24 hours, build-rate-limit. 같은 조건에서 추가 배포나 빈 push를 하지 않는다. 요금제나 DNS를 변경하지 않았다.
+- d263741 Pages build/deploy/report 성공. Verify UI run37088415938/job111103344802는 마지막 조회에서 진행 중이었다. bb351eb 전체 Verify UI는 success다. packaging fix의 최종 CI는 다음 조회에서 확인한다.
+- /prism·components.json·registry.json 최신 HTTP404. HTTP readback은 브라우저 렌더를 의미하지 않는다. CUA browser inventory는 계속 []다. 앱 재시작이나 Mac 잠금 해제는 시도하지 않았다.
+- 다음 독립 작업: context/primitives/position/assessment/collection/notice/response/management-tools/directory/page-state 10그룹의 import-only usage를 실제 props 예시로 보완하고 설치 소비자의 snippet typecheck를 추가한다. typed contracts와 합성 데이터만 사용한다. 원본 상태별 비교·인증 domain·print 페이지 확인은 브라우저 연결 복구가 필요하다.
+- 115개 상태/320px browser evidence는4503dea 기준이다. 최신 font/Toast는 source/build/consumer만 확인했고 browser 확인이 남아 있다. Goal active이며 전체 원본 일치와 공개 배포 완료는 미선언이다.
+
+- 최종 d263741 Verify UI run37088415938도 completed success이며 실패 step은0개다. 원격 CI까지 통과했다. 세션 결과는 이 로컬 worknote에 보존하고 동일 quota 상태에서 추가 push/deploy를 하지 않는다.
+
+## 2026-10-03 설치용 Usage와 예시 계약 보강
+
+- context/primitives/position/assessment/collection/notice/response/management-tools/directory/page-state 10그룹의 import-only code를 실제 props·합성 데이터·상태를 포함한 exported React 예시로 보완했다. page-state의 인증 상태와 retry는 host props로 유지했으며 인증·업무 API를 흉내 내지 않았다.
+- AI manifest에 registryUsage와 usageKind를 추가했다. registryUsage는 components.json 기본 aliases.ui의 @/components/ui/prism-*를 참조하고 usage는 private workspace import를 유지한다. 10개 component-example과 28개 integration-fragment를 구분하며 llms.txt에도 설치용 코드를 제공한다.
+- 문서 Usage는 registry 경로가 기본이고 Workspace 경로로 전환해 표시된 코드를 복사한다. import alias를 바꿨을 때의 안내와 Pretendard 자동 로딩 지침을 갱신했다. 새 Usage UI의 브라우저 실행은 미확인이다.
+- check-prism.mjs는 38그룹의 구체적 JSX와 설치 의존성 안의 import를 검사하고, 10개 완전한 workspace 예시를 TypeScript virtual source로 검사한다. 기존 CI PRISM gate에서 실행된다. 별도 소비자 검증도 설치된 registry 소스로 10개 예시를 타입 검사한다.
+- 작업 도중 origin/main이 ef8d2c6(PivotTable)으로 1commit 전진했다. source/generated 변경을 stash에 보존하고 fast-forward했다. 충돌은 생성된 docs 자산/HTML에만 있었으며 upstream docs를 복구한 뒤 병합 소스에서 재빌드했다. upstream의 LF 정규화 수정도 유지했다. packages/ui·generic catalog·registry source/release와 origin/main의 차이는 0개다.
+- 최신 전체 build·docs/profile-demo typecheck·PRISM23tests·generic247tests·registry release gates 통과. 일반 registry141/catalog139/immutable70 및 sha256-32c8c4110dd838fedd10716915c72849dd5e35f6977b0dbd010fe9a559d507b9 보존 확인. PRISM registry SHA256은 de0aa212f77f0528b3713e87818927baa4e4d6b0170e0a089c3394536a41db2f로 동일하다.
+- 처음 보강한 예시10개는 consumer-z0E5jn에서 39items/62files 설치·tsc/Vite·font bytes·notice 확인을 통과했다. upstream generic metadata 반영 뒤 최종 독립 소비자 consumer-NTZkpM에서도39items/62files 설치·10예시 tsc·Vite·font bytes·notice 확인을 통과했다. 경로: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-NTZkpM.
+- 현재 own browser inventory=[]이며 /prism·components.json·registry.json HTTP404다. ef8d2c6 Vercel commit status도 Deployment rate limited — retry in 24 hours다. 같은 quota의 수동 배포/빈 push, 앱 재시작, Mac 잠금 해제, 기존 로그인 변경을 하지 않았다.
+- 115개 상태/320px runtime 증거는4503dea 기준으로 유지한다. 최신 폰트/Toast·새 예시와 Usage UI·전체 원본 상태 비교·로그인 domain·print 실제 pagination·공개 route/registry readback은 미완료다. Goal active이며 전체 시각 일치/배포 완료를 선언하지 않는다.
+
+- 최종 소비자 성공 후 이 작업의 이전 consumer-z0E5jn/Xx25Y4/2b8kAS에서 node_modules만 정리했다. source·lockfile·dist·증거는 보존하고 최신 NTZkpM 의존성도 유지했다.

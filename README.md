@@ -205,7 +205,13 @@ Vercel이 다시 배포합니다.
 
 Workspace에서는 `@pydemia/prism`을 import합니다. 독립 소비자는 카탈로그에 표시된
 `shadcn add` 명령으로 소스와 의존성을 설치하고 로컬 `components/ui/prism-*.tsx`를
-import합니다. `prism.css`는 설치한 Pretendard variable font를 함께 로드합니다.
+import합니다. Usage의 기본값은 registry 설치 경로이며 Workspace 경로로 전환할 수
+있습니다. AI manifest의 `registryUsage`는 `@/components/ui/prism-*`를 사용하므로
+설치 경로를 바꿨다면 `components.json`의 `aliases.ui`에 맞춰 수정합니다.
+`usage`는 workspace import를 사용합니다. `usageKind: component-example`은 합성
+데이터·상태를 포함한 독립 React 예시이고 `integration-fragment`는 소비자가 데이터와
+callback을 정의해야 하는 연동 코드 일부입니다.
+`prism.css`는 설치한 Pretendard variable font를 함께 로드합니다.
 벡터 자산의 출처와 권리 고지는 설치되는 `PRISM_ASSET_NOTICES.md`에 있습니다.
 `tokens.css` 다음에 `prism.css`를 로드하고 앱 root에
 `data-prism="light"`를 지정합니다. PDF viewer의 `workerUrl`은 설치된 `pdfjs-dist`와
@@ -215,3 +221,5 @@ bundler는 해당 worker를 자체 정적 경로로 제공합니다.
 `npm run registry:prism`으로 계약과 registry를 갱신하고 `npm run prism:check`로
 구조·동작 계약을 검사합니다. `node scripts/verify-prism-consumer.mjs`는 임시 프로젝트에
 전체 PRISM registry를 실제 설치하고 TypeScript와 Vite 빌드를 검증합니다.
+`component-example`으로 표시한 사용 예시도 설치된 소스와 함께 타입 검사합니다.
+이 검사는 브라우저 실행이나 원본과의 시각 일치를 확인한 결과가 아닙니다.
