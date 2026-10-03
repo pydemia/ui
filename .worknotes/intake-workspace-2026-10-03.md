@@ -25,3 +25,8 @@ component·registry item·snapshot은 없습니다. 문서의 실행 preview,
 공개 후보 CI와 production의 새 예시 코드는 아직 확인하지 않았습니다.
 이 예시는 프런트엔드 조합의 동작만 보여 주며 실제 파일 전송과
 서버 저장을 검증한 결과로 해석하지 않습니다.
+
+PR #139 첫 Verify UI에서 typecheck·테스트·build·registry는 통과했지만
+`docs/prism/index.html`과 PRISM page asset의 생성 결과가 커밋에서
+빠져 `docs/` 일치 검사에 실패했습니다. 같은 빌드에서 생성된 파일을
+추가해 수정 CI를 실행합니다.
