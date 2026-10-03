@@ -1,5 +1,20 @@
 # Component 확장 작업 인계
 
+2026-10-03 Input 외형 선택 로컬 후보: 기존 component의 기본 outline을
+유지하고 filled·underline을 추가했습니다. label이 있는 세 입력의
+Usage·preview와 78번째 schema 2 snapshot 후보를 준비했습니다.
+대상 테스트 2/2, 전체 UI 270/270, typecheck·build·registry release
+검사가 통과했고 로컬 Chromium에서 두 테마와 텍스트 입력을
+확인했습니다. PR CI·공개 경로는 아직 확인 전입니다. 수량은 144개
+component·146개 item이며 Goal 관리용 추정은 약 99%입니다.
+[작업 기록](input-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 판정 재검토: 격리 소비자 설치는 registry item의
+내용 변경마다 하지 않고 설치 경로·target·의존 경로가 바뀔 때만
+요구합니다. 변경한 동작에 대한 핵심 증거를 유지하고 무관한 환경의
+전수 점검은 요구하지 않습니다. CI 방식은 바꾸지 않았습니다.
+[판정 기록](quality-gate-level-review-2026-10-03.md)을 참고하세요.
+
 2026-10-03 registry schema 2 공개 상태: PR #144를 병합했고 `main`
 `ff0bcae7`의 Verify UI·Pages가 통과했습니다. 77번째 raw manifest·
 TransferList·token·utils는 HTTP 200이고 게시 파일과 일치합니다.

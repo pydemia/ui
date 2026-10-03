@@ -5442,14 +5442,35 @@ function SelectedRequests() {
     {
         id: "input", name: "Input", category: "Inputs",
         installItems: ["input", "label"],
-        description: "기본 HTML input을 토큰에 맞춰 정리했습니다. Label과 함께 사용합니다.",
+        description: "native input을 공통 token으로 표시합니다. outline·filled·underline 형태를 고르며 Label과 함께 사용합니다.",
         code: `import { Input, Label } from "@pydemia/ui";
 
 <>
   <Label htmlFor="project-name">프로젝트 이름</Label>
   <Input id="project-name" placeholder="예: design-system" />
+
+  <Label htmlFor="team-name">담당 팀</Label>
+  <Input id="team-name" appearance="filled" placeholder="예: 운영팀" />
+
+  <Label htmlFor="reference-id">참조 번호</Label>
+  <Input id="reference-id" appearance="underline" placeholder="예: REQ-2048" />
 </>;`,
-        preview: () => <div className="preview-field"><Label htmlFor="demo-project">프로젝트 이름</Label><Input id="demo-project" placeholder="예: design-system" /></div>,
+        preview: () => <div className="grid gap-4">
+            <div className="preview-field">
+                <Label htmlFor="demo-project">프로젝트 이름 · outline</Label>
+                <Input id="demo-project" placeholder="예: design-system" />
+            </div>
+            <div className="preview-field">
+                <Label htmlFor="demo-team">담당 팀 · filled</Label>
+                <Input id="demo-team" appearance="filled"
+                    placeholder="예: 운영팀" />
+            </div>
+            <div className="preview-field">
+                <Label htmlFor="demo-reference">참조 번호 · underline</Label>
+                <Input id="demo-reference" appearance="underline"
+                    placeholder="예: REQ-2048" />
+            </div>
+        </div>,
     },
     {
         id: "search-input", name: "SearchInput", category: "Inputs",

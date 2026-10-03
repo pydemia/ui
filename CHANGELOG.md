@@ -1,5 +1,10 @@
 # 변경 기록
 
+## 2026-10-03 — Input 표시 형태
+
+- 기본 `outline`을 유지하고 `filled`·`underline` 표시 형태를
+  추가했습니다. 세 형태의 Usage와 실제 입력 preview를 제공합니다.
+
 ## 2026-10-03 — Registry snapshot 공급 경로
 
 - 새 snapshot의 manifest와 전이 의존성을 GitHub raw의 `main` 경로로

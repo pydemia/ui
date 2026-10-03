@@ -1,5 +1,14 @@
 # Prototype 설계 계약
 
+## 2026-10-03 Input 표시 형태
+
+`Input`의 `appearance`는 `outline`(기본값), `filled`, `underline` 중
+하나입니다. 세 형태는 같은 native input의 `type`, `name`, `value`,
+`required`, `aria-invalid`를 유지합니다. 외형은 공통 surface·border·
+foreground token을 사용합니다. `className`은 호출자가 마지막에
+재정의할 수 있습니다. 자체 외곽 테두리를 쓰는 `AffixedInput`은 이
+속성을 받지 않습니다.
+
 ## 2026-10-03 CalendarHeatmap
 
 `CalendarHeatmap`은 지정한 연도의 일별 활동을 월요일 시작 주 열에
