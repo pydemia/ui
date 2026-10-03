@@ -347,7 +347,15 @@
         "Actual 320px viewport: long filenames ellipsize, file tiles scroll inside a 288px list, page scroll width remains 320px",
         "Dynamic file control widths 140/200/400/800px; attach header stacks below 180px without changing desktop geometry",
         "Current local 119 fixtures at 320px: render failures/root overflow/nested buttons/unlabeled visible native controls/page errors all zero",
-        "PRISM 30 component tests; 39 registry items/62 files and 12 complete examples compiled in a fresh isolated consumer before the final icon/CSS correction; final emitted source/CSS subsequently synchronized and compiled separately"
+        "PRISM 30 component tests; 39 registry items/62 files and 12 complete examples compiled in a fresh isolated consumer before the final icon/CSS correction; final emitted source/CSS subsequently synchronized and compiled separately",
+        "Fresh deployed anonymous source Tooltip: nine placements measured after transition settling, compared at the same trigger coordinates",
+        "Default body 90x32.796875px and SUMMARY panel 251.90625x45.59375px match source dimensions; body-position differences <=0.203125px and arrow-position differences <=0.5px",
+        "Clipped 12x8.515625px arrow (horizontal 8.515625x12px), directional origins, 16px start/end inset; white panel arrow border #dee7fb/radius2 checked",
+        "Original and emitted-consumer screenshots inspected; not full pixel parity",
+        "SUMMARY touch toggle twice, outside touch dismissal, focus/Escape and Space toggle passed; Avatar full truncated text and Escape passed",
+        "788-character synthetic dark/panel content at 1280x900, 320x900 and 320x240: viewport clamp, complete text, internal scroll and centered anchor tracking passed",
+        "Native browser mouse wheel scrolls both dark and panel interiors while Tooltip remains open",
+        "PRISM 32 component tests and 12 complete example typechecks passed"
       ],
       "evidence": [
         "local-reference-files-comparison-direct",
@@ -356,10 +364,15 @@
         "local-files-final-119-fixtures-320-direct",
         "reference-files-zone-current-partial",
         "reference-files-attach-current-uploading",
-        "consumer-files-final-readonly-single-direct"
+        "consumer-files-final-readonly-single-direct",
+        "reference-tooltip-nine-placements-direct",
+        "reference-summary-panel-tooltip-direct",
+        "arrows-final-tooltip-comparison",
+        "tooltip-adaptive-runtime",
+        "tooltip-wheel-runtime"
       ],
       "remaining": [
-        "Switch, Tooltip and Progress source state combinations",
+        "Switch/Progress source state combinations; Tooltip caller, browser, timing, zoom and aligned edge-collision combinations outside measured cases",
         "native operating-system drag and file dialog interactions beyond the browser filechooser event",
         "authenticated upload/download service integration belongs to the host; not executed",
         "all accepted format/size/count/browser combinations"
@@ -533,12 +546,14 @@
       "interaction": "partial",
       "checks": [
         "source empty state 175px total and 120px icon",
-        "source error state 236px with 70px padding and retry"
+        "source error state 236px with 70px padding and retry",
+        "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed"
       ],
       "evidence": [
         "reference-common-empty-error",
         "local-request-empty",
-        "local-request-error"
+        "local-request-error",
+        "tooltip-adaptive-runtime"
       ],
       "remaining": [
         "authenticated profile page visual comparison"
@@ -569,14 +584,16 @@
         "Mock DOM focus opens the full truncated label; showInfo=false retains a screen-reader name",
         "Actual font/print build at 140px exercises natural/name/team/both allocation with shorter label preserved",
         "Focus and hover reveal full truncated labels; Escape and widening close Tooltip; no stale reopening on re-truncation",
-        "Declared Pretendard Variable face is loaded and used by current docs/embedded preview"
+        "Declared Pretendard Variable face is loaded and used by current docs/embedded preview",
+        "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed"
       ],
       "evidence": [
         "reference-ui-avatar",
         "local-fixed-avatar-140-metrics",
         "local-fixed-avatar-focus-tooltip",
         "local-fixed-avatar-hover-tooltip",
-        "local-fixed-avatar-resize-stays-closed"
+        "local-fixed-avatar-resize-stays-closed",
+        "tooltip-adaptive-runtime"
       ],
       "remaining": [
         "fresh original comparison across lengths and widths",
@@ -604,7 +621,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 30,
+      "passed": 32,
       "failed": 0
     },
     "registry": {
@@ -613,18 +630,18 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-local-install-then-final-emitted-byte-sync",
+      "status": "passed-fresh-local-install-then-final-CSS-sync",
       "items": 39,
       "files": 62,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "registrySha256": "39da825203f3c326d851debdac4ccd26eec44cbbddbec5f2df9964f379b7214e",
-      "method": "previous isolated public shadcn install; final font/print registry CSS synchronized byte-for-byte and consumer TypeScript/Vite rebuilt",
+      "registrySha256": "524ec86e783434311b6147339a6b2c0184d33948e06a7e1d638115215a1efae3",
+      "method": "Fresh shadcn install of all 39 items; final panel/small CSS priority synchronized from emitted tokens and recompiled",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "all 39 installed source items compiled and 11 component examples typechecked; final registry CSS compiled; demo renders Button only",
+      "sourceScope": "All 39 source items and 12 complete examples compiled; source-matched Tooltip fixture at nine placements plus touch/focus, 788-character narrow content and native wheel checks passed",
       "completeExamples": 12,
-      "browser": "Actual 320px emitted-source readonly and single-file chooser fixture passed; 140px header stacks, root scroll320, two same-file selection events, blocked readonly intents"
+      "browser": "Fresh installed consumer Tooltip fixture passed reference geometry, SUMMARY touch/open/close/outside, focus/Space/Escape, Avatar focus/full text, 320x240 width/height clamping and native wheel scroll"
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -730,11 +747,15 @@
       "previousCheckpoint": "4503dea",
       "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
       "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
+    },
+    "tooltipPublication": {
+      "status": "pending",
+      "scope": "Tooltip source and examples; previous file implementation publication remains separately recorded"
     }
   },
   "unverified": [
     "all 269 source correspondences do not establish state or pixel equality",
-    "remaining original state comparisons outside measured file controls and authenticated full-domain screens",
+    "remaining source state comparisons outside measured files, nine Tooltip placements and SUMMARY help; authenticated full-domain screens",
     "all extensions across domains, long content and popup combinations",
     "clipboard write and native print dialog"
   ],
@@ -742,7 +763,7 @@
   "fixtureRenderChecks": {
     "groups": 38,
     "states": 119,
-    "status": "passed-local-and-published-final-file-build",
+    "status": "passed-local-tooltip-build",
     "checks": [
       "all 119 fixtures render at actual 320px viewport",
       "no nested buttons",
@@ -750,8 +771,8 @@
       "no unlabeled visible native inputs",
       "no page errors or unhandled rejections"
     ],
-    "evidence": "published-ead2f0f4-119-fixtures-320-direct",
-    "localEvidence": "local-files-final-119-fixtures-320-direct"
+    "evidence": "local-tooltip-119",
+    "localEvidence": "local-tooltip-119"
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -812,6 +833,16 @@
       ],
       "scope": "published and local source-matched fixture PDFs",
       "publicVisualInspection": "published rendered PDF pixels exactly match inspected local pages"
+    },
+    "tooltipSizing": {
+      "status": "runtime-verified-partial",
+      "widths": [
+        1280,
+        320
+      ],
+      "shortViewportHeight": 240,
+      "nativeWheelScroll": "passed",
+      "scope": "synthetic emitted-source Tooltip consumer"
     }
   },
   "runtimeVerificationAvailability": {
@@ -877,5 +908,43 @@
     },
     "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
     "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
+  },
+  "tooltipReferenceComparison": {
+    "status": "passed-fresh-install-with-final-token-sync-partial",
+    "source": "fresh anonymous deployed samples and matching standalone trigger coordinates",
+    "placements": 9,
+    "panel": "SUMMARY",
+    "bodyDimensionsMaxDelta": 0,
+    "bodyPositionMaxDelta": 0.203125,
+    "arrowDimensionsMaxDelta": 0,
+    "arrowPositionMaxDelta": 0.5,
+    "keyboard": "focus/Escape; SUMMARY Space toggle",
+    "touch": "SUMMARY open/close/outside-dismiss",
+    "extensions": {
+      "viewports": [
+        [
+          1280,
+          900
+        ],
+        [
+          320,
+          900
+        ],
+        [
+          320,
+          240
+        ]
+      ],
+      "longTextCharacters": 788,
+      "widthClamping": true,
+      "nativeWheelScroll": true
+    },
+    "remaining": [
+      "all source domain callers",
+      "timing/browser/zoom combinations",
+      "all start/end collision cases"
+    ],
+    "claim": "Measured geometry and selected behavior only; no complete page pixel parity.",
+    "independentRegistrySha256": "524ec86e783434311b6147339a6b2c0184d33948e06a7e1d638115215a1efae3"
   }
 }

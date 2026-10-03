@@ -225,14 +225,16 @@
           "Mock DOM focus opens the full truncated label; showInfo=false retains a screen-reader name",
           "Actual font/print build at 140px exercises natural/name/team/both allocation with shorter label preserved",
           "Focus and hover reveal full truncated labels; Escape and widening close Tooltip; no stale reopening on re-truncation",
-          "Declared Pretendard Variable face is loaded and used by current docs/embedded preview"
+          "Declared Pretendard Variable face is loaded and used by current docs/embedded preview",
+          "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed"
         ],
         "evidence": [
           "reference-ui-avatar",
           "local-fixed-avatar-140-metrics",
           "local-fixed-avatar-focus-tooltip",
           "local-fixed-avatar-hover-tooltip",
-          "local-fixed-avatar-resize-stays-closed"
+          "local-fixed-avatar-resize-stays-closed",
+          "tooltip-adaptive-runtime"
         ],
         "remaining": [
           "fresh original comparison across lengths and widths",
@@ -880,12 +882,14 @@
         "interaction": "partial",
         "checks": [
           "source empty state 175px total and 120px icon",
-          "source error state 236px with 70px padding and retry"
+          "source error state 236px with 70px padding and retry",
+          "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed"
         ],
         "evidence": [
           "reference-common-empty-error",
           "local-request-empty",
-          "local-request-error"
+          "local-request-error",
+          "tooltip-adaptive-runtime"
         ],
         "remaining": [
           "authenticated profile page visual comparison"
@@ -1210,7 +1214,7 @@
       "name": "Switch / Tooltip / Progress / Files",
       "category": "Utility",
       "purpose": "환경 선택·도움말·진행률·파일 선택과 제거",
-      "contract": "Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip은 focus와 hover에서 열리며 side/align/small/arrow로 배치를 지정합니다. Progress null은 indeterminate이며 showPercent 기본값은 false입니다. Dropzone 기본 형식은 .xlsx/.csv/.pdf/.png/.jpg, 최대 10MB입니다. 확장자가 있으면 MIME보다 확장자로 검사하며 유효한 파일만 선택하고 혼합 거부는 onInvalid(partial)과 onFilesRejected로 전달합니다. maxFiles는 선택 1회당 제한이며 기본값은 제한 없음입니다. 두 파일 입력은 같은 파일 재선택과 제거, disabled/readOnly, 소비자 소유 files의 ready/uploading/error를 지원합니다. FileAttach는 accept로 선택기를 제한하고 multiple 기본값은 true입니다. 파일 업로드·완료·실패·다운로드는 소비자가 처리합니다.",
+      "contract": "Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip은 focus와 hover에서 열리며 side/align/small/arrow로 배치를 지정합니다. none 배치는 side=top/arrow=false입니다. 긴 도움말은 viewport에 맞춰 줄바꿈·내용 스크롤을 지원합니다. PrismTooltipContent는 같은 스타일을 직접 Tooltip root/trigger와 조합하며 sideOffset은 본문과 트리거 사이의 간격입니다. SUMMARY 설명은 터치·Space로 토글하고 Escape·바깥 클릭으로 닫습니다. Progress null은 indeterminate이며 showPercent 기본값은 false입니다. Dropzone 기본 형식은 .xlsx/.csv/.pdf/.png/.jpg, 최대 10MB입니다. 확장자가 있으면 MIME보다 확장자로 검사하며 유효한 파일만 선택하고 혼합 거부는 onInvalid(partial)과 onFilesRejected로 전달합니다. maxFiles는 선택 1회당 제한이며 기본값은 제한 없음입니다. 두 파일 입력은 같은 파일 재선택과 제거, disabled/readOnly, 소비자 소유 files의 ready/uploading/error를 지원합니다. FileAttach는 accept로 선택기를 제한하고 multiple 기본값은 true입니다. 파일 업로드·완료·실패·다운로드는 소비자가 처리합니다.",
       "states": [
         "default",
         "disabled",
@@ -1243,7 +1247,15 @@
           "Actual 320px viewport: long filenames ellipsize, file tiles scroll inside a 288px list, page scroll width remains 320px",
           "Dynamic file control widths 140/200/400/800px; attach header stacks below 180px without changing desktop geometry",
           "Current local 119 fixtures at 320px: render failures/root overflow/nested buttons/unlabeled visible native controls/page errors all zero",
-          "PRISM 30 component tests; 39 registry items/62 files and 12 complete examples compiled in a fresh isolated consumer before the final icon/CSS correction; final emitted source/CSS subsequently synchronized and compiled separately"
+          "PRISM 30 component tests; 39 registry items/62 files and 12 complete examples compiled in a fresh isolated consumer before the final icon/CSS correction; final emitted source/CSS subsequently synchronized and compiled separately",
+          "Fresh deployed anonymous source Tooltip: nine placements measured after transition settling, compared at the same trigger coordinates",
+          "Default body 90x32.796875px and SUMMARY panel 251.90625x45.59375px match source dimensions; body-position differences <=0.203125px and arrow-position differences <=0.5px",
+          "Clipped 12x8.515625px arrow (horizontal 8.515625x12px), directional origins, 16px start/end inset; white panel arrow border #dee7fb/radius2 checked",
+          "Original and emitted-consumer screenshots inspected; not full pixel parity",
+          "SUMMARY touch toggle twice, outside touch dismissal, focus/Escape and Space toggle passed; Avatar full truncated text and Escape passed",
+          "788-character synthetic dark/panel content at 1280x900, 320x900 and 320x240: viewport clamp, complete text, internal scroll and centered anchor tracking passed",
+          "Native browser mouse wheel scrolls both dark and panel interiors while Tooltip remains open",
+          "PRISM 32 component tests and 12 complete example typechecks passed"
         ],
         "evidence": [
           "local-reference-files-comparison-direct",
@@ -1252,10 +1264,15 @@
           "local-files-final-119-fixtures-320-direct",
           "reference-files-zone-current-partial",
           "reference-files-attach-current-uploading",
-          "consumer-files-final-readonly-single-direct"
+          "consumer-files-final-readonly-single-direct",
+          "reference-tooltip-nine-placements-direct",
+          "reference-summary-panel-tooltip-direct",
+          "arrows-final-tooltip-comparison",
+          "tooltip-adaptive-runtime",
+          "tooltip-wheel-runtime"
         ],
         "remaining": [
-          "Switch, Tooltip and Progress source state combinations",
+          "Switch/Progress source state combinations; Tooltip caller, browser, timing, zoom and aligned edge-collision combinations outside measured cases",
           "native operating-system drag and file dialog interactions beyond the browser filechooser event",
           "authenticated upload/download service integration belongs to the host; not executed",
           "all accepted format/size/count/browser combinations"
@@ -1264,6 +1281,18 @@
       "exports": [
         {
           "name": "PrismSwitch",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTooltipContentProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismTooltipProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismTooltipContent",
           "kind": "component"
         },
         {
