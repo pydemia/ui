@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-03 registry schema 2 공개 상태: PR #144를 병합했고 `main`
+`ff0bcae7`의 Verify UI·Pages가 통과했습니다. 77번째 raw manifest·
+TransferList·token·utils는 HTTP 200이고 게시 파일과 일치합니다.
+새 raw URL을 별도 Vite 소비자에 설치한 5개 파일의 typecheck·build도
+통과했습니다. Vercel preview는 READY지만 production은 이전 배포를
+가리키고 사용자 도메인의 77번째 manifest는 404입니다. 사이트
+게시 확인은 남아 있습니다. [공급 기록](registry-durable-snapshot-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 99%입니다.
+
 2026-10-03 공급·품질 수준 재검토: 수동 판정은 이미 변경분 중심입니다.
 경직성은 draft PR의 전체 검사와 76개 release의 이중 저장
 (각 9,064개 파일), 과거 운영 과제의 미완료 표기가 품질 점수처럼
