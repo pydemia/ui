@@ -1,5 +1,20 @@
 # Component 확장 작업 인계
 
+2026-10-03 `CalendarHeatmap` 공개 확인: 사용자 도메인의 현재
+registry 145개 item, component item, 74번째 manifest·snapshot
+item과 의존 도메인 item이 HTTP 200입니다. 응답 JSON은 게시
+파일과 일치합니다. 공개 확인 수량은 143개 component·145개 item,
+Goal 관리용 추정은 약 98%입니다.
+[작업 기록](calendar-heatmap-2026-10-03.md)에 근거가 있습니다.
+
+2026-10-03 shadcn/ui 출처 고지 범위 조정 후보: 원본 component의
+provenance 변경이 28개 수정 소스 item의 고지까지 바꾸던 연결을
+분리했습니다. build와 75번째 snapshot의 registry 검사는
+통과했고 PR CI·이 변경의 공개 경로는 남았습니다.
+[작업 기록](shadcn-provenance-scope-2026-10-03.md)에 근거가
+있습니다. component·item 수량과 Goal 관리용 추정 약 98%는
+바뀌지 않았습니다.
+
 2026-10-03 `CalendarHeatmap` 병합·공개 대기: PR #133과
 `main` Verify UI, Pages가 통과했습니다. Vercel production은
 배포 횟수 제한으로 실패했고 새 item·74번째 manifest가 사용자

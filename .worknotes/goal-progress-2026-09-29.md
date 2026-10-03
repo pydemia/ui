@@ -1,5 +1,17 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `CalendarHeatmap` 공개 확인: **약 98% → 약 98%**입니다.
+현재 registry 145개 item과 component item, 74번째 manifest·
+snapshot item을 사용자 도메인에서 HTTP 200으로 확인했습니다.
+공개 확인 수량은 143개 component·145개 item입니다.
+[작업 기록](calendar-heatmap-2026-10-03.md)을 참고하세요.
+
+2026-10-03 shadcn/ui 출처 고지 범위 조정:
+**약 98% → 약 98%**입니다. 원본 component의 provenance 변경이
+28개 수정 소스 item에 전파되던 경로를 분리했습니다. 공급 비용을
+줄이는 변경이며 새 component·공개 공급은 없습니다.
+[작업 기록](shadcn-provenance-scope-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `CalendarHeatmap` 병합·공개 대기:
 **약 98% → 약 98%**입니다. PR #133과 `main`의 Verify UI,
 Pages는 성공했지만 Vercel production 배포 제한으로 새 item·
