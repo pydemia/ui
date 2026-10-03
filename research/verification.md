@@ -1,5 +1,15 @@
 # 검증 기록
 
+## 2026-10-03 75번째 snapshot 공개
+
+Vercel production 배포 `dpl_7eqSffEpoZco4hUB1u7ofdyJgBTj`가
+READY입니다. 사용자 도메인의 현재 registry·75번째 manifest·
+snapshot Button·token, 의존 도메인의 snapshot utils JSON은
+HTTP 200이며 저장소 파일과 구조적으로 일치합니다. 이전 404는
+배포 전 상태입니다. 배포 경위와 남은 rollback 범위는
+[작업 기록](../.worknotes/shadcn-provenance-scope-2026-10-03.md)에
+있습니다.
+
 ## 2026-10-03 shadcn/ui 출처 고지 범위 조정
 
 28개 수정 소스 항목을 별도 manifest에 고정하고 현재 provenance와

@@ -1,5 +1,22 @@
 # shadcn 출처 고지 범위 조정
 
+## Production 공개 확인
+
+2026-10-03. commit `b1b14f7ba7a65caface8b7c88d464b20b003f530`의
+preview 배포 `dpl_45gTw8pVPb9Snvo4fBwP6xYpknxZ`는 READY였고,
+보호된 preview의 75번째 manifest가 로컬 JSON과 구조적으로
+일치했습니다. 이 commit과 `origin/main`의 추적 파일 내용은
+동일했습니다. Vercel의 Promote to Production으로 production 환경에서
+새 배포 `dpl_7eqSffEpoZco4hUB1u7ofdyJgBTj`를 빌드했습니다.
+READY와 `ui.pydemia.ai`, `pydemia-ui.vercel.app` alias를 확인했습니다.
+
+사용자 도메인의 현재 registry·75번째 manifest·snapshot Button·token,
+의존 도메인의 snapshot utils가 각각 HTTP 200이고, 응답 JSON은
+저장소 파일과 구조적으로 일치합니다. 75번째 snapshot의 공개 대기를
+해소했습니다. 공개 수량은 143개 component·145개 item입니다.
+Goal 관리용 추정은 약 98%에서 약 99%로 조정합니다. 이전 배포로
+rollback할 때 새 snapshot URL을 보존하는 방법은 별도로 남습니다.
+
 ## 병합 후 상태
 
 PR #135는 `ec5b4c44dbce6a5c7195791a938c65d3ae8074f0`로

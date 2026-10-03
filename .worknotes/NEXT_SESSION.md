@@ -1,5 +1,40 @@
 # Component 확장 작업 인계
 
+2026-10-03 release 이력 보존 검사 후보: 기존 snapshot 파일의 수정·삭제를
+PR·`main`에서 거부하는 작은 자동 검사를 추가했습니다. 신규 release
+추가·기존 원본 수정·게시 복사본 삭제를 임시 Git 저장소에서 검증했고,
+typecheck·UI 테스트 265/265·build·PRISM 검사 30/30·registry release
+검사가 통과했습니다. README에 새 커밋으로 복구하면서 release 파일을
+유지하는 절차를 적었습니다. PR CI·실제 복구 배포는 미검증입니다.
+[작업 기록](release-history-guard-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 75번째 snapshot 공개: Vercel preview와 `main`의 파일
+내용을 대조하고 production 승격 배포
+`dpl_7eqSffEpoZco4hUB1u7ofdyJgBTj`의 READY를 확인했습니다.
+현재 registry·75번째 manifest·대표 snapshot item·token과 의존
+도메인 utils가 HTTP 200이며 로컬 JSON과 일치합니다. 공개 수량은
+143개 component·145개 item입니다. Rollback 시 새 불변 URL 보존은
+남아 있고 Goal 관리용 추정은 약 99%입니다.
+[공개 기록](shadcn-provenance-scope-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Goal 범위 점검: 143개 component·145개 item, 주요
+framework·navigation·analytics·feedback 범주와 공개 복합 화면의
+동작을 대조했습니다. 현재 typecheck·UI 테스트 265/265·build·
+registry release 검사가 통과했고 공개 대표 item 8개는 HTTP
+200입니다. 75번째 snapshot은 사용자 도메인에서 404이며 이전
+배포 rollback의 URL 보존도 미완료라 Goal 완료 판정은 보류합니다.
+[점검 기록](goal-scope-audit-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 98%입니다.
+
+2026-10-03 공급·품질 체크리스트 경직성 재검토: 사람 검토 범위는
+이미 변경분 중심이지만, review 준비 PR과 `main`의 최신 snapshot
+요구 및 전체 snapshot 복제가 게시 비용을 키웁니다. 구현 검증과
+게시 검증을 별도 상태로 보고하고, 관련 component를 릴리스 묶음으로
+검토합니다. workflow는 변경하지 않았습니다.
+[재검토 기록](quality-checklist-stiffness-review-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 shadcn/ui 출처 고지 범위 조정 병합·공개 대기:
 PR #135와 `main`의 Verify UI·Pages가 통과했습니다. 고정 source
 manifest는 공개 GitHub URL에서 hash가 일치하지만, Vercel 배포

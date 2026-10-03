@@ -85,9 +85,22 @@ registry JSON과 내부 의존성, token 파일을 같은 내용 해시로 묶�
 있습니다. 현재 `/r/pyd-*.json`은 빌드할 때 갱신되는 최신 경로이고,
 `/r/releases/sha256-<digest>/pyd-*.json`은 해당 시점의 고정 경로입니다.
 snapshot 디렉터리의 `manifest.json`은 각 파일의 SHA-256을 기록합니다.
-과거 Vercel 배포로 rollback하면 그 배포에 없던 새 snapshot 경로는
-열리지 않을 수 있습니다. 모든 공개 ID를 유지하는 복구 절차는 아직
-마련 중입니다.
+과거 Vercel 배포로 Instant Rollback하면 그 배포에 없던 새 snapshot
+경로가 404가 될 수 있습니다. 복구할 때는 현재 `main`에서 새
+커밋으로 문제 변경을 되돌리고, 기존 `registry/releases/`와
+`docs/r/releases/`는 되돌리기 전 `main` commit에서 유지합니다.
+필요하면 다음 명령으로 두 디렉터리를 복원합니다. `COMMIT_SHA`는
+되돌리기 전 `main`의 commit으로 바꿉니다.
+
+```bash
+git restore --source=COMMIT_SHA --staged --worktree -- registry/releases docs/r/releases
+```
+
+이후 아래 순서로 빌드·snapshot·검사를 수행하고 새
+배포를 게시합니다. 공개 후 현재·이전 release의 manifest와 대표 item
+URL을 확인합니다. CI는 기존 release 파일의 수정·삭제를 거부합니다.
+이 절차는 앞으로 게시하는 빌드의 파일 보존을 검사하며, 이미 수행한
+Instant Rollback의 일시적인 404를 막지는 못합니다.
 
 ```bash
 npm run build

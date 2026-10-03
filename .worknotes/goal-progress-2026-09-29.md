@@ -1,5 +1,17 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 release 이력 보존 검사: **약 99% → 약 99%**입니다.
+기존 snapshot 파일의 수정·삭제를 PR·`main`에서 막고 안전한 복구
+절차를 README에 적었습니다. 로컬 테스트·빌드·registry 검사는
+통과했으며 PR CI와 실제 복구 배포는 남았습니다.
+[검증 기록](release-history-guard-2026-10-03.md)을 참고하세요.
+
+2026-10-03 75번째 snapshot production 공개: **약 98% → 약 99%**입니다.
+Vercel production 배포가 READY이고 현재 registry·75번째 manifest·
+대표 item·token·의존 utils URL이 HTTP 200이며 로컬 JSON과
+일치합니다. 이전 배포 rollback의 불변 URL 보존은 남아 있습니다.
+[공개 기록](shadcn-provenance-scope-2026-10-03.md)을 참고하세요.
+
 2026-10-03 shadcn/ui 출처 고지 범위 조정 병합:
 **약 98% → 약 98%**입니다. PR #135와 `main`의 Verify UI·Pages는
 통과했지만 Vercel 배포 제한으로 75번째 manifest는 공개
