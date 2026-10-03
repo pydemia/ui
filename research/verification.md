@@ -1,5 +1,16 @@
 # 검증 기록
 
+## 2026-10-03 Registry snapshot schema 2 공개 경로
+
+PR #144와 `main` Verify UI, Pages가 통과했습니다. 77번째 GitHub raw
+manifest·TransferList·token·utils는 HTTP 200이며 게시 파일과
+일치합니다. 별도 Vite 소비자에서 새 raw URL을 설치해 5개 파일을
+받았고 typecheck·build가 통과했습니다. 확인 시점에 Vercel production은
+이전 배포이며 사용자 도메인의 77번째 manifest는 404입니다. 사이트
+URL 게시와 실제 rollback 검사는 미검증입니다.
+[공급 기록](../.worknotes/registry-durable-snapshot-2026-10-03.md)에
+commit·CI run과 검증 범위를 남겼습니다.
+
 ## 2026-10-03 Registry snapshot schema 2 로컬 검증
 
 기존 schema 1 release 76개의 검증과 새 schema 2 생성·현재 빌드

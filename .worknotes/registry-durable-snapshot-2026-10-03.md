@@ -1,5 +1,23 @@
 # Vercel rollback과 registry snapshot 공급
 
+## 병합 후 공개 확인
+
+PR #144를 squash 병합한 `main` commit은
+`ff0bcae7928da0c52df54911920ab2b94093bc70`입니다. PR Verify UI
+run `37113956965`, `main` Verify UI run `37114138481`, Pages run
+`37114137833`이 통과했습니다. 새 raw manifest·TransferList·token·
+utils는 HTTP 200이고 로컬 게시 파일과 문자열이 일치합니다. 빈 Vite
+소비자에서 새 raw TransferList·token URL로 `shadcn@4.21.0 add`를
+실행해 5개 파일을 설치했고 typecheck·build가 통과했습니다. 내부
+의존성도 같은 raw release 경로로 받았습니다.
+
+Vercel PR preview `dpl_DnB8ATxeX5HoUt9jR9WGq3iWVdga`는 READY입니다.
+확인 시점의 production은 이전 `d1938377` 배포를 가리키며
+`ui.pydemia.ai`와 `pydemia-ui.vercel.app`의 77번째 manifest는 404입니다.
+GitHub raw 소비자 공급은 검증했지만 사이트 URL 게시 완료와 실제
+Instant Rollback 시험은 검증하지 않았습니다. Goal 관리용 추정은
+약 99%입니다.
+
 기존 76개 snapshot은 manifest와 내부 의존성이 Vercel URL을 가리킵니다.
 과거 배포로 Instant Rollback하면 그 배포에 없는 snapshot 파일은
 404가 됩니다. GitHub Pages의 `pydemia.github.io/ui`는 현재 CNAME
