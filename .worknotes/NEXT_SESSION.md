@@ -1,5 +1,11 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #120 병합·공개 대기: AppShell 측면·하단의 `inset` 표시와
+68번째 snapshot이 `main`에 들어갔습니다. PR·`main` Verify UI와 Pages는
+성공했으나 Vercel production 배포 제한으로 새 manifest는 404이고
+현재 AppShell item은 옛 내용입니다. [작업 기록](app-shell-panel-appearances-2026-10-03.md)에
+근거와 재확인 대상을 남겼습니다. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 AppShell panel 표시 형태 로컬 후보: 측면·하단에 기본
 `attached`와 안쪽 여백형 `inset`을 추가했습니다. typecheck·대상 테스트·
 390px/1280px preview·build·68번째 snapshot 검사는 통과했고 공개는
