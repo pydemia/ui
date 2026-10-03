@@ -1,11 +1,12 @@
 # Component 확장 작업 인계
 
-2026-10-03 `PivotTable` 로컬 후보: 두 범주의 원자료를 교차 집계하고
+2026-10-03 `PivotTable` 공개 준비: 두 범주의 원자료를 교차 집계하고
 행·열·전체 합계를 제공하는 원본 component를 추가했습니다. typecheck·
-대상/전체 테스트·build와 390px Chromium preview를 확인했습니다.
-고지 hash·snapshot·공개 확인은 남아 있습니다.
-[작업 기록](pivot-table-2026-10-03.md)을 참고하세요. 공개 수량은
-138개 component·140개 item이며 Goal 관리용 추정은 약 98%입니다.
+대상/전체 테스트·build, 390px Chromium preview, provenance 고지와
+70번째 snapshot을 확인했습니다. PR CI와 공개 URL은 남았습니다.
+[작업 기록](pivot-table-2026-10-03.md)을 참고하세요. 로컬 139개
+component·141개 item, 공개 138개·140개이며 Goal 관리용 추정은
+약 98%입니다.
 
 2026-10-03 공급·품질 재검토: 독립적인 표시 변경에 폭·theme·브라우저
 검사를 일괄 반복하지 않고, 영향받은 핵심 동작의 증거 하나와 API·Usage

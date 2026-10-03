@@ -22,6 +22,11 @@ focus 가능한 가로 스크롤을 사용합니다. `panel`·`plain`은 같은 
 reader 발표·touch·Safari·RTL은 적용 범위 밖이며 실행하지 않았습니다.
 
 첫 `registry:check`는 새 provenance SHA-256과 기존 소비자 고지가 달라
-중단됐습니다. metadata를 포함한 commit으로 고지 링크·hash를 갱신한
-뒤 snapshot과 공개 경로를 확인해야 합니다. Goal 관리용 추정은
-약 98%로 유지합니다.
+중단됐습니다. metadata를 포함한 commit
+`3523fc1cba5d8a590a821567071ec5db0bfdb5ec`에 고지 링크를 고정하고
+LF SHA-256을 갱신했습니다. 이후 `registry:check`와
+`registry:release-check`가 통과했습니다. 70번째 snapshot은
+`sha256-32c8c4110dd838fedd10716915c72849dd5e35f6977b0dbd010fe9a559d507b9`이며
+141개 item·139개 export/catalog와 70개 불변 snapshot의 정합성을
+확인했습니다. PR CI와 공개 배포는 아직 확인하지 않았습니다.
+Goal 관리용 추정은 약 98%로 유지합니다.
