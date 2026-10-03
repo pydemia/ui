@@ -716,6 +716,11 @@
       "files": [{ "path": "packages/ui/src/components/treemap-chart.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-pivot-table", "type": "registry:ui", "title": "Pivot Table",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/pivot-table.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-page-header", "type": "registry:ui", "title": "Page Header",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/page-header.tsx", "type": "registry:ui" }]

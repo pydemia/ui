@@ -229,6 +229,10 @@ export { TreemapChart } from "./components/treemap-chart";
 export type {
     TreemapChartProps, TreemapNode, TreemapLeaf, TreemapGroup,
 } from "./components/treemap-chart";
+export { PivotTable } from "./components/pivot-table";
+export type {
+    PivotTableProps, PivotAxisItem, PivotRecord,
+} from "./components/pivot-table";
 export { DataChart } from "./components/data-chart";
 export type {
     DataChartProps, ChartPoint, ChartSeries,
