@@ -335,16 +335,34 @@
       ]
     },
     "prism-utility": {
-      "visual": "pending",
+      "visual": "partial",
       "interaction": "partial",
       "checks": [
-        "Local fixture PDF upload shows attachment tile"
+        "Fresh anonymous original /sample and local built file inputs: drop area 140.375px, icon 40px, guide 13px/1.4, hint 10px/1.4; tile 240x46px, attach row 28px, add button 81.484375x28px",
+        "Original and local native file chooser accept the valid uppercase PDF extension despite octet-stream MIME and reject EXE in a mixed selection",
+        "Local mixed selection emits the accepted subset, structured rejected files and partial feedback; selected tiles and rows show host-owned uploading/ready/error",
+        "Native chooser re-selection of the same file after removal, input reset, removal through either display, and host-driven completion",
+        "Browser DOM DataTransfer drop accepts valid subset; nested child drag leave retains highlight, final leave clears it; settled drag border #416395/background #eef2fa",
+        "Disabled picker and removal, blocked DOM drop; readonly and single-selection attach verified in emitted consumer at actual 320px plus component tests",
+        "Actual 320px viewport: long filenames ellipsize, file tiles scroll inside a 288px list, page scroll width remains 320px",
+        "Dynamic file control widths 140/200/400/800px; attach header stacks below 180px without changing desktop geometry",
+        "Current local 119 fixtures at 320px: render failures/root overflow/nested buttons/unlabeled visible native controls/page errors all zero",
+        "PRISM 30 component tests; 39 registry items/62 files and 12 complete examples compiled in a fresh isolated consumer before the final icon/CSS correction; final emitted source/CSS subsequently synchronized and compiled separately"
       ],
       "evidence": [
-        "local-utility"
+        "local-reference-files-comparison-direct",
+        "local-files-partial-direct",
+        "local-files-long-320-direct",
+        "local-files-final-119-fixtures-320-direct",
+        "reference-files-zone-current-partial",
+        "reference-files-attach-current-uploading",
+        "consumer-files-final-readonly-single-direct"
       ],
       "remaining": [
-        "remove, reject and drag/drop paths"
+        "Switch, Tooltip and Progress source state combinations",
+        "native operating-system drag and file dialog interactions beyond the browser filechooser event",
+        "authenticated upload/download service integration belongs to the host; not executed",
+        "all accepted format/size/count/browser combinations"
       ]
     },
     "prism-workspace": {
@@ -586,7 +604,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 25,
+      "passed": 30,
       "failed": 0
     },
     "registry": {
@@ -595,21 +613,18 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed",
+      "status": "passed-local-install-then-final-emitted-byte-sync",
       "items": 39,
       "files": 62,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "registrySha256": "0e2ae1a01a72962924feafe4833b848a316fea8a7c2e91aa20f9da0c34c75e40",
+      "registrySha256": "39da825203f3c326d851debdac4ccd26eec44cbbddbec5f2df9964f379b7214e",
       "method": "previous isolated public shadcn install; final font/print registry CSS synchronized byte-for-byte and consumer TypeScript/Vite rebuilt",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
       "sourceScope": "all 39 installed source items compiled and 11 component examples typechecked; final registry CSS compiled; demo renders Button only",
-      "completeExamples": {
-        "count": 11,
-        "status": "typechecked-against-installed-sources",
-        "runtime": "not-executed"
-      }
+      "completeExamples": 12,
+      "browser": "Actual 320px emitted-source readonly and single-file chooser fixture passed; 140px header stacks, root scroll320, two same-file selection events, blocked readonly intents"
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -719,32 +734,23 @@
   },
   "unverified": [
     "all 269 source correspondences do not establish state or pixel equality",
-    "fresh original state comparison and authenticated full-domain screens",
+    "remaining original state comparisons outside measured file controls and authenticated full-domain screens",
     "all extensions across domains, long content and popup combinations",
     "clipboard write and native print dialog"
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 38,
-    "states": 117,
-    "status": "passed-current-published-font-print-build",
+    "states": 119,
+    "status": "passed-local-final-file-build",
     "checks": [
-      "all 117 fixtures render at actual 320px viewport",
+      "all 119 fixtures render at actual 320px viewport",
       "no nested buttons",
       "no page root horizontal overflow",
-      "no unlabeled visible native inputs"
+      "no unlabeled visible native inputs",
+      "no page errors or unhandled rejections"
     ],
-    "evidence": "published-font-print-fixtures-320",
-    "claim": "Rendering does not prove interaction or visual parity.",
-    "visibleInputLabels": {
-      "states": 117,
-      "status": "passed",
-      "evidence": [
-        "local-font-print-fixtures-320"
-      ]
-    },
-    "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
-    "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
+    "evidence": "local-files-final-119-fixtures-320-direct"
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -808,15 +814,49 @@
     }
   },
   "runtimeVerificationAvailability": {
-    "status": "available-headless",
-    "method": "agent-browser 0.38.2 with installed isolated Chromium; own namespace/session, no existing Chrome profile",
+    "status": "available-direct-headless",
+    "method": "Bundled Playwright 1.62.1 with installed isolated headless Chromium 1223; fresh context, no existing browser profile or saved authentication",
     "inAppBrowser": "still unavailable",
-    "sourceBrowser": "HTTP redirects/ERR_TOO_MANY_REDIRECTS and HTTPS ERR_CONNECTION_RESET; fresh original comparison pending",
-    "preservedEvidence": "37 source defaults plus current local 117 fixture states at 320px",
+    "sourceBrowser": "Direct HTTP /sample renders successfully; fresh button and file selection states captured in the original deployed app",
+    "preservedEvidence": "37 historical source defaults, fresh direct source file states, local 119 fixture states at actual 320px",
     "newChangesPendingRuntime": [
       "actual clipboard write",
-      "original states and authenticated domain screens",
-      "print outside Chromium Letter settings"
+      "original states outside the measured file controls and authenticated domain screens",
+      "print outside Chromium Letter settings",
+      "publishing the latest file source changes; Vercel was previously rate limited"
+    ],
+    "previousSourceBrowserAttempts": [
+      "agent-browser 0.38.2: HTTP upgrade/redirect loop; HTTPS connection reset. Historical failures do not apply to the working direct Playwright launch."
     ]
+  },
+  "fileSelectionVerification": {
+    "scope": "Fresh anonymous deployed original samples and local built synthetic fixtures; no server upload or existing login",
+    "visual": "Measured file-control geometry, text metrics, painted borders/backgrounds and icon dimensions; screenshots inspected. This is not whole-page pixel parity.",
+    "interaction": "Native browser filechooser event plus DOM DataTransfer; synthetic native File buffers",
+    "source": "http://dev.prism.ai/sample/ui/input/file-dropzone and /sample/ui/input/file-attach",
+    "localFixtureStates": 119,
+    "productionState": "Local only at recording time; earlier font/print deployment dd49ecbe remains published"
+  },
+  "publishedFontPrintFixtureRenderChecks": {
+    "groups": 38,
+    "states": 117,
+    "status": "passed-current-published-font-print-build",
+    "checks": [
+      "all 117 fixtures render at actual 320px viewport",
+      "no nested buttons",
+      "no page root horizontal overflow",
+      "no unlabeled visible native inputs"
+    ],
+    "evidence": "published-font-print-fixtures-320",
+    "claim": "Rendering does not prove interaction or visual parity.",
+    "visibleInputLabels": {
+      "states": 117,
+      "status": "passed",
+      "evidence": [
+        "local-font-print-fixtures-320"
+      ]
+    },
+    "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
+    "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
   }
 }

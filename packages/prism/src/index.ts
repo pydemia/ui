@@ -34,6 +34,7 @@ export type { PrismWorkspaceProps } from "./prism-workspace";
 export { PrismRadarChart, PrismTrendChart } from "./prism-chart";
 export type { PrismChartAxis, PrismChartSeries } from "./prism-chart";
 export { PrismSwitch, PrismTooltip, PrismProgress, PrismFileDropzone, PrismFileAttach } from "./prism-utility";
+export type { PrismFileDropzoneProps, PrismFileAttachProps, PrismFileInvalidReason } from "./prism-utility";
 export { PrismEvaluationHistory, PrismCompensationTable, PrismValidationList, PrismExperienceCard, PrismCommentEditor } from "./prism-record";
 export { PrismManagementForm, PrismAiGenerateButton, PrismCriteriaSection, PrismAffectedPositions } from "./prism-management";
 export type { PrismManagementField, PrismManagementValue } from "./prism-management";
