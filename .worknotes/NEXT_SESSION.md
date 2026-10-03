@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 수준 재판정: 개발 중 구현 검토와 공개 준비·확인의
+최소 증거를 [로드맵](component-roadmap.md#공급과-품질의-판정-단위)에
+간결하게 정리했습니다. 실제 반복 비용은 전체 CI와 snapshot 복제이며
+품질 점수로 세지 않습니다. 제품 코드·workflow·공개 수량은 바뀌지
+않았습니다. [판정 근거](quality-checklist-decision-2026-10-03.md)를
+참고하세요. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 PR #120 병합·공개 대기: AppShell 측면·하단의 `inset` 표시와
 68번째 snapshot이 `main`에 들어갔습니다. PR·`main` Verify UI와 Pages는
 성공했으나 Vercel production 배포 제한으로 새 manifest는 404이고
