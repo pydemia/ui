@@ -1,6 +1,14 @@
 # 검증 기록
 
-## 2026-10-03 분석 화면 간격 — 로컬 후보
+## 2026-10-03 분석 화면 간격 — 공개 확인
+
+PR #154와 `main` `82b760b7`의 Verify UI, `main` Pages가
+성공했습니다. Vercel production은
+`dpl_6wGv37rruAJexW3ajVAZU2cqo8t3`로 READY입니다. 사용자
+도메인의 82번째 manifest·변경 세 item이 HTTP 200이며 저장소
+파일과 일치합니다. 공개 Dashboard preview에서 조밀한 바깥
+12px·내부 8px 간격을 확인했습니다. 실제 screen reader·touch·
+Safari·RTL은 실행하지 않았습니다.
 
 `Dashboard`, `LogConsole`, `LogViewer`의 기본·조밀한 간격을 공개 API와
 문서 preview·Usage에 추가했습니다. `LogViewer`의 내부 로그에 밀도가
@@ -11,10 +19,9 @@
 release 검사도 통과했습니다. 로컬 Chromium에서 `Dashboard`의 영역
 간격 24→12px·하위 grid 간격 16→8px, `LogViewer`의 안쪽 여백과
 행 간격 축소·내부 `LogConsole` 전달·검색 결과를 확인했습니다.
-`LogConsole`의 조밀한 preview도 확인했습니다. PR CI와 공개 게시
-검증은 진행 중입니다.
+`LogConsole`의 조밀한 preview도 확인했습니다.
 [작업 기록](../.worknotes/analytics-density-2026-10-03.md)에 실제
-결과와 미검증 범위를 갱신합니다.
+결과와 미검증 범위를 남겼습니다.
 
 ## 2026-10-03 Sidebar 링크 표시 형태
 
