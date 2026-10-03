@@ -1,5 +1,16 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 shadcn/ui 소비자 고지
+
+현재 shadcn/ui 수정 소스를 쓰는 28개 item의 source metadata를
+`registry/shadcn-sources.json`에 고정했습니다. 해당 목록은
+`registry/provenance.json`의 shadcn/ui source 기록과 자동으로
+대조합니다. 원본 component의 provenance가 바뀌어도 MIT 고지의
+commit·hash와 수정 소스 item JSON을 갱신할 필요가 없습니다.
+source 기록이 바뀌면 manifest와 고지를 함께 갱신해야 합니다.
+[작업 기록](../.worknotes/shadcn-provenance-scope-2026-10-03.md)에
+검증 범위를 남겼습니다.
+
 ## 2026-10-03 CalendarHeatmap
 
 `Heatmap`은 임의의 두 범주를 행·열로 비교합니다. 일별 활동 기록은

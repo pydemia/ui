@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-tooltip",
+  "title": "Tooltip",
+  "dependencies": [
+    "@radix-ui/react-tooltip@1.2.16"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-293797da4028d8548f131b2b5c9c6945b449fef30bbb4a17385d7b7f26035dc8/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/tooltip.tsx",
+      "content": "import * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction TooltipProvider({\n    delayDuration = 300,\n    ...props\n}: ComponentProps<typeof TooltipPrimitive.Provider>) {\n    return <TooltipPrimitive.Provider delayDuration={delayDuration} {...props} />;\n}\n\nconst Tooltip = TooltipPrimitive.Root;\nconst TooltipTrigger = TooltipPrimitive.Trigger;\n\nfunction TooltipContent({\n    className,\n    sideOffset = 6,\n    ...props\n}: ComponentProps<typeof TooltipPrimitive.Content>) {\n    return (\n        <TooltipPrimitive.Portal>\n            <TooltipPrimitive.Content\n                sideOffset={sideOffset}\n                className={cn(\n                    \"z-50 max-w-xs rounded-sm bg-foreground \" +\n                    \"px-[var(--space-2)] py-[var(--space-1)] \" +\n                    \"text-xs text-background shadow-[var(--shadow-float)]\",\n                    className,\n                )}\n                {...props}\n            />\n        </TooltipPrimitive.Portal>\n    );\n}\n\nexport { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/tooltip.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe upstream source file for each adapted component is identified at\ncommit `b19a9f3968e53c0f1643814536b1cd45e1a21e46`:\n<https://github.com/pydemia/ui/blob/b19a9f3968e53c0f1643814536b1cd45e1a21e46/registry/shadcn-sources.json>.\nSHA-256 of that file with LF line endings:\n`a3df63facdf47784a0086e46536155cf973a51be86e01f707247b046d234eafa`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

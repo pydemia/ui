@@ -1,0 +1,360 @@
+{
+  "items": [
+    {
+      "name": "pyd-accordion",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/accordion.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-alert",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-alert-dialog",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert-dialog.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-avatar",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/avatar.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-breadcrumb",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/breadcrumb.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-button",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/button.tsx",
+        "license": "MIT",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-calendar",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/calendar.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-card",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/card.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-checkbox",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/checkbox.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-collapsible",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/collapsible.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-dialog",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/dialog.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-empty",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/empty.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-input",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/input.tsx",
+        "license": "MIT",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-input-group",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/input-group.tsx",
+        "license": "MIT",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-native-select",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/native-select.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-popover",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/popover.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-progress",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/progress.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-radio-group",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/radio-group.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-scroll-area",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/new-york-v4/ui/scroll-area.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-separator",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/separator.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-skeleton",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/skeleton.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-slider",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/slider.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-spinner",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/spinner.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-switch",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/switch.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-tabs",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tabs.tsx",
+        "license": "MIT",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-textarea",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/textarea.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-toggle",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/toggle.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    },
+    {
+      "name": "pyd-tooltip",
+      "source": {
+        "provider": "shadcn/ui",
+        "implementation": "modified",
+        "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tooltip.tsx",
+        "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md",
+        "license": "MIT",
+        "copyright": "2023 shadcn",
+        "notice": "THIRD_PARTY_NOTICES.md",
+        "consumer_notice": "registry/SHADCN_UI_LICENSE.md"
+      }
+    }
+  ]
+}

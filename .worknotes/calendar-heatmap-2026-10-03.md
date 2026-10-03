@@ -1,5 +1,15 @@
 # CalendarHeatmap 작업 기록
 
+## 공개 확인
+
+2026-10-03. 사용자 도메인의 현재 registry는 145개 item을 제공하고,
+`pyd-calendar-heatmap.json`, 74번째 manifest와 해당 snapshot
+item이 모두 HTTP 200입니다. 응답 JSON은 저장소의 게시 파일과
+일치합니다. registry 의존 경로의 `pydemia-ui.vercel.app`
+item도 HTTP 200입니다. 이전 절의 404는 당시 배포 상태입니다.
+공개 확인 수량은 143개 component·145개 item입니다.
+Goal 관리용 추정은 약 98%입니다.
+
 ## 병합 후 상태
 
 PR #133은 `65e330c16253c614b5963675980ea7999869c983`로
