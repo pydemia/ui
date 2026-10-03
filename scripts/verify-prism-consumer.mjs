@@ -8,6 +8,7 @@ import { spawn } from "node:child_process";
 
 // An isolated Vite consumer proves the emitted sources, not workspace package exports.
 const repo = new URL("../",import.meta.url);
+const publicRegistry = process.argv.includes("--public");
 const workdir = await mkdtemp(join(tmpdir(),"prism-consumer-"));
 const prism = JSON.parse(await readFile(new URL("apps/docs/public/prism/r/registry.json",repo),"utf8"));
 const manifest = JSON.parse(await readFile(new URL("apps/docs/public/prism/components.json",repo),"utf8"));
@@ -27,7 +28,7 @@ const server = createServer(async (request,response) => {
     } catch { response.writeHead(500).end(); }
 });
 await new Promise(resolve => server.listen(0,"127.0.0.1",resolve));
-base = `http://127.0.0.1:${server.address().port}`;
+base = publicRegistry ? "https://ui.pydemia.ai" : `http://127.0.0.1:${server.address().port}`;
 const run = (command,args) => new Promise((resolve,reject) => {
     const child = spawn(command,args,{cwd:workdir,stdio:"inherit"});
     child.once("error",reject); child.once("exit",code => code === 0 ? resolve() : reject(new Error(`${command} exited ${code}`)));
@@ -43,7 +44,7 @@ try {
     await writeFile(join(workdir,"index.html"),'<html><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>');
     await writeFile(join(workdir,"src/style.css"),'@import "tailwindcss";\n@import "./components/ui/tokens.css";\n@import "./components/ui/prism.css";');
     await run("npm",["install","--no-fund","--no-audit"]);
-    console.log(`Installing all ${prism.items.length} PRISM registry items into ${workdir}`);
+    console.log(`Installing all ${prism.items.length} PRISM registry items from ${base} into ${workdir}`);
     await run(new URL("node_modules/.bin/shadcn",repo).pathname,["add","--yes","--overwrite",...prism.items.map(item => `${base}/prism/r/${item.name}.json`)]);
     await writeFile(join(workdir,"src/main.tsx"),`import {createRoot} from "react-dom/client"; import "./style.css";\n${prism.items.filter(item => item.name !== "prism-tokens").map(item => `import * as ${item.name.replaceAll("-","_")} from "./components/ui/${item.name}";`).join("\n")}\nconst installed = {${prism.items.filter(item => item.name !== "prism-tokens").map(item => item.name.replaceAll("-","_")).join(",")}};\ncreateRoot(document.getElementById("root")!).render(<main data-prism="light">Installed {Object.keys(installed).length} PRISM modules<prism_button.PrismButton>저장</prism_button.PrismButton></main>);`);
     const examples = manifest.components.filter(entry => entry.usageKind === "component-example");

@@ -222,4 +222,6 @@ bundler는 해당 worker를 자체 정적 경로로 제공합니다.
 구조·동작 계약을 검사합니다. `node scripts/verify-prism-consumer.mjs`는 임시 프로젝트에
 전체 PRISM registry를 실제 설치하고 TypeScript와 Vite 빌드를 검증합니다.
 `component-example`으로 표시한 사용 예시도 설치된 소스와 함께 타입 검사합니다.
+공개 배포 후 `node scripts/verify-prism-consumer.mjs --public`을 실행하면 로컬
+mirror 대신 `https://ui.pydemia.ai`의 registry에서 설치합니다.
 이 검사는 브라우저 실행이나 원본과의 시각 일치를 확인한 결과가 아닙니다.

@@ -559,7 +559,7 @@
       "method": "isolated shadcn install against local registry mirror; no workspace package imports",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "all 39 installed items compiled; demo renders Button only",
+      "sourceScope": "all 39 installed items compiled and 10 component examples typechecked; demo renders Button only",
       "completeExamples": {
         "count": 10,
         "status": "typechecked-against-installed-sources",
@@ -568,9 +568,9 @@
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
-      "status": "rate-limited",
+      "status": "published-http-verified",
       "url": "https://ui.pydemia.ai/prism",
-      "readback": "HTTP 404 for route, components.json and registry.json after ef8d2c6 upstream integration",
+      "readback": "HTTP 200 for /prism and /prism/; components.json, registry.json, prism-context.json, llms.txt and font bytes match the local build",
       "attempts": [
         {
           "method": "normal-upload",
@@ -590,9 +590,27 @@
           "method": "existing-git-integration-status",
           "sourceCommit": "ef8d2c6",
           "result": "Vercel commit status failure: Deployment rate limited — retry in 24 hours."
+        },
+        {
+          "method": "existing-git-integration",
+          "sourceCommit": "b533c5c",
+          "result": "Vercel commit status success: Deployment has completed; public HTTP readback verified"
         }
       ],
-      "retryCondition": "existing Git integration after Vercel daily deployment/build limits reset"
+      "sourceCommit": "b533c5c9e0adea0e2fd79310ffd107a1e0cdcff6",
+      "browserRender": "pending; own browser unavailable",
+      "independentConsumer": {
+        "status": "passed",
+        "method": "node scripts/verify-prism-consumer.mjs --public; install directly from https://ui.pydemia.ai",
+        "items": 39,
+        "files": 62,
+        "componentExamples": 10,
+        "typecheck": "passed",
+        "viteBuild": "passed",
+        "portableFont": "emitted package font bytes matched",
+        "assetNotice": "installed and checked",
+        "browserRuntime": "not-executed"
+      }
     },
     "generalComponentTests": {
       "passed": 247,
@@ -607,10 +625,10 @@
       "upstreamRevision": "ef8d2c6"
     },
     "githubVerification": {
-      "sourceCommit": "d263741341f86cd8c1dcc2423dd6a5b5af68c9fd",
+      "sourceCommit": "b533c5c9e0adea0e2fd79310ffd107a1e0cdcff6",
       "status": "passed",
-      "url": "https://github.com/pydemia/ui/actions/runs/37088415938",
-      "scope": "previous published commit; new usage example changes have local gates only"
+      "url": "https://github.com/pydemia/ui/actions/runs/37091054547",
+      "scope": "installed usage examples and CI example typecheck"
     },
     "usageContracts": {
       "groups": 38,
@@ -625,7 +643,7 @@
   "unverified": [
     "all 269 source correspondences do not establish state or pixel equality",
     "authenticated full-domain screens in own browser",
-    "public /prism and registry URL readback",
+    "public /prism browser rendering and interaction",
     "extensions across every domain, long content and popup combination"
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
@@ -696,7 +714,7 @@
   },
   "runtimeVerificationAvailability": {
     "status": "temporarily-unavailable",
-    "reason": "own browser disconnected after disk exhaustion; no browsers listed after space recovery",
+    "reason": "own browser inventory remains empty; createBrowserTab(iab) returns Browser is not available",
     "preservedEvidence": "37 source defaults and local 115 fixture states at 320px",
     "newChangesPendingRuntime": [
       "portable package font loading",

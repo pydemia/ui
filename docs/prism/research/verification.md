@@ -28,7 +28,9 @@ PRISM 계약 테스트 23개가 통과했습니다. 38개 예시의 115개 공�
 
 import만 있던 10개 그룹의 Usage를 합성 데이터와 상태를 포함한 React 예시로 보완했습니다. 설치된 registry 소스를 참조하는 10개 예시의 타입 검사가 통과했고 기존 CI의 PRISM 검사에도 workspace 예시 타입 검사를 연결했습니다. 38개 그룹 모두 설치용 import를 제공하며 각 예시의 import가 해당 항목의 설치 의존성 안에 있는지 검사합니다. 나머지 28개는 데이터·상태·callback을 소비자가 정의하는 연동 코드 일부로 표시합니다. 새 예시와 Usage 경로 선택·복사 UI의 브라우저 실행은 미확인입니다.
 
-공개 `/prism`·manifest·registry는 ef8d2c6까지 반영된 원격 상태에서도 HTTP 404입니다. CLI 배포 생성은 Vercel 일일 배포 횟수 한도로 실패했습니다. 기존 Git 배포의 `.vercelignore`가 `apps/docs` 소스까지 제외하던 문제는 루트 생성 폴더만 제외하는 `/docs/` 규칙으로 수정했습니다. 수정 후 d263741와 ef8d2c6의 Vercel commit status는 일일 제한 오류입니다. d263741의 GitHub Verify UI는 통과했습니다. 자체 브라우저는 디스크 공간을 확보한 뒤에도 연결되지 않았으며 현재 browser inventory가 비어 있습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
+b533c5c의 기존 Vercel Git 배포가 완료됐습니다. 앞선 일일 제한 실패는 배포 이력에 남겼으며 `apps/docs`가 배포 입력에서 빠지던 문제는 `/docs/` 제외 규칙으로 수정했습니다. `/prism`과 `/prism/`은 HTTP 200이며 manifest·registry·단위 context 항목·llms.txt·폰트 파일의 bytes가 로컬 빌드와 일치합니다. b533c5c의 GitHub Verify UI와 Pages도 통과했습니다. `node scripts/verify-prism-consumer.mjs --public`으로 공개 URL에서 39개 항목·62개 파일을 직접 설치하고 예시 10개의 타입 검사·Vite 빌드·폰트 bytes·자산 고지를 확인했습니다. HTTP 응답과 설치 검증은 실제 브라우저 렌더 증거가 아닙니다.
+
+자체 브라우저는 디스크 공간을 확보한 뒤에도 연결되지 않았으며 현재 browser inventory가 비어 있습니다. 공개 주소로 IAB를 생성해 보았으나 Browser is not available 응답이었습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
 
 [기계 판독 검증 기록](verification.json)은 component별 확인 범위와 미검증 항목을 제공합니다. 원본 AX·JPEG는 gitignore된 `.worknotes/browser-evidence/`에만 보관하며 공개 사이트에 포함하지 않습니다.
 
@@ -37,6 +39,6 @@ import만 있던 10개 그룹의 Usage를 합성 데이터와 상태를 포함�
 - 기본·hover·focus·disabled·selected·error·empty·long 상태의 원본/로컬 비교를 마칩니다.
 - 공개 sample이 없는 도메인·관리자 화면은 소스 근거와 실제 화면 근거를 분리해 확인합니다.
 - 반응형·직접 크기 조절·dynamic sizing을 명시적인 확장으로 기록합니다. 115개 공개 상태의 작은 화면 검사는 마쳤으며 긴 내용·popup 조합의 검증은 남아 있습니다.
-- 전체 build, 독립 registry 소비자 설치, 기존 일반 catalogue 보존, 공개 배포와 URL readback을 확인합니다.
+- 최신 변경의 브라우저 렌더와 공개 `/prism`의 상호작용을 확인합니다. 전체 build·독립 registry 설치·일반 catalogue 보존·공개 HTTP readback은 통과했습니다.
 
 Mac 잠금을 해제하지 않고 자체 브라우저로 공개 sample을 관찰했으나 현재는 브라우저 연결이 없습니다. 연결 당시에도 인증 `/chat`은 렌더링되지 않아 로그인 화면의 시각 검증은 제한됐습니다. 기존 Chrome 로그인 세션을 변경하지 않았습니다.

@@ -157,3 +157,17 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 115개 상태/320px runtime 증거는4503dea 기준으로 유지한다. 최신 폰트/Toast·새 예시와 Usage UI·전체 원본 상태 비교·로그인 domain·print 실제 pagination·공개 route/registry readback은 미완료다. Goal active이며 전체 시각 일치/배포 완료를 선언하지 않는다.
 
 - 최종 소비자 성공 후 이 작업의 이전 consumer-z0E5jn/Xx25Y4/2b8kAS에서 node_modules만 정리했다. source·lockfile·dist·증거는 보존하고 최신 NTZkpM 의존성도 유지했다.
+
+- push 직전 main이 cbe461c(작업 기록/verification 문서만 변경)으로 전진해 두 작업 커밋을 rebase했다. source44e6a4a/generatedb533c5c로 유지했으며 compiled source의 추가 변경은 없었다. 최초 push 실패 후 GitHub API로 원격이 cbe461c임을 확인했고 같은 일반 push 재시도는 성공했다. 최종 원격main=b533c5c9e0adea0e2fd79310ffd107a1e0cdcff6, local과 일치. credential exact-match0·demian config hash 보존을 확인했다. 최신 CI 결과를 확인한다.
+
+## 2026-10-03 공개 배포 및 live registry 설치 확인
+
+- b533c5c의 Verify UI run37091054547는 completed success다. Pages run37091054112도 success이며 기존 Vercel Git status가 Deployment has completed로 바뀌었다. 이전 quota 조건이 해소된 실제 결과다. 수동 CLI 재배포는 하지 않았다.
+- 공개 /prism과 /prism/은 HTTP200이며 module asset은 index-CiHEio8y.js다. components.json(38그룹/10예시)·r/registry.json(39items)·prism-context.json·llms.txt·PretendardVariable.woff2 모두 HTTP200 및 로컬 bytes 일치 확인. HTTP검사는 브라우저 렌더 증거가 아니다.
+- 공개URL에서 39items/62files를 직접 설치한 consumer-FVI3xS가 tsc/Vite·10예시타입·font bytes·notice 확인을 통과했다. 임시 검증 코드에서 mirror base만 실제 domain으로 바꿨다.
+- 재현용 --public 모드를 scripts/verify-prism-consumer.mjs에 추가하고 실제 명령도 실행했다. consumer-CQmxAY의39items/62files·10예시 tsc·Vite·font bytes·notice 확인이 모두 통과했다. 경로: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-CQmxAY. mirror가 아닌 https://ui.pydemia.ai/prism/r/prism-*.json과 공개 dependency URL에서 설치했다.
+- 자체 브라우저 createBrowserTab(iab)는 Browser is not available: iab였다. 공개 URL 설치 및 source/asset 검증과 UI시각 검증을 분리한다. 최신폰트/Toast/Usage UI 및 원본의 모든 상태·로그인 domain·실제print pagination은 미완료다. Goal은 active다.
+- stash의 내용은 source44e6a4a/generatedb533c5c와 원격에 보존된 뒤 임시 stash만 정리했다. 공개 검증 결과와 재현 명령을 유지하는 마지막 문서 갱신을 진행한다.
+
+- 일반 /r/registry.json(141items) 및 배포 module assets index-CiHEio8y.js/page-D_d2rXKp.js/page-DrlmIlnL.css도 HTTP200 및 로컬 bytes 일치 확인. 최신 공개 설치 이후 이전 NTZkpM/FVI3xS의 node_modules만 정리하고 source·lockfile·dist 및 최신 CQmxAY 의존성은 보존했다.
+- 공개 기록은 published-http-verified로 갱신하고 별도로 browserRender=pending을 유지한다. 최종 전체 site build와 PRISM contracts/10예시 타입 검사는 통과했다. --public 재현 명령과 공개 검증 기록을 소스/생성 문서에 반영한다.
