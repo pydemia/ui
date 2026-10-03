@@ -3158,14 +3158,24 @@ TreeNav preview·Usage가 렌더링됐고 현재 `pyd-tree-nav.json` 및
 공개 사이트에서 반복하지 않았습니다. 실제 보조기술 발표는
 확인하지 않았습니다.
 
-## 2026-10-03 TransferList 구현 검토
+## 2026-10-03 TransferList 구현 검토 당시
 
 `npm run typecheck`, UI 테스트 268/268, `npm run build`,
 `registry:release-check`, PRISM 테스트 32/32와 76번째 snapshot
 생성이 통과했습니다. 로컬
 Chromium에서 Space 선택·Enter 일괄 배정과 제거, disabled 항목,
 form 제출값, `Panel`·`Plain`, 390px 세로 배치·가로 넘침 없음과
-다크 테마를 확인했습니다. PR CI·공개 배포·공개 URL은 확인 전입니다.
+다크 테마를 확인했습니다. 이 시점에는 PR CI·공개 배포·공개 URL을
+확인하기 전이었습니다.
 실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다.
 증거와 판정은 [작업 기록](../.worknotes/transfer-list-2026-10-03.md)에
 있습니다.
+
+## 2026-10-03 TransferList 공개 확인
+
+PR #142와 병합 commit의 Verify UI·Pages가 통과했고 Vercel
+production은 READY입니다. 사용자 도메인의 새 JS, 현재
+`pyd-transfer-list` item과 76번째 snapshot manifest가 HTTP
+200이며 manifest의 항목 수는 146입니다. 공개 사이트의 조작은
+다시 실행하지 않았습니다. 자세한 ID와 검증 범위는
+[작업 기록](../.worknotes/transfer-list-2026-10-03.md)에 있습니다.

@@ -1,6 +1,15 @@
 # Component 확장 작업 인계
 
-2026-10-03 `TransferList` 구현 검토: Selection의 두 목록 배정 용례를
+2026-10-03 `TransferList` 공개: PR #142와 병합 commit
+`d1938377`의 Verify UI, Pages가 성공했고 Vercel production은
+READY입니다. `ui.pydemia.ai`의 새 JS, 현재 item과 76번째 snapshot
+manifest가 HTTP 200이며 manifest는 146개 item을 담습니다. 공개
+수량은 144개 component·146개 registry item입니다. 공개 사이트의
+키보드·form 조작은 로컬에서 확인한 동작을 반복하지 않았습니다.
+Goal 관리용 추정은 약 99%입니다.
+[작업 기록](transfer-list-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `TransferList` 구현 검토 당시: Selection의 두 목록 배정 용례를
 원본 구현으로 추가했습니다. export·registry·provenance·Usage·preview와
 76번째 snapshot 후보를 준비했습니다. typecheck·전체 UI 테스트
 268/268·build·registry snapshot 검사와 로컬 Chromium의 keyboard,
