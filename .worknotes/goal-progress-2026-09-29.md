@@ -1,5 +1,16 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 Input 세 표시 형태 로컬 후보와 품질 판정 재검토:
+**약 99% → 약 99%**입니다. 기존 Input의 기본값을 유지하고
+filled·underline을 추가했습니다. 새 component 수량은 늘지 않았으며
+146개 registry item을 포함한 78번째 snapshot 후보를 생성했습니다.
+대상 테스트 2/2, 전체 UI 270/270, typecheck·build·registry 검사가
+통과했고 로컬 Chromium에서 밝은·어두운 preview와 입력을 확인했습니다.
+설치 경로가 그대로인 item 변경에 격리 소비자 재설치를 요구하지
+않도록 [판정](quality-gate-level-review-2026-10-03.md)을 바로잡았습니다.
+PR CI와 공개 경로는 아직 확인 전입니다.
+[작업 기록](input-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 적용 시점 재검토와 Intake workspace 로컬 후보:
 **약 99% → 약 99%**입니다. 개발 중 후보에 Usage·preview 완성을
 요구하지 않고 공개 후보 단계에서 확인하도록 기준을 좁혔습니다.

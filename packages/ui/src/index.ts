@@ -4,6 +4,7 @@ export type { IconButtonProps } from "./components/icon-button";
 export { ButtonGroup, ButtonGroupSeparator } from "./components/button-group";
 export type { ButtonGroupProps } from "./components/button-group";
 export { Input } from "./components/input";
+export type { InputProps } from "./components/input";
 export { Editable } from "./components/editable";
 export type { EditableProps } from "./components/editable";
 export {

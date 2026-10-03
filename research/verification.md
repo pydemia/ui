@@ -1,5 +1,15 @@
 # 검증 기록
 
+## 2026-10-03 Input 표시 형태 — 로컬 후보
+
+`Input` 세 형태가 native 속성과 오류 상태를 보존하는 대상 테스트
+2/2, UI 전체 테스트 270/270, typecheck·build·registry release 검사가
+통과했습니다. 로컬 Chromium 문서 preview에서 세 형태의 밝은·어두운
+테마와 `filled`의 텍스트 입력, label 연결을 확인했습니다. 실제 screen
+reader·touch·Safari는 실행하지 않았습니다. PR CI와 공개 URL은 아직
+확인 전입니다. 세부 기록은
+[작업 기록](../.worknotes/input-appearances-2026-10-03.md)에 남깁니다.
+
 ## 2026-10-03 Registry snapshot schema 2 공개 경로
 
 PR #144와 `main` Verify UI, Pages가 통과했습니다. 77번째 GitHub raw
