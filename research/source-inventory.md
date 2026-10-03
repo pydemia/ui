@@ -1,5 +1,23 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 Autocomplete
+
+제품의 새 팀 이름처럼 목록에 없는 텍스트도 허용하는 입력은 기존
+`Combobox`의 선택 ID 규칙과 다릅니다. `Autocomplete`는 pydemia/ui의
+원본 React·Tailwind 구현이며 외부 component 코드를 복사하지
+않았습니다. 새 npm 의존성은 없고 registry 의존성은 기존 `pyd-input`과
+`pyd-utils`입니다. `pyd-input`의 수정된 shadcn/ui source와 MIT
+고지는 기존 provenance의 고정 revision과 소비자 고지로 전달합니다.
+새 외부 component upstream이 없으므로 별도 revision·LICENSE 대조
+대상은 없습니다.
+
+[W3C WAI-ARIA APG Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)의
+manual list autocomplete를 확인했습니다. 그 명세는 추천어를
+명시적으로 고르지 않으면 사용자가 입력한 문자열을 값으로 유지하고,
+Enter로 강조된 추천어를 선택하며 Escape로 popup만 닫습니다. 예제
+source는 복사하지 않았습니다. 실제 screen reader 발표와 touch는
+별도 검증 대상으로 남깁니다.
+
 ## 2026-10-03 FunnelChart
 
 가입·구매 등의 단계별 도달률은 `BarList`의 독립 범주 비교나

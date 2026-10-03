@@ -1,5 +1,22 @@
 # Prototype 설계 계약
 
+## 2026-10-03 Autocomplete
+
+`Autocomplete`의 form 값은 입력한 문자열입니다. 추천어를 선택하지
+않아도 텍스트를 그대로 제출하고, 추천어를 고르면 그 문자열로 입력을
+바꿉니다. `Combobox`의 선택 ID와 상태를 공유하지 않습니다. native
+`required`는 입력이 비었는지 검사합니다. uncontrolled form reset은
+초기 문자열을 복원하며 controlled 값은 호출자가 소유합니다.
+
+눈에 보이는 label과 하나의 native input을 사용합니다. focus는
+input에 두고 추천 목록은 `listbox`·`option`과
+`aria-activedescendant`로 탐색합니다. 방향키로 추천어를 강조해도
+form 값은 바뀌지 않습니다. Enter는 강조한 추천어가 있을 때만
+선택하고, 나머지 경우에는 form 제출을 막지 않습니다. Escape는
+popup만 닫고 입력 문자열을 보존합니다. IME 조합 중 방향키·Enter는
+가로채지 않습니다. loading·오류·빈 결과는 구분합니다. 색·간격·
+focus와 popup 그림자는 공통 token을 사용합니다.
+
 ## 2026-10-03 PivotTable
 
 `PivotTable`은 한 행 범주와 한 열 범주의 기록을 ID로 모아 합산합니다.

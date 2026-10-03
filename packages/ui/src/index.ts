@@ -31,6 +31,8 @@ export { FavoriteToggle } from "./components/favorite-toggle";
 export type { FavoriteToggleProps } from "./components/favorite-toggle";
 export { Combobox } from "./components/combobox";
 export type { ComboboxOption, ComboboxProps } from "./components/combobox";
+export { Autocomplete } from "./components/autocomplete";
+export type { AutocompleteProps } from "./components/autocomplete";
 export { MultiSelect } from "./components/multi-select";
 export type {
     MultiSelectOption, MultiSelectProps,

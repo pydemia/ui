@@ -1,5 +1,15 @@
 # 검증 기록
 
+## 2026-10-03 Autocomplete — 로컬 후보
+
+visible label과 native form 값, 자유 입력·추천 선택의 차이, IME·
+Escape·reset·controlled 값과 loading 상태를 대상 테스트 4개로
+확인했습니다. 전체 UI 테스트 251/251, typecheck·build, PRISM
+검사 23/23과 로컬 Chromium의 자유 입력 제출·keyboard·pointer
+선택을 확인했습니다. registry 고지·snapshot과 공개 경로는
+[작업 기록](../.worknotes/autocomplete-2026-10-03.md)에 이어서
+남깁니다.
+
 ## 2026-10-03 PivotTable — 병합·공개 대기
 
 교차점 중복 합산·음수·0·미수집 전파·행/열/전체 합계와 잘못된 입력·

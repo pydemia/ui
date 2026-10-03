@@ -19,7 +19,7 @@ import {
     CardFooter, CardHeader,
     CardTitle,
     Carousel, Checkbox, CitationList, CodeBlock, CodeEditorShell,
-    ColorInput, Combobox,
+    ColorInput, Combobox, Autocomplete,
     CopyButton,
     CommandPalette,
     ContentList,
@@ -4759,6 +4759,44 @@ function ComboboxPreview() {
     );
 }
 
+function AutocompletePreview() {
+    const [team, setTeam] = useState("");
+    const [selected, setSelected] = useState<string | null>(null);
+    const [submitted, setSubmitted] = useState<string | null>(null);
+
+    return (
+        <form className="preview-field" onSubmit={(event) => {
+            event.preventDefault();
+            setSubmitted(String(
+                new FormData(event.currentTarget).get("team") ?? "",
+            ));
+        }} onReset={() => {
+            setTeam("");
+            setSelected(null);
+            setSubmitted(null);
+        }}>
+            <Autocomplete label="담당 팀" name="team"
+                suggestions={["운영", "디자인", "고객 지원"]}
+                value={team} onValueChange={(next) => {
+                    setTeam(next);
+                    setSelected(null);
+                    setSubmitted(null);
+                }}
+                onSuggestionSelect={setSelected}
+                placeholder="추천어를 고르거나 새 팀을 입력하세요"
+                required />
+            <div className="flex flex-wrap gap-2">
+                <Button type="submit">팀 적용</Button>
+                <Button type="reset" variant="outline">초기화</Button>
+            </div>
+            <p role="status">
+                현재 값: {team || "없음"} · 추천 선택: {selected ?? "없음"}
+                {" · "}제출 값: {submitted ?? "없음"}
+            </p>
+        </form>
+    );
+}
+
 function MultiSelectPreview() {
     const [values, setValues] = useState<string[]>([]);
     const [submitted, setSubmitted] = useState<string[]>([]);
@@ -6792,6 +6830,31 @@ function WorkspaceForm() {
 }`,
         installItems: ["combobox", "field", "button"],
         preview: () => <ComboboxPreview />,
+    },
+    {
+        id: "autocomplete", name: "Autocomplete", category: "Selection",
+        description: "추천어를 방향키·Enter 또는 pointer로 고르거나 목록에 없는 텍스트를 그대로 입력·제출합니다. Combobox의 선택 ID와 달리 입력 텍스트가 form 값입니다.",
+        code: `import { useState } from "react";
+import { Autocomplete, Button } from "@pydemia/ui";
+
+function TeamForm() {
+  const [team, setTeam] = useState("");
+  const [submitted, setSubmitted] = useState<string | null>(null);
+
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    setSubmitted(String(new FormData(event.currentTarget)
+      .get("team") ?? ""));
+  }}>
+    <Autocomplete label="담당 팀" name="team"
+      suggestions={["운영", "디자인", "고객 지원"]}
+      value={team} onValueChange={setTeam} required />
+    <Button type="submit">팀 적용</Button>
+    <p role="status">제출 값: {submitted ?? "없음"}</p>
+  </form>;
+}`,
+        installItems: ["autocomplete", "button"],
+        preview: () => <AutocompletePreview />,
     },
     {
         id: "multi-select", name: "MultiSelect", category: "Selection",
