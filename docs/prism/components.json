@@ -1,0 +1,2446 @@
+{
+  "schemaVersion": 1,
+  "title": "PRISM UI",
+  "reference": {
+    "url": "http://dev.prism.ai",
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "observedAt": "2026-10-03"
+  },
+  "theme": {
+    "mode": "light",
+    "scope": "data-prism=\"light\"",
+    "stylesheet": "/prism/r/prism-tokens.json",
+    "font": "Pretendard 1.3.9 (OFL-1.1)"
+  },
+  "integration": {
+    "workspaceImport": "@pydemia/prism",
+    "registryImport": "Installed components/ui/prism-*.tsx files",
+    "stateOwnership": "Consumer owns API/auth/permissions/persistence; demos use synthetic data."
+  },
+  "components": [
+    {
+      "id": "prism-button",
+      "name": "Button / New chat",
+      "category": "Actions",
+      "purpose": "일반·파괴적·아이콘 작업과 새 대화 진입",
+      "contract": "variant solid/line/shape, size large/medium/small/x-small, tone primary/danger. iconOnly는 접근 가능한 이름이 필요합니다. 기본 type은 button입니다.",
+      "states": [
+        "default",
+        "disabled"
+      ],
+      "source": [
+        "ui/button/HRXBtn.tsx",
+        "ui/button/HRXNewChatBtn.tsx"
+      ],
+      "usage": "import { PrismButton } from \"@pydemia/prism\";\n<PrismButton variant=\"solid\" size=\"medium\" onClick={save}>저장</PrismButton>;",
+      "sourcePath": "packages/prism/src/prism-button.tsx",
+      "previewUrl": "/prism?component=prism-button",
+      "embedUrl": "/prism?component=prism-button&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-button&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "pending",
+        "checks": [
+          "Deployed new-chat 40px height, 8px radius, 14px type",
+          "Button sample default geometry and token values compared"
+        ],
+        "remaining": [
+          "hover/focus/disabled combinations"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismButtonProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismButton",
+          "kind": "component"
+        },
+        {
+          "name": "PrismNewChatButton",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-field",
+      "name": "Input / Textarea / Select",
+      "category": "Inputs",
+      "purpose": "레이블·필수·읽기 전용·입력 오류를 포함한 값 입력",
+      "contract": "label은 필수이며 description·error를 aria-describedby로 연결합니다. Select의 required·name은 native form validation·FormData와 연동하며 미선택 오류 시 trigger로 포커스를 옮깁니다. uncontrolled Select는 form reset 시 defaultValue로 돌아갑니다. readonly 값은 전송되지만 변경할 수 없습니다. onClear는 controlled 값의 초기화 의도를 전달하고 입력 포커스를 유지합니다. endAdornment를 넣을 수 있으며 저장과 업무 검증은 호출자 책임입니다.",
+      "states": [
+        "default",
+        "disabled",
+        "readonly",
+        "error",
+        "long"
+      ],
+      "source": [
+        "ui/input/HRXTextField.tsx",
+        "ui/input/HRXInputField.tsx",
+        "ui/input/HRXSelect.tsx"
+      ],
+      "usage": "import { PrismInput } from \"@pydemia/prism\";\n<PrismInput label=\"포지션명\" value={name} onChange={e => setName(e.target.value)} required error={error} />;",
+      "sourcePath": "packages/prism/src/prism-field.tsx",
+      "previewUrl": "/prism?component=prism-field",
+      "embedUrl": "/prism?component=prism-field&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-field&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Deployed and local Select menu options: 33px height, 14px type, 0px 8px padding, 4px radius",
+          "End/Enter chooses last option and restores trigger focus",
+          "Clear action emits intent, preserves consumer-owned value and input focus",
+          "Readonly value keeps original primary text color; disabled value retains caption",
+          "readOnly Select remains focusable and submits value without opening",
+          "native required Select blocks empty submit and focuses trigger",
+          "uncontrolled form reset restores default; controlled reset preserves value",
+          "ArrowUp from search selects last option"
+        ],
+        "evidence": [
+          "local-select-open-contract",
+          "local-select-readonly-sizes",
+          "local-select-native-form"
+        ],
+        "remaining": [
+          "typeahead runtime",
+          "all source option states",
+          "all input size/adornment/error combinations"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismInputProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismInput",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTextareaProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismTextarea",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSelectProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSelect",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-badge",
+      "name": "ELP / Count / Tag / Chip",
+      "category": "Data display",
+      "purpose": "ELP 구분·건수·필터 제거·평가 상태 표시",
+      "contract": "ELP와 s-ELP는 별도 색·16px 규격입니다. Count는 0 이상 정수입니다. 제거 가능한 Tag에는 label과 onRemove를 제공합니다. Chip의 상태는 텍스트로도 표현합니다.",
+      "states": [
+        "default"
+      ],
+      "source": [
+        "ui/badge/HRXElpBadge.tsx",
+        "ui/badge/HRXCountBadge.tsx",
+        "ui/tag/HRXTag.tsx",
+        "ui/chip/HRXChip.tsx"
+      ],
+      "usage": "import { PrismElpBadge, PrismTag } from \"@pydemia/prism\";\n<><PrismElpBadge type=\"s-ELP\" /><PrismTag variant=\"blue\" label=\"재무\" onRemove={remove}>재무</PrismTag></>;",
+      "sourcePath": "packages/prism/src/prism-badge.tsx",
+      "previewUrl": "/prism?component=prism-badge",
+      "embedUrl": "/prism?component=prism-badge&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-badge&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismElpBadge",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCountBadge",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTag",
+          "kind": "component"
+        },
+        {
+          "name": "PrismChip",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-display",
+      "name": "Avatar / Chips / Table",
+      "category": "Data display",
+      "purpose": "사용자·후보 식별, 프로필 선택, 표 검색·정렬",
+      "contract": "PrismTable은 native table과 caption을 사용합니다. 대량 데이터 검색·정렬·페이지·원격 요청은 기존 DataTable 계약을 공유합니다. 이름 선택은 호출자의 onOpen으로 전달합니다.",
+      "states": [
+        "default",
+        "disabled",
+        "empty"
+      ],
+      "source": [
+        "ui/avatar/HRXAvatar.tsx",
+        "ui/chip/HRXProfileChip.tsx",
+        "ui/chip/HRXAnchorChip.tsx",
+        "ui/table/HRXTable.tsx"
+      ],
+      "usage": "import { PrismTable } from \"@pydemia/prism\";\n<PrismTable caption=\"포지션 목록\"><thead><tr><th scope=\"col\">포지션</th></tr></thead><tbody><tr><td>기술전략담당</td></tr></tbody></PrismTable>;",
+      "sourcePath": "packages/prism/src/prism-display.tsx",
+      "previewUrl": "/prism?component=prism-display",
+      "embedUrl": "/prism?component=prism-display&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-display&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismAvatarProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAvatar",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfileChip",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAnchorChip",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTable",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDataTable",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSection",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-tabs",
+      "name": "Tabs",
+      "category": "Navigation",
+      "purpose": "프로필·경력·메모를 한 영역에서 전환",
+      "contract": "Radix의 value/onValueChange, Arrow/Home/End, 연결된 tabpanel을 사용합니다. line 44px와 fill 32px를 구분합니다.",
+      "states": [
+        "default"
+      ],
+      "source": [
+        "../styles/_tabs.scss"
+      ],
+      "usage": "import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from \"@pydemia/prism\";\n<PrismTabs defaultValue=\"profile\"><PrismTabsList><PrismTabsTrigger value=\"profile\">프로필</PrismTabsTrigger></PrismTabsList><PrismTabsContent value=\"profile\">내용</PrismTabsContent></PrismTabs>;",
+      "sourcePath": "packages/prism/src/prism-tabs.tsx",
+      "previewUrl": "/prism?component=prism-tabs",
+      "embedUrl": "/prism?component=prism-tabs&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-tabs&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "320px tab list scrolls internally without growing root width"
+        ],
+        "evidence": [
+          "local-all-components-narrow"
+        ],
+        "remaining": [
+          "all source tab states and keyboard focus placement"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismTabs",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTabsContent",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTabsList",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTabsTrigger",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-dialog",
+      "name": "Dialog",
+      "category": "Overlays",
+      "purpose": "명시적 확인과 짧은 정보 편집",
+      "contract": "Radix dialog의 focus containment·Escape·focus restoration을 사용합니다. 기본 폭은 620px이며 width로 440/560/620px 등을 지정할 수 있습니다. 일반 Dialog의 title과 description은 필수입니다. ConfirmDialog는 성공·오류 아이콘, 선택적 취소, busy/error 상태와 확인 의도 callback을 제공합니다. onConfirm 이후 닫기와 실제 작업 성공 처리는 호출자가 소유합니다. Portal의 light profile을 직접 선언합니다.",
+      "states": [
+        "default",
+        "disabled",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "ui/dialog/HRXDialog.tsx",
+        "ui/dialog/HRXConfirmDialog.tsx"
+      ],
+      "usage": "import { PrismDialog, PrismButton } from \"@pydemia/prism\";\n<PrismDialog title=\"정보 확인\" description=\"변경 사항을 확인하세요.\" trigger={<PrismButton>열기</PrismButton>}>내용</PrismDialog>;",
+      "sourcePath": "packages/prism/src/prism-dialog.tsx",
+      "previewUrl": "/prism?component=prism-dialog",
+      "embedUrl": "/prism?component=prism-dialog&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-dialog&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "440/560/620px dialog widths",
+          "Header 66.1875px and 24px close artwork match source",
+          "Confirm dialog 440px width, 65px header, 24px icon and 16px body",
+          "Confirm callback emits synthetic intent",
+          "Keyboard Enter opens controlled confirm; Escape restores original opener focus",
+          "Busy confirm keeps dialog open on Escape and disables cancel/close"
+        ],
+        "evidence": [
+          "local-confirm-dialog",
+          "local-dialog-busy-focus"
+        ],
+        "remaining": [
+          "long body and no-title confirm variants",
+          "all deployed error/busy states"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismDialogProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismDialog",
+          "kind": "component"
+        },
+        {
+          "name": "PrismConfirmDialogProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismConfirmDialog",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-feedback",
+      "name": "Toast / Request state",
+      "category": "Feedback",
+      "purpose": "알림과 로딩·빈 결과·실패·재시도 구분",
+      "contract": "오류는 alert, 일반 알림은 status로 표시합니다. 요청 실패를 빈 결과로 바꾸지 않습니다. 자동 닫힘·queue·서버 재시도 정책은 호출자가 결정합니다.",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error"
+      ],
+      "source": [
+        "ui/toast/HRXToast.tsx",
+        "ui/empty-state/HRXEmptyState.tsx"
+      ],
+      "usage": "import { PrismRequestState } from \"@pydemia/prism\";\n<PrismRequestState status=\"error\" error=\"조회에 실패했습니다.\" onRetry={retry} />;",
+      "sourcePath": "packages/prism/src/prism-feedback.tsx",
+      "previewUrl": "/prism?component=prism-feedback",
+      "embedUrl": "/prism?component=prism-feedback&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-feedback&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation"
+        ],
+        "evidence": [],
+        "remaining": [
+          "updated Toast runtime metrics and open source sample states"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismToast",
+          "kind": "component"
+        },
+        {
+          "name": "PrismEmptyState",
+          "kind": "component"
+        },
+        {
+          "name": "PrismRequestState",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-sidebar",
+      "name": "Chat sidebar",
+      "category": "Navigation",
+      "purpose": "새 대화·후보자·즐겨찾기·관리·대화기록 탐색",
+      "contract": "collapsed/onCollapsedChange와 activeId/onNavigate는 controlled입니다. 펼침 280px·접힘 72px. 원본 벡터·관리 하위 메뉴·대화기록 접기·사용자 팝오버를 제공합니다. expandedIds와 historyOpen은 선택적 controlled입니다. 이름 변경은 IME를 보존하고 Enter/blur로 확정, Escape로 취소합니다. 삭제 요청·프로필 작업·방침은 callback이며 권한과 실제 저장은 소비자가 소유합니다.",
+      "states": [
+        "default",
+        "loading",
+        "empty"
+      ],
+      "source": [
+        "../layouts/chat/ChatSidebar.tsx"
+      ],
+      "usage": "import { PrismSidebar } from \"@pydemia/prism\";\n<PrismSidebar items={items} activeId={active} onNavigate={setActive} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={newChat} />;",
+      "sourcePath": "packages/prism/src/prism-sidebar.tsx",
+      "previewUrl": "/prism?component=prism-sidebar",
+      "embedUrl": "/prism?component=prism-sidebar&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-sidebar&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Original vector navigation artwork and 36px navigation rows",
+          "Collapsed width 72px, header 64px, new-chat height 40px",
+          "Admin submenu toggle and child navigation",
+          "History rename Enter, Escape cancellation",
+          "Profile action intent and 256px popover",
+          "Rename blur trims synthetic title",
+          "Delete request preserves one DOM history row until explicit fixture confirm; after confirm row count is zero"
+        ],
+        "evidence": [
+          "local-sidebar-profile-menu",
+          "local-sidebar-delete-confirm"
+        ],
+        "remaining": [
+          "IME rename path",
+          "full authenticated source sidebar visual comparison"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismNavItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismHistoryItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfileAction",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSidebarProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSidebar",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-chat",
+      "name": "Message / Composer / Criteria",
+      "category": "AI & agent",
+      "purpose": "질문 입력·전송·중단, 답변 상태와 판단 기준 표시",
+      "contract": "value/onValueChange/onSubmit은 controlled이며 Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공합니다. busy는 전송을 막고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다.",
+      "states": [
+        "default",
+        "disabled",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/common/ChatInput.tsx",
+        "chat/conversation/ChatMessageQuestion.tsx",
+        "chat/templates/ChatTemplateCriteria.tsx"
+      ],
+      "usage": "import { PrismChatInput } from \"@pydemia/prism\";\n<PrismChatInput value={text} onValueChange={setText} onSubmit={send} busy={busy} onStop={stop} />;",
+      "sourcePath": "packages/prism/src/prism-chat.tsx",
+      "previewUrl": "/prism?component=prism-chat",
+      "embedUrl": "/prism?component=prism-chat&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-chat&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismChatInputProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismChatInput",
+          "kind": "component"
+        },
+        {
+          "name": "PrismMessage",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCriteria",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-candidate",
+      "name": "Candidate / Evaluation",
+      "category": "Domain",
+      "purpose": "후보자 프로필·즐겨찾기·목록·평가 근거 표시",
+      "contract": "onOpen과 onFavoriteChange는 의도만 전달합니다. stack/pair/grid와 panel 배치를 제공합니다. PrismCandidateBrief의 날짜·평가 이력·보상 문자열은 소비자가 준비하며 금액 환산이나 평가를 계산하지 않습니다. 평가 점수는 0–5 또는 null이며 null을 0으로 바꾸지 않습니다.",
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error"
+      ],
+      "source": [
+        "chat/templates/ChatProfile.tsx",
+        "chat/templates/ChatTemplateTable.tsx"
+      ],
+      "usage": "import { PrismCandidateCard } from \"@pydemia/prism\";\n<PrismCandidateCard candidate={candidate} favorite={favorite} onOpen={openProfile} onFavoriteChange={setFavorite} />;",
+      "sourcePath": "packages/prism/src/prism-candidate.tsx",
+      "previewUrl": "/prism?component=prism-candidate",
+      "embedUrl": "/prism?component=prism-candidate&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-candidate&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Source-informed white brief contains dates, degree, recent evaluation history and prepared compensation text",
+          "Photo slot 70px; grid header is column, panel header is row",
+          "Favorite is 20 x 20px and checked color rgb(251,188,5)",
+          "Favorite click does not open profile; clicking date in card body opens profile",
+          "Grid compact brief excludes degree and compensation; no nested buttons"
+        ],
+        "remaining": [
+          "all source card placement and long-name states",
+          "authenticated deployed candidate card comparison; public Candidate Common sample contains helpers"
+        ],
+        "evidence": [
+          "local-candidate-card"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismCandidate",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateCardProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateCard",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCandidateBrief",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCandidateTable",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAssessment",
+          "kind": "type"
+        },
+        {
+          "name": "PrismEvaluationTable",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-detail",
+      "name": "Side panel / Detail / Memo",
+      "category": "Domain",
+      "purpose": "후보자·포지션 상세와 작성자·날짜가 있는 메모 확인",
+      "contract": "패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 메모 actions는 호출자가 제공합니다.",
+      "states": [
+        "default"
+      ],
+      "source": [
+        "chat/panel/SidePanel.tsx",
+        "chat/memo/MemoCard.tsx"
+      ],
+      "usage": "import { PrismSidePanel, PrismDetailList } from \"@pydemia/prism\";\n<PrismSidePanel title=\"프로필\" description=\"후보 정보\" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;",
+      "sourcePath": "packages/prism/src/prism-detail.tsx",
+      "previewUrl": "/prism?component=prism-detail",
+      "embedUrl": "/prism?component=prism-detail&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-detail&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismSidePanel",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDetailList",
+          "kind": "component"
+        },
+        {
+          "name": "PrismMemoCard",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-panel",
+      "name": "Inline panel",
+      "category": "Overlays",
+      "purpose": "채팅과 상세를 동시에 사용하며 패널 확대·축소",
+      "contract": "비모달 aside이며 기본 너비 440px와 64px header를 사용합니다. resizable을 켜면 드래그·방향키·Shift·Home/End로 조절하고 double click으로 초기화합니다. width/onWidthChange는 controlled 계약이며 minWidth/maxWidth는 부모 폭 안에서 적용합니다. responsive는 좁은 부모에서 전체 폭을 사용합니다. open/expanded는 호출자가 제어합니다. 부모는 position relative flex 컨테이너입니다.",
+      "states": [
+        "default"
+      ],
+      "source": [
+        "chat/panel/SidePanel.tsx"
+      ],
+      "usage": "import { PrismPanel } from \"@pydemia/prism\";\n<PrismPanel title=\"상세\" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}>내용</PrismPanel>;",
+      "sourcePath": "packages/prism/src/prism-panel.tsx",
+      "previewUrl": "/prism?component=prism-panel",
+      "embedUrl": "/prism?component=prism-panel&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-panel&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Expanded nonmodal panel reaches measured parent width 658px",
+          "Surrounding content remains operable",
+          "Keyboard resize 440 to 456, Home 320, End 800; double click reset 440",
+          "Pointer drag 80px left grows right-anchored panel from 440 to 520",
+          "Controlled width callback leaves width unchanged until consumer update",
+          "Real 390px iframe: compact detail panel 356px, no resizer, root scroll width 390px",
+          "nested Select Escape closes menu before parent Panel; second Escape closes parent"
+        ],
+        "remaining": [
+          "source SidePanel state-by-state comparison",
+          "pointer cancellation runtime"
+        ],
+        "evidence": [
+          "local-panel-resize",
+          "local-workspace-mobile-profile-390"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismPanelProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPanel",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-six-frame",
+      "name": "6-frame comparison",
+      "category": "Domain",
+      "purpose": "리더 유형·경험·역량·자질을 후보별로 비교",
+      "contract": "열 ID는 고유하며 값은 ReactNode 또는 null입니다. null은 정보 없음으로 표시합니다. 첫 두 열과 header를 고정하고 경험·역량 행을 병합합니다. 비교 점수나 순위는 계산하지 않습니다.",
+      "states": [
+        "default",
+        "empty",
+        "long"
+      ],
+      "source": [
+        "chat/templates/ChatSixFrameTable.tsx"
+      ],
+      "usage": "import { PrismSixFrame } from \"@pydemia/prism\";\n<PrismSixFrame columns={columns} panel={false} />;",
+      "sourcePath": "packages/prism/src/prism-six-frame.tsx",
+      "previewUrl": "/prism?component=prism-six-frame",
+      "embedUrl": "/prism?component=prism-six-frame&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-six-frame&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismFrameKey",
+          "kind": "type"
+        },
+        {
+          "name": "PrismFrameColumn",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSixFrame",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-selection",
+      "name": "Selection / Date / Pagination",
+      "category": "Inputs",
+      "purpose": "검색·다중 선택·기간 검증·페이지 탐색",
+      "contract": "선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 중복을 추가하지 않으며 첫 칩을 해제해도 나머지 값은 보존합니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다.",
+      "states": [
+        "default",
+        "disabled",
+        "readonly",
+        "loading",
+        "error",
+        "empty"
+      ],
+      "source": [
+        "ui/input/HRXAutocomplete.tsx",
+        "ui/input/HRXCheckbox.tsx",
+        "ui/input/HRXRadio.tsx",
+        "ui/datepicker/HRXDatePicker.tsx",
+        "ui/pagination/HRXPagination.tsx",
+        "admin/common/AdminDateRangeField.tsx",
+        "admin/common/AdminChipAutocomplete.tsx"
+      ],
+      "usage": "import { PrismMultiSelect } from \"@pydemia/prism\";\n<PrismMultiSelect label=\"분야\" options={options} value={value} onValueChange={setValue} />;",
+      "sourcePath": "packages/prism/src/prism-selection.tsx",
+      "previewUrl": "/prism?component=prism-selection",
+      "embedUrl": "/prism?component=prism-selection&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-selection&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Search ArrowDown/Enter selection and named clear",
+          "MultiSelect Space toggle, first-chip clear preserves remaining selection",
+          "Chip search does not open at two characters; opens at three",
+          "Chip clear restores labelled combobox focus",
+          "Checked vector color rgb(65,99,149) matches deployed Checkbox",
+          "Date invalid 2026-02-31 rejected; valid calendar selection",
+          "Pagination page 2",
+          "Source calendar-only field-click behavior restored; inputEditable is opt-in",
+          "Calendar 322px outer width, 40px header/weekdays, 36px circular day cells",
+          "Year grid 280px high; year change commits date and day selection closes"
+        ],
+        "evidence": [
+          "local-selection-fixed",
+          "local-selection-keyboard",
+          "local-calendar-year"
+        ],
+        "remaining": [
+          "every size and disabled/readOnly state",
+          "all dropdown keyboard and typeahead variants"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismOption",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAutocompleteProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAutocomplete",
+          "kind": "component"
+        },
+        {
+          "name": "PrismMultiSelect",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCheckbox",
+          "kind": "component"
+        },
+        {
+          "name": "PrismRadioGroup",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDatePicker",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDateRange",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPagination",
+          "kind": "component"
+        },
+        {
+          "name": "PrismChipAutocomplete",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-profile",
+      "name": "Candidate profile / Evidence",
+      "category": "Domain",
+      "purpose": "후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시",
+      "contract": "PrismProfileTab은 종합·전문성·성공경험·Design·Agility·Attitude·Leadership·Mgmt Comments의 안정 ID입니다. 분류별 sections는 독립 컴포넌트 slot입니다. 누락된 근거는 정보 없음으로 남기고 UI가 평가하지 않습니다.",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/successorCandidate/SuccessorCandidateDetail.tsx",
+        "chat/successorCandidate/OutlineBox.tsx",
+        "chat/successorCandidate/BadgeSummary.tsx",
+        "chat/successorCandidate/total/SuccessorCandidateBasicInfo.tsx",
+        "chat/successorCandidate/total/SuccessorCandidateCareerTimeline.tsx",
+        "chat/successorCandidate/competence/DesignCompetenceMatrix.tsx"
+      ],
+      "usage": "import { PrismProfile } from \"@pydemia/prism\";\n<PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab} sections={sections} />;",
+      "sourcePath": "packages/prism/src/prism-profile.tsx",
+      "previewUrl": "/prism?component=prism-profile",
+      "embedUrl": "/prism?component=prism-profile&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-profile&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "source empty state 175px total and 120px icon",
+          "source error state 236px with 70px padding and retry"
+        ],
+        "evidence": [
+          "reference-common-empty-error",
+          "local-request-empty",
+          "local-request-error"
+        ],
+        "remaining": [
+          "authenticated profile page visual comparison"
+        ]
+      },
+      "exports": [
+        {
+          "name": "prismProfileTabs",
+          "kind": "value"
+        },
+        {
+          "name": "PrismProfileTab",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCareerEntry",
+          "kind": "type"
+        },
+        {
+          "name": "PrismOutline",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCareerTimeline",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSummaryBadge",
+          "kind": "component"
+        },
+        {
+          "name": "PrismEvidence",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfile",
+          "kind": "component"
+        },
+        {
+          "name": "PrismBasicInfo",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCompetenceMatrix",
+          "kind": "component"
+        },
+        {
+          "name": "PrismFavoriteProfile",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-content",
+      "name": "Markdown / Suggestions / Position",
+      "category": "AI & agent",
+      "purpose": "답변 구조·생성 상태·후속 질문·포지션 안내",
+      "contract": "Markdown은 GFM 표·목록을 지원하며 raw HTML을 건너뜁니다. remote image는 alt로 표시합니다. 제안 선택·포지션 열기는 callback으로 전달하고 자동 전송·생성은 하지 않습니다.",
+      "states": [
+        "default",
+        "disabled",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/conversation/ChatMarkdownRenderer.tsx",
+        "chat/templates/ChatTemplateNudge.tsx",
+        "chat/templates/ChatTemplateGenerating.tsx",
+        "chat/templates/ChatTemplateComplete.tsx",
+        "chat/templates/ChatTemplatePositionRecommend.tsx"
+      ],
+      "usage": "import { PrismMarkdown } from \"@pydemia/prism\";\n<PrismMarkdown source={answer} />;",
+      "sourcePath": "packages/prism/src/prism-content.tsx",
+      "previewUrl": "/prism?component=prism-content",
+      "embedUrl": "/prism?component=prism-content&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-content&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismMarkdown",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSuggestions",
+          "kind": "component"
+        },
+        {
+          "name": "PrismGenerationStatus",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPositionCard",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-admin",
+      "name": "Admin layout / Attachments / Sync",
+      "category": "Administration",
+      "purpose": "관리 페이지의 검색·목록·등록·첨부·갱신 상태 구성",
+      "contract": "관리 chrome은 filters·toolbar·actions·pagination slot으로 구성합니다. 첨부파일 삭제·다운로드·갱신은 callback만 호출하며 실제 업로드와 저장은 소비자가 담당합니다. 파일 URL은 http(s) 또는 단일 slash 경로입니다.",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "admin/common/AdminPageLayout.tsx",
+        "admin/common/AdminPageHeader.tsx",
+        "admin/common/AdminFilterBar.tsx",
+        "admin/common/AdminTableToolbar.tsx",
+        "admin/common/AdminAttachmentList.tsx",
+        "admin/common/AdminSyncStatusBar.tsx",
+        "admin/common/AdminTruncatedText.tsx"
+      ],
+      "usage": "import { PrismAdminLayout } from \"@pydemia/prism\";\n<PrismAdminLayout title=\"관리\" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;",
+      "sourcePath": "packages/prism/src/prism-admin.tsx",
+      "previewUrl": "/prism?component=prism-admin",
+      "embedUrl": "/prism?component=prism-admin&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-admin&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismAdminLayout",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAttachment",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAttachmentList",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSyncStatus",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTruncatedText",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-document",
+      "name": "PDF / Print",
+      "category": "File & media",
+      "purpose": "문서 페이지·배율·맞춤·다운로드와 출력 정보 선택",
+      "contract": "PDF.js로 실제 PDF를 렌더링하며 workerUrl은 설치한 pdfjs-dist와 같은 버전이어야 합니다. 페이지는 1부터, 수동 배율 기본 범위는 30–100%이며 minZoom/maxZoom으로 확장할 수 있습니다. height로 높이를 지정하고 페이지/너비 맞춤은 실제 viewport 여백을 반영합니다. 확대 문서는 내부 스크롤하며 비동기 렌더를 취소합니다. 출력 섹션·선택·인쇄 callback은 소비자가 소유합니다.",
+      "states": [
+        "default",
+        "error"
+      ],
+      "source": [
+        "chat/successorCandidate/attitude/PdfViewerDialog.tsx",
+        "chat/successorCandidate/print/PrintOptionsDialog.tsx",
+        "chat/successorCandidate/print/CandidateProfilePrintPreview.tsx"
+      ],
+      "usage": "import { PrismPdfViewer } from \"@pydemia/prism\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n<PrismPdfViewer title=\"문서\" url=\"/document.pdf\" workerUrl={workerUrl} />;",
+      "sourcePath": "packages/prism/src/prism-document.tsx",
+      "previewUrl": "/prism?component=prism-document",
+      "embedUrl": "/prism?component=prism-document&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-document&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "Actual two-page fixture PDF renders",
+          "Page 2 navigation and manual 90 percent zoom",
+          "Print section checkbox changes selection",
+          "390px page fit uses 245.90625 x 348px canvas inside 356 x 380px viewport",
+          "Width fit subtracts 32px total padding once: 324px canvas at 390px frame; 254px at 320px; 958px at 1024px",
+          "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px"
+        ],
+        "remaining": [
+          "Source PDF toolbar/fit states comparison",
+          "actual browser print pagination"
+        ],
+        "evidence": [
+          "local-pdf-responsive"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismPdfViewerProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfViewer",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPrintSection",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPrintOptions",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPrintPreview",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-workspace",
+      "name": "Workspace shell",
+      "category": "Layout",
+      "purpose": "LNB·64px header·스크롤 본문·상세 패널 조합",
+      "contract": "sidebar·header·panel은 slot입니다. height/minHeight를 지정할 수 있고 responsive는 컨테이너 폭이 breakpoint(기본 768px)보다 작으면 탐색 Drawer를 사용합니다. navigationOpen/onNavigationOpenChange로 메뉴를 제어할 수 있으며 넓은 화면으로 전환하면 메뉴를 닫고 header에 포커스를 옮깁니다. 경로·로그인·서버 상태는 소비자가 소유합니다.",
+      "states": [
+        "default"
+      ],
+      "source": [
+        "../layouts/chat/ChatLayout.tsx"
+      ],
+      "usage": "import { PrismWorkspace } from \"@pydemia/prism\";\n<PrismWorkspace sidebar={sidebar} header={header} panel={panel}>{content}</PrismWorkspace>;",
+      "sourcePath": "packages/prism/src/prism-workspace.tsx",
+      "previewUrl": "/prism?component=prism-workspace",
+      "embedUrl": "/prism?component=prism-workspace&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-workspace&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "Enter submits draft and renders synthetic response",
+          "Candidate open/favorite and profile panel expansion",
+          "Real iframe widths 320/390/768/1024 have equal root client/scroll widths",
+          "Container widths 288/358/736 use compact navigation; 992px uses desktop navigation",
+          "Open Drawer closes when growing to 1024px and focus returns to workspace header",
+          "Draft text persists through width changes",
+          "Candidate detail keeps all eight profile tabs at 390px"
+        ],
+        "remaining": [
+          "complete source layout comparison",
+          "popup and long-content combinations beyond fixture rendering"
+        ],
+        "evidence": [
+          "local-workspace-sizing",
+          "local-workspace-growth",
+          "local-workspace-mobile-profile-390"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismWorkspaceProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismWorkspace",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-chart",
+      "name": "Radar / Trend chart",
+      "category": "Data & analytics",
+      "purpose": "성격·리더십 진단 값과 시계열·누락값 표시",
+      "contract": "값은 0..max 또는 null이고 축·시점 수와 일치해야 합니다. 누락값을 0으로 그리거나 보간하지 않습니다. SVG와 접근 가능한 데이터 표를 함께 제공합니다. 분류나 인사 평가를 계산하지 않습니다.",
+      "states": [
+        "default",
+        "empty"
+      ],
+      "source": [
+        "chat/chart/RadarChart.tsx",
+        "chat/successorCandidate/leadership/LeadershipRadar.tsx",
+        "chat/successorCandidate/leadership/LeadershipTrendChart.tsx"
+      ],
+      "usage": "import { PrismRadarChart } from \"@pydemia/prism\";\n<PrismRadarChart title=\"진단\" axes={axes} series={series} max={10} />;",
+      "sourcePath": "packages/prism/src/prism-chart.tsx",
+      "previewUrl": "/prism?component=prism-chart",
+      "embedUrl": "/prism?component=prism-chart&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-chart&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismChartAxis",
+          "kind": "type"
+        },
+        {
+          "name": "PrismChartSeries",
+          "kind": "type"
+        },
+        {
+          "name": "PrismRadarChart",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTrendChart",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-utility",
+      "name": "Switch / Tooltip / Progress / Files",
+      "category": "Utility",
+      "purpose": "환경 선택·도움말·진행률·파일 선택과 제거",
+      "contract": "Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip은 focus와 hover에서 열리며 side/align/small/arrow로 배치를 지정합니다. Progress null은 indeterminate이며 showPercent 기본값은 false, displayValue와 color는 소비자가 지정합니다. Dropzone은 형식·크기·개수를 검사하고 callback으로 File만 전달합니다. 서버 업로드는 실행하지 않습니다.",
+      "states": [
+        "default",
+        "disabled",
+        "loading"
+      ],
+      "source": [
+        "ui/input/HRXSwitch.tsx",
+        "ui/tooltip/HRXTooltip.tsx",
+        "ui/progressbar/HRXProgressBar.tsx",
+        "ui/input/HRXFileAttach.tsx",
+        "ui/input/HRXFileDropzone.tsx"
+      ],
+      "usage": "import { PrismProgress } from \"@pydemia/prism\";\n<PrismProgress value={progress} label=\"처리 진행률\" />;",
+      "sourcePath": "packages/prism/src/prism-utility.tsx",
+      "previewUrl": "/prism?component=prism-utility",
+      "embedUrl": "/prism?component=prism-utility&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-utility&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "Local fixture PDF upload shows attachment tile"
+        ],
+        "evidence": [
+          "local-utility"
+        ],
+        "remaining": [
+          "remove, reject and drag/drop paths"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismSwitch",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTooltip",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProgress",
+          "kind": "component"
+        },
+        {
+          "name": "PrismFileDropzone",
+          "kind": "component"
+        },
+        {
+          "name": "PrismFileAttach",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-record",
+      "name": "History / Compensation / Validation / Comment",
+      "category": "Domain",
+      "purpose": "평가 이력·연도별 보상·검증 근거·경험 사례·의견 편집",
+      "contract": "이력·등급·금액·검증 상태는 이미 결정된 외부 값을 표시합니다. 보상 합계 계산이나 평가 확정은 하지 않습니다. 의견은 controlled 입력이며 공백 제출과 busy 중 저장을 막고 onSave로 의도를 전달합니다.",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/common/CandidateEvaluationHistory.tsx",
+        "chat/successorCandidate/total/SuccessorCandidateCompensation.tsx",
+        "chat/successorCandidate/expertise/SurveyValidation.tsx",
+        "chat/successorCandidate/expertise/ValidationItem.tsx",
+        "chat/successorCandidate/successExperience/SuccessExperienceEssay.tsx",
+        "chat/successorCandidate/mgmtComments/CeoCommentForm.tsx"
+      ],
+      "usage": "import { PrismCommentEditor } from \"@pydemia/prism\";\n<PrismCommentEditor value={value} onValueChange={setValue} onSave={save} />;",
+      "sourcePath": "packages/prism/src/prism-record.tsx",
+      "previewUrl": "/prism?component=prism-record",
+      "embedUrl": "/prism?component=prism-record&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-record&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "320px iframe preserves page width; compensation table scrolls internally"
+        ],
+        "evidence": [
+          "local-all-components-narrow"
+        ],
+        "remaining": [
+          "deployed evaluation/compensation/validation geometry and all interactive states"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismEvaluationHistory",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCompensationTable",
+          "kind": "component"
+        },
+        {
+          "name": "PrismValidationList",
+          "kind": "component"
+        },
+        {
+          "name": "PrismExperienceCard",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCommentEditor",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-management",
+      "name": "Management forms / Criteria",
+      "category": "Administration",
+      "purpose": "회사 그룹·사용자·공지·포지션 정보 편집, 기준·영향 포지션 확인",
+      "contract": "분류된 Field schema와 controlled values로 관리 양식을 구성합니다. 필수 값과 native 이메일 검증을 제공하며 저장·생성·기준 추가/편집/제거는 callback입니다. 역할 변경의 권한과 API 검증은 서버 책임입니다. 원본 양식의 업무 검증을 모두 재구현한 것은 아닙니다.",
+      "states": [
+        "default",
+        "readonly",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "admin/company-groups/CompanyGroupForm.tsx",
+        "admin/users/UserForm.tsx",
+        "admin/notices/NoticeForm.tsx",
+        "admin/positions/PositionForm.tsx",
+        "admin/common/AdminAiGenerateButton.tsx",
+        "admin/position-blocks/CriteriaSection.tsx",
+        "admin/position-blocks/CriteriaTag.tsx",
+        "admin/position-blocks/AffectedPositionSummary.tsx"
+      ],
+      "usage": "import { PrismManagementForm } from \"@pydemia/prism\";\n<PrismManagementForm title=\"관리 정보\" fields={fields} values={values} onValueChange={change} onSubmit={save} />;",
+      "sourcePath": "packages/prism/src/prism-management.tsx",
+      "previewUrl": "/prism?component=prism-management",
+      "embedUrl": "/prism?component=prism-management&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-management&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismManagementField",
+          "kind": "type"
+        },
+        {
+          "name": "PrismManagementValue",
+          "kind": "type"
+        },
+        {
+          "name": "PrismManagementForm",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAiGenerateButton",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCriteriaSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAffectedPositions",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-context",
+      "name": "Context / Option card",
+      "category": "AI & agent",
+      "purpose": "맥락 정보 입력과 필수 값·문자 수·최대 선택 개수",
+      "contract": "values와 제출·취소는 controlled callback입니다. textarea는 기본 800자이고 maxSelections에 도달하면 미선택 항목만 비활성화합니다. 필수 값을 입력해야 등록할 수 있습니다.",
+      "states": [
+        "default",
+        "loading"
+      ],
+      "source": [
+        "chat/contextInfo/ContextInfoLayer.tsx",
+        "chat/contextInfo/ContextInfoSection.tsx",
+        "chat/contextInfo/ContextOptionCard.tsx"
+      ],
+      "usage": "import { PrismContextForm } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-context.tsx",
+      "previewUrl": "/prism?component=prism-context",
+      "embedUrl": "/prism?component=prism-context&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-context&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismContextOption",
+          "kind": "type"
+        },
+        {
+          "name": "PrismContextField",
+          "kind": "type"
+        },
+        {
+          "name": "PrismContextValues",
+          "kind": "type"
+        },
+        {
+          "name": "PrismContextSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismContextOptionCard",
+          "kind": "component"
+        },
+        {
+          "name": "PrismContextForm",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-primitives",
+      "name": "Logo / Profile / Popover / Skeleton / More",
+      "category": "Utility",
+      "purpose": "텍스트 브랜드·사용자 요약·팝오버·즐겨찾기·접기·로딩",
+      "contract": "SkeletonGroup은 기본 3개·120px 블록과 16px 간격을 사용하며 rows·height를 조절할 수 있습니다. 브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 사내 SVG 로고와 인증 검사는 포함하지 않습니다.",
+      "states": [
+        "default",
+        "disabled",
+        "empty"
+      ],
+      "source": [
+        "ui/avatar/HRXSidebarProfile.tsx",
+        "ui/logo/HRXAffiliateLogo.tsx",
+        "ui/popover/HRXPopover.tsx",
+        "ui/skeleton/HRXSkeleton.tsx",
+        "ui/button/HRXShowMoreBtn.tsx",
+        "ui/button/HRXFloatingChatBtn.tsx",
+        "ui/button/HRXFavoriteToggle.tsx",
+        "ui/input/HRXInputLabel.tsx",
+        "chat/common/DragDropOverlay.tsx"
+      ],
+      "usage": "import { PrismSkeletonGroup } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-primitives.tsx",
+      "previewUrl": "/prism?component=prism-primitives",
+      "embedUrl": "/prism?component=prism-primitives&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-primitives&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "source common skeleton 3x120 and 2x60 geometry",
+          "NoData 13px and 15px line box",
+          "Summary badge 88px, neutral border and text metrics",
+          "empty Summary 49px without badge",
+          "Summary click opens tooltip; Escape dismisses"
+        ],
+        "evidence": [
+          "reference-candidate-common-metrics",
+          "local-candidate-common-metrics",
+          "local-summary-empty",
+          "local-summary-tooltip"
+        ],
+        "remaining": [
+          "hover and focus-only Tooltip runtime",
+          "all summary content states"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismAffiliateLogo",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSidebarProfile",
+          "kind": "component"
+        },
+        {
+          "name": "PrismInputLabel",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSkeleton",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSkeletonGroup",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPopover",
+          "kind": "component"
+        },
+        {
+          "name": "PrismFavoriteToggle",
+          "kind": "component"
+        },
+        {
+          "name": "PrismShowMore",
+          "kind": "component"
+        },
+        {
+          "name": "PrismFloatingChatButton",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDragOverlay",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-position",
+      "name": "Position detail / Requirements",
+      "category": "Domain",
+      "purpose": "포지션 기본 정보와 Mission·요구 사항 그룹 표시",
+      "contract": "회사·포지션·메타데이터와 그룹 항목은 외부 값입니다. 빈 요구 사항과 null 내용은 관련 데이터 없음으로 표시합니다. 로드 상태와 retry는 소비자가 소유합니다.",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/position/PositionDetailHeader.tsx",
+        "chat/position/PositionDetailView.tsx",
+        "chat/position/PositionRequirementGroup.tsx",
+        "chat/position/PositionDetailViewSkeleton.tsx"
+      ],
+      "usage": "import { PrismPositionDetail } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-position.tsx",
+      "previewUrl": "/prism?component=prism-position",
+      "embedUrl": "/prism?component=prism-position&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-position&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismRequirementGroup",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPositionHeader",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPositionRequirements",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPositionDetail",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-assessment",
+      "name": "Diagnosis / Risk / Essay / Matrix / Analysis",
+      "category": "Domain",
+      "purpose": "성격·가치관·Risk·경험·전문성·리더십 근거와 현재 위치",
+      "contract": "Risk의 true·false·null을 구분하고 전 항목 누락 열만 병합합니다. 점수와 비중은 외부 값이며 범위만 검증합니다. Matrix 현재 위치는 row/column ID로 지정합니다. 평가를 계산하지 않습니다.",
+      "states": [
+        "default",
+        "empty"
+      ],
+      "source": [
+        "chat/successorCandidate/attitude/AttitudeDerailmentRisk.tsx",
+        "chat/successorCandidate/attitude/AttitudeDiagnosis.tsx",
+        "chat/successorCandidate/CandidateScoreEssay.tsx",
+        "chat/successorCandidate/expertise/SuccessorCandidateExpertiseField.tsx",
+        "chat/successorCandidate/competence/DesignCompetenceMatrix.tsx",
+        "chat/successorCandidate/learningAgility/LearningAgilityExperience.tsx",
+        "chat/successorCandidate/leadership/LeadershipReason.tsx",
+        "chat/templates/ChatProfileAnalysis.tsx"
+      ],
+      "usage": "import { PrismRiskTable } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-assessment.tsx",
+      "previewUrl": "/prism?component=prism-assessment",
+      "embedUrl": "/prism?component=prism-assessment&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-assessment&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismAssessmentSummary",
+          "kind": "component"
+        },
+        {
+          "name": "PrismNoData",
+          "kind": "component"
+        },
+        {
+          "name": "PrismRiskItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismRiskTable",
+          "kind": "component"
+        },
+        {
+          "name": "PrismValueShares",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDiagnosis",
+          "kind": "component"
+        },
+        {
+          "name": "PrismScoreEssay",
+          "kind": "component"
+        },
+        {
+          "name": "PrismExpertiseCards",
+          "kind": "component"
+        },
+        {
+          "name": "PrismExperienceTopics",
+          "kind": "component"
+        },
+        {
+          "name": "PrismExperienceEvidence",
+          "kind": "component"
+        },
+        {
+          "name": "PrismLeadershipReasons",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDesignDiversity",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfileSections",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPositionMatrix",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfileAnalysis",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-collection",
+      "name": "Filters / Candidate list / Board / Memo",
+      "category": "Domain",
+      "purpose": "후보 필터·카드/표 보기·후계자 Board·메모 작성",
+      "contract": "필터·조회·초기화·뷰 모드는 controlled입니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지를 지원합니다.",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/candidate/CandidateFilterBar.tsx",
+        "chat/candidate/CandidateListContent.tsx",
+        "chat/candidate/CandidateTable.tsx",
+        "chat/favorite/FavoriteCandidateList.tsx",
+        "chat/successorBoard/SuccessorBoardTable.tsx",
+        "chat/memo/MemoContent.tsx",
+        "chat/memo/MemoInput.tsx",
+        "chat/common/ChatHeader.tsx",
+        "chat/common/ContentFrame.tsx",
+        "chat/common/SectionTitle.tsx"
+      ],
+      "usage": "import { PrismCandidateCollection } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-collection.tsx",
+      "previewUrl": "/prism?component=prism-collection",
+      "embedUrl": "/prism?component=prism-collection&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-collection&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismChatHeader",
+          "kind": "component"
+        },
+        {
+          "name": "PrismContentFrame",
+          "kind": "component"
+        },
+        {
+          "name": "PrismSectionTitle",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCandidateFilters",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateFilterBar",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCandidateCollection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismBoardRow",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSuccessorBoard",
+          "kind": "component"
+        },
+        {
+          "name": "PrismMemoComposer",
+          "kind": "component"
+        },
+        {
+          "name": "PrismMemoCollection",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-notice",
+      "name": "Notice / Inquiry / Policy",
+      "category": "Overlays",
+      "purpose": "공지 목록·상세·비모달 팝업·문의 내역·방침 버전",
+      "contract": "공지 팝업은 비모달입니다. 목록·선택·정렬·버전은 소비자 소유이며 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서 높이를 관찰합니다.",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/notice/NoticePopup.tsx",
+        "chat/sidebar/NoticeDialog.tsx",
+        "chat/sidebar/InquiryHistoryDialog.tsx",
+        "chat/sidebar/PrivacyPolicyDialog.tsx"
+      ],
+      "usage": "import { PrismNoticeDialog } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-notice.tsx",
+      "previewUrl": "/prism?component=prism-notice",
+      "embedUrl": "/prism?component=prism-notice&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-notice&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "Policy version changes iframe content",
+          "Policy height stabilizes at content height",
+          "Policy sandbox has allow-same-origin without allow-scripts",
+          "Notice popup is nonmodal and next notice changes to 2/2"
+        ],
+        "evidence": [
+          "local-policy",
+          "local-notice-popup"
+        ],
+        "remaining": [
+          "Dialog list selection/order and all states"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismNotice",
+          "kind": "type"
+        },
+        {
+          "name": "PrismNoticeDetail",
+          "kind": "component"
+        },
+        {
+          "name": "PrismNoticeDialog",
+          "kind": "component"
+        },
+        {
+          "name": "PrismNoticePopup",
+          "kind": "component"
+        },
+        {
+          "name": "PrismInquiry",
+          "kind": "type"
+        },
+        {
+          "name": "PrismInquiryHistory",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPolicyViewer",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-response",
+      "name": "Structured response / Rich text / Conversation",
+      "category": "AI & agent",
+      "purpose": "Typed blocks, rich text, actionable references and streaming status",
+      "contract": "Consumers adapt backend payloads into a discriminated block union and own action callbacks. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur.",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/conversation/ChatJSONRenderer.tsx",
+        "chat/conversation/ChatJSONRendererPanel.tsx",
+        "chat/conversation/InlineMarkdown.tsx",
+        "ui/table/HRXChatTable.tsx",
+        "chat/conversation/ChatConversation.tsx"
+      ],
+      "usage": "import { PrismResponse } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-response.tsx",
+      "previewUrl": "/prism?component=prism-response",
+      "embedUrl": "/prism?component=prism-response&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-response&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismRichText",
+          "kind": "component"
+        },
+        {
+          "name": "PrismResponseBlock",
+          "kind": "type"
+        },
+        {
+          "name": "PrismResponse",
+          "kind": "component"
+        },
+        {
+          "name": "PrismConversation",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-management-tools",
+      "name": "Criteria editor / Remap / Company context",
+      "category": "Administration",
+      "purpose": "Criterion editing, sub-jobs, affected positions and replacement mapping",
+      "contract": "Draft fields, duplicate check status, generation and replacement mappings are controlled. Criteria deletion emits only a callback after every affected position has a valid replacement. The target itself cannot be a replacement. API, permissions and transactions belong to the consumer.",
+      "states": [
+        "default",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "admin/position-blocks/CriteriaDialog.tsx",
+        "admin/position-blocks/JobCriteriaDialog.tsx",
+        "admin/position-blocks/CriteriaDeleteDialog.tsx",
+        "admin/position-blocks/CriteriaTag.tsx",
+        "admin/positions/CompanyTaskDialog.tsx",
+        "admin/positions/PositionCheckCard.tsx"
+      ],
+      "usage": "import { PrismCriteriaEditor } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-management-tools.tsx",
+      "previewUrl": "/prism?component=prism-management-tools",
+      "embedUrl": "/prism?component=prism-management-tools&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-management-tools&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismCriteriaChange",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCriteriaTag",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCriteriaDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCriteriaEditor",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCriteriaRemapDialog",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPositionCheckCard",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCompanyContextDialog",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-directory",
+      "name": "Selectable directory / Admin table",
+      "category": "Data display",
+      "purpose": "Accessible remote sort and row selection with eligibility constraints",
+      "contract": "Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. Candidate favorites in the directory are read-only.",
+      "states": [
+        "default",
+        "empty",
+        "loading"
+      ],
+      "source": [
+        "chat/candidate/CandidateTable.tsx",
+        "admin/common/AdminTable.tsx"
+      ],
+      "usage": "import { PrismDirectoryTable } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-directory.tsx",
+      "previewUrl": "/prism?component=prism-directory",
+      "embedUrl": "/prism?component=prism-directory&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-directory&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismDirectoryColumn",
+          "kind": "type"
+        },
+        {
+          "name": "PrismDirectoryTable",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDirectoryCandidate",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateDirectory",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-page-state",
+      "name": "Error / Access / Blank layout",
+      "category": "Feedback",
+      "purpose": "Error pages, access states and service contact layout",
+      "contract": "Error code, icon, message and action are presentation props. Access status comes from the host authentication layer; this component does not request a session or change routes. Original brand illustrations can be supplied through the icon slot.",
+      "states": [
+        "default"
+      ],
+      "source": [
+        "error/ErrorContent.tsx",
+        "auth/ServiceContact.tsx",
+        "auth/AuthBootstrapLayout.tsx",
+        "../layouts/auth/AuthLayout.tsx",
+        "../layouts/common/BlankLayout.tsx"
+      ],
+      "usage": "import { PrismErrorContent } from \"@pydemia/prism\";",
+      "sourcePath": "packages/prism/src/prism-page-state.tsx",
+      "previewUrl": "/prism?component=prism-page-state",
+      "embedUrl": "/prism?component=prism-page-state&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-page-state&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismBlankLayout",
+          "kind": "component"
+        },
+        {
+          "name": "PrismErrorContent",
+          "kind": "component"
+        },
+        {
+          "name": "PrismServiceContact",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAccessGate",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-domain-forms",
+      "name": "Notice / Group / User / Position forms",
+      "category": "Administration",
+      "purpose": "공지 노출 범위·게시기간, 역할별 회사 그룹과 포지션 요구 사항 입력",
+      "contract": "양식 값과 선택지는 외부에서 전달합니다. 조건부 필드·선택 제한·중복 직무 표시를 제공하고 저장·취소·생성·상태 변경은 callback입니다. 이메일·이름 중복 검사 결과와 편집 권한은 소비자가 결정합니다. 팝업을 끄면 게시기간 입력값을 null로 변경합니다.",
+      "states": [
+        "default",
+        "readonly",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "admin/notices/NoticeForm.tsx",
+        "admin/company-groups/CompanyGroupForm.tsx",
+        "admin/users/UserForm.tsx",
+        "admin/positions/PositionForm.tsx"
+      ],
+      "usage": "import { PrismNoticeForm } from \"@pydemia/prism\";\n<PrismNoticeForm value={draft} onValueChange={setDraft} companies={companies} files={files} onFilesSelected={attach} onSubmit={save} onCancel={cancel} />;",
+      "sourcePath": "packages/prism/src/prism-domain-forms.tsx",
+      "previewUrl": "/prism?component=prism-domain-forms",
+      "embedUrl": "/prism?component=prism-domain-forms&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-domain-forms&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "All companies disables company selector",
+          "Notice popup requires valid date range",
+          "Disabling popup clears both dates",
+          "User role without group hides selector and clears group ID",
+          "company group selects two companies and emits synthetic save intent",
+          "duplicate position sub-job rejected",
+          "expertise limit 3 and experience limit 2 preserve removal",
+          "position generate and save intent callbacks"
+        ],
+        "evidence": [
+          "local-notice-form",
+          "local-user-form",
+          "local-group-form",
+          "local-position-form"
+        ],
+        "remaining": [
+          "all display variants",
+          "authenticated source form visual comparison"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismFormActions",
+          "kind": "type"
+        },
+        {
+          "name": "PrismNoticeDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismNoticeForm",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCompanyGroupDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCompanyGroupForm",
+          "kind": "component"
+        },
+        {
+          "name": "PrismUserDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserForm",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPositionDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPositionForm",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-print",
+      "name": "Profile print pages / Repeated header",
+      "category": "Documents",
+      "purpose": "인쇄 전용 Profile 머리말·경력·Risk·경험과 반복 표 머리말",
+      "contract": "출력 페이지는 190mm 폭과 최소 280mm 높이를 사용합니다. repeatHeader는 table thead를 사용해 출력 머리말을 반복합니다. 읽기 전용 경험 영역·대표 항목·누락 Risk 값을 표시하며 페이지 분할과 인쇄 실행은 호스트가 소유합니다.",
+      "states": [
+        "default",
+        "empty"
+      ],
+      "source": [
+        "chat/successorCandidate/print/PrintPage.tsx",
+        "chat/successorCandidate/print/PrintLeaderSummary.tsx",
+        "chat/successorCandidate/print/PrintCareerTimeline.tsx",
+        "chat/successorCandidate/print/PrintAttitudeDerailmentRisk.tsx",
+        "chat/successorCandidate/print/PrintSuccessExperienceEssay.tsx"
+      ],
+      "usage": "import { PrismPrintPage } from \"@pydemia/prism\";\n<PrismPrintPage name=\"김가상\" repeatHeader>{content}</PrismPrintPage>;",
+      "sourcePath": "packages/prism/src/prism-print.tsx",
+      "previewUrl": "/prism?component=prism-print",
+      "embedUrl": "/prism?component=prism-print&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-print&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismPrintPage",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPrintLeaderSummary",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPrintCareer",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPrintRisk",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPrintExperienceItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPrintExperience",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-intro",
+      "name": "Chat intro / Prompt cards",
+      "category": "AI & agent",
+      "purpose": "초기 인사말·즐겨찾기 카드·시작 질문·대화 입력",
+      "contract": "이름·카드·최대 5개 시작 질문을 표시합니다. 질문 선택은 onPromptSelect로 전달하고 textarea에 포커스를 이동합니다. 카드는 명시적 onOpen callback으로 동작하며 인증·라우팅을 수행하지 않습니다.",
+      "states": [
+        "default",
+        "empty",
+        "disabled",
+        "loading"
+      ],
+      "source": [
+        "chat/main/ChatIntroSection.tsx"
+      ],
+      "usage": "import { PrismChatIntro } from \"@pydemia/prism\";\n<PrismChatIntro name=\"김가상\" cards={cards} questions={questions} onPromptSelect={setDraft} composer={composer} />;",
+      "sourcePath": "packages/prism/src/prism-intro.tsx",
+      "previewUrl": "/prism?component=prism-intro",
+      "embedUrl": "/prism?component=prism-intro&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-intro&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "pending"
+      },
+      "exports": [
+        {
+          "name": "PrismChatIntro",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-profile-sections",
+      "name": "Profile tab recipes / Compensation / Trends",
+      "category": "Domain",
+      "purpose": "8개 프로필 분류를 조합하는 typed recipe와 보상·리더십 추이 표",
+      "contract": "API 결과를 외부에서 typed 표시 모델로 변환해 각 분류 recipe에 전달합니다. null 근거와 실제 0을 구분합니다. 보상 표의 행은 구분, 열은 연도이며 원화·외화·통화 단위를 별도로 표시합니다. 상태와 재시도는 소비자 소유입니다.",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "source": [
+        "chat/successorCandidate/total/SuccessorCandidateTotal.tsx",
+        "chat/successorCandidate/expertise/SuccessorCandidateExpertise.tsx",
+        "chat/successorCandidate/successExperience/SuccessorCandidateSuccessExperience.tsx",
+        "chat/successorCandidate/competence/SuccessorCandidateCompetence.tsx",
+        "chat/successorCandidate/learningAgility/SuccessorCandidateLearningAgility.tsx",
+        "chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
+        "chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+        "chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx"
+      ],
+      "usage": "import { PrismProfileSectionState, PrismTotalSection } from \"@pydemia/prism\";\n<PrismProfileSectionState status={status} onRetry={retry}><PrismTotalSection {...overview} /></PrismProfileSectionState>;",
+      "sourcePath": "packages/prism/src/prism-profile-sections.tsx",
+      "previewUrl": "/prism?component=prism-profile-sections",
+      "embedUrl": "/prism?component=prism-profile-sections&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-profile-sections&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "All eight tab recipes render",
+          "Experience topic changes displayed card",
+          "Comment save appends text and clears draft",
+          "320px profile recipe root does not overflow; tabs and compensation table scroll internally"
+        ],
+        "evidence": [
+          "local-profile-total",
+          "local-profile-expertise",
+          "local-profile-experience",
+          "local-profile-design",
+          "local-profile-agility",
+          "local-profile-attitude",
+          "local-profile-leadership",
+          "local-profile-comments",
+          "local-profile-interactions"
+        ],
+        "remaining": [
+          "Source domain recipe appearance comparison",
+          "empty/loading/error and long content states"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismProfileStatus",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfileSectionState",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCompensationValue",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCompensationGrid",
+          "kind": "component"
+        },
+        {
+          "name": "PrismTotalSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismExpertiseSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismExperienceSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDesignSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAgilitySection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAttitudeSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismLeadershipTrendRow",
+          "kind": "type"
+        },
+        {
+          "name": "PrismLeadershipTrend",
+          "kind": "component"
+        },
+        {
+          "name": "PrismLeadershipSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCommentsSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfileBrief",
+          "kind": "component"
+        },
+        {
+          "name": "PrismGradeSummary",
+          "kind": "component"
+        }
+      ]
+    },
+    {
+      "id": "prism-icon",
+      "name": "PRISM vector icons",
+      "category": "Utility",
+      "purpose": "기존 PRISM 아이콘과 브랜드·빈 상태·오류 화면의 벡터 디자인 자산",
+      "contract": "원본 87개 벡터의 형상을 보존하고 React adapter와 인스턴스별 SVG ID를 제공합니다. name은 PrismIconName, size는 px입니다. label을 주면 이미지로 이름을 노출하고 생략하면 장식으로 처리합니다. 디자인 자산의 권리는 원본 권리자에게 있습니다.",
+      "states": [
+        "default"
+      ],
+      "source": [
+        "ui/icons/AccessDeniedIcon.tsx",
+        "ui/icons/AddIcon.tsx",
+        "ui/icons/AdminIcon.tsx",
+        "ui/icons/AlarmIcon.tsx",
+        "ui/icons/AnswerCompleteIcon.tsx",
+        "ui/icons/BackIcon.tsx",
+        "ui/icons/BoardIcon.tsx",
+        "ui/icons/CalendarDropdownIcon.tsx",
+        "ui/icons/CalendarIcon.tsx",
+        "ui/icons/ChatBubbleIcon.tsx",
+        "ui/icons/ChatIcon.tsx",
+        "ui/icons/CheckBoxCheckedDisabledIcon.tsx",
+        "ui/icons/CheckBoxCheckedIcon.tsx",
+        "ui/icons/CheckBoxIndeterminateIcon.tsx",
+        "ui/icons/CheckBoxUncheckedDisabledIcon.tsx",
+        "ui/icons/CheckBoxUncheckedIcon.tsx",
+        "ui/icons/CheckFillIcon.tsx",
+        "ui/icons/CheckLineIcon.tsx",
+        "ui/icons/CheckPopupIcon.tsx",
+        "ui/icons/ChevronDownFillIcon.tsx",
+        "ui/icons/ChevronDownIcon.tsx",
+        "ui/icons/ChevronLeftIcon.tsx",
+        "ui/icons/ChevronRightIcon.tsx",
+        "ui/icons/ChevronUpFillIcon.tsx",
+        "ui/icons/ChipCloseIcon.tsx",
+        "ui/icons/CloseCircleIcon.tsx",
+        "ui/icons/CloseIcon.tsx",
+        "ui/icons/CollapseIcon.tsx",
+        "ui/icons/CompetenceIcon.tsx",
+        "ui/icons/CopyAltIcon.tsx",
+        "ui/icons/CopyIcon.tsx",
+        "ui/icons/DepthIcon.tsx",
+        "ui/icons/DownArrowIcon.tsx",
+        "ui/icons/DownloadIcon.tsx",
+        "ui/icons/DragDropIcon.tsx",
+        "ui/icons/EditIcon.tsx",
+        "ui/icons/ExpandIcon.tsx",
+        "ui/icons/ExpandedIcon.tsx",
+        "ui/icons/FavoriteIcon.tsx",
+        "ui/icons/FavoriteLargeIcon.tsx",
+        "ui/icons/FavoriteOnIcon.tsx",
+        "ui/icons/FileTextIcon.tsx",
+        "ui/icons/FileUploadIcon.tsx",
+        "ui/icons/FirstPageIcon.tsx",
+        "ui/icons/FitHeightIcon.tsx",
+        "ui/icons/FitWidthIcon.tsx",
+        "ui/icons/GeneratingSpinnerIcon.tsx",
+        "ui/icons/HistoryIcon.tsx",
+        "ui/icons/InfoIcon.tsx",
+        "ui/icons/LastPageIcon.tsx",
+        "ui/icons/LinkIcon.tsx",
+        "ui/icons/LogoHorizontalIcon.tsx",
+        "ui/icons/MessagesSquareIcon.tsx",
+        "ui/icons/ModalCloseIcon.tsx",
+        "ui/icons/MoreIcon.tsx",
+        "ui/icons/NextPageIcon.tsx",
+        "ui/icons/NoFavoriteIcon.tsx",
+        "ui/icons/NoMemoIcon.tsx",
+        "ui/icons/NoSearchResultIcon.tsx",
+        "ui/icons/NotFoundIcon.tsx",
+        "ui/icons/PlusIcon.tsx",
+        "ui/icons/PrevPageIcon.tsx",
+        "ui/icons/PrintIcon.tsx",
+        "ui/icons/RadioCheckedDisabledIcon.tsx",
+        "ui/icons/RadioCheckedIcon.tsx",
+        "ui/icons/RadioUncheckedDisabledIcon.tsx",
+        "ui/icons/RadioUncheckedIcon.tsx",
+        "ui/icons/ResetIcon.tsx",
+        "ui/icons/SearchIcon.tsx",
+        "ui/icons/SendIcon.tsx",
+        "ui/icons/SortIcon.tsx",
+        "ui/icons/StopCircleIcon.tsx",
+        "ui/icons/SuccessorBoardIcon.tsx",
+        "ui/icons/SymbolBgIcon.tsx",
+        "ui/icons/SymbolIcon.tsx",
+        "ui/icons/TagIcon.tsx",
+        "ui/icons/ToastCheckIcon.tsx",
+        "ui/icons/ToastErrorIcon.tsx",
+        "ui/icons/ToastInfoIcon.tsx",
+        "ui/icons/TrashIcon.tsx",
+        "ui/icons/UnauthorizedIcon.tsx",
+        "ui/icons/UsersIcon.tsx",
+        "ui/icons/ViewOffIcon.tsx",
+        "ui/icons/ViewOnIcon.tsx",
+        "ui/icons/WarningPopupIcon.tsx",
+        "ui/icons/ZoomInIcon.tsx",
+        "ui/icons/ZoomOutIcon.tsx"
+      ],
+      "usage": "import { PrismIcon } from \"@pydemia/prism\";\n<PrismIcon name=\"SearchIcon\" size={20} />;",
+      "sourcePath": "packages/prism/src/prism-icon.tsx",
+      "previewUrl": "/prism?component=prism-icon",
+      "embedUrl": "/prism?component=prism-icon&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-icon&view=responsive",
+      "verification": {
+        "visual": "source-artwork-retained",
+        "interaction": "not-applicable",
+        "checks": [
+          "87 original vector shapes retained with typed adapter",
+          "174 rendered SVG instances have unique IDs and valid local URL references"
+        ],
+        "remaining": [
+          "rendered currentColor and placement in every host component"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismIconName",
+          "kind": "type"
+        },
+        {
+          "name": "prismIconNames",
+          "kind": "value"
+        },
+        {
+          "name": "PrismIcon",
+          "kind": "component"
+        },
+        {
+          "name": "PrismXGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismPlusGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismCheckGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismChevronDownGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismChevronLeftGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismChevronRightGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismChevronsLeftGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismChevronsRightGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismSearchGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismCalendarDaysGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismStarGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismSendGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismFileTextGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismPaperclipGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismMaximize2Glyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismMinimize2Glyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismInfoGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismCopyGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismExpandGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismZoomInGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismZoomOutGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismArrowLeftGlyph",
+          "kind": "value"
+        },
+        {
+          "name": "PrismArrowDownUpGlyph",
+          "kind": "value"
+        }
+      ]
+    }
+  ]
+}

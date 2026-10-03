@@ -2,16 +2,23 @@
   "name": "pydemia-ui",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/ui", "apps/profile-demo", "apps/docs"],
+  "workspaces": [
+    "packages/ui",
+    "apps/profile-demo",
+    "apps/docs",
+    "packages/prism"
+  ],
   "scripts": {
     "dev": "npm run dev -w @pydemia/docs",
     "dev:example": "npm run dev -w @pydemia/profile-demo",
-    "typecheck": "npm run build -w @pydemia/ui && npm run typecheck -w @pydemia/profile-demo && npm run typecheck -w @pydemia/docs",
-    "build": "npm run registry:build && npm run build -w @pydemia/ui && node scripts/build-site.mjs",
+    "typecheck": "npm run build -w @pydemia/ui && npm run build -w @pydemia/prism && npm run typecheck -w @pydemia/profile-demo && npm run typecheck -w @pydemia/docs",
+    "build": "npm run registry:build && npm run build -w @pydemia/ui && npm run build -w @pydemia/prism && npm run registry:prism && node scripts/build-site.mjs",
     "registry:build": "shadcn build --output apps/profile-demo/public/r && node scripts/finalize-registry.mjs",
     "registry:check": "node scripts/check-registry.mjs && node scripts/registry-release.mjs verify && node --test scripts/registry-release.test.mjs",
     "registry:release-check": "npm run registry:check && node scripts/registry-release.mjs verify-current",
-    "registry:snapshot": "npm run registry:check && node scripts/registry-release.mjs create"
+    "registry:snapshot": "npm run registry:check && node scripts/registry-release.mjs create",
+    "registry:prism": "node scripts/build-prism-registry.mjs",
+    "prism:check": "node scripts/check-prism.mjs && npm run test -w @pydemia/prism"
   },
   "devDependencies": {
     "shadcn": "^4.0.0",

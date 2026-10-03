@@ -153,8 +153,10 @@ User message 대비 표시를
 | 경로 | 역할 |
 | --- | --- |
 | `packages/ui` | 컴포넌트 원본과 light/dark design tokens |
+| `packages/prism` | PRISM light profile과 독립 React 컴포넌트 |
 | `registry.json`, `registry/provenance.json` | registry 항목, 출처·라이선스·의존성·접근성 metadata |
 | `apps/docs` | 컴포넌트 미리보기, 사용 코드, palette, 예시 사이트의 원본 |
+| `apps/docs/src/prism`, `apps/docs/public/prism` | `/prism` 카탈로그·조합 예시·AI manifest·별도 registry·참조 검증 자료 |
 | `apps/profile-demo` | 실제 컴포넌트를 조합한 프로필 예시 |
 | `docs/` | Vercel 정적 배포용 빌드 결과 (`npm run build`로 갱신) |
 | `research/` | source inventory, taxonomy, 검증 기록 |
@@ -188,3 +190,28 @@ Vercel이 다시 배포합니다.
 
 접근성과 브라우저 검증의 현재 상태는 [`research/verification.md`](research/verification.md)에
 기록했습니다. 화면의 상태 변경과 복사는 데모 기능이며 서버 데이터가 아닙니다.
+
+## PRISM profile
+
+`/prism`은 PRISM-DEV의 색상·Pretendard·컴포넌트 규격과 기능 목적을
+재현하는 별도 카탈로그입니다. `Workspace`에서 채팅·후보 목록·즐겨찾기·상세·비교를
+가상 데이터로 실행할 수 있습니다. 서버 조회·인사 평가·권한·저장은 소비자가 소유합니다.
+38개 typed group과 토큰을 포함한 39개 registry 항목을 제공합니다. 원본 269개 항목의 목적별 대응을 기록했으며 원본 벡터 87개는 권리 고지와 함께 보존합니다. 반응형 탐색 Drawer, 직접 패널 크기 조절, PDF 맞춤·높이·배율 확장을 제공합니다. `Responsive` 화면의 실제 iframe으로 320–1200px 너비를 확인할 수 있습니다. 전체 상태별 원본 디자인 비교는 진행 중입니다. 매핑 수는 검증 완료 수가 아닙니다.
+
+- 계약·원본 대응: `apps/docs/public/prism/components.json`
+- AI 안내: `apps/docs/public/prism/llms.txt`
+- 디자인 규칙과 검증: `apps/docs/public/prism/research/`
+- Registry: `/prism/r/registry.json`; 단위 항목은 `/prism/r/prism-*.json`
+
+Workspace에서는 `@pydemia/prism`을 import합니다. 독립 소비자는 카탈로그에 표시된
+`shadcn add` 명령으로 소스와 의존성을 설치하고 로컬 `components/ui/prism-*.tsx`를
+import합니다. `prism.css`는 설치한 Pretendard variable font를 함께 로드합니다.
+벡터 자산의 출처와 권리 고지는 설치되는 `PRISM_ASSET_NOTICES.md`에 있습니다.
+`tokens.css` 다음에 `prism.css`를 로드하고 앱 root에
+`data-prism="light"`를 지정합니다. PDF viewer의 `workerUrl`은 설치된 `pdfjs-dist`와
+같은 버전이어야 합니다. Vite는 `pdf.worker.min.mjs?url` import를 지원하며 다른
+bundler는 해당 worker를 자체 정적 경로로 제공합니다.
+
+`npm run registry:prism`으로 계약과 registry를 갱신하고 `npm run prism:check`로
+구조·동작 계약을 검사합니다. `node scripts/verify-prism-consumer.mjs`는 임시 프로젝트에
+전체 PRISM registry를 실제 설치하고 TypeScript와 Vite 빌드를 검증합니다.

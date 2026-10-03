@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-button",
+  "type": "registry:ui",
+  "title": "Button / New chat",
+  "description": "일반·파괴적·아이콘 작업과 새 대화 진입",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/r/pyd-button.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-button.tsx",
+      "content": "import type { ComponentProps, ReactNode } from \"react\";\nimport { Button } from \"./button\";\n\nexport type PrismButtonProps = Omit<ComponentProps<typeof Button>, \"variant\" | \"size\"> & {\n    variant?: \"solid\" | \"line\" | \"shape\";\n    size?: \"large\" | \"medium\" | \"small\" | \"x-small\";\n    tone?: \"neutral\" | \"primary\" | \"danger\";\n    icon?: ReactNode;\n    iconOnly?: boolean;\n    iconPosition?: \"left\" | \"right\";\n};\n\n/** HRXBtn 규격. Native button 동작과 ref는 pydemia Button에 위임합니다. */\nexport function PrismButton({ variant = \"solid\", size = \"medium\", tone = variant === \"solid\" ? \"primary\" : \"neutral\",\n    icon, iconOnly, iconPosition = \"left\", children, className = \"\", ...props }: PrismButtonProps) {\n    if (iconOnly && !props[\"aria-label\"] && !props[\"aria-labelledby\"]) {\n        throw new Error(\"PrismButton iconOnly requires an accessible name.\");\n    }\n    return <Button {...props} variant={variant === \"solid\" ? \"primary\" : variant === \"line\" ? \"outline\" : \"ghost\"}\n        className={`prism-button ${className}`} data-size={size} data-variant={variant}\n        data-tone={tone} data-icon-only={iconOnly || undefined} data-icon-position={iconPosition}>\n        {icon && <span className=\"prism-button-icon\" aria-hidden=\"true\">{icon}</span>}\n        {!iconOnly && children}\n    </Button>;\n}\n\nexport function PrismNewChatButton(props: Omit<PrismButtonProps, \"variant\" | \"size\">) {\n    return <PrismButton {...props} size=\"large\" className={`prism-new-chat ${props.className ?? \"\"}`} />;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "510ec63d113b5487c55a9cfa67d1f2364e8b9fce0035892c1accbe2a0f720389",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-intro",
+  "type": "registry:ui",
+  "title": "Chat intro / Prompt cards",
+  "description": "초기 인사말·즐겨찾기 카드·시작 질문·대화 입력",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json",
+    "https://ui.pydemia.ai/prism/r/prism-chat.json",
+    "https://ui.pydemia.ai/prism/r/prism-primitives.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-intro.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-intro.tsx",
+      "content": "import { useRef, type ReactNode } from \"react\";\nimport { PrismIcon } from \"./prism-icon\";\nimport { PrismStarGlyph as Star } from \"./prism-icon\";\nimport { PrismChatInput, type PrismChatInputProps } from \"./prism-chat\";\nimport { PrismSkeletonGroup } from \"./prism-primitives\";\n\nexport function PrismChatIntro({name,cards,questions,onPromptSelect,loading=false,logo,composer}: {\n    name:string;cards:readonly {id:string;title:string;description:string;icon?:ReactNode;onOpen:()=>void}[];\n    questions:readonly string[];onPromptSelect:(question:string)=>void;loading?:boolean;logo?:ReactNode;composer:PrismChatInputProps;\n}) {\n    const ref=useRef<HTMLDivElement>(null);\n    return <div className=\"prism-chat-intro\"><header><div aria-hidden=\"true\">{logo??<PrismIcon name=\"SymbolBgIcon\" size={65}/>}</div><h2><span>{name}</span>님 어떤 인재를 찾고 계신가요?</h2><h3>필요한 후보 추천이나 인재분석을 도와드리겠습니다.</h3></header>\n        {loading ? <PrismSkeletonGroup rows={3}/> : <div className=\"prism-intro-cards\">{cards.map(card=><button key={card.id} type=\"button\" onClick={card.onOpen}><span aria-hidden=\"true\">{card.icon??<Star/>}</span><strong>{card.title}</strong><p>{card.description}</p></button>)}</div>}\n        <div ref={ref} className=\"prism-intro-input\">{!!questions.length&&<section><p>아래 질문으로 빠르게 시작해보세요</p><div>{questions.slice(0,5).map(question=><button key={question} type=\"button\" onClick={()=>{onPromptSelect(question);ref.current?.querySelector('textarea')?.focus();}}>{question}</button>)}</div></section>}<PrismChatInput {...composer}/></div></div>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "1fc67fe2c6305bceaf37a933f22adf6c35db78ea0b0628c1e7a493fdebb94831",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

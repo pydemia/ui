@@ -30,3 +30,13 @@ LF SHA-256을 갱신했습니다. 이후 `registry:check`와
 141개 item·139개 export/catalog와 70개 불변 snapshot의 정합성을
 확인했습니다. PR CI와 공개 배포는 아직 확인하지 않았습니다.
 Goal 관리용 추정은 약 98%로 유지합니다.
+
+`main`의 PRISM 공급 작업이 PR 작성 뒤 병합되어 작업 브랜치에
+통합했습니다. Windows checkout의 CRLF가 PRISM registry 내용과
+source hash를 바꾸던 부분은 생성기·검사기에서 LF로 읽게 했고,
+복사한 PRISM 페이지의 HTML도 기존 페이지처럼 LF로 저장합니다.
+통합 후 typecheck, UI 테스트 247/247, PRISM 테스트 23/23,
+`registry:release-check`가 통과했습니다. 공개 준비 PR #125의 CI와
+production 경로는 별도로 확인합니다. 이 줄바꿈 문제는
+[체크리스트 판정](quality-checklist-decision-2026-10-03.md)에서
+component 동작 품질과 구분했습니다.

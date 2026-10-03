@@ -70,6 +70,9 @@ jobs:
         if: steps.scope.outputs.full == 'true'
       - run: npm run build
         if: steps.scope.outputs.full == 'true'
+      - name: Verify PRISM contracts and registry
+        if: steps.scope.outputs.full == 'true'
+        run: npm run prism:check
       - name: Verify registry and published snapshots
         if: steps.scope.outputs.full == 'true'
         run: npm run registry:check
