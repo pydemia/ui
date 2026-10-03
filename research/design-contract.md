@@ -1740,3 +1740,17 @@ group은 `children`으로 leaf나 다른 group을 묶습니다. group에 별도
 좌우 위치, DOM 순서, 필수 `aria-label`, `Collapsible` 조합과
 `AppFloatingDisclosure`의 열림·focus 동작은 표시 형태와 무관합니다.
 두 형태 모두 `AppShell`의 container 폭에 따라 같은 위치에 놓입니다.
+
+## 2026-10-03 TransferList
+
+`TransferList`는 고유한 `value`를 가진 항목을 사용 가능·배정됨 두
+목록에 나눠 표시합니다. `value`와 `onValueChange`가 배정을 소유하고,
+component 내부의 checkbox 상태는 다음 이동 대상을 고르는 데만 씁니다.
+추가는 `items` 순서로 배정 목록 끝에 붙이고 제거는 기존 배정 순서를
+유지합니다. `disabled` 항목은 이동할 수 없지만 이미 배정돼 있다면
+값과 form 제출에 남습니다. 전체 `disabled` 상태에서는 form 값을
+제출하지 않습니다. 알 수 없는 값·중복 항목·빈 이름은 오류입니다.
+
+native fieldset·legend로 목록을 구분하고 checkbox와 button으로
+키보드 조작을 제공합니다. 좁은 화면에서는 두 목록과 이동 버튼을
+세로로 쌓습니다. `panel`과 `plain`은 공통 색·간격 token을 사용합니다.

@@ -333,6 +333,9 @@ export { Slider } from "./components/slider";
 export type { SliderProps } from "./components/slider";
 export { RangeSlider } from "./components/range-slider";
 export type { RangeSliderProps, RangeValue } from "./components/range-slider";
+export { TransferList } from "./components/transfer-list";
+export type { TransferListItem, TransferListProps } from
+    "./components/transfer-list";
 export { Calendar } from "./components/calendar";
 export { DatePicker } from "./components/date-picker";
 export type { DatePickerProps } from "./components/date-picker";

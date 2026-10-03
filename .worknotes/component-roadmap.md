@@ -14,6 +14,8 @@ ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
 사이트에는 143개 component와 145개 registry item이 있습니다.
+`TransferList`는 144번째 component·146번째 item의 공개 후보이며
+검증 상태는 [작업 기록](transfer-list-2026-10-03.md)에 있습니다.
 `ArtifactViewer`의 공개 preview·Usage와 54번째 snapshot 경로·대표
 소비자 설치를 확인했습니다.
 2026-09-30에
