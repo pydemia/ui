@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 공급·품질 재검토와 Table·DataTable 병합:
+**약 99% → 약 99%**입니다. PR #148과 `main` Verify UI·Pages,
+79번째 GitHub raw manifest 공개를 확인했습니다. 사용자 도메인의
+새 preview·manifest는 배포 대기입니다. 315개 변경 파일의 대부분은
+snapshot 이중 복제이며 품질 체크 수나 Goal 완료율의 분모로 쓰지
+않습니다. rollback URL 보존은 별도 운영 위험입니다.
+[판정](quality-gate-level-review-2026-10-03.md)과
+[작업 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Table·DataTable 세 표시 형태 로컬 후보:
 **약 99% → 약 99%**입니다. 기존 두 component에 격자형·경계선 없는
 형태를 더했고 기본 줄 구분형은 유지했습니다. 새 component 수량은

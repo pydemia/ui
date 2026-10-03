@@ -1,5 +1,11 @@
 # Component 공급 Goal 범위 점검 — 2026-10-03
 
+후속 판정: 아래 점검 당시에는 rollback 중 이전 snapshot URL 보존을
+이유로 Goal 완료를 보류했습니다. 현재
+[품질 판정](quality-gate-level-review-2026-10-03.md)은 이를 별도 운영
+위험으로 추적하고 Goal 완료율의 필수 체크박스로
+사용하지 않습니다. 아래 표의 실제 화면·공급 검증 결과는 유지합니다.
+
 ## 후속 공개 확인
 
 75번째 릴리스가 Vercel production 배포

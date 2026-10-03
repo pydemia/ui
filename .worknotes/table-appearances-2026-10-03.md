@@ -1,5 +1,15 @@
 # Table·DataTable 표시 형태 — 2026-10-03
 
+## 병합과 공급 상태
+
+PR #148을 병합한 `main` commit은 `743782db`입니다. PR Verify UI와
+`main` Verify UI run `37118547473`, Pages 배포가 통과했습니다.
+79번째 manifest는 GitHub raw 공개 경로에서 HTTP 200입니다.
+사용자 도메인의 같은 manifest는 2026-10-03 확인 시 HTTP 404이며
+Vercel production은 이전 `14486b7e` 배포를 가리킵니다. 따라서
+사용자 사이트의 공개 preview·registry 공급은 아직 확인되지
+않았습니다. 구현 검증과 게시 대기를 구분합니다.
+
 ## 선정과 구현
 
 기존 `Card`, `Alert`, `PageHeader`에는 외형이나 크기 선택지가 있지만
@@ -37,7 +47,8 @@ caption·열 머리글·정렬·선택·페이지 동작은 기존 native 구조
 
 실제 screen reader·touch·Safari는 실행하지 않았습니다. 이번에는
 keyboard 동작과 form 값 처리 코드를 바꾸지 않았고 browser에서 기존
-조작을 반복하지 않았습니다. PR CI와 공개 URL은 아직 확인 전입니다.
+조작을 반복하지 않았습니다. 사용자 도메인 게시 확인은 아직
+완료되지 않았습니다.
 설치 형식이 그대로여서 격리 소비자 설치는 반복하지 않았습니다.
 
 새 component는 없으며 후보 수량은 144개 component·146개 item입니다.
