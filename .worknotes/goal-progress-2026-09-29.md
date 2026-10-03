@@ -1,5 +1,18 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 공급·품질 기준 적용 재검토: **약 98% → 약 98%**입니다.
+고정 검사 조합과 component별 PR·snapshot은 필수가 아니며,
+구현·릴리스·공개 상태의 증거를 나눠 기록합니다.
+[현행 기준](quality-checklist-decision-2026-10-03.md)을 줄여
+정리했습니다. 이번 판정만으로 공개 수량은 늘지 않았습니다.
+
+2026-10-03 `CalendarHeatmap` 로컬 후보: **약 98% → 약 98%**입니다.
+날짜 활동 격자의 윤년·희소 값·0·미수집과 좁은 화면 preview를
+확인했습니다. 로컬 후보는 143개 component·145개 item,
+공개 확인은 142개·144개입니다. registry 고지·snapshot·
+PR CI·공개 경로는 남았습니다.
+[작업 기록](calendar-heatmap-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `SankeyChart` 병합·공개 확인: **약 98% → 약 98%**입니다.
 PR #131과 `main`의 Verify UI, Pages, Vercel production이 성공했고
 공개 registry 144개 item과 현재·snapshot 경로를 확인했습니다.

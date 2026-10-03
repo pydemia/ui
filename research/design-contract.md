@@ -1,5 +1,20 @@
 # Prototype 설계 계약
 
+## 2026-10-03 CalendarHeatmap
+
+`CalendarHeatmap`은 지정한 연도의 일별 활동을 월요일 시작 주 열에
+배치합니다. `days`는 해당 연도의 고유한 실제 ISO 날짜와 0 이상의
+유한한 수 또는 `null`을 받습니다. 목록에 없는 날짜는 0,
+`null`은 미수집입니다. 빈 목록은 빈 상태이며 격자를 그리지
+않습니다. 날짜 계산은 UTC를 사용해 실행 환경의 시간대에 의존하지
+않습니다. `maxValue`는 알려진 모든 값 이상인 양수입니다.
+
+`compact`·`comfortable` 밀도와 `panel`·`plain` 외형은 값
+의미를 바꾸지 않습니다. 색은 공통 accent·surface token을 사용합니다.
+격자는 보조 시각 요소이며 모든 날짜의 정확한 값은 펼칠 수 있는
+native table에 있습니다. 좁은 화면에서는 이름 있는 영역 안에서
+가로 스크롤합니다.
+
 ## 2026-10-03 SankeyChart
 
 `SankeyChart`는 이름 있는 2–6개 단계를 왼쪽에서 오른쪽으로 배치합니다.

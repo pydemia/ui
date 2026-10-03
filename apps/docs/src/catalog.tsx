@@ -15,7 +15,8 @@ import {
     Button, ButtonGroup, IconButton,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
-    Calendar, CalendarScheduler, Card, CardContent, CardDescription,
+    Calendar, CalendarHeatmap, CalendarScheduler,
+    Card, CardContent, CardDescription,
     CardFooter, CardHeader,
     CardTitle,
     Carousel, Checkbox, CitationList, CodeBlock, CodeEditorShell,
@@ -4854,6 +4855,41 @@ function ComboboxPreview() {
     );
 }
 
+const calendarHeatmapDays = Array.from({ length: 366 }, (_, index) => ({
+    date: new Date(Date.UTC(2024, 0, index + 1))
+        .toISOString().slice(0, 10),
+    value: index % 37 === 0 ? null : index % 11 === 0 ? 0 :
+        (index * 7) % 13,
+}));
+
+function CalendarHeatmapPreview() {
+    const [density, setDensity] = useState<"compact" | "comfortable">(
+        "compact",
+    );
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const [empty, setEmpty] = useState(false);
+
+    return <div className="preview-workspace grid gap-3">
+        <div className="flex flex-wrap gap-2">
+            <Button variant="outline" onClick={() => setDensity((value) =>
+                value === "compact" ? "comfortable" : "compact"
+            )}>{density === "compact" ? "넓게 보기" : "촘촘히 보기"}</Button>
+            <Button variant="outline" onClick={() => setAppearance((value) =>
+                value === "panel" ? "plain" : "panel"
+            )}>{appearance === "panel" ? "Plain" : "Panel"}</Button>
+            <Button variant="ghost" onClick={() => setEmpty((value) =>
+                !value
+            )}>{empty ? "샘플 표시" : "빈 데이터"}</Button>
+        </div>
+        <CalendarHeatmap title="일별 요청" year={2024} unit="건"
+            description="샘플 활동입니다. 미수집일은 점선으로 구분합니다."
+            days={empty ? [] : calendarHeatmapDays}
+            density={density} appearance={appearance} />
+    </div>;
+}
+
 function AutocompletePreview() {
     const [team, setTeam] = useState("");
     const [selected, setSelected] = useState<string | null>(null);
@@ -8220,6 +8256,22 @@ const segments = [
 <DonutChart title="요청 처리 상태" segments={segments}
   unit="건" totalLabel="전체 요청" appearance="plain" />`,
         preview: () => <DonutChartPreview />,
+    },
+    {
+        id: "calendar-heatmap", name: "CalendarHeatmap",
+        category: "Data & analytics",
+        description: "한 해의 날짜별 활동을 주 단위 격자로 표시합니다. 목록에 없는 날짜는 0, 명시적 null은 미수집이며 정확한 값은 펼칠 수 있는 표에서 확인합니다. 촘촘한·넓은 격자와 panel·plain 표시를 선택할 수 있습니다.",
+        code: `import { CalendarHeatmap } from "@pydemia/ui";
+
+const days = [
+  { date: "2024-01-01", value: 0 },
+  { date: "2024-02-29", value: 8 },
+  { date: "2024-03-01", value: null },
+];
+
+<CalendarHeatmap title="일별 요청" year={2024}
+  days={days} unit="건" density="compact" />;`,
+        preview: () => <CalendarHeatmapPreview />,
     },
     {
         id: "heatmap", name: "Heatmap", category: "Data & analytics",

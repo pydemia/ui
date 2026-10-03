@@ -13,7 +13,7 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
-사이트에는 140개 component와 142개 registry item이 있습니다.
+사이트에는 142개 component와 144개 registry item이 있습니다.
 `ArtifactViewer`의 공개 preview·Usage와 54번째 snapshot 경로·대표
 소비자 설치를 확인했습니다.
 2026-09-30에
@@ -74,46 +74,25 @@ component, 기존 API 확장, 설치 가능한 조합 예시, 보류 중 하나�
 
 ## 공급과 품질의 판정 단위
 
-구현 품질과 공개 공급을 별도로 판정합니다. 개발 중 후보에 배포
-조건을 적용하지 않습니다. 공개 후보에는 바뀐 내용에 해당하는
-증거만 요구합니다.
+개발 중 후보는 사용처와 기존 API의 차이, 바뀐 핵심 동작, 복사 가능한
+Usage와 동작하는 preview를 확인합니다. 관련 테스트와 브라우저 검사는
+변경한 동작을 실제로 증명하는 범위에서 선택합니다. 모든 component에
+같은 화면 폭·theme·browser 조합이나 수동 검사 개수를 요구하지 않습니다.
 
-| 단계 | 최소 확인 |
-| --- | --- |
-| 구현 검토 | 실제 사용처와 기존 API의 중복 여부, 바뀐 핵심 동작의 관련 테스트 또는 preview |
-| 공개 준비 | export·registry·출처·Usage·preview의 일치, 같은 commit의 적용 CI와 현재 snapshot |
-| 공개 확인 | production 배포, manifest와 바뀐 공급 경로의 대표 URL 접근 |
+릴리스 후보에는 export·registry·출처·Usage·preview의 일치와 적용 CI,
+현재 snapshot을 확인합니다. 관련 component는 하나의 PR·snapshot으로
+묶을 수 있습니다. 공개 후에는 manifest와 변경한 대표 item URL의
+접근을 확인합니다. 배포 제한은 제품 결함과 구분해 `공개 대기`로
+기록합니다.
 
-사람 검토의 기본 범위는 바뀐 핵심 동작의 관련 테스트 **또는** 실제
-preview·브라우저 실행과, 공개 API·Usage의 일치입니다. 정적 표시
-변경은 영향을 받는 상태의 preview 한 번으로 확인합니다. 폭·theme를
-일괄 조합하거나 공개 사이트에서 로컬 동작을 재실행하지 않습니다.
-값 계산·상태 전이는 관련 테스트 또는 브라우저 실행으로 확인합니다.
-새 focus·pointer·browser API·핵심 반응형 배치가 자동 테스트로
-확인되지 않으면 그 경로만 브라우저에서 실행합니다. 자동 registry
-검사가 확인한 파일 전체를 사람이 다시 대조하지 않습니다. 외부 코드를
-편입할 때는 공식 문서, 같은 revision의 source·LICENSE, 의존성·
-접근성과 고지 전달을 확인합니다. 일반적인
-디자인만 참고한 원본 구현에는 외부 코드 도입 검사를 적용하지 않습니다.
-설치 형식·target·의존 경로가 바뀔 때만 별도 소비자 설치·typecheck·
-build를 다시 확인합니다.
-
-CI와 snapshot은 공개할 릴리스 묶음당 확인합니다. 각 component에
-별도 PR·snapshot·소비자 설치를 요구하지 않습니다. 자동 검사가 전체
-item을 대조했다면 공개 URL도 대표 변경 경로만 확인합니다. 확인된
-값 손실·제출 오류·interactive 요소의 keyboard 접근 불가·필수 고지
-누락·설치 실패와 적용 CI 실패는 출시를 막습니다. CI 또는 배포
-서비스가 일시적으로 실행되지 않으면 `공개 대기`로 기록하고 제품
-결함으로 판정하지 않습니다. 지원 범위로 명시하지 않은 환경의
-포괄적인 수동 검사는 개별 릴리스의 조건이 아닙니다.
-
-작업별 증거와 실제 미검증 항목은 해당 `.worknotes` 기록 한 곳에
-남깁니다. 과거 10개 운영 과제는
-[당시 조사 기록](quality-legacy-2026-09-29.md)에 보존하지만
-릴리스 점수로 사용하지 않습니다. 상세 판정은
-[최신 재검토](quality-checklist-decision-2026-10-03.md)에 있습니다.
-전체 goal의 약 98%는 사용 사례와 공개 상태를 함께 본 관리용
-추정치이며 체크박스의 완료율이 아닙니다.
+외부 코드를 편입했을 때는 해당 revision의 source·LICENSE·의존성·
+접근성을 확인합니다. 새 설치 형식이나 의존 경로가 생겼을 때만 격리
+소비자 설치를 다시 실행합니다. 확인된 값 손실·제출 오류·keyboard
+접근 불가·필수 고지 누락·설치 실패·적용 CI 실패는 출시를 막습니다.
+실제 미검증 사항과 증거는 작업별 `.worknotes` 한 곳에 기록합니다.
+과거 10개 운영 과제의 완료 개수는 component 품질 점수나 Goal
+진척도가 아닙니다. [판정 근거](quality-checklist-decision-2026-10-03.md)에
+적용 범위와 자동화 비용을 정리했습니다.
 
 ## 추가 component 후보
 
@@ -297,6 +276,9 @@ item을 대조했다면 공개 URL도 대표 변경 경로만 확인합니다. �
 - [x] `Heatmap` — 두 범주의 수치를 색 농도와 보이는 숫자로 함께
   표시합니다. 표 헤더·결측값·0·빈 목록과 내부 가로 스크롤을 제공합니다.
   실제 screen reader 발표는 미검증입니다.
+- [x] `CalendarHeatmap` — 날짜별 활동량을 주·요일 위치의 색으로
+  표시하고 윤년·0·미수집을 구분합니다. 정확한 값은 날짜별 표에
+  제공합니다. [작업 기록](calendar-heatmap-2026-10-03.md)에 있습니다.
 - [x] `ScatterChart` — 두 연속 수치의 관계를 점으로 표시합니다.
   native 선택기와 데이터 표로 정확한 좌표·결측값을 확인합니다.
   실제 screen reader 발표는 미검증입니다.

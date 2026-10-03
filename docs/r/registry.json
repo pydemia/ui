@@ -761,6 +761,12 @@
       "files": [{ "path": "packages/ui/src/components/donut-chart.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-calendar-heatmap", "type": "registry:ui",
+      "title": "Calendar Heatmap",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/calendar-heatmap.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-heatmap", "type": "registry:ui", "title": "Heatmap",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/heatmap.tsx", "type": "registry:ui" }]

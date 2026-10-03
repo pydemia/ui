@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-03 CalendarHeatmap — 로컬 후보
+
+윤년 366일·평년 365일, 0·미수집·희소 날짜·빈 목록, 잘못된 날짜와
+수치·척도를 대상 SSR 테스트 5개로 확인했습니다. UI 전체 테스트
+265/265, typecheck·build와 PRISM 25/25가 통과했습니다. 로컬
+Chromium 408px에서 366개 날짜, 내부 가로 스크롤, `plain` 전환,
+정확한 값 표, 빈 상태를 확인했고 page error는 0건입니다.
+실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다.
+registry 고지·snapshot·PR CI·공개 URL은 아직 확인하지 않았습니다.
+세부 상태는 [작업 기록](../.worknotes/calendar-heatmap-2026-10-03.md)에
+남깁니다.
+
 ## 2026-10-03 SankeyChart — 릴리스 후보
 
 3단계 경로·정확한 수량 표, 비례 폭의 ribbon·line, 극단적으로 작은
