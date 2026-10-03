@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 `SankeyChart` PR #131 병합·공개 확인: `main` Verify UI와
+Pages, Vercel production이 성공했고 공개 registry는 144개 item입니다.
+현재·73번째 snapshot item과 manifest, RadarChart 대기 경로가
+HTTP 200입니다. 공개 확인 수량은 142개 component·144개 item입니다.
+[작업 기록](sankey-chart-2026-10-03.md)에 검증 범위가 있습니다.
+Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 공급·품질 운영 범위 재평가: 후보 선정과 품질 확인, 공개
 공급을 별도로 판정합니다. 변경한 동작의 증거 한 가지와 preview·Usage를
 기본 수동 범위로 삼고, CI·snapshot은 릴리스 묶음에 적용합니다.
