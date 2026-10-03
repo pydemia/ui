@@ -1,5 +1,18 @@
 # Input 표시 형태 — 2026-10-03
 
+## 공개 확인
+
+PR [#146](https://github.com/pydemia/ui/pull/146)을 병합한 `main`
+`14486b7e`의 Verify UI와 Pages가 통과했습니다. Vercel production
+`dpl_HBEQfR7zdJcWm6MfnXt3BJ7nJtc2`는 READY이며
+`ui.pydemia.ai` alias를 받았습니다. 사용자 도메인의
+[78번째 schema 2 manifest](https://ui.pydemia.ai/r/releases/sha256-386c361908aa3c1fdbdd48fe846b9fdd3a9ca0d7fd665acb966c37467e468b66/manifest.json)는
+HTTP 200, `itemCount=146`이고 snapshot·현재 `pyd-input` item도
+HTTP 200으로 새 외형 소스를 담습니다. GitHub raw의 같은 manifest와
+item도 HTTP 200입니다. [공개 문서](https://ui.pydemia.ai/?component=input#components)에서 세 외형과 Usage를
+확인하고 `filled`에 텍스트를 입력해 값과 focus 표시를 확인했습니다.
+설치 경로 변경은 없어 격리 소비자 설치를 다시 실행하지 않았습니다.
+
 ## 범위와 판단
 
 중급 화면의 입력란은 다른 표면에 놓이므로 공통 `Input`에 외형 선택이
@@ -34,9 +47,8 @@
 
 실제 screen reader·touch·Safari는 실행하지 않았습니다. native
 키보드 이동과 form 제출은 이번 preview에서 수동 실행하지 않았으며
-native 속성 보존을 대상 테스트로 확인했습니다. PR CI와 공개 raw
-URL·사용자 도메인은 아직 확인 전입니다. 설치 경로와 의존성 형식은
-바뀌지 않아 격리 소비자 설치를 반복하지 않습니다.
+native 속성 보존을 대상 테스트로 확인했습니다. 설치 경로와 의존성
+형식은 바뀌지 않아 격리 소비자 설치를 반복하지 않았습니다.
 
 ## 공급·품질 판정
 

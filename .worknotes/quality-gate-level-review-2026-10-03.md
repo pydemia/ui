@@ -47,6 +47,7 @@ Goal은 component 수나 과거 운영 과제의 체크 수로 종료하지 않�
 CI·snapshot 생성 방식은 바꾸지 않았습니다. schema 2의 새 설치
 경로는 [공급 기록](registry-durable-snapshot-2026-10-03.md)에 따라
 공개 raw URL로 격리 소비자 설치를 확인했습니다. 이후 같은 경로에서
-`Input`의 외형 API만 바꾸는 작업에는 그 설치 시험을 반복하지 않습니다.
+`Input`의 외형 API만 바꾼 PR #146에는 그 설치 시험을 반복하지
+않았습니다. PR·`main` CI와 production preview·item 접근을 확인했습니다.
 문서 전용 수정에는 공개 화면의 재배포만 확인하면 됩니다. Goal 관리용
 추정은 약 99%이며 이 기준 조정으로 수량이나 추정치를 올리지 않습니다.
