@@ -51,7 +51,7 @@
 
 로컬 registry의 39항목·62파일을 새 독립 소비자에 설치하고 12개 완전한 예시·TypeScript·Vite·폰트 bytes·자산 고지를 확인했습니다. 최종 LinkIcon 20px/CSS 보정은 이 소비자에 최신 registry source bytes를 동기화한 뒤 다시 컴파일했습니다. 후속 동기화를 새 shadcn 설치로 표현하지 않습니다.
 
-이 파일 변경의 공개 배포는 아직 확인하지 않았습니다. 이전 `7cb056df` 기록 커밋의 Vercel 배포는 24시간 rate limit으로 실패했고 앞선 `dd49ecbe` 구현 배포는 확인됐습니다. 동일 quota를 우회하는 재배포는 실행하지 않습니다.
+파일 보완의 `ead2f0f4`는 Verify UI run37101626014·Pages run37101625983·Vercel이 모두 성공했습니다. 공개 manifest·registry·utility·tokens는 HTTP200과 로컬 bytes 일치를 확인했습니다. 공개 119상태의 실제 320px 검사도 0문제였고 공개 화면에서 native browser chooser의 부분 첨부·재선택·삭제·host 완료, DOM DataTransfer·nested drag, 폭 변경을 확인했습니다. 원본과 비교한 파일 입력 크기 차이는 없었으며 공개 screenshot도 검토했습니다. 이전 `7cb056df` 기록 커밋의 rate limit 실패 이력은 별도로 보존합니다.
 
 [기계 판독 검증 기록](verification.json)은 확인한 범위와 남은 항목을 제공합니다. 원본 AX·JPEG와 가상 예시의 DOM·PDF는 gitignore된 `.worknotes/browser-evidence/`에 보관하며 공개 사이트에 포함하지 않습니다.
 

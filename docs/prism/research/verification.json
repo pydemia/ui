@@ -742,7 +742,7 @@
   "fixtureRenderChecks": {
     "groups": 38,
     "states": 119,
-    "status": "passed-local-final-file-build",
+    "status": "passed-local-and-published-final-file-build",
     "checks": [
       "all 119 fixtures render at actual 320px viewport",
       "no nested buttons",
@@ -750,7 +750,8 @@
       "no unlabeled visible native inputs",
       "no page errors or unhandled rejections"
     ],
-    "evidence": "local-files-final-119-fixtures-320-direct"
+    "evidence": "published-ead2f0f4-119-fixtures-320-direct",
+    "localEvidence": "local-files-final-119-fixtures-320-direct"
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -822,8 +823,7 @@
     "newChangesPendingRuntime": [
       "actual clipboard write",
       "original states outside the measured file controls and authenticated domain screens",
-      "print outside Chromium Letter settings",
-      "publishing the latest file source changes; Vercel was previously rate limited"
+      "print outside Chromium Letter settings"
     ],
     "previousSourceBrowserAttempts": [
       "agent-browser 0.38.2: HTTP upgrade/redirect loop; HTTPS connection reset. Historical failures do not apply to the working direct Playwright launch."
@@ -835,7 +835,26 @@
     "interaction": "Native browser filechooser event plus DOM DataTransfer; synthetic native File buffers",
     "source": "http://dev.prism.ai/sample/ui/input/file-dropzone and /sample/ui/input/file-attach",
     "localFixtureStates": 119,
-    "productionState": "Local only at recording time; earlier font/print deployment dd49ecbe remains published"
+    "productionState": "Source commit ead2f0f4: Verify UI and Pages success; Vercel deployment completed. Public manifest/registry/utility/tokens HTTP200 and local bytes equal.",
+    "publicVerification": {
+      "codeCommit": "ead2f0f4ac8b2198a6db28124ebb9dcdcb7a37d5",
+      "verifyUiRun": 37101626014,
+      "pagesRun": 37101625983,
+      "fixtureStates": 119,
+      "viewportWidth": 320,
+      "renderFailures": 0,
+      "rootOverflow": 0,
+      "pageErrors": 0,
+      "nativeChooser": "mixed acceptance, same-file re-selection, removal and host completion passed",
+      "drag": "DOM DataTransfer subset, nested highlight and leave; settled #416395/#eef2fa",
+      "measuredFileGeometryDifferences": 0,
+      "scope": "Source-matched published synthetic fixtures versus fresh anonymous deployed source file samples; not full-page pixel parity",
+      "evidence": [
+        "published-ead2f0f4-119-fixtures-320-direct",
+        "published-ead2f0f4-reference-files-comparison-direct",
+        "published-ead2f0f4-files-partial-direct"
+      ]
+    }
   },
   "publishedFontPrintFixtureRenderChecks": {
     "groups": 38,
