@@ -9,9 +9,12 @@
 `npm run build`와 `registry:release-check`가 81번째 snapshot과
 현재 146개 item의 일치를 확인했습니다. 로컬 Chromium에서 채움형
 링크의 현재 상태·색과 390px 모바일 Drawer의 동일 표시·선택 후
-닫힘을 확인했습니다. PR CI·공개 경로 확인은
+닫힘을 확인했습니다. PR·`main` Verify UI와 Pages, Vercel
+production이 성공했습니다. 공개 81번째 manifest·Sidebar item과
+현재 item은 HTTP 200이며 manifest·snapshot item은 저장소 파일과
+일치합니다. 공개 preview의 `filled` 활성 배경도 확인했습니다.
 [작업 기록](../.worknotes/sidebar-link-variants-2026-10-03.md)에
-이어 기록합니다.
+배포 ID와 미검증 환경을 남겼습니다.
 
 ## 2026-10-03 입력 control·Table 표시 형태 — 공개 확인
 

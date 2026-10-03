@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 `Sidebar` 링크 표시 선택 공개: PR #152와 `main`
+`7ea06aab`의 Verify UI·Pages, Vercel production이 성공했습니다.
+사용자 도메인의 81번째 manifest·Sidebar item과 현재 item이 HTTP
+200이고 공개 preview에서 채움형 전환을 확인했습니다. 144개
+component·146개 item, Goal 관리용 추정 약 99%입니다.
+[작업 기록](sidebar-link-variants-2026-10-03.md)에 근거가 있습니다.
+
 2026-10-03 `Sidebar` 링크 표시 선택 로컬 후보: 내부 `SideNavLink`의
 레일형·채움형을 `linkVariant`로 고를 수 있게 하고 Usage·preview를
 추가했습니다. 대상 4/4, UI 전체 278/278, typecheck·build·
