@@ -1,5 +1,16 @@
 # Component 확장 작업 인계
 
+2026-10-03 Intake workspace 로컬 후보: 기존 10개 component로 단계별
+요청 입력·기간·첨부 예정 목록과 접수 표를 연결했습니다. 공백 제목과
+기간 누락 차단, 파일 선택·제출·표 반영·390px 내부 스크롤을 로컬
+Chromium에서 확인했습니다. typecheck·build·registry release 검사가
+통과했습니다. 새 public item은 없고 Goal 관리용 추정은 약 99%입니다.
+PR·production은 아직 확인하지 않았습니다.
+[작업 기록](intake-workspace-2026-10-03.md)을 참고하세요.
+같은 날 공급·품질 판정에서 개발 중 Usage·preview 완성 조건을 공개
+후보 단계로 옮겼습니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+
 2026-10-03 release 이력 보존 검사 병합·공개: PR #137과 `main` Verify UI,
 Pages가 통과했고 Vercel production 배포가 READY입니다. 공개 도메인의
 75번째 manifest·Button item이 HTTP 200입니다. 과거 파일의 수정·삭제

@@ -37,6 +37,10 @@ Review workspace는 요청 검색·상태 필터, 변경 비교, 대댓글,
 승인·거절을 기존 component로 연결한 예시입니다. 원본은
 [`apps/docs/src/review-workspace.tsx`](apps/docs/src/review-workspace.tsx)에
 있으며 의견과 결정은 화면을 새로 고치면 초기화됩니다.
+Intake workspace는 단계별 입력·기간 선택·첨부 예정 파일 목록과
+접수 표를 연결합니다. 원본은
+[`apps/docs/src/intake-workspace.tsx`](apps/docs/src/intake-workspace.tsx)에
+있으며 파일 전송과 서버 저장은 실행하지 않습니다.
 
 `@pydemia/ui`는 이 workspace 안에서 사용하는 **private 패키지**이며 npm에
 게시되지 않았습니다. 컴포넌트 소스를 프로젝트에 편입할 때는 원하는
