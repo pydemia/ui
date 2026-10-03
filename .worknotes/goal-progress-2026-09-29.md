@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 shadcn/ui 출처 고지 범위 조정 병합:
+**약 98% → 약 98%**입니다. PR #135와 `main`의 Verify UI·Pages는
+통과했지만 Vercel 배포 제한으로 75번째 manifest는 공개
+도메인에서 404입니다. 원본 component 추가 시 고지 전파를
+줄이는 작업이며 공개 component 수량은 143개·item 145개로
+유지합니다.
+[작업 기록](shadcn-provenance-scope-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `CalendarHeatmap` 공개 확인: **약 98% → 약 98%**입니다.
 현재 registry 145개 item과 component item, 74번째 manifest·
 snapshot item을 사용자 도메인에서 HTTP 200으로 확인했습니다.

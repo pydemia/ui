@@ -6,8 +6,11 @@
 일치하는지 검사합니다. `npm run build`와
 `npm run registry:check`가 145개 item·143개 export/catalog·
 75개 snapshot과 현재 빌드의 일치를 확인했습니다. 원본 항목 추가와
-수정 소스 변경의 회귀 테스트 2개가 통과했습니다. PR CI·공개
-URL은 아직 확인하지 않았습니다.
+수정 소스 변경의 회귀 테스트 2개가 통과했습니다. PR #135와
+`main`의 Verify UI·Pages도 통과했습니다. 고정 source manifest
+URL은 HTTP 200이고 로컬 파일·SHA-256과 일치합니다. Vercel
+production은 배포 횟수 제한으로 실패해 75번째 manifest는
+사용자 도메인에서 HTTP 404입니다.
 [작업 기록](../.worknotes/shadcn-provenance-scope-2026-10-03.md)을
 참고하세요.
 
