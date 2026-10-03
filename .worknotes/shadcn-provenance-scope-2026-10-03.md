@@ -1,5 +1,16 @@
 # shadcn 출처 고지 범위 조정
 
+## 병합 후 상태
+
+PR #135는 `ec5b4c44dbce6a5c7195791a938c65d3ae8074f0`로
+`main`에 병합됐고 PR·`main` Verify UI와 Pages가 통과했습니다.
+고지가 가리키는 고정 commit의 manifest는 공개 GitHub URL에서
+HTTP 200이며 로컬 파일·SHA-256과 일치합니다. Vercel
+production은 배포 횟수 제한으로 실패해 사용자 도메인의 75번째
+manifest는 HTTP 404입니다. 기존 74번째 공급은 정상이고
+공개 확인 수량은 143개 component·145개 item입니다.
+75번째 snapshot의 공개 확인은 대기 중입니다.
+
 원본 component를 하나 추가해도 `registry/provenance.json` 전체의
 hash가 달라져 shadcn/ui 수정 소스를 쓰는 28개 item의 소비자 고지와
 생성 JSON이 함께 바뀌었습니다. `CalendarHeatmap` 릴리스에서

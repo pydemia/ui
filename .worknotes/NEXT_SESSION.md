@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 shadcn/ui 출처 고지 범위 조정 병합·공개 대기:
+PR #135와 `main`의 Verify UI·Pages가 통과했습니다. 고정 source
+manifest는 공개 GitHub URL에서 hash가 일치하지만, Vercel 배포
+제한으로 75번째 manifest는 사용자 도메인에서 404입니다.
+기존 공개 수량은 143개 component·145개 item이며 Goal 관리용
+추정은 약 98%입니다.
+[작업 기록](shadcn-provenance-scope-2026-10-03.md)에 있습니다.
+
 2026-10-03 `CalendarHeatmap` 공개 확인: 사용자 도메인의 현재
 registry 145개 item, component item, 74번째 manifest·snapshot
 item과 의존 도메인 item이 HTTP 200입니다. 응답 JSON은 게시
