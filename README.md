@@ -145,6 +145,10 @@ release URL이므로 이후 버전으로 자동 갱신되지는 않습니다.
 npx shadcn@4.21.0 add https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896/pyd-dialog.json https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896/pyd-tokens.json
 ```
 
+이 명령은 최소 Vite·React·Tailwind 소비자에서 실행해 Radix Dialog,
+`clsx`, `tailwind-merge`의 자동 설치와 typecheck·build를 확인했습니다.
+별도 소비자 브라우저에서는 세 크기의 표시와 focus 복원을 확인했습니다.
+
 이전 DataChart snapshot
 `sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331`은
 공개 URL 소비자의 소스 일치·typecheck·build를 확인했습니다.

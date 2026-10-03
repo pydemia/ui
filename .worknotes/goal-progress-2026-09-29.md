@@ -1,5 +1,11 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 Dialog raw 소비자 설치 검증:
+**약 99% → 약 99%**입니다. 새 Vite 소비자에서 README의 83번째
+raw 명령을 실행했고 설치 파일·typecheck·build·세 크기·focus 복원을
+확인했습니다. production 게시만 남았습니다.
+[공급 기록](raw-dialog-fallback-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Dialog의 raw registry 설치 안내:
 **약 99% → 약 99%**입니다. 83번째 고정 release의 Dialog·token
 설치 URL을 README에 추가하고 manifest·의존 item의 공개 응답과
