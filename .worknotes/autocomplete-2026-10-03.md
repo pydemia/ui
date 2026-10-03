@@ -19,3 +19,12 @@ registry 고지의 고정 provenance commit·SHA-256과 71번째 snapshot,
 로컬 후보는 140개 component·142개 registry item입니다. PR CI와 공개
 경로는 아직 확인하지 않았습니다. 실제 screen reader·touch·Safari·
 RTL은 실행하지 않았습니다. Goal 관리용 추정은 약 98%로 유지합니다.
+
+PR #127을 만들었습니다. 그 사이 `main`에 PRISM 게시 변경이 병합되어
+브랜치에 반영하고 문서 산출물을 최신 소스로 다시 만들었습니다. 병합
+과정에서 `scripts/check-prism.mjs`의 가상 Usage 경로 비교가 Windows의
+`\\`와 `/`를 구분해 10개 파일을 찾지 못했습니다. 경로 구분자를 맞춘 뒤
+PRISM 검사 23/23과 완전한 Usage 예제 10개 typecheck, 전체 typecheck,
+build, registry release 검사가 통과했습니다. Vercel 상태는 배포 횟수
+제한으로 실패했습니다. 이는 component 동작 결함과 구분해 공개 대기로
+기록합니다. 최신 PR CI·공개 URL은 계속 확인합니다.

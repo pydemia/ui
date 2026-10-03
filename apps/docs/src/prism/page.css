@@ -32,6 +32,11 @@ html[data-prism] { scroll-behavior: auto; }
 .prism-docs-specimen { border: 1px solid var(--prism-control-border); border-radius: 8px; overflow: hidden; }
 .prism-docs-specimen > header, .prism-docs-code > header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--prism-divider); background: var(--prism-lnb); }
 .prism-docs-specimen > header > h2, .prism-docs-code > header h2 { font-size: 13px; margin: 0; }
+.prism-docs-code > header { flex-wrap: wrap; gap: 8px; }
+.prism-docs-code-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.prism-docs-code-controls label { font-size: 12px; color: var(--muted); }
+.prism-docs-code-controls select { margin-left: 8px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+.prism-docs-code-note { margin: 0; padding: 12px 16px; color: var(--muted); font-size: 12px; line-height: 1.6; border-bottom: 1px solid var(--prism-divider); }
 .prism-docs-specimen > header label { font-size: 12px; color: var(--muted); }
 .prism-docs-specimen > header select { margin-left: 8px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
 .prism-docs-preview { padding: 28px; overflow: auto; min-height: 180px; }

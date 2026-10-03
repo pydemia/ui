@@ -46,6 +46,27 @@ for (const entry of metadata) {
         return [];
     });
 }
+const prismExportOwners = new Map(metadata.flatMap(entry => entry.exports.map(symbol => [symbol.name, entry.id])));
+for (const entry of metadata) {
+    const usageTree = ts.createSourceFile("example.tsx", entry.usage, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+    entry.usageKind = usageTree.statements.some(statement => ts.isFunctionDeclaration(statement) && statement.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.ExportKeyword))
+        ? "component-example" : "integration-fragment";
+    const replacements = [];
+    for (const statement of usageTree.statements) {
+        if (!ts.isImportDeclaration(statement) || statement.moduleSpecifier.text !== "@pydemia/prism") continue;
+        const owners = new Map();
+        for (const symbol of statement.importClause.namedBindings.elements) {
+            const imported = (symbol.propertyName ?? symbol.name).text;
+            const owner = prismExportOwners.get(imported);
+            if (!owner) throw new Error(`Missing PRISM example export: ${imported}`);
+            const symbols = owners.get(owner) ?? [];
+            symbols.push(symbol.getText(usageTree)); owners.set(owner, symbols);
+        }
+        replacements.push([statement.getStart(usageTree), statement.end, [...owners].map(([owner, symbols]) => `import { ${symbols.join(", ")} } from "@/components/ui/${owner}";`).join("\n")]);
+    }
+    entry.registryUsage = entry.usage;
+    for (const [start, end, replacement] of replacements.reverse()) entry.registryUsage = entry.registryUsage.slice(0, start) + replacement + entry.registryUsage.slice(end);
+}
 const items = [];
 for (const file of readdirSync(new URL("packages/prism/src/", root)).filter(file => file.endsWith(".tsx"))) {
     const name = basename(file, ".tsx");
@@ -97,9 +118,9 @@ write("apps/docs/public/prism/r/prism-tokens.json", JSON.stringify(tokens,null,2
 write("apps/docs/public/prism/r/registry.json", JSON.stringify({ $schema: "https://ui.shadcn.com/schema/registry.json", name: "prism-ui", homepage: "https://ui.pydemia.ai/prism", items },null,2)+"\n");
 write("apps/docs/public/prism/components.json", JSON.stringify({ schemaVersion: 1, title: "PRISM UI", reference: { url: "http://dev.prism.ai", sourceRevision: "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9", observedAt: "2026-10-03" },
     theme: { mode: "light", scope: 'data-prism="light"', stylesheet: "/prism/r/prism-tokens.json", font: "Pretendard 1.3.9 (OFL-1.1)" },
-    integration: { workspaceImport: "@pydemia/prism", registryImport: "Installed components/ui/prism-*.tsx files", stateOwnership: "Consumer owns API/auth/permissions/persistence; demos use synthetic data." }, components: metadata },null,2)+"\n");
+    integration: { workspaceImport: "@pydemia/prism", registryImport: "@/components/ui/prism-* (adjust to components.json aliases.ui)", workspaceUsageField: "usage", registryUsageField: "registryUsage", usageKinds: { "component-example": "Self-contained exported React component with synthetic data; typechecked against installed registry sources.", "integration-fragment": "Integration excerpt; supply the state, data and callbacks shown in the component contract." }, stateOwnership: "Consumer owns API/auth/permissions/persistence; demos use synthetic data." }, components: metadata },null,2)+"\n");
 copyFileSync(new URL("node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2",root), new URL("fonts/PretendardVariable.woff2",publicRoot));
 copyFileSync(new URL("node_modules/pretendard/dist/LICENSE.txt",root), new URL("fonts/LICENSE.txt",publicRoot));
 copyFileSync(new URL("node_modules/pdfjs-dist/LICENSE",root), new URL("vendor/PDFJS-LICENSE.txt",publicRoot));
-write("apps/docs/public/prism/llms.txt", `# PRISM UI\n\nIsolated PRISM-DEV design and interaction references using React 19, pydemia/ui and shadcn/Radix primitives.\n\n- [Contracts and source mapping](/prism/components.json)\n- [Ground rules](/prism/research/design-rules.md)\n- [Original inventory](/prism/research/source-inventory.json)\n- [Verification and known differences](/prism/research/verification.md)\n- [Registry](/prism/r/registry.json)\n\nUse data-prism="light" at the application root. Load pydemia tokens then prism.css; prism.css imports the installed Pretendard variable font. Keep the installed PRISM_ASSET_NOTICES.md. There is no verified source dark theme. Registry imports point to local installed files, not private workspace packages. Do not infer API, authorization, persistence or HR decision logic from a component demo. null assessment scores are insufficient evidence, never zero.\n\n${metadata.map(item => `## ${item.name}\n${item.purpose}\nContract: ${item.contract}\nStates: ${item.states.join(", ")}\nRegistry: /prism/r/${item.id}.json\nSource: ${item.sourcePath}\n`).join("\n")}\nVisual parity is pending until reference comparison has completed; read verification.md.\n`);
+write("apps/docs/public/prism/llms.txt", `# PRISM UI\n\nIsolated PRISM-DEV design and interaction references using React 19, pydemia/ui and shadcn/Radix primitives.\n\n- [Contracts and source mapping](/prism/components.json)\n- [Ground rules](/prism/research/design-rules.md)\n- [Original inventory](/prism/research/source-inventory.json)\n- [Verification and known differences](/prism/research/verification.md)\n- [Registry](/prism/r/registry.json)\n\nUse data-prism="light" at the application root. Load pydemia tokens then prism.css; prism.css imports the installed Pretendard variable font. Keep the installed PRISM_ASSET_NOTICES.md. There is no verified source dark theme. The manifest registryUsage field uses @/components/ui/prism-*; adjust this path to components.json aliases.ui. The usage field is for the private @pydemia/prism workspace. usageKind=component-example identifies a self-contained exported React component; usageKind=integration-fragment requires consumer-owned data, state and callbacks. The isolated consumer check typechecks component examples against installed registry sources. Do not infer API, authorization, persistence or HR decision logic from a component demo. null assessment scores are insufficient evidence, never zero.\n\n${metadata.map(item => `## ${item.name}\n${item.purpose}\nContract: ${item.contract}\nStates: ${item.states.join(", ")}\nRegistry: /prism/r/${item.id}.json\nSource: ${item.sourcePath}\nUsage kind: ${item.usageKind}\nInstalled usage:\n\`\`\`tsx\n${item.registryUsage}\n\`\`\`\n`).join("\n")}\nVisual parity is pending until reference comparison has completed; read verification.md.\n`);
 console.log(`Built ${items.length} PRISM registry items and ${metadata.length} contract groups.`);

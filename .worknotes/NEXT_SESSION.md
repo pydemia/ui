@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #127 최신 `main` 통합: PRISM 게시 변경을 반영하고 문서
+산출물을 다시 만들었습니다. Windows의 가상 Usage 경로 비교를 고쳐
+PRISM 23/23·예제 10개 typecheck, 전체 typecheck·build·registry
+release 검사가 통과했습니다. Vercel PR 상태는 배포 제한 실패이며,
+PR Verify UI와 공개 URL은 계속 확인합니다.
+[작업 기록](autocomplete-2026-10-03.md)을 참고하세요. Goal 관리용
+추정은 약 98%입니다.
+
 2026-10-03 `Autocomplete` 로컬 릴리스 후보: 자유 텍스트의 native form
 제출과 manual 추천어 선택을 추가했습니다. 대상 테스트 4/4, 전체 UI
 251/251, typecheck·build·PRISM 23/23, 390px Chromium preview,

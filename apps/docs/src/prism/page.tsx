@@ -27,10 +27,13 @@ function PrismDocs() {
     const [selected, setSelected] = useState(() => new URLSearchParams(location.search).get("component") ?? "prism-button");
     const [query, setQuery] = useState(""); const [state, setState] = useState<FixtureState>(()=>{const value=new URLSearchParams(location.search).get("state");return value&&value in stateLabels ? value as FixtureState : "default";});
     const [section, setSection] = useState(() => new URLSearchParams(location.search).get("view") ?? "components"); const [copied, setCopied] = useState("");
+    const [usageTarget, setUsageTarget] = useState<"registry" | "workspace">("registry");
     const knownSelection = prismCatalog.some(entry => entry.id === selected) || genericEntries.some(entry => entry.id === selected);
     const specific = prismCatalog.find(entry => entry.id === (knownSelection ? selected : "prism-button"));
     const generic = genericEntries.find(entry => entry.id === selected);
     const entry = specific ?? generic ?? prismCatalog[0];
+    const contract = specific ? manifest.components.find(item => item.id === specific.id) : undefined;
+    const usageCode = usageTarget === "registry" && contract ? contract.registryUsage : entry.code;
     const activeState=specific?.states.includes(state) ? state : "default";
     const embedded=new URLSearchParams(location.search).get("embed")==="1";
     const groups = [...new Set(prismCatalog.map(item => item.category))];
@@ -65,9 +68,9 @@ function PrismDocs() {
                         {specific && <label>상태 <select value={activeState} onChange={e => changeState(e.target.value as FixtureState)}>{specific.states.map(value => <option key={value} value={value}>{stateLabels[value]}</option>)}</select></label>}</header>
                         <div className="prism-docs-preview" key={`${entry.id}-${activeState}`}>{specific ? specific.render(activeState) : generic?.preview()}</div></section>
                     <section className="prism-docs-contract"><h2>Contract</h2><p>{specific?.contract ?? "기존 pydemia의 props·상태·키보드 계약을 공유하며 PRISM의 색상·32px control·Pretendard profile을 적용합니다. PRISM 원본에 없는 기능의 확장 예시이며 원본과 같은 외관으로 검증된 항목은 아닙니다."}</p></section>
-                    <section className="prism-docs-code"><header><h2>Usage</h2><PrismButton variant="shape" icon={<Copy />} onClick={() => copy(entry.code)}>복사</PrismButton></header><pre><code>{entry.code}</code></pre></section>
+                    <section className="prism-docs-code"><header><h2>Usage</h2><div className="prism-docs-code-controls">{specific && <label>사용 경로 <select value={usageTarget} onChange={event => setUsageTarget(event.target.value as "registry" | "workspace")}><option value="registry">Registry 설치</option><option value="workspace">Workspace</option></select></label>}<PrismButton variant="shape" icon={<Copy />} onClick={() => copy(usageCode)}>복사</PrismButton></div></header>{contract && <p className="prism-docs-code-note">{contract.usageKind === "component-example" ? "합성 데이터와 상태를 포함한 React 컴포넌트 예시입니다. API 호출과 저장은 소비자 앱에서 연결합니다." : "연동 코드 일부입니다. 데이터·상태·callback은 Contract에 맞춰 소비자 앱에서 정의하세요."}</p>}<pre><code>{usageCode}</code></pre></section>
                     <section className="prism-docs-install"><h2>독립 설치</h2><pre><code>{specific ? install : `npx shadcn@4.21.0 add ${(generic?.installItems ?? [generic?.id.replace("pyd-", "")]).map(id => `${location.origin}/r/pyd-${id}.json`).join(" ")} ${location.origin}/prism/r/prism-tokens.json`}</code></pre>
-                        <p><code>@pydemia/prism</code>은 workspace용 private import입니다. Registry 소비자는 설치된 <code>components/ui/prism-*.tsx</code>에서 import하고 CSS에 <code>tokens.css</code>와 <code>prism.css</code>를 연결합니다. Pretendard를 로드하고 앱 root에 <code>data-prism="light"</code>를 지정하세요.</p></section>
+                        <p><code>@pydemia/prism</code>은 workspace용 private import입니다. Registry 예시는 <code>@/components/ui/prism-*</code>를 사용합니다. 설치 경로를 바꿨다면 <code>components.json</code>의 <code>aliases.ui</code>에 맞춰 import를 수정하세요. CSS에 <code>tokens.css</code> 다음 <code>prism.css</code>를 연결하고 앱 root에 <code>data-prism="light"</code>를 지정하세요. Pretendard는 <code>prism.css</code>가 함께 로드합니다.</p></section>
                     {specific && <section className="prism-docs-sources"><h2>원본 대응</h2>{specific.source.map(path => <a key={path} target="_blank" rel="noreferrer" href={new URL(path.startsWith("../") ? path.slice(3) : `components/${path}`, referenceBase).href}>{path}</a>)}<p>소스에 근거한 규격과 배포 화면 검증 결과는 별도로 기록합니다. 현재 모든 컴포넌트의 시각 동일성을 확인한 상태는 아닙니다.</p></section>}
                 </> : section === "workspace" ? <><h1>Workspace</h1><p>독립 컴포넌트를 조합한 동작 예시입니다. 가상 후보 조회·즐겨찾기·상세 분류·비교 패널을 실행할 수 있습니다.</p><WorkspaceDemo /></> : section === "responsive" ? <><h1>Responsive</h1><ResponsivePreview component={selected} state={activeState} onStateChange={changeState} onComponentChange={changeResponsiveComponent}/></> : section === "rules" ? <><h1>Ground rules</h1><p>PRISM-DEV의 light UI를 유지하는 디자인 규칙입니다.</p>
                     <table className="prism-rules-table"><thead><tr><th>역할</th><th>규칙</th><th>근거</th></tr></thead><tbody>
