@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 release 이력 보존 검사 병합·공개: PR #137과 `main` Verify UI,
+Pages가 통과했고 Vercel production 배포가 READY입니다. 공개 도메인의
+75번째 manifest·Button item이 HTTP 200입니다. 과거 파일의 수정·삭제
+거부는 임시 Git 저장소에서 확인했으며 실제 Instant Rollback은
+시험하지 않았습니다. [공급 기록](release-history-guard-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 99%입니다.
+
 2026-10-03 release 이력 보존 검사 후보: 기존 snapshot 파일의 수정·삭제를
 PR·`main`에서 거부하는 작은 자동 검사를 추가했습니다. 신규 release
 추가·기존 원본 수정·게시 복사본 삭제를 임시 Git 저장소에서 검증했고,

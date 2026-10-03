@@ -39,3 +39,18 @@ release 두 디렉터리를 복원하고 새 current snapshot을 만든 뒤
 Goal 관리용 추정은 약 99%입니다. 공급 중단 없는 rollback은
 별도 호스팅 또는 배포 전략 변경이 필요하므로 아직 검증되지
 않았습니다.
+
+## 공개 후 확인
+
+PR #137의 Verify UI run `37105986078`이 성공했고,
+`5fb69999efef1e50109f7251fe7f419df42d13cc`로 `main`에
+병합됐습니다. `main` Verify UI run `37106153119`와 Pages run
+`37106152876`이 성공했습니다. Vercel production 배포
+`dpl_ERFD4DvMwYmFMg6uBJFZn6KsCrXh`가 READY이고
+`ui.pydemia.ai`·`pydemia-ui.vercel.app`을 가리킵니다. 사용자
+도메인의 75번째 manifest와 Button item은 HTTP 200입니다.
+
+새 CI 검사는 실제 PR·`main`에서 성공했습니다. 삭제·수정 실패
+경로는 임시 Git 저장소에서만 시험했습니다. production을 과거
+배포로 되돌리는 실험은 하지 않았고, Instant Rollback의 URL 손실
+가능성은 그대로입니다.
