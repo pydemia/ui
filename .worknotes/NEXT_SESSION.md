@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 Dialog raw 설치 경로 추가: Vercel 배포 제한 중에도
+83번째 schema 2 snapshot의 Dialog와 token을 GitHub raw에서 받을
+수 있는 고정 URL을 README에 적었습니다. manifest·Dialog·utils·
+token이 HTTP 200이고 저장소 파일과 같습니다. 사용자 사이트의 새
+preview 공개는 남아 있습니다. Goal 관리용 추정은 약 99%입니다.
+[공급 기록](raw-dialog-fallback-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Goal 범위 재확인: 현재 registry 144개 component·146개
 item·83개 release가 검사에 통과했습니다. 공개 AppShell·Spinner·
 MetricCard와 Operations workspace의 실제 동작으로 원래 Goal의
