@@ -197,11 +197,12 @@
       "name": "Avatar / Chips / Table",
       "category": "Data display",
       "purpose": "사용자·후보 식별, 프로필 선택, 표 검색·정렬",
-      "contract": "PrismTable은 native table과 caption을 사용합니다. 대량 데이터 검색·정렬·페이지·원격 요청은 기존 DataTable 계약을 공유합니다. 이름 선택은 호출자의 onOpen으로 전달합니다.",
+      "contract": "Avatar는 실제 영역과 글자 폭을 측정해 이름·팀명 중 긴 쪽을 줄이고 양쪽이 길면 함께 줄입니다. 말줄임된 텍스트는 hover·focus로 전체 내용을 표시하며 resize·텍스트 변경·폰트 로딩에 맞춰 재측정합니다. PrismTable은 native table과 caption을 사용합니다. 대량 데이터 검색·정렬·페이지·원격 요청은 기존 DataTable 계약을 공유합니다. 이름 선택은 호출자의 onOpen으로 전달합니다.",
       "states": [
         "default",
         "disabled",
-        "empty"
+        "empty",
+        "long"
       ],
       "source": [
         "ui/avatar/HRXAvatar.tsx",
@@ -209,14 +210,28 @@
         "ui/chip/HRXAnchorChip.tsx",
         "ui/table/HRXTable.tsx"
       ],
-      "usage": "import { PrismTable } from \"@pydemia/prism\";\n<PrismTable caption=\"포지션 목록\"><thead><tr><th scope=\"col\">포지션</th></tr></thead><tbody><tr><td>기술전략담당</td></tr></tbody></PrismTable>;",
+      "usage": "import { PrismAvatar, PrismTable } from \"@pydemia/prism\";\n\nexport function DisplayExample() {\n  return <section>\n    <PrismAvatar name=\"김가상\" team=\"가상 연구개발 및 기술전략 조직\"\n      description=\"demo@example.com\" style={{ width: \"100%\", maxWidth: 220 }} />\n    <PrismTable caption=\"포지션 목록\">\n      <thead><tr><th scope=\"col\">포지션</th></tr></thead>\n      <tbody><tr><td>기술전략담당</td></tr></tbody>\n    </PrismTable>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-display.tsx",
       "previewUrl": "/prism?component=prism-display",
       "embedUrl": "/prism?component=prism-display&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-display&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending"
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Source SCSS and stored default avatar metrics establish 40px image, 25px radius and 12px gap",
+          "Avatar text allocation preserves the shorter name/team and limits both when both exceed half the available width",
+          "Mock DOM geometry checks resize, text changes, font readiness/loadingdone and observer cleanup",
+          "Mock DOM focus opens the full truncated label; showInfo=false retains a screen-reader name"
+        ],
+        "evidence": [
+          "reference-ui-avatar"
+        ],
+        "remaining": [
+          "actual browser geometry for natural/name/team/both truncation",
+          "hover/focus Tooltip placement and variable font metrics",
+          "all chip and table visual/interactive states"
+        ]
       },
       "exports": [
         {
@@ -248,8 +263,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismTable } from \"@/components/ui/prism-display\";\n<PrismTable caption=\"포지션 목록\"><thead><tr><th scope=\"col\">포지션</th></tr></thead><tbody><tr><td>기술전략담당</td></tr></tbody></PrismTable>;"
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismAvatar, PrismTable } from \"@/components/ui/prism-display\";\n\nexport function DisplayExample() {\n  return <section>\n    <PrismAvatar name=\"김가상\" team=\"가상 연구개발 및 기술전략 조직\"\n      description=\"demo@example.com\" style={{ width: \"100%\", maxWidth: 220 }} />\n    <PrismTable caption=\"포지션 목록\">\n      <thead><tr><th scope=\"col\">포지션</th></tr></thead>\n      <tbody><tr><td>기술전략담당</td></tr></tbody>\n    </PrismTable>\n  </section>;\n}"
     },
     {
       "id": "prism-tabs",
