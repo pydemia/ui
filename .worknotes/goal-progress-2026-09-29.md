@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 AppShell panel 디자인 선택 구현 후보:
+**약 98% → 약 98%**입니다. 공개 component 수를 늘리지 않고 측면·
+하단 영역에 `attached`·`inset`을 선택하도록 했습니다. 로컬 typecheck·
+대상 테스트·브라우저·build·68번째 snapshot 검사는 통과했고 공개
+여부는 [작업 기록](app-shell-panel-appearances-2026-10-03.md)에
+남깁니다.
+
 2026-10-03 `HistogramChart` 공개와 체크리스트 실적용:
 **약 98% → 약 98%**입니다. PR #118과 `main`의 Verify UI·Pages,
 Vercel production이 성공했고 새 item·67번째 snapshot manifest의 공개

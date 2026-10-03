@@ -2587,6 +2587,9 @@ function AppShellPreview() {
     const [appearance, setAppearance] = useState<"framed" | "canvas">(
         "framed",
     );
+    const [panelAppearance, setPanelAppearance] = useState<
+        "attached" | "inset"
+    >("attached");
     const [bubbleAppearance, setBubbleAppearance] = useState<
         "circle" | "pill"
     >("circle");
@@ -2615,6 +2618,17 @@ function AppShellPreview() {
                                 ? "primary" : "outline"
                         } aria-pressed={bubbleAppearance === option}
                             onClick={() => setBubbleAppearance(option)}>
+                            {option}
+                        </Button>
+                    ))}
+                </div>
+                <div role="group" aria-label="패널 표시"
+                    className="flex gap-2">
+                    {(["attached", "inset"] as const).map((option) => (
+                        <Button key={option} variant={
+                            panelAppearance === option ? "primary" : "outline"
+                        } aria-pressed={panelAppearance === option}
+                            onClick={() => setPanelAppearance(option)}>
                             {option}
                         </Button>
                     ))}
@@ -2662,12 +2676,14 @@ function AppShellPreview() {
                         </div>
                     </AppMain>
                     <AppSidebar side="right" aria-label="상세 정보"
+                        appearance={panelAppearance}
                         className="@3xl:w-24">
                         <p className="m-0 text-xs text-muted">이번 주 변경 3건</p>
                     </AppSidebar>
                 </AppBody>
                 <Collapsible defaultOpen>
-                    <AppBottomPanel aria-label="프로젝트 작업 상태" className={
+                    <AppBottomPanel aria-label="프로젝트 작업 상태"
+                        appearance={panelAppearance} className={
                         floatingSide === "left"
                             ? "pl-28 text-xs" : "pr-28 text-xs"
                     }>
@@ -6899,7 +6915,7 @@ function RequestWorkspace() {
     {
         id: "app-shell", name: "AppShell", category: "Framework",
         installItems: ["app-shell", "sidebar", "button", "collapsible"],
-        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. Sidebar는 모바일 drawer로 열리고 하단 panel은 접을 수 있으며, framed·canvas와 도움말 표시를 선택합니다.",
+        description: "header, 좌우·하단 panel과 floating UI를 조합합니다. Sidebar는 모바일 drawer로 열리고 하단 panel은 접을 수 있습니다. 측면·하단 panel은 attached·inset, 골격은 framed·canvas 중 선택합니다.",
         code: `import {
   AppShell, AppHeader, AppBody, AppSidebar, AppMain,
   AppBottomPanel, AppFloatingDisclosure,
@@ -6917,10 +6933,12 @@ function Workspace() {
     <AppBody>
       <Sidebar label="프로젝트 탐색" items={projectPages} />
       <AppMain>화면 본문</AppMain>
-      <AppSidebar side="right" aria-label="상세 정보">...</AppSidebar>
+      <AppSidebar side="right" appearance="inset"
+        aria-label="상세 정보">...</AppSidebar>
     </AppBody>
     <Collapsible defaultOpen>
-      <AppBottomPanel aria-label="프로젝트 작업 상태" className="pl-28">
+      <AppBottomPanel appearance="inset"
+        aria-label="프로젝트 작업 상태" className="pl-28">
         <CollapsibleTrigger asChild>
           <Button variant="ghost">작업 상태</Button>
         </CollapsibleTrigger>

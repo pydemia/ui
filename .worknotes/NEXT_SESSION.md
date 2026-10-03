@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 AppShell panel 표시 형태 로컬 후보: 측면·하단에 기본
+`attached`와 안쪽 여백형 `inset`을 추가했습니다. typecheck·대상 테스트·
+390px/1280px preview·build·68번째 snapshot 검사는 통과했고 공개는
+진행 중입니다.
+[작업 기록](app-shell-panel-appearances-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 PR #118 병합·공개 확인: `HistogramChart`의 PR·`main` Verify UI,
 Pages와 Vercel production이 성공했습니다. 공개 item과 67번째 snapshot
 manifest는 HTTP 200이며 로컬 생성물과 SHA-256이 같습니다. 137개

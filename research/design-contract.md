@@ -1628,3 +1628,12 @@ component는 binning 규칙이나 표본의 구간 배정을 계산하지 않습
 숨기고 정확한 구간·빈도와 총건수는 보이는 텍스트와 native 표에
 제공합니다. 많은 구간은 그래프·표 각각 내부에서 가로 스크롤합니다.
 `panel`이 기본이고 상위 panel에 넣을 때 `plain`을 선택합니다.
+
+## 2026-10-03 AppShell 측면·하단 panel 표시 형태
+
+`AppSidebar`와 `AppBottomPanel`의 `appearance` 기본값은 `attached`이며
+기존 가장자리 연결형 스타일을 유지합니다. `inset`은 각 영역에 안쪽
+여백, 전체 테두리와 공통 그림자 token을 적용합니다. `side`가 지정한
+좌우 위치, DOM 순서, 필수 `aria-label`, `Collapsible` 조합과
+`AppFloatingDisclosure`의 열림·focus 동작은 표시 형태와 무관합니다.
+두 형태 모두 `AppShell`의 container 폭에 따라 같은 위치에 놓입니다.
