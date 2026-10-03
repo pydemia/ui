@@ -22,11 +22,15 @@ component·registry item·snapshot은 없습니다. 문서의 실행 preview,
 - 390px에서 페이지 가로 넘침은 없고 표 안에서만 가로 스크롤됐습니다.
   브라우저 console error는 0건입니다.
 
-공개 후보 CI와 production의 새 예시 코드는 아직 확인하지 않았습니다.
+PR #139의 수정 Verify UI와 병합 commit `616661b2`의 Verify UI·Pages가
+통과했습니다. Vercel Production deployment가 성공했고
+`ui.pydemia.ai`의 새 HTML이 `index-CyT3uKE9.js`를 참조합니다.
+해당 JS가 HTTP 200이며 `Intake workspace` 문자열을 포함하는 것도
+확인했습니다. 공개 사이트의 입력·제출은 다시 조작하지 않았습니다.
 이 예시는 프런트엔드 조합의 동작만 보여 주며 실제 파일 전송과
 서버 저장을 검증한 결과로 해석하지 않습니다.
 
 PR #139 첫 Verify UI에서 typecheck·테스트·build·registry는 통과했지만
 `docs/prism/index.html`과 PRISM page asset의 생성 결과가 커밋에서
 빠져 `docs/` 일치 검사에 실패했습니다. 같은 빌드에서 생성된 파일을
-추가해 수정 CI를 실행합니다.
+추가해 수정 CI에서 생성 파일 일치까지 통과했습니다.
