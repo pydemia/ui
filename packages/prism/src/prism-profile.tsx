@@ -1,4 +1,4 @@
-import { useId, useState, type ReactNode } from "react";
+import { useId, useRef, useState, type ReactNode } from "react";
 import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "./prism-tabs";
 import { PrismCandidateCard, type PrismCandidate } from "./prism-candidate";
 import { PrismButton } from "./prism-button";
@@ -21,10 +21,24 @@ export function PrismOutline({ title, children, actions }: { title?: string; chi
 export function PrismCareerTimeline({ entries }: { entries: readonly PrismCareerEntry[] }) {
     return <ol className="prism-career">{entries.length ? entries.map(item => <li key={item.id}><strong>{item.period}</strong><div><b>{item.company}</b><p>{item.role}</p></div></li>) : <li>경력 정보가 없습니다.</li>}</ol>;
 }
+function SummaryHelp({label,note}:{label:string;note:ReactNode}) {
+    const [open,setOpen]=useState(false); const trigger=useRef<HTMLButtonElement>(null);
+    return <PrismTooltip panel side="bottom" open={open} onOpenChange={setOpen} content={<div className="prism-summary-tooltip">{note}</div>}
+        contentProps={{onPointerDownOutside:event=>{
+            if(event.detail.originalEvent.target instanceof Node&&trigger.current?.contains(event.detail.originalEvent.target))event.preventDefault();
+        }}}>
+        <button ref={trigger} type="button" className="prism-summary-info" aria-label={`${label} 설명`} aria-expanded={open}
+            onPointerDown={event=>event.preventDefault()} onClick={event=>{event.preventDefault();setOpen(current=>!current);}}>
+            <PrismIcon name="InfoIcon" size={16}/>
+        </button>
+    </PrismTooltip>;
+}
 export function PrismSummaryBadge({ label, summary, note, title="SUMMARY" }: { label: string; summary: ReactNode; note?: ReactNode; title?: string }) {
-    const [infoOpen,setInfoOpen]=useState(false);
     const present=summary!==null&&summary!==undefined&&summary!==false&&(typeof summary!=="string"||!!summary.trim());
-    return <section className="prism-summary-field"><h3 className="prism-summary-title">{title}</h3>{present ? <div className="prism-summary-badge"><div className="prism-summary-circle"><strong>{label}</strong>{note&&<PrismTooltip panel side="bottom" open={infoOpen} onOpenChange={setInfoOpen} content={<div className="prism-summary-tooltip">{note}</div>}><button type="button" className="prism-summary-info" aria-label={`${label} 설명`} onClick={()=>setInfoOpen(!infoOpen)}><PrismIcon name="InfoIcon" size={16}/></button></PrismTooltip>}</div><div>{summary}</div></div> : <div className="prism-outline prism-summary-empty"><p className="prism-no-data">관련 데이터 없음</p></div>}</section>;
+    const hasNote=note!==null&&note!==undefined&&note!==false&&(typeof note!=="string"||!!note.trim());
+    return <section className="prism-summary-field"><h3 className="prism-summary-title">{title}</h3>{present ? <div className="prism-summary-badge">
+        <div className="prism-summary-circle"><strong>{label}</strong>{hasNote&&<SummaryHelp label={label} note={note}/>}</div><div>{summary}</div>
+    </div> : <div className="prism-outline prism-summary-empty"><p className="prism-no-data">관련 데이터 없음</p></div>}</section>;
 }
 export function PrismEvidence({ title, grade, children, source }: { title: string; grade?: string | null; children: ReactNode; source?: ReactNode }) {
     return <PrismOutline title={title} actions={grade !== undefined && <strong className="prism-evidence-grade">{grade ?? "미평가"}</strong>}>

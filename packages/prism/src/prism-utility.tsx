@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type ComponentProps, type CSSProperties, type DragEvent, type ReactNode } from "react";
 import { Button, Switch, TooltipProvider, Tooltip, TooltipTrigger, TooltipContent, type Dropzone } from "@pydemia/ui";
+import { Arrow as TooltipArrow } from "@radix-ui/react-tooltip";
 import { PrismIcon } from "./prism-icon";
 import { PrismButton } from "./prism-button";
 import type { PrismAttachment } from "./prism-admin";
@@ -7,8 +8,26 @@ import type { PrismAttachment } from "./prism-admin";
 export function PrismSwitch({ label, ...props }: ComponentProps<typeof Switch> & { label: string }) {
     const id = useId(); return <label className="prism-choice" htmlFor={props.id ?? id}><Switch {...props} id={props.id ?? id} className="prism-switch" />{label}</label>;
 }
-export function PrismTooltip({ content, children, side = "top", align = "center", panel = false, arrow = true, small = false, open, onOpenChange }: { content: ReactNode; children: ReactNode; side?: "top" | "bottom" | "left" | "right"; align?: "start" | "center" | "end"; panel?: boolean; arrow?: boolean; small?: boolean; open?:boolean; onOpenChange?:(open:boolean)=>void }) {
-    return <TooltipProvider><Tooltip open={open} onOpenChange={onOpenChange}><TooltipTrigger asChild>{children}</TooltipTrigger><TooltipContent data-prism="light" side={side} align={align} sideOffset={side==="left"||side==="right" ? 8 : 4} className="prism-tooltip" data-panel={panel || undefined} data-arrow={arrow||undefined} data-small={small||undefined}>{content}</TooltipContent></Tooltip></TooltipProvider>;
+export type PrismTooltipContentProps = Omit<ComponentProps<typeof TooltipContent>, "asChild"> & { panel?: boolean; arrow?: boolean; small?: boolean };
+export type PrismTooltipProps = Pick<PrismTooltipContentProps, "side" | "align" | "panel" | "arrow" | "small"> & {
+    content: ReactNode; children: ReactNode; open?: boolean; onOpenChange?: (open: boolean) => void;
+    contentProps?: Omit<PrismTooltipContentProps, "children" | "side" | "align" | "panel" | "arrow" | "small">;
+};
+/** sideOffset measures the body gap; Radix also includes its measured arrow height. */
+export function PrismTooltipContent({ children, side = "top", align = "center", panel = false, arrow = true, small = false,
+    sideOffset = side === "left" || side === "right" ? 8 : 4, collisionPadding = 8, className = "", ...props }: PrismTooltipContentProps) {
+    const arrowHeight = side === "left" || side === "right" ? 12 : 8.52;
+    return <TooltipContent {...props} data-prism="light" side={side} align={align} collisionPadding={collisionPadding}
+        sideOffset={sideOffset - (arrow ? arrowHeight : 0)} className={`prism-tooltip ${className}`}
+        data-panel={panel || undefined} data-arrow={arrow || undefined} data-small={small || undefined}>
+        <div className={panel ? "prism-tooltip-panel" : "prism-tooltip-text"}>{children}</div>
+        {arrow && <TooltipArrow asChild><span className="prism-tooltip-arrow" aria-hidden="true" /></TooltipArrow>}
+    </TooltipContent>;
+}
+export function PrismTooltip({ content, children, side, align, panel, arrow, small, open, onOpenChange, contentProps }: PrismTooltipProps) {
+    return <TooltipProvider><Tooltip open={open} onOpenChange={onOpenChange}><TooltipTrigger asChild>{children}</TooltipTrigger>
+        <PrismTooltipContent {...contentProps} side={side} align={align} panel={panel} arrow={arrow} small={small}>{content}</PrismTooltipContent>
+    </Tooltip></TooltipProvider>;
 }
 export function PrismProgress({ value, label = "진행률", showPercent = false, displayValue, color }: { value: number | null; label?: string; showPercent?: boolean; displayValue?: string | number; color?: string }) {
     if (value !== null && (!Number.isFinite(value) || value < 0 || value > 100)) throw new RangeError("Progress must be null or 0..100.");

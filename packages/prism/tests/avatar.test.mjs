@@ -12,9 +12,10 @@ globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(dom.windo
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const observers = new Set();
 globalThis.ResizeObserver = class {
-    constructor(callback) { this.callback = callback; observers.add(this); }
-    observe() {} unobserve() {}
-    disconnect() { observers.delete(this); }
+    constructor(callback) { this.callback = callback; this.targets = new Set(); }
+    observe(target) { this.targets.add(target); observers.add(this); }
+    unobserve(target) { this.targets.delete(target); if (!this.targets.size) observers.delete(this); }
+    disconnect() { this.targets.clear(); observers.delete(this); }
 };
 let geometry = { available: 400, name: 80, team: 50, shownName: 80, shownTeam: 50 };
 Object.defineProperty(dom.window.HTMLElement.prototype, "clientWidth", { configurable: true, get() {

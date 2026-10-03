@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from "react";
-import { Avatar, AvatarFallback, AvatarImage, DataTable, TooltipProvider, Tooltip, TooltipTrigger, TooltipContent, type DataTableProps } from "@pydemia/ui";
+import { Avatar, AvatarFallback, AvatarImage, DataTable, TooltipProvider, Tooltip, TooltipTrigger, type DataTableProps } from "@pydemia/ui";
+import { PrismTooltipContent } from "./prism-utility";
 
 export type PrismAvatarProps = Omit<ComponentProps<"div">, "children"> & { name: string; team?: string; description?: string; src?: string; showInfo?: boolean };
 type AvatarLayout = "natural" | "name-truncate" | "team-truncate" | "both-truncate";
@@ -7,7 +8,7 @@ function AvatarText({ as: Tag, text, className, truncated, elementRef }: { as: "
     const [open, setOpen] = useState(false);
     useEffect(() => { if (!truncated) setOpen(false); }, [truncated]);
     const label = <Tag ref={elementRef} className={className} tabIndex={truncated ? 0 : undefined}>{text}</Tag>;
-    return <Tooltip open={truncated && open} onOpenChange={next => setOpen(truncated && next)}><TooltipTrigger asChild>{label}</TooltipTrigger><TooltipContent data-prism="light" className="prism-tooltip" side="top" align="start" sideOffset={4} data-arrow>{text}</TooltipContent></Tooltip>;
+    return <Tooltip open={truncated && open} onOpenChange={next => setOpen(truncated && next)}><TooltipTrigger asChild>{label}</TooltipTrigger><PrismTooltipContent side="top" align="start">{text}</PrismTooltipContent></Tooltip>;
 }
 export function PrismAvatar({ name, team, description, src, className = "", showInfo = true, ...props }: PrismAvatarProps) {
     const info = useRef<HTMLDivElement>(null);
