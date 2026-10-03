@@ -1,10 +1,17 @@
 # Component 공급 목표 진행 상태
 
-2026-10-03 Dialog 크기 로컬 후보:
+2026-10-03 공급·품질 체크리스트 실적용 재검토:
+**약 99% → 약 99%**입니다. 로컬 대상 검증과 PR의 전체 CI,
+묶음당 공개 URL 확인을 구분했습니다. 품질 하한이나 component·item
+수는 바뀌지 않았습니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Dialog 크기 병합·공개 대기:
 **약 99% → 약 99%**입니다. 기존 모달에 넓은·전체 화면 크기를
 추가했으며 새 component·item은 없습니다. typecheck·대상 2/2·
 UI 전체 280/280·build·83번째 registry release 검사와 로컬
-Chromium 동작을 확인했습니다. PR CI와 공개 검증은 진행 중입니다.
+Chromium 동작을 확인했습니다. PR #156과 `main` CI·Pages는
+통과했지만 83번째 공개 manifest는 아직 HTTP 404입니다.
 [작업 기록](dialog-sizes-2026-10-03.md)을 참고하세요.
 
 2026-10-03 분석 화면 밀도 production 공개:
