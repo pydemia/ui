@@ -1,5 +1,18 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 공급·품질 체크리스트 추가 재검토:
+**약 98% → 약 98%**입니다. 사람 검토의 반복 화면·환경 검사를
+변경 위험에 맞춰 줄였습니다. 자동 CI·snapshot 비용은 그대로이며
+공개 수량은 바뀌지 않았습니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `TreemapChart` 공개 확인: **약 98% → 약 98%**입니다.
+PR #123과 `main`의 CI·Pages, Vercel production, 69번째 manifest와
+현재·snapshot item의 공개 URL을 확인했습니다. 공개 138개
+component·140개 registry item입니다. 이전 `AppShell` 68번째 manifest도
+HTTP 200으로 열립니다. [차트 기록](treemap-chart-2026-10-03.md)과
+[AppShell 기록](app-shell-panel-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `TreemapChart` 공개 준비: **약 98% → 약 98%**입니다.
 69번째 snapshot과 registry 고지를 확인했으며 PR CI·public URL은
 남았습니다. [작업 기록](treemap-chart-2026-10-03.md)을 참고하세요.

@@ -33,3 +33,8 @@ Pages도 성공했습니다. Vercel production은 배포 횟수 제한으로 실
 CI의 공개 준비는 확인했지만 사용자 도메인의 새 표시 형태는 공개
 확인으로 세지 않습니다. 배포가 가능해지면 manifest와 새 item의
 내용 일치를 확인해야 합니다. Goal 관리용 추정은 약 98%입니다.
+
+2026-10-03 후속 공개 확인: 사용자 도메인의 68번째 snapshot manifest가
+HTTP 200으로 열리고 현재 `pyd-app-shell.json`에 `inset` 표시가
+포함됐습니다. 위의 404와 옛 item 내용은 배포 대기 당시 결과입니다.
+68번째 snapshot item 전체의 바이트 일치는 따로 대조하지 않았습니다.

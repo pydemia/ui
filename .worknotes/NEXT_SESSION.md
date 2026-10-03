@@ -1,5 +1,20 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 재검토: 독립적인 표시 변경에 폭·theme·브라우저
+검사를 일괄 반복하지 않고, 영향받은 핵심 동작의 증거 하나와 API·Usage
+일치를 사람 검토의 기본 범위로 삼았습니다. CI·snapshot은 릴리스 묶음
+조건이며 현재 자동화 비용은 그대로입니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 98%입니다.
+
+2026-10-03 `TreemapChart` 공개 확인: PR #123 병합 뒤 CI·Pages·Vercel
+production이 성공했고 69번째 manifest와 현재·snapshot item이 공개
+URL에서 일치합니다. 138개 component·140개 item입니다. 기존
+`AppShell` 68번째 manifest도 현재 HTTP 200입니다. 근거와 미검증
+범위는 [차트 기록](treemap-chart-2026-10-03.md)과
+[AppShell 기록](app-shell-panel-appearances-2026-10-03.md)에 있습니다.
+Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 `TreemapChart` 공개 준비: 계층별 구성비와 정확한 값 표를
 추가하고 69번째 snapshot과 provenance 고지를 검증했습니다. PR CI와
 공개 경로는 남아 있습니다. 검증 범위는
