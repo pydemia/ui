@@ -1,5 +1,10 @@
 # 변경 기록
 
+## 2026-10-03 — Sidebar 링크 표시 형태
+
+- `Sidebar`에서 기존 `SideNavLink`의 레일형·채움형을 선택할 수
+  있습니다. 기본 레일형과 현재 페이지·접힘·모바일 탐색 동작은 유지합니다.
+
 ## 2026-10-03 — 입력 control 표시 형태
 
 - `Textarea`, `NativeSelect`, `SelectTrigger`에 `outline`(기본값),

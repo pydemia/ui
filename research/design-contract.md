@@ -1237,7 +1237,9 @@ native `<a>`입니다. icon은 선택적 장식으로 접근성 트리에서 숨
 
 `GlobalNavLink`의 기본 `surface`와 선택적 `underline`,
 `SideNavLink`의 기본 `rail`과 선택적 `filled`는 같은 native 링크에
-적용하는 표시 형태입니다. 현재 페이지는 호출자가
+적용하는 표시 형태입니다. `Sidebar`의 `linkVariant`도 이 두 값을
+내부 링크에 전달하며 기본값은 `rail`입니다. 데스크톱 접힘·섹션과
+모바일 Drawer에 같은 형태를 적용합니다. 현재 페이지는 호출자가
 `aria-current="page"`로 지정합니다. 밑줄형은 accent 테두리와 글자,
 채움형은 accent 배경과 accent foreground를 사용합니다. variant는
 목적지나 현재 route를 바꾸지 않습니다.

@@ -42,6 +42,18 @@ test("collapsed sections keep group and link names; flat items still work", () =
     assert.doesNotMatch(flat, /role="group"/);
 });
 
+test("link variant styles current items without changing navigation semantics", () => {
+    const rail = renderSidebar();
+    const filled = renderSidebar({ linkVariant: "filled", collapsed: true });
+
+    assert.match(rail, /data-variant="rail"[^>]*href="\/overview"/);
+    assert.match(filled, /data-variant="filled"[^>]*href="\/overview"/);
+    assert.match(filled, /href="\/overview"[^>]*aria-current="page"/);
+    assert.match(filled, /<span class="sr-only">개요<\/span>/);
+    assert.throws(() => renderSidebar({ linkVariant: "other" }),
+        /link variant is not supported/);
+});
+
 test("ambiguous or invalid sections fail before rendering", () => {
     assert.throws(() => renderSidebar({ items: [] }),
         /requires items or sections, not both/);

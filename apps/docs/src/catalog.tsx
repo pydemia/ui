@@ -2825,6 +2825,7 @@ function SidebarPreview() {
     const [active, setActive] = useState("overview");
     const [side, setSide] = useState<"left" | "right">("left");
     const [grouped, setGrouped] = useState(false);
+    const [linkVariant, setLinkVariant] = useState<"rail" | "filled">("rail");
     const items = [
         { id: "overview", label: "개요", href: "#components",
             icon: <Gauge size={16} />, current: active === "overview" },
@@ -2853,12 +2854,21 @@ function SidebarPreview() {
                     onClick={() => setGrouped((value) => !value)}>
                     {grouped ? "단일 목록" : "섹션별 보기"}
                 </Button>
+                <Button variant="outline" aria-pressed={linkVariant === "rail"}
+                    onClick={() => setLinkVariant("rail")}>
+                    레일형 링크
+                </Button>
+                <Button variant="outline" aria-pressed={linkVariant === "filled"}
+                    onClick={() => setLinkVariant("filled")}>
+                    채움형 링크
+                </Button>
             </div>
             <div className={
                 "flex min-h-72 flex-col overflow-hidden rounded-sm " +
                 "border border-border bg-background @3xl:flex-row"
             }>
                 <Sidebar label="프로젝트 탐색" {...content} side={side}
+                    linkVariant={linkVariant}
                     onNavigate={setActive} />
                 <div className="min-w-0 flex-1 p-[var(--space-4)]">
                     <h3 className="m-0 text-sm font-semibold">작업 공간</h3>
@@ -7485,7 +7495,7 @@ function Workspace() {
     {
         id: "sidebar", name: "Sidebar", category: "Framework",
         installItems: ["sidebar", "app-shell"],
-        description: "현재 페이지 링크를 단일 목록이나 이름 있는 섹션으로 표시합니다. 넓은 화면에서는 아이콘 폭으로 접히고, 좁은 화면에서는 modal drawer로 열립니다.",
+        description: "현재 페이지 링크를 단일 목록이나 이름 있는 섹션으로 표시합니다. 링크는 레일형·채움형을 고를 수 있습니다. 넓은 화면에서는 아이콘 폭으로 접히고, 좁은 화면에서는 modal drawer로 열립니다.",
         code: `import { AppShell, AppBody, AppMain, Sidebar } from "@pydemia/ui";
 
 const sections = [
@@ -7500,7 +7510,8 @@ const sections = [
 
 <AppShell>
   <AppBody>
-    <Sidebar label="프로젝트 탐색" sections={sections} />
+    <Sidebar label="프로젝트 탐색" sections={sections}
+      linkVariant="filled" />
     <AppMain>작업 공간</AppMain>
   </AppBody>
 </AppShell>`,

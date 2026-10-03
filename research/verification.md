@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-03 Sidebar 링크 표시 형태
+
+`Sidebar`의 `linkVariant`를 `rail`(기본값)·`filled`로 선택하고
+내부 `SideNavLink`에 전달합니다. 기본·접힌 상태의 현재 링크 의미와
+이름 유지, 잘못된 값 거부를 대상 테스트 4/4로 확인했습니다.
+전체 UI 테스트 278/278과 `npm run typecheck`가 통과했습니다.
+`npm run build`와 `registry:release-check`가 81번째 snapshot과
+현재 146개 item의 일치를 확인했습니다. 로컬 Chromium에서 채움형
+링크의 현재 상태·색과 390px 모바일 Drawer의 동일 표시·선택 후
+닫힘을 확인했습니다. PR CI·공개 경로 확인은
+[작업 기록](../.worknotes/sidebar-link-variants-2026-10-03.md)에
+이어 기록합니다.
+
 ## 2026-10-03 입력 control·Table 표시 형태 — 공개 확인
 
 PR #150과 `main` `a9247500`의 Verify UI·Pages가 통과했고 Vercel
