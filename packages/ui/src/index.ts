@@ -86,6 +86,7 @@ export {
     Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader,
     DialogFooter, DialogTitle, DialogDescription,
 } from "./components/dialog";
+export type { DialogContentProps } from "./components/dialog";
 export { CommandPalette } from "./components/command-palette";
 export type {
     CommandPaletteItem, CommandPaletteProps,

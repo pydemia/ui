@@ -1,5 +1,14 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 Dialog 크기
+
+기존 `pyd-dialog`의 shadcn/ui 고정 revision·MIT 고지와
+`@radix-ui/react-dialog@1.1.23` 의존성을 유지했습니다. 크기별 CSS와
+문서 preview는 pydemia/ui에서 작성했습니다. 외부 코드·npm 의존성·
+registry 설치 경로는 추가하지 않았습니다. source·license metadata는
+`registry/provenance.json`과 `registry/shadcn-sources.json`을
+따릅니다.
+
 ## 2026-10-03 분석 화면 간격
 
 `Dashboard`, `LogConsole`, `LogViewer`의 밀도 선택은 기존

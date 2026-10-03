@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 Dialog 크기 로컬 후보:
+**약 99% → 약 99%**입니다. 기존 모달에 넓은·전체 화면 크기를
+추가했으며 새 component·item은 없습니다. typecheck·대상 2/2·
+UI 전체 280/280·build·83번째 registry release 검사와 로컬
+Chromium 동작을 확인했습니다. PR CI와 공개 검증은 진행 중입니다.
+[작업 기록](dialog-sizes-2026-10-03.md)을 참고하세요.
+
 2026-10-03 분석 화면 밀도 production 공개:
 **약 99% → 약 99%**입니다. PR #154와 `main` Verify UI·Pages,
 Vercel production이 성공했습니다. 82번째 manifest·변경 세 item의

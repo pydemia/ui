@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-native-select",
+  "title": "Native Select",
+  "dependencies": [
+    "lucide-react@0.468.0"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/native-select.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { ChevronDown } from \"lucide-react\";\nimport { cn } from \"./utils\";\n\ntype NativeSelectProps = ComponentProps<\"select\"> & {\n    appearance?: \"outline\" | \"filled\" | \"underline\";\n};\n\nfunction NativeSelect({\n    appearance = \"outline\", className, ...props\n}: NativeSelectProps) {\n    if (![\"outline\", \"filled\", \"underline\"].includes(appearance)) {\n        throw new RangeError(\"NativeSelect appearance is not supported.\");\n    }\n\n    return (\n        <div className=\"relative w-full\">\n            <select\n                data-appearance={appearance}\n                className={cn(\n                    \"h-[var(--control-height)] w-full appearance-none rounded-sm \" +\n                    \"border border-border bg-surface px-[var(--space-3)] \" +\n                    \"pr-9 text-sm text-foreground disabled:cursor-not-allowed \" +\n                    \"disabled:opacity-50 aria-invalid:border-danger\",\n                    appearance === \"filled\" &&\n                        \"border-transparent bg-surface-subtle\",\n                    appearance === \"underline\" &&\n                        \"rounded-none border-x-0 border-t-0 bg-transparent pl-0\",\n                    className,\n                )}\n                {...props}\n            />\n            <ChevronDown\n                aria-hidden=\"true\"\n                className={\n                    \"pointer-events-none absolute right-3 top-1/2 size-4 \" +\n                    \"-translate-y-1/2 text-muted\"\n                }\n            />\n        </div>\n    );\n}\n\nexport { NativeSelect };\nexport type { NativeSelectProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/native-select.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe upstream source file for each adapted component is identified at\ncommit `b19a9f3968e53c0f1643814536b1cd45e1a21e46`:\n<https://github.com/pydemia/ui/blob/b19a9f3968e53c0f1643814536b1cd45e1a21e46/registry/shadcn-sources.json>.\nSHA-256 of that file with LF line endings:\n`a3df63facdf47784a0086e46536155cf973a51be86e01f707247b046d234eafa`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

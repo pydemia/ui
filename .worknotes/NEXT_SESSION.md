@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 Dialog 크기 로컬 후보: `DialogContent`에 기본·넓은·전체
+화면 크기를 추가했습니다. typecheck·대상 2/2·UI 전체 280/280·
+build·83번째 registry release 검사와 로컬 Chromium 크기·focus를
+확인했습니다. PR CI·공개 검증은 진행 중입니다.
+[작업 기록](dialog-sizes-2026-10-03.md)을 참고하세요. 새
+component·item은 없으며 Goal 관리용 추정 약 99%를 유지합니다.
+
 2026-10-03 분석 화면 밀도 공개: PR #154와 `main` `82b760b7`의
 Verify UI·Pages, Vercel production이 성공했습니다. 사용자 도메인의
 82번째 manifest·변경 세 item은 HTTP 200이고 저장소 파일과

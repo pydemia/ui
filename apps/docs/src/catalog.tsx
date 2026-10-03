@@ -922,17 +922,35 @@ function RatingPreview() {
 }
 
 function DialogPreview() {
+    const [size, setSize] = useState<
+        "default" | "wide" | "fullscreen"
+    >("default");
+
     return (
         <div className="preview-row">
+            <div role="group" aria-label="모달 크기" className="preview-row">
+                {(["default", "wide", "fullscreen"] as const).map(
+                    (option) => (
+                        <Button key={option} type="button"
+                            variant={size === option ? "primary" : "outline"}
+                            aria-pressed={size === option}
+                            onClick={() => setSize(option)}>
+                            {option === "default" ? "기본" :
+                                option === "wide" ? "넓게" : "전체 화면"}
+                        </Button>
+                    ),
+                )}
+            </div>
             <Dialog>
                 <DialogTrigger asChild>
                     <Button variant="outline">설정 열기</Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent size={size}>
                     <DialogHeader>
                         <DialogTitle>알림 설정</DialogTitle>
                         <DialogDescription>
-                            이 예시에서는 설정을 저장하지 않습니다.
+                            선택한 크기의 모달입니다. 이 예시에서는
+                            설정을 저장하지 않습니다.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
@@ -5820,7 +5838,7 @@ function ReviewForm() {
     {
         id: "dialog", name: "Dialog", category: "Overlays",
         installItems: ["dialog", "button"],
-        description: "제목·설명과 닫기 동작을 명시하는 모달입니다. focus 이동과 복원을 처리합니다.",
+        description: "제목·설명과 닫기 동작을 명시하는 모달입니다. 기본·넓은·전체 화면 크기를 선택하고 focus 이동과 복원을 유지합니다.",
         code: `import {
   Button, Dialog, DialogClose, DialogContent, DialogDescription,
   DialogFooter, DialogHeader, DialogTitle, DialogTrigger,
@@ -5828,7 +5846,7 @@ function ReviewForm() {
 
 <Dialog>
   <DialogTrigger asChild><Button>설정 열기</Button></DialogTrigger>
-  <DialogContent>
+  <DialogContent size="wide">
     <DialogHeader>
       <DialogTitle>알림 설정</DialogTitle>
       <DialogDescription>설정을 확인하세요.</DialogDescription>

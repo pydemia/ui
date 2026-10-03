@@ -1,5 +1,10 @@
 # 변경 기록
 
+## 2026-10-03 — Dialog 크기
+
+- `DialogContent`에 기존 기본 크기와 함께 넓은 크기와 전체 화면
+  크기를 선택하는 `size`를 추가했습니다.
+
 ## 2026-10-03 — 분석 화면 간격
 
 - `Dashboard`, `LogConsole`, `LogViewer`에 기본·조밀한 간격을

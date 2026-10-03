@@ -1,5 +1,14 @@
 # Prototype 설계 계약
 
+## 2026-10-03 Dialog 크기
+
+`DialogContent.size`는 `default`(기존 중앙 모달), `wide`(넓은 중앙
+모달), `fullscreen`(viewport 전체)입니다. 세 크기는 같은 Radix
+Dialog의 제목·설명·focus containment·Escape 닫기·focus 복원을
+사용합니다. 모든 크기에서 내용이 넘치면 모달 안을 스크롤하며
+`className`은 호출자가 마지막에 재정의할 수 있습니다. 미지원
+크기는 명시적으로 거부합니다.
+
 ## 2026-10-03 분석 화면 간격
 
 `Dashboard`, `LogConsole`, `LogViewer`의 `density`는
