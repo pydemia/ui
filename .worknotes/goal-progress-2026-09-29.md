@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 공급·품질 적용 시점 재검토와 Intake workspace 로컬 후보:
+**약 99% → 약 99%**입니다. 개발 중 후보에 Usage·preview 완성을
+요구하지 않고 공개 후보 단계에서 확인하도록 기준을 좁혔습니다.
+기존 component 10개로 접수 화면을 조합하고 로컬 typecheck·build·
+registry 검사와 브라우저 입력·제출을 확인했습니다. 새 public
+component·item은 없고 공개 예시는 아직 미검증입니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)과
+[예시 기록](intake-workspace-2026-10-03.md)을 참고하세요.
+
 2026-10-03 release 이력 보존 검사 production 확인:
 **약 99% → 약 99%**입니다. PR·`main` Verify UI와 Pages가 통과했고
 production 배포가 READY입니다. 공개 75번째 manifest·Button URL은
