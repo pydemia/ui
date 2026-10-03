@@ -695,6 +695,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, total, label-value-percentage list and empty state; SVG decorative", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-calendar-heatmap", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/images/complex/", "scope": "visible exact-value table for a dense date chart; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named figure, decorative date grid and expandable native table of every date with zero and unknown text", "keyboard": "horizontal grid scroll and native details disclosure checked in local Chromium", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-heatmap", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Kibo UI", "url": "https://www.kibo-ui.com/components/contribution-graph", "revision": "3d63cdb15b79d972e3dc38a10997987672f9b263", "license": "MIT", "scope": "time activity intensity and responsive overflow as design reference; no source copied" },

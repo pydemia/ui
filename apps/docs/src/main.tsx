@@ -466,7 +466,7 @@ function App() {
                             data-wide={[
                                 "app-shell", "data-chart", "dashboard",
                                 "data-table", "gantt", "scatter-chart",
-                                "sankey-chart",
+                                "calendar-heatmap", "sankey-chart",
                                 "resizable-panels",
                                 "sidebar", "stepper",
                             ].includes(selected.id) ? "true" : undefined}>

@@ -208,6 +208,9 @@ export type { TerminalLine, TerminalProps } from "./components/terminal";
 export { JsonViewer } from "./components/json-viewer";
 export type { JsonValue, JsonViewerProps } from "./components/json-viewer";
 export { Sparkline } from "./components/sparkline";
+export { CalendarHeatmap } from "./components/calendar-heatmap";
+export type { CalendarHeatmapDay, CalendarHeatmapProps } from
+    "./components/calendar-heatmap";
 export type { SparklineProps } from "./components/sparkline";
 export { BarList } from "./components/bar-list";
 export type { BarListItem, BarListProps } from "./components/bar-list";
