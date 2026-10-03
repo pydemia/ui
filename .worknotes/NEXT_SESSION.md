@@ -1,5 +1,11 @@
 # Component 확장 작업 인계
 
+2026-10-03 Dialog raw 소비자 설치 확인: 83번째 고정 URL을 새 Vite
+소비자에 설치해 Dialog·utils·token·MIT 고지 네 파일, typecheck·
+build, Chromium의 세 크기와 focus 복원을 확인했습니다. production
+배포는 Vercel 횟수 제한으로 남아 있으며 Goal 관리용 추정은 약
+99%입니다. [공급 기록](raw-dialog-fallback-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Dialog raw 설치 경로 추가: Vercel 배포 제한 중에도
 83번째 schema 2 snapshot의 Dialog와 token을 GitHub raw에서 받을
 수 있는 고정 URL을 README에 적었습니다. manifest·Dialog·utils·
