@@ -39,3 +39,20 @@ touch·Safari·RTL도 실행하지 않았습니다. Goal 관리용 추정은
 약 98%로 유지합니다. 로컬 후보는 142개 component·144개 item,
 공개 확인은 140개·142개입니다. RadarChart 공개 배포도 계속
 대기 중입니다.
+
+## 병합과 공개 공급
+
+PR [#131](https://github.com/pydemia/ui/pull/131)을 `main`에 병합했습니다.
+PR Verify UI 316, 병합 commit `b5ccfacef7890ecd30b2f53766c510ebe0211461`의
+Verify UI와 Pages가 통과했고 Vercel production 상태도 성공입니다.
+2026-10-03 공개 도메인에서 `/r/registry.json`은 HTTP 200·144개 item,
+`/r/pyd-sankey-chart.json`은 HTTP 200·이름과 파일 1개를 확인했습니다.
+73번째 manifest와 snapshot item, 앞서 대기 중이던 RadarChart의 현재
+item·72번째 manifest·snapshot item도 모두 HTTP 200입니다. 확인된 공개
+수량은 142개 component·144개 registry item입니다. Goal 관리용 추정은
+약 98%로 유지합니다.
+
+PR의 변경 파일 347개 중 290개가 현재 snapshot의 `registry/releases/`와
+`docs/r/releases/` 복사본입니다. 이는 저장 형식의 비용이며 component
+동작 검사의 개수로 세지 않습니다. 실제 보조기술·touch·Safari·RTL은
+이번 릴리스에서 실행하지 않았습니다.

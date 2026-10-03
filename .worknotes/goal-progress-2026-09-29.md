@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `SankeyChart` 병합·공개 확인: **약 98% → 약 98%**입니다.
+PR #131과 `main`의 Verify UI, Pages, Vercel production이 성공했고
+공개 registry 144개 item과 현재·snapshot 경로를 확인했습니다.
+RadarChart의 대기 경로도 제공돼 공개 확인 수량은 **142개 component·
+144개 item**입니다. [작업 기록](sankey-chart-2026-10-03.md)을
+참고하세요.
+
 2026-10-03 공급·품질 운영 범위 재평가: **약 98% → 약 98%**입니다.
 후보 선정, 변경 동작 확인, 릴리스 공급을 별도로 판정합니다. 수동 검사는
 변경한 핵심 동작의 증거 한 가지와 preview·Usage 확인으로 제한하고,
