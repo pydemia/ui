@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-03 — 분석 화면 간격
+
+- `Dashboard`, `LogConsole`, `LogViewer`에 기본·조밀한 간격을
+  선택하는 `density`를 추가했습니다. 기본 표시와 로그 조작은
+  유지합니다.
+
 ## 2026-10-03 — Sidebar 링크 표시 형태
 
 - `Sidebar`에서 기존 `SideNavLink`의 레일형·채움형을 선택할 수

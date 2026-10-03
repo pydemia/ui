@@ -1,5 +1,13 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 분석 화면 간격
+
+`Dashboard`, `LogConsole`, `LogViewer`의 밀도 선택은 기존
+pydemia/ui 원본 구현을 확장했습니다. 외부 코드를 편입하거나 npm
+의존성·registry 설치 경로를 추가하지 않았습니다. 기존 item의
+source·license metadata는 `registry/provenance.json`과
+`registry.json`을 따릅니다.
+
 ## 2026-10-03 입력 control 외형 확장
 
 기존 `Textarea`, `NativeSelect`의 shadcn/ui 고정 revision과 MIT 고지,

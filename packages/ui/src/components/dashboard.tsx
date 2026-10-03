@@ -1,10 +1,29 @@
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
 
-function Dashboard({ className, ...props }: ComponentProps<"div">) {
+type DashboardProps = ComponentProps<"div"> & {
+    density?: "comfortable" | "compact";
+};
+
+function Dashboard({
+    density = "comfortable", className, ...props
+}: DashboardProps) {
+    if (density !== "comfortable" && density !== "compact") {
+        throw new RangeError("Dashboard density is not supported.");
+    }
+
     return (
         <div
-            className={cn("@container grid min-w-0 gap-[var(--space-6)]", className)}
+            data-density={density}
+            className={cn(
+                "@container grid min-w-0",
+                density === "comfortable"
+                    ? "gap-[var(--space-6)] " +
+                      "[--dashboard-panel-gap:var(--space-4)]"
+                    : "gap-[var(--space-3)] " +
+                      "[--dashboard-panel-gap:var(--space-2)]",
+                className,
+            )}
             {...props}
         />
     );
@@ -35,7 +54,8 @@ function DashboardMetrics({
         <section
             data-columns={columns}
             className={cn(
-                "grid min-w-0 grid-cols-1 gap-[var(--space-4)] " +
+                "grid min-w-0 grid-cols-1 " +
+                "gap-[var(--dashboard-panel-gap,var(--space-4))] " +
                 "@sm:grid-cols-2",
                 metricColumns[columns],
                 className,
@@ -66,7 +86,7 @@ function DashboardPanels({
             data-layout={layout}
             className={cn(
                 "grid min-w-0 grid-cols-1 items-start " +
-                "gap-[var(--space-4)]",
+                "gap-[var(--dashboard-panel-gap,var(--space-4))]",
                 panelLayouts[layout],
                 className,
             )}
@@ -77,5 +97,6 @@ function DashboardPanels({
 
 export { Dashboard, DashboardMetrics, DashboardPanels };
 export type {
-    DashboardSectionProps, DashboardMetricsProps, DashboardPanelsProps,
+    DashboardProps, DashboardSectionProps, DashboardMetricsProps,
+    DashboardPanelsProps,
 };

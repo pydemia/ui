@@ -1,5 +1,16 @@
 # Prototype 설계 계약
 
+## 2026-10-03 분석 화면 간격
+
+`Dashboard`, `LogConsole`, `LogViewer`의 `density`는
+`comfortable`(기본값) 또는 `compact`입니다. `Dashboard`는 영역 사이와
+내부 `DashboardMetrics`·`DashboardPanels`의 간격을 공통 space token으로
+조절합니다. 두 하위 component를 단독으로 쓰면 기존 간격을 유지합니다.
+`LogConsole`은 안쪽 여백과 행 높이를, `LogViewer`는 도구 영역의 여백과
+내부 `LogConsole`의 행 간격을 줄입니다. 밀도는 로그의 역할, 필터,
+따라가기 상태와 `panel`·`flat` 표시에 영향을 주지 않습니다.
+미지원 값은 명시적으로 거부합니다.
+
 ## 2026-10-03 입력 control 표시 형태
 
 `Textarea`, `NativeSelect`, `SelectTrigger`의 `appearance`는
