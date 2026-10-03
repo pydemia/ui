@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-03 SankeyChart — 릴리스 후보
+
+3단계 경로·정확한 수량 표, 비례 폭의 ribbon·line, 극단적으로 작은
+값과 큰 유한 값, 0·미수집·빈 목록·잘못된 입력을 대상 SSR 테스트
+5개로 확인했습니다. 전체 UI 260/260, typecheck·build와 PRISM
+25/25·Usage 예제 11개 typecheck가 통과했습니다. 로컬 Chromium에서
+넓은 preview의 3단계·8개 경로, 디자인·미수집·빈 상태 전환을
+확인했습니다. 390px에서 문서 가로 넘침 없이 내부 영역이 스크롤되며
+방향키 이동과 page error 0건을 확인했습니다. provenance 고지를
+source commit에 고정했고 73번째 snapshot의 `registry:release-check`가
+144개 item·142개 export/catalog를 확인했습니다. PR CI·공개 URL과
+실제 screen reader·touch·Safari는 아직 확인하지 않았습니다. 범위는
+[작업 기록](../.worknotes/sankey-chart-2026-10-03.md)에 남겼습니다.
+
 ## 2026-10-03 RadarChart — 병합·공개 대기
 
 동일 척도 차원별 0·미수집·경계값, 결측 구간 비연결과 line·filled,

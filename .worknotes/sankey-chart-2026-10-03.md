@@ -21,11 +21,20 @@
   가로 넘침 없이 그림 영역이 가로 스크롤됩니다. 영역에 focus한 뒤
   방향키로 내부 스크롤이 이동하는 것도 확인했습니다. page error는
   0건입니다.
-- `npm run test -w @pydemia/ui`: 소수 척도 보강 이전의 259/259 통과.
+- `npm run test -w @pydemia/ui`: 260/260 통과.
 - `npm run prism:check`: 25/25·Usage 예제 11개 typecheck 통과.
+- provenance 고지를 source commit
+  `1ae533dd493b0db71c558192499e974df646fe80`과 SHA-256
+  `6298f0b4ac44e88054ede05603c74d6e88eb24a4351f5f437ea58c90d931af99`에
+  고정했습니다. 새 외부 구현 코드는 편입하지 않았습니다.
+- `npm run registry:release-check`: 144개 item·142개 export/catalog와
+  73개 불변 snapshot, 현재 registry 일치 검사 통과. 현재 ID는
+  `sha256-9bf65f08c6e3daa55815c07059472e3b3fbf73651f55169bbbc23398927e88d0`입니다.
 
-보강 뒤 전체 UI 테스트, registry 고지 고정·현재 snapshot·
-PR CI·공개 URL은 아직 확인하지 않았습니다. 실제 screen reader·
+첫 release 검사는 snapshot을 만든 직후 공개용 `docs/r/releases` 복사본이
+없어 실패했습니다. 이후 사이트를 다시 빌드해 생성물을 복사하고
+재실행해 통과했습니다. PR CI·공개 URL은 아직 확인하지 않았습니다.
+실제 screen reader·
 touch·Safari·RTL도 실행하지 않았습니다. Goal 관리용 추정은
 약 98%로 유지합니다. 로컬 후보는 142개 component·144개 item,
 공개 확인은 140개·142개입니다. RadarChart 공개 배포도 계속
