@@ -4,7 +4,7 @@ import { basename } from "node:path";
 import ts from "typescript";
 
 const root = new URL("../", import.meta.url);
-const read = path => readFileSync(new URL(path, root), "utf8");
+const read = path => readFileSync(new URL(path, root), "utf8").replace(/\r\n/g, "\n");
 const write = (path, text) => writeFileSync(new URL(path, root), text);
 const publicRoot = new URL("apps/docs/public/prism/", root);
 mkdirSync(new URL("r/", publicRoot), { recursive: true });

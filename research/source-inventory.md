@@ -1831,6 +1831,22 @@ revision이나 외부 component LICENSE는 없습니다. 현재 공급물의
 막대와 별도로 제목·행/열 머리글이 있는 정확한 값 표를 제공합니다.
 실제 screen reader 발표는 아직 확인하지 않았습니다.
 
+## 2026-10-03 PivotTable
+
+`PivotTable`은 pydemia/ui에서 새로 작성한 React·Tailwind 원본입니다.
+외부 component 코드·스타일·집계 함수를 복사하지 않았고 새 npm
+의존성도 없습니다. registry 의존성은 `pyd-utils`뿐입니다. 편입한
+upstream revision이나 외부 component LICENSE는 없습니다. 현행
+소스 표기는 `project-owned`이며 공개 사용 조건은 별도로 정하지
+않았습니다.
+
+[Microsoft의 PivotTable 설명](https://support.microsoft.com/en-us/excel/calculate-values-in-a-pivottable)은
+행·열 교차점에서 합계를 계산하는 사용 사례만 확인하는 데 사용했습니다.
+[W3C WAI의 두 머리글 표 지침](https://www.w3.org/WAI/tutorials/tables/two-headers/)에
+따라 native 행·열 머리글과 caption을 제공합니다. 두 문서의 코드와
+화면 디자인은 편입하지 않았습니다. 실제 screen reader 발표는
+아직 확인하지 않았습니다.
+
 ## 2026-10-03 TreemapChart
 
 `TreemapChart`는 pydemia/ui에서 새로 작성한 React·Tailwind 원본입니다.

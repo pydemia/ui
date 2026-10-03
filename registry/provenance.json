@@ -643,6 +643,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with exact native table of hierarchical paths, values and shares; decorative rectangles", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-pivot-table", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/tables/two-headers/", "scope": "native row and column header relationships; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "captioned native table with scoped row and column headers, exact sums and text for unknown values", "keyboard": "native focusable horizontal scroll region; browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-page-header", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "semantic heading level with optional subtitle and actions", "keyboard": "native actions", "screen_reader": "pending manual review" }

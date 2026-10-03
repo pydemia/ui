@@ -60,7 +60,7 @@ import {
     NavigationMenu, NavigationMenuContent, NavigationMenuItem,
     NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger,
     NativeSelect, NotificationCenter, NumberInput,
-    PageHeader, Pagination, PasswordInput, PinInput, Popover,
+    PageHeader, Pagination, PasswordInput, PinInput, PivotTable, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
     QueryBuilder, RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
     ResponseFeedback, ResultState,
@@ -3532,6 +3532,60 @@ function TreemapChartPreview() {
             <TreemapChart title="서비스별 사용량" unit="건"
                 description="플랫폼과 제품의 하위 서비스 사용량입니다."
                 nodes={nodes} appearance={appearance} />
+        </div>
+    );
+}
+
+function PivotTablePreview() {
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const [scenario, setScenario] = useState<
+        "data" | "missing" | "empty"
+    >("data");
+    const rows = scenario === "empty" ? [] : [
+        { id: "east", label: "동부" },
+        { id: "west", label: "서부" },
+        { id: "central", label: "중부" },
+    ];
+    const columns = scenario === "empty" ? [] : [
+        { id: "web", label: "웹" },
+        { id: "api", label: "API" },
+    ];
+    const records = scenario === "empty" ? [] : [
+        { rowId: "east", columnId: "web", value: 12 },
+        { rowId: "east", columnId: "web", value: 3 },
+        { rowId: "east", columnId: "api", value: 9 },
+        { rowId: "west", columnId: "web", value: 4 },
+        { rowId: "west", columnId: "api", value: scenario === "missing"
+            ? null : 8 },
+    ];
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "missing" ? "data" : "missing",
+                )}>
+                    {scenario === "missing" ? "서부 API 집계" :
+                        "서부 API 미수집"}
+                </Button>
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "empty" ? "data" : "empty",
+                )}>
+                    {scenario === "empty" ? "데이터 표시" : "빈 데이터"}
+                </Button>
+                <Button variant="outline" onClick={() => setAppearance(
+                    appearance === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {appearance === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <PivotTable title="지역별 채널 요청" rowLabel="지역"
+                columnLabel="채널" unit="건" rows={rows}
+                columns={columns} records={records}
+                description="같은 교차점의 기록은 합산하고 미수집은 별도로 표시합니다."
+                appearance={appearance} />
         </div>
     );
 }
@@ -7799,6 +7853,26 @@ function JobTerminal() {
     ] },
   ]} />`,
         preview: () => <TreemapChartPreview />,
+    },
+    {
+        id: "pivot-table", name: "PivotTable",
+        category: "Data & analytics",
+        description: "원자료를 행·열 범주로 묶어 교차점과 행·열·전체 합계를 계산합니다. 값이 없는 교차점은 0이며 명시적인 null은 미수집으로 표시하고 관련 합계에도 전파합니다.",
+        code: `import { PivotTable } from "@pydemia/ui";
+
+<PivotTable title="지역별 채널 요청" rowLabel="지역"
+  columnLabel="채널" unit="건"
+  rows={[{ id: "east", label: "동부" },
+    { id: "west", label: "서부" }]}
+  columns={[{ id: "web", label: "웹" },
+    { id: "api", label: "API" }]}
+  records={[
+    { rowId: "east", columnId: "web", value: 12 },
+    { rowId: "east", columnId: "web", value: 3 },
+    { rowId: "east", columnId: "api", value: 9 },
+    { rowId: "west", columnId: "api", value: null },
+  ]} />`,
+        preview: () => <PivotTablePreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",

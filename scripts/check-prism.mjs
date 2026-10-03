@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import ts from "typescript";
-const read = path => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
+const read = path => readFileSync(new URL(`../${path}`, import.meta.url), "utf8").replace(/\r\n/g, "\n");
 const manifest = JSON.parse(read("apps/docs/public/prism/components.json"));
 const index = JSON.parse(read("apps/docs/public/prism/r/registry.json"));
 const generic = new Set(JSON.parse(read("registry.json")).items.map(item => item.name));

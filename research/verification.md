@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-03 PivotTable — 로컬 후보
+
+교차점 중복 합산·음수·0·미수집 전파·행/열/전체 합계와 잘못된 입력·
+overflow를 대상 SSR 테스트 5개로 확인했습니다. 전체 UI 테스트
+247/247, typecheck와 build가 통과했습니다. 로컬 Chromium 390px에서
+표·Usage, 미수집·빈 데이터·plain 전환, 문서 가로 넘침 없음과
+page error 0건을 확인했습니다. 실제 screen reader·touch·Safari·RTL은
+실행하지 않았습니다. 고지를 provenance commit에 고정한 뒤
+`registry:release-check`가 141개 item·139개 export/catalog와 70개
+snapshot을 확인했습니다. 현재 ID는
+`sha256-32c8c4110dd838fedd10716915c72849dd5e35f6977b0dbd010fe9a559d507b9`입니다.
+PR CI·공개 URL은 [작업 기록](../.worknotes/pivot-table-2026-10-03.md)에
+이어 남깁니다.
+
 ## 2026-10-03 TreemapChart — 공개 확인
 
 `TreemapChart`의 계층 합계·값 비율·면적 배분·0값·빈 목록·잘못된 입력을
