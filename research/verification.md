@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-03 입력 control·Table 표시 형태 — 공개 확인
+
+PR #150과 `main` `a9247500`의 Verify UI·Pages가 통과했고 Vercel
+production `dpl_DJPhjTWxRLTtKiBkbM5NkrNYGLRy`가 READY입니다.
+사용자 도메인의 80번째 schema 2 manifest(`itemCount=146`)와 변경한
+세 입력 item, 79번째 Table manifest·item이 HTTP 200입니다.
+공개 Select preview에서 filled 선택 후 underline으로 바꿔도 form
+값 `editor`가 제출됐고 공개 Table preview에서 격자형으로 전환했습니다.
+공개 Textarea·NativeSelect의 세 외형 preview와 Usage도 확인했습니다.
+실제 screen reader·touch·Safari는 실행하지 않았습니다.
+[입력 기록](../.worknotes/form-control-appearances-2026-10-03.md)과
+[Table 기록](../.worknotes/table-appearances-2026-10-03.md)에 공급
+경로를 남겼습니다.
+
 ## 2026-10-03 입력 control 표시 형태 — 로컬 후보
 
 `Textarea`, `NativeSelect`, `SelectTrigger`의 세 외형과 native/form

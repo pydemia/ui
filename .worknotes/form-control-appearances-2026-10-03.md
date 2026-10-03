@@ -1,5 +1,20 @@
 # 입력 control 표시 형태 — 2026-10-03
 
+## 공개 확인
+
+PR [#150](https://github.com/pydemia/ui/pull/150)의 CI와 병합 commit
+`a9247500`의 Verify UI run `37120543627`·Pages가 통과했습니다.
+Vercel production `dpl_DJPhjTWxRLTtKiBkbM5NkrNYGLRy`는 READY이며
+`ui.pydemia.ai` alias를 받았습니다. 사용자 도메인에서 80번째
+manifest(`schemaVersion=2`, `itemCount=146`)와 snapshot·현재
+`pyd-textarea`, `pyd-native-select`, `pyd-select` item이 모두 HTTP
+200이고 새 외형 코드를 담습니다. [공개 Select 문서](https://ui.pydemia.ai/?component=select#components)에서
+Usage와 전환 가능한 preview를 확인했습니다. filled로 option을 고른 뒤
+underline으로 바꾸고 제출해 `editor` 값이 유지되는 것을 확인했습니다.
+공개 Textarea의 세 입력란·Usage와 NativeSelect의 외형 선택·Usage도
+확인했습니다. 두 control의 입력·선택은 로컬 Chromium에서 실행했으며
+공개 사이트에서는 반복하지 않았습니다.
+
 ## 선정과 변경
 
 `Input`은 outline·filled·underline을 제공하지만 같은 form에 쓰는

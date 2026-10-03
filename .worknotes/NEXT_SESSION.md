@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-03 입력 control 외형과 Table 외형 공개: PR #150과 병합 commit
+`a9247500`의 Verify UI·Pages, Vercel production이 성공했습니다.
+사용자 도메인의 80번째 manifest·세 입력 item과 79번째 Table
+manifest·item은 HTTP 200입니다. 공개 Select의 외형 변경 뒤 form
+제출과 Table 격자형 전환을 확인했습니다. 144개 component·146개
+item이며 Goal 관리용 추정은 약 99%입니다.
+[입력 기록](form-control-appearances-2026-10-03.md)과
+[Table 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 입력 control 세 외형 로컬 후보: `Textarea`,
 `NativeSelect`, `SelectTrigger`에 outline·filled·underline을
 추가했습니다. 기본 외형과 form 값은 유지합니다. 대상 테스트 4/4,

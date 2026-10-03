@@ -1,5 +1,14 @@
 # Table·DataTable 표시 형태 — 2026-10-03
 
+## 후속 공개 확인
+
+`main` `a9247500`의 Vercel production
+`dpl_DJPhjTWxRLTtKiBkbM5NkrNYGLRy`가 READY가 됐습니다. 사용자
+도메인의 79번째 manifest와 현재 `pyd-table` item은 HTTP 200이며
+item에 `appearance` 코드가 있습니다. [공개 Table 문서](https://ui.pydemia.ai/?component=table#components)에서
+세 형태의 preview·Usage와 격자형 전환을 확인했습니다. 아래의
+404 기록은 이전 배포를 확인한 당시 상태입니다.
+
 ## 병합과 공급 상태
 
 PR #148을 병합한 `main` commit은 `743782db`입니다. PR Verify UI와
