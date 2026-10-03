@@ -1,5 +1,19 @@
 # 검증 기록
 
+## 2026-10-03 입력 control 표시 형태 — 로컬 후보
+
+`Textarea`, `NativeSelect`, `SelectTrigger`의 세 외형과 native/form
+값 보존을 확인하는 대상 테스트 4/4, UI 전체 테스트 277/277,
+typecheck·build·registry release 검사가 통과했습니다. 로컬
+Chromium에서 Textarea 입력, NativeSelect 외형·값 전환,
+Select 외형·option 선택·폼 제출을 실행했습니다. 80번째 snapshot은
+146개 item을 포함하며 현재 빌드와 일치합니다. Select의 어두운
+테마에서 세 외형도 비교했습니다. 실제 screen reader·
+touch·Safari는 실행하지 않았습니다. PR CI와 공개 사이트 게시 상태는
+아직 확인 전입니다.
+[작업 기록](../.worknotes/form-control-appearances-2026-10-03.md)에 범위와
+남은 확인을 남겼습니다.
+
 ## 2026-10-03 Table·DataTable 표시 형태 — 로컬 후보
 
 native caption·열 머리글과 세 외형, `DataTable` 전달을 확인하는

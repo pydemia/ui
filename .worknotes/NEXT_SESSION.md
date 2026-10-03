@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-03 입력 control 세 외형 로컬 후보: `Textarea`,
+`NativeSelect`, `SelectTrigger`에 outline·filled·underline을
+추가했습니다. 기본 외형과 form 값은 유지합니다. 대상 테스트 4/4,
+UI 전체 277/277, typecheck·build·80번째 registry release 검사와
+로컬 Chromium 조작을 확인했습니다. PR CI·공개 사이트 게시 확인은
+남았습니다. 수량은 144개 component·146개 item, Goal 관리용 추정은
+약 99%입니다. [작업 기록](form-control-appearances-2026-10-03.md)을
+참고하세요.
+
 2026-10-03 공급·품질 체크리스트 재검토: `Table`·`DataTable` 변경은
 전체 315개 파일 중 snapshot 이중 복제가 대부분이었습니다. 이를
 사람의 품질 검토량이나 Goal 미완료로 계산하지 않습니다. 변경 동작,
