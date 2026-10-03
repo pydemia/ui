@@ -18,8 +18,10 @@ binning·집계는 호출자가 맡습니다. 정확한 구간·건수·합계�
 경계·너비·건수·합계, 소수 경계와 빈 formatter를 다룹니다.
 Chromium preview에서 390px과 1280px의 축·표 배치, data·모두 0·
 빈 데이터 전환, `panel`·`plain`, light/dark를 확인했습니다. 실제
-screen reader 발표는 실행하지 않았습니다. source 너비 변경 후에는
-package build만 재실행했으며 전체 build와 registry 검사는 남았습니다.
+screen reader 발표는 실행하지 않았습니다. 최종 source의 전체 build,
+`registry:check`, 67번째 snapshot 생성과 `registry:release-check`를
+통과했습니다. snapshot ID는
+`sha256-42ef7c428b894dd74fb740e145c8232d292363b9fefc1cd30fdfd506487701f8`입니다.
 
 공급·품질 기준은 이 변경에 한정해 적용했습니다. 원본 코드이므로
 외부 component의 revision·LICENSE 대조와 새 설치 방식의 격리 소비자
@@ -27,4 +29,5 @@ package build만 재실행했으며 전체 build와 registry 검사는 남았습
 빈 상태는 대상 테스트와 preview로 확인합니다. 전체 snapshot 복제량,
 공통 고지 hash 전파, Vercel 배포 제한은 component 품질 점수가
 아닙니다. 적용 CI와 공개 URL은 공개 준비·공개 확인 단계에서 각각
-판정합니다. 현재 상태는 구현 검토이며 Goal 관리용 추정은 약 98%입니다.
+판정합니다. 현재 상태는 공개 준비 단계의 로컬 검증 완료이며 적용 CI와
+공개 URL은 미확인입니다. Goal 관리용 추정은 약 98%입니다.
