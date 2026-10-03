@@ -1,5 +1,18 @@
 # Component 확장 작업 인계
 
+2026-10-03 `HistogramChart` 로컬 릴리스 준비: 137개 component·139개
+registry item·67번째 snapshot의 typecheck·대상 테스트·build·
+`registry:release-check`와 Chromium preview를 확인했습니다. PR CI와
+공개 URL은 아직 미확인입니다. [작업 기록](histogram-chart-2026-10-03.md)을
+참고하세요. 공급·품질 체크리스트는 해당 변경 위험에만 적용했고 Goal
+관리용 추정은 약 98%입니다.
+
+2026-10-03 `HistogramChart` 로컬 구현 후보: 연속된 동일 너비 구간의
+빈도를 검증하고 막대·정확한 값 표로 표시합니다. 대상 테스트와
+typecheck는 통과했으며 build·registry·browser·공개 검증은 이어서
+확인해야 합니다. [작업 기록](histogram-chart-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 PR #116 병합: `BoxPlotChart`와 66번째 snapshot, 체크리스트
 재검토가 `main`에 들어갔습니다. PR·`main` Verify UI와 Pages는
 성공했지만 Vercel production은 배포 제한으로 실패했고 새 item과

@@ -1,5 +1,16 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `HistogramChart` 릴리스 후보와 체크리스트 실적용:
+**약 98% → 약 98%**입니다. 로컬 137개 component·139개 item·67번째
+snapshot의 관련 검사와 preview를 확인했습니다. 외부 코드·새 설치
+형식 검사는 적용하지 않았고 PR CI·공개 URL은 아직 확인하지 않았습니다.
+[작업 기록](histogram-chart-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `HistogramChart` 구현 검토: **약 98% → 약 98%**입니다.
+연속된 수치 구간의 빈도를 다루는 원본 component를 추가하고
+typecheck·대상 테스트를 확인했습니다. 공개 공급은 아직 확인하지
+않았습니다. [작업 기록](histogram-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 PR #116 병합·공개 대기: **약 98% → 약 98%**입니다.
 저장소의 136개 component·138개 item·66개 snapshot은 PR·`main` CI를
 통과했습니다. Vercel 배포 제한으로 새 item과 manifest가 사용자
