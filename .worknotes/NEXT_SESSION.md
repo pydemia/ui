@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 `CalendarHeatmap` 병합·공개 대기: PR #133과
+`main` Verify UI, Pages가 통과했습니다. Vercel production은
+배포 횟수 제한으로 실패했고 새 item·74번째 manifest가 사용자
+도메인에서 404입니다. 공개 확인은 142개 component·144개 item,
+저장소 후보는 143개·145개·74개 snapshot입니다.
+[작업 기록](calendar-heatmap-2026-10-03.md)에 URL과 미검증
+범위가 있습니다. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 공급·품질 체크리스트 재검토: 고정된 수동 검사 조합이나
 component별 PR·snapshot을 요구하지 않습니다. 구현 증거와 릴리스
 묶음의 CI·snapshot, 공개 URL 판정을 분리해

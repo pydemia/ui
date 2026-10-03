@@ -10,7 +10,10 @@ Chromium 408px에서 366개 날짜, 내부 가로 스크롤, `plain` 전환,
 실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다.
 고지를 source commit에 고정한 뒤 `registry:release-check`가
 145개 item·143개 export/catalog와 74번째 snapshot의 현재
-일치를 확인했습니다. PR CI·공개 URL은 아직 확인하지 않았습니다.
+일치를 확인했습니다. PR #133과 `main`의 Verify UI, Pages는
+통과했습니다. Vercel production은 배포 횟수 제한으로 실패했고
+새 item과 manifest는 사용자 도메인에서 HTTP 404입니다.
+공개 공급 확인은 남았습니다.
 세부 상태는 [작업 기록](../.worknotes/calendar-heatmap-2026-10-03.md)에
 남깁니다.
 

@@ -1,5 +1,16 @@
 # CalendarHeatmap 작업 기록
 
+## 병합 후 상태
+
+PR #133은 `65e330c16253c614b5963675980ea7999869c983`로
+`main`에 병합됐습니다. PR과 `main`의 Verify UI가 모두 통과했고
+Pages도 성공했습니다. Vercel production은 배포 횟수 제한으로
+실패했습니다. 현재 `ui.pydemia.ai`의 새 item과 74번째
+manifest, `pydemia-ui.vercel.app`의 item은 HTTP 404입니다.
+이는 공개 대기이며 새 component를 공개 공급 수량에 반영하지
+않습니다. 공개 확인은 142개 component·144개 item이고
+Goal 관리용 추정은 약 98%입니다.
+
 날짜별 활동량은 임의의 두 범주를 비교하는 `Heatmap`으로 표현하기
 어려워 별도 component로 편입했습니다. 연도와 희소 날짜 목록을 받아
 주·요일 격자를 계산합니다. 빠진 날짜는 0, 명시적인 `null`은
