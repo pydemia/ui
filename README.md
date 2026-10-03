@@ -89,8 +89,12 @@ registry JSON과 내부 의존성, token 파일을 같은 내용 해시로 묶�
 있습니다. 현재 `/r/pyd-*.json`은 빌드할 때 갱신되는 최신 경로이고,
 `/r/releases/sha256-<digest>/pyd-*.json`은 해당 시점의 고정 경로입니다.
 snapshot 디렉터리의 `manifest.json`은 각 파일의 SHA-256을 기록합니다.
-과거 Vercel 배포로 Instant Rollback하면 그 배포에 없던 새 snapshot
-경로가 404가 될 수 있습니다. 복구할 때는 현재 `main`에서 새
+77번째부터 snapshot의 `baseUrl`과 내부 의존성은
+`raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/`를
+사용합니다. Vercel Instant Rollback으로 사이트를 이전 배포로
+돌려도 새 형식의 설치 URL은 `main`에 남은 파일을 읽습니다. 과거
+76개 snapshot의 Vercel URL은 이전 배포에서 404가 될 수 있습니다.
+복구할 때는 현재 `main`에서 새
 커밋으로 문제 변경을 되돌리고, 기존 `registry/releases/`와
 `docs/r/releases/`는 되돌리기 전 `main` commit에서 유지합니다.
 필요하면 다음 명령으로 두 디렉터리를 복원합니다. `COMMIT_SHA`는
@@ -103,8 +107,8 @@ git restore --source=COMMIT_SHA --staged --worktree -- registry/releases docs/r/
 이후 아래 순서로 빌드·snapshot·검사를 수행하고 새
 배포를 게시합니다. 공개 후 현재·이전 release의 manifest와 대표 item
 URL을 확인합니다. CI는 기존 release 파일의 수정·삭제를 거부합니다.
-이 절차는 앞으로 게시하는 빌드의 파일 보존을 검사하며, 이미 수행한
-Instant Rollback의 일시적인 404를 막지는 못합니다.
+이 절차는 `main`의 기존 release 파일 보존을 검사합니다. Vercel에
+묶인 이전 snapshot의 Instant Rollback 중 일시적인 404는 막지 못합니다.
 
 ```bash
 npm run build
@@ -113,9 +117,10 @@ npm run build
 npm run registry:release-check
 ```
 
-`registry:snapshot`은 기본 공개 URL로 빌드된 item만 받습니다. 같은
-내용을 다시 실행하면 기존 snapshot을 확인하고 유지하며, 내용이 바뀌면
-새 식별자를 만듭니다. `registry:check`는 snapshot의 파일 해시·내부
+`registry:snapshot`은 기본 공개 URL로 빌드된 item을 받아 의존성을
+고정된 release 경로로 바꿉니다. 같은 내용과 공급 형식이면 기존
+snapshot을 확인하고 유지하며, 내용이나 형식이 바뀌면 새 식별자를
+만듭니다. `registry:check`는 snapshot의 파일 해시·내부
 의존성·`docs/r/releases/` 복사본을 확인합니다. 이전 snapshot을 수정하지
 않고 새 경로를 추가합니다. `registry:release-check`는 현재 빌드의 내용
 해시 ID를 계산해 해당 snapshot과 `docs/r/`의 최신 JSON을 대조합니다.
@@ -124,11 +129,11 @@ npm run registry:release-check
 [CHANGELOG.md](CHANGELOG.md)에 기록하고, 배포 후 공개 manifest와
 변경 item URL을 확인합니다. 설치 형식·target·의존 경로가 바뀌면
 해당 경로의 별도 소비자 설치·typecheck·build도 확인합니다.
-다음은 이전 TreeSelect 릴리스의 고정 ID와 token을 별도 소비자에
-설치하는 예시입니다.
+다음은 GitHub raw 경로의 `TransferList`와 token을 별도 소비자에
+설치하는 예시입니다. `main`에 release가 병합된 뒤 사용할 수 있습니다.
 
 ```bash
-npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/releases/sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f/pyd-tree-select.json https://pydemia-ui.vercel.app/r/releases/sha256-b133e29e04962cce50921b2f92a4921c18fb90f061abf0d52d284777ac0ef14f/pyd-tokens.json
+npx shadcn@4.21.0 add https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-c4275e165672ed0ab23e640a160305ac6949384bb206a1424243efc8851b8857/pyd-transfer-list.json https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-c4275e165672ed0ab23e640a160305ac6949384bb206a1424243efc8851b8857/pyd-tokens.json
 ```
 
 이전 DataChart snapshot

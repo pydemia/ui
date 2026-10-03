@@ -5,6 +5,8 @@ import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
 const publicBase = "https://pydemia-ui.vercel.app/r/";
+const durableBase =
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/";
 const releaseRoot = "registry/releases";
 const publishedRoot = "docs/r/releases";
 const releaseIdPattern = /^sha256-[a-f0-9]{64}$/;
@@ -34,11 +36,21 @@ function canonicalItem(item, base, names) {
     return result;
 }
 
-function releaseDigest(items, base, names) {
-    return digest(JSON.stringify(items.map((item) => ({
+function releaseDigest(items, base, names, schemaVersion) {
+    const entries = items.map((item) => ({
         name: item.name,
         item: canonicalItem(item, base, names),
-    }))));
+    }));
+    if (schemaVersion === 1) return digest(JSON.stringify(entries));
+    return digest(JSON.stringify({
+        schemaVersion: 2, deliveryBase: durableBase, items: entries,
+    }));
+}
+
+function releaseBase(id, schemaVersion) {
+    assert(schemaVersion === 1 || schemaVersion === 2,
+        `Unsupported release schema: ${schemaVersion}`);
+    return `${schemaVersion === 1 ? publicBase : durableBase}releases/${id}/`;
 }
 
 async function registryNames() {
@@ -68,8 +80,7 @@ async function checkRelease(id, checkPublished) {
     const manifest = JSON.parse(await readFile(
         join(directory, "manifest.json"), "utf8",
     ));
-    const base = `${publicBase}releases/${id}/`;
-    assert.equal(manifest.schemaVersion, 1);
+    const base = releaseBase(id, manifest.schemaVersion);
     assert.equal(manifest.id, id);
     assert.equal(manifest.baseUrl, base);
     assert.equal(manifest.sourceDigest, id.slice("sha256-".length));
@@ -100,7 +111,8 @@ async function checkRelease(id, checkPublished) {
         }
     }
     assert.equal(manifest.itemCount, items.length);
-    assert.equal(releaseDigest(items, base, nameSet),
+    assert.equal(releaseDigest(items, base, nameSet,
+        manifest.schemaVersion),
         manifest.sourceDigest, `Release content changed: ${id}`);
     if (checkPublished) {
         assert.deepEqual(
@@ -119,9 +131,12 @@ async function checkRelease(id, checkPublished) {
 async function createRelease() {
     const { names, items } = await currentRegistryItems();
     const nameSet = new Set(names);
-    const sourceDigest = releaseDigest(items, publicBase, nameSet);
+    const schemaVersion = 2;
+    const sourceDigest = releaseDigest(
+        items, publicBase, nameSet, schemaVersion,
+    );
     const id = `sha256-${sourceDigest}`;
-    const base = `${publicBase}releases/${id}/`;
+    const base = releaseBase(id, schemaVersion);
     const directory = join(releaseRoot, id);
     if (existsSync(directory)) {
         await checkRelease(id, false);
@@ -142,7 +157,7 @@ async function createRelease() {
         contents.push([`${item.name}.json`, content]);
     }
     const manifest = {
-        schemaVersion: 1, id, baseUrl: base, sourceDigest,
+        schemaVersion, id, baseUrl: base, sourceDigest,
         itemCount: names.length, files,
     };
     await mkdir(directory, { recursive: true });
@@ -158,7 +173,7 @@ async function createRelease() {
 async function verifyCurrent(id) {
     const { names, items } = await currentRegistryItems();
     const currentId = `sha256-${releaseDigest(
-        items, publicBase, new Set(names),
+        items, publicBase, new Set(names), 2,
     )}`;
     const selectedId = id ?? currentId;
     assert(releaseIdPattern.test(selectedId),

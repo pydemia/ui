@@ -1,0 +1,49 @@
+# 공급·품질 판정 수준 재검토 — 2026-10-03
+
+## 확인한 사실
+
+현행 기준은 개발 중 후보의 사용처·중복 여부와 바뀐 핵심 동작만
+확인하고, Usage·preview·snapshot은 공개 후보 단계에서 확인합니다.
+고정된 browser·화면 폭 조합이나 component별 PR·snapshot도 요구하지
+않습니다. 이 수동 검사 범위는 더 낮출 이유가 확인되지 않았습니다.
+
+실제 부담은 자동 게시 절차에 남아 있습니다. `Verify UI`는 draft PR도
+전체 typecheck·테스트·build·registry 검사를 실행합니다. Review 준비
+PR과 `main`은 현재 snapshot 일치까지 확인하며, `registry:check`는
+과거 release 전체를 읽습니다. 현재 추적 중인 76개 release는
+`registry/releases/`와 `docs/r/releases/`에 각각 9,064개 파일,
+합계 18,128개 파일입니다. 이 파일 수와 과거 10개 운영 과제의
+미완료 수는 신규 component의 품질을 나타내지 않습니다.
+
+## 적용 판단
+
+| 변경 | 완료 판단에 필요한 증거 | 별도 위험이 없으면 반복하지 않는 검사 |
+| --- | --- | --- |
+| 기존 component의 표시 | 영향받은 상태의 preview와 build | 전체 사용 코드·모든 화면 폭·browser |
+| 새 API·상호작용 | 실제 사용 코드, 핵심 경로의 관련 테스트 또는 실행, keyboard·form 등 변경한 경로 | 자동 테스트와 같은 조작의 PR·production 재실행 |
+| registry·설치 경로 | 생성 item·의존성 정합성, 격리 소비자 설치, 적용 CI | 무관한 개별 item 전체 재설치 |
+| 외부 코드 편입 | 해당 revision의 source·LICENSE·의존성·접근성 | 같은 revision 조사 반복 |
+| 공개 게시 | 묶음의 snapshot·적용 CI, manifest와 변경 대표 item 접근 | component마다 별도 PR·snapshot |
+
+확인된 값 손실, 제출 오류, keyboard로 사용할 수 없는 핵심 조작,
+설치 실패, 필수 고지 누락, 적용 CI 실패는 출시를 막습니다. 해당 변경의
+핵심 경로를 실행하지 못한 경우에는 구현 검증을 완료로 쓰지 않습니다.
+Screen reader·touch·Safari·RTL의 전수 수동 점검, 과거 snapshot의
+모든 item 재설치, 장기 URL 보존 실험은 모든 component 릴리스의
+필수 체크박스로 두지 않습니다. 관련 지원 동작이나 공급 경로가
+바뀌면 해당 범위를 검증하고 미검증 항목을 구체적으로 남깁니다.
+
+Goal은 component 수나 과거 운영 과제의 체크 수로 종료하지 않습니다.
+요청한 화면 범주와 디자인 선택지, 대표 복합 화면의 설치·동작,
+현재 공개 공급을 확인하면 범위 달성을 판정할 수 있습니다.
+이미 확인한 [범위 점검](goal-scope-audit-2026-10-03.md)은 그 조건의
+대부분을 충족합니다. Rollback 시 과거 schema 1 snapshot URL 보존은
+라이브러리 전체의 별도 운영 위험으로 추적합니다. 이 위험 하나만으로
+새 component의 품질이나 Goal 달성률을 깎지 않습니다.
+
+이번 재검토는 판정의 적용 범위와 Goal 종료 조건을 정리한 것입니다.
+CI·snapshot 생성 방식은 바꾸지 않았습니다. 진행 중인 schema 2
+snapshot 변경은 설치 경로 변경이므로 공개 뒤 새 경로로 격리 소비자
+설치를 확인해야 합니다. 그 결과 전에는 공개 공급 완료로 쓰지
+않습니다. 현시점 Goal 관리용 추정은 약 99%이며 이번 문서 검토만으로
+수량이나 추정치를 올리지 않습니다.

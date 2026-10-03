@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-03 — Registry snapshot 공급 경로
+
+- 새 snapshot의 manifest와 전이 의존성을 GitHub raw의 `main` 경로로
+  고정합니다. Vercel을 이전 배포로 돌려도 새 형식의 설치 경로는
+  `main`의 release 파일을 사용합니다. 이전 76개 snapshot은 수정하지
+  않았습니다.
+
 ## 2026-10-03 — Autocomplete
 
 - 추천어를 선택하거나 자유 입력 텍스트를 그대로 제출하는
