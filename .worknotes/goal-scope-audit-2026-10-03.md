@@ -1,5 +1,33 @@
 # Component 공급 Goal 범위 점검 — 2026-10-03
 
+## 83번째 release 기준 재확인
+
+2026-10-03 현재 `npm run registry:release-check`가 144개 component
+export·catalog entry, 146개 registry item, 83개 불변 release와 현재
+빌드의 일치를 확인했습니다. 공개 사이트에서 `AppShell`, `Navigation`,
+`Sidebar`, `Dashboard`, `LogConsole`, `DataChart`, `PageHeader`,
+`ContentList`, `AlertDialog`, `Spinner`의 현재 item이 모두 HTTP 200입니다.
+
+공개 AppShell preview에는 전역 탐색, 측면·하단 패널과 floating 도움말,
+골격·패널·버튼 형태 선택이 있습니다. 도움말을 열어 패널과 닫기
+버튼이 표시되는 것을 확인했습니다. 공개 Spinner preview·Usage에는
+icon·ring·dots·bars·orbit가 있고 MetricCard에는 기본·compact·
+featured가 있습니다. Operations workspace에서 기간을 최근 7일에서
+최근 4주로 바꾸자 요청 지표가 1,284→5,031, 완료 지표가
+1,216→4,842로 바뀌고 차트 구간도 요일에서 주차로 바뀌었습니다.
+따라서 Goal에 명시된 화면 범주와 대표 복합 화면은 현재 공개 상태에서
+직접 확인했습니다.
+
+최신 Dialog 크기 변경 PR #156은 `main`에 병합됐고 PR·`main`의
+Verify UI와 Pages가 통과했습니다. 83번째 manifest는 GitHub raw에서
+HTTP 200이지만 `ui.pydemia.ai`에서는 HTTP 404입니다. Vercel
+production은 여전히 82번째 release의 `82b760b7`을 가리키며,
+최신 Dialog preview의 공개 공급은 완료되지 않았습니다. 계정 로그인이
+필요한 Vercel 배포 화면은 사용자에게 인계했습니다. 이 상태를
+component 품질 실패로 세지 않으며 Goal 관리용 추정은 약 99%로
+유지합니다. 실제 screen reader·touch·Safari·RTL의 전수 동작은
+이번 재확인에서 실행하지 않았습니다.
+
 후속 판정: 아래 점검 당시에는 rollback 중 이전 snapshot URL 보존을
 이유로 Goal 완료를 보류했습니다. 현재
 [품질 판정](quality-gate-level-review-2026-10-03.md)은 이를 별도 운영
