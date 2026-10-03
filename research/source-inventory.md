@@ -935,6 +935,11 @@ registry 전이 항목은 `pyd-button`, `pyd-drawer`, `pyd-navigation`,
 복사하지 않았습니다. 기존 Radix Dialog revision·MIT LICENSE와 registry
 전이 항목은 그대로이며 새 npm dependency는 없습니다.
 
+2026-10-03 `Sidebar.linkVariant`는 이미 제공하던 원본
+`SideNavLink`의 `rail`·`filled` 표시를 내부 링크에 전달합니다.
+외부 코드를 새로 편입하지 않았고 source·LICENSE·의존성은 위와
+같습니다.
+
 ## 2026-09-29 단계·활동 표시 reference
 
 `Stepper`와 `Timeline`은 이 저장소의 원본 구현입니다.

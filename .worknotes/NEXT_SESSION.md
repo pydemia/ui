@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-03 `Sidebar` 링크 표시 선택 로컬 후보: 내부 `SideNavLink`의
+레일형·채움형을 `linkVariant`로 고를 수 있게 하고 Usage·preview를
+추가했습니다. 대상 4/4, UI 전체 278/278, typecheck·build·
+81번째 registry release 검사와 로컬 Chromium 데스크톱·390px
+모바일 탐색을 확인했습니다. PR CI·공개 확인은 진행 중입니다.
+[작업 기록](sidebar-link-variants-2026-10-03.md)을 참고하세요.
+공급·품질은 [적용 재확인](quality-gate-level-review-2026-10-03.md)처럼
+변경 동작과 묶음 게시를 구분합니다. Goal 관리용 추정은 약 99%입니다.
+
 2026-10-03 입력 control 외형과 Table 외형 공개: PR #150과 병합 commit
 `a9247500`의 Verify UI·Pages, Vercel production이 성공했습니다.
 사용자 도메인의 80번째 manifest·세 입력 item과 79번째 Table

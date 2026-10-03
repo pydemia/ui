@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `Sidebar` 표시 형태와 품질 기준 재확인:
+**약 99% → 약 99%**입니다. 기존 내부 링크의 레일형·채움형을
+`Sidebar`에서 선택할 수 있게 했습니다. 새 component·item은 없고,
+대상 4/4·UI 전체 278/278·typecheck·build·81번째 registry
+release 검사와 로컬 Chromium preview를 확인했습니다. PR CI·공개
+검증은 진행 중입니다. 기준 재확인은
+[판정 기록](quality-gate-level-review-2026-10-03.md), 구현 상태는
+[작업 기록](sidebar-link-variants-2026-10-03.md)에 남겼습니다.
+
 2026-10-03 입력 control·Table 외형 production 공개:
 **약 99% → 약 99%**입니다. PR #150과 `main` CI·Pages가 통과했고
 Vercel production이 READY입니다. 사용자 도메인의 80번째 입력
