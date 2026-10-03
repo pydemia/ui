@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-03 — 입력 control 표시 형태
+
+- `Textarea`, `NativeSelect`, `SelectTrigger`에 `outline`(기본값),
+  `filled`, `underline`을 제공합니다. 기존 입력·선택 동작과 form 값은
+  유지하고 문서에서 각 형태를 조작할 수 있습니다.
+
 ## 2026-10-03 — Table·DataTable 표시 형태
 
 - 기본 줄 구분형을 유지하고 격자형·경계선 없는 표를 선택할 수

@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 입력 control 표시 선택 로컬 후보:
+**약 99% → 약 99%**입니다. `Textarea`, `NativeSelect`,
+`SelectTrigger`에 outline·filled·underline을 추가했습니다. 기존
+component 세 개의 디자인 선택지를 늘린 작업이라 수량은 144개
+component·146개 item으로 같습니다. 대상 테스트 4/4, UI 전체
+277/277, typecheck·build·80번째 release 검사와 로컬 Chromium
+입력·선택·제출을 확인했습니다. PR CI와 공개 게시 확인은 남았습니다.
+[작업 기록](form-control-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 재검토와 Table·DataTable 병합:
 **약 99% → 약 99%**입니다. PR #148과 `main` Verify UI·Pages,
 79번째 GitHub raw manifest 공개를 확인했습니다. 사용자 도메인의

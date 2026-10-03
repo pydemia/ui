@@ -1,5 +1,19 @@
 # Prototype 설계 계약
 
+## 2026-10-03 입력 control 표시 형태
+
+`Textarea`, `NativeSelect`, `SelectTrigger`의 `appearance`는
+`outline`(기본값), `filled`, `underline`입니다. `filled`는 공통
+`--surface-subtle` token을, `underline`은 투명 표면과 아래쪽
+테두리를 사용합니다. 입력 높이·간격·foreground·border는 기존
+semantic token을 따르고 `className`은 호출자가 마지막에
+재정의할 수 있습니다. 미지원 값은 명시적으로 거부합니다.
+
+외형을 바꿔도 `Textarea`·`NativeSelect`의 native `name`, 값,
+필수·오류 상태와 `SelectTrigger`의 이름 있는 combobox, option 탐색,
+`Select`의 form 값을 유지합니다. `Select`의 popup 외형은
+`SelectTrigger.appearance`의 영향을 받지 않습니다.
+
 ## 2026-10-03 Table·DataTable 표시 형태
 
 `Table`의 `appearance`는 `lined`(기본값), `grid`, `plain`입니다.

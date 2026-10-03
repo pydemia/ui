@@ -1,5 +1,13 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 입력 control 외형 확장
+
+기존 `Textarea`, `NativeSelect`의 shadcn/ui 고정 revision과 MIT 고지,
+`Select`의 pydemia/ui 원본 provenance를 유지했습니다. 입력 외형만
+공통 token으로 확장했으며 외부 코드·npm 의존성·registry 설치 경로를
+추가하지 않았습니다. 각 item의 기존 source·license 정보는
+`registry/provenance.json`과 `registry.json`을 따릅니다.
+
 ## 2026-10-03 shadcn/ui 소비자 고지
 
 현재 shadcn/ui 수정 소스를 쓰는 28개 item의 source metadata를

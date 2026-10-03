@@ -1075,12 +1075,29 @@ function AvatarGroupPreview() {
 
 function NativeSelectPreview() {
     const [density, setDensity] = useState("standard");
+    const [appearance, setAppearance] = useState<
+        "outline" | "filled" | "underline"
+    >("outline");
 
     return (
         <div className="preview-stack">
+            <div className="flex flex-wrap gap-2" role="group"
+                aria-label="기본 선택 표시 형태">
+                {(["outline", "filled", "underline"] as const).map(
+                    (option) => (
+                        <Button key={option} type="button"
+                            variant={appearance === option ? "primary" : "outline"}
+                            aria-pressed={appearance === option}
+                            onClick={() => setAppearance(option)}>
+                            {option}
+                        </Button>
+                    ),
+                )}
+            </div>
             <Label htmlFor="demo-density">화면 밀도</Label>
             <NativeSelect
                 id="demo-density"
+                appearance={appearance}
                 value={density}
                 onChange={(event) => setDensity(event.target.value)}
             >
@@ -1901,6 +1918,9 @@ function SelectPreview() {
     const [role, setRole] = useState("");
     const [submitted, setSubmitted] = useState<string | null>(null);
     const [tried, setTried] = useState(false);
+    const [appearance, setAppearance] = useState<
+        "outline" | "filled" | "underline"
+    >("outline");
 
     return (
         <form
@@ -1911,6 +1931,19 @@ function SelectPreview() {
                 setSubmitted(String(new FormData(event.currentTarget).get("role") ?? ""));
             }}
         >
+            <div className="flex flex-wrap gap-2" role="group"
+                aria-label="선택 표시 형태">
+                {(["outline", "filled", "underline"] as const).map(
+                    (option) => (
+                        <Button key={option} type="button"
+                            variant={appearance === option ? "primary" : "outline"}
+                            aria-pressed={appearance === option}
+                            onClick={() => setAppearance(option)}>
+                            {option}
+                        </Button>
+                    ),
+                )}
+            </div>
             <Field
                 label="담당 역할"
                 error={tried && !role ? "역할을 선택하세요." : undefined}
@@ -1922,7 +1955,7 @@ function SelectPreview() {
                         setSubmitted(null);
                         setTried(false);
                     }}>
-                        <SelectTrigger {...control}>
+                        <SelectTrigger {...control} appearance={appearance}>
                             <SelectValue placeholder="역할 선택" />
                         </SelectTrigger>
                         <SelectContent>
@@ -5938,24 +5971,41 @@ function RequestContextMenu() {
     {
         id: "textarea", name: "Textarea", category: "Inputs",
         installItems: ["textarea", "label"],
-        description: "여러 줄 입력에 쓰는 native textarea입니다. label과 오류 상태는 사용하는 form에서 연결합니다.",
+        description: "여러 줄 native 입력입니다. outline·filled·underline 형태를 고르며 label과 오류 상태는 form에서 연결합니다.",
         code: `import { Label, Textarea } from "@pydemia/ui";
 
 <>
   <Label htmlFor="notes">메모</Label>
   <Textarea id="notes" rows={3} placeholder="메모를 입력하세요" />
+
+  <Label htmlFor="summary">요약</Label>
+  <Textarea id="summary" appearance="filled" rows={3} />
+
+  <Label htmlFor="reference">참고 사항</Label>
+  <Textarea id="reference" appearance="underline" rows={3} />
 </>;`,
-        preview: () => <div className="preview-stack"><Label htmlFor="demo-notes">메모</Label><Textarea id="demo-notes" rows={3} placeholder="메모를 입력하세요" /></div>,
+        preview: () => <div className="preview-stack">
+            <Label htmlFor="demo-notes">메모 · outline</Label>
+            <Textarea id="demo-notes" rows={3}
+                placeholder="메모를 입력하세요" />
+            <Label htmlFor="demo-summary">요약 · filled</Label>
+            <Textarea id="demo-summary" appearance="filled" rows={3}
+                placeholder="요약을 입력하세요" />
+            <Label htmlFor="demo-reference">참고 사항 · underline</Label>
+            <Textarea id="demo-reference" appearance="underline" rows={3}
+                placeholder="참고 사항을 입력하세요" />
+        </div>,
     },
     {
         id: "native-select", name: "NativeSelect", category: "Selection",
         installItems: ["native-select", "label"],
-        description: "브라우저의 native select 동작을 유지하면서 입력 높이와 색상을 맞췄습니다.",
+        description: "브라우저의 native 선택 동작을 유지하며 outline·filled·underline 형태를 제공합니다.",
         code: `import { Label, NativeSelect } from "@pydemia/ui";
 
 <>
   <Label htmlFor="density">화면 밀도</Label>
-  <NativeSelect id="density" defaultValue="standard">
+  <NativeSelect id="density" appearance="filled"
+    defaultValue="standard">
     <option value="standard">기본</option>
     <option value="compact">좁게</option>
   </NativeSelect>
@@ -6964,7 +7014,7 @@ function EmailField() {
     {
         id: "select", name: "Select", category: "Selection",
         installItems: ["select", "field"],
-        description: "검색 없는 단일 선택입니다. option 탐색과 form 값을 관리합니다.",
+        description: "검색 없는 단일 선택입니다. trigger에 outline·filled·underline 형태를 고르며 option 탐색과 form 값을 유지합니다.",
         code: `import { useState } from "react";
 import { Field, Select, SelectTrigger, SelectValue,
   SelectContent, SelectItem } from "@pydemia/ui";
@@ -6975,7 +7025,7 @@ function RoleSelect() {
     <Field label="담당 역할" required>
       {(control) => (
         <Select name="role" value={role} onValueChange={setRole}>
-          <SelectTrigger {...control}>
+          <SelectTrigger {...control} appearance="underline">
             <SelectValue placeholder="역할 선택" />
           </SelectTrigger>
           <SelectContent>

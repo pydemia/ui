@@ -41,6 +41,7 @@ export type {
 export { Field } from "./components/field";
 export type { FieldControlProps, FieldProps } from "./components/field";
 export { Textarea } from "./components/textarea";
+export type { TextareaProps } from "./components/textarea";
 export { CodeEditorShell } from "./components/code-editor-shell";
 export type { CodeEditorShellProps } from "./components/code-editor-shell";
 export { MarkdownEditor } from "./components/markdown-editor";
@@ -54,9 +55,11 @@ export type {
     ArtifactKind, ArtifactRevision, ArtifactView, ArtifactViewerProps,
 } from "./components/artifact-viewer";
 export { NativeSelect } from "./components/native-select";
+export type { NativeSelectProps } from "./components/native-select";
 export {
     Select, SelectValue, SelectGroup, SelectTrigger, SelectContent, SelectItem,
 } from "./components/select";
+export type { SelectTriggerProps } from "./components/select";
 export { Label } from "./components/label";
 export { Badge } from "./components/badge";
 export type { BadgeProps } from "./components/badge";
