@@ -40,7 +40,7 @@
 
 공개 Avatar release `ff1f27a`에서 `node scripts/verify-prism-consumer.mjs --public`으로 39항목·62파일을 독립 설치하고 11예시 타입 검사·Vite·폰트 bytes·자산 고지를 확인했습니다. 최신 폰트/인쇄 CSS를 해당 소비자에 registry bytes 그대로 동기화한 뒤 TypeScript/Vite와 폰트 bytes를 다시 확인했습니다. 이 후속 검사는 새 shadcn 설치가 아닙니다. 소비자는 모든 설치 소스를 컴파일하며 렌더 demo는 Button입니다.
 
-`ff1f27a`의 GitHub Verify UI·Pages와 Vercel 배포는 통과했습니다. 당시 `/prism`, manifest·registry·폰트의 HTTP bytes도 확인했습니다. 최신 폰트·인쇄 수정의 공개 배포와 CI는 별도 확인 대상입니다.
+`ff1f27a`의 GitHub Verify UI·Pages와 Vercel 배포는 통과했습니다. 당시 `/prism`, manifest·registry·폰트의 HTTP bytes도 확인했습니다. 폰트·인쇄 수정의 공개 commit `dd49ecbe`는 Verify UI run37098604514·Pages·Vercel이 모두 통과했습니다. 현재 manifest·registry의 HTTP bytes가 로컬과 일치하며 공개 117상태의 320px 검사, 실제 폰트 사용, Avatar focus/hover/resize와 Usage 경로 전환도 확인했습니다. 공개 짧은/긴 PDF는 각각 1/2장이며 이미 검토한 로컬 PDF와 렌더 pixels가 모두 일치했습니다.
 
 원본 `http://dev.prism.ai`는 HTTP 요청에는 응답했지만 이번 headless 세션에서는 HTTPS 전환 뒤 반복 리다이렉트가 발생했습니다. HTTPS 직접 접근은 연결이 재설정됐습니다. 기존 화면 기록을 보존하고 새 원본 상태 비교를 미완료로 유지합니다. 브라우저 외 네트워크·DNS·로그인 설정은 변경하지 않았습니다.
 
@@ -50,4 +50,4 @@
 
 - 원본 기본·hover·focus·disabled·selected·error·empty·long 상태와 인증 도메인 화면을 비교합니다.
 - 모든 도메인의 긴 내용·popup·파일 상호작용과 인쇄 용지/여백·긴 Essay 조합을 확인합니다.
-- 최신 폰트·인쇄 release의 원격 CI와 공개 브라우저 readback을 확인합니다. 로컬 렌더 성공을 전체 원본 디자인 일치로 해석하지 않습니다.
+- 공개 117상태의 렌더와 상호작용 검사를 원본 스타일·모든 상태의 일치로 해석하지 않습니다.

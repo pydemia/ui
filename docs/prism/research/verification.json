@@ -613,9 +613,9 @@
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
-      "status": "published-http-verified",
+      "status": "published-http-and-browser-verified",
       "url": "https://ui.pydemia.ai/prism",
-      "readback": "Previous ff1f27a manifest (116 states) and registry bytes matched before font/print changes; not a readback of current local files",
+      "readback": "HTTP 200 current components.json (117 states) and registry.json match local bytes; registry SHA256 0e2ae1a01a72962924feafe4833b848a316fea8a7c2e91aa20f9da0c34c75e40",
       "attempts": [
         {
           "method": "normal-upload",
@@ -645,13 +645,18 @@
           "method": "existing-git-integration",
           "sourceCommit": "ff1f27a",
           "result": "Vercel Deployment has completed; current manifest/registry HTTP bytes and public consumer install verified"
+        },
+        {
+          "method": "existing-git-integration",
+          "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
+          "result": "Verify UI/Pages success, Vercel Deployment has completed; current manifest/registry HTTP and own headless browser verified"
         }
       ],
-      "sourceCommit": "ff1f27a1cb8fcea58692b2a8e430306d89adc743",
-      "browserRender": "prior Avatar release rendered in isolated headless Chromium; font fallback and blank print page found; fixes verified in current local build",
+      "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
+      "browserRender": "passed: current published 117 fixture states at 320px, declared font face loaded, Avatar focus/hover/resize and Usage selection, short/long PDF captures",
       "independentConsumer": {
         "status": "passed",
-        "method": "node scripts/verify-prism-consumer.mjs --public; install directly from the published avatar registry",
+        "method": "public Avatar registry installation before font/print changes; final current registry CSS synchronized and rebuilt",
         "items": 39,
         "files": 62,
         "componentExamples": 11,
@@ -659,13 +664,15 @@
         "viteBuild": "passed",
         "portableFont": "emitted package font bytes matched",
         "assetNotice": "installed and checked",
-        "browserRuntime": "not-executed"
+        "browserRuntime": "consumer demo not executed; published catalogue font/print browser checks are separate"
       },
-      "scope": "previous Avatar release; latest font and print fixes verified locally and awaiting publication",
+      "scope": "font and print fixes published; source visual parity remains partial",
       "currentImplementation": {
         "sourceCommit": "73be25852d2e7333a0332795334d33d145f3f4fa",
-        "status": "pending-publication",
-        "localBrowser": "passed at 320px across 117 states"
+        "status": "published-browser-verified",
+        "localBrowser": "passed at 320px across 117 states",
+        "verificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
+        "publicBrowser": "passed 117 states and inspected PDF pixel matching"
       }
     },
     "generalComponentTests": {
@@ -681,14 +688,15 @@
       "upstreamRevision": "b5ccface"
     },
     "githubVerification": {
-      "sourceCommit": "ff1f27a1cb8fcea58692b2a8e430306d89adc743",
+      "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
       "status": "passed",
-      "url": "https://github.com/pydemia/ui/actions/runs/37094680798",
-      "scope": "avatar allocation and all 11 complete usage examples",
+      "url": "https://github.com/pydemia/ui/actions/runs/37098604514",
+      "scope": "merged font/print implementation; PRISM contracts and all 11 complete usage examples",
       "latestImplementation": {
         "sourceCommit": "73be25852d2e7333a0332795334d33d145f3f4fa",
-        "status": "pending-remote-ci",
-        "localBuildAndTypecheck": "passed"
+        "status": "passed-at-published-merge",
+        "localBuildAndTypecheck": "passed",
+        "verificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
       }
     },
     "usageContracts": {
@@ -702,16 +710,16 @@
     },
     "currentFixtureStates": {
       "count": 117,
-      "status": "passed-current-local-browser-render",
+      "status": "passed-current-published-browser-render",
       "previousVerifiedStates": 115,
       "previousCheckpoint": "4503dea",
-      "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa"
+      "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
+      "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
     }
   },
   "unverified": [
     "all 269 source correspondences do not establish state or pixel equality",
     "fresh original state comparison and authenticated full-domain screens",
-    "current font/print release public deployment and browser readback",
     "all extensions across domains, long content and popup combinations",
     "clipboard write and native print dialog"
   ],
@@ -719,14 +727,14 @@
   "fixtureRenderChecks": {
     "groups": 38,
     "states": 117,
-    "status": "passed-current-font-print-build",
+    "status": "passed-current-published-font-print-build",
     "checks": [
       "all 117 fixtures render at actual 320px viewport",
       "no nested buttons",
       "no page root horizontal overflow",
       "no unlabeled visible native inputs"
     ],
-    "evidence": "local-font-print-fixtures-320",
+    "evidence": "published-font-print-fixtures-320",
     "claim": "Rendering does not prove interaction or visual parity.",
     "visibleInputLabels": {
       "states": 117,
@@ -735,7 +743,8 @@
         "local-font-print-fixtures-320"
       ]
     },
-    "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa"
+    "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
+    "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -772,12 +781,12 @@
       "method": "real iframe viewport, not browser emulation"
     },
     "narrowFixtureLayout": {
-      "status": "passed-current-font-print-build",
+      "status": "passed-current-published-font-print-build",
       "groups": 38,
       "states": 117,
       "frameWidth": 320,
       "rootOverflowCount": 0,
-      "evidence": "local-font-print-fixtures-320",
+      "evidence": "published-font-print-fixtures-320",
       "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa"
     },
     "printPagination": {
@@ -793,7 +802,9 @@
         "other paper sizes and margins",
         "native print dialog and physical printer",
         "long essay/outline fragmentation"
-      ]
+      ],
+      "scope": "published and local source-matched fixture PDFs",
+      "publicVisualInspection": "published rendered PDF pixels exactly match inspected local pages"
     }
   },
   "runtimeVerificationAvailability": {
