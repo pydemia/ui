@@ -1,5 +1,9 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `TreemapChart` 공개 준비: **약 98% → 약 98%**입니다.
+69번째 snapshot과 registry 고지를 확인했으며 PR CI·public URL은
+남았습니다. [작업 기록](treemap-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `TreemapChart` 로컬 후보: **약 98% → 약 98%**입니다.
 계층별 분석 화면에 쓸 138번째 component를 구현하고 typecheck·
 전체 UI 테스트·build·브라우저 preview를 확인했습니다. registry

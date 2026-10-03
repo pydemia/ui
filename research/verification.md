@@ -8,7 +8,10 @@ build는 통과했습니다. 로컬 Chromium에서 390px·1280px 배치,
 밝은색·어두운색, panel·plain, 0값·빈 목록 전환을 확인했습니다.
 두 폭 모두 문서 가로 넘침이 없고 page error는 0건입니다. 실제
 screen reader 발표·touch·다른 브라우저는 확인하지 않았습니다.
-registry·snapshot·공개 URL 결과는
+`registry:release-check`는 140개 item·138개 export/catalog와
+69개 snapshot을 확인했습니다. 현재 ID는
+`sha256-89c86a0be4705c8b66e8ba4bb6d9c83cc3e4fce2a499314871c130c73dbd63e7`입니다.
+PR CI·공개 URL 결과는
 [작업 기록](../.worknotes/treemap-chart-2026-10-03.md)에 이어서 남깁니다.
 
 ## 2026-10-03 공개 registry 갱신

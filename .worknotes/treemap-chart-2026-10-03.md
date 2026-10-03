@@ -27,12 +27,19 @@ artwork는 편입하지 않습니다. W3C WAI의 표 구조·색상 사용 지�
 - 구현·catalog·registry metadata: 완료. 로컬 138개 component·140개 item.
 - `npm run typecheck`, 대상 SSR 테스트 5/5, 전체 UI 테스트 242/242,
   `npm run build`: 통과.
-- `npm run registry:check`: 새 provenance의 SHA-256이 소비자 고지의
-  기존 값과 달라 중단. metadata를 포함한 commit에 고지 링크를 고정하고
-  hash·생성물을 갱신한 뒤 재검사해야 함.
+- 첫 `npm run registry:check`는 새 provenance의 SHA-256과 소비자
+  고지가 달라 중단. metadata를 포함한 commit
+  `393295abf5a11df8d1eaf987421b9d57d3e34f4d`에 고지 링크를
+  고정하고 hash를 갱신했습니다. 이후 `registry:check`와
+  `registry:release-check`가 통과했습니다.
+- 69번째 snapshot
+  `sha256-89c86a0be4705c8b66e8ba4bb6d9c83cc3e4fce2a499314871c130c73dbd63e7`을
+  생성하고 재빌드했습니다. 현재 140개 item·138개 export/catalog와
+  69개 snapshot의 내용·의존 경로를 검사했습니다.
 - 로컬 Chromium: 390px·1280px에서 계층 면적과 정확한 값 표,
   밝은색·어두운색, panel·plain, 0값·빈 목록 전환을 확인. 두 폭 모두
   문서 가로 넘침이 없고 page error 0건. 부모 이름이 자식 이름을
   가리던 표시를 수정해 자식 이름을 영역 아래쪽에 배치함.
-- 실제 screen reader 발표·touch·Safari·RTL 및 공개 배포: 미확인.
+- 실제 screen reader 발표·touch·Safari·RTL 및 PR CI·공개 배포:
+  미확인.
 - Goal 관리용 추정: 약 98% 유지
