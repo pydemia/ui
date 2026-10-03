@@ -1,5 +1,16 @@
 # Sidebar 링크 표시 형태
 
+## 공개 상태
+
+PR #152가 `main`의 `7ea06aab`로 병합됐습니다. PR과 `main`의
+Verify UI, `main`의 Pages가 통과했고 Vercel production
+`dpl_A4aKid5rZSsHtcXEYHtPVXKn9YU3`가 READY입니다.
+사용자 도메인의 81번째 manifest·Sidebar item과 현재 Sidebar item은
+HTTP 200입니다. 공개 manifest·snapshot item은 저장소 내용과
+일치합니다. 공개 문서에서 `filled`를 선택했을 때 활성 링크 배경은
+accent token이고 Usage에 `linkVariant="filled"`가 있습니다.
+실제 screen reader·touch·Safari는 실행하지 않았습니다.
+
 ## 범위
 
 `SideNavLink`에는 `rail`과 `filled`가 있었지만 이를 내부에서
@@ -29,8 +40,7 @@ Usage는 `filled` 예시를 보여 줍니다. 원본 구현의 기존 링크를
   token, 다른 항목 선택 후 `aria-current` 이동을 확인했습니다. 390px
   모바일 Drawer의 링크 세 개 모두 `filled`, 항목 선택 후 닫힘과
   현재 영역 갱신을 확인했습니다.
-- PR CI·공개 URL: 진행 중. 실제 screen reader·touch·Safari는
-  실행하지 않았습니다.
+- PR CI·`main` CI·Pages, production과 대표 공개 URL: 통과.
 
 Goal 관리용 추정은 약 99%입니다. component 144개·registry item
 146개는 그대로이며, 수량이 아닌 기존 composite API의 표시 선택

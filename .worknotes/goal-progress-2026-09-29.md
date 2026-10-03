@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `Sidebar` 링크 표시 선택 production 공개:
+**약 99% → 약 99%**입니다. PR #152와 `main` Verify UI·Pages,
+Vercel production이 성공했습니다. 사용자 도메인의 81번째 manifest·
+Sidebar snapshot·현재 item이 HTTP 200이고 공개 preview에서
+채움형 활성 링크를 확인했습니다. component·item 수는 144·146으로
+같습니다. [작업 기록](sidebar-link-variants-2026-10-03.md)을
+참고하세요.
+
 2026-10-03 `Sidebar` 표시 형태와 품질 기준 재확인:
 **약 99% → 약 99%**입니다. 기존 내부 링크의 레일형·채움형을
 `Sidebar`에서 선택할 수 있게 했습니다. 새 component·item은 없고,
