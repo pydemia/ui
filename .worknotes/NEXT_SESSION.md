@@ -1,5 +1,14 @@
 # Component 확장 작업 인계
 
+2026-10-03 `Autocomplete` 병합·공개 대기: PR #127을 `main`에 병합했고
+PR·`main` Verify UI와 Pages가 통과했습니다. Vercel 배포 제한으로 현재
+item과 71번째 manifest는 사용자 도메인에서 HTTP 404입니다.
+저장소는 140개 component·142개 registry item·71개 snapshot,
+확인된 공개 수량은 138개·140개입니다. 제한 해제 뒤 배포와 공개
+item·manifest를 확인하세요.
+[작업 기록](autocomplete-2026-10-03.md)에 증거와 미검증 범위가
+있습니다. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 PR #127 최신 `main` 통합: PRISM 게시 변경을 반영하고 문서
 산출물을 다시 만들었습니다. Windows의 가상 Usage 경로 비교를 고쳐
 PRISM 23/23·예제 10개 typecheck, 전체 typecheck·build·registry
