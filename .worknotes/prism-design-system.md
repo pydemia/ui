@@ -1,0 +1,107 @@
+# PRISM 디자인 시스템 재현 작업
+
+## 요청과 완료 조건
+
+- PRISM-DEV의 공통 UI와 도메인 조합을 pydemia/ui의 `/prism`에 독립 실행 가능하게 구성한다.
+- shadcn/ui 기반 기존 primitives를 재사용하고 PRISM 색상·Pretendard·규격을 보존한다.
+- 원본 inventory, 디자인 규칙, typed contracts, 상태 fixture, source registry, AI용 manifest·문서를 제공한다.
+- 필요한 추가 component를 같은 토큰으로 구성한다.
+- 모든 구현 후 배포 화면과 꼼꼼하게 비교한다. 소스 근거와 실제 런타임 증거를 구분한다.
+- 배포 URL과 소비자 설치 경로까지 검증한 뒤에만 완료로 처리한다.
+
+## 현재 근거
+
+- 참조: `skccmygit/skax-successionX-frontend` dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-02).
+- 기존 checkout을 사용자 요청으로 fetch 후 fast-forward: dev `7ecfc9a`, origin/dev 일치, clean. 최신 소스 archive는 `/tmp/prism-reference-dev`.
+- Chrome 탭 `2089331773`, `http://dev.prism.ai/chat/...`에서 testuser001 로그인과 UI DOM을 확인.
+- 런타임 색: base #FDFDFD, LNB #F9FAFC, panel #EEF1F8, border #E3E5E5, primary #2F548C, secondary #FA7C39. Pretendard 적용 확인.
+- 새 대화 버튼 높이 40px·radius 8px·font 14px 확인.
+- 사용자가 Mac 잠금을 해제할 수 없어 자체 IAB를 사용하도록 지시했다. IAB에서 로컬 `/prism` 및 배포 `http://dev.prism.ai/sample`의 37개 샘플에 접근·DOM·스크린샷이 가능하다. 인증 화면 `/chat`은 IAB에서 빈 화면이지만 공개 sample 경로는 렌더링된다. 기존 Chrome 로그인 세션은 보존했다.
+- ui.pydemia.ai와 Vercel 주소는 이 장비의 urllib와 web 도구에서 현재 접근 실패. 게시 상태는 아직 미확인.
+
+## 구현 결정
+
+- 별도 private workspace `@pydemia/prism`과 `/prism` 카탈로그.
+- pydemia 일반 카탈로그와 registry snapshot을 보존한다.
+- scoped token profile과 portal에도 명시적으로 적용하는 theme wrapper.
+- PRISM 전용 registry `/prism/r`, 기존 `/r/pyd-*` 의존성을 명시한다.
+- HRX proprietary 코드·로고·인사 데이터는 복사하지 않고 공개 primitive와 자체 구현을 조합한다. 예시는 가상 데이터다.
+- `/prism`의 component query, 상태 선택, usage, source link, contract와 JSON manifest를 연결한다.
+
+## 다음 작업
+
+source inventory·규칙 → primitives와 도메인 component → catalog·registry → build·상호작용·설치 검증 → 원본 화면 비교 → 배포·공개 readback.
+
+## 2026-10-03 현재 구현과 검증
+
+- `packages/prism`: 23 typed source groups (24 registry items incl tokens). 버튼·입력·선택·배지·표·탭·피드백·모달·비모달 패널·채팅·후보 카드·8분류 프로필·6-frame·Markdown·포지션 카드·관리 chrome·양식·PDF/출력·레이더/추이·평가/보상/검증/경험/의견·도움말/파일·shell.
+- 전체 조합은 `apps/docs/src/prism/workspace.tsx`이며 문서 Workspace에서 실행한다. 가상 데이터만 사용하고 저장/평가/생성 API는 구현하지 않는다.
+- 사용자 목표 추가: 원본 모든 컴포넌트의 목적과 스타일을 재현/검증한 뒤 반응형·크기 조절·dynamic sizing 개선도 완료 조건이다. 원본 재현 미완료 상태에서 확장만으로 목표를 완료하지 않는다.
+- IAB에서 검색 Enter 선택, checkbox, pagination page2, 달력 선택, PDF 실제 2페이지 렌더·page2·90% zoom, 출력 섹션 선택, Workspace Enter 제출 확인.
+- 원본 Button sample의 실제 computed height/font/padding/radius/color와 기본 재현 규격 일치. SixFrame 배포 screenshot 확인 중 docs chrome CSS가 미리보기 h2/label/pre를 덮는 문제 발견·수정. 전체 시각 동일성은 아직 미확인.
+- 타입 검사 통과. 초기 8tests 및 확장 11tests 통과; chart SVG title SSR warning은 후속 수정했다. 새 양식/record 변경 뒤 최종 전체 검사를 다시 해야 한다.
+- `scripts/verify-prism-consumer.mjs`: 임시 HTTP registry mirror로 workspace와 무관하게 shadcn 4.21로 23items/45files 설치, 소비자 tsc와 Vite production build 성공. 임시 소비자 `/var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-ZJnFks`. 이후 management group 추가됨.
+- 원본 inventory 현재 177개이며 직전 집계 specialized69/shared7/pending101. 이것은 시각 일치율이 아니고 source correspondence 집계다. 새 management 직접 source는 다음 inventory 갱신에 반영해야 한다.
+
+## 남은 작업
+
+- 원본 pending 101개를 실제 목적별로 검토하여 구현/조합/전용 recipe 대응을 완성한다. 내부 helper라는 이유로 근거 없이 제외하지 않는다.
+- 원본 37개 sample의 상태별 실제 화면/DOM 수치 비교를 완료하고 `research/verification.md` 및 machine-readable 검증 증거에 남긴다.
+- 원본 일부 full-domain/admin 화면은 sample이 없으므로 source+logged-in Chrome에서 read-only 근거 확보. 모든 업무 로직을 복제하는 것은 목표가 아니다.
+- 필드·포털·패널·full profile·PDF·모바일 상호작용과 크기 조절 검증, 기존 일반 catalogue 상태별 확인.
+- 이후 반응형 및 크기 조절 기능을 source baseline과 구분하여 구현한다.
+- 최종 전체 gates·generated docs·README·CI·registry snapshot·공개 배포 및 ui.pydemia.ai/prism readback. 아직 commit/push/deploy 안 함.
+
+## 2026-10-03 자체 브라우저 확장 검증
+
+- 38 source groups / 39 registry items까지 구현했다. 전용 맥락 입력, 포지션 요구 사항, Risk·진단·경험·분석, 목록·Board·메모, 공지·방침, structured response, 기준 편집·대체 매핑, 선택 가능한 표, 접근·오류 화면, 도메인 양식, 출력 페이지, 초기 채팅과 8분류 조합을 추가했다.
+- 원본 벡터 87개는 디자인 형상 동일성을 위해 자산으로 보존하고 typed React adapter 및 인스턴스별 SVG ID를 추가했다. 일반 업무 component 코드와 API는 복제하지 않았다. 이 결정은 앞선 '로고도 복사하지 않는다'를 자산에 한해 변경한 것이다. 권리·참조 revision은 THIRD_PARTY_NOTICES.md에 명시했다.
+- 원본 inventory는 기존 177개 + 누락된 인증/오류/레이아웃 5개 + 벡터 87개 = 269개. target correspondence를 전부 기록했지만 이 집계는 시각/상태 검증 완료가 아니다. auth bootstrap은 원본에서도 독립 시각 출력이 없어 host-owned-nonvisual로 기록했다.
+- 자체 IAB에서 공개 sample 37개의 기본 AX·computed style·JPEG를 로컬 `.worknotes/browser-evidence/`에 저장했다. 원본 기록은 로컬 전용이며 gitignore 처리했다. viewport 아래 내용과 열린 메뉴·상태까지 전부 검증한 것은 아니다.
+- IAB 관리자 공지: 제목/본문 + 전체 회사 → 등록 가능, 회사 선택 비활성화; 팝업 → 게시기간 필수; 유효 시작/종료일 → 저장 의도 callback; 팝업 OFF → 두 날짜 null 확인.
+- IAB 사용자: 회사 그룹 선택 → 2개 회사 표시; 그룹 미지정 역할 변경 → 회사 그룹 입력 숨김 확인.
+- IAB 방침: sandbox='allow-same-origin'이며 scripts 없음, 문서 높이 120px, v1→v2 iframe 본문 변경 확인. 비모달 공지 aria-modal 없음, 다음 공지 2/2 표시 확인.
+- 단위 계약/상호작용 16tests 통과 (IME, 필수/최대선택, 잠긴 행/다른 페이지 선택 보존, nullable Risk·보상 0, rich text sanitization·내부 action, 공지 날짜 초기화와 역할 변경). 이후 벡터 통합·추가 변경 뒤 전체 gates 재실행 필요.
+- 최신 typecheck 통과. 새 registry는 39개 생성. 독립 소비자 검증은 이전 23개 상태이므로 39개로 다시 실행해야 한다.
+- 파일: local-notice-form, local-user-form, local-policy, local-notice-popup 및 source 37개 기록. 기록용 서버 localhost:5804, UI dev localhost:5190.
+- 아직 남은 일: 상태별 배포/로컬 비교, 모든 domain 조합 실행, print 실제 분할, PDF fit/resize, Select/MultiSelect 키보드·포커스·선택 요약, 반응형/resize 확장, 소비자 설치와 최종 build, 공개 배포/readback.
+
+## 2026-10-03 컴포넌트 상태와 독립 설치 갱신
+
+- 38개 예시의 공개 상태 114개를 IAB에서 전부 렌더링했다. Preview 누락·중첩 button 없음. 이름 없는 input으로 집계된 항목은 aria-hidden/0px 파일 입력이었다. 이 검사는 픽셀 동일성이나 모든 업무 흐름 검증을 의미하지 않는다.
+- Button 아이콘 여백·x-small 14px·solid hover overlay, Favorite 20px/#FBBC05, 선택 hover Blue300/#2E8ED9·선택 글자 Blue400/#0072C6, Switch off #B6BEC9를 원본 SCSS/배포 수치에 맞췄다.
+- Dialog width 440/560/620 및 Confirm 440px 규격, Sidebar 하위 메뉴/기록 이름변경/프로필 팝오버, 달력 320px/연도 선택을 확장했다. Confirm busy 시 Escape·취소 차단 확인. 최신 패키지 재빌드 후 키보드로 연 Dialog의 닫기→열기 버튼 복귀 포커스 확인.
+- Profile 8개 탭 recipe가 실제 렌더되며 성공경험 주제 전환·의견 추가 callback을 확인했다. 전체 인증된 domain 페이지와 픽셀 비교는 남아 있다.
+- typecheck, prism:check 및 계약 19 tests 통과. 기존 일반 registry 135개/카탈로그 133개/불변 release 61개 보존 검증 통과.
+- 독립 소비자에 현재 PRISM 39 items/61 files 설치 후 tsc/Vite build 성공. 소비자 경로: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-8ld4wF.
+- 전체 사이트 build 1회 통과했다. 그 뒤 입력 clear/진행률 variants/툴팁 화살표와 Dialog 포커스 수정이 추가되어 최종 gates 갱신은 다시 필요하다.
+- baseline 기능 목적별 구현은 모두 존재하나 시각 검증은 부분 완료다. 패널 수동 resize와 container-width responsive shell 구현을 시작한다. 공개 배포와 전체 source parity는 아직 완료로 표시하지 않는다.
+
+## 2026-10-03 크기 확장과 최신 설치 검증
+
+- Panel의 opt-in 드래그·키보드·초기화, controlled width와 부모 폭 clamping을 구현했다. 440→520px pointer drag, Left 456·Home 320·End 800·double click 440을 IAB에서 확인했다.
+- Workspace는 실제 컨테이너 768px breakpoint로 Drawer/desktop 탐색을 전환한다. 열려 있던 Drawer를 넓은 화면에서 닫고 header 포커스 및 draft 보존을 확인했다.
+- PDF에 height·min/max zoom을 추가하고 fit의 중복 여백을 고쳤다. 320/390/1024px iframe의 너비 맞춤 canvas는 254/324/958px이며 page 2·200% 내부 스크롤에서 root 폭이 유지된다.
+- CandidateCard의 white brief·평가 이력·준비된 보상 문자열·20px Favorite와 stack/pair/grid/panel 배치를 보완했다. 요약 영역 클릭은 상세를 열고 Favorite 클릭은 즐겨찾기만 바꾼다. 실제 인사 데이터·사진은 사용하지 않았다.
+- Responsive 문서에 실제 iframe과 component 선택을 추가했다. IAB viewport override가 적용되지 않았던 local-panel-mobile 기록은 무효 처리했다. 388px frame 프로필 기록은 실제 390px 기록으로 대체했다.
+- 38개 기본 예시를 320px iframe에서 검사해 record/profile-sections의 grid intrinsic width 넘침을 수정했다. 재검사 root overflow 0개. 표와 탭은 내부에서 스크롤한다.
+- 최신 114개 fixture 상태: render 누락·nested button·unlabelled visible input 0개. Dialog busy Escape/닫기 차단 및 opener 포커스 복귀, 삭제 요청 전 1개→fixture 확인 후 0개 DOM 기록을 새 증거로 확인했다.
+- 최신 typecheck·PRISM21 tests·pydemia219 tests·일반 registry135/catalog133/immutable61 검증 통과. 소비자39 items/61 files 설치 및 tsc/Vite 성공: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-0Gf4vf.
+- Vercel pydemia-7822 계정의 pydemia-ui 프로젝트를 확인하고 로컬에 연결했다. 프로젝트 root `.`, npm ci/npm run build/output docs. IAB public /prism은 현재 404다. 연결이 자동 생성한 .env.local은 읽지 않고 삭제했다. .worknotes와 .env*는 .vercelignore에서도 제외한다.
+- 전체 source 시각/상태 비교는 부분 완료이며 goal은 active다. 공개 배포/readback과 source push는 아직 미완료다.
+
+## 2026-10-03 공개 배포 제한
+
+- `vercel deploy --prod --yes`는 api-upload-free 일일 5000 요청 제한으로 실패했다.
+- `vercel deploy --prod --yes --archive=tgz`는 52.4MB 압축 업로드를 완료했으나 api-deployments-free-per-day 일일 100회 제한으로 배포 생성이 실패했다. 새 production은 없다. 같은 조건에서 반복하지 않는다.
+- 공개 `https://ui.pydemia.ai/prism`은 IAB에서 404 확인. 로컬 전체 npm run build와 staged diff --check는 통과했다.
+- `.env.local`은 삭제되었고 credential 파일이나 브라우저 원본 증거는 staging/배포 입력에 포함하지 않았다. 원격 push와 commit은 아직 하지 않았다.
+- 자체 브라우저의 공개 sample 상태별 비교를 계속한다. 인증 domain 화면과 공개 배포 제한은 별도 미완료 범위다.
+
+## 2026-10-03 상태 비교 및 원격 변경 확인
+
+- Select의 readOnly·크기·검색 header·native required/FormData/reset·방향키 처리를 보완했다. uncontrolled/controlled reset과 필수 입력 검증을 추가해 PRISM 계약 23 tests가 통과했다. typeahead 런타임은 아직 미검증이다.
+- 원본 Candidate Common은 후보 카드가 아니라 Skeleton·NoData·Summary·Empty/Error helper 샘플이다. Skeleton 3x120/2x60, NoData 13px/15px, Summary 88px/empty49px, empty175px/error236px을 배포 DOM 수치에 맞췄다. Tooltip 클릭/Escape는 확인했으나 hover/focus-only 런타임은 미검증이다.
+- 그룹 2개 회사 선택 및 저장 의도, 포지션 중복 하위직무 거부·전문성3/경험2 선택 제한·해제·생성/저장 의도 확인. 실제 업무 API를 호출하지 않았다.
+- 실제 320px iframe에서 현재 공개 상태 115개를 검사해 렌더 누락·중첩 버튼·root/nested 가로 넘침 0개 확인. 기존 visible label 검사114상태와 수정 후 field5상태 결과를 구분했다.
+- PAT를 프로세스 한정으로 사용해 origin fetch 성공. demian credential config hash 보존. local HEAD f3a0162 대비 origin/main f4ee2a1이 15 commits 앞서 있다. 소스 변경 체크포인트 후 최신 원격을 반영하고 generated docs와 전체 gates를 갱신한다. 이전 generic219/135/133/61 수치는 새 remote 기준 결과가 아니다.

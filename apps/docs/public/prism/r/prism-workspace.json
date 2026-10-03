@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-workspace",
+  "type": "registry:ui",
+  "title": "Workspace shell",
+  "description": "LNB·64px header·스크롤 본문·상세 패널 조합",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/r/pyd-drawer.json",
+    "https://ui.pydemia.ai/prism/r/prism-button.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-workspace.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-workspace.tsx",
+      "content": "import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from \"react\";\nimport { Drawer, DrawerTrigger, DrawerContent, DrawerTitle, DrawerDescription, DrawerClose } from \"./drawer\";\nimport { PrismButton } from \"./prism-button\";\nimport { PrismIcon } from \"./prism-icon\";\n\nexport type PrismWorkspaceProps = {\n    sidebar: ReactNode; header: ReactNode; children: ReactNode; panel?: ReactNode; className?: string;\n    height?: CSSProperties[\"height\"]; minHeight?: CSSProperties[\"minHeight\"];\n    responsive?: boolean; breakpoint?: number; navigationOpen?: boolean; onNavigationOpenChange?: (open: boolean) => void;\n};\nexport function PrismWorkspace({ sidebar, header, children, panel, className, height = 760, minHeight = 440,\n    responsive = true, breakpoint = 768, navigationOpen, onNavigationOpenChange }: PrismWorkspaceProps) {\n    if(!Number.isFinite(breakpoint)||breakpoint<=0)throw new RangeError(\"Workspace breakpoint must be positive.\");\n    const shell=useRef<HTMLDivElement>(null);const headerElement=useRef<HTMLElement>(null);const [compact,setCompact]=useState(false);const [internalOpen,setInternalOpen]=useState(false);\n    const menuOpen=navigationOpen??internalOpen;\n    const setMenuOpen=(next:boolean)=>{if(navigationOpen===undefined)setInternalOpen(next);onNavigationOpenChange?.(next);};\n    useEffect(()=>{const element=shell.current;if(!element)return;const measure=()=>setCompact(responsive&&element.getBoundingClientRect().width<breakpoint);measure();const observer=new ResizeObserver(measure);observer.observe(element);return()=>observer.disconnect();},[responsive,breakpoint]);\n    useEffect(()=>{if(!compact&&menuOpen){setMenuOpen(false);headerElement.current?.focus();}},[compact,menuOpen]);\n    return <div ref={shell} className={`prism-workspace ${className ?? \"\"}`} data-compact={compact||undefined} style={{height,minHeight}}>\n        <div className=\"prism-workspace-sidebar\" hidden={compact}>{sidebar}</div>\n        <div className=\"prism-workspace-main\"><header ref={headerElement} tabIndex={-1} className=\"prism-workspace-header\">\n            {compact&&<Drawer open={menuOpen} onOpenChange={setMenuOpen}><DrawerTrigger asChild><PrismButton variant=\"shape\" iconOnly aria-label=\"탐색 메뉴 열기\" icon={<PrismIcon name=\"AdminIcon\" size={20}/>} /></DrawerTrigger>\n                <DrawerContent side=\"left\" data-prism=\"light\" className=\"prism-mobile-navigation\"><header><DrawerTitle>PRISM 탐색</DrawerTitle><DrawerClose asChild><PrismButton variant=\"shape\" iconOnly aria-label=\"탐색 메뉴 닫기\" icon={<PrismIcon name=\"CloseIcon\" size={20}/>} /></DrawerClose></header>\n                    <DrawerDescription className=\"prism-sr-only\">메뉴를 선택하거나 Escape로 닫을 수 있습니다.</DrawerDescription><div>{sidebar}</div></DrawerContent></Drawer>}\n            {header}</header><div className=\"prism-workspace-body\"><div className=\"prism-workspace-content\">{children}</div>{panel}</div></div></div>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "7f8271b7411f658b40f07e297571c956818f230f672c7f16e27e9d8e0ccd4ed2",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

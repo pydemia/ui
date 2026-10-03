@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-feedback",
+  "type": "registry:ui",
+  "title": "Toast / Request state",
+  "description": "알림과 로딩·빈 결과·실패·재시도 구분",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json",
+    "https://ui.pydemia.ai/prism/r/prism-button.json",
+    "https://ui.pydemia.ai/prism/r/prism-primitives.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-feedback.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-feedback.tsx",
+      "content": "import type { ReactNode } from \"react\";\nimport { PrismIcon } from \"./prism-icon\";\nimport { PrismInfoGlyph as Info, PrismXGlyph as X } from \"./prism-icon\";\nimport { PrismButton } from \"./prism-button\";\nimport { PrismSkeletonGroup } from \"./prism-primitives\";\n\nexport function PrismToast({ title, children, tone = \"info\", onClose }: { title: string; children?: ReactNode; tone?: \"info\" | \"success\" | \"error\"; onClose?: () => void }) {\n    const iconName = tone === \"success\" ? \"ToastCheckIcon\" : tone === \"error\" ? \"ToastErrorIcon\" : \"ToastInfoIcon\";\n    return <div className=\"prism-toast\" role={tone === \"error\" ? \"alert\" : \"status\"}><PrismIcon name={iconName} size={20} />\n        <div><strong>{title}</strong>{children && <p>{children}</p>}</div>{onClose && <button type=\"button\" onClick={onClose} aria-label=\"알림 닫기\"><X size={20} aria-hidden=\"true\" /></button>}</div>;\n}\nexport function PrismEmptyState({ title, description, panel = false, action, icon }: { title: string; description: string; panel?: boolean; action?: ReactNode; icon?: ReactNode }) {\n    return <div className=\"prism-empty\" data-panel={panel || undefined}><div className=\"prism-empty-icon\" aria-hidden=\"true\">{icon ?? <PrismIcon name=\"NoSearchResultIcon\" size={panel ? 120 : 140} />}</div>\n        <h3>{title}</h3><p>{description}</p>{action}</div>;\n}\nexport function PrismRequestState({ status, error, onRetry, variant=\"panel\" }: { status: \"loading\" | \"empty\" | \"error\"; error?: string; onRetry?: () => void; variant?:\"panel\"|\"generic\" }) {\n    if(variant===\"panel\"){\n        if(status===\"loading\")return <PrismSkeletonGroup/>;\n        if(status===\"empty\")return <div className=\"prism-request-empty\"><PrismEmptyState panel title=\"표시할 데이터가 없습니다\" description=\"데이터가 준비되면 여기서 확인할 수 있어요.\"/></div>;\n        return <div className=\"prism-request-error\" role=\"alert\"><p>{error??<>데이터를 불러오지 못했습니다.<br/>다시 시도해 주세요.</>}</p>{onRetry&&<PrismButton variant=\"line\" icon={<PrismIcon name=\"ResetIcon\" size={20}/>} onClick={onRetry}>다시 시도</PrismButton>}</div>;\n    }\n    if (status === \"loading\") return <div className=\"prism-loading\" role=\"status\" aria-live=\"polite\"><span className=\"prism-spinner\" aria-hidden=\"true\" />불러오는 중입니다.</div>;\n    return <PrismEmptyState panel title={status === \"error\" ? \"정보를 불러오지 못했습니다.\" : \"표시할 정보가 없습니다.\"}\n        description={status === \"error\" ? error ?? \"다시 시도해 주세요.\" : \"검색 조건을 변경해 주세요.\"}\n        action={status === \"error\" && onRetry && <PrismButton variant=\"line\" onClick={onRetry}>다시 시도</PrismButton>} />;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "6fc6c817ec6d1ea0ee3b902fb0aed5afe7375427142ee9d29ba8df96734caf29",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

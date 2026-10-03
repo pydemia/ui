@@ -1,0 +1,74 @@
+@font-face { font-family: Pretendard; src: url('/prism/fonts/PretendardVariable.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+html[data-prism] { scroll-behavior: auto; }
+.prism-docs { font-family: Pretendard,sans-serif; font-size: 14px; }
+.prism-docs-header { height: 64px; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--prism-divider); padding: 0 28px; background: var(--surface); position: sticky; top: 0; z-index: 20; }
+.prism-docs-brand { font-size: 18px; font-weight: 700; white-space: nowrap; }
+.prism-docs-brand span { color: var(--muted); font-weight: 500; }
+.prism-docs-divider { width: 1px; height: 20px; background: var(--prism-divider); }
+.prism-docs-header > strong { font-size: 16px; color: var(--accent); }
+.prism-docs-header nav { display: flex; align-items: center; gap: 24px; flex: 1; }
+.prism-docs-header nav button { border: 0; padding: 6px 0; background: none; color: var(--muted); font-size: 14px; white-space: nowrap; }
+.prism-docs-header nav button[aria-current] { color: var(--accent); font-weight: 600; }
+.prism-docs-header > a:last-child { display: flex; gap: 6px; align-items: center; font-size: 12px; white-space: nowrap; }
+.prism-docs-layout { display: grid; grid-template-columns: 260px minmax(0,1fr); }
+.prism-docs-rail { position: sticky; top: 64px; height: calc(100dvh - 64px); overflow: auto; padding: 20px 16px; border-right: 1px solid #dde5eb; background: var(--prism-lnb); }
+.prism-docs-search { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--prism-control-border); border-radius: 6px; background: var(--surface); }
+.prism-docs-search input { border: 0; padding: 0; min-width: 0; width: 100%; background: transparent; font-size: 13px; outline: none; }
+.prism-docs-search:focus-within { outline: 2px solid var(--focus); }
+.prism-rail-heading { margin: 22px 8px 12px; color: var(--accent); font-weight: 600; font-size: 12px; }
+.prism-docs-rail h2 { font-size: 12px; color: var(--muted); font-weight: 500; margin: 16px 8px 4px; }
+.prism-docs-rail button { width: 100%; display: block; text-align: left; padding: 8px; border: 0; border-radius: 6px; background: transparent; font-size: 13px; line-height: 1.4; }
+.prism-docs-rail button[aria-current] { background: var(--prism-panel); color: var(--accent); font-weight: 600; }
+.prism-docs-rail button:hover { background: var(--prism-cool-100); }
+.prism-docs-rail details { margin: 8px 0; }
+.prism-docs-rail summary { display: flex; justify-content: space-between; padding: 6px 8px; color: var(--muted); cursor: pointer; font-size: 12px; }
+.prism-docs-main { width: 100%; max-width: 1280px; padding: 32px 40px; min-width: 0; }
+.prism-docs-path { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+.prism-docs-main > h1 { font-size: 26px; line-height: 1.4; font-weight: 700; margin: 0 0 8px; }
+.prism-docs-main > h2, .prism-docs-contract > h2, .prism-docs-install > h2, .prism-docs-sources > h2 { font-size: 16px; font-weight: 600; margin: 0 0 12px; }
+.prism-docs-main > p, .prism-docs-contract > p, .prism-docs-install > p, .prism-docs-sources > p { line-height: 1.6; }
+.prism-docs-description { margin: 0 0 20px; color: var(--muted); }
+.prism-docs-reference { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 12px; margin-bottom: 16px; gap: 12px; }
+.prism-docs-reference a { display: flex; align-items: center; gap: 4px; }
+.prism-docs-specimen { border: 1px solid var(--prism-control-border); border-radius: 8px; overflow: hidden; }
+.prism-docs-specimen > header, .prism-docs-code > header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--prism-divider); background: var(--prism-lnb); }
+.prism-docs-specimen > header > h2, .prism-docs-code > header h2 { font-size: 13px; margin: 0; }
+.prism-docs-specimen > header label { font-size: 12px; color: var(--muted); }
+.prism-docs-specimen > header select { margin-left: 8px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+.prism-docs-preview { padding: 28px; overflow: auto; min-height: 180px; }
+.prism-demo-stack { display: grid; grid-template-columns:minmax(0,1fr);gap: 20px; }
+.prism-demo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.prism-demo-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
+.prism-demo-fields > :last-child { grid-column: 1/-1; }
+.prism-spec-label { min-width: 72px; color: var(--muted); font-size: 12px; }
+.prism-docs-contract, .prism-docs-install, .prism-docs-sources { margin-top: 28px; }
+.prism-docs-code { margin-top: 28px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.prism-docs-code > pre, .prism-docs-install > pre { margin: 0; padding: 20px; background: var(--prism-lnb); overflow-x: auto; font-size: 12px; line-height: 1.7; }
+.prism-docs-install p, .prism-docs-sources p { color: var(--muted); font-size: 12px; }
+.prism-docs-sources a { display: block; color: var(--accent); font-size: 12px; margin: 6px 0; overflow-wrap: anywhere; }
+.prism-docs-footer { border-top: 1px solid var(--prism-divider); margin-top: 40px; padding-top: 20px; color: var(--muted); font-size: 12px; }
+.prism-copy-status { font-size: 12px; min-height: 20px; }
+.prism-sidebar-demo { display: flex; height: 520px; border: 1px solid var(--border); overflow: auto; }
+.prism-sidebar-demo-main { flex: 1; padding: 24px; min-width: 200px; }
+.prism-rules-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.prism-rules-table th, .prism-rules-table td { text-align: left; padding: 12px; border-bottom: 1px solid var(--prism-divider); vertical-align: top; line-height: 1.6; }
+.prism-rules-table th { background: var(--prism-cool-100); font-weight: 600; }
+.prism-rules-table button { padding: 0; border: 0; background: none; color: var(--accent); text-align: left; }
+.prism-text-link { color: var(--accent); }
+@media (max-width: 900px) { .prism-docs-layout { grid-template-columns: 210px minmax(0,1fr); } .prism-docs-main { padding: 24px; } .prism-docs-header { gap: 12px; padding: 0 16px; } .prism-docs-header nav { gap: 12px; } }
+@media (max-width: 640px) { .prism-docs-header { height: auto; min-height: 64px; flex-wrap: wrap; padding: 12px 16px; gap: 8px 14px; } .prism-docs-header nav { order: 4; width: 100%; flex: auto; } .prism-docs-header > a:last-child { margin-left: auto; } .prism-docs-layout { display: block; } .prism-docs-rail { position: static; height: 230px; border-right: 0; border-bottom: 1px solid var(--border); } .prism-docs-main { padding: 24px 16px; } .prism-docs-preview { padding: 16px; } .prism-demo-fields { grid-template-columns: minmax(0,1fr); } .prism-docs-main > h1 { font-size: 22px; } }
+.prism-panel-demo { position: relative; display: flex; min-height: 440px; border: 1px solid var(--prism-border); overflow: hidden; }
+.prism-panel-demo-main { flex: 1; min-width: 0; padding: 20px; }
+.prism-sizing-controls {display:flex;flex-wrap:wrap;gap:12px 24px;font-size:12px;color:var(--muted);}
+.prism-sizing-controls label {display:flex;align-items:center;gap:8px;}
+.prism-sizing-controls input {width:140px;accent-color:var(--prism-primary);}
+.prism-sizing-controls output {width:48px;text-align:right;}
+.prism-demo-stack {min-width:0;}
+.prism-embedded {padding:16px;min-width:0;font:14px Pretendard,sans-serif;}
+.prism-embedded>h1 {font-size:18px;margin:0 0 16px;}
+.prism-responsive-scroll {max-width:100%;overflow:auto;padding:2px;}
+.prism-responsive-scroll iframe {display:block;border:1px solid var(--prism-control-border);border-radius:8px;background:var(--prism-base);max-width:none;}
+.prism-responsive-scroll iframe {box-sizing:content-box;}
+.prism-sizing-controls input[type="number"] {width:64px;border:1px solid var(--prism-control-border);border-radius:4px;background:var(--prism-base);padding:4px;}
+.prism-responsive-component {display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:12px;}
+.prism-responsive-component select {max-width:100%;height:32px;padding:0 8px;border:1px solid var(--prism-control-border);border-radius:6px;background:var(--prism-base);font:inherit;}

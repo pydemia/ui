@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-utility",
+  "type": "registry:ui",
+  "title": "Switch / Tooltip / Progress / Files",
+  "description": "환경 선택·도움말·진행률·파일 선택과 제거",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/r/pyd-switch.json",
+    "https://ui.pydemia.ai/r/pyd-tooltip.json",
+    "https://ui.pydemia.ai/r/pyd-dropzone.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json",
+    "https://ui.pydemia.ai/prism/r/prism-button.json",
+    "https://ui.pydemia.ai/prism/r/prism-admin.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-utility.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-utility.tsx",
+      "content": "import { useId, useRef, type ComponentProps, type ReactNode } from \"react\";\nimport { Switch } from \"./switch\";\nimport { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from \"./tooltip\";\nimport { Dropzone } from \"./dropzone\";\nimport { PrismPaperclipGlyph as Paperclip } from \"./prism-icon\";\nimport { PrismButton } from \"./prism-button\";\nimport { PrismAttachmentList, type PrismAttachment } from \"./prism-admin\";\n\nexport function PrismSwitch({ label, ...props }: ComponentProps<typeof Switch> & { label: string }) {\n    const id = useId(); return <label className=\"prism-choice\" htmlFor={props.id ?? id}><Switch {...props} id={props.id ?? id} className=\"prism-switch\" />{label}</label>;\n}\nexport function PrismTooltip({ content, children, side = \"top\", align = \"center\", panel = false, arrow = true, small = false, open, onOpenChange }: { content: ReactNode; children: ReactNode; side?: \"top\" | \"bottom\" | \"left\" | \"right\"; align?: \"start\" | \"center\" | \"end\"; panel?: boolean; arrow?: boolean; small?: boolean; open?:boolean; onOpenChange?:(open:boolean)=>void }) {\n    return <TooltipProvider><Tooltip open={open} onOpenChange={onOpenChange}><TooltipTrigger asChild>{children}</TooltipTrigger><TooltipContent data-prism=\"light\" side={side} align={align} sideOffset={side===\"left\"||side===\"right\" ? 8 : 4} className=\"prism-tooltip\" data-panel={panel || undefined} data-arrow={arrow||undefined} data-small={small||undefined}>{content}</TooltipContent></Tooltip></TooltipProvider>;\n}\nexport function PrismProgress({ value, label = \"진행률\", showPercent = false, displayValue, color }: { value: number | null; label?: string; showPercent?: boolean; displayValue?: string | number; color?: string }) {\n    if (value !== null && (!Number.isFinite(value) || value < 0 || value > 100)) throw new RangeError(\"Progress must be null or 0..100.\");\n    return <div className=\"prism-progress\"><div className=\"prism-progress-track\" role=\"progressbar\" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={value ?? undefined}>\n        <div className=\"prism-progress-fill\" data-indeterminate={value === null || undefined} style={{width:value === null ? \"30%\" : `${value}%`,background:color}} /></div>{value!==null&&(displayValue!==undefined||showPercent)&&<span aria-hidden=\"true\">{displayValue ?? `${Math.round(value)}%`}</span>}</div>;\n}\nexport function PrismFileDropzone({ files, onRemove, maxSize = 10*1024*1024, accept = {\"application/pdf\":[\".pdf\"],\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\":[\".xlsx\"],\"text/csv\":[\".csv\"],\"application/vnd.ms-excel\":[\".csv\"],\"image/png\":[\".png\"],\"image/jpeg\":[\".jpg\"]}, ...props }: ComponentProps<typeof Dropzone> & { files: readonly PrismAttachment[]; onRemove?: (id: string) => void }) {\n    return <div className=\"prism-filezone\"><Dropzone {...props} accept={accept} maxSize={maxSize} showSelectedFiles={false} className=\"prism-dropzone\" /><div className=\"prism-filetiles\"><PrismAttachmentList files={files} onRemove={onRemove} /></div></div>;\n}\nexport function PrismFileAttach({ label = \"첨부파일\", accept, disabled, onFilesSelected, children }: { label?: string; accept?: string; disabled?: boolean; onFilesSelected: (files: File[]) => void; children?: ReactNode }) {\n    const ref = useRef<HTMLInputElement>(null); const id = useId();\n    return <div className=\"prism-file-attach\"><div><label htmlFor={id}>{label}</label><PrismButton variant=\"line\" size=\"small\" icon={<Paperclip />} disabled={disabled} onClick={() => ref.current?.click()}>파일 선택</PrismButton>\n        <input id={id} hidden aria-hidden=\"true\" tabIndex={-1} ref={ref} type=\"file\" multiple accept={accept} disabled={disabled} onChange={e => { const files = [...(e.target.files ?? [])]; if (files.length) onFilesSelected(files); e.target.value=\"\"; }} /></div>{children}</div>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "fb137222994f40ea9f428d9bee9e2f32bc89034b344afacdeba770cd80a482de",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

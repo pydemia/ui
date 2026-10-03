@@ -400,6 +400,7 @@ function App() {
                                 </div>
                             </PopoverContent>
                         </Popover>
+                        <a className="top-nav-secondary" href="/prism">PRISM</a>
                         <a className="top-nav-secondary" href="#colormap">Colormap</a>
                         <a className="top-nav-secondary" href="#tokens">Tokens</a>
                         <a className="top-nav-secondary" href="#examples">Examples</a>
@@ -638,5 +639,10 @@ function App() {
 }
 
 const root = createRoot(document.getElementById("root")!);
-root.render(<App />);
-import.meta.hot?.dispose(() => root.unmount());
+let disposed = false;
+import.meta.hot?.dispose(() => { disposed = true; root.unmount(); });
+if (location.pathname === "/prism" || location.pathname.startsWith("/prism/")) {
+    import("./prism/page").then(({ mountPrism }) => { if (!disposed) mountPrism(root); });
+} else {
+    root.render(<App />);
+}

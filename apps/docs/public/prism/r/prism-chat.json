@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-chat",
+  "type": "registry:ui",
+  "title": "Message / Composer / Criteria",
+  "description": "질문 입력·전송·중단, 답변 상태와 판단 기준 표시",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json",
+    "https://ui.pydemia.ai/prism/r/prism-button.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-chat.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-chat.tsx",
+      "content": "import { useId, type ReactNode } from \"react\";\nimport { PrismIcon } from \"./prism-icon\";\nimport { PrismButton } from \"./prism-button\";\n\nexport type PrismChatInputProps = { value: string; onValueChange: (value: string) => void; onSubmit: (value: string) => void;\n    onStop?: () => void; busy?: boolean; disabled?: boolean; maxLength?: number; placeholder?: string; attachments?: ReactNode; onAttach?: () => void };\nexport function PrismChatInput({ value, onValueChange, onSubmit, onStop, busy = false, disabled = false, maxLength = 2000,\n    placeholder = \"궁금한 내용을 입력해 주세요.\", attachments, onAttach }: PrismChatInputProps) {\n    const id = useId(); const invalid = value.length > maxLength;\n    const send = () => { if (!busy && !disabled && !invalid && value.trim()) onSubmit(value.trim()); };\n    return <form className=\"prism-chat-input\" aria-label=\"대화 입력\" onSubmit={e => { e.preventDefault(); send(); }}>\n        {attachments && <div className=\"prism-chat-attachments\">{attachments}</div>}\n        <label htmlFor={id} className=\"prism-sr-only\">메시지</label>\n        <textarea id={id} value={value} onChange={e => onValueChange(e.target.value)} disabled={disabled || busy}\n            placeholder={placeholder} rows={2} aria-invalid={invalid || undefined} aria-describedby={`${id}-count`}\n            onKeyDown={e => { if (e.key === \"Enter\" && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); send(); } }} />\n        <div className=\"prism-chat-actions\">{onAttach && <PrismButton variant=\"shape\" iconOnly aria-label=\"파일 첨부\" icon={<PrismIcon name=\"PlusIcon\" size={20}/>} disabled={disabled || busy} onClick={onAttach}/>}<span id={`${id}-count`} className={invalid ? \"prism-error\" : \"\"}>{value.length} / {maxLength}</span>\n            {busy ? <PrismButton iconOnly aria-label=\"생성 중단\" disabled={!onStop} icon={<PrismIcon name=\"StopCircleIcon\" size={28} />} onClick={onStop} />\n                : <PrismButton type=\"submit\" iconOnly aria-label=\"메시지 전송\" icon={<PrismIcon name=\"SendIcon\" size={28} />} disabled={disabled || invalid || !value.trim()} />}</div>\n    </form>;\n}\nexport function PrismMessage({ role, children, status, actions }: { role: \"user\" | \"assistant\"; children: ReactNode;\n    status?: \"generating\" | \"complete\" | \"error\"; actions?: ReactNode }) {\n    return <article className=\"prism-message\" data-role={role} aria-label={role === \"user\" ? \"사용자 메시지\" : \"PRISM 답변\"}>\n        <div className=\"prism-message-content\">{children}</div>\n        {status && <p className=\"prism-answer-status\" role={status === \"error\" ? \"alert\" : \"status\"}>\n            {status === \"generating\" ? \"답변 생성 중\" : status === \"error\" ? \"답변을 생성하지 못했습니다.\" : \"답변 완료\"}</p>}{actions}</article>;\n}\nexport function PrismCriteria({ items }: { items: readonly string[] }) {\n    return <section className=\"prism-criteria\" aria-label=\"판단 기준\"><ul>{items.map((item, index) => <li key={index}>{item}</li>)}</ul></section>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "b02e4aececffd1b7efbfeb38b923c6d9b2e04108f2a41857ec2fab208dd8e4b0",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

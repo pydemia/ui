@@ -1,0 +1,2163 @@
+{
+  "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+  "coverageDefinition": "Source-purpose mapping is separate from state/visual verification. Vector artwork is retained as design assets; API/auth/persistence remains host-owned. Pending entries must be resolved explicitly before completion.",
+  "components": [
+    {
+      "source": "components/admin/common/AdminAiGenerateButton.tsx",
+      "name": "AdminAiGenerateButton",
+      "target": "prism-management",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminAttachmentList.tsx",
+      "name": "AdminAttachmentList",
+      "target": "prism-admin",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminChipAutocomplete.tsx",
+      "name": "AdminChipAutocomplete",
+      "target": "prism-selection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminDateRangeField.tsx",
+      "name": "AdminDateRangeField",
+      "target": "prism-selection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminFilterBar.tsx",
+      "name": "AdminFilterBar",
+      "target": "prism-admin",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminPageHeader.tsx",
+      "name": "AdminPageHeader",
+      "target": "prism-admin",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminPageLayout.tsx",
+      "name": "AdminPageLayout",
+      "target": "prism-admin",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminSyncStatusBar.tsx",
+      "name": "AdminSyncStatusBar",
+      "target": "prism-admin",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminSyncStatusLabel.tsx",
+      "name": "AdminSyncStatusLabel",
+      "target": "prism-admin",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminTable.tsx",
+      "name": "AdminTable",
+      "target": "prism-directory",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminTableToolbar.tsx",
+      "name": "AdminTableToolbar",
+      "target": "prism-admin",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/common/AdminTruncatedText.tsx",
+      "name": "AdminTruncatedText",
+      "target": "prism-admin",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/company-groups/CompanyGroupForm.tsx",
+      "name": "CompanyGroupForm",
+      "target": "prism-domain-forms",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/notices/NoticeForm.tsx",
+      "name": "NoticeForm",
+      "target": "prism-domain-forms",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/position-blocks/AffectedPositionSummary.tsx",
+      "name": "AffectedPositionSummary",
+      "target": "prism-management",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/position-blocks/CriteriaDeleteDialog.tsx",
+      "name": "CriteriaDeleteDialog",
+      "target": "prism-management-tools",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/position-blocks/CriteriaDialog.tsx",
+      "name": "CriteriaDialog",
+      "target": "prism-management-tools",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/position-blocks/CriteriaSection.tsx",
+      "name": "CriteriaSection",
+      "target": "prism-management",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/position-blocks/CriteriaTag.tsx",
+      "name": "CriteriaTag",
+      "target": "prism-management-tools",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/position-blocks/JobCriteriaDialog.tsx",
+      "name": "JobCriteriaDialog",
+      "target": "prism-management-tools",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/position-blocks/PositionBlockSkeleton.tsx",
+      "name": "PositionBlockSkeleton",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/positions/CompanyTaskDialog.tsx",
+      "name": "CompanyTaskDialog",
+      "target": "prism-management-tools",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/positions/PositionCheckCard.tsx",
+      "name": "PositionCheckCard",
+      "target": "prism-management-tools",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/positions/PositionForm.tsx",
+      "name": "PositionForm",
+      "target": "prism-domain-forms",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/positions/PositionFormSkeleton.tsx",
+      "name": "PositionFormSkeleton",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/admin/users/UserForm.tsx",
+      "name": "UserForm",
+      "target": "prism-domain-forms",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/auth/AuthBootstrapLayout.tsx",
+      "name": "AuthBootstrapLayout",
+      "target": "prism-page-state",
+      "recipe": "PrismAccessGate (host status adapter)",
+      "coverage": "host-owned-nonvisual",
+      "verification": "Original bootstrap owns authentication and redirects, and renders no standalone UI. Host authentication is deliberately not replicated."
+    },
+    {
+      "source": "components/auth/ServiceContact.tsx",
+      "name": "ServiceContact",
+      "target": "prism-page-state",
+      "recipe": null,
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification."
+    },
+    {
+      "source": "components/chat/candidate/CandidateFilterBar.tsx",
+      "name": "CandidateFilterBar",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/candidate/CandidateListContent.tsx",
+      "name": "CandidateListContent",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/candidate/CandidateTable.tsx",
+      "name": "CandidateTable",
+      "target": "prism-directory",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismCandidateDirectory"
+    },
+    {
+      "source": "components/chat/chart/RadarChart.tsx",
+      "name": "RadarChart",
+      "target": "prism-chart",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/common/CandidateEvaluationHistory.tsx",
+      "name": "CandidateEvaluationHistory",
+      "target": "prism-record",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/common/ChatHeader.tsx",
+      "name": "ChatHeader",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/common/ChatInput.tsx",
+      "name": "ChatInput",
+      "target": "prism-chat",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/common/ContentFrame.tsx",
+      "name": "ContentFrame",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/common/DragDropOverlay.tsx",
+      "name": "DragDropOverlay",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/common/SectionTitle.tsx",
+      "name": "SectionTitle",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/common/TabPanelEmptyState.tsx",
+      "name": "TabPanelEmptyState",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismProfileSectionState"
+    },
+    {
+      "source": "components/chat/common/TabPanelErrorState.tsx",
+      "name": "TabPanelErrorState",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismProfileSectionState"
+    },
+    {
+      "source": "components/chat/common/TabPanelSkeleton.tsx",
+      "name": "TabPanelSkeleton",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismProfileSectionState"
+    },
+    {
+      "source": "components/chat/contextInfo/ContextInfoLayer.tsx",
+      "name": "ContextInfoLayer",
+      "target": "prism-context",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/contextInfo/ContextInfoSection.tsx",
+      "name": "ContextInfoSection",
+      "target": "prism-context",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/contextInfo/ContextOptionCard.tsx",
+      "name": "ContextOptionCard",
+      "target": "prism-context",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatAnswer.tsx",
+      "name": "ChatAnswer",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatConversation.tsx",
+      "name": "ChatConversation",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatConversationItem.tsx",
+      "name": "ChatConversationItem",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatJSONRenderer.tsx",
+      "name": "ChatJSONRenderer",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatJSONRendererPanel.tsx",
+      "name": "ChatJSONRendererPanel",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatMarkdownRenderer.tsx",
+      "name": "ChatMarkdownRenderer",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatMarkdownRendererPanel.tsx",
+      "name": "ChatMarkdownRendererPanel",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatMessageQuestion.tsx",
+      "name": "ChatMessageQuestion",
+      "target": "prism-chat",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/ChatPanelContentSide.tsx",
+      "name": "ChatPanelContentSide",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/conversation/InlineMarkdown.tsx",
+      "name": "InlineMarkdown",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/favorite/FavoriteCandidateCard.tsx",
+      "name": "FavoriteCandidateCard",
+      "target": "prism-profile",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismFavoriteProfile"
+    },
+    {
+      "source": "components/chat/favorite/FavoriteCandidateDetailTab.tsx",
+      "name": "FavoriteCandidateDetailTab",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismProfile / PrismProfileSectionState"
+    },
+    {
+      "source": "components/chat/favorite/FavoriteCandidateList.tsx",
+      "name": "FavoriteCandidateList",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/main/ChatConversationSection.tsx",
+      "name": "ChatConversationSection",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/main/ChatIntroSection.tsx",
+      "name": "ChatIntroSection",
+      "target": "prism-intro",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/memo/MemoCard.tsx",
+      "name": "MemoCard",
+      "target": "prism-detail",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/memo/MemoCardListSkeleton.tsx",
+      "name": "MemoCardListSkeleton",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/memo/MemoContent.tsx",
+      "name": "MemoContent",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/memo/MemoInput.tsx",
+      "name": "MemoInput",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/notice/NoticePopup.tsx",
+      "name": "NoticePopup",
+      "target": "prism-notice",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/panel/ChatPanel.tsx",
+      "name": "ChatPanel",
+      "target": "prism-panel",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/panel/MemoPanel.tsx",
+      "name": "MemoPanel",
+      "target": "prism-panel",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/panel/PositionPanel.tsx",
+      "name": "PositionPanel",
+      "target": "prism-panel",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/panel/ProfilePanel.tsx",
+      "name": "ProfilePanel",
+      "target": "prism-panel",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/panel/SidePanel.tsx",
+      "name": "SidePanel",
+      "target": "prism-panel",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/position/PositionDetailHeader.tsx",
+      "name": "PositionDetailHeader",
+      "target": "prism-position",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/position/PositionDetailView.tsx",
+      "name": "PositionDetailView",
+      "target": "prism-position",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/position/PositionDetailViewSkeleton.tsx",
+      "name": "PositionDetailViewSkeleton",
+      "target": "prism-position",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/position/PositionRecommend.tsx",
+      "name": "PositionRecommend",
+      "target": "prism-content",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/position/PositionRequirementGroup.tsx",
+      "name": "PositionRequirementGroup",
+      "target": "prism-position",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/sidebar/InquiryHistoryDialog.tsx",
+      "name": "InquiryHistoryDialog",
+      "target": "prism-notice",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/sidebar/NoticeDialog.tsx",
+      "name": "NoticeDialog",
+      "target": "prism-notice",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/sidebar/PrivacyPolicyDialog.tsx",
+      "name": "PrivacyPolicyDialog",
+      "target": "prism-notice",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorBoard/SuccessorBoardTable.tsx",
+      "name": "SuccessorBoardTable",
+      "target": "prism-collection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/attitude/AttitudeDerailmentRisk.tsx",
+      "name": "AttitudeDerailmentRisk",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/attitude/AttitudeDiagnosis.tsx",
+      "name": "AttitudeDiagnosis",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/attitude/AttitudeSummary.tsx",
+      "name": "AttitudeSummary",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/attitude/PdfViewerDialog.tsx",
+      "name": "PdfViewerDialog",
+      "target": "prism-document",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
+      "name": "SuccessorCandidateAttitude",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismAttitudeSection"
+    },
+    {
+      "source": "components/chat/successorCandidate/BadgeSummary.tsx",
+      "name": "BadgeSummary",
+      "target": "prism-profile",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/CandidateScoreEssay.tsx",
+      "name": "CandidateScoreEssay",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/competence/DesignCompetenceMatrix.tsx",
+      "name": "DesignCompetenceMatrix",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/competence/DesignCompetenceSummary.tsx",
+      "name": "DesignCompetenceSummary",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/competence/DesignExperienceDiversity.tsx",
+      "name": "DesignExperienceDiversity",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/competence/SuccessorCandidateCompetence.tsx",
+      "name": "SuccessorCandidateCompetence",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismDesignSection"
+    },
+    {
+      "source": "components/chat/successorCandidate/expertise/SuccessorCandidateExpertise.tsx",
+      "name": "SuccessorCandidateExpertise",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismExpertiseSection"
+    },
+    {
+      "source": "components/chat/successorCandidate/expertise/SuccessorCandidateExpertiseField.tsx",
+      "name": "SuccessorCandidateExpertiseField",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/expertise/SuccessorCandidateExpertiseSummary.tsx",
+      "name": "SuccessorCandidateExpertiseSummary",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/expertise/SurveyValidation.tsx",
+      "name": "SurveyValidation",
+      "target": "prism-record",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/expertise/ValidationItem.tsx",
+      "name": "ValidationItem",
+      "target": "prism-record",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/GradeSummary.tsx",
+      "name": "GradeSummary",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismGradeSummary"
+    },
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipRadar.tsx",
+      "name": "LeadershipRadar",
+      "target": "prism-chart",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipReason.tsx",
+      "name": "LeadershipReason",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipSummary.tsx",
+      "name": "LeadershipSummary",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipTrend.tsx",
+      "name": "LeadershipTrend",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismLeadershipTrend"
+    },
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipTrendChart.tsx",
+      "name": "LeadershipTrendChart",
+      "target": "prism-chart",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+      "name": "SuccessorCandidateLeadership",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismLeadershipSection"
+    },
+    {
+      "source": "components/chat/successorCandidate/learningAgility/LearningAgilityExperience.tsx",
+      "name": "LearningAgilityExperience",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/learningAgility/SuccessorCandidateLearningAgility.tsx",
+      "name": "SuccessorCandidateLearningAgility",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismAgilitySection"
+    },
+    {
+      "source": "components/chat/successorCandidate/mgmtComments/CeoCommentForm.tsx",
+      "name": "CeoCommentForm",
+      "target": "prism-record",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx",
+      "name": "SuccessorCandidateMgmtComments",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismCommentsSection"
+    },
+    {
+      "source": "components/chat/successorCandidate/NoData.tsx",
+      "name": "NoData",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/OutlineBox.tsx",
+      "name": "OutlineBox",
+      "target": "prism-profile",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+      "name": "CandidateProfilePrintPreview",
+      "target": "prism-document",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/print/PrintAttitudeDerailmentRisk.tsx",
+      "name": "PrintAttitudeDerailmentRisk",
+      "target": "prism-print",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/print/PrintCareerTimeline.tsx",
+      "name": "PrintCareerTimeline",
+      "target": "prism-print",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/print/PrintLeaderSummary.tsx",
+      "name": "PrintLeaderSummary",
+      "target": "prism-print",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/print/PrintOptionsDialog.tsx",
+      "name": "PrintOptionsDialog",
+      "target": "prism-document",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/print/PrintPage.tsx",
+      "name": "PrintPage",
+      "target": "prism-print",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/print/PrintSuccessExperienceEssay.tsx",
+      "name": "PrintSuccessExperienceEssay",
+      "target": "prism-print",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/successExperience/ExperienceAreaChip.tsx",
+      "name": "ExperienceAreaChip",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/successExperience/SuccessExperienceEssay.tsx",
+      "name": "SuccessExperienceEssay",
+      "target": "prism-record",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/successExperience/SuccessExperienceFailureEssay.tsx",
+      "name": "SuccessExperienceFailureEssay",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/successExperience/SuccessExperienceSummary.tsx",
+      "name": "SuccessExperienceSummary",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/successExperience/SuccessorCandidateSuccessExperience.tsx",
+      "name": "SuccessorCandidateSuccessExperience",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismExperienceSection"
+    },
+    {
+      "source": "components/chat/successorCandidate/SuccessorCandidateDetail.tsx",
+      "name": "SuccessorCandidateDetail",
+      "target": "prism-profile",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+      "name": "SuccessorCandidateFavoriteProfile",
+      "target": "prism-profile",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismFavoriteProfile"
+    },
+    {
+      "source": "components/chat/successorCandidate/total/SuccessorCandidateBasicInfo.tsx",
+      "name": "SuccessorCandidateBasicInfo",
+      "target": "prism-profile",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/total/SuccessorCandidateCareerTimeline.tsx",
+      "name": "SuccessorCandidateCareerTimeline",
+      "target": "prism-profile",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/total/SuccessorCandidateCompensation.tsx",
+      "name": "SuccessorCandidateCompensation",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismCompensationGrid"
+    },
+    {
+      "source": "components/chat/successorCandidate/total/SuccessorCandidateLeaderSummary.tsx",
+      "name": "SuccessorCandidateLeaderSummary",
+      "target": "prism-profile",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/successorCandidate/total/SuccessorCandidateTotal.tsx",
+      "name": "SuccessorCandidateTotal",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismTotalSection"
+    },
+    {
+      "source": "components/chat/templates/ChatMarkdownText.tsx",
+      "name": "ChatMarkdownText",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatProfile.tsx",
+      "name": "ChatProfile",
+      "target": "prism-candidate",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatProfileAnalysis.tsx",
+      "name": "ChatProfileAnalysis",
+      "target": "prism-assessment",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatProfileBrief.tsx",
+      "name": "ChatProfileBrief",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismProfileBrief"
+    },
+    {
+      "source": "components/chat/templates/ChatSixFrameTable.tsx",
+      "name": "ChatSixFrameTable",
+      "target": "prism-six-frame",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplateComplete.tsx",
+      "name": "ChatTemplateComplete",
+      "target": "prism-content",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplateCriteria.tsx",
+      "name": "ChatTemplateCriteria",
+      "target": "prism-chat",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplateGenerating.tsx",
+      "name": "ChatTemplateGenerating",
+      "target": "prism-content",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplateNudge.tsx",
+      "name": "ChatTemplateNudge",
+      "target": "prism-content",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplatePositionRecommend.tsx",
+      "name": "ChatTemplatePositionRecommend",
+      "target": "prism-content",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplateProfile.tsx",
+      "name": "ChatTemplateProfile",
+      "target": "prism-candidate",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplateTable.tsx",
+      "name": "ChatTemplateTable",
+      "target": "prism-candidate",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplateText.tsx",
+      "name": "ChatTemplateText",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/chat/templates/ChatTemplateTitle.tsx",
+      "name": "ChatTemplateTitle",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/error/ErrorContent.tsx",
+      "name": "ErrorContent",
+      "target": "prism-page-state",
+      "recipe": null,
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification."
+    },
+    {
+      "source": "components/ui/avatar/HRXAvatar.tsx",
+      "name": "HRXAvatar",
+      "target": "prism-display",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/avatar/HRXSidebarProfile.tsx",
+      "name": "HRXSidebarProfile",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismSidebarProfile"
+    },
+    {
+      "source": "components/ui/badge/HRXCountBadge.tsx",
+      "name": "HRXCountBadge",
+      "target": "prism-badge",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/badge/HRXElpBadge.tsx",
+      "name": "HRXElpBadge",
+      "target": "prism-badge",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/button/HRXBtn.tsx",
+      "name": "HRXBtn",
+      "target": "prism-button",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/button/HRXFavoriteToggle.tsx",
+      "name": "HRXFavoriteToggle",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismFavoriteToggle"
+    },
+    {
+      "source": "components/ui/button/HRXFloatingChatBtn.tsx",
+      "name": "HRXFloatingChatBtn",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismFloatingChatButton"
+    },
+    {
+      "source": "components/ui/button/HRXNewChatBtn.tsx",
+      "name": "HRXNewChatBtn",
+      "target": "prism-button",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/button/HRXShowMoreBtn.tsx",
+      "name": "HRXShowMoreBtn",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismShowMore"
+    },
+    {
+      "source": "components/ui/chip/HRXAnchorChip.tsx",
+      "name": "HRXAnchorChip",
+      "target": "prism-display",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/chip/HRXChip.tsx",
+      "name": "HRXChip",
+      "target": "prism-badge",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/chip/HRXProfileChip.tsx",
+      "name": "HRXProfileChip",
+      "target": "prism-display",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/datepicker/HRXDatePicker.tsx",
+      "name": "HRXDatePicker",
+      "target": "prism-selection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/dialog/HRXConfirmDialog.tsx",
+      "name": "HRXConfirmDialog",
+      "target": "prism-dialog",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/dialog/HRXDialog.tsx",
+      "name": "HRXDialog",
+      "target": "prism-dialog",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/empty-state/HRXEmptyState.tsx",
+      "name": "HRXEmptyState",
+      "target": "prism-feedback",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/icons/AccessDeniedIcon.tsx",
+      "name": "AccessDeniedIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"AccessDeniedIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/AddIcon.tsx",
+      "name": "AddIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"AddIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/AdminIcon.tsx",
+      "name": "AdminIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"AdminIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/AlarmIcon.tsx",
+      "name": "AlarmIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"AlarmIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/AnswerCompleteIcon.tsx",
+      "name": "AnswerCompleteIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"AnswerCompleteIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/BackIcon.tsx",
+      "name": "BackIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"BackIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/BoardIcon.tsx",
+      "name": "BoardIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"BoardIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CalendarDropdownIcon.tsx",
+      "name": "CalendarDropdownIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CalendarDropdownIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CalendarIcon.tsx",
+      "name": "CalendarIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CalendarIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ChatBubbleIcon.tsx",
+      "name": "ChatBubbleIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ChatBubbleIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ChatIcon.tsx",
+      "name": "ChatIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ChatIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CheckBoxCheckedDisabledIcon.tsx",
+      "name": "CheckBoxCheckedDisabledIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CheckBoxCheckedDisabledIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CheckBoxCheckedIcon.tsx",
+      "name": "CheckBoxCheckedIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CheckBoxCheckedIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CheckBoxIndeterminateIcon.tsx",
+      "name": "CheckBoxIndeterminateIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CheckBoxIndeterminateIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CheckBoxUncheckedDisabledIcon.tsx",
+      "name": "CheckBoxUncheckedDisabledIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CheckBoxUncheckedDisabledIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CheckBoxUncheckedIcon.tsx",
+      "name": "CheckBoxUncheckedIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CheckBoxUncheckedIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CheckFillIcon.tsx",
+      "name": "CheckFillIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CheckFillIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CheckLineIcon.tsx",
+      "name": "CheckLineIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CheckLineIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CheckPopupIcon.tsx",
+      "name": "CheckPopupIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CheckPopupIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ChevronDownFillIcon.tsx",
+      "name": "ChevronDownFillIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ChevronDownFillIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ChevronDownIcon.tsx",
+      "name": "ChevronDownIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ChevronDownIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ChevronLeftIcon.tsx",
+      "name": "ChevronLeftIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ChevronLeftIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ChevronRightIcon.tsx",
+      "name": "ChevronRightIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ChevronRightIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ChevronUpFillIcon.tsx",
+      "name": "ChevronUpFillIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ChevronUpFillIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ChipCloseIcon.tsx",
+      "name": "ChipCloseIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ChipCloseIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CloseCircleIcon.tsx",
+      "name": "CloseCircleIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CloseCircleIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CloseIcon.tsx",
+      "name": "CloseIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CloseIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CollapseIcon.tsx",
+      "name": "CollapseIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CollapseIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CompetenceIcon.tsx",
+      "name": "CompetenceIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CompetenceIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CopyAltIcon.tsx",
+      "name": "CopyAltIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CopyAltIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/CopyIcon.tsx",
+      "name": "CopyIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"CopyIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/DepthIcon.tsx",
+      "name": "DepthIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"DepthIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/DownArrowIcon.tsx",
+      "name": "DownArrowIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"DownArrowIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/DownloadIcon.tsx",
+      "name": "DownloadIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"DownloadIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/DragDropIcon.tsx",
+      "name": "DragDropIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"DragDropIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/EditIcon.tsx",
+      "name": "EditIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"EditIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ExpandedIcon.tsx",
+      "name": "ExpandedIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ExpandedIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ExpandIcon.tsx",
+      "name": "ExpandIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ExpandIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/FavoriteIcon.tsx",
+      "name": "FavoriteIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"FavoriteIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/FavoriteLargeIcon.tsx",
+      "name": "FavoriteLargeIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"FavoriteLargeIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/FavoriteOnIcon.tsx",
+      "name": "FavoriteOnIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"FavoriteOnIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/FileTextIcon.tsx",
+      "name": "FileTextIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"FileTextIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/FileUploadIcon.tsx",
+      "name": "FileUploadIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"FileUploadIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/FirstPageIcon.tsx",
+      "name": "FirstPageIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"FirstPageIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/FitHeightIcon.tsx",
+      "name": "FitHeightIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"FitHeightIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/FitWidthIcon.tsx",
+      "name": "FitWidthIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"FitWidthIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/GeneratingSpinnerIcon.tsx",
+      "name": "GeneratingSpinnerIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"GeneratingSpinnerIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/HistoryIcon.tsx",
+      "name": "HistoryIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"HistoryIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/InfoIcon.tsx",
+      "name": "InfoIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"InfoIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/LastPageIcon.tsx",
+      "name": "LastPageIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"LastPageIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/LinkIcon.tsx",
+      "name": "LinkIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"LinkIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/LogoHorizontalIcon.tsx",
+      "name": "LogoHorizontalIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"LogoHorizontalIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/MessagesSquareIcon.tsx",
+      "name": "MessagesSquareIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"MessagesSquareIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ModalCloseIcon.tsx",
+      "name": "ModalCloseIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ModalCloseIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/MoreIcon.tsx",
+      "name": "MoreIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"MoreIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/NextPageIcon.tsx",
+      "name": "NextPageIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"NextPageIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/NoFavoriteIcon.tsx",
+      "name": "NoFavoriteIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"NoFavoriteIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/NoMemoIcon.tsx",
+      "name": "NoMemoIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"NoMemoIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/NoSearchResultIcon.tsx",
+      "name": "NoSearchResultIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"NoSearchResultIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/NotFoundIcon.tsx",
+      "name": "NotFoundIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"NotFoundIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/PlusIcon.tsx",
+      "name": "PlusIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"PlusIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/PrevPageIcon.tsx",
+      "name": "PrevPageIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"PrevPageIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/PrintIcon.tsx",
+      "name": "PrintIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"PrintIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/RadioCheckedDisabledIcon.tsx",
+      "name": "RadioCheckedDisabledIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"RadioCheckedDisabledIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/RadioCheckedIcon.tsx",
+      "name": "RadioCheckedIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"RadioCheckedIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/RadioUncheckedDisabledIcon.tsx",
+      "name": "RadioUncheckedDisabledIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"RadioUncheckedDisabledIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/RadioUncheckedIcon.tsx",
+      "name": "RadioUncheckedIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"RadioUncheckedIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ResetIcon.tsx",
+      "name": "ResetIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ResetIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/SearchIcon.tsx",
+      "name": "SearchIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"SearchIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/SendIcon.tsx",
+      "name": "SendIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"SendIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/SortIcon.tsx",
+      "name": "SortIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"SortIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/StopCircleIcon.tsx",
+      "name": "StopCircleIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"StopCircleIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/SuccessorBoardIcon.tsx",
+      "name": "SuccessorBoardIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"SuccessorBoardIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/SymbolBgIcon.tsx",
+      "name": "SymbolBgIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"SymbolBgIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/SymbolIcon.tsx",
+      "name": "SymbolIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"SymbolIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/TagIcon.tsx",
+      "name": "TagIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"TagIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ToastCheckIcon.tsx",
+      "name": "ToastCheckIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ToastCheckIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ToastErrorIcon.tsx",
+      "name": "ToastErrorIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ToastErrorIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ToastInfoIcon.tsx",
+      "name": "ToastInfoIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ToastInfoIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/TrashIcon.tsx",
+      "name": "TrashIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"TrashIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/UnauthorizedIcon.tsx",
+      "name": "UnauthorizedIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"UnauthorizedIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/UsersIcon.tsx",
+      "name": "UsersIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"UsersIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ViewOffIcon.tsx",
+      "name": "ViewOffIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ViewOffIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ViewOnIcon.tsx",
+      "name": "ViewOnIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ViewOnIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/WarningPopupIcon.tsx",
+      "name": "WarningPopupIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"WarningPopupIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ZoomInIcon.tsx",
+      "name": "ZoomInIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ZoomInIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/icons/ZoomOutIcon.tsx",
+      "name": "ZoomOutIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"ZoomOutIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained; SVG IDs are scoped per instance. Gallery and integration checks remain required."
+    },
+    {
+      "source": "components/ui/input/HRXAutocomplete.tsx",
+      "name": "HRXAutocomplete",
+      "target": "prism-selection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/input/HRXCheckbox.tsx",
+      "name": "HRXCheckbox",
+      "target": "prism-selection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/input/HRXFileAttach.tsx",
+      "name": "HRXFileAttach",
+      "target": "prism-utility",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/input/HRXFileDropzone.tsx",
+      "name": "HRXFileDropzone",
+      "target": "prism-utility",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/input/HRXInputField.tsx",
+      "name": "HRXInputField",
+      "target": "prism-field",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismInput / PrismTextarea / PrismSelect"
+    },
+    {
+      "source": "components/ui/input/HRXInputLabel.tsx",
+      "name": "HRXInputLabel",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismInputLabel"
+    },
+    {
+      "source": "components/ui/input/HRXMultiSelect.tsx",
+      "name": "HRXMultiSelect",
+      "target": "prism-selection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismMultiSelect"
+    },
+    {
+      "source": "components/ui/input/HRXRadio.tsx",
+      "name": "HRXRadio",
+      "target": "prism-selection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/input/HRXSelect.tsx",
+      "name": "HRXSelect",
+      "target": "prism-field",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/input/HRXSwitch.tsx",
+      "name": "HRXSwitch",
+      "target": "prism-utility",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/input/HRXTextField.tsx",
+      "name": "HRXTextField",
+      "target": "prism-field",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/logo/HRXAffiliateLogo.tsx",
+      "name": "HRXAffiliateLogo",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismAffiliateLogo"
+    },
+    {
+      "source": "components/ui/pagination/HRXPagination.tsx",
+      "name": "HRXPagination",
+      "target": "prism-selection",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/popover/HRXPopover.tsx",
+      "name": "HRXPopover",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismPopover"
+    },
+    {
+      "source": "components/ui/progressbar/HRXProgressBar.tsx",
+      "name": "HRXProgressBar",
+      "target": "prism-utility",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/skeleton/HRXSkeleton.tsx",
+      "name": "HRXSkeleton",
+      "target": "prism-primitives",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismSkeletonGroup"
+    },
+    {
+      "source": "components/ui/table/HRXChatTable.tsx",
+      "name": "HRXChatTable",
+      "target": "prism-response",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": "PrismResponse (table block)"
+    },
+    {
+      "source": "components/ui/table/HRXTable.tsx",
+      "name": "HRXTable",
+      "target": "prism-display",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/tag/HRXTag.tsx",
+      "name": "HRXTag",
+      "target": "prism-badge",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/toast/HRXToast.tsx",
+      "name": "HRXToast",
+      "target": "prism-feedback",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "components/ui/tooltip/HRXTooltip.tsx",
+      "name": "HRXTooltip",
+      "target": "prism-utility",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "layouts/auth/AuthLayout.tsx",
+      "name": "AuthLayout",
+      "target": "prism-page-state",
+      "recipe": "PrismBlankLayout + PrismServiceContact",
+      "coverage": "composition",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification."
+    },
+    {
+      "source": "layouts/chat/ChatLayout.tsx",
+      "name": "ChatLayout",
+      "target": "prism-workspace",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "layouts/chat/ChatSidebar.tsx",
+      "name": "ChatSidebar",
+      "target": "prism-sidebar",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null
+    },
+    {
+      "source": "layouts/common/BlankLayout.tsx",
+      "name": "BlankLayout",
+      "target": "prism-page-state",
+      "recipe": null,
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification."
+    }
+  ],
+  "counts": {
+    "total": 269,
+    "pending": 0,
+    "vectorAssets": 87
+  }
+}

@@ -4,3 +4,6 @@ packages/ui/src/components/scatter-chart.tsx text eol=lf
 docs/r/*.json text eol=lf
 docs/r/releases/** text eol=lf
 registry/releases/** text eol=lf
+*.pdf binary
+apps/docs/public/prism/fonts/LICENSE.txt whitespace=-blank-at-eol
+docs/prism/fonts/LICENSE.txt whitespace=-blank-at-eol

@@ -1,0 +1,649 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-03",
+  "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+  "status": "in-progress",
+  "claim": "Source correspondence and runtime checks are separate from visual parity. No complete parity claim.",
+  "baselineSamples": [
+    {
+      "id": "reference-admin-attachment-list",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-admin-chip-autocomplete",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-admin-date-range-field",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-admin-truncated-text",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-chat-candidate-common",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-chat-candidate-profile-print",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-chat-chart",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-chat-markdown",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-chat-pdf-viewer",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-chat-side-panel",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-chat-six-frame-table",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-chat-templates",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-affiliate-logo",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-avatar",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-badge",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-button",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-chip",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-date-picker",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-dialog",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-icon",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-autocomplete",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-checkbox",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-file-attach",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-file-dropzone",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-input-label",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-multi-select",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-radio",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-searchable-select",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-select",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-switch",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-input-text-field",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-pagination",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-progress-bar",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-table",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-tag",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-toast",
+      "status": "captured-default",
+      "statesCompared": false
+    },
+    {
+      "id": "reference-ui-tooltip",
+      "status": "captured-default",
+      "statesCompared": false
+    }
+  ],
+  "components": {
+    "prism-button": {
+      "visual": "partial",
+      "interaction": "pending",
+      "checks": [
+        "Deployed new-chat 40px height, 8px radius, 14px type",
+        "Button sample default geometry and token values compared"
+      ],
+      "remaining": [
+        "hover/focus/disabled combinations"
+      ]
+    },
+    "prism-selection": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Search ArrowDown/Enter selection and named clear",
+        "MultiSelect Space toggle, first-chip clear preserves remaining selection",
+        "Chip search does not open at two characters; opens at three",
+        "Chip clear restores labelled combobox focus",
+        "Checked vector color rgb(65,99,149) matches deployed Checkbox",
+        "Date invalid 2026-02-31 rejected; valid calendar selection",
+        "Pagination page 2",
+        "Source calendar-only field-click behavior restored; inputEditable is opt-in",
+        "Calendar 322px outer width, 40px header/weekdays, 36px circular day cells",
+        "Year grid 280px high; year change commits date and day selection closes"
+      ],
+      "evidence": [
+        "local-selection-fixed",
+        "local-selection-keyboard",
+        "local-calendar-year"
+      ],
+      "remaining": [
+        "every size and disabled/readOnly state",
+        "all dropdown keyboard and typeahead variants"
+      ]
+    },
+    "prism-domain-forms": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "All companies disables company selector",
+        "Notice popup requires valid date range",
+        "Disabling popup clears both dates",
+        "User role without group hides selector and clears group ID",
+        "company group selects two companies and emits synthetic save intent",
+        "duplicate position sub-job rejected",
+        "expertise limit 3 and experience limit 2 preserve removal",
+        "position generate and save intent callbacks"
+      ],
+      "evidence": [
+        "local-notice-form",
+        "local-user-form",
+        "local-group-form",
+        "local-position-form"
+      ],
+      "remaining": [
+        "Group and Position form workflows",
+        "all display variants",
+        "authenticated source form visual comparison"
+      ]
+    },
+    "prism-notice": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Policy version changes iframe content",
+        "Policy height stabilizes at content height",
+        "Policy sandbox has allow-same-origin without allow-scripts",
+        "Notice popup is nonmodal and next notice changes to 2/2"
+      ],
+      "evidence": [
+        "local-policy",
+        "local-notice-popup"
+      ],
+      "remaining": [
+        "Dialog list selection/order and all states"
+      ]
+    },
+    "prism-profile-sections": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "All eight tab recipes render",
+        "Experience topic changes displayed card",
+        "Comment save appends text and clears draft",
+        "320px profile recipe root does not overflow; tabs and compensation table scroll internally"
+      ],
+      "evidence": [
+        "local-profile-total",
+        "local-profile-expertise",
+        "local-profile-experience",
+        "local-profile-design",
+        "local-profile-agility",
+        "local-profile-attitude",
+        "local-profile-leadership",
+        "local-profile-comments",
+        "local-profile-interactions"
+      ],
+      "remaining": [
+        "Source domain recipe appearance comparison",
+        "empty/loading/error and long content states"
+      ]
+    },
+    "prism-document": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Actual two-page fixture PDF renders",
+        "Page 2 navigation and manual 90 percent zoom",
+        "Print section checkbox changes selection",
+        "390px page fit uses 245.90625 x 348px canvas inside 356 x 380px viewport",
+        "Width fit subtracts 32px total padding once: 324px canvas at 390px frame; 254px at 320px; 958px at 1024px",
+        "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px"
+      ],
+      "remaining": [
+        "Source PDF toolbar/fit states comparison",
+        "actual browser print pagination"
+      ],
+      "evidence": [
+        "local-pdf-responsive"
+      ]
+    },
+    "prism-panel": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Expanded nonmodal panel reaches measured parent width 658px",
+        "Surrounding content remains operable",
+        "Keyboard resize 440 to 456, Home 320, End 800; double click reset 440",
+        "Pointer drag 80px left grows right-anchored panel from 440 to 520",
+        "Controlled width callback leaves width unchanged until consumer update",
+        "Real 390px iframe: compact detail panel 356px, no resizer, root scroll width 390px"
+      ],
+      "remaining": [
+        "source SidePanel state-by-state comparison",
+        "pointer cancel and nested popup Escape combinations"
+      ],
+      "evidence": [
+        "local-panel-resize",
+        "local-workspace-mobile-profile-390"
+      ]
+    },
+    "prism-utility": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Local fixture PDF upload shows attachment tile"
+      ],
+      "evidence": [
+        "local-utility"
+      ],
+      "remaining": [
+        "remove, reject and drag/drop paths"
+      ]
+    },
+    "prism-workspace": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Enter submits draft and renders synthetic response",
+        "Candidate open/favorite and profile panel expansion",
+        "Real iframe widths 320/390/768/1024 have equal root client/scroll widths",
+        "Container widths 288/358/736 use compact navigation; 992px uses desktop navigation",
+        "Open Drawer closes when growing to 1024px and focus returns to workspace header",
+        "Draft text persists through width changes",
+        "Candidate detail keeps all eight profile tabs at 390px"
+      ],
+      "remaining": [
+        "complete source layout comparison",
+        "every domain fixture at narrow widths"
+      ],
+      "evidence": [
+        "local-workspace-sizing",
+        "local-workspace-growth",
+        "local-workspace-mobile-profile-390"
+      ]
+    },
+    "prism-icon": {
+      "visual": "source-artwork-retained",
+      "interaction": "not-applicable",
+      "checks": [
+        "87 original vector shapes retained with typed adapter",
+        "174 rendered SVG instances have unique IDs and valid local URL references"
+      ],
+      "remaining": [
+        "rendered currentColor and placement in every host component"
+      ]
+    },
+    "prism-field": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Deployed and local Select menu options: 33px height, 14px type, 0px 8px padding, 4px radius",
+        "End/Enter chooses last option and restores trigger focus",
+        "Clear action emits intent, preserves consumer-owned value and input focus",
+        "Readonly value keeps original primary text color; disabled value retains caption",
+        "readOnly Select remains focusable and submits value without opening",
+        "native required Select blocks empty submit and focuses trigger",
+        "uncontrolled form reset restores default; controlled reset preserves value",
+        "ArrowUp from search selects last option"
+      ],
+      "evidence": [
+        "local-select-open-contract",
+        "local-select-readonly-sizes",
+        "local-select-native-form"
+      ],
+      "remaining": [
+        "all input/select sizes and native form required validation",
+        "typeahead runtime",
+        "all source option states"
+      ]
+    },
+    "prism-dialog": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "440/560/620px dialog widths",
+        "Header 66.1875px and 24px close artwork match source",
+        "Confirm dialog 440px width, 65px header, 24px icon and 16px body",
+        "Confirm callback emits synthetic intent",
+        "Keyboard Enter opens controlled confirm; Escape restores original opener focus",
+        "Busy confirm keeps dialog open on Escape and disables cancel/close"
+      ],
+      "evidence": [
+        "local-confirm-dialog",
+        "local-dialog-busy-focus"
+      ],
+      "remaining": [
+        "long body and no-title confirm variants",
+        "all deployed error/busy states"
+      ]
+    },
+    "prism-sidebar": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Original vector navigation artwork and 36px navigation rows",
+        "Collapsed width 72px, header 64px, new-chat height 40px",
+        "Admin submenu toggle and child navigation",
+        "History rename Enter, Escape cancellation",
+        "Profile action intent and 256px popover",
+        "Rename blur trims synthetic title",
+        "Delete request preserves one DOM history row until explicit fixture confirm; after confirm row count is zero"
+      ],
+      "evidence": [
+        "local-sidebar-profile-menu",
+        "local-sidebar-delete-confirm"
+      ],
+      "remaining": [
+        "IME rename path",
+        "full authenticated source sidebar visual comparison"
+      ]
+    },
+    "prism-candidate": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Source-informed white brief contains dates, degree, recent evaluation history and prepared compensation text",
+        "Photo slot 70px; grid header is column, panel header is row",
+        "Favorite is 20 x 20px and checked color rgb(251,188,5)",
+        "Favorite click does not open profile; clicking date in card body opens profile",
+        "Grid compact brief excludes degree and compensation; no nested buttons"
+      ],
+      "remaining": [
+        "all source card placement and long-name states",
+        "paired deployed sample comparison"
+      ],
+      "evidence": [
+        "local-candidate-card"
+      ]
+    },
+    "prism-record": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "320px iframe preserves page width; compensation table scrolls internally"
+      ],
+      "evidence": [
+        "local-all-components-narrow"
+      ],
+      "remaining": [
+        "deployed evaluation/compensation/validation geometry and all interactive states"
+      ]
+    },
+    "prism-tabs": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "320px tab list scrolls internally without growing root width"
+      ],
+      "evidence": [
+        "local-all-components-narrow"
+      ],
+      "remaining": [
+        "all source tab states and keyboard focus placement"
+      ]
+    },
+    "prism-primitives": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "source common skeleton 3x120 and 2x60 geometry",
+        "NoData 13px and 15px line box",
+        "Summary badge 88px, neutral border and text metrics",
+        "empty Summary 49px without badge",
+        "Summary click opens tooltip; Escape dismisses"
+      ],
+      "evidence": [
+        "reference-candidate-common-metrics",
+        "local-candidate-common-metrics",
+        "local-summary-empty",
+        "local-summary-tooltip"
+      ],
+      "remaining": [
+        "hover and focus-only Tooltip runtime",
+        "all summary content states"
+      ]
+    },
+    "prism-profile": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "source empty state 175px total and 120px icon",
+        "source error state 236px with 70px padding and retry"
+      ],
+      "evidence": [
+        "reference-common-empty-error",
+        "local-request-empty",
+        "local-request-error"
+      ],
+      "remaining": [
+        "authenticated profile page visual comparison"
+      ]
+    }
+  },
+  "gates": {
+    "typecheck": "pending-current-source",
+    "contractTests": {
+      "passed": 23,
+      "failed": 0
+    },
+    "registry": {
+      "groups": 38,
+      "items": 39,
+      "status": "generated"
+    },
+    "independentConsumer": {
+      "status": "pending-current-source",
+      "items": 39,
+      "files": 61,
+      "typecheck": "passed",
+      "viteBuild": "passed",
+      "registrySha256": "a8549b4ed45ee64980a62c5ead8f4891a3f8d668c2fc21a62c84db712c241622",
+      "method": "isolated shadcn install against local registry mirror; no workspace package imports"
+    },
+    "fullSiteBuild": "pending-current-source",
+    "publicDeployment": {
+      "status": "service-limit",
+      "url": "https://ui.pydemia.ai/prism",
+      "readback": "404",
+      "attempts": [
+        {
+          "method": "normal-upload",
+          "result": "api-upload-free request limit exceeded (5000/day)"
+        },
+        {
+          "method": "archive-tgz",
+          "result": "archive upload completed; api-deployments-free-per-day limit exceeded (100/day)"
+        }
+      ],
+      "retryCondition": "Vercel daily quota reset"
+    },
+    "generalComponentTests": {
+      "passed": 219,
+      "failed": 0,
+      "status": "pending-remote-integration"
+    },
+    "genericRegistry": {
+      "items": 135,
+      "catalogEntries": 133,
+      "immutableReleases": 61,
+      "status": "pending-remote-integration"
+    }
+  },
+  "unverified": [
+    "all 269 source correspondences do not establish state or pixel equality",
+    "authenticated full-domain screens in own browser",
+    "public /prism and registry URL readback",
+    "extensions across every domain, long content and popup combination"
+  ],
+  "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
+  "fixtureRenderChecks": {
+    "groups": 38,
+    "states": 115,
+    "status": "passed",
+    "checks": [
+      "all 115 fixtures render at 320px",
+      "no nested buttons at 320px"
+    ],
+    "evidence": "local-all-fixture-states-320",
+    "claim": "Rendering does not prove interaction or visual parity.",
+    "visibleInputLabels": {
+      "states": 114,
+      "status": "passed-before-common-empty-fixture-addition",
+      "fieldStatesRechecked": 5,
+      "evidence": [
+        "local-all-fixture-states-current",
+        "local-field-visible-labels"
+      ]
+    }
+  },
+  "extensions": {
+    "responsiveWorkspace": {
+      "status": "runtime-verified-partial",
+      "containerBreakpoint": 768,
+      "testedFrameWidths": [
+        320,
+        390,
+        768,
+        1024
+      ]
+    },
+    "manualPanelResize": {
+      "status": "runtime-verified-partial",
+      "defaultWidth": 440,
+      "defaultBounds": [
+        320,
+        800
+      ]
+    },
+    "pdfSizing": {
+      "status": "runtime-verified-partial",
+      "defaultManualZoomBounds": [
+        30,
+        100
+      ],
+      "fixtureManualZoomBounds": [
+        30,
+        300
+      ]
+    },
+    "responsivePreview": {
+      "status": "implemented",
+      "method": "real iframe viewport, not browser emulation"
+    },
+    "narrowFixtureLayout": {
+      "status": "passed",
+      "groups": 38,
+      "states": 115,
+      "frameWidth": 320,
+      "rootOverflowCount": 0,
+      "evidence": "local-all-fixture-states-320"
+    }
+  }
+}

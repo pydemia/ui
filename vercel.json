@@ -3,5 +3,15 @@
   "framework": null,
   "installCommand": "npm ci",
   "buildCommand": "npm run build",
-  "outputDirectory": "docs"
+  "outputDirectory": "docs",
+  "rewrites": [
+    {
+      "source": "/prism",
+      "destination": "/prism/index.html"
+    },
+    {
+      "source": "/prism/",
+      "destination": "/prism/index.html"
+    }
+  ]
 }

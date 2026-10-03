@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-display",
+  "type": "registry:ui",
+  "title": "Avatar / Chips / Table",
+  "description": "사용자·후보 식별, 프로필 선택, 표 검색·정렬",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/r/pyd-avatar.json",
+    "https://ui.pydemia.ai/r/pyd-data-table.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-display.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-display.tsx",
+      "content": "import type { ComponentProps, ReactNode } from \"react\";\nimport { Avatar, AvatarFallback, AvatarImage } from \"./avatar\";\nimport { DataTable, type DataTableProps } from \"./data-table\";\n\nexport type PrismAvatarProps = { name: string; team?: string; description?: string; src?: string; className?: string; showInfo?: boolean };\nexport function PrismAvatar({ name, team, description, src, className = \"\", showInfo = true }: PrismAvatarProps) {\n    return <div className={`prism-avatar ${className}`}><Avatar className=\"prism-avatar-image\">\n        {src && <AvatarImage src={src} alt=\"\" />}<AvatarFallback>{name.trim().slice(0, 1) || \"?\"}</AvatarFallback></Avatar>\n        {showInfo ? <div className=\"prism-avatar-text\"><div><strong title={name}>{name}</strong>{team && <><span className=\"prism-avatar-divider\" aria-hidden=\"true\" /><span title={team}>{team}</span></>}</div>\n            {description && <p title={description}>{description}</p>}</div> : <span className=\"prism-sr-only\">{name}</span>}</div>;\n}\nexport function PrismProfileChip({ name, src, small, readOnly, ...props }: ComponentProps<\"button\"> & { name: string; src?: string; small?: boolean; readOnly?: boolean }) {\n    return <button {...props} disabled={props.disabled || readOnly} type={props.type ?? \"button\"} className={`prism-profile-chip ${props.className ?? \"\"}`} data-small={small || undefined} data-readonly={readOnly || undefined}>\n        <Avatar className=\"prism-profile-chip-image\" aria-hidden=\"true\">{src && <AvatarImage src={src} alt=\"\" />}<AvatarFallback /></Avatar>{name}</button>;\n}\nexport function PrismAnchorChip({ selected, small, interactive=true, children, ...props }: ComponentProps<\"button\"> & { selected: boolean; small?: boolean;interactive?:boolean }) {\n    if(!interactive)return <span className={`prism-anchor-chip ${props.className??\"\"}`} data-small={small||undefined} data-static=\"true\" data-selected={selected||undefined}>{children}</span>;\n    return <button {...props} type={props.type ?? \"button\"} className={`prism-anchor-chip ${props.className ?? \"\"}`} data-small={small||undefined} aria-pressed={selected}>{children}</button>;\n}\nexport function PrismTable({ caption, children, className = \"\", ...props }: ComponentProps<\"table\"> & { caption: string }) {\n    return <div className=\"prism-table-scroll\" role=\"region\" aria-label={caption} tabIndex={0}><table {...props} className={`prism-table ${className}`}>\n        <caption>{caption}</caption>{children}</table></div>;\n}\nexport function PrismDataTable<Row>(props: DataTableProps<Row>) {\n    return <DataTable {...props} className={`prism-data-table ${props.className ?? \"\"}`} />;\n}\nexport function PrismSection({ title, children, actions }: { title: string; children: ReactNode; actions?: ReactNode }) {\n    return <section className=\"prism-section\"><header><h3>{title}</h3>{actions}</header>{children}</section>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "sourceSha256": "4601b281534c102c2b2392ab84da3fa2ac35e050e2638fd7f3cc69768ea5ec77",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

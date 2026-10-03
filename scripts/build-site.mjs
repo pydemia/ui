@@ -23,6 +23,8 @@ if (existsSync("registry/releases")) {
 }
 await rm("apps/docs/dist", { recursive: true, force: true });
 run(["run", "build", "-w", "@pydemia/docs"]);
+await mkdir("apps/docs/dist/prism", { recursive: true });
+await cp("apps/docs/dist/index.html", "apps/docs/dist/prism/index.html");
 await rm("docs", { recursive: true, force: true });
 await cp("apps/docs/dist", "docs", { recursive: true });
 for (const file of ["docs/index.html", "docs/examples/profile/index.html"]) {
