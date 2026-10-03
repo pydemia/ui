@@ -2,7 +2,8 @@
 
 2026-10-03 AppShell panel 디자인 선택 구현 후보:
 **약 98% → 약 98%**입니다. 공개 component 수를 늘리지 않고 측면·
-하단 영역에 `attached`·`inset`을 선택하도록 했습니다. 검증·공개
+하단 영역에 `attached`·`inset`을 선택하도록 했습니다. 로컬 typecheck·
+대상 테스트·브라우저·build·68번째 snapshot 검사는 통과했고 공개
 여부는 [작업 기록](app-shell-panel-appearances-2026-10-03.md)에
 남깁니다.
 

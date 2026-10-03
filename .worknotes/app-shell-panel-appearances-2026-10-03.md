@@ -22,5 +22,9 @@ trigger focus 복귀가 동작했고 console error는 없었습니다. 실제
 screen reader 발표는 실행하지 않았습니다. 기존 `attached`의 DOM·
 class는 SSR 검사로 확인했고 시각 회귀 검사는 실행하지 않았습니다.
 
-전체 build·registry snapshot, 적용 CI와 공개 URL은 아직 확인 전입니다.
-Goal 관리용 추정은 약 98%입니다.
+전체 build와 `registry:check`가 139개 item·137개 component의 정합성을
+확인했습니다. 68번째 snapshot ID는
+`sha256-d8bd8996d3f0ad4dad3133de01626182d4c111a4c97664864f9b5a32403c194b`이며
+재빌드 뒤 `registry:release-check`가 현재 생성물과의 일치를 확인했습니다.
+적용 CI와 공개 URL은 아직 확인 전입니다. Goal 관리용 추정은 약
+98%입니다.
