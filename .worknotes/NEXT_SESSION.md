@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-03 `PivotTable`은 PR #125로 병합됐고 PR·`main` Verify UI와
+Pages가 통과했습니다. Vercel production은 배포 횟수 제한으로 실패해
+현재 item과 70번째 manifest가 공개 도메인에서 404입니다. 제한 해제
+뒤 production 배포와 manifest·현재 item·snapshot item을 확인하세요.
+공개 확인은 138개 component·140개 registry item, 저장소 후보는
+139개·141개입니다. [작업 기록](pivot-table-2026-10-03.md)에
+증거와 미검증 범위를 남겼습니다. 체크리스트의 변경 위험별 적용은
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 따릅니다.
+Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 `PivotTable` 공개 준비: 두 범주의 원자료를 교차 집계하고
 행·열·전체 합계를 제공하는 원본 component를 추가했습니다. typecheck·
 대상/전체 테스트·build, 390px Chromium preview, provenance 고지와

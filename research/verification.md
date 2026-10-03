@@ -1,6 +1,6 @@
 # 검증 기록
 
-## 2026-10-03 PivotTable — 로컬 후보
+## 2026-10-03 PivotTable — 병합·공개 대기
 
 교차점 중복 합산·음수·0·미수집 전파·행/열/전체 합계와 잘못된 입력·
 overflow를 대상 SSR 테스트 5개로 확인했습니다. 전체 UI 테스트
@@ -11,8 +11,11 @@ page error 0건을 확인했습니다. 실제 screen reader·touch·Safari·RTL�
 `registry:release-check`가 141개 item·139개 export/catalog와 70개
 snapshot을 확인했습니다. 현재 ID는
 `sha256-32c8c4110dd838fedd10716915c72849dd5e35f6977b0dbd010fe9a559d507b9`입니다.
-PR CI·공개 URL은 [작업 기록](../.worknotes/pivot-table-2026-10-03.md)에
-이어 남깁니다.
+PR #125와 병합 뒤 `main`의 Verify UI, Pages가 통과했습니다.
+Vercel production은 배포 횟수 제한으로 실패했고 현재 item과
+70번째 manifest는 공개 도메인에서 HTTP 404입니다. 배포 후
+대표 URL 확인은 [작업 기록](../.worknotes/pivot-table-2026-10-03.md)에
+남긴 대로 아직 필요합니다.
 
 ## 2026-10-03 TreemapChart — 공개 확인
 

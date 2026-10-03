@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `PivotTable` 병합·공개 대기와 체크리스트 재확인:
+**약 98% → 약 98%**입니다. PR #125와 `main`의 Verify UI,
+Pages가 통과했습니다. Vercel 배포 횟수 제한으로 새 item과
+70번째 manifest는 공개 도메인에서 404이므로 공개 확인 수량은
+138개 component·140개 registry item입니다. 로컬 후보는
+139개·141개입니다. [작업 기록](pivot-table-2026-10-03.md)과
+[품질 판정](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `PivotTable` 공개 준비: **약 98% → 약 98%**입니다.
 교차점과 합계를 계산하는 로컬 139번째 component의 typecheck·전체
 테스트·build·브라우저, 고지와 70번째 snapshot을 확인했습니다.

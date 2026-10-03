@@ -40,3 +40,15 @@ source hash를 바꾸던 부분은 생성기·검사기에서 LF로 읽게 했�
 production 경로는 별도로 확인합니다. 이 줄바꿈 문제는
 [체크리스트 판정](quality-checklist-decision-2026-10-03.md)에서
 component 동작 품질과 구분했습니다.
+
+PR #125의 Verify UI와 Vercel preview, 병합 commit
+`ef8d2c644aadde7b4e9b573759e2cb29938c5108`의 Verify UI와
+Pages가 통과했습니다. production Vercel 상태는 배포 횟수 제한으로
+`failure`이며 "retry in 24 hours"가 보고됐습니다. 공개 도메인에서
+현재 registry는 HTTP 200이지만 `pyd-pivot-table.json`과 70번째
+manifest는 HTTP 404입니다. 따라서 저장소의 공개 후보 139개
+component·141개 item과 공개 확인 138개·140개를 구분합니다.
+배포 제한이 풀린 뒤 같은 commit을 production에 배포하고 manifest와
+현재·snapshot PivotTable item을 확인해야 합니다. 실제 screen reader·
+touch·Safari·RTL은 이번 변경에서 실행하지 않았습니다. Goal 관리용
+추정은 약 98%입니다.
