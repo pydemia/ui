@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-alert-dialog",
+  "title": "Alert Dialog",
+  "dependencies": [
+    "@radix-ui/react-alert-dialog@1.1.23"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-ab149be9df7a468a1002ed3461c04dce1c3442fe0a32a796ad06ec010688a458/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/alert-dialog.tsx",
+      "content": "import * as AlertDialogPrimitive from \"@radix-ui/react-alert-dialog\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst AlertDialog = AlertDialogPrimitive.Root;\nconst AlertDialogTrigger = AlertDialogPrimitive.Trigger;\nconst AlertDialogAction = AlertDialogPrimitive.Action;\nconst AlertDialogCancel = AlertDialogPrimitive.Cancel;\n\nfunction AlertDialogContent({\n    className,\n    ...props\n}: ComponentProps<typeof AlertDialogPrimitive.Content>) {\n    return (\n        <AlertDialogPrimitive.Portal>\n            <AlertDialogPrimitive.Overlay\n                className=\"fixed inset-0 z-50 bg-[var(--overlay)]\"\n            />\n            <AlertDialogPrimitive.Content\n                className={cn(\n                    \"fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] \" +\n                    \"w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 \" +\n                    \"-translate-y-1/2 overflow-y-auto rounded-sm border \" +\n                    \"border-border bg-surface p-[var(--space-6)] \" +\n                    \"text-foreground shadow-[var(--shadow-float)]\",\n                    className,\n                )}\n                {...props}\n            />\n        </AlertDialogPrimitive.Portal>\n    );\n}\n\nfunction AlertDialogHeader({ className, ...props }: ComponentProps<\"div\">) {\n    return <div className={cn(\"grid gap-2\", className)} {...props} />;\n}\n\nfunction AlertDialogFooter({ className, ...props }: ComponentProps<\"div\">) {\n    return (\n        <div\n            className={cn(\"mt-6 flex flex-wrap justify-end gap-2\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction AlertDialogTitle({\n    className,\n    ...props\n}: ComponentProps<typeof AlertDialogPrimitive.Title>) {\n    return (\n        <AlertDialogPrimitive.Title\n            className={cn(\"text-base font-semibold\", className)}\n            {...props}\n        />\n    );\n}\n\nfunction AlertDialogDescription({\n    className,\n    ...props\n}: ComponentProps<typeof AlertDialogPrimitive.Description>) {\n    return (\n        <AlertDialogPrimitive.Description\n            className={cn(\"text-sm text-muted\", className)}\n            {...props}\n        />\n    );\n}\n\nexport {\n    AlertDialog, AlertDialogTrigger, AlertDialogAction, AlertDialogCancel,\n    AlertDialogContent, AlertDialogHeader, AlertDialogFooter,\n    AlertDialogTitle, AlertDialogDescription,\n};\n",
+      "type": "registry:ui",
+      "target": "@ui/alert-dialog.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `4b2d913306b142c3c9991b68a73a64a5d78427ad`:\n<https://github.com/pydemia/ui/blob/4b2d913306b142c3c9991b68a73a64a5d78427ad/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`5966c1515596b514fadc30b9defc682905c7a8f79d295b1d77012f5f20be5a28`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}

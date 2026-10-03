@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 `Autocomplete` 로컬 릴리스 후보: 자유 텍스트의 native form
+제출과 manual 추천어 선택을 추가했습니다. 대상 테스트 4/4, 전체 UI
+251/251, typecheck·build·PRISM 23/23, 390px Chromium preview,
+`registry:release-check`가 통과했습니다. 140개 component·142개 item·
+71번째 snapshot 후보입니다. PR CI와 공개 URL은 아직 확인하지
+않았습니다. [작업 기록](autocomplete-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 공급·품질 체크리스트 재검토: 과거 `5/10` 운영 조사와
 component 릴리스 판정을 분리했습니다. component마다 PR·snapshot을
 만드는 관행과 로컬·CI 검사의 반복이 실제 경직성입니다. 관련 변경은

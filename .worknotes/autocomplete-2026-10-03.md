@@ -13,6 +13,9 @@
 4개로 확인했습니다. 전체 UI 테스트 251/251, typecheck·build,
 PRISM 검사 23/23이 통과했습니다. 로컬 Chromium의 390px preview에서
 자유 텍스트 제출, 방향키·Enter와 마우스 추천어 선택을 확인했습니다.
-registry 고지·snapshot과 공개 경로는 계속 확인합니다. 실제 screen
-reader·touch·Safari·RTL은 아직 실행하지 않았습니다. Goal 관리용
-추정은 약 98%로 유지합니다.
+registry 고지의 고정 provenance commit·SHA-256과 71번째 snapshot,
+`registry:release-check`를 확인했습니다. 릴리스 ID는
+`sha256-ab149be9df7a468a1002ed3461c04dce1c3442fe0a32a796ad06ec010688a458`입니다.
+로컬 후보는 140개 component·142개 registry item입니다. PR CI와 공개
+경로는 아직 확인하지 않았습니다. 실제 screen reader·touch·Safari·
+RTL은 실행하지 않았습니다. Goal 관리용 추정은 약 98%로 유지합니다.
