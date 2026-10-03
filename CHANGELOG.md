@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 2026-10-03 — AppShell panel 표시 형태
+
+- `AppSidebar`와 `AppBottomPanel`에 `appearance="inset"`을 추가했습니다.
+  기본 `attached`는 기존 가장자리 연결형이며, `inset`은 안쪽 여백·
+  전체 테두리·그림자가 있는 panel입니다. 영역의 이름과 접기·탐색
+  동작은 그대로 사용합니다.
+
 ## 2026-10-03 — HistogramChart
 
 - 연속된 동일 너비 수치 구간의 빈도를 비교하는 `HistogramChart`를

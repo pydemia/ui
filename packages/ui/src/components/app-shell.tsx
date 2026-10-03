@@ -55,20 +55,31 @@ function AppBody({ className, ...props }: ComponentProps<"div">) {
 type AppSidebarProps = ComponentProps<"aside"> & {
     "aria-label": string;
     side?: "left" | "right";
+    appearance?: "attached" | "inset";
 };
 
 function AppSidebar({
     side = "left",
+    appearance = "attached",
     className,
     ...props
 }: AppSidebarProps) {
+    if (appearance !== "attached" && appearance !== "inset") {
+        throw new RangeError("AppSidebar appearance is not supported.");
+    }
+
     return (
         <aside
+            data-appearance={appearance}
             className={cn(
-                "min-w-0 border-b border-border bg-surface-subtle " +
-                "p-[var(--space-3)] @3xl:w-52 @3xl:shrink-0 " +
-                "@3xl:border-b-0",
-                side === "left" ? "@3xl:border-r" : "@3xl:border-l",
+                "min-w-0 p-[var(--space-3)] @3xl:w-52 @3xl:shrink-0",
+                appearance === "attached" &&
+                    "border-b border-border bg-surface-subtle @3xl:border-b-0",
+                appearance === "attached" &&
+                    (side === "left" ? "@3xl:border-r" : "@3xl:border-l"),
+                appearance === "inset" &&
+                    "m-[var(--space-3)] rounded-sm border border-border " +
+                    "bg-surface shadow-[var(--shadow-float)]",
                 className,
             )}
             {...props}
@@ -93,12 +104,26 @@ type NamedSectionProps = ComponentProps<"section"> & {
     "aria-label": string;
 };
 
-function AppBottomPanel({ className, ...props }: NamedSectionProps) {
+type AppBottomPanelProps = NamedSectionProps & {
+    appearance?: "attached" | "inset";
+};
+
+function AppBottomPanel({
+    appearance = "attached", className, ...props
+}: AppBottomPanelProps) {
+    if (appearance !== "attached" && appearance !== "inset") {
+        throw new RangeError("AppBottomPanel appearance is not supported.");
+    }
+
     return (
         <section
+            data-appearance={appearance}
             className={cn(
-                "min-w-0 border-t border-border bg-surface " +
-                "p-[var(--space-3)]",
+                "min-w-0 bg-surface p-[var(--space-3)]",
+                appearance === "attached" && "border-t border-border",
+                appearance === "inset" &&
+                    "m-[var(--space-3)] rounded-sm border border-border " +
+                    "shadow-[var(--shadow-float)]",
                 className,
             )}
             {...props}
@@ -259,6 +284,7 @@ export {
     AppFloatingPanel, AppFloatingBubble, AppFloatingDisclosure,
 };
 export type {
-    AppShellProps, AppMainProps, AppSidebarProps, AppFloatingPanelProps,
-    AppFloatingBubbleProps, AppFloatingDisclosureProps,
+    AppShellProps, AppMainProps, AppSidebarProps, AppBottomPanelProps,
+    AppFloatingPanelProps, AppFloatingBubbleProps,
+    AppFloatingDisclosureProps,
 };

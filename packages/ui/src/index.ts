@@ -118,8 +118,9 @@ export {
     AppFloatingPanel, AppFloatingBubble, AppFloatingDisclosure,
 } from "./components/app-shell";
 export type {
-    AppShellProps, AppMainProps, AppSidebarProps, AppFloatingPanelProps,
-    AppFloatingBubbleProps, AppFloatingDisclosureProps,
+    AppShellProps, AppMainProps, AppSidebarProps, AppBottomPanelProps,
+    AppFloatingPanelProps, AppFloatingBubbleProps,
+    AppFloatingDisclosureProps,
 } from "./components/app-shell";
 export { MasterDetail } from "./components/master-detail";
 export type {
