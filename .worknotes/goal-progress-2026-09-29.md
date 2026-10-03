@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `CalendarHeatmap` 병합·공개 대기:
+**약 98% → 약 98%**입니다. PR #133과 `main`의 Verify UI,
+Pages는 성공했지만 Vercel production 배포 제한으로 새 item·
+manifest가 사용자 도메인에서 404입니다. 공개 확인은
+142개 component·144개 item, 저장소 후보는 143개·145개입니다.
+[작업 기록](calendar-heatmap-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 기준 적용 재검토: **약 98% → 약 98%**입니다.
 고정 검사 조합과 component별 PR·snapshot은 필수가 아니며,
 구현·릴리스·공개 상태의 증거를 나눠 기록합니다.
