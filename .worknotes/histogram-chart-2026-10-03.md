@@ -29,5 +29,18 @@ screen reader 발표는 실행하지 않았습니다. 최종 source의 전체 bu
 빈 상태는 대상 테스트와 preview로 확인합니다. 전체 snapshot 복제량,
 공통 고지 hash 전파, Vercel 배포 제한은 component 품질 점수가
 아닙니다. 적용 CI와 공개 URL은 공개 준비·공개 확인 단계에서 각각
-판정합니다. 현재 상태는 공개 준비 단계의 로컬 검증 완료이며 적용 CI와
-공개 URL은 미확인입니다. Goal 관리용 추정은 약 98%입니다.
+판정합니다. 공개 후보의 로컬 검증은 완료됐습니다.
+
+PR #118의 Verify UI와 병합 뒤 `main` Verify UI·Pages·Vercel production이
+성공했습니다. `ui.pydemia.ai`의 새 item JSON과 67번째 snapshot
+manifest는 HTTP 200이고, 내려받은 바이트의 SHA-256이 로컬 생성물과
+일치합니다. 이전에 404였던 `BoxPlotChart` item도 HTTP 200입니다.
+실제 screen reader 발표와 별도 소비자 설치는 이번 변경에서 실행하지
+않았습니다. 새 설치 방식이 없어 소비자 설치는 적용 검사로 보지
+않습니다. 현재 상태는 공개 확인이며 Goal 관리용 추정은 약 98%입니다.
+
+체크리스트 실적용에서 원본 component 하나의 릴리스 commit은 322개
+파일을 바꿨습니다. 그중 새 snapshot의 item 139개와 manifest 1개를
+`registry/releases/`와 `docs/r/releases/`에 각각 복제한 280개가
+고정 비용입니다. 검증 하한을 더 낮추는 대신, 기존 불변 주소와
+고지 전달을 보존하면서 snapshot 중복 저장을 줄일 필요가 있습니다.

@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `HistogramChart` 공개와 체크리스트 실적용:
+**약 98% → 약 98%**입니다. PR #118과 `main`의 Verify UI·Pages,
+Vercel production이 성공했고 새 item·67번째 snapshot manifest의 공개
+바이트가 생성물과 같습니다. 공개 137개 component·139개 item입니다.
+새 component 하나의 322개 변경 파일 중 280개가 snapshot 전체
+복제여서, 릴리스 기준보다 생성·저장 방식이 실제 반복 비용입니다.
+[작업 기록](histogram-chart-2026-10-03.md)에 근거를 남겼습니다.
+
 2026-10-03 `HistogramChart` 릴리스 후보와 체크리스트 실적용:
 **약 98% → 약 98%**입니다. 로컬 137개 component·139개 item·67번째
 snapshot의 관련 검사와 preview를 확인했습니다. 외부 코드·새 설치
