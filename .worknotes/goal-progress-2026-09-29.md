@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 입력 control·Table 외형 production 공개:
+**약 99% → 약 99%**입니다. PR #150과 `main` CI·Pages가 통과했고
+Vercel production이 READY입니다. 사용자 도메인의 80번째 입력
+release와 79번째 Table release, 변경 item·문서 preview를 확인했습니다.
+공개 Select에서 선택값 제출, Table에서 격자형 전환을 실행했습니다.
+수량은 144개 component·146개 item으로 같습니다.
+[입력 기록](form-control-appearances-2026-10-03.md)과
+[Table 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 입력 control 표시 선택 로컬 후보:
 **약 99% → 약 99%**입니다. `Textarea`, `NativeSelect`,
 `SelectTrigger`에 outline·filled·underline을 추가했습니다. 기존
