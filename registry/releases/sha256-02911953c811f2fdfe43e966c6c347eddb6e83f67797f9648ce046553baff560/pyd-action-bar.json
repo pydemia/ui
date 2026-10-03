@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-action-bar",
+  "title": "Action Bar",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-02911953c811f2fdfe43e966c6c347eddb6e83f67797f9648ce046553baff560/pyd-button.json",
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-02911953c811f2fdfe43e966c6c347eddb6e83f67797f9648ce046553baff560/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/action-bar.tsx",
+      "content": "import type { ComponentProps, ReactNode } from \"react\";\nimport { Button } from \"./button\";\nimport { cn } from \"./utils\";\n\ntype ActionBarProps = Omit<ComponentProps<\"div\">, \"children\"> & {\n    \"aria-label\": string;\n    selectedCount: number;\n    onClear: () => void;\n    children?: ReactNode;\n    placement?: \"inline\" | \"floating\";\n    countText?: string;\n    clearLabel?: string;\n};\n\nfunction ActionBar({\n    selectedCount,\n    onClear,\n    children,\n    placement = \"inline\",\n    countText = `${selectedCount}건 선택`,\n    clearLabel = \"선택 해제\",\n    className,\n    ...props\n}: ActionBarProps) {\n    if (!props[\"aria-label\"]?.trim()) {\n        throw new Error(\"ActionBar requires an accessible label.\");\n    }\n    if (!Number.isInteger(selectedCount) || selectedCount < 0) {\n        throw new RangeError(\"ActionBar selectedCount must be non-negative.\");\n    }\n    if (placement !== \"inline\" && placement !== \"floating\") {\n        throw new RangeError(\"ActionBar placement is not supported.\");\n    }\n\n    return (\n        <div\n            {...props}\n            role=\"group\"\n            className={cn(\n                \"flex max-w-full flex-wrap items-center gap-2 rounded-sm \" +\n                \"border border-border bg-surface p-[var(--space-3)] \" +\n                \"text-sm text-foreground\",\n                placement === \"floating\" &&\n                    \"sticky bottom-[var(--space-3)] z-20 mx-auto w-fit \" +\n                    \"shadow-[var(--shadow-float)]\",\n                className,\n            )}\n        >\n            <span role=\"status\" className=\"mr-auto font-medium\">\n                {countText}\n            </span>\n            {children}\n            <Button variant=\"ghost\" disabled={selectedCount === 0}\n                onClick={onClear}>{clearLabel}</Button>\n        </div>\n    );\n}\n\nexport { ActionBar };\nexport type { ActionBarProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/action-bar.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

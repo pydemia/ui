@@ -53,12 +53,25 @@ test("viewer exposes named filters, count, and separate empty states", () => {
     assert.throws(() => renderToStaticMarkup(createElement(LogViewer, {
         label: "Build log", entries, variant: "unknown",
     })), { name: "RangeError" });
+    const compact = new JSDOM(renderToStaticMarkup(createElement(LogViewer, {
+        label: "Build log", entries, density: "compact",
+    }))).window.document;
+    assert.equal(compact.querySelector('[role="group"]').dataset.density,
+        "compact");
+    assert.equal(compact.querySelector('[role="log"]').dataset.density,
+        "compact");
+    assert.throws(() => renderToStaticMarkup(createElement(LogViewer, {
+        label: "Build log", entries, density: "unknown",
+    })), { name: "RangeError" });
     assert.throws(() => renderToStaticMarkup(createElement(LogViewer, {
         label: "Build log", entries: [entries[0], entries[0]],
     })), /unique IDs/);
     assert.match(renderToStaticMarkup(createElement(LogConsole, {
         label: "Raw log", entries, variant: "flat",
     })), /data-variant="flat"/);
+    assert.throws(() => renderToStaticMarkup(createElement(LogConsole, {
+        label: "Raw log", entries, density: "unknown",
+    })), { name: "RangeError" });
 });
 
 test("follow mode tracks appended entries and can be paused", async () => {

@@ -3189,6 +3189,9 @@ function TimelinePreview() {
 }
 
 function LogConsolePreview() {
+    const [density, setDensity] = useState<"comfortable" | "compact">(
+        "comfortable",
+    );
     const [entries, setEntries] = useState<LogEntry[]>([
         { id: "1", timestamp: "10:42:01", level: "info",
             message: "빌드 시작" },
@@ -3199,6 +3202,15 @@ function LogConsolePreview() {
     return (
         <div className="preview-stack">
             <div className="preview-row">
+                <Button variant="outline"
+                    aria-pressed={density === "comfortable"}
+                    onClick={() => setDensity("comfortable")}>
+                    기본 간격
+                </Button>
+                <Button variant="outline" aria-pressed={density === "compact"}
+                    onClick={() => setDensity("compact")}>
+                    조밀한 간격
+                </Button>
                 <Button variant="outline" onClick={() =>
                     setEntries((current) => [...current, {
                         id: String(current.length + 1),
@@ -3211,6 +3223,7 @@ function LogConsolePreview() {
                     onClick={() => setEntries([])}>비우기</Button>
             </div>
             <LogConsole label="빌드 로그" entries={entries}
+                density={density}
                 emptyMessage="표시할 로그가 없습니다." />
         </div>
     );
@@ -3218,6 +3231,9 @@ function LogConsolePreview() {
 
 function LogViewerPreview() {
     const [variant, setVariant] = useState<"panel" | "flat">("panel");
+    const [density, setDensity] = useState<"comfortable" | "compact">(
+        "comfortable",
+    );
     const [entries, setEntries] = useState<LogEntry[]>([
         { id: "start", timestamp: "10:42:01", level: "info",
             message: "빌드 시작" },
@@ -3235,6 +3251,15 @@ function LogViewerPreview() {
                     onClick={() => setVariant("panel")}>panel</Button>
                 <Button variant={variant === "flat" ? "primary" : "outline"}
                     onClick={() => setVariant("flat")}>flat</Button>
+                <Button variant="outline"
+                    aria-pressed={density === "comfortable"}
+                    onClick={() => setDensity("comfortable")}>
+                    기본 간격
+                </Button>
+                <Button variant="outline" aria-pressed={density === "compact"}
+                    onClick={() => setDensity("compact")}>
+                    조밀한 간격
+                </Button>
                 <Button variant="outline" onClick={() => setEntries((current) => [
                     ...current,
                     ...Array.from({ length: 5 }, (_, index) => ({
@@ -3248,7 +3273,7 @@ function LogViewerPreview() {
                 </Button>
             </div>
             <LogViewer label="배포 로그" entries={entries}
-                variant={variant} followTail />
+                variant={variant} density={density} followTail />
         </div>
     );
 }
@@ -3976,7 +4001,11 @@ function DashboardPreview() {
     const [layout, setLayout] = useState<"balanced" | "primary">(
         "balanced",
     );
+    const [density, setDensity] = useState<"comfortable" | "compact">(
+        "comfortable",
+    );
     const primary = layout === "primary";
+    const metricVariant = density === "compact" ? "compact" : "default";
 
     return (
         <div className="preview-workspace grid gap-3">
@@ -3994,22 +4023,36 @@ function DashboardPreview() {
                     onClick={() => setLayout("primary")}>
                     분석 중심
                 </Button>
+                <Button type="button" variant="outline"
+                    aria-pressed={density === "comfortable"}
+                    onClick={() => setDensity("comfortable")}>
+                    기본 간격
+                </Button>
+                <Button type="button" variant="outline"
+                    aria-pressed={density === "compact"}
+                    onClick={() => setDensity("compact")}>
+                    조밀한 간격
+                </Button>
             </div>
-            <Dashboard>
+            <Dashboard density={density}>
                 <PageHeader level={2} title="운영 대시보드"
                     subtitle="이번 주 요청과 실행 상태" />
                 <DashboardMetrics aria-label="주요 지표"
                     columns={primary ? 3 : 4}>
-                    <MetricCard label="요청" value="1,284" />
-                    <MetricCard label="완료" value="1,216" />
-                    <MetricCard label="대기" value="52" />
-                    {!primary && <MetricCard label="오류" value="16" />}
+                    <MetricCard label="요청" value="1,284"
+                        variant={metricVariant} />
+                    <MetricCard label="완료" value="1,216"
+                        variant={metricVariant} />
+                    <MetricCard label="대기" value="52"
+                        variant={metricVariant} />
+                    {!primary && <MetricCard label="오류" value="16"
+                        variant={metricVariant} />}
                 </DashboardMetrics>
                 <DashboardPanels aria-label="추세와 로그"
                     layout={layout}>
                     <DataChart title="요일별 완료" points={chartPoints}
                         unit="건" variant="bar" />
-                    <LogConsole label="최근 실행" entries={[
+                    <LogConsole label="최근 실행" density={density} entries={[
                         { id: "1", level: "info", message: "집계 완료" },
                         { id: "2", level: "warn", message: "재시도 2건" },
                     ]} />
@@ -8048,10 +8091,10 @@ function AuditRules() {
     },
     {
         id: "log-console", name: "LogConsole", category: "Developer tools",
-        description: "시간·수준·메시지를 읽을 수 있는 로그 영역입니다. 잦은 갱신의 음성 발표는 기본으로 끕니다.",
+        description: "시간·수준·메시지를 읽을 수 있는 로그 영역입니다. 기본·조밀한 행 간격을 고를 수 있고 잦은 갱신의 음성 발표는 기본으로 끕니다.",
         code: `import { LogConsole } from "@pydemia/ui";
 
-<LogConsole label="빌드 로그" entries={[
+<LogConsole label="빌드 로그" density="compact" entries={[
   { id: "1", timestamp: "10:42:01", level: "info",
     message: "빌드 시작" },
   { id: "2", timestamp: "10:42:03", level: "warn",
@@ -8062,7 +8105,7 @@ function AuditRules() {
     {
         id: "log-viewer", name: "LogViewer", category: "Developer tools",
         installItems: ["log-viewer", "button"],
-        description: "로그를 검색·수준별로 필터링하고 최신 항목을 따라갑니다. 따라가기 버튼으로 일시정지·재개할 수 있으며 기록의 갱신·삭제는 앱이 맡습니다.",
+        description: "로그를 검색·수준별로 필터링하고 최신 항목을 따라갑니다. 따라가기를 일시정지·재개하거나 간격을 선택할 수 있으며 기록의 갱신·삭제는 앱이 맡습니다.",
         code: `import { useState } from "react";
 import { Button, LogViewer, type LogEntry } from "@pydemia/ui";
 
@@ -8075,7 +8118,7 @@ function DeploymentLog() {
     <Button onClick={() => setEntries((current) => [...current, {
       id: String(current.length), level: "info", message: "단계 완료",
     }])}>항목 추가</Button>
-    <LogViewer label="배포 로그" variant="panel"
+    <LogViewer label="배포 로그" variant="panel" density="compact"
       entries={entries} followTail />
   </>;
 }`,
@@ -8507,24 +8550,24 @@ const points = [
             "dashboard", "page-header", "metric-card", "data-chart",
             "log-console",
         ],
-        description: "지표를 2·3·4열로, 상세 panel을 균등 또는 분석 중심 비율로 배치합니다. 좁은 container에서는 한 열로 쌓고 각 영역에 이름을 줍니다.",
+        description: "지표를 2·3·4열로, 상세 panel을 균등 또는 분석 중심 비율로 배치합니다. 기본·조밀한 간격을 선택할 수 있고 좁은 container에서는 한 열로 쌓입니다.",
         code: `import {
   Dashboard, DashboardMetrics, DashboardPanels,
   MetricCard, DataChart, LogConsole, PageHeader,
 } from "@pydemia/ui";
 
-<Dashboard>
+<Dashboard density="compact">
   <PageHeader title="운영 대시보드" />
   <DashboardMetrics aria-label="주요 지표" columns={3}>
-    <MetricCard label="요청" value="1,284" />
-    <MetricCard label="완료" value="1,216" />
-    <MetricCard label="대기" value="52" />
+    <MetricCard label="요청" value="1,284" variant="compact" />
+    <MetricCard label="완료" value="1,216" variant="compact" />
+    <MetricCard label="대기" value="52" variant="compact" />
   </DashboardMetrics>
   <DashboardPanels aria-label="추세와 로그" layout="primary">
     <DataChart title="요일별 완료" unit="건"
       points={[{ label: "월", value: 8 },
         { label: "화", value: 12 }]} />
-    <LogConsole label="최근 실행" entries={[
+    <LogConsole label="최근 실행" density="compact" entries={[
       { id: "1", level: "info", message: "집계 완료" },
     ]} />
   </DashboardPanels>

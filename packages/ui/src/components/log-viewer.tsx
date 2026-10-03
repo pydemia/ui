@@ -1,6 +1,8 @@
 import { useEffect, useId, useRef, useState, type ComponentProps } from "react";
 import { Input } from "./input";
-import { LogConsole, type LogEntry } from "./log-console";
+import {
+    LogConsole, type LogConsoleProps, type LogEntry,
+} from "./log-console";
 import { NativeSelect } from "./native-select";
 import { cn } from "./utils";
 
@@ -8,6 +10,7 @@ type LogViewerProps = Omit<ComponentProps<"div">, "children"> & {
     entries: readonly LogEntry[];
     label: string;
     variant?: "panel" | "flat";
+    density?: LogConsoleProps["density"];
     followTail?: boolean;
     emptyMessage?: string;
     noMatchesMessage?: string;
@@ -17,6 +20,7 @@ function LogViewer({
     entries,
     label,
     variant = "panel",
+    density = "comfortable",
     followTail = false,
     emptyMessage = "표시할 로그가 없습니다.",
     noMatchesMessage = "일치하는 로그가 없습니다.",
@@ -40,6 +44,9 @@ function LogViewer({
     }
     if (variant !== "panel" && variant !== "flat") {
         throw new RangeError("LogViewer variant is not supported.");
+    }
+    if (density !== "comfortable" && density !== "compact") {
+        throw new RangeError("LogViewer density is not supported.");
     }
     const ids = new Set<string>();
     for (const entry of entries) {
@@ -79,6 +86,7 @@ function LogViewer({
             role="group"
             aria-labelledby={titleId}
             data-variant={variant}
+            data-density={density}
             className={cn(
                 "@container min-w-0 overflow-hidden text-foreground",
                 variant === "panel" &&
@@ -87,8 +95,12 @@ function LogViewer({
             )}
         >
             <div className={cn(
-                "flex flex-wrap items-center justify-between " +
-                "gap-[var(--space-2)] px-[var(--space-3)] py-[var(--space-2)]",
+                "flex flex-wrap items-center justify-between",
+                density === "comfortable"
+                    ? "gap-[var(--space-2)] px-[var(--space-3)] " +
+                      "py-[var(--space-2)]"
+                    : "gap-[var(--space-1)] px-[var(--space-2)] " +
+                      "py-[var(--space-1)]",
                 variant === "panel" && "border-b border-border",
             )}>
                 <span id={titleId} className="text-sm font-medium">
@@ -114,10 +126,14 @@ function LogViewer({
                     )}
                 </div>
             </div>
-            <div className={
-                "grid gap-[var(--space-2)] px-[var(--space-3)] " +
-                "py-[var(--space-2)] @sm:grid-cols-[minmax(0,1fr)_10rem]"
-            }>
+            <div className={cn(
+                "grid @sm:grid-cols-[minmax(0,1fr)_10rem]",
+                density === "comfortable"
+                    ? "gap-[var(--space-2)] px-[var(--space-3)] " +
+                      "py-[var(--space-2)]"
+                    : "gap-[var(--space-1)] px-[var(--space-2)] " +
+                      "py-[var(--space-1)]",
+            )}>
                 <div className="min-w-0">
                     <label htmlFor={searchId} className="mb-1 block text-xs">
                         로그 검색
@@ -142,7 +158,7 @@ function LogViewer({
                 </div>
             </div>
             <LogConsole ref={logRef} id={logId} label={`${label} 항목`}
-                entries={visibleEntries} variant="flat"
+                entries={visibleEntries} variant="flat" density={density}
                 emptyMessage={entries.length === 0
                     ? emptyMessage : noMatchesMessage} />
         </div>

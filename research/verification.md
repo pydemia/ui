@@ -1,5 +1,21 @@
 # 검증 기록
 
+## 2026-10-03 분석 화면 간격 — 로컬 후보
+
+`Dashboard`, `LogConsole`, `LogViewer`의 기본·조밀한 간격을 공개 API와
+문서 preview·Usage에 추가했습니다. `LogViewer`의 내부 로그에 밀도가
+전달되고 잘못된 값이 거부되는지 대상 테스트 3/3으로 확인했습니다.
+`npm run typecheck`, UI 전체 테스트 278/278과 site build가
+통과했습니다. 82번째 registry snapshot
+`sha256-02911953c811f2fdfe43e966c6c347eddb6e83f67797f9648ce046553baff560`의
+release 검사도 통과했습니다. 로컬 Chromium에서 `Dashboard`의 영역
+간격 24→12px·하위 grid 간격 16→8px, `LogViewer`의 안쪽 여백과
+행 간격 축소·내부 `LogConsole` 전달·검색 결과를 확인했습니다.
+`LogConsole`의 조밀한 preview도 확인했습니다. PR CI와 공개 게시
+검증은 진행 중입니다.
+[작업 기록](../.worknotes/analytics-density-2026-10-03.md)에 실제
+결과와 미검증 범위를 갱신합니다.
+
 ## 2026-10-03 Sidebar 링크 표시 형태
 
 `Sidebar`의 `linkVariant`를 `rail`(기본값)·`filled`로 선택하고
