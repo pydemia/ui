@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `SankeyChart` 로컬 후보: **약 98% → 약 98%**입니다.
+이동 수량을 다단계 경로로 보여 주는 원본 component의 대상 검사·
+typecheck·build·로컬 preview를 확인했습니다. 로컬 후보는
+142개 component·144개 registry item이고 공개 확인은 140개·
+142개입니다. 고지·snapshot·CI·공개 경로 검사는 남았습니다.
+[작업 기록](sankey-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `RadarChart` 병합·공개 대기: **약 98% → 약 98%**입니다.
 PR #129와 `main`의 Verify UI·Pages가 통과했습니다. 저장소는
 141개 component·143개 item·72개 snapshot이며 Vercel 배포 제한으로

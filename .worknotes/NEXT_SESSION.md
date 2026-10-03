@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-03 `SankeyChart` 로컬 후보: 인접 단계의 수량 이동을 원본
+React·SVG로 추가했습니다. 대상 테스트 5/5, typecheck·build,
+로컬 Chromium의 넓은 화면과 390px preview, 방향키 스크롤을
+확인했습니다. 전체 UI 259/259·PRISM 25/25는 geometry 보강 전에
+통과했습니다.
+registry 고지 고정·snapshot·전체 CI·공개 배포는 남았습니다.
+[작업 기록](sankey-chart-2026-10-03.md)에 범위가 있습니다.
+로컬 후보 142개 component·144개 item, 공개 확인 140개·142개,
+Goal 관리용 추정 약 98%입니다.
+
 2026-10-03 `RadarChart` PR #129 병합·공개 대기: PR과 `main`의
 Verify UI·Pages가 통과했습니다. Vercel은 배포 횟수 제한으로
 실패했고 72번째 manifest와 현재 item은 공개 도메인에서 HTTP

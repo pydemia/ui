@@ -166,6 +166,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .preview-alerts { width: min(100%, 370px); display: grid; justify-items: start; gap: 12px; }
 .preview-alerts > [role] { width: 100%; }
 .preview-stack { width: min(100%, 370px); display: grid; gap: 10px; }
+.preview-stack-wide { width: 100%; min-width: 0; }
 .preview-stack > p { margin: 0; color: var(--muted); font-size: 13px; }
 .preview-stack > button { justify-self: start; }
 .preview-tabs-content { padding: 12px 3px 2px; margin: 0; color: var(--muted); font-size: 14px; }

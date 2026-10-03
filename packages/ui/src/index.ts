@@ -235,6 +235,10 @@ export { RadarChart } from "./components/radar-chart";
 export type {
     RadarChartProps, RadarAxis, RadarSeries,
 } from "./components/radar-chart";
+export { SankeyChart } from "./components/sankey-chart";
+export type {
+    SankeyChartProps, SankeyNode, SankeyLink,
+} from "./components/sankey-chart";
 export { PivotTable } from "./components/pivot-table";
 export type {
     PivotTableProps, PivotAxisItem, PivotRecord,
