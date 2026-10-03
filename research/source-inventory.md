@@ -1,5 +1,19 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 CalendarHeatmap
+
+`Heatmap`은 임의의 두 범주를 행·열로 비교합니다. 일별 활동 기록은
+달력의 주·요일 위치, 윤년, 미기록 날짜가 별도 사용처입니다.
+`CalendarHeatmap`은 원본 React·Tailwind 구현이며 외부 component
+source를 복사하지 않았습니다. 새 npm 의존성은 없고 registry
+의존성은 기존 `pyd-utils`뿐입니다. 외부 코드의 revision·LICENSE
+대조 대상은 없습니다.
+
+[W3C WAI의 Complex Images](https://www.w3.org/WAI/tutorials/images/complex/)를
+참고해 색 격자와 별개로 모든 날짜의 정확한 값을 native table에
+제공합니다. W3C 예제 코드는 사용하지 않았습니다. 실제 screen
+reader·touch·Safari·RTL은 아직 확인하지 않았습니다.
+
 ## 2026-10-03 SankeyChart
 
 `FunnelChart`는 순서 있는 단계의 총량을 비교하고 `NodeCanvas`는
