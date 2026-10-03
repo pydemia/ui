@@ -225,6 +225,10 @@ export { HistogramChart } from "./components/histogram-chart";
 export type {
     HistogramBin, HistogramChartProps,
 } from "./components/histogram-chart";
+export { TreemapChart } from "./components/treemap-chart";
+export type {
+    TreemapChartProps, TreemapNode, TreemapLeaf, TreemapGroup,
+} from "./components/treemap-chart";
 export { DataChart } from "./components/data-chart";
 export type {
     DataChartProps, ChartPoint, ChartSeries,

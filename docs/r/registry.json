@@ -711,6 +711,11 @@
       "files": [{ "path": "packages/ui/src/components/histogram-chart.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-treemap-chart", "type": "registry:ui", "title": "Treemap Chart",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/treemap-chart.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-page-header", "type": "registry:ui", "title": "Page Header",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/page-header.tsx", "type": "registry:ui" }]
