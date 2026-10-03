@@ -649,6 +649,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with exact native table of hierarchical paths, values and shares; decorative rectangles", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-radar-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/test-evaluate/preliminary/", "scope": "complex chart information available as exact data table; no source copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, text legend and native table of exact dimension values; decorative SVG", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-pivot-table", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/tables/two-headers/", "scope": "native row and column header relationships; no source copied" },

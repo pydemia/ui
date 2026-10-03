@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-03 RadarChart — 로컬 후보
+
+동일 척도 차원별 0·미수집·경계값, 결측 구간 비연결과 line·filled,
+panel·plain 표시를 대상 SSR 테스트 4개로 확인했습니다. 전체 UI
+테스트 255/255, typecheck·build와 PRISM 검사 23/23이 통과했습니다.
+로컬 Chromium 390px에서 chart·표·Usage, 결측 상태와 문서 가로
+넘침 없음·page error 0건을 확인했습니다. provenance 고지를 source
+commit에 고정하고 72번째 snapshot의 `registry:release-check`가
+143개 item을 확인했습니다. PR CI·공개 URL, 실제 screen reader·
+touch·Safari는 아직 확인하지 않았습니다. 후속 결과는
+[작업 기록](../.worknotes/radar-chart-2026-10-03.md)에 남깁니다.
+
 ## 2026-10-03 Autocomplete — 병합·공개 대기
 
 visible label과 native form 값, 자유 입력·추천 선택의 차이, IME·

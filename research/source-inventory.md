@@ -1,5 +1,20 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 RadarChart
+
+`DataChart`의 시간·범주별 추이와 `ScatterChart`의 두 연속 변수 분포로는
+동일 척도를 공유하는 여러 평가 차원의 윤곽을 계열별로 비교하기
+어렵습니다. `RadarChart`는 pydemia/ui의 원본 React·SVG·Tailwind
+구현입니다. 외부 component 소스나 그림을 복사하지 않았고 새 npm
+의존성도 없습니다. registry 의존성은 기존 `pyd-utils`뿐입니다.
+따라서 외부 코드의 동일 revision·LICENSE 대조 대상은 없습니다.
+
+[W3C WAI의 Easy Checks](https://www.w3.org/WAI/test-evaluate/preliminary/)에서
+복잡한 chart의 정보에는 상세한 텍스트 설명이나 데이터 표가 필요하다는
+안내를 확인했습니다. 차원·계열의 정확한 값은 native table에 두고
+SVG는 장식으로 처리했습니다. W3C 예제 코드는 사용하지 않았습니다.
+실제 screen reader·touch·Safari 검증은 남았습니다.
+
 ## 2026-10-03 Autocomplete
 
 제품의 새 팀 이름처럼 목록에 없는 텍스트도 허용하는 입력은 기존
