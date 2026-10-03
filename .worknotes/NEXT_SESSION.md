@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-03 `RadarChart` PR #129 병합·공개 대기: PR과 `main`의
+Verify UI·Pages가 통과했습니다. Vercel은 배포 횟수 제한으로
+실패했고 72번째 manifest와 현재 item은 공개 도메인에서 HTTP
+404입니다. 저장소는 141개 component·143개 item·72개 snapshot,
+공개 확인은 140개·142개입니다. 앞서 대기였던 PivotTable·
+Autocomplete의 현재 item과 70·71번째 manifest는 HTTP 200으로
+다시 확인했습니다. 배포 뒤 RadarChart의 현재·snapshot item과
+manifest를 확인하세요. [작업 기록](radar-chart-2026-10-03.md)에
+근거와 미검증 범위가 있습니다. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 `RadarChart` 로컬 릴리스 후보: 동일 척도의 차원을 여러 계열로
 비교하는 원본 component를 추가했습니다. 대상 4/4·전체 UI
 255/255, typecheck·build·PRISM 23/23과 로컬 Chromium 390px

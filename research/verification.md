@@ -1,6 +1,6 @@
 # 검증 기록
 
-## 2026-10-03 RadarChart — 로컬 후보
+## 2026-10-03 RadarChart — 병합·공개 대기
 
 동일 척도 차원별 0·미수집·경계값, 결측 구간 비연결과 line·filled,
 panel·plain 표시를 대상 SSR 테스트 4개로 확인했습니다. 전체 UI
@@ -8,11 +8,13 @@ panel·plain 표시를 대상 SSR 테스트 4개로 확인했습니다. 전체 U
 로컬 Chromium 390px에서 chart·표·Usage, 결측 상태와 문서 가로
 넘침 없음·page error 0건을 확인했습니다. provenance 고지를 source
 commit에 고정하고 72번째 snapshot의 `registry:release-check`가
-143개 item을 확인했습니다. PR CI·공개 URL, 실제 screen reader·
-touch·Safari는 아직 확인하지 않았습니다. 후속 결과는
+143개 item을 확인했습니다. PR #129와 `main`의 Verify UI·Pages는
+통과했습니다. Vercel 배포 횟수 제한으로 현재 item과 72번째
+manifest는 공개 도메인에서 HTTP 404입니다. 실제 screen reader·
+touch·Safari는 확인하지 않았습니다. 후속 결과는
 [작업 기록](../.worknotes/radar-chart-2026-10-03.md)에 남깁니다.
 
-## 2026-10-03 Autocomplete — 병합·공개 대기
+## 2026-10-03 Autocomplete — 공개 경로 확인
 
 visible label과 native form 값, 자유 입력·추천 선택의 차이, IME·
 Escape·reset·controlled 값과 loading 상태를 대상 테스트 4개로
@@ -20,11 +22,12 @@ Escape·reset·controlled 값과 loading 상태를 대상 테스트 4개로
 검사 23/23과 로컬 Chromium의 자유 입력 제출·keyboard·pointer
 선택을 확인했습니다. 고정 provenance 고지와 71번째 snapshot의
 `registry:release-check`가 통과했습니다. PR #127과 `main`의 Verify
-UI·Pages가 통과했습니다. Vercel 배포 제한으로 현재 item과 manifest는
-공개 도메인에서 HTTP 404입니다. 배포 재확인 대상과 미검증 범위는
+UI·Pages가 통과했습니다. 병합 직후에는 Vercel 제한으로 404였으나
+현재 item과 71번째 manifest·snapshot Button item이 공개 도메인에서
+HTTP 200입니다. 남은 보조기술 검증 범위는
 [작업 기록](../.worknotes/autocomplete-2026-10-03.md)에 있습니다.
 
-## 2026-10-03 PivotTable — 병합·공개 대기
+## 2026-10-03 PivotTable — 공개 경로 확인
 
 교차점 중복 합산·음수·0·미수집 전파·행/열/전체 합계와 잘못된 입력·
 overflow를 대상 SSR 테스트 5개로 확인했습니다. 전체 UI 테스트
@@ -36,10 +39,10 @@ page error 0건을 확인했습니다. 실제 screen reader·touch·Safari·RTL�
 snapshot을 확인했습니다. 현재 ID는
 `sha256-32c8c4110dd838fedd10716915c72849dd5e35f6977b0dbd010fe9a559d507b9`입니다.
 PR #125와 병합 뒤 `main`의 Verify UI, Pages가 통과했습니다.
-Vercel production은 배포 횟수 제한으로 실패했고 현재 item과
-70번째 manifest는 공개 도메인에서 HTTP 404입니다. 배포 후
-대표 URL 확인은 [작업 기록](../.worknotes/pivot-table-2026-10-03.md)에
-남긴 대로 아직 필요합니다.
+병합 직후 Vercel production은 배포 횟수 제한으로 실패했습니다.
+현재 item과 70번째 manifest·snapshot Button item은 공개 도메인에서
+HTTP 200으로 재확인했습니다. 남은 보조기술 검증 범위는
+[작업 기록](../.worknotes/pivot-table-2026-10-03.md)에 있습니다.
 
 ## 2026-10-03 TreemapChart — 공개 확인
 

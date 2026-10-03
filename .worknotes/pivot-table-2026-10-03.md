@@ -1,5 +1,11 @@
 # PivotTable 작업 기록
 
+2026-10-03 공개 재확인: `ui.pydemia.ai`의 현재
+`pyd-pivot-table.json`과 70번째 manifest·snapshot Button item이
+HTTP 200입니다. 현재 registry는 142개 item이며 PivotTable을
+포함합니다. 아래의 404 기록은 병합 직후 상태입니다. 실제 screen
+reader·touch·Safari·RTL 검증은 여전히 남았습니다.
+
 2026-10-03. `Heatmap`은 호출자가 계산한 교차값을 색과 숫자로 표시하고,
 `DataTable`은 원래 행을 검색·정렬합니다. 지역×채널처럼 원자료를 두
 범주로 묶어 합계까지 읽는 화면에는 별도 `PivotTable`이 유용합니다.
