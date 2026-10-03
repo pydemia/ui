@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 Input 외형 선택 production 공개: **약 99% → 약 99%**입니다.
+PR #146과 `main` Verify UI·Pages가 통과했고 Vercel production이
+READY입니다. 사용자 도메인의 78번째 manifest·Input item과 공개
+문서의 세 형태 및 텍스트 입력을 확인했습니다. 새 component 수량은
+없으며 공개 수량은 144개 component·146개 registry item입니다.
+[작업 기록](input-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Input 세 표시 형태 로컬 후보와 품질 판정 재검토:
 **약 99% → 약 99%**입니다. 기존 Input의 기본값을 유지하고
 filled·underline을 추가했습니다. 새 component 수량은 늘지 않았으며

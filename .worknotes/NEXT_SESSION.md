@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 Input 외형 선택 공개: PR #146을 병합했고 `main`
+`14486b7e`의 Verify UI·Pages가 성공했습니다. Vercel production은
+READY이며 사용자 도메인의 78번째 manifest·snapshot Input·현재
+Input item이 HTTP 200입니다. 공개 Usage·preview와 filled 입력을
+확인했습니다. component 144개·item 146개, Goal 관리용 추정은 약
+99%입니다. 실제 screen reader·touch·Safari는 실행하지 않았습니다.
+[작업 기록](input-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Input 외형 선택 로컬 후보: 기존 component의 기본 outline을
 유지하고 filled·underline을 추가했습니다. label이 있는 세 입력의
 Usage·preview와 78번째 schema 2 snapshot 후보를 준비했습니다.

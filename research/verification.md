@@ -1,5 +1,16 @@
 # 검증 기록
 
+## 2026-10-03 Input 표시 형태 — 공개 확인
+
+PR #146과 `main` `14486b7e`의 Verify UI·Pages가 통과했습니다.
+Vercel production은 READY이고 사용자 도메인의 78번째 schema 2
+manifest(`itemCount=146`)·snapshot Input·현재 Input item이 HTTP
+200입니다. 공개 문서의 세 외형과 Usage, `filled`의 텍스트 입력과
+focus 표시를 확인했습니다. 실제 screen reader·touch·Safari는
+실행하지 않았습니다.
+[작업 기록](../.worknotes/input-appearances-2026-10-03.md)에 URL과
+미검증 범위를 남겼습니다.
+
 ## 2026-10-03 Input 표시 형태 — 로컬 후보
 
 `Input` 세 형태가 native 속성과 오류 상태를 보존하는 대상 테스트
