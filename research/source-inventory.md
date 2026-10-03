@@ -1830,3 +1830,23 @@ revision이나 외부 component LICENSE는 없습니다. 현재 공급물의
 [W3C WAI의 표 지침](https://www.w3.org/WAI/tutorials/tables/)에 따라
 막대와 별도로 제목·행/열 머리글이 있는 정확한 값 표를 제공합니다.
 실제 screen reader 발표는 아직 확인하지 않았습니다.
+
+## 2026-10-03 TreemapChart
+
+`TreemapChart`는 pydemia/ui에서 새로 작성한 React·Tailwind 원본입니다.
+외부 component 코드·그림·layout 함수를 복사하지 않았고 새 npm
+의존성도 없습니다. registry 의존성은 `pyd-utils`뿐입니다. 편입한
+upstream revision이나 외부 component LICENSE는 없습니다. 현재
+공급물의 소스 표기는 `project-owned`이며 공개 사용 조건은 별도로
+정하지 않았습니다.
+
+[Vega의 treemap 명세](https://vega.github.io/vega/docs/transforms/treemap/)에서
+계층 값에 비례해 영역을 재귀 분할하는 개념을 확인했습니다.
+[D3의 treemap 설명](https://d3js.org/d3-hierarchy/treemap)은 정사각형에
+가까운 배치와 단순한 교차 분할의 시각적 차이를 설명합니다. 구현은
+입력 순서를 보존하는 자체 이진 분할이며 두 library의 알고리즘이나
+source를 사용하지 않습니다.
+[W3C WAI의 표 지침](https://www.w3.org/WAI/tutorials/tables/)과
+[색상 사용 지침](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html)을
+참고해 시각 영역과 별개로 경로·값·비율을 native 표에 제공합니다.
+실제 screen reader 발표는 아직 확인하지 않았습니다.

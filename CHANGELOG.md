@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-03 — TreemapChart
+
+- 계층별 값의 부모·자식 관계와 구성비를 사각형 면적으로 표시하는
+  `TreemapChart`를 추가했습니다. 정확한 경로·값·전체 대비 비율은
+  native 표에 제공하며 0값·빈 목록과 panel·plain 표시를 구분합니다.
+
 ## 2026-10-03 — AppShell panel 표시 형태
 
 - `AppSidebar`와 `AppBottomPanel`에 `appearance="inset"`을 추가했습니다.

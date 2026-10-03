@@ -1,5 +1,16 @@
 # 검증 기록
 
+## 2026-10-03 TreemapChart — 로컬 후보
+
+`TreemapChart`의 계층 합계·값 비율·면적 배분·0값·빈 목록·잘못된 입력을
+SSR 테스트 5개로 확인했습니다. 전체 UI 테스트 242/242, typecheck와
+build는 통과했습니다. 로컬 Chromium에서 390px·1280px 배치,
+밝은색·어두운색, panel·plain, 0값·빈 목록 전환을 확인했습니다.
+두 폭 모두 문서 가로 넘침이 없고 page error는 0건입니다. 실제
+screen reader 발표·touch·다른 브라우저는 확인하지 않았습니다.
+registry·snapshot·공개 URL 결과는
+[작업 기록](../.worknotes/treemap-chart-2026-10-03.md)에 이어서 남깁니다.
+
 ## 2026-10-03 공개 registry 갱신
 
 PR #108의 `main` 병합 commit `720eb7d98357a04392345922100323f881c5fdff`에

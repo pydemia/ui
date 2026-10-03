@@ -73,7 +73,7 @@ import {
     SnippetTabsList, SnippetTabsTrigger, SideNav, SideNavLink, Sidebar,
     Sparkline, Stepper, Switch, Table, TableCell, TagsInput, Terminal,
     Timeline,
-    Thread, TimePicker, ToolCall, Tree, TreeNav, TreeSelect,
+    Thread, TimePicker, ToolCall, Tree, TreeNav, TreeSelect, TreemapChart,
     ToastQueue, useToastQueue,
     TableHead, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toggle,
     ToggleGroup, ToggleGroupItem,
@@ -3486,6 +3486,52 @@ function HistogramChartPreview() {
                 countUnit="건"
                 description="동일 너비의 50ms 구간별 요청 건수입니다."
                 bins={bins} appearance={appearance} />
+        </div>
+    );
+}
+
+function TreemapChartPreview() {
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const [scenario, setScenario] = useState<"data" | "zero" | "empty">(
+        "data",
+    );
+    const values = [45, 25, 20, 10];
+    const count = (index: number) => scenario === "zero" ? 0 : values[index];
+    const nodes = scenario === "empty" ? [] : [
+        { id: "platform", label: "플랫폼", children: [
+            { id: "api", label: "API", value: count(0) },
+            { id: "automation", label: "자동화", value: count(1) },
+        ] },
+        { id: "product", label: "제품", children: [
+            { id: "editor", label: "편집기", value: count(2) },
+            { id: "console", label: "콘솔", value: count(3) },
+        ] },
+    ];
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "zero" ? "data" : "zero",
+                )}>
+                    {scenario === "zero" ? "구성비 표시" : "모두 0"}
+                </Button>
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "empty" ? "data" : "empty",
+                )}>
+                    {scenario === "empty" ? "데이터 표시" : "빈 데이터"}
+                </Button>
+                <Button variant="outline" onClick={() => setAppearance(
+                    appearance === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {appearance === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <TreemapChart title="서비스별 사용량" unit="건"
+                description="플랫폼과 제품의 하위 서비스 사용량입니다."
+                nodes={nodes} appearance={appearance} />
         </div>
     );
 }
@@ -7733,6 +7779,26 @@ function JobTerminal() {
     { start: 200, end: 250, count: 2 },
   ]} />`,
         preview: () => <HistogramChartPreview />,
+    },
+    {
+        id: "treemap-chart", name: "TreemapChart",
+        category: "Data & analytics",
+        description: "계층별 비음수 값을 면적에 비례하는 사각형으로 비교합니다. 부모 값은 자식의 합으로 계산하며 0값은 표에만 남깁니다. 모든 경로·정확한 값·전체 대비 비율을 표로 제공합니다.",
+        code: `import { TreemapChart } from "@pydemia/ui";
+
+<TreemapChart title="서비스별 사용량" unit="건"
+  description="플랫폼과 제품의 하위 서비스 사용량입니다."
+  nodes={[
+    { id: "platform", label: "플랫폼", children: [
+      { id: "api", label: "API", value: 45 },
+      { id: "automation", label: "자동화", value: 25 },
+    ] },
+    { id: "product", label: "제품", children: [
+      { id: "editor", label: "편집기", value: 20 },
+      { id: "console", label: "콘솔", value: 10 },
+    ] },
+  ]} />`,
+        preview: () => <TreemapChartPreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",
