@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-popover",
+  "title": "Popover",
+  "dependencies": [
+    "@radix-ui/react-popover@1.1.23"
+  ],
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-89c86a0be4705c8b66e8ba4bb6d9c83cc3e4fce2a499314871c130c73dbd63e7/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/popover.tsx",
+      "content": "import * as PopoverPrimitive from \"@radix-ui/react-popover\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nconst Popover = PopoverPrimitive.Root;\nconst PopoverTrigger = PopoverPrimitive.Trigger;\nconst PopoverClose = PopoverPrimitive.Close;\nconst PopoverAnchor = PopoverPrimitive.Anchor;\n\nfunction PopoverContent({\n    className,\n    align = \"center\",\n    sideOffset = 6,\n    ...props\n}: ComponentProps<typeof PopoverPrimitive.Content>) {\n    return (\n        <PopoverPrimitive.Portal>\n            <PopoverPrimitive.Content\n                align={align}\n                sideOffset={sideOffset}\n                className={cn(\n                    \"z-50 w-72 max-w-[calc(100vw-2rem)] rounded-sm border \" +\n                    \"border-border bg-surface p-[var(--space-4)] text-foreground \" +\n                    \"shadow-[var(--shadow-float)]\",\n                    className,\n                )}\n                {...props}\n            />\n        </PopoverPrimitive.Portal>\n    );\n}\n\nexport { Popover, PopoverTrigger, PopoverClose, PopoverAnchor, PopoverContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/popover.tsx"
+    },
+    {
+      "path": "registry/SHADCN_UI_LICENSE.md",
+      "content": "# shadcn/ui source license\n\nThis notice accompanies pydemia/ui registry components that adapt source\nfrom shadcn/ui at revision\n`98a1fe67b439324ddc857f47fbdce056600a4329`.\nThe source file for each component is identified in the provenance records at\ncommit `393295abf5a11df8d1eaf987421b9d57d3e34f4d`:\n<https://github.com/pydemia/ui/blob/393295abf5a11df8d1eaf987421b9d57d3e34f4d/registry/provenance.json>.\nSHA-256 of that file with LF line endings:\n`777f19f6b8b1ac7e5b83ac5b652e542dbc99364e856637b4a83694b6f3758452`.\n\nMIT License\n\nCopyright (c) 2023 shadcn\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n",
+      "type": "registry:file",
+      "target": "@ui/SHADCN_UI_LICENSE.md"
+    }
+  ],
+  "type": "registry:ui"
+}
