@@ -1814,3 +1814,19 @@ revision이나 외부 component LICENSE는 없습니다. 현재 공급물의
 [W3C WAI의 표 지침](https://www.w3.org/WAI/tutorials/tables/)을
 참고해 도형과 별도로 제목·열/행 머리글이 있는 정확한 값 표를
 제공합니다. 실제 screen reader 발표는 아직 확인하지 않았습니다.
+
+## 2026-10-03 HistogramChart
+
+`HistogramChart`는 pydemia/ui에서 새로 작성한 React·Tailwind 원본입니다.
+외부 component 코드·그림을 복사하지 않았고 새 npm 의존성도 없습니다.
+registry 의존성은 기존 `pyd-utils`뿐입니다. 따라서 편입한 upstream
+revision이나 외부 component LICENSE는 없습니다. 현재 공급물의
+소스 표기는 `project-owned`이며 공개 사용 조건은 별도로 정하지
+않았습니다.
+
+[NIST의 Histogram 설명](https://www.itl.nist.gov/div898/handbook/eda/section3/eda33e.htm)에서
+연속 수치의 동일 너비 구간과 빈도 축을 확인했습니다. 누적 빈도와
+상대 빈도는 현재 API에 포함하지 않습니다.
+[W3C WAI의 표 지침](https://www.w3.org/WAI/tutorials/tables/)에 따라
+막대와 별도로 제목·행/열 머리글이 있는 정확한 값 표를 제공합니다.
+실제 screen reader 발표는 아직 확인하지 않았습니다.

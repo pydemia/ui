@@ -631,6 +631,12 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title and native table of five exact values per group; decorative box plots", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-histogram-chart", "category": "Data & analytics", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "NIST", "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda33e.htm", "scope": "equal-width numeric bins and frequency; no code or artwork copied" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "figure with visible title, exact interval/count table, and decorative bars", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-page-header", "category": "Content", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "semantic heading level with optional subtitle and actions", "keyboard": "native actions", "screen_reader": "pending manual review" }

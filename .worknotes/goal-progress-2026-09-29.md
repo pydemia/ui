@@ -1,5 +1,10 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `HistogramChart` 구현 검토: **약 98% → 약 98%**입니다.
+연속된 수치 구간의 빈도를 다루는 원본 component를 추가하고
+typecheck·대상 테스트를 확인했습니다. 공개 공급은 아직 확인하지
+않았습니다. [작업 기록](histogram-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 PR #116 병합·공개 대기: **약 98% → 약 98%**입니다.
 저장소의 136개 component·138개 item·66개 snapshot은 PR·`main` CI를
 통과했습니다. Vercel 배포 제한으로 새 item과 manifest가 사용자

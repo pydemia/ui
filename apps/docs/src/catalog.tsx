@@ -44,7 +44,8 @@ import {
     EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
     FilterBar, FormWizard, FunnelChart, WaterfallChart, Gantt,
     GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
-    HoverCardTrigger, Heatmap, Image, ImageCropper, Input, InputGroup,
+    HoverCardTrigger, Heatmap, HistogramChart, Image, ImageCropper,
+    Input, InputGroup,
     InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
     InputGroupTextarea, ItemList, JsonViewer, Kanban, NodeCanvas,
@@ -3428,6 +3429,47 @@ function BoxPlotChartPreview() {
             <BoxPlotChart title="서비스별 응답 시간" unit="ms"
                 description="수염은 관측 최솟값과 최댓값입니다."
                 summaries={summaries} appearance={appearance} />
+        </div>
+    );
+}
+
+function HistogramChartPreview() {
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const [scenario, setScenario] = useState<"data" | "zero" | "empty">(
+        "data",
+    );
+    const counts = [3, 12, 20, 9, 2];
+    const bins = scenario === "empty" ? [] : counts.map((count, index) => ({
+        start: index * 50,
+        end: (index + 1) * 50,
+        count: scenario === "zero" ? 0 : count,
+    }));
+
+    return (
+        <div className="preview-stack">
+            <div className="preview-row">
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "zero" ? "data" : "zero",
+                )}>
+                    {scenario === "zero" ? "분포 표시" : "모두 0"}
+                </Button>
+                <Button variant="outline" onClick={() => setScenario(
+                    scenario === "empty" ? "data" : "empty",
+                )}>
+                    {scenario === "empty" ? "데이터 표시" : "빈 데이터"}
+                </Button>
+                <Button variant="outline" onClick={() => setAppearance(
+                    appearance === "panel" ? "plain" : "panel",
+                )}>
+                    표시: {appearance === "panel" ? "패널" : "평면"}
+                </Button>
+            </div>
+            <HistogramChart title="응답 시간 빈도" unit="ms"
+                countUnit="건"
+                description="동일 너비의 50ms 구간별 요청 건수입니다."
+                bins={bins} appearance={appearance} />
         </div>
     );
 }
@@ -7656,6 +7698,23 @@ function JobTerminal() {
       median: 110, q3: 150, max: 260 },
   ]} />`,
         preview: () => <BoxPlotChartPreview />,
+    },
+    {
+        id: "histogram-chart", name: "HistogramChart",
+        category: "Data & analytics",
+        description: "연속된 동일 너비 수치 구간의 빈도를 막대로 비교합니다. 호출자가 구간별 건수를 집계하며 마지막 구간만 상한을 포함합니다. 정확한 구간·건수와 0건은 표에 표시합니다.",
+        code: `import { HistogramChart } from "@pydemia/ui";
+
+<HistogramChart title="응답 시간 빈도" unit="ms" countUnit="건"
+  description="동일 너비의 50ms 구간별 요청 건수입니다."
+  bins={[
+    { start: 0, end: 50, count: 3 },
+    { start: 50, end: 100, count: 12 },
+    { start: 100, end: 150, count: 20 },
+    { start: 150, end: 200, count: 9 },
+    { start: 200, end: 250, count: 2 },
+  ]} />`,
+        preview: () => <HistogramChartPreview />,
     },
     {
         id: "page-header", name: "PageHeader", category: "Content",

@@ -220,6 +220,10 @@ export { BoxPlotChart } from "./components/box-plot-chart";
 export type {
     BoxPlotChartProps, BoxPlotSummary,
 } from "./components/box-plot-chart";
+export { HistogramChart } from "./components/histogram-chart";
+export type {
+    HistogramBin, HistogramChartProps,
+} from "./components/histogram-chart";
 export { DataChart } from "./components/data-chart";
 export type {
     DataChartProps, ChartPoint, ChartSeries,
