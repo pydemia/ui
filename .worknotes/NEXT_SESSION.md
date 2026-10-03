@@ -1,10 +1,11 @@
 # Component 확장 작업 인계
 
-2026-10-03 `RadarChart` 로컬 후보: 동일 척도의 차원을 여러 계열로
+2026-10-03 `RadarChart` 로컬 릴리스 후보: 동일 척도의 차원을 여러 계열로
 비교하는 원본 component를 추가했습니다. 대상 4/4·전체 UI
 255/255, typecheck·build·PRISM 23/23과 로컬 Chromium 390px
-preview를 확인했습니다. provenance 고지의 source commit 고정,
-snapshot·release 검사·PR CI·공개 URL은 남았습니다. 로컬
+preview를 확인했습니다. provenance 고지를 source commit에 고정했고
+72번째 snapshot의 release 검사가 통과했습니다. PR CI·공개 URL은
+남았습니다. 로컬
 141개 component·143개 item, 공개 확인은 138개·140개입니다.
 [작업 기록](radar-chart-2026-10-03.md)에 검증 범위를 남겼습니다.
 Goal 관리용 추정은 약 98%입니다.

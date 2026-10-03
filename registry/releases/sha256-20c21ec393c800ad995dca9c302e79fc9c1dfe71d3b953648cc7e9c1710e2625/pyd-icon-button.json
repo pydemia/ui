@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-icon-button",
+  "title": "Icon Button",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/releases/sha256-20c21ec393c800ad995dca9c302e79fc9c1dfe71d3b953648cc7e9c1710e2625/pyd-button.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/icon-button.tsx",
+      "content": "import { isValidElement, type ReactElement } from \"react\";\nimport { Button, type ButtonProps } from \"./button\";\n\ntype IconButtonProps = Omit<\n    ButtonProps,\n    \"aria-label\" | \"aria-labelledby\" | \"children\" | \"size\"\n> & {\n    label: string;\n    icon: ReactElement | string;\n};\n\nfunction IconButton({\n    label, icon, variant = \"ghost\", ...props\n}: IconButtonProps) {\n    if (typeof label !== \"string\" || !label.trim()) {\n        throw new Error(\"IconButton requires a label.\");\n    }\n    if (typeof icon === \"string\" ? !icon.trim() : !isValidElement(icon)) {\n        throw new Error(\"IconButton requires an icon.\");\n    }\n\n    return (\n        <Button {...props} variant={variant} size=\"icon\" aria-label={label}>\n            <span aria-hidden=\"true\" className=\"inline-flex items-center\">\n                {icon}\n            </span>\n        </Button>\n    );\n}\n\nexport { IconButton };\nexport type { IconButtonProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/icon-button.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,10 +1,12 @@
 # Component 공급 목표 진행 상태
 
-2026-10-03 `RadarChart` 로컬 후보: **약 98% → 약 98%**입니다.
+2026-10-03 `RadarChart` 로컬 릴리스 후보:
+**약 98% → 약 98%**입니다.
 동일 척도의 평가 차원을 비교하는 원본 component와 두 가지 표시
 형태를 추가했습니다. 로컬 141개 component·143개 item의 대상/전체
-테스트·typecheck·build·390px preview를 확인했으며 provenance 고지,
-snapshot·CI·공개 공급은 남았습니다. 공개 확인 수량은
+테스트·typecheck·build·390px preview, provenance 고지와 72번째
+snapshot의 release 검사를 확인했습니다. PR CI·공개 공급은 남아
+있습니다. 공개 확인 수량은
 138개 component·140개 item입니다.
 [작업 기록](radar-chart-2026-10-03.md)을 참고하세요.
 

@@ -20,10 +20,13 @@
 - 로컬 Chromium: 390px에서 chart·표·Usage와 디자인 전환을 확인.
   일부 미수집에서 해당 계열의 채움 다각형 0개, 인접 구간 선 3개,
   표의 `데이터 없음`, 문서 가로 넘침 0, page error 0건을 확인.
+- `npm run registry:release-check`: 143개 item·141개 export/catalog와
+  72개 불변 snapshot, 현재 registry 일치 검사 통과.
 
-`registry:check`는 현재 provenance SHA-256의 소비자 고지가 이전
-commit을 가리켜 실패했습니다. source commit 고정 뒤 고지를 갱신하고
-snapshot·release check를 재실행해야 합니다. PR CI와 공개 URL,
-실제 screen reader·touch·Safari 동작은 아직 확인하지 않았습니다.
-Goal 관리용 추정은 약 98%로 유지합니다. 로컬 후보는 141개
-component·143개 item, 공개 확인은 138개·140개입니다.
+첫 `registry:check`는 provenance 고지가 이전 commit을 가리켜
+실패했습니다. source commit `9d5d0b3198a6d3162b2512c03274903ca5cbe8cd`와
+SHA-256을 고지에 고정한 뒤 재실행해 통과했습니다. 72번째 snapshot은
+`sha256-20c21ec393c800ad995dca9c302e79fc9c1dfe71d3b953648cc7e9c1710e2625`입니다.
+PR CI와 공개 URL, 실제 screen reader·touch·Safari 동작은 아직
+확인하지 않았습니다. Goal 관리용 추정은 약 98%로 유지합니다.
+로컬 후보는 141개 component·143개 item, 공개 확인은 138개·140개입니다.
