@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 운영 범위 재평가: 후보 선정과 품질 확인, 공개
+공급을 별도로 판정합니다. 변경한 동작의 증거 한 가지와 preview·Usage를
+기본 수동 범위로 삼고, CI·snapshot은 릴리스 묶음에 적용합니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)에 상세 기준이
+있습니다. `SankeyChart`의 PR·배포 확인은 계속 남았고 Goal 관리용
+추정은 약 98%입니다.
+
 2026-10-03 `SankeyChart` 릴리스 후보: 고지를 source commit에 고정하고
 73번째 snapshot과 공개용 복사본을 만들었습니다.
 `registry:release-check`는 144개 item·142개 export/catalog와 현재
