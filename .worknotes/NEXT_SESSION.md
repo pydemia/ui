@@ -1,5 +1,12 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #118 병합·공개 확인: `HistogramChart`의 PR·`main` Verify UI,
+Pages와 Vercel production이 성공했습니다. 공개 item과 67번째 snapshot
+manifest는 HTTP 200이며 로컬 생성물과 SHA-256이 같습니다. 137개
+component·139개 item입니다. 공급·품질 체크리스트의 실제 부담은
+snapshot 전체 복제이며 [작업 기록](histogram-chart-2026-10-03.md)에
+남겼습니다. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 `HistogramChart` 로컬 릴리스 준비: 137개 component·139개
 registry item·67번째 snapshot의 typecheck·대상 테스트·build·
 `registry:release-check`와 Chromium preview를 확인했습니다. PR CI와
