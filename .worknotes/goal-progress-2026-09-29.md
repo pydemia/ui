@@ -1,5 +1,14 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 Table·DataTable 세 표시 형태 로컬 후보:
+**약 99% → 약 99%**입니다. 기존 두 component에 격자형·경계선 없는
+형태를 더했고 기본 줄 구분형은 유지했습니다. 새 component 수량은
+없으며 79번째 snapshot 후보는 146개 item을 담습니다. 대상 테스트
+3/3, 전체 UI 273/273, typecheck·build·registry release 검사와
+로컬 Chromium preview를
+확인했습니다. PR CI와 공개 경로는 아직 확인 전입니다.
+[작업 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Input 외형 선택 production 공개: **약 99% → 약 99%**입니다.
 PR #146과 `main` Verify UI·Pages가 통과했고 Vercel production이
 READY입니다. 사용자 도메인의 78번째 manifest·Input item과 공개

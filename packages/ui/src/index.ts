@@ -404,6 +404,7 @@ export type { CopyButtonProps } from "./components/copy-button";
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/tabs";
 export type { TabsListProps, TabsVariant } from "./components/tabs";
 export { Table, TableHead, TableCell } from "./components/table";
+export type { TableProps } from "./components/table";
 export { AffixedInput } from "./components/affixed-input";
 export {
     Snippet,

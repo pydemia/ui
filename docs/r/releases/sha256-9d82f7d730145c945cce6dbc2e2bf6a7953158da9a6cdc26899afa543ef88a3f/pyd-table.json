@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-table",
+  "title": "Table",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-9d82f7d730145c945cce6dbc2e2bf6a7953158da9a6cdc26899afa543ef88a3f/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/table.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype TableProps = ComponentProps<\"table\"> & {\n    appearance?: \"lined\" | \"grid\" | \"plain\";\n};\n\nconst appearanceClasses = {\n    lined: \"\",\n    grid: \"border border-border [&>*>tr>*]:border\",\n    plain: \"[&>*>tr>*]:border-0\",\n} as const;\n\nfunction Table({\n    appearance = \"lined\", className, ...props\n}: TableProps) {\n    if (!Object.hasOwn(appearanceClasses, appearance)) {\n        throw new RangeError(\"Table appearance is not supported.\");\n    }\n\n    return <table\n        data-appearance={appearance}\n        className={cn(\n            \"w-full border-collapse text-sm\",\n            appearanceClasses[appearance], className,\n        )}\n        {...props}\n    />;\n}\n\nfunction TableHead({ className, ...props }: ComponentProps<\"th\">) {\n    return (\n        <th\n            className={cn(\n                \"border-b border-border px-[var(--space-3)] py-2 text-left font-medium text-muted\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nfunction TableCell({ className, ...props }: ComponentProps<\"td\">) {\n    return (\n        <td\n            className={cn(\"border-b border-border px-[var(--space-3)] py-[var(--density-row-block)]\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Table, TableHead, TableCell };\nexport type { TableProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/table.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

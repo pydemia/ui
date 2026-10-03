@@ -4062,9 +4062,10 @@ const initialReviewRows: ReviewRow[] = [
         detail: "변경 전후 권한을 검토 화면에서 비교합니다." },
 ];
 
-function RemoteDataTablePreview({ density, striped }: {
+function RemoteDataTablePreview({ density, striped, appearance }: {
     density: "compact" | "standard" | "comfortable";
     striped: boolean;
+    appearance: "lined" | "grid" | "plain";
 }) {
     const [view, setView] = useState<DataTableView>({
         query: "", filterValue: "", sort: null, page: 1, pageSize: 2,
@@ -4104,6 +4105,7 @@ function RemoteDataTablePreview({ density, striped }: {
             <DataTable
                 caption="원격 요청 목록"
                 density={density} striped={striped}
+                appearance={appearance}
                 rows={pageRows}
                 columns={reviewColumns}
                 getRowId={(row) => row.id}
@@ -4188,6 +4190,47 @@ function NotificationCenterPreview() {
     );
 }
 
+function TableAppearancePreview() {
+    const [appearance, setAppearance] = useState<
+        "lined" | "grid" | "plain"
+    >("lined");
+
+    return <div className="grid w-full gap-3">
+        <div className="grid gap-1">
+            <label htmlFor="demo-table-appearance">표 형태</label>
+            <NativeSelect id="demo-table-appearance" value={appearance}
+                onChange={(event) => setAppearance(event.target.value as
+                    typeof appearance)}>
+                <option value="lined">줄 구분</option>
+                <option value="grid">격자</option>
+                <option value="plain">경계선 없음</option>
+            </NativeSelect>
+        </div>
+        <div className="preview-table">
+            <Table appearance={appearance}>
+                <caption className="sr-only">화면 개선 요청</caption>
+                <thead><tr>
+                    <TableHead scope="col">요청</TableHead>
+                    <TableHead scope="col">담당</TableHead>
+                    <TableHead scope="col">상태</TableHead>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <TableCell>초대 화면</TableCell>
+                        <TableCell>제품팀</TableCell>
+                        <TableCell>검토 중</TableCell>
+                    </tr>
+                    <tr>
+                        <TableCell>검색 필터</TableCell>
+                        <TableCell>운영팀</TableCell>
+                        <TableCell>승인</TableCell>
+                    </tr>
+                </tbody>
+            </Table>
+        </div>
+    </div>;
+}
+
 function DataTablePreview() {
     const [rows, setRows] = useState(initialReviewRows);
     const [lastAction, setLastAction] = useState("");
@@ -4196,6 +4239,9 @@ function DataTablePreview() {
         "compact" | "standard" | "comfortable"
     >("standard");
     const [striped, setStriped] = useState(false);
+    const [appearance, setAppearance] = useState<
+        "lined" | "grid" | "plain"
+    >("lined");
 
     return (
         <div className="preview-workspace">
@@ -4210,6 +4256,17 @@ function DataTablePreview() {
                 </Button>
             </div>
             <div className="mb-3 flex flex-wrap items-end gap-3">
+                <div className="grid gap-1">
+                    <label htmlFor="demo-data-table-appearance">표 형태</label>
+                    <NativeSelect id="demo-data-table-appearance"
+                        value={appearance}
+                        onChange={(event) => setAppearance(
+                            event.target.value as typeof appearance)}>
+                        <option value="lined">줄 구분</option>
+                        <option value="grid">격자</option>
+                        <option value="plain">경계선 없음</option>
+                    </NativeSelect>
+                </div>
                 <div className="grid gap-1">
                     <label htmlFor="demo-table-density">행 밀도</label>
                     <NativeSelect id="demo-table-density" value={density}
@@ -4227,9 +4284,10 @@ function DataTablePreview() {
                 </label>
             </div>
             {mode === "remote" ? <RemoteDataTablePreview density={density}
-                striped={striped} /> : <DataTable
+                striped={striped} appearance={appearance} /> : <DataTable
                 caption="화면 개선 요청"
                 density={density} striped={striped}
+                appearance={appearance}
                 rows={rows}
                 columns={reviewColumns}
                 getRowId={(row) => row.id}
@@ -6691,10 +6749,10 @@ function Composer() {
     },
     {
         id: "table", name: "Table", category: "Data display",
-        description: "caption과 열 머리글을 갖춘 데이터 표의 기본 뼈대입니다.",
+        description: "caption과 열 머리글을 갖춘 native 표입니다. 기본 줄 구분형과 격자형·경계선 없는 형태를 선택합니다.",
         code: `import { Table, TableHead, TableCell } from "@pydemia/ui";
 
-<Table>
+<Table appearance="grid">
   <caption className="sr-only">화면 개선 요청</caption>
   <thead><tr>
     <TableHead scope="col">요청</TableHead>
@@ -6714,20 +6772,7 @@ function Composer() {
     </tr>
   </tbody>
 </Table>`,
-        preview: () => <div className="preview-table">
-            <Table>
-                <caption className="sr-only">화면 개선 요청</caption>
-                <thead><tr>
-                    <TableHead scope="col">요청</TableHead>
-                    <TableHead scope="col">담당</TableHead>
-                    <TableHead scope="col">상태</TableHead>
-                </tr></thead>
-                <tbody>
-                    <tr><TableCell>초대 화면</TableCell><TableCell>제품팀</TableCell><TableCell>검토 중</TableCell></tr>
-                    <tr><TableCell>검색 필터</TableCell><TableCell>운영팀</TableCell><TableCell>승인</TableCell></tr>
-                </tbody>
-            </Table>
-        </div>,
+        preview: () => <TableAppearancePreview />,
     },
     {
         id: "data-list", name: "DataList", category: "Data display",
@@ -7803,7 +7848,7 @@ function RequestPages() {
     },
     {
         id: "data-table", name: "DataTable", category: "Data display",
-        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. 행 밀도·줄무늬와 행별 상세 펼침을 선택할 수 있습니다. remote에서는 전달된 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업과 상세는 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
+        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. 줄 구분·격자·경계선 없는 표 외형과 행 밀도·줄무늬·상세 펼침을 선택할 수 있습니다. remote에서는 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업과 상세는 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
         code: `import { Button, DataTable } from "@pydemia/ui";
 import type { DataTableColumn } from "@pydemia/ui";
 
@@ -7822,7 +7867,7 @@ const columns: DataTableColumn<Request>[] = [
 ];
 
 <DataTable caption="화면 개선 요청" rows={rows} columns={columns}
-  density="compact" striped
+  appearance="grid" density="compact" striped
   getRowId={(row) => row.id} getRowLabel={(row) => row.name}
   renderRowDetails={(row) => <p>{row.detail}</p>}
   getSearchText={(row) => row.name}
@@ -7851,7 +7896,8 @@ function RemoteRequests({ page, view, onViewChange, retry }: {
   retry: () => void;
 }) {
   return <DataTable caption="원격 요청 목록" rows={page.rows}
-    columns={columns} getRowId={(row) => row.id}
+    columns={columns} appearance="plain"
+    getRowId={(row) => row.id}
     renderRowDetails={(row) => <p>{row.detail}</p>}
     filter={{ label: "상태", options: [
       { value: "대기", label: "대기" },

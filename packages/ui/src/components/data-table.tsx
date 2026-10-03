@@ -8,7 +8,7 @@ import { Checkbox } from "./checkbox";
 import { Input } from "./input";
 import { NativeSelect } from "./native-select";
 import { Pagination } from "./pagination";
-import { Table, TableCell, TableHead } from "./table";
+import { Table, TableCell, TableHead, type TableProps } from "./table";
 import { cn } from "./utils";
 
 type DataTableColumn<Row> = {
@@ -47,6 +47,7 @@ type DataTableBaseProps<Row> = {
     emptyMessage?: string;
     density?: "compact" | "standard" | "comfortable";
     striped?: boolean;
+    appearance?: TableProps["appearance"];
     className?: string;
 };
 
@@ -97,7 +98,7 @@ function DataTable<Row>({
     pageSizeOptions = [10, 25, 50], selectable = false,
     renderActions, renderRowDetails,
     emptyMessage = "표시할 항목이 없습니다.", remote,
-    density = "standard", striped = false,
+    density = "standard", striped = false, appearance = "lined",
     className,
 }: DataTableProps<Row>) {
     const searchId = useId();
@@ -330,7 +331,7 @@ function DataTable<Row>({
                     "min-w-0 overflow-x-auto rounded-sm " +
                     "focus-visible:outline-2 focus-visible:outline-focus"
                 }>
-                <Table className={cn(
+                <Table appearance={appearance} className={cn(
                     "min-w-max",
                     density === "compact" &&
                         "[--density-row-block:var(--space-1)]",

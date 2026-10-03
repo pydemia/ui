@@ -1,8 +1,31 @@
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
 
-function Table({ className, ...props }: ComponentProps<"table">) {
-    return <table className={cn("w-full border-collapse text-sm", className)} {...props} />;
+type TableProps = ComponentProps<"table"> & {
+    appearance?: "lined" | "grid" | "plain";
+};
+
+const appearanceClasses = {
+    lined: "",
+    grid: "border border-border [&>*>tr>*]:border",
+    plain: "[&>*>tr>*]:border-0",
+} as const;
+
+function Table({
+    appearance = "lined", className, ...props
+}: TableProps) {
+    if (!Object.hasOwn(appearanceClasses, appearance)) {
+        throw new RangeError("Table appearance is not supported.");
+    }
+
+    return <table
+        data-appearance={appearance}
+        className={cn(
+            "w-full border-collapse text-sm",
+            appearanceClasses[appearance], className,
+        )}
+        {...props}
+    />;
 }
 
 function TableHead({ className, ...props }: ComponentProps<"th">) {
@@ -27,3 +50,4 @@ function TableCell({ className, ...props }: ComponentProps<"td">) {
 }
 
 export { Table, TableHead, TableCell };
+export type { TableProps };
