@@ -1,15 +1,16 @@
 # 검증 기록
 
-## 2026-10-03 Autocomplete — 로컬 후보
+## 2026-10-03 Autocomplete — 병합·공개 대기
 
 visible label과 native form 값, 자유 입력·추천 선택의 차이, IME·
 Escape·reset·controlled 값과 loading 상태를 대상 테스트 4개로
 확인했습니다. 전체 UI 테스트 251/251, typecheck·build, PRISM
 검사 23/23과 로컬 Chromium의 자유 입력 제출·keyboard·pointer
 선택을 확인했습니다. 고정 provenance 고지와 71번째 snapshot의
-`registry:release-check`가 통과했습니다. PR CI와 공개 경로는
-[작업 기록](../.worknotes/autocomplete-2026-10-03.md)에 이어서
-남깁니다.
+`registry:release-check`가 통과했습니다. PR #127과 `main`의 Verify
+UI·Pages가 통과했습니다. Vercel 배포 제한으로 현재 item과 manifest는
+공개 도메인에서 HTTP 404입니다. 배포 재확인 대상과 미검증 범위는
+[작업 기록](../.worknotes/autocomplete-2026-10-03.md)에 있습니다.
 
 ## 2026-10-03 PivotTable — 병합·공개 대기
 

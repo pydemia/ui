@@ -16,9 +16,9 @@ PRISM 검사 23/23이 통과했습니다. 로컬 Chromium의 390px preview에서
 registry 고지의 고정 provenance commit·SHA-256과 71번째 snapshot,
 `registry:release-check`를 확인했습니다. 릴리스 ID는
 `sha256-ab149be9df7a468a1002ed3461c04dce1c3442fe0a32a796ad06ec010688a458`입니다.
-로컬 후보는 140개 component·142개 registry item입니다. PR CI와 공개
-경로는 아직 확인하지 않았습니다. 실제 screen reader·touch·Safari·
-RTL은 실행하지 않았습니다. Goal 관리용 추정은 약 98%로 유지합니다.
+로컬 후보는 140개 component·142개 registry item입니다. 실제 screen
+reader·touch·Safari·RTL은 실행하지 않았습니다. Goal 관리용 추정은
+약 98%로 유지합니다.
 
 PR #127을 만들었습니다. 그 사이 `main`에 PRISM 게시 변경이 병합되어
 브랜치에 반영하고 문서 산출물을 최신 소스로 다시 만들었습니다. 병합
@@ -27,4 +27,14 @@ PR #127을 만들었습니다. 그 사이 `main`에 PRISM 게시 변경이 병�
 PRISM 검사 23/23과 완전한 Usage 예제 10개 typecheck, 전체 typecheck,
 build, registry release 검사가 통과했습니다. Vercel 상태는 배포 횟수
 제한으로 실패했습니다. 이는 component 동작 결함과 구분해 공개 대기로
-기록합니다. 최신 PR CI·공개 URL은 계속 확인합니다.
+기록합니다.
+
+PR #127의 Verify UI run `37092295178`이 통과했고 merge commit
+`8f7f9b652ad7e1b73a48aad2c2bdfa2fc094ae69`의 Verify UI run
+`37092485686`과 Pages run `37092485327`도 통과했습니다. Vercel
+status는 build rate limit 실패입니다. `ui.pydemia.ai`의 현재
+`pyd-autocomplete.json`과 71번째 manifest, Vercel 기본 도메인의
+현재 item은 모두 HTTP 404입니다. 저장소는 140개 component·142개
+item·71개 snapshot이고, 확인된 공개 수량은 기존 138개·140개입니다.
+배포 제한이 풀리면 production과 현재 item·snapshot manifest의 공개
+접근을 다시 확인해야 합니다. Goal 관리용 추정은 약 98%입니다.

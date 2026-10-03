@@ -1,5 +1,12 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `Autocomplete` 병합·공개 대기: **약 98% → 약 98%**입니다.
+PR #127과 `main`의 Verify UI·Pages가 통과했습니다. 저장소는
+140개 component·142개 item·71개 snapshot이며 Vercel 배포 제한으로
+새 item·manifest는 공개 도메인에서 404입니다. 공개 확인 수량은
+138개 component·140개 item으로 유지합니다.
+[작업 기록](autocomplete-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `Autocomplete` 로컬 릴리스 후보: **약 98% → 약 98%**입니다.
 독립적인 자유 입력·추천어 선택 용례로 140번째 component를 추가하고
 대상/전체 테스트·typecheck·build·로컬 브라우저·71번째 snapshot
