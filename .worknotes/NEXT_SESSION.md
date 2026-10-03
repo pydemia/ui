@@ -1,5 +1,18 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 체크리스트 재검토: `Table`·`DataTable` 변경은
+전체 315개 파일 중 snapshot 이중 복제가 대부분이었습니다. 이를
+사람의 품질 검토량이나 Goal 미완료로 계산하지 않습니다. 변경 동작,
+release 묶음, 공개 게시의 증거를 구분하고 rollback URL 보존은 별도
+운영 위험으로 둡니다. [판정 기록](quality-gate-level-review-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 Table·DataTable 외형 선택 병합: PR #148과 `main`
+Verify UI·Pages가 통과했고 79번째 GitHub raw manifest는 HTTP
+200입니다. 사용자 도메인과 Vercel production은 이전 배포여서
+공개 게시 확인이 남았습니다. [작업 기록](table-appearances-2026-10-03.md)을
+참고하세요.
+
 2026-10-03 Table·DataTable 외형 선택 로컬 후보: 기본 lined를 유지하고
 grid·plain을 추가했습니다. 두 component의 실제 preview·Usage와
 79번째 schema 2 snapshot 후보를 준비했습니다. 대상 테스트 3/3,
