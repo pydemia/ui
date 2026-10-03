@@ -1,5 +1,11 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 release 이력 보존 검사 production 확인:
+**약 99% → 약 99%**입니다. PR·`main` Verify UI와 Pages가 통과했고
+production 배포가 READY입니다. 공개 75번째 manifest·Button URL은
+HTTP 200입니다. 실제 Instant Rollback의 URL 보존은 미검증입니다.
+[검증 기록](release-history-guard-2026-10-03.md)을 참고하세요.
+
 2026-10-03 release 이력 보존 검사: **약 99% → 약 99%**입니다.
 기존 snapshot 파일의 수정·삭제를 PR·`main`에서 막고 안전한 복구
 절차를 README에 적었습니다. 로컬 테스트·빌드·registry 검사는
