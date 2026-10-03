@@ -1,9 +1,16 @@
 # Component 확장 작업 인계
 
-2026-10-03 Dialog 크기 로컬 후보: `DialogContent`에 기본·넓은·전체
+2026-10-03 공급·품질 기준 재검토: 로컬에서는 변경 동작을 대상으로
+검증하고, 전체 검사는 PR CI 결과를 사용합니다. 공개 확인은 묶음의
+배포와 대표 URL로 판단하며 같은 조작을 환경마다 반복하지 않습니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 Dialog 크기 병합·공개 대기: `DialogContent`에 기본·넓은·전체
 화면 크기를 추가했습니다. typecheck·대상 2/2·UI 전체 280/280·
 build·83번째 registry release 검사와 로컬 Chromium 크기·focus를
-확인했습니다. PR CI·공개 검증은 진행 중입니다.
+확인했습니다. PR #156과 `main`의 Verify UI, Pages가 통과했지만
+production은 이전 배포이며 83번째 manifest는 HTTP 404입니다.
 [작업 기록](dialog-sizes-2026-10-03.md)을 참고하세요. 새
 component·item은 없으며 Goal 관리용 추정 약 99%를 유지합니다.
 
