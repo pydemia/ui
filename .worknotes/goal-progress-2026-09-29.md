@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `RadarChart` 병합·공개 대기: **약 98% → 약 98%**입니다.
+PR #129와 `main`의 Verify UI·Pages가 통과했습니다. 저장소는
+141개 component·143개 item·72개 snapshot이며 Vercel 배포 제한으로
+RadarChart item과 manifest는 공개 도메인에서 404입니다. 공개 확인
+수량은 앞서 대기 중이던 PivotTable·Autocomplete가 제공되면서
+**140개 component·142개 item**으로 늘었습니다.
+[작업 기록](radar-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `RadarChart` 로컬 릴리스 후보:
 **약 98% → 약 98%**입니다.
 동일 척도의 평가 차원을 비교하는 원본 component와 두 가지 표시

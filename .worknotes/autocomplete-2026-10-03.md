@@ -1,5 +1,11 @@
 # Autocomplete 작업 기록
 
+2026-10-03 공개 재확인: `ui.pydemia.ai`의 현재
+`pyd-autocomplete.json`과 71번째 manifest·snapshot Button item이
+HTTP 200입니다. 현재 registry는 142개 item이며 Autocomplete를
+포함합니다. 아래의 404 기록은 병합 직후 상태입니다. 실제 screen
+reader·touch·Safari·RTL 검증은 여전히 남았습니다.
+
 2026-10-03. 기존 `Combobox`는 목록의 ID를 선택해야 form에 값을
 전달합니다. 새 팀·태그 후보처럼 추천 목록 밖의 이름을 입력할 수 있는
 필드에는 별도 문자열 규칙이 필요합니다. `Autocomplete`는 입력한
