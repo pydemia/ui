@@ -1,5 +1,15 @@
 # Prototype 설계 계약
 
+## 2026-10-03 Table·DataTable 표시 형태
+
+`Table`의 `appearance`는 `lined`(기본값), `grid`, `plain`입니다.
+각 형태는 같은 native table·caption·scope 속성을 유지합니다.
+`grid`는 표 바깥과 셀을 공통 border token으로 구분하고 `plain`은
+셀 경계선을 숨깁니다. selector는 현재 표의 셀만 대상으로 하므로
+셀 안에 있는 다른 표의 외형을 변경하지 않습니다. `DataTable`의
+동명 속성은 내부 표에 전달되며 조회·정렬·선택·페이지 상태를
+바꾸지 않습니다.
+
 ## 2026-10-03 Input 표시 형태
 
 `Input`의 `appearance`는 `outline`(기본값), `filled`, `underline` 중

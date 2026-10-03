@@ -1,5 +1,17 @@
 # 검증 기록
 
+## 2026-10-03 Table·DataTable 표시 형태 — 로컬 후보
+
+native caption·열 머리글과 세 외형, `DataTable` 전달을 확인하는
+대상 테스트 3/3, UI 전체 테스트 273/273, typecheck·build·
+registry release 검사가 통과했습니다. 로컬 Chromium에서 `Table`
+세 외형의 실제 셀 테두리,
+`DataTable` 로컬·remote 모드의 외형 전달과 어두운 테마를
+확인했습니다. 실제 screen reader·touch·Safari는 실행하지
+않았습니다. PR CI와 공개 경로는 아직 확인 전입니다.
+[작업 기록](../.worknotes/table-appearances-2026-10-03.md)에 범위와
+미검증 항목을 남겼습니다.
+
 ## 2026-10-03 Input 표시 형태 — 공개 확인
 
 PR #146과 `main` `14486b7e`의 Verify UI·Pages가 통과했습니다.

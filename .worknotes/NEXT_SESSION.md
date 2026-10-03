@@ -1,5 +1,15 @@
 # Component 확장 작업 인계
 
+2026-10-03 Table·DataTable 외형 선택 로컬 후보: 기본 lined를 유지하고
+grid·plain을 추가했습니다. 두 component의 실제 preview·Usage와
+79번째 schema 2 snapshot 후보를 준비했습니다. 대상 테스트 3/3,
+UI 전체 273/273, typecheck·build·registry release 검사가 통과했고
+로컬 Chromium에서
+Table 세 형태와 DataTable 로컬·remote 전달, 어두운 테마를
+확인했습니다. PR CI·공개 경로는 아직 확인 전입니다. 수량은 144개
+component·146개 item이며 Goal 관리용 추정은 약 99%입니다.
+[작업 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
 2026-10-03 Input 외형 선택 공개: PR #146을 병합했고 `main`
 `14486b7e`의 Verify UI·Pages가 성공했습니다. Vercel production은
 READY이며 사용자 도메인의 78번째 manifest·snapshot Input·현재

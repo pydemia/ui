@@ -1,5 +1,11 @@
 # 변경 기록
 
+## 2026-10-03 — Table·DataTable 표시 형태
+
+- 기본 줄 구분형을 유지하고 격자형·경계선 없는 표를 선택할 수
+  있도록 했습니다. 두 component의 Usage와 동작하는 preview를
+  제공합니다.
+
 ## 2026-10-03 — Input 표시 형태
 
 - 기본 `outline`을 유지하고 `filled`·`underline` 표시 형태를
