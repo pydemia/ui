@@ -222,14 +222,20 @@
           "Source SCSS and stored default avatar metrics establish 40px image, 25px radius and 12px gap",
           "Avatar text allocation preserves the shorter name/team and limits both when both exceed half the available width",
           "Mock DOM geometry checks resize, text changes, font readiness/loadingdone and observer cleanup",
-          "Mock DOM focus opens the full truncated label; showInfo=false retains a screen-reader name"
+          "Mock DOM focus opens the full truncated label; showInfo=false retains a screen-reader name",
+          "Actual font/print build at 140px exercises natural/name/team/both allocation with shorter label preserved",
+          "Focus and hover reveal full truncated labels; Escape and widening close Tooltip; no stale reopening on re-truncation",
+          "Declared Pretendard Variable face is loaded and used by current docs/embedded preview"
         ],
         "evidence": [
-          "reference-ui-avatar"
+          "reference-ui-avatar",
+          "local-fixed-avatar-140-metrics",
+          "local-fixed-avatar-focus-tooltip",
+          "local-fixed-avatar-hover-tooltip",
+          "local-fixed-avatar-resize-stays-closed"
         ],
         "remaining": [
-          "actual browser geometry for natural/name/team/both truncation",
-          "hover/focus Tooltip placement and variable font metrics",
+          "fresh original comparison across lengths and widths",
           "all chip and table visual/interactive states"
         ]
       },
@@ -404,11 +410,15 @@
         "visual": "partial",
         "interaction": "partial",
         "checks": [
-          "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation"
+          "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation",
+          "Actual 320px font-corrected preview: body gap 6px/content gap 4px, close 20x20px, dismiss removes toast and root stays 320px"
         ],
-        "evidence": [],
+        "evidence": [
+          "local-fixed-toast-metrics",
+          "local-fixed-toast-dismiss"
+        ],
         "remaining": [
-          "updated Toast runtime metrics and open source sample states"
+          "all original Toast tones, long content and placement states"
         ]
       },
       "exports": [
@@ -2112,10 +2122,11 @@
       "name": "Profile print pages / Repeated header",
       "category": "Documents",
       "purpose": "인쇄 전용 Profile 머리말·경력·Risk·경험과 반복 표 머리말",
-      "contract": "출력 페이지는 190mm 폭과 최소 280mm 높이를 사용합니다. repeatHeader는 table thead를 사용해 출력 머리말을 반복합니다. 읽기 전용 경험 영역·대표 항목·누락 Risk 값을 표시하며 페이지 분할과 인쇄 실행은 호스트가 소유합니다.",
+      "contract": "출력 미리보기는 190mm 폭과 최소 280mm 높이를 사용합니다. 인쇄 시 최소 높이를 해제해 짧은 내용의 빈 다음 페이지를 방지합니다. repeatHeader는 table thead를 사용해 출력 머리말을 반복합니다. 읽기 전용 경험 영역·대표 항목·누락 Risk 값을 표시하며 페이지 분할과 인쇄 실행은 호스트가 소유합니다.",
       "states": [
         "default",
-        "empty"
+        "empty",
+        "long"
       ],
       "source": [
         "chat/successorCandidate/print/PrintPage.tsx",
@@ -2130,8 +2141,21 @@
       "embedUrl": "/prism?component=prism-print&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-print&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending"
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Screen retains source 190mm width and 280mm minimum height; print clears minimum height to avoid blank trailing page",
+          "Short browser PDF is one nonblank page; long fixture is two pages with repeated Profile headers",
+          "All 36 synthetic career rows appear once; rendered PDF pages inspected"
+        ],
+        "evidence": [
+          "local-print-pdf-verification"
+        ],
+        "remaining": [
+          "original print page comparison",
+          "other paper and native print settings",
+          "very long outline and essay fragmentation"
+        ]
       },
       "exports": [
         {

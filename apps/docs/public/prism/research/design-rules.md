@@ -23,7 +23,7 @@ Independent UI materials for AI-assisted frontend maintenance. Reproduce design,
 | ELP | #F4ECFA, #E5D9F2, #68127A | _badge.scss |
 | s-ELP | #F6FCD6, #D2DAAA, #6A7B00 | _badge.scss |
 
-Pretendard is verified in deployed computed styles. The standalone site uses official Pretendard 1.3.9 variable font (OFL-1.1); original uses static weights. Font-metric equality still requires comparison. Use 400 for body, 500 for supporting content, 600 for controls and sections, 700 for emphasized names/headings. General body is 14px; chat answer and criteria use 16px/1.6; micro badge uses 10px.
+Pretendard is verified in deployed computed styles. The standalone site uses official Pretendard 1.3.9 variable font (OFL-1.1); original uses static weights. Docs, embedded previews and SVG charts use the declared "Pretendard Variable" family through --font-ui; using only "Pretendard" would select a fallback. Font-metric equality with the original static font still requires comparison. Use 400 for body, 500 for supporting content, 600 for controls and sections, 700 for emphasized names/headings. General body is 14px; chat answer and criteria use 16px/1.6; micro badge uses 10px.
 
 ## Geometry
 
@@ -61,3 +61,5 @@ PRISM component code is a design/behavior reference; independent implementations
 ## Sizing extensions
 
 Workspace height/minHeight and Panel width/defaultWidth/minWidth/maxWidth are consumer configuration. Width is clamped to its actual parent without overwriting a consumer preference. PDF viewer supports configurable height and manual zoom bounds; defaults stay 30–100 percent. Page/width fit uses client bounds minus one 16px padding on each side, and an enlarged canvas scrolls inside its own viewport. The Responsive catalog view uses a real 320–1200px iframe, so media/container queries run at the displayed width. It is not a screenshot scaled to look mobile.
+
+Print previews retain the source 190mm width and 280mm minimum screen height. Print media removes that minimum height so short content does not create a blank trailing page. repeatHeader uses a table header group; host print settings still determine paper and margins. Headless Chromium Letter output verified a one-page short fixture and two-page long fixture with repeated headers and all 36 synthetic career rows. This does not verify every paper size or native print dialog.

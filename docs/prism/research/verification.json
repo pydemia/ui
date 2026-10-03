@@ -530,11 +530,15 @@
       "visual": "partial",
       "interaction": "partial",
       "checks": [
-        "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation"
+        "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation",
+        "Actual 320px font-corrected preview: body gap 6px/content gap 4px, close 20x20px, dismiss removes toast and root stays 320px"
       ],
-      "evidence": [],
+      "evidence": [
+        "local-fixed-toast-metrics",
+        "local-fixed-toast-dismiss"
+      ],
       "remaining": [
-        "updated Toast runtime metrics and open source sample states"
+        "all original Toast tones, long content and placement states"
       ]
     },
     "prism-display": {
@@ -544,15 +548,38 @@
         "Source SCSS and stored default avatar metrics establish 40px image, 25px radius and 12px gap",
         "Avatar text allocation preserves the shorter name/team and limits both when both exceed half the available width",
         "Mock DOM geometry checks resize, text changes, font readiness/loadingdone and observer cleanup",
-        "Mock DOM focus opens the full truncated label; showInfo=false retains a screen-reader name"
+        "Mock DOM focus opens the full truncated label; showInfo=false retains a screen-reader name",
+        "Actual font/print build at 140px exercises natural/name/team/both allocation with shorter label preserved",
+        "Focus and hover reveal full truncated labels; Escape and widening close Tooltip; no stale reopening on re-truncation",
+        "Declared Pretendard Variable face is loaded and used by current docs/embedded preview"
       ],
       "evidence": [
-        "reference-ui-avatar"
+        "reference-ui-avatar",
+        "local-fixed-avatar-140-metrics",
+        "local-fixed-avatar-focus-tooltip",
+        "local-fixed-avatar-hover-tooltip",
+        "local-fixed-avatar-resize-stays-closed"
       ],
       "remaining": [
-        "actual browser geometry for natural/name/team/both truncation",
-        "hover/focus Tooltip placement and variable font metrics",
+        "fresh original comparison across lengths and widths",
         "all chip and table visual/interactive states"
+      ]
+    },
+    "prism-print": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Screen retains source 190mm width and 280mm minimum height; print clears minimum height to avoid blank trailing page",
+        "Short browser PDF is one nonblank page; long fixture is two pages with repeated Profile headers",
+        "All 36 synthetic career rows appear once; rendered PDF pages inspected"
+      ],
+      "evidence": [
+        "local-print-pdf-verification"
+      ],
+      "remaining": [
+        "original print page comparison",
+        "other paper and native print settings",
+        "very long outline and essay fragmentation"
       ]
     }
   },
@@ -573,11 +600,11 @@
       "files": 62,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "registrySha256": "432d3672c026575a0d0daa291dbaf669cf6012a6d94a11c9c8a1e1d5e815bcb2",
-      "method": "isolated shadcn install against local registry mirror; final registry CSS synced and rebuilt; no workspace package imports",
+      "registrySha256": "0e2ae1a01a72962924feafe4833b848a316fea8a7c2e91aa20f9da0c34c75e40",
+      "method": "previous isolated public shadcn install; final font/print registry CSS synchronized byte-for-byte and consumer TypeScript/Vite rebuilt",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "all 39 installed items compiled and 11 component examples typechecked; demo renders Button only",
+      "sourceScope": "all 39 installed source items compiled and 11 component examples typechecked; final registry CSS compiled; demo renders Button only",
       "completeExamples": {
         "count": 11,
         "status": "typechecked-against-installed-sources",
@@ -586,9 +613,9 @@
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
-      "status": "published-http-verified",
+      "status": "published-http-and-browser-verified",
       "url": "https://ui.pydemia.ai/prism",
-      "readback": "HTTP 200 for /prism and /prism/; components.json, registry.json, prism-context.json, llms.txt and font bytes match the local build",
+      "readback": "HTTP 200 current components.json (117 states) and registry.json match local bytes; registry SHA256 0e2ae1a01a72962924feafe4833b848a316fea8a7c2e91aa20f9da0c34c75e40",
       "attempts": [
         {
           "method": "normal-upload",
@@ -613,41 +640,64 @@
           "method": "existing-git-integration",
           "sourceCommit": "b533c5c",
           "result": "Vercel commit status success: Deployment has completed; public HTTP readback verified"
+        },
+        {
+          "method": "existing-git-integration",
+          "sourceCommit": "ff1f27a",
+          "result": "Vercel Deployment has completed; current manifest/registry HTTP bytes and public consumer install verified"
+        },
+        {
+          "method": "existing-git-integration",
+          "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
+          "result": "Verify UI/Pages success, Vercel Deployment has completed; current manifest/registry HTTP and own headless browser verified"
         }
       ],
-      "sourceCommit": "b533c5c9e0adea0e2fd79310ffd107a1e0cdcff6",
-      "browserRender": "pending; own browser unavailable",
+      "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
+      "browserRender": "passed: current published 117 fixture states at 320px, declared font face loaded, Avatar focus/hover/resize and Usage selection, short/long PDF captures",
       "independentConsumer": {
         "status": "passed",
-        "method": "node scripts/verify-prism-consumer.mjs --public; install directly from https://ui.pydemia.ai",
+        "method": "public Avatar registry installation before font/print changes; final current registry CSS synchronized and rebuilt",
         "items": 39,
         "files": 62,
-        "componentExamples": 10,
+        "componentExamples": 11,
         "typecheck": "passed",
         "viteBuild": "passed",
         "portableFont": "emitted package font bytes matched",
         "assetNotice": "installed and checked",
-        "browserRuntime": "not-executed"
+        "browserRuntime": "consumer demo not executed; published catalogue font/print browser checks are separate"
       },
-      "scope": "previous published b533c5c implementation; avatar allocation update pending"
+      "scope": "font and print fixes published; source visual parity remains partial",
+      "currentImplementation": {
+        "sourceCommit": "73be25852d2e7333a0332795334d33d145f3f4fa",
+        "status": "published-browser-verified",
+        "localBrowser": "passed at 320px across 117 states",
+        "verificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
+        "publicBrowser": "passed 117 states and inspected PDF pixel matching"
+      }
     },
     "generalComponentTests": {
-      "passed": 251,
+      "passed": 260,
       "failed": 0
     },
     "genericRegistry": {
-      "items": 142,
-      "catalogEntries": 140,
-      "immutableReleases": 71,
+      "items": 144,
+      "catalogEntries": 142,
+      "immutableReleases": 73,
       "status": "passed",
-      "currentRelease": "sha256-ab149be9df7a468a1002ed3461c04dce1c3442fe0a32a796ad06ec010688a458",
-      "upstreamRevision": "8e60a65"
+      "currentRelease": "sha256-9bf65f08c6e3daa55815c07059472e3b3fbf73651f55169bbbc23398927e88d0",
+      "upstreamRevision": "b5ccface"
     },
     "githubVerification": {
-      "sourceCommit": "b533c5c9e0adea0e2fd79310ffd107a1e0cdcff6",
+      "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
       "status": "passed",
-      "url": "https://github.com/pydemia/ui/actions/runs/37091054547",
-      "scope": "previous published commit; avatar allocation update has local gates only"
+      "url": "https://github.com/pydemia/ui/actions/runs/37098604514",
+      "scope": "merged font/print implementation; PRISM contracts and all 11 complete usage examples",
+      "latestImplementation": {
+        "sourceCommit": "73be25852d2e7333a0332795334d33d145f3f4fa",
+        "status": "passed-at-published-merge",
+        "localBuildAndTypecheck": "passed",
+        "verificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
+      }
     },
     "usageContracts": {
       "groups": 38,
@@ -656,42 +706,45 @@
       "workspaceTypecheck": "passed in check-prism.mjs; runs in existing CI PRISM gate",
       "installedTypecheck": "passed in isolated consumer",
       "installationDependencyClosure": "all 38 installed usage imports resolve within their registry dependency graph",
-      "usagePathControlRuntime": "pending"
+      "usagePathControlRuntime": "passed: registry/workspace selections display the matching manifest code; clipboard write not exercised"
     },
     "currentFixtureStates": {
-      "count": 116,
-      "status": "pending-current-browser-render",
+      "count": 117,
+      "status": "passed-current-published-browser-render",
       "previousVerifiedStates": 115,
-      "previousCheckpoint": "4503dea"
+      "previousCheckpoint": "4503dea",
+      "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
+      "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
     }
   },
   "unverified": [
     "all 269 source correspondences do not establish state or pixel equality",
-    "authenticated full-domain screens in own browser",
-    "public /prism browser rendering and interaction",
-    "extensions across every domain, long content and popup combination"
+    "fresh original state comparison and authenticated full-domain screens",
+    "all extensions across domains, long content and popup combinations",
+    "clipboard write and native print dialog"
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 38,
-    "states": 115,
-    "status": "passed-before-portable-font-toast-update",
+    "states": 117,
+    "status": "passed-current-published-font-print-build",
     "checks": [
-      "all 115 fixtures render at 320px",
-      "no nested buttons at 320px"
+      "all 117 fixtures render at actual 320px viewport",
+      "no nested buttons",
+      "no page root horizontal overflow",
+      "no unlabeled visible native inputs"
     ],
-    "evidence": "local-all-fixture-states-320",
+    "evidence": "published-font-print-fixtures-320",
     "claim": "Rendering does not prove interaction or visual parity.",
     "visibleInputLabels": {
-      "states": 114,
-      "status": "passed-before-common-empty-fixture-addition",
-      "fieldStatesRechecked": 5,
+      "states": 117,
+      "status": "passed",
       "evidence": [
-        "local-all-fixture-states-current",
-        "local-field-visible-labels"
+        "local-font-print-fixtures-320"
       ]
     },
-    "implementationCheckpoint": "4503dea"
+    "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
+    "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -728,24 +781,42 @@
       "method": "real iframe viewport, not browser emulation"
     },
     "narrowFixtureLayout": {
-      "status": "passed-before-portable-font-toast-update",
+      "status": "passed-current-published-font-print-build",
       "groups": 38,
-      "states": 115,
+      "states": 117,
       "frameWidth": 320,
       "rootOverflowCount": 0,
-      "evidence": "local-all-fixture-states-320",
-      "implementationCheckpoint": "4503dea"
+      "evidence": "published-font-print-fixtures-320",
+      "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa"
+    },
+    "printPagination": {
+      "status": "runtime-verified-partial",
+      "engine": "isolated headless Chromium",
+      "paper": "Letter 612x792pt via browser PDF",
+      "shortFixturePages": 1,
+      "longFixturePages": 2,
+      "syntheticCareerRows": 36,
+      "repeatedHeaders": "one on each long-fixture page",
+      "visualInspection": "rendered PDF pages checked; no missing rows or blank pages",
+      "remaining": [
+        "other paper sizes and margins",
+        "native print dialog and physical printer",
+        "long essay/outline fragmentation"
+      ],
+      "scope": "published and local source-matched fixture PDFs",
+      "publicVisualInspection": "published rendered PDF pixels exactly match inspected local pages"
     }
   },
   "runtimeVerificationAvailability": {
-    "status": "temporarily-unavailable",
-    "reason": "own browser inventory remains empty; createBrowserTab(iab) returns Browser is not available",
-    "preservedEvidence": "37 source defaults and local 115 fixture states at 320px",
+    "status": "available-headless",
+    "method": "agent-browser 0.38.2 with installed isolated Chromium; own namespace/session, no existing Chrome profile",
+    "inAppBrowser": "still unavailable",
+    "sourceBrowser": "HTTP redirects/ERR_TOO_MANY_REDIRECTS and HTTPS ERR_CONNECTION_RESET; fresh original comparison pending",
+    "preservedEvidence": "37 source defaults plus current local 117 fixture states at 320px",
     "newChangesPendingRuntime": [
-      "portable package font loading",
-      "Toast body 6px gap and close control geometry",
-      "Usage registry/workspace path selection and copied code",
-      "Avatar adaptive name/team allocation, truncated-label Tooltip and new long-content fixture"
+      "actual clipboard write",
+      "original states and authenticated domain screens",
+      "print outside Chromium Letter settings"
     ]
   }
 }
