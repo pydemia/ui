@@ -14,7 +14,13 @@
   },
   "integration": {
     "workspaceImport": "@pydemia/prism",
-    "registryImport": "Installed components/ui/prism-*.tsx files",
+    "registryImport": "@/components/ui/prism-* (adjust to components.json aliases.ui)",
+    "workspaceUsageField": "usage",
+    "registryUsageField": "registryUsage",
+    "usageKinds": {
+      "component-example": "Self-contained exported React component with synthetic data; typechecked against installed registry sources.",
+      "integration-fragment": "Integration excerpt; supply the state, data and callbacks shown in the component contract."
+    },
     "stateOwnership": "Consumer owns API/auth/permissions/persistence; demos use synthetic data."
   },
   "components": [
@@ -61,7 +67,9 @@
           "name": "PrismNewChatButton",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismButton } from \"@/components/ui/prism-button\";\n<PrismButton variant=\"solid\" size=\"medium\" onClick={save}>저장</PrismButton>;"
     },
     {
       "id": "prism-field",
@@ -135,7 +143,9 @@
           "name": "PrismSelect",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismInput } from \"@/components/ui/prism-field\";\n<PrismInput label=\"포지션명\" value={name} onChange={e => setName(e.target.value)} required error={error} />;"
     },
     {
       "id": "prism-badge",
@@ -178,7 +188,9 @@
           "name": "PrismChip",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismElpBadge, PrismTag } from \"@/components/ui/prism-badge\";\n<><PrismElpBadge type=\"s-ELP\" /><PrismTag variant=\"blue\" label=\"재무\" onRemove={remove}>재무</PrismTag></>;"
     },
     {
       "id": "prism-display",
@@ -235,7 +247,9 @@
           "name": "PrismSection",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismTable } from \"@/components/ui/prism-display\";\n<PrismTable caption=\"포지션 목록\"><thead><tr><th scope=\"col\">포지션</th></tr></thead><tbody><tr><td>기술전략담당</td></tr></tbody></PrismTable>;"
     },
     {
       "id": "prism-tabs",
@@ -284,7 +298,9 @@
           "name": "PrismTabsTrigger",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from \"@/components/ui/prism-tabs\";\n<PrismTabs defaultValue=\"profile\"><PrismTabsList><PrismTabsTrigger value=\"profile\">프로필</PrismTabsTrigger></PrismTabsList><PrismTabsContent value=\"profile\">내용</PrismTabsContent></PrismTabs>;"
     },
     {
       "id": "prism-dialog",
@@ -344,7 +360,9 @@
           "name": "PrismConfirmDialog",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismDialog } from \"@/components/ui/prism-dialog\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\n<PrismDialog title=\"정보 확인\" description=\"변경 사항을 확인하세요.\" trigger={<PrismButton>열기</PrismButton>}>내용</PrismDialog>;"
     },
     {
       "id": "prism-feedback",
@@ -391,7 +409,9 @@
           "name": "PrismRequestState",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismRequestState } from \"@/components/ui/prism-feedback\";\n<PrismRequestState status=\"error\" error=\"조회에 실패했습니다.\" onRetry={retry} />;"
     },
     {
       "id": "prism-sidebar",
@@ -454,7 +474,9 @@
           "name": "PrismSidebar",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismSidebar } from \"@/components/ui/prism-sidebar\";\n<PrismSidebar items={items} activeId={active} onNavigate={setActive} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={newChat} />;"
     },
     {
       "id": "prism-chat",
@@ -499,7 +521,9 @@
           "name": "PrismCriteria",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismChatInput } from \"@/components/ui/prism-chat\";\n<PrismChatInput value={text} onValueChange={setText} onSubmit={send} busy={busy} onStop={stop} />;"
     },
     {
       "id": "prism-candidate",
@@ -569,7 +593,9 @@
           "name": "PrismEvaluationTable",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismCandidateCard } from \"@/components/ui/prism-candidate\";\n<PrismCandidateCard candidate={candidate} favorite={favorite} onOpen={openProfile} onFavoriteChange={setFavorite} />;"
     },
     {
       "id": "prism-detail",
@@ -606,7 +632,9 @@
           "name": "PrismMemoCard",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismSidePanel, PrismDetailList } from \"@/components/ui/prism-detail\";\n<PrismSidePanel title=\"프로필\" description=\"후보 정보\" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;"
     },
     {
       "id": "prism-panel",
@@ -655,7 +683,9 @@
           "name": "PrismPanel",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismPanel } from \"@/components/ui/prism-panel\";\n<PrismPanel title=\"상세\" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}>내용</PrismPanel>;"
     },
     {
       "id": "prism-six-frame",
@@ -693,7 +723,9 @@
           "name": "PrismSixFrame",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismSixFrame } from \"@/components/ui/prism-six-frame\";\n<PrismSixFrame columns={columns} panel={false} />;"
     },
     {
       "id": "prism-selection",
@@ -789,7 +821,9 @@
           "name": "PrismChipAutocomplete",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismMultiSelect } from \"@/components/ui/prism-selection\";\n<PrismMultiSelect label=\"분야\" options={options} value={value} onValueChange={setValue} />;"
     },
     {
       "id": "prism-profile",
@@ -877,7 +911,9 @@
           "name": "PrismFavoriteProfile",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismProfile } from \"@/components/ui/prism-profile\";\n<PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab} sections={sections} />;"
     },
     {
       "id": "prism-content",
@@ -924,7 +960,9 @@
           "name": "PrismPositionCard",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismMarkdown } from \"@/components/ui/prism-content\";\n<PrismMarkdown source={answer} />;"
     },
     {
       "id": "prism-admin",
@@ -977,7 +1015,9 @@
           "name": "PrismTruncatedText",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismAdminLayout } from \"@/components/ui/prism-admin\";\n<PrismAdminLayout title=\"관리\" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;"
     },
     {
       "id": "prism-document",
@@ -1039,7 +1079,9 @@
           "name": "PrismPrintPreview",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismPdfViewer } from \"@/components/ui/prism-document\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n<PrismPdfViewer title=\"문서\" url=\"/document.pdf\" workerUrl={workerUrl} />;"
     },
     {
       "id": "prism-workspace",
@@ -1089,7 +1131,9 @@
           "name": "PrismWorkspace",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismWorkspace } from \"@/components/ui/prism-workspace\";\n<PrismWorkspace sidebar={sidebar} header={header} panel={panel}>{content}</PrismWorkspace>;"
     },
     {
       "id": "prism-chart",
@@ -1132,7 +1176,9 @@
           "name": "PrismTrendChart",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismRadarChart } from \"@/components/ui/prism-chart\";\n<PrismRadarChart title=\"진단\" axes={axes} series={series} max={10} />;"
     },
     {
       "id": "prism-utility",
@@ -1191,7 +1237,9 @@
           "name": "PrismFileAttach",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismProgress } from \"@/components/ui/prism-utility\";\n<PrismProgress value={progress} label=\"처리 진행률\" />;"
     },
     {
       "id": "prism-record",
@@ -1252,7 +1300,9 @@
           "name": "PrismCommentEditor",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismCommentEditor } from \"@/components/ui/prism-record\";\n<PrismCommentEditor value={value} onValueChange={setValue} onSave={save} />;"
     },
     {
       "id": "prism-management",
@@ -1310,7 +1360,9 @@
           "name": "PrismAffectedPositions",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismManagementForm } from \"@/components/ui/prism-management\";\n<PrismManagementForm title=\"관리 정보\" fields={fields} values={values} onValueChange={change} onSubmit={save} />;"
     },
     {
       "id": "prism-context",
@@ -1327,7 +1379,7 @@
         "chat/contextInfo/ContextInfoSection.tsx",
         "chat/contextInfo/ContextOptionCard.tsx"
       ],
-      "usage": "import { PrismContextForm } from \"@pydemia/prism\";",
+      "usage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextValues } from \"@pydemia/prism\";\n\nexport function ContextExample() {\n  const [values, setValues] = useState<PrismContextValues>({ mission: \"\", areas: [] });\n  const [submitted, setSubmitted] = useState<PrismContextValues | null>(null);\n  return <section>\n    <PrismContextForm fields={[\n      { key: \"mission\", label: \"포지션 Mission\", type: \"textarea\", required: true, maxLength: 800 },\n      { key: \"areas\", label: \"주요 분야\", type: \"options\", maxSelections: 2,\n        options: [{ value: \"research\", label: \"연구개발\" }, { value: \"strategy\", label: \"전략\" }] },\n    ]} values={values} onValueChange={setValues} onSubmit={setSubmitted} />\n    <p role=\"status\">{submitted ? \"입력 의도가 전달되었습니다.\" : \"\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-context.tsx",
       "previewUrl": "/prism?component=prism-context",
       "embedUrl": "/prism?component=prism-context&embed=1",
@@ -1361,7 +1413,9 @@
           "name": "PrismContextForm",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextValues } from \"@/components/ui/prism-context\";\n\nexport function ContextExample() {\n  const [values, setValues] = useState<PrismContextValues>({ mission: \"\", areas: [] });\n  const [submitted, setSubmitted] = useState<PrismContextValues | null>(null);\n  return <section>\n    <PrismContextForm fields={[\n      { key: \"mission\", label: \"포지션 Mission\", type: \"textarea\", required: true, maxLength: 800 },\n      { key: \"areas\", label: \"주요 분야\", type: \"options\", maxSelections: 2,\n        options: [{ value: \"research\", label: \"연구개발\" }, { value: \"strategy\", label: \"전략\" }] },\n    ]} values={values} onValueChange={setValues} onSubmit={setSubmitted} />\n    <p role=\"status\">{submitted ? \"입력 의도가 전달되었습니다.\" : \"\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-primitives",
@@ -1385,7 +1439,7 @@
         "ui/input/HRXInputLabel.tsx",
         "chat/common/DragDropOverlay.tsx"
       ],
-      "usage": "import { PrismSkeletonGroup } from \"@pydemia/prism\";",
+      "usage": "import { PrismSkeletonGroup } from \"@pydemia/prism\";\n\nexport function SkeletonExample() {\n  return <section aria-label=\"프로필 로딩\" aria-busy=\"true\">\n    <PrismSkeletonGroup rows={3} height={120} />\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-primitives.tsx",
       "previewUrl": "/prism?component=prism-primitives",
       "embedUrl": "/prism?component=prism-primitives&embed=1",
@@ -1452,7 +1506,9 @@
           "name": "PrismDragOverlay",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismSkeletonGroup } from \"@/components/ui/prism-primitives\";\n\nexport function SkeletonExample() {\n  return <section aria-label=\"프로필 로딩\" aria-busy=\"true\">\n    <PrismSkeletonGroup rows={3} height={120} />\n  </section>;\n}"
     },
     {
       "id": "prism-position",
@@ -1472,7 +1528,7 @@
         "chat/position/PositionRequirementGroup.tsx",
         "chat/position/PositionDetailViewSkeleton.tsx"
       ],
-      "usage": "import { PrismPositionDetail } from \"@pydemia/prism\";",
+      "usage": "import { PrismPositionDetail } from \"@pydemia/prism\";\n\nexport function PositionExample() {\n  return <PrismPositionDetail company=\"가상전자\" role=\"기술전략담당\"\n    items={[{ label: \"직무\", value: \"연구개발\" }]}\n    groups={[\n      { id: \"mission\", title: \"Mission\", items: [\n        { id: \"mission-1\", title: \"담당 업무\", content: \"가상 연구개발 조직의 기술전략을 수립합니다.\" },\n      ] },\n      { id: \"requirements\", title: \"요구 사항\", items: [\n        { id: \"requirement-1\", title: \"추가 근거\", content: null },\n      ] },\n    ]} />;\n}",
       "sourcePath": "packages/prism/src/prism-position.tsx",
       "previewUrl": "/prism?component=prism-position",
       "embedUrl": "/prism?component=prism-position&embed=1",
@@ -1498,7 +1554,9 @@
           "name": "PrismPositionDetail",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismPositionDetail } from \"@/components/ui/prism-position\";\n\nexport function PositionExample() {\n  return <PrismPositionDetail company=\"가상전자\" role=\"기술전략담당\"\n    items={[{ label: \"직무\", value: \"연구개발\" }]}\n    groups={[\n      { id: \"mission\", title: \"Mission\", items: [\n        { id: \"mission-1\", title: \"담당 업무\", content: \"가상 연구개발 조직의 기술전략을 수립합니다.\" },\n      ] },\n      { id: \"requirements\", title: \"요구 사항\", items: [\n        { id: \"requirement-1\", title: \"추가 근거\", content: null },\n      ] },\n    ]} />;\n}"
     },
     {
       "id": "prism-assessment",
@@ -1520,7 +1578,7 @@
         "chat/successorCandidate/leadership/LeadershipReason.tsx",
         "chat/templates/ChatProfileAnalysis.tsx"
       ],
-      "usage": "import { PrismRiskTable } from \"@pydemia/prism\";",
+      "usage": "import { PrismRiskTable } from \"@pydemia/prism\";\n\nexport function RiskExample() {\n  // 합성 데이터입니다. null은 평가 근거가 없다는 뜻입니다.\n  return <PrismRiskTable items={[\n    { id: \"demo-a\", label: \"가상 항목 A\", latent: false, manifest: null },\n    { id: \"demo-b\", label: \"가상 항목 B\", latent: true, manifest: null },\n  ]} />;\n}",
       "sourcePath": "packages/prism/src/prism-assessment.tsx",
       "previewUrl": "/prism?component=prism-assessment",
       "embedUrl": "/prism?component=prism-assessment&embed=1",
@@ -1590,7 +1648,9 @@
           "name": "PrismProfileAnalysis",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismRiskTable } from \"@/components/ui/prism-assessment\";\n\nexport function RiskExample() {\n  // 합성 데이터입니다. null은 평가 근거가 없다는 뜻입니다.\n  return <PrismRiskTable items={[\n    { id: \"demo-a\", label: \"가상 항목 A\", latent: false, manifest: null },\n    { id: \"demo-b\", label: \"가상 항목 B\", latent: true, manifest: null },\n  ]} />;\n}"
     },
     {
       "id": "prism-collection",
@@ -1616,7 +1676,7 @@
         "chat/common/ContentFrame.tsx",
         "chat/common/SectionTitle.tsx"
       ],
-      "usage": "import { PrismCandidateCollection } from \"@pydemia/prism\";",
+      "usage": "import { useState } from \"react\";\nimport { PrismCandidateCollection, type PrismCandidate } from \"@pydemia/prism\";\n\nconst candidates: PrismCandidate[] = [\n  { id: \"demo-1\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\" },\n  { id: \"demo-2\", name: \"이예시\", company: \"예시사업\", position: \"연구개발담당\" },\n];\n\nexport function CollectionExample() {\n  const [view, setView] = useState<\"cards\" | \"table\">(\"cards\");\n  const [favorites, setFavorites] = useState<string[]>([]);\n  const [opened, setOpened] = useState<PrismCandidate | null>(null);\n  return <section>\n    <PrismCandidateCollection title=\"가상 후보자 목록\" candidates={candidates}\n      view={view} onViewChange={setView} onOpen={setOpened} favorites={favorites}\n      onFavoriteChange={(candidate, checked) => setFavorites(ids =>\n        checked ? [...new Set([...ids, candidate.id])] : ids.filter(id => id !== candidate.id))} />\n    <p role=\"status\">{opened ? opened.name + \" 상세 조회 의도\" : \"\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-collection.tsx",
       "previewUrl": "/prism?component=prism-collection",
       "embedUrl": "/prism?component=prism-collection&embed=1",
@@ -1666,7 +1726,9 @@
           "name": "PrismMemoCollection",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismCandidateCollection } from \"@/components/ui/prism-collection\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\n\nconst candidates: PrismCandidate[] = [\n  { id: \"demo-1\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\" },\n  { id: \"demo-2\", name: \"이예시\", company: \"예시사업\", position: \"연구개발담당\" },\n];\n\nexport function CollectionExample() {\n  const [view, setView] = useState<\"cards\" | \"table\">(\"cards\");\n  const [favorites, setFavorites] = useState<string[]>([]);\n  const [opened, setOpened] = useState<PrismCandidate | null>(null);\n  return <section>\n    <PrismCandidateCollection title=\"가상 후보자 목록\" candidates={candidates}\n      view={view} onViewChange={setView} onOpen={setOpened} favorites={favorites}\n      onFavoriteChange={(candidate, checked) => setFavorites(ids =>\n        checked ? [...new Set([...ids, candidate.id])] : ids.filter(id => id !== candidate.id))} />\n    <p role=\"status\">{opened ? opened.name + \" 상세 조회 의도\" : \"\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-notice",
@@ -1686,7 +1748,7 @@
         "chat/sidebar/InquiryHistoryDialog.tsx",
         "chat/sidebar/PrivacyPolicyDialog.tsx"
       ],
-      "usage": "import { PrismNoticeDialog } from \"@pydemia/prism\";",
+      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismNoticeDialog, type PrismNotice } from \"@pydemia/prism\";\n\nconst notices: PrismNotice[] = [\n  { id: \"notice-demo\", title: \"가상 서비스 안내\", date: \"2026-10-03\",\n    author: \"예시 운영자\", content: \"공지 목록과 상세 전환을 확인하는 합성 데이터입니다.\" },\n];\n\nexport function NoticeExample() {\n  const [open, setOpen] = useState(false);\n  const [selectedId, setSelectedId] = useState<string | null>(null);\n  return <section>\n    <PrismButton onClick={() => { setSelectedId(null); setOpen(true); }}>공지사항 열기</PrismButton>\n    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={notices}\n      selectedId={selectedId} onSelect={setSelectedId} />\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-notice.tsx",
       "previewUrl": "/prism?component=prism-notice",
       "embedUrl": "/prism?component=prism-notice&embed=1",
@@ -1737,7 +1799,9 @@
           "name": "PrismPolicyViewer",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismNoticeDialog, type PrismNotice } from \"@/components/ui/prism-notice\";\n\nconst notices: PrismNotice[] = [\n  { id: \"notice-demo\", title: \"가상 서비스 안내\", date: \"2026-10-03\",\n    author: \"예시 운영자\", content: \"공지 목록과 상세 전환을 확인하는 합성 데이터입니다.\" },\n];\n\nexport function NoticeExample() {\n  const [open, setOpen] = useState(false);\n  const [selectedId, setSelectedId] = useState<string | null>(null);\n  return <section>\n    <PrismButton onClick={() => { setSelectedId(null); setOpen(true); }}>공지사항 열기</PrismButton>\n    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={notices}\n      selectedId={selectedId} onSelect={setSelectedId} />\n  </section>;\n}"
     },
     {
       "id": "prism-response",
@@ -1758,7 +1822,7 @@
         "ui/table/HRXChatTable.tsx",
         "chat/conversation/ChatConversation.tsx"
       ],
-      "usage": "import { PrismResponse } from \"@pydemia/prism\";",
+      "usage": "import { useState } from \"react\";\nimport { PrismResponse, type PrismResponseBlock } from \"@pydemia/prism\";\n\nexport function ResponseExample() {\n  const [selected, setSelected] = useState(\"\");\n  const blocks: PrismResponseBlock[] = [\n    { id: \"text\", type: \"text\", content: \"표시 계약을 확인하는 가상 응답입니다.\" },\n    { id: \"table\", type: \"table\", title: \"자료 상태\", columns: [\"영역\", \"값\"],\n      rows: [{ id: \"row-1\", cells: [\"진단 점수\", null] }] },\n    { id: \"options\", type: \"options\", title: \"다음 조회\", selected,\n      options: [{ id: \"profile\", label: \"프로필 조회\" }, { id: \"comparison\", label: \"비교 조회\" }] },\n  ];\n  return <PrismResponse blocks={blocks} status=\"complete\" onOptionSelect={setSelected} />;\n}",
       "sourcePath": "packages/prism/src/prism-response.tsx",
       "previewUrl": "/prism?component=prism-response",
       "embedUrl": "/prism?component=prism-response&embed=1",
@@ -1784,7 +1848,9 @@
           "name": "PrismConversation",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismResponse, type PrismResponseBlock } from \"@/components/ui/prism-response\";\n\nexport function ResponseExample() {\n  const [selected, setSelected] = useState(\"\");\n  const blocks: PrismResponseBlock[] = [\n    { id: \"text\", type: \"text\", content: \"표시 계약을 확인하는 가상 응답입니다.\" },\n    { id: \"table\", type: \"table\", title: \"자료 상태\", columns: [\"영역\", \"값\"],\n      rows: [{ id: \"row-1\", cells: [\"진단 점수\", null] }] },\n    { id: \"options\", type: \"options\", title: \"다음 조회\", selected,\n      options: [{ id: \"profile\", label: \"프로필 조회\" }, { id: \"comparison\", label: \"비교 조회\" }] },\n  ];\n  return <PrismResponse blocks={blocks} status=\"complete\" onOptionSelect={setSelected} />;\n}"
     },
     {
       "id": "prism-management-tools",
@@ -1805,7 +1871,7 @@
         "admin/positions/CompanyTaskDialog.tsx",
         "admin/positions/PositionCheckCard.tsx"
       ],
-      "usage": "import { PrismCriteriaEditor } from \"@pydemia/prism\";",
+      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismCriteriaEditor, type PrismCriteriaDraft } from \"@pydemia/prism\";\n\nexport function CriteriaExample() {\n  const [open, setOpen] = useState(false);\n  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: \"\", description: \"\", categoryId: \"\" });\n  const [submitted, setSubmitted] = useState<PrismCriteriaDraft | null>(null);\n  return <section>\n    <PrismButton onClick={() => setOpen(true)}>기준 편집</PrismButton>\n    <PrismCriteriaEditor title=\"가상 기준\" open={open} onOpenChange={setOpen}\n      value={draft} onValueChange={setDraft} categories={[{ id: \"technology\", label: \"기술\" }]}\n      positions={[{ id: \"position-demo\", name: \"기술전략담당\", company: \"가상전자\" }]}\n      onSubmit={value => { setSubmitted(value); setOpen(false); }} />\n    <p role=\"status\">{submitted ? submitted.name + \" 저장 의도\" : \"\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-management-tools.tsx",
       "previewUrl": "/prism?component=prism-management-tools",
       "embedUrl": "/prism?component=prism-management-tools&embed=1",
@@ -1843,7 +1909,9 @@
           "name": "PrismCompanyContextDialog",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismCriteriaEditor, type PrismCriteriaDraft } from \"@/components/ui/prism-management-tools\";\n\nexport function CriteriaExample() {\n  const [open, setOpen] = useState(false);\n  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: \"\", description: \"\", categoryId: \"\" });\n  const [submitted, setSubmitted] = useState<PrismCriteriaDraft | null>(null);\n  return <section>\n    <PrismButton onClick={() => setOpen(true)}>기준 편집</PrismButton>\n    <PrismCriteriaEditor title=\"가상 기준\" open={open} onOpenChange={setOpen}\n      value={draft} onValueChange={setDraft} categories={[{ id: \"technology\", label: \"기술\" }]}\n      positions={[{ id: \"position-demo\", name: \"기술전략담당\", company: \"가상전자\" }]}\n      onSubmit={value => { setSubmitted(value); setOpen(false); }} />\n    <p role=\"status\">{submitted ? submitted.name + \" 저장 의도\" : \"\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-directory",
@@ -1860,7 +1928,7 @@
         "chat/candidate/CandidateTable.tsx",
         "admin/common/AdminTable.tsx"
       ],
-      "usage": "import { PrismDirectoryTable } from \"@pydemia/prism\";",
+      "usage": "import { useState } from \"react\";\nimport { PrismDirectoryTable } from \"@pydemia/prism\";\n\nconst rows = [\n  { id: \"demo-1\", name: \"김가상\", selectable: true },\n  { id: \"demo-2\", name: \"이예시\", selectable: false },\n];\n\nexport function DirectoryExample() {\n  const [selected, setSelected] = useState<string[]>([\"other-page-row\"]);\n  return <PrismDirectoryTable title=\"가상 후보자 선택\" rows={rows}\n    getRowId={row => row.id} getRowLabel={row => row.name}\n    columns={[{ id: \"name\", label: \"이름\", cell: row => row.name }]}\n    selected={selected} onSelectionChange={setSelected}\n    isRowSelectable={row => row.selectable} />;\n}",
       "sourcePath": "packages/prism/src/prism-directory.tsx",
       "previewUrl": "/prism?component=prism-directory",
       "embedUrl": "/prism?component=prism-directory&embed=1",
@@ -1886,7 +1954,9 @@
           "name": "PrismCandidateDirectory",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismDirectoryTable } from \"@/components/ui/prism-directory\";\n\nconst rows = [\n  { id: \"demo-1\", name: \"김가상\", selectable: true },\n  { id: \"demo-2\", name: \"이예시\", selectable: false },\n];\n\nexport function DirectoryExample() {\n  const [selected, setSelected] = useState<string[]>([\"other-page-row\"]);\n  return <PrismDirectoryTable title=\"가상 후보자 선택\" rows={rows}\n    getRowId={row => row.id} getRowLabel={row => row.name}\n    columns={[{ id: \"name\", label: \"이름\", cell: row => row.name }]}\n    selected={selected} onSelectionChange={setSelected}\n    isRowSelectable={row => row.selectable} />;\n}"
     },
     {
       "id": "prism-page-state",
@@ -1904,7 +1974,7 @@
         "../layouts/auth/AuthLayout.tsx",
         "../layouts/common/BlankLayout.tsx"
       ],
-      "usage": "import { PrismErrorContent } from \"@pydemia/prism\";",
+      "usage": "import { PrismAccessGate, PrismErrorContent } from \"@pydemia/prism\";\n\nexport function AccessExample({ status, onRetry }: {\n  status: \"ready\" | \"loading\" | \"denied\";\n  onRetry: () => void;\n}) {\n  // status는 호스트의 인증 계층에서 제공합니다.\n  return <PrismAccessGate status={status}\n    fallback={<PrismErrorContent code=\"403\" message=\"접근 권한을 확인해 주세요.\"\n      buttonLabel=\"다시 확인\" onAction={onRetry} />}>\n    <p>호스트에서 접근을 승인한 화면입니다.</p>\n  </PrismAccessGate>;\n}",
       "sourcePath": "packages/prism/src/prism-page-state.tsx",
       "previewUrl": "/prism?component=prism-page-state",
       "embedUrl": "/prism?component=prism-page-state&embed=1",
@@ -1930,7 +2000,9 @@
           "name": "PrismAccessGate",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismAccessGate, PrismErrorContent } from \"@/components/ui/prism-page-state\";\n\nexport function AccessExample({ status, onRetry }: {\n  status: \"ready\" | \"loading\" | \"denied\";\n  onRetry: () => void;\n}) {\n  // status는 호스트의 인증 계층에서 제공합니다.\n  return <PrismAccessGate status={status}\n    fallback={<PrismErrorContent code=\"403\" message=\"접근 권한을 확인해 주세요.\"\n      buttonLabel=\"다시 확인\" onAction={onRetry} />}>\n    <p>호스트에서 접근을 승인한 화면입니다.</p>\n  </PrismAccessGate>;\n}"
     },
     {
       "id": "prism-domain-forms",
@@ -2016,7 +2088,9 @@
           "name": "PrismPositionForm",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismNoticeForm } from \"@/components/ui/prism-domain-forms\";\n<PrismNoticeForm value={draft} onValueChange={setDraft} companies={companies} files={files} onFilesSelected={attach} onSubmit={save} onCancel={cancel} />;"
     },
     {
       "id": "prism-print",
@@ -2069,7 +2143,9 @@
           "name": "PrismPrintExperience",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismPrintPage } from \"@/components/ui/prism-print\";\n<PrismPrintPage name=\"김가상\" repeatHeader>{content}</PrismPrintPage>;"
     },
     {
       "id": "prism-intro",
@@ -2100,7 +2176,9 @@
           "name": "PrismChatIntro",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismChatIntro } from \"@/components/ui/prism-intro\";\n<PrismChatIntro name=\"김가상\" cards={cards} questions={questions} onPromptSelect={setDraft} composer={composer} />;"
     },
     {
       "id": "prism-profile-sections",
@@ -2219,7 +2297,9 @@
           "name": "PrismGradeSummary",
           "kind": "component"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismProfileSectionState, PrismTotalSection } from \"@/components/ui/prism-profile-sections\";\n<PrismProfileSectionState status={status} onRetry={retry}><PrismTotalSection {...overview} /></PrismProfileSectionState>;"
     },
     {
       "id": "prism-icon",
@@ -2440,7 +2520,9 @@
           "name": "PrismArrowDownUpGlyph",
           "kind": "value"
         }
-      ]
+      ],
+      "usageKind": "integration-fragment",
+      "registryUsage": "import { PrismIcon } from \"@/components/ui/prism-icon\";\n<PrismIcon name=\"SearchIcon\" size={20} />;"
     }
   ]
 }

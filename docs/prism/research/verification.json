@@ -559,13 +559,18 @@
       "method": "isolated shadcn install against local registry mirror; no workspace package imports",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "all 39 installed items compiled; demo renders Button only"
+      "sourceScope": "all 39 installed items compiled; demo renders Button only",
+      "completeExamples": {
+        "count": 10,
+        "status": "typechecked-against-installed-sources",
+        "runtime": "not-executed"
+      }
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
-      "status": "pending-ignore-scope-fix-deployment",
+      "status": "rate-limited",
       "url": "https://ui.pydemia.ai/prism",
-      "readback": "HTTP 404 for route, components.json and registry.json after bb351eb push",
+      "readback": "HTTP 404 for route, components.json and registry.json after ef8d2c6 upstream integration",
       "attempts": [
         {
           "method": "normal-upload",
@@ -580,26 +585,41 @@
           "sourceCommit": "bb351eb",
           "result": "Vercel created deployment but build failed: ENOENT apps/docs/public/prism/research/verification.json",
           "fix": "anchor generated output exclusion to /docs/ instead of docs/"
+        },
+        {
+          "method": "existing-git-integration-status",
+          "sourceCommit": "ef8d2c6",
+          "result": "Vercel commit status failure: Deployment rate limited — retry in 24 hours."
         }
       ],
-      "retryCondition": "existing Git deployment after source-ignore fix"
+      "retryCondition": "existing Git integration after Vercel daily deployment/build limits reset"
     },
     "generalComponentTests": {
-      "passed": 242,
+      "passed": 247,
       "failed": 0
     },
     "genericRegistry": {
-      "items": 140,
-      "catalogEntries": 138,
-      "immutableReleases": 69,
+      "items": 141,
+      "catalogEntries": 139,
+      "immutableReleases": 70,
       "status": "passed",
-      "currentRelease": "sha256-89c86a0be4705c8b66e8ba4bb6d9c83cc3e4fce2a499314871c130c73dbd63e7",
-      "upstreamRevision": "43d1b3c"
+      "currentRelease": "sha256-32c8c4110dd838fedd10716915c72849dd5e35f6977b0dbd010fe9a559d507b9",
+      "upstreamRevision": "ef8d2c6"
     },
     "githubVerification": {
-      "sourceCommit": "bb351eb76634bbd72b06291ffa4270fa9332a0ae",
+      "sourceCommit": "d263741341f86cd8c1dcc2423dd6a5b5af68c9fd",
       "status": "passed",
-      "url": "https://github.com/pydemia/ui/actions/runs/37087870423"
+      "url": "https://github.com/pydemia/ui/actions/runs/37088415938",
+      "scope": "previous published commit; new usage example changes have local gates only"
+    },
+    "usageContracts": {
+      "groups": 38,
+      "componentExamples": 10,
+      "integrationFragments": 28,
+      "workspaceTypecheck": "passed in check-prism.mjs; runs in existing CI PRISM gate",
+      "installedTypecheck": "passed in isolated consumer",
+      "installationDependencyClosure": "all 38 installed usage imports resolve within their registry dependency graph",
+      "usagePathControlRuntime": "pending"
     }
   },
   "unverified": [
@@ -680,7 +700,8 @@
     "preservedEvidence": "37 source defaults and local 115 fixture states at 320px",
     "newChangesPendingRuntime": [
       "portable package font loading",
-      "Toast body 6px gap and close control geometry"
+      "Toast body 6px gap and close control geometry",
+      "Usage registry/workspace path selection and copied code"
     ]
   }
 }
