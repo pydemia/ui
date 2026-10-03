@@ -1,5 +1,21 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 수준 재검토: 수동 판정은 이미 변경분 중심입니다.
+경직성은 draft PR의 전체 검사와 76개 release의 이중 저장
+(각 9,064개 파일), 과거 운영 과제의 미완료 표기가 품질 점수처럼
+읽히는 데 있습니다. 변경 유형별 최소 증거와 실제 출시 차단 조건을
+[재검토 기록](quality-gate-level-review-2026-10-03.md)에 정리했습니다.
+CI는 변경하지 않았고 Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 registry snapshot 공급 형식 개선 후보: Vercel Instant Rollback
+중 새 snapshot URL 손실을 줄이기 위해 77번째부터 manifest와 전이
+의존성을 GitHub raw의 `main/docs/r/releases`로 고정합니다. 이전
+76개 release는 수정하지 않았습니다. 새 형식 후보는 146개 item이고
+로컬 release 테스트·생성·현재 빌드 일치 검사가 통과했습니다.
+전이 의존성 245개가 모두 raw 경로를 가리킵니다. PR CI·공개 raw
+소비자 설치는 확인 전입니다. Goal 관리용 추정은 약 99%입니다.
+[작업 기록](registry-durable-snapshot-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `TransferList` 공개: PR #142와 병합 commit
 `d1938377`의 Verify UI, Pages가 성공했고 Vercel production은
 READY입니다. `ui.pydemia.ai`의 새 JS, 현재 item과 76번째 snapshot

@@ -1,5 +1,18 @@
 # 검증 기록
 
+## 2026-10-03 Registry snapshot schema 2 로컬 검증
+
+기존 schema 1 release 76개의 검증과 새 schema 2 생성·현재 빌드
+대조가 통과했습니다. 77번째 후보의 146개 item에서 전이 의존성
+245개가 같은 GitHub raw release 경로를 가리킵니다.
+`npm run typecheck`, `npm run build`, `registry:release-check`와
+생성·변조·레거시 호환 테스트 5/5가
+통과했습니다. 독립 소비자에서는 이전 release의 raw root 설치·
+typecheck·build만 확인했으며 그 의존성은 Vercel을 사용합니다.
+새 release의 공개 raw 설치는 병합 후 확인해야 합니다.
+[작업 기록](../.worknotes/registry-durable-snapshot-2026-10-03.md)에
+범위와 한계를 남겼습니다.
+
 ## 2026-10-03 75번째 snapshot 공개
 
 Vercel production 배포 `dpl_7eqSffEpoZco4hUB1u7ofdyJgBTj`가
