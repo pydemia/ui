@@ -15,7 +15,7 @@ for (const item of index.items) {
     for (const dep of item.registryDependencies) assert.ok(generic.has(new URL(dep).pathname.split("/").pop().replace(".json","")) || names.has(new URL(dep).pathname.split("/").pop().replace(".json","")), `Unresolved dependency ${dep}`);
     for (const file of item.files) {
         assert.ok(!file.content.includes('from "@pydemia/'), "Private workspace imports must not leak into consumer sources");
-        if (item.meta) assert.equal(item.meta.sourceSha256, createHash("sha256").update(read(file.path)).digest("hex"));
+        if (item.meta) assert.equal(item.meta.fileSha256?.[file.path] ?? item.meta.sourceSha256, createHash("sha256").update(read(file.path)).digest("hex"));
         if (file.path.endsWith(".tsx")) {
             const tree = ts.createSourceFile(file.path,file.content,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
             assert.deepEqual(tree.parseDiagnostics,[]);

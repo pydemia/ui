@@ -8,7 +8,7 @@ Isolated PRISM-DEV design and interaction references using React 19, pydemia/ui 
 - [Verification and known differences](/prism/research/verification.md)
 - [Registry](/prism/r/registry.json)
 
-Use data-prism="light" at the application root. Load pydemia tokens then prism.css, and Pretendard. There is no verified source dark theme. Registry imports point to local installed files, not private workspace packages. Do not infer API, authorization, persistence or HR decision logic from a component demo. null assessment scores are insufficient evidence, never zero.
+Use data-prism="light" at the application root. Load pydemia tokens then prism.css; prism.css imports the installed Pretendard variable font. Keep the installed PRISM_ASSET_NOTICES.md. There is no verified source dark theme. Registry imports point to local installed files, not private workspace packages. Do not infer API, authorization, persistence or HR decision logic from a component demo. null assessment scores are insufficient evidence, never zero.
 
 ## Button / New chat
 일반·파괴적·아이콘 작업과 새 대화 진입
@@ -180,8 +180,8 @@ Source: packages/prism/src/prism-context.tsx
 
 ## Logo / Profile / Popover / Skeleton / More
 텍스트 브랜드·사용자 요약·팝오버·즐겨찾기·접기·로딩
-Contract: 브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 사내 SVG 로고와 인증 검사는 포함하지 않습니다.
-States: default, disabled
+Contract: SkeletonGroup은 기본 3개·120px 블록과 16px 간격을 사용하며 rows·height를 조절할 수 있습니다. 브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 사내 SVG 로고와 인증 검사는 포함하지 않습니다.
+States: default, disabled, empty
 Registry: /prism/r/prism-primitives.json
 Source: packages/prism/src/prism-primitives.tsx
 

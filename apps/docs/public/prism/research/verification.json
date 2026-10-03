@@ -248,7 +248,6 @@
         "local-position-form"
       ],
       "remaining": [
-        "Group and Position form workflows",
         "all display variants",
         "authenticated source form visual comparison"
       ]
@@ -323,11 +322,12 @@
         "Keyboard resize 440 to 456, Home 320, End 800; double click reset 440",
         "Pointer drag 80px left grows right-anchored panel from 440 to 520",
         "Controlled width callback leaves width unchanged until consumer update",
-        "Real 390px iframe: compact detail panel 356px, no resizer, root scroll width 390px"
+        "Real 390px iframe: compact detail panel 356px, no resizer, root scroll width 390px",
+        "nested Select Escape closes menu before parent Panel; second Escape closes parent"
       ],
       "remaining": [
         "source SidePanel state-by-state comparison",
-        "pointer cancel and nested popup Escape combinations"
+        "pointer cancellation runtime"
       ],
       "evidence": [
         "local-panel-resize",
@@ -361,7 +361,7 @@
       ],
       "remaining": [
         "complete source layout comparison",
-        "every domain fixture at narrow widths"
+        "popup and long-content combinations beyond fixture rendering"
       ],
       "evidence": [
         "local-workspace-sizing",
@@ -399,9 +399,9 @@
         "local-select-native-form"
       ],
       "remaining": [
-        "all input/select sizes and native form required validation",
         "typeahead runtime",
-        "all source option states"
+        "all source option states",
+        "all input size/adornment/error combinations"
       ]
     },
     "prism-dialog": {
@@ -457,7 +457,7 @@
       ],
       "remaining": [
         "all source card placement and long-name states",
-        "paired deployed sample comparison"
+        "authenticated deployed candidate card comparison; public Candidate Common sample contains helpers"
       ],
       "evidence": [
         "local-candidate-card"
@@ -525,10 +525,21 @@
       "remaining": [
         "authenticated profile page visual comparison"
       ]
+    },
+    "prism-feedback": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation"
+      ],
+      "evidence": [],
+      "remaining": [
+        "updated Toast runtime metrics and open source sample states"
+      ]
     }
   },
   "gates": {
-    "typecheck": "pending-current-source",
+    "typecheck": "passed",
     "contractTests": {
       "passed": 23,
       "failed": 0
@@ -539,15 +550,18 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "pending-current-source",
+      "status": "passed",
       "items": 39,
-      "files": 61,
+      "files": 62,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "registrySha256": "a8549b4ed45ee64980a62c5ead8f4891a3f8d668c2fc21a62c84db712c241622",
-      "method": "isolated shadcn install against local registry mirror; no workspace package imports"
+      "registrySha256": "de0aa212f77f0528b3713e87818927baa4e4d6b0170e0a089c3394536a41db2f",
+      "method": "isolated shadcn install against local registry mirror; no workspace package imports",
+      "portableFont": "package font emitted and SHA256 matched",
+      "assetNotice": "installed and checked",
+      "sourceScope": "all 39 installed items compiled; demo renders Button only"
     },
-    "fullSiteBuild": "pending-current-source",
+    "fullSiteBuild": "passed",
     "publicDeployment": {
       "status": "service-limit",
       "url": "https://ui.pydemia.ai/prism",
@@ -565,15 +579,16 @@
       "retryCondition": "Vercel daily quota reset"
     },
     "generalComponentTests": {
-      "passed": 219,
-      "failed": 0,
-      "status": "pending-remote-integration"
+      "passed": 237,
+      "failed": 0
     },
     "genericRegistry": {
-      "items": 135,
-      "catalogEntries": 133,
-      "immutableReleases": 61,
-      "status": "pending-remote-integration"
+      "items": 139,
+      "catalogEntries": 137,
+      "immutableReleases": 68,
+      "status": "passed",
+      "currentRelease": "sha256-d8bd8996d3f0ad4dad3133de01626182d4c111a4c97664864f9b5a32403c194b",
+      "upstreamRevision": "f4ee2a1"
     }
   },
   "unverified": [
@@ -645,5 +660,14 @@
       "rootOverflowCount": 0,
       "evidence": "local-all-fixture-states-320"
     }
+  },
+  "runtimeVerificationAvailability": {
+    "status": "temporarily-unavailable",
+    "reason": "own browser disconnected after disk exhaustion; no browsers listed after space recovery",
+    "preservedEvidence": "37 source defaults and local 115 fixture states at 320px",
+    "newChangesPendingRuntime": [
+      "portable package font loading",
+      "Toast body 6px gap and close control geometry"
+    ]
   }
 }

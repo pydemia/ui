@@ -24,7 +24,9 @@
 
 PRISM 계약 테스트 23개가 통과했습니다. 38개 예시의 115개 공개 상태를 실제 320px iframe에서 렌더링했으며 렌더 누락·중첩 버튼·페이지 가로 넘침은 없었습니다. 표시 입력 이름 검사는 기존 114개 상태와 이후 수정한 입력 5개 상태에서 통과했습니다. 이 검사는 픽셀 동일성을 뜻하지 않습니다. 원본 Candidate Common의 Skeleton·NoData·Summary 및 empty/error 영역은 크기·색상·여백을 비교하고 수정했습니다. Summary 설명의 클릭·Escape는 확인했으며 hover/focus만으로 열리는 동작은 런타임 미검증입니다.
 
-원격 main의 새 커밋 15개를 반영하고 전체 build·TypeScript·일반 registry 보존·독립 소비자 설치를 다시 확인할 예정입니다. 이전 검증의 일반 registry 135개·카탈로그 133개·불변 release 61개·pydemia 테스트 219개는 이전 기준의 결과입니다. 공개 `/prism`은 현재 404이며 Vercel 배포는 일일 요청 제한으로 완료하지 못했습니다. 압축 업로드는 완료했으나 일일 배포 횟수 한도에 걸렸습니다.
+원격 main의 새 커밋 15개를 반영한 뒤 전체 build·TypeScript·일반 UI 테스트 237개와 registry 검증을 통과했습니다. 현재 일반 registry는 139개·카탈로그 137개·불변 release 68개입니다. 별도 소비자에 PRISM 39개 항목·62개 파일을 설치하고 tsc/Vite·폰트 bytes·자산 고지를 확인했습니다. Toast 본문 gap을 원본 소스의 6px로 수정한 뒤에도 전체 build와 독립 소비자 설치·tsc/Vite 검증을 통과했습니다. 소비자 검증은 39개 전체 소스를 컴파일하며 실제 렌더 demo는 Button입니다.
+
+공개 `/prism`은 마지막 관찰에서 404였으며 Vercel 일일 배포 횟수 한도로 배포 생성이 실패했습니다. 디스크 공간 부족으로 끊긴 자체 브라우저는 임시 의존성 폴더를 정리해 공간을 확보한 뒤에도 다시 연결되지 않았습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
 
 [기계 판독 검증 기록](verification.json)은 component별 확인 범위와 미검증 항목을 제공합니다. 원본 AX·JPEG는 gitignore된 `.worknotes/browser-evidence/`에만 보관하며 공개 사이트에 포함하지 않습니다.
 

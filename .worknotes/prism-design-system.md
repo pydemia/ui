@@ -105,3 +105,14 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 그룹 2개 회사 선택 및 저장 의도, 포지션 중복 하위직무 거부·전문성3/경험2 선택 제한·해제·생성/저장 의도 확인. 실제 업무 API를 호출하지 않았다.
 - 실제 320px iframe에서 현재 공개 상태 115개를 검사해 렌더 누락·중첩 버튼·root/nested 가로 넘침 0개 확인. 기존 visible label 검사114상태와 수정 후 field5상태 결과를 구분했다.
 - PAT를 프로세스 한정으로 사용해 origin fetch 성공. demian credential config hash 보존. local HEAD f3a0162 대비 origin/main f4ee2a1이 15 commits 앞서 있다. 소스 변경 체크포인트 후 최신 원격을 반영하고 generated docs와 전체 gates를 갱신한다. 이전 generic219/135/133/61 수치는 새 remote 기준 결과가 아니다.
+
+## 2026-10-03 원격 통합 및 설치 검증
+
+- 체크포인트 75eafb8과 codex/prism-checkpoint-20261003 브랜치에 변경을 보존한 뒤 origin/main f4ee2a1에 rebase했다. source commit은 5859fd7. CI scope는 원격의 change-based 규칙을 보존하고 PRISM gate만 추가했다. packages/ui·generic catalog·registry/releases 소스는 원격과 동일하다. generated docs는 병합본에서 재빌드한다.
+- npm ci·전체 build·typecheck·PRISM23tests·generic237tests 통과. 일반 registry139/catalog137/immutable68 및 current release sha256-d8bd8996d3f0ad4dad3133de01626182d4c111a4c97664864f9b5a32403c194b 검증 통과.
+- 독립 소비자 설치 도중 ENOSPC 발생. 이번 작업의 이전 소비자5개에서 node_modules만 정리했다. source·lockfile·dist·증거는 보존했으며 여유2.2GiB 복구. 재설치39items/61files가 통과했다.
+- 소비자 CSS에서 폰트가 자동 로드되지 않던 지침을 보완했다. prism.css가 pretendard npm package의 variable CSS를 import하며 패키지 폰트 bytes를 빌드 출력과 SHA256 비교한다. prism-icon registry에 PRISM_ASSET_NOTICES.md를 함께 설치한다. 39items/62files·tsc·Vite·font hash·notice 검증 성공: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-SH8HaA.
+- 디스크 오류 후 CUA 자체 브라우저 ID3와 iab는 unavailable이고 inventory=[]다. Codex 패널 열기 응답도 없어서 요청을 종료했다. Mac 잠금 해제/앱 재시작/기존 로그인 변경은 시도하지 않았다. 원본 상태별 새 런타임 관찰은 브라우저 연결 복구 후 이어가야 한다.
+- 저장한 원본 default DOM 및 SCSS를 비교해 Toast 아이콘/본문 gap이12px로 잘못 공유되던 부분을6px로 수정했고 close20px·contentgap4px을 맞췄다. 해당 수정의 소스 근거는 있지만 새 런타임 증거는 아직 없다. 전체 build 및 소비자 검증을 이 변경 뒤 다시 갱신한다.
+
+- Toast 수정 후 전체 npm run build와 docs typecheck 및 PRISM source/registry check 통과. 최종 독립 소비자39items/62files 설치·tsc/Vite·font bytes·notice 검증 성공: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-Xx25Y4. 소비자는 모든 설치 모듈을 컴파일하지만 runtime demo는 Button 하나이며 모든 컴포넌트의 실제 브라우저 실행 증거로 해석하지 않는다.

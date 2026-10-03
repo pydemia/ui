@@ -1,4 +1,6 @@
-import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { mkdtemp, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createServer } from "node:http";
@@ -45,5 +47,13 @@ try {
     await writeFile(join(workdir,"src/main.tsx"),`import {createRoot} from "react-dom/client"; import "./style.css";\n${prism.items.filter(item => item.name !== "prism-tokens").map(item => `import * as ${item.name.replaceAll("-","_")} from "./components/ui/${item.name}";`).join("\n")}\nconst installed = {${prism.items.filter(item => item.name !== "prism-tokens").map(item => item.name.replaceAll("-","_")).join(",")}};\ncreateRoot(document.getElementById("root")!).render(<main data-prism="light">Installed {Object.keys(installed).length} PRISM modules<prism_button.PrismButton>저장</prism_button.PrismButton></main>);`);
     await run(join(workdir,"node_modules/.bin/tsc"),["--noEmit"]);
     await run(join(workdir,"node_modules/.bin/vite"),["build"]);
+    const fontAsset = (await readdir(join(workdir,"dist/assets"))).find(file => file.startsWith("PretendardVariable-") && file.endsWith(".woff2"));
+    assert.ok(fontAsset, "Independent build must emit the installed Pretendard font.");
+    const hash = bytes => createHash("sha256").update(bytes).digest("hex");
+    assert.equal(hash(await readFile(join(workdir,"dist/assets",fontAsset))),hash(await readFile(new URL("node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2",repo))));
+    const notices = await readFile(join(workdir,"src/components/ui/PRISM_ASSET_NOTICES.md"),"utf8");
+    assert.ok(notices.includes("Original artwork and branding rights remain"));
+    assert.ok(notices.includes("7ecfc9a"));
+    console.log("Verified portable font bytes and installed PRISM asset notices.");
     console.log(`PASS: isolated install, TypeScript and Vite build. Consumer preserved at ${workdir}`);
 } finally { await new Promise(resolve => server.close(resolve)); }

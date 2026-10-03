@@ -1,4 +1,3 @@
-@font-face { font-family: Pretendard; src: url('/prism/fonts/PretendardVariable.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
 html[data-prism] { scroll-behavior: auto; }
 .prism-docs { font-family: Pretendard,sans-serif; font-size: 14px; }
 .prism-docs-header { height: 64px; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--prism-divider); padding: 0 28px; background: var(--surface); position: sticky; top: 0; z-index: 20; }

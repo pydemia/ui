@@ -1,3 +1,5 @@
+@import "pretendard/dist/web/variable/pretendardvariable.css";
+
 /* PRISM light profile. Values are measured from PRISM-DEV and source design tokens. */
 [data-prism="light"] {
     --prism-base: #fdfdfd; --prism-lnb: #f9fafc; --prism-panel: #eef1f8;
@@ -13,7 +15,7 @@
     --focus: #2e8ed9; --danger: #ea002c; --success: #256645; --warning: #95620a;
     --message-user-background: var(--prism-cool-100); --message-user-foreground: #222;
     --radius: 6px; --control-height: 32px; --density-control-height: 32px;
-    --font-ui: Pretendard, sans-serif; --overlay: rgb(0 0 0 / 40%);
+    --font-ui: "Pretendard Variable", Pretendard, sans-serif; --overlay: rgb(0 0 0 / 40%);
     --shadow-float: 0 4px 24px rgb(37 38 46 / 16%);
     --shadow-medium: 0 4px 16px rgb(37 38 46 / 12%);
     font-family: var(--font-ui); color: var(--foreground); background: var(--background);
@@ -206,10 +208,12 @@
 .prism-memo { display: grid; gap: 16px; padding: 16px; border: 1px solid var(--prism-control-border); border-radius: 12px; font-size: 14px; line-height: 20px; }
 .prism-memo > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
 .prism-toast { display: inline-flex; align-items: flex-start; gap: 12px; padding: 10px 10px 10px 20px; max-width: min(100%,760px); border-radius: 8px; background: var(--prism-cool-700); color: #fff; }
-.prism-toast > div { flex: 1; min-width: 0; }
-.prism-toast strong { font-size: 14px; font-weight: 600; line-height: 1.4; }
-.prism-toast p { margin: 4px 0 0; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
-.prism-toast button { display: inline-flex; padding: 0; border: 0; background: none; color: inherit; }
+.prism-toast-body { display:flex;align-items:flex-start;gap:6px;flex:1;min-width:0; }
+.prism-toast-icon {display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0;}
+.prism-toast-content {display:flex;flex-direction:column;gap:4px;flex:1;min-width:0;}
+.prism-toast strong {font-size:14px;font-weight:600;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;}
+.prism-toast p { margin:0;font-size:13px;font-weight:400;line-height:1.4;overflow-wrap:anywhere; }
+.prism-toast button {display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:20px;height:20px;padding:0;border:0;background:none;color:inherit;cursor:pointer;}
 .prism-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
 .prism-empty-icon {display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
 .prism-empty-icon svg { width: 140px; height: 140px; margin:0; color: var(--prism-cool-200); }

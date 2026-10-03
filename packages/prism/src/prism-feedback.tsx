@@ -6,8 +6,10 @@ import { PrismSkeletonGroup } from "./prism-primitives";
 
 export function PrismToast({ title, children, tone = "info", onClose }: { title: string; children?: ReactNode; tone?: "info" | "success" | "error"; onClose?: () => void }) {
     const iconName = tone === "success" ? "ToastCheckIcon" : tone === "error" ? "ToastErrorIcon" : "ToastInfoIcon";
-    return <div className="prism-toast" role={tone === "error" ? "alert" : "status"}><PrismIcon name={iconName} size={20} />
-        <div><strong>{title}</strong>{children && <p>{children}</p>}</div>{onClose && <button type="button" onClick={onClose} aria-label="알림 닫기"><X size={20} aria-hidden="true" /></button>}</div>;
+    return <div className="prism-toast" role={tone === "error" ? "alert" : "status"}>
+        <div className="prism-toast-body"><span className="prism-toast-icon" aria-hidden="true"><PrismIcon name={iconName} size={20} /></span>
+            <div className="prism-toast-content"><strong>{title}</strong>{children && <p>{children}</p>}</div></div>
+        {onClose && <button type="button" onClick={onClose} aria-label="알림 닫기"><X size={20} aria-hidden="true" /></button>}</div>;
 }
 export function PrismEmptyState({ title, description, panel = false, action, icon }: { title: string; description: string; panel?: boolean; action?: ReactNode; icon?: ReactNode }) {
     return <div className="prism-empty" data-panel={panel || undefined}><div className="prism-empty-icon" aria-hidden="true">{icon ?? <PrismIcon name="NoSearchResultIcon" size={panel ? 120 : 140} />}</div>

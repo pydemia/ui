@@ -205,7 +205,9 @@ Vercel이 다시 배포합니다.
 
 Workspace에서는 `@pydemia/prism`을 import합니다. 독립 소비자는 카탈로그에 표시된
 `shadcn add` 명령으로 소스와 의존성을 설치하고 로컬 `components/ui/prism-*.tsx`를
-import합니다. `tokens.css` 다음에 `prism.css`와 Pretendard를 로드하고 앱 root에
+import합니다. `prism.css`는 설치한 Pretendard variable font를 함께 로드합니다.
+벡터 자산의 출처와 권리 고지는 설치되는 `PRISM_ASSET_NOTICES.md`에 있습니다.
+`tokens.css` 다음에 `prism.css`를 로드하고 앱 root에
 `data-prism="light"`를 지정합니다. PDF viewer의 `workerUrl`은 설치된 `pdfjs-dist`와
 같은 버전이어야 합니다. Vite는 `pdf.worker.min.mjs?url` import를 지원하며 다른
 bundler는 해당 worker를 자체 정적 경로로 제공합니다.

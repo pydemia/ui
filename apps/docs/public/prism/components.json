@@ -93,13 +93,21 @@
           "Deployed and local Select menu options: 33px height, 14px type, 0px 8px padding, 4px radius",
           "End/Enter chooses last option and restores trigger focus",
           "Clear action emits intent, preserves consumer-owned value and input focus",
-          "Readonly value keeps original primary text color; disabled value retains caption"
+          "Readonly value keeps original primary text color; disabled value retains caption",
+          "readOnly Select remains focusable and submits value without opening",
+          "native required Select blocks empty submit and focuses trigger",
+          "uncontrolled form reset restores default; controlled reset preserves value",
+          "ArrowUp from search selects last option"
         ],
         "evidence": [
-          "local-select-open-contract"
+          "local-select-open-contract",
+          "local-select-readonly-sizes",
+          "local-select-native-form"
         ],
         "remaining": [
-          "all input/select sizes and native form required validation"
+          "typeahead runtime",
+          "all source option states",
+          "all input size/adornment/error combinations"
         ]
       },
       "exports": [
@@ -360,8 +368,15 @@
       "embedUrl": "/prism?component=prism-feedback&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-feedback&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending"
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation"
+        ],
+        "evidence": [],
+        "remaining": [
+          "updated Toast runtime metrics and open source sample states"
+        ]
       },
       "exports": [
         {
@@ -519,7 +534,7 @@
         ],
         "remaining": [
           "all source card placement and long-name states",
-          "paired deployed sample comparison"
+          "authenticated deployed candidate card comparison; public Candidate Common sample contains helpers"
         ],
         "evidence": [
           "local-candidate-card"
@@ -619,11 +634,12 @@
           "Keyboard resize 440 to 456, Home 320, End 800; double click reset 440",
           "Pointer drag 80px left grows right-anchored panel from 440 to 520",
           "Controlled width callback leaves width unchanged until consumer update",
-          "Real 390px iframe: compact detail panel 356px, no resizer, root scroll width 390px"
+          "Real 390px iframe: compact detail panel 356px, no resizer, root scroll width 390px",
+          "nested Select Escape closes menu before parent Panel; second Escape closes parent"
         ],
         "remaining": [
           "source SidePanel state-by-state comparison",
-          "pointer cancel and nested popup Escape combinations"
+          "pointer cancellation runtime"
         ],
         "evidence": [
           "local-panel-resize",
@@ -801,8 +817,20 @@
       "embedUrl": "/prism?component=prism-profile&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-profile&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending"
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "source empty state 175px total and 120px icon",
+          "source error state 236px with 70px padding and retry"
+        ],
+        "evidence": [
+          "reference-common-empty-error",
+          "local-request-empty",
+          "local-request-error"
+        ],
+        "remaining": [
+          "authenticated profile page visual comparison"
+        ]
       },
       "exports": [
         {
@@ -1044,7 +1072,7 @@
         ],
         "remaining": [
           "complete source layout comparison",
-          "every domain fixture at narrow widths"
+          "popup and long-content combinations beyond fixture rendering"
         ],
         "evidence": [
           "local-workspace-sizing",
@@ -1340,10 +1368,11 @@
       "name": "Logo / Profile / Popover / Skeleton / More",
       "category": "Utility",
       "purpose": "텍스트 브랜드·사용자 요약·팝오버·즐겨찾기·접기·로딩",
-      "contract": "브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 사내 SVG 로고와 인증 검사는 포함하지 않습니다.",
+      "contract": "SkeletonGroup은 기본 3개·120px 블록과 16px 간격을 사용하며 rows·height를 조절할 수 있습니다. 브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 사내 SVG 로고와 인증 검사는 포함하지 않습니다.",
       "states": [
         "default",
-        "disabled"
+        "disabled",
+        "empty"
       ],
       "source": [
         "ui/avatar/HRXSidebarProfile.tsx",
@@ -1362,8 +1391,25 @@
       "embedUrl": "/prism?component=prism-primitives&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-primitives&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending"
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "source common skeleton 3x120 and 2x60 geometry",
+          "NoData 13px and 15px line box",
+          "Summary badge 88px, neutral border and text metrics",
+          "empty Summary 49px without badge",
+          "Summary click opens tooltip; Escape dismisses"
+        ],
+        "evidence": [
+          "reference-candidate-common-metrics",
+          "local-candidate-common-metrics",
+          "local-summary-empty",
+          "local-summary-tooltip"
+        ],
+        "remaining": [
+          "hover and focus-only Tooltip runtime",
+          "all summary content states"
+        ]
       },
       "exports": [
         {
@@ -1916,15 +1962,21 @@
           "All companies disables company selector",
           "Notice popup requires valid date range",
           "Disabling popup clears both dates",
-          "User role without group hides selector and clears group ID"
+          "User role without group hides selector and clears group ID",
+          "company group selects two companies and emits synthetic save intent",
+          "duplicate position sub-job rejected",
+          "expertise limit 3 and experience limit 2 preserve removal",
+          "position generate and save intent callbacks"
         ],
         "evidence": [
           "local-notice-form",
-          "local-user-form"
+          "local-user-form",
+          "local-group-form",
+          "local-position-form"
         ],
         "remaining": [
-          "Group and Position form workflows",
-          "all display variants"
+          "all display variants",
+          "authenticated source form visual comparison"
         ]
       },
       "exports": [

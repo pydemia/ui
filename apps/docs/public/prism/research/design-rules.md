@@ -27,7 +27,7 @@ Pretendard is verified in deployed computed styles. The standalone site uses off
 
 ## Geometry
 
-- Button large/medium/small/x-small heights: 40/32/28/26px. Padding 12px (x-small 8px). Radius 6px large, 4px other sizes. Icon-only is 28px/radius 6px.
+- Button large/medium/small/x-small heights: 40/32/28/26px. Padding 12px (x-small 8px). Radius 6px large, 4px other sizes. Icon-only widths follow 40/32/28/26px sizes; small uses radius 6px.
 - Input medium/small: 32/28px, radius 6px, padding 12px horizontal. Preserve required, invalid, readOnly, disabled independently.
 - Tag 21px/radius 4px, chip 22px/radius 4px, ELP 16px/radius 10px, count 14px.
 - Avatar 40px; candidate photo 70px/radius 8px. Profile chip 30px (small 27px).
@@ -51,12 +51,12 @@ The general pydemia catalog runs under the PRISM semantic token profile. These a
 - The 87 original vector assets preserve source artwork. The React adapter scopes SVG IDs per instance. CurrentColor, host placement and scaling need runtime comparison; retaining artwork alone does not prove page-level parity.
 - Source minimum-width constraints can overflow mobile. Standalone table scroll, parent-width panel clamping and a container-aware Workspace navigation Drawer preserve function; these are explicit responsive adaptations. Workspace breakpoint defaults to 768px and can be configured. Resizing preserves consumer-owned drafts; growing from compact navigation closes the Drawer and focuses the header.
 - Original caption colors can have low contrast on white. The shared semantic muted token is #626A75 for readable documentation; exact original caption is retained where referenced. Do not conflate accessibility adaptation with visual equality.
-- PrismSelect and MultiSelect use shadcn/Radix Popover with original dropdown geometry. Values remain consumer-owned. Select required is expressed as aria-required; consuming forms must validate the selected value. Search inputs support IME and keyboard selection. DatePicker defaults to a calendar-only readonly field, with a 320px calendar, 36px circular day cells and year selection. Optional inputEditable enables text entry and strict date validation. Autocomplete freeSolo is opt-in; default mode commits known options only.
+- PrismSelect and MultiSelect use shadcn/Radix Popover with original dropdown geometry. Values remain consumer-owned. Select name/required participate in native FormData and constraint validation. Invalid submission focuses the visible trigger. Uncontrolled form reset restores defaultValue; controlled values remain owned by the consumer. Custom business validation remains a host responsibility. Search inputs support IME and keyboard selection. DatePicker defaults to a calendar-only readonly field, with a 320px calendar, 36px circular day cells and year selection. Optional inputEditable enables text entry and strict date validation. Autocomplete freeSolo is opt-in; default mode commits known options only.
 - PrismPanel is a nonmodal inline panel with close/expand intent callbacks. PrismSidePanel is a separate modal drawer adapter for contexts that require focus containment. Manual resizing is opt-in via resizable. Pointer drag, Left/Right (16px), Shift (50px), Home/End and double click share bounded controlled width intent. Compact parent containers use full width and hide the handle.
 
 ## Source ownership
 
-PRISM component code is a design/behavior reference; independent implementations compose pydemia/shadcn primitives. The original vector artwork is retained separately to preserve the supplied design, with its owners and pinned revision documented in THIRD_PARTY_NOTICES.md. Portraits and source HR content are not published; all fixtures are synthetic. No artwork reuse license is inferred. Registry dependencies retain upstream MIT notices; Pretendard OFL is at /prism/fonts/LICENSE.txt.
+PRISM component code is a design/behavior reference; independent implementations compose pydemia/shadcn primitives. The original vector artwork is retained separately to preserve the supplied design, with its owners and pinned revision documented in THIRD_PARTY_NOTICES.md. Portraits and source HR content are not published; all fixtures are synthetic. No artwork reuse license is inferred. Registry dependencies retain upstream MIT notices; Pretendard OFL is at /prism/fonts/LICENSE.txt. Installed prism.css imports the npm Pretendard variable font, so independent consumers do not depend on the catalog font URL. Registry vector installs also include PRISM_ASSET_NOTICES.md.
 
 ## Sizing extensions
 
