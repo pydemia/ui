@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 Goal 범위 재확인: 현재 registry 144개 component·146개
+item·83개 release가 검사에 통과했습니다. 공개 AppShell·Spinner·
+MetricCard와 Operations workspace의 실제 동작으로 원래 Goal의
+대표 범위를 확인했습니다. 최신 Dialog preview는 production 배포가
+Vercel의 24시간 배포 횟수 제한으로 남아 있습니다. Goal 관리용
+추정은 약 99%입니다.
+[범위 점검](goal-scope-audit-2026-10-03.md)을 참고하세요.
+
 2026-10-03 공급·품질 기준 재검토: 로컬에서는 변경 동작을 대상으로
 검증하고, 전체 검사는 PR CI 결과를 사용합니다. 공개 확인은 묶음의
 배포와 대표 URL로 판단하며 같은 조작을 환경마다 반복하지 않습니다.
