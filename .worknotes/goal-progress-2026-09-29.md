@@ -4,8 +4,10 @@
 **약 99% → 약 99%**입니다. 개발 중 후보에 Usage·preview 완성을
 요구하지 않고 공개 후보 단계에서 확인하도록 기준을 좁혔습니다.
 기존 component 10개로 접수 화면을 조합하고 로컬 typecheck·build·
-registry 검사와 브라우저 입력·제출을 확인했습니다. 새 public
-component·item은 없고 공개 예시는 아직 미검증입니다.
+registry 검사와 브라우저 입력·제출을 확인했습니다. PR #139와 병합
+commit의 CI·Pages, Vercel production과 사용자 도메인의 새 JS 접근을
+확인했습니다. 새 public component·item은 없습니다. 공개 사이트의
+입력·제출은 재조작하지 않았습니다.
 [판정 기록](quality-checklist-decision-2026-10-03.md)과
 [예시 기록](intake-workspace-2026-10-03.md)을 참고하세요.
 
