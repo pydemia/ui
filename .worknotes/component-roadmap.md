@@ -130,6 +130,10 @@ item을 대조했다면 공개 URL도 대표 변경 경로만 확인합니다. �
 - [x] `Select` — 검색 없는 사용자 정의 단일 선택과 form 값 연결.
 - [x] `Combobox` — 입력 검색, option 탐색, 단일 선택, 빈 결과와
   선택값만의 form 제출. popup 위치 전환과 screen reader 검사는 남았습니다.
+- [x] `Autocomplete` — 목록의 ID 선택이 아닌 자유 텍스트 입력을
+  native form 값으로 제출합니다. 추천어는 manual selection이며
+  목록에 없는 입력도 유지합니다. 공개 상태는
+  [작업 기록](autocomplete-2026-10-03.md)에 남깁니다.
 - [x] `NumberInput` — 범위·step·locale 표시와 잘못된 입력 구분.
 - [x] `PasswordInput` — native 입력과 이름이 일정한 표시 toggle.
 - [x] `SearchInput` — 검색·초기화·submit의 일관된 입력 동작.

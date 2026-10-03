@@ -96,6 +96,12 @@
       "dependencies": ["pyd-input", "pyd-utils"], "accessibility": { "semantics": "editable combobox with listbox, active descendant, selected-only form value, and loading/error status", "keyboard": "Chromium: arrows, Enter, Escape, disabled item and form value verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-autocomplete", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/combobox/", "scope": "manual list autocomplete and free text form behavior; no source copied" },
+      "dependencies": ["pyd-input", "pyd-utils"], "accessibility": { "semantics": "visibly labeled editable combobox with listbox suggestions and native free-text form value", "keyboard": "Chromium: free-text submit, arrows, Enter and pointer selection verified; Escape, composition and reset covered by UI tests", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-multi-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "W3C WAI", "url": "https://www.w3.org/WAI/tutorials/forms/grouping/", "scope": "checkbox group guidance; no source copied" },

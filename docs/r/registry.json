@@ -107,6 +107,11 @@
       "files": [{ "path": "packages/ui/src/components/combobox.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-autocomplete", "type": "registry:ui", "title": "Autocomplete",
+      "registryDependencies": ["./pyd-input.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/autocomplete.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-multi-select", "type": "registry:ui", "title": "Multi Select",
       "registryDependencies": ["./pyd-input.json", "./pyd-popover.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/multi-select.tsx", "type": "registry:ui" }]

@@ -48,12 +48,13 @@ for (const entry of manifest.components) {
 }
 // Check complete examples against public workspace declarations on every CI run.
 // The isolated consumer verifier separately checks emitted registry imports.
-const examples = new Map(manifest.components.filter(entry => entry.usageKind === "component-example").map(entry => [fileURLToPath(new URL(`../apps/docs/src/prism/.usage-${entry.id}.tsx`, import.meta.url)), entry.usage]));
+const virtualPath = path => path.replaceAll("\\", "/");
+const examples = new Map(manifest.components.filter(entry => entry.usageKind === "component-example").map(entry => [virtualPath(fileURLToPath(new URL(`../apps/docs/src/prism/.usage-${entry.id}.tsx`, import.meta.url))), entry.usage]));
 const options = { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, moduleResolution: ts.ModuleResolutionKind.Bundler, jsx: ts.JsxEmit.ReactJSX, strict: true, skipLibCheck: true, noEmit: true };
 const host = ts.createCompilerHost(options);
 const sourceFile = host.getSourceFile.bind(host);
-host.getSourceFile = (path, languageVersion, onError, shouldCreateNewSourceFile) => examples.has(path)
-    ? ts.createSourceFile(path, examples.get(path), languageVersion, true, ts.ScriptKind.TSX)
+host.getSourceFile = (path, languageVersion, onError, shouldCreateNewSourceFile) => examples.has(virtualPath(path))
+    ? ts.createSourceFile(path, examples.get(virtualPath(path)), languageVersion, true, ts.ScriptKind.TSX)
     : sourceFile(path, languageVersion, onError, shouldCreateNewSourceFile);
 const diagnostics = ts.getPreEmitDiagnostics(ts.createProgram([...examples.keys()], options, host));
 assert.equal(diagnostics.length, 0, ts.formatDiagnostics(diagnostics, { getCanonicalFileName: path => path, getCurrentDirectory: () => fileURLToPath(new URL("../", import.meta.url)), getNewLine: () => "\n" }));

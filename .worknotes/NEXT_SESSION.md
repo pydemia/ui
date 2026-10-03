@@ -1,5 +1,29 @@
 # Component 확장 작업 인계
 
+2026-10-03 PR #127 최신 `main` 통합: PRISM 게시 변경을 반영하고 문서
+산출물을 다시 만들었습니다. Windows의 가상 Usage 경로 비교를 고쳐
+PRISM 23/23·예제 10개 typecheck, 전체 typecheck·build·registry
+release 검사가 통과했습니다. Vercel PR 상태는 배포 제한 실패이며,
+PR Verify UI와 공개 URL은 계속 확인합니다.
+[작업 기록](autocomplete-2026-10-03.md)을 참고하세요. Goal 관리용
+추정은 약 98%입니다.
+
+2026-10-03 `Autocomplete` 로컬 릴리스 후보: 자유 텍스트의 native form
+제출과 manual 추천어 선택을 추가했습니다. 대상 테스트 4/4, 전체 UI
+251/251, typecheck·build·PRISM 23/23, 390px Chromium preview,
+`registry:release-check`가 통과했습니다. 140개 component·142개 item·
+71번째 snapshot 후보입니다. PR CI와 공개 URL은 아직 확인하지
+않았습니다. [작업 기록](autocomplete-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 98%입니다.
+
+2026-10-03 공급·품질 체크리스트 재검토: 과거 `5/10` 운영 조사와
+component 릴리스 판정을 분리했습니다. component마다 PR·snapshot을
+만드는 관행과 로컬·CI 검사의 반복이 실제 경직성입니다. 관련 변경은
+릴리스 후보로 묶고 후보 commit의 CI를 재사용합니다. 차단 결함과
+공개 배포 대기 상태는 구분합니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 `PivotTable`은 PR #125로 병합됐고 PR·`main` Verify UI와
 Pages가 통과했습니다. Vercel production은 배포 횟수 제한으로 실패해
 현재 item과 70번째 manifest가 공개 도메인에서 404입니다. 제한 해제
