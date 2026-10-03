@@ -36,7 +36,17 @@ LICENSE, manifest와 W3C WAI 접근성 지침은
 않았습니다. 새 설치 형식이나 의존 경로는 없습니다.
 
 실제 screen reader 발표, touch, Safari, RTL은 실행하지 않았습니다.
-PR CI, 공개 배포, 공개 manifest와 새 item URL은 아직 확인 전입니다.
-이들은 구현 검토와 구분해 후속 공급 상태로 기록합니다. Goal 관리용
-추정은 약 99%이며 Instant Rollback 후 불변 URL 보존은 여전히
-별도 미검증 항목입니다.
+Goal 관리용 추정은 약 99%이며 Instant Rollback 후 불변 URL
+보존은 여전히 별도 미검증 항목입니다.
+
+## 공개 공급
+
+PR #142의 Verify UI `37111819271`, 병합 commit `d1938377`의
+Verify UI `37112046324`와 Pages `37112045839`가 성공했습니다.
+Vercel production 배포 `dpl_FLqymHxGjLdwvi92c2RtisfHvTyo`는
+READY입니다. `ui.pydemia.ai`의 HTML은 새
+`assets/index-CQEgDUp_.js`를 참조합니다. 현재
+`/r/pyd-transfer-list.json`과 76번째 snapshot
+`sha256-6dc931cf4f48322a91355a9fc5f11a3c9b37878b8c73b60f197f43426d9a6ac5`
+manifest는 HTTP 200이고 manifest의 `itemCount`는 146입니다.
+공개 사이트의 키보드·form 동작은 로컬 검사를 반복하지 않았습니다.
