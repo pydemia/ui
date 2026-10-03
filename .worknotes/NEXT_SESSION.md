@@ -1,5 +1,13 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 체크리스트 재검토: 과거 `5/10` 운영 조사와
+component 릴리스 판정을 분리했습니다. component마다 PR·snapshot을
+만드는 관행과 로컬·CI 검사의 반복이 실제 경직성입니다. 관련 변경은
+릴리스 후보로 묶고 후보 commit의 CI를 재사용합니다. 차단 결함과
+공개 배포 대기 상태는 구분합니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 `PivotTable`은 PR #125로 병합됐고 PR·`main` Verify UI와
 Pages가 통과했습니다. Vercel production은 배포 횟수 제한으로 실패해
 현재 item과 70번째 manifest가 공개 도메인에서 404입니다. 제한 해제
