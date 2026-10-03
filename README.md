@@ -136,6 +136,15 @@ snapshot을 확인하고 유지하며, 내용이나 형식이 바뀌면 새 식�
 npx shadcn@4.21.0 add https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-c4275e165672ed0ab23e640a160305ac6949384bb206a1424243efc8851b8857/pyd-transfer-list.json https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-c4275e165672ed0ab23e640a160305ac6949384bb206a1424243efc8851b8857/pyd-tokens.json
 ```
 
+문서 사이트 배포가 지연돼도 `main`에 병합된 schema 2 snapshot은
+GitHub raw에서 설치할 수 있습니다. 다음 83번째 release는
+`DialogContent`의 기본·넓은·전체 화면 크기를 포함합니다. 고정된
+release URL이므로 이후 버전으로 자동 갱신되지는 않습니다.
+
+```bash
+npx shadcn@4.21.0 add https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896/pyd-dialog.json https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896/pyd-tokens.json
+```
+
 이전 DataChart snapshot
 `sha256-212e10face340c8a0d867de1ea5ace2c1490e102dfec7d09f8ca97e999cae331`은
 공개 URL 소비자의 소스 일치·typecheck·build를 확인했습니다.
