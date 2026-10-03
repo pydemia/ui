@@ -20,7 +20,9 @@ native table로 제공합니다. 색상만으로 구분하지 않습니다. 차�
 Vega와 D3의 공식 treemap 문서는 면적이 값에 비례하는 계층 사각형
 표시라는 개념만 참고했습니다. 해당 library의 source, 알고리즘,
 artwork는 편입하지 않습니다. W3C WAI의 표 구조·색상 사용 지침을
-값 대안의 근거로 사용합니다. 출처와 실제 검증은 구현 뒤 갱신합니다.
+값 대안의 근거로 사용합니다. 출처는
+[source-inventory.md](../research/source-inventory.md), 실제 검증은
+[verification.md](../research/verification.md)에 기록했습니다.
 
 ## 진행 상태
 
@@ -40,6 +42,14 @@ artwork는 편입하지 않습니다. W3C WAI의 표 구조·색상 사용 지�
   밝은색·어두운색, panel·plain, 0값·빈 목록 전환을 확인. 두 폭 모두
   문서 가로 넘침이 없고 page error 0건. 부모 이름이 자식 이름을
   가리던 표시를 수정해 자식 이름을 영역 아래쪽에 배치함.
-- 실제 screen reader 발표·touch·Safari·RTL 및 PR CI·공개 배포:
-  미확인.
+- PR #123의 Verify UI run `37086235912`, 병합 commit
+  `2a38211c728135d40e63a69396413d8a6f83f936`의 Verify UI run
+  `37086445611`과 Pages run `37086445381`이 성공했습니다. Vercel
+  production도 성공했습니다.
+- 사용자 도메인의 69번째 manifest, 현재 `pyd-treemap-chart.json`,
+  69번째 snapshot item이 HTTP 200이고 로컬 생성물과 바이트가
+  같습니다. 공개 catalog에서 `TreemapChart` preview와 Usage 전환,
+  계층 표의 `플랫폼 › API` 행을 확인했고 page error는 0건입니다.
+- 실제 screen reader 발표·touch·Safari·RTL: 미확인. 이번 릴리스에서
+  해당 환경 전수 검사를 적용하지 않았습니다.
 - Goal 관리용 추정: 약 98% 유지

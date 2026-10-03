@@ -1,6 +1,6 @@
 # 검증 기록
 
-## 2026-10-03 TreemapChart — 로컬 후보
+## 2026-10-03 TreemapChart — 공개 확인
 
 `TreemapChart`의 계층 합계·값 비율·면적 배분·0값·빈 목록·잘못된 입력을
 SSR 테스트 5개로 확인했습니다. 전체 UI 테스트 242/242, typecheck와
@@ -11,8 +11,12 @@ screen reader 발표·touch·다른 브라우저는 확인하지 않았습니다
 `registry:release-check`는 140개 item·138개 export/catalog와
 69개 snapshot을 확인했습니다. 현재 ID는
 `sha256-89c86a0be4705c8b66e8ba4bb6d9c83cc3e4fce2a499314871c130c73dbd63e7`입니다.
-PR CI·공개 URL 결과는
-[작업 기록](../.worknotes/treemap-chart-2026-10-03.md)에 이어서 남깁니다.
+PR #123과 병합 뒤 `main`의 Verify UI·Pages, Vercel production이
+성공했습니다. 사용자 도메인의 69번째 manifest와 현재·snapshot
+`pyd-treemap-chart.json`은 HTTP 200이며 로컬 생성물과 바이트가
+같습니다. 공개 catalog의 preview·Usage 전환과 계층 표도 확인했습니다.
+실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다. 세부
+결과는 [작업 기록](../.worknotes/treemap-chart-2026-10-03.md)에 있습니다.
 
 ## 2026-10-03 공개 registry 갱신
 
