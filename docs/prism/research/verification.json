@@ -588,7 +588,7 @@
     "publicDeployment": {
       "status": "published-http-verified",
       "url": "https://ui.pydemia.ai/prism",
-      "readback": "HTTP 200 for /prism and /prism/; components.json, registry.json, prism-context.json, llms.txt and font bytes match the local build",
+      "readback": "HTTP 200; components.json has 11 complete examples and 116 fixture states and matches local bytes; registry.json matches SHA256 432d3672c026575a0d0daa291dbaf669cf6012a6d94a11c9c8a1e1d5e815bcb2",
       "attempts": [
         {
           "method": "normal-upload",
@@ -613,23 +613,28 @@
           "method": "existing-git-integration",
           "sourceCommit": "b533c5c",
           "result": "Vercel commit status success: Deployment has completed; public HTTP readback verified"
+        },
+        {
+          "method": "existing-git-integration",
+          "sourceCommit": "ff1f27a",
+          "result": "Vercel Deployment has completed; current manifest/registry HTTP bytes and public consumer install verified"
         }
       ],
-      "sourceCommit": "b533c5c9e0adea0e2fd79310ffd107a1e0cdcff6",
+      "sourceCommit": "ff1f27a1cb8fcea58692b2a8e430306d89adc743",
       "browserRender": "pending; own browser unavailable",
       "independentConsumer": {
         "status": "passed",
-        "method": "node scripts/verify-prism-consumer.mjs --public; install directly from https://ui.pydemia.ai",
+        "method": "node scripts/verify-prism-consumer.mjs --public; install directly from the published avatar registry",
         "items": 39,
         "files": 62,
-        "componentExamples": 10,
+        "componentExamples": 11,
         "typecheck": "passed",
         "viteBuild": "passed",
         "portableFont": "emitted package font bytes matched",
         "assetNotice": "installed and checked",
         "browserRuntime": "not-executed"
       },
-      "scope": "previous published b533c5c implementation; avatar allocation update pending"
+      "scope": "avatar allocation update published; actual browser geometry and interaction pending"
     },
     "generalComponentTests": {
       "passed": 251,
@@ -644,10 +649,10 @@
       "upstreamRevision": "8e60a65"
     },
     "githubVerification": {
-      "sourceCommit": "b533c5c9e0adea0e2fd79310ffd107a1e0cdcff6",
+      "sourceCommit": "ff1f27a1cb8fcea58692b2a8e430306d89adc743",
       "status": "passed",
-      "url": "https://github.com/pydemia/ui/actions/runs/37091054547",
-      "scope": "previous published commit; avatar allocation update has local gates only"
+      "url": "https://github.com/pydemia/ui/actions/runs/37094680798",
+      "scope": "avatar allocation and all 11 complete usage examples"
     },
     "usageContracts": {
       "groups": 38,

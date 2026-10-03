@@ -28,11 +28,11 @@ PRISM 계약 테스트 25개가 통과했습니다. 4503dea 기준의 38개 예�
 
 import만 있던 10개 그룹의 Usage를 합성 데이터와 상태를 포함한 React 예시로 보완했습니다. 설치된 registry 소스를 참조하는 10개 예시의 타입 검사가 통과했고 기존 CI의 PRISM 검사에도 workspace 예시 타입 검사를 연결했습니다. 38개 그룹 모두 설치용 import를 제공하며 각 예시의 import가 해당 항목의 설치 의존성 안에 있는지 검사합니다. 나머지 28개는 데이터·상태·callback을 소비자가 정의하는 연동 코드 일부로 표시합니다. 새 예시와 Usage 경로 선택·복사 UI의 브라우저 실행은 미확인입니다. Avatar/Table의 독립 예시를 추가한 현재 버전은 완전한 예시 11개와 연동 코드 일부 27개입니다. 현재 버전의 설치 소비자 타입 검사도 통과했습니다.
 
-b533c5c의 기존 Vercel Git 배포가 완료됐습니다. 앞선 일일 제한 실패는 배포 이력에 남겼으며 `apps/docs`가 배포 입력에서 빠지던 문제는 `/docs/` 제외 규칙으로 수정했습니다. `/prism`과 `/prism/`은 HTTP 200이며 manifest·registry·단위 context 항목·llms.txt·폰트 파일의 bytes가 로컬 빌드와 일치합니다. b533c5c의 GitHub Verify UI와 Pages도 통과했습니다. `node scripts/verify-prism-consumer.mjs --public`으로 공개 URL에서 39개 항목·62개 파일을 직접 설치하고 예시 10개의 타입 검사·Vite 빌드·폰트 bytes·자산 고지를 확인했습니다. HTTP 응답과 설치 검증은 실제 브라우저 렌더 증거가 아닙니다.
+ff1f27a의 기존 Vercel Git 배포가 완료됐습니다. 앞선 일일 제한 실패는 배포 이력에 남겼으며 `apps/docs`가 배포 입력에서 빠지던 문제는 `/docs/` 제외 규칙으로 수정했습니다. `/prism`과 `/prism/`은 HTTP 200이며 manifest·registry·단위 context 항목·llms.txt·폰트 파일의 bytes가 로컬 빌드와 일치합니다. ff1f27a의 GitHub Verify UI와 Pages도 통과했습니다. `node scripts/verify-prism-consumer.mjs --public`으로 공개 URL에서 39개 항목·62개 파일을 직접 설치하고 Avatar 예시를 포함한 11개 예시의 타입 검사·Vite 빌드·폰트 bytes·자산 고지를 확인했습니다. HTTP 응답과 설치 검증은 실제 브라우저 렌더 증거가 아닙니다.
 
 자체 브라우저는 디스크 공간을 확보한 뒤에도 연결되지 않았으며 현재 browser inventory가 비어 있습니다. 공개 주소로 IAB를 생성해 보았으나 Browser is not available 응답이었습니다. 저장해 둔 화면 근거는 보존했으며 최신 폰트 로딩과 Toast 변경은 브라우저 런타임 미검증입니다.
 
-Avatar는 원본처럼 영역·이름·팀 폭을 측정해 긴 쪽을 줄이고 양쪽이 길면 함께 줄이도록 보완했습니다. ResizeObserver·텍스트 변경·폰트 로딩 재측정과 잘린 텍스트의 hover/focus Tooltip을 연결했습니다. 모의 DOM에서 폭 배분·폰트 이벤트·키보드 도움말·cleanup을 검사한 결과이며 실제 CSS 배치 검증은 아닙니다. 긴 내용의 크기 조절 예시를 추가해 현재 공개 fixture는 116개입니다. 이 추가 상태와 최신 Avatar/Tooltip의 브라우저 검증은 남아 있습니다. 공개 배포·설치 결과는 b533c5c 기준이며 Avatar 변경에는 아직 적용되지 않습니다.
+Avatar는 원본처럼 영역·이름·팀 폭을 측정해 긴 쪽을 줄이고 양쪽이 길면 함께 줄이도록 보완했습니다. ResizeObserver·텍스트 변경·폰트 로딩 재측정과 잘린 텍스트의 hover/focus Tooltip을 연결했습니다. 모의 DOM에서 폭 배분·폰트 이벤트·키보드 도움말·cleanup을 검사한 결과이며 실제 CSS 배치 검증은 아닙니다. 긴 내용의 크기 조절 예시를 추가해 현재 공개 fixture는 116개입니다. 이 추가 상태와 최신 Avatar/Tooltip의 브라우저 검증은 남아 있습니다. ff1f27a의 공개 manifest·registry는 최신 로컬 bytes와 일치하며 공개 registry 설치와 11예시 타입 검사도 통과했습니다. 이 결과는 Avatar의 실제 브라우저 배치와 시각 일치를 뜻하지 않습니다.
 
 [기계 판독 검증 기록](verification.json)은 component별 확인 범위와 미검증 항목을 제공합니다. 원본 AX·JPEG는 gitignore된 `.worknotes/browser-evidence/`에만 보관하며 공개 사이트에 포함하지 않습니다.
 

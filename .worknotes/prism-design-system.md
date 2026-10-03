@@ -190,3 +190,7 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 같은4.21 CLI 재시도의 consumer-Ukms7T는39items/62files 설치·11예시 tsc·Vite·font bytes·notice 확인이 성공했다. 경로: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-Ukms7T. 이후 원본 Tooltip SCSS의 white-space:normal/word-break:break-word도 반영했다. registry CSS와 source bytes 일치를 확인하고 마지막 CSS를 해당 소비자에 동기화해 Vite 재빌드했다. 독립 설치와 CSS 빌드를 browser visual 검증으로 해석하지 않는다.
 
 - 마지막 CSS 동기화 소비자 Vite build도 성공했다. 최종 전체 site build와 11예시 workspace 타입 검사도 통과했다. 실패eyXieL와 이전공개소비자CQmxAY의 node_modules만 정리했으며 source/lockfile/dist와 최신Ukms7T 의존성은 보존했다.
+
+- source2680786/generatedff1f27a를 main에 push했고 원격SHA ff1f27a1cb8fcea58692b2a8e430306d89adc743와 일치했다. credential source config hash 보존/변경된 commit 파일 token exact-match0 확인. Verify UI run37094680798와 Pages run37094680499 모두 success, Vercel Deployment has completed다.
+- 공개 components.json은11complete examples/116fixtures이며 registry.json SHA256은432d3672c026575a0d0daa291dbaf669cf6012a6d94a11c9c8a1e1d5e815bcb2다. 두 파일 모두HTTP200과 최신local bytes 일치 확인. public mode의 consumer-rIByQh도39items/62files·11예시tsc·Vite·font bytes·notice 확인이 통과했다. 경로: /var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-rIByQh.
+- Codex browser panel의 새 long 예시 URL 열기를 요청했으나 응답을 확인하지 못했다. 추가 열기 요청을 취소했고 브라우저 inventory도 []다. panel이 열렸다고 주장하지 않으며 같은 요청을 반복하지 않는다. Mac 잠금/기존 로그인/네트워크 설정은 변경하지 않았다. browserRender와 actual geometry/print 상태는 pending이다.
