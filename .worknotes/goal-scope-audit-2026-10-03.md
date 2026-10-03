@@ -79,3 +79,22 @@ rollback했을 때 새 불변 URL을
 실제 screen reader·touch·Safari·RTL의 전수 동작도 검증하지
 않았습니다. 이번 점검의 공개 브라우저 확인은 위에 적은 흐름에만
 해당합니다. 다음 공급 작업은 불변 URL 보존 범위의 구체화입니다.
+
+## 2026-10-04 현재 공개 범위 재확인
+
+현재 catalog에는 144개 component가 16개 category에 분포합니다.
+`AppSidebar`는 좌·우, `AppBottomPanel`은 하단,
+`AppFloatingPanel`·`AppFloatingBubble`은 좌·우 floating 영역을
+제공합니다. `PageHeader`는 title·subtitle·세 크기, `Markdown`은
+텍스트 bullet list를 제공합니다. `Spinner`에는 다섯 형태가 있습니다.
+사용자 도메인의 AppShell·Navigation·Sidebar·Dashboard·LogConsole·
+DataChart·PageHeader·Markdown·BulletChart·AlertDialog·Spinner·Dialog
+현재 item 12개가 HTTP 200입니다. 공개 82번째 manifest는 schema 2,
+item 146개입니다. 기존 기록의 AppShell·Operations browser 동작과
+13개 item 복합 소비자 검사도 이 공개 revision 범위를 다룹니다.
+
+83번째 raw release의 146개 item 전체 설치·144개 Usage typecheck는
+[소비자 기록](full-registry-83-consumer-2026-10-04.md)에 있습니다.
+이는 최신 코드의 설치 가능성을 보강하지만, 사용자 사이트의 83번째
+manifest와 Dialog 크기 preview는 아직 404입니다. 따라서 공개 범위와
+최신 미게시 변경을 분리해 기록하고 Goal 관리용 추정 약 99%를 유지합니다.
