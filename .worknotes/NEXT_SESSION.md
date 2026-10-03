@@ -1,5 +1,11 @@
 # Component 확장 작업 인계
 
+2026-10-04 Goal 공개 범위 재확인: 144개 component·16개 category,
+공개 82번째 manifest의 146개 item, 요구 범위 대표 item 12개 HTTP 200을
+확인했습니다. 좌우·하단·floating 패널, title·subtitle·텍스트 bullet과
+spinner 다섯 형태도 현재 source에 있습니다. 83번째 사이트 게시가
+남아 Goal 관리용 추정은 약 99%입니다.
+[범위 기록](goal-scope-audit-2026-10-03.md)을 참고하세요.
 2026-10-04 83번째 전체 registry 소비자 검사: GitHub raw 고정 URL의
 146개 item을 새 소비자에 동시 설치했습니다. 생성 파일 148개가
 manifest 내용과 일치하고, 146개 모듈을 모두 import한 typecheck·build와
