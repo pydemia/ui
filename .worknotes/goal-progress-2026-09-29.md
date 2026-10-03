@@ -1,5 +1,13 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 `RadarChart` 로컬 후보: **약 98% → 약 98%**입니다.
+동일 척도의 평가 차원을 비교하는 원본 component와 두 가지 표시
+형태를 추가했습니다. 로컬 141개 component·143개 item의 대상/전체
+테스트·typecheck·build·390px preview를 확인했으며 provenance 고지,
+snapshot·CI·공개 공급은 남았습니다. 공개 확인 수량은
+138개 component·140개 item입니다.
+[작업 기록](radar-chart-2026-10-03.md)을 참고하세요.
+
 2026-10-03 `Autocomplete` 병합·공개 대기: **약 98% → 약 98%**입니다.
 PR #127과 `main`의 Verify UI·Pages가 통과했습니다. 저장소는
 140개 component·142개 item·71개 snapshot이며 Vercel 배포 제한으로

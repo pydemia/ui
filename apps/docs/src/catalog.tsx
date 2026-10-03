@@ -62,7 +62,8 @@ import {
     NativeSelect, NotificationCenter, NumberInput,
     PageHeader, Pagination, PasswordInput, PinInput, PivotTable, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
-    QueryBuilder, RadioGroup, RadioGroupItem, RangeSlider, Rating, Reasoning,
+    QueryBuilder, RadarChart, RadioGroup, RadioGroupItem, RangeSlider,
+    Rating, Reasoning,
     ResponseFeedback, ResultState,
     ResizablePanels, ScatterChart, ScrollArea,
     SearchInput,
@@ -3534,6 +3535,50 @@ function TreemapChartPreview() {
                 nodes={nodes} appearance={appearance} />
         </div>
     );
+}
+
+function RadarChartPreview() {
+    const [variant, setVariant] = useState<"line" | "filled">("filled");
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const [scenario, setScenario] = useState<"data" | "missing" | "empty">(
+        "data",
+    );
+    const axes = scenario === "empty" ? [] : [
+        { id: "speed", label: "응답 속도" },
+        { id: "reliability", label: "안정성" },
+        { id: "accessibility", label: "접근성" },
+        { id: "usability", label: "사용성" },
+        { id: "coverage", label: "기능 범위" },
+    ];
+    const series = scenario === "empty" ? [] : [
+        { id: "current", label: "현재", values: [
+            4, 5, scenario === "missing" ? null : 3, 4, 3,
+        ] },
+        { id: "target", label: "목표", values: [5, 5, 4, 5, 4] },
+    ];
+
+    return <div className="preview-stack">
+        <div className="preview-row">
+            <Button variant="outline" onClick={() => setVariant(
+                variant === "line" ? "filled" : "line",
+            )}>형태: {variant === "line" ? "선" : "채움"}</Button>
+            <Button variant="outline" onClick={() => setAppearance(
+                appearance === "panel" ? "plain" : "panel",
+            )}>표시: {appearance === "panel" ? "패널" : "평면"}</Button>
+            <Button variant="outline" onClick={() => setScenario(
+                scenario === "missing" ? "data" : "missing",
+            )}>{scenario === "missing" ? "전체 값" : "일부 미수집"}</Button>
+            <Button variant="outline" onClick={() => setScenario(
+                scenario === "empty" ? "data" : "empty",
+            )}>{scenario === "empty" ? "데이터 표시" : "빈 데이터"}</Button>
+        </div>
+        <RadarChart title="제품 경험 평가" max={5} unit="점"
+            description="같은 0–5점 척도의 차원을 현재와 목표로 비교합니다."
+            axes={axes} series={series} variant={variant}
+            appearance={appearance} />
+    </div>;
 }
 
 function PivotTablePreview() {
@@ -7916,6 +7961,26 @@ function JobTerminal() {
     ] },
   ]} />`,
         preview: () => <TreemapChartPreview />,
+    },
+    {
+        id: "radar-chart", name: "RadarChart",
+        category: "Data & analytics",
+        description: "동일한 비음수 척도의 세 개 이상 차원을 여러 계열로 비교합니다. 일부 값이 없으면 선을 이어 그리거나 면을 채우지 않으며, 정확한 값과 미수집 상태는 표에 남깁니다.",
+        code: `import { RadarChart } from "@pydemia/ui";
+
+<RadarChart title="제품 경험 평가" max={5} unit="점"
+  axes={[
+    { id: "speed", label: "응답 속도" },
+    { id: "reliability", label: "안정성" },
+    { id: "accessibility", label: "접근성" },
+    { id: "usability", label: "사용성" },
+    { id: "coverage", label: "기능 범위" },
+  ]}
+  series={[
+    { id: "current", label: "현재", values: [4, 5, null, 4, 3] },
+    { id: "target", label: "목표", values: [5, 5, 4, 5, 4] },
+  ]} variant="filled" />`,
+        preview: () => <RadarChartPreview />,
     },
     {
         id: "pivot-table", name: "PivotTable",

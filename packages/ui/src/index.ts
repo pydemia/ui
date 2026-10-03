@@ -231,6 +231,10 @@ export { TreemapChart } from "./components/treemap-chart";
 export type {
     TreemapChartProps, TreemapNode, TreemapLeaf, TreemapGroup,
 } from "./components/treemap-chart";
+export { RadarChart } from "./components/radar-chart";
+export type {
+    RadarChartProps, RadarAxis, RadarSeries,
+} from "./components/radar-chart";
 export { PivotTable } from "./components/pivot-table";
 export type {
     PivotTableProps, PivotAxisItem, PivotRecord,

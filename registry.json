@@ -721,6 +721,11 @@
       "files": [{ "path": "packages/ui/src/components/treemap-chart.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-radar-chart", "type": "registry:ui", "title": "Radar Chart",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/radar-chart.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-pivot-table", "type": "registry:ui", "title": "Pivot Table",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/pivot-table.tsx", "type": "registry:ui" }]
