@@ -726,6 +726,11 @@
       "files": [{ "path": "packages/ui/src/components/radar-chart.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-sankey-chart", "type": "registry:ui", "title": "Sankey Chart",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/sankey-chart.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-pivot-table", "type": "registry:ui", "title": "Pivot Table",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/pivot-table.tsx", "type": "registry:ui" }]

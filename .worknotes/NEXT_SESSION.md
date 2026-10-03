@@ -1,5 +1,29 @@
 # Component 확장 작업 인계
 
+2026-10-03 공급·품질 운영 범위 재평가: 후보 선정과 품질 확인, 공개
+공급을 별도로 판정합니다. 변경한 동작의 증거 한 가지와 preview·Usage를
+기본 수동 범위로 삼고, CI·snapshot은 릴리스 묶음에 적용합니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)에 상세 기준이
+있습니다. `SankeyChart`의 PR·배포 확인은 계속 남았고 Goal 관리용
+추정은 약 98%입니다.
+
+2026-10-03 `SankeyChart` 릴리스 후보: 고지를 source commit에 고정하고
+73번째 snapshot과 공개용 복사본을 만들었습니다.
+`registry:release-check`는 144개 item·142개 export/catalog와 현재
+snapshot 일치를 확인했습니다. PR CI·공개 URL은 남았습니다.
+[작업 기록](sankey-chart-2026-10-03.md)에 검증 범위와 ID가 있습니다.
+Goal 관리용 추정은 약 98%입니다.
+
+2026-10-03 `SankeyChart` 로컬 후보: 인접 단계의 수량 이동을 원본
+React·SVG로 추가했습니다. 대상 테스트 5/5, typecheck·build,
+로컬 Chromium의 넓은 화면과 390px preview, 방향키 스크롤을
+확인했습니다. 전체 UI 260/260·PRISM 25/25가 통과했습니다.
+이 단계에서는 registry 고지 고정·snapshot·전체 CI·공개 배포가
+남았습니다.
+[작업 기록](sankey-chart-2026-10-03.md)에 범위가 있습니다.
+로컬 후보 142개 component·144개 item, 공개 확인 140개·142개,
+Goal 관리용 추정 약 98%입니다.
+
 2026-10-03 `RadarChart` PR #129 병합·공개 대기: PR과 `main`의
 Verify UI·Pages가 통과했습니다. Vercel은 배포 횟수 제한으로
 실패했고 72번째 manifest와 현재 item은 공개 도메인에서 HTTP

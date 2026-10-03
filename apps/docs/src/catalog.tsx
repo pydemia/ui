@@ -62,7 +62,7 @@ import {
     NativeSelect, NotificationCenter, NumberInput,
     PageHeader, Pagination, PasswordInput, PinInput, PivotTable, Popover,
     PopoverClose, PopoverContent, PopoverTrigger, Progress, PromptInput,
-    QueryBuilder, RadarChart, RadioGroup, RadioGroupItem, RangeSlider,
+    QueryBuilder, RadarChart, SankeyChart, RadioGroup, RadioGroupItem, RangeSlider,
     Rating, Reasoning,
     ResponseFeedback, ResultState,
     ResizablePanels, ScatterChart, ScrollArea,
@@ -3578,6 +3578,56 @@ function RadarChartPreview() {
             description="같은 0–5점 척도의 차원을 현재와 목표로 비교합니다."
             axes={axes} series={series} variant={variant}
             appearance={appearance} />
+    </div>;
+}
+
+function SankeyChartPreview() {
+    const [variant, setVariant] = useState<"ribbon" | "line">("ribbon");
+    const [appearance, setAppearance] = useState<"panel" | "plain">(
+        "panel",
+    );
+    const [scenario, setScenario] = useState<"data" | "missing" | "empty">(
+        "data",
+    );
+    const nodes = scenario === "empty" ? [] : [
+        { id: "direct", label: "직접 방문", stage: 0 },
+        { id: "referral", label: "추천 유입", stage: 0 },
+        { id: "home", label: "홈", stage: 1 },
+        { id: "product", label: "제품 페이지", stage: 1 },
+        { id: "signup", label: "가입", stage: 2 },
+        { id: "exit", label: "이탈", stage: 2 },
+    ];
+    const links = scenario === "empty" ? [] : [
+        { id: "direct-home", source: "direct", target: "home", value: 40 },
+        { id: "direct-product", source: "direct", target: "product", value: 20 },
+        { id: "referral-home", source: "referral", target: "home", value: 10 },
+        { id: "referral-product", source: "referral", target: "product", value: 30 },
+        { id: "home-signup", source: "home", target: "signup", value: 20 },
+        { id: "home-exit", source: "home", target: "exit", value: 30 },
+        { id: "product-signup", source: "product", target: "signup",
+            value: scenario === "missing" ? null : 35 },
+        { id: "product-exit", source: "product", target: "exit", value: 15 },
+    ];
+
+    return <div className="preview-stack preview-stack-wide">
+        <div className="preview-row">
+            <Button variant="outline" onClick={() => setVariant(
+                variant === "ribbon" ? "line" : "ribbon",
+            )}>형태: {variant === "ribbon" ? "리본" : "선"}</Button>
+            <Button variant="outline" onClick={() => setAppearance(
+                appearance === "panel" ? "plain" : "panel",
+            )}>표시: {appearance === "panel" ? "패널" : "평면"}</Button>
+            <Button variant="outline" onClick={() => setScenario(
+                scenario === "missing" ? "data" : "missing",
+            )}>{scenario === "missing" ? "전체 값" : "일부 미수집"}</Button>
+            <Button variant="outline" onClick={() => setScenario(
+                scenario === "empty" ? "data" : "empty",
+            )}>{scenario === "empty" ? "데이터 표시" : "빈 데이터"}</Button>
+        </div>
+        <SankeyChart title="유입부터 가입까지" unit="명"
+            description="방문 경로별 이동 인원입니다. 미수집 경로는 표에 남깁니다."
+            stages={["유입", "방문", "결과"]} nodes={nodes} links={links}
+            variant={variant} appearance={appearance} />
     </div>;
 }
 
@@ -7981,6 +8031,27 @@ function JobTerminal() {
     { id: "target", label: "목표", values: [5, 5, 4, 5, 4] },
   ]} variant="filled" />`,
         preview: () => <RadarChartPreview />,
+    },
+    {
+        id: "sankey-chart", name: "SankeyChart",
+        category: "Data & analytics",
+        description: "인접 단계 사이의 이동 수량을 폭이 다른 경로로 표시합니다. 0과 미수집을 구분하고 정확한 출발·도착·수량은 표로 제공합니다. 단계와 경로의 순서는 입력 순서입니다.",
+        code: `import { SankeyChart } from "@pydemia/ui";
+
+<SankeyChart title="유입부터 가입까지" unit="명"
+  stages={["유입", "방문", "결과"]}
+  nodes={[
+    { id: "direct", label: "직접 방문", stage: 0 },
+    { id: "referral", label: "추천 유입", stage: 0 },
+    { id: "home", label: "홈", stage: 1 },
+    { id: "signup", label: "가입", stage: 2 },
+  ]}
+  links={[
+    { id: "direct-home", source: "direct", target: "home", value: 40 },
+    { id: "referral-home", source: "referral", target: "home", value: 10 },
+    { id: "home-signup", source: "home", target: "signup", value: 25 },
+  ]} variant="ribbon" />`,
+        preview: () => <SankeyChartPreview />,
     },
     {
         id: "pivot-table", name: "PivotTable",
