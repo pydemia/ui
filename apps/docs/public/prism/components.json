@@ -1210,11 +1210,13 @@
       "name": "Switch / Tooltip / Progress / Files",
       "category": "Utility",
       "purpose": "환경 선택·도움말·진행률·파일 선택과 제거",
-      "contract": "Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip은 focus와 hover에서 열리며 side/align/small/arrow로 배치를 지정합니다. Progress null은 indeterminate이며 showPercent 기본값은 false, displayValue와 color는 소비자가 지정합니다. Dropzone은 형식·크기·개수를 검사하고 callback으로 File만 전달합니다. 서버 업로드는 실행하지 않습니다.",
+      "contract": "Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip은 focus와 hover에서 열리며 side/align/small/arrow로 배치를 지정합니다. Progress null은 indeterminate이며 showPercent 기본값은 false입니다. Dropzone 기본 형식은 .xlsx/.csv/.pdf/.png/.jpg, 최대 10MB입니다. 확장자가 있으면 MIME보다 확장자로 검사하며 유효한 파일만 선택하고 혼합 거부는 onInvalid(partial)과 onFilesRejected로 전달합니다. maxFiles는 선택 1회당 제한이며 기본값은 제한 없음입니다. 두 파일 입력은 같은 파일 재선택과 제거, disabled/readOnly, 소비자 소유 files의 ready/uploading/error를 지원합니다. FileAttach는 accept로 선택기를 제한하고 multiple 기본값은 true입니다. 파일 업로드·완료·실패·다운로드는 소비자가 처리합니다.",
       "states": [
         "default",
         "disabled",
-        "loading"
+        "loading",
+        "error",
+        "long"
       ],
       "source": [
         "ui/input/HRXSwitch.tsx",
@@ -1223,22 +1225,40 @@
         "ui/input/HRXFileAttach.tsx",
         "ui/input/HRXFileDropzone.tsx"
       ],
-      "usage": "import { PrismProgress } from \"@pydemia/prism\";\n<PrismProgress value={progress} label=\"처리 진행률\" />;",
+      "usage": "import { useRef, useState } from \"react\";\nimport { PrismFileDropzone, PrismFileAttach, PrismButton, type PrismAttachment } from \"@pydemia/prism\";\nexport function FileSelectionExample() {\n    const nextId = useRef(0);\n    const [files, setFiles] = useState<PrismAttachment[]>([]);\n    const [error, setError] = useState(\"\");\n    function select(selected: File[]) {\n        // Upload in your host; update status from its result. This demo only stores names.\n        setFiles(current => [...current, ...selected.map(file => ({\n            id: `file-${nextId.current++}`, name: file.name, status: \"ready\" as const,\n            sizeLabel: `${Math.max(1, Math.round(file.size / 1024))}KB`,\n        }))]);\n    }\n    const remove = (id: string) => setFiles(current => current.filter(file => file.id !== id));\n    return <section data-prism=\"light\">\n        <PrismFileDropzone files={files} onFilesSelected={select} onRemove={remove}\n            onInvalid={reason => setError(reason === \"partial\" ? \"일부 파일만 첨부되었습니다.\" : \"파일을 확인해 주세요.\")} />\n        <PrismFileAttach files={files} onFilesSelected={select} onRemove={remove} />\n        {error && <p role=\"alert\">{error}<PrismButton variant=\"shape\" onClick={() => setError(\"\")}>닫기</PrismButton></p>}\n    </section>;\n}",
       "sourcePath": "packages/prism/src/prism-utility.tsx",
       "previewUrl": "/prism?component=prism-utility",
       "embedUrl": "/prism?component=prism-utility&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-utility&view=responsive",
       "verification": {
-        "visual": "pending",
+        "visual": "partial",
         "interaction": "partial",
         "checks": [
-          "Local fixture PDF upload shows attachment tile"
+          "Fresh anonymous original /sample and local built file inputs: drop area 140.375px, icon 40px, guide 13px/1.4, hint 10px/1.4; tile 240x46px, attach row 28px, add button 81.484375x28px",
+          "Original and local native file chooser accept the valid uppercase PDF extension despite octet-stream MIME and reject EXE in a mixed selection",
+          "Local mixed selection emits the accepted subset, structured rejected files and partial feedback; selected tiles and rows show host-owned uploading/ready/error",
+          "Native chooser re-selection of the same file after removal, input reset, removal through either display, and host-driven completion",
+          "Browser DOM DataTransfer drop accepts valid subset; nested child drag leave retains highlight, final leave clears it; settled drag border #416395/background #eef2fa",
+          "Disabled picker and removal, blocked DOM drop; readonly and single-selection attach verified in emitted consumer at actual 320px plus component tests",
+          "Actual 320px viewport: long filenames ellipsize, file tiles scroll inside a 288px list, page scroll width remains 320px",
+          "Dynamic file control widths 140/200/400/800px; attach header stacks below 180px without changing desktop geometry",
+          "Current local 119 fixtures at 320px: render failures/root overflow/nested buttons/unlabeled visible native controls/page errors all zero",
+          "PRISM 30 component tests; 39 registry items/62 files and 12 complete examples compiled in a fresh isolated consumer before the final icon/CSS correction; final emitted source/CSS subsequently synchronized and compiled separately"
         ],
         "evidence": [
-          "local-utility"
+          "local-reference-files-comparison-direct",
+          "local-files-partial-direct",
+          "local-files-long-320-direct",
+          "local-files-final-119-fixtures-320-direct",
+          "reference-files-zone-current-partial",
+          "reference-files-attach-current-uploading",
+          "consumer-files-final-readonly-single-direct"
         ],
         "remaining": [
-          "remove, reject and drag/drop paths"
+          "Switch, Tooltip and Progress source state combinations",
+          "native operating-system drag and file dialog interactions beyond the browser filechooser event",
+          "authenticated upload/download service integration belongs to the host; not executed",
+          "all accepted format/size/count/browser combinations"
         ]
       },
       "exports": [
@@ -1255,6 +1275,18 @@
           "kind": "component"
         },
         {
+          "name": "PrismFileInvalidReason",
+          "kind": "type"
+        },
+        {
+          "name": "PrismFileDropzoneProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismFileAttachProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismFileDropzone",
           "kind": "component"
         },
@@ -1263,8 +1295,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismProgress } from \"@/components/ui/prism-utility\";\n<PrismProgress value={progress} label=\"처리 진행률\" />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismFileDropzone, PrismFileAttach } from \"@/components/ui/prism-utility\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { type PrismAttachment } from \"@/components/ui/prism-admin\";\nexport function FileSelectionExample() {\n    const nextId = useRef(0);\n    const [files, setFiles] = useState<PrismAttachment[]>([]);\n    const [error, setError] = useState(\"\");\n    function select(selected: File[]) {\n        // Upload in your host; update status from its result. This demo only stores names.\n        setFiles(current => [...current, ...selected.map(file => ({\n            id: `file-${nextId.current++}`, name: file.name, status: \"ready\" as const,\n            sizeLabel: `${Math.max(1, Math.round(file.size / 1024))}KB`,\n        }))]);\n    }\n    const remove = (id: string) => setFiles(current => current.filter(file => file.id !== id));\n    return <section data-prism=\"light\">\n        <PrismFileDropzone files={files} onFilesSelected={select} onRemove={remove}\n            onInvalid={reason => setError(reason === \"partial\" ? \"일부 파일만 첨부되었습니다.\" : \"파일을 확인해 주세요.\")} />\n        <PrismFileAttach files={files} onFilesSelected={select} onRemove={remove} />\n        {error && <p role=\"alert\">{error}<PrismButton variant=\"shape\" onClick={() => setError(\"\")}>닫기</PrismButton></p>}\n    </section>;\n}"
     },
     {
       "id": "prism-record",

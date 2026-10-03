@@ -12,11 +12,11 @@
 
 ## 브라우저 동작
 
-현재 수정본은 `73be258`의 폰트·인쇄 변경입니다. IAB 연결은 없지만 `agent-browser 0.38.2`와 설치된 별도 headless Chromium으로 검증했습니다. 기존 Chrome 프로필과 로그인을 사용하거나 변경하지 않았으며 Mac 잠금도 해제하지 않았습니다.
+파일 입력 보완본은 bundled Playwright 1.62.1과 설치된 별도 headless Chromium 1223으로 검증했습니다. IAB 연결은 없지만 fresh browser context에서 원본 HTTP `/sample`을 직접 열 수 있습니다. 기존 Chrome 프로필과 로그인을 사용하거나 변경하지 않았으며 Mac 잠금도 해제하지 않았습니다.
 
 | 범위 | 확인한 결과 | 남은 범위 |
 | --- | --- | --- |
-| 최신 fixture | 실제 320px viewport에서 38그룹·117상태 렌더, 누락·중첩 버튼·페이지 가로 넘침·표시 입력 이름 누락·수집된 page error 0건 | 원본 상태별 시각 비교와 모든 상호작용 |
+| 최신 fixture | 실제 320px viewport에서 38그룹·119상태 렌더, 누락·중첩 버튼·페이지 가로 넘침·표시 입력 이름 누락·수집된 page error 0건 | 원본 상태별 시각 비교와 모든 상호작용 |
 | 폰트 | 문서·embedded preview의 `Pretendard Variable` face가 실제 loaded 상태이며 해당 family를 사용 | 원본 static font와 모든 글자 폭 비교 |
 | Avatar | 140px에서 자연 배치·이름/팀/양쪽 축약, 짧은 라벨 보존, 잘린 라벨의 focus/hover 도움말, Escape·확장 후 닫기, 재축약만으로 다시 열리지 않음 | 원본 길이·폭 조합, chip/table의 모든 상태 |
 | Toast | 폰트 수정본의 320px 화면에서 body 6px/content 4px gap, 20px 닫기 버튼, 닫기 후 제거 | 원본 tone·긴 내용·배치 조합 |
@@ -26,7 +26,7 @@
 | 관리자 양식 | 기존 IAB에서 전체 회사의 회사 입력 비활성화, 게시기간 필수, 팝업 OFF 시 날짜 null, 역할별 그룹 해제, 선택 제한과 저장 의도 | 원본 관리자 화면 비교 |
 | 공지·방침 | 기존 IAB에서 비모달 다음 공지, 버전 변경·높이 안정화, script 없는 iframe sandbox | 목록·오류·긴 문서 |
 | 프로필·PDF·Workspace | 기존 IAB에서 8개 분류, 경험 전환·의견 저장, 실제 PDF 2페이지·200% 내부 스크롤·320/390/1024px fit, 패널 드래그/키보드, Drawer 전환·draft 보존 | 원본 도메인·shell 및 모든 popup/long 조합 |
-| 파일 | 기존 IAB에서 가상 PDF 선택과 attachment tile | 삭제·거부·drag/drop |
+| 파일 | 원본·재현본의 native browser filechooser로 혼합 선택·부분 첨부·MIME와 다른 확장자 허용을 확인했습니다. 재현본의 같은 파일 재선택·제거·호스트 상태 변경, disabled, DOM DataTransfer 드롭·중첩 drag 강조, 실제 320px과 140/200/400/800px 폭도 확인했습니다. | OS 수준 drag/dialog, 실제 업로드·다운로드 서비스, 모든 형식·제한 조합 |
 
 폰트 파일은 이미 포함되어 있었지만 문서·embedded preview·차트가 face 이름과 다른 `Pretendard`를 지정해 대체 폰트를 사용했습니다. `--font-ui`의 `Pretendard Variable`을 사용하도록 수정했습니다. 파일 다운로드나 `document.fonts.check()`만으로는 해당 폰트의 실제 사용을 확인할 수 없습니다.
 
@@ -36,13 +36,22 @@
 
 원격 SankeyChart까지 반영한 `b5ccface` 기준에서 전체 build·TypeScript·PRISM 계약 25개·일반 UI 테스트 260개를 통과했습니다. 일반 registry 144개·catalog 142개·불변 release 73개와 현재 snapshot `sha256-9bf65f08c6e3daa55815c07059472e3b3fbf73651f55169bbbc23398927e88d0` 검증을 통과했습니다. 이후 폰트·인쇄 변경의 전체 build, 문서 TypeScript와 PRISM 예시 계약 검사도 통과했습니다.
 
-38그룹 모두 설치용 import와 typed contract를 제공합니다. 완전한 React 예시는 11개, 소비자 데이터·상태·callback이 필요한 연동 코드 일부는 27개입니다. workspace 예시 타입 검사와 설치 의존성 내 import 검사를 기존 CI에서 실행합니다.
+38그룹 모두 설치용 import와 typed contract를 제공합니다. 완전한 React 예시는 12개, 소비자 데이터·상태·callback이 필요한 연동 코드 일부는 26개입니다. workspace 예시 타입 검사와 설치 의존성 내 import 검사를 기존 CI에서 실행합니다.
 
 공개 Avatar release `ff1f27a`에서 `node scripts/verify-prism-consumer.mjs --public`으로 39항목·62파일을 독립 설치하고 11예시 타입 검사·Vite·폰트 bytes·자산 고지를 확인했습니다. 최신 폰트/인쇄 CSS를 해당 소비자에 registry bytes 그대로 동기화한 뒤 TypeScript/Vite와 폰트 bytes를 다시 확인했습니다. 이 후속 검사는 새 shadcn 설치가 아닙니다. 소비자는 모든 설치 소스를 컴파일하며 렌더 demo는 Button입니다.
 
 `ff1f27a`의 GitHub Verify UI·Pages와 Vercel 배포는 통과했습니다. 당시 `/prism`, manifest·registry·폰트의 HTTP bytes도 확인했습니다. 폰트·인쇄 수정의 공개 commit `dd49ecbe`는 Verify UI run37098604514·Pages·Vercel이 모두 통과했습니다. 현재 manifest·registry의 HTTP bytes가 로컬과 일치하며 공개 117상태의 320px 검사, 실제 폰트 사용, Avatar focus/hover/resize와 Usage 경로 전환도 확인했습니다. 공개 짧은/긴 PDF는 각각 1/2장이며 이미 검토한 로컬 PDF와 렌더 pixels가 모두 일치했습니다.
 
-원본 `http://dev.prism.ai`는 HTTP 요청에는 응답했지만 이번 headless 세션에서는 HTTPS 전환 뒤 반복 리다이렉트가 발생했습니다. HTTPS 직접 접근은 연결이 재설정됐습니다. 기존 화면 기록을 보존하고 새 원본 상태 비교를 미완료로 유지합니다. 브라우저 외 네트워크·DNS·로그인 설정은 변경하지 않았습니다.
+이전 agent-browser 실행에서는 원본 HTTP가 HTTPS 전환 뒤 반복 리다이렉트됐습니다. 같은 설치 Chromium을 bundled Playwright로 직접 실행하니 원본 HTTP `/sample`이 정상 렌더됐습니다. 이 방법으로 파일 입력의 기본·disabled·부분 첨부·uploading·ready·삭제 상태를 새로 관찰했습니다. 기존 화면 기록과 실패 이력은 보존하며 브라우저 외 네트워크·DNS·로그인 설정은 변경하지 않았습니다. 새 context는 인증 정보가 없는 별도 세션입니다.
+
+
+파일 영역 높이 140.375px, 아이콘 40px, 안내 13px/1.4와 hint 10px/1.4, 카드 240×46px, 행 28px, 파일추가 버튼 81.484375×28px를 원본과 재현본에서 비교했습니다. 비교한 부분의 크기는 일치했으며 실제 screenshot도 검토했습니다. 0px border의 none/solid 같은 비표시 computed style과 글자를 직접 표시하지 않는 부모의 상속 값은 별도 raw 기록에 남겼습니다. 전체 화면 pixel 일치로 해석하지 않습니다.
+
+새 파일 입력 구현은 pydemia Button과 원본 벡터를 조합하고 소비자 소유 `files`의 ready/uploading/error를 표시합니다. 원본 sample의 가짜 업로드 timer는 라이브러리에 넣지 않았습니다. 문서 예시에서 상태를 직접 바꾸며 업로드는 연동 앱이 담당합니다. 파일명이 길면 생략하고 카드 목록 안에서 스크롤하며 180px 미만의 첨부 header는 세로로 배치합니다.
+
+로컬 registry의 39항목·62파일을 새 독립 소비자에 설치하고 12개 완전한 예시·TypeScript·Vite·폰트 bytes·자산 고지를 확인했습니다. 최종 LinkIcon 20px/CSS 보정은 이 소비자에 최신 registry source bytes를 동기화한 뒤 다시 컴파일했습니다. 후속 동기화를 새 shadcn 설치로 표현하지 않습니다.
+
+이 파일 변경의 공개 배포는 아직 확인하지 않았습니다. 이전 `7cb056df` 기록 커밋의 Vercel 배포는 24시간 rate limit으로 실패했고 앞선 `dd49ecbe` 구현 배포는 확인됐습니다. 동일 quota를 우회하는 재배포는 실행하지 않습니다.
 
 [기계 판독 검증 기록](verification.json)은 확인한 범위와 남은 항목을 제공합니다. 원본 AX·JPEG와 가상 예시의 DOM·PDF는 gitignore된 `.worknotes/browser-evidence/`에 보관하며 공개 사이트에 포함하지 않습니다.
 
