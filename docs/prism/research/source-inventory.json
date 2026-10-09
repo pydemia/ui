@@ -337,16 +337,18 @@
       "name": "ContextInfoLayer",
       "target": "prism-context",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current required/optional badges, trimmed 50-unit validation, source counter warnings and structured action response implemented. Source/deployed style and runtime checks are separate from full authenticated visual parity.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/contextInfo/ContextInfoSection.tsx",
       "name": "ContextInfoSection",
       "target": "prism-context",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current required/optional badges, trimmed 50-unit validation, source counter warnings and structured action response implemented. Source/deployed style and runtime checks are separate from full authenticated visual parity.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/contextInfo/ContextOptionCard.tsx",

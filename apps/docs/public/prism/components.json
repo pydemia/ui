@@ -1817,26 +1817,57 @@
       "id": "prism-context",
       "name": "Context / Option card",
       "category": "AI & agent",
-      "purpose": "맥락 정보 입력과 필수 값·문자 수·최대 선택 개수",
-      "contract": "values와 제출·취소는 controlled callback입니다. textarea는 기본 800자이고 maxSelections에 도달하면 미선택 항목만 비활성화합니다. 필수 값을 입력해야 등록할 수 있습니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "purpose": "맥락 정보 입력·50자 필수 기준·선택 제한과 구조화된 재개 의도",
+      "contract": "fields/values와 실제 서비스 처리는 소비자가 소유합니다. 기본 textarea는 11행, minLength 50, maxLength 800입니다. 필수 입력의 trim().length가 50 이상이어야 등록할 수 있으며 내부 공백과 UTF-16 code units는 원본처럼 셉니다. counter는 원문 길이입니다. 선택 textarea의 짧은 입력과 정확히 800자는 원본의 오류 표시를 유지하되 그 표시만으로 submit을 막지 않습니다. 외부에서 넘긴 800자 초과 입력과 잘못된 선택지는 거부합니다. 필수/선택 배지, collapse의 controlled/defaultOpen, 최대 선택 개수와 이미 선택한 항목 해제를 지원합니다. onAction은 선언된 field key와 원문, 선택된 option의 value/label/description을 source 순서로 반환하고 실제로 클릭한 action label을 전달합니다. 내부/추가 values는 구조화 응답에서 제외합니다. 기존 onSubmit primitive map callback도 지원하며 둘 중 하나를 선택합니다. busy/readOnly, 수동 width, textarea resize, 좁은 폭의 단일 열 배치를 지원합니다. reduceMotion은 호스트가 섹션 애니메이션을 줄이는 옵션이며 기본값은 false입니다. 시스템의 reduced-motion 설정도 따릅니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
-        "loading"
+        "loading",
+        "error",
+        "readonly",
+        "long",
+        "empty"
       ],
       "source": [
         "chat/contextInfo/ContextInfoLayer.tsx",
         "chat/contextInfo/ContextInfoSection.tsx",
         "chat/contextInfo/ContextOptionCard.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextValues } from \"@pydemia/prism\";\n\nexport function ContextExample() {\n  const [values, setValues] = useState<PrismContextValues>({ mission: \"\", areas: [] });\n  const [submitted, setSubmitted] = useState<PrismContextValues | null>(null);\n  return <section>\n    <PrismContextForm fields={[\n      { key: \"mission\", label: \"포지션 Mission\", type: \"textarea\", required: true, maxLength: 800 },\n      { key: \"areas\", label: \"주요 분야\", type: \"options\", maxSelections: 2,\n        options: [{ value: \"research\", label: \"연구개발\" }, { value: \"strategy\", label: \"전략\" }] },\n    ]} values={values} onValueChange={setValues} onSubmit={setSubmitted} />\n    <p role=\"status\">{submitted ? \"입력 의도가 전달되었습니다.\" : \"\"}</p>\n  </section>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextValues, type PrismContextResponse } from \"@pydemia/prism\";\nexport function ContextExample({ reduceMotion = false }: { reduceMotion?: boolean } = {}) {\n  const [values, setValues] = useState<PrismContextValues>({ mission: \"\", areas: [] });\n  const [submitted, setSubmitted] = useState<PrismContextResponse | null>(null);\n  return <section data-prism=\"light\"><PrismContextForm fields={[\n    { key: \"mission\", label: \"포지션 Mission\", type: \"textarea\", required: true, minLength: 50, maxLength: 800, rows: 11 },\n    { key: \"areas\", label: \"주요 분야\", type: \"options\", maxSelections: 2,\n      options: [{ value: \"research\", label: \"연구개발\", description: \"가상 연구개발 분야\" }, { value: \"strategy\", label: \"전략\" }] },\n  ]} values={values} onValueChange={setValues} onAction={response => setSubmitted(response)} reduceMotion={reduceMotion} />\n    <p role=\"status\">{submitted ? JSON.stringify(submitted) : \"\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-context.tsx",
       "previewUrl": "/prism?component=prism-context",
       "embedUrl": "/prism?component=prism-context&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-context&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending"
+        "visual": "partial",
+        "interaction": "partial",
+        "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+        "checks": [
+          "Current source and deployed CSS:14px-high required/optional badges,10px500 font,radius10,red228/88/88 andgray134;source11-row textarea,50 trimmed-unit minimum and800 raw-unit maximum",
+          "Required49 rejects;50 trimmed UTF16 units including internal spaces accepts;raw counter and submitted whitespace remain intact",
+          "Optional short text and exact800 show source warnings without alone blocking valid submit;externally supplied801 is rejected",
+          "Structured actions retain declared service keys,raw nonempty text,option order/value/label/description andclicked action label;extra internal values excluded",
+          "Synthetic CUA:description andcheckbox clicks,max2 gate,Space deselection,collapsed controlled value preservation,submit/cancel,readonly/busy/empty/error/long states",
+          "Actual140/200/320px widths use one option column;800/1000 use two;form/section/card horizontal overflow0",
+          "Native textarea drag233.375 to333px with horizontal overflow0;source-compatible default300ms motion andexplicit reduceMotion override",
+          "Six interaction tests added;75 full PRISM tests passed",
+          "Radix hidden form input no longer interrupts state glyph andfocus CSS selectors;checked/unchecked glyph visibility measured in the form",
+          "Fresh42-item/66-file registry installation and18 complete examples passed TypeScript/Vite/font bytes/notices;installedContextExample inStrictMode at320px submitted preserved text andcanonical option descriptors withvisible glyphs/nooverflow/errors"
+        ],
+        "evidence": [
+          "context.test.mjs",
+          "context-deployed-css.json",
+          "context-live-cua.json",
+          "context-static-140-cua.json",
+          "context-full-consumer-retry.log",
+          "context-consumer-u0eKVn.json"
+        ],
+        "remaining": [
+          "Fresh authenticated deployed Context states andcomplete rendered/source geometry orpixel comparison",
+          "Default section animation in the locked environment did not advance beyond its initial frame;interaction checks usedreduceMotion=true",
+          "Page.captureScreenshot timed out after5000ms in this phase;no new screenshot file",
+          "Full service schema/query continuation,OSIME/touch andallfont/low-height combinations"
+        ]
       },
       "exports": [
         {
@@ -1852,6 +1883,22 @@
           "kind": "type"
         },
         {
+          "name": "PrismContextAction",
+          "kind": "type"
+        },
+        {
+          "name": "PrismContextResponseOption",
+          "kind": "type"
+        },
+        {
+          "name": "PrismContextResponse",
+          "kind": "type"
+        },
+        {
+          "name": "PrismContextSectionProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismContextSection",
           "kind": "component"
         },
@@ -1860,12 +1907,24 @@
           "kind": "component"
         },
         {
+          "name": "prismContextPlaceholder",
+          "kind": "value"
+        },
+        {
+          "name": "createPrismContextResponse",
+          "kind": "component"
+        },
+        {
+          "name": "PrismContextFormProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismContextForm",
           "kind": "component"
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextValues } from \"@/components/ui/prism-context\";\n\nexport function ContextExample() {\n  const [values, setValues] = useState<PrismContextValues>({ mission: \"\", areas: [] });\n  const [submitted, setSubmitted] = useState<PrismContextValues | null>(null);\n  return <section>\n    <PrismContextForm fields={[\n      { key: \"mission\", label: \"포지션 Mission\", type: \"textarea\", required: true, maxLength: 800 },\n      { key: \"areas\", label: \"주요 분야\", type: \"options\", maxSelections: 2,\n        options: [{ value: \"research\", label: \"연구개발\" }, { value: \"strategy\", label: \"전략\" }] },\n    ]} values={values} onValueChange={setValues} onSubmit={setSubmitted} />\n    <p role=\"status\">{submitted ? \"입력 의도가 전달되었습니다.\" : \"\"}</p>\n  </section>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextValues, type PrismContextResponse } from \"@/components/ui/prism-context\";\nexport function ContextExample({ reduceMotion = false }: { reduceMotion?: boolean } = {}) {\n  const [values, setValues] = useState<PrismContextValues>({ mission: \"\", areas: [] });\n  const [submitted, setSubmitted] = useState<PrismContextResponse | null>(null);\n  return <section data-prism=\"light\"><PrismContextForm fields={[\n    { key: \"mission\", label: \"포지션 Mission\", type: \"textarea\", required: true, minLength: 50, maxLength: 800, rows: 11 },\n    { key: \"areas\", label: \"주요 분야\", type: \"options\", maxSelections: 2,\n      options: [{ value: \"research\", label: \"연구개발\", description: \"가상 연구개발 분야\" }, { value: \"strategy\", label: \"전략\" }] },\n  ]} values={values} onValueChange={setValues} onAction={response => setSubmitted(response)} reduceMotion={reduceMotion} />\n    <p role=\"status\">{submitted ? JSON.stringify(submitted) : \"\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-primitives",

@@ -422,27 +422,25 @@ import { PrismManagementForm } from "@/components/ui/prism-management";
 ```
 
 ## Context / Option card
-맥락 정보 입력과 필수 값·문자 수·최대 선택 개수
-Contract: values와 제출·취소는 controlled callback입니다. textarea는 기본 800자이고 maxSelections에 도달하면 미선택 항목만 비활성화합니다. 필수 값을 입력해야 등록할 수 있습니다.
-States: default, loading
+맥락 정보 입력·50자 필수 기준·선택 제한과 구조화된 재개 의도
+Contract: fields/values와 실제 서비스 처리는 소비자가 소유합니다. 기본 textarea는 11행, minLength 50, maxLength 800입니다. 필수 입력의 trim().length가 50 이상이어야 등록할 수 있으며 내부 공백과 UTF-16 code units는 원본처럼 셉니다. counter는 원문 길이입니다. 선택 textarea의 짧은 입력과 정확히 800자는 원본의 오류 표시를 유지하되 그 표시만으로 submit을 막지 않습니다. 외부에서 넘긴 800자 초과 입력과 잘못된 선택지는 거부합니다. 필수/선택 배지, collapse의 controlled/defaultOpen, 최대 선택 개수와 이미 선택한 항목 해제를 지원합니다. onAction은 선언된 field key와 원문, 선택된 option의 value/label/description을 source 순서로 반환하고 실제로 클릭한 action label을 전달합니다. 내부/추가 values는 구조화 응답에서 제외합니다. 기존 onSubmit primitive map callback도 지원하며 둘 중 하나를 선택합니다. busy/readOnly, 수동 width, textarea resize, 좁은 폭의 단일 열 배치를 지원합니다. reduceMotion은 호스트가 섹션 애니메이션을 줄이는 옵션이며 기본값은 false입니다. 시스템의 reduced-motion 설정도 따릅니다.
+States: default, loading, error, readonly, long, empty
 Registry: /prism/r/prism-context.json
 Source: packages/prism/src/prism-context.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
 import { useState } from "react";
-import { PrismContextForm, type PrismContextValues } from "@/components/ui/prism-context";
-
-export function ContextExample() {
+import { PrismContextForm, type PrismContextValues, type PrismContextResponse } from "@/components/ui/prism-context";
+export function ContextExample({ reduceMotion = false }: { reduceMotion?: boolean } = {}) {
   const [values, setValues] = useState<PrismContextValues>({ mission: "", areas: [] });
-  const [submitted, setSubmitted] = useState<PrismContextValues | null>(null);
-  return <section>
-    <PrismContextForm fields={[
-      { key: "mission", label: "포지션 Mission", type: "textarea", required: true, maxLength: 800 },
-      { key: "areas", label: "주요 분야", type: "options", maxSelections: 2,
-        options: [{ value: "research", label: "연구개발" }, { value: "strategy", label: "전략" }] },
-    ]} values={values} onValueChange={setValues} onSubmit={setSubmitted} />
-    <p role="status">{submitted ? "입력 의도가 전달되었습니다." : ""}</p>
+  const [submitted, setSubmitted] = useState<PrismContextResponse | null>(null);
+  return <section data-prism="light"><PrismContextForm fields={[
+    { key: "mission", label: "포지션 Mission", type: "textarea", required: true, minLength: 50, maxLength: 800, rows: 11 },
+    { key: "areas", label: "주요 분야", type: "options", maxSelections: 2,
+      options: [{ value: "research", label: "연구개발", description: "가상 연구개발 분야" }, { value: "strategy", label: "전략" }] },
+  ]} values={values} onValueChange={setValues} onAction={response => setSubmitted(response)} reduceMotion={reduceMotion} />
+    <p role="status">{submitted ? JSON.stringify(submitted) : ""}</p>
   </section>;
 }
 ```
