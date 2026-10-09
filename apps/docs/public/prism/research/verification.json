@@ -759,31 +759,77 @@
         "Page.captureScreenshot timed out after5000ms in this phase;no new screenshot file",
         "Full service schema/query continuation,OSIME/touch andallfont/low-height combinations"
       ]
+    },
+    "prism-candidate-list": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "Source and deployed selected gp77p/ekoga CSS match list padding36,toolbar margins24/10 andgap20,informationgap10,actiongap8,page-sizewidth120,andconfirmnote14px/1.4/subgray/margin8",
+        "Controlled selection rejects an excess100 change atomically;page changes retain it;search/reset clear it;candidate partial/all header clears every page",
+        "Source candidate table has sibling profile actions,icon-only remote sort with role defaultdesc,4 skeleton rows andsource empty state;generic Directory eligibility/page-preservation remains unchanged",
+        "Readonly request snapshots andcanonical optional summary/compensation fields;per-kind duplicate guards;retry retains original IDs/options after current selection changes;local unmount doesnot cancel application-owned preparation",
+        "Ten new behavior/lifecycle/pagination/job-copy/page-size tests;full85 PRISM tests passed",
+        "Live CUA:empty-selection alert,selection/page/size/sort,100 limit,preparingnotice,busy,failedretry,partialexclusion,andpreparation continuing afterlist unmount",
+        "Generated two-profile ZIP andsingle summary PDF preserved fromvisibledata-URL links;ZIP CRC andtwo1-pageA4 PDFs parsed;first page raster inspected. Native event timed out andBlob downloadMedia unsupported;OSsaveunverified",
+        "Actual140/200/320/440/800/1000/1280 widths havezero list/filterhorizontaloverflow;tableminimum640 staysinternal. Actual320px iframe,height240,keyboard rootscroll reachesfooter",
+        "Live visual inspection found a legacycard class collision causing stackedtablecells andmissingneutral400 token;final table-cell geometry and16px grey sort icons corrected",
+        "42 groups/146 current-source fixtures rendered inactual320px iframe with component/state DOMmarkers;nohorizontaloverflow,nestedbuttons,unnameddisplayedinputs orbrowsererrors",
+        "Fresh43items/67files/19examples passedTypeScript/Vite/fontbytes/notices. Installed component sources unchanged;portableexample synchronized tofinalusage. ProductionbuiltStrictMode example atactual320px generatedoneZIP withtwoA4 PDFs andbothoptionalfields visibleinraster"
+      ],
+      "evidence": [
+        "candidate-list.test.mjs",
+        "candidate-deployed-css.json",
+        "candidate-cua-runtime.json",
+        "candidate-widths-cua.json",
+        "candidate-zip-validation.json",
+        "candidate-static-146-cua.json",
+        "candidate-consumer-install.log",
+        "candidate-consumer-BXqIdv.json",
+        "candidate-consumer-zip-validation.json"
+      ],
+      "remaining": [
+        "Fresh authenticated deployed candidate list states andcomplete rendered/pixel/static-font comparison",
+        "Native OS save andautomatic browser print integration in thelocked environment",
+        "Full real profile query/mapping andoriginal printable layout;synthetic generated PDFs are integration fixtures",
+        "Current UI screenshot capture timed out after5000ms;no newUI screenshot produced;PDF raster is export evidence only"
+      ]
+    },
+    "prism-directory": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Generic eligibility andother-page preservation preserved",
+        "Current candidate directory uses source-specific table,header-clear-all semantics androle descending default",
+        "Sibling profile button avoids nested buttons andemits oneopen action"
+      ],
+      "remaining": [
+        "Complete authenticated source table state/pixel comparison"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 75,
+      "passed": 85,
       "failed": 0
     },
     "registry": {
-      "groups": 41,
-      "items": 42,
+      "groups": 42,
+      "items": 43,
       "status": "generated"
     },
     "independentConsumer": {
       "status": "passed-fresh-local-install",
-      "items": 42,
-      "files": 66,
-      "completeExamples": 18,
+      "items": 43,
+      "files": 67,
+      "completeExamples": 19,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "portableFont": "emitted andSHA256matched",
+      "portableFont": "emitted andSHA256 matched",
       "assetNotice": "installed andchecked",
-      "sourceScope": "All42 items freshly installed byshadcn CLI;noinstalledsource synchronization. Entry subsequently mountsContextExample reduceMotion underStrictMode.",
-      "runtime": "Actual320px:descriptionclick andSpace selection,structuredsubmit preservingwhitespace/optionorder/descriptors,visiblecheckboxglyphs,nohorizontaloverflow/errors",
-      "initialAttempt": "All42 attempt failed withENOSPC;onlythatfailednode_modules removed. Targeted Context install succeeded buttheharness referenced anunimportedbutton;entryfixed andtsc/Vite passed. Currentall42retry fullypassed."
+      "sourceScope": "Fresh installedcomponent sources unchanged. Portablecandidate-list.example synchronized tofinalemitted usage,thenentry wrapsStrictMode inactual320px iframe andproductionrebuildpassed.",
+      "runtime": "ProductionbuiltCandidateListExample:selection,twooptions,oneZIP link;CRC/two1-pageA4 PDFs andoptionalfieldrasterverified. Nooverflow/nestedbuttons/errors. OSsave/nativeprintunverified."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -866,16 +912,16 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 41,
-      "componentExamples": 18,
+      "groups": 42,
+      "componentExamples": 19,
       "integrationFragments": 23,
-      "workspaceTypecheck": "passed incheck-prism.mjs",
-      "installedTypecheck": "passed innewindependentconsumer",
-      "installationDependencyClosure": "Verified41groups andportabledependencies incheck-prism.mjs;newcollapsible dependencyinstalled"
+      "workspaceTypecheck": "passed check-prism.mjs",
+      "installedTypecheck": "passed independentconsumer",
+      "installationDependencyClosure": "Verified all42groups andportabledependencies;43itemfreshinstallation"
     },
     "currentFixtureStates": {
-      "count": 140,
-      "status": "passed-local-built-document-actual320px-cua",
+      "count": 146,
+      "status": "passed-current-source-documents-actual320px-iframe-cua",
       "previousVerifiedStates": 120,
       "previousPublishedVerificationCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b"
     },
@@ -904,6 +950,12 @@
       "status": "local-and-independent-runtime-verified;draft-publication-pending",
       "production": "pending human-approved publication",
       "purposeMappingIsFullParity": false
+    },
+    "candidateListImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified;draft-publication-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
     }
   },
   "unverified": [
@@ -916,20 +968,21 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 41,
-    "states": 140,
-    "status": "passed-local-built-document-actual320px-cua",
+    "groups": 42,
+    "states": 146,
+    "status": "passed-current-source-documents-actual320px-iframe-cua",
     "checks": [
-      "rendered",
+      "component/state DOMmarker awaited",
+      "actual320px childviewport",
       "pagehorizontaloverflow0",
       "nestedbuttons0",
       "displayedinputnamespresent",
       "browsererrors0"
     ],
     "evidence": [
-      "context-static-140-cua.json"
+      "candidate-static-146-cua.json"
     ],
-    "claim": "Fixture rendering checks do not prove authenticated reference-state orvisualparity. Context interaction usesexplicitreduceMotion=true;defaultmotionremains unverified inlocked environment."
+    "claim": "Source/dev document checks andfreshinstalledproductionexample do notestablish authenticatedoriginal-state/fullpixel parity. Top-levelviewport2501 was unchanged byviewportoverride;theactualiframewidth was320."
   },
   "extensions": {
     "responsiveWorkspace": {

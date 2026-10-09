@@ -234,23 +234,35 @@
       "target": "prism-collection",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-candidate-list"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/candidate/CandidateListContent.tsx",
       "name": "CandidateListContent",
-      "target": "prism-collection",
+      "target": "prism-candidate-list",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source selection/filter/output preparation contract implemented; authenticated deployed states and full rendered parity remain pending.",
+      "recipe": null,
+      "additionalTargets": [
+        "prism-collection"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/candidate/CandidateTable.tsx",
       "name": "CandidateTable",
       "target": "prism-directory",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismCandidateDirectory"
+      "verification": "Source-specific table behavior and styles; generic directory remains separate. Browser and reference state verification in progress.",
+      "recipe": "PrismCandidateDirectory",
+      "additionalTargets": [
+        "prism-candidate-list"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/chart/RadarChart.tsx",

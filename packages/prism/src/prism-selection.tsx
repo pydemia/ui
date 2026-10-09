@@ -49,9 +49,9 @@ export function PrismAutocomplete({ label, options, selectedOption: retained, va
         {errorMessage&&<p className="prism-error" role="alert" id={`${id}-error`}>{errorMessage}</p>}
     </div>;
 }
-export function PrismMultiSelect({ label, options, value, onValueChange, disabled, readOnly, error, searchable = true, size = "medium", allLabel = "전체", allToggleClearsSelection = false }: {
+export function PrismMultiSelect({ label, options, value, onValueChange, disabled, readOnly, error, searchable = true, size = "medium", allLabel = "전체", allToggleClearsSelection = false, placeholder = "선택하세요" }: {
     label: string; options: readonly ComboboxOption[]; value: readonly string[]; onValueChange: (value: string[]) => void;
-    disabled?: boolean; readOnly?: boolean; error?: string; searchable?: boolean; size?: "large" | "medium" | "small"; allLabel?: string; allToggleClearsSelection?: boolean;
+    disabled?: boolean; readOnly?: boolean; error?: string; searchable?: boolean; size?: "large" | "medium" | "small"; allLabel?: string; allToggleClearsSelection?: boolean; placeholder?: string;
 }) {
     const id = useId(); const [open,setOpen] = useState(false); const [query,setQuery] = useState("");
     const eligible=options.filter(o => !o.disabled); const all=eligible.length>0 && eligible.every(o => value.includes(o.value));
@@ -60,7 +60,7 @@ export function PrismMultiSelect({ label, options, value, onValueChange, disable
     const first=value[0]; const summary=all ? allLabel : options.find(o => o.value===first)?.label ?? first;
     return <div className="prism-field prism-multi-select"><label htmlFor={id}>{label}</label><div className="prism-multi-anchor"><Popover open={open} onOpenChange={next => {setOpen(next);setQuery("");}}>
         <PopoverTrigger asChild><button id={id} className="prism-select-trigger" data-size={size} type="button" disabled={disabled || readOnly} role="combobox" aria-expanded={open} aria-controls={`${id}-options`} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} onKeyDown={e=>{if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();setOpen(true);}}}>
-            <span className={value.length ? "prism-sr-only" : undefined}>{value.length ? `${summary}${!all && value.length>1 ? ` 외 ${value.length-1}개` : ""}` : "선택하세요"}</span><ChevronDown aria-hidden="true" size={20} /></button></PopoverTrigger>
+            <span className={value.length ? "prism-sr-only" : undefined}>{value.length ? `${summary}${!all && value.length>1 ? ` 외 ${value.length-1}개` : ""}` : placeholder}</span><ChevronDown aria-hidden="true" size={20} /></button></PopoverTrigger>
         <PopoverContent data-prism="light" className="prism-dropdown" align="start" id={`${id}-options`} aria-label={`${label} 선택 메뉴`} onKeyDown={e=>{
             const choices=Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>('button[role="checkbox"]:not(:disabled)'));
             const index=choices.indexOf(document.activeElement as HTMLButtonElement);let next:number|undefined;
@@ -133,14 +133,16 @@ export function PrismDateRange({ label, start, end, onValueChange, disabled, rea
                 onValueChange={next => onValueChange({ start, end: next })} error={invalid ? "종료일은 시작일 이후여야 합니다." : undefined} /></div>
         {invalid && <p id={id} className="prism-error">종료일은 시작일 이후여야 합니다.</p>}</>}</fieldset>;
 }
-export function PrismPagination({ page, pageCount, onPageChange, disabled }: { page: number; pageCount: number;
-    onPageChange: (page: number) => void; disabled?: boolean }) {
+export function PrismPagination({ page, pageCount, onPageChange, disabled, pageButtonCount = 5 }: { page: number; pageCount: number;
+    onPageChange: (page: number) => void; disabled?: boolean; pageButtonCount?: number }) {
     if (!Number.isInteger(pageCount) || pageCount < 1 || !Number.isInteger(page) || page < 1 || page > pageCount) throw new RangeError("Pagination requires 1 <= page <= pageCount.");
-    const first = Math.max(1, Math.min(page - 2, pageCount - 4));
-    const pages = Array.from({ length: Math.min(5, pageCount) }, (_, i) => first + i);
+    if (!Number.isSafeInteger(pageButtonCount) || pageButtonCount < 1) throw new RangeError("Pagination pageButtonCount must be a positive integer.");
+    const count = Math.min(pageButtonCount, pageCount);
+    const first = Math.max(1, Math.min(page - Math.floor(count / 2), pageCount - count + 1));
+    const pages = Array.from({ length: count }, (_, i) => first + i);
     return <nav className="prism-pagination" aria-label="페이지 이동">{[[1,"첫 페이지",ChevronsLeft],[page - 1,"이전 페이지",ChevronLeft]].map(([next,label,Icon]) => {
         const Glyph = Icon as typeof ChevronLeft; return <button type="button" key={String(label)} aria-label={String(label)} disabled={disabled || page === 1} onClick={() => onPageChange(Number(next))}><Glyph aria-hidden="true" /></button>;
-    })}{pages.map(next => <button type="button" key={next} aria-current={next === page ? "page" : undefined} disabled={disabled} onClick={() => onPageChange(next)}>{next}</button>)}
+    })}<span className="prism-pagination-pages">{pages.map(next => <button type="button" key={next} aria-current={next === page ? "page" : undefined} disabled={disabled} onClick={() => onPageChange(next)}>{next}</button>)}</span>
         <button type="button" aria-label="다음 페이지" disabled={disabled || page === pageCount} onClick={() => onPageChange(page + 1)}><ChevronRight aria-hidden="true" /></button>
         <button type="button" aria-label="마지막 페이지" disabled={disabled || page === pageCount} onClick={() => onPageChange(pageCount)}><ChevronsRight aria-hidden="true" /></button></nav>;
 }

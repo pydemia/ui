@@ -8,9 +8,9 @@
 | M | src/components/admin/company-groups/CompanyGroupForm.tsx | 반영 및 합성 fixture 검증 | 현재 create/detail typed 양식; 인증 원본 상태·pixel 대조 대기 |
 | M | src/components/admin/users/UserForm.module.scss | 반영 및 합성 fixture 검증 | 현재 create/detail typed 양식; 인증 원본 상태·pixel 대조 대기 |
 | M | src/components/admin/users/UserForm.tsx | 반영 및 합성 fixture 검증 | 현재 create/detail typed 양식; 인증 원본 상태·pixel 대조 대기 |
-| M | src/components/chat/candidate/CandidateFilterBar.tsx | 세부 diff 확인; 구현 대조 대기 | 회사 placeholder 전체→회사 선택. kit의 필터 placeholder 대조·반영 대기 |
-| M | src/components/chat/candidate/CandidateListContent.module.scss | 세부 diff 확인; 구현 대조 대기 | 생성 확인 안내 confirmNote 14px/1.4/subgray/margin-top8 추가; kit 안내 상태 대조 대기 |
-| M | src/components/chat/candidate/CandidateListContent.tsx | 세부 diff 확인; 구현 대조 대기 | 선택 최대100·다운로드 action·생성 안내와 excluded warning 추가. page 이동 선택 초기화 코드는 주석 상태이며 실제로 유지됨. 독립 export 엔진과 목록 결합·상태/pixel 대조 대기 |
+| M | src/components/chat/candidate/CandidateFilterBar.tsx | 반영 및 선택 합성 상태 검증 | 현재 typed 목록·source 선택/출력 준비·반응형·85tests와 CUA; 원본 인증 상태·전체 pixel/native print·OS 저장 대조 대기 |
+| M | src/components/chat/candidate/CandidateListContent.module.scss | 반영 및 선택 합성 상태 검증 | 현재 typed 목록·source 선택/출력 준비·반응형·85tests와 CUA; 원본 인증 상태·전체 pixel/native print·OS 저장 대조 대기 |
+| M | src/components/chat/candidate/CandidateListContent.tsx | 반영 및 선택 합성 상태 검증 | 현재 typed 목록·source 선택/출력 준비·반응형·85tests와 CUA; 원본 인증 상태·전체 pixel/native print·OS 저장 대조 대기 |
 | M | src/components/chat/contextInfo/ContextInfoLayer.module.scss | 반영 및 선택 합성 상태 검증 | 필수/선택 badge·11행·trim기준50/800 경고·structured intent·반응형/resize 반영; 원본 인증 상태·전체 pixel·기본 motion 대조 대기 |
 | M | src/components/chat/contextInfo/ContextInfoLayer.tsx | 반영 및 선택 합성 상태 검증 | 필수/선택 badge·11행·trim기준50/800 경고·structured intent·반응형/resize 반영; 원본 인증 상태·전체 pixel·기본 motion 대조 대기 |
 | M | src/components/chat/contextInfo/ContextInfoSection.module.scss | 반영 및 선택 합성 상태 검증 | 필수/선택 badge·11행·trim기준50/800 경고·structured intent·반응형/resize 반영; 원본 인증 상태·전체 pixel·기본 motion 대조 대기 |
