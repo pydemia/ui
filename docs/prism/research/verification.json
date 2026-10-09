@@ -543,7 +543,7 @@
       ],
       "remaining": [
         "All other primitive states and domain callers",
-        "New source delta components remain pending in source-inventory.json"
+        "Latest source-purpose mappings are implemented; changed source styles and domain caller states remain unverified."
       ]
     },
     "prism-profile": {
@@ -640,29 +640,54 @@
         "Authenticated leadership domain",
         "Complete page pixel parity"
       ]
+    },
+    "prism-export": {
+      "visual": "source-confirmed-options-layout; profile-print parity pending",
+      "interaction": "passed-selected-synthetic-runtime",
+      "checks": [
+        "8 real PDF/ZIP downloads at1280/320; one/two/three profiles and long3-page PDF",
+        "ZIP integrity and duplicate (2)/(3) names; all extracted files PDF",
+        "error/cancel produce no download; beforeunload listener cleanup",
+        "fresh installed consumer actual menu change preserves one job under StrictMode",
+        "fresh installed consumer two concurrent PDF/ZIP jobs and cancellation",
+        "async writer backpressure, failure abort and pending renderer cancellation tests",
+        "PDF pages rasterized and inspected; synthetic header overlap fixed before final replay"
+      ],
+      "remaining": [
+        "Original authenticated export comparison",
+        "Consumer DOM renderer and pagination integration",
+        "Actual source service-worker/OS cancellation integration",
+        "All real-profile print sections and HTML export"
+      ],
+      "evidence": [
+        "final-local-export-20261009",
+        "consumer-export-runtime",
+        "local-export-125",
+        "final-static-export"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 40,
+      "passed": 49,
       "failed": 0
     },
     "registry": {
-      "groups": 38,
-      "items": 39,
+      "groups": 39,
+      "items": 40,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-fresh-local-install-then-final-source-sync",
-      "items": 39,
-      "files": 62,
-      "completeExamples": 14,
+      "status": "passed-fresh-local-install",
+      "items": 40,
+      "files": 63,
+      "completeExamples": 15,
       "typecheck": "passed",
       "viteBuild": "passed",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "Fresh39items/62files with14complete examples compiled;final CSS scoping and zero label source synchronized from emitted registry and recompiled.",
+      "sourceScope": "Fresh installed registry source unchanged; separate synthetic consumer fixture compiled and executed in a fresh browser.",
       "registrySha256": "acae6f777e96e83bd77d64c539b4234798b0246ca529d998e4ba4d347dab93ad",
       "browser": "42 fresh consumer distribution/width cases and animation/reduced-motion passed."
     },
@@ -787,21 +812,22 @@
     "remaining source state comparisons outside measured files, nine Tooltip placements and SUMMARY help; authenticated full-domain screens",
     "all extensions across domains, long content and popup combinations",
     "clipboard write and native print dialog",
-    "Latest source checkout adds four components:two leadership purpose mappings are implemented;profile PDF download and background host remain pending."
+    "All 273 source-purpose mappings, including four recent additions, do not establish full state or visual equality.",
+    "Original authenticated profile export and service-worker stream integration; full profile DOM capture/pagination and standalone HTML export purpose comparison."
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 38,
-    "states": 121,
-    "status": "passed-final-local-leadership-build",
+    "groups": 39,
+    "states": 125,
+    "status": "passed-final-static-export-build",
     "checks": [
-      "all121 fixtures render at actual320px viewport",
+      "all125 fixtures render at actual320px viewport",
       "no nested buttons",
       "no page root horizontal overflow",
       "no unlabeled visible native inputs",
       "no page errors or unhandled rejections"
     ],
-    "evidence": "final-local-leadership-121",
+    "evidence": "final-static-export-125",
     "claim": "Rendering does not prove all source states, interactions or visual parity."
   },
   "extensions": {
@@ -1007,7 +1033,7 @@
     "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
     "previousRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
     "inventoryComponents": 273,
-    "newPendingComponents": 2,
+    "newPendingComponents": 0,
     "changedStyleFiles": [
       "_dialog.scss",
       "_print.scss",
@@ -1136,5 +1162,16 @@
       "rootOverflow": 0,
       "pageErrors": 0
     }
+  },
+  "profileExportVerification": {
+    "status": "passed-selected-local-and-installed-synthetic-runtime",
+    "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "downloadCases": 8,
+    "longPdfPages": 3,
+    "consumerJobsConcurrent": 2,
+    "menuPersistence": true,
+    "strictModeDuplicateDownloads": 0,
+    "originalAuthenticatedExport": "unverified",
+    "claim": "Real synthetic file generation/download and source-purpose correspondence; no complete print-document or OS-save parity claim."
   }
 }

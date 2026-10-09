@@ -19,7 +19,7 @@
       "path": "packages/prism/THIRD_PARTY_NOTICES.md",
       "type": "registry:file",
       "target": "@ui/PRISM_ASSET_NOTICES.md",
-      "content": "# PRISM asset notices\n\n## PRISM profile dependencies and assets\n\nPRISM components are independently implemented from design and interaction references.\nEmployee data is not redistributed here. `prism-icon.tsx` retains 87 vector design assets from the authorized PRISM reference revision `7ecfc9a`, with a typed React adapter and instance-scoped SVG IDs. Original artwork and branding rights remain with their respective owners; this repository does not grant those rights.\n\n- Pretendard 1.3.9, SIL Open Font License 1.1. The official variable font is served\n  in `/prism/fonts/` together with `LICENSE.txt`.\n- PDF.js (`pdfjs-dist` 6.3.289), Apache License 2.0. The production document viewer\n  serves the package's worker; its license is included at `/prism/vendor/PDFJS-LICENSE.txt`.\n- `react-markdown` and `remark-gfm`, MIT. They are npm dependencies; their source\n  is consumed as packages rather than copied into PRISM registry source files.\n\nRegistry installation includes this notice as `PRISM_ASSET_NOTICES.md`.\nPretendard and PDF.js package distributions include their full licenses.\n"
+      "content": "# PRISM asset notices\n\n## PRISM profile dependencies and assets\n\nPRISM components are independently implemented from design and interaction references.\nEmployee data is not redistributed here. `prism-icon.tsx` retains 87 vector design assets from the authorized PRISM reference revision `7ecfc9a`, with a typed React adapter and instance-scoped SVG IDs. Original artwork and branding rights remain with their respective owners; this repository does not grant those rights.\n\n- Pretendard 1.3.9, SIL Open Font License 1.1. The official variable font is served\n  in `/prism/fonts/` together with `LICENSE.txt`.\n- PDF.js (`pdfjs-dist` 6.3.289), Apache License 2.0. The production document viewer\n  serves the package's worker; its license is included at `/prism/vendor/PDFJS-LICENSE.txt`.\n- jsPDF 4.2.1 and fflate 0.8.3, MIT. Used on demand for image-page PDF generation\n  and ZIP packaging; full licenses remain in their npm distributions.\n- `react-markdown` and `remark-gfm`, MIT. They are npm dependencies; their source\n  is consumed as packages rather than copied into PRISM registry source files.\n\nRegistry installation includes this notice as `PRISM_ASSET_NOTICES.md`.\nPretendard and PDF.js package distributions include their full licenses.\n"
     }
   ],
   "meta": {
@@ -28,7 +28,7 @@
     "provenance": "PRISM reference vector artwork retained with a typed adapter and instance-scoped SVG IDs. Rights remain with the original asset owners.",
     "fileSha256": {
       "packages/prism/src/prism-icon.tsx": "dae99ad10cba25d5cf2d2456c3434a3cf6a7b46bc46a4d07aff628d459591121",
-      "packages/prism/THIRD_PARTY_NOTICES.md": "5afa5eb1e85939717f2a2f4b67c54607048457ddc7dd9eab3ad80e337f92090b"
+      "packages/prism/THIRD_PARTY_NOTICES.md": "ce806e5289349c79a3b7e01dc09e3872951bfcef8d80c0ddee5e50bdd455c014"
     }
   }
 }

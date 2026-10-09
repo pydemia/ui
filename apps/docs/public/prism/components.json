@@ -17,17 +17,14 @@
         "components/chat/successorCandidate/print/PdfDownloadHost.tsx"
       ],
       "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date.",
-      "newPurposeMappedComponents": 2,
-      "pendingComponents": [
-        "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
-        "components/chat/successorCandidate/print/PdfDownloadHost.tsx"
-      ]
+      "newPurposeMappedComponents": 4,
+      "pendingComponents": []
     }
   },
   "sourceCoverage": {
     "inventoryUrl": "/prism/research/source-inventory.json",
     "total": 273,
-    "pending": 2,
+    "pending": 0,
     "vectorAssets": 87,
     "claim": "Source-purpose mapping is separate from state/visual verification. Vector artwork is retained as design assets; API/auth/persistence remains host-owned. Pending entries must be resolved explicitly before completion."
   },
@@ -1091,6 +1088,110 @@
       "registryUsage": "import { PrismAdminLayout } from \"@/components/ui/prism-admin\";\n<PrismAdminLayout title=\"관리\" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;"
     },
     {
+      "id": "prism-export",
+      "name": "Profile PDF / ZIP download jobs",
+      "category": "Documents",
+      "purpose": "프로필 PDF 생성·여러 파일 ZIP·진행률·취소와 메뉴 이동 중 작업 유지",
+      "contract": "PrismPdfDownloadHost를 route보다 위에 배치합니다. jobs의 ID는 고유하고 문서·renderer는 작업별 snapshot입니다. 소비자가 API/auth/프로필 표시·페이지 분할·PDF renderer를 소유하며 빈 문서는 오류입니다. 한 명은 PDF, 여러 명은 중복 이름을 (2)로 구분한 ZIP 하나로 출력합니다. onProgress는 생성 완료 수, onComplete는 다운로드 시작 또는 sink close이며 OS 저장 완료를 뜻하지 않습니다. 실패한 작업의 불완전 ZIP은 다운로드하지 않습니다. 작업 제거는 AbortSignal로 취소하고 메뉴 이동에는 유지하며 진행 중 beforeunload 경고를 등록합니다. 완료·실패 작업은 owner가 제거해야 합니다. openDownload로 소비자 소유 streaming writer와 비동기 backpressure를 연결하며 null이면 Blob fallback을 씁니다. createPrismImagePdf는 이미 분할한 JPEG 페이지를 PDF로 변환합니다. 이미지 PDF는 텍스트 검색을 제공하지 않으며 기본 DOM 캡처나 서비스워커 자동 등록은 하지 않습니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "long"
+      ],
+      "source": [
+        "chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
+        "chat/successorCandidate/print/PdfDownloadHost.tsx"
+      ],
+      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismPdfDownloadHost, createPrismImagePdf, type PrismPdfExportJob } from \"@pydemia/prism\";\nexport function PdfDownloadExample() {\n  const [jobs, setJobs] = useState<PrismPdfExportJob<string>[]>([]);\n  return <section data-prism=\"light\"><PrismButton disabled={jobs.length > 0} onClick={() => setJobs([{id:\"example\",documents:[{filename:\"가상 프로필\",data:\"가상 프로필\"}]}])}>예시 PDF 다운로드</PrismButton>\n    <PrismPdfDownloadHost jobs={jobs} renderPdf={async (text, {signal}) => {\n      await document.fonts.ready; signal.throwIfAborted();\n      const canvas = document.createElement(\"canvas\"); canvas.width = 800; canvas.height = 1100;\n      const ctx = canvas.getContext(\"2d\"); if (!ctx) throw new Error(\"Canvas unavailable\");\n      ctx.fillStyle = \"white\"; ctx.fillRect(0,0,800,1100);\n      ctx.fillStyle = \"#363636\"; ctx.font = '24px \"Pretendard Variable\", sans-serif'; ctx.fillText(text,50,80);\n      return createPrismImagePdf([{jpeg:canvas.toDataURL(\"image/jpeg\"),width:210,height:297}],{signal,title:text});\n    }} onComplete={() => setJobs([])} onError={() => setJobs([])} />\n  </section>;\n}",
+      "sourcePath": "packages/prism/src/prism-export.tsx",
+      "previewUrl": "/prism?component=prism-export",
+      "embedUrl": "/prism?component=prism-export&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-export&view=responsive",
+      "verification": {
+        "visual": "source-confirmed-options-layout; profile-print parity pending",
+        "interaction": "passed-selected-synthetic-runtime",
+        "checks": [
+          "8 real PDF/ZIP downloads at1280/320; one/two/three profiles and long3-page PDF",
+          "ZIP integrity and duplicate (2)/(3) names; all extracted files PDF",
+          "error/cancel produce no download; beforeunload listener cleanup",
+          "fresh installed consumer actual menu change preserves one job under StrictMode",
+          "fresh installed consumer two concurrent PDF/ZIP jobs and cancellation",
+          "async writer backpressure, failure abort and pending renderer cancellation tests",
+          "PDF pages rasterized and inspected; synthetic header overlap fixed before final replay"
+        ],
+        "remaining": [
+          "Original authenticated export comparison",
+          "Consumer DOM renderer and pagination integration",
+          "Actual source service-worker/OS cancellation integration",
+          "All real-profile print sections and HTML export"
+        ],
+        "evidence": [
+          "final-local-export-20261009",
+          "consumer-export-runtime",
+          "local-export-125",
+          "final-static-export"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismPdfExportDocument",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfExportJob",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfExportProgress",
+          "kind": "type"
+        },
+        {
+          "name": "PrismDownloadSink",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfExportResult",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfRenderer",
+          "kind": "type"
+        },
+        {
+          "name": "PrismOpenDownload",
+          "kind": "type"
+        },
+        {
+          "name": "runPrismPdfExport",
+          "kind": "component"
+        },
+        {
+          "name": "PrismImagePdfPage",
+          "kind": "type"
+        },
+        {
+          "name": "createPrismImagePdf",
+          "kind": "component"
+        },
+        {
+          "name": "downloadPrismBlob",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPdfDownloadHostProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfDownloadHost",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismPdfDownloadHost, createPrismImagePdf, type PrismPdfExportJob } from \"@/components/ui/prism-export\";\nexport function PdfDownloadExample() {\n  const [jobs, setJobs] = useState<PrismPdfExportJob<string>[]>([]);\n  return <section data-prism=\"light\"><PrismButton disabled={jobs.length > 0} onClick={() => setJobs([{id:\"example\",documents:[{filename:\"가상 프로필\",data:\"가상 프로필\"}]}])}>예시 PDF 다운로드</PrismButton>\n    <PrismPdfDownloadHost jobs={jobs} renderPdf={async (text, {signal}) => {\n      await document.fonts.ready; signal.throwIfAborted();\n      const canvas = document.createElement(\"canvas\"); canvas.width = 800; canvas.height = 1100;\n      const ctx = canvas.getContext(\"2d\"); if (!ctx) throw new Error(\"Canvas unavailable\");\n      ctx.fillStyle = \"white\"; ctx.fillRect(0,0,800,1100);\n      ctx.fillStyle = \"#363636\"; ctx.font = '24px \"Pretendard Variable\", sans-serif'; ctx.fillText(text,50,80);\n      return createPrismImagePdf([{jpeg:canvas.toDataURL(\"image/jpeg\"),width:210,height:297}],{signal,title:text});\n    }} onComplete={() => setJobs([])} onError={() => setJobs([])} />\n  </section>;\n}"
+    },
+    {
       "id": "prism-document",
       "name": "PDF / Print",
       "category": "File & media",
@@ -1141,6 +1242,10 @@
         },
         {
           "name": "PrismPrintSection",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPrintOptionsProps",
           "kind": "type"
         },
         {
@@ -1640,7 +1745,7 @@
         ],
         "remaining": [
           "All other primitive states and domain callers",
-          "New source delta components remain pending in source-inventory.json"
+          "Latest source-purpose mappings are implemented; changed source styles and domain caller states remain unverified."
         ]
       },
       "exports": [

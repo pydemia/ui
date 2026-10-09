@@ -2,7 +2,7 @@
 
 Isolated PRISM-DEV design and interaction references using React 19, pydemia/ui and shadcn/Radix primitives.
 
-Latest source inventory: 273 entries, 2 pending implementations. Purpose mapping and selected runtime checks do not prove all source states or visual parity.
+Latest source inventory: 273 entries, 0 pending implementations. Purpose mapping and selected runtime checks do not prove all source states or visual parity.
 
 - [Contracts and source mapping](/prism/components.json)
 - [Ground rules](/prism/research/design-rules.md)
@@ -242,6 +242,33 @@ Installed usage:
 ```tsx
 import { PrismAdminLayout } from "@/components/ui/prism-admin";
 <PrismAdminLayout title="관리" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;
+```
+
+## Profile PDF / ZIP download jobs
+프로필 PDF 생성·여러 파일 ZIP·진행률·취소와 메뉴 이동 중 작업 유지
+Contract: PrismPdfDownloadHost를 route보다 위에 배치합니다. jobs의 ID는 고유하고 문서·renderer는 작업별 snapshot입니다. 소비자가 API/auth/프로필 표시·페이지 분할·PDF renderer를 소유하며 빈 문서는 오류입니다. 한 명은 PDF, 여러 명은 중복 이름을 (2)로 구분한 ZIP 하나로 출력합니다. onProgress는 생성 완료 수, onComplete는 다운로드 시작 또는 sink close이며 OS 저장 완료를 뜻하지 않습니다. 실패한 작업의 불완전 ZIP은 다운로드하지 않습니다. 작업 제거는 AbortSignal로 취소하고 메뉴 이동에는 유지하며 진행 중 beforeunload 경고를 등록합니다. 완료·실패 작업은 owner가 제거해야 합니다. openDownload로 소비자 소유 streaming writer와 비동기 backpressure를 연결하며 null이면 Blob fallback을 씁니다. createPrismImagePdf는 이미 분할한 JPEG 페이지를 PDF로 변환합니다. 이미지 PDF는 텍스트 검색을 제공하지 않으며 기본 DOM 캡처나 서비스워커 자동 등록은 하지 않습니다.
+States: default, loading, error, long
+Registry: /prism/r/prism-export.json
+Source: packages/prism/src/prism-export.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismButton } from "@/components/ui/prism-button";
+import { PrismPdfDownloadHost, createPrismImagePdf, type PrismPdfExportJob } from "@/components/ui/prism-export";
+export function PdfDownloadExample() {
+  const [jobs, setJobs] = useState<PrismPdfExportJob<string>[]>([]);
+  return <section data-prism="light"><PrismButton disabled={jobs.length > 0} onClick={() => setJobs([{id:"example",documents:[{filename:"가상 프로필",data:"가상 프로필"}]}])}>예시 PDF 다운로드</PrismButton>
+    <PrismPdfDownloadHost jobs={jobs} renderPdf={async (text, {signal}) => {
+      await document.fonts.ready; signal.throwIfAborted();
+      const canvas = document.createElement("canvas"); canvas.width = 800; canvas.height = 1100;
+      const ctx = canvas.getContext("2d"); if (!ctx) throw new Error("Canvas unavailable");
+      ctx.fillStyle = "white"; ctx.fillRect(0,0,800,1100);
+      ctx.fillStyle = "#363636"; ctx.font = '24px "Pretendard Variable", sans-serif'; ctx.fillText(text,50,80);
+      return createPrismImagePdf([{jpeg:canvas.toDataURL("image/jpeg"),width:210,height:297}],{signal,title:text});
+    }} onComplete={() => setJobs([])} onError={() => setJobs([])} />
+  </section>;
+}
 ```
 
 ## PDF / Print
