@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-03",
+  "updatedAt": "2026-10-09",
   "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "status": "in-progress",
   "claim": "Source correspondence and runtime checks are separate from visual parity. No complete parity claim.",
@@ -528,17 +528,21 @@
         "NoData 13px and 15px line box",
         "Summary badge 88px, neutral border and text metrics",
         "empty Summary 49px without badge",
-        "Summary click opens tooltip; Escape dismisses"
+        "Summary click opens tooltip; Escape dismisses",
+        "InputLabel source coordinates and short tooltip match measured dimensions and style",
+        "Native label/help sibling association and controlled info state tests",
+        "Selected real touch/focus/Space/Escape and narrow long tooltip behavior"
       ],
       "evidence": [
         "reference-candidate-common-metrics",
         "local-candidate-common-metrics",
         "local-summary-empty",
-        "local-summary-tooltip"
+        "local-summary-tooltip",
+        "installed-input-label"
       ],
       "remaining": [
-        "hover and focus-only Tooltip runtime",
-        "all summary content states"
+        "All other primitive states and domain callers",
+        "New source delta components remain pending in source-inventory.json"
       ]
     },
     "prism-profile": {
@@ -621,7 +625,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 32,
+      "passed": 36,
       "failed": 0
     },
     "registry": {
@@ -630,24 +634,23 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-fresh-local-install-then-final-CSS-sync",
+      "status": "passed-fresh-local-install-then-final-focus-source-sync",
       "items": 39,
       "files": 62,
+      "completeExamples": 12,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "registrySha256": "524ec86e783434311b6147339a6b2c0184d33948e06a7e1d638115215a1efae3",
-      "method": "Fresh shadcn install of all 39 items; final panel/small CSS priority synchronized from emitted tokens and recompiled",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "All 39 source items and 12 complete examples compiled; source-matched Tooltip fixture at nine placements plus touch/focus, 788-character narrow content and native wheel checks passed",
-      "completeExamples": 12,
-      "browser": "Fresh installed consumer Tooltip fixture passed reference geometry, SUMMARY touch/open/close/outside, focus/Space/Escape, Avatar focus/full text, 320x240 width/height clamping and native wheel scroll"
+      "sourceScope": "All 39 items and 12 complete examples compiled after upstream integration; only the subsequent focus-scroll fix was synchronized from emitted utility and recompiled.",
+      "registrySha256": "93f89ddbfda167b0e9bd76997c07747886d633f472d3a0c3b3030494e9e4891f",
+      "browser": "Actual source coordinates, touch/focus/Space/Escape, SUMMARY and Avatar regression, eight long label/help viewport and manual width cases passed."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
       "status": "published-http-and-browser-verified",
       "url": "https://ui.pydemia.ai/prism",
-      "readback": "HTTP 200 current components.json (117 states) and registry.json match local bytes; registry SHA256 0e2ae1a01a72962924feafe4833b848a316fea8a7c2e91aa20f9da0c34c75e40",
+      "readback": "Previous Tooltip publication: 119 fixture states; nine HTTP assets matched local bytes, registry SHA256 524ec86e783434311b6147339a6b2c0184d33948e06a7e1d638115215a1efae3.",
       "attempts": [
         {
           "method": "normal-upload",
@@ -684,8 +687,8 @@
           "result": "Verify UI/Pages success, Vercel Deployment has completed; current manifest/registry HTTP and own headless browser verified"
         }
       ],
-      "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
-      "browserRender": "passed: current published 117 fixture states at 320px, declared font face loaded, Avatar focus/hover/resize and Usage selection, short/long PDF captures",
+      "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+      "browserRender": "Previous Tooltip publication passed 119 states at actual 320px and selected SUMMARY touch, focus/Escape and long 320x240/wheel checks.",
       "independentConsumer": {
         "status": "passed",
         "method": "public Avatar registry installation before font/print changes; final current registry CSS synchronized and rebuilt",
@@ -698,81 +701,81 @@
         "assetNotice": "installed and checked",
         "browserRuntime": "consumer demo not executed; published catalogue font/print browser checks are separate"
       },
-      "scope": "font and print fixes published; source visual parity remains partial",
+      "scope": "Previous Tooltip implementation, before current InputLabel changes.",
       "currentImplementation": {
-        "sourceCommit": "73be25852d2e7333a0332795334d33d145f3f4fa",
-        "status": "published-browser-verified",
-        "localBrowser": "passed at 320px across 117 states",
-        "verificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
-        "publicBrowser": "passed 117 states and inspected PDF pixel matching"
+        "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+        "status": "published-browser-verified-before-input-label-changes",
+        "publicBrowser": "119 states and selected Tooltip interactions"
       }
     },
     "generalComponentTests": {
-      "passed": 260,
+      "passed": 280,
       "failed": 0
     },
     "genericRegistry": {
-      "items": 144,
-      "catalogEntries": 142,
-      "immutableReleases": 73,
+      "items": 146,
+      "catalogEntries": 144,
+      "immutableReleases": 83,
       "status": "passed",
-      "currentRelease": "sha256-9bf65f08c6e3daa55815c07059472e3b3fbf73651f55169bbbc23398927e88d0",
-      "upstreamRevision": "b5ccface"
+      "currentRelease": "sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896",
+      "upstreamRevision": "316e95fc"
     },
     "githubVerification": {
-      "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
-      "status": "passed",
-      "url": "https://github.com/pydemia/ui/actions/runs/37098604514",
-      "scope": "merged font/print implementation; PRISM contracts and all 11 complete usage examples",
-      "latestImplementation": {
-        "sourceCommit": "73be25852d2e7333a0332795334d33d145f3f4fa",
-        "status": "passed-at-published-merge",
-        "localBuildAndTypecheck": "passed",
-        "verificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
-      }
+      "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+      "status": "passed-before-input-label-changes",
+      "url": "https://github.com/pydemia/ui/actions/runs/37105231272",
+      "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
       "groups": 38,
-      "componentExamples": 11,
-      "integrationFragments": 27,
+      "componentExamples": 12,
+      "integrationFragments": 26,
       "workspaceTypecheck": "passed in check-prism.mjs; runs in existing CI PRISM gate",
       "installedTypecheck": "passed in isolated consumer",
       "installationDependencyClosure": "all 38 installed usage imports resolve within their registry dependency graph",
       "usagePathControlRuntime": "passed: registry/workspace selections display the matching manifest code; clipboard write not exercised"
     },
     "currentFixtureStates": {
-      "count": 117,
-      "status": "passed-current-published-browser-render",
-      "previousVerifiedStates": 115,
-      "previousCheckpoint": "4503dea",
-      "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa",
-      "publishedVerificationCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b"
+      "count": 120,
+      "status": "passed-local-merged-build-browser",
+      "previousVerifiedStates": 119,
+      "previousPublishedVerificationCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+      "implementationCheckpoint": "a52360ee plus focus fix"
     },
     "tooltipPublication": {
-      "status": "pending",
-      "scope": "Tooltip source and examples; previous file implementation publication remains separately recorded"
+      "status": "published-http-and-browser-verified",
+      "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+      "verifyUiRun": 37105231272,
+      "pagesRun": 37105230581,
+      "fixtureStates": 119,
+      "scope": "Nine placements, small, SUMMARY touch/focus and long 320x240/wheel checks; whole-domain parity remains partial."
+    },
+    "inputLabelPublication": {
+      "status": "recorded-before-publication",
+      "scope": "Local merged InputLabel and PrismInfoTooltip checks passed. The exact Git and deployment results are recorded after publication in the session worknote."
     }
   },
   "unverified": [
     "all 269 source correspondences do not establish state or pixel equality",
     "remaining source state comparisons outside measured files, nine Tooltip placements and SUMMARY help; authenticated full-domain screens",
     "all extensions across domains, long content and popup combinations",
-    "clipboard write and native print dialog"
+    "clipboard write and native print dialog",
+    "Latest source checkout 087811ff adds four components whose implementation is pending; 269 previous purpose mappings are not current full coverage."
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 38,
-    "states": 119,
-    "status": "passed-local-tooltip-build",
+    "states": 120,
+    "status": "passed-local-merged-input-label-build",
     "checks": [
-      "all 119 fixtures render at actual 320px viewport",
+      "all 120 fixtures render at actual 320px viewport",
       "no nested buttons",
       "no page root horizontal overflow",
       "no unlabeled visible native inputs",
       "no page errors or unhandled rejections"
     ],
-    "evidence": "local-tooltip-119",
-    "localEvidence": "local-tooltip-119"
+    "evidence": "local-label-120-fixed",
+    "claim": "Rendering does not prove all source states, interactions or visual parity."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -809,13 +812,12 @@
       "method": "real iframe viewport, not browser emulation"
     },
     "narrowFixtureLayout": {
-      "status": "passed-current-published-font-print-build",
+      "status": "passed-local-merged-input-label-build",
       "groups": 38,
-      "states": 117,
+      "states": 120,
       "frameWidth": 320,
       "rootOverflowCount": 0,
-      "evidence": "published-font-print-fixtures-320",
-      "implementationCheckpoint": "73be25852d2e7333a0332795334d33d145f3f4fa"
+      "evidence": "local-label-120-fixed"
     },
     "printPagination": {
       "status": "runtime-verified-partial",
@@ -843,6 +845,33 @@
       "shortViewportHeight": 240,
       "nativeWheelScroll": "passed",
       "scope": "synthetic emitted-source Tooltip consumer"
+    },
+    "inputLabelSizing": {
+      "status": "runtime-verified-partial",
+      "viewports": [
+        [
+          1280,
+          900
+        ],
+        [
+          320,
+          900
+        ],
+        [
+          320,
+          240
+        ]
+      ],
+      "manualWidths": [
+        140,
+        200,
+        304,
+        400,
+        800
+      ],
+      "nativeWheelScroll": "passed",
+      "labelWrap": "passed",
+      "sourceMatchedShortGeometryMaxDelta": 0
     }
   },
   "runtimeVerificationAvailability": {
@@ -850,7 +879,7 @@
     "method": "Bundled Playwright 1.62.1 with installed isolated headless Chromium 1223; fresh context, no existing browser profile or saved authentication",
     "inAppBrowser": "still unavailable",
     "sourceBrowser": "Direct HTTP /sample renders successfully; fresh button and file selection states captured in the original deployed app",
-    "preservedEvidence": "37 historical source defaults, fresh direct source file states, local 119 fixture states at actual 320px",
+    "preservedEvidence": "Historical source defaults, fresh deployed file/Tooltip/InputLabel states, local 120 fixture states at actual 320px.",
     "newChangesPendingRuntime": [
       "actual clipboard write",
       "original states outside the measured file controls and authenticated domain screens",
@@ -946,5 +975,70 @@
     ],
     "claim": "Measured geometry and selected behavior only; no complete page pixel parity.",
     "independentRegistrySha256": "524ec86e783434311b6147339a6b2c0184d33948e06a7e1d638115215a1efae3"
+  },
+  "latestSourceAudit": {
+    "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "previousRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+    "inventoryComponents": 273,
+    "newPendingComponents": 4,
+    "changedStyleFiles": [
+      "_dialog.scss",
+      "_print.scss",
+      "_text-field.scss"
+    ],
+    "inputLabelAndTooltipSources": "Unchanged between the previous and latest checkout.",
+    "deployedRevisionBinding": "Not established."
+  },
+  "inputLabelReferenceComparison": {
+    "status": "passed-selected-runtime-2026-10-09",
+    "source": "http://dev.prism.ai/sample/ui/input/input-label",
+    "sourceCoordinates": "Standalone synthetic installed consumer placed at source trigger coordinates.",
+    "labelAndTooltipGeometryMaxDelta": 0,
+    "tooltip": {
+      "fontSize": 11,
+      "fontWeight": 500,
+      "padding": "4px 8px",
+      "background": "rgba(97,97,97,.92)",
+      "radius": 4,
+      "arrow": false,
+      "bodyGap": 14
+    },
+    "interaction": [
+      "native label click focuses input",
+      "touch toggle and outside dismissal",
+      "focus/Space/Escape",
+      "help keeps current input focus",
+      "no implicit form submission"
+    ],
+    "viewports": [
+      [
+        1280,
+        900
+      ],
+      [
+        320,
+        900
+      ],
+      [
+        320,
+        240
+      ]
+    ],
+    "manualWidths": [
+      140,
+      200,
+      304,
+      400,
+      800
+    ],
+    "nativeWheelScrollTop": 110,
+    "remaining": [
+      "All label suffix and custom icon combinations",
+      "Authenticated domain callers"
+    ],
+    "claim": "Measured geometry and selected behavior; not whole-page pixel parity.",
+    "sourceObservation": "Fresh anonymous deployed sample; source/target screenshots inspected.",
+    "focusScroll": "Native focus scroll finishes before opening; pending focus opening is cancelled by Escape/blur/unmount.",
+    "installedConsumer": "Fresh merged-source install with final emitted focus fix synchronized; tsc/Vite and real browser passed."
   }
 }

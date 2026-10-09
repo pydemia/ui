@@ -34,14 +34,24 @@ export type PrismInfoTooltipProps = Omit<PrismTooltipProps, "children"> & { labe
 /** Hover/focus and an explicit toggle share one state; outside dismissal excludes the trigger. */
 export function PrismInfoTooltip({ label, className = "", icon, open, onOpenChange, contentProps, ...props }: PrismInfoTooltipProps) {
     const [localOpen, setLocalOpen] = useState(false); const trigger = useRef<HTMLButtonElement>(null);
+    const focusFrame = useRef<number | null>(null);
+    useEffect(() => () => { if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current); }, []);
     if (!label.trim()) throw new Error("Info tooltip trigger requires a label.");
     const expanded = open ?? localOpen;
-    function change(next: boolean) { if (open === undefined) setLocalOpen(next); onOpenChange?.(next); }
+    function clearFocusFrame() { if (focusFrame.current !== null) cancelAnimationFrame(focusFrame.current); focusFrame.current = null; }
+    function change(next: boolean) { clearFocusFrame(); if (open === undefined) setLocalOpen(next); onOpenChange?.(next); }
     return <PrismTooltip {...props} open={expanded} onOpenChange={change} contentProps={{...contentProps, onPointerDownOutside: event => {
         contentProps?.onPointerDownOutside?.(event);
         if (event.detail.originalEvent.target instanceof Node && trigger.current?.contains(event.detail.originalEvent.target)) event.preventDefault();
     }}}>
         <button ref={trigger} type="button" className={`prism-info-tooltip-trigger ${className}`} aria-label={label} aria-expanded={expanded}
+            onFocus={event => {
+                // Native focus scroll must finish before Radix installs its ancestor-scroll dismissal.
+                event.preventDefault(); clearFocusFrame();
+                if (!expanded) focusFrame.current = requestAnimationFrame(() => {
+                    focusFrame.current = null; if (trigger.current === document.activeElement) change(true);
+                });
+            }} onBlur={clearFocusFrame} onKeyDown={event => { if (event.key === "Escape") clearFocusFrame(); }}
             onPointerDown={event => event.preventDefault()} onClick={event => { event.preventDefault(); change(!expanded); }}>
             {icon ?? <PrismIcon name="InfoIcon" size={16}/>}
         </button>

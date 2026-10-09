@@ -83,4 +83,20 @@ test("an info tooltip leaves controlled state with its owner", async () => {
     assert.equal(tooltip(), null);
     assert.throws(() => renderToStaticMarkup(h(PrismInfoTooltip, { label: "  ", content: "본문" })), /requires a label/);
 });
+test("focus opens info after native scroll, while Escape cancels a pending focus opening", async () => {
+    await act(async () => root.render(h(PrismInfoTooltip, { label: "포커스 설명", content: "포커스 도움말", arrow: false })));
+    const help = document.querySelector('[aria-label="포커스 설명"]');
+    await act(async () => help.focus());
+    await act(async () => new Promise(resolve => requestAnimationFrame(resolve)));
+    assert.equal(tooltip().textContent, "포커스 도움말");
+    await act(async () => help.blur());
+    assert.equal(tooltip(), null);
+    await act(async () => {
+        help.focus();
+        help.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    });
+    await act(async () => new Promise(resolve => requestAnimationFrame(resolve)));
+    assert.equal(tooltip(), null);
+    assert.equal(help.getAttribute("aria-expanded"), "false");
+});
 test.after(async () => { await act(async () => root.unmount()); dom.window.close(); });
