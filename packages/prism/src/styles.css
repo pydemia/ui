@@ -1125,6 +1125,38 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 .prism-candidate-feedback {flex:none;max-width:100%;margin-bottom:10px;}
 .prism-candidate-feedback .prism-button {color:white;}
 .prism-candidate-confirm-note {display:block;margin-top:8px;font-size:14px;line-height:1.4;color:#868686;}
+.prism-mgmt-comments {display:flex;flex-direction:column;gap:16px;padding-bottom:36px;container-type:inline-size;min-width:0;}
+.prism-mgmt-section-header {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;min-width:0;}
+.prism-mgmt-section-header>h3 {margin:0;font-size:14px;font-weight:600;line-height:1.4;overflow-wrap:anywhere;}
+.prism-mgmt-section-header>h3>span {color:var(--prism-blue-300);}
+.prism-mgmt-card-list,.prism-mgmt-record {display:flex;flex-direction:column;gap:12px;min-width:0;}
+.prism-mgmt-card,.prism-ceo-form {display:flex;flex-direction:column;padding:16px;border:1px solid var(--prism-control-border);border-radius:12px;background:white;white-space:pre-line;min-width:0;break-inside:avoid;}
+.prism-mgmt-card>header {display:flex;align-items:baseline;gap:8px;margin-bottom:12px;flex-wrap:wrap;min-width:0;}
+.prism-mgmt-card h4 {margin:0;font-size:16px;font-weight:700;line-height:1.4;color:var(--prism-primary);overflow-wrap:anywhere;}
+.prism-mgmt-year {font-size:14px;font-weight:500;line-height:1.4;color:var(--prism-sub);}
+.prism-mgmt-author {margin:0 0 4px;font-size:14px;font-weight:600;line-height:1.4;color:var(--foreground);overflow-wrap:anywhere;}
+.prism-mgmt-text {margin:0;white-space:pre-line;font-size:14px;font-weight:400;line-height:1.4;color:#363636;overflow-wrap:anywhere;}
+.prism-mgmt-actions {display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:12px;}
+.prism-mgmt-actions>button {display:inline-flex;width:20px;height:20px;padding:0;border:0;background:none;cursor:pointer;color:var(--foreground);}
+.prism-mgmt-actions>button:disabled {cursor:default;color:#9da3b3;}
+.prism-mgmt-actions>button:disabled>.prism-icon {color:#9da3b3;}
+.prism-mgmt-empty {display:flex;justify-content:center;padding:16px;}
+.prism-ceo-form {gap:12px;container-type:inline-size;}
+.prism-ceo-form-title {margin:0;font-size:14px;font-weight:600;line-height:1.4;color:var(--foreground);}
+.prism-ceo-form-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;min-width:0;}
+.prism-ceo-field {display:flex;align-items:center;gap:8px;min-width:0;}
+.prism-ceo-field[data-wide] {grid-column:1/-1;}
+.prism-ceo-field[data-top] {align-items:flex-start;}
+.prism-ceo-field[data-top]>.prism-ceo-label {padding-top:8px;}
+.prism-ceo-label {flex:none;width:32px;font-size:12px;font-weight:500;line-height:1.4;color:var(--foreground);}
+.prism-ceo-field>.prism-field {flex:1;min-width:0;gap:0;}
+.prism-ceo-field .prism-field>label {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+.prism-ceo-textarea {width:100%;min-width:0;min-height:112.625px;padding:6px 12px;font-size:14px;font-weight:500;line-height:1.4375;resize:vertical;}
+.prism-ceo-textarea[data-auto-size] {resize:none;}
+.prism-ceo-form-footer {display:flex;justify-content:flex-end;}
+.prism-mgmt-comments>.prism-toast .prism-button {color:white;}
+@container (max-width:480px) {.prism-ceo-form-grid {grid-template-columns:minmax(0,1fr);}}
+@container (max-width:220px) {.prism-mgmt-section-header {flex-wrap:wrap;}}
 @container (max-width:600px) {
     [data-prism="light"] .prism-candidate-list>.prism-candidate-filters {flex-wrap:wrap;gap:12px;}
     [data-prism="light"] .prism-candidate-list>.prism-candidate-filters>div:first-child {flex-basis:100%;}

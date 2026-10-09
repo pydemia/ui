@@ -1,4 +1,4 @@
-import { useId, useState, type ReactNode } from "react";
+import { useId, useState, type ReactNode, type CSSProperties } from "react";
 import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "./prism-tabs";
 import { PrismCandidateCard, type PrismCandidate } from "./prism-candidate";
 import { PrismButton } from "./prism-button";
@@ -21,14 +21,14 @@ export function PrismOutline({ title, children, actions }: { title?: ReactNode; 
 export function PrismCareerTimeline({ entries }: { entries: readonly PrismCareerEntry[] }) {
     return <ol className="prism-career">{entries.length ? entries.map(item => <li key={item.id}><strong>{item.period}</strong><div><b>{item.company}</b><p>{item.role}</p></div></li>) : <li>경력 정보가 없습니다.</li>}</ol>;
 }
-function SummaryHelp({label,note}:{label:string;note:ReactNode}) {
-    return <PrismInfoTooltip panel side="bottom" label={`${label} 설명`} className="prism-summary-info" content={<div className="prism-summary-tooltip">{note}</div>}/>;
+function SummaryHelp({label,note,tooltipClassName,tooltipStyle}:{label:string;note:ReactNode;tooltipClassName?:string;tooltipStyle?:CSSProperties}) {
+    return <PrismInfoTooltip panel side="bottom" label={`${label} 설명`} className="prism-summary-info" content={<div className={`prism-summary-tooltip ${tooltipClassName ?? ""}`} style={tooltipStyle}>{note}</div>}/>;
 }
-export function PrismSummaryBadge({ label, summary, note, title="SUMMARY" }: { label: string; summary: ReactNode; note?: ReactNode; title?: string }) {
+export function PrismSummaryBadge({ label, summary, note, title="SUMMARY", tooltipClassName, tooltipStyle }: { label: string; summary: ReactNode; note?: ReactNode; title?: string; tooltipClassName?:string;tooltipStyle?:CSSProperties }) {
     const present=summary!==null&&summary!==undefined&&summary!==false&&(typeof summary!=="string"||!!summary.trim());
     const hasNote=note!==null&&note!==undefined&&note!==false&&(typeof note!=="string"||!!note.trim());
     return <section className="prism-summary-field"><h3 className="prism-summary-title">{title}</h3>{present ? <div className="prism-summary-badge">
-        <div className="prism-summary-circle"><strong>{label}</strong>{hasNote&&<SummaryHelp label={label} note={note}/>}</div><div>{summary}</div>
+        <div className="prism-summary-circle"><strong>{label}</strong>{hasNote&&<SummaryHelp label={label} note={note} tooltipClassName={tooltipClassName} tooltipStyle={tooltipStyle}/>}</div><div>{summary}</div>
     </div> : <div className="prism-outline prism-summary-empty"><p className="prism-no-data">관련 데이터 없음</p></div>}</section>;
 }
 export function PrismEvidence({ title, grade, children, source }: { title: string; grade?: string | null; children: ReactNode; source?: ReactNode }) {

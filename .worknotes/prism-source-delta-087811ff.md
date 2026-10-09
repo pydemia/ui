@@ -22,7 +22,7 @@
 | M | src/components/chat/memo/MemoContent.tsx | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
 | M | src/components/chat/position/PositionRecommend.module.scss | 차이 확인; 추가 대조 대기 | rank UI 제거 확인; 현재 kit에도 rank 계약 없음. 원본 headerMinHeight/선택/정렬 layout 상태 대조는 필요 |
 | M | src/components/chat/position/PositionRecommend.tsx | 차이 확인; 추가 대조 대기 | rank UI 제거 확인; 현재 kit에도 rank 계약 없음. 원본 headerMinHeight/선택/정렬 layout 상태 대조는 필요 |
-| M | src/components/chat/successorCandidate/BadgeSummary.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
+| M | src/components/chat/successorCandidate/BadgeSummary.tsx | 반영 및 선택 상태 검증 | 현재 CEO/ELP typed recipe·tooltip 본문 override, 11개 새 tests·152상태 CUA·독립 소비자 등록/수정/삭제·크기 검증. 인증 원본 전체 상태·시각/폰트 및 실제 backend 대조 대기 |
 | M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
 | M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
 | M | src/components/chat/successorCandidate/attitude/PdfViewerDialog.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
@@ -36,8 +36,8 @@
 | A | src/components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx | 부분 반영 및 선택 검증 | typed pie/summary와 수치·geometry 증거 있음; 전체 원본 profile/frame 상태 대기 |
 | M | src/components/chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx | 부분 반영 및 선택 검증 | typed pie/summary와 수치·geometry 증거 있음; 전체 원본 profile/frame 상태 대기 |
 | A | src/components/chat/successorCandidate/leadership/mapLeadershipPie.ts | 부분 반영 및 선택 검증 | typed pie/summary와 수치·geometry 증거 있음; 전체 원본 profile/frame 상태 대기 |
-| M | src/components/chat/successorCandidate/mgmtComments/CeoCommentForm.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
+| M | src/components/chat/successorCandidate/mgmtComments/CeoCommentForm.tsx | 반영 및 선택 상태 검증 | 현재 CEO/ELP typed recipe·tooltip 본문 override, 11개 새 tests·152상태 CUA·독립 소비자 등록/수정/삭제·크기 검증. 인증 원본 전체 상태·시각/폰트 및 실제 backend 대조 대기 |
+| M | src/components/chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx | 반영 및 선택 상태 검증 | 현재 CEO/ELP typed recipe·tooltip 본문 override, 11개 새 tests·152상태 CUA·독립 소비자 등록/수정/삭제·크기 검증. 인증 원본 전체 상태·시각/폰트 및 실제 backend 대조 대기 |
 | M | src/components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx | 목적 구현 및 선택 검증 | 독립 PDF/ZIP/HTML engine과 합성 runtime 있음; 전체 실제 source print/layout/mapping 대조 대기 |
 | A | src/components/chat/successorCandidate/print/CandidateProfilesPdfDownload.module.scss | 목적 구현 및 선택 검증 | 독립 PDF/ZIP/HTML engine과 합성 runtime 있음; 전체 실제 source print/layout/mapping 대조 대기 |
 | A | src/components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx | 목적 구현 및 선택 검증 | 독립 PDF/ZIP/HTML engine과 합성 runtime 있음; 전체 실제 source print/layout/mapping 대조 대기 |

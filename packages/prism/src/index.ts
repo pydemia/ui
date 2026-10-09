@@ -51,6 +51,7 @@ export * from "./prism-response";
 export * from "./prism-management-tools";
 export * from "./prism-directory";
 export * from "./prism-candidate-list";
+export * from "./prism-mgmt-comments";
 export * from "./prism-page-state";
 
 export * from "./prism-domain-forms";
