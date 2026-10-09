@@ -757,7 +757,7 @@
     },
     "currentFixtureStates": {
       "count": 121,
-      "status": "pending-final-built-document-check",
+      "status": "passed-final-local-built-document",
       "previousVerifiedStates": 120,
       "previousPublishedVerificationCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b"
     },
@@ -793,7 +793,7 @@
   "fixtureRenderChecks": {
     "groups": 38,
     "states": 121,
-    "status": "passed-initial-local-leadership-build",
+    "status": "passed-final-local-leadership-build",
     "checks": [
       "all121 fixtures render at actual320px viewport",
       "no nested buttons",
@@ -801,7 +801,7 @@
       "no unlabeled visible native inputs",
       "no page errors or unhandled rejections"
     ],
-    "evidence": "local-leadership-121-initial",
+    "evidence": "final-local-leadership-121",
     "claim": "Rendering does not prove all source states, interactions or visual parity."
   },
   "extensions": {
@@ -1128,6 +1128,13 @@
       ],
       "count": 4,
       "status": "passed"
+    },
+    "documentChecks": {
+      "states": 121,
+      "sourceReferenceLinks": "passed087811ff",
+      "profileHeader": "600/8px",
+      "rootOverflow": 0,
+      "pageErrors": 0
     }
   }
 }
