@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-09",
+  "updatedAt": "2026-10-10",
   "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "status": "in-progress",
   "claim": "Source correspondence and runtime checks are separate from visual parity. No complete parity claim.",
@@ -229,7 +229,7 @@
       ]
     },
     "prism-domain-forms": {
-      "visual": "pending",
+      "visual": "partial",
       "interaction": "partial",
       "checks": [
         "All companies disables company selector",
@@ -239,17 +239,27 @@
         "company group selects two companies and emits synthetic save intent",
         "duplicate position sub-job rejected",
         "expertise limit 3 and experience limit 2 preserve removal",
-        "position generate and save intent callbacks"
+        "position generate and save intent callbacks",
+        "Current source 087811ff user create: required email/lastName/firstName/companyId/division, searchable company select",
+        "Current user detail: read-only basics, unchanged save disabled, role/group changes enable save; active/inactive rich group labels",
+        "Group create blur validation and detail 600ms debounce; unchanged detail name allows company-only edit",
+        "Stale/aborted name responses ignored, duplicate and failed checks block save; retry is available",
+        "Promise save busy state, duplicate submission guard, rejected-save recovery",
+        "Actual local Chrome: source field gap 2px, header 18px/600/1.4, status colors #009A93/#363636, error helper 12px; focused error remains red",
+        "Long synthetic current forms at 140/200/320/800/1280px: no page or visible form-control overflow after grid/action wrapping fix"
       ],
       "evidence": [
         "local-notice-form",
         "local-user-form",
         "local-group-form",
-        "local-position-form"
+        "local-position-form",
+        "current-admin-forms.test.mjs",
+        "current-admin-user-long.jpg",
+        "current-admin-cua-runtime.json"
       ],
       "remaining": [
-        "all display variants",
-        "authenticated source form visual comparison"
+        "Fresh authenticated source create/detail visual and behavior comparison",
+        "Complete notice/position form states and source-specific authorization/business-validation contracts"
       ]
     },
     "prism-notice": {
@@ -276,7 +286,8 @@
         "All eight tab recipes render",
         "Experience topic changes displayed card",
         "Comment save appends text and clears draft",
-        "320px profile recipe root does not overflow; tabs and compensation table scroll internally"
+        "320px profile recipe root does not overflow; tabs and compensation table scroll internally",
+        "LeadershipPieSummary uses source print padding16/gap20/radius12/border#b6bec9/white and13.333px caption;typedrecipe selects old summary or new pieSummary."
       ],
       "evidence": [
         "local-profile-total",
@@ -303,7 +314,8 @@
         "Print section checkbox changes selection",
         "390px page fit uses 245.90625 x 348px canvas inside 356 x 380px viewport",
         "Width fit subtracts 32px total padding once: 324px canvas at 390px frame; 254px at 320px; 958px at 1024px",
-        "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px"
+        "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px",
+        "전체 bytes/host loader·native 연속 Viewer·원본 toolbar와독립 pdf.css,재시도/취소/immutable download context를 보완. 기존 출력 options/preview 소스는 byte 보존."
       ],
       "remaining": [
         "Source PDF toolbar/fit states comparison",
@@ -542,7 +554,7 @@
       ],
       "remaining": [
         "All other primitive states and domain callers",
-        "New source delta components remain pending in source-inventory.json"
+        "Latest source-purpose mappings are implemented; changed source styles and domain caller states remain unverified."
       ]
     },
     "prism-profile": {
@@ -551,7 +563,8 @@
       "checks": [
         "source empty state 175px total and 120px icon",
         "source error state 236px with 70px padding and retry",
-        "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed"
+        "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed",
+        "PrismSummaryBadge tooltipClassName/tooltipStyle을 본문에 적용. 계약 테스트와 실제 CUA에서 소비자 class,12px font/padding,280px maxWidth를 확인. 원본 모든 도움말 상태의 시각 비교는 대기."
       ],
       "evidence": [
         "reference-common-empty-error",
@@ -620,31 +633,284 @@
         "other paper and native print settings",
         "very long outline and essay fragmentation"
       ]
+    },
+    "prism-chart": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "New deployed leadership print sample:160x158 frame,11px700 inside labels,three source colors",
+        "Typed SVG preserves supplied percentages,null and real zero; incomplete geometry has an unassigned sector",
+        "42 actual consumer cases across1280/320/390 viewport and140/320/800 manual widths passed with no root overflow",
+        "Adaptive radius and long-label legend preserve legibility; hidden data-table overflow corrected"
+      ],
+      "evidence": [
+        "reference-leadership-print-20261009",
+        "consumer-leadership-20261009"
+      ],
+      "remaining": [
+        "All original outside-label and animation states",
+        "Authenticated leadership domain",
+        "Complete page pixel parity"
+      ]
+    },
+    "prism-export": {
+      "visual": "source-confirmed-options-layout; profile-print parity pending",
+      "interaction": "passed-selected-synthetic-runtime",
+      "checks": [
+        "8 real PDF/ZIP downloads at1280/320; one/two/three profiles and long3-page PDF",
+        "ZIP integrity and duplicate (2)/(3) names; all extracted files PDF",
+        "error/cancel produce no download; beforeunload listener cleanup",
+        "fresh installed consumer actual menu change preserves one job under StrictMode",
+        "fresh installed consumer two concurrent PDF/ZIP jobs and cancellation",
+        "async writer backpressure, failure abort and pending renderer cancellation tests",
+        "PDF pages rasterized and inspected; synthetic header overlap fixed before final replay"
+      ],
+      "remaining": [
+        "Original authenticated export comparison",
+        "Consumer DOM renderer and pagination integration",
+        "Actual source service-worker/OS cancellation integration",
+        "All real-profile print sections and HTML export"
+      ],
+      "evidence": [
+        "final-local-export-20261009",
+        "consumer-export-runtime",
+        "local-export-125",
+        "final-static-export"
+      ]
+    },
+    "prism-html-export": {
+      "visual": "passed-online-vs-offline-selected-layout; original full profile parity remains partial",
+      "interaction": "passed-selected-runtime",
+      "checks": [
+        "4 actual HTML downloads and offline reopened documents at1280/320/default/long",
+        "Loaded embedded Pretendard;page/pie/SUMMARY metrics and all3/48career rows match",
+        "No external network requests;320px root width and native internal horizontal wheel",
+        "Errors/cancel do not download;CSSOM/asset failure surfaced",
+        "Actual red canvas/blue photo/green canvas order;one cached asset;SVG use reference",
+        "Live input values and frozen content during slow CSS asset load;caller DOM preserved",
+        "CSS parser preserves literal URL text/comments and embeds image-set candidates"
+      ],
+      "remaining": [
+        "Every original profile section/state/style comparison",
+        "All paper sizes/margins and authenticated data/image asset paths",
+        "Cross-browser and full global inherited selector contexts"
+      ],
+      "evidence": [
+        "final-html-export",
+        "html-export-canvas-photo",
+        "reference-html-export-20261009",
+        "reference-html-export-offline",
+        "parsed-css-html-export"
+      ]
+    },
+    "prism-memo": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Deployed index-DDygUNQ9.js/index-Ct5vvkRn.css contain memoCardBottom and edited label; old memoCardHeader absent",
+        "Source and deployed CSS match card16px padding/12px gap/radius12, body14px400/1.4, date12px500/17px, bottom20px/actions6px and20px icons",
+        "Personal collection excludes non-true isMine data, has no author header and controls one editor through editingId",
+        "Synthetic browser: update, retained failed draft and retry, confirmed delete with busy close guard, create via Enter with Shift+Enter newline preserved",
+        "Promise duplicate guard, immutable draft, AbortSignal on entity transition/unmount and ignored late completion exercised in seven interaction tests",
+        "Actual 140/200/320/440/800px manual widths: no collection/page horizontal overflow, bounded list and composer placement",
+        "Native textarea resize overflow at height240 discovered; ResizeObserver-based maximum corrected it, and height700 restores max200",
+        "Actual 320px viewport: internal PageDown scroll0 to204; CUA native wheel attempted but produced no observed change, so wheel integration is not claimed",
+        "Fresh emitted registry installation:42items/65files/18examples, TypeScript/Vite/font bytes/notices passed"
+      ],
+      "evidence": [
+        "memo.test.mjs",
+        "memo-deployed-css-rules.json",
+        "memo-cua-runtime.json",
+        "memo-static-136-cua.json",
+        "memo-consumer-install.log"
+      ],
+      "remaining": [
+        "Fresh authenticated deployed memo states and complete rendered/source geometry or pixel comparison",
+        "Original static font versus installed variable font measurements for every state",
+        "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
+        "Current screenshot capture unavailable: responsive, default, native and minimal-button capture all timed out while live DOM checks remained available"
+      ]
+    },
+    "prism-context": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "Current source and deployed CSS:14px-high required/optional badges,10px500 font,radius10,red228/88/88 andgray134;source11-row textarea,50 trimmed-unit minimum and800 raw-unit maximum",
+        "Required49 rejects;50 trimmed UTF16 units including internal spaces accepts;raw counter and submitted whitespace remain intact",
+        "Optional short text and exact800 show source warnings without alone blocking valid submit;externally supplied801 is rejected",
+        "Structured actions retain declared service keys,raw nonempty text,option order/value/label/description andclicked action label;extra internal values excluded",
+        "Synthetic CUA:description andcheckbox clicks,max2 gate,Space deselection,collapsed controlled value preservation,submit/cancel,readonly/busy/empty/error/long states",
+        "Actual140/200/320px widths use one option column;800/1000 use two;form/section/card horizontal overflow0",
+        "Native textarea drag233.375 to333px with horizontal overflow0;source-compatible default300ms motion andexplicit reduceMotion override",
+        "Six interaction tests added;75 full PRISM tests passed",
+        "Radix hidden form input no longer interrupts state glyph andfocus CSS selectors;checked/unchecked glyph visibility measured in the form",
+        "Fresh42-item/66-file registry installation and18 complete examples passed TypeScript/Vite/font bytes/notices;installedContextExample inStrictMode at320px submitted preserved text andcanonical option descriptors withvisible glyphs/nooverflow/errors"
+      ],
+      "evidence": [
+        "context.test.mjs",
+        "context-deployed-css.json",
+        "context-live-cua.json",
+        "context-static-140-cua.json",
+        "context-full-consumer-retry.log",
+        "context-consumer-u0eKVn.json"
+      ],
+      "remaining": [
+        "Fresh authenticated deployed Context states andcomplete rendered/source geometry orpixel comparison",
+        "Default section animation in the locked environment did not advance beyond its initial frame;interaction checks usedreduceMotion=true",
+        "Page.captureScreenshot timed out after5000ms in this phase;no new screenshot file",
+        "Full service schema/query continuation,OSIME/touch andallfont/low-height combinations"
+      ]
+    },
+    "prism-candidate-list": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "Source and deployed selected gp77p/ekoga CSS match list padding36,toolbar margins24/10 andgap20,informationgap10,actiongap8,page-sizewidth120,andconfirmnote14px/1.4/subgray/margin8",
+        "Controlled selection rejects an excess100 change atomically;page changes retain it;search/reset clear it;candidate partial/all header clears every page",
+        "Source candidate table has sibling profile actions,icon-only remote sort with role defaultdesc,4 skeleton rows andsource empty state;generic Directory eligibility/page-preservation remains unchanged",
+        "Readonly request snapshots andcanonical optional summary/compensation fields;per-kind duplicate guards;retry retains original IDs/options after current selection changes;local unmount doesnot cancel application-owned preparation",
+        "Ten new behavior/lifecycle/pagination/job-copy/page-size tests;full85 PRISM tests passed",
+        "Live CUA:empty-selection alert,selection/page/size/sort,100 limit,preparingnotice,busy,failedretry,partialexclusion,andpreparation continuing afterlist unmount",
+        "Generated two-profile ZIP andsingle summary PDF preserved fromvisibledata-URL links;ZIP CRC andtwo1-pageA4 PDFs parsed;first page raster inspected. Native event timed out andBlob downloadMedia unsupported;OSsaveunverified",
+        "Actual140/200/320/440/800/1000/1280 widths havezero list/filterhorizontaloverflow;tableminimum640 staysinternal. Actual320px iframe,height240,keyboard rootscroll reachesfooter",
+        "Live visual inspection found a legacycard class collision causing stackedtablecells andmissingneutral400 token;final table-cell geometry and16px grey sort icons corrected",
+        "42 groups/146 current-source fixtures rendered inactual320px iframe with component/state DOMmarkers;nohorizontaloverflow,nestedbuttons,unnameddisplayedinputs orbrowsererrors",
+        "Fresh43items/67files/19examples passedTypeScript/Vite/fontbytes/notices. Installed component sources unchanged;portableexample synchronized tofinalusage. ProductionbuiltStrictMode example atactual320px generatedoneZIP withtwoA4 PDFs andbothoptionalfields visibleinraster"
+      ],
+      "evidence": [
+        "candidate-list.test.mjs",
+        "candidate-deployed-css.json",
+        "candidate-cua-runtime.json",
+        "candidate-widths-cua.json",
+        "candidate-zip-validation.json",
+        "candidate-static-146-cua.json",
+        "candidate-consumer-install.log",
+        "candidate-consumer-BXqIdv.json",
+        "candidate-consumer-zip-validation.json"
+      ],
+      "remaining": [
+        "Fresh authenticated deployed candidate list states andcomplete rendered/pixel/static-font comparison",
+        "Native OS save andautomatic browser print integration in thelocked environment",
+        "Full real profile query/mapping andoriginal printable layout;synthetic generated PDFs are integration fixtures",
+        "Current UI screenshot capture timed out after5000ms;no newUI screenshot produced;PDF raster is export evidence only"
+      ]
+    },
+    "prism-directory": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Generic eligibility andother-page preservation preserved",
+        "Current candidate directory uses source-specific table,header-clear-all semantics androle descending default",
+        "Sibling profile button avoids nested buttons andemits oneopen action"
+      ],
+      "remaining": [
+        "Complete authenticated source table state/pixel comparison"
+      ]
+    },
+    "prism-mgmt-comments": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "현재 CeoCommentForm/SuccessorCandidateMgmtComments 소스와 공개 배포 CSS의 1hr3u/1kle5 규칙 대조: 4필드·5행·trim 경계, 카드 16px padding/12px radius/14~16px 글꼴, 20px 액션과 간격12/16",
+        "CEO/ELP 별도 배열과 nullable metadata, year=0, 원문 줄바꿈, 작성자 액션, 편집 양식을 기존 카드 위에 표시",
+        "Promise 중복 방지·후보 전환/unmount AbortSignal·실패 초안 유지·성공 후 reload 실패 분리와 reload만 재시도",
+        "11개 새 계약/상호작용 테스트를 포함한 전체96개 테스트 통과. 추가 등록 없이 수정만 제공하는 소비자도 편집을 취소할 수 있습니다.",
+        "실제 CUA: 연도 혼합문자→2026, 입력 Enter 제출 차단, native maxlength100/100/2000, 대기 잠금·저장/상세/삭제 실패와 재시도, 후보 전환, 삭제 완료",
+        "140/200/320/440/800/1000/1280px에서 코멘트 영역 가로 넘침0; 5행 내용115px/긴 내용638px와 자동 scrollHeight 일치; 수동 drag113→193px; 최종 빌드에서 수동·자동180px 제한",
+        "43그룹/152상태를 실제320px iframe에서 component/state 표식 확인 후 검사; 렌더 누락·페이지 넘침·중첩 버튼·이름 없는 표시 입력·수집 브라우저 오류0",
+        "새 독립 소비자에44항목/20예시를 설치하고 최종 레지스트리로 재설치; TypeScript/Vite/font bytes/고지 검증. 설치 component 소스를 수정하지 않고 검증 앱만320px iframe+StrictMode로 구성",
+        "독립 production 예시의 등록3/수정/삭제2, 자동638px/제한180px, 실제320px·Pretendard·넘침/중첩/오류0 확인"
+      ],
+      "evidence": [
+        "mgmt-comments.test.mjs",
+        "mgmt-deployed-css.json",
+        "mgmt-cua-runtime.json",
+        "mgmt-isolated-consumer.log",
+        "mgmt-final-consumer-retry.log",
+        "mgmt-consumer-runtime.json"
+      ],
+      "remaining": [
+        "인증된 원본 CEO/ELP 추가·편집·오류 상태의 전체 시각 및 폰트 대조",
+        "실제 backend 권한·저장·캐시/query 통합",
+        "현재 screenshot capture는5000ms timeout; 새 UI screenshot 없음"
+      ]
+    },
+    "prism-attitude-report": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "진단 제목 옆 조건부 보고서 버튼, subject/url/data 변경 시 모달 닫기; 기존 documentAction의 배치 계약 유지",
+        "PDF 전체 bytes·%PDF 헤더 검사·호스트 fallback과 AbortSignal. PDF.js6.3.289 Native PDFViewer의 연속 페이지·텍스트 레이어/선택·링크·맞춤을 사용하며 source worker/CSS 버전은 호스트가 연결",
+        "페이지/배율은 blur 또는 Enter 적용, 10단계 rounding·30~100 기본범위와 min/max 확장,46/64px 입력·14px500 글꼴·원본 glyph",
+        "실제 CUA 3페이지/3canvas/텍스트 레이어,2페이지 Enter·3페이지 PageDown,67→70/60·30/100 경계,너비맞춤146%,Synthetic 단어 선택",
+        "HTML200 응답은 PDF형식 오류이며 같은URL 재시도 성공. UI callback bytes4351이 원본과 동일하고 Poppler가3페이지A4를 확인. OS 저장 완료와 구분",
+        "진단140~1280px 넘침0,좁은 차트 내부scroll 및 범례wrap. PDF140~1280px/240~1000px의7조합 ready/넘침0;140×240에서viewport0 문제를36px로 수정",
+        "실제320px iframe에서모달296px·3페이지 ready/페이지 넘침0. 후보 자동전환 중 대기모달 닫힘과 계약 Signal 확인",
+        "현재45그룹/159개 고유 상태의 표식·가로 넘침·중첩 버튼·이름 없는 표시 입력·수집 오류 검사; 긴 Survey 접근성 표의870px 넘침 수정 후 재측정0",
+        "새46항목/71파일·22예시의독립설치와최종registry재설치,TypeScript/Vite/font bytes/고지 통과. 실제production320px StrictMode native3페이지·text layer·이동/줌/필드·넘침/오류0. download event25초timeout;OSsave미확인."
+      ],
+      "remaining": [
+        "인증된 원본 Attitude/PDF 상태·전체 font/pixel 비교",
+        "진단 SVG의 source Chart.js 전체 geometry·motion/print 대조",
+        "실제backend 권한/query/캐시·OS 저장·native 인쇄",
+        "현재 screenshot capture5000ms timeout"
+      ],
+      "evidence": [
+        "pdf-report.test.mjs",
+        "attitude-deployed-css.json",
+        "attitude-cua-runtime.json",
+        "attitude-downloaded-bytes.pdf"
+      ]
+    },
+    "prism-survey": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "source36px bars/24px track/100px height·role 색·정수 평균선·0.0과null 구분을 구현",
+        "CUA 카드194px/padding8/12px radius,bars36/24,평균61/63/75/82px·Red400,role Green200/Blue200/Orange200 확인",
+        "140~1280px 넘침0·3/2/1열 재배치,가변320px 막대와평균195px",
+        "print class의118pt=157.328px 카드·70px 막대·legend10pt 확인. 실제OS/native print와 구분",
+        "긴 제목의sr-only table min-content가 페이지 너비를 늘리던 문제를clip wrapper로 수정하고 실제320px 재측정"
+      ],
+      "remaining": [
+        "인증 원본 모든 Survey 상태·전체 pixel/font 대조",
+        "실제프로필 전체 출력/native print"
+      ],
+      "evidence": [
+        "pdf-report.test.mjs",
+        "attitude-deployed-css.json",
+        "survey-cua-runtime.json",
+        "attitude-cua-runtime.json"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 36,
+      "passed": 107,
       "failed": 0
     },
     "registry": {
-      "groups": 38,
-      "items": 39,
+      "groups": 45,
+      "items": 46,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-fresh-local-install-then-final-focus-source-sync",
-      "items": 39,
-      "files": 62,
-      "completeExamples": 12,
+      "status": "passed-fresh-local-install-and-final-registry-reinstall",
+      "items": 46,
+      "files": 71,
+      "completeExamples": 22,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "portableFont": "package font emitted and SHA256 matched",
+      "portableFont": "emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "All 39 items and 12 complete examples compiled after upstream integration; only the subsequent focus-scroll fix was synchronized from emitted utility and recompiled.",
-      "registrySha256": "93f89ddbfda167b0e9bd76997c07747886d633f472d3a0c3b3030494e9e4891f",
-      "browser": "Actual source coordinates, touch/focus/Space/Escape, SUMMARY and Avatar regression, eight long label/help viewport and manual width cases passed."
+      "sourceScope": "설치 component source는 직접 수정하지 않았습니다. 최종 emitted registry로 재설치했으며 entry/환경worker/합성PDF만 검증 앱에 연결했습니다.",
+      "runtime": "Production StrictMode/실제320px의3페이지/텍스트 레이어,3페이지 Enter·67→70 줌,46/64px·14px500,넘침/브라우저 오류0. Native download event25초 timeout;OSsave미확인"
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -727,20 +993,19 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 38,
-      "componentExamples": 12,
-      "integrationFragments": 26,
-      "workspaceTypecheck": "passed in check-prism.mjs; runs in existing CI PRISM gate",
-      "installedTypecheck": "passed in isolated consumer",
-      "installationDependencyClosure": "all 38 installed usage imports resolve within their registry dependency graph",
-      "usagePathControlRuntime": "passed: registry/workspace selections display the matching manifest code; clipboard write not exercised"
+      "groups": 45,
+      "componentExamples": 22,
+      "integrationFragments": 23,
+      "workspaceTypecheck": "passed check-prism.mjs",
+      "installedTypecheck": "passed final independent install",
+      "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 120,
-      "status": "passed-local-merged-build-browser",
-      "previousVerifiedStates": 119,
-      "previousPublishedVerificationCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
-      "implementationCheckpoint": "a52360ee plus focus fix"
+      "count": 159,
+      "status": "passed-current-source-documents-actual320px-iframe-cua",
+      "unique": 159,
+      "previousVerifiedStates": 152,
+      "scope": "합성 기본 렌더 검사이며 모든 원본 상태·상호작용·pixel 완료를 의미하지 않음"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -751,8 +1016,40 @@
       "scope": "Nine placements, small, SUMMARY touch/focus and long 320x240/wheel checks; whole-domain parity remains partial."
     },
     "inputLabelPublication": {
+      "status": "published-http-and-browser-verified",
+      "sourceCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b",
+      "verifyUiRun": 37901827017,
+      "pagesRun": 37901826283,
+      "states": 120,
+      "publicAssetsMatching": 13
+    },
+    "leadershipPublication": {
       "status": "recorded-before-publication",
-      "scope": "Local merged InputLabel and PrismInfoTooltip checks passed. The exact Git and deployment results are recorded after publication in the session worknote."
+      "scope": "New pie,summary,typed recipe and source-reference revision; publication readback will be recorded after push."
+    },
+    "contextImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified;draft-publication-pending",
+      "production": "pending human-approved publication",
+      "purposeMappingIsFullParity": false
+    },
+    "candidateListImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified;draft-publication-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
+    },
+    "mgmtCommentsImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified; draft-update-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
+    },
+    "attitudeReportImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified; draft-update-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
     }
   },
   "unverified": [
@@ -760,22 +1057,23 @@
     "remaining source state comparisons outside measured files, nine Tooltip placements and SUMMARY help; authenticated full-domain screens",
     "all extensions across domains, long content and popup combinations",
     "clipboard write and native print dialog",
-    "Latest source checkout 087811ff adds four components whose implementation is pending; 269 previous purpose mappings are not current full coverage."
+    "All 273 source-purpose mappings, including four recent additions, do not establish full state or visual equality.",
+    "Original authenticated profile export and service-worker stream integration; full profile DOM capture/pagination and all original standalone HTML profile sections/styles."
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 38,
-    "states": 120,
-    "status": "passed-local-merged-input-label-build",
+    "groups": 45,
+    "states": 159,
+    "status": "passed-current-source-documents-actual320px-iframe-cua",
     "checks": [
-      "all 120 fixtures render at actual 320px viewport",
-      "no nested buttons",
-      "no page root horizontal overflow",
-      "no unlabeled visible native inputs",
-      "no page errors or unhandled rejections"
+      "현재component/state 표식과 실제320px 확인",
+      "최종159개 고유 상태의 누락·넘침·중첩 버튼·이름 없는 표시 입력·수집된 오류0",
+      "긴 Survey hidden table은 수정 후 별도 재측정·집계 누락 감사"
     ],
-    "evidence": "local-label-120-fixed",
-    "claim": "Rendering does not prove all source states, interactions or visual parity."
+    "evidence": [
+      "attitude-cua-runtime.json"
+    ],
+    "claim": "현재 합성 상태의 기본 검사; source 전체 시각/상태 parity 아님"
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -980,14 +1278,26 @@
     "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
     "previousRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
     "inventoryComponents": 273,
-    "newPendingComponents": 4,
+    "newPendingComponents": 0,
     "changedStyleFiles": [
       "_dialog.scss",
       "_print.scss",
       "_text-field.scss"
     ],
     "inputLabelAndTooltipSources": "Unchanged between the previous and latest checkout.",
-    "deployedRevisionBinding": "Not established."
+    "deployedRevisionBinding": "Not established.",
+    "contextSources": [
+      "ContextInfoLayer.tsx",
+      "ContextInfoLayer.module.scss",
+      "ContextInfoSection.tsx",
+      "ContextInfoSection.module.scss"
+    ],
+    "deltaReview": {
+      "modified": 42,
+      "added": 10,
+      "unreviewedPaths": 5,
+      "coverageClaim": "Reviewing a path is separate fromimplementation/state/parity completion."
+    }
   },
   "inputLabelReferenceComparison": {
     "status": "passed-selected-runtime-2026-10-09",
@@ -1040,5 +1350,104 @@
     "sourceObservation": "Fresh anonymous deployed sample; source/target screenshots inspected.",
     "focusScroll": "Native focus scroll finishes before opening; pending focus opening is cancelled by Escape/blur/unmount.",
     "installedConsumer": "Fresh merged-source install with final emitted focus fix synchronized; tsc/Vite and real browser passed."
+  },
+  "leadershipVerification": {
+    "status": "passed-selected-local-runtime",
+    "source": "http://dev.prism.ai/sample/chat/candidate-profile-print",
+    "frame": {
+      "width": 160,
+      "height": 158
+    },
+    "knownSourceValues": [
+      33,
+      32,
+      35
+    ],
+    "consumerCases": 42,
+    "viewports": [
+      1280,
+      320,
+      390
+    ],
+    "manualWidths": [
+      140,
+      320,
+      800
+    ],
+    "scope": "Measured frame/styles/colors and selected synthetic state/size behavior; source and target screenshots inspected. Whole-page parity remains partial.",
+    "animation": "passed in isolated consumer",
+    "reducedMotion": "passed in isolated consumer",
+    "evidence": "fresh-final-leadership-20261009",
+    "fontRendering": {
+      "sourceColdGlyphWidths": [
+        29,
+        30,
+        32
+      ],
+      "sourceWarmGlyphWidths": [
+        35,
+        34,
+        35
+      ],
+      "targetGlyphWidths": [
+        35,
+        34,
+        35
+      ],
+      "warmGlyphBoxPositionMaxDelta": 1,
+      "warmGlyphBoxHeightMaxDelta": 2,
+      "interpretation": "Original cold canvas retained a different text rendering; warm sample remount matched target widths. A font-loading paint race is inferred, not a whole-page pixel-equivalence claim.",
+      "sourceFontFaces": "Pretendard400/500/600/700 loaded at observation; original uses static faces and target uses package variable face.",
+      "remaining": "Exact rasterization, all outside labels and browser/font combinations."
+    },
+    "fontCases": {
+      "sizes": [
+        8,
+        24
+      ],
+      "states": [
+        "long",
+        "missing"
+      ],
+      "count": 4,
+      "status": "passed"
+    },
+    "documentChecks": {
+      "states": 121,
+      "sourceReferenceLinks": "passed087811ff",
+      "profileHeader": "600/8px",
+      "rootOverflow": 0,
+      "pageErrors": 0
+    }
+  },
+  "profileExportVerification": {
+    "status": "passed-selected-local-and-installed-synthetic-runtime",
+    "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "downloadCases": 8,
+    "longPdfPages": 3,
+    "consumerJobsConcurrent": 2,
+    "menuPersistence": true,
+    "strictModeDuplicateDownloads": 0,
+    "originalAuthenticatedExport": "unverified",
+    "claim": "Real synthetic file generation/download and source-purpose correspondence; no complete print-document or OS-save parity claim."
+  },
+  "htmlExportVerification": {
+    "status": "passed-selected-local-runtime",
+    "source": "http://dev.prism.ai/sample/chat/candidate-profile-print",
+    "sourceDownloadedPages": 9,
+    "sourceOfflineCanvasImagesLoaded": 3,
+    "sourceOfflineProfileImageLoaded": false,
+    "targetDownloadCases": 4,
+    "targetViewports": [
+      1280,
+      320
+    ],
+    "targetCareerRows": [
+      3,
+      48
+    ],
+    "onlineOfflineMetricEquality": true,
+    "sourceFullProfileParity": "unverified",
+    "claim": "Original purpose plus real standalone synthetic document fidelity; not complete original profile page parity."
   }
 }

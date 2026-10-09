@@ -57,11 +57,11 @@ test("risk absence merges only wholly missing columns and zero compensation is p
 });
 test("context limits block new options but allow deselection and require text before submit",async()=>{
     let next;const fields=[{key:"issue",label:"현안",type:"textarea",required:true},{key:"options",label:"분야",type:"options",maxSelections:1,options:[{value:"a",label:"A"},{value:"b",label:"B"}]}];
-    const props={fields,values:{issue:"",options:["a"]},onValueChange:v=>next=v,onSubmit(){throw new Error("invalid submission");}};
+    const props={fields,defaultOpenFields:["issue","options"],values:{issue:"",options:["a"]},onValueChange:v=>next=v,onSubmit(){throw new Error("invalid submission");}};
     await act(async()=>root.render(h(PrismContextForm,props)));
     assert.equal(document.querySelector('button[type="submit"]').disabled,true);const checkbox=[...document.querySelectorAll('[role="checkbox"]')];assert.equal(checkbox[0].disabled,false);assert.equal(checkbox[1].disabled,true);
     await act(async()=>checkbox[0].click());assert.deepEqual(next.options,[]);
-    await act(async()=>root.render(h(PrismContextForm,{...props,values:{issue:"현안 입력",options:[]}})));assert.equal(document.querySelector('button[type="submit"]').disabled,false);
+    await act(async()=>root.render(h(PrismContextForm,{...props,values:{issue:"현안 입력을 충분히 작성합니다. ".repeat(4),options:[]}})));assert.equal(document.querySelector('button[type="submit"]').disabled,false);
 });
 test("directory select-all preserves other pages and cannot select locked rows",async()=>{
     let selected;const rows=[{id:"a",name:"A"},{id:"b",name:"B",locked:true},{id:"c",name:"C"}];

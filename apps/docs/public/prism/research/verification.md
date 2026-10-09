@@ -1,6 +1,6 @@
 # PRISM 검증 기록
 
-기존 구현·관찰 기준: dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9`, 2026-10-03. 2026-10-09에 frontend를 fetch·fast-forward해 `087811ff`를 확인했습니다. 현재 inventory 273개 중 새 컴포넌트 4개는 구현 대기입니다. 전체 원본 스타일·상태 일치는 아직 확인하지 않았습니다.
+기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 45개 typed 그룹과 토큰을 포함한 46개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
 
 ## 근거와 범위
 
@@ -75,6 +75,107 @@ InputLabel의 raw MUI 도움말은 일반 HRXTooltip와 규격이 다릅니다. 
 
 Tooltip 기본 hover 지연100ms는 실제 배포 MUI bundle에서 확인했습니다. `delayDuration`으로 바꿀 수 있고 `PrismInfoTooltip`의 `open/onOpenChange`는 호스트가 제어할 수 있습니다. SUMMARY도 같은 정보 버튼을 조합합니다. 최신 병합본의 계약 테스트36개와 예시12개 타입 검사, 일반 UI280테스트,146registry/144catalog/83immutable release 검증이 통과했습니다. 병합 후 새 독립 소비자39항목·62파일의 설치·컴파일이 통과했고 이후 포커스 자동 스크롤 수정만 emitted source로 동기화해 다시 컴파일했습니다. 수정 후 라벨·SUMMARY·Avatar의 실제 브라우저 검사도 통과했습니다.
 
-최신 frontend는 LeadershipPie, LeadershipPieSummary, CandidateProfilesPdfDownload, PdfDownloadHost를 추가했습니다. 기존269개 목적 대응에 이 네 가지의 구현이 포함됐다고 표시하지 않습니다. 사용자·회사 그룹 양식, Memo, PDF, 프로필 영역의 변경과 `_dialog.scss`·`_print.scss`·`_text-field.scss` 차이도 후속 비교가 필요합니다. InputLabel과 Tooltip의 소스·SCSS는 두 revision에서 동일했습니다. 이 checkout revision이 현재 배포 revision과 같다는 근거는 확보하지 않았습니다.
+최초 `087811ff` 감사에서는 LeadershipPie, LeadershipPieSummary, CandidateProfilesPdfDownload, PdfDownloadHost 네 항목이 구현 대기였습니다. 이후 독립 pie·PDF/ZIP/HTML 목적 구현과 선택한 검증을 추가해 아래 기록에 반영했습니다. Memo, PDF, 프로필 영역과 인쇄 규칙의 전체 상태 비교는 남아 있습니다. 사용자·회사 그룹 양식과 dialog/text-field 선택 규칙은 최신 추가 검증의 범위를 확인해 주세요. InputLabel과 Tooltip의 소스·SCSS는 두 revision에서 동일했습니다. 이 checkout revision이 현재 배포 revision과 같다는 근거는 확보하지 않았습니다.
 
 포커스로 화면 밖의 정보 버튼을 스크롤하면 Radix의 ancestor-scroll 닫기가 열림과 겹쳤습니다. 다음 animation frame에 포커스 도움말을 열고 Escape·blur·unmount는 대기 중 열림을 취소하도록 보완했습니다. 문서의 실제320×240 long 도움말은300×90.1875px이며 native wheel scrollTop230을 확인했습니다. 최신120상태의320px 렌더·가로 넘침·중첩 버튼·입력 이름·page error 검사도0문제입니다. 이 기록은 현재 소스의 공개 반영 전에 작성했으며 원격 결과는 세션 worknote에서 갱신합니다.
+
+
+## 리더십 비중과 SUMMARY
+
+새 원형 차트는 Chart.js plugin을 복사하지 않고 SVG로 구현했습니다. 호출자가 계산한1–3개의 비중을 표시하며 색상은 지·덕·용 순서의#706ee7/#55c4ae/#ff928a입니다. 원본 인쇄 샘플과 같은160×158px 기본 영역과11px/700 흰 내부 라벨, SUMMARY의padding16·gap20·radius12·border#b6bec9·white·printcaption10pt를 확인했습니다. 코멘트 본문은 호출자 제공 값이며 인사 평가를 계산하지 않습니다.
+
+누락값과0은 별도 데이터 표에 그대로 표시합니다. 남은 미확정 영역은 회색으로 표시하며 완전한 양수 비중은 합계100의 반올림 오차0.2를 허용합니다. 크기40–640·라벨8–24px, 컨테이너 맞춤과 긴 라벨 범례를 지원합니다. 기존소비자의SUMMARYrecipe도 유지하고 새pieSummary는 별도형으로 선택합니다. 실제1280/320/390px 화면과140/320/800px 수동 폭의42조합이 통과했습니다. 이는 모든 원본 라벨 배치·애니메이션·도메인 화면의 pixel 일치를 증명하지 않습니다.
+
+새14개 완전한 사용 예시와40개 계약 테스트,39항목·62파일의 새 독립 설치·TypeScript/Vite·폰트bytes·자산 고지 확인을 통과했습니다. 새 fixture는121상태이며 최종본의 브라우저·공개 반영 검증은 이어서 진행합니다. 신규 두 그룹의 원본 링크는 해당파일이 존재하는087811ff를 참조하고 기존 벡터·기준소스의7ecfc9a 근거는 유지합니다.
+
+
+## 프로필 PDF와 ZIP 다운로드
+
+최신 두 다운로드 컴포넌트의 목적을 독립 `prism-export` 모듈로 구현했습니다. 한 명은 PDF, 여러 명은 ZIP 하나로 다운로드하며 중복 파일명은 `(2)`, `(3)`으로 구분합니다. 호출자가 제공한 PDF 렌더러를 순서대로 실행하고 진행률·오류·AbortSignal을 전달합니다. route 위에 둔 다운로드 host는 메뉴 이동에도 작업을 유지합니다. 완료·실패 작업은 호출자가 제거하며 완료는 브라우저 다운로드 시작 또는 stream writer close를 뜻합니다. OS 파일 저장 완료를 추정하지 않습니다.
+
+Blob fallback과 호출자 소유 streaming writer를 지원합니다. writer의 비동기 backpressure와 abort를 처리하며 기본 서비스워커를 등록하지 않습니다. `createPrismImagePdf`는 이미 페이지를 분할한 JPEG를 실제 PDF로 변환합니다. 프로필 데이터 조회·인증·DOM 캡처·페이지 분할은 호출자가 소유합니다. 이미지 PDF의 텍스트 검색과 접근 가능한 텍스트 레이어는 제공하지 않습니다.
+
+가상 프로필의 실제 다운로드8조합(1280/320px, 한 명/두 명/세 명, 긴3페이지)을 확인했습니다. ZIP 무결성·내부 PDF·중복 이름을 검사하고 PDF를 이미지로 렌더해 글자와 머리말을 검토했습니다. 오류와 취소에는 파일이 다운로드되지 않았으며 진행 중 beforeunload 경고와 종료 후 listener 해제를 확인했습니다. 새 독립 설치40항목·63파일·15예시의 TypeScript/Vite가 통과했습니다. 설치한 소스를 수정하지 않은 별도 소비자 fixture에서 StrictMode·메뉴 이동·동시 두 작업·취소도 실제 브라우저로 확인했습니다.
+
+현재 source inventory273항목의 pending 목적 매핑은0입니다. 이 수치는 전체 원본 상태·스타일·인쇄본 일치의 완료 기준이 아닙니다. 최신49계약 테스트와125상태의320px 렌더 검사가 통과했으며 원본 인증 다운로드·실제 서비스워커·전체 인쇄 섹션·HTML 내보내기 비교는 남아 있습니다.
+
+
+## 단일 HTML 프로필 파일
+
+원본 공개 인쇄 샘플에서9페이지 `profile-template.html`을 실제로 받았습니다. 네트워크를 차단해 다시 열었을 때 Pretendard4굵기와canvas를 변환한 차트 이미지3개가 표시됐고 툴바는 없었습니다. 프로필 이미지1개는 로드되지 않았습니다. 이 원본 샘플의 결과를 모든 실제 프로필이나 인증된 사진 경로로 일반화하지 않습니다.
+
+`createPrismHtmlDocument`와`PrismHtmlExportButton`은 재현한 정적 문서를 같은 목적의 단일 파일로 저장합니다. CSS·글꼴·사진·CSS URL을 포함하고 canvas를 PNG로 바꾸며 내부SVG참조와현재입력값을 유지합니다. 부모의 글꼴·design token을 보존하고 표시 위치를 정상 문서 흐름으로 바꿉니다. `data-prism-export-exclude`는 화면 툴바를 제외합니다. 자산이나 CSS를 읽지 못하면 실패를 알리며 호출자가`loadAsset`·완전한`cssText`를 공급할 수 있습니다. 생성 중 취소와unmount abort를 지원합니다. 파일은 React 없이 열리고 좁은 화면에서는 내부 가로 스크롤을 사용합니다. 인쇄 media는 이 overflow를 해제합니다.
+
+1280/320px의일반·긴프로필4조합을실제로다운로드해offline으로열었습니다. 본문·SVG·3/48경력행·Pretendard와page/pie/SUMMARY의측정규격이원래렌더와일치했고외부요청은0입니다. 320pxroot도320px이며native가로wheel을확인했습니다. 별도canvas/사진의red-blue-green색상순서·SVG use40px·자산cache1회·느린자산중본문변경을실제브라우저로검증했습니다. 실패/취소시다운로드는없습니다. 새로운독립설치41항목/64파일/16예시와56계약테스트가통과했습니다.
+
+전체원본의9페이지필드·모든상태·인쇄여백일치와인증된사진경로는후속비교대상입니다. 이HTML검증은재현한문서의저장후보존을입증하며전체PRISM화면일치를대체하지않습니다.
+
+
+## 2026-10-09 현재 관리자 양식
+
+최신 `UserForm`의 성·이름·회사·본부/팀 필수 입력과 상세 기본 정보 읽기 전용, 변경 후 수정, 회사 검색, 회사 그룹 활성/비활성 배지를 독립 typed recipe에 반영했습니다. `CompanyGroupForm`은 등록 blur 검사, 상세 이름 변경 600ms debounce, 기존 이름 유지 시 회사만 수정, stale/abort 결과 차단과 검사 실패 재시도를 지원합니다. 두 양식은 Promise 저장 중 입력·취소·상태 변경을 잠그고 중복 제출과 저장 실패를 처리합니다. 업무 이메일 도메인·등록 여부·권한은 소비자가 결정합니다. 기본 이메일 검사는 형식 검사입니다.
+
+자체 Chrome 탭에서 합성 데이터로 필수 입력과 저장 의도, 상세 읽기 전용·변경 전후 저장, 선택값·목록의 상태 배지, 회사만 변경, 등록 blur 대기, 중복/검사 오류·재시도를 확인했습니다. 원본 SCSS의 입력 gap 2px, 제목 18px/600/1.4, 상태 색상과 12px 오류 도움말을 적용했습니다. 140px에서 발견한 grid의 최소 내용 폭과 버튼 행 넘침을 제한하고 140/200/320/800/1280px 긴 내용 배치를 다시 확인했습니다. 긴 회사 태그의 고정 높이로 본문이 겹치는 문제도 수정했습니다. 기본 viewport 화면·실제 320px iframe 화면 증거와 폭별 DOM geometry를 따로 기록했습니다.
+
+전체 62개 계약 테스트, 17개 완전 사용 예시와 최신 전체 build/타입 검사를 통과했습니다. 40그룹·130상태의 실제 320px 렌더에서 누락·페이지 가로 넘침·중첩 버튼·표시 입력 이름 누락·브라우저 오류가 없었습니다. 새 소비자에 41항목/64파일을 설치한 뒤 최종 태그 CSS만 emitted bytes로 동기화했고 TypeScript/Vite를 다시 통과했습니다. 설치한 두 완전 양식 예시를 StrictMode에서 입력하고 사용자/그룹의 등록 의도와 320px 가로 넘침 없음을 확인했습니다. 일반 registry는146항목/144catalog/83immutable이며 기존 snapshot SHA를 유지합니다.
+
+기존 원본 탭에는 계정과 후보 화면이 남아 있으나 새 탭은 admin-login으로 이동했고 저장된 비밀번호 자동 완성도 확인되지 않았습니다. 새 인증 세션의 관리자 화면 대조는 미확인입니다. 실제 인사 데이터·credential은 예시나 검증 문서에 포함하지 않습니다. 최신 checkout과 배포 revision의 결합도 아직 확인하지 않았습니다.
+
+
+## 2026-10-09 현재 프로필 메모
+
+배포된 공개 index-DDygUNQ9.js/index-Ct5vvkRn.css에서 새 memoCardBottom과 수정됨 표시를 확인했으며 이전 memoCardHeader는 없었습니다. Source087811ff의 카드·본문·날짜·하단·액션 규칙도 이 CSS와 일치합니다. 인증 화면의 모든 상태 및 배포 commit SHA의 완전한 결합과는 구분합니다.
+
+새 prism-memo는 본문 우선·날짜/수정됨·단일 편집 잠금·삭제 확인을 독립 typed 계약으로 구현합니다. 서비스는 본인에게 허용된 메모만 조회해야 하며 isMine은 인증 수단이 아닙니다. Collection은 true가 아닌 기록을 표시하지 않습니다. Promise 저장/삭제/등록의 진행·오류·재시도와 중복 의도 방지를 제공하고 엔터 제출·Shift+Enter 줄바꿈·IME 보호, 원문 보존·소비자 draft 소유권을 유지합니다. 전환/unmount는 signal을 취소하고 오래된 UI 완료를 무시합니다. 기존 작성자 header API는 이전 형식의 호환으로 유지하되 현재 예시와 source mapping은 새 recipe를 사용합니다.
+
+실제 합성 브라우저에서 편집 잠금·저장 실패 내용 보존/재시도·삭제 확인/진행·등록을 확인했습니다. source 규칙의 padding16/gap12/radius12, 본문14/400/1.4, 날짜12/500/17, 액션20px를 측정했습니다. 원본 confirm store의 삭제 label·warning red와 contentMinHeight123을 반영했습니다. 수동 폭140/200/320/440/800px에서 내부 목록 스크롤과 입력창 배치를 확인했습니다. 높이240에서 native textarea resize가 입력창을 넘치게 하는 결함을 실제로 재현해 부모 크기에 맞춰 최대 높이를 제한했고, 부모 높이700에서 max200 복귀를 확인했습니다. 320px의 PageDown 내부 스크롤은0→204였지만 CUA wheel 호출은 변화가 없었으므로 휠 통합 검증 성공으로 표시하지 않습니다.
+
+7개 새 상호작용 테스트를 포함한 전체69개 테스트와18개 완전 예시 검사를 통과했습니다. 새 소비자42항목/65파일 설치·TypeScript/Vite·폰트 bytes·고지도 확인했습니다. 원본 인증 상태·전체 pixel/폰트 비교와 실제 서비스/API 권한 검증은 남아 있습니다.
+
+이번 CUA 화면 캡처는 반응형 화면·기본 화면·대체 캡처·최소 버튼 화면에서 모두 응답하지 않았습니다. DOM 조회와 실제 조작은 가능했고 오류 수집은0건이지만 새 화면 이미지로 시각 일치를 증명하지 않습니다. 원본 인증 상태와 전체 시각 대조는 계속 미완료입니다.
+
+## 2026-10-10 Context 입력·선택 계약
+
+현재 소스087811ff의 ContextInfoLayer/Section에서 필수·선택 배지, textarea 11행, trim().length 50자 기준과 원문800자 counter를 반영했습니다. 내부 공백은 문자 수에 포함합니다. 선택 입력의 최소 길이 경고와 정확히800자의 최대 길이 경고는 원본처럼 표시하면서, 그 경고만으로 유효한 등록을 막지 않습니다. 구조화된 onAction은 선언한 키, 원문, 선택지의 value/label/description과 클릭한 액션 라벨을 반환합니다. 서비스 조회와 재개는 소비자 소유입니다.
+
+실제 CUA 브라우저에서49·50·800자, 짧은 선택 입력의 제출, 원문 보존, 최대2개 선택과 해제, 접은 뒤 값 유지, 취소·읽기 전용·진행·오류·긴 입력·빈 상태를 확인했습니다.140·200·320px에서는 한 열,800·1000px에서는 두 열로 배치하며 폼·섹션·옵션 가로 넘침이 없습니다. native textarea drag로233.375→333px 세로 크기 조절도 확인했습니다. 폼 안 Radix의 숨은 input이 체크 SVG·focus selector를 끊던 CSS 문제를 수정했습니다.
+
+기본300ms 섹션 애니메이션은 유지합니다. 현재 잠금 환경에서는 열린 콘텐츠의 높이가 시작 프레임에 머물러 클릭이 헤더에 전달되는 현상이 관찰됐습니다. 키보드 선택은 정상 동작했고, 호스트의 명시적인 reduceMotion=true로 애니메이션을 줄인 경우 카드 클릭도 정상 동작했습니다. 시스템 reduced-motion 설정도 유지합니다. 캡처는 이번 단계에서도5초 timeout으로 실패해 새 이미지 파일이 없으며, 인증 원본 화면의 전체 상태·픽셀 일치는 완료하지 않았습니다.6개 새 테스트를 포함한75개 PRISM 테스트가 통과했습니다.
+
+최종 검증:41그룹·140상태의 실제320px CUA 렌더에서 누락·페이지 넘침·중첩 버튼·표시 입력 이름 누락·브라우저 오류가 없습니다. 새 소비자에42항목/66파일을 설치하고18개 완전 예시·TypeScript/Vite·폰트 bytes·고지를 검증했습니다. 설치 소스는 수정하지 않았고 진입 파일만 ContextExample reduceMotion+StrictMode로 구성했습니다. 실제 입력·설명 클릭·Space 선택·구조화된 제출과 체크 SVG 표시·넘침/오류0을 확인했습니다. 최초 전체 설치의ENOSPC와 부분 검증 진입 파일의import 오류는 별도 실패 이력으로 보존합니다. 이 결과를 인증 원본의 전체 스타일·상태 일치로 확대하지 않습니다.
+
+## 현재 후보 목록과 출력 준비
+
+PrismCandidateList는 현재 source087811ff의 필터·선택·표·페이지·출력 옵션과 준비 상태를 연결합니다. 기본100명 한도를 넘는 선택 변경은 전부 거부하고, 페이지 이동은 선택을 유지합니다. 조회·초기화와 후보 표의 부분/전체 해제는 모든 선택을 비웁니다. 일반 Directory의 다른 페이지 보존 계약은 유지합니다. 기본 출력 옵션은summary/compensation이며 매번 비워서 엽니다. 요청의 ID·종류·선택·옵션을 고정하고, Promise 준비 결과의prepared/excluded count와 실패·원래 요청 재시도를 지원합니다. 조회/권한/프로필 변환·상위 PDF host·네이티브 인쇄는 소비자 소유이며 목록을 닫는 동작으로 그 준비를 취소하지 않습니다.
+
+현재 공개 배포 CSS와 source의 목록/필터/안내 규칙을 대조했고, local CUA에서 선택·정렬·페이지·출력 준비/실패/재시도/제외와100명 한도를 확인했습니다. 140–1280px 수동 폭은 가로 넘침이 없고 표는 내부에640px 최소 폭을 유지합니다. 실제320px iframe·240px 높이에서도 키보드로 전체 목록과 마지막 페이지 버튼에 접근했습니다. 브라우저 viewport override가 적용되지 않아 기존 반응형 미리보기의 실제 iframe을 사용했습니다. 기존 카드 클래스와의 충돌로 셀이 flex가 되던 문제와 미정의neutral400 토큰을 수정했으며 최종 표 셀/16px 회색 정렬 아이콘을 확인했습니다.
+
+단일 요약 PDF와 두 프로필 ZIP의 실제 생성 바이트를 보이는 data-URL 링크에서 보존했습니다. ZIP CRC와 각각1페이지 A4인 PDF를 파싱하고 첫 페이지를 raster로 확인했습니다. 브라우저 download event는25초 timeout, Blob downloadMedia는 미지원이었고 기본 Downloads 폴더에 새 파일을 확인하지 못했습니다. 생성과 OS 저장을 구분하며 네이티브 인쇄·원본 전체 프로필/픽셀 일치는 아직 검증하지 않았습니다. 10개 새 테스트를 포함한85개 PRISM 테스트가 통과했습니다.
+
+42그룹·146개 현재 소스 상태를 실제320px iframe에서 확인했습니다. 원하는 component/state의 DOM marker를 기다려 확인한 뒤 측정했으며 렌더 누락·가로 넘침·중첩 버튼·표시 입력 이름 누락·브라우저 오류가 없습니다. 새 소비자의43항목/67파일과19개 예시,TypeScript/Vite·폰트 bytes·고지를 확인했습니다. 설치 컴포넌트 소스는 변경하지 않았고 portable 예시만 최종 usage로 동기화해 다시 컴파일했습니다. 프로덕션 빌드의 StrictMode·실제320px에서 두 옵션을 선택해 한 ZIP과 두 A4 PDF를 생성했으며 optional field가 raster에 포함됐습니다. 현재 UI capture는5초 timeout으로 실패해 새 화면 캡처가 없고 PDF raster를 UI screenshot으로 취급하지 않습니다.
+
+
+## 현재 CEO·ELP 코멘트와 SUMMARY 도움말
+
+현재 source `087811ff`의 CEO 코멘트 4필드 양식과 CEO/ELP 별도 목록을 독립 계약으로 구현했습니다. 연도 숫자4자리 입력 정리, 원본 validator의 digits/integer 판정, 회의체·발화자trim1~100·논평trim1~2000, native maxlength와5행을 유지합니다. nullable metadata와실제0을 구분하고 편집 양식은 기존 카드 위에 표시합니다. 작성자 액션 표시와 서버 권한 검사를 구분합니다.
+
+단일 편집과 Promise 작업 중복 방지, 후보 전환·unmount의AbortSignal과 늦은UI 완료 무시, 실패 초안 유지, 저장 성공 후 목록 갱신 실패 분리 및 목록만 재시도를 지원합니다. standalone submitting은 원본처럼 제출 버튼만 막으며 collection은 기본 입력 잠금입니다. 잠금을 해제하면 원본의 저장 중 입력 가능 상태를 선택할 수 있습니다. API·권한·저장·캐시는 호스트가 처리합니다. 신호 취소는 이미 완료된 서버 변경의 rollback을 뜻하지 않습니다. 기존 일반본문 editor 계약도 유지합니다.
+
+공개 배포 CSS의 코멘트1hr3u/1kle5 규칙과 source 간격·글꼴·20px 아이콘을 대조했습니다. 실제 CUA에서4필드 입력·Enter·maxlength·잠금·실패/재시도·후보 전환·삭제 완료를 확인했습니다. 140~1280px에서 코멘트 영역의 가로 넘침이 없고, 내용·폭 변경에 따른 자동 높이와 실제 드래그113→193px를 확인했습니다. maxEditorHeight180px는 최종 빌드에서 자동·수동 크기 모두 제한했습니다. SUMMARY 도움말 class/style은 trigger가 아닌 본문에 적용합니다.
+
+현재43그룹·152상태를 실제320px iframe에서DOM 표식 확인 후 측정했으며 렌더 누락·페이지 넘침·중첩 버튼·표시 입력 이름 누락·수집된 브라우저 오류가 없습니다. 새 독립 소비자에44항목/20개 완전 예시를 설치하고 최종 registry로 재설치해TypeScript/Vite·폰트 bytes·고지를 확인했습니다. component 소스는 수정하지 않았으며 검증 앱만StrictMode/320px iframe으로 구성했습니다. production 예시의 등록3/수정/삭제2,자동 높이638px/제한180px와 넘침·중첩·오류0을 확인했습니다.
+
+재사용 설치 script의EEXIST와 소비자 진입 빌드의 잘못된cwd는 수정 후 각각 재설치·빌드했습니다. 초기 수동 제한 측정은 이전dist를 읽어 실패했으므로 새빌드·reload 이후180px 결과와 구분합니다. screenshot capture는5000ms timeout으로 실패해 새 UI 이미지는 없습니다. 인증 원본 상태·전체 시각/폰트 비교와 실제backend 권한·저장 검증은 남아 있습니다. 기능 목적273/pending0과 계약·fixture 성공을 전체 완료로 해석하지 않습니다.
+
+
+## 현재 Attitude·PDF 보고서와 6 Frame Survey
+
+진단 제목의 보고서 action과 독립 PDF 모달, 성격·가치관·Risk·Survey 조합을 추가했습니다. API·권한·평가는 호스트가 처리합니다. 진단 제목/설명은 trim 후 판정하며 제목만 있을 때 NoData를 덧붙이지 않습니다. 양수 비중만 표시하되 원래 색 인덱스를 유지하고, 차트180px·4개 grid와 source 색/point border0 및 접근성 데이터를 지원합니다. 전체 Chart.js geometry/motion/print 대조는 남아 있습니다.
+
+PDF는 전체 bytes와%PDF 헤더 검사 후 PDF.js의 native viewer를 사용합니다. 연속 페이지·텍스트 선택·링크·실제 페이지/너비 맞춤을 지원하며, source처럼 페이지·배율은blur/Enter로 적용합니다. workerUrl과 전용pdf.css는 설치한pdfjs-dist와 같은 버전이어야 합니다. 호스트 loader와fallback,신호취소/늦은 결과 무시,고정된download context와실패/재시도를 지원합니다. 환경은 완전 예시의workerUrl prop으로 명시하며 설치본의전용CSS 파일까지 dependency closure를 검사합니다. 기존출력 options/preview는 보존했습니다.
+
+실제 CUA에서3페이지와텍스트 레이어,페이지 이동/스크롤,67%→70/60%,30~100% 경계와너비맞춤146%,Synthetic 단어선택을 확인했습니다. HTML200 응답은PDF형식 오류로 거부했고 같은URL retry가 성공했습니다. callback4351bytes는원본합성PDF와동일하며 Poppler가3페이지A4를확인했습니다. OS 저장 완료로 해석하지 않습니다. 진단/Survey140~1280px의 넘침0과 PDF모달의7개 폭/높이 조합을 확인했습니다.140×240에서0px viewport 문제를 좁은 toolbar/제목으로 수정해36px와ready를 확인했습니다. 실제320px iframe에서도296px 모달/3페이지/넘침0입니다.
+
+Survey는source36/24px 막대·0.0과null·정수 그룹 평균선·role색·2/3열을 구현했습니다. CUA의194px 카드와61/63/75/82px 평균선,가변320px track/195px 평균,print class118pt 카드/70px track/10pt legend를 확인했습니다. native print와는 별도입니다. 긴 접근성 표가870px 페이지 넘침을 만들던 문제는 숨김 wrapper로 수정했습니다. 최종45그룹/159개 고유 상태의 실제320px 기본 검사와107개 테스트,22개 완전예시 타입 검사를 통과했습니다. source273/pending0과 합성검사를 전체 parity로 확대하지 않습니다.
+
+원본 인증 상태·전체pixel/font·실제 query/권한/저장·OS 저장/native print가 남아 있습니다. 현재UI screenshot은5000ms timeout으로 실패했습니다. Export manifest는일반 helper를function,React 이름의선언을component로 구분합니다.

@@ -1,0 +1,51 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import {createElement as h} from "react";
+import {renderToStaticMarkup} from "react-dom/server";
+import {JSDOM} from "jsdom";
+import {PrismLeadershipPie,PrismLeadershipPieSummary} from "../dist/index.js";
+const items=values=>values.map((value,index)=>({label:["지","덕","용"][index],value}));
+const render=(Component,props)=>new JSDOM(renderToStaticMarkup(h(Component,props))).window.document;
+test("pie exposes exact supplied percentages and distinguishes missing from real zero",()=>{
+ const doc=render(PrismLeadershipPie,{title:"리더십 비중",items:items([33,null,0]),animate:false});
+ assert.deepEqual([...doc.querySelectorAll("tbody td")].map(el=>el.textContent),["33%","정보 없음","0%"]);
+ assert.equal(doc.querySelectorAll(".prism-pie-slice").length,1);
+ assert.equal(doc.querySelector(".prism-pie-slice").dataset.value,"33");
+ assert.ok(doc.querySelector(".prism-pie-unassigned"));
+ const missing=render(PrismLeadershipPie,{title:"리더십 비중",items:items([null,null,null]),animate:false});
+ const zero=render(PrismLeadershipPie,{title:"리더십 비중",items:items([0,0,0]),animate:false});
+ assert.equal(missing.querySelectorAll(".prism-pie-slice").length,0);
+ assert.equal(zero.querySelectorAll(".prism-pie-slice").length,0);
+ assert.match(missing.querySelector("svg").textContent,/관련 데이터 없음/);
+ assert.match(zero.querySelector("svg").textContent,/비중 모두 0%/);
+});
+test("single and small slices stay finite and outside labels retain their supplied text",()=>{
+ const single=render(PrismLeadershipPie,{title:"리더십 비중",items:items([100,0,0]),animate:false});
+ assert.equal(single.querySelectorAll(".prism-pie-slice").length,1);
+ assert.equal(single.querySelector(".prism-pie-slice").getAttribute("d").split(" A ").length,3);
+ const small=render(PrismLeadershipPie,{title:"리더십 비중",items:items([1,98,1]),animate:false});
+ assert.equal(small.querySelectorAll("polyline").length,2);
+ for(const path of small.querySelectorAll("path"))assert.doesNotMatch(path.getAttribute("d"),/NaN|Infinity/);
+ assert.match(small.querySelector("svg").textContent,/지 1%/);
+});
+test("invalid and ambiguous pie values cannot produce a misleading distribution",()=>{
+ for(const values of [[-1,50,51],[101,0,0],[NaN,40,60],[50,20,10],[80,null,30]])assert.throws(()=>render(PrismLeadershipPie,{title:"리더십 비중",items:items(values)}),/percentages/);
+ assert.doesNotThrow(()=>render(PrismLeadershipPie,{title:"리더십 비중",items:items([33.3,33.3,33.3]),animate:false}));
+ assert.throws(()=>render(PrismLeadershipPie,{title:"리더십 비중",items:[{label:"지",value:50},{label:"지",value:50}]}),/unique/);
+ assert.throws(()=>render(PrismLeadershipPie,{title:"리더십 비중",items:items([33,32,35]),size:0}),/size/);
+ assert.throws(()=>render(PrismLeadershipPieSummary,{items:items([-1,null,0])}),/percentages/);
+ assert.throws(()=>render(PrismLeadershipPieSummary,{items:[{label:"",value:null}]}),/labels/);
+});
+test("summary keeps print, empty data and provided comments separate",()=>{
+ const print=render(PrismLeadershipPieSummary,{items:items([33,32,35]),title:"가상 유형",description:"첫 줄\n다음 줄",print:true});
+ assert.ok(print.querySelector('[data-print="true"]'));
+ assert.equal(print.querySelector("strong").textContent,"가상 유형");
+ assert.equal(print.querySelector(".prism-leadership-summary-comment p").textContent,"첫 줄\n다음 줄");
+ const empty=render(PrismLeadershipPieSummary,{items:items([null,0,null]),title:" ",description:"\n"});
+ assert.equal(empty.querySelector("svg"),null);
+ assert.deepEqual([...empty.querySelectorAll("tbody td")].map(el=>el.textContent),["정보 없음","0%","정보 없음"]);
+ const zero=render(PrismLeadershipPieSummary,{items:items([0,0,0])});assert.match(zero.querySelector(".prism-no-data").textContent,/비중 모두 0%/);
+ const paired=new JSDOM(renderToStaticMarkup(h("div",null,h(PrismLeadershipPie,{title:"첫 차트",items:items([33,32,35])}),h(PrismLeadershipPie,{title:"두 번째",items:items([33,32,35])})))).window.document;
+ const labels=[...paired.querySelectorAll('svg[role="img"]')].map(el=>el.getAttribute("aria-labelledby"));assert.equal(new Set(labels).size,2);
+ for(const names of labels)for(const id of names.split(" "))assert.ok(paired.getElementById(id));
+});

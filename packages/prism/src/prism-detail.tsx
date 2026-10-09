@@ -14,6 +14,7 @@ export function PrismSidePanel({ title, description, open, onOpenChange, childre
 export function PrismDetailList({ items }: { items: readonly { label: string; value: ReactNode }[] }) {
     return <dl className="prism-detail-list">{items.map(item => <div key={item.label}><dt>{item.label}</dt><dd>{item.value ?? "정보 없음"}</dd></div>)}</dl>;
 }
+/** Previous author-header recipe. Current personal memos use PrismProfileMemoCard. */
 export function PrismMemoCard({ author, date, children, actions }: { author: string; date: string; children: ReactNode; actions?: ReactNode }) {
     const id = useId();
     return <article className="prism-memo" aria-labelledby={id}><header><div id={id}><PrismAvatar name={author} description={date} /></div>{actions}</header>

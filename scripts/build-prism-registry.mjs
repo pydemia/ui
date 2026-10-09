@@ -31,7 +31,10 @@ visit(catalog);
 const metadata = entries.elements.map(entry => {
     const fields = new Map(entry.properties.filter(ts.isPropertyAssignment).map(prop => [prop.name.getText(catalog), prop.initializer]));
     const value = key => fields.get(key)?.text;
+    const referenceRevision = sourceInventory.components.some(item => (item.target === value("id") || item.additionalTargets?.includes(value("id"))) && item.mappedAtRevision === sourceInventory.referenceRevision)
+        ? sourceInventory.referenceRevision : verification.sourceRevision;
     return { id: value("id"), name: value("name"), category: value("category"), purpose: value("purpose"), contract: value("contract"),
+        referenceRevision,
         states: fields.get("states").elements.map(node => node.text), source: fields.get("source").elements.map(node => node.text),
         usage: value("code"), sourcePath: `packages/prism/src/${value("id")}.tsx`,
         previewUrl:`/prism?component=${value("id")}`,embedUrl:`/prism?component=${value("id")}&embed=1`,
@@ -43,7 +46,12 @@ for (const entry of metadata) {
     entry.exports = tree.statements.flatMap(statement => {
         if (!statement.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.ExportKeyword)) return [];
         if (ts.isVariableStatement(statement)) return statement.declarationList.declarations.map(declaration => ({name:declaration.name.getText(tree),kind:"value"}));
-        if (statement.name) return [{name:statement.name.getText(tree),kind:ts.isTypeAliasDeclaration(statement) || ts.isInterfaceDeclaration(statement) ? "type" : "component"}];
+        if (statement.name) {
+            const name = statement.name.getText(tree);
+            const kind = ts.isTypeAliasDeclaration(statement) || ts.isInterfaceDeclaration(statement) ? "type"
+                : ts.isClassDeclaration(statement) ? "class" : ts.isFunctionDeclaration(statement) ? (/^[A-Z]/.test(name) ? "component" : "function") : "value";
+            return [{name,kind}];
+        }
         return [];
     });
 }
@@ -54,6 +62,9 @@ for (const entry of metadata) {
         ? "component-example" : "integration-fragment";
     const replacements = [];
     for (const statement of usageTree.statements) {
+        if (ts.isImportDeclaration(statement) && statement.moduleSpecifier.text === "@pydemia/prism/pdf.css") {
+            replacements.push([statement.getStart(usageTree),statement.end,'import "@/components/ui/prism-pdf.css";']); continue;
+        }
         if (!ts.isImportDeclaration(statement) || statement.moduleSpecifier.text !== "@pydemia/prism") continue;
         const owners = new Map();
         for (const symbol of statement.importClause.namedBindings.elements) {
@@ -100,14 +111,30 @@ for (const file of readdirSync(new URL("packages/prism/src/", root)).filter(file
     let content = source;
     for (const [start,end,replacement] of replacements.reverse()) content = content.slice(0,start) + replacement + content.slice(end);
     const meta = metadata.find(entry => entry.id === name);
+    // A complete installed example must receive its supporting components too.
+    if (meta.usageKind === "component-example") {
+        const usage = ts.createSourceFile("usage.tsx", meta.usage, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+        for (const statement of usage.statements) {
+            if (!ts.isImportDeclaration(statement) || statement.moduleSpecifier.text !== "@pydemia/prism") continue;
+            for (const symbol of statement.importClause.namedBindings.elements) {
+                const owner = prismExportOwners.get((symbol.propertyName ?? symbol.name).text);
+                if (owner && owner !== name) registryDependencies.add(new URL(`${owner}.json`, prismBase).href);
+            }
+        }
+    }
     const item = { $schema: "https://ui.shadcn.com/schema/registry-item.json", name, type: "registry:ui", title: meta.name,
         description: meta.purpose, dependencies: [...dependencies], registryDependencies: [...registryDependencies],
         files: [{ path: sourcePath, type: "registry:ui", target: `@ui/${file}`, content }],
-        meta: { sourceRevision: "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9", sourceSha256: createHash("sha256").update(source).digest("hex"), provenance: name === "prism-icon" ? "PRISM reference vector artwork retained with a typed adapter and instance-scoped SVG IDs. Rights remain with the original asset owners." : "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference." } };
+        meta: { sourceRevision: meta.referenceRevision, sourceSha256: createHash("sha256").update(source).digest("hex"), provenance: name === "prism-icon" ? "PRISM reference vector artwork retained with a typed adapter and instance-scoped SVG IDs. Rights remain with the original asset owners." : "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference." } };
     if (name === "prism-icon") {
         const noticePath = "packages/prism/THIRD_PARTY_NOTICES.md";
         item.files.push({ path: noticePath, type: "registry:file", target: "@ui/PRISM_ASSET_NOTICES.md", content: read(noticePath) });
         item.meta.fileSha256 = Object.fromEntries(item.files.map(file => [file.path, createHash("sha256").update(read(file.path)).digest("hex")]));
+    }
+    if (name === "prism-document") {
+        const stylesheetPath = "packages/prism/src/pdf.css";
+        item.files.push({ path: stylesheetPath, type: "registry:file", target: "@ui/prism-pdf.css", content: read(stylesheetPath) });
+        item.meta.fileSha256 = Object.fromEntries(item.files.map(file => [file.path,createHash("sha256").update(read(file.path)).digest("hex")]));
     }
     write(`apps/docs/public/prism/r/${name}.json`, JSON.stringify(item,null,2)+"\n"); items.push(item);
 }

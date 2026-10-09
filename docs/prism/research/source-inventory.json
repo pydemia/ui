@@ -103,8 +103,9 @@
       "name": "CompanyGroupForm",
       "target": "prism-domain-forms",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current create/detail fields and name-validation behavior implemented and checked with synthetic local fixtures. Fresh authenticated source visual/state comparison remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/admin/notices/NoticeForm.tsx",
@@ -207,8 +208,9 @@
       "name": "UserForm",
       "target": "prism-domain-forms",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current create/detail fields and name-validation behavior implemented and checked with synthetic local fixtures. Fresh authenticated source visual/state comparison remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/auth/AuthBootstrapLayout.tsx",
@@ -232,23 +234,35 @@
       "target": "prism-collection",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-candidate-list"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/candidate/CandidateListContent.tsx",
       "name": "CandidateListContent",
-      "target": "prism-collection",
+      "target": "prism-candidate-list",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source selection/filter/output preparation contract implemented; authenticated deployed states and full rendered parity remain pending.",
+      "recipe": null,
+      "additionalTargets": [
+        "prism-collection"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/candidate/CandidateTable.tsx",
       "name": "CandidateTable",
       "target": "prism-directory",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismCandidateDirectory"
+      "verification": "Source-specific table behavior and styles; generic directory remains separate. Browser and reference state verification in progress.",
+      "recipe": "PrismCandidateDirectory",
+      "additionalTargets": [
+        "prism-candidate-list"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/chart/RadarChart.tsx",
@@ -335,16 +349,18 @@
       "name": "ContextInfoLayer",
       "target": "prism-context",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current required/optional badges, trimmed 50-unit validation, source counter warnings and structured action response implemented. Source/deployed style and runtime checks are separate from full authenticated visual parity.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/contextInfo/ContextInfoSection.tsx",
       "name": "ContextInfoSection",
       "target": "prism-context",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current required/optional badges, trimmed 50-unit validation, source counter warnings and structured action response implemented. Source/deployed style and runtime checks are separate from full authenticated visual parity.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/contextInfo/ContextOptionCard.tsx",
@@ -477,10 +493,11 @@
     {
       "source": "components/chat/memo/MemoCard.tsx",
       "name": "MemoCard",
-      "target": "prism-detail",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoCardListSkeleton.tsx",
@@ -488,23 +505,29 @@
       "target": "prism-primitives",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-memo"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoContent.tsx",
       "name": "MemoContent",
-      "target": "prism-collection",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoInput.tsx",
       "name": "MemoInput",
-      "target": "prism-collection",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/notice/NoticePopup.tsx",
@@ -640,7 +663,8 @@
       "target": "prism-assessment",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/attitude/AttitudeSummary.tsx",
@@ -656,15 +680,20 @@
       "target": "prism-document",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
       "name": "SuccessorCandidateAttitude",
-      "target": "prism-profile-sections",
+      "target": "prism-attitude-report",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismAttitudeSection"
+      "recipe": "PrismAttitudeReport",
+      "additionalTargets": [
+        "prism-profile-sections"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/BadgeSummary.tsx",
@@ -672,7 +701,8 @@
       "target": "prism-profile",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/CandidateScoreEssay.tsx",
@@ -741,18 +771,26 @@
     {
       "source": "components/chat/successorCandidate/expertise/SurveyValidation.tsx",
       "name": "SurveyValidation",
-      "target": "prism-record",
+      "target": "prism-survey",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismSurveyValidation",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/expertise/ValidationItem.tsx",
       "name": "ValidationItem",
-      "target": "prism-record",
+      "target": "prism-survey",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismSurveyValidation",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/GradeSummary.tsx",
@@ -829,18 +867,26 @@
     {
       "source": "components/chat/successorCandidate/mgmtComments/CeoCommentForm.tsx",
       "name": "CeoCommentForm",
-      "target": "prism-record",
+      "target": "prism-mgmt-comments",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismCeoCommentForm",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx",
       "name": "SuccessorCandidateMgmtComments",
-      "target": "prism-profile-sections",
+      "target": "prism-mgmt-comments",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismCommentsSection"
+      "recipe": "PrismMgmtComments",
+      "additionalTargets": [
+        "prism-profile-sections"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/NoData.tsx",
@@ -864,7 +910,11 @@
       "target": "prism-document",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismPrintPreview / PrismPrintPage + PrismHtmlExportButton",
+      "additionalTargets": [
+        "prism-html-export"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PrintAttitudeDerailmentRisk.tsx",
@@ -2157,39 +2207,43 @@
     {
       "source": "components/chat/successorCandidate/leadership/LeadershipPie.tsx",
       "name": "LeadershipPie",
-      "target": null,
-      "coverage": "pending",
-      "verification": "Added in the latest source checkout; standalone purpose and visual implementation are not yet verified.",
-      "recipe": null
+      "target": "prism-chart",
+      "coverage": "purpose-mapped",
+      "verification": "Implemented typed SVG and summary with measured deployed print-frame/style checks and42 synthetic consumer resize/distribution cases; remaining source outside-label, animation, domain and complete pixel comparisons are partial.",
+      "recipe": "PrismLeadershipPie",
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
       "name": "LeadershipPieSummary",
-      "target": null,
-      "coverage": "pending",
-      "verification": "Added in the latest source checkout; standalone purpose and visual implementation are not yet verified.",
-      "recipe": null
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Implemented typed SVG and summary with measured deployed print-frame/style checks and42 synthetic consumer resize/distribution cases; remaining source outside-label, animation, domain and complete pixel comparisons are partial.",
+      "recipe": "PrismLeadershipPieSummary",
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
       "name": "CandidateProfilesPdfDownload",
-      "target": null,
-      "coverage": "pending",
-      "verification": "Added in the latest source checkout; standalone purpose and visual implementation are not yet verified.",
-      "recipe": null
+      "target": "prism-export",
+      "coverage": "purpose-mapped",
+      "verification": "Single PDF, multi-profile ZIP, progress, duplicate filenames, cancellation, errors and route-persistent host verified with synthetic local and fresh installed browser fixtures. Rendering/data/page breaks stay consumer-owned. Original authenticated export and full print-document parity remain unverified.",
+      "recipe": "runPrismPdfExport / PrismPdfDownloadHost with consumer PDF renderer",
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PdfDownloadHost.tsx",
       "name": "PdfDownloadHost",
-      "target": null,
-      "coverage": "pending",
-      "verification": "Added in the latest source checkout; standalone purpose and visual implementation are not yet verified.",
-      "recipe": null
+      "target": "prism-export",
+      "coverage": "purpose-mapped",
+      "verification": "Single PDF, multi-profile ZIP, progress, duplicate filenames, cancellation, errors and route-persistent host verified with synthetic local and fresh installed browser fixtures. Rendering/data/page breaks stay consumer-owned. Original authenticated export and full print-document parity remain unverified.",
+      "recipe": "runPrismPdfExport / PrismPdfDownloadHost with consumer PDF renderer",
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     }
   ],
   "counts": {
     "total": 273,
-    "pending": 4,
+    "pending": 0,
     "vectorAssets": 87
   },
   "baselineMappingRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
@@ -2204,6 +2258,8 @@
       "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
       "components/chat/successorCandidate/print/PdfDownloadHost.tsx"
     ],
-    "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date."
+    "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date.",
+    "newPurposeMappedComponents": 4,
+    "pendingComponents": []
   }
 }

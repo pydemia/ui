@@ -13,11 +13,12 @@ export function PrismChatHeader({ title, actions }: { title: string; actions?: R
 export function PrismContentFrame({ children, fluid = false }: { children: ReactNode; fluid?: boolean }) { return <div className="prism-content-frame" data-fluid={fluid || undefined}>{children}</div>; }
 export function PrismSectionTitle({ children, actions }: { children: ReactNode; actions?: ReactNode }) { return <div className="prism-section-title"><h3>{children}</h3>{actions}</div>; }
 export type PrismCandidateFilters = { series: string; companies: readonly string[]; name: string };
-export function PrismCandidateFilterBar({ value, onValueChange, seriesOptions, companyOptions, onSearch, onReset, disabled = false }: { value: PrismCandidateFilters;
-    onValueChange: (value: PrismCandidateFilters) => void; seriesOptions: readonly PrismOption[]; companyOptions: readonly PrismOption[]; onSearch: (value: PrismCandidateFilters) => void; onReset: () => void; disabled?: boolean }) {
-    return <form className="prism-candidate-filters" onSubmit={e => { e.preventDefault(); if (!disabled) onSearch(value); }}><div>
+export type PrismCandidateFilterBarProps = { value: PrismCandidateFilters;
+    onValueChange: (value: PrismCandidateFilters) => void; seriesOptions: readonly PrismOption[]; companyOptions: readonly PrismOption[]; onSearch: (value: PrismCandidateFilters) => void; onReset: () => void; disabled?: boolean };
+export function PrismCandidateFilterBar({ value, onValueChange, seriesOptions, companyOptions, onSearch, onReset, disabled = false }: PrismCandidateFilterBarProps) {
+    return <form className="prism-candidate-filters" onKeyDown={e => { if (e.key === "Enter" && e.nativeEvent.isComposing) e.preventDefault(); }} onSubmit={e => { e.preventDefault(); if (!disabled) onSearch(value); }}><div>
         <PrismSelect label="계열" size="small" value={value.series} disabled={disabled} onChange={e => onValueChange({...value,series:e.target.value})}>{seriesOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}</PrismSelect>
-        <PrismMultiSelect label="회사" options={companyOptions} value={value.companies} onValueChange={companies => onValueChange({...value,companies})} disabled={disabled} />
+        <PrismMultiSelect label="회사" options={companyOptions} value={value.companies} onValueChange={companies => onValueChange({...value,companies})} disabled={disabled} size="small" placeholder="회사 선택" allToggleClearsSelection />
         <PrismInput label="이름" size="small" placeholder="이름" value={value.name} disabled={disabled} onChange={e => onValueChange({...value,name:e.target.value})} /></div><div>
         <PrismButton variant="line" size="small" iconOnly aria-label="검색 조건 초기화" icon={<RotateCcw />} disabled={disabled} onClick={onReset} /><PrismButton type="submit" size="small" disabled={disabled}>조회</PrismButton></div></form>;
 }
@@ -44,6 +45,7 @@ export function PrismMemoComposer({ value, onValueChange, onSubmit, busy = false
         if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); submit(); }
     }} /><PrismButton type="submit" disabled={busy || !value.trim()}>등록</PrismButton></form>;
 }
+/** Previous author-header collection. Use PrismProfileMemoCollection for current personal memos. */
 export function PrismMemoCollection({ items, composer, loading }: { items: readonly { id: string; author: string; date: string; content: string; actions?: ReactNode }[]; composer?: ReactNode; loading?: boolean }) {
     return <section className="prism-memo-collection"><PrismSectionTitle>메모 ({items.length})</PrismSectionTitle>{loading ? <PrismSkeletonGroup rows={6} /> : items.length ? items.map(item => <PrismMemoCard key={item.id} author={item.author} date={item.date} actions={item.actions}>{item.content}</PrismMemoCard>) : <PrismRequestState status="empty" />}{composer}</section>;
 }

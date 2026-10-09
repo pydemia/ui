@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useId, type ReactNode, type CSSProperties } from "react";
 import { PrismCheckGlyph as Check, PrismStarGlyph as Star } from "./prism-icon";
 import { PrismOutline, PrismCompetenceMatrix } from "./prism-profile";
 import { PrismChip } from "./prism-badge";
@@ -20,13 +20,18 @@ export function PrismValueShares({ items }: { items: readonly { label: string; p
     const colors = ["#2F548C","#2E8ED9","#98D0F5","#D7DCE3"];
     if (items.some(i => !Number.isFinite(i.percent) || i.percent < 0 || i.percent > 100) || items.reduce((sum,i) => sum+i.percent,0) > 100.01) throw new RangeError("Value shares must be 0..100 and total at most 100.");
     if (!items.some(i => i.percent > 0)) return <PrismNoData />;
-    return <div className="prism-value-shares"><div className="prism-share-bar" aria-hidden="true">{items.map((item,i) => <span key={item.label} style={{width:`${item.percent}%`,background:colors[i%4]}} />)}</div>
-        <ul>{items.map((item,i) => <li key={item.label}><span aria-hidden="true" style={{background:colors[i%4]}} />{item.label} <b>{item.percent}%</b></li>)}</ul></div>;
+    const visible = items.map((item,index) => ({ ...item, color: colors[index%4] })).filter(item => item.percent > 0);
+    return <div className="prism-value-shares"><div className="prism-share-bar" aria-hidden="true">{visible.map(item => <span key={item.label} style={{width:`${item.percent}%`,background:item.color}} />)}</div>
+        <ul>{visible.map(item => <li key={item.label}><span aria-hidden="true" style={{background:item.color}} />{item.label} <b>{item.percent}%</b></li>)}</ul></div>;
 }
-export function PrismDiagnosis({ title, axes, values, heading, description, shares, valueDescription, max = 10 }: { title: string; axes: readonly string[]; values: readonly (number | null)[];
-    heading?: string; description?: string; shares?: readonly { label: string; percent: number }[]; valueDescription?: string; max?: number }) {
-    return <PrismOutline title={title}><div className="prism-diagnosis"><section><header><strong>성격</strong><span>Big 5 기반 · {max}점 만점</span></header><div className="prism-diagnosis-row"><PrismRadarChart title="성격 진단" axes={axes.map((label,index) => ({id:String(index),label}))} series={[{id:"personality",label:"성격",values}]} max={max} /><div>{heading && <strong>{heading}</strong>}{description ? <p>{description}</p> : <PrismNoData />}</div></div></section>
-        {shares && <section><header><strong>가치관</strong><span>가치 지향 비중 · %</span></header><PrismValueShares items={shares} />{valueDescription ? <p>{valueDescription}</p> : <PrismNoData />}</section>}</div></PrismOutline>;
+export function PrismDiagnosis({ title, axes, values, heading, description, shares, valueDescription, max = 10, action, className = "", style }: { title: string; axes: readonly string[]; values: readonly (number | null)[];
+    heading?: string; description?: string; shares?: readonly { label: string; percent: number }[]; valueDescription?: string; max?: number; action?: ReactNode; className?: string; style?: CSSProperties }) {
+    const id = useId(), commentTitle = heading?.trim(), comment = description?.trim(), valuesComment = valueDescription?.trim();
+    const hasComment = !!commentTitle || !!comment, hasShares = shares?.some(item => item.percent > 0);
+    return <section className={`prism-diagnosis-recipe ${className}`} style={style} aria-labelledby={id}><header className="prism-profile-section-header"><h3 id={id}>{title}</h3>{action}</header>
+        <PrismOutline><div className="prism-diagnosis"><section><header><strong>성격</strong><span>Big 5 기반 · {max}점 만점</span></header><div className="prism-diagnosis-row"><div className="prism-diagnosis-chart"><PrismRadarChart title="성격 진단" axes={axes.map((label,index) => ({id:String(index),label}))} series={[{id:"personality",label:"성격",values:values.length ? values : axes.map(() => null)}]} max={max} size={180} gridRings={4} pointBorderWidth={0} showLegend={false} dataTable="hidden"/></div><div className="prism-diagnosis-comment">{hasComment ? <>{commentTitle && <strong>{commentTitle}</strong>}{comment && <p>{comment}</p>}</> : <PrismNoData/>}</div></div></section>
+        {shares && <section><header><strong>가치관</strong><span>가치 지향 비중 · %</span></header><PrismValueShares items={shares}/>{hasShares && (valuesComment ? <p>{valuesComment}</p> : <PrismNoData/>)}</section>}</div></PrismOutline>
+    </section>;
 }
 export function PrismScoreEssay({ title, items }: { title: string; items: readonly { id: string; name: string; score: number | null; max: number; description: string | null }[] }) {
     if (items.some(i => !Number.isFinite(i.max) || i.max <= 0 || (i.score !== null && (!Number.isFinite(i.score) || i.score < 0 || i.score > i.max)))) throw new RangeError("Essay score must be null or 0..max.");

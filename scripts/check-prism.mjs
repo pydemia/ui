@@ -43,7 +43,11 @@ for (const entry of manifest.components) {
         if (!ts.isImportDeclaration(statement)) continue;
         const specifier = statement.moduleSpecifier.text;
         assert.ok(!specifier.startsWith("@pydemia/"), "Private workspace imports must not leak into installed examples");
-        if (specifier.startsWith("@/components/ui/")) assert.ok(installed.has(specifier.split("/").pop()), `Example import is missing from ${entry.id}'s installation dependencies: ${specifier}`);
+        if (specifier.startsWith("@/components/ui/")) {
+            const file = specifier.slice("@/components/ui/".length);
+            const bundledFile = index.items.some(item => installed.has(item.name) && item.files.some(source => source.target === `@ui/${file}`));
+            assert.ok(installed.has(file) || bundledFile, `Example import is missing from ${entry.id}'s installation dependencies: ${specifier}`);
+        }
     }
 }
 // Check complete examples against public workspace declarations on every CI run.

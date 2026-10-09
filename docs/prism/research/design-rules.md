@@ -71,3 +71,25 @@ Print previews retain the source 190mm width and 280mm minimum screen height. Pr
 - Panel body has no padding, minimum size or shadow inheritance. Its white surface has a #dee7fb border, radius 12px and 0 4px 16px rgba(0,0,0,.12) shadow. An inner container owns 12px padding and the original 507px maximum width. SUMMARY content uses 14px/500/1.4 and preserves newlines.
 - `PrismTooltip` composes a trigger and content. `PrismTooltipContent` provides the same surface inside a consumer-owned Tooltip root/trigger; its `sideOffset` measures the body gap. Keep content informational. Interactive forms/actions belong in a Popover or Dialog.
 - Viewport collision handling, an 8px boundary inset, width clamping and internal vertical scrolling extend the reference for long content. SUMMARY help retains hover/focus and adds touch/Space toggling, Escape and outside dismissal. Empty string explanations omit the trigger. These additions are explicit behavior improvements.
+
+
+## Standalone document exports
+
+Keep data and page selection in the consumer. `PrismHtmlExportButton` receives a connected static root. Mark screen-only actions with `data-prism-export-exclude`. The export embeds readable styles, images, fonts and canvas pixels, retains SVG IDs and form values, and freezes the document before pending resource loads. Supply a consumer asset loader when authentication or asset routing requires it. Complete `cssText` must already contain the full rules when CSSOM access is unavailable. Asset failures are errors; do not report a successful export with a missing photograph or chart. The HTML file is a static document and does not carry the application runtime. Narrow screen overflow remains inside the exported viewer; print media releases that overflow.
+
+## Current administration recipes
+
+Use `PrismUserForm mode="create"` with `PrismUserRegistrationDraft`: email, lastName, firstName, companyId, division, roleId and companyGroupId. The five basic fields are required. Company selection is searchable. `mode="detail"` requires a stable `initialValue`; basic information is read-only and the consumer changes roles or company groups. Supply group status to display the source active/inactive badge in both options and the selected value. The existing mode-less three-field model remains supported. Default email validation checks format on blur; the service owns allowed domains, duplicate checks, permissions and role notices through the controlled validation props.
+
+For `PrismCompanyGroupForm`, supply `mode`, controlled draft and company choices. Pass a stable detail `initialValue` as the comparison baseline. Mount the form after its entity is loaded, and use a different React key when changing entities. `validateName(name,{signal})` runs on create blur or 600ms after a detail rename. Respect the signal when calling the service; the component also ignores stale results. The unchanged original name permits company-only edits. The company picker adds only unselected entries or all remaining companies, while the required collection is the selected company IDs. Its intentionally empty scalar picker is not a native required select.
+
+User/group `onSubmit` may return a Promise. Inputs and actions stay disabled until it settles; duplicate submissions are suppressed, and a rejected save shows a retryable error. Connect `onSubmitError` for service error handling. Input label gap is 2px, user basic-card gap 12px and role-card gap 16px. At container widths up to 480px the basic grid becomes one column; action rows wrap and company tags grow with wrapped text. Business validation and persistence remain consumer-owned.
+
+
+## Current personal memo recipe
+
+Use prism-memo for the current personal profile memo UI. Load only authenticated, permitted records through the service; isMine is service data, not proof of authorization. Collection displays only isMine=true entries. Keep stable unique IDs and consumer-owned items/editingId. Source cards have no author header: body, then date and the edited marker, with one editor locking other edit/delete actions. Legacy author-header PrismMemoCard/Collection remain available for existing consumers.
+
+Return the actual save/delete/create Promise, pass the supplied AbortSignal to the service and update data only after successful completion. Failed mutations retain their draft/dialog and expose retry. Cancellation suppresses late UI completion; the consumer still owns persistence, permissions and concurrency handling. Creation preserves whitespace and does not clear the controlled draft automatically.
+
+Cards use padding16px/gap12px/radius12px, body14px400/1.4, date12px500/17px and20px edit/delete artwork. The delete confirmation uses the source error copy, red warning button and123px minimum content area. Provide a height for a bounded list with a separate composer; omit height for natural layout. Native editor resizing is limited by available container space. Footer wrapping and pre-wrap body text preserve narrow and multiline content. Source loading keeps its three skeleton cards with42px placeholders.
