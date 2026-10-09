@@ -28,6 +28,7 @@
     "jspdf": "4.2.1",
     "lucide-react": "^0.468.0",
     "pdfjs-dist": "^6.3.289",
+    "postcss-value-parser": "4.2.0",
     "pretendard": "1.3.9",
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",

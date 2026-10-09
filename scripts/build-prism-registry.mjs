@@ -31,7 +31,7 @@ visit(catalog);
 const metadata = entries.elements.map(entry => {
     const fields = new Map(entry.properties.filter(ts.isPropertyAssignment).map(prop => [prop.name.getText(catalog), prop.initializer]));
     const value = key => fields.get(key)?.text;
-    const referenceRevision = sourceInventory.components.some(item => item.target === value("id") && item.mappedAtRevision === sourceInventory.referenceRevision)
+    const referenceRevision = sourceInventory.components.some(item => (item.target === value("id") || item.additionalTargets?.includes(value("id"))) && item.mappedAtRevision === sourceInventory.referenceRevision)
         ? sourceInventory.referenceRevision : verification.sourceRevision;
     return { id: value("id"), name: value("name"), category: value("category"), purpose: value("purpose"), contract: value("contract"),
         referenceRevision,

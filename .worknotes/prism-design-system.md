@@ -333,3 +333,25 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 완전 예시는 외부 PDF endpoint 대신 가상 Canvas를 JPEG/PDF로 생성하도록 보완했습니다. 설치 환경의 CORS/서버 준비 없이 자체 실행할 수 있습니다. 최종 예시만 기존 독립 소비자에 갱신해 타입/빌드를 확인하며 fresh 설치 소스는 그대로 유지합니다.
 
 - 마지막 자체 생성 portable 예시를 기존 독립 설치본의15예시에 반영해 tsc/Vite가 통과했고 StrictMode actualPDF 다운로드1회·errors0을 확인했습니다. 최종 static125states/8다운로드 재검사도0문제입니다. Public/generated9파일 bytes일치 및registry SHA25608d50a180022d2356726b49b1091e70d14d690f89fabdf48d21f5b05892d6400을 확인했습니다. 기존relative manifest경로 실패는 절대경로로 수정한 재검사만 인정합니다.
+
+- Source71e19a2c/generated597cce0004a79cffa92a7dac6a0ed1cae3aba698를별도commit했습니다. 기존검토branch에일반push했고committed credentialexact-match0/demian및targetconfig보존을확인했습니다. PR162는drafttrue/base main/head597cce00이며제목·설명을리더십과PDF/ZIP최종범위로갱신해readback했습니다. VerifyUI37918225583와VercelEQkwRrYaNWT27YFYbUk3iE9NR3jb는진행중입니다. main/production288b0838은그대로입니다.
+- 소유server60239(pid87731),60847(pid95003),60991(pid809)는각command/cwd/port가본작업과일치함을검증해종료했습니다. 기존8766과사용자브라우저는보존했습니다. 모든replaybrowser는finallyclose이며consumer-wNDLos의source/lock/dist/deps와rawdownload/PNG/scripts를보존합니다. Goalactive:source변경52개상태/스타일,인증domain,fullsource인쇄/HTMLexport등후속검증이남습니다.
+
+- 최종CI readback: 정확한head597cce0004a79cffa92a7dac6a0ed1cae3aba698의VerifyUI37918225583가completed success이고Vercel브랜치preview도Deployment has completed입니다. production배포가아니며preview실제HTTP/browserreadback은아직하지않았습니다. main/production288b0838과승인대기를유지합니다. 작업기록만localmodified이며구현·생성물은원격draftPR162에서검토할수있습니다.
+
+
+## 2026-10-09 단일 HTML export 구현과 실제 오프라인 검증
+
+- 이전goal turn은source71e19a2c/generated597cce00·PDF/ZIP runtime/독립 설치·PR162/CI성공으로progress입니다. 현재검토branchHEAD597cce00,origin/main288b0838,worknote만localmodified였음을확인하고새HTML목적을진행했습니다. main/production명시승인대기는계속되며전체goal은active입니다.
+- 원본publicsample의실제HTML다운로드profile-template.html은9pages/canvas3/img1/errors0입니다. 새offlinebrowser에서font400/500/600/700와canvas변환3이미지가loaded이고툴바0입니다. 프로필사진1개는loadedfalse입니다. raw원본HTML/PNG/metrics는ignored에보존하고공개문서에는합성검사와정량결과만남겼습니다.
+- 새독립prism-html-export는root/CSSOM/완전cssText/consumerloadAsset,폰트·CSS URL·사진인라인,canvasPNG/SVG내부참조,입력현재값,툴바제외,동결본문,최신callback/abort를지원합니다. parent글꼴상속을보존하고파일의root배치를정상화합니다. 320pxviewer내부가로스크롤을추가하며printoverflow는해제합니다. 읽지못한자산은오류이며사진을비워둔성공으로처리하지않습니다. 원본모든도메인/selector/인쇄동작을완료로선언하지않습니다.
+- 첫browserharness는React렌더전측정해서null실패했고root/폰트/2frame대기를추가했습니다. 부모14px가16px로바뀌는차이를찾아상속맥락을보존했습니다. 한번staledist로동일차이를관찰했고source재build후4cases가통과했습니다. 최종final-html-export는1280/320×default/long의4actualdownloads/offlineopen,3/48rows,font1loaded,page/pie/SUMMARY측정일치,externalrequests0,rootwidth동일,native가로wheel/error/cancel을확인했습니다. source모든9pagepixel동일이라고주장하지않습니다.
+- html-export-canvas-runtime은실제redcanvas/bluephoto/greencanvas색상순서,SVGuse40px,cacheload1회,slowCSS중본문변경이snapshot에섞이지않음을확인했습니다. callerDOM은변경하지않습니다. 6newtests+이전49=55가통과했고40groups/41items/16완전예시입니다. 최신프린트동작과실제source사진경로는남습니다.
+- 새consumer-rKv6Fe는41items/64files/16예시·tsc/Vite/fontbytes/noticefresh설치를통과했습니다. source추가mapping은CandidateProfilePrintPreview의additionalTargets로기록해새HTMLgroup은latest087811ff를참조합니다. standaloneexample의실제consumerbrowser와최종static129states/fullbuild/PRupdate를이어갑니다. source52변경·authdomain·전체printparity가미완료이므로goalactive입니다.
+
+- 전체40groups/129states actual320px의render/overflow/nestedbutton/unlabeled/errors는0입니다. 설치한완전HtmlExportExample을StrictMode에서actualdownload1회/offlinefont1/row1/root320/viewer718/script0/externalrequests0/errors0으로검증했습니다. installedsource를수정하지않고verifier main만예시로바꿔tsc/Vite한별도runtime입니다. 모든fileobserver는ownedbrowserfinallyclose입니다. 원격mainfetch는288b0838그대로이며credentialconfighash는보존됐습니다.
+
+- CSS의literal url(...) 문자열·주석을실제자산으로오인하지않도록postcss-value-parser4.2.0을고정사용했습니다. image-set문자열후보도포함합니다. 추가1test로총56이며기존7개HTMLtests중literal/comment/image-set케이스가추가됐습니다. parsed-css-html-export4cases/offline/geometry/root/nativewheel/error/cancel이통과했고새consumer-dCjdws의41items/64files/16예시 설치·tsc/Vite/fontbytes/notice가통과했습니다. 이전rKv6Fe의actualexample검증과최종파서포함설치를구분합니다. source/public/generated최종빌드와static129states를확인후PR162에추가합니다.
+
+- 최종파서포함consumer-dCjdws도source수정없이완전예시main만바꿔tsc/Vite·StrictMode실제HTMLdownload1/offlinefont1/row1/root320/viewer718/errors0/external0을확인했습니다. 최종fullbuildexit0,56tests/16완전예시,static129states0문제,4HTMLofflinecases0문제를확인했습니다. 일반146registry/144catalog/83immutable/current25ca4393도보존했습니다. Public/generated9filesbytes와HTMLsource087링크가일치하며registrySHA2d25bd8582166fa7c3428c7766ee78d46ac834cfbc4148963a2c4246f8e51a6f입니다.
+- 고지파일변경후registry재생성전prismcheck가hash불일치를검출했습니다. source/runtime실패로처리하지않고fullbuild끝난뒤재실행한56tests/registry결과만성공으로기록했습니다. 최종구현과생성물commit을별도로보존한뒤기존draftPR162를업데이트합니다. 모든원본print/인증domain/52변경상태검증이남아goalactive입니다.

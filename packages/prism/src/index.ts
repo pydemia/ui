@@ -30,6 +30,7 @@ export { PrismPdfViewer, PrismPrintOptions, PrismPrintPreview } from "./prism-do
 export type { PrismPrintSection, PrismPrintOptionsProps } from "./prism-document";
 export type { PrismPdfViewerProps } from "./prism-document";
 export * from "./prism-export";
+export * from "./prism-html-export";
 export { PrismWorkspace } from "./prism-workspace";
 export type { PrismWorkspaceProps } from "./prism-workspace";
 export { PrismRadarChart, PrismTrendChart, PrismLeadershipPie } from "./prism-chart";

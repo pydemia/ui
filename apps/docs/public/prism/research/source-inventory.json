@@ -864,7 +864,11 @@
       "target": "prism-document",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismPrintPreview / PrismPrintPage + PrismHtmlExportButton",
+      "additionalTargets": [
+        "prism-html-export"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PrintAttitudeDerailmentRisk.tsx",
