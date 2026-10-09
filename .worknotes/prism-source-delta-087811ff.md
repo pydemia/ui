@@ -16,12 +16,12 @@
 | M | src/components/chat/contextInfo/ContextInfoSection.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
 | M | src/components/chat/contextInfo/ContextInfoSection.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
 | M | src/components/chat/conversation/ChatJSONRendererPanel.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/memo/MemoCard.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/memo/MemoCard.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/memo/MemoContent.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/memo/MemoContent.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/position/PositionRecommend.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/position/PositionRecommend.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
+| M | src/components/chat/memo/MemoCard.module.scss | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
+| M | src/components/chat/memo/MemoCard.tsx | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
+| M | src/components/chat/memo/MemoContent.module.scss | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
+| M | src/components/chat/memo/MemoContent.tsx | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
+| M | src/components/chat/position/PositionRecommend.module.scss | 차이 확인; 추가 대조 대기 | rank UI 제거 확인; 현재 kit에도 rank 계약 없음. 원본 headerMinHeight/선택/정렬 layout 상태 대조는 필요 |
+| M | src/components/chat/position/PositionRecommend.tsx | 차이 확인; 추가 대조 대기 | rank UI 제거 확인; 현재 kit에도 rank 계약 없음. 원본 headerMinHeight/선택/정렬 layout 상태 대조는 필요 |
 | M | src/components/chat/successorCandidate/BadgeSummary.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
 | M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
 | M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |

@@ -1,10 +1,10 @@
 import { PrismIcon, prismIconNames, PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent, PrismExpertiseSection, PrismExperienceSection, PrismDesignSection, PrismAgilitySection, PrismAttitudeSection, PrismLeadershipSection, PrismCommentsSection } from "@pydemia/prism";
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { PrismSummaryBadge, PrismNoData, PrismOutline } from "@pydemia/prism";
 import { PrismNoticeForm, PrismCompanyGroupForm, PrismUserForm, PrismPositionForm, PrismSelect, PrismPrintPage, PrismPrintLeaderSummary, PrismPrintCareer, PrismPrintRisk, PrismPrintExperience, PrismChatIntro, PrismProfileSectionState, PrismTotalSection, type PrismNoticeDraft, type PrismCompanyGroupDraft, type PrismUserRegistrationDraft, type PrismPositionDraft } from "@pydemia/prism";
 import { PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismCriteriaTag, PrismPositionCheckCard, PrismCompanyContextDialog, PrismCandidateDirectory, PrismDirectoryTable, PrismBlankLayout, PrismErrorContent, PrismServiceContact, type PrismCriteriaDraft, PrismResponse, PrismButton, PrismContextForm, PrismAffiliateLogo, PrismSidebarProfile, PrismSkeletonGroup, PrismPopover, PrismFavoriteToggle, PrismShowMore, PrismInputLabel,
     PrismPositionDetail, PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis,
-    PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismMemoComposer, PrismMemoCollection,
+    PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismProfileMemoComposer, PrismProfileMemoCollection, type PrismProfileMemoItem,
     PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistory, PrismPolicyViewer, PrismDialog,
     type PrismContextValues, type PrismCandidateFilters, type PrismCandidate, type PrismNotice,
 } from "@pydemia/prism";
@@ -43,13 +43,17 @@ export function AssessmentDemo({ state }: { state: FixtureState }) {
 }
 export function CollectionDemo({ state }: { state: FixtureState }) {
     const [view,setView] = useState<"cards" | "table">("cards"); const [filters,setFilters] = useState<PrismCandidateFilters>({series:"all",companies:[],name:""});
-    const [result,setResult] = useState(""); const [draft,setDraft] = useState(""); const [memos,setMemos] = useState<string[]>([]); const [favorites,setFavorites] = useState<string[]>([]);
+    const [result,setResult] = useState(""); const [draft,setDraft] = useState(""); const [memos,setMemos] = useState<PrismProfileMemoItem[]>([]); const [editingId,setEditingId]=useState<string|null>(null); const [favorites,setFavorites] = useState<string[]>([]);
+    const nextMemoId=useRef(0);
     const items = state === "empty" ? [] : demoCandidates;
     return <div className="prism-demo-stack"><PrismCandidateCollection title="후보자 목록" candidates={items} view={view} onViewChange={setView} onOpen={candidate => setResult(`${candidate.name} 선택`)} favorites={favorites}
         onFavoriteChange={(candidate,checked) => setFavorites(checked ? [...favorites,candidate.id] : favorites.filter(id => id !== candidate.id))} status={state === "loading" || state === "error" ? state : "ready"}
         filters={<PrismCandidateFilterBar value={filters} onValueChange={setFilters} seriesOptions={[{value:"all",label:"전체"},{value:"ICT",label:"ICT"}]} companyOptions={demoCandidates.map(c => ({value:c.company,label:c.company}))} onSearch={value => setResult(JSON.stringify(value))} onReset={() => setFilters({series:"all",companies:[],name:""})} disabled={state === "loading"} />} />
         <PrismSuccessorBoard rows={items.length ? [{id:"one",company:"가상전자",position:"기술전략담당",current:[demoCandidates[0]],ranks:[demoCandidates[1],null,null]}] : []} onOpen={candidate => setResult(`${candidate.name} 선택`)} loading={state === "loading"} />
-        <PrismMemoCollection items={memos.map((content,index) => ({id:String(index),author:"김작성",date:"2026.10.03",content}))} composer={<PrismMemoComposer value={draft} onValueChange={setDraft} onSubmit={content => {setMemos([...memos,content]);setDraft("");}} busy={state === "loading"} />} /><p role="status">{result}</p></div>;
+        <PrismProfileMemoCollection items={memos} editingId={editingId} onEditingChange={setEditingId} height={340} status={state==="loading"?"loading":"ready"}
+            onSave={async(id,content)=>setMemos(current=>current.map(memo=>memo.id===id?{...memo,content,updatedAt:"2026-10-09T17:30:00+09:00"}:memo))}
+            onDelete={async id=>setMemos(current=>current.filter(memo=>memo.id!==id))}
+            composer={<PrismProfileMemoComposer value={draft} onValueChange={setDraft} onSubmit={async content => {const id=`demo-${++nextMemoId.current}`;setMemos(current=>[...current,{id,content,createdAt:"2026-10-09",isMine:true}]);setDraft("");}} busy={state === "loading"} />} /><p role="status">{result}</p></div>;
 }
 const notices: PrismNotice[] = [{id:"one",title:"가상 공지사항",date:"2026.10.03",author:"김작성",content:"실제 사내 공지나 인사 데이터를 포함하지 않는 UI 예시입니다."},{id:"two",title:"두 번째 가상 공지",date:"2026.10.02",author:"이작성",content:"비모달 공지의 다음 항목입니다."}];
 export function NoticeDemo({ state }: { state: FixtureState }) {

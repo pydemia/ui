@@ -46,6 +46,7 @@ export * from "./prism-primitives";
 export * from "./prism-assessment";
 export * from "./prism-notice";
 export * from "./prism-collection";
+export * from "./prism-memo";
 export * from "./prism-response";
 export * from "./prism-management-tools";
 export * from "./prism-directory";

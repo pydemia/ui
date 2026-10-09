@@ -44,6 +44,7 @@ export function PrismMemoComposer({ value, onValueChange, onSubmit, busy = false
         if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); submit(); }
     }} /><PrismButton type="submit" disabled={busy || !value.trim()}>등록</PrismButton></form>;
 }
+/** Previous author-header collection. Use PrismProfileMemoCollection for current personal memos. */
 export function PrismMemoCollection({ items, composer, loading }: { items: readonly { id: string; author: string; date: string; content: string; actions?: ReactNode }[]; composer?: ReactNode; loading?: boolean }) {
     return <section className="prism-memo-collection"><PrismSectionTitle>메모 ({items.length})</PrismSectionTitle>{loading ? <PrismSkeletonGroup rows={6} /> : items.length ? items.map(item => <PrismMemoCard key={item.id} author={item.author} date={item.date} actions={item.actions}>{item.content}</PrismMemoCard>) : <PrismRequestState status="empty" />}{composer}</section>;
 }

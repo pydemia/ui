@@ -1,4 +1,5 @@
 import { HtmlExportDemo } from "./html-export-demo";
+import { MemoDemo } from "./memo-demo";
 import { ExportDemo } from "./export-demo";
 import { IconDemo, DomainFormsDemo, PrintDemo, IntroDemo, ProfileSectionsDemo, ContextDemo, PrimitivesDemo, PositionDemo, AssessmentDemo, CollectionDemo, NoticeDemo, ResponseDemo, ManagementToolsDemo, DirectoryDemo, PageStateDemo } from "./extra-demos";
 import { useRef, useState, type ReactNode } from "react";
@@ -12,7 +13,7 @@ import {
     PrismDialog, PrismConfirmDialog, PrismToast, PrismEmptyState, PrismRequestState,
     PrismSidebar, PrismChatInput, PrismMessage, PrismCriteria,
     PrismCandidateCard, PrismCandidateTable, PrismEvaluationTable,
-    PrismSidePanel, PrismDetailList, PrismMemoCard, type PrismCandidate,
+    PrismSidePanel, PrismDetailList, PrismMemoCard, PrismProfileMemoCard, type PrismCandidate,
     PrismPanel, PrismSixFrame, PrismChipAutocomplete, PrismAutocomplete, PrismMultiSelect, PrismCheckbox, PrismRadioGroup, PrismDateRange, PrismPagination,
     PrismProfile, PrismOutline, PrismCareerTimeline, PrismSummaryBadge, PrismEvidence, PrismBasicInfo, PrismCompetenceMatrix, type PrismProfileTab,
     PrismMarkdown, PrismSuggestions, PrismGenerationStatus, PrismPositionCard,
@@ -95,8 +96,8 @@ function CandidateDemo({ state }: { state: FixtureState }) { const [selected, se
     <PrismSidePanel title="후보자 프로필" description="가상 후보자의 예시 정보입니다." open={!!selected} onOpenChange={open => { if (!open) setSelected(null); }}><PrismDetailList items={[{ label: "이름", value: selected?.name }, { label: "회사", value: selected?.company }, { label: "직책", value: selected?.position }]} /></PrismSidePanel>
 </div>; }
 function DetailDemo() { const [open, setOpen] = useState(false); return <div className="prism-demo-stack"><PrismDetailList items={[{ label: "소속 회사", value: "가상전자" }, { label: "현재 직책", value: "기술전략담당" }, { label: "보유 정보", value: null }]} />
-    <PrismMemoCard author="김작성" date="2026-10-03">가상 데이터로 작성한 메모입니다.</PrismMemoCard><PrismButton onClick={() => setOpen(true)}>상세 패널 열기</PrismButton>
-    <PrismSidePanel title="상세 정보" description="독립 패널 예시입니다." open={open} onOpenChange={setOpen}><PrismMemoCard author="김작성" date="2026-10-03">메모 내용</PrismMemoCard></PrismSidePanel></div>; }
+    <PrismProfileMemoCard memo={{id:"detail",content:"가상 데이터로 작성한 메모입니다.",createdAt:"2026-10-09",isMine:true}} editing={false} readOnly onEditStart={()=>{}} onEditCancel={()=>{}}/><PrismButton onClick={() => setOpen(true)}>상세 패널 열기</PrismButton>
+    <PrismSidePanel title="상세 정보" description="독립 패널 예시입니다." open={open} onOpenChange={setOpen}><PrismProfileMemoCard memo={{id:"panel",content:"메모 내용",createdAt:"2026-10-09",isMine:true}} editing={false} readOnly onEditStart={()=>{}} onEditCancel={()=>{}}/></PrismSidePanel></div>; }
 
 const selectionOptions = [{ value: "tech", label: "기술·연구개발" }, { value: "finance", label: "재무" }, { value: "operations", label: "운영" }];
 function SelectionDemo({ state }: { state: FixtureState }) {
@@ -232,7 +233,22 @@ export const prismCatalog: PrismEntry[] = [
     { id: "prism-sidebar", name: "Chat sidebar", category: "Navigation", purpose: "새 대화·후보자·즐겨찾기·관리·대화기록 탐색", source: ["../layouts/chat/ChatSidebar.tsx"], states: ["default", "loading", "empty"], contract: "collapsed/onCollapsedChange와 activeId/onNavigate는 controlled입니다. 펼침 280px·접힘 72px. 원본 벡터·관리 하위 메뉴·대화기록 접기·사용자 팝오버를 제공합니다. expandedIds와 historyOpen은 선택적 controlled입니다. 이름 변경은 IME를 보존하고 Enter/blur로 확정, Escape로 취소합니다. 삭제 요청·프로필 작업·방침은 callback이며 권한과 실제 저장은 소비자가 소유합니다.", code: 'import { PrismSidebar } from "@pydemia/prism";\n<PrismSidebar items={items} activeId={active} onNavigate={setActive} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={newChat} />;', render: state => <SidebarDemo key={state} state={state} /> },
     { id: "prism-chat", name: "Message / Composer / Criteria", category: "AI & agent", purpose: "질문 입력·전송·중단, 답변 상태와 판단 기준 표시", source: ["chat/common/ChatInput.tsx", "chat/conversation/ChatMessageQuestion.tsx", "chat/templates/ChatTemplateCriteria.tsx"], states: ["default", "disabled", "loading", "error"], contract: "value/onValueChange/onSubmit은 controlled이며 Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공합니다. busy는 전송을 막고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다.", code: 'import { PrismChatInput } from "@pydemia/prism";\n<PrismChatInput value={text} onValueChange={setText} onSubmit={send} busy={busy} onStop={stop} />;', render: state => <ChatDemo key={state} state={state} /> },
     { id: "prism-candidate", name: "Candidate / Evaluation", category: "Domain", purpose: "후보자 프로필·즐겨찾기·목록·평가 근거 표시", source: ["chat/templates/ChatProfile.tsx", "chat/templates/ChatTemplateTable.tsx"], states: ["default", "loading", "empty", "error"], contract: "onOpen과 onFavoriteChange는 의도만 전달합니다. stack/pair/grid와 panel 배치를 제공합니다. PrismCandidateBrief의 날짜·평가 이력·보상 문자열은 소비자가 준비하며 금액 환산이나 평가를 계산하지 않습니다. 평가 점수는 0–5 또는 null이며 null을 0으로 바꾸지 않습니다.", code: 'import { PrismCandidateCard } from "@pydemia/prism";\n<PrismCandidateCard candidate={candidate} favorite={favorite} onOpen={openProfile} onFavoriteChange={setFavorite} />;', render: state => <CandidateDemo state={state} /> },
-    { id: "prism-detail", name: "Side panel / Detail / Memo", category: "Domain", purpose: "후보자·포지션 상세와 작성자·날짜가 있는 메모 확인", source: ["chat/panel/SidePanel.tsx", "chat/memo/MemoCard.tsx"], states: ["default"], contract: "패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 메모 actions는 호출자가 제공합니다.", code: 'import { PrismSidePanel, PrismDetailList } from "@pydemia/prism";\n<PrismSidePanel title="프로필" description="후보 정보" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;', render: () => <DetailDemo /> },
+    { id: "prism-detail", name: "Side panel / Detail", category: "Domain", purpose: "후보자·포지션 상세를 독립 패널에서 확인", source: ["chat/panel/SidePanel.tsx"], states: ["default"], contract: "패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 기존 PrismMemoCard의 작성자 header는 이전 형식의 호환 API이며 현재 프로필 메모는 prism-memo를 사용합니다.", code: 'import { PrismSidePanel, PrismDetailList } from "@pydemia/prism";\n<PrismSidePanel title="프로필" description="후보 정보" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;', render: () => <DetailDemo /> },
+    { id: "prism-memo", name: "Personal profile memos", category: "Domain", purpose: "본인 프로필 메모의 등록·단일 편집·수정 날짜·삭제 확인과 실패 복구", source: ["chat/memo/MemoCard.tsx", "chat/memo/MemoContent.tsx", "chat/memo/MemoInput.tsx", "chat/memo/MemoCardListSkeleton.tsx"], states: ["default", "empty", "loading", "error", "readonly", "long"], contract: "소비자가 인증된 서비스에서 본인에게 허용된 메모만 조회합니다. isMine은 서비스 데이터이며 권한을 증명하지 않습니다. Collection은 isMine=false 기록을 제외하고 editingId/onEditingChange로 편집 하나를 관리합니다. 한 카드의 편집 중 다른 카드 수정·삭제를 잠급니다. 카드에는 작성자 header 없이 본문·날짜·수정됨과20px 액션을 표시합니다. onSave/onDelete/onSubmit은 Promise와 {signal}을 지원하며 진행·오류·재시도·중복 의도 방지와 전환/unmount 취소를 처리합니다. 소비자는 실제 저장과 데이터 갱신·draft 해제를 담당합니다. Composer는 Enter 제출·Shift+Enter 줄바꿈·IME 보호를 제공하고 입력 원문을 보존합니다. 높이를 지정하면 목록만 내부 스크롤하고 입력창은 계속 보입니다. 미지정 높이는 자연 크기이며 긴 본문·날짜·footer는 좁은 폭에 맞춰 배치합니다.", code: `import { useRef, useState } from "react";
+import { PrismProfileMemoCollection, PrismProfileMemoComposer, type PrismProfileMemoItem } from "@pydemia/prism";
+export function MemoExample() {
+  const [items, setItems] = useState<PrismProfileMemoItem[]>([{ id: "demo", content: "합성 메모 예시입니다.", createdAt: "2026-10-08", updatedAt: "2026-10-09", isMine: true }]);
+  const [editingId, setEditingId] = useState<string | null>(null), [draft, setDraft] = useState("");
+  const nextId = useRef(0);
+  return <div data-prism="light"><PrismProfileMemoCollection height={520} items={items} editingId={editingId} onEditingChange={setEditingId}
+    onSave={async (id, content) => setItems(current => current.map(memo => memo.id === id ? { ...memo, content, updatedAt: "2026-10-09T17:30:00+09:00" } : memo))}
+    onDelete={async id => setItems(current => current.filter(memo => memo.id !== id))}
+    composer={<PrismProfileMemoComposer value={draft} onValueChange={setDraft} onSubmit={async content => {
+      const id = "demo-" + (++nextId.current);
+      setItems(current => [...current, { id, content, createdAt: "2026-10-09", isMine: true }]);
+      setDraft(current => current === content ? "" : current);
+    }}/>} /></div>;
+}`, render: state => <MemoDemo key={state} state={state}/> },
 
     { id: "prism-panel", name: "Inline panel", category: "Overlays", purpose: "채팅과 상세를 동시에 사용하며 패널 확대·축소", source: ["chat/panel/SidePanel.tsx"], states: ["default"], contract: "비모달 aside이며 기본 너비 440px와 64px header를 사용합니다. resizable을 켜면 드래그·방향키·Shift·Home/End로 조절하고 double click으로 초기화합니다. width/onWidthChange는 controlled 계약이며 minWidth/maxWidth는 부모 폭 안에서 적용합니다. responsive는 좁은 부모에서 전체 폭을 사용합니다. open/expanded는 호출자가 제어합니다. 부모는 position relative flex 컨테이너입니다.", code: 'import { PrismPanel } from "@pydemia/prism";\n<PrismPanel title="상세" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}>내용</PrismPanel>;', render: () => <PanelDemo /> },
     { id: "prism-six-frame", name: "6-frame comparison", category: "Domain", purpose: "리더 유형·경험·역량·자질을 후보별로 비교", source: ["chat/templates/ChatSixFrameTable.tsx"], states: ["default", "empty", "long"], contract: "열 ID는 고유하며 값은 ReactNode 또는 null입니다. null은 정보 없음으로 표시합니다. 첫 두 열과 header를 고정하고 경험·역량 행을 병합합니다. 비교 점수나 순위는 계산하지 않습니다.", code: 'import { PrismSixFrame } from "@pydemia/prism";\n<PrismSixFrame columns={columns} panel={false} />;', render: state => <SixFrameDemo state={state} /> },
