@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-09",
+  "updatedAt": "2026-10-10",
   "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "status": "in-progress",
   "claim": "Source correspondence and runtime checks are separate from visual parity. No complete parity claim.",
@@ -728,32 +728,62 @@
         "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
         "Current screenshot capture unavailable: responsive, default, native and minimal-button capture all timed out while live DOM checks remained available"
       ]
+    },
+    "prism-context": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "Current source and deployed CSS:14px-high required/optional badges,10px500 font,radius10,red228/88/88 andgray134;source11-row textarea,50 trimmed-unit minimum and800 raw-unit maximum",
+        "Required49 rejects;50 trimmed UTF16 units including internal spaces accepts;raw counter and submitted whitespace remain intact",
+        "Optional short text and exact800 show source warnings without alone blocking valid submit;externally supplied801 is rejected",
+        "Structured actions retain declared service keys,raw nonempty text,option order/value/label/description andclicked action label;extra internal values excluded",
+        "Synthetic CUA:description andcheckbox clicks,max2 gate,Space deselection,collapsed controlled value preservation,submit/cancel,readonly/busy/empty/error/long states",
+        "Actual140/200/320px widths use one option column;800/1000 use two;form/section/card horizontal overflow0",
+        "Native textarea drag233.375 to333px with horizontal overflow0;source-compatible default300ms motion andexplicit reduceMotion override",
+        "Six interaction tests added;75 full PRISM tests passed",
+        "Radix hidden form input no longer interrupts state glyph andfocus CSS selectors;checked/unchecked glyph visibility measured in the form",
+        "Fresh42-item/66-file registry installation and18 complete examples passed TypeScript/Vite/font bytes/notices;installedContextExample inStrictMode at320px submitted preserved text andcanonical option descriptors withvisible glyphs/nooverflow/errors"
+      ],
+      "evidence": [
+        "context.test.mjs",
+        "context-deployed-css.json",
+        "context-live-cua.json",
+        "context-static-140-cua.json",
+        "context-full-consumer-retry.log",
+        "context-consumer-u0eKVn.json"
+      ],
+      "remaining": [
+        "Fresh authenticated deployed Context states andcomplete rendered/source geometry orpixel comparison",
+        "Default section animation in the locked environment did not advance beyond its initial frame;interaction checks usedreduceMotion=true",
+        "Page.captureScreenshot timed out after5000ms in this phase;no new screenshot file",
+        "Full service schema/query continuation,OSIME/touch andallfont/low-height combinations"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 56,
+      "passed": 75,
       "failed": 0
     },
     "registry": {
-      "groups": 40,
-      "items": 41,
+      "groups": 41,
+      "items": 42,
       "status": "generated"
     },
     "independentConsumer": {
       "status": "passed-fresh-local-install",
-      "items": 41,
-      "files": 64,
-      "completeExamples": 16,
+      "items": 42,
+      "files": 66,
+      "completeExamples": 18,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "portableFont": "package font emitted and SHA256 matched",
-      "assetNotice": "installed and checked",
-      "sourceScope": "Fresh installed registry source;16 portable examples typechecked and Vite compiled. HTML export runtime below is a separate synthetic check.",
-      "registrySha256": "acae6f777e96e83bd77d64c539b4234798b0246ca529d998e4ba4d347dab93ad",
-      "browser": "42 fresh consumer distribution/width cases and animation/reduced-motion passed.",
-      "runtime": "Installed self-contained HTML example executed under StrictMode; one real download, offline font and career row, root320px and internal viewer718px, no external requests."
+      "portableFont": "emitted andSHA256matched",
+      "assetNotice": "installed andchecked",
+      "sourceScope": "All42 items freshly installed byshadcn CLI;noinstalledsource synchronization. Entry subsequently mountsContextExample reduceMotion underStrictMode.",
+      "runtime": "Actual320px:descriptionclick andSpace selection,structuredsubmit preservingwhitespace/optionorder/descriptors,visiblecheckboxglyphs,nohorizontaloverflow/errors",
+      "initialAttempt": "All42 attempt failed withENOSPC;onlythatfailednode_modules removed. Targeted Context install succeeded buttheharness referenced anunimportedbutton;entryfixed andtsc/Vite passed. Currentall42retry fullypassed."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -836,17 +866,16 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 38,
-      "componentExamples": 14,
-      "integrationFragments": 24,
-      "workspaceTypecheck": "passed in check-prism.mjs; runs in existing CI PRISM gate",
-      "installedTypecheck": "passed in isolated consumer",
-      "installationDependencyClosure": "all 38 installed usage imports resolve within their registry dependency graph",
-      "usagePathControlRuntime": "passed: registry/workspace selections display the matching manifest code; clipboard write not exercised"
+      "groups": 41,
+      "componentExamples": 18,
+      "integrationFragments": 23,
+      "workspaceTypecheck": "passed incheck-prism.mjs",
+      "installedTypecheck": "passed innewindependentconsumer",
+      "installationDependencyClosure": "Verified41groups andportabledependencies incheck-prism.mjs;newcollapsible dependencyinstalled"
     },
     "currentFixtureStates": {
-      "count": 121,
-      "status": "passed-final-local-built-document",
+      "count": 140,
+      "status": "passed-local-built-document-actual320px-cua",
       "previousVerifiedStates": 120,
       "previousPublishedVerificationCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b"
     },
@@ -869,6 +898,12 @@
     "leadershipPublication": {
       "status": "recorded-before-publication",
       "scope": "New pie,summary,typed recipe and source-reference revision; publication readback will be recorded after push."
+    },
+    "contextImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified;draft-publication-pending",
+      "production": "pending human-approved publication",
+      "purposeMappingIsFullParity": false
     }
   },
   "unverified": [
@@ -881,18 +916,20 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 40,
-    "states": 129,
-    "status": "passed-local-html-129",
+    "groups": 41,
+    "states": 140,
+    "status": "passed-local-built-document-actual320px-cua",
     "checks": [
-      "all129 fixtures render at actual320px viewport",
-      "no nested buttons",
-      "no page root horizontal overflow",
-      "no unlabeled visible native inputs",
-      "no page errors or unhandled rejections"
+      "rendered",
+      "pagehorizontaloverflow0",
+      "nestedbuttons0",
+      "displayedinputnamespresent",
+      "browsererrors0"
     ],
-    "evidence": "local-html-129",
-    "claim": "Rendering does not prove all source states, interactions or visual parity."
+    "evidence": [
+      "context-static-140-cua.json"
+    ],
+    "claim": "Fixture rendering checks do not prove authenticated reference-state orvisualparity. Context interaction usesexplicitreduceMotion=true;defaultmotionremains unverified inlocked environment."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1104,7 +1141,19 @@
       "_text-field.scss"
     ],
     "inputLabelAndTooltipSources": "Unchanged between the previous and latest checkout.",
-    "deployedRevisionBinding": "Not established."
+    "deployedRevisionBinding": "Not established.",
+    "contextSources": [
+      "ContextInfoLayer.tsx",
+      "ContextInfoLayer.module.scss",
+      "ContextInfoSection.tsx",
+      "ContextInfoSection.module.scss"
+    ],
+    "deltaReview": {
+      "modified": 42,
+      "added": 10,
+      "unreviewedPaths": 15,
+      "coverageClaim": "Reviewing a path is separate fromimplementation/state/parity completion."
+    }
   },
   "inputLabelReferenceComparison": {
     "status": "passed-selected-runtime-2026-10-09",

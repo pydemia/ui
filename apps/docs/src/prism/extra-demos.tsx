@@ -11,9 +11,12 @@ import { PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismCriteriaTag, PrismP
 import type { FixtureState } from "./catalog";
 const demoCandidates: PrismCandidate[] = [{id:"one",name:"김가상",company:"가상전자",position:"기술전략담당",elp:"ELP",birthDate:"1980.01.01",executiveYears:3},{id:"two",name:"이예시",company:"예시사업",position:"운영총괄",elp:"s-ELP",executiveYears:5}];
 export function ContextDemo({ state }: { state: FixtureState }) {
-    const [values,setValues] = useState<PrismContextValues>({ issue:"",expertise:[] }); const [result,setResult] = useState("");
-    return <><PrismContextForm fields={[{key:"issue",label:"핵심 현안·요구 사항",type:"textarea",required:true,description:"가상 포지션에 필요한 맥락을 입력해 주세요."},{key:"expertise",label:"전문 분야",type:"options",maxSelections:2,options:[{value:"tech",label:"기술",description:"기술 및 연구개발"},{value:"finance",label:"재무"},{value:"sales",label:"영업"},{value:"operations",label:"운영"}]}]}
-        values={values} onValueChange={setValues} onSubmit={v => setResult(JSON.stringify(v))} onCancel={() => setResult("취소")} busy={state === "loading"} /><p role="status">{result}</p></>;
+    const [values,setValues] = useState<PrismContextValues>({ issue:state==="long"?"가".repeat(800):state==="error"?"가".repeat(49):state==="readonly"?"가상 포지션의 중점 현안을 충분히 설명하고 요구 사항을 구체적으로 기록한 입력 예시입니다.":"",constraints:"",expertise:state==="readonly"?["tech"]:[] });
+    const [result,setResult] = useState(""); const [width,setWidth]=useState(800); const [reduceMotion,setReduceMotion]=useState(false);
+    return <div className="prism-demo-stack"><label className="prism-spec-label">맥락 너비 <input type="number" aria-label="맥락 너비" min={140} max={1000} value={width} onChange={event=>setWidth(Math.max(140,Math.min(1000,Number(event.target.value)||140)))}/></label>
+        <label className="prism-spec-label"><input type="checkbox" checked={reduceMotion} onChange={event=>setReduceMotion(event.target.checked)}/> 애니메이션 줄이기</label>
+        <div style={{width:"100%",maxWidth:width}}><PrismContextForm fields={[{key:"issue",label:state==="long"?"여러 조직의 중점 현안과 포지션 요구 사항을 함께 기록하는 긴 가상 입력 제목":"핵심 현안·요구 사항",type:"textarea",required:true,description:"가상 포지션에 필요한 맥락을 입력해 주세요.\n앞뒤 공백을 제외하고 50자 이상 작성합니다."},{key:"constraints",label:"추가 제약 조건",type:"textarea",description:"필요한 경우 입력합니다."},{key:"expertise",label:"전문 분야",type:"options",maxSelections:2,options:[{value:"tech",label:"기술",description:state==="long"?"긴 설명을 포함한 기술 및 연구개발 분야의 가상 선택지입니다. ".repeat(4):"기술 및 연구개발"},{value:"finance",label:"재무"},{value:"sales",label:"영업"},{value:"operations",label:"운영"}]}]}
+            defaultOpenFields={state==="default"?[]:["issue","constraints","expertise"]} reduceMotion={reduceMotion} values={values} onValueChange={setValues} onAction={(response,label)=>setResult(JSON.stringify({response,label}))} busy={state === "loading"} readOnly={state==="readonly"}/></div><p role="status">{result}</p></div>;
 }
 export function PrimitivesDemo({ state }: { state: FixtureState }) {
     const [favorite,setFavorite] = useState(false); const [expanded,setExpanded] = useState(false); const fieldId = useId();
