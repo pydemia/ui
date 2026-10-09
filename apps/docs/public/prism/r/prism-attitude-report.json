@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-attitude-report",
+  "type": "registry:ui",
+  "title": "Attitude profile / PDF report",
+  "description": "성격·가치관·Risk·Survey와 제목 옆 심리적강인함 보고서 열기·다운로드",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-profile-sections.json",
+    "https://ui.pydemia.ai/prism/r/prism-document.json",
+    "https://ui.pydemia.ai/prism/r/prism-button.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-attitude-report.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-attitude-report.tsx",
+      "content": "import { useLayoutEffect, useState, type ComponentProps } from \"react\";\nimport { PrismAttitudeSection } from \"./prism-profile-sections\";\nimport { PrismPdfDialog, type PrismPdfViewerProps } from \"./prism-document\";\nimport { PrismButton } from \"./prism-button\";\nexport type PrismAttitudeReportDocument<T = PrismPdfViewerProps> = T extends unknown ? Omit<T,\"title\"> & { title?: string; buttonLabel?: string; width?: number } : never;\nexport type PrismAttitudeReportProps = Omit<ComponentProps<typeof PrismAttitudeSection>,\"documentAction\"> & { report?: PrismAttitudeReportDocument; subjectId?: string };\nexport function PrismAttitudeReport({ report, subjectId, diagnosis, ...sections }: PrismAttitudeReportProps) {\n    const [open,setOpen] = useState(false);\n    const available = !!report && (report.data !== undefined || !!report.url?.trim());\n    useLayoutEffect(() => setOpen(false), [subjectId,report?.url,report?.data]);\n    const action = available && <PrismButton variant=\"line\" size=\"small\" onClick={() => setOpen(true)}>{report.buttonLabel || \"심리적강인함 결과 보기\"}</PrismButton>;\n    return <><PrismAttitudeSection {...sections} diagnosis={{ ...diagnosis, action: action || diagnosis.action }}/>\n        {available && <PrismPdfDialog {...report} title={report.title || \"심리적강인함 결과\"} open={open} onOpenChange={setOpen}/>}\n    </>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "sourceSha256": "b322e97f9e013493364b17fb2b69fcfa1edd7c81a3bd39ed754a0fcbad287bcc",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

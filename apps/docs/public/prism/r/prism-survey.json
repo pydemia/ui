@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-survey",
+  "type": "registry:ui",
+  "title": "6 Frame Survey / Group averages",
+  "description": "응답자별 진단 점수와 그룹 평균선·누락값·2/3열 카드 표시",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-assessment.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-survey.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-survey.tsx",
+      "content": "import { useId, type CSSProperties, type ReactNode } from \"react\";\nimport { PrismNoData } from \"./prism-assessment\";\nexport type PrismSurveyBar = { role: \"boss\" | \"peer\" | \"member\"; value: number | null; average?: number | null };\nexport type PrismSurveyItem = { id: string; category: string; bars: readonly PrismSurveyBar[] };\nconst roleLabels = { boss: \"상사\", peer: \"동료\", member: \"구성원\" };\nexport function PrismSurveyValidation({ items, columns = 3, barMaxHeight = 100, action, title = \"6 Frame Survey 결과\", className = \"\", style }:\n    { items: readonly PrismSurveyItem[]; columns?: 2 | 3; barMaxHeight?: number; action?: ReactNode; title?: string; className?: string; style?: CSSProperties }) {\n    const id = useId();\n    if (![2,3].includes(columns) || !Number.isFinite(barMaxHeight) || barMaxHeight <= 0) throw new RangeError(\"Survey columns must be 2 or 3 and bar height positive.\");\n    if (new Set(items.map(item => item.id)).size !== items.length || items.some(item => !item.id || !item.category.trim() || new Set(item.bars.map(bar => bar.role)).size !== item.bars.length ||\n        item.bars.some(bar => bar.value === undefined || !Object.hasOwn(roleLabels,bar.role) || [bar.value,bar.average].some(value => value !== null && value !== undefined && (!Number.isFinite(value) || value < 0 || value > 10))))) throw new RangeError(\"Survey records require unique identifiers and roles with null or 0..10 values.\");\n    return <section className={`prism-survey ${className}`} style={style} aria-labelledby={id}>\n        <header className=\"prism-profile-section-header\"><h3 id={id}>{title}</h3>{action}</header>\n        {items.length ? <><div className=\"prism-survey-grid\" data-columns={columns}>{items.map(item => <article key={item.id} className=\"prism-survey-item\">\n            <h4>{item.category}</h4><div className=\"prism-survey-body\">{item.bars.some(bar => bar.value !== null) ? <div className=\"prism-survey-chart\">{item.bars.filter(bar => bar.value !== null).map(bar => <div key={bar.role} className=\"prism-survey-bar\" data-role={bar.role}>\n                <strong>{bar.value!.toFixed(1)}</strong><div className=\"prism-survey-track\" style={{ height: barMaxHeight }} aria-hidden=\"true\"><span className=\"prism-survey-fill\" style={{ height: bar.value!/10*barMaxHeight }}/>\n                    {bar.average !== null && bar.average !== undefined && <span className=\"prism-survey-average\" style={{ bottom: Math.round(bar.average/10*barMaxHeight) }}/>}</div><span>{roleLabels[bar.role]}</span>\n                {bar.average !== null && bar.average !== undefined && <span className=\"prism-sr-only\">그룹 평균 {bar.average}</span>}\n            </div>)}</div> : <div className=\"prism-survey-empty\"><PrismNoData/></div>}</div>\n            <div className=\"prism-sr-only\"><table><caption>{item.category} 데이터</caption><thead><tr><th>응답자</th><th>점수</th><th>그룹 평균</th></tr></thead><tbody>{item.bars.map(bar => <tr key={bar.role}><th scope=\"row\">{roleLabels[bar.role]}</th><td>{bar.value ?? \"정보 없음\"}</td><td>{bar.average ?? \"정보 없음\"}</td></tr>)}</tbody></table></div>\n        </article>)}</div><div className=\"prism-survey-legend\"><span aria-hidden=\"true\"/>그룹 평균(10점 만점)</div></> : <div className=\"prism-survey-empty-outline\"><PrismNoData/></div>}\n    </section>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "sourceSha256": "48ee66fbcc5bb8d511f6a5f09e1b86215cb387672d94f5437cc959bc89396dbe",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

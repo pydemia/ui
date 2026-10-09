@@ -1,6 +1,6 @@
 # PRISM 검증 기록
 
-기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 43개 typed 그룹과 토큰을 포함한 44개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
+기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 45개 typed 그룹과 토큰을 포함한 46개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
 
 ## 근거와 범위
 
@@ -166,3 +166,16 @@ PrismCandidateList는 현재 source087811ff의 필터·선택·표·페이지·�
 현재43그룹·152상태를 실제320px iframe에서DOM 표식 확인 후 측정했으며 렌더 누락·페이지 넘침·중첩 버튼·표시 입력 이름 누락·수집된 브라우저 오류가 없습니다. 새 독립 소비자에44항목/20개 완전 예시를 설치하고 최종 registry로 재설치해TypeScript/Vite·폰트 bytes·고지를 확인했습니다. component 소스는 수정하지 않았으며 검증 앱만StrictMode/320px iframe으로 구성했습니다. production 예시의 등록3/수정/삭제2,자동 높이638px/제한180px와 넘침·중첩·오류0을 확인했습니다.
 
 재사용 설치 script의EEXIST와 소비자 진입 빌드의 잘못된cwd는 수정 후 각각 재설치·빌드했습니다. 초기 수동 제한 측정은 이전dist를 읽어 실패했으므로 새빌드·reload 이후180px 결과와 구분합니다. screenshot capture는5000ms timeout으로 실패해 새 UI 이미지는 없습니다. 인증 원본 상태·전체 시각/폰트 비교와 실제backend 권한·저장 검증은 남아 있습니다. 기능 목적273/pending0과 계약·fixture 성공을 전체 완료로 해석하지 않습니다.
+
+
+## 현재 Attitude·PDF 보고서와 6 Frame Survey
+
+진단 제목의 보고서 action과 독립 PDF 모달, 성격·가치관·Risk·Survey 조합을 추가했습니다. API·권한·평가는 호스트가 처리합니다. 진단 제목/설명은 trim 후 판정하며 제목만 있을 때 NoData를 덧붙이지 않습니다. 양수 비중만 표시하되 원래 색 인덱스를 유지하고, 차트180px·4개 grid와 source 색/point border0 및 접근성 데이터를 지원합니다. 전체 Chart.js geometry/motion/print 대조는 남아 있습니다.
+
+PDF는 전체 bytes와%PDF 헤더 검사 후 PDF.js의 native viewer를 사용합니다. 연속 페이지·텍스트 선택·링크·실제 페이지/너비 맞춤을 지원하며, source처럼 페이지·배율은blur/Enter로 적용합니다. workerUrl과 전용pdf.css는 설치한pdfjs-dist와 같은 버전이어야 합니다. 호스트 loader와fallback,신호취소/늦은 결과 무시,고정된download context와실패/재시도를 지원합니다. 환경은 완전 예시의workerUrl prop으로 명시하며 설치본의전용CSS 파일까지 dependency closure를 검사합니다. 기존출력 options/preview는 보존했습니다.
+
+실제 CUA에서3페이지와텍스트 레이어,페이지 이동/스크롤,67%→70/60%,30~100% 경계와너비맞춤146%,Synthetic 단어선택을 확인했습니다. HTML200 응답은PDF형식 오류로 거부했고 같은URL retry가 성공했습니다. callback4351bytes는원본합성PDF와동일하며 Poppler가3페이지A4를확인했습니다. OS 저장 완료로 해석하지 않습니다. 진단/Survey140~1280px의 넘침0과 PDF모달의7개 폭/높이 조합을 확인했습니다.140×240에서0px viewport 문제를 좁은 toolbar/제목으로 수정해36px와ready를 확인했습니다. 실제320px iframe에서도296px 모달/3페이지/넘침0입니다.
+
+Survey는source36/24px 막대·0.0과null·정수 그룹 평균선·role색·2/3열을 구현했습니다. CUA의194px 카드와61/63/75/82px 평균선,가변320px track/195px 평균,print class118pt 카드/70px track/10pt legend를 확인했습니다. native print와는 별도입니다. 긴 접근성 표가870px 페이지 넘침을 만들던 문제는 숨김 wrapper로 수정했습니다. 최종45그룹/159개 고유 상태의 실제320px 기본 검사와107개 테스트,22개 완전예시 타입 검사를 통과했습니다. source273/pending0과 합성검사를 전체 parity로 확대하지 않습니다.
+
+원본 인증 상태·전체pixel/font·실제 query/권한/저장·OS 저장/native print가 남아 있습니다. 현재UI screenshot은5000ms timeout으로 실패했습니다. Export manifest는일반 helper를function,React 이름의선언을component로 구분합니다.

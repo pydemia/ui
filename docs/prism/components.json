@@ -1247,7 +1247,7 @@
         },
         {
           "name": "createPrismHtmlDocument",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "PrismHtmlExportButtonProps",
@@ -1339,7 +1339,7 @@
         },
         {
           "name": "runPrismPdfExport",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "PrismImagePdfPage",
@@ -1347,11 +1347,11 @@
         },
         {
           "name": "createPrismImagePdf",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "downloadPrismBlob",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "PrismPdfDownloadHostProps",
@@ -1381,7 +1381,7 @@
         "chat/successorCandidate/print/PrintOptionsDialog.tsx",
         "chat/successorCandidate/print/CandidateProfilePrintPreview.tsx"
       ],
-      "usage": "import { PrismPdfViewer } from \"@pydemia/prism\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n<PrismPdfViewer title=\"문서\" url=\"/document.pdf\" workerUrl={workerUrl} />;",
+      "usage": "import { PrismPdfViewer } from \"@pydemia/prism\";\nimport \"@pydemia/prism/pdf.css\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n<PrismPdfViewer title=\"문서\" url=\"/document.pdf\" workerUrl={workerUrl} />;",
       "sourcePath": "packages/prism/src/prism-document.tsx",
       "previewUrl": "/prism?component=prism-document",
       "embedUrl": "/prism?component=prism-document&embed=1",
@@ -1395,7 +1395,8 @@
           "Print section checkbox changes selection",
           "390px page fit uses 245.90625 x 348px canvas inside 356 x 380px viewport",
           "Width fit subtracts 32px total padding once: 324px canvas at 390px frame; 254px at 320px; 958px at 1024px",
-          "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px"
+          "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px",
+          "전체 bytes/host loader·native 연속 Viewer·원본 toolbar와독립 pdf.css,재시도/취소/immutable download context를 보완. 기존 출력 options/preview 소스는 byte 보존."
         ],
         "remaining": [
           "Source PDF toolbar/fit states comparison",
@@ -1407,11 +1408,51 @@
       },
       "exports": [
         {
+          "name": "PrismPdfBytes",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfLoadContext",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfLoader",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfDownloadContext",
+          "kind": "type"
+        },
+        {
+          "name": "copyPrismPdfBytes",
+          "kind": "function"
+        },
+        {
+          "name": "loadPrismPdfBytes",
+          "kind": "function"
+        },
+        {
+          "name": "prismPdfFilename",
+          "kind": "function"
+        },
+        {
+          "name": "startPrismPdfDownload",
+          "kind": "function"
+        },
+        {
           "name": "PrismPdfViewerProps",
           "kind": "type"
         },
         {
           "name": "PrismPdfViewer",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPdfDialogProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPdfDialog",
           "kind": "component"
         },
         {
@@ -1432,7 +1473,7 @@
         }
       ],
       "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismPdfViewer } from \"@/components/ui/prism-document\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n<PrismPdfViewer title=\"문서\" url=\"/document.pdf\" workerUrl={workerUrl} />;"
+      "registryUsage": "import { PrismPdfViewer } from \"@/components/ui/prism-document\";\nimport \"@/components/ui/prism-pdf.css\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n<PrismPdfViewer title=\"문서\" url=\"/document.pdf\" workerUrl={workerUrl} />;"
     },
     {
       "id": "prism-workspace",
@@ -1912,7 +1953,7 @@
         },
         {
           "name": "createPrismContextResponse",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "PrismContextFormProps",
@@ -2084,7 +2125,7 @@
       "category": "Domain",
       "purpose": "성격·가치관·Risk·경험·전문성·리더십 근거와 현재 위치",
       "contract": "Risk의 true·false·null을 구분하고 전 항목 누락 열만 병합합니다. 점수와 비중은 외부 값이며 범위만 검증합니다. Matrix 현재 위치는 row/column ID로 지정합니다. 평가를 계산하지 않습니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty"
@@ -2522,7 +2563,7 @@
         },
         {
           "name": "createPrismCandidateDownloadJob",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "PrismCandidateListProps",
@@ -3095,15 +3136,15 @@
         },
         {
           "name": "isPrismCeoCommentDraftValid",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "createPrismCeoCommentPayload",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "prismCeoCommentDraftFromItem",
-          "kind": "component"
+          "kind": "function"
         },
         {
           "name": "PrismCeoCommentFormProps",
@@ -3128,6 +3169,136 @@
       ],
       "usageKind": "component-example",
       "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismMgmtComments, prismCeoCommentDraftFromItem, type PrismCeoCommentItem } from \"@/components/ui/prism-mgmt-comments\";\nexport function MgmtCommentsExample() {\n    // The host owns authoritative records and authorization; this store is synthetic.\n    const records = useRef<PrismCeoCommentItem[]>([\n        {id:\"own\",year:2026,category:\"가상 육성 회의\",author:\"가상 CEO 김작성\",comment:\"가상 협업 사례입니다.\\n육성 과제를 논의합니다.\",isMine:true},\n        {id:\"other\",year:null,category:null,author:null,comment:\"다른 작성자의 가상 의견입니다.\",isMine:false},\n    ]);\n    const next = useRef(0);\n    const [items,setItems] = useState(records.current);\n    const [width,setWidth] = useState(800);\n    const [bounded,setBounded] = useState(false);\n    return <section data-prism=\"light\">\n        <label>코멘트 너비 <input type=\"number\" aria-label=\"코멘트 너비\" min={140} max={1280} value={width}\n            onChange={event=>setWidth(Math.max(140,Math.min(1280,Number(event.target.value)||140)))}/></label>\n        <label><input type=\"checkbox\" checked={bounded} onChange={event=>setBounded(event.target.checked)}/> 입력창 높이 180px 제한</label>\n        <div style={{width:\"100%\",maxWidth:width}}><PrismMgmtComments subjectId=\"synthetic-candidate\" ceoComments={items}\n            elpComments={[{id:\"elp\",year:2025,category:\"가상 ELP 선발\",author:\"가상 평가위원\",comment:\"육성 과정의 가상 기록입니다.\"}]}\n            maxEditorHeight={bounded?180:undefined}\n            loadDetail={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();const item=records.current.find(item=>item.id===id);if(!item)throw new Error(\"Missing synthetic record\");return prismCeoCommentDraftFromItem(item);}}\n            onCreate={async(payload,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=[{id:\"new-\"+ ++next.current,...payload,isMine:true},...records.current];}}\n            onUpdate={async(id,payload,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.map(item=>item.id===id?{...item,...payload}:item);}}\n            onDelete={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.filter(item=>item.id!==id);}}\n            onReload={async({signal})=>{await Promise.resolve();signal.throwIfAborted();setItems([...records.current]);}}/>\n        </div>\n    </section>;\n}"
+    },
+    {
+      "id": "prism-survey",
+      "name": "6 Frame Survey / Group averages",
+      "category": "Domain",
+      "purpose": "응답자별 진단 점수와 그룹 평균선·누락값·2/3열 카드 표시",
+      "contract": "점수와 평균은 호스트가 제공한0~10 값입니다. 실제0은0.0과0높이 막대로 표시하고 null 막대는 원본처럼 생략하되 접근성 데이터 표에는 정보 없음으로 남깁니다. role은boss/peer/member이며 한 범주에 중복할 수 없습니다. 그룹 평균선은 정수px로 반올림합니다. columns2/3·barMaxHeight·제목 action·style/className을 지원하며 좁은 컨테이너에서는 열과 막대를 재배치합니다. 평가나 평균을 계산하지 않습니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "long"
+      ],
+      "source": [
+        "chat/successorCandidate/expertise/SurveyValidation.tsx",
+        "chat/successorCandidate/expertise/ValidationItem.tsx",
+        "chat/successorCandidate/expertise/SurveyValidation.module.scss",
+        "chat/successorCandidate/expertise/ValidationItem.module.scss"
+      ],
+      "usage": "import { useState } from \"react\";\nimport { PrismSurveyValidation } from \"@pydemia/prism\";\nexport function SurveyExample() {\n    const [height,setHeight]=useState(100);\n    return <section data-prism=\"light\"><label>막대 높이 <input type=\"number\" aria-label=\"막대 높이\" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>\n        <PrismSurveyValidation columns={2} barMaxHeight={height} items={[\n            {id:\"example\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]},\n            {id:\"missing\",category:\"가상 존중\",bars:[{role:\"boss\",value:null},{role:\"peer\",value:null},{role:\"member\",value:null}]},\n        ]}/></section>;\n}",
+      "sourcePath": "packages/prism/src/prism-survey.tsx",
+      "previewUrl": "/prism?component=prism-survey",
+      "embedUrl": "/prism?component=prism-survey&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-survey&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+        "checks": [
+          "source36px bars/24px track/100px height·role 색·정수 평균선·0.0과null 구분을 구현",
+          "CUA 카드194px/padding8/12px radius,bars36/24,평균61/63/75/82px·Red400,role Green200/Blue200/Orange200 확인",
+          "140~1280px 넘침0·3/2/1열 재배치,가변320px 막대와평균195px",
+          "print class의118pt=157.328px 카드·70px 막대·legend10pt 확인. 실제OS/native print와 구분",
+          "긴 제목의sr-only table min-content가 페이지 너비를 늘리던 문제를clip wrapper로 수정하고 실제320px 재측정"
+        ],
+        "remaining": [
+          "인증 원본 모든 Survey 상태·전체 pixel/font 대조",
+          "실제프로필 전체 출력/native print"
+        ],
+        "evidence": [
+          "pdf-report.test.mjs",
+          "attitude-deployed-css.json",
+          "survey-cua-runtime.json",
+          "attitude-cua-runtime.json"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismSurveyBar",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSurveyItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSurveyValidation",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismSurveyValidation } from \"@/components/ui/prism-survey\";\nexport function SurveyExample() {\n    const [height,setHeight]=useState(100);\n    return <section data-prism=\"light\"><label>막대 높이 <input type=\"number\" aria-label=\"막대 높이\" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>\n        <PrismSurveyValidation columns={2} barMaxHeight={height} items={[\n            {id:\"example\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]},\n            {id:\"missing\",category:\"가상 존중\",bars:[{role:\"boss\",value:null},{role:\"peer\",value:null},{role:\"member\",value:null}]},\n        ]}/></section>;\n}"
+    },
+    {
+      "id": "prism-attitude-report",
+      "name": "Attitude profile / PDF report",
+      "category": "Domain",
+      "purpose": "성격·가치관·Risk·Survey와 제목 옆 심리적강인함 보고서 열기·다운로드",
+      "contract": "기존 프로필 표시 모델을 독립 recipe로 조합합니다. report의url 또는data가 있으면 진단 제목 오른쪽에 보고서 버튼을 제공합니다. url은trim 후 존재 여부를 판정하며 subjectId/url/data 변경은 기존 모달을 닫습니다. 제목·레이블·파일명·workerUrl과loadPdf/onDownload를 호스트가 지정합니다. workerUrl과pdf.css는 설치한pdfjs-dist와 같은 버전이어야 합니다. 연속 페이지·텍스트 선택·링크·페이지/너비 맞춤을 지원합니다. URL은전체bytes와%PDF 헤더 검사 후읽으며loadPdf 또는loadPrismPdfBytes로 호스트가인증/fallback을 연결합니다. stylesheet는워크스페이스@pydemia/prism/pdf.css,설치본@/components/ui/prism-pdf.css입니다. API/권한·HR평가·원본서비스URL은호스트 소유이며 예시의synthetic-report.pdf는소비자가 제공할 합성문서 경로입니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "error",
+        "long"
+      ],
+      "source": [
+        "chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
+        "chat/successorCandidate/attitude/AttitudeDiagnosis.tsx",
+        "chat/successorCandidate/attitude/PdfViewerDialog.tsx"
+      ],
+      "usage": "import { PrismAttitudeReport } from \"@pydemia/prism\";\nimport \"@pydemia/prism/pdf.css\";\nexport function AttitudeReportExample({workerUrl}: {workerUrl: string}) {\n    return <section data-prism=\"light\"><PrismAttitudeReport subjectId=\"synthetic-candidate\"\n        summary={{heading:\"가상 Attitude 요약\",description:\"외부에서 제공한 가상 근거를 표시합니다.\"}}\n        diagnosis={{title:\"성격·가치관 진단 결과\",axes:[\"개방성\",\"성실성\",\"외향성\",\"우호성\",\"정서 안정\"],values:[8,7,5,6,8],heading:\"가상 성격 해석\",description:\"실제 평가 결과를 의미하지 않습니다.\",shares:[{label:\"자기초월\",percent:30},{label:\"안정\",percent:0},{label:\"개방\",percent:40},{label:\"자기증진\",percent:30}],valueDescription:\"호출자가 제공한 가상 비중입니다.\"}}\n        risk={{items:[{id:\"one\",label:\"가상 Risk\",latent:false,manifest:null}]}}\n        survey={{columns:2,items:[{id:\"one\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]}]}}\n        report={{url:\"/synthetic-report.pdf\",workerUrl,title:\"가상 심리적강인함 결과\",filename:\"가상 보고서.pdf\"}}/>\n    </section>;\n}",
+      "sourcePath": "packages/prism/src/prism-attitude-report.tsx",
+      "previewUrl": "/prism?component=prism-attitude-report",
+      "embedUrl": "/prism?component=prism-attitude-report&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-attitude-report&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+        "checks": [
+          "진단 제목 옆 조건부 보고서 버튼, subject/url/data 변경 시 모달 닫기; 기존 documentAction의 배치 계약 유지",
+          "PDF 전체 bytes·%PDF 헤더 검사·호스트 fallback과 AbortSignal. PDF.js6.3.289 Native PDFViewer의 연속 페이지·텍스트 레이어/선택·링크·맞춤을 사용하며 source worker/CSS 버전은 호스트가 연결",
+          "페이지/배율은 blur 또는 Enter 적용, 10단계 rounding·30~100 기본범위와 min/max 확장,46/64px 입력·14px500 글꼴·원본 glyph",
+          "실제 CUA 3페이지/3canvas/텍스트 레이어,2페이지 Enter·3페이지 PageDown,67→70/60·30/100 경계,너비맞춤146%,Synthetic 단어 선택",
+          "HTML200 응답은 PDF형식 오류이며 같은URL 재시도 성공. UI callback bytes4351이 원본과 동일하고 Poppler가3페이지A4를 확인. OS 저장 완료와 구분",
+          "진단140~1280px 넘침0,좁은 차트 내부scroll 및 범례wrap. PDF140~1280px/240~1000px의7조합 ready/넘침0;140×240에서viewport0 문제를36px로 수정",
+          "실제320px iframe에서모달296px·3페이지 ready/페이지 넘침0. 후보 자동전환 중 대기모달 닫힘과 계약 Signal 확인",
+          "현재45그룹/159개 고유 상태의 표식·가로 넘침·중첩 버튼·이름 없는 표시 입력·수집 오류 검사; 긴 Survey 접근성 표의870px 넘침 수정 후 재측정0",
+          "새46항목/71파일·22예시의독립설치와최종registry재설치,TypeScript/Vite/font bytes/고지 통과. 실제production320px StrictMode native3페이지·text layer·이동/줌/필드·넘침/오류0. download event25초timeout;OSsave미확인."
+        ],
+        "remaining": [
+          "인증된 원본 Attitude/PDF 상태·전체 font/pixel 비교",
+          "진단 SVG의 source Chart.js 전체 geometry·motion/print 대조",
+          "실제backend 권한/query/캐시·OS 저장·native 인쇄",
+          "현재 screenshot capture5000ms timeout"
+        ],
+        "evidence": [
+          "pdf-report.test.mjs",
+          "attitude-deployed-css.json",
+          "attitude-cua-runtime.json",
+          "attitude-downloaded-bytes.pdf"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismAttitudeReportDocument",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAttitudeReportProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAttitudeReport",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismAttitudeReport } from \"@/components/ui/prism-attitude-report\";\nimport \"@/components/ui/prism-pdf.css\";\nexport function AttitudeReportExample({workerUrl}: {workerUrl: string}) {\n    return <section data-prism=\"light\"><PrismAttitudeReport subjectId=\"synthetic-candidate\"\n        summary={{heading:\"가상 Attitude 요약\",description:\"외부에서 제공한 가상 근거를 표시합니다.\"}}\n        diagnosis={{title:\"성격·가치관 진단 결과\",axes:[\"개방성\",\"성실성\",\"외향성\",\"우호성\",\"정서 안정\"],values:[8,7,5,6,8],heading:\"가상 성격 해석\",description:\"실제 평가 결과를 의미하지 않습니다.\",shares:[{label:\"자기초월\",percent:30},{label:\"안정\",percent:0},{label:\"개방\",percent:40},{label:\"자기증진\",percent:30}],valueDescription:\"호출자가 제공한 가상 비중입니다.\"}}\n        risk={{items:[{id:\"one\",label:\"가상 Risk\",latent:false,manifest:null}]}}\n        survey={{columns:2,items:[{id:\"one\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]}]}}\n        report={{url:\"/synthetic-report.pdf\",workerUrl,title:\"가상 심리적강인함 결과\",filename:\"가상 보고서.pdf\"}}/>\n    </section>;\n}"
     },
     {
       "id": "prism-icon",

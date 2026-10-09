@@ -328,6 +328,7 @@ Usage kind: integration-fragment
 Installed usage:
 ```tsx
 import { PrismPdfViewer } from "@/components/ui/prism-document";
+import "@/components/ui/prism-pdf.css";
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 <PrismPdfViewer title="문서" url="/document.pdf" workerUrl={workerUrl} />;
 ```
@@ -835,6 +836,49 @@ export function MgmtCommentsExample() {
             onDelete={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.filter(item=>item.id!==id);}}
             onReload={async({signal})=>{await Promise.resolve();signal.throwIfAborted();setItems([...records.current]);}}/>
         </div>
+    </section>;
+}
+```
+
+## 6 Frame Survey / Group averages
+응답자별 진단 점수와 그룹 평균선·누락값·2/3열 카드 표시
+Contract: 점수와 평균은 호스트가 제공한0~10 값입니다. 실제0은0.0과0높이 막대로 표시하고 null 막대는 원본처럼 생략하되 접근성 데이터 표에는 정보 없음으로 남깁니다. role은boss/peer/member이며 한 범주에 중복할 수 없습니다. 그룹 평균선은 정수px로 반올림합니다. columns2/3·barMaxHeight·제목 action·style/className을 지원하며 좁은 컨테이너에서는 열과 막대를 재배치합니다. 평가나 평균을 계산하지 않습니다.
+States: default, empty, long
+Registry: /prism/r/prism-survey.json
+Source: packages/prism/src/prism-survey.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismSurveyValidation } from "@/components/ui/prism-survey";
+export function SurveyExample() {
+    const [height,setHeight]=useState(100);
+    return <section data-prism="light"><label>막대 높이 <input type="number" aria-label="막대 높이" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>
+        <PrismSurveyValidation columns={2} barMaxHeight={height} items={[
+            {id:"example",category:"가상 신뢰",bars:[{role:"boss",value:0,average:6.1},{role:"peer",value:7.2,average:6.45},{role:"member",value:null}]},
+            {id:"missing",category:"가상 존중",bars:[{role:"boss",value:null},{role:"peer",value:null},{role:"member",value:null}]},
+        ]}/></section>;
+}
+```
+
+## Attitude profile / PDF report
+성격·가치관·Risk·Survey와 제목 옆 심리적강인함 보고서 열기·다운로드
+Contract: 기존 프로필 표시 모델을 독립 recipe로 조합합니다. report의url 또는data가 있으면 진단 제목 오른쪽에 보고서 버튼을 제공합니다. url은trim 후 존재 여부를 판정하며 subjectId/url/data 변경은 기존 모달을 닫습니다. 제목·레이블·파일명·workerUrl과loadPdf/onDownload를 호스트가 지정합니다. workerUrl과pdf.css는 설치한pdfjs-dist와 같은 버전이어야 합니다. 연속 페이지·텍스트 선택·링크·페이지/너비 맞춤을 지원합니다. URL은전체bytes와%PDF 헤더 검사 후읽으며loadPdf 또는loadPrismPdfBytes로 호스트가인증/fallback을 연결합니다. stylesheet는워크스페이스@pydemia/prism/pdf.css,설치본@/components/ui/prism-pdf.css입니다. API/권한·HR평가·원본서비스URL은호스트 소유이며 예시의synthetic-report.pdf는소비자가 제공할 합성문서 경로입니다.
+States: default, empty, error, long
+Registry: /prism/r/prism-attitude-report.json
+Source: packages/prism/src/prism-attitude-report.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { PrismAttitudeReport } from "@/components/ui/prism-attitude-report";
+import "@/components/ui/prism-pdf.css";
+export function AttitudeReportExample({workerUrl}: {workerUrl: string}) {
+    return <section data-prism="light"><PrismAttitudeReport subjectId="synthetic-candidate"
+        summary={{heading:"가상 Attitude 요약",description:"외부에서 제공한 가상 근거를 표시합니다."}}
+        diagnosis={{title:"성격·가치관 진단 결과",axes:["개방성","성실성","외향성","우호성","정서 안정"],values:[8,7,5,6,8],heading:"가상 성격 해석",description:"실제 평가 결과를 의미하지 않습니다.",shares:[{label:"자기초월",percent:30},{label:"안정",percent:0},{label:"개방",percent:40},{label:"자기증진",percent:30}],valueDescription:"호출자가 제공한 가상 비중입니다."}}
+        risk={{items:[{id:"one",label:"가상 Risk",latent:false,manifest:null}]}}
+        survey={{columns:2,items:[{id:"one",category:"가상 신뢰",bars:[{role:"boss",value:0,average:6.1},{role:"peer",value:7.2,average:6.45},{role:"member",value:null}]}]}}
+        report={{url:"/synthetic-report.pdf",workerUrl,title:"가상 심리적강인함 결과",filename:"가상 보고서.pdf"}}/>
     </section>;
 }
 ```
