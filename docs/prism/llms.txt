@@ -233,7 +233,7 @@ import { PrismMultiSelect } from "@/components/ui/prism-selection";
 
 ## Candidate profile / Evidence
 후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시
-Contract: PrismProfileTab은 종합·전문성·성공경험·Design·Agility·Attitude·Leadership·Mgmt Comments의 안정 ID입니다. 분류별 sections는 독립 컴포넌트 slot입니다. 누락된 근거는 정보 없음으로 남기고 UI가 평가하지 않습니다.
+Contract: PrismProfileTab은 종합·전문성·성공경험·Design·Agility·Attitude·Leadership·Mgmt Comments의 안정 ID입니다. 분류별 sections는 독립 컴포넌트 slot입니다. 누락된 근거는 정보 없음으로 남기고 UI가 평가하지 않습니다. PrismSummaryBadge의 tooltipClassName과 tooltipStyle은 도움말 본문에 적용하며 trigger와 빈 summary 판정을 바꾸지 않습니다.
 States: default, empty, loading, error
 Registry: /prism/r/prism-profile.json
 Source: packages/prism/src/prism-profile.tsx
@@ -798,6 +798,44 @@ export function LeadershipSummaryExample() {
     return <section data-prism="light"><PrismLeadershipPieSummary
         items={[{label:"지",value:33},{label:"덕",value:32},{label:"용",value:35}]}
         title="가상 리더십 유형" description="비중과 해석은 호출자가 제공합니다." /></section>;
+}
+```
+
+## CEO / ELP management comments
+CEO 코멘트의 4필드 등록·상세 조회·수정·삭제와 ELP 육성 코멘트 표시
+Contract: CEO와 ELP 배열은 호스트가 제공하는 controlled 데이터입니다. year/category/author의 null은 표시를 생략하며 year=0과 본문 줄바꿈은 유지합니다. isMine은 CEO 편집 액션의 표시 계약이며 서버 권한 검사를 대신하지 않습니다. 단일 editor와 상세 조회·저장·삭제·reload 중복 방지를 지원합니다. Promise callback은 고정된 subjectId와 AbortSignal을 받으며 대상 변경·unmount 후 UI 완료를 무시합니다. 이미 완료된 서버 변경의 rollback을 의미하지 않습니다. 저장 실패는 draft를 보존하고 성공 후 reload 실패는 editor를 닫아 reload만 재시도합니다. standalone form의 submitting은 원본처럼 제출 버튼만 막으며 collection은 기본적으로 입력도 잠급니다. lockInputsWhileSubmitting=false로 원본의 입력 가능 상태를 선택할 수 있습니다. 연도 입력은 숫자4자리로 정리하되 외부 draft validator는 원본digits/integer 규칙입니다. 회의체·발화자trim1~100,논평trim1~2000/native maxlength와5행을 사용합니다. 입력 Enter는 기본 제출하지 않으며 submitOnEnter로 확장할 수 있습니다. autoSize는 내용·폭·폰트 변경에 반응하고 maxEditorHeight로 높이를 제한합니다. autoSize=false는 native 세로 resize를 허용합니다. 좁은 폭은 한 열로 전환하고 style/className으로 크기를 조절합니다. API/auth/캐시/영속 저장은 호스트 소유입니다. 기존 PrismCommentEditor/PrismCommentsSection은 일반 본문 편집 계약을 유지합니다.
+States: default, empty, loading, error, readonly, long
+Registry: /prism/r/prism-mgmt-comments.json
+Source: packages/prism/src/prism-mgmt-comments.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useRef, useState } from "react";
+import { PrismMgmtComments, prismCeoCommentDraftFromItem, type PrismCeoCommentItem } from "@/components/ui/prism-mgmt-comments";
+export function MgmtCommentsExample() {
+    // The host owns authoritative records and authorization; this store is synthetic.
+    const records = useRef<PrismCeoCommentItem[]>([
+        {id:"own",year:2026,category:"가상 육성 회의",author:"가상 CEO 김작성",comment:"가상 협업 사례입니다.\n육성 과제를 논의합니다.",isMine:true},
+        {id:"other",year:null,category:null,author:null,comment:"다른 작성자의 가상 의견입니다.",isMine:false},
+    ]);
+    const next = useRef(0);
+    const [items,setItems] = useState(records.current);
+    const [width,setWidth] = useState(800);
+    const [bounded,setBounded] = useState(false);
+    return <section data-prism="light">
+        <label>코멘트 너비 <input type="number" aria-label="코멘트 너비" min={140} max={1280} value={width}
+            onChange={event=>setWidth(Math.max(140,Math.min(1280,Number(event.target.value)||140)))}/></label>
+        <label><input type="checkbox" checked={bounded} onChange={event=>setBounded(event.target.checked)}/> 입력창 높이 180px 제한</label>
+        <div style={{width:"100%",maxWidth:width}}><PrismMgmtComments subjectId="synthetic-candidate" ceoComments={items}
+            elpComments={[{id:"elp",year:2025,category:"가상 ELP 선발",author:"가상 평가위원",comment:"육성 과정의 가상 기록입니다."}]}
+            maxEditorHeight={bounded?180:undefined}
+            loadDetail={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();const item=records.current.find(item=>item.id===id);if(!item)throw new Error("Missing synthetic record");return prismCeoCommentDraftFromItem(item);}}
+            onCreate={async(payload,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=[{id:"new-"+ ++next.current,...payload,isMine:true},...records.current];}}
+            onUpdate={async(id,payload,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.map(item=>item.id===id?{...item,...payload}:item);}}
+            onDelete={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.filter(item=>item.id!==id);}}
+            onReload={async({signal})=>{await Promise.resolve();signal.throwIfAborted();setItems([...records.current]);}}/>
+        </div>
+    </section>;
 }
 ```
 

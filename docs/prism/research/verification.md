@@ -1,6 +1,6 @@
 # PRISM 검증 기록
 
-기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 41개 typed 그룹과 토큰을 포함한 42개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
+기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 43개 typed 그룹과 토큰을 포함한 44개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
 
 ## 근거와 범위
 
@@ -153,3 +153,16 @@ PrismCandidateList는 현재 source087811ff의 필터·선택·표·페이지·�
 단일 요약 PDF와 두 프로필 ZIP의 실제 생성 바이트를 보이는 data-URL 링크에서 보존했습니다. ZIP CRC와 각각1페이지 A4인 PDF를 파싱하고 첫 페이지를 raster로 확인했습니다. 브라우저 download event는25초 timeout, Blob downloadMedia는 미지원이었고 기본 Downloads 폴더에 새 파일을 확인하지 못했습니다. 생성과 OS 저장을 구분하며 네이티브 인쇄·원본 전체 프로필/픽셀 일치는 아직 검증하지 않았습니다. 10개 새 테스트를 포함한85개 PRISM 테스트가 통과했습니다.
 
 42그룹·146개 현재 소스 상태를 실제320px iframe에서 확인했습니다. 원하는 component/state의 DOM marker를 기다려 확인한 뒤 측정했으며 렌더 누락·가로 넘침·중첩 버튼·표시 입력 이름 누락·브라우저 오류가 없습니다. 새 소비자의43항목/67파일과19개 예시,TypeScript/Vite·폰트 bytes·고지를 확인했습니다. 설치 컴포넌트 소스는 변경하지 않았고 portable 예시만 최종 usage로 동기화해 다시 컴파일했습니다. 프로덕션 빌드의 StrictMode·실제320px에서 두 옵션을 선택해 한 ZIP과 두 A4 PDF를 생성했으며 optional field가 raster에 포함됐습니다. 현재 UI capture는5초 timeout으로 실패해 새 화면 캡처가 없고 PDF raster를 UI screenshot으로 취급하지 않습니다.
+
+
+## 현재 CEO·ELP 코멘트와 SUMMARY 도움말
+
+현재 source `087811ff`의 CEO 코멘트 4필드 양식과 CEO/ELP 별도 목록을 독립 계약으로 구현했습니다. 연도 숫자4자리 입력 정리, 원본 validator의 digits/integer 판정, 회의체·발화자trim1~100·논평trim1~2000, native maxlength와5행을 유지합니다. nullable metadata와실제0을 구분하고 편집 양식은 기존 카드 위에 표시합니다. 작성자 액션 표시와 서버 권한 검사를 구분합니다.
+
+단일 편집과 Promise 작업 중복 방지, 후보 전환·unmount의AbortSignal과 늦은UI 완료 무시, 실패 초안 유지, 저장 성공 후 목록 갱신 실패 분리 및 목록만 재시도를 지원합니다. standalone submitting은 원본처럼 제출 버튼만 막으며 collection은 기본 입력 잠금입니다. 잠금을 해제하면 원본의 저장 중 입력 가능 상태를 선택할 수 있습니다. API·권한·저장·캐시는 호스트가 처리합니다. 신호 취소는 이미 완료된 서버 변경의 rollback을 뜻하지 않습니다. 기존 일반본문 editor 계약도 유지합니다.
+
+공개 배포 CSS의 코멘트1hr3u/1kle5 규칙과 source 간격·글꼴·20px 아이콘을 대조했습니다. 실제 CUA에서4필드 입력·Enter·maxlength·잠금·실패/재시도·후보 전환·삭제 완료를 확인했습니다. 140~1280px에서 코멘트 영역의 가로 넘침이 없고, 내용·폭 변경에 따른 자동 높이와 실제 드래그113→193px를 확인했습니다. maxEditorHeight180px는 최종 빌드에서 자동·수동 크기 모두 제한했습니다. SUMMARY 도움말 class/style은 trigger가 아닌 본문에 적용합니다.
+
+현재43그룹·152상태를 실제320px iframe에서DOM 표식 확인 후 측정했으며 렌더 누락·페이지 넘침·중첩 버튼·표시 입력 이름 누락·수집된 브라우저 오류가 없습니다. 새 독립 소비자에44항목/20개 완전 예시를 설치하고 최종 registry로 재설치해TypeScript/Vite·폰트 bytes·고지를 확인했습니다. component 소스는 수정하지 않았으며 검증 앱만StrictMode/320px iframe으로 구성했습니다. production 예시의 등록3/수정/삭제2,자동 높이638px/제한180px와 넘침·중첩·오류0을 확인했습니다.
+
+재사용 설치 script의EEXIST와 소비자 진입 빌드의 잘못된cwd는 수정 후 각각 재설치·빌드했습니다. 초기 수동 제한 측정은 이전dist를 읽어 실패했으므로 새빌드·reload 이후180px 결과와 구분합니다. screenshot capture는5000ms timeout으로 실패해 새 UI 이미지는 없습니다. 인증 원본 상태·전체 시각/폰트 비교와 실제backend 권한·저장 검증은 남아 있습니다. 기능 목적273/pending0과 계약·fixture 성공을 전체 완료로 해석하지 않습니다.

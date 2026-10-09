@@ -695,7 +695,8 @@
       "target": "prism-profile",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/CandidateScoreEssay.tsx",
@@ -852,18 +853,26 @@
     {
       "source": "components/chat/successorCandidate/mgmtComments/CeoCommentForm.tsx",
       "name": "CeoCommentForm",
-      "target": "prism-record",
+      "target": "prism-mgmt-comments",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismCeoCommentForm",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx",
       "name": "SuccessorCandidateMgmtComments",
-      "target": "prism-profile-sections",
+      "target": "prism-mgmt-comments",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismCommentsSection"
+      "recipe": "PrismMgmtComments",
+      "additionalTargets": [
+        "prism-profile-sections"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/NoData.tsx",

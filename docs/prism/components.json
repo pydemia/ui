@@ -991,8 +991,8 @@
       "name": "Candidate profile / Evidence",
       "category": "Domain",
       "purpose": "후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시",
-      "contract": "PrismProfileTab은 종합·전문성·성공경험·Design·Agility·Attitude·Leadership·Mgmt Comments의 안정 ID입니다. 분류별 sections는 독립 컴포넌트 slot입니다. 누락된 근거는 정보 없음으로 남기고 UI가 평가하지 않습니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "contract": "PrismProfileTab은 종합·전문성·성공경험·Design·Agility·Attitude·Leadership·Mgmt Comments의 안정 ID입니다. 분류별 sections는 독립 컴포넌트 slot입니다. 누락된 근거는 정보 없음으로 남기고 UI가 평가하지 않습니다. PrismSummaryBadge의 tooltipClassName과 tooltipStyle은 도움말 본문에 적용하며 trigger와 빈 summary 판정을 바꾸지 않습니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty",
@@ -1018,7 +1018,8 @@
         "checks": [
           "source empty state 175px total and 120px icon",
           "source error state 236px with 70px padding and retry",
-          "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed"
+          "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed",
+          "PrismSummaryBadge tooltipClassName/tooltipStyle을 본문에 적용. 계약 테스트와 실제 CUA에서 소비자 class,12px font/padding,280px maxWidth를 확인. 원본 모든 도움말 상태의 시각 비교는 대기."
         ],
         "evidence": [
           "reference-common-empty-error",
@@ -1694,7 +1695,7 @@
       "category": "Domain",
       "purpose": "평가 이력·연도별 보상·검증 근거·경험 사례·의견 편집",
       "contract": "이력·등급·금액·검증 상태는 이미 결정된 외부 값을 표시합니다. 보상 합계 계산이나 평가 확정은 하지 않습니다. 의견은 controlled 입력이며 공백 제출과 busy 중 저장을 막고 onSave로 의도를 전달합니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty",
@@ -1706,8 +1707,7 @@
         "chat/successorCandidate/total/SuccessorCandidateCompensation.tsx",
         "chat/successorCandidate/expertise/SurveyValidation.tsx",
         "chat/successorCandidate/expertise/ValidationItem.tsx",
-        "chat/successorCandidate/successExperience/SuccessExperienceEssay.tsx",
-        "chat/successorCandidate/mgmtComments/CeoCommentForm.tsx"
+        "chat/successorCandidate/successExperience/SuccessExperienceEssay.tsx"
       ],
       "usage": "import { PrismCommentEditor } from \"@pydemia/prism\";\n<PrismCommentEditor value={value} onValueChange={setValue} onSave={save} />;",
       "sourcePath": "packages/prism/src/prism-record.tsx",
@@ -3012,6 +3012,122 @@
       ],
       "usageKind": "component-example",
       "registryUsage": "import { PrismLeadershipPieSummary } from \"@/components/ui/prism-profile-sections\";\nexport function LeadershipSummaryExample() {\n    return <section data-prism=\"light\"><PrismLeadershipPieSummary\n        items={[{label:\"지\",value:33},{label:\"덕\",value:32},{label:\"용\",value:35}]}\n        title=\"가상 리더십 유형\" description=\"비중과 해석은 호출자가 제공합니다.\" /></section>;\n}"
+    },
+    {
+      "id": "prism-mgmt-comments",
+      "name": "CEO / ELP management comments",
+      "category": "Domain",
+      "purpose": "CEO 코멘트의 4필드 등록·상세 조회·수정·삭제와 ELP 육성 코멘트 표시",
+      "contract": "CEO와 ELP 배열은 호스트가 제공하는 controlled 데이터입니다. year/category/author의 null은 표시를 생략하며 year=0과 본문 줄바꿈은 유지합니다. isMine은 CEO 편집 액션의 표시 계약이며 서버 권한 검사를 대신하지 않습니다. 단일 editor와 상세 조회·저장·삭제·reload 중복 방지를 지원합니다. Promise callback은 고정된 subjectId와 AbortSignal을 받으며 대상 변경·unmount 후 UI 완료를 무시합니다. 이미 완료된 서버 변경의 rollback을 의미하지 않습니다. 저장 실패는 draft를 보존하고 성공 후 reload 실패는 editor를 닫아 reload만 재시도합니다. standalone form의 submitting은 원본처럼 제출 버튼만 막으며 collection은 기본적으로 입력도 잠급니다. lockInputsWhileSubmitting=false로 원본의 입력 가능 상태를 선택할 수 있습니다. 연도 입력은 숫자4자리로 정리하되 외부 draft validator는 원본digits/integer 규칙입니다. 회의체·발화자trim1~100,논평trim1~2000/native maxlength와5행을 사용합니다. 입력 Enter는 기본 제출하지 않으며 submitOnEnter로 확장할 수 있습니다. autoSize는 내용·폭·폰트 변경에 반응하고 maxEditorHeight로 높이를 제한합니다. autoSize=false는 native 세로 resize를 허용합니다. 좁은 폭은 한 열로 전환하고 style/className으로 크기를 조절합니다. API/auth/캐시/영속 저장은 호스트 소유입니다. 기존 PrismCommentEditor/PrismCommentsSection은 일반 본문 편집 계약을 유지합니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error",
+        "readonly",
+        "long"
+      ],
+      "source": [
+        "chat/successorCandidate/mgmtComments/CeoCommentForm.tsx",
+        "chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx",
+        "chat/successorCandidate/mgmtComments/CeoCommentForm.module.scss",
+        "chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.module.scss"
+      ],
+      "usage": "import { useRef, useState } from \"react\";\nimport { PrismMgmtComments, prismCeoCommentDraftFromItem, type PrismCeoCommentItem } from \"@pydemia/prism\";\nexport function MgmtCommentsExample() {\n    // The host owns authoritative records and authorization; this store is synthetic.\n    const records = useRef<PrismCeoCommentItem[]>([\n        {id:\"own\",year:2026,category:\"가상 육성 회의\",author:\"가상 CEO 김작성\",comment:\"가상 협업 사례입니다.\\n육성 과제를 논의합니다.\",isMine:true},\n        {id:\"other\",year:null,category:null,author:null,comment:\"다른 작성자의 가상 의견입니다.\",isMine:false},\n    ]);\n    const next = useRef(0);\n    const [items,setItems] = useState(records.current);\n    const [width,setWidth] = useState(800);\n    const [bounded,setBounded] = useState(false);\n    return <section data-prism=\"light\">\n        <label>코멘트 너비 <input type=\"number\" aria-label=\"코멘트 너비\" min={140} max={1280} value={width}\n            onChange={event=>setWidth(Math.max(140,Math.min(1280,Number(event.target.value)||140)))}/></label>\n        <label><input type=\"checkbox\" checked={bounded} onChange={event=>setBounded(event.target.checked)}/> 입력창 높이 180px 제한</label>\n        <div style={{width:\"100%\",maxWidth:width}}><PrismMgmtComments subjectId=\"synthetic-candidate\" ceoComments={items}\n            elpComments={[{id:\"elp\",year:2025,category:\"가상 ELP 선발\",author:\"가상 평가위원\",comment:\"육성 과정의 가상 기록입니다.\"}]}\n            maxEditorHeight={bounded?180:undefined}\n            loadDetail={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();const item=records.current.find(item=>item.id===id);if(!item)throw new Error(\"Missing synthetic record\");return prismCeoCommentDraftFromItem(item);}}\n            onCreate={async(payload,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=[{id:\"new-\"+ ++next.current,...payload,isMine:true},...records.current];}}\n            onUpdate={async(id,payload,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.map(item=>item.id===id?{...item,...payload}:item);}}\n            onDelete={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.filter(item=>item.id!==id);}}\n            onReload={async({signal})=>{await Promise.resolve();signal.throwIfAborted();setItems([...records.current]);}}/>\n        </div>\n    </section>;\n}",
+      "sourcePath": "packages/prism/src/prism-mgmt-comments.tsx",
+      "previewUrl": "/prism?component=prism-mgmt-comments",
+      "embedUrl": "/prism?component=prism-mgmt-comments&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-mgmt-comments&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+        "checks": [
+          "현재 CeoCommentForm/SuccessorCandidateMgmtComments 소스와 공개 배포 CSS의 1hr3u/1kle5 규칙 대조: 4필드·5행·trim 경계, 카드 16px padding/12px radius/14~16px 글꼴, 20px 액션과 간격12/16",
+          "CEO/ELP 별도 배열과 nullable metadata, year=0, 원문 줄바꿈, 작성자 액션, 편집 양식을 기존 카드 위에 표시",
+          "Promise 중복 방지·후보 전환/unmount AbortSignal·실패 초안 유지·성공 후 reload 실패 분리와 reload만 재시도",
+          "11개 새 계약/상호작용 테스트를 포함한 전체96개 테스트 통과. 추가 등록 없이 수정만 제공하는 소비자도 편집을 취소할 수 있습니다.",
+          "실제 CUA: 연도 혼합문자→2026, 입력 Enter 제출 차단, native maxlength100/100/2000, 대기 잠금·저장/상세/삭제 실패와 재시도, 후보 전환, 삭제 완료",
+          "140/200/320/440/800/1000/1280px에서 코멘트 영역 가로 넘침0; 5행 내용115px/긴 내용638px와 자동 scrollHeight 일치; 수동 drag113→193px; 최종 빌드에서 수동·자동180px 제한",
+          "43그룹/152상태를 실제320px iframe에서 component/state 표식 확인 후 검사; 렌더 누락·페이지 넘침·중첩 버튼·이름 없는 표시 입력·수집 브라우저 오류0",
+          "새 독립 소비자에44항목/20예시를 설치하고 최종 레지스트리로 재설치; TypeScript/Vite/font bytes/고지 검증. 설치 component 소스를 수정하지 않고 검증 앱만320px iframe+StrictMode로 구성",
+          "독립 production 예시의 등록3/수정/삭제2, 자동638px/제한180px, 실제320px·Pretendard·넘침/중첩/오류0 확인"
+        ],
+        "evidence": [
+          "mgmt-comments.test.mjs",
+          "mgmt-deployed-css.json",
+          "mgmt-cua-runtime.json",
+          "mgmt-isolated-consumer.log",
+          "mgmt-final-consumer-retry.log",
+          "mgmt-consumer-runtime.json"
+        ],
+        "remaining": [
+          "인증된 원본 CEO/ELP 추가·편집·오류 상태의 전체 시각 및 폰트 대조",
+          "실제 backend 권한·저장·캐시/query 통합",
+          "현재 screenshot capture는5000ms timeout; 새 UI screenshot 없음"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismCeoCommentDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCeoCommentPayload",
+          "kind": "type"
+        },
+        {
+          "name": "PrismMgmtCommentItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCeoCommentItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCeoCommentContext",
+          "kind": "type"
+        },
+        {
+          "name": "emptyPrismCeoCommentDraft",
+          "kind": "value"
+        },
+        {
+          "name": "isPrismCeoCommentDraftValid",
+          "kind": "component"
+        },
+        {
+          "name": "createPrismCeoCommentPayload",
+          "kind": "component"
+        },
+        {
+          "name": "prismCeoCommentDraftFromItem",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCeoCommentFormProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCeoCommentForm",
+          "kind": "component"
+        },
+        {
+          "name": "PrismMgmtCommentCard",
+          "kind": "component"
+        },
+        {
+          "name": "PrismMgmtCommentsProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismMgmtComments",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismMgmtComments, prismCeoCommentDraftFromItem, type PrismCeoCommentItem } from \"@/components/ui/prism-mgmt-comments\";\nexport function MgmtCommentsExample() {\n    // The host owns authoritative records and authorization; this store is synthetic.\n    const records = useRef<PrismCeoCommentItem[]>([\n        {id:\"own\",year:2026,category:\"가상 육성 회의\",author:\"가상 CEO 김작성\",comment:\"가상 협업 사례입니다.\\n육성 과제를 논의합니다.\",isMine:true},\n        {id:\"other\",year:null,category:null,author:null,comment:\"다른 작성자의 가상 의견입니다.\",isMine:false},\n    ]);\n    const next = useRef(0);\n    const [items,setItems] = useState(records.current);\n    const [width,setWidth] = useState(800);\n    const [bounded,setBounded] = useState(false);\n    return <section data-prism=\"light\">\n        <label>코멘트 너비 <input type=\"number\" aria-label=\"코멘트 너비\" min={140} max={1280} value={width}\n            onChange={event=>setWidth(Math.max(140,Math.min(1280,Number(event.target.value)||140)))}/></label>\n        <label><input type=\"checkbox\" checked={bounded} onChange={event=>setBounded(event.target.checked)}/> 입력창 높이 180px 제한</label>\n        <div style={{width:\"100%\",maxWidth:width}}><PrismMgmtComments subjectId=\"synthetic-candidate\" ceoComments={items}\n            elpComments={[{id:\"elp\",year:2025,category:\"가상 ELP 선발\",author:\"가상 평가위원\",comment:\"육성 과정의 가상 기록입니다.\"}]}\n            maxEditorHeight={bounded?180:undefined}\n            loadDetail={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();const item=records.current.find(item=>item.id===id);if(!item)throw new Error(\"Missing synthetic record\");return prismCeoCommentDraftFromItem(item);}}\n            onCreate={async(payload,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=[{id:\"new-\"+ ++next.current,...payload,isMine:true},...records.current];}}\n            onUpdate={async(id,payload,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.map(item=>item.id===id?{...item,...payload}:item);}}\n            onDelete={async(id,{signal})=>{await Promise.resolve();signal.throwIfAborted();records.current=records.current.filter(item=>item.id!==id);}}\n            onReload={async({signal})=>{await Promise.resolve();signal.throwIfAborted();setItems([...records.current]);}}/>\n        </div>\n    </section>;\n}"
     },
     {
       "id": "prism-icon",

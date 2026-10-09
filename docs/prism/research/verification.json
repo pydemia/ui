@@ -562,7 +562,8 @@
       "checks": [
         "source empty state 175px total and 120px icon",
         "source error state 236px with 70px padding and retry",
-        "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed"
+        "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed",
+        "PrismSummaryBadge tooltipClassName/tooltipStyle을 본문에 적용. 계약 테스트와 실제 CUA에서 소비자 class,12px font/padding,280px maxWidth를 확인. 원본 모든 도움말 상태의 시각 비교는 대기."
       ],
       "evidence": [
         "reference-common-empty-error",
@@ -806,30 +807,58 @@
       "remaining": [
         "Complete authenticated source table state/pixel comparison"
       ]
+    },
+    "prism-mgmt-comments": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "현재 CeoCommentForm/SuccessorCandidateMgmtComments 소스와 공개 배포 CSS의 1hr3u/1kle5 규칙 대조: 4필드·5행·trim 경계, 카드 16px padding/12px radius/14~16px 글꼴, 20px 액션과 간격12/16",
+        "CEO/ELP 별도 배열과 nullable metadata, year=0, 원문 줄바꿈, 작성자 액션, 편집 양식을 기존 카드 위에 표시",
+        "Promise 중복 방지·후보 전환/unmount AbortSignal·실패 초안 유지·성공 후 reload 실패 분리와 reload만 재시도",
+        "11개 새 계약/상호작용 테스트를 포함한 전체96개 테스트 통과. 추가 등록 없이 수정만 제공하는 소비자도 편집을 취소할 수 있습니다.",
+        "실제 CUA: 연도 혼합문자→2026, 입력 Enter 제출 차단, native maxlength100/100/2000, 대기 잠금·저장/상세/삭제 실패와 재시도, 후보 전환, 삭제 완료",
+        "140/200/320/440/800/1000/1280px에서 코멘트 영역 가로 넘침0; 5행 내용115px/긴 내용638px와 자동 scrollHeight 일치; 수동 drag113→193px; 최종 빌드에서 수동·자동180px 제한",
+        "43그룹/152상태를 실제320px iframe에서 component/state 표식 확인 후 검사; 렌더 누락·페이지 넘침·중첩 버튼·이름 없는 표시 입력·수집 브라우저 오류0",
+        "새 독립 소비자에44항목/20예시를 설치하고 최종 레지스트리로 재설치; TypeScript/Vite/font bytes/고지 검증. 설치 component 소스를 수정하지 않고 검증 앱만320px iframe+StrictMode로 구성",
+        "독립 production 예시의 등록3/수정/삭제2, 자동638px/제한180px, 실제320px·Pretendard·넘침/중첩/오류0 확인"
+      ],
+      "evidence": [
+        "mgmt-comments.test.mjs",
+        "mgmt-deployed-css.json",
+        "mgmt-cua-runtime.json",
+        "mgmt-isolated-consumer.log",
+        "mgmt-final-consumer-retry.log",
+        "mgmt-consumer-runtime.json"
+      ],
+      "remaining": [
+        "인증된 원본 CEO/ELP 추가·편집·오류 상태의 전체 시각 및 폰트 대조",
+        "실제 backend 권한·저장·캐시/query 통합",
+        "현재 screenshot capture는5000ms timeout; 새 UI screenshot 없음"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 85,
+      "passed": 96,
       "failed": 0
     },
     "registry": {
-      "groups": 42,
-      "items": 43,
+      "groups": 43,
+      "items": 44,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-fresh-local-install",
-      "items": 43,
-      "files": 67,
-      "completeExamples": 19,
+      "status": "passed-fresh-local-install-and-final-registry-reinstall",
+      "items": 44,
+      "completeExamples": 20,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "portableFont": "emitted andSHA256 matched",
-      "assetNotice": "installed andchecked",
-      "sourceScope": "Fresh installedcomponent sources unchanged. Portablecandidate-list.example synchronized tofinalemitted usage,thenentry wrapsStrictMode inactual320px iframe andproductionrebuildpassed.",
-      "runtime": "ProductionbuiltCandidateListExample:selection,twooptions,oneZIP link;CRC/two1-pageA4 PDFs andoptionalfieldrasterverified. Nooverflow/nestedbuttons/errors. OSsave/nativeprintunverified."
+      "portableFont": "emitted and SHA256 matched",
+      "assetNotice": "installed and checked",
+      "sourceScope": "설치 component 소스는 수정하지 않았습니다. 최종 emitted registry로 재설치했으며 검증 진입 앱만320px iframe/StrictMode로 구성했습니다.",
+      "runtime": "Production MgmtCommentsExample의 등록/수정/삭제,자동높이/180px 제한,320px font/넘침/중첩/오류 확인"
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -912,17 +941,17 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 42,
-      "componentExamples": 19,
+      "groups": 43,
+      "componentExamples": 20,
       "integrationFragments": 23,
       "workspaceTypecheck": "passed check-prism.mjs",
-      "installedTypecheck": "passed independentconsumer",
-      "installationDependencyClosure": "Verified all42groups andportabledependencies;43itemfreshinstallation"
+      "installedTypecheck": "passed independent consumer",
+      "installationDependencyClosure": "44개 항목 전체의 독립 설치를 확인"
     },
     "currentFixtureStates": {
-      "count": 146,
+      "count": 152,
       "status": "passed-current-source-documents-actual320px-iframe-cua",
-      "previousVerifiedStates": 120,
+      "previousVerifiedStates": 146,
       "previousPublishedVerificationCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b"
     },
     "tooltipPublication": {
@@ -956,6 +985,12 @@
       "status": "local-and-independent-runtime-verified;draft-publication-pending",
       "production": "pending human-approved publication",
       "completeParity": false
+    },
+    "mgmtCommentsImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified; draft-update-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
     }
   },
   "unverified": [
@@ -968,21 +1003,18 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 42,
-    "states": 146,
+    "groups": 43,
+    "states": 152,
     "status": "passed-current-source-documents-actual320px-iframe-cua",
     "checks": [
-      "component/state DOMmarker awaited",
-      "actual320px childviewport",
-      "pagehorizontaloverflow0",
-      "nestedbuttons0",
-      "displayedinputnamespresent",
-      "browsererrors0"
+      "component/state DOM marker로 현재 iframe 문서 확인",
+      "실제320px width",
+      "렌더 누락·가로 넘침·중첩 버튼·표시 입력 이름 누락·수집 브라우저 오류0"
     ],
     "evidence": [
-      "candidate-static-146-cua.json"
+      "mgmt-cua-runtime.json"
     ],
-    "claim": "Source/dev document checks andfreshinstalledproductionexample do notestablish authenticatedoriginal-state/fullpixel parity. Top-levelviewport2501 was unchanged byviewportoverride;theactualiframewidth was320."
+    "claim": "현재 소스 fixture의 기본 렌더 검사이며 원본 모든 상태·전체 시각 일치를 의미하지 않습니다."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1204,7 +1236,7 @@
     "deltaReview": {
       "modified": 42,
       "added": 10,
-      "unreviewedPaths": 15,
+      "unreviewedPaths": 12,
       "coverageClaim": "Reviewing a path is separate fromimplementation/state/parity completion."
     }
   },
