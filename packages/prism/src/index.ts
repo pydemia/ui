@@ -27,8 +27,9 @@ export { PrismMarkdown, PrismSuggestions, PrismGenerationStatus, PrismPositionCa
 export { PrismAdminLayout, PrismAttachmentList, PrismSyncStatus, PrismTruncatedText } from "./prism-admin";
 export type { PrismAttachment } from "./prism-admin";
 export { PrismPdfViewer, PrismPrintOptions, PrismPrintPreview } from "./prism-document";
-export type { PrismPrintSection } from "./prism-document";
+export type { PrismPrintSection, PrismPrintOptionsProps } from "./prism-document";
 export type { PrismPdfViewerProps } from "./prism-document";
+export * from "./prism-export";
 export { PrismWorkspace } from "./prism-workspace";
 export type { PrismWorkspaceProps } from "./prism-workspace";
 export { PrismRadarChart, PrismTrendChart, PrismLeadershipPie } from "./prism-chart";

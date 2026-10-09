@@ -309,3 +309,27 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 - 최종 final-leadership-with-fonts-20261009 검사에서42개 비중/폭 조합,8/24px long/missing4조합,animation/reducedmotion을 통과했다. errors/root overflow0이다. 원본warm글자폭35/34/35px는target과일치한다. 최종40tests/14examples/docsTypeScript도통과했다. 남은위치1px/높이2px 차이는부분검증범위로유지하고최종fullbuild/121states/doclinks/publication을확인한다.
 
 - 최종fullbuild는exit0이고final-local-leadership-121의121states/render/overflow/nestedbutton/unlabeled/pageerror0을확인했다. final-local-leadership-docs의missinglong/root320/source087링크/프로필SUMMARYfont600,margin8도통과했다.146registry/144catalog/83immutable 및current25ca4393 검증을통과했고upstreamgeneric source/catalog/main과차이는없다.40tests/14complete examples/새install과후속sync/42+4fontcases/animation/reducedmotion은위근거로유지한다. source123fef0e를체크포인트로두고최종generated output을보존한후push/publicreadback을확인한다.
+
+- 최종소스123fef0e/generated68baf9fd27bbfcc192866f4df6b6777e1ad12938를로컬에보존했다. main push require_escalated는자동승인검토에서거절됐다:원격기본브랜치main에대한되돌리기어려운외부변경이며명시적사용자승인근거가없다는이유다. main push/병합/production을우회하거나재시도하지않았다.
+- 안전한검토경로로codex/prism-leadership-pie에일반push했고credentialexact-match0/confighash보존을확인했다. DraftPR#162 https://github.com/pydemia/ui/pull/162 를생성(drafttrue/base main/head68baf9fd)하고Codex artifact로연결했다. branchpush/PR생성은automaticreview가승인했다. Production/main은288b0838그대로다. 승인대상은이구체적인PR의main반영/배포이며사용자승인이필요하다. Goal active이며미검증source/domains와2개profileexport구현을이어갈수있다.
+
+- PR#162의branchpreview는Vercelstatus success(Deployment has completed)이며production배포가아니다. GitHubVerifyUI37914334558의livejob을조회중이며build/contracts/release/docs gates를확인한다. 자체58477/59580/59759 서버는command/cwd를검증해종료했고기존8766/Chrome/login/credential settings를보존했다. 모든자체browser는finallyclose다. head68baf9fd/main288b0838이고worknote만localmodified다.
+
+- 최종CI조회의일시적인ConnectionRefused는job종료로해석하지않고같은head68baf9fd로재조회했다. VerifyUI37914334558가completed success임을확인했다. Vercelbranchpreview도success다. 최종reviewable대상은draftPR#162(head68baf9fd)이고main/production반영은자동승인거절로사용자명시승인이필요하다. 후속작업은profileexport2항목과originalstate/domain/완전visual검증이며goal은active다.
+
+
+## 2026-10-09 프로필 PDF·ZIP 작업과 자체 브라우저 검증
+
+- Mac 잠금을 유지하고 fresh headless Chromium을 사용했습니다. 기존 Chrome/testuser001 세션·계정·네트워크·credential 설정은 변경하지 않았습니다. ui는 이미 clone됐고 frontend HEAD=origin/dev087811ff clean입니다. UI origin/main fetch 결과288b0838로 변함없으며 demian/target config hash 보존을 확인했습니다.
+- 새 `prism-export`는 호스트 PDF renderer, 한 명 PDF/여러 명 ZIP, 중복 파일명, 진행률, cancellation, route-persistent host, beforeunload, Blob fallback/async streaming writer를 지원합니다. jsPDF4.2.1/fflate0.8.3은 고정 버전이며 사용 시 lazy import합니다. JPEG page builder를 포함하지만 API/auth/실제 DOM 캡처·페이지 분할은 호스트 소유입니다. 기본 서비스워커를 자동 등록하지 않았습니다.
+- source PrintOptions의 width440·옵션gap12/padding8x12/radius8·패널 배경과 다운로드 제목/문구/확인 버튼을 지원했습니다. 기존 출력 API 기본값은 유지합니다. 원본 인증 다운로드 실행과 모든 인쇄 스타일 비교는 미검증입니다.
+- final-local-export-20261009의 실제 PDF/ZIP8조합·오류/취소/beforeunload가 통과했습니다. ZIP 내부수·(2)/(3)·CRC·PDF bytes를 확인했고 긴PDF는 실제3쪽/A4입니다. Poppler PNG를 검토하며 첫 머리말 겹침을 수정한 뒤 최종 다운로드를 다시 검증했습니다. imagePDF는 검색 가능한 텍스트 레이어를 제공하지 않습니다.
+- 새 consumer-wNDLos는40항목/63파일/15예시 tsc/Vite/fontbytes/notice 설치를 통과했습니다. 설치 source는 수정하지 않았으며 별도 fixture만 추가해 compile했습니다. consumer-export-runtime은actual320px,StrictMode중복0,메뉴이동중유지,동시PDF/ZIP2작업,취소뒤download0,errors0입니다. jsPDF/fflate만 요청됐고 미사용html2canvas/purify chunk는 요청되지 않았습니다. 첫 harness의 sort된 파일명 기대값 순서만 수정한 재검사 결과를 기록했습니다.
+- 레지스트리 완전 예시가 추가 컴포넌트를 import하면 설치 의존성에 포함하도록 builder를 보완했습니다. 초기 체크가 prism-button 누락을 검출했으며 보완 후15완전예시/의존성 검사가 통과했습니다. 125states/39groups의actual320px render/overflow/nestedbutton/unlabeled/pageerrors0입니다. engine6tests+host3tests는sinkbackpressure·abort·late-result·callback변경·route·StrictMode를 확인합니다.
+- CandidateProfilesPdfDownload/PdfDownloadHost의 목적 매핑을 추가해inventory273/pending0입니다. 상태/visual 전체 완료로 해석하지 않습니다. 현재52개기존source변경·authdomain·실제source인쇄/HTMLexport가 남고goalactive입니다. main/production은288b0838이며PR162의main반영은이전automaticreview거절후명시승인대기입니다. 검토 branch codex/prism-leadership-pie에서작업을이어갑니다.
+
+- 최종 `npm run build` exit0, PRISM49tests/15예시와146registry/144catalog/83immutable/current25ca4393 검사가 통과했습니다. 최종 static60991에서125states0문제와실제PDF/ZIP8조합·error/cancel/unload를다시확인했습니다. genericUIsource/catalog/main 변경은없습니다. 원격main288b0838과local검토branch를구분하고source/generated별도commit및PR162업데이트를진행합니다.
+
+- 완전 예시는 외부 PDF endpoint 대신 가상 Canvas를 JPEG/PDF로 생성하도록 보완했습니다. 설치 환경의 CORS/서버 준비 없이 자체 실행할 수 있습니다. 최종 예시만 기존 독립 소비자에 갱신해 타입/빌드를 확인하며 fresh 설치 소스는 그대로 유지합니다.
+
+- 마지막 자체 생성 portable 예시를 기존 독립 설치본의15예시에 반영해 tsc/Vite가 통과했고 StrictMode actualPDF 다운로드1회·errors0을 확인했습니다. 최종 static125states/8다운로드 재검사도0문제입니다. Public/generated9파일 bytes일치 및registry SHA25608d50a180022d2356726b49b1091e70d14d690f89fabdf48d21f5b05892d6400을 확인했습니다. 기존relative manifest경로 실패는 절대경로로 수정한 재검사만 인정합니다.

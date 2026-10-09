@@ -48,13 +48,15 @@ export function PrismPdfViewer({ url, workerUrl, title, onDownload, height, minZ
         {onDownload && <footer><PrismButton onClick={onDownload}>다운로드</PrismButton></footer>}</section>;
 }
 export type PrismPrintSection = { id: string; label: string; content: ReactNode };
-export function PrismPrintOptions({ sections, value, onValueChange, onConfirm, open, onOpenChange }: {
+export type PrismPrintOptionsProps = {
     sections: readonly PrismPrintSection[]; value: readonly string[]; onValueChange: (value: string[]) => void;
     onConfirm: (value: readonly string[]) => void; open: boolean; onOpenChange: (open: boolean) => void;
-}) {
-    return <PrismDialog title="출력 정보 선택" description="출력할 정보를 선택해 주세요." open={open} onOpenChange={onOpenChange}
-        footer={<><PrismButton variant="line" onClick={() => onOpenChange(false)}>취소</PrismButton><PrismButton onClick={() => onConfirm(value)}>출력 미리보기</PrismButton></>}>
-        <div className="prism-print-options">{sections.map(section => <PrismCheckbox key={section.id} label={section.label} checked={value.includes(section.id)}
+    title?: string; description?: string; confirmLabel?: string; busy?: boolean;
+};
+export function PrismPrintOptions({ sections, value, onValueChange, onConfirm, open, onOpenChange, title = "출력 정보 선택", description = "출력할 정보를 선택해 주세요.", confirmLabel = "출력 미리보기", busy = false }: PrismPrintOptionsProps) {
+    return <PrismDialog title={title} description={description} width={440} className="prism-print-options-dialog" open={open} onOpenChange={next => { if (!busy) onOpenChange(next); }}
+        footer={<><PrismButton variant="line" disabled={busy} onClick={() => onOpenChange(false)}>취소</PrismButton><PrismButton disabled={busy} onClick={() => onConfirm(value)}>{busy ? "처리 중" : confirmLabel}</PrismButton></>}>
+        <div className="prism-print-options">{sections.map(section => <PrismCheckbox key={section.id} label={section.label} disabled={busy} checked={value.includes(section.id)}
             onCheckedChange={checked => onValueChange(checked ? [...new Set([...value,section.id])] : value.filter(id => id !== section.id))} />)}</div></PrismDialog>;
 }
 export function PrismPrintPreview({ title, sections, selected, onPrint }: { title: string; sections: readonly PrismPrintSection[]; selected: readonly string[]; onPrint?: () => void }) {

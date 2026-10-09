@@ -103,6 +103,17 @@ for (const file of readdirSync(new URL("packages/prism/src/", root)).filter(file
     let content = source;
     for (const [start,end,replacement] of replacements.reverse()) content = content.slice(0,start) + replacement + content.slice(end);
     const meta = metadata.find(entry => entry.id === name);
+    // A complete installed example must receive its supporting components too.
+    if (meta.usageKind === "component-example") {
+        const usage = ts.createSourceFile("usage.tsx", meta.usage, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+        for (const statement of usage.statements) {
+            if (!ts.isImportDeclaration(statement) || statement.moduleSpecifier.text !== "@pydemia/prism") continue;
+            for (const symbol of statement.importClause.namedBindings.elements) {
+                const owner = prismExportOwners.get((symbol.propertyName ?? symbol.name).text);
+                if (owner && owner !== name) registryDependencies.add(new URL(`${owner}.json`, prismBase).href);
+            }
+        }
+    }
     const item = { $schema: "https://ui.shadcn.com/schema/registry-item.json", name, type: "registry:ui", title: meta.name,
         description: meta.purpose, dependencies: [...dependencies], registryDependencies: [...registryDependencies],
         files: [{ path: sourcePath, type: "registry:ui", target: `@ui/${file}`, content }],
