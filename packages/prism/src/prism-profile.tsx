@@ -15,7 +15,7 @@ export const prismProfileTabs = [
 ] as const;
 export type PrismProfileTab = typeof prismProfileTabs[number]["id"];
 export type PrismCareerEntry = { id: string; period: string; company: string; role: string };
-export function PrismOutline({ title, children, actions }: { title?: string; children: ReactNode; actions?: ReactNode }) {
+export function PrismOutline({ title, children, actions }: { title?: ReactNode; children: ReactNode; actions?: ReactNode }) {
     const id = useId(); return <section className="prism-outline" aria-labelledby={title ? id : undefined}>{(title||actions)&&<header>{title&&<h3 id={id}>{title}</h3>}{actions}</header>}{children}</section>;
 }
 export function PrismCareerTimeline({ entries }: { entries: readonly PrismCareerEntry[] }) {

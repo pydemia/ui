@@ -103,8 +103,9 @@
       "name": "CompanyGroupForm",
       "target": "prism-domain-forms",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current create/detail fields and name-validation behavior implemented and checked with synthetic local fixtures. Fresh authenticated source visual/state comparison remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/admin/notices/NoticeForm.tsx",
@@ -207,8 +208,9 @@
       "name": "UserForm",
       "target": "prism-domain-forms",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current create/detail fields and name-validation behavior implemented and checked with synthetic local fixtures. Fresh authenticated source visual/state comparison remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/auth/AuthBootstrapLayout.tsx",

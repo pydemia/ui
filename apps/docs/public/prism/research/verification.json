@@ -229,7 +229,7 @@
       ]
     },
     "prism-domain-forms": {
-      "visual": "pending",
+      "visual": "partial",
       "interaction": "partial",
       "checks": [
         "All companies disables company selector",
@@ -239,17 +239,27 @@
         "company group selects two companies and emits synthetic save intent",
         "duplicate position sub-job rejected",
         "expertise limit 3 and experience limit 2 preserve removal",
-        "position generate and save intent callbacks"
+        "position generate and save intent callbacks",
+        "Current source 087811ff user create: required email/lastName/firstName/companyId/division, searchable company select",
+        "Current user detail: read-only basics, unchanged save disabled, role/group changes enable save; active/inactive rich group labels",
+        "Group create blur validation and detail 600ms debounce; unchanged detail name allows company-only edit",
+        "Stale/aborted name responses ignored, duplicate and failed checks block save; retry is available",
+        "Promise save busy state, duplicate submission guard, rejected-save recovery",
+        "Actual local Chrome: source field gap 2px, header 18px/600/1.4, status colors #009A93/#363636, error helper 12px; focused error remains red",
+        "Long synthetic current forms at 140/200/320/800/1280px: no page or visible form-control overflow after grid/action wrapping fix"
       ],
       "evidence": [
         "local-notice-form",
         "local-user-form",
         "local-group-form",
-        "local-position-form"
+        "local-position-form",
+        "current-admin-forms.test.mjs",
+        "current-admin-user-long.jpg",
+        "current-admin-cua-runtime.json"
       ],
       "remaining": [
-        "all display variants",
-        "authenticated source form visual comparison"
+        "Fresh authenticated source create/detail visual and behavior comparison",
+        "Complete notice/position form states and source-specific authorization/business-validation contracts"
       ]
     },
     "prism-notice": {

@@ -1,7 +1,7 @@
 export { PrismButton, PrismNewChatButton } from "./prism-button";
 export type { PrismButtonProps } from "./prism-button";
 export { PrismInput, PrismTextarea, PrismSelect } from "./prism-field";
-export type { PrismInputProps, PrismTextareaProps, PrismSelectProps } from "./prism-field";
+export type { PrismInputProps, PrismTextareaProps, PrismSelectProps, PrismSelectOption } from "./prism-field";
 export { PrismElpBadge, PrismCountBadge, PrismTag, PrismChip } from "./prism-badge";
 export { PrismAvatar, PrismProfileChip, PrismAnchorChip, PrismTable, PrismDataTable, PrismSection } from "./prism-display";
 export type { PrismAvatarProps } from "./prism-display";

@@ -70,6 +70,7 @@
 .prism-input:read-only,.prism-textarea:read-only {background:var(--prism-neutral-50);}
 .prism-input:hover:not(:disabled):not(:read-only) {border-color:var(--prism-blue-300);}
 .prism-input[aria-invalid="true"], .prism-textarea[aria-invalid="true"] { border-color: var(--danger); }
+.prism-input[aria-invalid="true"]:focus:not(:read-only), .prism-textarea[aria-invalid="true"]:focus:not(:read-only) {border-color:var(--danger);}
 .prism-help, .prism-error { font-size: 12px; line-height: 17px; margin: 0; }
 .prism-help { color: var(--muted); }
 .prism-textarea { font-size: 14px; font-weight: 500; padding: 6px 12px; border-radius: 6px; }
@@ -147,7 +148,7 @@
 .prism-confirm-dialog>header {height:65px;min-height:65px;padding:20px;}
 .prism-confirm-dialog>header h2 {display:flex;align-items:center;gap:6px;line-height:25px;}
 .prism-confirm-dialog .prism-dialog-body {min-height:0;}
-.prism-confirm-dialog .prism-dialog-body>div {font-size:16px;font-weight:400;line-height:1.6;color:var(--foreground);}
+.prism-confirm-dialog .prism-dialog-body>div {font-size:16px;font-weight:400;line-height:1.6;color:var(--foreground);white-space:pre-line;}
 .prism-confirm-dialog>footer .prism-button {min-width:69px;}
 .prism-confirm-dialog[data-no-title]>header,.prism-confirm-dialog[data-no-title]>footer {border:0;}
 .prism-confirm-dialog[data-no-title] .prism-dialog-body {padding-top:0;}
@@ -751,6 +752,29 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 .prism-domain-company-box>div {display:flex;flex-wrap:wrap;gap:8px;}
 .prism-domain-form-actions {display:flex;align-items:center;justify-content:space-between;gap:8px;}
 .prism-domain-form-actions>div {display:flex;gap:8px;}
+.prism-company-current,.prism-user-current {container-type:inline-size;min-width:0;}
+.prism-company-current .prism-field,.prism-user-current .prism-field {gap:2px;min-width:0;grid-template-columns:minmax(0,1fr);}
+.prism-company-current[data-has-detail]>.prism-outline:first-of-type {gap:12px;}
+.prism-user-current>.prism-outline:first-of-type {gap:12px;}
+.prism-user-current>.prism-outline>header {display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:0;}
+.prism-user-current>.prism-outline>header h3 {font-size:18px;font-weight:600;line-height:1.4;margin:0;}
+.prism-user-current>.prism-outline>header h3>span {display:inline-flex;align-items:center;}
+.prism-user-current .prism-user-role .prism-radio-group>legend {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
+.prism-group-name {position:relative;min-width:0;}
+.prism-group-name>.prism-chip {position:absolute;top:0;right:0;}
+.prism-group-name[data-has-status] .prism-input-label {min-height:22px;padding-right:48px;}
+.prism-group-name[data-validation="available"] .prism-input:not(:focus):not([aria-invalid="true"]) {border-color:#009A93;}
+.prism-group-name .prism-error,.prism-user-current .prism-error {display:flex;align-items:center;gap:4px;font-size:12px;line-height:1.4;}
+.prism-company-select-area,.prism-user-group-field {display:flex;flex-direction:column;gap:12px;min-width:0;}
+.prism-domain-role-notice {padding:24px 12px;border-radius:8px;background:var(--prism-lnb);font-size:13px;line-height:1.4;text-align:center;color:var(--prism-sub);}
+.prism-domain-company-box .prism-tag {color:#222;max-width:100%;min-width:0;min-height:21px;height:auto;overflow-wrap:anywhere;}
+.prism-domain-company-box .prism-tag>button {flex-shrink:0;}
+.prism-user-group-option {display:flex;align-items:center;gap:8px;min-width:0;width:100%;height:100%;}
+.prism-user-group-option>.prism-chip {flex-shrink:0;}
+.prism-user-group-option>span:last-child {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.prism-company-current .prism-domain-form-actions,.prism-user-current .prism-domain-form-actions {flex-wrap:wrap;}
+.prism-company-current .prism-domain-form-actions>div,.prism-user-current .prism-domain-form-actions>div {flex-wrap:wrap;}
+@container (max-width:480px) {.prism-company-current .prism-domain-form-grid,.prism-user-current .prism-domain-form-grid {grid-template-columns:minmax(0,1fr);}}
 .prism-chat-intro {position:relative;display:flex;flex-direction:column;justify-content:center;gap:40px;width:100%;max-width:800px;margin:0 auto;}
 .prism-chat-intro>header {text-align:center;}
 .prism-chat-intro>header>div {width:65px;height:65px;margin:0 auto 34px;}
