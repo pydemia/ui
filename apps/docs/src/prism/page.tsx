@@ -7,6 +7,7 @@ import { prismCatalog, type FixtureState } from "./catalog";
 import { WorkspaceDemo } from "./workspace";
 import manifest from "../../public/prism/components.json";
 import "@pydemia/prism/styles.css";
+import "@pydemia/prism/pdf.css";
 import "./page.css";
 
 const stateLabels: Record<FixtureState, string> = { default: "기본", disabled: "비활성", readonly: "읽기 전용", error: "오류", loading: "로딩", empty: "빈 결과", long: "긴 내용" };

@@ -663,7 +663,8 @@
       "target": "prism-assessment",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/attitude/AttitudeSummary.tsx",
@@ -679,15 +680,20 @@
       "target": "prism-document",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
       "name": "SuccessorCandidateAttitude",
-      "target": "prism-profile-sections",
+      "target": "prism-attitude-report",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismAttitudeSection"
+      "recipe": "PrismAttitudeReport",
+      "additionalTargets": [
+        "prism-profile-sections"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/BadgeSummary.tsx",
@@ -765,18 +771,26 @@
     {
       "source": "components/chat/successorCandidate/expertise/SurveyValidation.tsx",
       "name": "SurveyValidation",
-      "target": "prism-record",
+      "target": "prism-survey",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismSurveyValidation",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/expertise/ValidationItem.tsx",
       "name": "ValidationItem",
-      "target": "prism-record",
+      "target": "prism-survey",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismSurveyValidation",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/GradeSummary.tsx",

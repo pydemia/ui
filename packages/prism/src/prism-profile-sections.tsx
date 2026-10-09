@@ -1,6 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
 import { PrismBasicInfo, PrismCareerTimeline, PrismOutline, PrismSummaryBadge } from "./prism-profile";
 import { PrismAssessmentSummary, PrismDiagnosis, PrismRiskTable, PrismExpertiseCards, PrismScoreEssay, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismNoData } from "./prism-assessment";
+import { PrismSurveyValidation } from "./prism-survey";
 import { PrismValidationList, PrismExperienceCard, PrismCommentEditor } from "./prism-record";
 import { PrismTrendChart, PrismRadarChart, PrismLeadershipPie, type PrismLeadershipPieProps } from "./prism-chart";
 import { PrismTable } from "./prism-display";
@@ -33,8 +34,8 @@ export function PrismDesignSection({summary,matrix}: {summary:ComponentProps<typ
 export function PrismAgilitySection({summary,experience}: {summary:ComponentProps<typeof PrismScoreEssay>;experience:ComponentProps<typeof PrismExperienceEvidence>}) {
     return <div className="prism-domain-profile-section"><PrismScoreEssay {...summary}/><PrismExperienceEvidence {...experience}/></div>;
 }
-export function PrismAttitudeSection({summary,diagnosis,risk,documentAction}: {summary:ComponentProps<typeof PrismAssessmentSummary>;diagnosis:ComponentProps<typeof PrismDiagnosis>;risk:ComponentProps<typeof PrismRiskTable>;documentAction?:ReactNode}) {
-    return <div className="prism-domain-profile-section"><PrismAssessmentSummary {...summary}/><PrismDiagnosis {...diagnosis}/>{documentAction}<PrismRiskTable {...risk}/></div>;
+export function PrismAttitudeSection({summary,diagnosis,risk,documentAction,survey}: {summary:ComponentProps<typeof PrismAssessmentSummary>;diagnosis:ComponentProps<typeof PrismDiagnosis>;risk:ComponentProps<typeof PrismRiskTable>;documentAction?:ReactNode;survey?:ComponentProps<typeof PrismSurveyValidation>}) {
+    return <div className="prism-domain-profile-section"><PrismAssessmentSummary {...summary}/><PrismDiagnosis {...diagnosis}/>{documentAction}<PrismRiskTable {...risk}/>{survey && <PrismSurveyValidation columns={survey.items.length >= 3 ? 3 : 2} {...survey}/>}</div>;
 }
 export type PrismLeadershipTrendRow={year:string;evaluators:number|null;respondents:number|null;score:number|null;groupAverage:number|null;percentile:number|null};
 export type PrismLeadershipPieSummaryProps = Omit<PrismLeadershipPieProps,"title"> & {

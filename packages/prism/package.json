@@ -10,7 +10,8 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./styles.css": "./src/styles.css"
+    "./styles.css": "./src/styles.css",
+    "./pdf.css": "./src/pdf.css"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --platform=neutral --format=esm --packages=external --jsx=automatic --outfile=dist/index.js",

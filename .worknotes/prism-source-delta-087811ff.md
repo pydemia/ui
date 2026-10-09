@@ -23,13 +23,13 @@
 | M | src/components/chat/position/PositionRecommend.module.scss | 차이 확인; 추가 대조 대기 | rank UI 제거 확인; 현재 kit에도 rank 계약 없음. 원본 headerMinHeight/선택/정렬 layout 상태 대조는 필요 |
 | M | src/components/chat/position/PositionRecommend.tsx | 차이 확인; 추가 대조 대기 | rank UI 제거 확인; 현재 kit에도 rank 계약 없음. 원본 headerMinHeight/선택/정렬 layout 상태 대조는 필요 |
 | M | src/components/chat/successorCandidate/BadgeSummary.tsx | 반영 및 선택 상태 검증 | 현재 CEO/ELP typed recipe·tooltip 본문 override, 11개 새 tests·152상태 CUA·독립 소비자 등록/수정/삭제·크기 검증. 인증 원본 전체 상태·시각/폰트 및 실제 backend 대조 대기 |
-| M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/successorCandidate/attitude/PdfViewerDialog.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/successorCandidate/attitude/PdfViewerDialog.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/successorCandidate/expertise/SurveyValidation.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/successorCandidate/expertise/SurveyValidation.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
+| M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.module.scss | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
+| M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.tsx | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
+| M | src/components/chat/successorCandidate/attitude/PdfViewerDialog.module.scss | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
+| M | src/components/chat/successorCandidate/attitude/PdfViewerDialog.tsx | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
+| M | src/components/chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
+| M | src/components/chat/successorCandidate/expertise/SurveyValidation.module.scss | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
+| M | src/components/chat/successorCandidate/expertise/SurveyValidation.tsx | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
 | A | src/components/chat/successorCandidate/leadership/LeadershipPie.module.scss | 부분 반영 및 선택 검증 | typed pie/summary와 수치·geometry 증거 있음; 전체 원본 profile/frame 상태 대기 |
 | A | src/components/chat/successorCandidate/leadership/LeadershipPie.tsx | 부분 반영 및 선택 검증 | typed pie/summary와 수치·geometry 증거 있음; 전체 원본 profile/frame 상태 대기 |
 | A | src/components/chat/successorCandidate/leadership/LeadershipPieSummary.module.scss | 부분 반영 및 선택 검증 | typed pie/summary와 수치·geometry 증거 있음; 전체 원본 profile/frame 상태 대기 |

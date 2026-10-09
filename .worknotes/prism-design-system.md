@@ -440,3 +440,22 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 ### 2026-10-10 CEO·ELP 코멘트와 SUMMARY 도움말
 
 현재 소스의 4필드 양식·CEO/ELP 목록·비동기 실패/재시도와 자동·수동 크기 조절을 구현했습니다. 실제 320px의 43그룹/152상태와 독립 설치본의 등록·수정·삭제를 확인했습니다. 인증 원본의 전체 시각/상태 대조는 남아 있습니다. 세부 변경·증거·실패 이력과 최종 gate는 [코멘트 검증 기록](prism-mgmt-comments-20261010.md)에 이어서 기록합니다. Goal은 active이며 미검토 source delta 12경로와 기존 구현의 원본 대조를 계속합니다.
+
+
+- 코멘트 source5ffa5aa5/generated82815d34를 검토 branch에 정상 push했습니다. PR162의 제목은 Add PRISM candidate, management comment and export recipes이며 draft true/base main/head82815d34944e4679141b5bc414db1e30fcb4105d를 확인하고 attach했습니다. PAT exact-match0과 Git config hash 보존입니다. 자체63147(pid10298)/63223(pid21526)을 포트·명령·cwd 확인 후 종료하고 own tab2089332362를 닫았습니다. 8766(pid65001)과 원본 탭·계정·설정을 보존했습니다.
+- 게시 후 AttitudeDiagnosis/PdfViewerDialog/SuccessorCandidateAttitude의5경로를 diff·전체 현재 코드와 kit에 대조했습니다. 미검토12→7이며 보고서 action 위치·bytes/HTML 오류·모달/입력/줌/다운로드와 진단 trim/양수 비중 표시를 보완해야 합니다. [다음 source 감사](prism-attitude-source-audit-20261010.md)에 근거와 범위를 기록했습니다. 공개82815d34 metadata의 미검토12는 감사 전 시점이며 이 후속 기록은 로컬 상태입니다. Goal active입니다.
+
+- 최종 head82815d34944e4679141b5bc414db1e30fcb4105d의 Verify UI37971111138은 completed/success입니다. Vercel2CSbT4t9ieu1PNZvnUjT2MDPDtB4도success이며 preview HTTP/browser readback이나 production 완료로 확대하지 않습니다. PRISM registry SHA256은 16697458f0becf25a4a3f94354ab4a94a1bf6e4c37d386f73e5a8dac1ebdbfc4입니다. 후속 감사·CI readback 기록만 로컬 worknotes에 남아 있으며 구현/generated 두 커밋은 PR162에 반영되었습니다. 코멘트 phase는 유효한 진척이며 전체 Goal은 active입니다.
+
+
+### 2026-10-10 Attitude·PDF 보고서와 Survey
+
+이전 코멘트 turn은 source/generated push·독립소비자·CI까지 완료한 진척입니다. 이번에는 독립 진단/report/Survey recipe와 실제native PDF 연속페이지·텍스트선택·페이지/줌·bytes/header/fallback·취소/실패/재시도/다운로드 context를 구현했습니다. 원본의제목action·nullable/trim·양수비중·role색/평균선과반응형/크기·전용PDF stylesheet·AI export kind를보완했습니다. source 감사 미검토는5경로입니다.
+
+실제 CUA 3페이지/텍스트레이어/Synthetic단어선택과blur/Enter·10단계/30~100경계,HTML 거부와같은URL retry,후보전환닫기·140~1280px/240~1000px sizing을확인했습니다. callback4351bytes는원본과동일하고 Poppler의3페이지A4입니다. 모든159개고유fixture를실제320px DOMmarker후검사했으며 최종누락/넘침/중첩/이름/수집오류0입니다. 긴Survey 접근성표의870px 넘침과140×240의0px viewport를수정하고 재측정했습니다.
+
+새 consumer-tpmsik에46항목/71파일·22예시를설치했고 최종registry로재설치했습니다. component source는직접수정하지않고entry/환경worker/합성PDF만연결했습니다. TypeScript/Vite·폰트bytes·고지와productionStrictMode/실제320px native3페이지/텍스트/이동/줌/field46/64px·14px500·넘침/오류0을확인했습니다. Native download event는25초timeout이며OSsave를확인하지못했습니다. UI screenshot5000ms timeout과원본전체인증/pixel/font·실제query/권한/저장/native print는남아있습니다.
+
+세부 source 근거와실패 이력은 [Attitude 감사](prism-attitude-source-audit-20261010.md), raw들은 browser-evidence에보존합니다. 전체107tests와45그룹/22예시 검사통과후최종표준build/typecheck/generic·검토branch/PR162 갱신을진행합니다. Goal은active이며273/pending0·159fixture를전체완료로해석하지않습니다.
+
+- 최종 local gate는 표준 npm run build, docs TypeScript, check-prism(45그룹/22완전예시), generic verify-current, diff whitespace가 모두 exit0입니다. 전체107 PRISM tests가 성공했고 generic snapshot SHA256 25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896을 유지했습니다. fresh fetch 후 frontend HEAD=origin/dev087811ff clean, ui origin/main288b0838이며 Git credential config hash를 보존했습니다. 독립 consumer의 native download event timeout 후 예상 Downloads 파일도 없어 OS 저장을 완료했다고 보고하지 않습니다. source/generated를 분리 저장하고 기존 draft PR162만 갱신합니다.

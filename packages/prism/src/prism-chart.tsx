@@ -89,27 +89,29 @@ export function PrismLeadershipPie({ title, items, size = 120, labelFontSize = 1
 function validate(values: readonly (number | null)[], count: number, max: number) {
     if (!Number.isFinite(max) || max <= 0 || values.length !== count || values.some(v => v !== null && (!Number.isFinite(v) || v < 0 || v > max))) throw new RangeError("Chart values must match labels and be null or in 0..max.");
 }
-export function PrismRadarChart({ title, axes, series, max = 10 }: { title: string; axes: readonly PrismChartAxis[]; series: readonly PrismChartSeries[]; max?: number }) {
+export function PrismRadarChart({ title, axes, series, max = 10, showLegend = true, dataTable = "toggle", size, gridRings = 5, pointBorderWidth = 1 }: { title: string; axes: readonly PrismChartAxis[]; series: readonly PrismChartSeries[]; max?: number; showLegend?: boolean; dataTable?: "toggle" | "hidden"; size?: number; gridRings?: 4 | 5; pointBorderWidth?: number }) {
     const id = useId(); const [active,setActive] = useState<string | null>(null);
     if (axes.length < 3) throw new RangeError("Radar chart requires at least three axes.");
+    if (size !== undefined && (!Number.isFinite(size) || size < 160 || size > 800) || ![4,5].includes(gridRings) || !Number.isFinite(pointBorderWidth) || pointBorderWidth < 0) throw new RangeError("Radar size, grid count or point border is invalid.");
     series.forEach(s => validate(s.values,axes.length,max));
-    const point = (index: number, value: number, radius = 90) => { const angle = index/axes.length*Math.PI*2-Math.PI/2;
-        return [210+Math.cos(angle)*radius*value/max,130+Math.sin(angle)*radius*value/max]; };
-    const polygon = (values: readonly number[], radius = 90) => values.map((v,i) => point(i,v,radius).join(",")).join(" ");
-    return <figure className="prism-radar"><svg viewBox="0 0 420 280" role="img" aria-labelledby={`${id}-title ${id}-description`}>
+    const centerX = size ? size/2 : 210, centerY = size ? size/2+5 : 130, radius = size ? size*.27 : 90, labelRadius = size ? size*.38 : 115;
+    const point = (index: number, value: number, extent = radius) => { const angle = index/axes.length*Math.PI*2-Math.PI/2;
+        return [centerX+Math.cos(angle)*extent*value/max,centerY+Math.sin(angle)*extent*value/max]; };
+    const polygon = (values: readonly number[], extent = radius) => values.map((v,i) => point(i,v,extent).join(",")).join(" ");
+    return <figure className="prism-radar" style={size ? {width:size,minWidth:size} : undefined}><svg viewBox={size ? `0 0 ${size} ${size}` : "0 0 420 280"} role="img" aria-labelledby={`${id}-title ${id}-description`}>
         <title id={`${id}-title`}>{title}</title><desc id={`${id}-description`}>값과 누락 정보는 아래 데이터 표에서도 확인할 수 있습니다.</desc>
-        {[.2,.4,.6,.8,1].map(fraction => <polygon key={fraction} points={polygon(axes.map(() => max*fraction))} fill="none" stroke="#E3E5E5" />)}
-        {axes.map((axis,index) => { const [x,y] = point(index,max); const [lx,ly] = point(index,max,115); return <g key={axis.id}>
-            <line x1={210} y1={130} x2={x} y2={y} stroke="#E3E5E5" /><text x={lx} y={ly-7} textAnchor="middle" className="prism-radar-value">{series[0]?.values[index] ?? "--"}</text>
+        {Array.from({length:gridRings},(_,index)=>(index+1)/gridRings).map(fraction => <polygon key={fraction} points={polygon(axes.map(() => max*fraction))} fill="none" stroke="#E3E5E5" />)}
+        {axes.map((axis,index) => { const [x,y] = point(index,max); const [lx,ly] = point(index,max,labelRadius); return <g key={axis.id}>
+            <line x1={centerX} y1={centerY} x2={x} y2={y} stroke="#E3E5E5" /><text x={lx} y={ly-7} textAnchor="middle" className="prism-radar-value">{series[0]?.values[index] ?? "--"}</text>
             <text x={lx} y={ly+9} textAnchor="middle" className="prism-radar-label">{axis.label}</text></g>; })}
         {series.map(s => <g key={s.id}>{s.values.every(v => v !== null) && <polygon points={polygon(s.values as number[])} fill="rgba(27,100,218,0.15)" stroke={s.color ?? "#0072C6"} strokeWidth={2} />}
             {s.values.map((value,index) => { if (value === null) return null; const [x,y] = point(index,value); const key = `${s.id}-${axes[index].id}`;
-                return <circle key={key} cx={x} cy={y} r={4} fill="#98D0F5" stroke={s.color ?? "#0072C6"} tabIndex={0}
+                return <circle key={key} cx={x} cy={y} r={4} fill="#98D0F5" stroke={s.color ?? "#0072C6"} strokeWidth={pointBorderWidth} tabIndex={0}
                     aria-label={`${axes[index].label} ${s.label} ${value} / ${max}`} onFocus={() => setActive(key)} onBlur={() => setActive(null)} onMouseEnter={() => setActive(key)} onMouseLeave={() => setActive(null)}>
                     <title>{`${axes[index].description ?? axes[index].label}: ${value} / ${max}`}</title></circle>; })}</g>)}</svg>
-        <figcaption>{series.map(s => <span key={s.id}><i style={{background:s.color ?? "#0072C6"}} />{s.label}</span>)}</figcaption>
+        {showLegend && <figcaption>{series.map(s => <span key={s.id}><i style={{background:s.color ?? "#0072C6"}} />{s.label}</span>)}</figcaption>}
         {active && <p className="prism-chart-detail" role="status">{series.flatMap(s => axes.map((axis,index) => `${s.id}-${axis.id}` === active ? `${axis.label}: ${s.values[index]} / ${max} · ${axis.description ?? s.label}` : null)).find(Boolean)}</p>}
-        <details><summary>차트 데이터</summary><table><caption className="prism-sr-only">{title} 데이터</caption><thead><tr><th scope="col">분류</th>{series.map(s => <th scope="col" key={s.id}>{s.label}</th>)}</tr></thead>
+        <details className={dataTable === "hidden" ? "prism-sr-only" : undefined} open={dataTable === "hidden" || undefined}><summary hidden={dataTable === "hidden"} tabIndex={dataTable === "hidden" ? -1 : undefined}>차트 데이터</summary><table><caption className="prism-sr-only">{title} 데이터</caption><thead><tr><th scope="col">분류</th>{series.map(s => <th scope="col" key={s.id}>{s.label}</th>)}</tr></thead>
             <tbody>{axes.map((axis,index) => <tr key={axis.id}><th scope="row">{axis.label}</th>{series.map(s => <td key={s.id}>{s.values[index] ?? "정보 없음"}</td>)}</tr>)}</tbody></table></details></figure>;
 }
 export function PrismTrendChart({ title, labels, series, max = 5 }: { title: string; labels: readonly string[]; series: readonly PrismChartSeries[]; max?: number }) {

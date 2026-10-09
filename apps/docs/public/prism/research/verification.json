@@ -314,7 +314,8 @@
         "Print section checkbox changes selection",
         "390px page fit uses 245.90625 x 348px canvas inside 356 x 380px viewport",
         "Width fit subtracts 32px total padding once: 324px canvas at 390px frame; 254px at 320px; 958px at 1024px",
-        "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px"
+        "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px",
+        "전체 bytes/host loader·native 연속 Viewer·원본 toolbar와독립 pdf.css,재시도/취소/immutable download context를 보완. 기존 출력 options/preview 소스는 byte 보존."
       ],
       "remaining": [
         "Source PDF toolbar/fit states comparison",
@@ -836,29 +837,80 @@
         "실제 backend 권한·저장·캐시/query 통합",
         "현재 screenshot capture는5000ms timeout; 새 UI screenshot 없음"
       ]
+    },
+    "prism-attitude-report": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "진단 제목 옆 조건부 보고서 버튼, subject/url/data 변경 시 모달 닫기; 기존 documentAction의 배치 계약 유지",
+        "PDF 전체 bytes·%PDF 헤더 검사·호스트 fallback과 AbortSignal. PDF.js6.3.289 Native PDFViewer의 연속 페이지·텍스트 레이어/선택·링크·맞춤을 사용하며 source worker/CSS 버전은 호스트가 연결",
+        "페이지/배율은 blur 또는 Enter 적용, 10단계 rounding·30~100 기본범위와 min/max 확장,46/64px 입력·14px500 글꼴·원본 glyph",
+        "실제 CUA 3페이지/3canvas/텍스트 레이어,2페이지 Enter·3페이지 PageDown,67→70/60·30/100 경계,너비맞춤146%,Synthetic 단어 선택",
+        "HTML200 응답은 PDF형식 오류이며 같은URL 재시도 성공. UI callback bytes4351이 원본과 동일하고 Poppler가3페이지A4를 확인. OS 저장 완료와 구분",
+        "진단140~1280px 넘침0,좁은 차트 내부scroll 및 범례wrap. PDF140~1280px/240~1000px의7조합 ready/넘침0;140×240에서viewport0 문제를36px로 수정",
+        "실제320px iframe에서모달296px·3페이지 ready/페이지 넘침0. 후보 자동전환 중 대기모달 닫힘과 계약 Signal 확인",
+        "현재45그룹/159개 고유 상태의 표식·가로 넘침·중첩 버튼·이름 없는 표시 입력·수집 오류 검사; 긴 Survey 접근성 표의870px 넘침 수정 후 재측정0",
+        "새46항목/71파일·22예시의독립설치와최종registry재설치,TypeScript/Vite/font bytes/고지 통과. 실제production320px StrictMode native3페이지·text layer·이동/줌/필드·넘침/오류0. download event25초timeout;OSsave미확인."
+      ],
+      "remaining": [
+        "인증된 원본 Attitude/PDF 상태·전체 font/pixel 비교",
+        "진단 SVG의 source Chart.js 전체 geometry·motion/print 대조",
+        "실제backend 권한/query/캐시·OS 저장·native 인쇄",
+        "현재 screenshot capture5000ms timeout"
+      ],
+      "evidence": [
+        "pdf-report.test.mjs",
+        "attitude-deployed-css.json",
+        "attitude-cua-runtime.json",
+        "attitude-downloaded-bytes.pdf"
+      ]
+    },
+    "prism-survey": {
+      "visual": "partial",
+      "interaction": "partial",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checks": [
+        "source36px bars/24px track/100px height·role 색·정수 평균선·0.0과null 구분을 구현",
+        "CUA 카드194px/padding8/12px radius,bars36/24,평균61/63/75/82px·Red400,role Green200/Blue200/Orange200 확인",
+        "140~1280px 넘침0·3/2/1열 재배치,가변320px 막대와평균195px",
+        "print class의118pt=157.328px 카드·70px 막대·legend10pt 확인. 실제OS/native print와 구분",
+        "긴 제목의sr-only table min-content가 페이지 너비를 늘리던 문제를clip wrapper로 수정하고 실제320px 재측정"
+      ],
+      "remaining": [
+        "인증 원본 모든 Survey 상태·전체 pixel/font 대조",
+        "실제프로필 전체 출력/native print"
+      ],
+      "evidence": [
+        "pdf-report.test.mjs",
+        "attitude-deployed-css.json",
+        "survey-cua-runtime.json",
+        "attitude-cua-runtime.json"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 96,
+      "passed": 107,
       "failed": 0
     },
     "registry": {
-      "groups": 43,
-      "items": 44,
+      "groups": 45,
+      "items": 46,
       "status": "generated"
     },
     "independentConsumer": {
       "status": "passed-fresh-local-install-and-final-registry-reinstall",
-      "items": 44,
-      "completeExamples": 20,
+      "items": 46,
+      "files": 71,
+      "completeExamples": 22,
       "typecheck": "passed",
       "viteBuild": "passed",
       "portableFont": "emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "설치 component 소스는 수정하지 않았습니다. 최종 emitted registry로 재설치했으며 검증 진입 앱만320px iframe/StrictMode로 구성했습니다.",
-      "runtime": "Production MgmtCommentsExample의 등록/수정/삭제,자동높이/180px 제한,320px font/넘침/중첩/오류 확인"
+      "sourceScope": "설치 component source는 직접 수정하지 않았습니다. 최종 emitted registry로 재설치했으며 entry/환경worker/합성PDF만 검증 앱에 연결했습니다.",
+      "runtime": "Production StrictMode/실제320px의3페이지/텍스트 레이어,3페이지 Enter·67→70 줌,46/64px·14px500,넘침/브라우저 오류0. Native download event25초 timeout;OSsave미확인"
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -941,18 +993,19 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 43,
-      "componentExamples": 20,
+      "groups": 45,
+      "componentExamples": 22,
       "integrationFragments": 23,
       "workspaceTypecheck": "passed check-prism.mjs",
-      "installedTypecheck": "passed independent consumer",
-      "installationDependencyClosure": "44개 항목 전체의 독립 설치를 확인"
+      "installedTypecheck": "passed final independent install",
+      "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 152,
+      "count": 159,
       "status": "passed-current-source-documents-actual320px-iframe-cua",
-      "previousVerifiedStates": 146,
-      "previousPublishedVerificationCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b"
+      "unique": 159,
+      "previousVerifiedStates": 152,
+      "scope": "합성 기본 렌더 검사이며 모든 원본 상태·상호작용·pixel 완료를 의미하지 않음"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -991,6 +1044,12 @@
       "status": "local-and-independent-runtime-verified; draft-update-pending",
       "production": "pending human-approved publication",
       "completeParity": false
+    },
+    "attitudeReportImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified; draft-update-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
     }
   },
   "unverified": [
@@ -1003,18 +1062,18 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 43,
-    "states": 152,
+    "groups": 45,
+    "states": 159,
     "status": "passed-current-source-documents-actual320px-iframe-cua",
     "checks": [
-      "component/state DOM marker로 현재 iframe 문서 확인",
-      "실제320px width",
-      "렌더 누락·가로 넘침·중첩 버튼·표시 입력 이름 누락·수집 브라우저 오류0"
+      "현재component/state 표식과 실제320px 확인",
+      "최종159개 고유 상태의 누락·넘침·중첩 버튼·이름 없는 표시 입력·수집된 오류0",
+      "긴 Survey hidden table은 수정 후 별도 재측정·집계 누락 감사"
     ],
     "evidence": [
-      "mgmt-cua-runtime.json"
+      "attitude-cua-runtime.json"
     ],
-    "claim": "현재 소스 fixture의 기본 렌더 검사이며 원본 모든 상태·전체 시각 일치를 의미하지 않습니다."
+    "claim": "현재 합성 상태의 기본 검사; source 전체 시각/상태 parity 아님"
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1236,7 +1295,7 @@
     "deltaReview": {
       "modified": 42,
       "added": 10,
-      "unreviewedPaths": 12,
+      "unreviewedPaths": 5,
       "coverageClaim": "Reviewing a path is separate fromimplementation/state/parity completion."
     }
   },

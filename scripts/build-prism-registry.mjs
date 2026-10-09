@@ -46,7 +46,12 @@ for (const entry of metadata) {
     entry.exports = tree.statements.flatMap(statement => {
         if (!statement.modifiers?.some(modifier => modifier.kind === ts.SyntaxKind.ExportKeyword)) return [];
         if (ts.isVariableStatement(statement)) return statement.declarationList.declarations.map(declaration => ({name:declaration.name.getText(tree),kind:"value"}));
-        if (statement.name) return [{name:statement.name.getText(tree),kind:ts.isTypeAliasDeclaration(statement) || ts.isInterfaceDeclaration(statement) ? "type" : "component"}];
+        if (statement.name) {
+            const name = statement.name.getText(tree);
+            const kind = ts.isTypeAliasDeclaration(statement) || ts.isInterfaceDeclaration(statement) ? "type"
+                : ts.isClassDeclaration(statement) ? "class" : ts.isFunctionDeclaration(statement) ? (/^[A-Z]/.test(name) ? "component" : "function") : "value";
+            return [{name,kind}];
+        }
         return [];
     });
 }
@@ -57,6 +62,9 @@ for (const entry of metadata) {
         ? "component-example" : "integration-fragment";
     const replacements = [];
     for (const statement of usageTree.statements) {
+        if (ts.isImportDeclaration(statement) && statement.moduleSpecifier.text === "@pydemia/prism/pdf.css") {
+            replacements.push([statement.getStart(usageTree),statement.end,'import "@/components/ui/prism-pdf.css";']); continue;
+        }
         if (!ts.isImportDeclaration(statement) || statement.moduleSpecifier.text !== "@pydemia/prism") continue;
         const owners = new Map();
         for (const symbol of statement.importClause.namedBindings.elements) {
@@ -122,6 +130,11 @@ for (const file of readdirSync(new URL("packages/prism/src/", root)).filter(file
         const noticePath = "packages/prism/THIRD_PARTY_NOTICES.md";
         item.files.push({ path: noticePath, type: "registry:file", target: "@ui/PRISM_ASSET_NOTICES.md", content: read(noticePath) });
         item.meta.fileSha256 = Object.fromEntries(item.files.map(file => [file.path, createHash("sha256").update(read(file.path)).digest("hex")]));
+    }
+    if (name === "prism-document") {
+        const stylesheetPath = "packages/prism/src/pdf.css";
+        item.files.push({ path: stylesheetPath, type: "registry:file", target: "@ui/prism-pdf.css", content: read(stylesheetPath) });
+        item.meta.fileSha256 = Object.fromEntries(item.files.map(file => [file.path,createHash("sha256").update(read(file.path)).digest("hex")]));
     }
     write(`apps/docs/public/prism/r/${name}.json`, JSON.stringify(item,null,2)+"\n"); items.push(item);
 }

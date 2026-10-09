@@ -11,14 +11,14 @@ function useReturnFocus(trigger: ReactNode, open: boolean | undefined) {
 }
 
 export type PrismDialogProps = { title: string; description: string; children: ReactNode; trigger?: ReactNode;
-    footer?: ReactNode; open?: boolean; onOpenChange?: (open: boolean) => void; className?: string; width?: number };
-export function PrismDialog({ title, description, children, trigger, footer, open, onOpenChange, className, width = 620 }: PrismDialogProps) {
+    footer?: ReactNode; open?: boolean; onOpenChange?: (open: boolean) => void; className?: string; width?: number; style?: CSSProperties };
+export function PrismDialog({ title, description, children, trigger, footer, open, onOpenChange, className, width = 620, style }: PrismDialogProps) {
     const returnFocus=useReturnFocus(trigger,open);
     if(!Number.isFinite(width)||width<=0)throw new RangeError("Dialog width must be positive.");
     return <Dialog open={open} onOpenChange={onOpenChange}>
         {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
-        <DialogContent {...returnFocus} data-prism="light" style={{"--prism-dialog-width":`${width}px`} as CSSProperties} className={`prism-dialog ${className ?? ""}`}>
-            <header><DialogTitle>{title}</DialogTitle><DialogClose asChild><button type="button" className="prism-dialog-close" aria-label="닫기"><PrismIcon name="ModalCloseIcon" size={24}/></button></DialogClose></header>
+        <DialogContent {...returnFocus} data-prism="light" style={{"--prism-dialog-width":`${width}px`,...style} as CSSProperties} className={`prism-dialog ${className ?? ""}`}>
+            <header><DialogTitle title={title}>{title}</DialogTitle><DialogClose asChild><button type="button" className="prism-dialog-close" aria-label="닫기"><PrismIcon name="ModalCloseIcon" size={24}/></button></DialogClose></header>
             <div className="prism-dialog-body"><DialogDescription>{description}</DialogDescription>{children}</div>
             {footer && <footer>{footer}</footer>}
         </DialogContent></Dialog>;
