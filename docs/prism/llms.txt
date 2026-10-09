@@ -244,6 +244,27 @@ import { PrismAdminLayout } from "@/components/ui/prism-admin";
 <PrismAdminLayout title="관리" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;
 ```
 
+## Standalone profile HTML export
+프로필 문서·글꼴·사진·차트를 단일 정적 HTML로 다운로드
+Contract: 연결된 정적 문서 root를 직렬화하며 data-prism=light와 호출자 token override를 유지합니다. 글꼴·CSS URL·사진을 인라인하고 canvas는 PNG로 바꾸며 SVG 내부 ID를 보존합니다. 내보낸 문서는 React 없이 열립니다. 툴바는 data-prism-export-exclude로 제외합니다. 현재 input/textarea/select 값을 보존하고 실행 스크립트·이벤트와 live media는 포함하지 않습니다. 읽지 못한 자산/CSS는 실패하며 빠진 사진을 성공 파일로 숨기지 않습니다. loadAsset로 인증·자산 fetch를 연결하고 CSSOM 접근이 불가능하면 완전한 cssText를 공급합니다. 버튼은 생성을 취소하며 unmount에서 abort합니다. 완료는 브라우저 다운로드 시작입니다. 실제 데이터 조회·프로필 선택·인쇄 용지/여백은 소비자가 소유합니다.
+States: default, loading, error, long
+Registry: /prism/r/prism-html-export.json
+Source: packages/prism/src/prism-html-export.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useRef, useState } from "react";
+import { PrismHtmlExportButton } from "@/components/ui/prism-html-export";
+import { PrismPrintPage, PrismPrintCareer } from "@/components/ui/prism-print";
+export function HtmlExportExample() {
+  const root = useRef<HTMLDivElement>(null);
+  const [status,setStatus] = useState("");
+  return <section data-prism="light"><PrismHtmlExportButton getRoot={() => root.current} title="가상 프로필" onComplete={() => setStatus("다운로드 시작")} onError={() => setStatus("HTML 생성 실패")} />
+    <p role="status">{status}</p><div style={{overflow:"auto"}}><div ref={root}><PrismPrintPage name="김가상" jobTitle="기술전략담당" repeatHeader><PrismPrintCareer items={[{id:"one",period:"2024 ~ 현재",company:"가상전자",role:"가상 직무"}]} /></PrismPrintPage></div></div>
+  </section>;
+}
+```
+
 ## Profile PDF / ZIP download jobs
 프로필 PDF 생성·여러 파일 ZIP·진행률·취소와 메뉴 이동 중 작업 유지
 Contract: PrismPdfDownloadHost를 route보다 위에 배치합니다. jobs의 ID는 고유하고 문서·renderer는 작업별 snapshot입니다. 소비자가 API/auth/프로필 표시·페이지 분할·PDF renderer를 소유하며 빈 문서는 오류입니다. 한 명은 PDF, 여러 명은 중복 이름을 (2)로 구분한 ZIP 하나로 출력합니다. onProgress는 생성 완료 수, onComplete는 다운로드 시작 또는 sink close이며 OS 저장 완료를 뜻하지 않습니다. 실패한 작업의 불완전 ZIP은 다운로드하지 않습니다. 작업 제거는 AbortSignal로 취소하고 메뉴 이동에는 유지하며 진행 중 beforeunload 경고를 등록합니다. 완료·실패 작업은 owner가 제거해야 합니다. openDownload로 소비자 소유 streaming writer와 비동기 backpressure를 연결하며 null이면 Blob fallback을 씁니다. createPrismImagePdf는 이미 분할한 JPEG 페이지를 PDF로 변환합니다. 이미지 PDF는 텍스트 검색을 제공하지 않으며 기본 DOM 캡처나 서비스워커 자동 등록은 하지 않습니다.

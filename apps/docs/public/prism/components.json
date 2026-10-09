@@ -1088,6 +1088,81 @@
       "registryUsage": "import { PrismAdminLayout } from \"@/components/ui/prism-admin\";\n<PrismAdminLayout title=\"관리\" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;"
     },
     {
+      "id": "prism-html-export",
+      "name": "Standalone profile HTML export",
+      "category": "Documents",
+      "purpose": "프로필 문서·글꼴·사진·차트를 단일 정적 HTML로 다운로드",
+      "contract": "연결된 정적 문서 root를 직렬화하며 data-prism=light와 호출자 token override를 유지합니다. 글꼴·CSS URL·사진을 인라인하고 canvas는 PNG로 바꾸며 SVG 내부 ID를 보존합니다. 내보낸 문서는 React 없이 열립니다. 툴바는 data-prism-export-exclude로 제외합니다. 현재 input/textarea/select 값을 보존하고 실행 스크립트·이벤트와 live media는 포함하지 않습니다. 읽지 못한 자산/CSS는 실패하며 빠진 사진을 성공 파일로 숨기지 않습니다. loadAsset로 인증·자산 fetch를 연결하고 CSSOM 접근이 불가능하면 완전한 cssText를 공급합니다. 버튼은 생성을 취소하며 unmount에서 abort합니다. 완료는 브라우저 다운로드 시작입니다. 실제 데이터 조회·프로필 선택·인쇄 용지/여백은 소비자가 소유합니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "long"
+      ],
+      "source": [
+        "chat/successorCandidate/print/CandidateProfilePrintPreview.tsx"
+      ],
+      "usage": "import { useRef, useState } from \"react\";\nimport { PrismHtmlExportButton, PrismPrintPage, PrismPrintCareer } from \"@pydemia/prism\";\nexport function HtmlExportExample() {\n  const root = useRef<HTMLDivElement>(null);\n  const [status,setStatus] = useState(\"\");\n  return <section data-prism=\"light\"><PrismHtmlExportButton getRoot={() => root.current} title=\"가상 프로필\" onComplete={() => setStatus(\"다운로드 시작\")} onError={() => setStatus(\"HTML 생성 실패\")} />\n    <p role=\"status\">{status}</p><div style={{overflow:\"auto\"}}><div ref={root}><PrismPrintPage name=\"김가상\" jobTitle=\"기술전략담당\" repeatHeader><PrismPrintCareer items={[{id:\"one\",period:\"2024 ~ 현재\",company:\"가상전자\",role:\"가상 직무\"}]} /></PrismPrintPage></div></div>\n  </section>;\n}",
+      "sourcePath": "packages/prism/src/prism-html-export.tsx",
+      "previewUrl": "/prism?component=prism-html-export",
+      "embedUrl": "/prism?component=prism-html-export&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-html-export&view=responsive",
+      "verification": {
+        "visual": "passed-online-vs-offline-selected-layout; original full profile parity remains partial",
+        "interaction": "passed-selected-runtime",
+        "checks": [
+          "4 actual HTML downloads and offline reopened documents at1280/320/default/long",
+          "Loaded embedded Pretendard;page/pie/SUMMARY metrics and all3/48career rows match",
+          "No external network requests;320px root width and native internal horizontal wheel",
+          "Errors/cancel do not download;CSSOM/asset failure surfaced",
+          "Actual red canvas/blue photo/green canvas order;one cached asset;SVG use reference",
+          "Live input values and frozen content during slow CSS asset load;caller DOM preserved",
+          "CSS parser preserves literal URL text/comments and embeds image-set candidates"
+        ],
+        "remaining": [
+          "Every original profile section/state/style comparison",
+          "All paper sizes/margins and authenticated data/image asset paths",
+          "Cross-browser and full global inherited selector contexts"
+        ],
+        "evidence": [
+          "final-html-export",
+          "html-export-canvas-photo",
+          "reference-html-export-20261009",
+          "reference-html-export-offline",
+          "parsed-css-html-export"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismHtmlAssetLoader",
+          "kind": "type"
+        },
+        {
+          "name": "PrismHtmlExportOptions",
+          "kind": "type"
+        },
+        {
+          "name": "PrismHtmlExportResult",
+          "kind": "type"
+        },
+        {
+          "name": "createPrismHtmlDocument",
+          "kind": "component"
+        },
+        {
+          "name": "PrismHtmlExportButtonProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismHtmlExportButton",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismHtmlExportButton } from \"@/components/ui/prism-html-export\";\nimport { PrismPrintPage, PrismPrintCareer } from \"@/components/ui/prism-print\";\nexport function HtmlExportExample() {\n  const root = useRef<HTMLDivElement>(null);\n  const [status,setStatus] = useState(\"\");\n  return <section data-prism=\"light\"><PrismHtmlExportButton getRoot={() => root.current} title=\"가상 프로필\" onComplete={() => setStatus(\"다운로드 시작\")} onError={() => setStatus(\"HTML 생성 실패\")} />\n    <p role=\"status\">{status}</p><div style={{overflow:\"auto\"}}><div ref={root}><PrismPrintPage name=\"김가상\" jobTitle=\"기술전략담당\" repeatHeader><PrismPrintCareer items={[{id:\"one\",period:\"2024 ~ 현재\",company:\"가상전자\",role:\"가상 직무\"}]} /></PrismPrintPage></div></div>\n  </section>;\n}"
+    },
+    {
       "id": "prism-export",
       "name": "Profile PDF / ZIP download jobs",
       "category": "Documents",
@@ -1197,7 +1272,7 @@
       "category": "File & media",
       "purpose": "문서 페이지·배율·맞춤·다운로드와 출력 정보 선택",
       "contract": "PDF.js로 실제 PDF를 렌더링하며 workerUrl은 설치한 pdfjs-dist와 같은 버전이어야 합니다. 페이지는 1부터, 수동 배율 기본 범위는 30–100%이며 minZoom/maxZoom으로 확장할 수 있습니다. height로 높이를 지정하고 페이지/너비 맞춤은 실제 viewport 여백을 반영합니다. 확대 문서는 내부 스크롤하며 비동기 렌더를 취소합니다. 출력 섹션·선택·인쇄 callback은 소비자가 소유합니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "error"

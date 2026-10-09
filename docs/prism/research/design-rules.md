@@ -71,3 +71,8 @@ Print previews retain the source 190mm width and 280mm minimum screen height. Pr
 - Panel body has no padding, minimum size or shadow inheritance. Its white surface has a #dee7fb border, radius 12px and 0 4px 16px rgba(0,0,0,.12) shadow. An inner container owns 12px padding and the original 507px maximum width. SUMMARY content uses 14px/500/1.4 and preserves newlines.
 - `PrismTooltip` composes a trigger and content. `PrismTooltipContent` provides the same surface inside a consumer-owned Tooltip root/trigger; its `sideOffset` measures the body gap. Keep content informational. Interactive forms/actions belong in a Popover or Dialog.
 - Viewport collision handling, an 8px boundary inset, width clamping and internal vertical scrolling extend the reference for long content. SUMMARY help retains hover/focus and adds touch/Space toggling, Escape and outside dismissal. Empty string explanations omit the trigger. These additions are explicit behavior improvements.
+
+
+## Standalone document exports
+
+Keep data and page selection in the consumer. `PrismHtmlExportButton` receives a connected static root. Mark screen-only actions with `data-prism-export-exclude`. The export embeds readable styles, images, fonts and canvas pixels, retains SVG IDs and form values, and freezes the document before pending resource loads. Supply a consumer asset loader when authentication or asset routing requires it. Complete `cssText` must already contain the full rules when CSSOM access is unavailable. Asset failures are errors; do not report a successful export with a missing photograph or chart. The HTML file is a static document and does not carry the application runtime. Narrow screen overflow remains inside the exported viewer; print media releases that overflow.

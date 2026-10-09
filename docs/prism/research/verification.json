@@ -665,31 +665,57 @@
         "local-export-125",
         "final-static-export"
       ]
+    },
+    "prism-html-export": {
+      "visual": "passed-online-vs-offline-selected-layout; original full profile parity remains partial",
+      "interaction": "passed-selected-runtime",
+      "checks": [
+        "4 actual HTML downloads and offline reopened documents at1280/320/default/long",
+        "Loaded embedded Pretendard;page/pie/SUMMARY metrics and all3/48career rows match",
+        "No external network requests;320px root width and native internal horizontal wheel",
+        "Errors/cancel do not download;CSSOM/asset failure surfaced",
+        "Actual red canvas/blue photo/green canvas order;one cached asset;SVG use reference",
+        "Live input values and frozen content during slow CSS asset load;caller DOM preserved",
+        "CSS parser preserves literal URL text/comments and embeds image-set candidates"
+      ],
+      "remaining": [
+        "Every original profile section/state/style comparison",
+        "All paper sizes/margins and authenticated data/image asset paths",
+        "Cross-browser and full global inherited selector contexts"
+      ],
+      "evidence": [
+        "final-html-export",
+        "html-export-canvas-photo",
+        "reference-html-export-20261009",
+        "reference-html-export-offline",
+        "parsed-css-html-export"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 49,
+      "passed": 56,
       "failed": 0
     },
     "registry": {
-      "groups": 39,
-      "items": 40,
+      "groups": 40,
+      "items": 41,
       "status": "generated"
     },
     "independentConsumer": {
       "status": "passed-fresh-local-install",
-      "items": 40,
-      "files": 63,
-      "completeExamples": 15,
+      "items": 41,
+      "files": 64,
+      "completeExamples": 16,
       "typecheck": "passed",
       "viteBuild": "passed",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "Fresh installed registry source unchanged; separate synthetic consumer fixture compiled and executed in a fresh browser.",
+      "sourceScope": "Fresh installed registry source;16 portable examples typechecked and Vite compiled. HTML export runtime below is a separate synthetic check.",
       "registrySha256": "acae6f777e96e83bd77d64c539b4234798b0246ca529d998e4ba4d347dab93ad",
-      "browser": "42 fresh consumer distribution/width cases and animation/reduced-motion passed."
+      "browser": "42 fresh consumer distribution/width cases and animation/reduced-motion passed.",
+      "runtime": "Installed self-contained HTML example executed under StrictMode; one real download, offline font and career row, root320px and internal viewer718px, no external requests."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -813,21 +839,21 @@
     "all extensions across domains, long content and popup combinations",
     "clipboard write and native print dialog",
     "All 273 source-purpose mappings, including four recent additions, do not establish full state or visual equality.",
-    "Original authenticated profile export and service-worker stream integration; full profile DOM capture/pagination and standalone HTML export purpose comparison."
+    "Original authenticated profile export and service-worker stream integration; full profile DOM capture/pagination and all original standalone HTML profile sections/styles."
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 39,
-    "states": 125,
-    "status": "passed-final-static-export-build",
+    "groups": 40,
+    "states": 129,
+    "status": "passed-local-html-129",
     "checks": [
-      "all125 fixtures render at actual320px viewport",
+      "all129 fixtures render at actual320px viewport",
       "no nested buttons",
       "no page root horizontal overflow",
       "no unlabeled visible native inputs",
       "no page errors or unhandled rejections"
     ],
-    "evidence": "final-static-export-125",
+    "evidence": "local-html-129",
     "claim": "Rendering does not prove all source states, interactions or visual parity."
   },
   "extensions": {
@@ -1173,5 +1199,24 @@
     "strictModeDuplicateDownloads": 0,
     "originalAuthenticatedExport": "unverified",
     "claim": "Real synthetic file generation/download and source-purpose correspondence; no complete print-document or OS-save parity claim."
+  },
+  "htmlExportVerification": {
+    "status": "passed-selected-local-runtime",
+    "source": "http://dev.prism.ai/sample/chat/candidate-profile-print",
+    "sourceDownloadedPages": 9,
+    "sourceOfflineCanvasImagesLoaded": 3,
+    "sourceOfflineProfileImageLoaded": false,
+    "targetDownloadCases": 4,
+    "targetViewports": [
+      1280,
+      320
+    ],
+    "targetCareerRows": [
+      3,
+      48
+    ],
+    "onlineOfflineMetricEquality": true,
+    "sourceFullProfileParity": "unverified",
+    "claim": "Original purpose plus real standalone synthetic document fidelity; not complete original profile page parity."
   }
 }
