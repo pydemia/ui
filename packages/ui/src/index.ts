@@ -4,6 +4,7 @@ export type { IconButtonProps } from "./components/icon-button";
 export { ButtonGroup, ButtonGroupSeparator } from "./components/button-group";
 export type { ButtonGroupProps } from "./components/button-group";
 export { Input } from "./components/input";
+export type { InputProps } from "./components/input";
 export { Editable } from "./components/editable";
 export type { EditableProps } from "./components/editable";
 export {
@@ -40,6 +41,7 @@ export type {
 export { Field } from "./components/field";
 export type { FieldControlProps, FieldProps } from "./components/field";
 export { Textarea } from "./components/textarea";
+export type { TextareaProps } from "./components/textarea";
 export { CodeEditorShell } from "./components/code-editor-shell";
 export type { CodeEditorShellProps } from "./components/code-editor-shell";
 export { MarkdownEditor } from "./components/markdown-editor";
@@ -53,9 +55,11 @@ export type {
     ArtifactKind, ArtifactRevision, ArtifactView, ArtifactViewerProps,
 } from "./components/artifact-viewer";
 export { NativeSelect } from "./components/native-select";
+export type { NativeSelectProps } from "./components/native-select";
 export {
     Select, SelectValue, SelectGroup, SelectTrigger, SelectContent, SelectItem,
 } from "./components/select";
+export type { SelectTriggerProps } from "./components/select";
 export { Label } from "./components/label";
 export { Badge } from "./components/badge";
 export type { BadgeProps } from "./components/badge";
@@ -82,6 +86,7 @@ export {
     Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader,
     DialogFooter, DialogTitle, DialogDescription,
 } from "./components/dialog";
+export type { DialogContentProps } from "./components/dialog";
 export { CommandPalette } from "./components/command-palette";
 export type {
     CommandPaletteItem, CommandPaletteProps,
@@ -262,7 +267,8 @@ export {
     Dashboard, DashboardMetrics, DashboardPanels,
 } from "./components/dashboard";
 export type {
-    DashboardSectionProps, DashboardMetricsProps, DashboardPanelsProps,
+    DashboardProps, DashboardSectionProps, DashboardMetricsProps,
+    DashboardPanelsProps,
 } from "./components/dashboard";
 export {
     ToastRegion, Toast, ToastQueue, useToastQueue,
@@ -333,6 +339,9 @@ export { Slider } from "./components/slider";
 export type { SliderProps } from "./components/slider";
 export { RangeSlider } from "./components/range-slider";
 export type { RangeSliderProps, RangeValue } from "./components/range-slider";
+export { TransferList } from "./components/transfer-list";
+export type { TransferListItem, TransferListProps } from
+    "./components/transfer-list";
 export { Calendar } from "./components/calendar";
 export { DatePicker } from "./components/date-picker";
 export type { DatePickerProps } from "./components/date-picker";
@@ -400,6 +409,7 @@ export type { CopyButtonProps } from "./components/copy-button";
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/tabs";
 export type { TabsListProps, TabsVariant } from "./components/tabs";
 export { Table, TableHead, TableCell } from "./components/table";
+export type { TableProps } from "./components/table";
 export { AffixedInput } from "./components/affixed-input";
 export {
     Snippet,

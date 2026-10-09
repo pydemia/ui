@@ -1,5 +1,58 @@
 # Prototype 설계 계약
 
+## 2026-10-03 Dialog 크기
+
+`DialogContent.size`는 `default`(기존 중앙 모달), `wide`(넓은 중앙
+모달), `fullscreen`(viewport 전체)입니다. 세 크기는 같은 Radix
+Dialog의 제목·설명·focus containment·Escape 닫기·focus 복원을
+사용합니다. 모든 크기에서 내용이 넘치면 모달 안을 스크롤하며
+`className`은 호출자가 마지막에 재정의할 수 있습니다. 미지원
+크기는 명시적으로 거부합니다.
+
+## 2026-10-03 분석 화면 간격
+
+`Dashboard`, `LogConsole`, `LogViewer`의 `density`는
+`comfortable`(기본값) 또는 `compact`입니다. `Dashboard`는 영역 사이와
+내부 `DashboardMetrics`·`DashboardPanels`의 간격을 공통 space token으로
+조절합니다. 두 하위 component를 단독으로 쓰면 기존 간격을 유지합니다.
+`LogConsole`은 안쪽 여백과 행 높이를, `LogViewer`는 도구 영역의 여백과
+내부 `LogConsole`의 행 간격을 줄입니다. 밀도는 로그의 역할, 필터,
+따라가기 상태와 `panel`·`flat` 표시에 영향을 주지 않습니다.
+미지원 값은 명시적으로 거부합니다.
+
+## 2026-10-03 입력 control 표시 형태
+
+`Textarea`, `NativeSelect`, `SelectTrigger`의 `appearance`는
+`outline`(기본값), `filled`, `underline`입니다. `filled`는 공통
+`--surface-subtle` token을, `underline`은 투명 표면과 아래쪽
+테두리를 사용합니다. 입력 높이·간격·foreground·border는 기존
+semantic token을 따르고 `className`은 호출자가 마지막에
+재정의할 수 있습니다. 미지원 값은 명시적으로 거부합니다.
+
+외형을 바꿔도 `Textarea`·`NativeSelect`의 native `name`, 값,
+필수·오류 상태와 `SelectTrigger`의 이름 있는 combobox, option 탐색,
+`Select`의 form 값을 유지합니다. `Select`의 popup 외형은
+`SelectTrigger.appearance`의 영향을 받지 않습니다.
+
+## 2026-10-03 Table·DataTable 표시 형태
+
+`Table`의 `appearance`는 `lined`(기본값), `grid`, `plain`입니다.
+각 형태는 같은 native table·caption·scope 속성을 유지합니다.
+`grid`는 표 바깥과 셀을 공통 border token으로 구분하고 `plain`은
+셀 경계선을 숨깁니다. selector는 현재 표의 셀만 대상으로 하므로
+셀 안에 있는 다른 표의 외형을 변경하지 않습니다. `DataTable`의
+동명 속성은 내부 표에 전달되며 조회·정렬·선택·페이지 상태를
+바꾸지 않습니다.
+
+## 2026-10-03 Input 표시 형태
+
+`Input`의 `appearance`는 `outline`(기본값), `filled`, `underline` 중
+하나입니다. 세 형태는 같은 native input의 `type`, `name`, `value`,
+`required`, `aria-invalid`를 유지합니다. 외형은 공통 surface·border·
+foreground token을 사용합니다. `className`은 호출자가 마지막에
+재정의할 수 있습니다. 자체 외곽 테두리를 쓰는 `AffixedInput`은 이
+속성을 받지 않습니다.
+
 ## 2026-10-03 CalendarHeatmap
 
 `CalendarHeatmap`은 지정한 연도의 일별 활동을 월요일 시작 주 열에
@@ -1204,7 +1257,9 @@ native `<a>`입니다. icon은 선택적 장식으로 접근성 트리에서 숨
 
 `GlobalNavLink`의 기본 `surface`와 선택적 `underline`,
 `SideNavLink`의 기본 `rail`과 선택적 `filled`는 같은 native 링크에
-적용하는 표시 형태입니다. 현재 페이지는 호출자가
+적용하는 표시 형태입니다. `Sidebar`의 `linkVariant`도 이 두 값을
+내부 링크에 전달하며 기본값은 `rail`입니다. 데스크톱 접힘·섹션과
+모바일 Drawer에 같은 형태를 적용합니다. 현재 페이지는 호출자가
 `aria-current="page"`로 지정합니다. 밑줄형은 accent 테두리와 글자,
 채움형은 accent 배경과 accent foreground를 사용합니다. variant는
 목적지나 현재 route를 바꾸지 않습니다.
@@ -1740,3 +1795,17 @@ group은 `children`으로 leaf나 다른 group을 묶습니다. group에 별도
 좌우 위치, DOM 순서, 필수 `aria-label`, `Collapsible` 조합과
 `AppFloatingDisclosure`의 열림·focus 동작은 표시 형태와 무관합니다.
 두 형태 모두 `AppShell`의 container 폭에 따라 같은 위치에 놓입니다.
+
+## 2026-10-03 TransferList
+
+`TransferList`는 고유한 `value`를 가진 항목을 사용 가능·배정됨 두
+목록에 나눠 표시합니다. `value`와 `onValueChange`가 배정을 소유하고,
+component 내부의 checkbox 상태는 다음 이동 대상을 고르는 데만 씁니다.
+추가는 `items` 순서로 배정 목록 끝에 붙이고 제거는 기존 배정 순서를
+유지합니다. `disabled` 항목은 이동할 수 없지만 이미 배정돼 있다면
+값과 form 제출에 남습니다. 전체 `disabled` 상태에서는 form 값을
+제출하지 않습니다. 알 수 없는 값·중복 항목·빈 이름은 오류입니다.
+
+native fieldset·legend로 목록을 구분하고 checkbox와 button으로
+키보드 조작을 제공합니다. 좁은 화면에서는 두 목록과 이동 버튼을
+세로로 쌓습니다. `panel`과 `plain`은 공통 색·간격 token을 사용합니다.

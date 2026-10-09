@@ -1,5 +1,232 @@
 # Component 확장 작업 인계
 
+2026-10-03 Dialog raw 소비자 설치 확인: 83번째 고정 URL을 새 Vite
+소비자에 설치해 Dialog·utils·token·MIT 고지 네 파일, typecheck·
+build, Chromium의 세 크기와 focus 복원을 확인했습니다. production
+배포는 Vercel 횟수 제한으로 남아 있으며 Goal 관리용 추정은 약
+99%입니다. [공급 기록](raw-dialog-fallback-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Dialog raw 설치 경로 추가: Vercel 배포 제한 중에도
+83번째 schema 2 snapshot의 Dialog와 token을 GitHub raw에서 받을
+수 있는 고정 URL을 README에 적었습니다. manifest·Dialog·utils·
+token이 HTTP 200이고 저장소 파일과 같습니다. 사용자 사이트의 새
+preview 공개는 남아 있습니다. Goal 관리용 추정은 약 99%입니다.
+[공급 기록](raw-dialog-fallback-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Goal 범위 재확인: 현재 registry 144개 component·146개
+item·83개 release가 검사에 통과했습니다. 공개 AppShell·Spinner·
+MetricCard와 Operations workspace의 실제 동작으로 원래 Goal의
+대표 범위를 확인했습니다. 최신 Dialog preview는 production 배포가
+Vercel의 24시간 배포 횟수 제한으로 남아 있습니다. Goal 관리용
+추정은 약 99%입니다.
+[범위 점검](goal-scope-audit-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 기준 재검토: 로컬에서는 변경 동작을 대상으로
+검증하고, 전체 검사는 PR CI 결과를 사용합니다. 공개 확인은 묶음의
+배포와 대표 URL로 판단하며 같은 조작을 환경마다 반복하지 않습니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 Dialog 크기 병합·공개 대기: `DialogContent`에 기본·넓은·전체
+화면 크기를 추가했습니다. typecheck·대상 2/2·UI 전체 280/280·
+build·83번째 registry release 검사와 로컬 Chromium 크기·focus를
+확인했습니다. PR #156과 `main`의 Verify UI, Pages가 통과했지만
+production은 이전 배포이며 83번째 manifest는 HTTP 404입니다.
+[작업 기록](dialog-sizes-2026-10-03.md)을 참고하세요. 새
+component·item은 없으며 Goal 관리용 추정 약 99%를 유지합니다.
+
+2026-10-03 분석 화면 밀도 공개: PR #154와 `main` `82b760b7`의
+Verify UI·Pages, Vercel production이 성공했습니다. 사용자 도메인의
+82번째 manifest·변경 세 item은 HTTP 200이고 저장소 파일과
+일치합니다. 공개 Dashboard preview에서 조밀한 간격을 확인했습니다.
+144개 component·146개 item, Goal 관리용 추정 약 99%입니다.
+[작업 기록](analytics-density-2026-10-03.md)에 미검증 환경도
+기록했습니다.
+
+2026-10-03 공급·품질 기준 재확인: 변경된 동작은 관련 실행 증거,
+게시물은 묶음 CI·snapshot·대표 공개 URL로 판단합니다. 과거 운영
+과제의 미완료 수는 component 품질 점수로 사용하지 않습니다.
+[판정 기록](quality-gate-level-review-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `Sidebar` 링크 표시 선택 공개: PR #152와 `main`
+`7ea06aab`의 Verify UI·Pages, Vercel production이 성공했습니다.
+사용자 도메인의 81번째 manifest·Sidebar item과 현재 item이 HTTP
+200이고 공개 preview에서 채움형 전환을 확인했습니다. 144개
+component·146개 item, Goal 관리용 추정 약 99%입니다.
+[작업 기록](sidebar-link-variants-2026-10-03.md)에 근거가 있습니다.
+
+2026-10-03 `Sidebar` 링크 표시 선택 로컬 후보: 내부 `SideNavLink`의
+레일형·채움형을 `linkVariant`로 고를 수 있게 하고 Usage·preview를
+추가했습니다. 대상 4/4, UI 전체 278/278, typecheck·build·
+81번째 registry release 검사와 로컬 Chromium 데스크톱·390px
+모바일 탐색을 확인했습니다. PR CI·공개 확인은 진행 중입니다.
+[작업 기록](sidebar-link-variants-2026-10-03.md)을 참고하세요.
+공급·품질은 [적용 재확인](quality-gate-level-review-2026-10-03.md)처럼
+변경 동작과 묶음 게시를 구분합니다. Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 입력 control 외형과 Table 외형 공개: PR #150과 병합 commit
+`a9247500`의 Verify UI·Pages, Vercel production이 성공했습니다.
+사용자 도메인의 80번째 manifest·세 입력 item과 79번째 Table
+manifest·item은 HTTP 200입니다. 공개 Select의 외형 변경 뒤 form
+제출과 Table 격자형 전환을 확인했습니다. 144개 component·146개
+item이며 Goal 관리용 추정은 약 99%입니다.
+[입력 기록](form-control-appearances-2026-10-03.md)과
+[Table 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 입력 control 세 외형 로컬 후보: `Textarea`,
+`NativeSelect`, `SelectTrigger`에 outline·filled·underline을
+추가했습니다. 기본 외형과 form 값은 유지합니다. 대상 테스트 4/4,
+UI 전체 277/277, typecheck·build·80번째 registry release 검사와
+로컬 Chromium 조작을 확인했습니다. PR CI·공개 사이트 게시 확인은
+남았습니다. 수량은 144개 component·146개 item, Goal 관리용 추정은
+약 99%입니다. [작업 기록](form-control-appearances-2026-10-03.md)을
+참고하세요.
+
+2026-10-03 공급·품질 체크리스트 재검토: `Table`·`DataTable` 변경은
+전체 315개 파일 중 snapshot 이중 복제가 대부분이었습니다. 이를
+사람의 품질 검토량이나 Goal 미완료로 계산하지 않습니다. 변경 동작,
+release 묶음, 공개 게시의 증거를 구분하고 rollback URL 보존은 별도
+운영 위험으로 둡니다. [판정 기록](quality-gate-level-review-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 Table·DataTable 외형 선택 병합: PR #148과 `main`
+Verify UI·Pages가 통과했고 79번째 GitHub raw manifest는 HTTP
+200입니다. 사용자 도메인과 Vercel production은 이전 배포여서
+공개 게시 확인이 남았습니다. [작업 기록](table-appearances-2026-10-03.md)을
+참고하세요.
+
+2026-10-03 Table·DataTable 외형 선택 로컬 후보: 기본 lined를 유지하고
+grid·plain을 추가했습니다. 두 component의 실제 preview·Usage와
+79번째 schema 2 snapshot 후보를 준비했습니다. 대상 테스트 3/3,
+UI 전체 273/273, typecheck·build·registry release 검사가 통과했고
+로컬 Chromium에서
+Table 세 형태와 DataTable 로컬·remote 전달, 어두운 테마를
+확인했습니다. PR CI·공개 경로는 아직 확인 전입니다. 수량은 144개
+component·146개 item이며 Goal 관리용 추정은 약 99%입니다.
+[작업 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Input 외형 선택 공개: PR #146을 병합했고 `main`
+`14486b7e`의 Verify UI·Pages가 성공했습니다. Vercel production은
+READY이며 사용자 도메인의 78번째 manifest·snapshot Input·현재
+Input item이 HTTP 200입니다. 공개 Usage·preview와 filled 입력을
+확인했습니다. component 144개·item 146개, Goal 관리용 추정은 약
+99%입니다. 실제 screen reader·touch·Safari는 실행하지 않았습니다.
+[작업 기록](input-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Input 외형 선택 로컬 후보: 기존 component의 기본 outline을
+유지하고 filled·underline을 추가했습니다. label이 있는 세 입력의
+Usage·preview와 78번째 schema 2 snapshot 후보를 준비했습니다.
+대상 테스트 2/2, 전체 UI 270/270, typecheck·build·registry release
+검사가 통과했고 로컬 Chromium에서 두 테마와 텍스트 입력을
+확인했습니다. PR CI·공개 경로는 아직 확인 전입니다. 수량은 144개
+component·146개 item이며 Goal 관리용 추정은 약 99%입니다.
+[작업 기록](input-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 판정 재검토: 격리 소비자 설치는 registry item의
+내용 변경마다 하지 않고 설치 경로·target·의존 경로가 바뀔 때만
+요구합니다. 변경한 동작에 대한 핵심 증거를 유지하고 무관한 환경의
+전수 점검은 요구하지 않습니다. CI 방식은 바꾸지 않았습니다.
+[판정 기록](quality-gate-level-review-2026-10-03.md)을 참고하세요.
+
+2026-10-03 registry schema 2 공개 상태: PR #144를 병합했고 `main`
+`ff0bcae7`의 Verify UI·Pages가 통과했습니다. 77번째 raw manifest·
+TransferList·token·utils는 HTTP 200이고 게시 파일과 일치합니다.
+새 raw URL을 별도 Vite 소비자에 설치한 5개 파일의 typecheck·build도
+통과했습니다. Vercel preview는 READY지만 production은 이전 배포를
+가리키고 사용자 도메인의 77번째 manifest는 404입니다. 사이트
+게시 확인은 남아 있습니다. [공급 기록](registry-durable-snapshot-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 공급·품질 수준 재검토: 수동 판정은 이미 변경분 중심입니다.
+경직성은 draft PR의 전체 검사와 76개 release의 이중 저장
+(각 9,064개 파일), 과거 운영 과제의 미완료 표기가 품질 점수처럼
+읽히는 데 있습니다. 변경 유형별 최소 증거와 실제 출시 차단 조건을
+[재검토 기록](quality-gate-level-review-2026-10-03.md)에 정리했습니다.
+CI는 변경하지 않았고 Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 registry snapshot 공급 형식 개선 후보: Vercel Instant Rollback
+중 새 snapshot URL 손실을 줄이기 위해 77번째부터 manifest와 전이
+의존성을 GitHub raw의 `main/docs/r/releases`로 고정합니다. 이전
+76개 release는 수정하지 않았습니다. 새 형식 후보는 146개 item이고
+로컬 release 테스트·생성·현재 빌드 일치 검사가 통과했습니다.
+전이 의존성 245개가 모두 raw 경로를 가리킵니다. PR CI·공개 raw
+소비자 설치는 확인 전입니다. Goal 관리용 추정은 약 99%입니다.
+[작업 기록](registry-durable-snapshot-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `TransferList` 공개: PR #142와 병합 commit
+`d1938377`의 Verify UI, Pages가 성공했고 Vercel production은
+READY입니다. `ui.pydemia.ai`의 새 JS, 현재 item과 76번째 snapshot
+manifest가 HTTP 200이며 manifest는 146개 item을 담습니다. 공개
+수량은 144개 component·146개 registry item입니다. 공개 사이트의
+키보드·form 조작은 로컬에서 확인한 동작을 반복하지 않았습니다.
+Goal 관리용 추정은 약 99%입니다.
+[작업 기록](transfer-list-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `TransferList` 구현 검토 당시: Selection의 두 목록 배정 용례를
+원본 구현으로 추가했습니다. export·registry·provenance·Usage·preview와
+76번째 snapshot 후보를 준비했습니다. typecheck·전체 UI 테스트
+268/268·build·registry snapshot 검사와 로컬 Chromium의 keyboard,
+form 제출, 390px 표시와 PRISM 32/32를 확인했습니다.
+`registry:release-check`도 통과했습니다. PR CI·공개 공급은 아직
+확인 전입니다. 공개 수량 143개 component·145개 item은 그대로이며,
+후보는 144개·146개입니다. Goal 관리용 추정은 약 99%입니다.
+[작업 기록](transfer-list-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Intake workspace 공개: 기존 10개 component로 단계별
+요청 입력·기간·첨부 예정 목록과 접수 표를 연결했습니다. 공백 제목과
+기간 누락 차단, 파일 선택·제출·표 반영·390px 내부 스크롤을 로컬
+Chromium에서 확인했습니다. typecheck·build·registry release 검사가
+통과했습니다. 새 public item은 없고 Goal 관리용 추정은 약 99%입니다.
+PR #139와 병합 commit의 Verify UI·Pages, Vercel production, 사용자
+도메인의 새 JS 접근을 확인했습니다. 공개 사이트의 입력·제출은
+다시 조작하지 않았습니다.
+[작업 기록](intake-workspace-2026-10-03.md)을 참고하세요.
+같은 날 공급·품질 판정에서 개발 중 Usage·preview 완성 조건을 공개
+후보 단계로 옮겼습니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+
+2026-10-03 release 이력 보존 검사 병합·공개: PR #137과 `main` Verify UI,
+Pages가 통과했고 Vercel production 배포가 READY입니다. 공개 도메인의
+75번째 manifest·Button item이 HTTP 200입니다. 과거 파일의 수정·삭제
+거부는 임시 Git 저장소에서 확인했으며 실제 Instant Rollback은
+시험하지 않았습니다. [공급 기록](release-history-guard-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 release 이력 보존 검사 후보: 기존 snapshot 파일의 수정·삭제를
+PR·`main`에서 거부하는 작은 자동 검사를 추가했습니다. 신규 release
+추가·기존 원본 수정·게시 복사본 삭제를 임시 Git 저장소에서 검증했고,
+typecheck·UI 테스트 265/265·build·PRISM 검사 30/30·registry release
+검사가 통과했습니다. README에 새 커밋으로 복구하면서 release 파일을
+유지하는 절차를 적었습니다. PR CI·실제 복구 배포는 미검증입니다.
+[작업 기록](release-history-guard-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 99%입니다.
+
+2026-10-03 75번째 snapshot 공개: Vercel preview와 `main`의 파일
+내용을 대조하고 production 승격 배포
+`dpl_7eqSffEpoZco4hUB1u7ofdyJgBTj`의 READY를 확인했습니다.
+현재 registry·75번째 manifest·대표 snapshot item·token과 의존
+도메인 utils가 HTTP 200이며 로컬 JSON과 일치합니다. 공개 수량은
+143개 component·145개 item입니다. Rollback 시 새 불변 URL 보존은
+남아 있고 Goal 관리용 추정은 약 99%입니다.
+[공개 기록](shadcn-provenance-scope-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Goal 범위 점검: 143개 component·145개 item, 주요
+framework·navigation·analytics·feedback 범주와 공개 복합 화면의
+동작을 대조했습니다. 현재 typecheck·UI 테스트 265/265·build·
+registry release 검사가 통과했고 공개 대표 item 8개는 HTTP
+200입니다. 75번째 snapshot은 사용자 도메인에서 404이며 이전
+배포 rollback의 URL 보존도 미완료라 Goal 완료 판정은 보류합니다.
+[점검 기록](goal-scope-audit-2026-10-03.md)을 참고하세요.
+Goal 관리용 추정은 약 98%입니다.
+
+2026-10-03 공급·품질 체크리스트 경직성 재검토: 사람 검토 범위는
+이미 변경분 중심이지만, review 준비 PR과 `main`의 최신 snapshot
+요구 및 전체 snapshot 복제가 게시 비용을 키웁니다. 구현 검증과
+게시 검증을 별도 상태로 보고하고, 관련 component를 릴리스 묶음으로
+검토합니다. workflow는 변경하지 않았습니다.
+[재검토 기록](quality-checklist-stiffness-review-2026-10-03.md)을
+참고하세요. Goal 관리용 추정은 약 98%입니다.
+
 2026-10-03 shadcn/ui 출처 고지 범위 조정 병합·공개 대기:
 PR #135와 `main`의 Verify UI·Pages가 통과했습니다. 고정 source
 manifest는 공개 GitHub URL에서 hash가 일치하지만, Vercel 배포

@@ -5,7 +5,7 @@ import {
     Drawer, DrawerClose, DrawerContent, DrawerDescription,
     DrawerTitle, DrawerTrigger,
 } from "./drawer";
-import { SideNav, SideNavLink } from "./navigation";
+import { SideNav, SideNavLink, type SideNavLinkProps } from "./navigation";
 import { cn } from "./utils";
 
 type SidebarItem = {
@@ -31,6 +31,7 @@ type SidebarProps = ({
 }) & {
     label: string;
     side?: "left" | "right";
+    linkVariant?: SideNavLinkProps["variant"];
     collapsed?: boolean;
     defaultCollapsed?: boolean;
     onCollapsedChange?: (collapsed: boolean) => void;
@@ -46,6 +47,7 @@ function Sidebar({
     items,
     sections,
     side = "left",
+    linkVariant = "rail",
     collapsed,
     defaultCollapsed = false,
     onCollapsedChange,
@@ -57,6 +59,9 @@ function Sidebar({
 }: SidebarProps) {
     if (typeof label !== "string" || !label.trim()) {
         throw new Error("Sidebar requires a label and named links.");
+    }
+    if (linkVariant !== "rail" && linkVariant !== "filled") {
+        throw new RangeError("Sidebar link variant is not supported.");
     }
     if ((items === undefined) === (sections === undefined) ||
         (items !== undefined && !Array.isArray(items)) ||
@@ -105,6 +110,7 @@ function Sidebar({
         return (
             <SideNavLink
                 key={item.id}
+                variant={linkVariant}
                 href={item.href}
                 aria-current={item.current ? "page" : undefined}
                 title={compact ? item.label : undefined}

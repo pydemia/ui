@@ -1,5 +1,152 @@
 # 검증 기록
 
+## 2026-10-03 Dialog 크기 — 로컬 후보
+
+`DialogContent`에 기본·넓은·전체 화면 크기를 추가하고 문서 preview에서
+열 수 있게 했습니다. 제목 있는 모달의 크기와 미지원 값 거부를 대상
+테스트 2/2로 확인했습니다. `npm run typecheck`, UI 전체 테스트
+280/280, `npm run build`와 83번째 registry release 검사가
+통과했습니다. 로컬 Chromium에서 기본 512px·넓은 896px, 전체
+화면의 viewport 맞춤(1280×720, 390×844), 열 때 닫기 버튼
+focus와 Escape 후 열기 버튼 focus 복원을 확인했습니다. PR CI와
+공개 게시 검증은 진행 중입니다.
+[작업 기록](../.worknotes/dialog-sizes-2026-10-03.md)에 결과와
+미검증 범위를 갱신합니다.
+
+## 2026-10-03 분석 화면 간격 — 공개 확인
+
+PR #154와 `main` `82b760b7`의 Verify UI, `main` Pages가
+성공했습니다. Vercel production은
+`dpl_6wGv37rruAJexW3ajVAZU2cqo8t3`로 READY입니다. 사용자
+도메인의 82번째 manifest·변경 세 item이 HTTP 200이며 저장소
+파일과 일치합니다. 공개 Dashboard preview에서 조밀한 바깥
+12px·내부 8px 간격을 확인했습니다. 실제 screen reader·touch·
+Safari·RTL은 실행하지 않았습니다.
+
+`Dashboard`, `LogConsole`, `LogViewer`의 기본·조밀한 간격을 공개 API와
+문서 preview·Usage에 추가했습니다. `LogViewer`의 내부 로그에 밀도가
+전달되고 잘못된 값이 거부되는지 대상 테스트 3/3으로 확인했습니다.
+`npm run typecheck`, UI 전체 테스트 278/278과 site build가
+통과했습니다. 82번째 registry snapshot
+`sha256-02911953c811f2fdfe43e966c6c347eddb6e83f67797f9648ce046553baff560`의
+release 검사도 통과했습니다. 로컬 Chromium에서 `Dashboard`의 영역
+간격 24→12px·하위 grid 간격 16→8px, `LogViewer`의 안쪽 여백과
+행 간격 축소·내부 `LogConsole` 전달·검색 결과를 확인했습니다.
+`LogConsole`의 조밀한 preview도 확인했습니다.
+[작업 기록](../.worknotes/analytics-density-2026-10-03.md)에 실제
+결과와 미검증 범위를 남겼습니다.
+
+## 2026-10-03 Sidebar 링크 표시 형태
+
+`Sidebar`의 `linkVariant`를 `rail`(기본값)·`filled`로 선택하고
+내부 `SideNavLink`에 전달합니다. 기본·접힌 상태의 현재 링크 의미와
+이름 유지, 잘못된 값 거부를 대상 테스트 4/4로 확인했습니다.
+전체 UI 테스트 278/278과 `npm run typecheck`가 통과했습니다.
+`npm run build`와 `registry:release-check`가 81번째 snapshot과
+현재 146개 item의 일치를 확인했습니다. 로컬 Chromium에서 채움형
+링크의 현재 상태·색과 390px 모바일 Drawer의 동일 표시·선택 후
+닫힘을 확인했습니다. PR·`main` Verify UI와 Pages, Vercel
+production이 성공했습니다. 공개 81번째 manifest·Sidebar item과
+현재 item은 HTTP 200이며 manifest·snapshot item은 저장소 파일과
+일치합니다. 공개 preview의 `filled` 활성 배경도 확인했습니다.
+[작업 기록](../.worknotes/sidebar-link-variants-2026-10-03.md)에
+배포 ID와 미검증 환경을 남겼습니다.
+
+## 2026-10-03 입력 control·Table 표시 형태 — 공개 확인
+
+PR #150과 `main` `a9247500`의 Verify UI·Pages가 통과했고 Vercel
+production `dpl_DJPhjTWxRLTtKiBkbM5NkrNYGLRy`가 READY입니다.
+사용자 도메인의 80번째 schema 2 manifest(`itemCount=146`)와 변경한
+세 입력 item, 79번째 Table manifest·item이 HTTP 200입니다.
+공개 Select preview에서 filled 선택 후 underline으로 바꿔도 form
+값 `editor`가 제출됐고 공개 Table preview에서 격자형으로 전환했습니다.
+공개 Textarea·NativeSelect의 세 외형 preview와 Usage도 확인했습니다.
+실제 screen reader·touch·Safari는 실행하지 않았습니다.
+[입력 기록](../.worknotes/form-control-appearances-2026-10-03.md)과
+[Table 기록](../.worknotes/table-appearances-2026-10-03.md)에 공급
+경로를 남겼습니다.
+
+## 2026-10-03 입력 control 표시 형태 — 로컬 후보
+
+`Textarea`, `NativeSelect`, `SelectTrigger`의 세 외형과 native/form
+값 보존을 확인하는 대상 테스트 4/4, UI 전체 테스트 277/277,
+typecheck·build·registry release 검사가 통과했습니다. 로컬
+Chromium에서 Textarea 입력, NativeSelect 외형·값 전환,
+Select 외형·option 선택·폼 제출을 실행했습니다. 80번째 snapshot은
+146개 item을 포함하며 현재 빌드와 일치합니다. Select의 어두운
+테마에서 세 외형도 비교했습니다. 실제 screen reader·
+touch·Safari는 실행하지 않았습니다. PR CI와 공개 사이트 게시 상태는
+아직 확인 전입니다.
+[작업 기록](../.worknotes/form-control-appearances-2026-10-03.md)에 범위와
+남은 확인을 남겼습니다.
+
+## 2026-10-03 Table·DataTable 표시 형태 — 로컬 후보
+
+native caption·열 머리글과 세 외형, `DataTable` 전달을 확인하는
+대상 테스트 3/3, UI 전체 테스트 273/273, typecheck·build·
+registry release 검사가 통과했습니다. 로컬 Chromium에서 `Table`
+세 외형의 실제 셀 테두리,
+`DataTable` 로컬·remote 모드의 외형 전달과 어두운 테마를
+확인했습니다. 실제 screen reader·touch·Safari는 실행하지
+않았습니다. PR CI와 공개 경로는 아직 확인 전입니다.
+[작업 기록](../.worknotes/table-appearances-2026-10-03.md)에 범위와
+미검증 항목을 남겼습니다.
+
+## 2026-10-03 Input 표시 형태 — 공개 확인
+
+PR #146과 `main` `14486b7e`의 Verify UI·Pages가 통과했습니다.
+Vercel production은 READY이고 사용자 도메인의 78번째 schema 2
+manifest(`itemCount=146`)·snapshot Input·현재 Input item이 HTTP
+200입니다. 공개 문서의 세 외형과 Usage, `filled`의 텍스트 입력과
+focus 표시를 확인했습니다. 실제 screen reader·touch·Safari는
+실행하지 않았습니다.
+[작업 기록](../.worknotes/input-appearances-2026-10-03.md)에 URL과
+미검증 범위를 남겼습니다.
+
+## 2026-10-03 Input 표시 형태 — 로컬 후보
+
+`Input` 세 형태가 native 속성과 오류 상태를 보존하는 대상 테스트
+2/2, UI 전체 테스트 270/270, typecheck·build·registry release 검사가
+통과했습니다. 로컬 Chromium 문서 preview에서 세 형태의 밝은·어두운
+테마와 `filled`의 텍스트 입력, label 연결을 확인했습니다. 실제 screen
+reader·touch·Safari는 실행하지 않았습니다. PR CI와 공개 URL은 아직
+확인 전입니다. 세부 기록은
+[작업 기록](../.worknotes/input-appearances-2026-10-03.md)에 남깁니다.
+
+## 2026-10-03 Registry snapshot schema 2 공개 경로
+
+PR #144와 `main` Verify UI, Pages가 통과했습니다. 77번째 GitHub raw
+manifest·TransferList·token·utils는 HTTP 200이며 게시 파일과
+일치합니다. 별도 Vite 소비자에서 새 raw URL을 설치해 5개 파일을
+받았고 typecheck·build가 통과했습니다. 확인 시점에 Vercel production은
+이전 배포이며 사용자 도메인의 77번째 manifest는 404입니다. 사이트
+URL 게시와 실제 rollback 검사는 미검증입니다.
+[공급 기록](../.worknotes/registry-durable-snapshot-2026-10-03.md)에
+commit·CI run과 검증 범위를 남겼습니다.
+
+## 2026-10-03 Registry snapshot schema 2 로컬 검증
+
+기존 schema 1 release 76개의 검증과 새 schema 2 생성·현재 빌드
+대조가 통과했습니다. 77번째 후보의 146개 item에서 전이 의존성
+245개가 같은 GitHub raw release 경로를 가리킵니다.
+`npm run typecheck`, `npm run build`, `registry:release-check`와
+생성·변조·레거시 호환 테스트 5/5가
+통과했습니다. 독립 소비자에서는 이전 release의 raw root 설치·
+typecheck·build만 확인했으며 그 의존성은 Vercel을 사용합니다.
+새 release의 공개 raw 설치는 병합 후 확인해야 합니다.
+[작업 기록](../.worknotes/registry-durable-snapshot-2026-10-03.md)에
+범위와 한계를 남겼습니다.
+
+## 2026-10-03 75번째 snapshot 공개
+
+Vercel production 배포 `dpl_7eqSffEpoZco4hUB1u7ofdyJgBTj`가
+READY입니다. 사용자 도메인의 현재 registry·75번째 manifest·
+snapshot Button·token, 의존 도메인의 snapshot utils JSON은
+HTTP 200이며 저장소 파일과 구조적으로 일치합니다. 이전 404는
+배포 전 상태입니다. 배포 경위와 남은 rollback 범위는
+[작업 기록](../.worknotes/shadcn-provenance-scope-2026-10-03.md)에
+있습니다.
+
 ## 2026-10-03 shadcn/ui 출처 고지 범위 조정
 
 28개 수정 소스 항목을 별도 manifest에 고정하고 현재 provenance와
@@ -3147,3 +3294,25 @@ TreeNav preview·Usage가 렌더링됐고 현재 `pyd-tree-nav.json` 및
 `itemCount`는 122입니다. 로컬 Chromium의 핵심 조작 검사를
 공개 사이트에서 반복하지 않았습니다. 실제 보조기술 발표는
 확인하지 않았습니다.
+
+## 2026-10-03 TransferList 구현 검토 당시
+
+`npm run typecheck`, UI 테스트 268/268, `npm run build`,
+`registry:release-check`, PRISM 테스트 32/32와 76번째 snapshot
+생성이 통과했습니다. 로컬
+Chromium에서 Space 선택·Enter 일괄 배정과 제거, disabled 항목,
+form 제출값, `Panel`·`Plain`, 390px 세로 배치·가로 넘침 없음과
+다크 테마를 확인했습니다. 이 시점에는 PR CI·공개 배포·공개 URL을
+확인하기 전이었습니다.
+실제 screen reader·touch·Safari·RTL은 실행하지 않았습니다.
+증거와 판정은 [작업 기록](../.worknotes/transfer-list-2026-10-03.md)에
+있습니다.
+
+## 2026-10-03 TransferList 공개 확인
+
+PR #142와 병합 commit의 Verify UI·Pages가 통과했고 Vercel
+production은 READY입니다. 사용자 도메인의 새 JS, 현재
+`pyd-transfer-list` item과 76번째 snapshot manifest가 HTTP
+200이며 manifest의 항목 수는 146입니다. 공개 사이트의 조작은
+다시 실행하지 않았습니다. 자세한 ID와 검증 범위는
+[작업 기록](../.worknotes/transfer-list-2026-10-03.md)에 있습니다.

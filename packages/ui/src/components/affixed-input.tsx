@@ -3,7 +3,9 @@ import { Input } from "./input";
 import { Label } from "./label";
 import { cn } from "./utils";
 
-type AffixedInputProps = Omit<ComponentProps<typeof Input>, "type"> & {
+type AffixedInputProps = Omit<
+    ComponentProps<typeof Input>, "type" | "appearance"
+> & {
     label: string;
     prefix?: string;
     suffix?: string;

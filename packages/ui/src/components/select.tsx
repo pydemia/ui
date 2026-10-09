@@ -7,19 +7,33 @@ const Select = SelectPrimitive.Root;
 const SelectValue = SelectPrimitive.Value;
 const SelectGroup = SelectPrimitive.Group;
 
+type SelectTriggerProps = ComponentProps<typeof SelectPrimitive.Trigger> & {
+    appearance?: "outline" | "filled" | "underline";
+};
+
 function SelectTrigger({
+    appearance = "outline",
     className,
     children,
     ...props
-}: ComponentProps<typeof SelectPrimitive.Trigger>) {
+}: SelectTriggerProps) {
+    if (!["outline", "filled", "underline"].includes(appearance)) {
+        throw new RangeError("SelectTrigger appearance is not supported.");
+    }
+
     return (
         <SelectPrimitive.Trigger
+            data-appearance={appearance}
             className={cn(
                 "flex h-[var(--control-height)] w-full items-center " +
                 "justify-between gap-2 rounded-sm border border-border " +
                 "bg-surface px-[var(--space-3)] text-sm text-foreground " +
                 "data-[placeholder]:text-muted disabled:cursor-not-allowed " +
                 "disabled:opacity-50 aria-invalid:border-danger",
+                appearance === "filled" &&
+                    "border-transparent bg-surface-subtle",
+                appearance === "underline" &&
+                    "rounded-none border-x-0 border-t-0 bg-transparent px-0",
                 className,
             )}
             {...props}
@@ -87,3 +101,4 @@ function SelectItem({
 }
 
 export { Select, SelectValue, SelectGroup, SelectTrigger, SelectContent, SelectItem };
+export type { SelectTriggerProps };

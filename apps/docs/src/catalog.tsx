@@ -75,7 +75,8 @@ import {
     SnippetTabsList, SnippetTabsTrigger, SideNav, SideNavLink, Sidebar,
     Sparkline, Stepper, Switch, Table, TableCell, TagsInput, Terminal,
     Timeline,
-    Thread, TimePicker, ToolCall, Tree, TreeNav, TreeSelect, TreemapChart,
+    Thread, TimePicker, ToolCall, TransferList, Tree, TreeNav, TreeSelect,
+    TreemapChart,
     ToastQueue, useToastQueue,
     TableHead, Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toggle,
     ToggleGroup, ToggleGroupItem,
@@ -921,17 +922,35 @@ function RatingPreview() {
 }
 
 function DialogPreview() {
+    const [size, setSize] = useState<
+        "default" | "wide" | "fullscreen"
+    >("default");
+
     return (
         <div className="preview-row">
+            <div role="group" aria-label="모달 크기" className="preview-row">
+                {(["default", "wide", "fullscreen"] as const).map(
+                    (option) => (
+                        <Button key={option} type="button"
+                            variant={size === option ? "primary" : "outline"}
+                            aria-pressed={size === option}
+                            onClick={() => setSize(option)}>
+                            {option === "default" ? "기본" :
+                                option === "wide" ? "넓게" : "전체 화면"}
+                        </Button>
+                    ),
+                )}
+            </div>
             <Dialog>
                 <DialogTrigger asChild>
                     <Button variant="outline">설정 열기</Button>
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent size={size}>
                     <DialogHeader>
                         <DialogTitle>알림 설정</DialogTitle>
                         <DialogDescription>
-                            이 예시에서는 설정을 저장하지 않습니다.
+                            선택한 크기의 모달입니다. 이 예시에서는
+                            설정을 저장하지 않습니다.
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
@@ -1074,12 +1093,29 @@ function AvatarGroupPreview() {
 
 function NativeSelectPreview() {
     const [density, setDensity] = useState("standard");
+    const [appearance, setAppearance] = useState<
+        "outline" | "filled" | "underline"
+    >("outline");
 
     return (
         <div className="preview-stack">
+            <div className="flex flex-wrap gap-2" role="group"
+                aria-label="기본 선택 표시 형태">
+                {(["outline", "filled", "underline"] as const).map(
+                    (option) => (
+                        <Button key={option} type="button"
+                            variant={appearance === option ? "primary" : "outline"}
+                            aria-pressed={appearance === option}
+                            onClick={() => setAppearance(option)}>
+                            {option}
+                        </Button>
+                    ),
+                )}
+            </div>
             <Label htmlFor="demo-density">화면 밀도</Label>
             <NativeSelect
                 id="demo-density"
+                appearance={appearance}
                 value={density}
                 onChange={(event) => setDensity(event.target.value)}
             >
@@ -1900,6 +1936,9 @@ function SelectPreview() {
     const [role, setRole] = useState("");
     const [submitted, setSubmitted] = useState<string | null>(null);
     const [tried, setTried] = useState(false);
+    const [appearance, setAppearance] = useState<
+        "outline" | "filled" | "underline"
+    >("outline");
 
     return (
         <form
@@ -1910,6 +1949,19 @@ function SelectPreview() {
                 setSubmitted(String(new FormData(event.currentTarget).get("role") ?? ""));
             }}
         >
+            <div className="flex flex-wrap gap-2" role="group"
+                aria-label="선택 표시 형태">
+                {(["outline", "filled", "underline"] as const).map(
+                    (option) => (
+                        <Button key={option} type="button"
+                            variant={appearance === option ? "primary" : "outline"}
+                            aria-pressed={appearance === option}
+                            onClick={() => setAppearance(option)}>
+                            {option}
+                        </Button>
+                    ),
+                )}
+            </div>
             <Field
                 label="담당 역할"
                 error={tried && !role ? "역할을 선택하세요." : undefined}
@@ -1921,7 +1973,7 @@ function SelectPreview() {
                         setSubmitted(null);
                         setTried(false);
                     }}>
-                        <SelectTrigger {...control}>
+                        <SelectTrigger {...control} appearance={appearance}>
                             <SelectValue placeholder="역할 선택" />
                         </SelectTrigger>
                         <SelectContent>
@@ -2791,6 +2843,7 @@ function SidebarPreview() {
     const [active, setActive] = useState("overview");
     const [side, setSide] = useState<"left" | "right">("left");
     const [grouped, setGrouped] = useState(false);
+    const [linkVariant, setLinkVariant] = useState<"rail" | "filled">("rail");
     const items = [
         { id: "overview", label: "개요", href: "#components",
             icon: <Gauge size={16} />, current: active === "overview" },
@@ -2819,12 +2872,21 @@ function SidebarPreview() {
                     onClick={() => setGrouped((value) => !value)}>
                     {grouped ? "단일 목록" : "섹션별 보기"}
                 </Button>
+                <Button variant="outline" aria-pressed={linkVariant === "rail"}
+                    onClick={() => setLinkVariant("rail")}>
+                    레일형 링크
+                </Button>
+                <Button variant="outline" aria-pressed={linkVariant === "filled"}
+                    onClick={() => setLinkVariant("filled")}>
+                    채움형 링크
+                </Button>
             </div>
             <div className={
                 "flex min-h-72 flex-col overflow-hidden rounded-sm " +
                 "border border-border bg-background @3xl:flex-row"
             }>
                 <Sidebar label="프로젝트 탐색" {...content} side={side}
+                    linkVariant={linkVariant}
                     onNavigate={setActive} />
                 <div className="min-w-0 flex-1 p-[var(--space-4)]">
                     <h3 className="m-0 text-sm font-semibold">작업 공간</h3>
@@ -3145,6 +3207,9 @@ function TimelinePreview() {
 }
 
 function LogConsolePreview() {
+    const [density, setDensity] = useState<"comfortable" | "compact">(
+        "comfortable",
+    );
     const [entries, setEntries] = useState<LogEntry[]>([
         { id: "1", timestamp: "10:42:01", level: "info",
             message: "빌드 시작" },
@@ -3155,6 +3220,15 @@ function LogConsolePreview() {
     return (
         <div className="preview-stack">
             <div className="preview-row">
+                <Button variant="outline"
+                    aria-pressed={density === "comfortable"}
+                    onClick={() => setDensity("comfortable")}>
+                    기본 간격
+                </Button>
+                <Button variant="outline" aria-pressed={density === "compact"}
+                    onClick={() => setDensity("compact")}>
+                    조밀한 간격
+                </Button>
                 <Button variant="outline" onClick={() =>
                     setEntries((current) => [...current, {
                         id: String(current.length + 1),
@@ -3167,6 +3241,7 @@ function LogConsolePreview() {
                     onClick={() => setEntries([])}>비우기</Button>
             </div>
             <LogConsole label="빌드 로그" entries={entries}
+                density={density}
                 emptyMessage="표시할 로그가 없습니다." />
         </div>
     );
@@ -3174,6 +3249,9 @@ function LogConsolePreview() {
 
 function LogViewerPreview() {
     const [variant, setVariant] = useState<"panel" | "flat">("panel");
+    const [density, setDensity] = useState<"comfortable" | "compact">(
+        "comfortable",
+    );
     const [entries, setEntries] = useState<LogEntry[]>([
         { id: "start", timestamp: "10:42:01", level: "info",
             message: "빌드 시작" },
@@ -3191,6 +3269,15 @@ function LogViewerPreview() {
                     onClick={() => setVariant("panel")}>panel</Button>
                 <Button variant={variant === "flat" ? "primary" : "outline"}
                     onClick={() => setVariant("flat")}>flat</Button>
+                <Button variant="outline"
+                    aria-pressed={density === "comfortable"}
+                    onClick={() => setDensity("comfortable")}>
+                    기본 간격
+                </Button>
+                <Button variant="outline" aria-pressed={density === "compact"}
+                    onClick={() => setDensity("compact")}>
+                    조밀한 간격
+                </Button>
                 <Button variant="outline" onClick={() => setEntries((current) => [
                     ...current,
                     ...Array.from({ length: 5 }, (_, index) => ({
@@ -3204,7 +3291,7 @@ function LogViewerPreview() {
                 </Button>
             </div>
             <LogViewer label="배포 로그" entries={entries}
-                variant={variant} followTail />
+                variant={variant} density={density} followTail />
         </div>
     );
 }
@@ -3932,7 +4019,11 @@ function DashboardPreview() {
     const [layout, setLayout] = useState<"balanced" | "primary">(
         "balanced",
     );
+    const [density, setDensity] = useState<"comfortable" | "compact">(
+        "comfortable",
+    );
     const primary = layout === "primary";
+    const metricVariant = density === "compact" ? "compact" : "default";
 
     return (
         <div className="preview-workspace grid gap-3">
@@ -3950,22 +4041,36 @@ function DashboardPreview() {
                     onClick={() => setLayout("primary")}>
                     분석 중심
                 </Button>
+                <Button type="button" variant="outline"
+                    aria-pressed={density === "comfortable"}
+                    onClick={() => setDensity("comfortable")}>
+                    기본 간격
+                </Button>
+                <Button type="button" variant="outline"
+                    aria-pressed={density === "compact"}
+                    onClick={() => setDensity("compact")}>
+                    조밀한 간격
+                </Button>
             </div>
-            <Dashboard>
+            <Dashboard density={density}>
                 <PageHeader level={2} title="운영 대시보드"
                     subtitle="이번 주 요청과 실행 상태" />
                 <DashboardMetrics aria-label="주요 지표"
                     columns={primary ? 3 : 4}>
-                    <MetricCard label="요청" value="1,284" />
-                    <MetricCard label="완료" value="1,216" />
-                    <MetricCard label="대기" value="52" />
-                    {!primary && <MetricCard label="오류" value="16" />}
+                    <MetricCard label="요청" value="1,284"
+                        variant={metricVariant} />
+                    <MetricCard label="완료" value="1,216"
+                        variant={metricVariant} />
+                    <MetricCard label="대기" value="52"
+                        variant={metricVariant} />
+                    {!primary && <MetricCard label="오류" value="16"
+                        variant={metricVariant} />}
                 </DashboardMetrics>
                 <DashboardPanels aria-label="추세와 로그"
                     layout={layout}>
                     <DataChart title="요일별 완료" points={chartPoints}
                         unit="건" variant="bar" />
-                    <LogConsole label="최근 실행" entries={[
+                    <LogConsole label="최근 실행" density={density} entries={[
                         { id: "1", level: "info", message: "집계 완료" },
                         { id: "2", level: "warn", message: "재시도 2건" },
                     ]} />
@@ -4061,9 +4166,10 @@ const initialReviewRows: ReviewRow[] = [
         detail: "변경 전후 권한을 검토 화면에서 비교합니다." },
 ];
 
-function RemoteDataTablePreview({ density, striped }: {
+function RemoteDataTablePreview({ density, striped, appearance }: {
     density: "compact" | "standard" | "comfortable";
     striped: boolean;
+    appearance: "lined" | "grid" | "plain";
 }) {
     const [view, setView] = useState<DataTableView>({
         query: "", filterValue: "", sort: null, page: 1, pageSize: 2,
@@ -4103,6 +4209,7 @@ function RemoteDataTablePreview({ density, striped }: {
             <DataTable
                 caption="원격 요청 목록"
                 density={density} striped={striped}
+                appearance={appearance}
                 rows={pageRows}
                 columns={reviewColumns}
                 getRowId={(row) => row.id}
@@ -4187,6 +4294,47 @@ function NotificationCenterPreview() {
     );
 }
 
+function TableAppearancePreview() {
+    const [appearance, setAppearance] = useState<
+        "lined" | "grid" | "plain"
+    >("lined");
+
+    return <div className="grid w-full gap-3">
+        <div className="grid gap-1">
+            <label htmlFor="demo-table-appearance">표 형태</label>
+            <NativeSelect id="demo-table-appearance" value={appearance}
+                onChange={(event) => setAppearance(event.target.value as
+                    typeof appearance)}>
+                <option value="lined">줄 구분</option>
+                <option value="grid">격자</option>
+                <option value="plain">경계선 없음</option>
+            </NativeSelect>
+        </div>
+        <div className="preview-table">
+            <Table appearance={appearance}>
+                <caption className="sr-only">화면 개선 요청</caption>
+                <thead><tr>
+                    <TableHead scope="col">요청</TableHead>
+                    <TableHead scope="col">담당</TableHead>
+                    <TableHead scope="col">상태</TableHead>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <TableCell>초대 화면</TableCell>
+                        <TableCell>제품팀</TableCell>
+                        <TableCell>검토 중</TableCell>
+                    </tr>
+                    <tr>
+                        <TableCell>검색 필터</TableCell>
+                        <TableCell>운영팀</TableCell>
+                        <TableCell>승인</TableCell>
+                    </tr>
+                </tbody>
+            </Table>
+        </div>
+    </div>;
+}
+
 function DataTablePreview() {
     const [rows, setRows] = useState(initialReviewRows);
     const [lastAction, setLastAction] = useState("");
@@ -4195,6 +4343,9 @@ function DataTablePreview() {
         "compact" | "standard" | "comfortable"
     >("standard");
     const [striped, setStriped] = useState(false);
+    const [appearance, setAppearance] = useState<
+        "lined" | "grid" | "plain"
+    >("lined");
 
     return (
         <div className="preview-workspace">
@@ -4209,6 +4360,17 @@ function DataTablePreview() {
                 </Button>
             </div>
             <div className="mb-3 flex flex-wrap items-end gap-3">
+                <div className="grid gap-1">
+                    <label htmlFor="demo-data-table-appearance">표 형태</label>
+                    <NativeSelect id="demo-data-table-appearance"
+                        value={appearance}
+                        onChange={(event) => setAppearance(
+                            event.target.value as typeof appearance)}>
+                        <option value="lined">줄 구분</option>
+                        <option value="grid">격자</option>
+                        <option value="plain">경계선 없음</option>
+                    </NativeSelect>
+                </div>
                 <div className="grid gap-1">
                     <label htmlFor="demo-table-density">행 밀도</label>
                     <NativeSelect id="demo-table-density" value={density}
@@ -4226,9 +4388,10 @@ function DataTablePreview() {
                 </label>
             </div>
             {mode === "remote" ? <RemoteDataTablePreview density={density}
-                striped={striped} /> : <DataTable
+                striped={striped} appearance={appearance} /> : <DataTable
                 caption="화면 개선 요청"
                 density={density} striped={striped}
+                appearance={appearance}
                 rows={rows}
                 columns={reviewColumns}
                 getRowId={(row) => row.id}
@@ -4966,6 +5129,40 @@ function MultiSelectPreview() {
     );
 }
 
+const transferMembers = [
+    { value: "mina", label: "김민아", description: "디자인" },
+    { value: "june", label: "이준", description: "개발" },
+    { value: "sora", label: "박소라", description: "운영" },
+    { value: "admin", label: "관리자", disabled: true },
+];
+
+function TransferListPreview() {
+    const [members, setMembers] = useState<string[]>(["sora"]);
+    const [submitted, setSubmitted] = useState<string[]>([]);
+    const [appearance, setAppearance] = useState<"panel" | "plain">("panel");
+
+    return (
+        <form className="preview-field" onSubmit={(event) => {
+            event.preventDefault();
+            setSubmitted(new FormData(event.currentTarget)
+                .getAll("reviewer").map(String));
+        }}>
+            <div className="flex gap-2">
+                <Button variant={appearance === "panel" ? "primary" : "outline"}
+                    onClick={() => setAppearance("panel")}>Panel</Button>
+                <Button variant={appearance === "plain" ? "primary" : "outline"}
+                    onClick={() => setAppearance("plain")}>Plain</Button>
+            </div>
+            <TransferList label="검토 담당자" items={transferMembers}
+                value={members} onValueChange={setMembers}
+                name="reviewer" availableLabel="전체 구성원"
+                assignedLabel="검토 담당" appearance={appearance} />
+            <Button type="submit">배정 저장</Button>
+            <p role="status">제출: {submitted.join(", ") || "없음"}</p>
+        </form>
+    );
+}
+
 function CarouselPreview() {
     const [variant, setVariant] = useState<"card" | "plain">("card");
     const slides = [
@@ -5407,14 +5604,35 @@ function SelectedRequests() {
     {
         id: "input", name: "Input", category: "Inputs",
         installItems: ["input", "label"],
-        description: "기본 HTML input을 토큰에 맞춰 정리했습니다. Label과 함께 사용합니다.",
+        description: "native input을 공통 token으로 표시합니다. outline·filled·underline 형태를 고르며 Label과 함께 사용합니다.",
         code: `import { Input, Label } from "@pydemia/ui";
 
 <>
   <Label htmlFor="project-name">프로젝트 이름</Label>
   <Input id="project-name" placeholder="예: design-system" />
+
+  <Label htmlFor="team-name">담당 팀</Label>
+  <Input id="team-name" appearance="filled" placeholder="예: 운영팀" />
+
+  <Label htmlFor="reference-id">참조 번호</Label>
+  <Input id="reference-id" appearance="underline" placeholder="예: REQ-2048" />
 </>;`,
-        preview: () => <div className="preview-field"><Label htmlFor="demo-project">프로젝트 이름</Label><Input id="demo-project" placeholder="예: design-system" /></div>,
+        preview: () => <div className="grid gap-4">
+            <div className="preview-field">
+                <Label htmlFor="demo-project">프로젝트 이름 · outline</Label>
+                <Input id="demo-project" placeholder="예: design-system" />
+            </div>
+            <div className="preview-field">
+                <Label htmlFor="demo-team">담당 팀 · filled</Label>
+                <Input id="demo-team" appearance="filled"
+                    placeholder="예: 운영팀" />
+            </div>
+            <div className="preview-field">
+                <Label htmlFor="demo-reference">참조 번호 · underline</Label>
+                <Input id="demo-reference" appearance="underline"
+                    placeholder="예: REQ-2048" />
+            </div>
+        </div>,
     },
     {
         id: "search-input", name: "SearchInput", category: "Inputs",
@@ -5620,7 +5838,7 @@ function ReviewForm() {
     {
         id: "dialog", name: "Dialog", category: "Overlays",
         installItems: ["dialog", "button"],
-        description: "제목·설명과 닫기 동작을 명시하는 모달입니다. focus 이동과 복원을 처리합니다.",
+        description: "제목·설명과 닫기 동작을 명시하는 모달입니다. 기본·넓은·전체 화면 크기를 선택하고 focus 이동과 복원을 유지합니다.",
         code: `import {
   Button, Dialog, DialogClose, DialogContent, DialogDescription,
   DialogFooter, DialogHeader, DialogTitle, DialogTrigger,
@@ -5628,7 +5846,7 @@ function ReviewForm() {
 
 <Dialog>
   <DialogTrigger asChild><Button>설정 열기</Button></DialogTrigger>
-  <DialogContent>
+  <DialogContent size="wide">
     <DialogHeader>
       <DialogTitle>알림 설정</DialogTitle>
       <DialogDescription>설정을 확인하세요.</DialogDescription>
@@ -5824,24 +6042,41 @@ function RequestContextMenu() {
     {
         id: "textarea", name: "Textarea", category: "Inputs",
         installItems: ["textarea", "label"],
-        description: "여러 줄 입력에 쓰는 native textarea입니다. label과 오류 상태는 사용하는 form에서 연결합니다.",
+        description: "여러 줄 native 입력입니다. outline·filled·underline 형태를 고르며 label과 오류 상태는 form에서 연결합니다.",
         code: `import { Label, Textarea } from "@pydemia/ui";
 
 <>
   <Label htmlFor="notes">메모</Label>
   <Textarea id="notes" rows={3} placeholder="메모를 입력하세요" />
+
+  <Label htmlFor="summary">요약</Label>
+  <Textarea id="summary" appearance="filled" rows={3} />
+
+  <Label htmlFor="reference">참고 사항</Label>
+  <Textarea id="reference" appearance="underline" rows={3} />
 </>;`,
-        preview: () => <div className="preview-stack"><Label htmlFor="demo-notes">메모</Label><Textarea id="demo-notes" rows={3} placeholder="메모를 입력하세요" /></div>,
+        preview: () => <div className="preview-stack">
+            <Label htmlFor="demo-notes">메모 · outline</Label>
+            <Textarea id="demo-notes" rows={3}
+                placeholder="메모를 입력하세요" />
+            <Label htmlFor="demo-summary">요약 · filled</Label>
+            <Textarea id="demo-summary" appearance="filled" rows={3}
+                placeholder="요약을 입력하세요" />
+            <Label htmlFor="demo-reference">참고 사항 · underline</Label>
+            <Textarea id="demo-reference" appearance="underline" rows={3}
+                placeholder="참고 사항을 입력하세요" />
+        </div>,
     },
     {
         id: "native-select", name: "NativeSelect", category: "Selection",
         installItems: ["native-select", "label"],
-        description: "브라우저의 native select 동작을 유지하면서 입력 높이와 색상을 맞췄습니다.",
+        description: "브라우저의 native 선택 동작을 유지하며 outline·filled·underline 형태를 제공합니다.",
         code: `import { Label, NativeSelect } from "@pydemia/ui";
 
 <>
   <Label htmlFor="density">화면 밀도</Label>
-  <NativeSelect id="density" defaultValue="standard">
+  <NativeSelect id="density" appearance="filled"
+    defaultValue="standard">
     <option value="standard">기본</option>
     <option value="compact">좁게</option>
   </NativeSelect>
@@ -6635,10 +6870,10 @@ function Composer() {
     },
     {
         id: "table", name: "Table", category: "Data display",
-        description: "caption과 열 머리글을 갖춘 데이터 표의 기본 뼈대입니다.",
+        description: "caption과 열 머리글을 갖춘 native 표입니다. 기본 줄 구분형과 격자형·경계선 없는 형태를 선택합니다.",
         code: `import { Table, TableHead, TableCell } from "@pydemia/ui";
 
-<Table>
+<Table appearance="grid">
   <caption className="sr-only">화면 개선 요청</caption>
   <thead><tr>
     <TableHead scope="col">요청</TableHead>
@@ -6658,20 +6893,7 @@ function Composer() {
     </tr>
   </tbody>
 </Table>`,
-        preview: () => <div className="preview-table">
-            <Table>
-                <caption className="sr-only">화면 개선 요청</caption>
-                <thead><tr>
-                    <TableHead scope="col">요청</TableHead>
-                    <TableHead scope="col">담당</TableHead>
-                    <TableHead scope="col">상태</TableHead>
-                </tr></thead>
-                <tbody>
-                    <tr><TableCell>초대 화면</TableCell><TableCell>제품팀</TableCell><TableCell>검토 중</TableCell></tr>
-                    <tr><TableCell>검색 필터</TableCell><TableCell>운영팀</TableCell><TableCell>승인</TableCell></tr>
-                </tbody>
-            </Table>
-        </div>,
+        preview: () => <TableAppearancePreview />,
     },
     {
         id: "data-list", name: "DataList", category: "Data display",
@@ -6863,7 +7085,7 @@ function EmailField() {
     {
         id: "select", name: "Select", category: "Selection",
         installItems: ["select", "field"],
-        description: "검색 없는 단일 선택입니다. option 탐색과 form 값을 관리합니다.",
+        description: "검색 없는 단일 선택입니다. trigger에 outline·filled·underline 형태를 고르며 option 탐색과 form 값을 유지합니다.",
         code: `import { useState } from "react";
 import { Field, Select, SelectTrigger, SelectValue,
   SelectContent, SelectItem } from "@pydemia/ui";
@@ -6874,7 +7096,7 @@ function RoleSelect() {
     <Field label="담당 역할" required>
       {(control) => (
         <Select name="role" value={role} onValueChange={setRole}>
-          <SelectTrigger {...control}>
+          <SelectTrigger {...control} appearance="underline">
             <SelectValue placeholder="역할 선택" />
           </SelectTrigger>
           <SelectContent>
@@ -7019,6 +7241,37 @@ function WorkspaceForm() {
 }`,
         installItems: ["multi-select", "field", "button"],
         preview: () => <MultiSelectPreview />,
+    },
+    {
+        id: "transfer-list", name: "TransferList", category: "Selection",
+        description: "두 목록에서 구성원을 선택해 일괄 배정하거나 제거합니다. 배정된 값만 form에 전달합니다.",
+        code: `import { useState } from "react";
+import { Button, TransferList } from "@pydemia/ui";
+
+const members = [
+  { value: "mina", label: "김민아" },
+  { value: "june", label: "이준" },
+  { value: "sora", label: "박소라" },
+];
+
+function ReviewerForm() {
+  const [assigned, setAssigned] = useState<string[]>(["sora"]);
+  const [submitted, setSubmitted] = useState<string[]>([]);
+  return <form onSubmit={(event) => {
+    event.preventDefault();
+    setSubmitted(new FormData(event.currentTarget)
+      .getAll("reviewer").map(String));
+  }}>
+    <TransferList label="검토 담당자" items={members}
+      value={assigned} onValueChange={setAssigned}
+      name="reviewer" availableLabel="전체 구성원"
+      assignedLabel="검토 담당" appearance="panel" />
+    <Button type="submit">배정 저장</Button>
+    <p role="status">제출: {submitted.join(", ") || "없음"}</p>
+  </form>;
+}`,
+        installItems: ["transfer-list", "button"],
+        preview: () => <TransferListPreview />,
     },
     {
         id: "date-picker", name: "DatePicker", category: "Date & time",
@@ -7303,7 +7556,7 @@ function Workspace() {
     {
         id: "sidebar", name: "Sidebar", category: "Framework",
         installItems: ["sidebar", "app-shell"],
-        description: "현재 페이지 링크를 단일 목록이나 이름 있는 섹션으로 표시합니다. 넓은 화면에서는 아이콘 폭으로 접히고, 좁은 화면에서는 modal drawer로 열립니다.",
+        description: "현재 페이지 링크를 단일 목록이나 이름 있는 섹션으로 표시합니다. 링크는 레일형·채움형을 고를 수 있습니다. 넓은 화면에서는 아이콘 폭으로 접히고, 좁은 화면에서는 modal drawer로 열립니다.",
         code: `import { AppShell, AppBody, AppMain, Sidebar } from "@pydemia/ui";
 
 const sections = [
@@ -7318,7 +7571,8 @@ const sections = [
 
 <AppShell>
   <AppBody>
-    <Sidebar label="프로젝트 탐색" sections={sections} />
+    <Sidebar label="프로젝트 탐색" sections={sections}
+      linkVariant="filled" />
     <AppMain>작업 공간</AppMain>
   </AppBody>
 </AppShell>`,
@@ -7716,7 +7970,7 @@ function RequestPages() {
     },
     {
         id: "data-table", name: "DataTable", category: "Data display",
-        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. 행 밀도·줄무늬와 행별 상세 펼침을 선택할 수 있습니다. remote에서는 전달된 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업과 상세는 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
+        description: "전체 행을 처리하는 기본 모드와 서버가 조회·정렬·페이지를 소유하는 remote 모드를 제공합니다. 줄 구분·격자·경계선 없는 표 외형과 행 밀도·줄무늬·상세 펼침을 선택할 수 있습니다. remote에서는 현재 페이지 행과 총건수·로딩·오류를 표시하며 선택 작업과 상세는 현재 페이지에 한정됩니다. 좁은 폭에서는 표만 가로로 스크롤합니다.",
         code: `import { Button, DataTable } from "@pydemia/ui";
 import type { DataTableColumn } from "@pydemia/ui";
 
@@ -7735,7 +7989,7 @@ const columns: DataTableColumn<Request>[] = [
 ];
 
 <DataTable caption="화면 개선 요청" rows={rows} columns={columns}
-  density="compact" striped
+  appearance="grid" density="compact" striped
   getRowId={(row) => row.id} getRowLabel={(row) => row.name}
   renderRowDetails={(row) => <p>{row.detail}</p>}
   getSearchText={(row) => row.name}
@@ -7764,7 +8018,8 @@ function RemoteRequests({ page, view, onViewChange, retry }: {
   retry: () => void;
 }) {
   return <DataTable caption="원격 요청 목록" rows={page.rows}
-    columns={columns} getRowId={(row) => row.id}
+    columns={columns} appearance="plain"
+    getRowId={(row) => row.id}
     renderRowDetails={(row) => <p>{row.detail}</p>}
     filter={{ label: "상태", options: [
       { value: "대기", label: "대기" },
@@ -7854,10 +8109,10 @@ function AuditRules() {
     },
     {
         id: "log-console", name: "LogConsole", category: "Developer tools",
-        description: "시간·수준·메시지를 읽을 수 있는 로그 영역입니다. 잦은 갱신의 음성 발표는 기본으로 끕니다.",
+        description: "시간·수준·메시지를 읽을 수 있는 로그 영역입니다. 기본·조밀한 행 간격을 고를 수 있고 잦은 갱신의 음성 발표는 기본으로 끕니다.",
         code: `import { LogConsole } from "@pydemia/ui";
 
-<LogConsole label="빌드 로그" entries={[
+<LogConsole label="빌드 로그" density="compact" entries={[
   { id: "1", timestamp: "10:42:01", level: "info",
     message: "빌드 시작" },
   { id: "2", timestamp: "10:42:03", level: "warn",
@@ -7868,7 +8123,7 @@ function AuditRules() {
     {
         id: "log-viewer", name: "LogViewer", category: "Developer tools",
         installItems: ["log-viewer", "button"],
-        description: "로그를 검색·수준별로 필터링하고 최신 항목을 따라갑니다. 따라가기 버튼으로 일시정지·재개할 수 있으며 기록의 갱신·삭제는 앱이 맡습니다.",
+        description: "로그를 검색·수준별로 필터링하고 최신 항목을 따라갑니다. 따라가기를 일시정지·재개하거나 간격을 선택할 수 있으며 기록의 갱신·삭제는 앱이 맡습니다.",
         code: `import { useState } from "react";
 import { Button, LogViewer, type LogEntry } from "@pydemia/ui";
 
@@ -7881,7 +8136,7 @@ function DeploymentLog() {
     <Button onClick={() => setEntries((current) => [...current, {
       id: String(current.length), level: "info", message: "단계 완료",
     }])}>항목 추가</Button>
-    <LogViewer label="배포 로그" variant="panel"
+    <LogViewer label="배포 로그" variant="panel" density="compact"
       entries={entries} followTail />
   </>;
 }`,
@@ -8313,24 +8568,24 @@ const points = [
             "dashboard", "page-header", "metric-card", "data-chart",
             "log-console",
         ],
-        description: "지표를 2·3·4열로, 상세 panel을 균등 또는 분석 중심 비율로 배치합니다. 좁은 container에서는 한 열로 쌓고 각 영역에 이름을 줍니다.",
+        description: "지표를 2·3·4열로, 상세 panel을 균등 또는 분석 중심 비율로 배치합니다. 기본·조밀한 간격을 선택할 수 있고 좁은 container에서는 한 열로 쌓입니다.",
         code: `import {
   Dashboard, DashboardMetrics, DashboardPanels,
   MetricCard, DataChart, LogConsole, PageHeader,
 } from "@pydemia/ui";
 
-<Dashboard>
+<Dashboard density="compact">
   <PageHeader title="운영 대시보드" />
   <DashboardMetrics aria-label="주요 지표" columns={3}>
-    <MetricCard label="요청" value="1,284" />
-    <MetricCard label="완료" value="1,216" />
-    <MetricCard label="대기" value="52" />
+    <MetricCard label="요청" value="1,284" variant="compact" />
+    <MetricCard label="완료" value="1,216" variant="compact" />
+    <MetricCard label="대기" value="52" variant="compact" />
   </DashboardMetrics>
   <DashboardPanels aria-label="추세와 로그" layout="primary">
     <DataChart title="요일별 완료" unit="건"
       points={[{ label: "월", value: 8 },
         { label: "화", value: 12 }]} />
-    <LogConsole label="최근 실행" entries={[
+    <LogConsole label="최근 실행" density="compact" entries={[
       { id: "1", level: "info", message: "집계 완료" },
     ]} />
   </DashboardPanels>

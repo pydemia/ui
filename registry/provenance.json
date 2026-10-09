@@ -108,6 +108,12 @@
       "dependencies": ["pyd-input", "pyd-popover", "pyd-utils"], "accessibility": { "semantics": "named popover, search and checkbox group; selected chips and multiple form values", "keyboard": "Chromium: Enter open, Tab to checkbox, Space select, Escape close and focus restore verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-transfer-list", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "MUI", "url": "https://mui.com/material-ui/react-transfer-list/", "scope": "two-list assignment workflow; no source copied" },
+      "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named group with native fieldsets, legends, checkboxes and repeated hidden form values", "keyboard": "Chromium: Space selection, Enter bulk transfer and removal, disabled item and form value verified", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-label", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/label" },

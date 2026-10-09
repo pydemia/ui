@@ -1,5 +1,45 @@
 # 변경 기록
 
+## 2026-10-03 — Dialog 크기
+
+- `DialogContent`에 기존 기본 크기와 함께 넓은 크기와 전체 화면
+  크기를 선택하는 `size`를 추가했습니다.
+
+## 2026-10-03 — 분석 화면 간격
+
+- `Dashboard`, `LogConsole`, `LogViewer`에 기본·조밀한 간격을
+  선택하는 `density`를 추가했습니다. 기본 표시와 로그 조작은
+  유지합니다.
+
+## 2026-10-03 — Sidebar 링크 표시 형태
+
+- `Sidebar`에서 기존 `SideNavLink`의 레일형·채움형을 선택할 수
+  있습니다. 기본 레일형과 현재 페이지·접힘·모바일 탐색 동작은 유지합니다.
+
+## 2026-10-03 — 입력 control 표시 형태
+
+- `Textarea`, `NativeSelect`, `SelectTrigger`에 `outline`(기본값),
+  `filled`, `underline`을 제공합니다. 기존 입력·선택 동작과 form 값은
+  유지하고 문서에서 각 형태를 조작할 수 있습니다.
+
+## 2026-10-03 — Table·DataTable 표시 형태
+
+- 기본 줄 구분형을 유지하고 격자형·경계선 없는 표를 선택할 수
+  있도록 했습니다. 두 component의 Usage와 동작하는 preview를
+  제공합니다.
+
+## 2026-10-03 — Input 표시 형태
+
+- 기본 `outline`을 유지하고 `filled`·`underline` 표시 형태를
+  추가했습니다. 세 형태의 Usage와 실제 입력 preview를 제공합니다.
+
+## 2026-10-03 — Registry snapshot 공급 경로
+
+- 새 snapshot의 manifest와 전이 의존성을 GitHub raw의 `main` 경로로
+  고정합니다. Vercel을 이전 배포로 돌려도 새 형식의 설치 경로는
+  `main`의 release 파일을 사용합니다. 이전 76개 snapshot은 수정하지
+  않았습니다.
+
 ## 2026-10-03 — Autocomplete
 
 - 추천어를 선택하거나 자유 입력 텍스트를 그대로 제출하는

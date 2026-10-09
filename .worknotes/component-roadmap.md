@@ -13,7 +13,9 @@ ToggleGroup, PinInput, Rating, TimePicker, ScrollArea, AvatarGroup,
 ButtonGroup, DateTimePicker, CodeBlock, DataList, SegmentedControl,
 Markdown을
 추가하고 AI 출처 목록 `CitationList`를 편입했습니다. 현재 공개
-사이트에는 143개 component와 145개 registry item이 있습니다.
+사이트에는 144개 component와 146개 registry item이 있습니다.
+`TransferList`는 두 목록 배정 용례로 편입했으며 검증 상태는
+[작업 기록](transfer-list-2026-10-03.md)에 있습니다.
 `ArtifactViewer`의 공개 preview·Usage와 54번째 snapshot 경로·대표
 소비자 설치를 확인했습니다.
 2026-09-30에
@@ -74,10 +76,11 @@ component, 기존 API 확장, 설치 가능한 조합 예시, 보류 중 하나�
 
 ## 공급과 품질의 판정 단위
 
-개발 중 후보는 사용처와 기존 API의 차이, 바뀐 핵심 동작, 복사 가능한
-Usage와 동작하는 preview를 확인합니다. 관련 테스트와 브라우저 검사는
-변경한 동작을 실제로 증명하는 범위에서 선택합니다. 모든 component에
-같은 화면 폭·theme·browser 조합이나 수동 검사 개수를 요구하지 않습니다.
+개발 중 후보는 사용처와 기존 API의 차이, 바뀐 핵심 동작을 확인합니다.
+관련 테스트와 브라우저 검사는 변경한 동작을 실제로 증명하는 범위에서
+선택합니다. Usage와 preview는 공개 후보를 만들 때 완성합니다. 모든
+component에 같은 화면 폭·theme·browser 조합이나 수동 검사 개수를
+요구하지 않습니다.
 
 릴리스 후보에는 export·registry·출처·Usage·preview의 일치와 적용 CI,
 현재 snapshot을 확인합니다. 관련 component는 하나의 PR·snapshot으로

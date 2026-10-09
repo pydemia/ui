@@ -14,6 +14,7 @@ type LogConsoleProps = Omit<ComponentProps<"div">, "children"> & {
     emptyMessage?: string;
     live?: "off" | "polite";
     variant?: "panel" | "flat";
+    density?: "comfortable" | "compact";
 };
 
 const levelColor: Record<LogEntry["level"], string> = {
@@ -29,11 +30,15 @@ function LogConsole({
     emptyMessage = "No log entries",
     live = "off",
     variant = "panel",
+    density = "comfortable",
     className,
     ...props
 }: LogConsoleProps) {
     if (variant !== "panel" && variant !== "flat") {
         throw new RangeError("LogConsole variant is not supported.");
+    }
+    if (density !== "comfortable" && density !== "compact") {
+        throw new RangeError("LogConsole density is not supported.");
     }
 
     return (
@@ -42,9 +47,12 @@ function LogConsole({
             aria-label={label}
             aria-live={live}
             data-variant={variant}
+            data-density={density}
             className={cn(
-                "max-h-64 min-w-0 overflow-auto p-[var(--space-3)] " +
-                "font-mono text-xs text-foreground",
+                "max-h-64 min-w-0 overflow-auto font-mono text-xs " +
+                "text-foreground",
+                density === "comfortable"
+                    ? "p-[var(--space-3)]" : "p-[var(--space-2)]",
                 variant === "panel" &&
                     "rounded-sm border border-border bg-surface-subtle",
                 variant === "flat" && "bg-transparent",
@@ -58,7 +66,10 @@ function LogConsole({
                 <div
                     key={entry.id}
                     data-level={entry.level}
-                    className="flex min-w-0 gap-[var(--space-2)] py-1"
+                    className={cn(
+                        "flex min-w-0 gap-[var(--space-2)]",
+                        density === "comfortable" ? "py-1" : "py-0.5",
+                    )}
                 >
                     {entry.timestamp && (
                         <time className="shrink-0 text-muted">

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-dashboard",
+  "title": "Dashboard Layout",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/dashboard.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype DashboardProps = ComponentProps<\"div\"> & {\n    density?: \"comfortable\" | \"compact\";\n};\n\nfunction Dashboard({\n    density = \"comfortable\", className, ...props\n}: DashboardProps) {\n    if (density !== \"comfortable\" && density !== \"compact\") {\n        throw new RangeError(\"Dashboard density is not supported.\");\n    }\n\n    return (\n        <div\n            data-density={density}\n            className={cn(\n                \"@container grid min-w-0\",\n                density === \"comfortable\"\n                    ? \"gap-[var(--space-6)] \" +\n                      \"[--dashboard-panel-gap:var(--space-4)]\"\n                    : \"gap-[var(--space-3)] \" +\n                      \"[--dashboard-panel-gap:var(--space-2)]\",\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\ntype DashboardSectionProps = ComponentProps<\"section\"> & {\n    \"aria-label\": string;\n};\n\ntype DashboardMetricsProps = DashboardSectionProps & {\n    columns?: 2 | 3 | 4;\n};\n\nconst metricColumns = {\n    2: \"@3xl:grid-cols-2\",\n    3: \"@3xl:grid-cols-3\",\n    4: \"@3xl:grid-cols-4\",\n} as const;\n\nfunction DashboardMetrics({\n    columns = 4, className, ...props\n}: DashboardMetricsProps) {\n    if (!Object.hasOwn(metricColumns, columns)) {\n        throw new RangeError(\"DashboardMetrics columns is not supported.\");\n    }\n\n    return (\n        <section\n            data-columns={columns}\n            className={cn(\n                \"grid min-w-0 grid-cols-1 \" +\n                \"gap-[var(--dashboard-panel-gap,var(--space-4))] \" +\n                \"@sm:grid-cols-2\",\n                metricColumns[columns],\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\ntype DashboardPanelsProps = DashboardSectionProps & {\n    layout?: \"balanced\" | \"primary\";\n};\n\nconst panelLayouts = {\n    balanced: \"@3xl:grid-cols-2\",\n    primary: \"@3xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]\",\n} as const;\n\nfunction DashboardPanels({\n    layout = \"balanced\", className, ...props\n}: DashboardPanelsProps) {\n    if (!Object.hasOwn(panelLayouts, layout)) {\n        throw new RangeError(\"DashboardPanels layout is not supported.\");\n    }\n\n    return (\n        <section\n            data-layout={layout}\n            className={cn(\n                \"grid min-w-0 grid-cols-1 items-start \" +\n                \"gap-[var(--dashboard-panel-gap,var(--space-4))]\",\n                panelLayouts[layout],\n                className,\n            )}\n            {...props}\n        />\n    );\n}\n\nexport { Dashboard, DashboardMetrics, DashboardPanels };\nexport type {\n    DashboardProps, DashboardSectionProps, DashboardMetricsProps,\n    DashboardPanelsProps,\n};\n",
+      "type": "registry:ui",
+      "target": "@ui/dashboard.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

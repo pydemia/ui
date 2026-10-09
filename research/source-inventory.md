@@ -1,5 +1,30 @@
 # Component taxonomy와 source 검토
 
+## 2026-10-03 Dialog 크기
+
+기존 `pyd-dialog`의 shadcn/ui 고정 revision·MIT 고지와
+`@radix-ui/react-dialog@1.1.23` 의존성을 유지했습니다. 크기별 CSS와
+문서 preview는 pydemia/ui에서 작성했습니다. 외부 코드·npm 의존성·
+registry 설치 경로는 추가하지 않았습니다. source·license metadata는
+`registry/provenance.json`과 `registry/shadcn-sources.json`을
+따릅니다.
+
+## 2026-10-03 분석 화면 간격
+
+`Dashboard`, `LogConsole`, `LogViewer`의 밀도 선택은 기존
+pydemia/ui 원본 구현을 확장했습니다. 외부 코드를 편입하거나 npm
+의존성·registry 설치 경로를 추가하지 않았습니다. 기존 item의
+source·license metadata는 `registry/provenance.json`과
+`registry.json`을 따릅니다.
+
+## 2026-10-03 입력 control 외형 확장
+
+기존 `Textarea`, `NativeSelect`의 shadcn/ui 고정 revision과 MIT 고지,
+`Select`의 pydemia/ui 원본 provenance를 유지했습니다. 입력 외형만
+공통 token으로 확장했으며 외부 코드·npm 의존성·registry 설치 경로를
+추가하지 않았습니다. 각 item의 기존 source·license 정보는
+`registry/provenance.json`과 `registry.json`을 따릅니다.
+
 ## 2026-10-03 shadcn/ui 소비자 고지
 
 현재 shadcn/ui 수정 소스를 쓰는 28개 item의 source metadata를
@@ -927,6 +952,11 @@ registry 전이 항목은 `pyd-button`, `pyd-drawer`, `pyd-navigation`,
 복사하지 않았습니다. 기존 Radix Dialog revision·MIT LICENSE와 registry
 전이 항목은 그대로이며 새 npm dependency는 없습니다.
 
+2026-10-03 `Sidebar.linkVariant`는 이미 제공하던 원본
+`SideNavLink`의 `rail`·`filled` 표시를 내부 링크에 전달합니다.
+외부 코드를 새로 편입하지 않았고 source·LICENSE·의존성은 위와
+같습니다.
+
 ## 2026-09-29 단계·활동 표시 reference
 
 `Stepper`와 `Timeline`은 이 저장소의 원본 구현입니다.
@@ -968,6 +998,23 @@ focus·Escape 동작을 확인하고 기존 `pyd-popover`를 조합했습니다.
 `dist/index.mjs`, MIT LICENSE도 확인했습니다. `MultiSelect`에 외부
 component source를 복사하지 않았고 새 npm dependency는 없습니다.
 직접 registry 의존성은 `pyd-input`, `pyd-popover`, `pyd-utils`입니다.
+
+## 2026-10-03 두 목록 배정 reference
+
+`TransferList`는 구성원·권한을 두 목록 사이에 일괄 배정하는 원본
+구현입니다. [MUI 공식 Transfer List 문서](https://mui.com/material-ui/react-transfer-list/)에서
+사용 흐름과 데스크톱 전용 예제의 한계를 확인했습니다. 동일 upstream
+revision `27565bf06476f6ce2f8eb0c67393c67477968fa2`의
+[기본 예제 source](https://github.com/mui/material-ui/blob/27565bf06476f6ce2f8eb0c67393c67477968fa2/docs/data/material/components/transfer-list/TransferList.tsx),
+[확장 예제 source](https://github.com/mui/material-ui/blob/27565bf06476f6ce2f8eb0c67393c67477968fa2/docs/data/material/components/transfer-list/SelectAllTransferList.tsx),
+[MIT LICENSE](https://github.com/mui/material-ui/blob/27565bf06476f6ce2f8eb0c67393c67477968fa2/LICENSE),
+[package manifest](https://github.com/mui/material-ui/blob/27565bf06476f6ce2f8eb0c67393c67477968fa2/packages/mui-material/package.json)를
+확인했습니다. MUI source와 의존성은 편입하지 않았습니다.
+[W3C WAI form grouping](https://www.w3.org/WAI/tutorials/forms/grouping/)과
+[checkbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/)을
+참고해 native fieldset·legend·checkbox·button으로 구성했습니다.
+직접 registry 의존성은 기존 `pyd-button`, `pyd-utils`이며 새 npm
+dependency는 없습니다.
 
 ## 2026-09-29 명령 팔레트 reference
 

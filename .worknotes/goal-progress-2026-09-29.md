@@ -1,5 +1,153 @@
 # Component 공급 목표 진행 상태
 
+2026-10-03 Dialog raw 소비자 설치 검증:
+**약 99% → 약 99%**입니다. 새 Vite 소비자에서 README의 83번째
+raw 명령을 실행했고 설치 파일·typecheck·build·세 크기·focus 복원을
+확인했습니다. production 게시만 남았습니다.
+[공급 기록](raw-dialog-fallback-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Dialog의 raw registry 설치 안내:
+**약 99% → 약 99%**입니다. 83번째 고정 release의 Dialog·token
+설치 URL을 README에 추가하고 manifest·의존 item의 공개 응답과
+내용 일치를 확인했습니다. Vercel production 공개는 남았습니다.
+[공급 기록](raw-dialog-fallback-2026-10-03.md)을 참고하세요.
+
+2026-10-03 현재 Goal 범위 재확인: **약 99% → 약 99%**입니다.
+144개 component·146개 item·83개 release의 정합성과 공개 화면의
+대표 동작을 확인했습니다. 최신 Dialog 크기 선택은 GitHub raw에
+있지만 Vercel의 24시간 배포 횟수 제한으로 사용자 도메인의 배포가
+남았습니다.
+[범위 점검](goal-scope-audit-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 체크리스트 실적용 재검토:
+**약 99% → 약 99%**입니다. 로컬 대상 검증과 PR의 전체 CI,
+묶음당 공개 URL 확인을 구분했습니다. 품질 하한이나 component·item
+수는 바뀌지 않았습니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Dialog 크기 병합·공개 대기:
+**약 99% → 약 99%**입니다. 기존 모달에 넓은·전체 화면 크기를
+추가했으며 새 component·item은 없습니다. typecheck·대상 2/2·
+UI 전체 280/280·build·83번째 registry release 검사와 로컬
+Chromium 동작을 확인했습니다. PR #156과 `main` CI·Pages는
+통과했지만 83번째 공개 manifest는 아직 HTTP 404입니다.
+[작업 기록](dialog-sizes-2026-10-03.md)을 참고하세요.
+
+2026-10-03 분석 화면 밀도 production 공개:
+**약 99% → 약 99%**입니다. PR #154와 `main` Verify UI·Pages,
+Vercel production이 성공했습니다. 82번째 manifest·변경 세 item의
+공개 URL과 Dashboard 밀도 전환을 확인했습니다. component·item 수는
+144·146입니다. [작업 기록](analytics-density-2026-10-03.md)을
+참고하세요.
+
+2026-10-03 분석 화면 간격 로컬 후보와 공급·품질 기준 재확인:
+**약 99% → 약 99%**입니다. `Dashboard`, `LogConsole`,
+`LogViewer`의 밀도 선택을 추가했으며 새 component·item은 없습니다.
+typecheck·대상 3/3·UI 전체 278/278·build·82번째 registry
+release 검사와 로컬 Chromium 표시를 확인했습니다. PR CI와 공개
+검증은 진행 중입니다. [작업 기록](analytics-density-2026-10-03.md)과
+[판정](quality-gate-level-review-2026-10-03.md)을 참고하세요.
+
+2026-10-03 `Sidebar` 링크 표시 선택 production 공개:
+**약 99% → 약 99%**입니다. PR #152와 `main` Verify UI·Pages,
+Vercel production이 성공했습니다. 사용자 도메인의 81번째 manifest·
+Sidebar snapshot·현재 item이 HTTP 200이고 공개 preview에서
+채움형 활성 링크를 확인했습니다. component·item 수는 144·146으로
+같습니다. [작업 기록](sidebar-link-variants-2026-10-03.md)을
+참고하세요.
+
+2026-10-03 `Sidebar` 표시 형태와 품질 기준 재확인:
+**약 99% → 약 99%**입니다. 기존 내부 링크의 레일형·채움형을
+`Sidebar`에서 선택할 수 있게 했습니다. 새 component·item은 없고,
+대상 4/4·UI 전체 278/278·typecheck·build·81번째 registry
+release 검사와 로컬 Chromium preview를 확인했습니다. PR CI·공개
+검증은 진행 중입니다. 기준 재확인은
+[판정 기록](quality-gate-level-review-2026-10-03.md), 구현 상태는
+[작업 기록](sidebar-link-variants-2026-10-03.md)에 남겼습니다.
+
+2026-10-03 입력 control·Table 외형 production 공개:
+**약 99% → 약 99%**입니다. PR #150과 `main` CI·Pages가 통과했고
+Vercel production이 READY입니다. 사용자 도메인의 80번째 입력
+release와 79번째 Table release, 변경 item·문서 preview를 확인했습니다.
+공개 Select에서 선택값 제출, Table에서 격자형 전환을 실행했습니다.
+수량은 144개 component·146개 item으로 같습니다.
+[입력 기록](form-control-appearances-2026-10-03.md)과
+[Table 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 입력 control 표시 선택 로컬 후보:
+**약 99% → 약 99%**입니다. `Textarea`, `NativeSelect`,
+`SelectTrigger`에 outline·filled·underline을 추가했습니다. 기존
+component 세 개의 디자인 선택지를 늘린 작업이라 수량은 144개
+component·146개 item으로 같습니다. 대상 테스트 4/4, UI 전체
+277/277, typecheck·build·80번째 release 검사와 로컬 Chromium
+입력·선택·제출을 확인했습니다. PR CI와 공개 게시 확인은 남았습니다.
+[작업 기록](form-control-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 재검토와 Table·DataTable 병합:
+**약 99% → 약 99%**입니다. PR #148과 `main` Verify UI·Pages,
+79번째 GitHub raw manifest 공개를 확인했습니다. 사용자 도메인의
+새 preview·manifest는 배포 대기입니다. 315개 변경 파일의 대부분은
+snapshot 이중 복제이며 품질 체크 수나 Goal 완료율의 분모로 쓰지
+않습니다. rollback URL 보존은 별도 운영 위험입니다.
+[판정](quality-gate-level-review-2026-10-03.md)과
+[작업 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Table·DataTable 세 표시 형태 로컬 후보:
+**약 99% → 약 99%**입니다. 기존 두 component에 격자형·경계선 없는
+형태를 더했고 기본 줄 구분형은 유지했습니다. 새 component 수량은
+없으며 79번째 snapshot 후보는 146개 item을 담습니다. 대상 테스트
+3/3, 전체 UI 273/273, typecheck·build·registry release 검사와
+로컬 Chromium preview를
+확인했습니다. PR CI와 공개 경로는 아직 확인 전입니다.
+[작업 기록](table-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Input 외형 선택 production 공개: **약 99% → 약 99%**입니다.
+PR #146과 `main` Verify UI·Pages가 통과했고 Vercel production이
+READY입니다. 사용자 도메인의 78번째 manifest·Input item과 공개
+문서의 세 형태 및 텍스트 입력을 확인했습니다. 새 component 수량은
+없으며 공개 수량은 144개 component·146개 registry item입니다.
+[작업 기록](input-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 Input 세 표시 형태 로컬 후보와 품질 판정 재검토:
+**약 99% → 약 99%**입니다. 기존 Input의 기본값을 유지하고
+filled·underline을 추가했습니다. 새 component 수량은 늘지 않았으며
+146개 registry item을 포함한 78번째 snapshot 후보를 생성했습니다.
+대상 테스트 2/2, 전체 UI 270/270, typecheck·build·registry 검사가
+통과했고 로컬 Chromium에서 밝은·어두운 preview와 입력을 확인했습니다.
+설치 경로가 그대로인 item 변경에 격리 소비자 재설치를 요구하지
+않도록 [판정](quality-gate-level-review-2026-10-03.md)을 바로잡았습니다.
+PR CI와 공개 경로는 아직 확인 전입니다.
+[작업 기록](input-appearances-2026-10-03.md)을 참고하세요.
+
+2026-10-03 공급·품질 적용 시점 재검토와 Intake workspace 로컬 후보:
+**약 99% → 약 99%**입니다. 개발 중 후보에 Usage·preview 완성을
+요구하지 않고 공개 후보 단계에서 확인하도록 기준을 좁혔습니다.
+기존 component 10개로 접수 화면을 조합하고 로컬 typecheck·build·
+registry 검사와 브라우저 입력·제출을 확인했습니다. PR #139와 병합
+commit의 CI·Pages, Vercel production과 사용자 도메인의 새 JS 접근을
+확인했습니다. 새 public component·item은 없습니다. 공개 사이트의
+입력·제출은 재조작하지 않았습니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)과
+[예시 기록](intake-workspace-2026-10-03.md)을 참고하세요.
+
+2026-10-03 release 이력 보존 검사 production 확인:
+**약 99% → 약 99%**입니다. PR·`main` Verify UI와 Pages가 통과했고
+production 배포가 READY입니다. 공개 75번째 manifest·Button URL은
+HTTP 200입니다. 실제 Instant Rollback의 URL 보존은 미검증입니다.
+[검증 기록](release-history-guard-2026-10-03.md)을 참고하세요.
+
+2026-10-03 release 이력 보존 검사: **약 99% → 약 99%**입니다.
+기존 snapshot 파일의 수정·삭제를 PR·`main`에서 막고 안전한 복구
+절차를 README에 적었습니다. 로컬 테스트·빌드·registry 검사는
+통과했으며 PR CI와 실제 복구 배포는 남았습니다.
+[검증 기록](release-history-guard-2026-10-03.md)을 참고하세요.
+
+2026-10-03 75번째 snapshot production 공개: **약 98% → 약 99%**입니다.
+Vercel production 배포가 READY이고 현재 registry·75번째 manifest·
+대표 item·token·의존 utils URL이 HTTP 200이며 로컬 JSON과
+일치합니다. 이전 배포 rollback의 불변 URL 보존은 남아 있습니다.
+[공개 기록](shadcn-provenance-scope-2026-10-03.md)을 참고하세요.
+
 2026-10-03 shadcn/ui 출처 고지 범위 조정 병합:
 **약 98% → 약 98%**입니다. PR #135와 `main`의 Verify UI·Pages는
 통과했지만 Vercel 배포 제한으로 75번째 manifest는 공개
