@@ -1,8 +1,8 @@
 import { PrismIcon, prismIconNames, PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent, PrismExpertiseSection, PrismExperienceSection, PrismDesignSection, PrismAgilitySection, PrismAttitudeSection, PrismLeadershipSection, PrismCommentsSection } from "@pydemia/prism";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { PrismSummaryBadge, PrismNoData, PrismOutline } from "@pydemia/prism";
 import { PrismNoticeForm, PrismCompanyGroupForm, PrismUserForm, PrismPositionForm, PrismSelect, PrismPrintPage, PrismPrintLeaderSummary, PrismPrintCareer, PrismPrintRisk, PrismPrintExperience, PrismChatIntro, PrismProfileSectionState, PrismTotalSection, type PrismNoticeDraft, type PrismCompanyGroupDraft, type PrismUserDraft, type PrismPositionDraft } from "@pydemia/prism";
-import { PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismCriteriaTag, PrismPositionCheckCard, PrismCompanyContextDialog, PrismCandidateDirectory, PrismDirectoryTable, PrismBlankLayout, PrismErrorContent, PrismServiceContact, type PrismCriteriaDraft, PrismResponse, PrismButton, PrismContextForm, PrismAffiliateLogo, PrismSidebarProfile, PrismSkeletonGroup, PrismPopover, PrismFavoriteToggle, PrismShowMore,
+import { PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismCriteriaTag, PrismPositionCheckCard, PrismCompanyContextDialog, PrismCandidateDirectory, PrismDirectoryTable, PrismBlankLayout, PrismErrorContent, PrismServiceContact, type PrismCriteriaDraft, PrismResponse, PrismButton, PrismContextForm, PrismAffiliateLogo, PrismSidebarProfile, PrismSkeletonGroup, PrismPopover, PrismFavoriteToggle, PrismShowMore, PrismInputLabel,
     PrismPositionDetail, PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis,
     PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismMemoComposer, PrismMemoCollection,
     PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistory, PrismPolicyViewer, PrismDialog,
@@ -16,8 +16,13 @@ export function ContextDemo({ state }: { state: FixtureState }) {
         values={values} onValueChange={setValues} onSubmit={v => setResult(JSON.stringify(v))} onCancel={() => setResult("취소")} busy={state === "loading"} /><p role="status">{result}</p></>;
 }
 export function PrimitivesDemo({ state }: { state: FixtureState }) {
-    const [favorite,setFavorite] = useState(false); const [expanded,setExpanded] = useState(false);
+    const [favorite,setFavorite] = useState(false); const [expanded,setExpanded] = useState(false); const fieldId = useId();
+    const labelHelp = state === "long" ? "입력 방법과 검증 기준은 호출자가 제공합니다. ".repeat(24)+"abcdefghijklmnopqrstuvwxyz".repeat(12) : "표시용 가상 이름을 입력하세요.";
     return <div className="prism-demo-stack"><PrismAffiliateLogo brand="가상" affiliate="전자" /><PrismSidebarProfile name="김가상" email="demo@example.com" /><PrismFavoriteToggle name="김가상" checked={favorite} onCheckedChange={setFavorite} disabled={state === "disabled"} />
+        <div className="prism-demo-stack"><PrismInputLabel htmlFor={fieldId} required tooltip={state === "empty" ? "" : labelHelp}>
+            {state === "long" ? "가상_입력_라벨의_긴_이름과_여러_설명_구간을_줄바꿈하여_표시하는_예시" : "표시 이름"}</PrismInputLabel>
+            <input id={fieldId} name="display-name" required disabled={state === "disabled"} style={{maxWidth:"100%"}}/>
+            <PrismInputLabel>기본 라벨</PrismInputLabel></div>
         <PrismPopover trigger={<PrismButton>추가 정보 열기</PrismButton>}><p>팝오버의 안내 내용입니다.</p></PrismPopover><PrismShowMore expanded={expanded} hiddenCount={3} onExpandedChange={setExpanded}><p>추가 항목의 내용입니다.</p></PrismShowMore>
         <PrismSummaryBadge label="가상 유형" summary={state==="empty" ? null : "가상 조직과 기술 경험을 요약한 표시 예시입니다."} note="호출자가 제공한 가상 유형의 설명입니다."/><PrismOutline><PrismNoData/></PrismOutline><PrismSkeletonGroup rows={3}/><PrismSkeletonGroup rows={2} height={60}/></div>;
 }

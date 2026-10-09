@@ -36,7 +36,7 @@ export function PrismAvatar({ name, team, description, src, className = "", show
         measure();
         return () => { active = false; observer?.disconnect(); window.removeEventListener("resize", measure); document.fonts?.removeEventListener("loadingdone", measure); };
     }, [name, team, description, showInfo]);
-    return <TooltipProvider><div {...props} className={`prism-avatar ${className}`}><Avatar className="prism-avatar-image" aria-hidden="true">
+    return <TooltipProvider delayDuration={100}><div {...props} className={`prism-avatar ${className}`}><Avatar className="prism-avatar-image" aria-hidden="true">
         {src && <AvatarImage src={src} alt="" />}<AvatarFallback>{name.trim().slice(0, 1) || "?"}</AvatarFallback></Avatar>
         {showInfo ? <div className="prism-avatar-text"><div ref={info} data-info-layout={layout.mode}><AvatarText as="strong" text={name} className="prism-avatar-name" truncated={layout.name} elementRef={element => { nameText.current = element; }} />{team && <><span className="prism-avatar-divider" aria-hidden="true" /><AvatarText as="span" text={team} className="prism-avatar-team" truncated={layout.team} elementRef={element => { teamText.current = element; }} /></>}</div>
             {description && <p title={description}>{description}</p>}</div> : <span className="prism-sr-only">{name}</span>}</div></TooltipProvider>;

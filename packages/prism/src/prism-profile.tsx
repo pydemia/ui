@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
 import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "./prism-tabs";
 import { PrismCandidateCard, type PrismCandidate } from "./prism-candidate";
 import { PrismButton } from "./prism-button";
@@ -6,7 +6,7 @@ import { PrismElpBadge, PrismTag } from "./prism-badge";
 import { PrismFavoriteToggle } from "./prism-primitives";
 import { PrismDetailList } from "./prism-detail";
 import { PrismIcon } from "./prism-icon";
-import { PrismTooltip } from "./prism-utility";
+import { PrismInfoTooltip } from "./prism-utility";
 
 export const prismProfileTabs = [
     { id: "total", label: "종합" }, { id: "expertise", label: "전문성" }, { id: "experience", label: "성공경험" },
@@ -22,16 +22,7 @@ export function PrismCareerTimeline({ entries }: { entries: readonly PrismCareer
     return <ol className="prism-career">{entries.length ? entries.map(item => <li key={item.id}><strong>{item.period}</strong><div><b>{item.company}</b><p>{item.role}</p></div></li>) : <li>경력 정보가 없습니다.</li>}</ol>;
 }
 function SummaryHelp({label,note}:{label:string;note:ReactNode}) {
-    const [open,setOpen]=useState(false); const trigger=useRef<HTMLButtonElement>(null);
-    return <PrismTooltip panel side="bottom" open={open} onOpenChange={setOpen} content={<div className="prism-summary-tooltip">{note}</div>}
-        contentProps={{onPointerDownOutside:event=>{
-            if(event.detail.originalEvent.target instanceof Node&&trigger.current?.contains(event.detail.originalEvent.target))event.preventDefault();
-        }}}>
-        <button ref={trigger} type="button" className="prism-summary-info" aria-label={`${label} 설명`} aria-expanded={open}
-            onPointerDown={event=>event.preventDefault()} onClick={event=>{event.preventDefault();setOpen(current=>!current);}}>
-            <PrismIcon name="InfoIcon" size={16}/>
-        </button>
-    </PrismTooltip>;
+    return <PrismInfoTooltip panel side="bottom" label={`${label} 설명`} className="prism-summary-info" content={<div className="prism-summary-tooltip">{note}</div>}/>;
 }
 export function PrismSummaryBadge({ label, summary, note, title="SUMMARY" }: { label: string; summary: ReactNode; note?: ReactNode; title?: string }) {
     const present=summary!==null&&summary!==undefined&&summary!==false&&(typeof summary!=="string"||!!summary.trim());

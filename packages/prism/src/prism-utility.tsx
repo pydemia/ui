@@ -11,6 +11,7 @@ export function PrismSwitch({ label, ...props }: ComponentProps<typeof Switch> &
 export type PrismTooltipContentProps = Omit<ComponentProps<typeof TooltipContent>, "asChild"> & { panel?: boolean; arrow?: boolean; small?: boolean };
 export type PrismTooltipProps = Pick<PrismTooltipContentProps, "side" | "align" | "panel" | "arrow" | "small"> & {
     content: ReactNode; children: ReactNode; open?: boolean; onOpenChange?: (open: boolean) => void;
+    delayDuration?: number;
     contentProps?: Omit<PrismTooltipContentProps, "children" | "side" | "align" | "panel" | "arrow" | "small">;
 };
 /** sideOffset measures the body gap; Radix also includes its measured arrow height. */
@@ -24,10 +25,27 @@ export function PrismTooltipContent({ children, side = "top", align = "center", 
         {arrow && <TooltipArrow asChild><span className="prism-tooltip-arrow" aria-hidden="true" /></TooltipArrow>}
     </TooltipContent>;
 }
-export function PrismTooltip({ content, children, side, align, panel, arrow, small, open, onOpenChange, contentProps }: PrismTooltipProps) {
-    return <TooltipProvider><Tooltip open={open} onOpenChange={onOpenChange}><TooltipTrigger asChild>{children}</TooltipTrigger>
+export function PrismTooltip({ content, children, side, align, panel, arrow, small, open, onOpenChange, contentProps, delayDuration = 100 }: PrismTooltipProps) {
+    return <TooltipProvider delayDuration={delayDuration}><Tooltip open={open} onOpenChange={onOpenChange}><TooltipTrigger asChild>{children}</TooltipTrigger>
         <PrismTooltipContent {...contentProps} side={side} align={align} panel={panel} arrow={arrow} small={small}>{content}</PrismTooltipContent>
     </Tooltip></TooltipProvider>;
+}
+export type PrismInfoTooltipProps = Omit<PrismTooltipProps, "children"> & { label: string; className?: string; icon?: ReactNode };
+/** Hover/focus and an explicit toggle share one state; outside dismissal excludes the trigger. */
+export function PrismInfoTooltip({ label, className = "", icon, open, onOpenChange, contentProps, ...props }: PrismInfoTooltipProps) {
+    const [localOpen, setLocalOpen] = useState(false); const trigger = useRef<HTMLButtonElement>(null);
+    if (!label.trim()) throw new Error("Info tooltip trigger requires a label.");
+    const expanded = open ?? localOpen;
+    function change(next: boolean) { if (open === undefined) setLocalOpen(next); onOpenChange?.(next); }
+    return <PrismTooltip {...props} open={expanded} onOpenChange={change} contentProps={{...contentProps, onPointerDownOutside: event => {
+        contentProps?.onPointerDownOutside?.(event);
+        if (event.detail.originalEvent.target instanceof Node && trigger.current?.contains(event.detail.originalEvent.target)) event.preventDefault();
+    }}}>
+        <button ref={trigger} type="button" className={`prism-info-tooltip-trigger ${className}`} aria-label={label} aria-expanded={expanded}
+            onPointerDown={event => event.preventDefault()} onClick={event => { event.preventDefault(); change(!expanded); }}>
+            {icon ?? <PrismIcon name="InfoIcon" size={16}/>}
+        </button>
+    </PrismTooltip>;
 }
 export function PrismProgress({ value, label = "진행률", showPercent = false, displayValue, color }: { value: number | null; label?: string; showPercent?: boolean; displayValue?: string | number; color?: string }) {
     if (value !== null && (!Number.isFinite(value) || value < 0 || value > 100)) throw new RangeError("Progress must be null or 0..100.");

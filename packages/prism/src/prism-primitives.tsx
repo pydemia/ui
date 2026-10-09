@@ -3,6 +3,7 @@ import { PrismIcon } from "./prism-icon";
 import { PrismChevronDownGlyph as ChevronDown, PrismStarGlyph as Star } from "./prism-icon";
 import { Popover, PopoverTrigger, PopoverContent } from "@pydemia/ui";
 import { PrismButton } from "./prism-button";
+import { PrismInfoTooltip } from "./prism-utility";
 
 export function PrismAffiliateLogo({ brand, affiliate, size = 48 }: { brand?: string; affiliate: string; size?: number | string }) {
     return <span className="prism-affiliate" style={{fontSize:size}}>{brand && <b>{brand}</b>}<span>{affiliate}</span></span>;
@@ -10,8 +11,18 @@ export function PrismAffiliateLogo({ brand, affiliate, size = 48 }: { brand?: st
 export function PrismSidebarProfile({ name, email, collapsed }: { name: string; email: string; collapsed?: boolean }) {
     return <div className="prism-sidebar-profile"><span aria-hidden="true">{name.trim().slice(0,1) || "?"}</span>{!collapsed && <div><strong>{name}</strong><small>{email}</small></div>}{collapsed && <span className="prism-sr-only">{name}</span>}</div>;
 }
-export function PrismInputLabel({ children, required, htmlFor, suffix }: { children: ReactNode; required?: boolean; htmlFor?: string; suffix?: ReactNode }) {
-    return <label className="prism-input-label" htmlFor={htmlFor}>{children}{required && <span aria-hidden="true">*</span>}{required && <span className="prism-sr-only">필수</span>}{suffix}</label>;
+export type PrismInputLabelProps = {
+    children: ReactNode; required?: boolean; htmlFor?: string; suffix?: ReactNode; tooltip?: string; tooltipLabel?: string;
+    className?: string; style?: CSSProperties;
+};
+export function PrismInputLabel({ children, required, htmlFor, suffix, tooltip, tooltipLabel, className = "", style }: PrismInputLabelProps) {
+    const text = <>{children}{required && <span className="prism-input-required" aria-hidden="true">*</span>}{required && <span className="prism-sr-only">필수</span>}{suffix}</>;
+    if (!tooltip?.trim()) return <label className={`prism-input-label ${className}`} style={style} htmlFor={htmlFor}>{text}</label>;
+    return <span className={`prism-input-label ${className}`} style={style}>
+        <label className="prism-input-label-text" htmlFor={htmlFor}>{text}</label>
+        <PrismInfoTooltip label={tooltipLabel ?? (typeof children === "string" ? `${children} 설명` : "입력 항목 설명")} content={tooltip}
+            side="bottom" arrow={false} contentProps={{className:"prism-label-tooltip",sideOffset:14}}/>
+    </span>;
 }
 export function PrismSkeleton({ width = "100%", height = 16, radius = 4 }: { width?: CSSProperties["width"]; height?: CSSProperties["height"]; radius?: number }) {
     return <span className="prism-skeleton" aria-hidden="true" style={{width,height,borderRadius:radius}} />;

@@ -11,7 +11,7 @@ globalThis.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const { createElement: h, act } = await import("react");
 const { createRoot } = await import("react-dom/client");
-const { PrismTooltip, PrismSummaryBadge } = await import("../dist/index.js");
+const { PrismTooltip, PrismInfoTooltip, PrismInputLabel, PrismSummaryBadge } = await import("../dist/index.js");
 const { renderToStaticMarkup } = await import("react-dom/server");
 const root = createRoot(document.getElementById("root"));
 const tooltip = () => document.querySelector('[role="tooltip"]');
@@ -35,5 +35,52 @@ test("a controlled tooltip emits close intent without changing owner-supplied op
     assert.equal(next, false);
     assert.equal(tooltip().textContent, "호스트 도움말");
     assert.equal(document.querySelector(".prism-tooltip-arrow"), null);
+});
+test("input label keeps its native control association separate from the help button", async () => {
+    await act(async () => root.render(h("div", null,
+        h(PrismInputLabel, { htmlFor: "labelled-input", required: true, tooltip: "입력 방법", tooltipLabel: "이름 입력 설명", suffix: h("span", { "data-suffix": true }, "선택 기준") }, "이름"),
+        h("input", { id: "labelled-input", required: true }))));
+    const input = document.getElementById("labelled-input");
+    const label = input.labels[0];
+    const help = document.querySelector('[aria-label="이름 입력 설명"]');
+    assert.equal(input.labels.length, 1);
+    assert.equal(label.contains(help), false);
+    assert.equal(help.type, "button");
+    assert.equal(help.getAttribute("aria-expanded"), "false");
+    assert.equal(label.querySelector(".prism-input-required").getAttribute("aria-hidden"), "true");
+    assert.equal(label.querySelector("[data-suffix]").textContent, "선택 기준");
+    for (const tooltipText of [undefined, "", " \n "]) {
+        await act(async () => root.render(h("div", null,
+            h(PrismInputLabel, { htmlFor: "plain-input", tooltip: tooltipText }, "이름"), h("input", { id: "plain-input" }))));
+        assert.equal(document.getElementById("plain-input").labels.length, 1);
+        assert.equal(document.querySelector(".prism-info-tooltip-trigger"), null);
+    }
+});
+test("an uncontrolled info button toggles without submitting its containing form", async () => {
+    let submitted = 0;
+    await act(async () => root.render(h("form", { onSubmit: event => { event.preventDefault(); submitted++; } },
+        h(PrismInfoTooltip, { label: "입력 설명", content: "도움말", arrow: false }))));
+    const help = document.querySelector('[aria-label="입력 설명"]');
+    await act(async () => help.click());
+    assert.equal(help.getAttribute("aria-expanded"), "true");
+    assert.equal(tooltip().textContent, "도움말");
+    await act(async () => help.click());
+    assert.equal(help.getAttribute("aria-expanded"), "false");
+    assert.equal(tooltip(), null);
+    assert.equal(submitted, 0);
+});
+test("an info tooltip leaves controlled state with its owner", async () => {
+    const changes = [];
+    const render = open => h(PrismInfoTooltip, { label: "제어된 설명", content: "호스트 도움말", arrow: false, open, onOpenChange: value => changes.push(value) });
+    await act(async () => root.render(render(true)));
+    const help = document.querySelector('[aria-label="제어된 설명"]');
+    await act(async () => help.click());
+    assert.equal(changes.at(-1), false);
+    assert.equal(help.getAttribute("aria-expanded"), "true");
+    assert.equal(tooltip().textContent, "호스트 도움말");
+    await act(async () => root.render(render(false)));
+    assert.equal(help.getAttribute("aria-expanded"), "false");
+    assert.equal(tooltip(), null);
+    assert.throws(() => renderToStaticMarkup(h(PrismInfoTooltip, { label: "  ", content: "본문" })), /requires a label/);
 });
 test.after(async () => { await act(async () => root.unmount()); dom.window.close(); });
