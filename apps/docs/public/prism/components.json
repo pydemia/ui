@@ -4,7 +4,27 @@
   "reference": {
     "url": "http://dev.prism.ai",
     "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
-    "observedAt": "2026-10-03"
+    "observedAt": "2026-10-03",
+    "latestSourceAudit": {
+      "observedAt": "2026-10-09",
+      "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "checkout": "dev fast-forwarded and clean",
+      "previousMappedCount": 269,
+      "newComponents": [
+        "components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+        "components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+        "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
+        "components/chat/successorCandidate/print/PdfDownloadHost.tsx"
+      ],
+      "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date."
+    }
+  },
+  "sourceCoverage": {
+    "inventoryUrl": "/prism/research/source-inventory.json",
+    "total": 273,
+    "pending": 4,
+    "vectorAssets": 87,
+    "claim": "Source-purpose mapping is separate from state/visual verification. Vector artwork is retained as design assets; API/auth/persistence remains host-owned. Pending entries must be resolved explicitly before completion."
   },
   "theme": {
     "mode": "light",
@@ -1547,17 +1567,21 @@
           "NoData 13px and 15px line box",
           "Summary badge 88px, neutral border and text metrics",
           "empty Summary 49px without badge",
-          "Summary click opens tooltip; Escape dismisses"
+          "Summary click opens tooltip; Escape dismisses",
+          "InputLabel source coordinates and short tooltip match measured dimensions and style",
+          "Native label/help sibling association and controlled info state tests",
+          "Selected real touch/focus/Space/Escape and narrow long tooltip behavior"
         ],
         "evidence": [
           "reference-candidate-common-metrics",
           "local-candidate-common-metrics",
           "local-summary-empty",
-          "local-summary-tooltip"
+          "local-summary-tooltip",
+          "installed-input-label"
         ],
         "remaining": [
-          "hover and focus-only Tooltip runtime",
-          "all summary content states"
+          "All other primitive states and domain callers",
+          "New source delta components remain pending in source-inventory.json"
         ]
       },
       "exports": [

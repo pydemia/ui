@@ -2,6 +2,8 @@
 
 Isolated PRISM-DEV design and interaction references using React 19, pydemia/ui and shadcn/Radix primitives.
 
+Latest source inventory: 273 entries, 4 pending implementations. Purpose mapping and selected runtime checks do not prove all source states or visual parity.
+
 - [Contracts and source mapping](/prism/components.json)
 - [Ground rules](/prism/research/design-rules.md)
 - [Original inventory](/prism/research/source-inventory.json)

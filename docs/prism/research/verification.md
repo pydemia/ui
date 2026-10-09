@@ -1,6 +1,6 @@
 # PRISM 검증 기록
 
-기준 소스: dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9`. 관찰일: 2026-10-03. 전체 원본 스타일·상태 일치는 아직 확인하지 않았습니다.
+기존 구현·관찰 기준: dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9`, 2026-10-03. 2026-10-09에 frontend를 fetch·fast-forward해 `087811ff`를 확인했습니다. 현재 inventory 273개 중 새 컴포넌트 4개는 구현 대기입니다. 전체 원본 스타일·상태 일치는 아직 확인하지 않았습니다.
 
 ## 근거와 범위
 
@@ -68,3 +68,13 @@ SUMMARY의 터치 열기/닫기, 바깥 터치, focus/Escape, Space 토글을 �
 - 원본 기본·hover·focus·disabled·selected·error·empty·long 상태와 인증 도메인 화면을 비교합니다.
 - 모든 도메인의 긴 내용·popup·파일 상호작용과 인쇄 용지/여백·긴 Essay 조합을 확인합니다.
 - 공개 119상태의 렌더와 상호작용 검사를 원본 스타일·모든 상태의 일치로 해석하지 않습니다.
+
+## InputLabel 도움말과 최신 소스 차이
+
+InputLabel의 raw MUI 도움말은 일반 HRXTooltip와 규격이 다릅니다. 원본의 라벨 14px/600/20px, 필수 표시 8px, Info16px과 도움말 11px/500·4px8px padding·회색 배경·radius4·화살표 없음·14px 간격을 재현했습니다. 기존 라벨 간격4px을0으로 맞췄습니다. 같은 좌표에서 짧은 라벨·도움말의 크기와 위치가 일치했으며 키보드·터치·320px 줄바꿈·320×240 내부 스크롤을 확인했습니다. 도움말 버튼은 native label과 형제로 배치해 htmlFor 연결을 유지합니다. 2026-10-09에 원본과 독립 소비자를 다시 확인했고 같은 좌표의 크기·위치 차이는0px였습니다. 이 비교가 전체 화면 pixel 일치를 의미하지는 않습니다.
+
+Tooltip 기본 hover 지연100ms는 실제 배포 MUI bundle에서 확인했습니다. `delayDuration`으로 바꿀 수 있고 `PrismInfoTooltip`의 `open/onOpenChange`는 호스트가 제어할 수 있습니다. SUMMARY도 같은 정보 버튼을 조합합니다. 최신 병합본의 계약 테스트36개와 예시12개 타입 검사, 일반 UI280테스트,146registry/144catalog/83immutable release 검증이 통과했습니다. 병합 후 새 독립 소비자39항목·62파일의 설치·컴파일이 통과했고 이후 포커스 자동 스크롤 수정만 emitted source로 동기화해 다시 컴파일했습니다. 수정 후 라벨·SUMMARY·Avatar의 실제 브라우저 검사도 통과했습니다.
+
+최신 frontend는 LeadershipPie, LeadershipPieSummary, CandidateProfilesPdfDownload, PdfDownloadHost를 추가했습니다. 기존269개 목적 대응에 이 네 가지의 구현이 포함됐다고 표시하지 않습니다. 사용자·회사 그룹 양식, Memo, PDF, 프로필 영역의 변경과 `_dialog.scss`·`_print.scss`·`_text-field.scss` 차이도 후속 비교가 필요합니다. InputLabel과 Tooltip의 소스·SCSS는 두 revision에서 동일했습니다. 이 checkout revision이 현재 배포 revision과 같다는 근거는 확보하지 않았습니다.
+
+포커스로 화면 밖의 정보 버튼을 스크롤하면 Radix의 ancestor-scroll 닫기가 열림과 겹쳤습니다. 다음 animation frame에 포커스 도움말을 열고 Escape·blur·unmount는 대기 중 열림을 취소하도록 보완했습니다. 문서의 실제320×240 long 도움말은300×90.1875px이며 native wheel scrollTop230을 확인했습니다. 최신120상태의320px 렌더·가로 넘침·중첩 버튼·입력 이름·page error 검사도0문제입니다. 이 기록은 현재 소스의 공개 반영 전에 작성했으며 원격 결과는 세션 worknote에서 갱신합니다.
