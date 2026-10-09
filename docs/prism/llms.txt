@@ -653,16 +653,32 @@ export function AccessExample({ status, onRetry }: {
 ```
 
 ## Notice / Group / User / Position forms
-공지 노출 범위·게시기간, 역할별 회사 그룹과 포지션 요구 사항 입력
-Contract: 양식 값과 선택지는 외부에서 전달합니다. 조건부 필드·선택 제한·중복 직무 표시를 제공하고 저장·취소·생성·상태 변경은 callback입니다. 이메일·이름 중복 검사 결과와 편집 권한은 소비자가 결정합니다. 팝업을 끄면 게시기간 입력값을 null로 변경합니다.
-States: default, readonly, loading, error
+공지 노출 범위·게시기간, 사용자 기본 정보·역할별 회사 그룹과 포지션 요구 사항 입력
+Contract: 소비자가 값·선택지·권한·업무 검증과 저장을 소유합니다. UserForm의 mode=create는 PrismUserRegistrationDraft의 이메일·성·이름·회사·본부/팀을 필수로 받고 mode=detail은 initialValue를 요구하며 기본 정보를 읽기 전용으로 표시합니다. 역할·회사 그룹 변경 후 수정 가능합니다. 그룹의 활성/비활성 배지는 선택값과 옵션에 표시합니다. emailStatus/onCheckEmail은 업무 검증용이며 기본 검사는 이메일 형식만 확인합니다. CompanyGroupForm의 validateName(name,{signal})은 등록 blur 또는 상세 이름 변경 600ms 후 호출되며 오래된 결과·중복·확인 오류는 저장을 막습니다. 이름이 그대로인 상세는 회사만 바꿔 저장 가능합니다. 사용자/그룹 양식은 Promise 저장의 진행·실패·재시도와 중복 제출 방지를 지원합니다. mode 없는 기존 3필드 UserForm도 지원합니다. 공지 팝업을 끄면 게시기간을 null로 변경하며 포지션 요구 선택 제한과 중복 직무를 표시합니다.
+States: default, readonly, loading, error, long
 Registry: /prism/r/prism-domain-forms.json
 Source: packages/prism/src/prism-domain-forms.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismNoticeForm } from "@/components/ui/prism-domain-forms";
-<PrismNoticeForm value={draft} onValueChange={setDraft} companies={companies} files={files} onFilesSelected={attach} onSubmit={save} onCancel={cancel} />;
+import { useState } from "react";
+import { PrismUserForm, PrismCompanyGroupForm, type PrismUserRegistrationDraft, type PrismCompanyGroupDraft, type PrismGroupNameValidator } from "@/components/ui/prism-domain-forms";
+const companies = [{ value: "demo", label: "가상전자" }, { value: "example", label: "예시사업" }];
+export function UserFormExample() {
+  const [value, setValue] = useState<PrismUserRegistrationDraft>({ email: "", lastName: "", firstName: "", companyId: "", division: "", roleId: "member", companyGroupId: "" });
+  const [saved, setSaved] = useState(false);
+  return <div data-prism="light"><PrismUserForm mode="create" value={value} onValueChange={setValue} companies={companies}
+    roles={[{ value: "member", label: "멤버사 사용자", needsCompanyGroup: true }, { value: "group", label: "그룹 담당자" }]}
+    companyGroups={[{ id: "group", name: "가상 회사 그룹", status: "활성", companies: ["가상전자"] }]}
+    onSubmit={async () => { setSaved(true); }} onCancel={() => setSaved(false)} /><p role="status">{saved ? "가상 입력 확인 완료" : ""}</p></div>;
+}
+export function CompanyGroupFormExample() {
+  const [value, setValue] = useState<PrismCompanyGroupDraft>({ name: "", companyIds: [] });
+  const [saved, setSaved] = useState(false);
+  // Synthetic validation only. Supply the service's validator in an application.
+  const validateName: PrismGroupNameValidator = async (name, { signal }) => { if (signal.aborted) throw signal.reason; return name !== "중복 그룹"; };
+  return <div data-prism="light"><PrismCompanyGroupForm mode="create" value={value} onValueChange={setValue} companies={companies} validateName={validateName} onSubmit={async () => { setSaved(true); }} onCancel={() => setSaved(false)} /><p role="status">{saved ? "가상 그룹 확인 완료" : ""}</p></div>;
+}
 ```
 
 ## Profile print pages / Repeated header

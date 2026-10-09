@@ -160,6 +160,10 @@
           "kind": "component"
         },
         {
+          "name": "PrismSelectOption",
+          "kind": "type"
+        },
+        {
           "name": "PrismSelectProps",
           "kind": "type"
         },
@@ -2378,14 +2382,15 @@
       "id": "prism-domain-forms",
       "name": "Notice / Group / User / Position forms",
       "category": "Administration",
-      "purpose": "공지 노출 범위·게시기간, 역할별 회사 그룹과 포지션 요구 사항 입력",
-      "contract": "양식 값과 선택지는 외부에서 전달합니다. 조건부 필드·선택 제한·중복 직무 표시를 제공하고 저장·취소·생성·상태 변경은 callback입니다. 이메일·이름 중복 검사 결과와 편집 권한은 소비자가 결정합니다. 팝업을 끄면 게시기간 입력값을 null로 변경합니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "purpose": "공지 노출 범위·게시기간, 사용자 기본 정보·역할별 회사 그룹과 포지션 요구 사항 입력",
+      "contract": "소비자가 값·선택지·권한·업무 검증과 저장을 소유합니다. UserForm의 mode=create는 PrismUserRegistrationDraft의 이메일·성·이름·회사·본부/팀을 필수로 받고 mode=detail은 initialValue를 요구하며 기본 정보를 읽기 전용으로 표시합니다. 역할·회사 그룹 변경 후 수정 가능합니다. 그룹의 활성/비활성 배지는 선택값과 옵션에 표시합니다. emailStatus/onCheckEmail은 업무 검증용이며 기본 검사는 이메일 형식만 확인합니다. CompanyGroupForm의 validateName(name,{signal})은 등록 blur 또는 상세 이름 변경 600ms 후 호출되며 오래된 결과·중복·확인 오류는 저장을 막습니다. 이름이 그대로인 상세는 회사만 바꿔 저장 가능합니다. 사용자/그룹 양식은 Promise 저장의 진행·실패·재시도와 중복 제출 방지를 지원합니다. mode 없는 기존 3필드 UserForm도 지원합니다. 공지 팝업을 끄면 게시기간을 null로 변경하며 포지션 요구 선택 제한과 중복 직무를 표시합니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "readonly",
         "loading",
-        "error"
+        "error",
+        "long"
       ],
       "source": [
         "admin/notices/NoticeForm.tsx",
@@ -2393,13 +2398,13 @@
         "admin/users/UserForm.tsx",
         "admin/positions/PositionForm.tsx"
       ],
-      "usage": "import { PrismNoticeForm } from \"@pydemia/prism\";\n<PrismNoticeForm value={draft} onValueChange={setDraft} companies={companies} files={files} onFilesSelected={attach} onSubmit={save} onCancel={cancel} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismUserForm, PrismCompanyGroupForm, type PrismUserRegistrationDraft, type PrismCompanyGroupDraft, type PrismGroupNameValidator } from \"@pydemia/prism\";\nconst companies = [{ value: \"demo\", label: \"가상전자\" }, { value: \"example\", label: \"예시사업\" }];\nexport function UserFormExample() {\n  const [value, setValue] = useState<PrismUserRegistrationDraft>({ email: \"\", lastName: \"\", firstName: \"\", companyId: \"\", division: \"\", roleId: \"member\", companyGroupId: \"\" });\n  const [saved, setSaved] = useState(false);\n  return <div data-prism=\"light\"><PrismUserForm mode=\"create\" value={value} onValueChange={setValue} companies={companies}\n    roles={[{ value: \"member\", label: \"멤버사 사용자\", needsCompanyGroup: true }, { value: \"group\", label: \"그룹 담당자\" }]}\n    companyGroups={[{ id: \"group\", name: \"가상 회사 그룹\", status: \"활성\", companies: [\"가상전자\"] }]}\n    onSubmit={async () => { setSaved(true); }} onCancel={() => setSaved(false)} /><p role=\"status\">{saved ? \"가상 입력 확인 완료\" : \"\"}</p></div>;\n}\nexport function CompanyGroupFormExample() {\n  const [value, setValue] = useState<PrismCompanyGroupDraft>({ name: \"\", companyIds: [] });\n  const [saved, setSaved] = useState(false);\n  // Synthetic validation only. Supply the service's validator in an application.\n  const validateName: PrismGroupNameValidator = async (name, { signal }) => { if (signal.aborted) throw signal.reason; return name !== \"중복 그룹\"; };\n  return <div data-prism=\"light\"><PrismCompanyGroupForm mode=\"create\" value={value} onValueChange={setValue} companies={companies} validateName={validateName} onSubmit={async () => { setSaved(true); }} onCancel={() => setSaved(false)} /><p role=\"status\">{saved ? \"가상 그룹 확인 완료\" : \"\"}</p></div>;\n}",
       "sourcePath": "packages/prism/src/prism-domain-forms.tsx",
       "previewUrl": "/prism?component=prism-domain-forms",
       "embedUrl": "/prism?component=prism-domain-forms&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-domain-forms&view=responsive",
       "verification": {
-        "visual": "pending",
+        "visual": "partial",
         "interaction": "partial",
         "checks": [
           "All companies disables company selector",
@@ -2409,17 +2414,27 @@
           "company group selects two companies and emits synthetic save intent",
           "duplicate position sub-job rejected",
           "expertise limit 3 and experience limit 2 preserve removal",
-          "position generate and save intent callbacks"
+          "position generate and save intent callbacks",
+          "Current source 087811ff user create: required email/lastName/firstName/companyId/division, searchable company select",
+          "Current user detail: read-only basics, unchanged save disabled, role/group changes enable save; active/inactive rich group labels",
+          "Group create blur validation and detail 600ms debounce; unchanged detail name allows company-only edit",
+          "Stale/aborted name responses ignored, duplicate and failed checks block save; retry is available",
+          "Promise save busy state, duplicate submission guard, rejected-save recovery",
+          "Actual local Chrome: source field gap 2px, header 18px/600/1.4, status colors #009A93/#363636, error helper 12px; focused error remains red",
+          "Long synthetic current forms at 140/200/320/800/1280px: no page or visible form-control overflow after grid/action wrapping fix"
         ],
         "evidence": [
           "local-notice-form",
           "local-user-form",
           "local-group-form",
-          "local-position-form"
+          "local-position-form",
+          "current-admin-forms.test.mjs",
+          "current-admin-user-long.jpg",
+          "current-admin-cua-runtime.json"
         ],
         "remaining": [
-          "all display variants",
-          "authenticated source form visual comparison"
+          "Fresh authenticated source create/detail visual and behavior comparison",
+          "Complete notice/position form states and source-specific authorization/business-validation contracts"
         ]
       },
       "exports": [
@@ -2440,11 +2455,43 @@
           "kind": "type"
         },
         {
+          "name": "PrismGroupNameValidator",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCompanyGroupFormProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismCompanyGroupForm",
           "kind": "component"
         },
         {
           "name": "PrismUserDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserRegistrationDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserRoleOption",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserCompanyGroup",
+          "kind": "type"
+        },
+        {
+          "name": "PrismLegacyUserFormProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserRegistrationFormProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserFormProps",
           "kind": "type"
         },
         {
@@ -2460,8 +2507,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismNoticeForm } from \"@/components/ui/prism-domain-forms\";\n<PrismNoticeForm value={draft} onValueChange={setDraft} companies={companies} files={files} onFilesSelected={attach} onSubmit={save} onCancel={cancel} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismUserForm, PrismCompanyGroupForm, type PrismUserRegistrationDraft, type PrismCompanyGroupDraft, type PrismGroupNameValidator } from \"@/components/ui/prism-domain-forms\";\nconst companies = [{ value: \"demo\", label: \"가상전자\" }, { value: \"example\", label: \"예시사업\" }];\nexport function UserFormExample() {\n  const [value, setValue] = useState<PrismUserRegistrationDraft>({ email: \"\", lastName: \"\", firstName: \"\", companyId: \"\", division: \"\", roleId: \"member\", companyGroupId: \"\" });\n  const [saved, setSaved] = useState(false);\n  return <div data-prism=\"light\"><PrismUserForm mode=\"create\" value={value} onValueChange={setValue} companies={companies}\n    roles={[{ value: \"member\", label: \"멤버사 사용자\", needsCompanyGroup: true }, { value: \"group\", label: \"그룹 담당자\" }]}\n    companyGroups={[{ id: \"group\", name: \"가상 회사 그룹\", status: \"활성\", companies: [\"가상전자\"] }]}\n    onSubmit={async () => { setSaved(true); }} onCancel={() => setSaved(false)} /><p role=\"status\">{saved ? \"가상 입력 확인 완료\" : \"\"}</p></div>;\n}\nexport function CompanyGroupFormExample() {\n  const [value, setValue] = useState<PrismCompanyGroupDraft>({ name: \"\", companyIds: [] });\n  const [saved, setSaved] = useState(false);\n  // Synthetic validation only. Supply the service's validator in an application.\n  const validateName: PrismGroupNameValidator = async (name, { signal }) => { if (signal.aborted) throw signal.reason; return name !== \"중복 그룹\"; };\n  return <div data-prism=\"light\"><PrismCompanyGroupForm mode=\"create\" value={value} onValueChange={setValue} companies={companies} validateName={validateName} onSubmit={async () => { setSaved(true); }} onCancel={() => setSaved(false)} /><p role=\"status\">{saved ? \"가상 그룹 확인 완료\" : \"\"}</p></div>;\n}"
     },
     {
       "id": "prism-print",

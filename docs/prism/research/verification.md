@@ -1,6 +1,6 @@
 # PRISM 검증 기록
 
-기존 구현·관찰 기준: dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9`, 2026-10-03. 2026-10-09에 frontend를 fetch·fast-forward해 `087811ff`를 확인했습니다. 현재 inventory 273개 중 새 프로필 PDF 다운로드와 background host2개는 구현 대기입니다. 새 LeadershipPie와 Summary는 별도 typed 구현과 선택한 검증을 추가했습니다. 전체 원본 스타일·상태 일치는 아직 확인하지 않았습니다.
+기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 40개 typed 그룹과 토큰을 포함한 41개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
 
 ## 근거와 범위
 
@@ -75,7 +75,7 @@ InputLabel의 raw MUI 도움말은 일반 HRXTooltip와 규격이 다릅니다. 
 
 Tooltip 기본 hover 지연100ms는 실제 배포 MUI bundle에서 확인했습니다. `delayDuration`으로 바꿀 수 있고 `PrismInfoTooltip`의 `open/onOpenChange`는 호스트가 제어할 수 있습니다. SUMMARY도 같은 정보 버튼을 조합합니다. 최신 병합본의 계약 테스트36개와 예시12개 타입 검사, 일반 UI280테스트,146registry/144catalog/83immutable release 검증이 통과했습니다. 병합 후 새 독립 소비자39항목·62파일의 설치·컴파일이 통과했고 이후 포커스 자동 스크롤 수정만 emitted source로 동기화해 다시 컴파일했습니다. 수정 후 라벨·SUMMARY·Avatar의 실제 브라우저 검사도 통과했습니다.
 
-최신 frontend는 LeadershipPie, LeadershipPieSummary, CandidateProfilesPdfDownload, PdfDownloadHost를 추가했습니다. 기존269개 목적 대응에 이 네 가지의 구현이 포함됐다고 표시하지 않습니다. 사용자·회사 그룹 양식, Memo, PDF, 프로필 영역의 변경과 `_dialog.scss`·`_print.scss`·`_text-field.scss` 차이도 후속 비교가 필요합니다. InputLabel과 Tooltip의 소스·SCSS는 두 revision에서 동일했습니다. 이 checkout revision이 현재 배포 revision과 같다는 근거는 확보하지 않았습니다.
+최초 `087811ff` 감사에서는 LeadershipPie, LeadershipPieSummary, CandidateProfilesPdfDownload, PdfDownloadHost 네 항목이 구현 대기였습니다. 이후 독립 pie·PDF/ZIP/HTML 목적 구현과 선택한 검증을 추가해 아래 기록에 반영했습니다. Memo, PDF, 프로필 영역과 인쇄 규칙의 전체 상태 비교는 남아 있습니다. 사용자·회사 그룹 양식과 dialog/text-field 선택 규칙은 최신 추가 검증의 범위를 확인해 주세요. InputLabel과 Tooltip의 소스·SCSS는 두 revision에서 동일했습니다. 이 checkout revision이 현재 배포 revision과 같다는 근거는 확보하지 않았습니다.
 
 포커스로 화면 밖의 정보 버튼을 스크롤하면 Radix의 ancestor-scroll 닫기가 열림과 겹쳤습니다. 다음 animation frame에 포커스 도움말을 열고 Escape·blur·unmount는 대기 중 열림을 취소하도록 보완했습니다. 문서의 실제320×240 long 도움말은300×90.1875px이며 native wheel scrollTop230을 확인했습니다. 최신120상태의320px 렌더·가로 넘침·중첩 버튼·입력 이름·page error 검사도0문제입니다. 이 기록은 현재 소스의 공개 반영 전에 작성했으며 원격 결과는 세션 worknote에서 갱신합니다.
 
@@ -109,3 +109,14 @@ Blob fallback과 호출자 소유 streaming writer를 지원합니다. writer의
 1280/320px의일반·긴프로필4조합을실제로다운로드해offline으로열었습니다. 본문·SVG·3/48경력행·Pretendard와page/pie/SUMMARY의측정규격이원래렌더와일치했고외부요청은0입니다. 320pxroot도320px이며native가로wheel을확인했습니다. 별도canvas/사진의red-blue-green색상순서·SVG use40px·자산cache1회·느린자산중본문변경을실제브라우저로검증했습니다. 실패/취소시다운로드는없습니다. 새로운독립설치41항목/64파일/16예시와56계약테스트가통과했습니다.
 
 전체원본의9페이지필드·모든상태·인쇄여백일치와인증된사진경로는후속비교대상입니다. 이HTML검증은재현한문서의저장후보존을입증하며전체PRISM화면일치를대체하지않습니다.
+
+
+## 2026-10-09 현재 관리자 양식
+
+최신 `UserForm`의 성·이름·회사·본부/팀 필수 입력과 상세 기본 정보 읽기 전용, 변경 후 수정, 회사 검색, 회사 그룹 활성/비활성 배지를 독립 typed recipe에 반영했습니다. `CompanyGroupForm`은 등록 blur 검사, 상세 이름 변경 600ms debounce, 기존 이름 유지 시 회사만 수정, stale/abort 결과 차단과 검사 실패 재시도를 지원합니다. 두 양식은 Promise 저장 중 입력·취소·상태 변경을 잠그고 중복 제출과 저장 실패를 처리합니다. 업무 이메일 도메인·등록 여부·권한은 소비자가 결정합니다. 기본 이메일 검사는 형식 검사입니다.
+
+자체 Chrome 탭에서 합성 데이터로 필수 입력과 저장 의도, 상세 읽기 전용·변경 전후 저장, 선택값·목록의 상태 배지, 회사만 변경, 등록 blur 대기, 중복/검사 오류·재시도를 확인했습니다. 원본 SCSS의 입력 gap 2px, 제목 18px/600/1.4, 상태 색상과 12px 오류 도움말을 적용했습니다. 140px에서 발견한 grid의 최소 내용 폭과 버튼 행 넘침을 제한하고 140/200/320/800/1280px 긴 내용 배치를 다시 확인했습니다. 긴 회사 태그의 고정 높이로 본문이 겹치는 문제도 수정했습니다. 기본 viewport 화면·실제 320px iframe 화면 증거와 폭별 DOM geometry를 따로 기록했습니다.
+
+전체 62개 계약 테스트, 17개 완전 사용 예시와 최신 전체 build/타입 검사를 통과했습니다. 40그룹·130상태의 실제 320px 렌더에서 누락·페이지 가로 넘침·중첩 버튼·표시 입력 이름 누락·브라우저 오류가 없었습니다. 새 소비자에 41항목/64파일을 설치한 뒤 최종 태그 CSS만 emitted bytes로 동기화했고 TypeScript/Vite를 다시 통과했습니다. 설치한 두 완전 양식 예시를 StrictMode에서 입력하고 사용자/그룹의 등록 의도와 320px 가로 넘침 없음을 확인했습니다. 일반 registry는146항목/144catalog/83immutable이며 기존 snapshot SHA를 유지합니다.
+
+기존 원본 탭에는 계정과 후보 화면이 남아 있으나 새 탭은 admin-login으로 이동했고 저장된 비밀번호 자동 완성도 확인되지 않았습니다. 새 인증 세션의 관리자 화면 대조는 미확인입니다. 실제 인사 데이터·credential은 예시나 검증 문서에 포함하지 않습니다. 최신 checkout과 배포 revision의 결합도 아직 확인하지 않았습니다.
