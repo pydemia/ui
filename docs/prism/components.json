@@ -662,17 +662,16 @@
     },
     {
       "id": "prism-detail",
-      "name": "Side panel / Detail / Memo",
+      "name": "Side panel / Detail",
       "category": "Domain",
-      "purpose": "후보자·포지션 상세와 작성자·날짜가 있는 메모 확인",
-      "contract": "패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 메모 actions는 호출자가 제공합니다.",
+      "purpose": "후보자·포지션 상세를 독립 패널에서 확인",
+      "contract": "패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 기존 PrismMemoCard의 작성자 header는 이전 형식의 호환 API이며 현재 프로필 메모는 prism-memo를 사용합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default"
       ],
       "source": [
-        "chat/panel/SidePanel.tsx",
-        "chat/memo/MemoCard.tsx"
+        "chat/panel/SidePanel.tsx"
       ],
       "usage": "import { PrismSidePanel, PrismDetailList } from \"@pydemia/prism\";\n<PrismSidePanel title=\"프로필\" description=\"후보 정보\" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;",
       "sourcePath": "packages/prism/src/prism-detail.tsx",
@@ -699,6 +698,101 @@
       ],
       "usageKind": "integration-fragment",
       "registryUsage": "import { PrismSidePanel, PrismDetailList } from \"@/components/ui/prism-detail\";\n<PrismSidePanel title=\"프로필\" description=\"후보 정보\" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;"
+    },
+    {
+      "id": "prism-memo",
+      "name": "Personal profile memos",
+      "category": "Domain",
+      "purpose": "본인 프로필 메모의 등록·단일 편집·수정 날짜·삭제 확인과 실패 복구",
+      "contract": "소비자가 인증된 서비스에서 본인에게 허용된 메모만 조회합니다. isMine은 서비스 데이터이며 권한을 증명하지 않습니다. Collection은 isMine=false 기록을 제외하고 editingId/onEditingChange로 편집 하나를 관리합니다. 한 카드의 편집 중 다른 카드 수정·삭제를 잠급니다. 카드에는 작성자 header 없이 본문·날짜·수정됨과20px 액션을 표시합니다. onSave/onDelete/onSubmit은 Promise와 {signal}을 지원하며 진행·오류·재시도·중복 의도 방지와 전환/unmount 취소를 처리합니다. 소비자는 실제 저장과 데이터 갱신·draft 해제를 담당합니다. Composer는 Enter 제출·Shift+Enter 줄바꿈·IME 보호를 제공하고 입력 원문을 보존합니다. 높이를 지정하면 목록만 내부 스크롤하고 입력창은 계속 보입니다. 미지정 높이는 자연 크기이며 긴 본문·날짜·footer는 좁은 폭에 맞춰 배치합니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "error",
+        "readonly",
+        "long"
+      ],
+      "source": [
+        "chat/memo/MemoCard.tsx",
+        "chat/memo/MemoContent.tsx",
+        "chat/memo/MemoInput.tsx",
+        "chat/memo/MemoCardListSkeleton.tsx"
+      ],
+      "usage": "import { useRef, useState } from \"react\";\nimport { PrismProfileMemoCollection, PrismProfileMemoComposer, type PrismProfileMemoItem } from \"@pydemia/prism\";\nexport function MemoExample() {\n  const [items, setItems] = useState<PrismProfileMemoItem[]>([{ id: \"demo\", content: \"합성 메모 예시입니다.\", createdAt: \"2026-10-08\", updatedAt: \"2026-10-09\", isMine: true }]);\n  const [editingId, setEditingId] = useState<string | null>(null), [draft, setDraft] = useState(\"\");\n  const nextId = useRef(0);\n  return <div data-prism=\"light\"><PrismProfileMemoCollection height={520} items={items} editingId={editingId} onEditingChange={setEditingId}\n    onSave={async (id, content) => setItems(current => current.map(memo => memo.id === id ? { ...memo, content, updatedAt: \"2026-10-09T17:30:00+09:00\" } : memo))}\n    onDelete={async id => setItems(current => current.filter(memo => memo.id !== id))}\n    composer={<PrismProfileMemoComposer value={draft} onValueChange={setDraft} onSubmit={async content => {\n      const id = \"demo-\" + (++nextId.current);\n      setItems(current => [...current, { id, content, createdAt: \"2026-10-09\", isMine: true }]);\n      setDraft(current => current === content ? \"\" : current);\n    }}/>} /></div>;\n}",
+      "sourcePath": "packages/prism/src/prism-memo.tsx",
+      "previewUrl": "/prism?component=prism-memo",
+      "embedUrl": "/prism?component=prism-memo&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-memo&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Deployed index-DDygUNQ9.js/index-Ct5vvkRn.css contain memoCardBottom and edited label; old memoCardHeader absent",
+          "Source and deployed CSS match card16px padding/12px gap/radius12, body14px400/1.4, date12px500/17px, bottom20px/actions6px and20px icons",
+          "Personal collection excludes non-true isMine data, has no author header and controls one editor through editingId",
+          "Synthetic browser: update, retained failed draft and retry, confirmed delete with busy close guard, create via Enter with Shift+Enter newline preserved",
+          "Promise duplicate guard, immutable draft, AbortSignal on entity transition/unmount and ignored late completion exercised in seven interaction tests",
+          "Actual 140/200/320/440/800px manual widths: no collection/page horizontal overflow, bounded list and composer placement",
+          "Native textarea resize overflow at height240 discovered; ResizeObserver-based maximum corrected it, and height700 restores max200",
+          "Actual 320px viewport: internal PageDown scroll0 to204; CUA native wheel attempted but produced no observed change, so wheel integration is not claimed",
+          "Fresh emitted registry installation:42items/65files/18examples, TypeScript/Vite/font bytes/notices passed"
+        ],
+        "evidence": [
+          "memo.test.mjs",
+          "memo-deployed-css-rules.json",
+          "memo-cua-runtime.json",
+          "memo-static-136-cua.json",
+          "memo-consumer-install.log"
+        ],
+        "remaining": [
+          "Fresh authenticated deployed memo states and complete rendered/source geometry or pixel comparison",
+          "Original static font versus installed variable font measurements for every state",
+          "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
+          "Current screenshot capture unavailable: responsive, default, native and minimal-button capture all timed out while live DOM checks remained available"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismProfileMemoItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismMemoMutationContext",
+          "kind": "type"
+        },
+        {
+          "name": "PrismMemoDateFormatter",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfileMemoCardProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfileMemoCard",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfileMemoComposerProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfileMemoComposer",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfileMemoCollectionProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfileMemoCollection",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismProfileMemoCollection, PrismProfileMemoComposer, type PrismProfileMemoItem } from \"@/components/ui/prism-memo\";\nexport function MemoExample() {\n  const [items, setItems] = useState<PrismProfileMemoItem[]>([{ id: \"demo\", content: \"합성 메모 예시입니다.\", createdAt: \"2026-10-08\", updatedAt: \"2026-10-09\", isMine: true }]);\n  const [editingId, setEditingId] = useState<string | null>(null), [draft, setDraft] = useState(\"\");\n  const nextId = useRef(0);\n  return <div data-prism=\"light\"><PrismProfileMemoCollection height={520} items={items} editingId={editingId} onEditingChange={setEditingId}\n    onSave={async (id, content) => setItems(current => current.map(memo => memo.id === id ? { ...memo, content, updatedAt: \"2026-10-09T17:30:00+09:00\" } : memo))}\n    onDelete={async id => setItems(current => current.filter(memo => memo.id !== id))}\n    composer={<PrismProfileMemoComposer value={draft} onValueChange={setDraft} onSubmit={async content => {\n      const id = \"demo-\" + (++nextId.current);\n      setItems(current => [...current, { id, content, createdAt: \"2026-10-09\", isMine: true }]);\n      setDraft(current => current === content ? \"\" : current);\n    }}/>} /></div>;\n}"
     },
     {
       "id": "prism-panel",
@@ -1779,7 +1873,7 @@
       "category": "Utility",
       "purpose": "텍스트 브랜드·사용자 요약·입력 라벨과 도움말·팝오버·즐겨찾기·접기·로딩",
       "contract": "InputLabel은 htmlFor로 입력과 연결하고 required 표시와 suffix를 유지합니다. tooltip은 11px 회색 도움말로 hover/focus와 터치·Space 토글, Escape·바깥 클릭 닫기를 지원합니다. tooltipLabel은 복합 children의 도움말 접근성 이름을 지정합니다. 입력 required/disabled와 값은 소비자가 지정하며 도움말 버튼은 label 밖에 배치합니다. className/style로 폭을 지정할 수 있고 긴 라벨은 줄바꿈합니다. SkeletonGroup은 기본 3개·120px 블록과 16px 간격을 사용하며 rows·height를 조절할 수 있습니다. 브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 사내 SVG 로고와 인증 검사는 포함하지 않습니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "disabled",

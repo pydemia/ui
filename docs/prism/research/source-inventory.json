@@ -479,10 +479,11 @@
     {
       "source": "components/chat/memo/MemoCard.tsx",
       "name": "MemoCard",
-      "target": "prism-detail",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoCardListSkeleton.tsx",
@@ -490,23 +491,29 @@
       "target": "prism-primitives",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-memo"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoContent.tsx",
       "name": "MemoContent",
-      "target": "prism-collection",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoInput.tsx",
       "name": "MemoInput",
-      "target": "prism-collection",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/notice/NoticePopup.tsx",

@@ -153,9 +153,9 @@ import { PrismCandidateCard } from "@/components/ui/prism-candidate";
 <PrismCandidateCard candidate={candidate} favorite={favorite} onOpen={openProfile} onFavoriteChange={setFavorite} />;
 ```
 
-## Side panel / Detail / Memo
-후보자·포지션 상세와 작성자·날짜가 있는 메모 확인
-Contract: 패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 메모 actions는 호출자가 제공합니다.
+## Side panel / Detail
+후보자·포지션 상세를 독립 패널에서 확인
+Contract: 패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 기존 PrismMemoCard의 작성자 header는 이전 형식의 호환 API이며 현재 프로필 메모는 prism-memo를 사용합니다.
 States: default
 Registry: /prism/r/prism-detail.json
 Source: packages/prism/src/prism-detail.tsx
@@ -164,6 +164,32 @@ Installed usage:
 ```tsx
 import { PrismSidePanel, PrismDetailList } from "@/components/ui/prism-detail";
 <PrismSidePanel title="프로필" description="후보 정보" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;
+```
+
+## Personal profile memos
+본인 프로필 메모의 등록·단일 편집·수정 날짜·삭제 확인과 실패 복구
+Contract: 소비자가 인증된 서비스에서 본인에게 허용된 메모만 조회합니다. isMine은 서비스 데이터이며 권한을 증명하지 않습니다. Collection은 isMine=false 기록을 제외하고 editingId/onEditingChange로 편집 하나를 관리합니다. 한 카드의 편집 중 다른 카드 수정·삭제를 잠급니다. 카드에는 작성자 header 없이 본문·날짜·수정됨과20px 액션을 표시합니다. onSave/onDelete/onSubmit은 Promise와 {signal}을 지원하며 진행·오류·재시도·중복 의도 방지와 전환/unmount 취소를 처리합니다. 소비자는 실제 저장과 데이터 갱신·draft 해제를 담당합니다. Composer는 Enter 제출·Shift+Enter 줄바꿈·IME 보호를 제공하고 입력 원문을 보존합니다. 높이를 지정하면 목록만 내부 스크롤하고 입력창은 계속 보입니다. 미지정 높이는 자연 크기이며 긴 본문·날짜·footer는 좁은 폭에 맞춰 배치합니다.
+States: default, empty, loading, error, readonly, long
+Registry: /prism/r/prism-memo.json
+Source: packages/prism/src/prism-memo.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useRef, useState } from "react";
+import { PrismProfileMemoCollection, PrismProfileMemoComposer, type PrismProfileMemoItem } from "@/components/ui/prism-memo";
+export function MemoExample() {
+  const [items, setItems] = useState<PrismProfileMemoItem[]>([{ id: "demo", content: "합성 메모 예시입니다.", createdAt: "2026-10-08", updatedAt: "2026-10-09", isMine: true }]);
+  const [editingId, setEditingId] = useState<string | null>(null), [draft, setDraft] = useState("");
+  const nextId = useRef(0);
+  return <div data-prism="light"><PrismProfileMemoCollection height={520} items={items} editingId={editingId} onEditingChange={setEditingId}
+    onSave={async (id, content) => setItems(current => current.map(memo => memo.id === id ? { ...memo, content, updatedAt: "2026-10-09T17:30:00+09:00" } : memo))}
+    onDelete={async id => setItems(current => current.filter(memo => memo.id !== id))}
+    composer={<PrismProfileMemoComposer value={draft} onValueChange={setDraft} onSubmit={async content => {
+      const id = "demo-" + (++nextId.current);
+      setItems(current => [...current, { id, content, createdAt: "2026-10-09", isMine: true }]);
+      setDraft(current => current === content ? "" : current);
+    }}/>} /></div>;
+}
 ```
 
 ## Inline panel

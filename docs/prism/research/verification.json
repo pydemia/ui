@@ -700,6 +700,34 @@
         "reference-html-export-offline",
         "parsed-css-html-export"
       ]
+    },
+    "prism-memo": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Deployed index-DDygUNQ9.js/index-Ct5vvkRn.css contain memoCardBottom and edited label; old memoCardHeader absent",
+        "Source and deployed CSS match card16px padding/12px gap/radius12, body14px400/1.4, date12px500/17px, bottom20px/actions6px and20px icons",
+        "Personal collection excludes non-true isMine data, has no author header and controls one editor through editingId",
+        "Synthetic browser: update, retained failed draft and retry, confirmed delete with busy close guard, create via Enter with Shift+Enter newline preserved",
+        "Promise duplicate guard, immutable draft, AbortSignal on entity transition/unmount and ignored late completion exercised in seven interaction tests",
+        "Actual 140/200/320/440/800px manual widths: no collection/page horizontal overflow, bounded list and composer placement",
+        "Native textarea resize overflow at height240 discovered; ResizeObserver-based maximum corrected it, and height700 restores max200",
+        "Actual 320px viewport: internal PageDown scroll0 to204; CUA native wheel attempted but produced no observed change, so wheel integration is not claimed",
+        "Fresh emitted registry installation:42items/65files/18examples, TypeScript/Vite/font bytes/notices passed"
+      ],
+      "evidence": [
+        "memo.test.mjs",
+        "memo-deployed-css-rules.json",
+        "memo-cua-runtime.json",
+        "memo-static-136-cua.json",
+        "memo-consumer-install.log"
+      ],
+      "remaining": [
+        "Fresh authenticated deployed memo states and complete rendered/source geometry or pixel comparison",
+        "Original static font versus installed variable font measurements for every state",
+        "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
+        "Current screenshot capture unavailable: responsive, default, native and minimal-button capture all timed out while live DOM checks remained available"
+      ]
     }
   },
   "gates": {
