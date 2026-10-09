@@ -276,7 +276,8 @@
         "All eight tab recipes render",
         "Experience topic changes displayed card",
         "Comment save appends text and clears draft",
-        "320px profile recipe root does not overflow; tabs and compensation table scroll internally"
+        "320px profile recipe root does not overflow; tabs and compensation table scroll internally",
+        "LeadershipPieSummary uses source print padding16/gap20/radius12/border#b6bec9/white and13.333px caption;typedrecipe selects old summary or new pieSummary."
       ],
       "evidence": [
         "local-profile-total",
@@ -620,12 +621,31 @@
         "other paper and native print settings",
         "very long outline and essay fragmentation"
       ]
+    },
+    "prism-chart": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "New deployed leadership print sample:160x158 frame,11px700 inside labels,three source colors",
+        "Typed SVG preserves supplied percentages,null and real zero; incomplete geometry has an unassigned sector",
+        "42 actual consumer cases across1280/320/390 viewport and140/320/800 manual widths passed with no root overflow",
+        "Adaptive radius and long-label legend preserve legibility; hidden data-table overflow corrected"
+      ],
+      "evidence": [
+        "reference-leadership-print-20261009",
+        "consumer-leadership-20261009"
+      ],
+      "remaining": [
+        "All original outside-label and animation states",
+        "Authenticated leadership domain",
+        "Complete page pixel parity"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 36,
+      "passed": 40,
       "failed": 0
     },
     "registry": {
@@ -634,17 +654,17 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-fresh-local-install-then-final-focus-source-sync",
+      "status": "passed-fresh-local-install-then-final-source-sync",
       "items": 39,
       "files": 62,
-      "completeExamples": 12,
+      "completeExamples": 14,
       "typecheck": "passed",
       "viteBuild": "passed",
       "portableFont": "package font emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "All 39 items and 12 complete examples compiled after upstream integration; only the subsequent focus-scroll fix was synchronized from emitted utility and recompiled.",
-      "registrySha256": "93f89ddbfda167b0e9bd76997c07747886d633f472d3a0c3b3030494e9e4891f",
-      "browser": "Actual source coordinates, touch/focus/Space/Escape, SUMMARY and Avatar regression, eight long label/help viewport and manual width cases passed."
+      "sourceScope": "Fresh39items/62files with14complete examples compiled;final CSS scoping and zero label source synchronized from emitted registry and recompiled.",
+      "registrySha256": "acae6f777e96e83bd77d64c539b4234798b0246ca529d998e4ba4d347dab93ad",
+      "browser": "42 fresh consumer distribution/width cases and animation/reduced-motion passed."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -728,19 +748,18 @@
     },
     "usageContracts": {
       "groups": 38,
-      "componentExamples": 12,
-      "integrationFragments": 26,
+      "componentExamples": 14,
+      "integrationFragments": 24,
       "workspaceTypecheck": "passed in check-prism.mjs; runs in existing CI PRISM gate",
       "installedTypecheck": "passed in isolated consumer",
       "installationDependencyClosure": "all 38 installed usage imports resolve within their registry dependency graph",
       "usagePathControlRuntime": "passed: registry/workspace selections display the matching manifest code; clipboard write not exercised"
     },
     "currentFixtureStates": {
-      "count": 120,
-      "status": "passed-local-merged-build-browser",
-      "previousVerifiedStates": 119,
-      "previousPublishedVerificationCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
-      "implementationCheckpoint": "a52360ee plus focus fix"
+      "count": 121,
+      "status": "pending-final-built-document-check",
+      "previousVerifiedStates": 120,
+      "previousPublishedVerificationCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -751,8 +770,16 @@
       "scope": "Nine placements, small, SUMMARY touch/focus and long 320x240/wheel checks; whole-domain parity remains partial."
     },
     "inputLabelPublication": {
+      "status": "published-http-and-browser-verified",
+      "sourceCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b",
+      "verifyUiRun": 37901827017,
+      "pagesRun": 37901826283,
+      "states": 120,
+      "publicAssetsMatching": 13
+    },
+    "leadershipPublication": {
       "status": "recorded-before-publication",
-      "scope": "Local merged InputLabel and PrismInfoTooltip checks passed. The exact Git and deployment results are recorded after publication in the session worknote."
+      "scope": "New pie,summary,typed recipe and source-reference revision; publication readback will be recorded after push."
     }
   },
   "unverified": [
@@ -760,21 +787,21 @@
     "remaining source state comparisons outside measured files, nine Tooltip placements and SUMMARY help; authenticated full-domain screens",
     "all extensions across domains, long content and popup combinations",
     "clipboard write and native print dialog",
-    "Latest source checkout 087811ff adds four components whose implementation is pending; 269 previous purpose mappings are not current full coverage."
+    "Latest source checkout adds four components:two leadership purpose mappings are implemented;profile PDF download and background host remain pending."
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 38,
-    "states": 120,
-    "status": "passed-local-merged-input-label-build",
+    "states": 121,
+    "status": "passed-initial-local-leadership-build",
     "checks": [
-      "all 120 fixtures render at actual 320px viewport",
+      "all121 fixtures render at actual320px viewport",
       "no nested buttons",
       "no page root horizontal overflow",
       "no unlabeled visible native inputs",
       "no page errors or unhandled rejections"
     ],
-    "evidence": "local-label-120-fixed",
+    "evidence": "local-leadership-121-initial",
     "claim": "Rendering does not prove all source states, interactions or visual parity."
   },
   "extensions": {
@@ -980,7 +1007,7 @@
     "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
     "previousRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
     "inventoryComponents": 273,
-    "newPendingComponents": 4,
+    "newPendingComponents": 2,
     "changedStyleFiles": [
       "_dialog.scss",
       "_print.scss",
@@ -1040,5 +1067,67 @@
     "sourceObservation": "Fresh anonymous deployed sample; source/target screenshots inspected.",
     "focusScroll": "Native focus scroll finishes before opening; pending focus opening is cancelled by Escape/blur/unmount.",
     "installedConsumer": "Fresh merged-source install with final emitted focus fix synchronized; tsc/Vite and real browser passed."
+  },
+  "leadershipVerification": {
+    "status": "passed-selected-local-runtime",
+    "source": "http://dev.prism.ai/sample/chat/candidate-profile-print",
+    "frame": {
+      "width": 160,
+      "height": 158
+    },
+    "knownSourceValues": [
+      33,
+      32,
+      35
+    ],
+    "consumerCases": 42,
+    "viewports": [
+      1280,
+      320,
+      390
+    ],
+    "manualWidths": [
+      140,
+      320,
+      800
+    ],
+    "scope": "Measured frame/styles/colors and selected synthetic state/size behavior; source and target screenshots inspected. Whole-page parity remains partial.",
+    "animation": "passed in isolated consumer",
+    "reducedMotion": "passed in isolated consumer",
+    "evidence": "fresh-final-leadership-20261009",
+    "fontRendering": {
+      "sourceColdGlyphWidths": [
+        29,
+        30,
+        32
+      ],
+      "sourceWarmGlyphWidths": [
+        35,
+        34,
+        35
+      ],
+      "targetGlyphWidths": [
+        35,
+        34,
+        35
+      ],
+      "warmGlyphBoxPositionMaxDelta": 1,
+      "warmGlyphBoxHeightMaxDelta": 2,
+      "interpretation": "Original cold canvas retained a different text rendering; warm sample remount matched target widths. A font-loading paint race is inferred, not a whole-page pixel-equivalence claim.",
+      "sourceFontFaces": "Pretendard400/500/600/700 loaded at observation; original uses static faces and target uses package variable face.",
+      "remaining": "Exact rasterization, all outside labels and browser/font combinations."
+    },
+    "fontCases": {
+      "sizes": [
+        8,
+        24
+      ],
+      "states": [
+        "long",
+        "missing"
+      ],
+      "count": 4,
+      "status": "passed"
+    }
   }
 }

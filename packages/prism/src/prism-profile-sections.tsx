@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { PrismBasicInfo, PrismCareerTimeline, PrismOutline, PrismSummaryBadge } from "./prism-profile";
 import { PrismAssessmentSummary, PrismDiagnosis, PrismRiskTable, PrismExpertiseCards, PrismScoreEssay, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismNoData } from "./prism-assessment";
 import { PrismValidationList, PrismExperienceCard, PrismCommentEditor } from "./prism-record";
-import { PrismTrendChart, PrismRadarChart } from "./prism-chart";
+import { PrismTrendChart, PrismRadarChart, PrismLeadershipPie, type PrismLeadershipPieProps } from "./prism-chart";
 import { PrismTable } from "./prism-display";
 import { PrismRequestState } from "./prism-feedback";
 import { PrismSkeletonGroup } from "./prism-primitives";
@@ -37,11 +37,33 @@ export function PrismAttitudeSection({summary,diagnosis,risk,documentAction}: {s
     return <div className="prism-domain-profile-section"><PrismAssessmentSummary {...summary}/><PrismDiagnosis {...diagnosis}/>{documentAction}<PrismRiskTable {...risk}/></div>;
 }
 export type PrismLeadershipTrendRow={year:string;evaluators:number|null;respondents:number|null;score:number|null;groupAverage:number|null;percentile:number|null};
+export type PrismLeadershipPieSummaryProps = Omit<PrismLeadershipPieProps,"title"> & {
+    title?: string; description?: string; chartTitle?: string; print?: boolean;
+};
+export function PrismLeadershipPieSummary({ items, title = "", description = "", chartTitle = "리더십 특성", print = false, ...chart }: PrismLeadershipPieSummaryProps) {
+    if (!chartTitle.trim() || !items.length || items.length>3 || new Set(items.map(item=>item.label.trim())).size!==items.length || items.some(item=>!item.label.trim())) throw new Error("Leadership summary requires a chart title and one to three unique labels.");
+    const total = items.reduce((sum,item)=>sum+(item.value??0),0);
+    if (items.some(item=>item.value!==null&&(!Number.isFinite(item.value)||item.value<0||item.value>100)) || total>100.2 || (items.every(item=>item.value!==null)&&total>0&&Math.abs(total-100)>.2)) throw new RangeError("Leadership summary values must be null or percentages with a complete positive total of100.");
+    const commentTitle = title.trim(), commentDescription = description.trim();
+    const hasData = items.some(item => (item.value ?? 0)>0) || !!commentTitle || !!commentDescription;
+    return <section className="prism-leadership-summary" data-print={print || undefined}><h3>SUMMARY</h3>
+        <div className="prism-leadership-summary-box">{hasData ? <>
+            <div className="prism-leadership-summary-chart"><PrismLeadershipPie {...chart} items={items} title={chartTitle} animate={print ? false : chart.animate}/>
+                <p>리더십 특성 (지・덕・용 중 1위 득표수 비중)</p></div>
+            <div className="prism-leadership-summary-comment">{commentTitle && <strong>{commentTitle}</strong>}{commentDescription && <p>{commentDescription}</p>}</div>
+        </> : <div className="prism-leadership-summary-empty"><PrismNoData message={items.every(item=>item.value===0) ? "비중 모두 0%" : undefined}/>
+            <div className="prism-sr-only"><table><caption>{chartTitle} 데이터</caption><tbody>{items.map(item => <tr key={item.label}><th scope="row">{item.label}</th><td>{item.value===null ? "정보 없음" : `${item.value}%`}</td></tr>)}</tbody></table></div>
+        </div>}</div>
+    </section>;
+}
 export function PrismLeadershipTrend({chart,rows}: {chart:ComponentProps<typeof PrismTrendChart>;rows:readonly PrismLeadershipTrendRow[]}) {
     return <section className="prism-leadership-trend"><header><h3>과거 5개년 리더십 Survey 추이</h3><span>종합 평균 (5점 만점)</span></header><PrismTrendChart {...chart}/><PrismTable caption="리더십 Survey 추이"><thead><tr>{["연도","평가자수","응답자수","점수","그룹 평균 점수","백분율"].map(label=><th key={label} scope="col">{label}</th>)}</tr></thead><tbody>{rows.length ? rows.map(row=><tr key={row.year}><th scope="row">{row.year}</th><td>{row.evaluators??"-"}</td><td>{row.respondents??"-"}</td><td data-highlight>{row.score??"-"}</td><td>{row.groupAverage??"-"}</td><td data-highlight>{row.percentile===null ? "-" : `상위 ${row.percentile}%`}</td></tr>) : <tr><td colSpan={6}>관련 데이터 없음</td></tr>}</tbody></PrismTable></section>;
 }
-export function PrismLeadershipSection({summary,radar,validation,strength,improvement,trend}: {summary:ComponentProps<typeof PrismAssessmentSummary>;radar:ComponentProps<typeof PrismRadarChart>;validation:ComponentProps<typeof PrismValidationList>;strength:ComponentProps<typeof PrismLeadershipReasons>;improvement:ComponentProps<typeof PrismLeadershipReasons>;trend:ComponentProps<typeof PrismLeadershipTrend>}) {
-    return <div className="prism-domain-profile-section"><PrismAssessmentSummary {...summary}/><PrismRadarChart {...radar}/><PrismValidationList {...validation}/><PrismLeadershipReasons {...strength}/><PrismLeadershipReasons {...improvement} danger/><PrismLeadershipTrend {...trend}/></div>;
+export type PrismLeadershipSectionProps = {radar:ComponentProps<typeof PrismRadarChart>;validation:ComponentProps<typeof PrismValidationList>;strength:ComponentProps<typeof PrismLeadershipReasons>;improvement:ComponentProps<typeof PrismLeadershipReasons>;trend:ComponentProps<typeof PrismLeadershipTrend>} & (
+    {summary:ComponentProps<typeof PrismAssessmentSummary>;pieSummary?:never} | {summary?:never;pieSummary:PrismLeadershipPieSummaryProps}
+);
+export function PrismLeadershipSection({summary,pieSummary,radar,validation,strength,improvement,trend}: PrismLeadershipSectionProps) {
+    return <div className="prism-domain-profile-section">{pieSummary ? <PrismLeadershipPieSummary {...pieSummary}/> : <PrismAssessmentSummary {...summary}/>}<PrismRadarChart {...radar}/><PrismValidationList {...validation}/><PrismLeadershipReasons {...strength}/><PrismLeadershipReasons {...improvement} danger/><PrismLeadershipTrend {...trend}/></div>;
 }
 export function PrismCommentsSection({items,editor}: {items:readonly {id:string;author:string;date:string;comment:string|null}[];editor?:ComponentProps<typeof PrismCommentEditor>}) {
     return <div className="prism-domain-profile-section"><PrismOutline title="Mgmt. Comments">{items.length ? items.map(item=><article key={item.id}><header><strong>{item.author}</strong> <time>{item.date}</time></header><p>{item.comment??"관련 데이터 없음"}</p></article>) : <PrismNoData/>}</PrismOutline>{editor&&<PrismCommentEditor {...editor}/>}</div>;

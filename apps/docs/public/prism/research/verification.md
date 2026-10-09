@@ -1,6 +1,6 @@
 # PRISM 검증 기록
 
-기존 구현·관찰 기준: dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9`, 2026-10-03. 2026-10-09에 frontend를 fetch·fast-forward해 `087811ff`를 확인했습니다. 현재 inventory 273개 중 새 컴포넌트 4개는 구현 대기입니다. 전체 원본 스타일·상태 일치는 아직 확인하지 않았습니다.
+기존 구현·관찰 기준: dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9`, 2026-10-03. 2026-10-09에 frontend를 fetch·fast-forward해 `087811ff`를 확인했습니다. 현재 inventory 273개 중 새 프로필 PDF 다운로드와 background host2개는 구현 대기입니다. 새 LeadershipPie와 Summary는 별도 typed 구현과 선택한 검증을 추가했습니다. 전체 원본 스타일·상태 일치는 아직 확인하지 않았습니다.
 
 ## 근거와 범위
 
@@ -78,3 +78,12 @@ Tooltip 기본 hover 지연100ms는 실제 배포 MUI bundle에서 확인했습�
 최신 frontend는 LeadershipPie, LeadershipPieSummary, CandidateProfilesPdfDownload, PdfDownloadHost를 추가했습니다. 기존269개 목적 대응에 이 네 가지의 구현이 포함됐다고 표시하지 않습니다. 사용자·회사 그룹 양식, Memo, PDF, 프로필 영역의 변경과 `_dialog.scss`·`_print.scss`·`_text-field.scss` 차이도 후속 비교가 필요합니다. InputLabel과 Tooltip의 소스·SCSS는 두 revision에서 동일했습니다. 이 checkout revision이 현재 배포 revision과 같다는 근거는 확보하지 않았습니다.
 
 포커스로 화면 밖의 정보 버튼을 스크롤하면 Radix의 ancestor-scroll 닫기가 열림과 겹쳤습니다. 다음 animation frame에 포커스 도움말을 열고 Escape·blur·unmount는 대기 중 열림을 취소하도록 보완했습니다. 문서의 실제320×240 long 도움말은300×90.1875px이며 native wheel scrollTop230을 확인했습니다. 최신120상태의320px 렌더·가로 넘침·중첩 버튼·입력 이름·page error 검사도0문제입니다. 이 기록은 현재 소스의 공개 반영 전에 작성했으며 원격 결과는 세션 worknote에서 갱신합니다.
+
+
+## 리더십 비중과 SUMMARY
+
+새 원형 차트는 Chart.js plugin을 복사하지 않고 SVG로 구현했습니다. 호출자가 계산한1–3개의 비중을 표시하며 색상은 지·덕·용 순서의#706ee7/#55c4ae/#ff928a입니다. 원본 인쇄 샘플과 같은160×158px 기본 영역과11px/700 흰 내부 라벨, SUMMARY의padding16·gap20·radius12·border#b6bec9·white·printcaption10pt를 확인했습니다. 코멘트 본문은 호출자 제공 값이며 인사 평가를 계산하지 않습니다.
+
+누락값과0은 별도 데이터 표에 그대로 표시합니다. 남은 미확정 영역은 회색으로 표시하며 완전한 양수 비중은 합계100의 반올림 오차0.2를 허용합니다. 크기40–640·라벨8–24px, 컨테이너 맞춤과 긴 라벨 범례를 지원합니다. 기존소비자의SUMMARYrecipe도 유지하고 새pieSummary는 별도형으로 선택합니다. 실제1280/320/390px 화면과140/320/800px 수동 폭의42조합이 통과했습니다. 이는 모든 원본 라벨 배치·애니메이션·도메인 화면의 pixel 일치를 증명하지 않습니다.
+
+새14개 완전한 사용 예시와40개 계약 테스트,39항목·62파일의 새 독립 설치·TypeScript/Vite·폰트bytes·자산 고지 확인을 통과했습니다. 새 fixture는121상태이며 최종본의 브라우저·공개 반영 검증은 이어서 진행합니다. 신규 두 그룹의 원본 링크는 해당파일이 존재하는087811ff를 참조하고 기존 벡터·기준소스의7ecfc9a 근거는 유지합니다.
