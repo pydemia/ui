@@ -2179,7 +2179,7 @@
       "category": "Domain",
       "purpose": "후보 필터·카드/표 보기·후계자 Board·메모 작성",
       "contract": "필터·조회·초기화·뷰 모드는 controlled입니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지를 지원합니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty",
@@ -2222,6 +2222,10 @@
         },
         {
           "name": "PrismCandidateFilters",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateFilterBarProps",
           "kind": "type"
         },
         {
@@ -2439,12 +2443,106 @@
       "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismCriteriaEditor, type PrismCriteriaDraft } from \"@/components/ui/prism-management-tools\";\n\nexport function CriteriaExample() {\n  const [open, setOpen] = useState(false);\n  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: \"\", description: \"\", categoryId: \"\" });\n  const [submitted, setSubmitted] = useState<PrismCriteriaDraft | null>(null);\n  return <section>\n    <PrismButton onClick={() => setOpen(true)}>기준 편집</PrismButton>\n    <PrismCriteriaEditor title=\"가상 기준\" open={open} onOpenChange={setOpen}\n      value={draft} onValueChange={setDraft} categories={[{ id: \"technology\", label: \"기술\" }]}\n      positions={[{ id: \"position-demo\", name: \"기술전략담당\", company: \"가상전자\" }]}\n      onSubmit={value => { setSubmitted(value); setOpen(false); }} />\n    <p role=\"status\">{submitted ? submitted.name + \" 저장 의도\" : \"\"}</p>\n  </section>;\n}"
     },
     {
+      "id": "prism-candidate-list",
+      "name": "Candidate list / Profile output",
+      "category": "Domain",
+      "purpose": "후보 필터·100명 선택·remote sort·페이지 이동과 프로필 다운로드·인쇄 준비",
+      "contract": "필터·선택 ID·rows·sort·pagination은 controlled입니다. 기본 선택 한도는 100명이며 초과 변경은 전체 거부합니다. 페이지 변경은 선택을 유지하고 조회·초기화는 선택을 비웁니다. 후보 표의 부분/전체 선택 해제는 다른 페이지 선택도 비웁니다. 일반 Directory의 보존 계약과 구분합니다. 기본 페이지 크기는 호스트 값이며 선택지 10/20/50/100, 페이지 번호 10개를 표시합니다. 회사 placeholder는 회사 선택입니다. output options는 summary/compensation이며 매번 빈 상태로 엽니다. onOutput은 고정된 request id/kind/candidateIds/options를 받고 preparedCount/excludedCount를 반환합니다. 두 종류의 준비는 각각 중복 방지·busy를 지원하며 실패 retry는 원래 요청 내용을 유지합니다. 준비 안내를 닫거나 목록을 unmount해도 호스트 소유 작업을 취소하지 않습니다. onOutput과 상위 PDF host·실제 profile/query/auth/native print·페이지 분할은 소비자 소유입니다. createPrismCandidateDownloadJob은 준비한 PDF 문서와 request를 연결합니다. 낮은 높이는 목록 scroll, 좁은 폭은 toolbar/filter wrap와 표 내부 scroll을 지원하고 style/height로 크기를 조절합니다. 선택 UI는 권한 검사가 아닙니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "loading",
+        "error",
+        "readonly",
+        "long",
+        "empty"
+      ],
+      "source": [
+        "chat/candidate/CandidateListContent.tsx",
+        "chat/candidate/CandidateFilterBar.tsx",
+        "chat/candidate/CandidateTable.tsx",
+        "chat/successorCandidate/print/PrintOptionsDialog.tsx"
+      ],
+      "usage": "import { useEffect, useState } from \"react\";\nimport { PrismCandidateList, createPrismCandidateDownloadJob, PrismPdfDownloadHost, createPrismImagePdf, PrismPrintPreview,\n  type PrismCandidateFilters, type PrismPdfExportJob } from \"@pydemia/prism\";\nconst rows = [\n  { id: \"demo-a\", name: \"김가상\", company: \"가상전자\", position: \"가상 직책\", series: \"제조\" },\n  { id: \"demo-b\", name: \"이예시\", company: \"예시사업\", position: \"가상 직책\", series: \"제조\" },\n];\nexport function CandidateListExample() {\n  const [selected,setSelected] = useState<string[]>([]);\n  const [filters,setFilters] = useState<PrismCandidateFilters>({series:\"all\",companies:[],name:\"\"});\n  const [sort,setSort] = useState<{column:string;direction:\"asc\"|\"desc\"}|null>(null);\n  const [size,setSize] = useState(10), [page,setPage] = useState(1);\n  const [jobs,setJobs] = useState<PrismPdfExportJob<string[]>[]>([]);\n  const [files,setFiles] = useState<{name:string;href:string}[]>([]);\n  const [print,setPrint] = useState<{id:string;label:string;content:string}[]>([]);\n  useEffect(() => { if (print.length) void document.fonts.ready.then(() => window.print()); }, [print]);\n  return <section data-prism=\"light\"><div data-prism-export-exclude><PrismCandidateList rows={rows} selected={selected} onSelectionChange={setSelected}\n    sort={sort} onSortChange={setSort} onOpen={() => {}} height={600} total={2} page={page} pageCount={1} onPageChange={setPage}\n    rowsPerPage={size} onRowsPerPageChange={setSize} filters={{value:filters,onValueChange:setFilters,\n      seriesOptions:[{value:\"all\",label:\"전체\"}],companyOptions:[{value:\"example\",label:\"가상전자\"}],onSearch:()=>setPage(1),\n      onReset:()=>setFilters({series:\"all\",companies:[],name:\"\"})}}\n    onOutput={async request => {\n      // 실제 조회와 프로필 변환은 소비자가 연결합니다. 이 예시는 합성 데이터입니다.\n      const prepared = rows.filter(row => request.candidateIds.includes(row.id));\n      const extra = request.options.map(option => option === \"summary\" ? \"가상 종합 요약 정보\" : \"가상 보상 정보\");\n      if (request.kind === \"download\" && prepared.length) setJobs(value => [...value,createPrismCandidateDownloadJob(request,prepared.map(row => ({filename:row.name,data:[row.name,row.company,row.position,...extra]})))]);\n      if (request.kind === \"print\") setPrint(prepared.map(row=>({id:row.id,label:row.name,content:[row.company,row.position,...extra].join(\" · \")})));\n      return {preparedCount:prepared.length,excludedCount:request.candidateIds.length-prepared.length};\n    }}/></div>\n    <PrismPdfDownloadHost jobs={jobs} renderPdf={async (lines,{signal}) => {\n      await document.fonts.ready; signal.throwIfAborted();\n      const canvas=document.createElement(\"canvas\");canvas.width=800;canvas.height=1100;\n      const ctx=canvas.getContext(\"2d\");if(!ctx)throw new Error(\"Canvas unavailable\");\n      ctx.fillStyle=\"white\";ctx.fillRect(0,0,800,1100);ctx.fillStyle=\"#363636\";ctx.font='24px \"Pretendard Variable\", sans-serif';lines.forEach((line,index)=>ctx.fillText(line,50,80+index*40));\n      return createPrismImagePdf([{jpeg:canvas.toDataURL(\"image/jpeg\"),width:210,height:297}],{signal,title:lines[0]});\n    }} onComplete={(id,result)=>{setJobs(value=>value.filter(job=>job.id!==id));if(result.blob){const reader=new FileReader();reader.onload=()=>{if(typeof reader.result===\"string\")setFiles(value=>[...value,{name:result.filename,href:reader.result as string}]);};reader.readAsDataURL(result.blob);}}} onError={id=>setJobs(value=>value.filter(job=>job.id!==id))}/>\n    {files.map((file,index)=><p key={index}><a href={file.href} download={file.name}>완료된 파일: {file.name}</a></p>)}\n    {print.length>0 && <PrismPrintPreview title=\"가상 후보자 프로필\" sections={print} selected={print.map(item=>item.id)} onPrint={()=>window.print()}/>}\n  </section>;\n}",
+      "sourcePath": "packages/prism/src/prism-candidate-list.tsx",
+      "previewUrl": "/prism?component=prism-candidate-list",
+      "embedUrl": "/prism?component=prism-candidate-list&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-candidate-list&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "partial",
+        "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+        "checks": [
+          "Source and deployed selected gp77p/ekoga CSS match list padding36,toolbar margins24/10 andgap20,informationgap10,actiongap8,page-sizewidth120,andconfirmnote14px/1.4/subgray/margin8",
+          "Controlled selection rejects an excess100 change atomically;page changes retain it;search/reset clear it;candidate partial/all header clears every page",
+          "Source candidate table has sibling profile actions,icon-only remote sort with role defaultdesc,4 skeleton rows andsource empty state;generic Directory eligibility/page-preservation remains unchanged",
+          "Readonly request snapshots andcanonical optional summary/compensation fields;per-kind duplicate guards;retry retains original IDs/options after current selection changes;local unmount doesnot cancel application-owned preparation",
+          "Ten new behavior/lifecycle/pagination/job-copy/page-size tests;full85 PRISM tests passed",
+          "Live CUA:empty-selection alert,selection/page/size/sort,100 limit,preparingnotice,busy,failedretry,partialexclusion,andpreparation continuing afterlist unmount",
+          "Generated two-profile ZIP andsingle summary PDF preserved fromvisibledata-URL links;ZIP CRC andtwo1-pageA4 PDFs parsed;first page raster inspected. Native event timed out andBlob downloadMedia unsupported;OSsaveunverified",
+          "Actual140/200/320/440/800/1000/1280 widths havezero list/filterhorizontaloverflow;tableminimum640 staysinternal. Actual320px iframe,height240,keyboard rootscroll reachesfooter",
+          "Live visual inspection found a legacycard class collision causing stackedtablecells andmissingneutral400 token;final table-cell geometry and16px grey sort icons corrected",
+          "42 groups/146 current-source fixtures rendered inactual320px iframe with component/state DOMmarkers;nohorizontaloverflow,nestedbuttons,unnameddisplayedinputs orbrowsererrors",
+          "Fresh43items/67files/19examples passedTypeScript/Vite/fontbytes/notices. Installed component sources unchanged;portableexample synchronized tofinalusage. ProductionbuiltStrictMode example atactual320px generatedoneZIP withtwoA4 PDFs andbothoptionalfields visibleinraster"
+        ],
+        "evidence": [
+          "candidate-list.test.mjs",
+          "candidate-deployed-css.json",
+          "candidate-cua-runtime.json",
+          "candidate-widths-cua.json",
+          "candidate-zip-validation.json",
+          "candidate-static-146-cua.json",
+          "candidate-consumer-install.log",
+          "candidate-consumer-BXqIdv.json",
+          "candidate-consumer-zip-validation.json"
+        ],
+        "remaining": [
+          "Fresh authenticated deployed candidate list states andcomplete rendered/pixel/static-font comparison",
+          "Native OS save andautomatic browser print integration in thelocked environment",
+          "Full real profile query/mapping andoriginal printable layout;synthetic generated PDFs are integration fixtures",
+          "Current UI screenshot capture timed out after5000ms;no newUI screenshot produced;PDF raster is export evidence only"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismCandidateOutputKind",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateOutputOption",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateOutputRequest",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateOutputResult",
+          "kind": "type"
+        },
+        {
+          "name": "createPrismCandidateDownloadJob",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCandidateListProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateList",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useEffect, useState } from \"react\";\nimport { PrismCandidateList, createPrismCandidateDownloadJob } from \"@/components/ui/prism-candidate-list\";\nimport { PrismPdfDownloadHost, createPrismImagePdf, type PrismPdfExportJob } from \"@/components/ui/prism-export\";\nimport { PrismPrintPreview } from \"@/components/ui/prism-document\";\nimport { type PrismCandidateFilters } from \"@/components/ui/prism-collection\";\nconst rows = [\n  { id: \"demo-a\", name: \"김가상\", company: \"가상전자\", position: \"가상 직책\", series: \"제조\" },\n  { id: \"demo-b\", name: \"이예시\", company: \"예시사업\", position: \"가상 직책\", series: \"제조\" },\n];\nexport function CandidateListExample() {\n  const [selected,setSelected] = useState<string[]>([]);\n  const [filters,setFilters] = useState<PrismCandidateFilters>({series:\"all\",companies:[],name:\"\"});\n  const [sort,setSort] = useState<{column:string;direction:\"asc\"|\"desc\"}|null>(null);\n  const [size,setSize] = useState(10), [page,setPage] = useState(1);\n  const [jobs,setJobs] = useState<PrismPdfExportJob<string[]>[]>([]);\n  const [files,setFiles] = useState<{name:string;href:string}[]>([]);\n  const [print,setPrint] = useState<{id:string;label:string;content:string}[]>([]);\n  useEffect(() => { if (print.length) void document.fonts.ready.then(() => window.print()); }, [print]);\n  return <section data-prism=\"light\"><div data-prism-export-exclude><PrismCandidateList rows={rows} selected={selected} onSelectionChange={setSelected}\n    sort={sort} onSortChange={setSort} onOpen={() => {}} height={600} total={2} page={page} pageCount={1} onPageChange={setPage}\n    rowsPerPage={size} onRowsPerPageChange={setSize} filters={{value:filters,onValueChange:setFilters,\n      seriesOptions:[{value:\"all\",label:\"전체\"}],companyOptions:[{value:\"example\",label:\"가상전자\"}],onSearch:()=>setPage(1),\n      onReset:()=>setFilters({series:\"all\",companies:[],name:\"\"})}}\n    onOutput={async request => {\n      // 실제 조회와 프로필 변환은 소비자가 연결합니다. 이 예시는 합성 데이터입니다.\n      const prepared = rows.filter(row => request.candidateIds.includes(row.id));\n      const extra = request.options.map(option => option === \"summary\" ? \"가상 종합 요약 정보\" : \"가상 보상 정보\");\n      if (request.kind === \"download\" && prepared.length) setJobs(value => [...value,createPrismCandidateDownloadJob(request,prepared.map(row => ({filename:row.name,data:[row.name,row.company,row.position,...extra]})))]);\n      if (request.kind === \"print\") setPrint(prepared.map(row=>({id:row.id,label:row.name,content:[row.company,row.position,...extra].join(\" · \")})));\n      return {preparedCount:prepared.length,excludedCount:request.candidateIds.length-prepared.length};\n    }}/></div>\n    <PrismPdfDownloadHost jobs={jobs} renderPdf={async (lines,{signal}) => {\n      await document.fonts.ready; signal.throwIfAborted();\n      const canvas=document.createElement(\"canvas\");canvas.width=800;canvas.height=1100;\n      const ctx=canvas.getContext(\"2d\");if(!ctx)throw new Error(\"Canvas unavailable\");\n      ctx.fillStyle=\"white\";ctx.fillRect(0,0,800,1100);ctx.fillStyle=\"#363636\";ctx.font='24px \"Pretendard Variable\", sans-serif';lines.forEach((line,index)=>ctx.fillText(line,50,80+index*40));\n      return createPrismImagePdf([{jpeg:canvas.toDataURL(\"image/jpeg\"),width:210,height:297}],{signal,title:lines[0]});\n    }} onComplete={(id,result)=>{setJobs(value=>value.filter(job=>job.id!==id));if(result.blob){const reader=new FileReader();reader.onload=()=>{if(typeof reader.result===\"string\")setFiles(value=>[...value,{name:result.filename,href:reader.result as string}]);};reader.readAsDataURL(result.blob);}}} onError={id=>setJobs(value=>value.filter(job=>job.id!==id))}/>\n    {files.map((file,index)=><p key={index}><a href={file.href} download={file.name}>완료된 파일: {file.name}</a></p>)}\n    {print.length>0 && <PrismPrintPreview title=\"가상 후보자 프로필\" sections={print} selected={print.map(item=>item.id)} onPrint={()=>window.print()}/>}\n  </section>;\n}"
+    },
+    {
       "id": "prism-directory",
       "name": "Selectable directory / Admin table",
       "category": "Data display",
       "purpose": "Accessible remote sort and row selection with eligibility constraints",
-      "contract": "Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. Candidate favorites in the directory are read-only.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "contract": "Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. PrismCandidateDirectory uses the source candidate table: profile actions are sibling controls, role starts descending, and clicking a selected or partial header clears all pages. Candidate favorites are read-only.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty",
@@ -2460,8 +2558,16 @@
       "embedUrl": "/prism?component=prism-directory&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-directory&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending"
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Generic eligibility andother-page preservation preserved",
+          "Current candidate directory uses source-specific table,header-clear-all semantics androle descending default",
+          "Sibling profile button avoids nested buttons andemits oneopen action"
+        ],
+        "remaining": [
+          "Complete authenticated source table state/pixel comparison"
+        ]
       },
       "exports": [
         {
@@ -2474,6 +2580,10 @@
         },
         {
           "name": "PrismDirectoryCandidate",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateDirectoryProps",
           "kind": "type"
         },
         {

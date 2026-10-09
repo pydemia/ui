@@ -625,9 +625,62 @@ export function CriteriaExample() {
 }
 ```
 
+## Candidate list / Profile output
+후보 필터·100명 선택·remote sort·페이지 이동과 프로필 다운로드·인쇄 준비
+Contract: 필터·선택 ID·rows·sort·pagination은 controlled입니다. 기본 선택 한도는 100명이며 초과 변경은 전체 거부합니다. 페이지 변경은 선택을 유지하고 조회·초기화는 선택을 비웁니다. 후보 표의 부분/전체 선택 해제는 다른 페이지 선택도 비웁니다. 일반 Directory의 보존 계약과 구분합니다. 기본 페이지 크기는 호스트 값이며 선택지 10/20/50/100, 페이지 번호 10개를 표시합니다. 회사 placeholder는 회사 선택입니다. output options는 summary/compensation이며 매번 빈 상태로 엽니다. onOutput은 고정된 request id/kind/candidateIds/options를 받고 preparedCount/excludedCount를 반환합니다. 두 종류의 준비는 각각 중복 방지·busy를 지원하며 실패 retry는 원래 요청 내용을 유지합니다. 준비 안내를 닫거나 목록을 unmount해도 호스트 소유 작업을 취소하지 않습니다. onOutput과 상위 PDF host·실제 profile/query/auth/native print·페이지 분할은 소비자 소유입니다. createPrismCandidateDownloadJob은 준비한 PDF 문서와 request를 연결합니다. 낮은 높이는 목록 scroll, 좁은 폭은 toolbar/filter wrap와 표 내부 scroll을 지원하고 style/height로 크기를 조절합니다. 선택 UI는 권한 검사가 아닙니다.
+States: default, loading, error, readonly, long, empty
+Registry: /prism/r/prism-candidate-list.json
+Source: packages/prism/src/prism-candidate-list.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useEffect, useState } from "react";
+import { PrismCandidateList, createPrismCandidateDownloadJob } from "@/components/ui/prism-candidate-list";
+import { PrismPdfDownloadHost, createPrismImagePdf, type PrismPdfExportJob } from "@/components/ui/prism-export";
+import { PrismPrintPreview } from "@/components/ui/prism-document";
+import { type PrismCandidateFilters } from "@/components/ui/prism-collection";
+const rows = [
+  { id: "demo-a", name: "김가상", company: "가상전자", position: "가상 직책", series: "제조" },
+  { id: "demo-b", name: "이예시", company: "예시사업", position: "가상 직책", series: "제조" },
+];
+export function CandidateListExample() {
+  const [selected,setSelected] = useState<string[]>([]);
+  const [filters,setFilters] = useState<PrismCandidateFilters>({series:"all",companies:[],name:""});
+  const [sort,setSort] = useState<{column:string;direction:"asc"|"desc"}|null>(null);
+  const [size,setSize] = useState(10), [page,setPage] = useState(1);
+  const [jobs,setJobs] = useState<PrismPdfExportJob<string[]>[]>([]);
+  const [files,setFiles] = useState<{name:string;href:string}[]>([]);
+  const [print,setPrint] = useState<{id:string;label:string;content:string}[]>([]);
+  useEffect(() => { if (print.length) void document.fonts.ready.then(() => window.print()); }, [print]);
+  return <section data-prism="light"><div data-prism-export-exclude><PrismCandidateList rows={rows} selected={selected} onSelectionChange={setSelected}
+    sort={sort} onSortChange={setSort} onOpen={() => {}} height={600} total={2} page={page} pageCount={1} onPageChange={setPage}
+    rowsPerPage={size} onRowsPerPageChange={setSize} filters={{value:filters,onValueChange:setFilters,
+      seriesOptions:[{value:"all",label:"전체"}],companyOptions:[{value:"example",label:"가상전자"}],onSearch:()=>setPage(1),
+      onReset:()=>setFilters({series:"all",companies:[],name:""})}}
+    onOutput={async request => {
+      // 실제 조회와 프로필 변환은 소비자가 연결합니다. 이 예시는 합성 데이터입니다.
+      const prepared = rows.filter(row => request.candidateIds.includes(row.id));
+      const extra = request.options.map(option => option === "summary" ? "가상 종합 요약 정보" : "가상 보상 정보");
+      if (request.kind === "download" && prepared.length) setJobs(value => [...value,createPrismCandidateDownloadJob(request,prepared.map(row => ({filename:row.name,data:[row.name,row.company,row.position,...extra]})))]);
+      if (request.kind === "print") setPrint(prepared.map(row=>({id:row.id,label:row.name,content:[row.company,row.position,...extra].join(" · ")})));
+      return {preparedCount:prepared.length,excludedCount:request.candidateIds.length-prepared.length};
+    }}/></div>
+    <PrismPdfDownloadHost jobs={jobs} renderPdf={async (lines,{signal}) => {
+      await document.fonts.ready; signal.throwIfAborted();
+      const canvas=document.createElement("canvas");canvas.width=800;canvas.height=1100;
+      const ctx=canvas.getContext("2d");if(!ctx)throw new Error("Canvas unavailable");
+      ctx.fillStyle="white";ctx.fillRect(0,0,800,1100);ctx.fillStyle="#363636";ctx.font='24px "Pretendard Variable", sans-serif';lines.forEach((line,index)=>ctx.fillText(line,50,80+index*40));
+      return createPrismImagePdf([{jpeg:canvas.toDataURL("image/jpeg"),width:210,height:297}],{signal,title:lines[0]});
+    }} onComplete={(id,result)=>{setJobs(value=>value.filter(job=>job.id!==id));if(result.blob){const reader=new FileReader();reader.onload=()=>{if(typeof reader.result==="string")setFiles(value=>[...value,{name:result.filename,href:reader.result as string}]);};reader.readAsDataURL(result.blob);}}} onError={id=>setJobs(value=>value.filter(job=>job.id!==id))}/>
+    {files.map((file,index)=><p key={index}><a href={file.href} download={file.name}>완료된 파일: {file.name}</a></p>)}
+    {print.length>0 && <PrismPrintPreview title="가상 후보자 프로필" sections={print} selected={print.map(item=>item.id)} onPrint={()=>window.print()}/>}
+  </section>;
+}
+```
+
 ## Selectable directory / Admin table
 Accessible remote sort and row selection with eligibility constraints
-Contract: Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. Candidate favorites in the directory are read-only.
+Contract: Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. PrismCandidateDirectory uses the source candidate table: profile actions are sibling controls, role starts descending, and clicking a selected or partial header clears all pages. Candidate favorites are read-only.
 States: default, empty, loading
 Registry: /prism/r/prism-directory.json
 Source: packages/prism/src/prism-directory.tsx
