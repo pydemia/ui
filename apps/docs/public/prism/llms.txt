@@ -208,15 +208,29 @@ export function MemoExample() {
 
 ## Inline panel
 채팅과 상세를 동시에 사용하며 패널 확대·축소
-Contract: 비모달 aside이며 기본 너비 440px와 64px header를 사용합니다. resizable을 켜면 드래그·방향키·Shift·Home/End로 조절하고 double click으로 초기화합니다. width/onWidthChange는 controlled 계약이며 minWidth/maxWidth는 부모 폭 안에서 적용합니다. responsive는 좁은 부모에서 전체 폭을 사용합니다. open/expanded는 호출자가 제어합니다. 부모는 position relative flex 컨테이너입니다.
-States: default
+Contract: 비모달 aside이며 기본 너비 440px, 헤더 64px, 버튼·원본 SVG 24px를 사용합니다. title은 ReactNode이며 긴 제목에 맞춰 헤더 높이가 늘어납니다. 확대 시 부모 폭+1px와 z-index 1250을 사용합니다. 닫힌 본문은 mounted/inert로 초안을 유지합니다. contentClassName/contentStyle/contentRef로 호출자가 본문 여백과 스크롤을 정하며 기본은 padding 0·overflow-y hidden입니다. resizable의 드래그·방향키 16px·Shift 50px·Home/End·double click은 bounded width intent를 보냅니다. 드래그 취소·capture 유실·닫기·확대·compact 전환은 시작 전 선호 너비로 복구합니다. 복구한 선호 너비가 현재 부모보다 커도 실제 표시는 부모 폭으로 제한합니다. width/open/expanded는 호출자가 제어하며 외부 닫기에서도 expanded=false intent를 한 번 보냅니다. responsive는 640px 미만 부모에서 전체 폭과 숨긴 핸들을 사용하고 선호 너비를 보존합니다. 부모는 position relative flex 컨테이너입니다.
+States: default, closed, expanded, long
 Registry: /prism/r/prism-panel.json
 Source: packages/prism/src/prism-panel.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
+import { useRef, useState } from "react";
 import { PrismPanel } from "@/components/ui/prism-panel";
-<PrismPanel title="상세" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}>내용</PrismPanel>;
+export function PanelExample() {
+  const [open, setOpen] = useState(true);
+  const [expanded, setExpanded] = useState(false);
+  const [width, setWidth] = useState(440);
+  const content = useRef<HTMLDivElement>(null);
+  return <div style={{ position: "relative", display: "flex", height: 440 }}>
+    <main style={{ flex: 1, minWidth: 0, padding: 20 }}><button type="button" onClick={() => setOpen(true)}>패널 열기</button></main>
+    <PrismPanel title={<h4>상세 정보</h4>} open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}
+      resizable width={width} onWidthChange={setWidth} contentRef={content} contentStyle={{ padding: 20, overflowY: "auto" }}>
+      <label>검토 초안 <textarea defaultValue="가상 검토 기록" /></label>
+      <p>닫았다 다시 열어도 입력한 초안이 유지됩니다.</p>
+    </PrismPanel>
+  </div>;
+}
 ```
 
 ## 6-frame comparison

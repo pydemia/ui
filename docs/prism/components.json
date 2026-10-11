@@ -815,15 +815,18 @@
       "name": "Inline panel",
       "category": "Overlays",
       "purpose": "채팅과 상세를 동시에 사용하며 패널 확대·축소",
-      "contract": "비모달 aside이며 기본 너비 440px와 64px header를 사용합니다. resizable을 켜면 드래그·방향키·Shift·Home/End로 조절하고 double click으로 초기화합니다. width/onWidthChange는 controlled 계약이며 minWidth/maxWidth는 부모 폭 안에서 적용합니다. responsive는 좁은 부모에서 전체 폭을 사용합니다. open/expanded는 호출자가 제어합니다. 부모는 position relative flex 컨테이너입니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "contract": "비모달 aside이며 기본 너비 440px, 헤더 64px, 버튼·원본 SVG 24px를 사용합니다. title은 ReactNode이며 긴 제목에 맞춰 헤더 높이가 늘어납니다. 확대 시 부모 폭+1px와 z-index 1250을 사용합니다. 닫힌 본문은 mounted/inert로 초안을 유지합니다. contentClassName/contentStyle/contentRef로 호출자가 본문 여백과 스크롤을 정하며 기본은 padding 0·overflow-y hidden입니다. resizable의 드래그·방향키 16px·Shift 50px·Home/End·double click은 bounded width intent를 보냅니다. 드래그 취소·capture 유실·닫기·확대·compact 전환은 시작 전 선호 너비로 복구합니다. 복구한 선호 너비가 현재 부모보다 커도 실제 표시는 부모 폭으로 제한합니다. width/open/expanded는 호출자가 제어하며 외부 닫기에서도 expanded=false intent를 한 번 보냅니다. responsive는 640px 미만 부모에서 전체 폭과 숨긴 핸들을 사용하고 선호 너비를 보존합니다. 부모는 position relative flex 컨테이너입니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
-        "default"
+        "default",
+        "closed",
+        "expanded",
+        "long"
       ],
       "source": [
         "chat/panel/SidePanel.tsx"
       ],
-      "usage": "import { PrismPanel } from \"@pydemia/prism\";\n<PrismPanel title=\"상세\" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}>내용</PrismPanel>;",
+      "usage": "import { useRef, useState } from \"react\";\nimport { PrismPanel } from \"@pydemia/prism\";\nexport function PanelExample() {\n  const [open, setOpen] = useState(true);\n  const [expanded, setExpanded] = useState(false);\n  const [width, setWidth] = useState(440);\n  const content = useRef<HTMLDivElement>(null);\n  return <div style={{ position: \"relative\", display: \"flex\", height: 440 }}>\n    <main style={{ flex: 1, minWidth: 0, padding: 20 }}><button type=\"button\" onClick={() => setOpen(true)}>패널 열기</button></main>\n    <PrismPanel title={<h4>상세 정보</h4>} open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}\n      resizable width={width} onWidthChange={setWidth} contentRef={content} contentStyle={{ padding: 20, overflowY: \"auto\" }}>\n      <label>검토 초안 <textarea defaultValue=\"가상 검토 기록\" /></label>\n      <p>닫았다 다시 열어도 입력한 초안이 유지됩니다.</p>\n    </PrismPanel>\n  </div>;\n}",
       "sourcePath": "packages/prism/src/prism-panel.tsx",
       "previewUrl": "/prism?component=prism-panel",
       "embedUrl": "/prism?component=prism-panel&embed=1",
@@ -832,21 +835,32 @@
         "visual": "partial",
         "interaction": "partial",
         "checks": [
-          "Expanded nonmodal panel reaches measured parent width 658px",
-          "Surrounding content remains operable",
-          "Keyboard resize 440 to 456, Home 320, End 800; double click reset 440",
-          "Pointer drag 80px left grows right-anchored panel from 440 to 520",
-          "Controlled width callback leaves width unchanged until consumer update",
-          "Real 390px iframe: compact detail panel 356px, no resizer, root scroll width 390px",
-          "nested Select Escape closes menu before parent Panel; second Escape closes parent"
+          "Public source and final isolated installation: default width440, header64/padding20, buttons/SVG24, border#DDE5EB, shadow rgba(37,38,46,.06) -4px 0 12px.",
+          "Public h4 title 18px/700/black/height21; source static font width66.375 vs installed variable font66.390625.",
+          "Expand/Collapse/Close path geometry and computed paint matched; expanded source viewport1280 uses1281/z1250 and installed inner parent998 uses999/z1250.",
+          "Closed source/installed panels both width0, invisible, inert, mounted and placeholder0.",
+          "Final actual keyboard456/Home320/End800, double-click440 and 80px pointer drag520; manual sizing is immediate to keep the handle stable.",
+          "Actual320px installed long-title header125, body313 and no horizontal overflow. Escape close/reopen retained the draft; real wheel reached the final action.",
+          "Actual320px catalog in a240x240 parent: panel238x238, header146, body92; draft input fully visible.",
+          "Controlled ownership, external-close expansion reset, draft DOM persistence, pointer cancellation/capture loss and preferred-width restoration passed in JSDOM.",
+          "A failing700→drag600→parent300→parent1000 regression now restores700; covered by a dedicated mocked ResizeObserver/pointer test."
         ],
         "remaining": [
-          "source SidePanel state-by-state comparison",
-          "pointer cancellation runtime"
+          "Authenticated ChatPanel/MemoPanel/ProfilePanel/PositionPanel state-by-state visual comparison.",
+          "Native unexpected pointer cancellation/capture loss; mock tests do not prove OS/device behavior.",
+          "Complete static/variable font and pixel comparison."
         ],
         "evidence": [
-          "local-panel-resize",
-          "local-workspace-mobile-profile-390"
+          "panel-independent-basic-source-comparison.json",
+          "panel-independent-expand-vectors.json",
+          "panel-independent-expanded.json",
+          "panel-independent-closed.json",
+          "panel-independent-mobile-draft.json",
+          "panel-independent-mobile-scroll.json",
+          "panel-final-short-mobile.json",
+          "panel-independent-resize.json",
+          "panel-drag-compact-before.log",
+          "panel-drag-compact-after.log"
         ]
       },
       "exports": [
@@ -859,8 +873,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismPanel } from \"@/components/ui/prism-panel\";\n<PrismPanel title=\"상세\" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}>내용</PrismPanel>;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismPanel } from \"@/components/ui/prism-panel\";\nexport function PanelExample() {\n  const [open, setOpen] = useState(true);\n  const [expanded, setExpanded] = useState(false);\n  const [width, setWidth] = useState(440);\n  const content = useRef<HTMLDivElement>(null);\n  return <div style={{ position: \"relative\", display: \"flex\", height: 440 }}>\n    <main style={{ flex: 1, minWidth: 0, padding: 20 }}><button type=\"button\" onClick={() => setOpen(true)}>패널 열기</button></main>\n    <PrismPanel title={<h4>상세 정보</h4>} open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}\n      resizable width={width} onWidthChange={setWidth} contentRef={content} contentStyle={{ padding: 20, overflowY: \"auto\" }}>\n      <label>검토 초안 <textarea defaultValue=\"가상 검토 기록\" /></label>\n      <p>닫았다 다시 열어도 입력한 초안이 유지됩니다.</p>\n    </PrismPanel>\n  </div>;\n}"
     },
     {
       "id": "prism-six-frame",

@@ -52,8 +52,9 @@
     },
     {
       "id": "reference-chat-side-panel",
-      "status": "captured-default",
-      "statesCompared": false
+      "status": "compared-public-basic-expanded-closed-metrics",
+      "statesCompared": true,
+      "scope": "Selected metrics and vector paint, not full pixels or authenticated wrappers"
     },
     {
       "id": "reference-chat-six-frame-table",
@@ -329,21 +330,32 @@
       "visual": "partial",
       "interaction": "partial",
       "checks": [
-        "Expanded nonmodal panel reaches measured parent width 658px",
-        "Surrounding content remains operable",
-        "Keyboard resize 440 to 456, Home 320, End 800; double click reset 440",
-        "Pointer drag 80px left grows right-anchored panel from 440 to 520",
-        "Controlled width callback leaves width unchanged until consumer update",
-        "Real 390px iframe: compact detail panel 356px, no resizer, root scroll width 390px",
-        "nested Select Escape closes menu before parent Panel; second Escape closes parent"
+        "Public source and final isolated installation: default width440, header64/padding20, buttons/SVG24, border#DDE5EB, shadow rgba(37,38,46,.06) -4px 0 12px.",
+        "Public h4 title 18px/700/black/height21; source static font width66.375 vs installed variable font66.390625.",
+        "Expand/Collapse/Close path geometry and computed paint matched; expanded source viewport1280 uses1281/z1250 and installed inner parent998 uses999/z1250.",
+        "Closed source/installed panels both width0, invisible, inert, mounted and placeholder0.",
+        "Final actual keyboard456/Home320/End800, double-click440 and 80px pointer drag520; manual sizing is immediate to keep the handle stable.",
+        "Actual320px installed long-title header125, body313 and no horizontal overflow. Escape close/reopen retained the draft; real wheel reached the final action.",
+        "Actual320px catalog in a240x240 parent: panel238x238, header146, body92; draft input fully visible.",
+        "Controlled ownership, external-close expansion reset, draft DOM persistence, pointer cancellation/capture loss and preferred-width restoration passed in JSDOM.",
+        "A failing700→drag600→parent300→parent1000 regression now restores700; covered by a dedicated mocked ResizeObserver/pointer test."
       ],
       "remaining": [
-        "source SidePanel state-by-state comparison",
-        "pointer cancellation runtime"
+        "Authenticated ChatPanel/MemoPanel/ProfilePanel/PositionPanel state-by-state visual comparison.",
+        "Native unexpected pointer cancellation/capture loss; mock tests do not prove OS/device behavior.",
+        "Complete static/variable font and pixel comparison."
       ],
       "evidence": [
-        "local-panel-resize",
-        "local-workspace-mobile-profile-390"
+        "panel-independent-basic-source-comparison.json",
+        "panel-independent-expand-vectors.json",
+        "panel-independent-expanded.json",
+        "panel-independent-closed.json",
+        "panel-independent-mobile-draft.json",
+        "panel-independent-mobile-scroll.json",
+        "panel-final-short-mobile.json",
+        "panel-independent-resize.json",
+        "panel-drag-compact-before.log",
+        "panel-drag-compact-after.log"
       ]
     },
     "prism-utility": {
@@ -958,7 +970,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 139,
+      "passed": 143,
       "failed": 0
     },
     "registry": {
@@ -970,12 +982,12 @@
       "status": "passed-final-registry-install-build-and-selected-runtime",
       "items": 50,
       "files": 75,
-      "completeExamples": 27,
+      "completeExamples": 28,
       "typecheck": "passed",
       "viteBuild": "passed",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px). Latest registry reinstall also passed 14-chapter/96-career prepared print document, fonts, exclusion of app chrome and scripts; selected cancel/error/retry/immutable snapshot checked in the real browser. Current feedback variants, legacy panel, omitted description and bounded empty memo also passed in the final installed consumer at actual320px."
+      "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px). Latest registry reinstall also passed 14-chapter/96-career prepared print document, fonts, exclusion of app chrome and scripts; selected cancel/error/retry/immutable snapshot checked in the real browser. Current feedback variants, legacy panel, omitted description and bounded empty memo also passed in the final installed consumer at actual320px. Final installed Panel basic/expanded/closed measurements and vector paint matched the public sample. Actual320px long-title header125/body313, draft persistence through Escape close/reopen and real wheel to the final body action passed. The final preferred-width rollback source was reinstalled after ENOSPC recovery and typechecked/built with28 examples. Latest installed browser readback is blocked by the browser URL policy; earlier selected style/runtime comparisons are before this interaction-only fix."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1059,22 +1071,24 @@
     },
     "usageContracts": {
       "groups": 49,
-      "componentExamples": 27,
-      "integrationFragments": 22,
+      "componentExamples": 28,
+      "integrationFragments": 21,
       "workspaceTypecheck": "passed check-prism.mjs",
       "installedTypecheck": "passed final independent install",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 172,
-      "checked": 172,
-      "status": "passed-current-worktree-actual320px-direct-embed-cua",
-      "previousVerifiedStates": 159,
+      "count": 175,
+      "checked": 150,
+      "status": "partial-current-source-150-of175-actual320px-cua",
+      "previousVerifiedStates": 175,
       "previousSourceCommit": "b4a502d8021277469e6a8d2862b0fb11482e1298",
       "previousPartialChecked": 22,
       "previousPartialSourceCommit": "c6b5d7ee09fe730346b80cf515608247dfd2910d",
-      "baseCommit": "c827baa301d5dc3330819dbb98dc97c198c21bdc",
-      "sourceSha256": "d5b8bc013bfb371deb0842c9907c356acea17d90a9d1492a6bac579298dc0d98"
+      "baseCommit": "59ff8bb467c71ef9e1208e9e3b3ed868a7cbd269",
+      "sourceSha256": "16906b727cf14b0d0a957cbf1733d175c2762c230947906908e74e6aa5ece567",
+      "previousSourceSha256": "15d1c35715767b09ed4f587ef896d80643f21b983f645af35f78ad219e29663a",
+      "pending": 25
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1153,22 +1167,124 @@
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 49,
-    "states": 172,
-    "checked": 172,
-    "status": "passed-current-worktree-actual320px-direct-embed-cua",
-    "baseCommit": "c827baa301d5dc3330819dbb98dc97c198c21bdc",
-    "sourceSha256": "d5b8bc013bfb371deb0842c9907c356acea17d90a9d1492a6bac579298dc0d98",
+    "states": 175,
+    "checked": 150,
+    "status": "partial-current-source-150-of175-actual320px-cua",
+    "baseCommit": "59ff8bb467c71ef9e1208e9e3b3ed868a7cbd269",
+    "sourceSha256": "16906b727cf14b0d0a957cbf1733d175c2762c230947906908e74e6aa5ece567",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
     "checks": [
-      "All172 unique component/state markers matched at actual document clientWidth320.",
-      "No document overflow over1px, nested buttons or unlabeled visible native inputs.",
-      "Collected warning/error logs were empty."
+      "The first150 manifest-defined states have matching markers and actual clientWidth320.",
+      "No document overflow over1px, nested buttons or unlabeled visible native input/textarea/select in these150 states; aria-hidden native form controls excluded."
     ],
     "evidence": [
-      "memo-empty-final-172-fixtures.json",
-      "memo-empty-source-fingerprint.json"
+      "panel-final-150-fixtures.json",
+      "panel-source-fingerprint.json"
     ],
-    "claim": "Synthetic render/accessibility structure only. Not all interactions or original parity."
+    "claim": "Current150 and previous175-before-rollback checks are distinct; no complete parity claim.",
+    "pending": [
+      [
+        "prism-mgmt-comments",
+        "loading"
+      ],
+      [
+        "prism-mgmt-comments",
+        "error"
+      ],
+      [
+        "prism-mgmt-comments",
+        "readonly"
+      ],
+      [
+        "prism-mgmt-comments",
+        "long"
+      ],
+      [
+        "prism-survey",
+        "default"
+      ],
+      [
+        "prism-survey",
+        "empty"
+      ],
+      [
+        "prism-survey",
+        "long"
+      ],
+      [
+        "prism-attitude-report",
+        "default"
+      ],
+      [
+        "prism-attitude-report",
+        "empty"
+      ],
+      [
+        "prism-attitude-report",
+        "error"
+      ],
+      [
+        "prism-attitude-report",
+        "long"
+      ],
+      [
+        "prism-icon",
+        "default"
+      ],
+      [
+        "prism-analysis",
+        "default"
+      ],
+      [
+        "prism-analysis",
+        "empty"
+      ],
+      [
+        "prism-analysis",
+        "long"
+      ],
+      [
+        "prism-position-recommendations",
+        "default"
+      ],
+      [
+        "prism-position-recommendations",
+        "empty"
+      ],
+      [
+        "prism-position-recommendations",
+        "readonly"
+      ],
+      [
+        "prism-position-recommendations",
+        "long"
+      ],
+      [
+        "prism-rich-text",
+        "default"
+      ],
+      [
+        "prism-rich-text",
+        "empty"
+      ],
+      [
+        "prism-rich-text",
+        "long"
+      ],
+      [
+        "prism-profile-print",
+        "default"
+      ],
+      [
+        "prism-profile-print",
+        "empty"
+      ],
+      [
+        "prism-profile-print",
+        "long"
+      ]
+    ],
+    "pendingReason": "Browser URL policy rejected even localhost HTTP access; remaining25 current-source states unverified."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1877,5 +1993,77 @@
       "memo-empty-installed-loaded-fonts.json"
     ],
     "claim": "Selected public tab geometry and current source/deployedCSS rules, synthetic responsive/mutation and installed consumer. Not complete authenticated memo or all font/pixel parity."
+  },
+  "previousPanelFixtureRenderChecks": {
+    "groups": 49,
+    "states": 172,
+    "checked": 172,
+    "status": "passed-current-worktree-actual320px-direct-embed-cua",
+    "baseCommit": "c827baa301d5dc3330819dbb98dc97c198c21bdc",
+    "sourceSha256": "d5b8bc013bfb371deb0842c9907c356acea17d90a9d1492a6bac579298dc0d98",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "checks": [
+      "All172 unique component/state markers matched at actual document clientWidth320.",
+      "No document overflow over1px, nested buttons or unlabeled visible native inputs.",
+      "Collected warning/error logs were empty."
+    ],
+    "evidence": [
+      "memo-empty-final-172-fixtures.json",
+      "memo-empty-source-fingerprint.json"
+    ],
+    "claim": "Synthetic render/accessibility structure only. Not all interactions or original parity."
+  },
+  "panelVerification": {
+    "observedAt": "2026-10-11",
+    "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "deployedRevision": "not-reported-by-public-sample",
+    "referenceUrl": "http://dev.prism.ai/sample/chat/side-panel",
+    "status": "public-sample-selected-metrics-and-installed-runtime-verified-full-parity-pending",
+    "sourceSha256": "16906b727cf14b0d0a957cbf1733d175c2762c230947906908e74e6aa5ece567",
+    "enhancements": [
+      "Rich ReactNode titles and measured multiline header height; default remains64px.",
+      "Caller-owned content class/style/ref, padding and scrolling; base content padding0 and overflow-y hidden.",
+      "Mounted/inert closed content preserves drafts; external close emits expanded=false once.",
+      "Opt-in bounded resize, immediate manual width changes, compact full width and preserved preferred width.",
+      "Pointer cancellation, capture loss, close/expand during drag restore the starting width.",
+      "Drag rollback preserves pre-gesture preferred width even when the parent becomes compact; the actual displayed width remains bounded."
+    ],
+    "gates": {
+      "tests": 143,
+      "completeExamples": 28,
+      "fixtureStates": 175,
+      "installedItems": 50,
+      "installedSourceFiles": 75,
+      "currentSourceFixtureStatesChecked": 150,
+      "currentSourceFixtureStatesPending": 25
+    },
+    "limitations": [
+      "Authenticated wrapper screens unavailable in the existing Chrome tab.",
+      "Title font width delta0.015625px; complete font/pixel parity not claimed.",
+      "Mobile close width0.859375 was observed during the transition and excluded from final geometry; stable closed width0 is from the desktop source/install comparison.",
+      "Native unexpected pointer cancel/capture loss unverified.",
+      "Production changes not published.",
+      "After the final rollback fix, current-source fixture render checks cover150/175 states; browser policy blocked the remaining25 and current installed runtime readback."
+    ],
+    "measuredStyleSourceSha256": "15d1c35715767b09ed4f587ef896d80643f21b983f645af35f78ad219e29663a"
+  },
+  "previousPanelBeforeRollbackFixtureRenderChecks": {
+    "groups": 49,
+    "states": 175,
+    "checked": 175,
+    "status": "passed-current-worktree-actual320px-direct-embed-cua",
+    "baseCommit": "59ff8bb467c71ef9e1208e9e3b3ed868a7cbd269",
+    "sourceSha256": "15d1c35715767b09ed4f587ef896d80643f21b983f645af35f78ad219e29663a",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "checks": [
+      "All175 unique component/state markers matched the current manifest at actual document clientWidth320.",
+      "No document overflow over1px, nested buttons or unlabeled visible native input/textarea/select. Hidden native form selects are excluded by aria-hidden.",
+      "Collected warning/error logs were empty. Results persisted in batches after an observation timeout."
+    ],
+    "evidence": [
+      "panel-before-rollback-175-fixtures.json",
+      "panel-before-rollback-source-fingerprint.json"
+    ],
+    "claim": "Synthetic current-document render and accessibility structure only; not all interactions or original parity."
   }
 }

@@ -1,5 +1,13 @@
 # PRISM 검증 기록
 
+## SidePanel 원본 대조와 크기 조절 보완 (2026-10-11)
+
+공개 SidePanel과 최종 독립 설치본의 기본·확대·닫기 상태를 대조했습니다. 기본 너비440px, 헤더64px/여백20px, 버튼·SVG24px, #DDE5EB 경계선, 12px/.06 그림자와 본문 여백0/overflow-y hidden이 맞습니다. 확대는 부모 폭+1px와 z-index1250을 사용하며 닫힌 본문은 mounted/inert를 유지합니다. Expand·Collapse·Close의 path와 computed paint도 같았습니다. h4 제목은18px/700/검정/높이21px이며 static/variable 폰트에서 폭66.375/66.390625px로0.015625px 차이가 있습니다. 서로 다른 caller 컨테이너의 패널 높이는 비교에서 제외했습니다.
+
+ReactNode 제목과 content class/style/ref를 지원합니다. 긴 제목은 헤더 높이에 반영되고 본문 여백·스크롤은 호출자가 지정합니다. 수동 너비 조절에서는 애니메이션을 끄며 방향키456/Home320/End800, double click440, 실제80px 드래그520을 확인했습니다. 실제320px 독립 화면은 긴 제목 헤더125px/본문313px, 초안의 Escape 닫기·재열기 유지와 마지막 동작까지의 실제 wheel scroll이 통과했습니다. 240×240px 부모에서도 패널238×238/헤더146/본문92px이며 초안 입력이 완전히 보였습니다. pointer 취소·capture 유실·외부 닫기 expansion reset·선호 너비 복구는 JSDOM 검사이고 OS/device 검증과 구분합니다.
+
+드래그 compact 회귀를 추가한 전체143 tests,28개 완전 예시,50항목/75 source파일의 최종 독립 설치·타입·Vite·폰트 bytes·고지 검사와175개 고유 상태의 실제320px 렌더/문서 넘침/중첩 버튼/표시 native 입력 이름 검사·수집 로그가 통과했습니다. 관찰 timeout 뒤 같은 탭을 확인하고 결과를 묶음별로 저장해 다시 대조했습니다. 첫175상태 검사의 source fingerprint는15d1c35715767b09ed4f587ef896d80643f21b983f645af35f78ad219e29663a/66 input입니다. 이후700→드래그600→부모300→부모1000에서선호너비가600으로남는회귀를재현해700을복구하도록수정했습니다. 최종16906b727cf14b0d0a957cbf1733d175c2762c230947906908e74e6aa5ece567/66 input은150/175상태까지통과했으며프로토콜정책이localhost HTTP도거절해남은25상태와최종installed browser readback은미검증입니다. ENOSPC 뒤확인한임시consumer의node_modules만재생성해최종재설치·타입·빌드를완료했습니다. 인증 wrapper 상태·전체 font/pixel·native unexpected pointer cancel·production은 미완료이며 전체 목표는 계속 진행합니다.
+
 ## 2026-10-11 메모와 빈 상태의 용도 구분
 
 공개 원본의 TabPanelEmptyState를 실제로 측정하고 현재 MemoContent와 배포된 빈 상태 CSS를 대조했습니다. 일반 화면은 140px 그림·18/16px 글자, 탭은 120px·16/14px·10px 제목 간격, 메모 패널은 140px·16/14px·6px 간격입니다. `PrismEmptyState`에 default/tab/panel variant와 optional description을 추가했습니다. 기존 panel=true는 탭 규격을 유지합니다. 콘텐츠 바깥의 24px 여백은 원본 규칙에 맞춰 제거했으며 호출자가 배치 여백을 정합니다.
