@@ -15,13 +15,13 @@
 | M | src/components/chat/contextInfo/ContextInfoLayer.tsx | 반영 및 선택 합성 상태 검증 | 필수/선택 badge·11행·trim기준50/800 경고·structured intent·반응형/resize 반영; 원본 인증 상태·전체 pixel·기본 motion 대조 대기 |
 | M | src/components/chat/contextInfo/ContextInfoSection.module.scss | 반영 및 선택 합성 상태 검증 | 필수/선택 badge·11행·trim기준50/800 경고·structured intent·반응형/resize 반영; 원본 인증 상태·전체 pixel·기본 motion 대조 대기 |
 | M | src/components/chat/contextInfo/ContextInfoSection.tsx | 반영 및 선택 합성 상태 검증 | 필수/선택 badge·11행·trim기준50/800 경고·structured intent·반응형/resize 반영; 원본 인증 상태·전체 pixel·기본 motion 대조 대기 |
-| M | src/components/chat/conversation/ChatJSONRendererPanel.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
+| M | src/components/chat/conversation/ChatJSONRendererPanel.tsx | 현재 목적 구현·선택 검증 | 독립 분석/추천/리더 tooltip·동일 panel layout·115tests/49항목 재설치·선택 CUA 크기/더 보기/resize. 169전체 상태/새 설치본 browser·원본 전체시각은 미완료 |
 | M | src/components/chat/memo/MemoCard.module.scss | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
 | M | src/components/chat/memo/MemoCard.tsx | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
 | M | src/components/chat/memo/MemoContent.module.scss | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
 | M | src/components/chat/memo/MemoContent.tsx | 반영 및 선택 검증 | prism-memo의 현재 본문/날짜/단일 편집과 async 동작 반영; source/deployed CSS 대조 및 합성 runtime. 인증 원본 전체 상태 대기 |
-| M | src/components/chat/position/PositionRecommend.module.scss | 차이 확인; 추가 대조 대기 | rank UI 제거 확인; 현재 kit에도 rank 계약 없음. 원본 headerMinHeight/선택/정렬 layout 상태 대조는 필요 |
-| M | src/components/chat/position/PositionRecommend.tsx | 차이 확인; 추가 대조 대기 | rank UI 제거 확인; 현재 kit에도 rank 계약 없음. 원본 headerMinHeight/선택/정렬 layout 상태 대조는 필요 |
+| M | src/components/chat/position/PositionRecommend.module.scss | 현재 목적 구현·선택 검증 | 독립 분석/추천/리더 tooltip·동일 panel layout·115tests/49항목 재설치·선택 CUA 크기/더 보기/resize. 169전체 상태/새 설치본 browser·원본 전체시각은 미완료 |
+| M | src/components/chat/position/PositionRecommend.tsx | 현재 목적 구현·선택 검증 | 독립 분석/추천/리더 tooltip·동일 panel layout·115tests/49항목 재설치·선택 CUA 크기/더 보기/resize. 169전체 상태/새 설치본 browser·원본 전체시각은 미완료 |
 | M | src/components/chat/successorCandidate/BadgeSummary.tsx | 반영 및 선택 상태 검증 | 현재 CEO/ELP typed recipe·tooltip 본문 override, 11개 새 tests·152상태 CUA·독립 소비자 등록/수정/삭제·크기 검증. 인증 원본 전체 상태·시각/폰트 및 실제 backend 대조 대기 |
 | M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.module.scss | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
 | M | src/components/chat/successorCandidate/attitude/AttitudeDiagnosis.tsx | 반영 및 선택 상태 검증 | 제목 action·진단/Survey typed recipe와 native 연속PDF·전체bytes·실패/취소/재시도·크기 지원. 107tests/159상태·실제CUA/독립소비자 근거. 인증 원본전체pixel/font·Chart.js geometry·실서비스/OS 대조 대기 |
@@ -49,10 +49,10 @@
 | M | src/components/chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts | 목적 구현 및 선택 검증 | 독립 PDF/ZIP/HTML engine과 합성 runtime 있음; 전체 실제 source print/layout/mapping 대조 대기 |
 | M | src/components/chat/successorCandidate/total/SuccessorCandidateLeaderSummary.module.scss | 부분 반영 및 선택 검증 | typed pie/summary와 수치·geometry 증거 있음; 전체 원본 profile/frame 상태 대기 |
 | M | src/components/chat/successorCandidate/total/SuccessorCandidateLeaderSummary.tsx | 부분 반영 및 선택 검증 | typed pie/summary와 수치·geometry 증거 있음; 전체 원본 profile/frame 상태 대기 |
-| M | src/components/chat/templates/ChatProfileAnalysis.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/templates/ChatProfileAnalysis.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/templates/ChatTemplatePositionRecommend.module.scss | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
-| M | src/components/chat/templates/ChatTemplatePositionRecommend.tsx | 변경 경로 확인 | 이번 관리자 양식 범위에서 세부 diff/state까지 검토하지 않음; 다음 감사 대상 |
+| M | src/components/chat/templates/ChatProfileAnalysis.module.scss | 현재 목적 구현·선택 검증 | 독립 분석/추천/리더 tooltip·동일 panel layout·115tests/49항목 재설치·선택 CUA 크기/더 보기/resize. 169전체 상태/새 설치본 browser·원본 전체시각은 미완료 |
+| M | src/components/chat/templates/ChatProfileAnalysis.tsx | 현재 목적 구현·선택 검증 | 독립 분석/추천/리더 tooltip·동일 panel layout·115tests/49항목 재설치·선택 CUA 크기/더 보기/resize. 169전체 상태/새 설치본 browser·원본 전체시각은 미완료 |
+| M | src/components/chat/templates/ChatTemplatePositionRecommend.module.scss | 현재 목적 구현·선택 검증 | 독립 분석/추천/리더 tooltip·동일 panel layout·115tests/49항목 재설치·선택 CUA 크기/더 보기/resize. 169전체 상태/새 설치본 browser·원본 전체시각은 미완료 |
+| M | src/components/chat/templates/ChatTemplatePositionRecommend.tsx | 현재 목적 구현·선택 검증 | 독립 분석/추천/리더 tooltip·동일 panel layout·115tests/49항목 재설치·선택 CUA 크기/더 보기/resize. 169전체 상태/새 설치본 browser·원본 전체시각은 미완료 |
 | M | src/styles/_dialog.scss | 선택 규칙 반영 | 확인 본문 pre-line 반영; 원본 모든 dialog 상태 대조 대기 |
 | M | src/styles/_print.scss | 목적 구현 및 선택 검증 | 독립 PDF/ZIP/HTML engine과 합성 runtime 있음; 전체 실제 source print/layout/mapping 대조 대기 |
 | M | src/styles/_text-field.scss | 선택 규칙 반영 | focus 오류 빨간 테두리의 local computed style 확인; 전체 입력 규칙은 추가 대조 |

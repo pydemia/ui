@@ -1,3 +1,4 @@
+import { PrismAnalysis, type PrismAnalysisProps, type PrismAnalysisFactor } from "./prism-analysis";
 import { useId, type ReactNode, type CSSProperties } from "react";
 import { PrismCheckGlyph as Check, PrismStarGlyph as Star } from "./prism-icon";
 import { PrismOutline, PrismCompetenceMatrix } from "./prism-profile";
@@ -57,6 +58,18 @@ export function PrismPositionMatrix({ columns, rows, rowAxisLabel, current }: { 
     return <div className="prism-position-matrix" role="region" aria-label="다양성 Matrix" tabIndex={0}><table><caption className="prism-sr-only">다양성 Matrix · 현재 위치</caption><thead><tr><th scope="col">{rowAxisLabel}</th>{columns.map(column => <th scope="col" key={column.id}>{column.label}</th>)}</tr></thead>
         <tbody>{rows.map(row => <tr key={row.id}><th scope="row">{rowAxisLabel} {row.label}</th>{columns.map(column => { const selected = current?.row === row.id && current?.column === column.id; return <td data-current={selected || undefined} key={column.id}>{selected ? "현재 위치" : <span className="prism-sr-only">해당 없음</span>}</td>; })}</tr>)}</tbody></table></div>;
 }
-export function PrismProfileAnalysis({ leader, factors }: { leader?: { label: string; description?: string }; factors: readonly { id: string; label: string; title?: string; results: readonly string[]; summary?: string | null; starred?: readonly string[] }[] }) {
-    return <div className="prism-profile-analysis">{leader && <div className="prism-analysis-leader"><strong>{leader.label}</strong><p>{leader.description ?? "관련 데이터 없음"}</p></div>}{factors.map(factor => <section key={factor.id}><h4>{factor.label}</h4><div>{factor.title && <strong>{factor.title}</strong>}<div>{factor.results.map(result => <PrismChip key={result}>{factor.starred?.includes(result) && <Star size={14} aria-hidden="true" />}{result}</PrismChip>)}</div><p>{factor.summary ?? "관련 데이터 없음"}</p></div></section>)}</div>;
+export type PrismProfileAnalysisProps = Omit<PrismAnalysisProps,"factors"> & { factors: readonly (Omit<PrismAnalysisFactor,"kind"> & {kind?: PrismAnalysisFactor["kind"]})[] };
+/** Compatibility adapter; new consumers explicitly choose each factor's display kind. */
+export function PrismProfileAnalysis({factors,...props}: PrismProfileAnalysisProps) {
+    return <PrismAnalysis {...props} factors={factors.map(factor => ({...factor,kind:factor.kind ?? analysisKind(factor.label)}))}/>;
+}
+function analysisKind(label: string): PrismAnalysisFactor["kind"] {
+    const text=label.trim();
+    if(text.startsWith("전문성"))return "expertise";
+    if(text.startsWith("성공"))return "success";
+    if(text.startsWith("Design"))return "design";
+    if(text.startsWith("Learning"))return "agility";
+    if(text.startsWith("Attitude"))return "attitude";
+    if(text.startsWith("Leadership"))return "leadership";
+    return "other";
 }

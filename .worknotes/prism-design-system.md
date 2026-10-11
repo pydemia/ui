@@ -459,3 +459,17 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 세부 source 근거와실패 이력은 [Attitude 감사](prism-attitude-source-audit-20261010.md), raw들은 browser-evidence에보존합니다. 전체107tests와45그룹/22예시 검사통과후최종표준build/typecheck/generic·검토branch/PR162 갱신을진행합니다. Goal은active이며273/pending0·159fixture를전체완료로해석하지않습니다.
 
 - 최종 local gate는 표준 npm run build, docs TypeScript, check-prism(45그룹/22완전예시), generic verify-current, diff whitespace가 모두 exit0입니다. 전체107 PRISM tests가 성공했고 generic snapshot SHA256 25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896을 유지했습니다. fresh fetch 후 frontend HEAD=origin/dev087811ff clean, ui origin/main288b0838이며 Git credential config hash를 보존했습니다. 독립 consumer의 native download event timeout 후 예상 Downloads 파일도 없어 OS 저장을 완료했다고 보고하지 않습니다. source/generated를 분리 저장하고 기존 draft PR162만 갱신합니다.
+
+- 게시 readback: source8617e577/generatedb4a502d8021277469e6a8d2862b0fb11482e1298을 기존 검토 branch에 정상 push했습니다. PR162 title은 Add independent PRISM profile, report and management recipes이며 draft true/base main/정확한 head를 API로 확인했습니다. PAT exact-match0과 Git config hash 보존입니다. main/production은288b0838이며 변경하지 않았습니다.
+- 게시 후 남은 5개 chat 파일의 diff·현재 전체 소스와 kit를 대조했습니다. source delta 미검토는0이며 [채팅 감사](prism-chat-source-audit-20261010.md)에 근거를 기록했습니다. 분석의 리더 도움말·aiComment·factor별 표시와 포지션 추천의 현재 스타일·선택/더 보기/반응형을 보완해야 합니다. 공개 metadata의 미검토5는 후속 감사 전 snapshot이며 이 감사는 로컬 기록입니다. 전체 원본 UI parity와 Goal은 계속 미완료입니다.
+- 정리 근거: 자체63148(pid88990)/63224(pid47072)의 포트·명령·cwd가 맞는지 다시 검증한 후 종료했습니다. 8766(pid65001)은 유지됐고 own tab2089332366을 닫았습니다. 원본 탭·Mac 잠금·계정/credential 설정과 소비자 source/lock/deps/dist·실패/성공 raw 자료를 보존했습니다. 이번 phase의 검증·게시 후 기록과 후속 채팅 감사는 로컬 worknotes에 남아 있습니다.
+- 최종 headb4a502d8021277469e6a8d2862b0fb11482e1298의 Verify UI37983188168은 completed/success입니다. 앞선 live jobs에서 타입·일반 UI test·표준 build 통과를 확인했고 전체 workflow 성공을 후속 readback으로 확인했습니다. VercelEJqt4YTZXymkrwy4M3U3uPWW5XzR도 success이며 branch preview HTTP/browser readback이나 production 완료로 확대하지 않습니다. PRISM registry SHA256은4c82ca800e92d26c1ebf6667413f293f98199ddcb989a7d1788442544c457d84입니다. PR162는 기존 첨부 상태였으며 이번 재첨부 도구 호출은 응답 없이 대기해 orchestration을 종료했습니다. GitHub PR 갱신/정확한 head·CI는 별도 API로 확인됐습니다.
+- 이번 phase는 Attitude/Survey/native PDF 구현·159합성 상태/독립46항목 설치·두 커밋 게시·CI의 유효 진척입니다. Goal은 active입니다. 다음 작업은 위 채팅 감사의 분석/추천 독립 recipe 보완과 기존 profile/print mapping·원본 인증 상태/full pixel/font·OS 저장/native print 통합 검증이며 미검토0을 전체 달성으로 해석하지 않습니다. 구현 변경은 모두 PR162에 있고 CI·정리·후속 감사 worknotes만 로컬 modified/untracked입니다.
+
+### 2026-10-11 채팅 분석·추천 독립 recipe
+
+이전 중단 turn은 코드3모듈/호환 adapter·새8tests와전체115tests/49항목 재설치·실제CUA 크기/선택/더 보기/native resize의 진척입니다. 현재 파일과 통과 로그를 다시 읽어 근거를 확인했습니다. dev63149는 listener가 없고 기존 session51841도 Unknown process id로 terminal을 확인했으므로 observation timeout만 보고 재시작하지 않았습니다.
+
+소스·25예시·독립 빌드는 통과했지만 browser3/iab unavailable 이후 CUA 도구가 환경에서 빠져 전체169개 actual320 상태와 새 consumer 실제UI는 미완료입니다. 이전159개 검증은 b4a502d8의 historical 근거로 별도 보존하고 이번22개 aggregate·선택 측정을 구분했습니다. [채팅 감사](prism-chat-source-audit-20261010.md)에 소스 차이·구현·실패·재개 위치를 기록했습니다. 현재 목표는 여전히 전체 원본 component coverage/시각·상태/개선이며 source 미검토0이나115tests를 전체완료로 해석하지 않습니다.
+
+- 최종 표준 npm run build·docs TypeScript·check-prism(48그룹/25완전예시)·generic verify-current·diff whitespace가 모두 exit0입니다. 115PRISM tests가 통과했고 generic snapshot SHA25625ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896을 보존했습니다. 최신 fetch 후 frontend HEAD=origin/dev087811ff clean/ui main288b0838이며 credential Git config hash도 유지됐습니다. source/generated를 별도 저장하고 기존 draftPR162만 갱신합니다. 전체 UI 검증과 production은 미완료입니다.
