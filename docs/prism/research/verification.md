@@ -1,6 +1,6 @@
 # PRISM 검증 기록
 
-기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 48개 typed 그룹과 토큰을 포함한 49개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
+기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 49개 typed 그룹과 토큰을 포함한 50개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
 
 ## 근거와 범위
 
@@ -194,3 +194,14 @@ PrismPositionRecommendations는 일반·panel의 같은 레이아웃과36/53px �
 선택 CUA 측정은 추천140–1280px의1/2/3열·넘침0,0/1/2/3/4/6/7/9개 초기 표시,4→6→9/접기·키보드 선택·데이터 전환을 포함합니다. 양축 드래그800×349.59→600×410과overflow0을 확인했습니다. 분석140–1280에서60px badge/10px info/12px700 comment/80px label(320px 이상),역할별색과tooltip350px/12pxpadding/14px500/pre-line을측정했습니다. 전체 원본pixel/font 일치의근거로 확대하지 않습니다.
 
 현재169개 상태의실제320px 검사는22개aggregate tool 관찰 후 브라우저 연결이끊겼습니다. 개별 배열 저장 전 REPL reset이 있었으므로169개완료나22개 개별 raw 파일 확보를주장하지 않습니다. 이전159개 성공은 b4a502d8의별도 historical evidence입니다. Screenshot도5000ms timeout으로 새이미지가 없습니다. 전체 상태·긴 문장·회사 logo·원본 인증·OS 저장/인쇄 검증은 남아 있습니다.
+
+
+## 7분류 프로필 인쇄 문서: 2026-10-11
+
+PrismProfilePrintDocument는 종합·전문성·성공경험·Design 역량·Learning Agility·Attitude·Leadership을 원본 순서로 묶습니다. SUMMARY/보상 옵션은 종합의 해당 부분만 제어합니다. 경력 continuation의 마지막에 보상을 두고, 나머지 분류는 table thead 머리말과 정적7개 탭을 사용합니다. model은호스트가조회/변환한표시값이며API/auth/자동인쇄를수행하지않습니다.
+
+careerPages를제공하면누락/중복/순서를검사합니다. 생략하면source값을참고한글꼴/공간추정으로나누며실제browser/font pagination의검증을대신하지않습니다. 설명은기본full로보존하고긴본문을숨기지않습니다. reference-limits를선택하면표시필드만복사·코드포인트단위축약하고안내를표시합니다. 실제0과null score/max를구분하고,성공경험의모든topic·대표인터뷰·실패를포함합니다. 누락된topic index의실제essay도문서에서누락하지않습니다.
+
+Source에맞춰leader70pt/140pt,경력11pt/130pt,photo80pt/10pt,Essay86pt/Survey65px·118pt와정적탭20pt/10pt/8pt/6pt를반영했습니다. min-height/overflow-visible로길어진본문을보존합니다.190mm paper를독립viewport에서너비맞춤/수동배율/양축resize하고인쇄시배율1과named A4 page(7/10/10mm margin)로설정합니다. 이는구현과source대조이며실제측정완료를의미하지않습니다.
+
+8개새검사를포함123tests,49그룹/26완전예시가통과했습니다. 독립소비자에50항목/75파일을fresh설치해26예시TypeScript/Vite·폰트bytes·고지를검증했습니다. 이전tmp소비자는없어서새폴더를할당했고component source는직접수정하지않았습니다. 현재172개정의상태의browser검사는0이며이전159개/후속22개부분검사와구분합니다. 실제A4/PDF/HTML/ZIP 문서·폰트/pixel·전체내용/머리말/페이지counter·독립소비자320px/resize/native print는미완료입니다.

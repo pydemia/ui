@@ -958,4 +958,31 @@ export function FormattedTextExample(){
 
 ```
 
+## Complete profile print document / Seven sections
+독립7분류 프로필 인쇄 문서·종합 경력 continuation·전체 topic/실패·정적 탭
+Contract: 표시 모델은 host-owned입니다. 종합·전문성·성공경험·Design·Learning·Attitude·Leadership의7분류를 모두 렌더하며 options.summary/compensation은 종합의해당영역만제어합니다. API/auth/자동인쇄를실행하지않습니다. careerPages로정확한호스트페이지를받거나source글꼴/예약높이의추정helper를사용합니다. 긴내용은숨기지않으며 실제font/browser pagination은별도검증입니다. 점수/최댓값null과0을구분합니다. textPolicy기본full은원문을보존하며reference-limits는복사한표시모델에원본한도를적용하고축약안내를표시합니다.190mm paper를viewport에서zoom/양축resize하며인쇄시named A4 page/배율1로돌립니다. Model의companyLogo는호스트가제공하는정적자산slot입니다. 원본전체font/pixel/native print와모든긴문서는미검증입니다.
+States: default, empty, long
+Registry: /prism/r/prism-profile-print.json
+Source: packages/prism/src/prism-profile-print.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { PrismProfilePrintDocument, PrismProfilePrintViewport, type PrismProfilePrintModel } from "@/components/ui/prism-profile-print";
+const model:PrismProfilePrintModel={
+ id:"synthetic",candidate:{id:"synthetic",name:"김가상",company:"가상전자",position:"기술전략담당"},
+ leader:{name:"Good 리더",summary:"합성 요약입니다.",definition:"합성 정의입니다."},
+ basicInfo:[{label:"최종 학위",value:["합성 학위"]}],
+ career:[{id:"career",period:"합성 기간",company:"가상전자",role:["가상 직무","합성 업무"]}],
+ compensation:{years:["2026"],rows:[{label:"현금",values:[0]}]},
+ expertise:{summary:null,fields:[],survey:[]},
+ success:{summary:null,topics:["합성 경험"],essays:[{id:"essay",topic:"합성 경험",representative:true,title:"합성 경험",description:"가상 근거입니다.",keywords:[]}],failures:[]},
+ design:{grade:null,description:null,essays:[{id:"missing",name:"근거 없음",score:null,max:null,description:null}],survey:[],diversity:null},
+ agility:{grade:null,description:null,essays:[],survey:[],experiences:[]},
+ attitude:{summary:null,diagnosis:null,risk:[],survey:[]},
+ leadership:{summary:null,survey:[],strengths:[],improvements:[],trend:null},
+};
+export function ProfilePrintExample(){return <section data-prism="light"><PrismProfilePrintViewport style={{height:800}}><PrismProfilePrintDocument model={model} options={{summary:true,compensation:true}}/></PrismProfilePrintViewport></section>;}
+
+```
+
 Visual parity is pending until reference comparison has completed; read verification.md.

@@ -2827,7 +2827,7 @@
       "category": "Documents",
       "purpose": "인쇄 전용 Profile 머리말·경력·Risk·경험과 반복 표 머리말",
       "contract": "출력 미리보기는 190mm 폭과 최소 280mm 높이를 사용합니다. 인쇄 시 최소 높이를 해제해 짧은 내용의 빈 다음 페이지를 방지합니다. repeatHeader는 table thead를 사용해 출력 머리말을 반복합니다. 읽기 전용 경험 영역·대표 항목·누락 Risk 값을 표시하며 페이지 분할과 인쇄 실행은 호스트가 소유합니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty",
@@ -2846,20 +2846,11 @@
       "embedUrl": "/prism?component=prism-print&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-print&view=responsive",
       "verification": {
-        "visual": "partial",
-        "interaction": "partial",
-        "checks": [
-          "Screen retains source 190mm width and 280mm minimum height; print clears minimum height to avoid blank trailing page",
-          "Short browser PDF is one nonblank page; long fixture is two pages with repeated Profile headers",
-          "All 36 synthetic career rows appear once; rendered PDF pages inspected"
-        ],
-        "evidence": [
-          "local-print-pdf-verification"
-        ],
+        "visual": "partial-source-style-alignment",
+        "interaction": "whole123tests passed",
+        "source": "70pt/140pt leader layout,11pt/130pt timeline and all-topic success composition",
         "remaining": [
-          "original print page comparison",
-          "other paper and native print settings",
-          "very long outline and essay fragmentation"
+          "Original whole print style/pixel/font and actual pagination"
         ]
       },
       "exports": [
@@ -2870,6 +2861,10 @@
         {
           "name": "PrismPrintLeaderSummary",
           "kind": "component"
+        },
+        {
+          "name": "PrismPrintCareerItem",
+          "kind": "type"
         },
         {
           "name": "PrismPrintCareer",
@@ -3694,6 +3689,113 @@
       ],
       "usageKind": "component-example",
       "registryUsage": "import {useState} from \"react\";\nimport { PrismFormattedText } from \"@/components/ui/prism-rich-text\";\nexport function FormattedTextExample(){\n  const [action,setAction]=useState(\"\");\n  return <div data-prism=\"light\"><PrismFormattedText source=\"**합성 근거**와 [후보 확인](profile://synthetic)\" onAction={(kind,id)=>setAction(`${kind}: ${id}`)}/><p role=\"status\">{action}</p></div>;\n}\n"
+    },
+    {
+      "id": "prism-profile-print",
+      "name": "Complete profile print document / Seven sections",
+      "category": "Documents",
+      "purpose": "독립7분류 프로필 인쇄 문서·종합 경력 continuation·전체 topic/실패·정적 탭",
+      "contract": "표시 모델은 host-owned입니다. 종합·전문성·성공경험·Design·Learning·Attitude·Leadership의7분류를 모두 렌더하며 options.summary/compensation은 종합의해당영역만제어합니다. API/auth/자동인쇄를실행하지않습니다. careerPages로정확한호스트페이지를받거나source글꼴/예약높이의추정helper를사용합니다. 긴내용은숨기지않으며 실제font/browser pagination은별도검증입니다. 점수/최댓값null과0을구분합니다. textPolicy기본full은원문을보존하며reference-limits는복사한표시모델에원본한도를적용하고축약안내를표시합니다.190mm paper를viewport에서zoom/양축resize하며인쇄시named A4 page/배율1로돌립니다. Model의companyLogo는호스트가제공하는정적자산slot입니다. 원본전체font/pixel/native print와모든긴문서는미검증입니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "long"
+      ],
+      "source": [
+        "chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+        "chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts",
+        "chat/successorCandidate/print/PrintPage.tsx",
+        "chat/successorCandidate/print/PrintLeaderSummary.tsx",
+        "chat/successorCandidate/print/PrintCareerTimeline.tsx"
+      ],
+      "usage": "import {PrismProfilePrintDocument,PrismProfilePrintViewport,type PrismProfilePrintModel} from \"@pydemia/prism\";\nconst model:PrismProfilePrintModel={\n id:\"synthetic\",candidate:{id:\"synthetic\",name:\"김가상\",company:\"가상전자\",position:\"기술전략담당\"},\n leader:{name:\"Good 리더\",summary:\"합성 요약입니다.\",definition:\"합성 정의입니다.\"},\n basicInfo:[{label:\"최종 학위\",value:[\"합성 학위\"]}],\n career:[{id:\"career\",period:\"합성 기간\",company:\"가상전자\",role:[\"가상 직무\",\"합성 업무\"]}],\n compensation:{years:[\"2026\"],rows:[{label:\"현금\",values:[0]}]},\n expertise:{summary:null,fields:[],survey:[]},\n success:{summary:null,topics:[\"합성 경험\"],essays:[{id:\"essay\",topic:\"합성 경험\",representative:true,title:\"합성 경험\",description:\"가상 근거입니다.\",keywords:[]}],failures:[]},\n design:{grade:null,description:null,essays:[{id:\"missing\",name:\"근거 없음\",score:null,max:null,description:null}],survey:[],diversity:null},\n agility:{grade:null,description:null,essays:[],survey:[],experiences:[]},\n attitude:{summary:null,diagnosis:null,risk:[],survey:[]},\n leadership:{summary:null,survey:[],strengths:[],improvements:[],trend:null},\n};\nexport function ProfilePrintExample(){return <section data-prism=\"light\"><PrismProfilePrintViewport style={{height:800}}><PrismProfilePrintDocument model={model} options={{summary:true,compensation:true}}/></PrismProfilePrintViewport></section>;}\n",
+      "sourcePath": "packages/prism/src/prism-profile-print.tsx",
+      "previewUrl": "/prism?component=prism-profile-print",
+      "embedUrl": "/prism?component=prism-profile-print&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-profile-print&view=responsive",
+      "verification": {
+        "visual": "pending-current-full-document-comparison",
+        "interaction": "123tests includes8new content/option/continuation/missing-vs-zero/multi-profile tests;26portable examples passed",
+        "source": "087811ff print mapping and seven chapter composition/styles",
+        "remaining": [
+          "Actual font/browser page fragmentation and all long content",
+          "A4 margins/footer/header repetition and source/target full-page visual comparison",
+          "Independent consumer actual320 preview sizing/resize and native print/PDF/HTML/ZIP integration"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismPrintScoreEssayItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPrintSummaryData",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPrintBasicInfoItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPrintGradeData",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfilePrintModel",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfilePrintOptions",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPrintTextPolicy",
+          "kind": "type"
+        },
+        {
+          "name": "prismPrintSections",
+          "kind": "value"
+        },
+        {
+          "name": "PrismPrintSectionId",
+          "kind": "type"
+        },
+        {
+          "name": "preparePrismPrintProfile",
+          "kind": "function"
+        },
+        {
+          "name": "paginatePrismPrintCareers",
+          "kind": "function"
+        },
+        {
+          "name": "PrismPrintScoreEssays",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPrintTabBar",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfilePrintDocumentProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismProfilePrintDocument",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfilePrintDocuments",
+          "kind": "component"
+        },
+        {
+          "name": "PrismProfilePrintViewport",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismProfilePrintDocument, PrismProfilePrintViewport, type PrismProfilePrintModel } from \"@/components/ui/prism-profile-print\";\nconst model:PrismProfilePrintModel={\n id:\"synthetic\",candidate:{id:\"synthetic\",name:\"김가상\",company:\"가상전자\",position:\"기술전략담당\"},\n leader:{name:\"Good 리더\",summary:\"합성 요약입니다.\",definition:\"합성 정의입니다.\"},\n basicInfo:[{label:\"최종 학위\",value:[\"합성 학위\"]}],\n career:[{id:\"career\",period:\"합성 기간\",company:\"가상전자\",role:[\"가상 직무\",\"합성 업무\"]}],\n compensation:{years:[\"2026\"],rows:[{label:\"현금\",values:[0]}]},\n expertise:{summary:null,fields:[],survey:[]},\n success:{summary:null,topics:[\"합성 경험\"],essays:[{id:\"essay\",topic:\"합성 경험\",representative:true,title:\"합성 경험\",description:\"가상 근거입니다.\",keywords:[]}],failures:[]},\n design:{grade:null,description:null,essays:[{id:\"missing\",name:\"근거 없음\",score:null,max:null,description:null}],survey:[],diversity:null},\n agility:{grade:null,description:null,essays:[],survey:[],experiences:[]},\n attitude:{summary:null,diagnosis:null,risk:[],survey:[]},\n leadership:{summary:null,survey:[],strengths:[],improvements:[],trend:null},\n};\nexport function ProfilePrintExample(){return <section data-prism=\"light\"><PrismProfilePrintViewport style={{height:800}}><PrismProfilePrintDocument model={model} options={{summary:true,compensation:true}}/></PrismProfilePrintViewport></section>;}\n"
     }
   ]
 }

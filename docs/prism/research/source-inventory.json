@@ -920,12 +920,14 @@
     {
       "source": "components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
       "name": "CandidateProfilePrintPreview",
-      "target": "prism-document",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
       "recipe": "PrismPrintPreview / PrismPrintPage + PrismHtmlExportButton",
       "additionalTargets": [
-        "prism-html-export"
+        "prism-html-export",
+        "prism-document",
+        "prism-print"
       ],
       "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
@@ -940,18 +942,26 @@
     {
       "source": "components/chat/successorCandidate/print/PrintCareerTimeline.tsx",
       "name": "PrintCareerTimeline",
-      "target": "prism-print",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PrintLeaderSummary.tsx",
       "name": "PrintLeaderSummary",
-      "target": "prism-print",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PrintOptionsDialog.tsx",
@@ -964,18 +974,26 @@
     {
       "source": "components/chat/successorCandidate/print/PrintPage.tsx",
       "name": "PrintPage",
-      "target": "prism-print",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PrintSuccessExperienceEssay.tsx",
       "name": "PrintSuccessExperienceEssay",
-      "target": "prism-print",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/successExperience/ExperienceAreaChip.tsx",
