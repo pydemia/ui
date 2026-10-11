@@ -11,14 +11,21 @@ export function PrismToast({ title, children, tone = "info", onClose }: { title:
             <div className="prism-toast-content"><strong>{title}</strong>{children && <p>{children}</p>}</div></div>
         {onClose && <button type="button" onClick={onClose} aria-label="알림 닫기"><X size={20} aria-hidden="true" /></button>}</div>;
 }
-export function PrismEmptyState({ title, description, panel = false, action, icon }: { title: string; description: string; panel?: boolean; action?: ReactNode; icon?: ReactNode }) {
-    return <div className="prism-empty" data-panel={panel || undefined}><div className="prism-empty-icon" aria-hidden="true">{icon ?? <PrismIcon name="NoSearchResultIcon" size={panel ? 120 : 140} />}</div>
-        <h3>{title}</h3><p>{description}</p>{action}</div>;
+export type PrismEmptyStateVariant = "default" | "tab" | "panel";
+export type PrismEmptyStateProps = {
+    title: string; description?: string; variant?: PrismEmptyStateVariant;
+    /** Legacy compact tab appearance. Prefer an explicit variant for new uses. */
+    panel?: boolean; action?: ReactNode; icon?: ReactNode;
+};
+export function PrismEmptyState({ title, description, variant, panel = false, action, icon }: PrismEmptyStateProps) {
+    const resolved = variant ?? (panel ? "tab" : "default");
+    return <div className="prism-empty" data-panel={resolved !== "default" || undefined} data-empty-variant={resolved}><div className="prism-empty-icon" aria-hidden="true">{icon ?? <PrismIcon name="NoSearchResultIcon" size={resolved === "tab" ? 120 : 140} />}</div>
+        <h3>{title}</h3>{description && <p>{description}</p>}{action}</div>;
 }
 export function PrismRequestState({ status, error, onRetry, variant="panel" }: { status: "loading" | "empty" | "error"; error?: string; onRetry?: () => void; variant?:"panel"|"generic" }) {
     if(variant==="panel"){
         if(status==="loading")return <PrismSkeletonGroup/>;
-        if(status==="empty")return <div className="prism-request-empty"><PrismEmptyState panel title="표시할 데이터가 없습니다" description="데이터가 준비되면 여기서 확인할 수 있어요."/></div>;
+        if(status==="empty")return <div className="prism-request-empty"><PrismEmptyState variant="tab" title="표시할 데이터가 없습니다" description="데이터가 준비되면 여기서 확인할 수 있어요."/></div>;
         return <div className="prism-request-error" role="alert"><p>{error??<>데이터를 불러오지 못했습니다.<br/>다시 시도해 주세요.</>}</p>{onRetry&&<PrismButton variant="line" icon={<PrismIcon name="ResetIcon" size={20}/>} onClick={onRetry}>다시 시도</PrismButton>}</div>;
     }
     if (status === "loading") return <div className="prism-loading" role="status" aria-live="polite"><span className="prism-spinner" aria-hidden="true" />불러오는 중입니다.</div>;

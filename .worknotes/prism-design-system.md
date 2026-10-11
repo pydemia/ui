@@ -512,3 +512,7 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 ### 2026-10-11 격리 인쇄와 snapshot/좁은 HTML 보완
 
 앱 전체 인쇄 대신 준비·취소·해제 가능한 정적 print session을 추가했고 폰트/자산 대기 중 snapshot이 바뀌는 문제와320px HTML의 hidden text 가로 넘침을 수정했습니다. 전체138tests/172 actual320 상태, 독립50항목 재설치와 긴 두프로필·취소/오류/수정불변, 실제 Native 요청/Escape/afterprint 정리를 확인했습니다. 전체 원본 print/photo/font/pixel·OS 출력 비교는 미완료이며 goal active입니다. 근거와 transport 수정·정책 거부·미검증은 [native 인쇄 감사](prism-native-print-audit-20261011.md)에 기록했습니다.
+
+### 2026-10-11 메모와 빈 상태의 용도별 규칙
+
+배포된 공개 TabPanelEmptyState와 현재 MemoContent/CSS 규칙을 대조해 default/tab/panel variant를 구분했습니다. 메모의 잘못된120px 그림·전체0표시와 낮은 높이에서 안내가 가려지는 문제를 보완했습니다. 상세 원본 제약·지표·실패/수정·독립 설치 근거는 [메모 빈 상태 감사](prism-memo-empty-audit-20261011.md)에 기록했습니다. 인증 원본 전체 메모 비교와 전체 goal은 아직 진행 중입니다.

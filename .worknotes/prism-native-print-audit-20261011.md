@@ -32,3 +32,11 @@ HTML Standard는 브라우저가 인쇄 요청을 무시할 수 있고 sandboxed
 
 - 최종 docs typecheck/check-prism49그룹·26예시/표준 npm run build/generic verify-current/diff check exit0입니다. 일반 snapshot25ca4393는 유지됐습니다. generated components/registry/verification JSON·MD 네 파일이 canonical public bytes와 일치했습니다. registry762,676bytes/sha25681d67f026cc42675b238cb380dbd84c9a23c943de933dbab1745263f4d3af29b입니다.
 - own 탭14–18을 닫고 temporary viewport를 reset했습니다.63153/5804/63227/63228의 PID·command·cwd를 확인한 뒤 해당서버만 종료했고4session exit143을 확인했습니다. 소비자source/lock/deps/dist와raw HTML·PNG·JSON은 보존했습니다. 사용자Chrome 탭과계정·권한은 변경하지 않았습니다. Vite terminal의public import/Babel/large chunk 경고와 browser warning/error 수집0은 다른 범위입니다.
+
+## 원격 게시와 최종 상태
+
+source f13b6c09/generated c827baa301d5dc3330819dbb98dc97c198c21bdc를 기존 검토 branch에 정상 push했습니다. PAT exact-match0과 Git config hash 보존을 확인했고 PR162 title Add portable PRISM profile printing and PDF exports/draft true/base main/정확한head를 readback·재첨부했습니다. Verify UI38132313137은 completed/success입니다. Vercel dpl_8jcZnbEChgzPjutMD4466KkBUBmW는 READY/target null/sha c827baa3의 preview입니다.
+
+기존 Vercel CLI 인증으로 최종 registry762,676bytes/81d67f026cc42675b238cb380dbd84c9a23c943de933dbab1745263f4d3af29b와manifest231,650bytes/9f9b094da8857d2b18ccd800112f6b3eccbacf554ed747f6b6d82ff8b207ff97의 HTTP bytes 일치를 확인했습니다. auth값/헤더는 출력·artifact에 저장하지 않았습니다. CLI 도움말 exit2는 도움말 출력이며 실제 두 curl 요청은exit0/valid JSON입니다. IAB preview는 Login – Vercel로redirect됐고 자체확인용19탭도닫았습니다. preview browser render와production을검증한결과는아닙니다.
+
+이번 turn은 격리NativeAPI/asyncsnapshot회귀/320px standalone overflow 보완, 실제독립설치·172합성상태·진짜인쇄요청/Escape/이벤트·명시적취소/오류·source/generated게시·CI·preview byte readback의 유효 진척입니다. 원본전체화면/상태/print/photo/font/pixel·OS 출력·production은미완료이며goal active입니다. 다음 작업은 현재partial component 검증표를 원본 인증화면과 대조해 gap을 계속 줄이는 것입니다. 구현·생성물은원격head에있고후속readback노트만local modified입니다.

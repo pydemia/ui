@@ -165,6 +165,7 @@ export type PrismProfileMemoCollectionProps = {
 };
 export function PrismProfileMemoCollection({ items, editingId, onEditingChange, onSave, onDelete, onMutationError, composer, status = "ready", onRetry, readOnly, height, className = "", style, dateFormatter }: PrismProfileMemoCollectionProps) {
     const visible = items.filter(item => item.isMine === true);
+    const showTotal = status === "loading" || visible.length > 0;
     const container = useRef<HTMLElement>(null), specifiedHeight = style?.height ?? height;
     const bounded = specifiedHeight !== undefined && specifiedHeight !== "auto";
     useLayoutEffect(() => {
@@ -176,7 +177,7 @@ export function PrismProfileMemoCollection({ items, editingId, onEditingChange, 
         const measure = () => {
             const input = composeArea.querySelector<HTMLTextAreaElement>(".prism-profile-memo-composer>textarea");
             if (!input) return;
-            const total = root.querySelector<HTMLElement>(".prism-profile-memo-total")!.getBoundingClientRect().height;
+            const total = root.querySelector<HTMLElement>(".prism-profile-memo-total")?.getBoundingClientRect().height ?? 0;
             const fixed = composeArea.getBoundingClientRect().height - input.getBoundingClientRect().height;
             // Preserve room for the list; a taller caller container permits a larger editor.
             const maximum = Math.max(60, Math.min(200, root.getBoundingClientRect().height - total - fixed - 24));
@@ -187,14 +188,14 @@ export function PrismProfileMemoCollection({ items, editingId, onEditingChange, 
         observer?.observe(root); observer?.observe(composeArea);
         window.addEventListener("resize", measure);
         return () => { observer?.disconnect(); window.removeEventListener("resize", measure); };
-    }, [bounded, specifiedHeight, !!composer]);
+    }, [bounded, specifiedHeight, !!composer, showTotal]);
     if (new Set(items.map(item => item.id)).size !== items.length) throw new Error("Memo IDs must be unique.");
     const activeExists = visible.some(item => item.id === editingId), change = useRef(onEditingChange); change.current = onEditingChange;
     useEffect(() => { if (status === "ready" && editingId !== null && !activeExists) change.current(null); }, [status, editingId, activeExists]);
     return <section ref={container} className={`prism-profile-memo-collection ${className}`} style={{ height, ...style }} aria-label="프로필 메모" data-bounded={bounded || undefined}>
-        <header className="prism-profile-memo-total">전체 <span>{visible.length}</span></header>
+        {showTotal && <header className="prism-profile-memo-total">전체 <span>{visible.length}</span></header>}
         <div className="prism-profile-memo-scroll" role="region" aria-label="메모 목록" tabIndex={0}>
-            {status === "loading" ? <MemoSkeleton/> : status === "error" ? <PrismRequestState status="error" onRetry={onRetry}/> : !visible.length ? <div className="prism-profile-memo-empty"><PrismEmptyState panel icon={<PrismIcon name="NoMemoIcon" size={140}/>} title="등록된 프로필 메모가 없습니다." description="후보자에 대한 의견이나 참고사항을 기록해보세요."/></div> :
+            {status === "loading" ? <MemoSkeleton/> : status === "error" ? <PrismRequestState status="error" onRetry={onRetry}/> : !visible.length ? <div className="prism-profile-memo-empty"><PrismEmptyState variant="panel" icon={<PrismIcon name="NoMemoIcon" size={140}/>} title="등록된 프로필 메모가 없습니다." description="후보자에 대한 의견이나 참고사항을 기록해보세요."/></div> :
                 visible.map(memo => <PrismProfileMemoCard key={memo.id} memo={memo} editing={editingId === memo.id} disabled={editingId !== null && editingId !== memo.id} readOnly={readOnly} dateFormatter={dateFormatter}
                     onEditStart={() => onEditingChange(memo.id)} onEditCancel={() => onEditingChange(null)} onSave={onSave ? (content, context) => onSave(memo.id, content, context) : undefined}
                     onDelete={onDelete ? context => onDelete(memo.id, context) : undefined} onMutationError={onMutationError}/>) }

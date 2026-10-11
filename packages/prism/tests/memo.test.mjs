@@ -27,6 +27,22 @@ test("personal memo collection excludes non-own records and preserves updated or
     assert.equal(document.querySelector('.prism-profile-memo-date').textContent, "확인되지 않은 날짜"); assert.equal(document.querySelector('time'), null); await unmount();
 });
 
+test("an empty bounded collection keeps its composer usable as permitted records arrive and disappear", async () => {
+    const composer = h(PrismProfileMemoComposer, { value: "보존할 작성 내용", onValueChange() {}, onSubmit() {} });
+    const props = { editingId: null, onEditingChange() {}, height: 240, composer };
+    await act(async () => root.render(h(PrismProfileMemoCollection, { ...props, items: [] })));
+    assert.equal(document.querySelector('.prism-profile-memo-total'), null);
+    assert.match(document.querySelector('.prism-profile-memo-empty').textContent, /등록된 프로필 메모가 없습니다/);
+    assert.equal(document.querySelector('textarea').value, "보존할 작성 내용");
+    await act(async () => root.render(h(PrismProfileMemoCollection, { ...props, items: [own] })));
+    assert.equal(document.querySelector('.prism-profile-memo-total').textContent, "전체 1");
+    assert.equal(document.querySelector('textarea').disabled, false);
+    await act(async () => root.render(h(PrismProfileMemoCollection, { ...props, items: [{ ...own, isMine: false }] })));
+    assert.equal(document.querySelector('.prism-profile-memo-total'), null);
+    assert.equal(document.querySelectorAll('article').length, 0);
+    assert.equal(document.querySelector('textarea').value, "보존할 작성 내용"); await unmount();
+});
+
 test("one controlled editor locks other cards and saves an immutable draft once", async () => {
     let resolveSave, update; const calls = [];
     function Demo() {
