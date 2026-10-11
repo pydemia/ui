@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-10-12",
   "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "status": "in-progress",
   "claim": "Source correspondence and runtime checks are separate from visual parity. No complete parity claim.",
@@ -965,29 +965,53 @@
         "Native print dialog and OS file save",
         "Cross-browser and authenticated profile photo/font/export cases"
       ]
+    },
+    "prism-panel-recipes": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Source ProfilePanel/MemoPanel max840 and padding20/0 20;24px back/gap6 title;mounted hidden memo and subject reset.",
+        "Source ChatPanel22px title,panel#EEF1F8,message20px,user bubble320px/#D6DCEE,sticky composer bottom30px and bottom-action34px.",
+        "Nine new JSDOM/SSR tests cover guarded leave deny/accept/rejection/duplicate/stale subject/abort, draft and expansion persistence, chat unmount, full-profile memo callback, position empty/text/status/retry."
+      ],
+      "remaining": [
+        "Actual source and independent-consumer rendered geometry, pixels and real keyboard/focus/modal/scroll at compact/expanded/short heights.",
+        "Authenticated original view and production publication."
+      ]
+    },
+    "prism-position": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Current PositionDetailView source displays definition, Business Context, expertise/experience requirements and common-competency footnote; these are now independently typed host inputs.",
+        "Source max840,scroll gap20/padding20,summary16px/radius12 and source-structure skeleton were implemented; source reading does not prove browser geometry.",
+        "SSR/JSDOM show whitespace/null absence, escaped host text, two empty groups, source footnote, no stale loading/error detail and retry intent."
+      ],
+      "remaining": [
+        "Current deployed original and isolated-render style/scroll/long-content comparison; live data and auth state."
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 143,
+      "passed": 152,
       "failed": 0
     },
     "registry": {
-      "groups": 49,
-      "items": 50,
+      "groups": 50,
+      "items": 51,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-final-registry-install-build-and-selected-runtime",
-      "items": 50,
-      "files": 75,
-      "completeExamples": 28,
+      "status": "passed-current-registry-install-typecheck-build",
+      "items": 51,
+      "completeExamples": 29,
       "typecheck": "passed",
       "viteBuild": "passed",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px). Latest registry reinstall also passed 14-chapter/96-career prepared print document, fonts, exclusion of app chrome and scripts; selected cancel/error/retry/immutable snapshot checked in the real browser. Current feedback variants, legacy panel, omitted description and bounded empty memo also passed in the final installed consumer at actual320px. Final installed Panel basic/expanded/closed measurements and vector paint matched the public sample. Actual320px long-title header125/body313, draft persistence through Escape close/reopen and real wheel to the final body action passed. The final preferred-width rollback source was reinstalled after ENOSPC recovery and typechecked/built with28 examples. Latest installed browser readback is blocked by the browser URL policy; earlier selected style/runtime comparisons are before this interaction-only fix."
+      "runtime": "Current panel recipes/position browser readback is unverified. The earlier selected source/installed comparisons are preserved separately and do not prove these new changes."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1166,125 +1190,17 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 49,
-    "states": 175,
-    "checked": 150,
-    "status": "partial-current-source-150-of175-actual320px-cua",
-    "baseCommit": "59ff8bb467c71ef9e1208e9e3b3ed868a7cbd269",
-    "sourceSha256": "16906b727cf14b0d0a957cbf1733d175c2762c230947906908e74e6aa5ece567",
+    "groups": 50,
+    "states": 185,
+    "checked": 0,
+    "status": "pending-current-panel-recipes-source-browser-policy",
+    "baseCommit": "4c9f7993242ab777c2d06172e04a352f19a4d227",
+    "sourceSha256": "2c69397ecc24ca100f693a5ce6959ca3cedcc9f65160c02a2f30a43b97efc828",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
-    "checks": [
-      "The first150 manifest-defined states have matching markers and actual clientWidth320.",
-      "No document overflow over1px, nested buttons or unlabeled visible native input/textarea/select in these150 states; aria-hidden native form controls excluded."
-    ],
-    "evidence": [
-      "panel-final-150-fixtures.json",
-      "panel-source-fingerprint.json"
-    ],
-    "claim": "Current150 and previous175-before-rollback checks are distinct; no complete parity claim.",
-    "pending": [
-      [
-        "prism-mgmt-comments",
-        "loading"
-      ],
-      [
-        "prism-mgmt-comments",
-        "error"
-      ],
-      [
-        "prism-mgmt-comments",
-        "readonly"
-      ],
-      [
-        "prism-mgmt-comments",
-        "long"
-      ],
-      [
-        "prism-survey",
-        "default"
-      ],
-      [
-        "prism-survey",
-        "empty"
-      ],
-      [
-        "prism-survey",
-        "long"
-      ],
-      [
-        "prism-attitude-report",
-        "default"
-      ],
-      [
-        "prism-attitude-report",
-        "empty"
-      ],
-      [
-        "prism-attitude-report",
-        "error"
-      ],
-      [
-        "prism-attitude-report",
-        "long"
-      ],
-      [
-        "prism-icon",
-        "default"
-      ],
-      [
-        "prism-analysis",
-        "default"
-      ],
-      [
-        "prism-analysis",
-        "empty"
-      ],
-      [
-        "prism-analysis",
-        "long"
-      ],
-      [
-        "prism-position-recommendations",
-        "default"
-      ],
-      [
-        "prism-position-recommendations",
-        "empty"
-      ],
-      [
-        "prism-position-recommendations",
-        "readonly"
-      ],
-      [
-        "prism-position-recommendations",
-        "long"
-      ],
-      [
-        "prism-rich-text",
-        "default"
-      ],
-      [
-        "prism-rich-text",
-        "empty"
-      ],
-      [
-        "prism-rich-text",
-        "long"
-      ],
-      [
-        "prism-profile-print",
-        "default"
-      ],
-      [
-        "prism-profile-print",
-        "empty"
-      ],
-      [
-        "prism-profile-print",
-        "long"
-      ]
-    ],
-    "pendingReason": "Browser URL policy rejected even localhost HTTP access; remaining25 current-source states unverified."
+    "inputCount": 68,
+    "checks": [],
+    "claim": "Previous 150/175 checks are retained at their older source fingerprint; new current-source browser checks have not run.",
+    "pendingReason": "Existing HTTP URL protocol-policy rejection has not been resolved; browser inventory visibility alone is not page-operation verification."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1384,15 +1300,16 @@
     }
   },
   "runtimeVerificationAvailability": {
-    "status": "available",
-    "method": "Codex CUA in-app browser and existing authenticated browser session verified live.",
+    "status": "restricted",
+    "method": "Browser inventory is visible, but HTTP page actions were refused by URL protocol policy; no recovery of page operations has been confirmed.",
     "inAppBrowser": "Actual local pages, standalone HTML and installed consumer used successfully.",
     "sourceBrowser": "Previous authenticated candidate tabs are historical. Current existing testuser001 home was read, but click timed out and direct navigation left the root empty; fresh memo runtime unverified. The original /chat URL was restored.",
     "sourceDeployedRevision": "not reported by the observed UI; local source revision remains separately scoped",
     "newChangesPendingRuntime": [
       "Full authenticated original screen/state and print export comparison",
       "Native dialog paper/margin/fragmentation, OS save and physical output",
-      "Remaining original long-content and domain states"
+      "Remaining original long-content and domain states",
+      "Current Profile/Memo/Position/Chat panel recipes, guarded leave confirmation and source-aligned position detail; all current manifest states."
     ]
   },
   "fileSelectionVerification": {
@@ -2065,5 +1982,152 @@
       "panel-before-rollback-source-fingerprint.json"
     ],
     "claim": "Synthetic current-document render and accessibility structure only; not all interactions or original parity."
+  },
+  "previousPanelRecipesFixtureRenderChecks": {
+    "groups": 49,
+    "states": 175,
+    "checked": 150,
+    "status": "partial-current-source-150-of175-actual320px-cua",
+    "baseCommit": "59ff8bb467c71ef9e1208e9e3b3ed868a7cbd269",
+    "sourceSha256": "16906b727cf14b0d0a957cbf1733d175c2762c230947906908e74e6aa5ece567",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "checks": [
+      "The first150 manifest-defined states have matching markers and actual clientWidth320.",
+      "No document overflow over1px, nested buttons or unlabeled visible native input/textarea/select in these150 states; aria-hidden native form controls excluded."
+    ],
+    "evidence": [
+      "panel-final-150-fixtures.json",
+      "panel-source-fingerprint.json"
+    ],
+    "claim": "Current150 and previous175-before-rollback checks are distinct; no complete parity claim.",
+    "pending": [
+      [
+        "prism-mgmt-comments",
+        "loading"
+      ],
+      [
+        "prism-mgmt-comments",
+        "error"
+      ],
+      [
+        "prism-mgmt-comments",
+        "readonly"
+      ],
+      [
+        "prism-mgmt-comments",
+        "long"
+      ],
+      [
+        "prism-survey",
+        "default"
+      ],
+      [
+        "prism-survey",
+        "empty"
+      ],
+      [
+        "prism-survey",
+        "long"
+      ],
+      [
+        "prism-attitude-report",
+        "default"
+      ],
+      [
+        "prism-attitude-report",
+        "empty"
+      ],
+      [
+        "prism-attitude-report",
+        "error"
+      ],
+      [
+        "prism-attitude-report",
+        "long"
+      ],
+      [
+        "prism-icon",
+        "default"
+      ],
+      [
+        "prism-analysis",
+        "default"
+      ],
+      [
+        "prism-analysis",
+        "empty"
+      ],
+      [
+        "prism-analysis",
+        "long"
+      ],
+      [
+        "prism-position-recommendations",
+        "default"
+      ],
+      [
+        "prism-position-recommendations",
+        "empty"
+      ],
+      [
+        "prism-position-recommendations",
+        "readonly"
+      ],
+      [
+        "prism-position-recommendations",
+        "long"
+      ],
+      [
+        "prism-rich-text",
+        "default"
+      ],
+      [
+        "prism-rich-text",
+        "empty"
+      ],
+      [
+        "prism-rich-text",
+        "long"
+      ],
+      [
+        "prism-profile-print",
+        "default"
+      ],
+      [
+        "prism-profile-print",
+        "empty"
+      ],
+      [
+        "prism-profile-print",
+        "long"
+      ]
+    ],
+    "pendingReason": "Browser URL policy rejected even localhost HTTP access; remaining25 current-source states unverified."
+  },
+  "previousPanelRecipesConsumerChecks": {
+    "status": "passed-final-registry-install-build-and-selected-runtime",
+    "items": 50,
+    "files": 75,
+    "completeExamples": 28,
+    "typecheck": "passed",
+    "viteBuild": "passed",
+    "portableFont": "emitted SHA256 matched",
+    "assetNotice": "installed and checked",
+    "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px). Latest registry reinstall also passed 14-chapter/96-career prepared print document, fonts, exclusion of app chrome and scripts; selected cancel/error/retry/immutable snapshot checked in the real browser. Current feedback variants, legacy panel, omitted description and bounded empty memo also passed in the final installed consumer at actual320px. Final installed Panel basic/expanded/closed measurements and vector paint matched the public sample. Actual320px long-title header125/body313, draft persistence through Escape close/reopen and real wheel to the final body action passed. The final preferred-width rollback source was reinstalled after ENOSPC recovery and typechecked/built with28 examples. Latest installed browser readback is blocked by the browser URL policy; earlier selected style/runtime comparisons are before this interaction-only fix."
+  },
+  "panelRecipeVerification": {
+    "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "observedAt": "2026-10-12",
+    "source": "ProfilePanel/MemoPanel/PositionPanel/ChatPanel, PositionDetailView and confirmLeaveMemoIfNeeded from clean local dev checkout.",
+    "sourceDeployedRevisionBinding": "Not established.",
+    "sourceGeometry": "implemented-from-source-not-browser-verified",
+    "interaction": "9 new JSDOM/SSR tests passed, including the controlled source confirmation dialog cancel/Escape/confirm flow; native browser/modal focus remains unverified.",
+    "browser": "pending-no-policy-bypass",
+    "publication": "not-published",
+    "extension": "Async host leave guard with AbortSignal/subject boundary; responsive/manual width inherited from PrismPanel; position metadata stacks below320px.",
+    "sourceSha256": "2c69397ecc24ca100f693a5ce6959ca3cedcc9f65160c02a2f30a43b97efc828",
+    "independentConsumer": "All51 items installed using shadcn;29 complete examples typechecked, Vite built, font bytes and asset notices checked. Current installed recipe/panel/position/profile sources match emitted registry bytes.",
+    "testEvidence": "panel-recipes-full-tests.log:152 passed/0 failed;panel-recipes-guard-tests.log:9 passed/0 failed.",
+    "siteBuild": "Standard npm run build passed; generic current release remained sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896."
   }
 }

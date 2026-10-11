@@ -116,3 +116,13 @@ Use a 440px panel and a 64px header with 20px padding. The header actions and Ex
 The base content has no padding and hides vertical overflow. Set contentStyle/contentClassName for the specific profile, memo or comparison layout; the workspace explicitly supplies20px and vertical scrolling. Long rich titles grow the header. Opt-in manual resizing applies width immediately so the handle does not move during keyboard/double-click input; the base panel retains the source 225ms width transition. Compact parents use full width and hide the handle while retaining the preferred width. Unexpected pointer cancellation/capture loss is covered by mocked lifecycle tests; native device behavior remains unverified.
 
 Cancelling a drag restores the preferred width from before the gesture, including interruption by a compact parent. The panel still clamps its displayed width to the current parent; rollback does not erase a wider stored preference.
+
+## Current panel caller contracts (2026-10-12)
+
+Use PrismProfilePanel/PrismMemoPanel/PrismPositionPanel/PrismChatPanel for the source-specific caller layout. Profile and memo are expandable and cap their body at840px. Profile padding is20px20px0; its memo view is0 20px; a standalone memo uses20px20px0. Profile memo remains mounted while hidden, and a different subject resets the view/content boundary.
+
+The base onCloseRequest does not mutate open or expanded. A guarded owner commits the close after beforeLeave(back/close,{subjectId,signal}) accepts. Denial and rejection preserve the current draft/view/expansion. Repeated pending requests are ignored; subject changes, external close and unmount abort stale confirmations. Hosts must decide about unsaved drafts before changing subjectId. PrismMemoLeaveDialog exposes the source confirmation text and controlled buttons without an application store.
+
+Chat uses a22px symbol/gap6 title, #EEF1F8 surface,20px messages,320px/#D6DCEE user bubble,sticky composer with30px bottom padding and34px bottom-scroll action. Closed chat content unmounts, as in the source; chat/stream persistence and scroll detection remain host-owned.
+
+Position detail displays definition, Business Context,expertise/experience groups and the source competency footnote. Preserve max840px,scroll gap20/padding20 and16px/radius12 summaries. Empty text is not a successful data load; loading/error hide stale content. Only the host selects LIVE data/main-job requirements and cancels stale requests. Stacking metadata below320px is an explicit responsive extension. These source-read rules await current rendered comparison.

@@ -3,6 +3,8 @@ import { PrismIcon } from "./prism-icon";
 
 export type PrismPanelProps = {
     title: ReactNode; open: boolean; onOpenChange: (open: boolean) => void;
+    /** A guarded caller decides when to commit onOpenChange(false). */
+    onCloseRequest?: () => void;
     expanded?: boolean; onExpandedChange?: (expanded: boolean) => void;
     children: ReactNode; className?: string; style?: CSSProperties; ariaLabel?: string;
     contentClassName?: string; contentStyle?: CSSProperties; contentRef?: Ref<HTMLDivElement>;
@@ -10,7 +12,7 @@ export type PrismPanelProps = {
     onWidthChange?: (width: number) => void; responsive?: boolean;
 };
 /** Nonmodal, mounted while closed. The caller owns content padding and scrolling. */
-export function PrismPanel({ title, open, onOpenChange, expanded = false, onExpandedChange, children,
+export function PrismPanel({ title, open, onOpenChange, onCloseRequest, expanded = false, onExpandedChange, children,
     className = "", style, ariaLabel, contentClassName = "", contentStyle, contentRef,
     resizable = false, width, defaultWidth = 440, minWidth = 320, maxWidth = 800, onWidthChange, responsive = true }: PrismPanelProps) {
     if([minWidth,maxWidth,defaultWidth,width??defaultWidth].some(value=>!Number.isFinite(value)||value<=0)||minWidth>maxWidth)throw new RangeError("Panel widths must be positive with minWidth <= maxWidth.");
@@ -44,7 +46,11 @@ export function PrismPanel({ title, open, onOpenChange, expanded = false, onExpa
         if(open||!expanded)resetSent.current=false;
         else if(!resetSent.current&&onExpandedChange){resetSent.current=true;onExpandedChange(false);}
     },[open,expanded,onExpandedChange]);
-    const close=()=>{cancelDrag();resetSent.current=true;onExpandedChange?.(false);onOpenChange(false);};
+    const close=()=>{
+        cancelDrag();
+        if(onCloseRequest){onCloseRequest();return;}
+        resetSent.current=true;onExpandedChange?.(false);onOpenChange(false);
+    };
     const panelStyle={"--prism-panel-width":`${currentWidth}px`,"--prism-panel-header-height":`${headerHeight}px`,...style} as CSSProperties;
     return <><div className="prism-panel-placeholder" style={{"--prism-panel-width":`${currentWidth}px`} as CSSProperties} data-open={open || undefined} data-compact={compact||undefined} aria-hidden="true" />
         <aside ref={panel} id={`${id}-panel`} style={panelStyle} className={`prism-panel ${className}`} inert={!open} aria-hidden={!open||undefined}

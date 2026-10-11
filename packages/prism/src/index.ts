@@ -19,6 +19,7 @@ export type { PrismCandidate, PrismCandidateCardProps, PrismAssessment } from ".
 export { PrismSidePanel, PrismDetailList, PrismMemoCard } from "./prism-detail";
 export { PrismPanel } from "./prism-panel";
 export type { PrismPanelProps } from "./prism-panel";
+export * from "./prism-panel-recipes";
 export { PrismSixFrame } from "./prism-six-frame";
 export type { PrismFrameKey, PrismFrameColumn } from "./prism-six-frame";
 export { PrismChipAutocomplete, PrismAutocomplete, PrismMultiSelect, PrismCheckbox, PrismRadioGroup, PrismDatePicker, PrismDateRange, PrismPagination } from "./prism-selection";

@@ -40,3 +40,13 @@ Raw evidence는 `.worknotes/browser-evidence/`에 있습니다. 현재 화면은
 사용자에 의한 turn 중단 후 기존unified exec handles가없고loopback listener도없음을확인했습니다. 서버를다시시작했으며일반sandbox의EPERM은승인된loopback 실행으로해결했습니다. 브라우저inventory는기존URL들을유지했지만ID가재배정됐습니다. 대화상자조회와정상HTTP기록화면에대한요청을브라우저도구가URL protocol policy로거절했습니다. 해당조작을중단했고다른브라우저/rawCDP/직접Playwright/우회접근을사용하지않았습니다. 현재source의남은25상태와최종installed runtime은검증할수없어canonical자료에pending으로기록했습니다.
 
 표준site build와6개canonical/generated자료의byte대조,portable예시계약과generic current release 검증을완료한뒤source/generated를분리커밋하고draft PR162에게시합니다. 전체goal의달성으로표시하지않습니다.
+
+## 게시·원격 readback (2026-10-12)
+
+source6b94f2e1/generated4c9f7993242ab777c2d06172e04a352f19a4d227를기존review브랜치에push했습니다. credential exact-match0·Git config보존이며PR162 title Add portable PRISM components and profile exports/draft true/base main/정확한head를읽고재첨부했습니다. Verify UI38149567793 completed/success입니다.
+
+Vercel dpl_3yANb4ypd6auVseDHwADwnAWM7pU는READY/target null/정확한4c9f7993sha의preview입니다. 기존CLI인증으로registry767379bytes/SHA146e1a8b…와manifest238877bytes/SHA4e2c6a67…, verification91250bytes/SHA90eb499d…가로컬과exact bytes임을확인했습니다. preview browser render와production은확인하지않았습니다. 이HTTP readback을막힌25상태의browser검증대신으로사용하지않습니다.
+
+전체source의style·기능목적·고도화와인증state별대조는미완료이고goal active입니다. 다음에는ProfilePanel의840px wrapper/20px 여백·메모전환/뒤로,PositionPanel과ChatPanel caller의구체규격을현재재현본에대조합니다. 브라우저정책차단이해결되면최종source의남은25상태와installed/preview runtime도검증해야합니다.
+
+검증서버75676/75681/75969는각명령·cwd를확인한뒤종료했습니다. 설치source·lockfile·dist·JSON/JPEG와현재커밋들을보존했습니다. 구현과생성물은PR의정확한head에있으며이원격readback/cleanup노트만local modified입니다.

@@ -1809,3 +1809,13 @@ component 내부의 checkbox 상태는 다음 이동 대상을 고르는 데만 
 native fieldset·legend로 목록을 구분하고 checkbox와 button으로
 키보드 조작을 제공합니다. 좁은 화면에서는 두 목록과 이동 버튼을
 세로로 쌓습니다. `panel`과 `plain`은 공통 색·간격 token을 사용합니다.
+
+## Current panel caller contracts (2026-10-12)
+
+Use PrismProfilePanel/PrismMemoPanel/PrismPositionPanel/PrismChatPanel for the source-specific caller layout. Profile and memo are expandable and cap their body at840px. Profile padding is20px20px0; its memo view is0 20px; a standalone memo uses20px20px0. Profile memo remains mounted while hidden, and a different subject resets the view/content boundary.
+
+The base onCloseRequest does not mutate open or expanded. A guarded owner commits the close after beforeLeave(back/close,{subjectId,signal}) accepts. Denial and rejection preserve the current draft/view/expansion. Repeated pending requests are ignored; subject changes, external close and unmount abort stale confirmations. Hosts must decide about unsaved drafts before changing subjectId. PrismMemoLeaveDialog exposes the source confirmation text and controlled buttons without an application store.
+
+Chat uses a22px symbol/gap6 title, #EEF1F8 surface,20px messages,320px/#D6DCEE user bubble,sticky composer with30px bottom padding and34px bottom-scroll action. Closed chat content unmounts, as in the source; chat/stream persistence and scroll detection remain host-owned.
+
+Position detail displays definition, Business Context,expertise/experience groups and the source competency footnote. Preserve max840px,scroll gap20/padding20 and16px/radius12 summaries. Empty text is not a successful data load; loading/error hide stale content. Only the host selects LIVE data/main-job requirements and cancels stale requests. Stacking metadata below320px is an explicit responsive extension. These source-read rules await current rendered comparison.

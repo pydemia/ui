@@ -31,7 +31,14 @@ export function PrimitivesDemo({ state }: { state: FixtureState }) {
         <PrismSummaryBadge label="가상 유형" summary={state==="empty" ? null : "가상 조직과 기술 경험을 요약한 표시 예시입니다."} note="호출자가 제공한 가상 유형의 설명입니다."/><PrismOutline><PrismNoData/></PrismOutline><PrismSkeletonGroup rows={3}/><PrismSkeletonGroup rows={2} height={60}/></div>;
 }
 export function PositionDemo({ state }: { state: FixtureState }) {
-    return <PrismPositionDetail company="가상전자" role="기술전략담당" items={[{label:"계열",value:"ICT"},{label:"직무",value:"기술·연구개발"},{label:"조직",value:"기술전략실"}]} groups={[{id:"purpose",title:"포지션 Mission",items:state === "empty" ? [] : [{id:"mission",title:"미션",content:"가상 조직의 기술전략을 수립합니다."}]},{id:"requirements",title:"후보자 요구 사항",items:[{id:"expertise",title:"전문성",content:"기술·연구개발 경험"},{id:"design",title:"Design 역량",content:null}]}]} status={state === "loading" || state === "error" ? state : "ready"} />;
+    const [retried,setRetried] = useState(false);
+    const empty = state === "empty";
+    const text = state === "long" ? "합성 포지션의 역할과 사업 맥락을 긴 본문으로 검증합니다.\n".repeat(24) : "가상 조직의 기술전략을 수립합니다.";
+    return <div style={{height:560,minWidth:0}}><PrismPositionDetail company="가상전자" role="기술전략담당"
+        items={[{label:"산업",value:"전자"},{label:"직무",value:"기술·연구개발"},{label:"직책",value:"담당"}]}
+        definition={empty ? null : text} businessContext={empty ? " " : "가상 사업의 연구개발 방향을 정리합니다."}
+        groups={empty ? [] : [{id:"expertise",title:"전문성",items:[{id:"expertise-1",content:text}]},{id:"experience",title:"성공경험",items:[]}]}
+        status={!retried && (state === "loading" || state === "error") ? state : "ready"} onRetry={()=>setRetried(true)}/></div>;
 }
 export function AssessmentDemo({ state }: { state: FixtureState }) {
     const [topic,setTopic] = useState("growth"); const empty = state === "empty";

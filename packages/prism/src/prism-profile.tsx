@@ -35,11 +35,12 @@ export function PrismEvidence({ title, grade, children, source }: { title: strin
     return <PrismOutline title={title} actions={grade !== undefined && <strong className="prism-evidence-grade">{grade ?? "미평가"}</strong>}>
         <div className="prism-evidence-body">{children ?? "근거 정보가 없습니다."}</div>{source && <footer className="prism-help">{source}</footer>}</PrismOutline>;
 }
-export function PrismProfile({ candidate, activeTab, onTabChange, sections, favorite, onFavoriteChange }: {
+export function PrismProfile({ candidate, activeTab, onTabChange, sections, favorite, onFavoriteChange, onComments, onPrint, commentCount }: {
     candidate: PrismCandidate; activeTab: PrismProfileTab; onTabChange: (tab: PrismProfileTab) => void;
     sections: Partial<Record<PrismProfileTab, ReactNode>>; favorite?: boolean; onFavoriteChange?: (favorite: boolean) => void;
+    onComments?: () => void; onPrint?: () => void; commentCount?: number;
 }) {
-    return <div className="prism-profile"><PrismFavoriteProfile candidate={candidate} favorite={favorite} onFavoriteChange={onFavoriteChange} />
+    return <div className="prism-profile"><PrismFavoriteProfile candidate={candidate} favorite={favorite} onFavoriteChange={onFavoriteChange} onComments={onComments} onPrint={onPrint} commentCount={commentCount} />
         <PrismTabs value={activeTab} onValueChange={value => onTabChange(value as PrismProfileTab)}><PrismTabsList className="prism-profile-tabs" aria-label="후보자 상세 분류">
             {prismProfileTabs.map(tab => <PrismTabsTrigger value={tab.id} key={tab.id}>{tab.label}</PrismTabsTrigger>)}</PrismTabsList>
             {prismProfileTabs.map(tab => <PrismTabsContent value={tab.id} key={tab.id}><div className="prism-profile-section">
