@@ -1,4 +1,5 @@
 import {ProfilePrintDemo} from "./profile-print-demo";
+import {PanelDemo} from "./panel-demo";
 import { AnalysisDemo, RecommendationsDemo, FormattedTextDemo } from "./chat-recipe-demos";
 import { CandidateListDemo } from "./candidate-list-demo";
 import { MgmtCommentsDemo } from "./mgmt-comments-demo";
@@ -19,7 +20,7 @@ import {
     PrismSidebar, PrismChatInput, PrismMessage, PrismCriteria,
     PrismCandidateCard, PrismCandidateTable, PrismEvaluationTable,
     PrismSidePanel, PrismDetailList, PrismMemoCard, PrismProfileMemoCard, type PrismCandidate,
-    PrismPanel, PrismSixFrame, PrismChipAutocomplete, PrismAutocomplete, PrismMultiSelect, PrismCheckbox, PrismRadioGroup, PrismDateRange, PrismPagination,
+    PrismSixFrame, PrismChipAutocomplete, PrismAutocomplete, PrismMultiSelect, PrismCheckbox, PrismRadioGroup, PrismDateRange, PrismPagination,
     PrismProfile, PrismOutline, PrismCareerTimeline, PrismSummaryBadge, PrismEvidence, PrismBasicInfo, PrismCompetenceMatrix, type PrismProfileTab,
     PrismMarkdown, PrismSuggestions, PrismGenerationStatus, PrismPositionCard,
     PrismAdminLayout, PrismAttachmentList, PrismSyncStatus, PrismTruncatedText,
@@ -31,7 +32,7 @@ import {
     PrismManagementForm, PrismAiGenerateButton, PrismCriteriaSection, PrismAffectedPositions, type PrismManagementField, type PrismManagementValue,
 } from "@pydemia/prism";
 
-export type FixtureState = "default" | "disabled" | "readonly" | "error" | "loading" | "empty" | "long";
+export type FixtureState = "default" | "disabled" | "readonly" | "error" | "loading" | "empty" | "long" | "closed" | "expanded";
 export type PrismEntry = { id: string; name: string; category: string; purpose: string; source: string[];
     states: FixtureState[]; contract: string; code: string; render: (state: FixtureState) => ReactNode; };
 export const candidates: PrismCandidate[] = [
@@ -115,11 +116,6 @@ function SelectionDemo({ state }: { state: FixtureState }) {
         <PrismRadioGroup label="기준 분야" options={selectionOptions} value={radio} onValueChange={setRadio} disabled={state === "disabled"} /><PrismRadioGroup label="작은 기준 분야" size="small" options={selectionOptions} value={radio} onValueChange={setRadio} disabled={state === "disabled"} />
         <PrismDateRange label="조회 기간" {...range} onValueChange={setRange} disabled={state === "disabled"} readOnly={state === "readonly"} />
         <PrismPagination page={page} pageCount={9} onPageChange={setPage} disabled={state === "disabled"} /></div>;
-}
-function PanelDemo() { const [open,setOpen] = useState(true); const [expanded,setExpanded] = useState(false);const [width,setWidth]=useState(440);
-    return <div className="prism-demo-stack"><p role="status">패널 선호 너비: {width}px · 경계선 드래그 또는 방향키로 조절할 수 있습니다.</p><div className="prism-panel-demo"><div className="prism-panel-demo-main"><p>패널이 열려 있어도 이 영역을 사용할 수 있습니다.</p><PrismButton onClick={() => setOpen(true)}>패널 열기</PrismButton></div>
-        <PrismPanel title="후보자 상세" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded} resizable width={width} onWidthChange={setWidth}>
-            <PrismDetailList items={[{label:"이름",value:"김가상"},{label:"회사",value:"가상전자"}]} /><PrismSelect label="패널 전문분야" defaultValue="tech" searchable options={selectionOptions}/><PrismMemoCard author="김작성" date="2026-10-03">비모달 패널 예시입니다.</PrismMemoCard></PrismPanel></div></div>;
 }
 export const frameColumns = candidates.map(candidate => ({ id: candidate.id, label: candidate.name, values: { leaderType: "가상 유형", expertise: candidate.speciality ?? null,
     successExperience: "가상 프로젝트 수행", designCapability: "근거 정보 없음", learningAgility: "예시 경험", derailmentRisk: null } }));
@@ -255,7 +251,7 @@ export function MemoExample() {
     }}/>} /></div>;
 }`, render: state => <MemoDemo key={state} state={state}/> },
 
-    { id: "prism-panel", name: "Inline panel", category: "Overlays", purpose: "채팅과 상세를 동시에 사용하며 패널 확대·축소", source: ["chat/panel/SidePanel.tsx"], states: ["default"], contract: "비모달 aside이며 기본 너비 440px와 64px header를 사용합니다. resizable을 켜면 드래그·방향키·Shift·Home/End로 조절하고 double click으로 초기화합니다. width/onWidthChange는 controlled 계약이며 minWidth/maxWidth는 부모 폭 안에서 적용합니다. responsive는 좁은 부모에서 전체 폭을 사용합니다. open/expanded는 호출자가 제어합니다. 부모는 position relative flex 컨테이너입니다.", code: 'import { PrismPanel } from "@pydemia/prism";\n<PrismPanel title="상세" open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}>내용</PrismPanel>;', render: () => <PanelDemo /> },
+    { id: "prism-panel", name: "Inline panel", category: "Overlays", purpose: "채팅과 상세를 동시에 사용하며 패널 확대·축소", source: ["chat/panel/SidePanel.tsx"], states: ["default","closed","expanded","long"], contract: "비모달 aside이며 기본 너비 440px, 헤더 64px, 버튼·원본 SVG 24px를 사용합니다. title은 ReactNode이며 긴 제목에 맞춰 헤더 높이가 늘어납니다. 확대 시 부모 폭+1px와 z-index 1250을 사용합니다. 닫힌 본문은 mounted/inert로 초안을 유지합니다. contentClassName/contentStyle/contentRef로 호출자가 본문 여백과 스크롤을 정하며 기본은 padding 0·overflow-y hidden입니다. resizable의 드래그·방향키 16px·Shift 50px·Home/End·double click은 bounded width intent를 보냅니다. 드래그 취소·capture 유실·닫기·확대·compact 전환은 시작 전 선호 너비로 복구합니다. 복구한 선호 너비가 현재 부모보다 커도 실제 표시는 부모 폭으로 제한합니다. width/open/expanded는 호출자가 제어하며 외부 닫기에서도 expanded=false intent를 한 번 보냅니다. responsive는 640px 미만 부모에서 전체 폭과 숨긴 핸들을 사용하고 선호 너비를 보존합니다. 부모는 position relative flex 컨테이너입니다.", code: "import { useRef, useState } from \"react\";\nimport { PrismPanel } from \"@pydemia/prism\";\nexport function PanelExample() {\n  const [open, setOpen] = useState(true);\n  const [expanded, setExpanded] = useState(false);\n  const [width, setWidth] = useState(440);\n  const content = useRef<HTMLDivElement>(null);\n  return <div style={{ position: \"relative\", display: \"flex\", height: 440 }}>\n    <main style={{ flex: 1, minWidth: 0, padding: 20 }}><button type=\"button\" onClick={() => setOpen(true)}>패널 열기</button></main>\n    <PrismPanel title={<h4>상세 정보</h4>} open={open} onOpenChange={setOpen} expanded={expanded} onExpandedChange={setExpanded}\n      resizable width={width} onWidthChange={setWidth} contentRef={content} contentStyle={{ padding: 20, overflowY: \"auto\" }}>\n      <label>검토 초안 <textarea defaultValue=\"가상 검토 기록\" /></label>\n      <p>닫았다 다시 열어도 입력한 초안이 유지됩니다.</p>\n    </PrismPanel>\n  </div>;\n}", render: state => <PanelDemo key={state} state={state}/> },
     { id: "prism-six-frame", name: "6-frame comparison", category: "Domain", purpose: "리더 유형·경험·역량·자질을 후보별로 비교", source: ["chat/templates/ChatSixFrameTable.tsx"], states: ["default", "empty", "long"], contract: "열 ID는 고유하며 값은 ReactNode 또는 null입니다. null은 정보 없음으로 표시합니다. 첫 두 열과 header를 고정하고 경험·역량 행을 병합합니다. 비교 점수나 순위는 계산하지 않습니다.", code: 'import { PrismSixFrame } from "@pydemia/prism";\n<PrismSixFrame columns={columns} panel={false} />;', render: state => <SixFrameDemo state={state} /> },
     { id: "prism-selection", name: "Selection / Date / Pagination", category: "Inputs", purpose: "검색·다중 선택·기간 검증·페이지 탐색", source: ["ui/input/HRXAutocomplete.tsx", "ui/input/HRXCheckbox.tsx", "ui/input/HRXRadio.tsx", "ui/datepicker/HRXDatePicker.tsx", "ui/pagination/HRXPagination.tsx", "admin/common/AdminDateRangeField.tsx", "admin/common/AdminChipAutocomplete.tsx"], states: ["default", "disabled", "readonly", "loading", "error", "empty"], contract: "선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 중복을 추가하지 않으며 첫 칩을 해제해도 나머지 값은 보존합니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다.", code: 'import { PrismMultiSelect } from "@pydemia/prism";\n<PrismMultiSelect label="분야" options={options} value={value} onValueChange={setValue} />;', render: state => <SelectionDemo key={state} state={state} /> },
     { id: "prism-profile", name: "Candidate profile / Evidence", category: "Domain", purpose: "후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시", source: ["chat/successorCandidate/SuccessorCandidateDetail.tsx", "chat/successorCandidate/OutlineBox.tsx", "chat/successorCandidate/BadgeSummary.tsx", "chat/successorCandidate/total/SuccessorCandidateBasicInfo.tsx", "chat/successorCandidate/total/SuccessorCandidateCareerTimeline.tsx", "chat/successorCandidate/competence/DesignCompetenceMatrix.tsx"], states: ["default", "empty", "loading", "error"], contract: "PrismProfileTab은 종합·전문성·성공경험·Design·Agility·Attitude·Leadership·Mgmt Comments의 안정 ID입니다. 분류별 sections는 독립 컴포넌트 slot입니다. 상세 분류 탭은 원본26px/10px/4px간격·내용에 따른flex너비를 유지하며660px 이하에서는4열grid로 전환합니다. 누락된 근거는 정보 없음으로 남기고 UI가 평가하지 않습니다. PrismSummaryBadge의 tooltipClassName과 tooltipStyle은 도움말 본문에 적용하며 trigger와 빈 summary 판정을 바꾸지 않습니다.", code: 'import { PrismProfile } from "@pydemia/prism";\n<PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab} sections={sections} />;', render: state => <ProfileDemo state={state} /> },

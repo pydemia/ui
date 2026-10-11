@@ -583,8 +583,9 @@
       "name": "SidePanel",
       "target": "prism-panel",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Public basic/expanded/closed metrics and final installed vector paint compared. Complete pixels and authenticated panel wrappers remain pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/position/PositionDetailHeader.tsx",

@@ -24,3 +24,9 @@
 - 첫 final-320 screenshot은 component폭320/viewport1280 사례였습니다. 이를실제mobile viewport로 사용하지않았고 새26탭에서viewport320/scroll320/component288/height240을측정한 screenshot을 별도로 저장했습니다. memo-empty-actual-mobile.png를 최종화면으로 사용합니다. own20–27 및원본로그인실패 비교탭을닫고temporary viewport를reset했으며사용자원본2089333017은/chat주소로남겼습니다.
 
 - 검증용 서버31612/31757/86296은확인된명령·cwd에한정해종료했습니다. source/generated를분리커밋하고 기존draft PR162의제목/본문을누적구현범위에맞춰갱신합니다. 전체원본UI·인증상태·print/font/pixel·OS저장·production은미완료이고goal active입니다.
+
+## 원격 readback과 인계
+
+source a6478bd3/generated59ff8bb467c71ef9e1208e9e3b3ed868a7cbd269를 정상push했습니다. PAT exact-match0·Git config 보존이며 PR162 title Add portable PRISM components and profile exports/draft true/base main/정확한head를 읽고 재첨부했습니다. Verify UI38137545080 completed/success입니다. Vercel dpl_kr7ePfQY5PyRgesFUV7jZzonfhTX는 READY/target null/정확한sha의preview입니다. 기존CLI인증으로registry763,936bytes/431bdac4…와manifest235,258bytes/9f6827c6…의byte일치를확인했습니다. auth값/헤더는출력·artifact에기록하지않았습니다. 이preview의browser render와production은검증하지않았습니다.
+
+세검증server session exit143을확인했습니다. 소비자·source/deps/dist·rawJSON/PNG를보존했고사용자탭/계정/권한은유지했습니다. 구현과생성물은원격head에있고후속readback노트만local modified입니다. 이전phase가아닌이번turn도실제원본대조·규칙/코드수정·새test·독립예시/설치·모바일가시성·게시/CI/HTTPreadback의유효진척입니다. 전체goal은active이며다음은아직partial인원본public/authenticated 화면·상태와remaining스타일/동작차이의대조입니다.

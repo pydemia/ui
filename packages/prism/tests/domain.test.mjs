@@ -117,4 +117,61 @@ test("input clear retains focus and never mutates a consumer-owned value",async(
     const input=document.querySelector('input');assert.equal(count,1);assert.equal(input.value,"가상");assert.equal(document.activeElement,input);
     await act(async()=>root.render(h(PrismInput,{...props,readOnly:true})));assert.equal(document.querySelector('button'),null);
 });
+test("closing a rich-title panel preserves its draft and resets externally owned expansion once",async()=>{
+    const resets=[];const content={current:null};
+    const props={key:"panel-draft",title:h("h4",{},"상세 정보"),open:true,expanded:true,onOpenChange(){},onExpandedChange:value=>resets.push(value),contentRef:content,contentClassName:"consumer-content",contentStyle:{padding:20,overflowY:"auto"},children:h("input",{defaultValue:"가상 초안","aria-label":"초안"})};
+    await act(async()=>root.render(h(PrismPanel,props)));
+    const input=document.querySelector('input');input.value="수정한 초안";
+    assert.equal(document.querySelector('h4').textContent,"상세 정보");assert.equal(document.querySelector('h2 h4'),null);
+    assert.equal(content.current,document.querySelector('.consumer-content'));assert.equal(content.current.style.overflowY,"auto");
+    await act(async()=>root.render(h(PrismPanel,{...props,open:false})));
+    assert.deepEqual(resets,[false]);assert.equal(document.querySelector('aside').hasAttribute('inert'),true);assert.equal(document.querySelector('aside').getAttribute('aria-hidden'),"true");
+    assert.equal(document.querySelector('input'),input);assert.equal(input.value,"수정한 초안");
+    await act(async()=>root.render(h(PrismPanel,{...props,open:false,onExpandedChange:value=>resets.push(value)})));
+    assert.deepEqual(resets,[false]);
+    await act(async()=>root.render(h(PrismPanel,{...props,expanded:false})));
+    assert.equal(input.value,"수정한 초안");assert.equal(document.querySelector('aside').hasAttribute('inert'),false);
+});
+test("panel pointer cancellation and capture loss restore the starting width while pointer-up commits",async()=>{
+    function Demo({open=true,expanded=false}){const [width,setWidth]=useState(440);return h(PrismPanel,{title:"상세",open,expanded,resizable:true,width,onWidthChange:setWidth,onOpenChange(){},children:"본문"});}
+    await act(async()=>root.render(h(Demo,{key:"panel-pointer"})));
+    const handle=document.querySelector('[role="separator"]');let captured=false;
+    handle.setPointerCapture=()=>{captured=true;};handle.hasPointerCapture=()=>captured;handle.releasePointerCapture=()=>{captured=false;};
+    const pointer=(type,x)=>{const event=new MouseEvent(type,{bubbles:true,clientX:x,button:0});Object.defineProperty(event,"pointerId",{value:7});return event;};
+    const start=async()=>{await act(async()=>handle.dispatchEvent(pointer("pointerdown",500)));await act(async()=>handle.dispatchEvent(pointer("pointermove",400)));assert.equal(handle.getAttribute("aria-valuenow"),"540");};
+    await start();await act(async()=>handle.dispatchEvent(pointer("pointercancel",400)));assert.equal(handle.getAttribute("aria-valuenow"),"440");assert.equal(captured,false);
+    await start();captured=false;await act(async()=>handle.dispatchEvent(pointer("lostpointercapture",400)));assert.equal(handle.getAttribute("aria-valuenow"),"440");
+    await start();await act(async()=>handle.dispatchEvent(pointer("pointerup",400)));await act(async()=>handle.dispatchEvent(pointer("lostpointercapture",400)));assert.equal(handle.getAttribute("aria-valuenow"),"540");
+    await act(async()=>handle.dispatchEvent(pointer("pointerdown",500)));await act(async()=>handle.dispatchEvent(pointer("pointermove",400)));
+    await act(async()=>handle.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true,cancelable:true})));assert.equal(handle.getAttribute("aria-valuenow"),"540");assert.equal(document.querySelector('aside').hasAttribute('data-open'),true);
+    await act(async()=>handle.dispatchEvent(pointer("pointerdown",500)));await act(async()=>handle.dispatchEvent(pointer("pointermove",400)));
+    await act(async()=>root.render(h(Demo,{key:"panel-pointer",open:false})));assert.equal(document.querySelector('[role="separator"]'),null);
+    await act(async()=>root.render(h(Demo,{key:"panel-pointer"})));assert.equal(document.querySelector('[role="separator"]').getAttribute("aria-valuenow"),"540");
+});
+test("panel compact layout clamps display without erasing the preferred uncontrolled width",async()=>{
+    const previousObserver=globalThis.ResizeObserver;const host=document.getElementById('root');const previousRect=host.getBoundingClientRect;let size=1000;const observers=[];
+    host.getBoundingClientRect=()=>({width:size});globalThis.ResizeObserver=class{constructor(callback){this.callback=callback;observers.push(this);}observe(target){this.target=target;}disconnect(){this.target=null;}};
+    try{
+        await act(async()=>root.render(h(PrismPanel,{key:"panel-compact",title:"상세",open:true,resizable:true,defaultWidth:700,onOpenChange(){},children:"본문"})));
+        assert.equal(document.querySelector('[role="separator"]').getAttribute("aria-valuenow"),"700");
+        const observer=observers.find(item=>item.target===host);size=300;await act(async()=>observer.callback([]));
+        assert.equal(document.querySelector('[role="separator"]'),null);assert.equal(document.querySelector('aside').style.getPropertyValue('--prism-panel-width'),"300px");
+        size=900;await act(async()=>observer.callback([]));assert.equal(document.querySelector('[role="separator"]').getAttribute("aria-valuenow"),"700");
+    }finally{globalThis.ResizeObserver=previousObserver;host.getBoundingClientRect=previousRect;}
+});
+test("interrupting a drag with a compact parent restores the owner's preferred width",async()=>{
+    const previousObserver=globalThis.ResizeObserver;const host=document.getElementById('root');const previousRect=host.getBoundingClientRect;let size=1000;const observers=[];
+    host.getBoundingClientRect=()=>({width:size});globalThis.ResizeObserver=class{constructor(callback){this.callback=callback;observers.push(this);}observe(target){this.target=target;}disconnect(){this.target=null;}};
+    function Demo(){const [width,setWidth]=useState(700);return h(PrismPanel,{title:"상세",open:true,resizable:true,width,onWidthChange:setWidth,onOpenChange(){},children:"본문"});}
+    try{
+        await act(async()=>root.render(h(Demo,{key:"panel-compact-drag"})));
+        const handle=document.querySelector('[role="separator"]');let captured=false;
+        handle.setPointerCapture=()=>{captured=true;};handle.hasPointerCapture=()=>captured;handle.releasePointerCapture=()=>{captured=false;};
+        const pointer=(type,x)=>{const event=new MouseEvent(type,{bubbles:true,clientX:x,button:0});Object.defineProperty(event,"pointerId",{value:9});return event;};
+        await act(async()=>handle.dispatchEvent(pointer("pointerdown",500)));await act(async()=>handle.dispatchEvent(pointer("pointermove",600)));
+        assert.equal(handle.getAttribute("aria-valuenow"),"600");
+        const observer=observers.find(item=>item.target===host);size=300;await act(async()=>observer.callback([]));assert.equal(document.querySelector('[role="separator"]'),null);assert.equal(captured,false);
+        size=1000;await act(async()=>observer.callback([]));assert.equal(document.querySelector('[role="separator"]').getAttribute("aria-valuenow"),"700");
+    }finally{globalThis.ResizeObserver=previousObserver;host.getBoundingClientRect=previousRect;}
+});
 test.after(async()=>{await act(async()=>root.unmount());dom.window.close();});

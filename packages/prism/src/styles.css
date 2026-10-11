@@ -3,7 +3,7 @@
 /* PRISM light profile. Values are measured from PRISM-DEV and source design tokens. */
 [data-prism="light"] {
     --prism-base: #fdfdfd; --prism-lnb: #f9fafc; --prism-panel: #eef1f8;
-    --prism-border: #e3e5e5; --prism-control-border: #d4d8dd; --prism-divider: #e7e9ed;
+    --prism-border: #e3e5e5; --prism-border-secondary: #dde5eb; --prism-control-border: #d4d8dd; --prism-divider: #e7e9ed;
     --prism-primary: #2f548c; --prism-secondary: #fa7c39;
     --prism-cool-100: #eef2fa; --prism-cool-200: #d6dcee; --prism-cool-700: #384a7d; --prism-cool-800: #1f3365;
     --prism-neutral-50: #f4f5f8; --prism-neutral-100: #e7eaee; --prism-neutral-200: #d7dce3; --prism-neutral-400: #8a939f;
@@ -237,14 +237,21 @@
 @media (prefers-reduced-motion: reduce) { [data-prism] *, [data-prism] *::before { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 
 /* Inline panel preserves the source's nonmodal layout and 64px header. */
-.prism-panel-placeholder { width: 0; flex-shrink: 0; }
-.prism-panel-placeholder[data-open] { width: min(440px, 100%); }
-.prism-panel { position: absolute; inset: 0 0 0 auto; z-index: 10; display: flex; flex-direction: column; width: min(440px, 100%); background: #fff; border-left: 1px solid var(--prism-border); box-shadow: -4px 0 16px #25262e1f; }
-.prism-panel[data-expanded] { width: 100%; z-index: 20; }
-.prism-panel > header { display: flex; align-items: center; justify-content: space-between; height: 64px; min-height: 64px; padding: 20px; border-bottom: 1px solid var(--prism-border); }
-.prism-panel > header h2 { margin: 0; font-size: 18px; font-weight: 600; }
-.prism-panel > header > div { display: flex; gap: 10px; }
-.prism-panel-content { flex: 1; min-height: 0; overflow: auto; padding: 20px; }
+.prism-panel-placeholder { width:0; flex-shrink:0; transition:width 225ms cubic-bezier(.4,0,.6,1); }
+.prism-panel-placeholder[data-open] {width:min(var(--prism-panel-width,440px),100%);}
+.prism-panel {position:absolute;inset:0 0 0 auto;z-index:10;display:flex;flex-direction:column;width:min(var(--prism-panel-width,440px),100%);height:100%;overflow:hidden;background:#fff;color:#000;font-size:16px;border-left:1px solid var(--prism-border-secondary);box-shadow:-4px 0 12px rgba(37,38,46,.06);transition:width 225ms cubic-bezier(.4,0,.6,1);}
+.prism-panel[data-expanded] {width:calc(100% + 1px);z-index:1250;}
+.prism-panel:not([data-open]) {width:0;visibility:hidden;pointer-events:none;border-left:0;box-shadow:none;}
+.prism-panel > header {display:flex;flex:none;align-items:center;justify-content:space-between;min-width:var(--prism-panel-width,440px);height:var(--prism-panel-header-height,64px);min-height:64px;padding:20px;border-bottom:1px solid var(--prism-border-secondary);font-size:18px;font-weight:600;}
+.prism-panel-title {min-width:0;flex:1;overflow-wrap:anywhere;line-height:normal;}
+.prism-panel-title :is(h1,h2,h3,h4,h5,h6) {margin:0;font-size:18px;line-height:normal;max-width:100%;width:fit-content;}
+.prism-panel-title > h2 {font-weight:600;}
+.prism-panel-title :is(h1,h3,h4,h5,h6) {font-weight:700;}
+.prism-panel-actions {display:flex;flex:none;align-items:center;gap:10px;margin-left:10px;}
+.prism-panel-icon-button {display:inline-flex;flex:none;width:24px;height:24px;background:none;border:0;padding:0;color:var(--foreground);font-size:13.333333px;font-weight:400;line-height:normal;cursor:pointer;}
+.prism-panel-close {color:#000;}
+.prism-panel-content {flex:1;min-height:0;min-width:var(--prism-panel-width,440px);overflow-y:hidden;padding:0;}
+.prism-panel[data-expanded] > header,.prism-panel[data-compact] > header,.prism-panel[data-expanded] > .prism-panel-content,.prism-panel[data-compact] > .prism-panel-content {min-width:0;}
 .prism-six-frame { display: grid; gap: 20px; min-width: 0; }
 .prism-six-frame h2 { margin: 0; font-size: 24px; line-height: 1.4; font-weight: 700; }
 .prism-six-scroll { max-height: 500px; overflow: auto; border-bottom: 1px solid var(--prism-neutral-200); }
@@ -1395,12 +1402,11 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 }
 
 /* Responsive/sizing extensions retain the desktop PRISM baseline. */
-.prism-panel-placeholder[data-open] {width:min(var(--prism-panel-width,440px),100%);}
-.prism-panel {width:min(var(--prism-panel-width,440px),100%);overflow:visible;}
-.prism-panel[data-expanded],.prism-panel[data-compact] {width:100%;}
+.prism-panel[data-compact][data-open]:not([data-expanded]) {width:100%;}
+.prism-panel[data-resizing],.prism-panel[data-resizable] {transition:none;}
 .prism-panel-placeholder[data-compact] {width:0;}
 .prism-panel-content {container-type:inline-size;container-name:prism-content;}
-.prism-panel-resizer {position:absolute;left:-4px;top:0;bottom:0;z-index:2;width:8px;cursor:col-resize;touch-action:none;user-select:none;background:transparent;}
+.prism-panel-resizer {position:absolute;left:0;top:0;bottom:0;z-index:2;width:8px;cursor:col-resize;touch-action:none;user-select:none;background:transparent;}
 .prism-panel-resizer::after {content:"";position:absolute;top:calc(50% - 18px);left:3px;width:2px;height:36px;border-radius:2px;background:var(--prism-control-border);}
 .prism-panel-resizer:hover::after,.prism-panel-resizer:focus-visible::after {background:var(--prism-blue-300);}
 .prism-workspace {container-type:inline-size;container-name:prism-shell;}

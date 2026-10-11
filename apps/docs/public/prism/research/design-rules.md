@@ -108,3 +108,11 @@ Use prism-memo for the current personal profile memo UI. Load only authenticated
 Return the actual save/delete/create Promise, pass the supplied AbortSignal to the service and update data only after successful completion. Failed mutations retain their draft/dialog and expose retry. Cancellation suppresses late UI completion; the consumer still owns persistence, permissions and concurrency handling. Creation preserves whitespace and does not clear the controlled draft automatically.
 
 Cards use padding16px/gap12px/radius12px, body14px400/1.4, date12px500/17px and20px edit/delete artwork. The delete confirmation uses the source error copy, red warning button and123px minimum content area. Provide a height for a bounded list with a separate composer; omit height for natural layout. Native editor resizing is limited by available container space. Footer wrapping and pre-wrap body text preserve narrow and multiline content. Source loading keeps its three skeleton cards with42px placeholders.
+
+### Inline SidePanel baseline and sizing
+
+Use a 440px panel and a 64px header with 20px padding. The header actions and Expand/Collapse/Close vectors are 24px. Use border-secondary #DDE5EB and shadow -4px 0 12px rgba(37,38,46,.06). Base panel text is 16px/black; header text is 18px/600, while the public rich h4 title is 18px/700. Expanded width is parent+1px at z-index1250. A closed panel remains mounted and inert with width0 and a0-width placeholder.
+
+The base content has no padding and hides vertical overflow. Set contentStyle/contentClassName for the specific profile, memo or comparison layout; the workspace explicitly supplies20px and vertical scrolling. Long rich titles grow the header. Opt-in manual resizing applies width immediately so the handle does not move during keyboard/double-click input; the base panel retains the source 225ms width transition. Compact parents use full width and hide the handle while retaining the preferred width. Unexpected pointer cancellation/capture loss is covered by mocked lifecycle tests; native device behavior remains unverified.
+
+Cancelling a drag restores the preferred width from before the gesture, including interruption by a compact parent. The panel still clamps its displayed width to the current parent; rollback does not erase a wider stored preference.
