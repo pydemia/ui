@@ -618,20 +618,11 @@
       ]
     },
     "prism-print": {
-      "visual": "partial",
-      "interaction": "partial",
-      "checks": [
-        "Screen retains source 190mm width and 280mm minimum height; print clears minimum height to avoid blank trailing page",
-        "Short browser PDF is one nonblank page; long fixture is two pages with repeated Profile headers",
-        "All 36 synthetic career rows appear once; rendered PDF pages inspected"
-      ],
-      "evidence": [
-        "local-print-pdf-verification"
-      ],
+      "visual": "partial-source-style-alignment",
+      "interaction": "whole123tests passed",
+      "source": "70pt/140pt leader layout,11pt/130pt timeline and all-topic success composition",
       "remaining": [
-        "original print page comparison",
-        "other paper and native print settings",
-        "very long outline and essay fragmentation"
+        "Original whole print style/pixel/font and actual pagination"
       ]
     },
     "prism-chart": {
@@ -936,30 +927,39 @@
       "remaining": [
         "전체 원본 structured blocks·grouping·streaming 상태/시각 대조"
       ]
+    },
+    "prism-profile-print": {
+      "visual": "pending-current-full-document-comparison",
+      "interaction": "123tests includes8new content/option/continuation/missing-vs-zero/multi-profile tests;26portable examples passed",
+      "source": "087811ff print mapping and seven chapter composition/styles",
+      "remaining": [
+        "Actual font/browser page fragmentation and all long content",
+        "A4 margins/footer/header repetition and source/target full-page visual comparison",
+        "Independent consumer actual320 preview sizing/resize and native print/PDF/HTML/ZIP integration"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 115,
+      "passed": 123,
       "failed": 0
     },
     "registry": {
-      "groups": 48,
-      "items": 49,
+      "groups": 49,
+      "items": 50,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-local-final-registry-reinstall-build-runtime-pending",
-      "items": 49,
-      "completeExamples": 25,
+      "status": "passed-fresh-install-final-registry-reinstall-build-runtime-pending",
+      "items": 50,
+      "files": 75,
+      "completeExamples": 26,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "portableFont": "emitted and SHA256 matched",
+      "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "자체 소비자에 emitted registry 전체를 재설치했습니다. 설치 component source는 직접 수정하지 않았으며 테스트 entry만 연결했습니다.",
-      "runtime": "이번 채팅 설치본의 actual320px 브라우저 실행은 연결 중단으로 미검증입니다. 이전 Attitude 소비자 실행과 구분합니다.",
-      "files": 74
+      "runtime": "Current print consumer browser runtime unverified. Previous own temporary consumer was absent; a new one was allocated and preserved. Installed components were not hand-edited."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1042,20 +1042,21 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 48,
-      "componentExamples": 25,
+      "groups": 49,
+      "componentExamples": 26,
       "integrationFragments": 23,
       "workspaceTypecheck": "passed check-prism.mjs",
       "installedTypecheck": "passed final independent install",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 169,
-      "checked": 22,
-      "status": "partial-browser-disconnected",
+      "count": 172,
+      "checked": 0,
+      "status": "not-rerun-browser-tools-unavailable",
       "previousVerifiedStates": 159,
       "previousSourceCommit": "b4a502d8021277469e6a8d2862b0fb11482e1298",
-      "scope": "정의 상태 수, 이전 source head 검사, 이번 aggregate partial 검사를 구분합니다."
+      "previousPartialChecked": 22,
+      "previousPartialSourceCommit": "c6b5d7ee09fe730346b80cf515608247dfd2910d"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1109,6 +1110,18 @@
       "fullFixtureRuntime": "partial22of169",
       "originalAuthenticatedParity": "unverified",
       "production": "not-published"
+    },
+    "profilePrintDocumentImplementation": {
+      "status": "implemented-content-and-type-verified",
+      "newTests": 8,
+      "sections": 7,
+      "outputOptionCombinations": 4,
+      "textPolicyDefault": "full",
+      "pagePlanning": "source-based estimate or validated host-provided career pages",
+      "fullBrowserRuntime": "unverified",
+      "fullA4PdfLayout": "unverified",
+      "nativePrint": "unverified",
+      "production": "not-published"
     }
   },
   "unverified": [
@@ -1121,20 +1134,14 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 48,
-    "states": 169,
-    "checked": 22,
-    "status": "partial-browser-disconnected",
+    "groups": 49,
+    "states": 172,
+    "checked": 0,
+    "status": "not-rerun-browser-tools-unavailable",
     "checks": [
-      "현재 component/state 표식과 실제320px iframe을 확인한 22개 상태의 기본 검사",
-      "aria-hidden native select를 표시 입력으로 오인한 조건은 DOM 확인 후 수정",
-      "연결 중단 후 남은 상태는 미검증이며 169개 전체 성공을 주장하지 않습니다."
+      "123개 tests와26개 usage contract는 DOM 내용/타입 근거이며 실제 browser layout 검증을 대신하지 않습니다."
     ],
-    "evidence": [
-      "chat-cua-runtime.json",
-      "tool observations: 22 checked, stopped at prism-sidebar default"
-    ],
-    "claim": "수집 파일은 새 분석/추천의 선택 측정입니다. 22개 상태의 개별 raw 배열은 REPL reset으로 저장하지 못했고 aggregate tool observation만 남았습니다. 이전159개 결과는 별도 source head의 historical evidence입니다."
+    "claim": "172 are defined synthetic states, not completed original or actual320 runtime checks. Prior159 and partial22 retain their separate source-head scope."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1528,5 +1535,22 @@
       "attitude-cua-runtime.json"
     ],
     "claim": "현재 합성 상태의 기본 검사; source 전체 시각/상태 parity 아님"
+  },
+  "previousChatFixtureRenderChecks": {
+    "sourceCommit": "c6b5d7ee09fe730346b80cf515608247dfd2910d",
+    "groups": 48,
+    "states": 169,
+    "checked": 22,
+    "status": "partial-browser-disconnected",
+    "checks": [
+      "현재 component/state 표식과 실제320px iframe을 확인한 22개 상태의 기본 검사",
+      "aria-hidden native select를 표시 입력으로 오인한 조건은 DOM 확인 후 수정",
+      "연결 중단 후 남은 상태는 미검증이며 169개 전체 성공을 주장하지 않습니다."
+    ],
+    "evidence": [
+      "chat-cua-runtime.json",
+      "tool observations: 22 checked, stopped at prism-sidebar default"
+    ],
+    "claim": "수집 파일은 새 분석/추천의 선택 측정입니다. 22개 상태의 개별 raw 배열은 REPL reset으로 저장하지 못했고 aggregate tool observation만 남았습니다. 이전159개 결과는 별도 source head의 historical evidence입니다."
   }
 }

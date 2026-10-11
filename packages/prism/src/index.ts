@@ -60,6 +60,7 @@ export * from "./prism-page-state";
 
 export * from "./prism-domain-forms";
 export * from "./prism-print";
+export * from "./prism-profile-print";
 export * from "./prism-intro";
 export * from "./prism-profile-sections";
 export * from "./prism-icon";
