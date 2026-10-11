@@ -408,7 +408,12 @@
       "target": "prism-response",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-position-recommendations",
+        "prism-analysis"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/conversation/ChatMarkdownRenderer.tsx",
@@ -445,10 +450,14 @@
     {
       "source": "components/chat/conversation/InlineMarkdown.tsx",
       "name": "InlineMarkdown",
-      "target": "prism-response",
+      "target": "prism-rich-text",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-response"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/favorite/FavoriteCandidateCard.tsx",
@@ -604,10 +613,14 @@
     {
       "source": "components/chat/position/PositionRecommend.tsx",
       "name": "PositionRecommend",
-      "target": "prism-content",
+      "target": "prism-position-recommendations",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-content"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/position/PositionRequirementGroup.tsx",
@@ -1079,10 +1092,14 @@
     {
       "source": "components/chat/templates/ChatProfileAnalysis.tsx",
       "name": "ChatProfileAnalysis",
-      "target": "prism-assessment",
+      "target": "prism-analysis",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-assessment"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/templates/ChatProfileBrief.tsx",
@@ -1135,10 +1152,14 @@
     {
       "source": "components/chat/templates/ChatTemplatePositionRecommend.tsx",
       "name": "ChatTemplatePositionRecommend",
-      "target": "prism-content",
+      "target": "prism-position-recommendations",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-content"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/templates/ChatTemplateProfile.tsx",

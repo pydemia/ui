@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-10",
+  "updatedAt": "2026-10-11",
   "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "status": "in-progress",
   "claim": "Source correspondence and runtime checks are separate from visual parity. No complete parity claim.",
@@ -887,30 +887,79 @@
         "survey-cua-runtime.json",
         "attitude-cua-runtime.json"
       ]
+    },
+    "prism-analysis": {
+      "visual": "partial",
+      "interaction": "selected-local-runtime-and-unit-tests",
+      "source": "087811ff current code and selected computed measurements",
+      "extensions": [
+        "140–1280px sizing",
+        "explicit host actions",
+        "native both-axis recommendations resize"
+      ],
+      "remaining": [
+        "원본 인증 상태의 전체 pixel/font 대조",
+        "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+      ]
+    },
+    "prism-position-recommendations": {
+      "visual": "partial",
+      "interaction": "selected-local-runtime-and-unit-tests",
+      "source": "087811ff current code and selected computed measurements",
+      "extensions": [
+        "140–1280px sizing",
+        "explicit host actions",
+        "native both-axis recommendations resize"
+      ],
+      "remaining": [
+        "원본 인증 상태의 전체 pixel/font 대조",
+        "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+      ]
+    },
+    "prism-rich-text": {
+      "visual": "partial",
+      "interaction": "selected-local-runtime-and-unit-tests",
+      "source": "087811ff current code and selected computed measurements",
+      "extensions": [
+        "140–1280px sizing",
+        "explicit host actions",
+        "native both-axis recommendations resize"
+      ],
+      "remaining": [
+        "원본 인증 상태의 전체 pixel/font 대조",
+        "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+      ]
+    },
+    "prism-response": {
+      "visual": "partial",
+      "interaction": "unit-tested-current-analysis-and-recommendations-routing",
+      "remaining": [
+        "전체 원본 structured blocks·grouping·streaming 상태/시각 대조"
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 107,
+      "passed": 115,
       "failed": 0
     },
     "registry": {
-      "groups": 45,
-      "items": 46,
+      "groups": 48,
+      "items": 49,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-fresh-local-install-and-final-registry-reinstall",
-      "items": 46,
-      "files": 71,
-      "completeExamples": 22,
+      "status": "passed-local-final-registry-reinstall-build-runtime-pending",
+      "items": 49,
+      "completeExamples": 25,
       "typecheck": "passed",
       "viteBuild": "passed",
       "portableFont": "emitted and SHA256 matched",
       "assetNotice": "installed and checked",
-      "sourceScope": "설치 component source는 직접 수정하지 않았습니다. 최종 emitted registry로 재설치했으며 entry/환경worker/합성PDF만 검증 앱에 연결했습니다.",
-      "runtime": "Production StrictMode/실제320px의3페이지/텍스트 레이어,3페이지 Enter·67→70 줌,46/64px·14px500,넘침/브라우저 오류0. Native download event25초 timeout;OSsave미확인"
+      "sourceScope": "자체 소비자에 emitted registry 전체를 재설치했습니다. 설치 component source는 직접 수정하지 않았으며 테스트 entry만 연결했습니다.",
+      "runtime": "이번 채팅 설치본의 actual320px 브라우저 실행은 연결 중단으로 미검증입니다. 이전 Attitude 소비자 실행과 구분합니다.",
+      "files": 74
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -993,19 +1042,20 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 45,
-      "componentExamples": 22,
+      "groups": 48,
+      "componentExamples": 25,
       "integrationFragments": 23,
       "workspaceTypecheck": "passed check-prism.mjs",
       "installedTypecheck": "passed final independent install",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 159,
-      "status": "passed-current-source-documents-actual320px-iframe-cua",
-      "unique": 159,
-      "previousVerifiedStates": 152,
-      "scope": "합성 기본 렌더 검사이며 모든 원본 상태·상호작용·pixel 완료를 의미하지 않음"
+      "count": 169,
+      "checked": 22,
+      "status": "partial-browser-disconnected",
+      "previousVerifiedStates": 159,
+      "previousSourceCommit": "b4a502d8021277469e6a8d2862b0fb11482e1298",
+      "scope": "정의 상태 수, 이전 source head 검사, 이번 aggregate partial 검사를 구분합니다."
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1050,6 +1100,15 @@
       "status": "local-and-independent-runtime-verified; draft-update-pending",
       "production": "pending human-approved publication",
       "completeParity": false
+    },
+    "chatRecipesImplementation": {
+      "status": "implemented-unit-and-selected-local-runtime-verified",
+      "newTests": 8,
+      "independentBuild": "passed",
+      "independentBrowserRuntime": "pending-browser-availability",
+      "fullFixtureRuntime": "partial22of169",
+      "originalAuthenticatedParity": "unverified",
+      "production": "not-published"
     }
   },
   "unverified": [
@@ -1062,18 +1121,20 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 45,
-    "states": 159,
-    "status": "passed-current-source-documents-actual320px-iframe-cua",
+    "groups": 48,
+    "states": 169,
+    "checked": 22,
+    "status": "partial-browser-disconnected",
     "checks": [
-      "현재component/state 표식과 실제320px 확인",
-      "최종159개 고유 상태의 누락·넘침·중첩 버튼·이름 없는 표시 입력·수집된 오류0",
-      "긴 Survey hidden table은 수정 후 별도 재측정·집계 누락 감사"
+      "현재 component/state 표식과 실제320px iframe을 확인한 22개 상태의 기본 검사",
+      "aria-hidden native select를 표시 입력으로 오인한 조건은 DOM 확인 후 수정",
+      "연결 중단 후 남은 상태는 미검증이며 169개 전체 성공을 주장하지 않습니다."
     ],
     "evidence": [
-      "attitude-cua-runtime.json"
+      "chat-cua-runtime.json",
+      "tool observations: 22 checked, stopped at prism-sidebar default"
     ],
-    "claim": "현재 합성 상태의 기본 검사; source 전체 시각/상태 parity 아님"
+    "claim": "수집 파일은 새 분석/추천의 선택 측정입니다. 22개 상태의 개별 raw 배열은 REPL reset으로 저장하지 못했고 aggregate tool observation만 남았습니다. 이전159개 결과는 별도 source head의 historical evidence입니다."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1173,19 +1234,22 @@
     }
   },
   "runtimeVerificationAvailability": {
-    "status": "available-direct-headless",
-    "method": "Bundled Playwright 1.62.1 with installed isolated headless Chromium 1223; fresh context, no existing browser profile or saved authentication",
+    "status": "browser-disconnected-current-chat-phase",
+    "method": "Chrome CUA completed selected measurements, then browser3 unavailable; inventory timeout reset kernel; in-app browser unavailable. Browser tools are absent after environment refresh.",
     "inAppBrowser": "still unavailable",
-    "sourceBrowser": "Direct HTTP /sample renders successfully; fresh button and file selection states captured in the original deployed app",
+    "sourceBrowser": "현재 browser 제어 연결 없음; 과거 원본 관찰은 별도 historical evidence입니다.",
     "preservedEvidence": "Historical source defaults, fresh deployed file/Tooltip/InputLabel states, local 120 fixture states at actual 320px.",
     "newChangesPendingRuntime": [
       "actual clipboard write",
       "original states outside the measured file controls and authenticated domain screens",
-      "print outside Chromium Letter settings"
+      "print outside Chromium Letter settings",
+      "current169state actual320px CUA audit",
+      "current independent chat consumer production UI"
     ],
     "previousSourceBrowserAttempts": [
       "agent-browser 0.38.2: HTTP upgrade/redirect loop; HTTPS connection reset. Historical failures do not apply to the working direct Playwright launch."
-    ]
+    ],
+    "previousSourceBrowserObservation": "Direct HTTP /sample renders successfully; fresh button and file selection states captured in the original deployed app"
   },
   "fileSelectionVerification": {
     "scope": "Fresh anonymous deployed original samples and local built synthetic fixtures; no server upload or existing login",
@@ -1295,7 +1359,7 @@
     "deltaReview": {
       "modified": 42,
       "added": 10,
-      "unreviewedPaths": 5,
+      "unreviewedPaths": 0,
       "coverageClaim": "Reviewing a path is separate fromimplementation/state/parity completion."
     }
   },
@@ -1449,5 +1513,20 @@
     "onlineOfflineMetricEquality": true,
     "sourceFullProfileParity": "unverified",
     "claim": "Original purpose plus real standalone synthetic document fidelity; not complete original profile page parity."
+  },
+  "previousFixtureRenderChecks": {
+    "sourceCommit": "b4a502d8021277469e6a8d2862b0fb11482e1298",
+    "groups": 45,
+    "states": 159,
+    "status": "passed-current-source-documents-actual320px-iframe-cua",
+    "checks": [
+      "현재component/state 표식과 실제320px 확인",
+      "최종159개 고유 상태의 누락·넘침·중첩 버튼·이름 없는 표시 입력·수집된 오류0",
+      "긴 Survey hidden table은 수정 후 별도 재측정·집계 누락 감사"
+    ],
+    "evidence": [
+      "attitude-cua-runtime.json"
+    ],
+    "claim": "현재 합성 상태의 기본 검사; source 전체 시각/상태 parity 아님"
   }
 }

@@ -1086,7 +1086,7 @@
       "category": "AI & agent",
       "purpose": "답변 구조·생성 상태·후속 질문·포지션 안내",
       "contract": "Markdown은 GFM 표·목록을 지원하며 raw HTML을 건너뜁니다. remote image는 alt로 표시합니다. 제안 선택·포지션 열기는 callback으로 전달하고 자동 전송·생성은 하지 않습니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "disabled",
@@ -2207,6 +2207,10 @@
           "kind": "component"
         },
         {
+          "name": "PrismProfileAnalysisProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismProfileAnalysis",
           "kind": "component"
         }
@@ -2377,7 +2381,7 @@
       "category": "AI & agent",
       "purpose": "Typed blocks, rich text, actionable references and streaming status",
       "contract": "Consumers adapt backend payloads into a discriminated block union and own action callbacks. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty",
@@ -2397,8 +2401,11 @@
       "embedUrl": "/prism?component=prism-response&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-response&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending"
+        "visual": "partial",
+        "interaction": "unit-tested-current-analysis-and-recommendations-routing",
+        "remaining": [
+          "전체 원본 structured blocks·grouping·streaming 상태/시각 대조"
+        ]
       },
       "exports": [
         {
@@ -3523,6 +3530,170 @@
       ],
       "usageKind": "integration-fragment",
       "registryUsage": "import { PrismIcon } from \"@/components/ui/prism-icon\";\n<PrismIcon name=\"SearchIcon\" size={20} />;"
+    },
+    {
+      "id": "prism-analysis",
+      "name": "Profile analysis / Leader explanation",
+      "category": "Domain",
+      "purpose": "리더 유형 도움말과 6 Frame 목적별 근거 표시",
+      "contract": "Factor kind를 명시합니다. 전문성 tag·대표 성공경험 star·Design/Learning 첫 결과·Attitude Derailment·Leadership 제목/설명을 원본대로 구분합니다. 리더 본문은 aiComment ?? description이며 빈 aiComment도 보존합니다. 누락/trim empty는 관련 데이터 없음입니다. Description은 sanitized inline markup이며 panel의 내부 action은 label입니다. 평가·등급을 계산하지 않습니다. CSS style로 크기를 조절하고 280px 이하에 label 열을 재배치합니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "long"
+      ],
+      "source": [
+        "chat/templates/ChatProfileAnalysis.tsx"
+      ],
+      "usage": "import { PrismAnalysis } from \"@pydemia/prism\";\nexport function AnalysisExample() {\n  return <div data-prism=\"light\"><PrismAnalysis\n    leader={{label:\"Good 리더\",description:\"합성 유형 설명입니다.\",aiComment:\"합성 요약문입니다.\"}}\n    factors={[\n      {id:\"expertise\",kind:\"expertise\",label:\"전문성\",title:\"합성 전문 분야\",results:[\"기술\",\"전략\"],summary:\"가상 근거입니다.\"},\n      {id:\"success\",kind:\"success\",label:\"성공경험\",results:[\"합성 경험 A\",\"합성 경험 B\"],starred:[\"합성 경험 A\"],summary:\"합성 근거입니다.\"},\n      {id:\"design\",kind:\"design\",label:\"Design\",results:[\"합성 등급\"],summary:null},\n      {id:\"agility\",kind:\"agility\",label:\"Learning Agility\",results:[],summary:null},\n      {id:\"attitude\",kind:\"attitude\",label:\"Attitude\",title:\"합성 진단\",results:[\"합성 Risk\"],summary:\"실제 평가가 아닙니다.\"},\n      {id:\"leadership\",kind:\"leadership\",label:\"Leadership\",results:[],summary:\"합성 리더십 근거\"},\n    ]}/></div>;\n}\n",
+      "sourcePath": "packages/prism/src/prism-analysis.tsx",
+      "previewUrl": "/prism?component=prism-analysis",
+      "embedUrl": "/prism?component=prism-analysis&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-analysis&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "selected-local-runtime-and-unit-tests",
+        "source": "087811ff current code and selected computed measurements",
+        "extensions": [
+          "140–1280px sizing",
+          "explicit host actions",
+          "native both-axis recommendations resize"
+        ],
+        "remaining": [
+          "원본 인증 상태의 전체 pixel/font 대조",
+          "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismAnalysisFactorKind",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAnalysisFactor",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAnalysisLeader",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAnalysisProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAnalysis",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismAnalysis } from \"@/components/ui/prism-analysis\";\nexport function AnalysisExample() {\n  return <div data-prism=\"light\"><PrismAnalysis\n    leader={{label:\"Good 리더\",description:\"합성 유형 설명입니다.\",aiComment:\"합성 요약문입니다.\"}}\n    factors={[\n      {id:\"expertise\",kind:\"expertise\",label:\"전문성\",title:\"합성 전문 분야\",results:[\"기술\",\"전략\"],summary:\"가상 근거입니다.\"},\n      {id:\"success\",kind:\"success\",label:\"성공경험\",results:[\"합성 경험 A\",\"합성 경험 B\"],starred:[\"합성 경험 A\"],summary:\"합성 근거입니다.\"},\n      {id:\"design\",kind:\"design\",label:\"Design\",results:[\"합성 등급\"],summary:null},\n      {id:\"agility\",kind:\"agility\",label:\"Learning Agility\",results:[],summary:null},\n      {id:\"attitude\",kind:\"attitude\",label:\"Attitude\",title:\"합성 진단\",results:[\"합성 Risk\"],summary:\"실제 평가가 아닙니다.\"},\n      {id:\"leadership\",kind:\"leadership\",label:\"Leadership\",results:[],summary:\"합성 리더십 근거\"},\n    ]}/></div>;\n}\n"
+    },
+    {
+      "id": "prism-position-recommendations",
+      "name": "Position recommendations / Reveal and selection",
+      "category": "Domain",
+      "purpose": "현재 포지션 추천 카드·선택·단계별 더 보기·반응형/수동 크기",
+      "contract": "같은 추천 레이아웃을 일반·panel 응답에 사용하며 rank를 표시하지 않습니다. 넓은 폭은 4~6개 최초3개/7개 이상6개, 400px 이하 최초4개·두 개씩/마지막 최대3개 추가·접기를 지원합니다. 마지막 묶음은 표시한 수와 실제 추가 수가 일치합니다. 240px 이하 한 열로 개선합니다. selectedId/onSelect는 호스트 소유이며 callback이 없으면 비대화형입니다. 데이터 ID 순서/datasetKey/breakpoint 변경은 접습니다. companyLogo는 호스트가 제공하는 비대화형 회사 자산 slot이며 기본은 회사명입니다. resize로 수동 폭/높이와 scroll을 지원합니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "readonly",
+        "long"
+      ],
+      "source": [
+        "chat/templates/ChatTemplatePositionRecommend.tsx",
+        "chat/position/PositionRecommend.tsx",
+        "chat/conversation/ChatJSONRendererPanel.tsx"
+      ],
+      "usage": "import { useState } from \"react\";\nimport { PrismPositionRecommendations, type PrismPositionRecommendationItem } from \"@pydemia/prism\";\nexport function PositionRecommendationsExample() {\n  const [selected,setSelected]=useState(\"\");\n  const items: PrismPositionRecommendationItem[]=Array.from({length:9},(_,index)=>({id:`synthetic-${index}`,company:\"가상전자\",title:`가상 포지션 ${index+1}`,reasons:[\"합성 전문성 근거\",\"합성 경험 근거\"]}));\n  return <div data-prism=\"light\"><PrismPositionRecommendations items={items} selectedId={selected} onSelect={item=>setSelected(item.id)} resize=\"both\" style={{width:\"100%\"}}/><p role=\"status\">{selected || \"선택 없음\"}</p></div>;\n}\n",
+      "sourcePath": "packages/prism/src/prism-position-recommendations.tsx",
+      "previewUrl": "/prism?component=prism-position-recommendations",
+      "embedUrl": "/prism?component=prism-position-recommendations&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-position-recommendations&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "selected-local-runtime-and-unit-tests",
+        "source": "087811ff current code and selected computed measurements",
+        "extensions": [
+          "140–1280px sizing",
+          "explicit host actions",
+          "native both-axis recommendations resize"
+        ],
+        "remaining": [
+          "원본 인증 상태의 전체 pixel/font 대조",
+          "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismPositionRecommendationItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPositionRecommendationProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPositionRecommendation",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPositionRecommendationsProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPositionRecommendations",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismPositionRecommendations, type PrismPositionRecommendationItem } from \"@/components/ui/prism-position-recommendations\";\nexport function PositionRecommendationsExample() {\n  const [selected,setSelected]=useState(\"\");\n  const items: PrismPositionRecommendationItem[]=Array.from({length:9},(_,index)=>({id:`synthetic-${index}`,company:\"가상전자\",title:`가상 포지션 ${index+1}`,reasons:[\"합성 전문성 근거\",\"합성 경험 근거\"]}));\n  return <div data-prism=\"light\"><PrismPositionRecommendations items={items} selectedId={selected} onSelect={item=>setSelected(item.id)} resize=\"both\" style={{width:\"100%\"}}/><p role=\"status\">{selected || \"선택 없음\"}</p></div>;\n}\n"
+    },
+    {
+      "id": "prism-rich-text",
+      "name": "Formatted text / Sanitized actions",
+      "category": "AI & agent",
+      "purpose": "독립적인 rich text·custom inline tag·호스트 action",
+      "contract": "PrismResponse의 기존 PrismRichText와 동일한 sanitizer 및 URL 계약을 독립적으로 제공합니다. profile/position 링크는 callback이 있을 때만 button, panel에서는 label입니다. HTTP/mailto/root URL만 허용하며 이미지 로드와 raw script 실행을 하지 않습니다. host가 action을 처리합니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "long"
+      ],
+      "source": [
+        "chat/conversation/InlineMarkdown.tsx"
+      ],
+      "usage": "import {useState} from \"react\";\nimport {PrismFormattedText} from \"@pydemia/prism\";\nexport function FormattedTextExample(){\n  const [action,setAction]=useState(\"\");\n  return <div data-prism=\"light\"><PrismFormattedText source=\"**합성 근거**와 [후보 확인](profile://synthetic)\" onAction={(kind,id)=>setAction(`${kind}: ${id}`)}/><p role=\"status\">{action}</p></div>;\n}\n",
+      "sourcePath": "packages/prism/src/prism-rich-text.tsx",
+      "previewUrl": "/prism?component=prism-rich-text",
+      "embedUrl": "/prism?component=prism-rich-text&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-rich-text&view=responsive",
+      "verification": {
+        "visual": "partial",
+        "interaction": "selected-local-runtime-and-unit-tests",
+        "source": "087811ff current code and selected computed measurements",
+        "extensions": [
+          "140–1280px sizing",
+          "explicit host actions",
+          "native both-axis recommendations resize"
+        ],
+        "remaining": [
+          "원본 인증 상태의 전체 pixel/font 대조",
+          "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismFormattedText",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import {useState} from \"react\";\nimport { PrismFormattedText } from \"@/components/ui/prism-rich-text\";\nexport function FormattedTextExample(){\n  const [action,setAction]=useState(\"\");\n  return <div data-prism=\"light\"><PrismFormattedText source=\"**합성 근거**와 [후보 확인](profile://synthetic)\" onAction={(kind,id)=>setAction(`${kind}: ${id}`)}/><p role=\"status\">{action}</p></div>;\n}\n"
     }
   ]
 }

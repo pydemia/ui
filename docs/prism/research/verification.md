@@ -1,6 +1,6 @@
 # PRISM 검증 기록
 
-기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 45개 typed 그룹과 토큰을 포함한 46개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
+기존 관찰 기준은 dev `7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9` (2026-10-03)이며 최신 source audit는 `087811ff` (2026-10-09)입니다. 현재 원본 inventory 273개에 기능 목적 대응을 기록했습니다. 미대응 항목 0개는 전체 스타일·상태 일치의 완료를 의미하지 않습니다. 48개 typed 그룹과 토큰을 포함한 49개 registry 항목을 제공합니다. 아래 과거 관찰과 최신 추가 검증의 범위를 구분합니다.
 
 ## 근거와 범위
 
@@ -11,6 +11,8 @@
 - 원본 벡터 87개의 권리 고지와 revision을 보존했습니다. 174개 SVG 동시 렌더의 ID·내부 참조 검사와 모든 배치·색상 비교는 구분합니다.
 
 ## 브라우저 동작
+
+아래 표와 별도 headless 실행은 과거 관찰 기록입니다. 2026-10-11 현재 CUA 연결 중단 후 브라우저 도구가 제공되지 않아 새 채팅 구현의 전체 상태 검사는 미완료입니다. 최신 부분 검증은 마지막 절에서 구분합니다.
 
 파일 입력 보완본은 bundled Playwright 1.62.1과 설치된 별도 headless Chromium 1223으로 검증했습니다. IAB 연결은 없지만 fresh browser context에서 원본 HTTP `/sample`을 직접 열 수 있습니다. 기존 Chrome 프로필과 로그인을 사용하거나 변경하지 않았으며 Mac 잠금도 해제하지 않았습니다.
 
@@ -179,3 +181,16 @@ PDF는 전체 bytes와%PDF 헤더 검사 후 PDF.js의 native viewer를 사용�
 Survey는source36/24px 막대·0.0과null·정수 그룹 평균선·role색·2/3열을 구현했습니다. CUA의194px 카드와61/63/75/82px 평균선,가변320px track/195px 평균,print class118pt 카드/70px track/10pt legend를 확인했습니다. native print와는 별도입니다. 긴 접근성 표가870px 페이지 넘침을 만들던 문제는 숨김 wrapper로 수정했습니다. 최종45그룹/159개 고유 상태의 실제320px 기본 검사와107개 테스트,22개 완전예시 타입 검사를 통과했습니다. source273/pending0과 합성검사를 전체 parity로 확대하지 않습니다.
 
 원본 인증 상태·전체pixel/font·실제 query/권한/저장·OS 저장/native print가 남아 있습니다. 현재UI screenshot은5000ms timeout으로 실패했습니다. Export manifest는일반 helper를function,React 이름의선언을component로 구분합니다.
+
+
+## 채팅 프로필 분석·포지션 추천: 2026-10-11
+
+PrismAnalysis는 명시적 factor kind에 따라 전문성 tag, 대표 성공경험 star, Design/Learning 첫 결과, Attitude Derailment, Leadership 제목/근거를 구분합니다. 리더 유형은 60px 원형/10px 정보 버튼/설명+단계 tooltip이며 본문은 aiComment ?? description입니다. 빈 AI comment를 임의 설명으로 바꾸지 않고 trim empty 근거는 관련 데이터 없음으로 표시합니다. PrismFormattedText는 기존 sanitizer/custom tag/호스트 action을 독립적으로 제공하며 기존 PrismRichText와 PrismProfileAnalysis 진입점도 유지합니다.
+
+PrismPositionRecommendations는 일반·panel의 같은 레이아웃과36/53px 헤더·12px 제목/본문, 선택2px border/15px padding,400px 경계의 단계별 더 보기/접기를 사용합니다. 마지막 묶음은 버튼 표시와 실제 추가 개수를 맞추고240px 이하 한 열로 재배치합니다. selectedId/onSelect와회사 logo 자산은호스트 소유입니다. 기본 회사명을 임의 로고로 치환하지 않습니다. 데이터 ID 순서/datasetKey/breakpoint 전환은 접으며native 수동 양축resize와 내부scroll을 지원합니다.
+
+115개 tests(새8개),48그룹/25완전예시와표준build/docs TypeScript/generic snapshot 검사가 통과했습니다.49항목/74파일을 자체 독립 소비자에전체 재설치했고25예시 TypeScript/Vite·폰트 bytes·자산 고지를 확인했습니다. 설치component source는직접 수정하지 않았습니다. 새 소비자의 실제 browser UI는 연결 중단으로 아직 검증하지 못했습니다.
+
+선택 CUA 측정은 추천140–1280px의1/2/3열·넘침0,0/1/2/3/4/6/7/9개 초기 표시,4→6→9/접기·키보드 선택·데이터 전환을 포함합니다. 양축 드래그800×349.59→600×410과overflow0을 확인했습니다. 분석140–1280에서60px badge/10px info/12px700 comment/80px label(320px 이상),역할별색과tooltip350px/12pxpadding/14px500/pre-line을측정했습니다. 전체 원본pixel/font 일치의근거로 확대하지 않습니다.
+
+현재169개 상태의실제320px 검사는22개aggregate tool 관찰 후 브라우저 연결이끊겼습니다. 개별 배열 저장 전 REPL reset이 있었으므로169개완료나22개 개별 raw 파일 확보를주장하지 않습니다. 이전159개 성공은 b4a502d8의별도 historical evidence입니다. Screenshot도5000ms timeout으로 새이미지가 없습니다. 전체 상태·긴 문장·회사 logo·원본 인증·OS 저장/인쇄 검증은 남아 있습니다.

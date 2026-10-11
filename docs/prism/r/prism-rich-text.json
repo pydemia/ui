@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-rich-text",
+  "type": "registry:ui",
+  "title": "Formatted text / Sanitized actions",
+  "description": "독립적인 rich text·custom inline tag·호스트 action",
+  "dependencies": [
+    "react-markdown@^10.1.0",
+    "remark-gfm@^4.0.1",
+    "rehype-raw@^7.0.0",
+    "rehype-sanitize@^6.0.0"
+  ],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-rich-text.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-rich-text.tsx",
+      "content": "import { Fragment } from \"react\";\nimport ReactMarkdown, { defaultUrlTransform } from \"react-markdown\";\nimport remarkGfm from \"remark-gfm\";\nimport rehypeRaw from \"rehype-raw\";\nimport rehypeSanitize, { defaultSchema } from \"rehype-sanitize\";\nconst colors = \"white|black|gray|red|orange|yellow|green|blue|purple|brown|pink\";\nconst schema = { ...defaultSchema, tagNames:[...(defaultSchema.tagNames ?? []),\"mark\"], attributes:{...defaultSchema.attributes,\n    span:[[\"className\",/^prism-rich-(?:color|highlight|badge|size|bullet|bold|italic|underline|h1|h2)/]], mark:[[\"className\",/^prism-rich-highlight/]],\n}, protocols:{...defaultSchema.protocols,href:[\"http\",\"https\",\"mailto\",\"profile\",\"position\",\"popup\"]} };\nfunction formatTags(source: string): string {\n    let formatted = source.replace(new RegExp(`<(color|highlight|badge)-(${colors})>`,'g'),(_,kind,color) => `<span class=\"prism-rich-${kind}-${color}\">`)\n        .replace(/<\\/(color|highlight|badge)>/g,\"</span>\")\n        .replace(/<size-(extra-small|small|normal|large|extra-large)>/g,'<span class=\"prism-rich-size-$1\">').replace(/<\\/size>/g,\"</span>\")\n        .replace(/<(bold|italic|underline)>/g,'<span class=\"prism-rich-$1\">').replace(/<\\/(bold|italic|underline)>/g,\"</span>\")\n        .replace(/<bullet\\s+depth=[\"']?([1-3])[\"']?>/g,'<span class=\"prism-rich-bullet-$1\">').replace(/<\\/bullet>/g,\"</span>\");\n    return formatted;\n}\nfunction safeUrl(url: string): string { return /^(https?:\\/\\/|mailto:|\\/(?!\\/)|#)/i.test(url) ? url : \"\"; }\nexport function PrismFormattedText({ source, inline = false, panel = false, onAction }: { source: string; inline?: boolean; panel?: boolean; onAction?: (kind: \"profile\" | \"position\" | \"document\", id: string) => void }) {\n    return <div className=\"prism-rich-text\" data-panel={panel || undefined}><ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw,[rehypeSanitize,schema]]}\n        urlTransform={url => /^(profile|position):\\/\\/[^\\s]+$/.test(url) || /^popup:(https?:\\/\\/|\\/(?!\\/))/.test(url) ? url : defaultUrlTransform(safeUrl(url))}\n        components={{ p: ({children}) => inline ? <Fragment>{children}</Fragment> : <p>{children}</p>, img:({alt}) => <span>{alt ?? \"이미지\"}</span>,\n            a:({href,children}) => { const action = /^(profile|position):\\/\\/(.+)$/.exec(href ?? \"\"); const document = /^popup:(.+)$/.exec(href ?? \"\");\n                if (action) return panel || !onAction ? <strong>{children}</strong> : <button type=\"button\" className=\"prism-rich-action\" onClick={() => onAction(action[1] as \"profile\" | \"position\",action[2])}>{children}</button>;\n                if (document) return onAction && safeUrl(document[1]) ? <button type=\"button\" className=\"prism-rich-action\" onClick={() => onAction(\"document\",document[1])}>{children}</button> : <span>{children}</span>;\n                return <a href={safeUrl(href ?? \"\") || undefined} target=\"_blank\" rel=\"noopener noreferrer\">{children}</a>; },\n            table:({children}) => <div className=\"prism-response-table-scroll\" role=\"region\" aria-label=\"답변 표\" tabIndex={0}><table>{children}</table></div>,\n        }}>{formatTags(source)}</ReactMarkdown></div>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "sourceSha256": "004de5f13a7b6adb792ca67d5c782459a4c7ba62e19744791097e1cbaf42f519",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

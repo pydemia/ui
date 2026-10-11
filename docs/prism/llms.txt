@@ -896,4 +896,66 @@ import { PrismIcon } from "@/components/ui/prism-icon";
 <PrismIcon name="SearchIcon" size={20} />;
 ```
 
+## Profile analysis / Leader explanation
+리더 유형 도움말과 6 Frame 목적별 근거 표시
+Contract: Factor kind를 명시합니다. 전문성 tag·대표 성공경험 star·Design/Learning 첫 결과·Attitude Derailment·Leadership 제목/설명을 원본대로 구분합니다. 리더 본문은 aiComment ?? description이며 빈 aiComment도 보존합니다. 누락/trim empty는 관련 데이터 없음입니다. Description은 sanitized inline markup이며 panel의 내부 action은 label입니다. 평가·등급을 계산하지 않습니다. CSS style로 크기를 조절하고 280px 이하에 label 열을 재배치합니다.
+States: default, empty, long
+Registry: /prism/r/prism-analysis.json
+Source: packages/prism/src/prism-analysis.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { PrismAnalysis } from "@/components/ui/prism-analysis";
+export function AnalysisExample() {
+  return <div data-prism="light"><PrismAnalysis
+    leader={{label:"Good 리더",description:"합성 유형 설명입니다.",aiComment:"합성 요약문입니다."}}
+    factors={[
+      {id:"expertise",kind:"expertise",label:"전문성",title:"합성 전문 분야",results:["기술","전략"],summary:"가상 근거입니다."},
+      {id:"success",kind:"success",label:"성공경험",results:["합성 경험 A","합성 경험 B"],starred:["합성 경험 A"],summary:"합성 근거입니다."},
+      {id:"design",kind:"design",label:"Design",results:["합성 등급"],summary:null},
+      {id:"agility",kind:"agility",label:"Learning Agility",results:[],summary:null},
+      {id:"attitude",kind:"attitude",label:"Attitude",title:"합성 진단",results:["합성 Risk"],summary:"실제 평가가 아닙니다."},
+      {id:"leadership",kind:"leadership",label:"Leadership",results:[],summary:"합성 리더십 근거"},
+    ]}/></div>;
+}
+
+```
+
+## Position recommendations / Reveal and selection
+현재 포지션 추천 카드·선택·단계별 더 보기·반응형/수동 크기
+Contract: 같은 추천 레이아웃을 일반·panel 응답에 사용하며 rank를 표시하지 않습니다. 넓은 폭은 4~6개 최초3개/7개 이상6개, 400px 이하 최초4개·두 개씩/마지막 최대3개 추가·접기를 지원합니다. 마지막 묶음은 표시한 수와 실제 추가 수가 일치합니다. 240px 이하 한 열로 개선합니다. selectedId/onSelect는 호스트 소유이며 callback이 없으면 비대화형입니다. 데이터 ID 순서/datasetKey/breakpoint 변경은 접습니다. companyLogo는 호스트가 제공하는 비대화형 회사 자산 slot이며 기본은 회사명입니다. resize로 수동 폭/높이와 scroll을 지원합니다.
+States: default, empty, readonly, long
+Registry: /prism/r/prism-position-recommendations.json
+Source: packages/prism/src/prism-position-recommendations.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismPositionRecommendations, type PrismPositionRecommendationItem } from "@/components/ui/prism-position-recommendations";
+export function PositionRecommendationsExample() {
+  const [selected,setSelected]=useState("");
+  const items: PrismPositionRecommendationItem[]=Array.from({length:9},(_,index)=>({id:`synthetic-${index}`,company:"가상전자",title:`가상 포지션 ${index+1}`,reasons:["합성 전문성 근거","합성 경험 근거"]}));
+  return <div data-prism="light"><PrismPositionRecommendations items={items} selectedId={selected} onSelect={item=>setSelected(item.id)} resize="both" style={{width:"100%"}}/><p role="status">{selected || "선택 없음"}</p></div>;
+}
+
+```
+
+## Formatted text / Sanitized actions
+독립적인 rich text·custom inline tag·호스트 action
+Contract: PrismResponse의 기존 PrismRichText와 동일한 sanitizer 및 URL 계약을 독립적으로 제공합니다. profile/position 링크는 callback이 있을 때만 button, panel에서는 label입니다. HTTP/mailto/root URL만 허용하며 이미지 로드와 raw script 실행을 하지 않습니다. host가 action을 처리합니다.
+States: default, empty, long
+Registry: /prism/r/prism-rich-text.json
+Source: packages/prism/src/prism-rich-text.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import {useState} from "react";
+import { PrismFormattedText } from "@/components/ui/prism-rich-text";
+export function FormattedTextExample(){
+  const [action,setAction]=useState("");
+  return <div data-prism="light"><PrismFormattedText source="**합성 근거**와 [후보 확인](profile://synthetic)" onAction={(kind,id)=>setAction(`${kind}: ${id}`)}/><p role="status">{action}</p></div>;
+}
+
+```
+
 Visual parity is pending until reference comparison has completed; read verification.md.
