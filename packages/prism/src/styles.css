@@ -922,6 +922,7 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 .prism-intro-input>section>div {display:flex;flex-wrap:wrap;gap:8px;}
 .prism-intro-input>section button {padding:12px 16px;border-radius:42px;border:1px solid #e5eaee;background:var(--prism-neutral-50);font-size:14px;font-weight:500;line-height:1.4;}
 .prism-print-page {display:flex;flex-direction:column;flex-shrink:0;gap:12pt;width:190mm;min-height:280mm;background:#fff;color:#1f1f1f;}
+.prism-native-print-actions {display:inline-flex;align-items:center;gap:8px;}
 .prism-print-page-header {display:flex;flex-direction:column;margin:0 4pt;border-bottom:1pt solid #FA7C39;}
 .prism-print-page-header>small {font-size:8pt;font-weight:500;color:#8f8f8f;}
 .prism-print-page-header>div {display:flex;align-items:center;padding-bottom:4pt;}

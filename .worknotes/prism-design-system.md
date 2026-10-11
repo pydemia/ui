@@ -508,3 +508,7 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 130tests와actual320px 172고유상태의 렌더/overflow/접근성 구조 검사가 통과했습니다. 원본 전체상태·print/photo/font/pixel·native print/OS save는 미완료입니다. 상세 근거·실패/제외한 관찰·아직 남은 검증은 [인쇄 문서 감사](prism-print-document-audit-20261011.md)에 기록했습니다. source/generated 분리 commit과승인된draft PR readback/CI를 이어가며goal active입니다.
 
 - 최종 후속 검증: 모달·탭 수정 registry를 consumer-UAveFJ에 다시 설치해26예시 TypeScript/Vite/폰트SHA/고지를 통과했습니다. supporting entry만 추가했으며 installed component는 직접 수정하지 않았습니다. 실제 소비자 모달 하나에 두프로필/14분류가 aria-hidden 없이 나타났고800px 상세 탭의26px/37px·색/flex너비도 원본과 맞았습니다(max0.03125px). Input.dispatchMouseEvent 관찰timeout 뒤 같은 탭을 읽어 이미 완료된 상태임을 확인했으며 출력요청을 다시 실행하지 않았습니다. 원본 사용자 탭은 /chat으로 복원했습니다. frontend fetch 뒤 HEAD=origin/dev087811ff, origin/main288b0838가 유지됐고 typecheck/site build/generic snapshot25ca4393가 통과했습니다.
+
+### 2026-10-11 격리 인쇄와 snapshot/좁은 HTML 보완
+
+앱 전체 인쇄 대신 준비·취소·해제 가능한 정적 print session을 추가했고 폰트/자산 대기 중 snapshot이 바뀌는 문제와320px HTML의 hidden text 가로 넘침을 수정했습니다. 전체138tests/172 actual320 상태, 독립50항목 재설치와 긴 두프로필·취소/오류/수정불변, 실제 Native 요청/Escape/afterprint 정리를 확인했습니다. 전체 원본 print/photo/font/pixel·OS 출력 비교는 미완료이며 goal active입니다. 근거와 transport 수정·정책 거부·미검증은 [native 인쇄 감사](prism-native-print-audit-20261011.md)에 기록했습니다.

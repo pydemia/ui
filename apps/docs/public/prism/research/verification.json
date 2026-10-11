@@ -620,10 +620,14 @@
     },
     "prism-print": {
       "visual": "partial-source-style-alignment",
-      "interaction": "whole123tests passed",
+      "interaction": "Five native-session tests plus existing print-content tests; actual PrismPrintButton invocation/Escape/afterprint cleanup and installed preparation checked.",
       "source": "70pt/140pt leader layout,11pt/130pt timeline and all-topic success composition",
       "remaining": [
         "Original whole print style/pixel/font and actual pagination"
+      ],
+      "checks": [
+        "Isolated static document waits embedded fonts/images and paint; preparation timeout, abort/dispose and afterprint release only its owned iframe.",
+        "Parent title/DOM retained; browser invocation and event are not physical-output confirmation."
       ]
     },
     "prism-chart": {
@@ -680,7 +684,9 @@
         "Errors/cancel do not download;CSSOM/asset failure surfaced",
         "Actual red canvas/blue photo/green canvas order;one cached asset;SVG use reference",
         "Live input values and frozen content during slow CSS asset load;caller DOM preserved",
-        "CSS parser preserves literal URL text/comments and embeds image-set candidates"
+        "CSS parser preserves literal URL text/comments and embeds image-set candidates",
+        "Content, form values, inline style, stylesheet conditions and canvas dimensions are captured before asynchronous resources; delayed-font before/after regression demonstrates immutable snapshot.",
+        "Latest long two-profile standalone HTML at 320px has document scrollWidth 320 and internal viewer scrollWidth 718; position-relative viewer contains screen-reader-only text."
       ],
       "remaining": [
         "Every original profile section/state/style comparison",
@@ -932,7 +938,7 @@
     },
     "prism-profile-print": {
       "visual": "passed-selected-synthetic-pdf-raster-and-html-render; original full-document parity pending",
-      "interaction": "Eight content tests, six pagination/abort tests, actual PDF/HTML/ZIP output and two-profile preview verified.",
+      "interaction": "Eight content tests, six pagination/abort tests, actual PDF/HTML/ZIP output and two-profile preview verified. Native isolated print request/Escape/afterprint cleanup, long two-profile preparation and standalone 320px viewer verified.",
       "source": "087811ff local print mapping and seven chapter composition/styles; deployed source revision not established",
       "remaining": [
         "All source profile lengths, source/target complete print page comparison",
@@ -944,7 +950,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 130,
+      "passed": 138,
       "failed": 0
     },
     "registry": {
@@ -961,7 +967,7 @@
       "viteBuild": "passed",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px)."
+      "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px). Latest registry reinstall also passed 14-chapter/96-career prepared print document, fonts, exclusion of app chrome and scripts; selected cancel/error/retry/immutable snapshot checked in the real browser."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1053,12 +1059,14 @@
     },
     "currentFixtureStates": {
       "count": 172,
-      "checked": 0,
-      "status": "not-rerun-browser-tools-unavailable",
+      "checked": 172,
+      "status": "passed-current-worktree-actual320px-cua",
       "previousVerifiedStates": 159,
       "previousSourceCommit": "b4a502d8021277469e6a8d2862b0fb11482e1298",
       "previousPartialChecked": 22,
-      "previousPartialSourceCommit": "c6b5d7ee09fe730346b80cf515608247dfd2910d"
+      "previousPartialSourceCommit": "c6b5d7ee09fe730346b80cf515608247dfd2910d",
+      "baseCommit": "88ecf49355e0969e41652ea6144f1d143ae99497",
+      "sourceSha256": "740efd9dc6e1b7d2ac617dfb42e57a9e95064ba7c731194639380cc9616686e2"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1109,7 +1117,7 @@
       "newTests": 8,
       "independentBuild": "passed",
       "independentBrowserRuntime": "pending-browser-availability",
-      "fullFixtureRuntime": "partial22of169",
+      "fullFixtureRuntime": "All 172 current synthetic states checked for render/accessibility structure; not all interactions.",
       "originalAuthenticatedParity": "unverified",
       "production": "not-published"
     },
@@ -1122,7 +1130,7 @@
       "pagePlanning": "source-based estimate or validated host-provided career pages",
       "fullBrowserRuntime": "Selected synthetic full-document PDF/HTML/ZIP and preview passed; all 172 render states checked.",
       "fullA4PdfLayout": "Selected 9-page default/two-profile and 21-page long raster outputs checked; all original lengths/pixel comparison pending.",
-      "nativePrint": "unverified",
+      "nativePrint": "Actual isolated print invocation, one Escape, browser afterprint and owned-frame cleanup passed; OS dialog/pagination/save unverified.",
       "production": "not-published"
     }
   },
@@ -1140,14 +1148,27 @@
     "states": 172,
     "checked": 172,
     "status": "passed-current-worktree-actual320px-direct-embed-cua",
-    "baseCommit": "0e73730af3959d31fac9147c7d2b7104647dd2ea",
-    "sourceSha256": "0d0ddc7ff753fc38210a3f2cd7c6a2b60fb118e17c9f49a30cb0330098e2394e",
+    "baseCommit": "88ecf49355e0969e41652ea6144f1d143ae99497",
+    "sourceSha256": "740efd9dc6e1b7d2ac617dfb42e57a9e95064ba7c731194639380cc9616686e2",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
     "checks": [
-      "All unique component/state DOM markers matched at actual document clientWidth 320.",
+      "All 172 unique component/state DOM markers matched at actual document clientWidth 320.",
       "No document overflow, nested buttons or unlabeled visible native inputs.",
       "Collected tab warning/error logs were empty."
     ],
-    "claim": "Synthetic render/accessibility structure only. Does not prove all interactions or original state/pixel equality."
+    "evidence": [
+      "native-final-172-fixtures.json",
+      "native-final-source-fingerprint.json"
+    ],
+    "claim": "Synthetic render/accessibility structure only. Does not prove all interactions or original state/pixel equality.",
+    "revalidation": {
+      "previousSourceSha256": "2996cb313e6e0672c6cd1b0282c4e9fad8e8d7a3ccbda0f39e1713f16a16ddc8",
+      "changedInputs": [
+        "apps/docs/src/prism/candidate-list-demo.tsx"
+      ],
+      "states": 6,
+      "evidence": "native-final-candidate-six-states.json"
+    }
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1254,7 +1275,7 @@
     "sourceDeployedRevision": "not reported by the observed UI; local source revision remains separately scoped",
     "newChangesPendingRuntime": [
       "Full authenticated original screen/state and print export comparison",
-      "Native print dialog and OS save",
+      "Native dialog paper/margin/fragmentation, OS save and physical output",
       "Remaining original long-content and domain states"
     ]
   },
@@ -1646,8 +1667,94 @@
       "finalPreparationNoticeAndTabStyleReinstall": "passed TypeScript/Vite, one accessible 14-chapter modal and 800px tab geometry/colors"
     },
     "originalAuthenticatedPrintParity": "unverified",
-    "nativePrint": "unverified",
+    "nativePrint": "Actual isolated print invocation, one Escape, browser afterprint and owned-frame cleanup passed; OS dialog/pagination/save unverified.",
     "osSave": "unverified",
     "claim": "Actual synthetic output content and selected layout/cleanup checked. Not full original profile/state/print parity."
+  },
+  "previousExportFixtureRenderChecks": {
+    "groups": 49,
+    "states": 172,
+    "checked": 172,
+    "status": "passed-current-worktree-actual320px-direct-embed-cua",
+    "baseCommit": "0e73730af3959d31fac9147c7d2b7104647dd2ea",
+    "sourceSha256": "0d0ddc7ff753fc38210a3f2cd7c6a2b60fb118e17c9f49a30cb0330098e2394e",
+    "checks": [
+      "All unique component/state DOM markers matched at actual document clientWidth 320.",
+      "No document overflow, nested buttons or unlabeled visible native inputs.",
+      "Collected tab warning/error logs were empty."
+    ],
+    "claim": "Synthetic render/accessibility structure only. Does not prove all interactions or original state/pixel equality."
+  },
+  "nativePrintVerification": {
+    "status": "passed-selected-preparation-and-browser-invocation",
+    "originalSource": "087811ff CandidateProfilePrintPreview portal/title/afterprint and _print.scss; deployed revision not established",
+    "unitTests": 5,
+    "unitScope": "JSDOM load/print simulation; not native dialog evidence",
+    "actualInvocation": {
+      "method": "Current PrismPrintButton click followed by one Escape; no simulated browser afterprint event",
+      "afterPrintStatus": "인쇄 요청 처리가 끝났습니다.",
+      "ownedFramesAfter": 0,
+      "parentTitle": "PRISM UI · pydemia",
+      "osDialogVisuallyInspected": false,
+      "physicalOutputVerified": false
+    },
+    "installedPreparation": {
+      "items": 50,
+      "examples": 26,
+      "handEditedInstalledComponents": false,
+      "profiles": 2,
+      "chapters": 14,
+      "careers": 96,
+      "svgCharts": 6,
+      "scripts": 0,
+      "buttons": 0,
+      "appChrome": false,
+      "fontFamily": "Pretendard Variable",
+      "fontStatus": "loaded",
+      "paperWidthPx": 718.109375,
+      "cancelFrames": 0,
+      "errorFrames": 0,
+      "retry": "passed",
+      "parentEditChangesSnapshot": false
+    },
+    "responsiveHtml": {
+      "viewport": 320,
+      "beforeDocumentScrollWidth": 619,
+      "documentScrollWidth": 320,
+      "viewerScrollWidth": 718,
+      "paperWidthPx": 718.109375,
+      "transportSha256": "5d58962efa5a593c64c0fd346f1bc0bae27f9d084a9233117df2a49d334b878f"
+    },
+    "snapshotRegression": {
+      "oldRevision": "88ecf493",
+      "oldDelayedFont": "later profile and later form value",
+      "currentDelayedFont": "original profile and original form value",
+      "newTests": 3
+    },
+    "remaining": [
+      "Native paper/margin/fragmentation and OS PDF save/physical printer",
+      "Complete authenticated original profile lengths, photos, fonts and source/target page comparison",
+      "Cross-browser native behavior"
+    ],
+    "evidence": [
+      "native-fixed-print-invocation.json",
+      "native-prepared-current-long-metrics.json",
+      "native-current-cancel-error-snapshot.json",
+      "native-fixed-standalone-320.json",
+      "font-snapshot-before-after.json"
+    ],
+    "claim": "Selected synthetic preparation, immutable output and actual browser event observed; not full original print/pixel or OS output parity.",
+    "candidatePreview": {
+      "profiles": 2,
+      "chapters": 14,
+      "viewport": 320,
+      "documentScrollWidth": 320,
+      "summary": false,
+      "compensation": false,
+      "accessibleDialogs": 1,
+      "escapeClosedPreview": true,
+      "ownedFramesAfter": 0,
+      "afterprintSeparatelyObserved": false
+    }
   }
 }

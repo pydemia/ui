@@ -62,6 +62,30 @@ test("slow stylesheet assets do not mix a later edited profile into the cloned d
     assert.equal(saved.querySelector("p").textContent, "original profile"); assert.equal(saved.querySelector("input").value, "original");
     assert.equal(root.querySelector("p").textContent, "later profile"); dom.window.close();
 });
+test("pending fonts preserve the content and live form values from the requested snapshot", async () => {
+    const { dom, root } = make('<div><p>original candidate</p><input value="original"></div>'); let ready;
+    dom.window.document.fonts.ready = new Promise(resolve => { ready = resolve; });
+    const running = createPrismHtmlDocument(root, { title: "snapshot", cssText: "" });
+    root.querySelector("p").textContent = "later candidate"; root.querySelector("input").value = "later"; ready();
+    const saved = new JSDOM((await running).html).window.document;
+    assert.equal(saved.querySelector("p").textContent, "original candidate"); assert.equal(saved.querySelector("input").value, "original"); dom.window.close();
+});
+test("an image asset wait cannot copy a later style from the live source", async () => {
+    const { dom, root } = make('<div><img src="photo.png" style="width:80px;color:red"></div>'); let ready;
+    const running = createPrismHtmlDocument(root, { title: "snapshot", cssText: "", loadAsset: () => new Promise(resolve => { ready = resolve; }) });
+    root.querySelector("img").style.cssText = "width:160px;color:blue"; ready(new dom.window.Blob(["photo"], {type:"image/png"}));
+    const saved = new JSDOM((await running).html).window.document;
+    assert.equal(saved.querySelector("img").style.width, "80px"); assert.equal(saved.querySelector("img").style.color, "red"); dom.window.close();
+});
+test("a resized canvas keeps its captured display dimensions while inline assets are loading", async () => {
+    const { dom, root } = make('<div><canvas style="background:url(photo.png)"></canvas></div>'); const canvas = root.querySelector("canvas"); let ready, size = 90;
+    canvas.toDataURL = () => "data:image/png;base64,chart";
+    Object.defineProperty(canvas, "clientWidth", { get: () => size }); Object.defineProperty(canvas, "clientHeight", { get: () => size / 2 });
+    const running = createPrismHtmlDocument(root, { title: "snapshot", cssText: "", loadAsset: () => new Promise(resolve => { ready = resolve; }) });
+    size = 180; ready(new dom.window.Blob(["photo"], {type:"image/png"}));
+    const saved = new JSDOM((await running).html).window.document;
+    assert.equal(saved.querySelector("img").style.width, "90px"); assert.equal(saved.querySelector("img").style.height, "45px"); assert.equal(canvas.clientWidth, 180); dom.window.close();
+});
 test("CSS asset rewriting preserves literal URL text and comments while embedding image-set candidates", async () => {
     const { dom, root } = make('<div><p>body</p></div>'); const requests = [];
     const cssText = '/* url("comment.png") */ p::before{content:"url(literal.png)"} div{background:image-set("photo.png" 1x,url("photo.png") 2x)}';

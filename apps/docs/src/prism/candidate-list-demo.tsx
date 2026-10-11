@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { PrismCandidateList, PrismPdfDownloadHost, renderPrismProfilePdf, PrismDialog, PrismProfilePrintDocument, PrismProfilePrintViewport, PrismButton,
+import { PrismCandidateList, PrismPdfDownloadHost, renderPrismProfilePdf, PrismDialog, PrismProfilePrintDocument, PrismProfilePrintViewport, PrismButton, PrismPrintButton,
     type PrismProfilePrintModel, type PrismCandidateFilters, type PrismDirectoryCandidate, type PrismCandidateOutputRequest, type PrismPdfExportJob } from "@pydemia/prism";
 import type { FixtureState } from "./catalog";
 import { createPrintFixture } from "./profile-print-demo";
@@ -17,7 +17,8 @@ export function CandidateListDemo({ state }: { state: FixtureState }) {
     const [fail, setFail] = useState(false), [shown, setShown] = useState(true), [error, setError] = useState(state === "error");
     const [exclude, setExclude] = useState(false), [status, setStatus] = useState("");
     const [jobs, setJobs] = useState<PrismPdfExportJob<DemoProfile>[]>([]), [print, setPrint] = useState<DemoProfile[]>([]);
-    const [files, setFiles] = useState<{ name: string; href: string }[]>([]);
+    const [files, setFiles] = useState<{ name: string; href: string }[]>([]), [printMessage, setPrintMessage] = useState("");
+    const printRoot = useRef<HTMLDivElement>(null);
     const total = state === "empty" ? 0 : state === "long" ? 1100 : 40;
     const rows = state === "loading" ? [] : allRows.slice((page - 1) * pageSize, Math.min(page * pageSize, total)).map(row => state === "long" ? { ...row,
         name: `${row.name} 긴 이름 표시`, company: `${row.company} 조직과 계열사의 긴 명칭`.repeat(8), position: "여러 조직과 업무를 담당하는 긴 가상 직책".repeat(4) } : row);
@@ -29,7 +30,7 @@ export function CandidateListDemo({ state }: { state: FixtureState }) {
         const omitted = exclude && records.length > 1 ? 1 : 0;
         const documents = records.slice(omitted).map(row => ({ filename: row.name, data: { model: {...createPrintFixture(false,false),id:row.id,candidate:row}, options: request.options } }));
         if (request.kind === "download" && documents.length) setJobs(value => [...value, { id: request.id, archiveName: "가상 후보자 프로필", documents }]);
-        if (request.kind === "print") setPrint(documents.map(document => document.data));
+        if (request.kind === "print") { setPrintMessage(""); setPrint(documents.map(document => document.data)); }
         return { preparedCount: documents.length, excludedCount: request.candidateIds.length - documents.length };
     };
     return <div className="prism-demo-stack">
@@ -53,9 +54,9 @@ export function CandidateListDemo({ state }: { state: FixtureState }) {
         }} onProgress={(_, progress) => setStatus(`PDF 생성 ${progress.done}/${progress.total}`)} onComplete={(id, result) => { setStatus(`${result.filename} 다운로드 시작`); setJobs(value => value.filter(job => job.id !== id));
             if (result.blob) { const reader = new FileReader(); reader.onload = () => { if (typeof reader.result === "string") setFiles(value => [...value, { name: result.filename, href: reader.result as string }]); }; reader.readAsDataURL(result.blob); } }}
             onError={id => { setStatus("가상 PDF 생성 실패"); setJobs(value => value.filter(job => job.id !== id)); }}/>
-        <PrismDialog open={print.length > 0} onOpenChange={open => { if (!open) setPrint([]); }} title="후보자 프로필 출력 미리보기" description="합성 프로필입니다. 네이티브 인쇄는 소비자가 연결합니다." width={900}
-            footer={<><PrismButton variant="line" onClick={() => setPrint([])}>닫기</PrismButton><PrismButton onClick={() => window.print()}>인쇄</PrismButton></>}>
-            <PrismProfilePrintViewport style={{height:650}}>{print.map(profile => <PrismProfilePrintDocument key={profile.model.id} model={profile.model} options={{summary:profile.options.includes("summary"),compensation:profile.options.includes("compensation")}}/>)}</PrismProfilePrintViewport>
+        <PrismDialog open={print.length > 0} onOpenChange={open => { if (!open) setPrint([]); }} title="후보자 프로필 출력 미리보기" description="선택한 출력 옵션을 적용한 합성 프로필입니다." width={900}
+            footer={<><PrismButton variant="line" onClick={() => setPrint([])}>닫기</PrismButton><PrismPrintButton getRoot={()=>printRoot.current} title="가상 후보자 프로필" onRequested={()=>setPrintMessage("인쇄를 요청했습니다.")} onAfterPrint={()=>setPrintMessage("인쇄 요청 처리가 끝났습니다.")} onError={()=>setPrintMessage("인쇄 문서 준비 실패")}/></>}>
+            <p role="status" data-prism-export-exclude>{printMessage}</p><PrismProfilePrintViewport style={{height:650}}><div ref={printRoot}>{print.map(profile => <PrismProfilePrintDocument key={profile.model.id} model={profile.model} options={{summary:profile.options.includes("summary"),compensation:profile.options.includes("compensation")}}/>)}</div></PrismProfilePrintViewport>
         </PrismDialog>
     </div>;
 }

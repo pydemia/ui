@@ -32,7 +32,6 @@ export async function createPrismHtmlDocument(root: HTMLElement, { title, signal
     signal.throwIfAborted();
     const doc = root.ownerDocument, view = doc.defaultView;
     if (!view || !root.isConnected) throw new Error("A connected document root is required.");
-    await abortable(doc.fonts.ready, signal);
     const cache = new Map<string, Promise<string>>();
     const embed = (raw: string, base = doc.baseURI): Promise<string> => {
         if (!raw || raw.startsWith("#") || raw.startsWith("data:")) return Promise.resolve(raw);
@@ -72,18 +71,20 @@ export async function createPrismHtmlDocument(root: HTMLElement, { title, signal
         let rules: CSSRuleList;
         try { rules = sheet.cssRules; } catch { throw new Error("Stylesheet access is unavailable; supply complete cssText."); }
         const base = sheet.href || doc.baseURI;
+        const media = sheet.media?.mediaText;
         const parts = await Promise.all(Array.from(rules).map(async rule => {
             if (rule.type !== 3) return inlineCss(rule.cssText, base);
             const imported = rule as CSSImportRule;
             if (!imported.styleSheet) throw new Error("An imported stylesheet is unavailable.");
+            const importedMedia = imported.media.mediaText, supports = imported.supportsText, layer = imported.layerName;
             let text = await readSheet(imported.styleSheet, chain);
-            if (imported.media.mediaText && imported.media.mediaText !== "all") text = `@media ${imported.media.mediaText}{${text}}`;
-            if (imported.supportsText) text = `@supports ${imported.supportsText}{${text}}`;
-            if (imported.layerName !== null && imported.layerName !== undefined) text = `@layer ${imported.layerName}{${text}}`;
+            if (importedMedia && importedMedia !== "all") text = `@media ${importedMedia}{${text}}`;
+            if (supports) text = `@supports ${supports}{${text}}`;
+            if (layer !== null && layer !== undefined) text = `@layer ${layer}{${text}}`;
             return text;
         }));
         let text = parts.join("\n");
-        if (sheet.media?.mediaText && sheet.media.mediaText !== "all") text = `@media ${sheet.media.mediaText}{${text}}`;
+        if (media && media !== "all") text = `@media ${media}{${text}}`;
         return text;
     };
     const cssPending = cssText === undefined
@@ -99,6 +100,8 @@ export async function createPrismHtmlDocument(root: HTMLElement, { title, signal
     const tokens = Array.from(computed).filter(property => property.startsWith("--")).map(property => [property, computed.getPropertyValue(property)]);
     const contentPending = Promise.all(sources.map(async (source, index) => {
         let target = targets[index];
+        const sourceStyle = source.getAttribute("style");
+        const canvasSize = source.localName === "canvas" ? { width: (source as HTMLCanvasElement).clientWidth, height: (source as HTMLCanvasElement).clientHeight } : null;
         if (source.matches(excludeSelector) || source.closest(excludeSelector)) return;
         if (source.localName === "canvas") {
             const canvas = source as HTMLCanvasElement;
@@ -106,7 +109,7 @@ export async function createPrismHtmlDocument(root: HTMLElement, { title, signal
             try { image.src = canvas.toDataURL("image/png"); } catch { throw new Error("A chart canvas could not be exported."); }
             if (image.src === "data:,") throw new Error("An empty or oversized chart canvas could not be exported.");
             image.alt = canvas.getAttribute("aria-label") || ""; image.className = canvas.className;
-            image.style.cssText = canvas.style.cssText; image.style.width = `${canvas.clientWidth}px`; image.style.height = `${canvas.clientHeight}px`;
+            image.style.cssText = canvas.style.cssText; image.style.width = `${canvasSize!.width}px`; image.style.height = `${canvasSize!.height}px`;
             if (source === root) clone = image; else target.replaceWith(image);
             target = image;
         } else if (source.localName === "img") {
@@ -127,16 +130,17 @@ export async function createPrismHtmlDocument(root: HTMLElement, { title, signal
         if (source.localName === "input") { target.setAttribute("value", (source as HTMLInputElement).value); target.toggleAttribute("checked", (source as HTMLInputElement).checked); }
         if (source.localName === "textarea") target.textContent = (source as HTMLTextAreaElement).value;
         if (source.localName === "option") target.toggleAttribute("selected", (source as HTMLOptionElement).selected);
-        if (source.hasAttribute("style")) {
-            const style = await inlineCss(source.getAttribute("style")!, doc.baseURI);
+        if (sourceStyle !== null) {
+            const style = await inlineCss(sourceStyle, doc.baseURI);
             if (source.localName === "canvas") {
                 (target as HTMLElement).style.cssText = style;
-                (target as HTMLElement).style.width = `${(source as HTMLCanvasElement).clientWidth}px`;
-                (target as HTMLElement).style.height = `${(source as HTMLCanvasElement).clientHeight}px`;
+                (target as HTMLElement).style.width = `${canvasSize!.width}px`;
+                (target as HTMLElement).style.height = `${canvasSize!.height}px`;
             } else target.setAttribute("style", style);
         }
     }));
-    const [css] = await Promise.all([cssPending, contentPending]);
+    // Snapshot content/styles before waiting, so pending fonts cannot mix a later edit.
+    const [css] = await Promise.all([cssPending, contentPending, abortable(doc.fonts.ready, signal)]);
     signal.throwIfAborted();
     clone.querySelectorAll(`${excludeSelector},script,style,link,base,source`).forEach(element => element.remove());
     for (const element of [clone, ...clone.querySelectorAll("*")]) {
@@ -150,7 +154,7 @@ export async function createPrismHtmlDocument(root: HTMLElement, { title, signal
     const viewport = output.createElement("meta"); viewport.name = "viewport"; viewport.content = "width=device-width,initial-scale=1"; output.head.append(viewport);
     const policy = output.createElement("meta"); policy.httpEquiv = "Content-Security-Policy"; policy.content = "default-src 'none'; img-src data:; font-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"; output.head.append(policy);
     const style = output.createElement("style");
-    style.textContent = css.replace(/</g, "\\3c ") + "\nhtml,body{position:static!important;inset:auto!important;width:auto!important;height:auto!important;overflow:auto!important;margin:0} [data-prism-export-root]{position:static!important;inset:auto!important;transform:none!important;visibility:visible!important;pointer-events:auto!important;z-index:auto!important} [data-prism-export-viewer]{max-width:100%;overflow-x:auto} @media print{[data-prism-export-viewer]{max-width:none;overflow:visible}}";
+    style.textContent = css.replace(/</g, "\\3c ") + "\nhtml,body{position:static!important;inset:auto!important;width:auto!important;height:auto!important;overflow:auto!important;margin:0} [data-prism-export-root]{position:static!important;inset:auto!important;transform:none!important;visibility:visible!important;pointer-events:auto!important;z-index:auto!important} [data-prism-export-viewer]{position:relative;max-width:100%;overflow-x:auto} @media print{[data-prism-export-viewer]{max-width:none;overflow:visible}}";
     output.head.append(style);
     const scope = output.createElement("main"); scope.setAttribute("data-prism", "light"); scope.setAttribute("data-prism-export-viewer", "");
     // Retain consumer overrides of scoped design tokens.
