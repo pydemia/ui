@@ -424,7 +424,7 @@
       "name": "Toast / Request state",
       "category": "Feedback",
       "purpose": "알림과 로딩·빈 결과·실패·재시도 구분",
-      "contract": "오류는 alert, 일반 알림은 status로 표시합니다. 요청 실패를 빈 결과로 바꾸지 않습니다. 자동 닫힘·queue·서버 재시도 정책은 호출자가 결정합니다.",
+      "contract": "오류는 alert, 일반 알림은 status로 표시합니다. 요청 실패를 빈 결과로 바꾸지 않습니다. 자동 닫힘·queue·서버 재시도 정책은 호출자가 결정합니다. 빈 상태의 variant는 default(일반 140px/18px·16px), tab(탭 120px/16px·14px·제목 간격 10px), panel(메모 140px/16px·14px·간격 6px)을 구분합니다. 기존 panel=true는 tab 표시를 유지하며 명시적 variant가 우선합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
@@ -436,7 +436,7 @@
         "ui/toast/HRXToast.tsx",
         "ui/empty-state/HRXEmptyState.tsx"
       ],
-      "usage": "import { PrismRequestState } from \"@pydemia/prism\";\n<PrismRequestState status=\"error\" error=\"조회에 실패했습니다.\" onRetry={retry} />;",
+      "usage": "import { PrismEmptyState, PrismIcon, PrismRequestState, type PrismEmptyStateVariant } from \"@pydemia/prism\";\n\nexport function FeedbackExample({ status, variant = \"panel\", onRetry }: {\n  status?: \"loading\" | \"empty\" | \"error\";\n  variant?: PrismEmptyStateVariant;\n  onRetry?: () => void;\n} = {}) {\n  return <section data-prism=\"light\">\n    {status ? <PrismRequestState status={status} onRetry={onRetry} /> :\n      <PrismEmptyState variant={variant}\n        icon={variant === \"panel\" ? <PrismIcon name=\"NoMemoIcon\" size={140} /> : undefined}\n        title={variant === \"panel\" ? \"등록된 프로필 메모가 없습니다.\" : \"표시할 데이터가 없습니다\"}\n        description={variant === \"panel\" ? \"후보자에 대한 의견이나 참고사항을 기록해보세요.\" : \"데이터가 준비되면 여기서 확인할 수 있어요.\"} />}\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-feedback.tsx",
       "previewUrl": "/prism?component=prism-feedback",
       "embedUrl": "/prism?component=prism-feedback&embed=1",
@@ -446,7 +446,11 @@
         "interaction": "partial",
         "checks": [
           "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation",
-          "Actual 320px font-corrected preview: body gap 6px/content gap 4px, close 20x20px, dismiss removes toast and root stays 320px"
+          "Actual 320px font-corrected preview: body gap 6px/content gap 4px, close 20x20px, dismiss removes toast and root stays 320px",
+          "Explicit default/tab/panel variants use source140/120/140px icons,18/16/16px headings and10/10/6px title gaps; legacypanel=true maps to tab.",
+          "No source content outer padding; callers own layout insets. Description is optional and omitted paragraphs are absent.",
+          "Deployed tab/current local body175px and120px SVG, title19px/description16px heights, colors and gaps matched; title width differed0.015625px between static/variable font.",
+          "Ten SVG shapes matched geometry and computed fill/stroke/opacity, with local gradient identifiers normalized."
         ],
         "evidence": [
           "local-fixed-toast-metrics",
@@ -462,6 +466,14 @@
           "kind": "component"
         },
         {
+          "name": "PrismEmptyStateVariant",
+          "kind": "type"
+        },
+        {
+          "name": "PrismEmptyStateProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismEmptyState",
           "kind": "component"
         },
@@ -470,8 +482,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismRequestState } from \"@/components/ui/prism-feedback\";\n<PrismRequestState status=\"error\" error=\"조회에 실패했습니다.\" onRetry={retry} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismEmptyState, PrismRequestState, type PrismEmptyStateVariant } from \"@/components/ui/prism-feedback\";\nimport { PrismIcon } from \"@/components/ui/prism-icon\";\n\nexport function FeedbackExample({ status, variant = \"panel\", onRetry }: {\n  status?: \"loading\" | \"empty\" | \"error\";\n  variant?: PrismEmptyStateVariant;\n  onRetry?: () => void;\n} = {}) {\n  return <section data-prism=\"light\">\n    {status ? <PrismRequestState status={status} onRetry={onRetry} /> :\n      <PrismEmptyState variant={variant}\n        icon={variant === \"panel\" ? <PrismIcon name=\"NoMemoIcon\" size={140} /> : undefined}\n        title={variant === \"panel\" ? \"등록된 프로필 메모가 없습니다.\" : \"표시할 데이터가 없습니다\"}\n        description={variant === \"panel\" ? \"후보자에 대한 의견이나 참고사항을 기록해보세요.\" : \"데이터가 준비되면 여기서 확인할 수 있어요.\"} />}\n  </section>;\n}"
     },
     {
       "id": "prism-sidebar",
@@ -704,7 +716,7 @@
       "name": "Personal profile memos",
       "category": "Domain",
       "purpose": "본인 프로필 메모의 등록·단일 편집·수정 날짜·삭제 확인과 실패 복구",
-      "contract": "소비자가 인증된 서비스에서 본인에게 허용된 메모만 조회합니다. isMine은 서비스 데이터이며 권한을 증명하지 않습니다. Collection은 isMine=false 기록을 제외하고 editingId/onEditingChange로 편집 하나를 관리합니다. 한 카드의 편집 중 다른 카드 수정·삭제를 잠급니다. 카드에는 작성자 header 없이 본문·날짜·수정됨과20px 액션을 표시합니다. onSave/onDelete/onSubmit은 Promise와 {signal}을 지원하며 진행·오류·재시도·중복 의도 방지와 전환/unmount 취소를 처리합니다. 소비자는 실제 저장과 데이터 갱신·draft 해제를 담당합니다. Composer는 Enter 제출·Shift+Enter 줄바꿈·IME 보호를 제공하고 입력 원문을 보존합니다. 높이를 지정하면 목록만 내부 스크롤하고 입력창은 계속 보입니다. 미지정 높이는 자연 크기이며 긴 본문·날짜·footer는 좁은 폭에 맞춰 배치합니다.",
+      "contract": "소비자가 인증된 서비스에서 본인에게 허용된 메모만 조회합니다. isMine은 서비스 데이터이며 권한을 증명하지 않습니다. Collection은 isMine=false 기록을 제외하고 editingId/onEditingChange로 편집 하나를 관리합니다. 한 카드의 편집 중 다른 카드 수정·삭제를 잠급니다. 카드에는 작성자 header 없이 본문·날짜·수정됨과20px 액션을 표시합니다. onSave/onDelete/onSubmit은 Promise와 {signal}을 지원하며 진행·오류·재시도·중복 의도 방지와 전환/unmount 취소를 처리합니다. 소비자는 실제 저장과 데이터 갱신·draft 해제를 담당합니다. Composer는 Enter 제출·Shift+Enter 줄바꿈·IME 보호를 제공하고 입력 원문을 보존합니다. 높이를 지정하면 목록만 내부 스크롤하고 입력창은 계속 보입니다. 미지정 높이는 자연 크기이며 긴 본문·날짜·footer는 좁은 폭에 맞춰 배치합니다. 본인에게 허용된 메모가 없는 ready 상태에서는 전체 0 표시를 숨기고 panel 빈 상태의 140px 아이콘·6px 제목 간격을 사용합니다. loading이나 허용된 메모가 있을 때만 전체 건수를 표시하며 입력창은 유지합니다. 높이를 지정한 좁거나 짧은 목록에서는 장식용 빈 상태 아이콘을 숨겨 안내 문구와 입력창을 함께 볼 수 있습니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
@@ -737,7 +749,11 @@
           "Actual 140/200/320/440/800px manual widths: no collection/page horizontal overflow, bounded list and composer placement",
           "Native textarea resize overflow at height240 discovered; ResizeObserver-based maximum corrected it, and height700 restores max200",
           "Actual 320px viewport: internal PageDown scroll0 to204; CUA native wheel attempted but produced no observed change, so wheel integration is not claimed",
-          "Fresh emitted registry installation:42items/65files/18examples, TypeScript/Vite/font bytes/notices passed"
+          "Fresh emitted registry installation:42items/65files/18examples, TypeScript/Vite/font bytes/notices passed",
+          "Current source/deployed empty CSS separate140px memo panel from120px tab; memo empty total0 omitted and bounded editor measure updates as permitted results appear/disappear.",
+          "Actual20 width/height cases keep empty title, explanation and composer visible; only decorative icon hidden in short bounded space.",
+          "Actual synthetic create/delete cycle remeasured editor max-height96→132px without header0 or stale empty state.",
+          "Final50-item/75-file/27-example independent reinstall passed TypeScript/Vite/font bytes/notices and selected real320px runtime."
         ],
         "evidence": [
           "memo.test.mjs",
@@ -750,7 +766,7 @@
           "Fresh authenticated deployed memo states and complete rendered/source geometry or pixel comparison",
           "Original static font versus installed variable font measurements for every state",
           "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
-          "Current screenshot capture unavailable: responsive, default, native and minimal-button capture all timed out while live DOM checks remained available"
+          "Complete authenticated source memo/card/long-state screenshot and pixel/font comparison; current source interaction could not render the target state."
         ]
       },
       "exports": [

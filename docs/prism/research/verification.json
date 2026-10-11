@@ -582,7 +582,11 @@
       "interaction": "partial",
       "checks": [
         "Toast source structure confirms body 6px gap, content 4px gap, close control 20px; corrected implementation",
-        "Actual 320px font-corrected preview: body gap 6px/content gap 4px, close 20x20px, dismiss removes toast and root stays 320px"
+        "Actual 320px font-corrected preview: body gap 6px/content gap 4px, close 20x20px, dismiss removes toast and root stays 320px",
+        "Explicit default/tab/panel variants use source140/120/140px icons,18/16/16px headings and10/10/6px title gaps; legacypanel=true maps to tab.",
+        "No source content outer padding; callers own layout insets. Description is optional and omitted paragraphs are absent.",
+        "Deployed tab/current local body175px and120px SVG, title19px/description16px heights, colors and gaps matched; title width differed0.015625px between static/variable font.",
+        "Ten SVG shapes matched geometry and computed fill/stroke/opacity, with local gradient identifiers normalized."
       ],
       "evidence": [
         "local-fixed-toast-metrics",
@@ -713,7 +717,11 @@
         "Actual 140/200/320/440/800px manual widths: no collection/page horizontal overflow, bounded list and composer placement",
         "Native textarea resize overflow at height240 discovered; ResizeObserver-based maximum corrected it, and height700 restores max200",
         "Actual 320px viewport: internal PageDown scroll0 to204; CUA native wheel attempted but produced no observed change, so wheel integration is not claimed",
-        "Fresh emitted registry installation:42items/65files/18examples, TypeScript/Vite/font bytes/notices passed"
+        "Fresh emitted registry installation:42items/65files/18examples, TypeScript/Vite/font bytes/notices passed",
+        "Current source/deployed empty CSS separate140px memo panel from120px tab; memo empty total0 omitted and bounded editor measure updates as permitted results appear/disappear.",
+        "Actual20 width/height cases keep empty title, explanation and composer visible; only decorative icon hidden in short bounded space.",
+        "Actual synthetic create/delete cycle remeasured editor max-height96→132px without header0 or stale empty state.",
+        "Final50-item/75-file/27-example independent reinstall passed TypeScript/Vite/font bytes/notices and selected real320px runtime."
       ],
       "evidence": [
         "memo.test.mjs",
@@ -726,7 +734,7 @@
         "Fresh authenticated deployed memo states and complete rendered/source geometry or pixel comparison",
         "Original static font versus installed variable font measurements for every state",
         "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
-        "Current screenshot capture unavailable: responsive, default, native and minimal-button capture all timed out while live DOM checks remained available"
+        "Complete authenticated source memo/card/long-state screenshot and pixel/font comparison; current source interaction could not render the target state."
       ]
     },
     "prism-context": {
@@ -950,7 +958,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 138,
+      "passed": 139,
       "failed": 0
     },
     "registry": {
@@ -962,12 +970,12 @@
       "status": "passed-final-registry-install-build-and-selected-runtime",
       "items": 50,
       "files": 75,
-      "completeExamples": 26,
+      "completeExamples": 27,
       "typecheck": "passed",
       "viteBuild": "passed",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px). Latest registry reinstall also passed 14-chapter/96-career prepared print document, fonts, exclusion of app chrome and scripts; selected cancel/error/retry/immutable snapshot checked in the real browser."
+      "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px). Latest registry reinstall also passed 14-chapter/96-career prepared print document, fonts, exclusion of app chrome and scripts; selected cancel/error/retry/immutable snapshot checked in the real browser. Current feedback variants, legacy panel, omitted description and bounded empty memo also passed in the final installed consumer at actual320px."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1051,8 +1059,8 @@
     },
     "usageContracts": {
       "groups": 49,
-      "componentExamples": 26,
-      "integrationFragments": 23,
+      "componentExamples": 27,
+      "integrationFragments": 22,
       "workspaceTypecheck": "passed check-prism.mjs",
       "installedTypecheck": "passed final independent install",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
@@ -1060,13 +1068,13 @@
     "currentFixtureStates": {
       "count": 172,
       "checked": 172,
-      "status": "passed-current-worktree-actual320px-cua",
+      "status": "passed-current-worktree-actual320px-direct-embed-cua",
       "previousVerifiedStates": 159,
       "previousSourceCommit": "b4a502d8021277469e6a8d2862b0fb11482e1298",
       "previousPartialChecked": 22,
       "previousPartialSourceCommit": "c6b5d7ee09fe730346b80cf515608247dfd2910d",
-      "baseCommit": "88ecf49355e0969e41652ea6144f1d143ae99497",
-      "sourceSha256": "740efd9dc6e1b7d2ac617dfb42e57a9e95064ba7c731194639380cc9616686e2"
+      "baseCommit": "c827baa301d5dc3330819dbb98dc97c198c21bdc",
+      "sourceSha256": "d5b8bc013bfb371deb0842c9907c356acea17d90a9d1492a6bac579298dc0d98"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1148,27 +1156,19 @@
     "states": 172,
     "checked": 172,
     "status": "passed-current-worktree-actual320px-direct-embed-cua",
-    "baseCommit": "88ecf49355e0969e41652ea6144f1d143ae99497",
-    "sourceSha256": "740efd9dc6e1b7d2ac617dfb42e57a9e95064ba7c731194639380cc9616686e2",
+    "baseCommit": "c827baa301d5dc3330819dbb98dc97c198c21bdc",
+    "sourceSha256": "d5b8bc013bfb371deb0842c9907c356acea17d90a9d1492a6bac579298dc0d98",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
     "checks": [
-      "All 172 unique component/state DOM markers matched at actual document clientWidth 320.",
-      "No document overflow, nested buttons or unlabeled visible native inputs.",
-      "Collected tab warning/error logs were empty."
+      "All172 unique component/state markers matched at actual document clientWidth320.",
+      "No document overflow over1px, nested buttons or unlabeled visible native inputs.",
+      "Collected warning/error logs were empty."
     ],
     "evidence": [
-      "native-final-172-fixtures.json",
-      "native-final-source-fingerprint.json"
+      "memo-empty-final-172-fixtures.json",
+      "memo-empty-source-fingerprint.json"
     ],
-    "claim": "Synthetic render/accessibility structure only. Does not prove all interactions or original state/pixel equality.",
-    "revalidation": {
-      "previousSourceSha256": "2996cb313e6e0672c6cd1b0282c4e9fad8e8d7a3ccbda0f39e1713f16a16ddc8",
-      "changedInputs": [
-        "apps/docs/src/prism/candidate-list-demo.tsx"
-      ],
-      "states": 6,
-      "evidence": "native-final-candidate-six-states.json"
-    }
+    "claim": "Synthetic render/accessibility structure only. Not all interactions or original parity."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1271,7 +1271,7 @@
     "status": "available",
     "method": "Codex CUA in-app browser and existing authenticated browser session verified live.",
     "inAppBrowser": "Actual local pages, standalone HTML and installed consumer used successfully.",
-    "sourceBrowser": "testuser001 confirmed in existing dev.prism.ai session; candidate list/detail and eight category tabs read.",
+    "sourceBrowser": "Previous authenticated candidate tabs are historical. Current existing testuser001 home was read, but click timed out and direct navigation left the root empty; fresh memo runtime unverified. The original /chat URL was restored.",
     "sourceDeployedRevision": "not reported by the observed UI; local source revision remains separately scoped",
     "newChangesPendingRuntime": [
       "Full authenticated original screen/state and print export comparison",
@@ -1756,5 +1756,126 @@
       "ownedFramesAfter": 0,
       "afterprintSeparatelyObserved": false
     }
+  },
+  "previousNativeFixtureRenderChecks": {
+    "groups": 49,
+    "states": 172,
+    "checked": 172,
+    "status": "passed-current-worktree-actual320px-direct-embed-cua",
+    "baseCommit": "88ecf49355e0969e41652ea6144f1d143ae99497",
+    "sourceSha256": "740efd9dc6e1b7d2ac617dfb42e57a9e95064ba7c731194639380cc9616686e2",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "checks": [
+      "All 172 unique component/state DOM markers matched at actual document clientWidth 320.",
+      "No document overflow, nested buttons or unlabeled visible native inputs.",
+      "Collected tab warning/error logs were empty."
+    ],
+    "evidence": [
+      "native-final-172-fixtures.json",
+      "native-final-source-fingerprint.json"
+    ],
+    "claim": "Synthetic render/accessibility structure only. Does not prove all interactions or original state/pixel equality.",
+    "revalidation": {
+      "previousSourceSha256": "2996cb313e6e0672c6cd1b0282c4e9fad8e8d7a3ccbda0f39e1713f16a16ddc8",
+      "changedInputs": [
+        "apps/docs/src/prism/candidate-list-demo.tsx"
+      ],
+      "states": 6,
+      "evidence": "native-final-candidate-six-states.json"
+    }
+  },
+  "emptyStateVerification": {
+    "status": "passed-source-css-and-selected-rendered-tab-comparison",
+    "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "deployedSource": "http://dev.prism.ai/sample/chat/candidate-common",
+    "variants": {
+      "default": {
+        "icon": 140,
+        "title": 18,
+        "description": 16,
+        "gap": 10
+      },
+      "tab": {
+        "icon": 120,
+        "title": 16,
+        "description": 14,
+        "gap": 10
+      },
+      "panel": {
+        "icon": 140,
+        "title": 16,
+        "description": 14,
+        "gap": 6
+      }
+    },
+    "contentPadding": 0,
+    "tabWrapperPadding": "70px0",
+    "descriptionOptional": true,
+    "legacyPanelVariant": "tab",
+    "memoBefore": {
+      "icon": 120,
+      "total": "전체0"
+    },
+    "memoAfter": {
+      "icon": 140,
+      "total": null
+    },
+    "compact": {
+      "widths": [
+        140,
+        200,
+        320,
+        440,
+        800
+      ],
+      "heights": [
+        240,
+        320,
+        520,
+        700
+      ],
+      "uniqueCases": 20,
+      "messageAndComposerVisible": true,
+      "collectionRoundingTolerancePx": 1,
+      "originalSame440x240": {
+        "regionHeight": 96,
+        "scrollHeight": 176,
+        "messageVisible": false
+      },
+      "currentSame440x240": {
+        "regionHeight": 96,
+        "scrollHeight": 96,
+        "messageVisible": true
+      }
+    },
+    "fontComparison": {
+      "source": "Pretendard static",
+      "target": "Pretendard Variable",
+      "titleWidthDeltaPx": 0.015625,
+      "titleHeightPx": 19,
+      "descriptionHeightPx": 16
+    },
+    "installedConsumer": {
+      "items": 50,
+      "files": 75,
+      "examples": 27,
+      "componentHandEdits": false,
+      "variantsAndLegacyPassed": true,
+      "descriptionOmissionPassed": true,
+      "compact320Passed": true,
+      "loadedPanelHeight": 191
+    },
+    "authenticatedMemoRuntime": "unverified; existing home read, then input timeout/direct navigation root empty; original URL restored",
+    "evidence": [
+      "memo-empty-reference-before.json",
+      "memo-empty-after-and-tab-comparison.json",
+      "memo-empty-size-matrix.json",
+      "memo-empty-create-delete-cycle.json",
+      "memo-tab-empty-svg-proof.json",
+      "memo-empty-independent-runtime.json",
+      "memo-empty-final-installed-runtime.json",
+      "memo-empty-installed-loaded-fonts.json"
+    ],
+    "claim": "Selected public tab geometry and current source/deployedCSS rules, synthetic responsive/mutation and installed consumer. Not complete authenticated memo or all font/pixel parity."
   }
 }

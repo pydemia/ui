@@ -25,6 +25,21 @@ Independent UI materials for AI-assisted frontend maintenance. Reproduce design,
 
 Pretendard is verified in deployed computed styles. The standalone site uses official Pretendard 1.3.9 variable font (OFL-1.1); original uses static weights. Docs, embedded previews and SVG charts use the declared "Pretendard Variable" family through --font-ui; using only "Pretendard" would select a fallback. Font-metric equality with the original static font still requires comparison. Use 400 for body, 500 for supporting content, 600 for controls and sections, 700 for emphasized names/headings. General body is 14px; chat answer and criteria use 16px/1.6; micro badge uses 10px.
 
+## Empty states and profile memos
+
+The current source separates the base HRX empty state, the tab wrapper and the memo panel. Use `PrismEmptyState`'s explicit `variant` to preserve that distinction. The empty-state content has no outer padding; the caller provides layout spacing. `PrismRequestState` supplies the tab wrapper's 70px vertical padding.
+
+| Variant | Icon | Title / description | Title gap | Source |
+| --- | --- | --- | --- | --- |
+| default | 140px | 18px 600 / 16px 500 | 10px | HRXEmptyState / _empty-state.scss |
+| tab | 120px | 16px 600 / 14px 500 | 10px | TabPanelEmptyState.module.scss |
+| panel | 140px | 16px 600 / 14px 500 | 6px | HRX panelMode, used by MemoContent |
+
+The legacy `panel=true` prop retains its compact tab appearance; an explicit variant takes precedence. Description is optional. Memo collections omit the total row when permitted ready records are empty. A bounded memo list hides only its decorative empty-state illustration when the remaining space is short, keeping the message and composer visible. Natural-height collections keep their illustration and content-driven layout.
+
+These rules use local dev `087811ff` and the observed deployed empty-state CSS. The authenticated memo panel's complete visual states remain unverified.
+
+
 ## Geometry
 
 - Button large/medium/small/x-small heights: 40/32/28/26px. Padding 12px (x-small 8px). Radius 6px large, 4px other sizes. Icon-only widths follow 40/32/28/26px sizes; small uses radius 6px.

@@ -1,5 +1,15 @@
 # PRISM 검증 기록
 
+## 2026-10-11 메모와 빈 상태의 용도 구분
+
+공개 원본의 TabPanelEmptyState를 실제로 측정하고 현재 MemoContent와 배포된 빈 상태 CSS를 대조했습니다. 일반 화면은 140px 그림·18/16px 글자, 탭은 120px·16/14px·10px 제목 간격, 메모 패널은 140px·16/14px·6px 간격입니다. `PrismEmptyState`에 default/tab/panel variant와 optional description을 추가했습니다. 기존 panel=true는 탭 규격을 유지합니다. 콘텐츠 바깥의 24px 여백은 원본 규칙에 맞춰 제거했으며 호출자가 배치 여백을 정합니다.
+
+메모가 없는 ready 상태의 전체 0 표시는 제거했습니다. 첫 메모가 나타나거나 마지막 메모가 사라지면 건수와 입력창 최대 높이를 다시 계산합니다. 실제 440×240에서는 빈 안내가 스크롤 아래에 있었는데, 짧은 bounded 목록에서 장식 그림을 숨겨 안내와 입력창을 함께 볼 수 있게 했습니다. 20개 크기 조합과 로컬 합성 메모의 등록·삭제 전환을 확인했습니다.
+
+원본과 로컬 탭의 본문 175px·SVG 120px·글자 높이와 색·간격이 일치했습니다. 같은 제목 폭은 static/variable font에서 0.015625px 차이가 있었습니다. 10개 SVG shape의 형상과 computed fill/stroke/opacity도 같았습니다. 전체 font/pixel 비교의 완료를 뜻하지 않습니다. 전체 139개 테스트, 27개 완전 예시, 최종 독립 설치의 세 variant·기존 API·설명 생략·320px 동작과 현재 172개 합성 상태가 통과했습니다.
+
+기존 testuser001 홈은 읽었지만 원본 입력 응답이 시간 초과되었고 직접 이동 뒤 새 페이지의 root가 비어 있었습니다. 기존 /chat 주소로 복원했으나 화면 렌더 복구와 메모의 전체 인증 상태는 확인하지 못했습니다. 배포 commit과 모든 원본 상태의 동일성은 계속 검증 대상입니다.
+
 ## 2026-10-11 인쇄 문서 격리와 HTML snapshot
 
 `preparePrismPrintSession`과 `PrismPrintButton`은 앱 전체 대신 정적 프로필 문서를 별도 iframe에서 인쇄합니다. 글꼴·이미지·paint 준비를 기다리고 준비 취소·시간 초과·자산 오류·명시적 해제·afterprint에서 작업이 만든 frame만 정리합니다. 부모 제목과 DOM은 유지합니다. 실제 최신 버튼 클릭 후 Escape를 한 번 보내 브라우저의 afterprint 상태와 frame 0을 확인했습니다. OS 대화상자의 용지·여백·페이지 분할, 저장 파일이나 실물 출력은 확인하지 못했습니다.
