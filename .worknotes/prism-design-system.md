@@ -486,3 +486,25 @@ source inventory·규칙 → primitives와 도메인 component → catalog·regi
 새8개포함123tests와49그룹/26완전예시,docs TypeScript·표준build/generic snapshot이통과했습니다. 새consumer-UAveFJ는50항목/75파일·26예시fresh설치·최종registry재설치·TypeScript/Vite/폰트bytes/고지를통과했습니다. 이전tmp소비자는이미없었으며상태를확인하고새로할당했습니다. CUA도구는제공되지않고plugin조회로현재local연결을복구하지못했으므로browser/A4 PDF/native print·전체172상태/원본pixel/font완료를주장하지않습니다. [인쇄 문서 감사](prism-print-document-audit-20261011.md)에source근거/구현/논리검증·실패/미검증을기록했습니다. Goal active입니다.
 
 - 최종 표준build·docs TypeScript·check-prism49그룹/26예시·generic verify-current·diff whitespace는exit0입니다. generic SHA25625ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896을유지했고최신fetch뒤frontend HEAD=origin/dev087811ff clean/ui main288b0838입니다. Credential Git config hash도보존됐습니다. PRISM manifest SHA2560834b55f784c2ab614fb4278c340e247d2ad3fa7c098ed38a6133b5b3aca99b5이며source/generated를별도저장해기존draftPR162를갱신합니다.
+
+### 2026-10-11 내장 브라우저 재연결 확인
+
+- 이번 사용자 질문 뒤 CUA가 다시 제공됐고 내장 브라우저4에서 새 탭/공식 문서/로컬 PRISM 문서를 실제로 열어 읽었습니다. 이전 ChatGPT 플러그인 조회만으로 로컬 Codex 브라우저 복구 수단을 판단한 설명은 근거가 부족했습니다. 연결 가용성이 바뀐 원인은 확인하지 못했습니다. 별도 설치·권한 변경·Mac 잠금 해제를 수행하지 않았습니다.
+- 현재 head0e73730a에서49그룹/172개 고유 정의 상태를 실제320px iframe으로 다시 검사했습니다. 각 root clientWidth/scrollWidth320,중첩 button0,노출된 native input/select/textarea의 label 부재0이며 실제 수집한 warning/error 로그도 빈 배열입니다. aria-hidden 내부 select는 접근성 노출 검사에서 제외했습니다. 정의 상태 렌더 검사가 전체 동작·원본 UI 동일성 완료를 뜻하지 않습니다. 개별172행은 browser-evidence/browser-recovery-172.csv에 있습니다.
+- 인쇄 문서7분류의 default/empty/long이320px에 들어갑니다. 기본 문서 paper/viewport288px,자동zoom0.4010526316입니다. 직접 embed 화면에서SUMMARY/보상4조합을 클릭해 종합의 해당 영역만 바뀌고7분류가 유지됨을 확인했습니다. 수동20/80/200%에서paper143.609375/574.484375/1436.21875px이고root overflow는없었습니다. native 양축drag로1248×800→988×894→508×964를 확인했으며508px에서autozoom0.7074122807/paper508px입니다.
+- iframe 체크박스 자동화는 상태를 바꾸지 못했고 일부 시점에iframe이상단화면밖에있었습니다. 직접 embed의동일옵션성공과구분하며정확한자동화실패원인은미확정입니다. 새스크린샷은CUA에서실제확인했지만로컬이미지파일로저장하지않았습니다. A4 PDF/native print·전체긴문서pagination·원본font/pixel비교는미완료입니다.
+- consumer-UAveFJ의독립빌드도실제320px iframe에서7분류/scrollWidth320·paper296/viewport296·zoom0.4121929825·중첩button0·실제warning/error로그빈배열을확인했습니다. 설치component source는수정하지않았습니다. 전체50항목의모든동작을consumer에서검증한것으로확대하지않습니다.
+- 인쇄source b257b083/generated0e73730a의원격head를API로확인했고draftPR162 title Add typed PRISM profile print documents and current recipes/base main/정확한head를갱신·readback·재첨부했습니다. Verify UI38120810133 completed/success와VercelDgoV8kAmxDXGku4HHA1NY1ixg15t success입니다. preview HTTP/production완료를주장하지않습니다. 이후의browser/CI기록은local worknote이며goal active입니다.
+
+- 정리: 이번검증용63150(pid93857)/63225(pid98766)의명령·cwd를확인한뒤해당서버만종료했습니다. 자체내장탭1/2를닫았고사용자탭·계정/권한설정은변경하지않았습니다. 소비자source/lock/deps/dist와측정자료를보존했습니다. 구성/생성물은새로변경하지않아동일head의성공한CI를다시실행하지않았습니다. 다음은7분류출력의실제PDF/HTML/ZIP통합과원본인증UI/전체font/pixel대조입니다.
+
+- 서버종료후실제terminal exit143을확인했습니다. dev Vite에는기존public/prism/components.json import와큰번들Babel 경고가있었습니다. 위warning/error 빈배열은브라우저tab.dev.logs의수집범위이며terminal 경고까지없다는뜻이아닙니다. 독립production consumer의브라우저검사는별도로성공했습니다.
+
+
+### 2026-10-11 실제 7분류 출력 통합과 원본 탭 대조
+
+전체 문서 DOM→A4 PDF를 연결하고 반복 머리말·탭, 안전한 분할과 취소 정리를 구현했습니다. 실제 21쪽 긴 PDF와 9쪽 PDF 두 개의 ZIP(CRC 정상), 독립 HTML, installed consumer의7쪽 PDF/HTML/다인 ZIP·14분류 preview를 확인했습니다. 준비 안내/미리보기의 동시 modal aria-hidden 문제를 수정했습니다. 인증된 testuser001의 원본 상세 탭과800px 실측을 비교해 비활성 색·flex너비·상속margin을 맞췄습니다.
+
+130tests와actual320px 172고유상태의 렌더/overflow/접근성 구조 검사가 통과했습니다. 원본 전체상태·print/photo/font/pixel·native print/OS save는 미완료입니다. 상세 근거·실패/제외한 관찰·아직 남은 검증은 [인쇄 문서 감사](prism-print-document-audit-20261011.md)에 기록했습니다. source/generated 분리 commit과승인된draft PR readback/CI를 이어가며goal active입니다.
+
+- 최종 후속 검증: 모달·탭 수정 registry를 consumer-UAveFJ에 다시 설치해26예시 TypeScript/Vite/폰트SHA/고지를 통과했습니다. supporting entry만 추가했으며 installed component는 직접 수정하지 않았습니다. 실제 소비자 모달 하나에 두프로필/14분류가 aria-hidden 없이 나타났고800px 상세 탭의26px/37px·색/flex너비도 원본과 맞았습니다(max0.03125px). Input.dispatchMouseEvent 관찰timeout 뒤 같은 탭을 읽어 이미 완료된 상태임을 확인했으며 출력요청을 다시 실행하지 않았습니다. 원본 사용자 탭은 /chat으로 복원했습니다. frontend fetch 뒤 HEAD=origin/dev087811ff, origin/main288b0838가 유지됐고 typecheck/site build/generic snapshot25ca4393가 통과했습니다.

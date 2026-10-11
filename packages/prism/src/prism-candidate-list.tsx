@@ -74,6 +74,9 @@ export function PrismCandidateList({ filters, total, page, pageCount, onPageChan
                 throw new RangeError("Output counts must describe the requested candidates.");
             }
             if (!mounted.current) return;
+            // A ready print preview may be another modal owned by the consumer. Closing
+            // the preparation notice prevents two sibling modal roots hiding each other.
+            if (request.kind === "print" && result.preparedCount) setConfirmation(current => current?.kind === "preparing" && current.output === "print" ? null : current);
             if (!result.preparedCount) setFeedback({ message: `${action}할 프로필 데이터를 찾을 수 없습니다.`, tone: "error", retry: request });
             else if (excluded) setFeedback({ message: `일부 후보자(${excluded}명)는 ${action} 대상에서 제외되었습니다.`, tone: "info" });
         } catch {

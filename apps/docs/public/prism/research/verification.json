@@ -564,7 +564,8 @@
         "source empty state 175px total and 120px icon",
         "source error state 236px with 70px padding and retry",
         "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed",
-        "PrismSummaryBadge tooltipClassName/tooltipStyle을 본문에 적용. 계약 테스트와 실제 CUA에서 소비자 class,12px font/padding,280px maxWidth를 확인. 원본 모든 도움말 상태의 시각 비교는 대기."
+        "PrismSummaryBadge tooltipClassName/tooltipStyle을 본문에 적용. 계약 테스트와 실제 CUA에서 소비자 class,12px font/padding,280px maxWidth를 확인. 원본 모든 도움말 상태의 시각 비교는 대기.",
+        "Authenticated source tabs compared at 800px: 26px tabs, 37px row, 10px type, 8px radius, 4px gap and colors; flex widths differ by at most 0.03125px. Inactive color, flex distribution and inherited -1px margin corrected. Source expertise tab was hovered; hover is separately recorded."
       ],
       "evidence": [
         "reference-common-empty-error",
@@ -573,7 +574,7 @@
         "tooltip-adaptive-runtime"
       ],
       "remaining": [
-        "authenticated profile page visual comparison"
+        "Remaining authenticated profile sections and all dynamic states; full-page pixel/font comparison."
       ]
     },
     "prism-feedback": {
@@ -768,7 +769,8 @@
         "Actual140/200/320/440/800/1000/1280 widths havezero list/filterhorizontaloverflow;tableminimum640 staysinternal. Actual320px iframe,height240,keyboard rootscroll reachesfooter",
         "Live visual inspection found a legacycard class collision causing stackedtablecells andmissingneutral400 token;final table-cell geometry and16px grey sort icons corrected",
         "42 groups/146 current-source fixtures rendered inactual320px iframe with component/state DOMmarkers;nohorizontaloverflow,nestedbuttons,unnameddisplayedinputs orbrowsererrors",
-        "Fresh43items/67files/19examples passedTypeScript/Vite/fontbytes/notices. Installed component sources unchanged;portableexample synchronized tofinalusage. ProductionbuiltStrictMode example atactual320px generatedoneZIP withtwoA4 PDFs andbothoptionalfields visibleinraster"
+        "Fresh43items/67files/19examples passedTypeScript/Vite/fontbytes/notices. Installed component sources unchanged;portableexample synchronized tofinalusage. ProductionbuiltStrictMode example atactual320px generatedoneZIP withtwoA4 PDFs andbothoptionalfields visibleinraster",
+        "Print preparation notice closes after a successful result; actual consumer-owned dialog remains accessible with two profiles/14 chapters. Regression test and CUA passed."
       ],
       "evidence": [
         "candidate-list.test.mjs",
@@ -929,20 +931,20 @@
       ]
     },
     "prism-profile-print": {
-      "visual": "pending-current-full-document-comparison",
-      "interaction": "123tests includes8new content/option/continuation/missing-vs-zero/multi-profile tests;26portable examples passed",
-      "source": "087811ff print mapping and seven chapter composition/styles",
+      "visual": "passed-selected-synthetic-pdf-raster-and-html-render; original full-document parity pending",
+      "interaction": "Eight content tests, six pagination/abort tests, actual PDF/HTML/ZIP output and two-profile preview verified.",
+      "source": "087811ff local print mapping and seven chapter composition/styles; deployed source revision not established",
       "remaining": [
-        "Actual font/browser page fragmentation and all long content",
-        "A4 margins/footer/header repetition and source/target full-page visual comparison",
-        "Independent consumer actual320 preview sizing/resize and native print/PDF/HTML/ZIP integration"
+        "All source profile lengths, source/target complete print page comparison",
+        "Native print dialog and OS file save",
+        "Cross-browser and authenticated profile photo/font/export cases"
       ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 123,
+      "passed": 130,
       "failed": 0
     },
     "registry": {
@@ -951,7 +953,7 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-fresh-install-final-registry-reinstall-build-runtime-pending",
+      "status": "passed-final-registry-install-build-and-selected-runtime",
       "items": 50,
       "files": 75,
       "completeExamples": 26,
@@ -959,7 +961,7 @@
       "viteBuild": "passed",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Current print consumer browser runtime unverified. Previous own temporary consumer was absent; a new one was allocated and preserved. Installed components were not hand-edited."
+      "runtime": "Actual 7-page PDF/HTML/two-profile ZIP and 14-chapter inline preview; final installed preparation-notice fix also passed with one accessible consumer-owned modal. Installed profile tabs matched the authenticated source at 800px (26px/37px heights, colors, flex; max width delta 0.03125px)."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1118,8 +1120,8 @@
       "outputOptionCombinations": 4,
       "textPolicyDefault": "full",
       "pagePlanning": "source-based estimate or validated host-provided career pages",
-      "fullBrowserRuntime": "unverified",
-      "fullA4PdfLayout": "unverified",
+      "fullBrowserRuntime": "Selected synthetic full-document PDF/HTML/ZIP and preview passed; all 172 render states checked.",
+      "fullA4PdfLayout": "Selected 9-page default/two-profile and 21-page long raster outputs checked; all original lengths/pixel comparison pending.",
       "nativePrint": "unverified",
       "production": "not-published"
     }
@@ -1130,18 +1132,22 @@
     "all extensions across domains, long content and popup combinations",
     "clipboard write and native print dialog",
     "All 273 source-purpose mappings, including four recent additions, do not establish full state or visual equality.",
-    "Original authenticated profile export and service-worker stream integration; full profile DOM capture/pagination and all original standalone HTML profile sections/styles."
+    "Original authenticated full print export, service-worker stream and OS save; all source long-content layouts and complete page/font/pixel parity remain unverified."
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 49,
     "states": 172,
-    "checked": 0,
-    "status": "not-rerun-browser-tools-unavailable",
+    "checked": 172,
+    "status": "passed-current-worktree-actual320px-direct-embed-cua",
+    "baseCommit": "0e73730af3959d31fac9147c7d2b7104647dd2ea",
+    "sourceSha256": "0d0ddc7ff753fc38210a3f2cd7c6a2b60fb118e17c9f49a30cb0330098e2394e",
     "checks": [
-      "123개 tests와26개 usage contract는 DOM 내용/타입 근거이며 실제 browser layout 검증을 대신하지 않습니다."
+      "All unique component/state DOM markers matched at actual document clientWidth 320.",
+      "No document overflow, nested buttons or unlabeled visible native inputs.",
+      "Collected tab warning/error logs were empty."
     ],
-    "claim": "172 are defined synthetic states, not completed original or actual320 runtime checks. Prior159 and partial22 retain their separate source-head scope."
+    "claim": "Synthetic render/accessibility structure only. Does not prove all interactions or original state/pixel equality."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1241,22 +1247,16 @@
     }
   },
   "runtimeVerificationAvailability": {
-    "status": "browser-disconnected-current-chat-phase",
-    "method": "Chrome CUA completed selected measurements, then browser3 unavailable; inventory timeout reset kernel; in-app browser unavailable. Browser tools are absent after environment refresh.",
-    "inAppBrowser": "still unavailable",
-    "sourceBrowser": "현재 browser 제어 연결 없음; 과거 원본 관찰은 별도 historical evidence입니다.",
-    "preservedEvidence": "Historical source defaults, fresh deployed file/Tooltip/InputLabel states, local 120 fixture states at actual 320px.",
+    "status": "available",
+    "method": "Codex CUA in-app browser and existing authenticated browser session verified live.",
+    "inAppBrowser": "Actual local pages, standalone HTML and installed consumer used successfully.",
+    "sourceBrowser": "testuser001 confirmed in existing dev.prism.ai session; candidate list/detail and eight category tabs read.",
+    "sourceDeployedRevision": "not reported by the observed UI; local source revision remains separately scoped",
     "newChangesPendingRuntime": [
-      "actual clipboard write",
-      "original states outside the measured file controls and authenticated domain screens",
-      "print outside Chromium Letter settings",
-      "current169state actual320px CUA audit",
-      "current independent chat consumer production UI"
-    ],
-    "previousSourceBrowserAttempts": [
-      "agent-browser 0.38.2: HTTP upgrade/redirect loop; HTTPS connection reset. Historical failures do not apply to the working direct Playwright launch."
-    ],
-    "previousSourceBrowserObservation": "Direct HTTP /sample renders successfully; fresh button and file selection states captured in the original deployed app"
+      "Full authenticated original screen/state and print export comparison",
+      "Native print dialog and OS save",
+      "Remaining original long-content and domain states"
+    ]
   },
   "fileSelectionVerification": {
     "scope": "Fresh anonymous deployed original samples and local built synthetic fixtures; no server upload or existing login",
@@ -1552,5 +1552,102 @@
       "tool observations: 22 checked, stopped at prism-sidebar default"
     ],
     "claim": "수집 파일은 새 분석/추천의 선택 측정입니다. 22개 상태의 개별 raw 배열은 REPL reset으로 저장하지 못했고 aggregate tool observation만 남았습니다. 이전159개 결과는 별도 source head의 historical evidence입니다."
+  },
+  "previousProfilePrintFixtureRenderChecks": {
+    "sourceCommit": "0e73730af3959d31fac9147c7d2b7104647dd2ea",
+    "groups": 49,
+    "states": 172,
+    "checked": 172,
+    "status": "passed-actual320px-iframe-cua",
+    "claim": "Render/layout structure only, not every behavior or original parity."
+  },
+  "previousRuntimeVerificationAvailability": {
+    "status": "browser-disconnected-current-chat-phase",
+    "method": "Chrome CUA completed selected measurements, then browser3 unavailable; inventory timeout reset kernel; in-app browser unavailable. Browser tools are absent after environment refresh.",
+    "inAppBrowser": "still unavailable",
+    "sourceBrowser": "현재 browser 제어 연결 없음; 과거 원본 관찰은 별도 historical evidence입니다.",
+    "preservedEvidence": "Historical source defaults, fresh deployed file/Tooltip/InputLabel states, local 120 fixture states at actual 320px.",
+    "newChangesPendingRuntime": [
+      "actual clipboard write",
+      "original states outside the measured file controls and authenticated domain screens",
+      "print outside Chromium Letter settings",
+      "current169state actual320px CUA audit",
+      "current independent chat consumer production UI"
+    ],
+    "previousSourceBrowserAttempts": [
+      "agent-browser 0.38.2: HTTP upgrade/redirect loop; HTTPS connection reset. Historical failures do not apply to the working direct Playwright launch."
+    ],
+    "previousSourceBrowserObservation": "Direct HTTP /sample renders successfully; fresh button and file selection states captured in the original deployed app"
+  },
+  "profilePrintExportVerification": {
+    "status": "passed-selected-real-synthetic-browser-output",
+    "capture": "Bounded html2canvas-pro A4 segments; connected unscaled DOM, repeated header/tab parts, line/card break avoidance, forced-break reporting and AbortSignal cleanup.",
+    "localOutput": {
+      "twoProfileZip": {
+        "crcVerified": true,
+        "pdfCount": 2,
+        "pagesEach": [
+          9,
+          9
+        ],
+        "pageSizePoints": [
+          595.28,
+          841.89
+        ]
+      },
+      "longPdf": {
+        "pages": 21,
+        "bytes": 9544849,
+        "forcedBreaks": 1,
+        "footers": "1/21 through 21/21 verified",
+        "rasterReview": "All-page contact sheet and continuation/oversized Attitude detail reviewed; body uses raster images, not searchable text."
+      },
+      "html": {
+        "sevenSections": true,
+        "careerRows": 3,
+        "topics": 2,
+        "svgCharts": 3,
+        "externalAssetUrls": 0,
+        "scripts": 0,
+        "browserFontFamily": "Pretendard Variable",
+        "fontStatus": "loaded"
+      },
+      "canceledCapture": {
+        "partialFiles": 0,
+        "captureRoots": 0,
+        "ownedFrames": 0,
+        "cloneIframes": 0
+      },
+      "listUnmount": {
+        "hostPreparationContinues": true,
+        "zipCompleted": true,
+        "profiles": 2
+      },
+      "previewModal": {
+        "profiles": 2,
+        "chapters": 14,
+        "competingPreparationModal": false,
+        "ariaHidden": false
+      }
+    },
+    "installedConsumer": {
+      "items": 50,
+      "completeExamples": 26,
+      "handEditedInstalledComponents": false,
+      "profilePdfPages": 7,
+      "htmlGenerated": true,
+      "zipPdfPages": [
+        7,
+        7
+      ],
+      "zipCrcVerified": true,
+      "previewProfiles": 2,
+      "previewChapters": 14,
+      "finalPreparationNoticeAndTabStyleReinstall": "passed TypeScript/Vite, one accessible 14-chapter modal and 800px tab geometry/colors"
+    },
+    "originalAuthenticatedPrintParity": "unverified",
+    "nativePrint": "unverified",
+    "osSave": "unverified",
+    "claim": "Actual synthetic output content and selected layout/cleanup checked. Not full original profile/state/print parity."
   }
 }

@@ -1,4 +1,6 @@
 import { useLayoutEffect, useRef, useState, type ComponentProps, type CSSProperties, type ReactNode } from "react";
+import { createRoot } from "react-dom/client";
+import { createPrismPrintPdf, type PrismPrintPdfCapture, type PrismPrintPdfResult, type PrismPdfExportProgress } from "./prism-export";
 import { PrismPrintPage, PrismPrintLeaderSummary, PrismPrintCareer, PrismPrintRisk, PrismPrintExperience, type PrismPrintCareerItem, type PrismPrintExperienceItem } from "./prism-print";
 import { PrismFavoriteProfile, PrismBasicInfo, PrismOutline, PrismSummaryBadge } from "./prism-profile";
 import type { PrismCandidate } from "./prism-candidate";
@@ -65,7 +67,7 @@ export function PrismPrintScoreEssays({title,items}:{title:string;items:readonly
 function Survey({items}:{items:readonly PrismSurveyItem[]}){return <PrismSurveyValidation items={items} columns={items.length>=3?3:2} barMaxHeight={65}/>;}
 function Summary({data}:{data?:PrismPrintSummaryData|null}){return <PrismAssessmentSummary heading={data?.title??undefined} description={data?.description}/>;}
 function Grade({data}:{data?:PrismPrintGradeData|null}){return <PrismSummaryBadge label={data?.grade??"-"} summary={data?.description}/>;}
-export function PrismPrintTabBar({active}:{active:PrismPrintSectionId}){return <div className="prism-profile-print-tabs" aria-label="프로필 인쇄 분류">{prismPrintSections.map(section=><span key={section.id} aria-current={section.id===active?"page":undefined}>{section.label}</span>)}</div>;}
+export function PrismPrintTabBar({active}:{active:PrismPrintSectionId}){return <div className="prism-profile-print-tabs" data-print-repeat-part aria-label="프로필 인쇄 분류">{prismPrintSections.map(section=><span key={section.id} aria-current={section.id===active?"page":undefined}>{section.label}</span>)}</div>;}
 export type PrismProfilePrintDocumentProps={model:PrismProfilePrintModel;options?:PrismProfilePrintOptions;textPolicy?:PrismPrintTextPolicy;careerPages?:readonly (readonly PrismPrintCareerItem[])[]};
 export function PrismProfilePrintDocument({model:original,options={},textPolicy="full",careerPages}:PrismProfilePrintDocumentProps) {
     if(!original.id.trim()||!original.candidate.name.trim())throw new Error("A print profile requires its identity and candidate name.");
@@ -81,9 +83,8 @@ export function PrismProfilePrintDocument({model:original,options={},textPolicy=
     const compensation=withCompensation?<PrismCompensationGrid years={model.compensation?.years??[]} rows={model.compensation?.rows??[]} unit={model.compensation?.unit}/>:null;
     const frame=(id:Exclude<PrismPrintSectionId,"total">,content:ReactNode)=><section key={id} data-print-section={id} aria-label={prismPrintSections.find(section=>section.id===id)!.label}><PrismPrintPage {...pageProps} repeatHeader tabBar={<PrismPrintTabBar active={id}/>}><div className="prism-profile-print-content">{content}</div></PrismPrintPage></section>;
     return <article className="prism-profile-print-document candidate-profile-print" data-profile-id={model.id} data-pagination={careerPages?"host-provided":"estimated"} data-text-policy={textPolicy} aria-label={`${candidate.name} 프로필 인쇄 문서`}>
-        {shortened.length>0&&<p className="prism-profile-print-shortened" role="note">일부 설명은 분량에 맞춰 줄여 표시했습니다.</p>}
         <section data-print-section="total" aria-label="종합">{career.map((items,index)=><PrismPrintPage key={index} {...pageProps} repeatHeader={index>0} tabBar={index>0?<PrismPrintTabBar active="total"/>:undefined}>
-            {index===0&&<><PrismFavoriteProfile candidate={candidate}/><PrismPrintTabBar active="total"/>{withSummary&&<PrismPrintLeaderSummary {...model.leader}/>}<section><h3>기본 정보</h3>{model.basicInfo?.length?<PrismBasicInfo items={model.basicInfo.map(item=>({label:item.label,value:item.value===null?"관련 데이터 없음":typeof item.value==="string"?item.value:<div className="prism-profile-print-info-values">{item.value.map((value,i)=><span key={i}>{value}</span>)}</div>}))}/>:<PrismNoData/>}</section></>}
+            {index===0&&<><PrismFavoriteProfile candidate={candidate}/><PrismPrintTabBar active="total"/>{shortened.length>0&&<p className="prism-profile-print-shortened" role="note">일부 설명은 분량에 맞춰 줄여 표시했습니다.</p>}{withSummary&&<PrismPrintLeaderSummary {...model.leader}/>}<section><h3>기본 정보</h3>{model.basicInfo?.length?<PrismBasicInfo items={model.basicInfo.map(item=>({label:item.label,value:item.value===null?"관련 데이터 없음":typeof item.value==="string"?item.value:<div className="prism-profile-print-info-values">{item.value.map((value,i)=><span key={i}>{value}</span>)}</div>}))}/>:<PrismNoData/>}</section></>}
             {items.length>0&&<PrismPrintCareer items={items} showTitle={index===0} continuation={index>0}/>}{index===career.length-1&&compensation}
         </PrismPrintPage>)}</section>
         {frame("expertise",<><Summary data={model.expertise?.summary}/><PrismExpertiseCards items={model.expertise?.fields??[]}/><Survey items={model.expertise?.survey??[]}/></>)}
@@ -97,6 +98,25 @@ export function PrismProfilePrintDocument({model:original,options={},textPolicy=
 export function PrismProfilePrintDocuments({documents,options,textPolicy}:{documents:readonly PrismProfilePrintModel[];options?:PrismProfilePrintOptions;textPolicy?:PrismPrintTextPolicy}) {
     if(new Set(documents.map(item=>item.id)).size!==documents.length)throw new Error("Printed profile IDs must be unique.");
     return <div className="prism-profile-print-documents">{documents.length?documents.map(model=><PrismProfilePrintDocument key={model.id} model={model} options={options} textPolicy={textPolicy}/>):<PrismNoData message="출력할 프로필이 없습니다."/>}</div>;
+}
+/** One immutable display model, rendered at physical paper size; its temporary DOM is always removed. */
+export async function renderPrismProfilePdf(model: PrismProfilePrintModel, { options, textPolicy, ...pdfOptions }: {
+    options?: PrismProfilePrintOptions; textPolicy?: PrismPrintTextPolicy; title?: string; signal?: AbortSignal;
+    scale?: number; capture?: PrismPrintPdfCapture; onProgress?: (progress: PrismPdfExportProgress) => void;
+} = {}): Promise<PrismPrintPdfResult> {
+    const signal = pdfOptions.signal ?? new AbortController().signal; signal.throwIfAborted();
+    const stage = document.createElement("div"); stage.dataset.prism = "light"; stage.dataset.prismPdfCapture = ""; stage.setAttribute("aria-hidden", "true");
+    stage.style.cssText = "position:fixed;left:-10000px;top:0;width:190mm;pointer-events:none;background:#fff";
+    document.body.append(stage);
+    let resolveReady!: () => void, rejectReady!: (error: unknown) => void;
+    const ready = new Promise<void>((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
+    const abort = () => rejectReady(signal.reason); signal.addEventListener("abort", abort, { once: true });
+    const root = createRoot(stage, { onUncaughtError: rejectReady });
+    function CaptureDocument() { useLayoutEffect(() => resolveReady(), []); return <PrismProfilePrintDocument model={model} options={options} textPolicy={textPolicy}/>; }
+    try {
+        root.render(<CaptureDocument/>); await ready; signal.throwIfAborted();
+        return await createPrismPrintPdf(stage, { title: model.candidate.name, ...pdfOptions, signal });
+    } finally { signal.removeEventListener("abort", abort); root.unmount(); stage.remove(); }
 }
 export function PrismProfilePrintViewport({children,scale="auto",resize,className="",style}:{children:ReactNode;scale?:"auto"|number;resize?:"horizontal"|"both";className?:string;style?:CSSProperties}) {
     const root=useRef<HTMLDivElement>(null),[width,setWidth]=useState<number|null>(null);

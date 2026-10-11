@@ -7,7 +7,7 @@ Object.defineProperty(globalThis, "navigator", { configurable: true, value: dom.
 globalThis.getComputedStyle = dom.window.getComputedStyle; globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(dom.window); globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(dom.window);
 globalThis.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} }; globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const { createElement: h, act, useState } = await import("react"), { createRoot } = await import("react-dom/client");
-const { PrismCandidateDirectory, PrismCandidateList, PrismPagination, createPrismCandidateDownloadJob } = await import("../dist/index.js");
+const { PrismCandidateDirectory, PrismCandidateList, PrismPagination, PrismDialog, createPrismCandidateDownloadJob } = await import("../dist/index.js");
 const root = createRoot(document.getElementById("root"));
 const rows = [{ id: "a", name: "김가상", company: "가상전자", position: "기술전략", series: "제조" }, { id: "b", name: "이예시", company: "예시사업", position: "연구개발", series: "제조" }];
 const filters = { value: { series: "all", companies: [], name: "" }, seriesOptions: [{ value: "all", label: "전체" }], companyOptions: [{ value: "company", label: "가상전자" }], onValueChange() {}, onSearch() {}, onReset() {} };
@@ -30,6 +30,22 @@ const closeNotice = async () => {
     const dialog = document.querySelector(".prism-confirm-dialog");
     if (dialog) await click(byText("확인", dialog));
 };
+
+test("ready print preview remains accessible without a competing preparation modal", async () => {
+    function Demo() {
+        const [print, setPrint] = useState(false);
+        return h("div", null,
+            h(PrismCandidateList, { ...base, onOutput: async () => { setPrint(true); return { preparedCount: 1 }; } }),
+            h(PrismDialog, { open: print, onOpenChange: setPrint, title: "합성 출력 미리보기" }, "합성 프로필 본문"));
+    }
+    await render(h(Demo)); await openOutput("print"); await confirmOutput("print");
+    const dialogs = [...document.querySelectorAll('[role="dialog"]')];
+    assert.equal(dialogs.length, 1);
+    assert.match(dialogs[0].textContent, /합성 출력 미리보기.*합성 프로필 본문/);
+    assert.notEqual(dialogs[0].getAttribute("aria-hidden"), "true");
+    assert.equal(document.querySelector(".prism-confirm-dialog"), null);
+    await clear();
+});
 
 test("candidate chips open once without nested buttons and remote sort starts with source directions", async () => {
     const opens = [], sorts = [];

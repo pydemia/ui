@@ -5,7 +5,7 @@ import { PrismOutline } from "./prism-profile";
 import { PrismChip } from "./prism-badge";
 
 export function PrismPrintPage({name,company,companyLogo,jobTitle,tabBar,repeatHeader=false,children}: {name:string;company?:{brand:string;affiliate:string};companyLogo?:ReactNode;jobTitle?:string;tabBar?:ReactNode;repeatHeader?:boolean;children:ReactNode}) {
-    const header=<><header className="prism-print-page-header"><small>Profile</small><div>{companyLogo ?? (company && <PrismAffiliateLogo {...company} size={10}/>)}{jobTitle && <span>{jobTitle}</span>}<strong>{name}</strong></div></header>{tabBar}</>;
+    const header=<><header className="prism-print-page-header" data-print-repeat-part><small>Profile</small><div>{companyLogo ?? (company && <PrismAffiliateLogo {...company} size={10}/>)}{jobTitle && <span>{jobTitle}</span>}<strong>{name}</strong></div></header>{tabBar}</>;
     return <section className="prism-print-page" data-print-page data-repeat-header={repeatHeader||undefined}>{repeatHeader ? <table className="prism-print-repeat"><thead><tr><td>{header}</td></tr></thead><tbody><tr><td>{children}</td></tr></tbody></table> : <>{header}<div className="prism-print-page-body">{children}</div></>}</section>;
 }
 export function PrismPrintLeaderSummary({name,summary,definition}: {name?:string|null;summary?:string|null;definition?:string|null}) {
