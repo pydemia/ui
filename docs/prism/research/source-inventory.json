@@ -549,34 +549,50 @@
     {
       "source": "components/chat/panel/ChatPanel.tsx",
       "name": "ChatPanel",
-      "target": "prism-panel",
+      "target": "prism-panel-recipes",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source-specific wrapper and guarded-leave composition implemented from clean local dev. JSDOM contracts checked; authenticated current rendered styles/states remain unverified.",
+      "recipe": "PrismChatPanel",
+      "additionalTargets": [
+        "prism-panel"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/panel/MemoPanel.tsx",
       "name": "MemoPanel",
-      "target": "prism-panel",
+      "target": "prism-panel-recipes",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source-specific wrapper and guarded-leave composition implemented from clean local dev. JSDOM contracts checked; authenticated current rendered styles/states remain unverified.",
+      "recipe": "PrismMemoPanel",
+      "additionalTargets": [
+        "prism-panel"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/panel/PositionPanel.tsx",
       "name": "PositionPanel",
-      "target": "prism-panel",
+      "target": "prism-panel-recipes",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source-specific wrapper and guarded-leave composition implemented from clean local dev. JSDOM contracts checked; authenticated current rendered styles/states remain unverified.",
+      "recipe": "PrismPositionPanel",
+      "additionalTargets": [
+        "prism-panel"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/panel/ProfilePanel.tsx",
       "name": "ProfilePanel",
-      "target": "prism-panel",
+      "target": "prism-panel-recipes",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source-specific wrapper and guarded-leave composition implemented from clean local dev. JSDOM contracts checked; authenticated current rendered styles/states remain unverified.",
+      "recipe": "PrismProfilePanel",
+      "additionalTargets": [
+        "prism-panel"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/panel/SidePanel.tsx",
@@ -592,24 +608,27 @@
       "name": "PositionDetailHeader",
       "target": "prism-position",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/position/PositionDetailView.tsx",
       "name": "PositionDetailView",
       "target": "prism-position",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/position/PositionDetailViewSkeleton.tsx",
       "name": "PositionDetailViewSkeleton",
       "target": "prism-position",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/position/PositionRecommend.tsx",
@@ -628,8 +647,9 @@
       "name": "PositionRequirementGroup",
       "target": "prism-position",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/sidebar/InquiryHistoryDialog.tsx",
@@ -2300,6 +2320,7 @@
     ],
     "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date.",
     "newPurposeMappedComponents": 4,
-    "pendingComponents": []
+    "pendingComponents": [],
+    "localRecheckedAt": "2026-10-12"
   }
 }

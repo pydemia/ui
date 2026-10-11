@@ -208,7 +208,7 @@ export function MemoExample() {
 
 ## Inline panel
 채팅과 상세를 동시에 사용하며 패널 확대·축소
-Contract: 비모달 aside이며 기본 너비 440px, 헤더 64px, 버튼·원본 SVG 24px를 사용합니다. title은 ReactNode이며 긴 제목에 맞춰 헤더 높이가 늘어납니다. 확대 시 부모 폭+1px와 z-index 1250을 사용합니다. 닫힌 본문은 mounted/inert로 초안을 유지합니다. contentClassName/contentStyle/contentRef로 호출자가 본문 여백과 스크롤을 정하며 기본은 padding 0·overflow-y hidden입니다. resizable의 드래그·방향키 16px·Shift 50px·Home/End·double click은 bounded width intent를 보냅니다. 드래그 취소·capture 유실·닫기·확대·compact 전환은 시작 전 선호 너비로 복구합니다. 복구한 선호 너비가 현재 부모보다 커도 실제 표시는 부모 폭으로 제한합니다. width/open/expanded는 호출자가 제어하며 외부 닫기에서도 expanded=false intent를 한 번 보냅니다. responsive는 640px 미만 부모에서 전체 폭과 숨긴 핸들을 사용하고 선호 너비를 보존합니다. 부모는 position relative flex 컨테이너입니다.
+Contract: 비모달 aside이며 기본 너비 440px, 헤더 64px, 버튼·원본 SVG 24px를 사용합니다. title은 ReactNode이며 긴 제목에 맞춰 헤더 높이가 늘어납니다. 확대 시 부모 폭+1px와 z-index 1250을 사용합니다. 닫힌 본문은 mounted/inert로 초안을 유지합니다. contentClassName/contentStyle/contentRef로 호출자가 본문 여백과 스크롤을 정하며 기본은 padding 0·overflow-y hidden입니다. resizable의 드래그·방향키 16px·Shift 50px·Home/End·double click은 bounded width intent를 보냅니다. 드래그 취소·capture 유실·닫기·확대·compact 전환은 시작 전 선호 너비로 복구합니다. 복구한 선호 너비가 현재 부모보다 커도 실제 표시는 부모 폭으로 제한합니다. onCloseRequest는 초안 확인을 맡은 호출자에게 닫기 요청만 보내며 확대/open을 먼저 바꾸지 않습니다. width/open/expanded는 호출자가 제어하며 외부 닫기에서도 expanded=false intent를 한 번 보냅니다. responsive는 640px 미만 부모에서 전체 폭과 숨긴 핸들을 사용하고 선호 너비를 보존합니다. 부모는 position relative flex 컨테이너입니다.
 States: default, closed, expanded, long
 Registry: /prism/r/prism-panel.json
 Source: packages/prism/src/prism-panel.tsx
@@ -495,28 +495,78 @@ export function LabelAndLoadingExample() {
 }
 ```
 
-## Position detail / Requirements
-포지션 기본 정보와 Mission·요구 사항 그룹 표시
-Contract: 회사·포지션·메타데이터와 그룹 항목은 외부 값입니다. 빈 요구 사항과 null 내용은 관련 데이터 없음으로 표시합니다. 로드 상태와 retry는 소비자가 소유합니다.
-States: default, empty, loading, error
+## Profile / Memo / Position / Chat panels
+원본 패널별 본문 규격·프로필/메모 전환·초안 이탈 확인·채팅 입력과 스크롤
+Contract: Profile/Memo는 expandable·max840px이고 profile은20px20px0/memo view는0 20px/standalone memo는20px20px0 여백입니다. Profile의 memo는 hidden 상태에도 mounted이며 subjectId 변경 시 본문 경계를 새로 만들고 profile로 돌아갑니다. beforeLeave(back/close,{subjectId,signal})는 호스트의 초안·확인 정책입니다. false/reject는 현재 view·확대·초안을 보존하며 duplicate 요청을 막고 후보 변경/외부 닫기/unmount는 이전 결과를 취소합니다. 후보를 바꾸기 전의 이탈 확인은 호스트에서 수행합니다. PrismMemoLeaveDialog는 원본 메모 작성 중/계속 작성/나가기의 제어형 확인창입니다. Position은 기본 패널, Chat은22px 제목·#EEF1F8·messages20px·user bubble320px/#D6DCEE·sticky composer30px bottom·아래 이동34px이며 closed chat content는 unmount합니다. API/stream/권한/LIVE 조회/스크롤 판단은 호스트가 소유합니다. 패널 크기·responsive·contentRef는 기본 Panel 계약을 재사용합니다.
+States: default, memo, position, chat, closed, expanded, long, loading, error
+Registry: /prism/r/prism-panel-recipes.json
+Source: packages/prism/src/prism-panel-recipes.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useRef, useState } from "react";
+import { PrismProfilePanel, PrismMemoPanel, PrismPositionPanel, PrismChatPanel, PrismMemoLeaveDialog, type PrismPanelLeaveContext } from "@/components/ui/prism-panel-recipes";
+export function PanelRecipesExample() {
+  const [open, setOpen] = useState(true);
+  const [kind, setKind] = useState<"profile" | "memo" | "position" | "chat">("profile");
+  const [draft, setDraft] = useState("");
+  const [confirm, setConfirm] = useState(false);
+  const decide = useRef<((allowed: boolean) => void) | null>(null);
+  function beforeLeave(_intent: "back" | "close", { signal }: PrismPanelLeaveContext) {
+    if (!draft.trim()) return true;
+    return new Promise<boolean>(resolve => {
+      let settled = false;
+      const finish = (allowed: boolean) => {
+        if (settled) return;
+        settled = true; signal.removeEventListener("abort", abort);
+        decide.current = null; setConfirm(false);
+        if (allowed) setDraft("");
+        resolve(allowed);
+      };
+      const abort = () => finish(false);
+      if (signal.aborted) { finish(false); return; }
+      signal.addEventListener("abort", abort, { once: true });
+      decide.current = finish; setConfirm(true);
+    });
+  }
+  const memo = <label>메모 초안<textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>;
+  const shared = { open, onOpenChange: setOpen, resizable: true };
+  return <div data-prism="light">
+    <label>패널 종류<select value={kind} onChange={e => { decide.current?.(false); setKind(e.target.value as typeof kind); setOpen(true); }}>
+      <option value="profile">프로필</option><option value="memo">메모</option><option value="position">포지션</option><option value="chat">채팅</option>
+    </select></label>
+    <div style={{ position: "relative", display: "flex", height: 440, minWidth: 0 }}>
+      <main style={{ flex: 1, minWidth: 0 }}><button type="button" onClick={() => setOpen(true)}>패널 열기</button></main>
+      {kind === "profile" && <PrismProfilePanel {...shared} subjectId="synthetic-candidate" beforeLeave={beforeLeave} memo={memo}
+        profile={showMemo => <div>가상 후보 <button type="button" onClick={showMemo}>메모 보기</button></div>} />}
+      {kind === "memo" && <PrismMemoPanel {...shared} subjectId="synthetic-candidate" beforeLeave={beforeLeave}>{memo}</PrismMemoPanel>}
+      {kind === "position" && <PrismPositionPanel {...shared}><p>호스트가 제공한 포지션 상세 영역</p></PrismPositionPanel>}
+      {kind === "chat" && <PrismChatPanel {...shared} messages={<p>가상 대화</p>} composer={<label>질문<textarea /></label>} />}
+    </div>
+    <PrismMemoLeaveDialog open={confirm} onOpenChange={next => { if (!next) decide.current?.(false); }} onConfirm={() => decide.current?.(true)} />
+  </div>;
+}
+```
+
+## Position definition / Context / Requirements
+포지션 기본 정보·정의·Business Context·전문성/성공경험 요구사항과 빈 값·로드 상태 표시
+Contract: 호스트가 회사·산업/직무/직책·정의·Business Context와 요구사항 그룹을 제공합니다. 본문 max840px/scroll gap20·padding20, 두 요약 카드16px/12px, 전문성·성공경험 그룹을 표시합니다. 빈 문자열/공백/null은 관련 데이터 없음이며 groups=[]는 빈 전문성·성공경험 그룹을 유지합니다. loading은 원본 구조 skeleton, error는 stale detail을 감추고 retry intent를 보냅니다. 기본 안내문은 원본의 공통 역량·자질 설명이며 footnote로 변경하거나 null로 숨길 수 있습니다. LIVE/draft 조회·주직무 requirements 선택·요청 취소·재시도 결과는 호스트가 소유합니다. 320px 이하 부모에서는 기본 정보 카드를 한 열로 배치하고 긴 문자열을 줄바꿈합니다.
+States: default, empty, loading, error, long
 Registry: /prism/r/prism-position.json
 Source: packages/prism/src/prism-position.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
 import { PrismPositionDetail } from "@/components/ui/prism-position";
-
 export function PositionExample() {
-  return <PrismPositionDetail company="가상전자" role="기술전략담당"
-    items={[{ label: "직무", value: "연구개발" }]}
+  return <div data-prism="light" style={{ height: 560 }}><PrismPositionDetail company="가상전자" role="기술전략담당"
+    items={[{ label: "산업", value: "전자" }, { label: "직무", value: "연구개발" }, { label: "직책", value: "담당" }]}
+    definition="가상 조직의 기술전략을 수립합니다."
+    businessContext="가상 사업의 연구개발 방향을 정리합니다."
     groups={[
-      { id: "mission", title: "Mission", items: [
-        { id: "mission-1", title: "담당 업무", content: "가상 연구개발 조직의 기술전략을 수립합니다." },
-      ] },
-      { id: "requirements", title: "요구 사항", items: [
-        { id: "requirement-1", title: "추가 근거", content: null },
-      ] },
-    ]} />;
+      { id: "expertise", title: "전문성", items: [{ id: "expertise-1", content: "기술·연구개발 경험" }] },
+      { id: "experience", title: "성공경험", items: [] },
+    ]} /></div>;
 }
 ```
 

@@ -1,5 +1,13 @@
 # PRISM 검증 기록
 
+## 패널 조합과 포지션 상세 보완 (2026-10-12)
+
+최신 로컬 dev087811ff의 ProfilePanel/MemoPanel/PositionPanel/ChatPanel과 PositionDetailView를 대조했습니다. 프로필·메모의840px 본문과 여백, 메모 전환/24px 뒤로, 채팅의22px 제목·320px 질문·sticky 입력 영역을 별도 typed 조합으로 제공합니다. beforeLeave는 호스트가 소유하는 초안 확인이며 취소 시 확대·초안을 보존합니다. 후보 변경/외부 닫기/unmount는 이전 확인 결과를 취소합니다.
+
+포지션 상세는 원본의 포지션 정의·Business Context·전문성/성공경험·공통 역량 안내문을 복원했습니다. Mission 중심 예시를 현재 source 목적에 맞게 변경하고 빈 값·원본 구조 skeleton·error/retry·긴 내용을 제공합니다. LIVE 조회와 주직무 선택은 호스트의 책임입니다.
+
+새 JSDOM/SSR 검사 9개를 포함한 전체 152 tests와 타입 검사가 통과했습니다. 51항목·29개 완전 예시의 최종 shadcn 독립 설치, TypeScript/Vite, 폰트 bytes와 고지 검사도 통과했습니다. 확인창의 계속 작성/Escape/나가기 흐름은 JSDOM 검사이며 native focus/dialog의 증거가 아닙니다. 표준 site build와 generic current release 검사가 통과했고 공개 게시와 브라우저 비교는 미완료입니다. 이전150/175 fixture 기록은16906b72 source의 과거 증거입니다. 새 source의 실제 화면 동일성으로 사용하지 않습니다.
+
 ## SidePanel 원본 대조와 크기 조절 보완 (2026-10-11)
 
 공개 SidePanel과 최종 독립 설치본의 기본·확대·닫기 상태를 대조했습니다. 기본 너비440px, 헤더64px/여백20px, 버튼·SVG24px, #DDE5EB 경계선, 12px/.06 그림자와 본문 여백0/overflow-y hidden이 맞습니다. 확대는 부모 폭+1px와 z-index1250을 사용하며 닫힌 본문은 mounted/inert를 유지합니다. Expand·Collapse·Close의 path와 computed paint도 같았습니다. h4 제목은18px/700/검정/높이21px이며 static/variable 폰트에서 폭66.375/66.390625px로0.015625px 차이가 있습니다. 서로 다른 caller 컨테이너의 패널 높이는 비교에서 제외했습니다.
