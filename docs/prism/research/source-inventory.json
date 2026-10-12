@@ -962,7 +962,12 @@
         "prism-document",
         "prism-print"
       ],
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+      }
     },
     {
       "source": "components/chat/successorCandidate/print/PrintAttitudeDerailmentRisk.tsx",
@@ -2287,7 +2292,12 @@
       "coverage": "purpose-mapped",
       "verification": "Implemented typed SVG and summary with measured deployed print-frame/style checks and42 synthetic consumer resize/distribution cases; remaining source outside-label, animation, domain and complete pixel comparisons are partial.",
       "recipe": "PrismLeadershipPie",
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+      }
     },
     {
       "source": "components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
@@ -2296,7 +2306,12 @@
       "coverage": "purpose-mapped",
       "verification": "Implemented typed SVG and summary with measured deployed print-frame/style checks and42 synthetic consumer resize/distribution cases; remaining source outside-label, animation, domain and complete pixel comparisons are partial.",
       "recipe": "PrismLeadershipPieSummary",
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+      }
     },
     {
       "source": "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
@@ -2385,11 +2400,15 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Leadership summary blue tag/content/detail/divider and print variant; print data propagation.",
       "Position card/reference version and host current-LIVE fallback.",
       "Admin user/group/position display/action changes and authorization-owned state.",
       "Chat render link behavior and sidebar/context changes."
     ],
-    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced."
+    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
+    "reviewedLeadershipDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+    }
   }
 }

@@ -29,6 +29,14 @@
   ],
   "meta": {
     "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "sourceDeltaAudits": [
+      {
+        "source": "components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+      }
+    ],
     "sourceSha256": "a8db4842e6dd385d076690da566fc62c38f27772f380dc3d971c3e8f17b47e15",
     "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
   }

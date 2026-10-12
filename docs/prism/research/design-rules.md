@@ -25,6 +25,14 @@ Independent UI materials for AI-assisted frontend maintenance. Reproduce design,
 
 Pretendard is verified in deployed computed styles. The standalone site uses official Pretendard 1.3.9 variable font (OFL-1.1); original uses static weights. Docs, embedded previews and SVG charts use the declared "Pretendard Variable" family through --font-ui; using only "Pretendard" would select a fallback. Font-metric equality with the original static font still requires comparison. Use 400 for body, 500 for supporting content, 600 for controls and sections, 700 for emphasized names/headings. General body is 14px; chat answer and criteria use 16px/1.6; micro badge uses 10px.
 
+## Leadership summary
+
+The local dev revision `27c4fdbf3e73234b7ab5c46e379a04d083c12df8` changes the summary to a blue type tag, a bold summary and a separate explanation below a divider. `PrismLeadershipPieSummary.title` maps to `summary.title`; `description` maps to `summary.content`; `detail` maps to `summary.description`. Whitespace-only detail adds no divider. Detail alone is information, including when all percentages are missing or zero. The host supplies the values and interpretation.
+
+The outer box uses 16px padding/gap and a 12px radius; its chart/comment row uses a 20px gap. Summary text is 14px/700/#222222; detail is 14px/400/#363636 with preserved line breaks. The type tag reuses the shared blue tag. The divider is 1px/#E3E5E5. Ordered 지·덕·용 colors are #327BB7/#42938A/#DDB77D. At 660px the caption spans stack; the independent component also stacks the main row at 480px and wraps type labels there without dropping detail. At wider sizes `wrapTitle` opts into multiline type labels; default tags keep the source 21px height.
+
+Print uses 8pt padding/gap/radius, an 80pt minimum height, a 20pt main-row gap, a 2pt chart gap and a 6pt comment gap. Caption, summary and detail are 10pt. The default tag uses a 15pt height, 3.5pt 4pt .5pt padding, a 4pt radius and 8pt/11pt text. Full print text is the default. The optional reference limits shorten title/summary in a copied display model and retain all detail, matching the current source mapping. These rules were checked against local source; current deployed revision binding, rendered comparison and A4 pagination remain unverified.
+
 ## Empty states and profile memos
 
 The current source separates the base HRX empty state, the tab wrapper and the memo panel. Use `PrismEmptyState`'s explicit `variant` to preserve that distinction. The empty-state content has no outer padding; the caller provides layout spacing. `PrismRequestState` supplies the tab wrapper's 70px vertical padding.

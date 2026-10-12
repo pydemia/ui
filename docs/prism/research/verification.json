@@ -281,29 +281,15 @@
       ]
     },
     "prism-profile-sections": {
-      "visual": "pending",
-      "interaction": "partial",
+      "visual": "pending-current-leadership-detail-rendered-comparison",
+      "interaction": "passed-local-source-and-contract-tests",
       "checks": [
-        "All eight tab recipes render",
-        "Experience topic changes displayed card",
-        "Comment save appends text and clears draft",
-        "320px profile recipe root does not overflow; tabs and compensation table scroll internally",
-        "LeadershipPieSummary uses source print padding16/gap20/radius12/border#b6bec9/white and13.333px caption;typedrecipe selects old summary or new pieSummary."
-      ],
-      "evidence": [
-        "local-profile-total",
-        "local-profile-expertise",
-        "local-profile-experience",
-        "local-profile-design",
-        "local-profile-agility",
-        "local-profile-attitude",
-        "local-profile-leadership",
-        "local-profile-comments",
-        "local-profile-interactions"
+        "Latest27c4fdbf source delta: tag/content/detail/divider, ordered palette and screen/print rules.",
+        "Detail-only and full detail under both print text policies retain host-provided text without mutation."
       ],
       "remaining": [
-        "Source domain recipe appearance comparison",
-        "empty/loading/error and long content states"
+        "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
+        "Authenticated deployed source and deployed revision binding."
       ]
     },
     "prism-document": {
@@ -639,22 +625,15 @@
       ]
     },
     "prism-chart": {
-      "visual": "partial",
-      "interaction": "partial",
+      "visual": "pending-current-leadership-detail-rendered-comparison",
+      "interaction": "passed-local-source-and-contract-tests",
       "checks": [
-        "New deployed leadership print sample:160x158 frame,11px700 inside labels,three source colors",
-        "Typed SVG preserves supplied percentages,null and real zero; incomplete geometry has an unassigned sector",
-        "42 actual consumer cases across1280/320/390 viewport and140/320/800 manual widths passed with no root overflow",
-        "Adaptive radius and long-label legend preserve legibility; hidden data-table overflow corrected"
-      ],
-      "evidence": [
-        "reference-leadership-print-20261009",
-        "consumer-leadership-20261009"
+        "Latest27c4fdbf source delta: tag/content/detail/divider, ordered palette and screen/print rules.",
+        "Detail-only and full detail under both print text policies retain host-provided text without mutation."
       ],
       "remaining": [
-        "All original outside-label and animation states",
-        "Authenticated leadership domain",
-        "Complete page pixel parity"
+        "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
+        "Authenticated deployed source and deployed revision binding."
       ]
     },
     "prism-export": {
@@ -949,13 +928,15 @@
       ]
     },
     "prism-profile-print": {
-      "visual": "passed-selected-synthetic-pdf-raster-and-html-render; original full-document parity pending",
-      "interaction": "Eight content tests, six pagination/abort tests, actual PDF/HTML/ZIP output and two-profile preview verified. Native isolated print request/Escape/afterprint cleanup, long two-profile preparation and standalone 320px viewer verified.",
-      "source": "087811ff local print mapping and seven chapter composition/styles; deployed source revision not established",
+      "visual": "pending-current-leadership-detail-rendered-comparison",
+      "interaction": "passed-local-source-and-contract-tests",
+      "checks": [
+        "Latest27c4fdbf source delta: tag/content/detail/divider, ordered palette and screen/print rules.",
+        "Detail-only and full detail under both print text policies retain host-provided text without mutation."
+      ],
       "remaining": [
-        "All source profile lengths, source/target complete print page comparison",
-        "Native print dialog and OS file save",
-        "Cross-browser and authenticated profile photo/font/export cases"
+        "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
+        "Authenticated deployed source and deployed revision binding."
       ]
     },
     "prism-panel-recipes": {
@@ -1011,7 +992,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 161,
+      "passed": 165,
       "failed": 0
     },
     "registry": {
@@ -1020,20 +1001,20 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-final-registry-install-typecheck-build",
+      "status": "passed-current-leadership-detail-real-install-typecheck-build",
       "items": 53,
       "modules": 52,
       "completeExamples": 32,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "source": "All52 installed TSX modules and CSS are exact emitted registry bytes. Vector notice is retained after its import; no transform exception was used.",
+      "source": "All52 installed TSX modules and CSS match final emitted registry bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Current real browser and A4 header/pagination comparison remain pending."
+      "runtime": "Current real browser and A4 comparison remain pending."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
-      "status": "published-http-and-browser-verified",
+      "status": "historical-public-readback; current-review-preview-pending",
       "url": "https://ui.pydemia.ai/prism",
       "readback": "Previous Tooltip publication: 119 fixture states; nine HTTP assets matched local bytes, registry SHA256 524ec86e783434311b6147339a6b2c0184d33948e06a7e1d638115215a1efae3.",
       "attempts": [
@@ -1120,17 +1101,11 @@
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 175,
-      "checked": 150,
-      "status": "partial-current-source-150-of175-actual320px-cua",
-      "previousVerifiedStates": 175,
-      "previousSourceCommit": "b4a502d8021277469e6a8d2862b0fb11482e1298",
-      "previousPartialChecked": 22,
-      "previousPartialSourceCommit": "c6b5d7ee09fe730346b80cf515608247dfd2910d",
-      "baseCommit": "59ff8bb467c71ef9e1208e9e3b3ed868a7cbd269",
-      "sourceSha256": "16906b727cf14b0d0a957cbf1733d175c2762c230947906908e74e6aa5ece567",
-      "previousSourceSha256": "15d1c35715767b09ed4f587ef896d80643f21b983f645af35f78ad219e29663a",
-      "pending": 25
+      "count": 197,
+      "checked": 0,
+      "pending": 197,
+      "status": "pending-current-leadership-detail-source-browser-policy",
+      "sourceSha256": "f2ee00893ee4f59e56bc661ed23805cfe7d4b4a342b64a152db9028258494847"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1209,11 +1184,11 @@
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 52,
-    "states": 195,
+    "states": 197,
     "checked": 0,
-    "status": "pending-current-profile-header-source-browser-policy",
-    "baseCommit": "cf38ab3d934afd2ec91dcb0cb748b0bf222dd827",
-    "sourceSha256": "b27a07b18ed2b915e5ab73219241dff4352d5fbbbb434ded0b329c1168103afd",
+    "status": "pending-current-leadership-detail-source-browser-policy",
+    "baseCommit": "78ef5a0301a710995d6768aac936b358a428f474",
+    "sourceSha256": "f2ee00893ee4f59e56bc661ed23805cfe7d4b4a342b64a152db9028258494847",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
     "inputCount": 71,
     "checks": [],
@@ -1491,12 +1466,16 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Leadership summary blue tag/content/detail/divider and print variant; print data propagation.",
       "Position card/reference version and host current-LIVE fallback.",
       "Admin user/group/position display/action changes and authorization-owned state.",
       "Chat render link behavior and sidebar/context changes."
     ],
-    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced."
+    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
+    "reviewedLeadershipDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+    }
   },
   "inputLabelReferenceComparison": {
     "status": "passed-selected-runtime-2026-10-09",
@@ -1551,72 +1530,116 @@
     "installedConsumer": "Fresh merged-source install with final emitted focus fix synchronized; tsc/Vite and real browser passed."
   },
   "leadershipVerification": {
-    "status": "passed-selected-local-runtime",
-    "source": "http://dev.prism.ai/sample/chat/candidate-profile-print",
-    "frame": {
-      "width": 160,
-      "height": 158
+    "status": "passed-local-source-and-contract-tests; current-rendered-comparison-pending",
+    "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "sourceSha256": "f2ee00893ee4f59e56bc661ed23805cfe7d4b4a342b64a152db9028258494847",
+    "sourceFields": {
+      "title": "summary.title",
+      "description": "summary.content",
+      "detail": "summary.description"
     },
-    "knownSourceValues": [
-      33,
-      32,
-      35
+    "colors": [
+      "#327BB7",
+      "#42938A",
+      "#DDB77D"
     ],
-    "consumerCases": 42,
-    "viewports": [
-      1280,
-      320,
-      390
-    ],
-    "manualWidths": [
-      140,
-      320,
-      800
-    ],
-    "scope": "Measured frame/styles/colors and selected synthetic state/size behavior; source and target screenshots inspected. Whole-page parity remains partial.",
-    "animation": "passed in isolated consumer",
-    "reducedMotion": "passed in isolated consumer",
-    "evidence": "fresh-final-leadership-20261009",
-    "fontRendering": {
-      "sourceColdGlyphWidths": [
-        29,
-        30,
-        32
-      ],
-      "sourceWarmGlyphWidths": [
-        35,
-        34,
-        35
-      ],
-      "targetGlyphWidths": [
-        35,
-        34,
-        35
-      ],
-      "warmGlyphBoxPositionMaxDelta": 1,
-      "warmGlyphBoxHeightMaxDelta": 2,
-      "interpretation": "Original cold canvas retained a different text rendering; warm sample remount matched target widths. A font-loading paint race is inferred, not a whole-page pixel-equivalence claim.",
-      "sourceFontFaces": "Pretendard400/500/600/700 loaded at observation; original uses static faces and target uses package variable face.",
-      "remaining": "Exact rasterization, all outside labels and browser/font combinations."
+    "screen": {
+      "boxPadding": 16,
+      "boxGap": 16,
+      "radius": 12,
+      "mainGap": 20,
+      "commentGap": 6,
+      "summary": "14px/700/#222222",
+      "detail": "14px/400/#363636",
+      "divider": "1px/#E3E5E5",
+      "captionWrapAt": 660,
+      "responsiveMainStackAt": 480,
+      "tagHeight": 21,
+      "longTypeWrapping": "Explicit wrapTitle or compact480px containers."
     },
-    "fontCases": {
-      "sizes": [
-        8,
-        24
+    "print": {
+      "boxPaddingPt": 8,
+      "boxGapPt": 8,
+      "radiusPt": 8,
+      "minHeightPt": 80,
+      "mainGapPt": 20,
+      "chartGapPt": 2,
+      "commentGapPt": 6,
+      "textPt": 10,
+      "tagMinHeightPt": 15,
+      "tagPaddingPt": [
+        3.5,
+        4,
+        0.5
       ],
-      "states": [
-        "long",
-        "missing"
-      ],
-      "count": 4,
-      "status": "passed"
+      "tagFontPt": 8,
+      "tagLineHeightPt": 11,
+      "tagHeightPt": 15
     },
-    "documentChecks": {
-      "states": 121,
-      "sourceReferenceLinks": "passed087811ff",
-      "profileHeader": "600/8px",
-      "rootOverflow": 0,
-      "pageErrors": 0
+    "interaction": "165 PRISM tests passed, including detail-only missing/zero data, text separation/escaping, whitespace omission and all print options/text policies without host mutation.",
+    "independentConsumer": "All52 installed TSX modules and CSS match final emitted registry bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
+    "browser": "pending; HTTP protocol-policy refusal is unresolved",
+    "publication": "review branch; production not-published",
+    "remaining": [
+      "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
+      "Authenticated deployed source and deployed revision binding."
+    ],
+    "previousComponents": {
+      "prism-chart": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "New deployed leadership print sample:160x158 frame,11px700 inside labels,three source colors",
+          "Typed SVG preserves supplied percentages,null and real zero; incomplete geometry has an unassigned sector",
+          "42 actual consumer cases across1280/320/390 viewport and140/320/800 manual widths passed with no root overflow",
+          "Adaptive radius and long-label legend preserve legibility; hidden data-table overflow corrected"
+        ],
+        "evidence": [
+          "reference-leadership-print-20261009",
+          "consumer-leadership-20261009"
+        ],
+        "remaining": [
+          "All original outside-label and animation states",
+          "Authenticated leadership domain",
+          "Complete page pixel parity"
+        ]
+      },
+      "prism-profile-sections": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "All eight tab recipes render",
+          "Experience topic changes displayed card",
+          "Comment save appends text and clears draft",
+          "320px profile recipe root does not overflow; tabs and compensation table scroll internally",
+          "LeadershipPieSummary uses source print padding16/gap20/radius12/border#b6bec9/white and13.333px caption;typedrecipe selects old summary or new pieSummary."
+        ],
+        "evidence": [
+          "local-profile-total",
+          "local-profile-expertise",
+          "local-profile-experience",
+          "local-profile-design",
+          "local-profile-agility",
+          "local-profile-attitude",
+          "local-profile-leadership",
+          "local-profile-comments",
+          "local-profile-interactions"
+        ],
+        "remaining": [
+          "Source domain recipe appearance comparison",
+          "empty/loading/error and long content states"
+        ]
+      },
+      "prism-profile-print": {
+        "visual": "passed-selected-synthetic-pdf-raster-and-html-render; original full-document parity pending",
+        "interaction": "Eight content tests, six pagination/abort tests, actual PDF/HTML/ZIP output and two-profile preview verified. Native isolated print request/Escape/afterprint cleanup, long two-profile preparation and standalone 320px viewer verified.",
+        "source": "087811ff local print mapping and seven chapter composition/styles; deployed source revision not established",
+        "remaining": [
+          "All source profile lengths, source/target complete print page comparison",
+          "Native print dialog and OS file save",
+          "Cross-browser and authenticated profile photo/font/export cases"
+        ]
+      }
     }
   },
   "profileExportVerification": {
@@ -2273,5 +2296,102 @@
     "provenance": "The unchanged vector notice is now after the import and survives real shadcn installation. All52 installed modules/CSS match emitted bytes with0 transform exceptions; font bytes and notices passed.",
     "confirmedUnchangedAtRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
     "siteBuild": "Standard site build,32 example contracts and generic current release verification passed."
+  },
+  "previousLeadershipDetailFixtureRenderChecks": {
+    "groups": 52,
+    "states": 195,
+    "checked": 0,
+    "status": "pending-current-profile-header-source-browser-policy",
+    "baseCommit": "cf38ab3d934afd2ec91dcb0cb748b0bf222dd827",
+    "sourceSha256": "b27a07b18ed2b915e5ab73219241dff4352d5fbbbb434ded0b329c1168103afd",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "inputCount": 71,
+    "checks": [],
+    "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
+    "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
+  },
+  "previousLeadershipVerification": {
+    "status": "passed-selected-local-runtime",
+    "source": "http://dev.prism.ai/sample/chat/candidate-profile-print",
+    "frame": {
+      "width": 160,
+      "height": 158
+    },
+    "knownSourceValues": [
+      33,
+      32,
+      35
+    ],
+    "consumerCases": 42,
+    "viewports": [
+      1280,
+      320,
+      390
+    ],
+    "manualWidths": [
+      140,
+      320,
+      800
+    ],
+    "scope": "Measured frame/styles/colors and selected synthetic state/size behavior; source and target screenshots inspected. Whole-page parity remains partial.",
+    "animation": "passed in isolated consumer",
+    "reducedMotion": "passed in isolated consumer",
+    "evidence": "fresh-final-leadership-20261009",
+    "fontRendering": {
+      "sourceColdGlyphWidths": [
+        29,
+        30,
+        32
+      ],
+      "sourceWarmGlyphWidths": [
+        35,
+        34,
+        35
+      ],
+      "targetGlyphWidths": [
+        35,
+        34,
+        35
+      ],
+      "warmGlyphBoxPositionMaxDelta": 1,
+      "warmGlyphBoxHeightMaxDelta": 2,
+      "interpretation": "Original cold canvas retained a different text rendering; warm sample remount matched target widths. A font-loading paint race is inferred, not a whole-page pixel-equivalence claim.",
+      "sourceFontFaces": "Pretendard400/500/600/700 loaded at observation; original uses static faces and target uses package variable face.",
+      "remaining": "Exact rasterization, all outside labels and browser/font combinations."
+    },
+    "fontCases": {
+      "sizes": [
+        8,
+        24
+      ],
+      "states": [
+        "long",
+        "missing"
+      ],
+      "count": 4,
+      "status": "passed"
+    },
+    "documentChecks": {
+      "states": 121,
+      "sourceReferenceLinks": "passed087811ff",
+      "profileHeader": "600/8px",
+      "rootOverflow": 0,
+      "pageErrors": 0
+    }
+  },
+  "previousLeadershipDetailGates": {
+    "currentFixtureStates": {
+      "count": 175,
+      "checked": 150,
+      "status": "partial-current-source-150-of175-actual320px-cua",
+      "previousVerifiedStates": 175,
+      "previousSourceCommit": "b4a502d8021277469e6a8d2862b0fb11482e1298",
+      "previousPartialChecked": 22,
+      "previousPartialSourceCommit": "c6b5d7ee09fe730346b80cf515608247dfd2910d",
+      "baseCommit": "59ff8bb467c71ef9e1208e9e3b3ed868a7cbd269",
+      "sourceSha256": "16906b727cf14b0d0a957cbf1733d175c2762c230947906908e74e6aa5ece567",
+      "previousSourceSha256": "15d1c35715767b09ed4f587ef896d80643f21b983f645af35f78ad219e29663a",
+      "pending": 25
+    }
   }
 }
