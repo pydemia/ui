@@ -257,7 +257,7 @@ import { PrismSixFrame } from "@/components/ui/prism-six-frame";
 
 ## Selection / Date / Pagination
 검색·다중 선택·기간 검증·페이지 탐색
-Contract: 선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 중복을 추가하지 않으며 첫 칩을 해제해도 나머지 값은 보존합니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다.
+Contract: 선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 중복을 추가하지 않으며 첫 칩을 해제해도 나머지 값은 보존합니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다. DatePicker displayFormat는YYYY-MM-DD(기본)/YYYY.MM.DD만지원하고placeholder를선택적으로지정합니다. 표시와수동입력은format을따르며value/onValueChange는기존ISO YYYY-MM-DD를유지합니다.
 States: default, disabled, readonly, loading, error, empty
 Registry: /prism/r/prism-selection.json
 Source: packages/prism/src/prism-selection.tsx
@@ -1465,6 +1465,88 @@ export function PositionManagementExample({ initialMode = "default", contextKey 
             <button type="button" onClick={() => setRoute({ source: route.source, restore: true })}>목록으로 이동</button></section> : <PositionListExample key={contextKey} mode={initialMode} source={route.source} contextKey={contextKey}
             snapshot={snapshot.current} restore={route.restore} records={records} onRecords={setRecords} syncStatus={syncStatus} onSyncStatus={setSyncStatus}
             onLeave={(state, id) => { snapshot.current = capturePrismPositionListSnapshot(state, { contextKey, locationKey: "synthetic-history" }); setRoute({ source: state.source, detail: id, restore: false }); }}/>}
+    </div>;
+}
+
+```
+
+## Administrator company groups / Notices
+회사 그룹 상태 변경과 공지 조회·현재 페이지 정렬·건별 삭제 결과 처리
+Contract: PrismCompanyGroupManagement와 PrismNoticeManagement는 필터 draft/applied, 행·전체 건수·page/sort/선택을 host에서 받습니다. 회사 그룹은6열(회사 정렬 없음)과 서버 정렬이며 조회/초기화/정렬은page1, 정렬은선택을유지합니다. 활성/비활성 확인은공개ID snapshot이고 비활성화의소속사용자영향을안내합니다. classifyStatusError가missing을확인하면해당요청ID를선택에서제거하고onGroupsMissing이재조회하며성공으로처리하지않습니다. 공지는6열이며sortPrismNoticePage로현재페이지에서만정렬하고page/total/선택을유지합니다. 회사가빈배열이면전체회사이고알수없는팝업상태는원문을보존하면서dash로표시합니다. host가UTC timestamp를원본의local 날짜로정규화해행에전달합니다. preparePrismNoticeFilters는팝업기간쌍/날짜/순서를검증하고등록일은한쪽을허용하며ISO draft를YYYY.MM.DD API 날짜로복사합니다. 잘못된조회는기존조건/page/선택을유지하며표시중인invalid수동날짜도조회하지않습니다. 필터없는0건은등록안내,필터있는0건은표검색안내이고조회오류를빈결과로바꾸지않습니다. onDelete는deletedIds/failures의정확한요청ID별결과를반환해야하며성공ID만선택에서제거하고실패항목은재시도합니다. 전체실패는확인창을유지하고부분성공은결과를안내하며onDeletionApplied가host cache를갱신합니다. 전체현재페이지가실제로삭제되었을때만이전page로이동합니다. settlePrismNoticeDeletion은건별서비스의bounded concurrency/AbortSignal/queued취소와순서있는성공·실패결과를지원합니다. 중복요청/busy/scopeKey/권한/unmount와완료callback안의동기scope교체를fence합니다. scopeKey는account/permission/applied query/page/provider 의미가바뀌면갱신합니다. 실제회원비활성화·서비스/RBAC/API/cache/route는host 책임이고예시는합성23행만바꿉니다. 원본64pxheader/140·140·436 회사그룹필터/120·120·275·275 공지필터/130px 날짜쌍/표를유지하고좁은컨테이너에필터wrap·날짜stack·표내부scroll을추가합니다.
+States: default, loading, empty, error, readonly, long, notice, partial, filtered-empty, missing
+Registry: /prism/r/prism-admin-lists.json
+Source: packages/prism/src/prism-admin-lists.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismCompanyGroupManagement, PrismNoticeManagement, createPrismCompanyGroupFilterDraft, normalizePrismCompanyGroupFilters, createPrismNoticeFilterDraft, preparePrismNoticeFilters, settlePrismNoticeDeletion, type PrismCompanyGroupRow, type PrismCompanyGroupAppliedFilters, type PrismCompanyGroupSort, type PrismNoticeListRow, type PrismNoticeAppliedFilters, type PrismNoticeListSort } from "@/components/ui/prism-admin-lists";
+
+type Mode = "default" | "loading" | "empty" | "error" | "readonly" | "long" | "notice" | "partial" | "filtered-empty" | "missing";
+const companies = [{ value: "demo", label: "가상전자" }, { value: "example", label: "예시사업" }];
+const initialGroups: PrismCompanyGroupRow[] = Array.from({ length: 23 }, (_, index) => ({ id: `synthetic-group-${index + 1}`, name: `가상 그룹 ${String(index + 1).padStart(2, "0")}`,
+    active: index % 3 !== 0, companies: [{ id: companies[index % 2].value, name: companies[index % 2].label }], registrant: "가상 관리자(가상전자)", createdAt: "2026.10.01", updatedAt: `2026.10.${String(index + 1).padStart(2, "0")}` }));
+const initialNotices: PrismNoticeListRow[] = Array.from({ length: 23 }, (_, index) => ({ id: `synthetic-notice-${index + 1}`, title: `가상 공지 ${String(index + 1).padStart(2, "0")}`,
+    companies: index % 2 ? [{ id: "demo", name: "가상전자" }] : [], popupStatus: index % 3 === 0 ? "ENDED" : index % 3 === 1 ? "ACTIVE" : "INACTIVE",
+    popupStartDate: "2026.10.01", popupEndDate: "2026.10.31", author: { name: "가상 작성자", company: "가상전자", email: "synthetic@example.com" }, createdDate: `2026.10.${String(index + 1).padStart(2, "0")}` }));
+async function delay(signal: AbortSignal) {
+    signal.throwIfAborted();
+    await new Promise<void>((resolve, reject) => {
+        const abort = () => { clearTimeout(timer); reject(signal.reason); };
+        const timer = setTimeout(() => { signal.removeEventListener("abort", abort); resolve(); }, 50);
+        signal.addEventListener("abort", abort, { once: true });
+    });
+    signal.throwIfAborted();
+}
+function CompanyGroupExample({ mode, requestScope }: { mode: Mode; requestScope: string }) {
+    const [records, setRecords] = useState(initialGroups), [filters, setFilters] = useState(() => createPrismCompanyGroupFilterDraft(companies));
+    const [applied, setApplied] = useState<PrismCompanyGroupAppliedFilters>(() => normalizePrismCompanyGroupFilters(filters, companies));
+    const [page, setPage] = useState(1), [sort, setSort] = useState<PrismCompanyGroupSort | null>({ column: "updatedAt", direction: "desc" }), [selected, setSelected] = useState<string[]>([]);
+    const [message, setMessage] = useState(""), [loading, setLoading] = useState(mode === "loading"), [error, setError] = useState(mode === "error" ? "합성 회사 그룹 조회 오류" : "");
+    const filtered = records.filter(row => (!applied.isActive.length || applied.isActive.includes(row.active)) && (!applied.companyIds.length || row.companies.some(company => applied.companyIds.includes(company.id))) && (!applied.keyword || row.name.includes(applied.keyword)));
+    const value = (row: PrismCompanyGroupRow) => sort?.column === "status" ? String(row.active) : String(row[sort?.column ?? "updatedAt"] ?? "");
+    const ordered = sort ? [...filtered].sort((a, b) => value(a).localeCompare(value(b), "ko") * (sort.direction === "asc" ? 1 : -1)) : filtered;
+    const pageCount = Math.max(1, Math.ceil(ordered.length / 10)), currentPage = Math.min(page, pageCount);
+    return <>
+        {loading&&<button type="button" onClick={() => setLoading(false)}>합성 로딩 종료</button>}
+        <PrismCompanyGroupManagement companies={companies} filters={filters} onFiltersChange={setFilters} onSearch={next => { setApplied(next); setError(""); }} rows={ordered.slice((currentPage - 1) * 10, currentPage * 10)} total={ordered.length}
+            selected={selected} onSelectionChange={setSelected} page={currentPage} pageCount={pageCount} onPageChange={setPage} sort={sort} onSortChange={setSort} readOnly={mode === "readonly"} loading={loading} error={error || undefined} onRetry={() => setError("")}
+            scopeKey={JSON.stringify([requestScope, applied, currentPage, sort])} onOpen={row => setMessage(`회사 그룹 상세 열기 의도: ${row.id}`)} onCreate={() => setMessage("회사 그룹 등록 의도")}
+            onStatusChange={async (_request, { signal }) => { await delay(signal); if (mode === "missing") throw new Error("Synthetic missing groups"); }}
+            classifyStatusError={() => ({ message: "합성 회사 그룹이 더 이상 존재하지 않습니다.", missing: mode === "missing" })}
+            onGroupsMissing={request => { setRecords(current => current.filter(row => !request.ids.includes(row.id))); setMessage("누락된 합성 그룹을 목록에서 다시 확인했습니다."); }}
+            onStatusApplied={request => { setRecords(current => current.map(row => request.ids.includes(row.id) ? { ...row, active: request.active } : row)); setMessage(`합성 그룹 ${request.ids.length}개 ${request.active ? "활성화" : "비활성화"} 완료`); }}/>
+        <p role="status">{message}</p>
+    </>;
+}
+function NoticeExample({ mode, requestScope }: { mode: Mode; requestScope: string }) {
+    const [records, setRecords] = useState(() => mode === "empty" ? [] : initialNotices.map(row => mode === "long" ? { ...row, title: row.title + " 매우 긴 공지 제목과 안내 내용으로 좁은 화면에서도 정보가 유지되는지 확인합니다." } : row));
+    const [filters, setFilters] = useState(() => ({ ...createPrismNoticeFilterDraft(companies), keyword: mode === "filtered-empty" ? "존재하지 않는 합성 공지" : "" }));
+    const [applied, setApplied] = useState<PrismNoticeAppliedFilters>(() => { const result = preparePrismNoticeFilters(filters, companies); if (!result.ok) throw new Error(result.message); return result.filters; });
+    const [page, setPage] = useState(1), [sort, setSort] = useState<PrismNoticeListSort | null>(null), [selected, setSelected] = useState<string[]>([]), [message, setMessage] = useState("");
+    const [partialFailure, setPartialFailure] = useState(mode === "partial"), [readOnly, setReadOnly] = useState(mode === "readonly"), [loading, setLoading] = useState(mode === "loading"), [error, setError] = useState(mode === "error" ? "합성 공지 조회 오류" : "");
+    const filtered = records.filter(row => (!applied.companyIds.length || !row.companies.length || row.companies.some(company => applied.companyIds.includes(company.id)))
+        && (!applied.popupStatus.length || applied.popupStatus.some(status => status === row.popupStatus)) && (!applied.keyword || row.title.includes(applied.keyword))
+        && (!applied.popupFrom || row.popupStartDate && row.popupStartDate >= applied.popupFrom) && (!applied.popupTo || row.popupEndDate && row.popupEndDate <= applied.popupTo)
+        && (!applied.createdFrom || row.createdDate >= applied.createdFrom) && (!applied.createdTo || row.createdDate <= applied.createdTo));
+    const pageCount = Math.max(1, Math.ceil(filtered.length / 10)), currentPage = Math.min(page, pageCount);
+    return <>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}><label><input type="checkbox" checked={partialFailure} onChange={event => setPartialFailure(event.target.checked)}/>두 번째 공지 삭제 실패 예시</label>
+            <label><input type="checkbox" checked={readOnly} onChange={event => setReadOnly(event.target.checked)}/>읽기 전용</label>{loading&&<button type="button" onClick={() => setLoading(false)}>합성 로딩 종료</button>}</div>
+        <PrismNoticeManagement companies={companies} filters={filters} applied={applied} onFiltersChange={setFilters} onSearch={next => { setApplied(next); setError(""); }} rows={filtered.slice((currentPage - 1) * 10, currentPage * 10)} total={filtered.length}
+            selected={selected} onSelectionChange={setSelected} page={currentPage} pageCount={pageCount} onPageChange={setPage} sort={sort} onSortChange={setSort} readOnly={readOnly} loading={loading} error={error || undefined} onRetry={() => setError("")}
+            scopeKey={JSON.stringify([requestScope, applied, currentPage, partialFailure])} onOpen={row => setMessage(`공지 상세 열기 의도: ${row.id}`)} onCreate={() => setMessage("공지 등록 의도")} dateInputEditable
+            onDelete={(request, { signal }) => settlePrismNoticeDeletion(request, async id => { await delay(signal); if (partialFailure && id === "synthetic-notice-2") throw new Error("Synthetic deletion failure"); }, { signal, concurrency: 3, getErrorMessage: () => "합성 공지2 삭제 실패" })}
+            onDeletionApplied={(_request, result) => { setRecords(current => current.filter(row => !result.deletedIds.includes(row.id))); setMessage(`합성 공지 ${result.deletedIds.length}개 삭제 완료, ${result.failures.length}개 실패`); }}/>
+        <p role="status">{message}</p>
+    </>;
+}
+/** Self-contained examples; every service mutation applies only to synthetic records. */
+export function AdminListsExample({ initialMode = "default", requestScope = "synthetic-account" }: { initialMode?: Mode; requestScope?: string }) {
+    const [family, setFamily] = useState(["empty", "long", "notice", "partial", "filtered-empty"].includes(initialMode) ? "notices" : "groups");
+    return <div data-prism="light" style={{ minWidth: 0 }}><p>합성 회사 그룹·공지 목록입니다. 실제 사용자·권한·공지를 변경하지 않습니다.</p>
+        <label>관리 목록 예제 <select value={family} onChange={event => setFamily(event.target.value)}><option value="groups">회사 그룹</option><option value="notices">공지사항</option></select></label>
+        {family === "groups" ? <CompanyGroupExample key={requestScope} mode={initialMode} requestScope={requestScope}/> : <NoticeExample key={requestScope} mode={initialMode} requestScope={requestScope}/>}
     </div>;
 }
 

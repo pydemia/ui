@@ -1418,7 +1418,12 @@
       "target": "prism-selection",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Optional dotted display and custom placeholder preserve canonical ISO model/default; input14px/500/23px line-height/20.125px height measured from current public source date sample. Full static/variable font/pixel and all size/state parity pending."
+      }
     },
     {
       "source": "components/ui/dialog/HRXConfirmDialog.tsx",
@@ -2464,7 +2469,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Administrator real role/status/sync authorization/API integration, other administrator lists and page-level access remain pending; user and position list source/synthetic composition reviewed separately.",
+      "Administrator real role/status/sync authorization/API and original page-level access,position-block/chat-log purposes remain pending. Source/synthetic user,position,company-group and notice lists reviewed separately.",
       "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -2497,6 +2502,17 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+    },
+    "reviewedCompanyNoticeListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+    },
+    "lastFetch": {
+      "observedAt": "2026-10-13",
+      "head": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "originDev": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "workingTree": "clean"
     }
   },
   "integrationReferences": [
@@ -2615,6 +2631,51 @@
         "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "observedAt": "2026-10-12",
         "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "pages/admin/company-groups/CompanyGroupPage.tsx",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "pages/admin/notices/NoticePage.tsx",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminDateRangeField.tsx",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "service/companyGroups.ts",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "service/notices.ts",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
       }
     }
   ],
