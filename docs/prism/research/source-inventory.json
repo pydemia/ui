@@ -275,10 +275,14 @@
     {
       "source": "components/chat/common/CandidateEvaluationHistory.tsx",
       "name": "CandidateEvaluationHistory",
-      "target": "prism-record",
+      "target": "prism-evaluation-history",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": null,
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/common/ChatHeader.tsx",
@@ -462,10 +466,14 @@
     {
       "source": "components/chat/favorite/FavoriteCandidateCard.tsx",
       "name": "FavoriteCandidateCard",
-      "target": "prism-profile",
+      "target": "prism-favorite-candidate",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismFavoriteProfile"
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": "PrismFavoriteProfile",
+      "additionalTargets": [
+        "prism-profile"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/favorite/FavoriteCandidateDetailTab.tsx",
@@ -478,10 +486,14 @@
     {
       "source": "components/chat/favorite/FavoriteCandidateList.tsx",
       "name": "FavoriteCandidateList",
-      "target": "prism-collection",
+      "target": "prism-favorite-candidate",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": null,
+      "additionalTargets": [
+        "prism-collection"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/main/ChatConversationSection.tsx",
@@ -1069,8 +1081,10 @@
       "name": "SuccessorCandidateFavoriteProfile",
       "target": "prism-profile",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismFavoriteProfile"
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": "PrismFavoriteProfile",
+      "additionalTargets": [],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/total/SuccessorCandidateBasicInfo.tsx",
@@ -1285,8 +1299,10 @@
       "name": "HRXFavoriteToggle",
       "target": "prism-primitives",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismFavoriteToggle"
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": "PrismFavoriteToggle",
+      "additionalTargets": [],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/ui/button/HRXFloatingChatBtn.tsx",
@@ -2310,7 +2326,7 @@
   "latestSourceAudit": {
     "observedAt": "2026-10-09",
     "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
-    "checkout": "dev fast-forwarded and clean",
+    "checkout": "dev fast-forwarded to27c4fdbf and clean",
     "previousMappedCount": 269,
     "newComponents": [
       "components/chat/successorCandidate/leadership/LeadershipPie.tsx",
@@ -2321,6 +2337,59 @@
     "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date.",
     "newPurposeMappedComponents": 4,
     "pendingComponents": [],
-    "localRecheckedAt": "2026-10-12"
+    "localRecheckedAt": "2026-10-12",
+    "fetchedRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "previousReferenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "changedFilesSinceReference": [
+      "src/components/admin/company-groups/CompanyGroupForm.module.scss",
+      "src/components/admin/company-groups/CompanyGroupForm.tsx",
+      "src/components/admin/positions/PositionForm.tsx",
+      "src/components/admin/users/UserForm.tsx",
+      "src/components/chat/conversation/ChatJSONRenderer.tsx",
+      "src/components/chat/conversation/ChatJSONRendererPanel.tsx",
+      "src/components/chat/conversation/ChatMarkdownRenderer.tsx",
+      "src/components/chat/conversation/ChatMarkdownRendererPanel.tsx",
+      "src/components/chat/position/PositionDetailView.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.module.scss",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+      "src/components/chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+      "src/components/chat/successorCandidate/leadership/mapLeadershipPie.ts",
+      "src/components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+      "src/components/chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts",
+      "src/layouts/chat/ChatSidebar.tsx",
+      "src/lib/axios.ts",
+      "src/pages/admin/positions/PositionFormPage.tsx",
+      "src/pages/admin/positions/PositionPage.tsx",
+      "src/pages/admin/positions/positionListRestore.ts",
+      "src/pages/admin/users/UserFormPage.tsx",
+      "src/pages/admin/users/UserManagementPage.tsx",
+      "src/pages/chat/ChatMain.tsx",
+      "src/pages/sample/chat/candidateProfilePrintDummy.ts",
+      "src/service/data-management/positionManagement.ts",
+      "src/service/hrx/agent.ts",
+      "src/service/recommendation/candidates.ts",
+      "src/service/users.ts",
+      "src/store/useAuthStore.ts"
+    ],
+    "unchangedProfileReferenceFiles": [
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateCard.tsx",
+      "src/components/chat/favorite/FavoriteCandidateCard.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateList.tsx",
+      "src/components/chat/favorite/FavoriteCandidateList.module.scss",
+      "src/components/chat/common/CandidateEvaluationHistory.tsx",
+      "src/components/chat/common/CandidateEvaluationHistory.module.scss",
+      "src/components/ui/button/HRXFavoriteToggle.tsx",
+      "src/styles/_btn.scss"
+    ],
+    "pendingRevisionAudit": [
+      "Leadership summary blue tag/content/detail/divider and print variant; print data propagation.",
+      "Position card/reference version and host current-LIVE fallback.",
+      "Admin user/group/position display/action changes and authorization-owned state.",
+      "Chat render link behavior and sidebar/context changes."
+    ],
+    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced."
   }
 }

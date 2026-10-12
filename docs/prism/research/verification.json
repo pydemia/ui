@@ -570,23 +570,15 @@
       ]
     },
     "prism-profile": {
-      "visual": "partial",
+      "visual": "pending",
       "interaction": "partial",
       "checks": [
-        "source empty state 175px total and 120px icon",
-        "source error state 236px with 70px padding and retry",
-        "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed",
-        "PrismSummaryBadge tooltipClassName/tooltipStyle을 본문에 적용. 계약 테스트와 실제 CUA에서 소비자 class,12px font/padding,280px maxWidth를 확인. 원본 모든 도움말 상태의 시각 비교는 대기.",
-        "Authenticated source tabs compared at 800px: 26px tabs, 37px row, 10px type, 8px radius, 4px gap and colors; flex widths differ by at most 0.03125px. Inactive color, flex distribution and inherited -1px margin corrected. Source expertise tab was hovered; hover is separately recorded."
-      ],
-      "evidence": [
-        "reference-common-empty-error",
-        "local-request-empty",
-        "local-request-error",
-        "tooltip-adaptive-runtime"
+        "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
       ],
       "remaining": [
-        "Remaining authenticated profile sections and all dynamic states; full-page pixel/font comparison."
+        "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
+        "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
+        "Authenticated original source and production."
       ]
     },
     "prism-feedback": {
@@ -990,28 +982,54 @@
       "remaining": [
         "Current deployed original and isolated-render style/scroll/long-content comparison; live data and auth state."
       ]
+    },
+    "prism-favorite-candidate": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
+      ],
+      "remaining": [
+        "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
+        "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
+        "Authenticated original source and production."
+      ]
+    },
+    "prism-evaluation-history": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
+      ],
+      "remaining": [
+        "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
+        "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
+        "Authenticated original source and production."
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 152,
+      "passed": 161,
       "failed": 0
     },
     "registry": {
-      "groups": 50,
-      "items": 51,
+      "groups": 52,
+      "items": 53,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-current-registry-install-typecheck-build",
-      "items": 51,
-      "completeExamples": 29,
+      "status": "passed-final-registry-install-typecheck-build",
+      "items": 53,
+      "modules": 52,
+      "completeExamples": 32,
       "typecheck": "passed",
       "viteBuild": "passed",
+      "source": "All52 installed TSX modules and CSS are exact emitted registry bytes. Vector notice is retained after its import; no transform exception was used.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Current panel recipes/position browser readback is unverified. The earlier selected source/installed comparisons are preserved separately and do not prove these new changes."
+      "runtime": "Current real browser and A4 header/pagination comparison remain pending."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1190,17 +1208,17 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 50,
-    "states": 185,
+    "groups": 52,
+    "states": 195,
     "checked": 0,
-    "status": "pending-current-panel-recipes-source-browser-policy",
-    "baseCommit": "4c9f7993242ab777c2d06172e04a352f19a4d227",
-    "sourceSha256": "2c69397ecc24ca100f693a5ce6959ca3cedcc9f65160c02a2f30a43b97efc828",
+    "status": "pending-current-profile-header-source-browser-policy",
+    "baseCommit": "cf38ab3d934afd2ec91dcb0cb748b0bf222dd827",
+    "sourceSha256": "b27a07b18ed2b915e5ab73219241dff4352d5fbbbb434ded0b329c1168103afd",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
-    "inputCount": 68,
+    "inputCount": 71,
     "checks": [],
-    "claim": "Previous 150/175 checks are retained at their older source fingerprint; new current-source browser checks have not run.",
-    "pendingReason": "Existing HTTP URL protocol-policy rejection has not been resolved; browser inventory visibility alone is not page-operation verification."
+    "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
+    "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1309,7 +1327,8 @@
       "Full authenticated original screen/state and print export comparison",
       "Native dialog paper/margin/fragmentation, OS save and physical output",
       "Remaining original long-content and domain states",
-      "Current Profile/Memo/Position/Chat panel recipes, guarded leave confirmation and source-aligned position detail; all current manifest states."
+      "Current Profile/Memo/Position/Chat panel recipes, guarded leave confirmation and source-aligned position detail; all current manifest states.",
+      "Current source profile header, evaluation/favorite/portrait interaction and A4 header/pagination after metadata changes."
     ]
   },
   "fileSelectionVerification": {
@@ -1422,7 +1441,62 @@
       "added": 10,
       "unreviewedPaths": 0,
       "coverageClaim": "Reviewing a path is separate fromimplementation/state/parity completion."
-    }
+    },
+    "fetchedRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "localRecheckedAt": "2026-10-12",
+    "checkout": "dev fast-forwarded to27c4fdbf and clean",
+    "previousReferenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "changedFilesSinceReference": [
+      "src/components/admin/company-groups/CompanyGroupForm.module.scss",
+      "src/components/admin/company-groups/CompanyGroupForm.tsx",
+      "src/components/admin/positions/PositionForm.tsx",
+      "src/components/admin/users/UserForm.tsx",
+      "src/components/chat/conversation/ChatJSONRenderer.tsx",
+      "src/components/chat/conversation/ChatJSONRendererPanel.tsx",
+      "src/components/chat/conversation/ChatMarkdownRenderer.tsx",
+      "src/components/chat/conversation/ChatMarkdownRendererPanel.tsx",
+      "src/components/chat/position/PositionDetailView.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.module.scss",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+      "src/components/chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+      "src/components/chat/successorCandidate/leadership/mapLeadershipPie.ts",
+      "src/components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+      "src/components/chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts",
+      "src/layouts/chat/ChatSidebar.tsx",
+      "src/lib/axios.ts",
+      "src/pages/admin/positions/PositionFormPage.tsx",
+      "src/pages/admin/positions/PositionPage.tsx",
+      "src/pages/admin/positions/positionListRestore.ts",
+      "src/pages/admin/users/UserFormPage.tsx",
+      "src/pages/admin/users/UserManagementPage.tsx",
+      "src/pages/chat/ChatMain.tsx",
+      "src/pages/sample/chat/candidateProfilePrintDummy.ts",
+      "src/service/data-management/positionManagement.ts",
+      "src/service/hrx/agent.ts",
+      "src/service/recommendation/candidates.ts",
+      "src/service/users.ts",
+      "src/store/useAuthStore.ts"
+    ],
+    "unchangedProfileReferenceFiles": [
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateCard.tsx",
+      "src/components/chat/favorite/FavoriteCandidateCard.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateList.tsx",
+      "src/components/chat/favorite/FavoriteCandidateList.module.scss",
+      "src/components/chat/common/CandidateEvaluationHistory.tsx",
+      "src/components/chat/common/CandidateEvaluationHistory.module.scss",
+      "src/components/ui/button/HRXFavoriteToggle.tsx",
+      "src/styles/_btn.scss"
+    ],
+    "pendingRevisionAudit": [
+      "Leadership summary blue tag/content/detail/divider and print variant; print data propagation.",
+      "Position card/reference version and host current-LIVE fallback.",
+      "Admin user/group/position display/action changes and authorization-owned state.",
+      "Chat render link behavior and sidebar/context changes."
+    ],
+    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced."
   },
   "inputLabelReferenceComparison": {
     "status": "passed-selected-runtime-2026-10-09",
@@ -2129,5 +2203,75 @@
     "independentConsumer": "All51 items installed using shadcn;29 complete examples typechecked, Vite built, font bytes and asset notices checked. Current installed recipe/panel/position/profile sources match emitted registry bytes.",
     "testEvidence": "panel-recipes-full-tests.log:152 passed/0 failed;panel-recipes-guard-tests.log:9 passed/0 failed.",
     "siteBuild": "Standard npm run build passed; generic current release remained sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896."
+  },
+  "previousProfileHeaderFixtureRenderChecks": {
+    "groups": 50,
+    "states": 185,
+    "checked": 0,
+    "status": "pending-current-panel-recipes-source-browser-policy",
+    "baseCommit": "4c9f7993242ab777c2d06172e04a352f19a4d227",
+    "sourceSha256": "2c69397ecc24ca100f693a5ce6959ca3cedcc9f65160c02a2f30a43b97efc828",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "inputCount": 68,
+    "checks": [],
+    "claim": "Previous 150/175 checks are retained at their older source fingerprint; new current-source browser checks have not run.",
+    "pendingReason": "Existing HTTP URL protocol-policy rejection has not been resolved; browser inventory visibility alone is not page-operation verification."
+  },
+  "previousProfileHeaderConsumerChecks": {
+    "status": "passed-current-registry-install-typecheck-build",
+    "items": 51,
+    "completeExamples": 29,
+    "typecheck": "passed",
+    "viteBuild": "passed",
+    "portableFont": "emitted SHA256 matched",
+    "assetNotice": "installed and checked",
+    "runtime": "Current panel recipes/position browser readback is unverified. The earlier selected source/installed comparisons are preserved separately and do not prove these new changes."
+  },
+  "profileHeaderVerification": {
+    "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "observedAt": "2026-10-12",
+    "sourceSha256": "b27a07b18ed2b915e5ab73219241dff4352d5fbbbb434ded0b329c1168103afd",
+    "source": [
+      "SuccessorCandidateFavoriteProfile.tsx/module.scss",
+      "FavoriteCandidateCard.tsx/module.scss",
+      "FavoriteCandidateList.tsx/module.scss",
+      "CandidateEvaluationHistory.tsx/module.scss",
+      "HRXFavoriteToggle.tsx/_btn.scss"
+    ],
+    "sourceGeometry": "implemented-from-source-not-browser-verified",
+    "interaction": "Current161 PRISM tests passed including9 new profile/header cases. Subsequent vector-notice relocation changes no executable vector declarations.",
+    "browser": "pending-no-policy-bypass",
+    "publication": "not-published",
+    "remaining": [
+      "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
+      "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
+      "Authenticated original source and production."
+    ],
+    "previousComponents": {
+      "prism-profile": {
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "source empty state 175px total and 120px icon",
+          "source error state 236px with 70px padding and retry",
+          "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed",
+          "PrismSummaryBadge tooltipClassName/tooltipStyle을 본문에 적용. 계약 테스트와 실제 CUA에서 소비자 class,12px font/padding,280px maxWidth를 확인. 원본 모든 도움말 상태의 시각 비교는 대기.",
+          "Authenticated source tabs compared at 800px: 26px tabs, 37px row, 10px type, 8px radius, 4px gap and colors; flex widths differ by at most 0.03125px. Inactive color, flex distribution and inherited -1px margin corrected. Source expertise tab was hovered; hover is separately recorded."
+        ],
+        "evidence": [
+          "reference-common-empty-error",
+          "local-request-empty",
+          "local-request-error",
+          "tooltip-adaptive-runtime"
+        ],
+        "remaining": [
+          "Remaining authenticated profile sections and all dynamic states; full-page pixel/font comparison."
+        ]
+      }
+    },
+    "independentConsumer": "All52 installed TSX modules and CSS are exact emitted registry bytes. Vector notice is retained after its import; no transform exception was used.",
+    "provenance": "The unchanged vector notice is now after the import and survives real shadcn installation. All52 installed modules/CSS match emitted bytes with0 transform exceptions; font bytes and notices passed.",
+    "confirmedUnchangedAtRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "siteBuild": "Standard site build,32 example contracts and generic current release verification passed."
   }
 }

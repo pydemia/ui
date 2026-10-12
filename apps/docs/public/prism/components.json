@@ -8,7 +8,7 @@
     "latestSourceAudit": {
       "observedAt": "2026-10-09",
       "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
-      "checkout": "dev fast-forwarded and clean",
+      "checkout": "dev fast-forwarded to27c4fdbf and clean",
       "previousMappedCount": 269,
       "newComponents": [
         "components/chat/successorCandidate/leadership/LeadershipPie.tsx",
@@ -19,7 +19,60 @@
       "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date.",
       "newPurposeMappedComponents": 4,
       "pendingComponents": [],
-      "localRecheckedAt": "2026-10-12"
+      "localRecheckedAt": "2026-10-12",
+      "fetchedRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "previousReferenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "changedFilesSinceReference": [
+        "src/components/admin/company-groups/CompanyGroupForm.module.scss",
+        "src/components/admin/company-groups/CompanyGroupForm.tsx",
+        "src/components/admin/positions/PositionForm.tsx",
+        "src/components/admin/users/UserForm.tsx",
+        "src/components/chat/conversation/ChatJSONRenderer.tsx",
+        "src/components/chat/conversation/ChatJSONRendererPanel.tsx",
+        "src/components/chat/conversation/ChatMarkdownRenderer.tsx",
+        "src/components/chat/conversation/ChatMarkdownRendererPanel.tsx",
+        "src/components/chat/position/PositionDetailView.tsx",
+        "src/components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+        "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.module.scss",
+        "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+        "src/components/chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+        "src/components/chat/successorCandidate/leadership/mapLeadershipPie.ts",
+        "src/components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+        "src/components/chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts",
+        "src/layouts/chat/ChatSidebar.tsx",
+        "src/lib/axios.ts",
+        "src/pages/admin/positions/PositionFormPage.tsx",
+        "src/pages/admin/positions/PositionPage.tsx",
+        "src/pages/admin/positions/positionListRestore.ts",
+        "src/pages/admin/users/UserFormPage.tsx",
+        "src/pages/admin/users/UserManagementPage.tsx",
+        "src/pages/chat/ChatMain.tsx",
+        "src/pages/sample/chat/candidateProfilePrintDummy.ts",
+        "src/service/data-management/positionManagement.ts",
+        "src/service/hrx/agent.ts",
+        "src/service/recommendation/candidates.ts",
+        "src/service/users.ts",
+        "src/store/useAuthStore.ts"
+      ],
+      "unchangedProfileReferenceFiles": [
+        "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+        "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.module.scss",
+        "src/components/chat/favorite/FavoriteCandidateCard.tsx",
+        "src/components/chat/favorite/FavoriteCandidateCard.module.scss",
+        "src/components/chat/favorite/FavoriteCandidateList.tsx",
+        "src/components/chat/favorite/FavoriteCandidateList.module.scss",
+        "src/components/chat/common/CandidateEvaluationHistory.tsx",
+        "src/components/chat/common/CandidateEvaluationHistory.module.scss",
+        "src/components/ui/button/HRXFavoriteToggle.tsx",
+        "src/styles/_btn.scss"
+      ],
+      "pendingRevisionAudit": [
+        "Leadership summary blue tag/content/detail/divider and print variant; print data propagation.",
+        "Position card/reference version and host current-LIVE fallback.",
+        "Admin user/group/position display/action changes and authorization-owned state.",
+        "Chat render link behavior and sidebar/context changes."
+      ],
+      "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced."
     }
   },
   "sourceCoverage": {
@@ -646,6 +699,14 @@
           "kind": "type"
         },
         {
+          "name": "PrismCandidatePortraitProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidatePortrait",
+          "kind": "component"
+        },
+        {
           "name": "PrismCandidateCardProps",
           "kind": "type"
         },
@@ -1022,45 +1083,40 @@
       "name": "Candidate profile / Evidence",
       "category": "Domain",
       "purpose": "후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시",
-      "contract": "PrismProfileTab은 종합·전문성·성공경험·Design·Agility·Attitude·Leadership·Mgmt Comments의 안정 ID입니다. 분류별 sections는 독립 컴포넌트 slot입니다. 상세 분류 탭은 원본26px/10px/4px간격·내용에 따른flex너비를 유지하며660px 이하에서는4열grid로 전환합니다. 누락된 근거는 정보 없음으로 남기고 UI가 평가하지 않습니다. PrismSummaryBadge의 tooltipClassName과 tooltipStyle은 도움말 본문에 적용하며 trigger와 빈 summary 판정을 바꾸지 않습니다.",
+      "contract": "PrismProfile은 제어형8분류와 원본132px/gap12 헤더를 조합합니다. 이름·ELP·생년월/tenure 태그, 우측Print/Favorite20px, 계열/직무·12px 로고/직책·평가 이력·하단메모/blue 건수를 표시합니다. tenure/affiliation/jobFunction은 호스트 문자열이며 명시된 빈문자열을 다른 값으로 덮지 않습니다. companyField/domain은 legacy alias입니다. loading은 stale header와 동작을 감추며 sections의 별도load/error와 candidate 변경의 activeTab reset은 호스트 소유입니다. favorite/activeTab과 favoriteBusy/printBusy/readOnly는 제어형이고 readOnly는 즐겨찾기 변경만 막습니다. Portrait는 subject/URL 변경 시 재시도하고 보호URL/인증을 해석하지 않습니다. 좁은 본문은 사진/정보를 줄바꿈하고 긴 정보를 보존합니다. print는80pt 사진/10pt 정보/18pt 태그를 사용하며 callbacks가 없으면 앱 동작을 포함하지 않습니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty",
         "loading",
-        "error"
+        "error",
+        "readonly",
+        "long"
       ],
       "source": [
         "chat/successorCandidate/SuccessorCandidateDetail.tsx",
+        "chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
         "chat/successorCandidate/OutlineBox.tsx",
         "chat/successorCandidate/BadgeSummary.tsx",
         "chat/successorCandidate/total/SuccessorCandidateBasicInfo.tsx",
         "chat/successorCandidate/total/SuccessorCandidateCareerTimeline.tsx",
         "chat/successorCandidate/competence/DesignCompetenceMatrix.tsx"
       ],
-      "usage": "import { PrismProfile } from \"@pydemia/prism\";\n<PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab} sections={sections} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismProfile, type PrismProfileTab, type PrismCandidate } from \"@pydemia/prism\";\nexport function ProfileExample() {\n  const [tab, setTab] = useState<PrismProfileTab>(\"total\");\n  const [favorite, setFavorite] = useState(false);\n  const [action, setAction] = useState(\"\");\n  const candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", birthDate: \"1980.01\", executiveYears: 0,\n    recentEvaluations: [{ year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" }] };\n  return <div data-prism=\"light\"><PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab}\n    favorite={favorite} onFavoriteChange={setFavorite} commentCount={0}\n    onComments={() => setAction(\"메모 열기 intent\")} onPrint={() => setAction(\"인쇄 intent\")}\n    sections={{ total: <p>호스트가 제공한 후보자 상세 영역</p> }} /><p role=\"status\">{action}</p></div>;\n}",
       "sourcePath": "packages/prism/src/prism-profile.tsx",
       "previewUrl": "/prism?component=prism-profile",
       "embedUrl": "/prism?component=prism-profile&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-profile&view=responsive",
       "verification": {
-        "visual": "partial",
+        "visual": "pending",
         "interaction": "partial",
         "checks": [
-          "source empty state 175px total and 120px icon",
-          "source error state 236px with 70px padding and retry",
-          "Shared PRISM Tooltip surface/arrow used by SUMMARY and truncated Avatar; selected actual focus/Escape/touch behavior passed",
-          "PrismSummaryBadge tooltipClassName/tooltipStyle을 본문에 적용. 계약 테스트와 실제 CUA에서 소비자 class,12px font/padding,280px maxWidth를 확인. 원본 모든 도움말 상태의 시각 비교는 대기.",
-          "Authenticated source tabs compared at 800px: 26px tabs, 37px row, 10px type, 8px radius, 4px gap and colors; flex widths differ by at most 0.03125px. Inactive color, flex distribution and inherited -1px margin corrected. Source expertise tab was hovered; hover is separately recorded."
-        ],
-        "evidence": [
-          "reference-common-empty-error",
-          "local-request-empty",
-          "local-request-error",
-          "tooltip-adaptive-runtime"
+          "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
         ],
         "remaining": [
-          "Remaining authenticated profile sections and all dynamic states; full-page pixel/font comparison."
+          "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
+          "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
+          "Authenticated original source and production."
         ]
       },
       "exports": [
@@ -1105,12 +1161,16 @@
           "kind": "component"
         },
         {
+          "name": "PrismFavoriteProfileProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismFavoriteProfile",
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismProfile } from \"@/components/ui/prism-profile\";\n<PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab} sections={sections} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismProfile, type PrismProfileTab } from \"@/components/ui/prism-profile\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\nexport function ProfileExample() {\n  const [tab, setTab] = useState<PrismProfileTab>(\"total\");\n  const [favorite, setFavorite] = useState(false);\n  const [action, setAction] = useState(\"\");\n  const candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", birthDate: \"1980.01\", executiveYears: 0,\n    recentEvaluations: [{ year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" }] };\n  return <div data-prism=\"light\"><PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab}\n    favorite={favorite} onFavoriteChange={setFavorite} commentCount={0}\n    onComments={() => setAction(\"메모 열기 intent\")} onPrint={() => setAction(\"인쇄 intent\")}\n    sections={{ total: <p>호스트가 제공한 후보자 상세 영역</p> }} /><p role=\"status\">{action}</p></div>;\n}"
     },
     {
       "id": "prism-content",
@@ -1789,6 +1849,119 @@
       "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismFileDropzone, PrismFileAttach } from \"@/components/ui/prism-utility\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { type PrismAttachment } from \"@/components/ui/prism-admin\";\nexport function FileSelectionExample() {\n    const nextId = useRef(0);\n    const [files, setFiles] = useState<PrismAttachment[]>([]);\n    const [error, setError] = useState(\"\");\n    function select(selected: File[]) {\n        // Upload in your host; update status from its result. This demo only stores names.\n        setFiles(current => [...current, ...selected.map(file => ({\n            id: `file-${nextId.current++}`, name: file.name, status: \"ready\" as const,\n            sizeLabel: `${Math.max(1, Math.round(file.size / 1024))}KB`,\n        }))]);\n    }\n    const remove = (id: string) => setFiles(current => current.filter(file => file.id !== id));\n    return <section data-prism=\"light\">\n        <PrismFileDropzone files={files} onFilesSelected={select} onRemove={remove}\n            onInvalid={reason => setError(reason === \"partial\" ? \"일부 파일만 첨부되었습니다.\" : \"파일을 확인해 주세요.\")} />\n        <PrismFileAttach files={files} onFilesSelected={select} onRemove={remove} />\n        {error && <p role=\"alert\">{error}<PrismButton variant=\"shape\" onClick={() => setError(\"\")}>닫기</PrismButton></p>}\n    </section>;\n}"
     },
     {
+      "id": "prism-evaluation-history",
+      "name": "Evaluation badges / Grouped years",
+      "category": "Domain",
+      "purpose": "원본 최근 평가의 정렬·강조 배지·연도 묶음과 개별값 표시",
+      "contract": "기본 source variant는 공백/null을 제외하고 유효한4자리 연도 내림차순으로 배지와 연도 묶음을 표시합니다. 괄호 등급은 표시용 강조이며 active가 명시되면 그 값을 우선합니다. 입력/보관 원문을 변경하지 않고0문자열을 보존합니다. 알 수 없는 연도는 원문/입력 순서를 유지하고 유효 연도 뒤에 표시합니다. Source empty는 null이며 explicit은 개별grade/year·null의--·빈이력 안내를 유지합니다. empty slot은 명시적 null도 존중합니다. 배지는 각 연도의 접근 가능한 설명을 제공하고 평가 계산/사람 순위/API를 수행하지 않습니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "long"
+      ],
+      "source": [
+        "chat/common/CandidateEvaluationHistory.tsx"
+      ],
+      "usage": "import { PrismEvaluationHistory } from \"@pydemia/prism\";\nexport function EvaluationHistoryExample() {\n  return <div data-prism=\"light\"><PrismEvaluationHistory items={[\n    { year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: null },\n  ]} /></div>;\n}",
+      "sourcePath": "packages/prism/src/prism-evaluation-history.tsx",
+      "previewUrl": "/prism?component=prism-evaluation-history",
+      "embedUrl": "/prism?component=prism-evaluation-history&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-evaluation-history&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
+        ],
+        "remaining": [
+          "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
+          "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
+          "Authenticated original source and production."
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismEvaluationRecord",
+          "kind": "type"
+        },
+        {
+          "name": "PrismEvaluationHistoryProps",
+          "kind": "type"
+        },
+        {
+          "name": "preparePrismEvaluationHistory",
+          "kind": "function"
+        },
+        {
+          "name": "PrismEvaluationHistory",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { PrismEvaluationHistory } from \"@/components/ui/prism-evaluation-history\";\nexport function EvaluationHistoryExample() {\n  return <div data-prism=\"light\"><PrismEvaluationHistory items={[\n    { year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: null },\n  ]} /></div>;\n}"
+    },
+    {
+      "id": "prism-favorite-candidate",
+      "name": "Favorite candidate card / Responsive grid",
+      "category": "Domain",
+      "purpose": "즐겨찾기 목록의70px 사진·정보·전문 분야/평가 카드와 독립 동작·반응형/수동 크기",
+      "contract": "원본16px padding/12px radius·70px 사진·121px 정보 영역·12px 흰 전문 분야/평가 패널을 사용합니다. 긴 정보는 min-height/줄바꿈으로 보존합니다. 상세와 즐겨찾기는 형제 native buttons이며 callback 없는 상세 action을 생성하지 않습니다. favorite/selected/busy/readOnly는 호스트 값이고 API 저장/성공 toast를 모사하지 않습니다. 초기 favorite=true는 즐겨찾기 카드의 표시 기본값이며 실제 계정 상태는 호스트가 제공합니다. Grid는 source3열/gap10,600px 이하2열/360px 이하1열과 opt-in resize/overflow를 소유한 container입니다. Collection.cardVariant=favorite로 조합하고 필터/조회/총건수/페이지 데이터는 호스트 경계입니다.",
+      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "states": [
+        "default",
+        "empty",
+        "loading",
+        "readonly",
+        "long"
+      ],
+      "source": [
+        "chat/favorite/FavoriteCandidateCard.tsx",
+        "chat/favorite/FavoriteCandidateList.tsx"
+      ],
+      "usage": "import { useState } from \"react\";\nimport { PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid, type PrismCandidate } from \"@pydemia/prism\";\nexport function FavoriteCandidatesExample() {\n  const [favorite, setFavorite] = useState(true);\n  const [selected, setSelected] = useState(\"\");\n  const candidate: PrismCandidate = { id: \"synthetic-favorite\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", expertAreas: [\"기술\", \"전략\"],\n    recentEvaluations: [{ year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: \"B\" }] };\n  return <div data-prism=\"light\"><PrismFavoriteCandidateGrid resize=\"both\" style={{ width: \"100%\", height: 440 }}>\n    <PrismFavoriteCandidateCard candidate={candidate} favorite={favorite} onFavoriteChange={setFavorite}\n      selected={selected === candidate.id} onOpen={item => setSelected(item.id)} />\n  </PrismFavoriteCandidateGrid><p role=\"status\">{selected || \"선택 없음\"}</p></div>;\n}",
+      "sourcePath": "packages/prism/src/prism-favorite-candidate.tsx",
+      "previewUrl": "/prism?component=prism-favorite-candidate",
+      "embedUrl": "/prism?component=prism-favorite-candidate&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-favorite-candidate&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
+        ],
+        "remaining": [
+          "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
+          "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
+          "Authenticated original source and production."
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismFavoriteCandidateCardProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismFavoriteCandidateGridProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismFavoriteCandidateGrid",
+          "kind": "component"
+        },
+        {
+          "name": "PrismFavoriteCandidateSkeleton",
+          "kind": "component"
+        },
+        {
+          "name": "PrismFavoriteCandidateCard",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid } from \"@/components/ui/prism-favorite-candidate\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\nexport function FavoriteCandidatesExample() {\n  const [favorite, setFavorite] = useState(true);\n  const [selected, setSelected] = useState(\"\");\n  const candidate: PrismCandidate = { id: \"synthetic-favorite\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", expertAreas: [\"기술\", \"전략\"],\n    recentEvaluations: [{ year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: \"B\" }] };\n  return <div data-prism=\"light\"><PrismFavoriteCandidateGrid resize=\"both\" style={{ width: \"100%\", height: 440 }}>\n    <PrismFavoriteCandidateCard candidate={candidate} favorite={favorite} onFavoriteChange={setFavorite}\n      selected={selected === candidate.id} onOpen={item => setSelected(item.id)} />\n  </PrismFavoriteCandidateGrid><p role=\"status\">{selected || \"선택 없음\"}</p></div>;\n}"
+    },
+    {
       "id": "prism-record",
       "name": "History / Compensation / Validation / Comment",
       "category": "Domain",
@@ -1802,7 +1975,6 @@
         "error"
       ],
       "source": [
-        "chat/common/CandidateEvaluationHistory.tsx",
         "chat/successorCandidate/total/SuccessorCandidateCompensation.tsx",
         "chat/successorCandidate/expertise/SurveyValidation.tsx",
         "chat/successorCandidate/expertise/ValidationItem.tsx",
@@ -1827,10 +1999,6 @@
         ]
       },
       "exports": [
-        {
-          "name": "PrismEvaluationHistory",
-          "kind": "component"
-        },
         {
           "name": "PrismCompensationTable",
           "kind": "component"
@@ -2409,7 +2577,7 @@
       "name": "Filters / Candidate list / Board / Memo",
       "category": "Domain",
       "purpose": "후보 필터·카드/표 보기·후계자 Board·메모 작성",
-      "contract": "필터·조회·초기화·뷰 모드는 controlled입니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지를 지원합니다.",
+      "contract": "필터·조회·초기화·뷰 모드는 controlled입니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지를 지원합니다. cardVariant=favorite는 원본 즐겨찾기 카드/grid/skeleton을 조합합니다. favoriteBusyIds/readOnly는 변경만 보호하고 조회·뷰 선택은 유지합니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
