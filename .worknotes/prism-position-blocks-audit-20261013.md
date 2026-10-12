@@ -1,6 +1,6 @@
 # 포지션 블록 관리 원본과 독립 계약
 
-직전 관리자 목록 단계는 source/generated commits 4d973a9e/65734935, 실제 shadcn 설치, 선택한 browser 동작, CI와 검토 preview 자산 readback까지 확인했습니다. 이전 goal 턴은 component count의 정적 의존관계를 현재 원본에서 재실행하고 파일 수와 설치 그룹 수의 혼동을 바로잡은 조사 진척입니다. 기존 admin-list 게시 기록과 소비자 산출물을 보존합니다.
+직전 관리자 목록 단계는 source/generated commits 4d973a9e/65734935, 실제 shadcn 설치, 선택한 browser 동작, CI와 검토 preview 자산 readback까지 확인했습니다. 직전 수 산정 질문에서는 현재 분류를 재확인했으며 구현 상태의 증가는 없었습니다. 이번 continuation에서는 다음 안전한 작업인 블록 목록·편집·삭제의 누락 목적을 구현했습니다. 기존 admin-list 게시 기록과 소비자 산출물을 보존합니다.
 
 현재 원본 frontend 27c4fdbf3e73234b7ab5c46e379a04d083c12df8의 PositionBlockPage, CriteriaDialog, JobCriteriaDialog, CriteriaDeleteDialog, Tag/Section/영향 요약의 TSX/SCSS와 mapBlocks를 읽었습니다. LIVE/TEMP, 산업·직책·직무의 구분, 직책 읽기 전용, TEMP scheduled/running 잠금, 삭제 상태 제외 count, 직무 대분류 3열과 변경 tag를 재현합니다. 목록에는 원본에 없는 검색을 추가하지 않습니다.
 
@@ -25,3 +25,11 @@
 설치browser에서도영향확인후직무수정/중복재매핑차단/보조직무해제/삭제가동작했고320px dialog296/scroll296,표viewport264/scroll760,consolewarn/error0을확인했습니다. 원본에없는표caption의시각적제목을숨기면서table의접근성명칭을유지했고마지막CSS도다시설치해57 TSX/CSS exact bytes/38예제와mobile검증을통과했습니다. 최종재매핑screenshot을같은파일에갱신했습니다. 임시설치tab16/17과dev sessions71230/83126을닫고모두종료130을확인했습니다. viewport는reset했고기존workspace tab9와새tab15는handoff로보존합니다. 기존source/user 탭은변경하지않았습니다.
 
 최종source fingerprint8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5/82inputs입니다. 57그룹/58registry/38예제/244fixture이며현재선택browser증거는13개고유상태입니다. 표준site build/registry contract·dependency·usage 검사와generic snapshot sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896이통과했습니다. canonical4개research는docs복사본과일치합니다. 원본비벡터186개는여전히파일수이고원본purpose매핑49 primary/50 total그룹은최종목표수나완료수가아닙니다. source/generatedcommit과검토게시확인을이어갑니다.
+
+Source4d1a662d/generated74c29ce670334d0bad5be052ce96739cd2ec56b6를검토branch에push했습니다. credential exact-match0/config보존이며PR162는draft/base main/정확한74c29ce6입니다. 새preview dpl_74S8nqPFW7HfMoJCF1fsABKEf935는READY/target null/동일SHA이며https://pydemia-9xv8j6xt2-pydemia-7822.vercel.app의8개자산이로컬과exact bytes/SHA일치했습니다. CI38278773605의후속상태를확인중입니다.
+
+추가공통스타일읽기에서AdminAiGenerateButton의wrapper는column/8px이고재생성notice는Red50/Red400·14pxInfoIcon·6px10px padding·12px500이었습니다. OutlineBox는16pxpadding/12pxradius/Btn-1 border/white이고소직무삭제는12px500/Red300/padding4px0입니다. 기존단계는이부분을가로회색notice/8px박스/공통shape버튼으로표시해source일치가부족했습니다. 별도source보정으로수직빨간notice·상태아이콘·정확한소직무박스/삭제버튼으로바꾸고검증중입니다. 74c29ce6의게시증거를후속보정과구분합니다.
+
+74c29ce6의CI38278773605는completed/success입니다. 후속보정에서는Textarea의optional beforeInput 슬롯으로label→helper→generate→textarea 순서를유지하고기본label/value/error/DOM계약을보존했습니다. Tag삭제도실제ChipCloseIcon16px/Neutral400와label-hover규칙을사용합니다. source의notice/상태/box/delete 규격은실제computedStyle과일치했고전체252tests/0fail,workspace typecheck와57소스/38예제 계약검사가다시통과했습니다. 현재14개고유상태(신규12개1280/320,tag/field default320)의overflow0/중첩button0입니다.
+
+마지막보정도실제설치57TSX/CSS exact/0변환과38예제TypeScript/Vite/font/고지가통과했습니다. 설치tab19에서320px dialog296/scroll296,Red50/Red400,동일label순서와영향확인→직무수정완료/console0을확인했고tab19/dev57941은닫고종료130을확인했습니다. 최종source fingerprint24f6875e7f3aa078e2c927100585b52274d7788c75207ae70c9352506239d1b6/82inputs입니다. 최신source-controls source/generated commit·CI·preview readback을이어갑니다. 원본generation overlay/전체busy-state 및인증된원본font/pixel/A4는아직미확인입니다.
