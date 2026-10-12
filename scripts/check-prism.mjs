@@ -26,7 +26,7 @@ for (const item of index.items) {
     }
 }
 for (const entry of manifest.components) {
-    const deltaAudits = sourceInventory.components.filter(item => item.target === entry.id && item.latestDeltaAudit)
+    const deltaAudits = [...sourceInventory.components, ...(sourceInventory.integrationReferences ?? [])].filter(item => item.target === entry.id && item.latestDeltaAudit)
         .map(item => ({ source: item.source, ...item.latestDeltaAudit }));
     assert.deepEqual(entry.sourceDeltaAudits ?? [], deltaAudits, "Manifest source delta audits must preserve their scoped provenance");
     assert.deepEqual(index.items.find(item => item.name === entry.id)?.meta?.sourceDeltaAudits ?? [], deltaAudits, "Registry source delta audits must match the manifest");

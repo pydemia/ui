@@ -33,7 +33,7 @@ const metadata = entries.elements.map(entry => {
     const value = key => fields.get(key)?.text;
     const referenceRevision = sourceInventory.components.some(item => (item.target === value("id") || item.additionalTargets?.includes(value("id"))) && item.mappedAtRevision === sourceInventory.referenceRevision)
         ? sourceInventory.referenceRevision : verification.sourceRevision;
-    const sourceDeltaAudits = sourceInventory.components.filter(item => item.target === value("id") && item.latestDeltaAudit)
+    const sourceDeltaAudits = [...sourceInventory.components, ...(sourceInventory.integrationReferences ?? [])].filter(item => item.target === value("id") && item.latestDeltaAudit)
         .map(item => ({ source: item.source, ...item.latestDeltaAudit }));
     return { id: value("id"), name: value("name"), category: value("category"), purpose: value("purpose"), contract: value("contract"),
         referenceRevision,

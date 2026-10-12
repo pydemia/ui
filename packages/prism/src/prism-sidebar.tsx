@@ -5,7 +5,18 @@ import { PrismNewChatButton } from "./prism-button";
 import { PrismSidebarProfile } from "./prism-primitives";
 import { PrismAvatar } from "./prism-display";
 
-export type PrismNavItem = { id: string; label: string; icon?: ReactNode; disabled?: boolean; children?: readonly PrismNavItem[] };
+export type PrismNavItem = { id: string; label: string; icon?: ReactNode; disabled?: boolean; children?: readonly PrismNavItem[]; matchDescendants?: boolean };
+/** The host decides whether the administrator menu is available; this does not authorize API calls. */
+export function createPrismAdminMenu(canManage: boolean, basePath = "/chat/admin"): PrismNavItem | null {
+    if (!canManage) return null;
+    const base = basePath.replace(/\/+$/, "");
+    return { id: "admin", label: "Admin", icon: <PrismIcon name="AdminIcon" size={24}/>, children:
+        [["users","사용자 관리"],["company-groups","회사 그룹 관리"],["position-blocks","포지션 블럭 관리"],["positions","포지션 관리"],["notices","공지사항 관리"]]
+            .map(([path,label]) => ({ id: `${base}/${path}`, label, matchDescendants: true })) };
+}
+function navItemActive(item: PrismNavItem, activeId: string) {
+    return activeId === item.id || !!item.matchDescendants && activeId.startsWith(item.id.endsWith("/") ? item.id : item.id + "/");
+}
 export type PrismHistoryItem = { id:string;title:string;generating?:boolean;editable?:boolean };
 export type PrismProfileAction = { id:string;label:string;icon?:ReactNode;tone?:"default"|"muted"|"danger";disabled?:boolean };
 export type PrismSidebarProps = { items: readonly PrismNavItem[]; activeId: string; onNavigate: (id: string) => void;
@@ -31,10 +42,10 @@ export function PrismSidebar({items,activeId,onNavigate,collapsed,onCollapsedCha
         <div className="prism-sidebar-new"><PrismNewChatButton icon={<PrismIcon name="PlusIcon" size={28}/>} iconOnly={collapsed} aria-label="새로운 대화" onClick={onNewChat}>새로운 대화</PrismNewChatButton></div>
         <hr className="prism-sidebar-divider"/>
         <nav className="prism-sidebar-nav" aria-label="주요 메뉴">{items.map(item=><div className="prism-sidebar-nav-group" key={item.id}>
-            <button className="prism-nav-item" type="button" aria-label={item.label} disabled={item.disabled} aria-current={activeId===item.id ? "page" : undefined}
+            <button className="prism-nav-item" type="button" aria-label={item.label} disabled={item.disabled} aria-current={navItemActive(item,activeId) ? "page" : undefined}
                 aria-expanded={item.children ? !collapsed&&expanded.includes(item.id) : undefined} aria-controls={item.children ? `${id}-menu-${item.id}` : undefined} onClick={()=>item.children ? toggleMenu(item.id) : onNavigate(item.id)}>
                 <span aria-hidden="true">{item.icon??<PrismIcon name="ChatIcon" size={24}/>}</span>{!collapsed&&<><span>{item.label}</span>{item.children&&<PrismIcon name="ChevronDownIcon" size={16} style={{marginLeft:"auto",transform:expanded.includes(item.id) ? "rotate(180deg)" : undefined}}/>}</>}</button>
-            {item.children&&<div className="prism-sidebar-submenu" id={`${id}-menu-${item.id}`} hidden={collapsed||!expanded.includes(item.id)}>{item.children.map(child=><button className="prism-nav-child" type="button" key={child.id} disabled={child.disabled} aria-current={activeId===child.id ? "page" : undefined} onClick={()=>onNavigate(child.id)}>{child.label}</button>)}</div>}
+            {item.children&&<div className="prism-sidebar-submenu" id={`${id}-menu-${item.id}`} hidden={collapsed||!expanded.includes(item.id)}>{item.children.map(child=><button className="prism-nav-child" type="button" key={child.id} disabled={child.disabled} aria-current={navItemActive(child,activeId) ? "page" : undefined} onClick={()=>onNavigate(child.id)}>{child.label}</button>)}</div>}
         </div>)}
         <div className="prism-sidebar-nav-group"><button className="prism-nav-item" type="button" aria-label="대화기록" aria-expanded={!collapsed&&historyOpen} aria-controls={`${id}-history`} onClick={toggleHistory}><PrismIcon name="HistoryIcon" size={24}/>{!collapsed&&<><span>대화기록</span><PrismIcon name="ChevronDownIcon" size={16} style={{marginLeft:"auto",transform:historyOpen ? "rotate(180deg)" : undefined}}/></>}</button></div>
         <div className="prism-history" id={`${id}-history`} hidden={collapsed||!historyOpen}>{!history.length&&<p className="prism-history-empty">대화 기록이 없어요.</p>}{history.map(item=><div className="prism-history-row" key={item.id} data-selected={activeId===item.id||undefined} data-editing={editing===item.id||undefined} data-menu-open={more===item.id||undefined}>

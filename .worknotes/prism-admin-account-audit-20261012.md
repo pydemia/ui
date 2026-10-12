@@ -33,3 +33,12 @@ PrismPositionForm의mode=view는현재companyId와일치하는403/404를onAccess
 
 
 취소보정후최종179 tests/0 fail,workspace typecheck와32개완전예시계약검사가통과했습니다. 실제최종shadcn재설치/TypeScript/Vite/font/고지와52개module/CSS exact bytes,변환예외0도통과했습니다. 최종source7ea7cd89e57bfaa5f165b8d2cd0c620fc4b0143244881270c2147c659874adec/72 inputs입니다. 이전4f1a/178개증거는보정전범위입니다. 현재202 actual-render검사0을유지합니다.
+
+
+## PR·CI·preview readback
+
+폼 source5ac53d4b/생성3167d12d에취소보정source59d1e3b5/최종생성1218c9ff2ffe582d380a11502be2060e236d5260을추가했습니다. 기존review branch에push했고credential exact-match0과Git config보존을확인했습니다. PR162는draft true/base main/정확한1218c9ff head로읽고재첨부했습니다. Verify UI38217517697는completed/success이며최종179 PRISM tests,registry/현재generic release/생성물재현검사가포함됩니다.
+
+Vercel dpl_7RDnWr6bQMB1GQVg4EcMvNgA5Cfx는READY/target null/정확한1218c9ff SHA입니다. https://pydemia-broprnil8-pydemia-7822.vercel.app에서기존CLI인증으로registry825410bytes/SHA21ee7676,manifest287691bytes/SHA10941b05,verification118547bytes/SHA19ccb027,domain-forms37111bytes/SHA38fee8f9,tokens190283bytes/SHA53ce9e83의로컬exact bytes를확인했습니다. 전체hash는admin-account-preview-readback.json에보존합니다. HTTP자산검사를실제화면·A4·서비스/RBAC증거로사용하지않습니다.
+
+코드/생성물은게시된head에있고이readback메모만local modified로보존합니다. Consumer/source/lock/dist/node_modules와기록을보존했고helper registry server는finally에서종료됐습니다. 새dev server를시작하지않았습니다. 전체goal은active이며관리자목록/페이지복원/상태액션,chat API접근오류의panel/선택해제와메뉴,전체source 디자인·목적·고도화coverage와현재DEV/font/pixel/A4/production은미완료입니다.
