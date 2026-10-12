@@ -605,24 +605,85 @@ export function PanelRecipesExample() {
 
 ## Position definition / Context / Requirements
 포지션 기본 정보·정의·Business Context·전문성/성공경험 요구사항과 빈 값·로드 상태 표시
-Contract: 호스트가 회사·산업/직무/직책·정의·Business Context와 요구사항 그룹을 제공합니다. 본문 max840px/scroll gap20·padding20, 두 요약 카드16px/12px, 전문성·성공경험 그룹을 표시합니다. 빈 문자열/공백/null은 관련 데이터 없음이며 groups=[]는 빈 전문성·성공경험 그룹을 유지합니다. loading은 원본 구조 skeleton, error는 stale detail을 감추고 retry intent를 보냅니다. 기본 안내문은 원본의 공통 역량·자질 설명이며 footnote로 변경하거나 null로 숨길 수 있습니다. LIVE/draft 조회·주직무 requirements 선택·요청 취소·재시도 결과는 호스트가 소유합니다. 320px 이하 부모에서는 기본 정보 카드를 한 열로 배치하고 긴 문자열을 줄바꿈합니다.
-States: default, empty, loading, error, long
+Contract: 호스트가 회사·산업/직무/직책·정의·Business Context와 요구사항 그룹을 제공합니다. 본문 max840px/scroll gap20·padding20, 두 요약 카드16px/12px, 전문성·성공경험 그룹을 표시합니다. 빈 문자열/공백/null은 관련 데이터 없음이며 groups=[]는 빈 전문성·성공경험 그룹을 유지합니다. loading은 원본 구조 skeleton, error는 stale detail을 감추고 retry intent를 보냅니다. 기본 안내문은 원본의 공통 역량·자질 설명이며 footnote로 변경하거나 null로 숨길 수 있습니다. LIVE/draft 조회·주직무 requirements 선택·요청 취소·재시도 결과는 호스트가 소유합니다. 320px 이하 부모에서는 기본 정보 카드를 한 열로 배치하고 긴 문자열을 줄바꿈합니다. 카드의 과거 버전과 본문 링크의 현재LIVE를 구분하는 완전 host 예시를 제공합니다. createPrismPositionReference로 입력을 변형하지 않고 요청 대상을 정하며 provider에 AbortSignal을 전달합니다. id/version/provider가 바뀌면 오래된 완료·실패와 화면 데이터를 무시합니다. 기본 provider는 합성100ms fixture이며 실제 API/auth 연동 증거가 아닙니다.
+States: default, empty, loading, error, long, versioned
 Registry: /prism/r/prism-position.json
 Source: packages/prism/src/prism-position.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismPositionDetail } from "@/components/ui/prism-position";
-export function PositionExample() {
-  return <div data-prism="light" style={{ height: 560 }}><PrismPositionDetail company="가상전자" role="기술전략담당"
-    items={[{ label: "산업", value: "전자" }, { label: "직무", value: "연구개발" }, { label: "직책", value: "담당" }]}
-    definition="가상 조직의 기술전략을 수립합니다."
-    businessContext="가상 사업의 연구개발 방향을 정리합니다."
-    groups={[
-      { id: "expertise", title: "전문성", items: [{ id: "expertise-1", content: "기술·연구개발 경험" }] },
-      { id: "experience", title: "성공경험", items: [] },
-    ]} /></div>;
+import { useEffect, useState } from "react";
+import { PrismButton } from "@/components/ui/prism-button";
+import { PrismPositionDetail, type PrismPositionDetailProps } from "@/components/ui/prism-position";
+import { PrismResponse, type PrismResponseBlock } from "@/components/ui/prism-response";
+import { createPrismPositionReference, type PrismPositionReference } from "@/components/ui/prism-position-recommendations";
+
+type PositionData = Omit<PrismPositionDetailProps, "status" | "onRetry">;
+type PositionLoader = (reference: PrismPositionReference, signal: AbortSignal, simulateFailure: boolean) => Promise<PositionData>;
+type PositionRequest = { key: string; loader: PositionLoader; status: "ready" | "loading" | "error"; data: PositionData | null };
+
+/** Synthetic provider for this example. Supply your authenticated historical/LIVE loader instead. */
+async function loadSyntheticPosition(reference: PrismPositionReference, signal: AbortSignal, fail: boolean): Promise<PositionData> {
+    signal.throwIfAborted();
+    await new Promise<void>((resolve, reject) => {
+        const abort = () => { clearTimeout(timer); reject(signal.reason); };
+        const timer = setTimeout(() => { signal.removeEventListener("abort", abort); resolve(); }, 100);
+        signal.addEventListener("abort", abort, { once: true });
+    });
+    signal.throwIfAborted();
+    if (fail) throw new Error("Synthetic request failure");
+    const label = reference.source === "card" ? `과거 버전 ${reference.version}` : "현재 운영본";
+    return { company: "가상전자", role: "가상 기술전략담당", items: [{ label: "조회 대상", value: label }],
+        definition: `${label}의 합성 포지션 정의입니다. 실제 API 조회 결과가 아닙니다.`, businessContext: "합성 사업 환경입니다.",
+        groups: [{ id: "expertise", title: "전문성", items: [{ id: "tech", content: "가상 기술전략 경험" }] }] };
 }
+
+/** Host-owned request example: aborts old id/version loads and hides stale data before the next effect. */
+export function PositionReferenceExample({ loadPosition = loadSyntheticPosition }: {
+    loadPosition?: PositionLoader;
+}) {
+    const [reference, setReference] = useState<PrismPositionReference | null>(null);
+    const [fail, setFail] = useState(false), [retry, setRetry] = useState(0);
+    const [result, setResult] = useState<PositionRequest | null>(null);
+    const id = reference?.id, source = reference?.source, version = reference?.source === "card" ? reference.version : undefined;
+    const key = JSON.stringify([id, source, version, fail, retry]);
+    useEffect(() => {
+        if (!id || !source) { setResult(null); return; }
+        let active = true;
+        const controller = new AbortController(), snapshot = createPrismPositionReference({ id, version }, source);
+        const requestKey = JSON.stringify([id, source, version, fail, retry]);
+        setResult({ key: requestKey, loader: loadPosition, status: "loading", data: null });
+        void (async () => {
+            try {
+                const data = await loadPosition(snapshot, controller.signal, fail);
+                if (active && !controller.signal.aborted) setResult({ key: requestKey, loader: loadPosition, status: "ready", data });
+            } catch {
+                if (active && !controller.signal.aborted) setResult({ key: requestKey, loader: loadPosition, status: "error", data: null });
+            }
+        })();
+        return () => { active = false; controller.abort(); };
+    }, [id, source, version, fail, retry, loadPosition]);
+    const blocks: PrismResponseBlock[] = [
+        { id: "current", type: "text", content: "[같은 포지션의 현재 운영본](position://synthetic-position)" },
+        { id: "old", type: "positions", positions: [{ id: "synthetic-position", version: 2, company: "가상전자", title: "가상 기술전략담당", reasons: ["과거 대화의 합성 추천 근거"] }] },
+        { id: "new", type: "positions", positions: [{ id: "synthetic-position", version: 3, company: "가상전자", title: "가상 기술전략담당", reasons: ["후속 대화의 합성 추천 근거"] }] },
+        { id: "legacy", type: "positions", positions: [{ id: "synthetic-legacy", company: "가상회사", title: "버전이 없는 오래된 카드", reasons: ["합성 추천 근거"] }] },
+    ];
+    const current = result?.key === key && result.loader === loadPosition ? result : null;
+    const empty: PositionData = { company: "", role: "", items: [], groups: [] };
+    return <div data-prism="light" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <p>합성 조회 예시입니다. 카드는 과거 버전을, 본문 링크는 현재 운영본을 요청합니다.</p>
+        <label><input type="checkbox" checked={fail} onChange={event => setFail(event.target.checked)}/>조회 실패 예시</label>
+        <PrismResponse blocks={blocks} selectedPositionReference={reference} onPositionOpen={(_id, next) => setReference(next)}
+            onAction={(kind, _id, next) => { if (kind === "position" && next) setReference(next); }}/>
+        <PrismButton variant="line" onClick={() => setReference(null)}>선택 해제</PrismButton>
+        <p role="status">{reference ? reference.source === "card" ? `요청: ${reference.id} 과거 버전 ${reference.version}` : `요청: ${reference.id} 현재 운영본` : "포지션을 선택해 주세요."}</p>
+        {reference && <div style={{ height: 440, resize: "both", overflow: "auto", minWidth: 140, maxWidth: "100%" }}>
+            <PrismPositionDetail {...(current?.data ?? empty)} status={current?.status ?? "loading"} onRetry={() => setRetry(value => value + 1)}/>
+        </div>}
+    </div>;
+}
+
 ```
 
 ## Diagnosis / Risk / Essay / Matrix / Analysis
@@ -708,8 +769,8 @@ export function NoticeExample() {
 
 ## Structured response / Rich text / Conversation
 Typed blocks, rich text, actionable references and streaming status
-Contract: Consumers adapt backend payloads into a discriminated block union and own action callbacks. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur.
-States: default, empty, loading, error
+Contract: Consumers adapt backend payloads into a discriminated block union and own action callbacks. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur. Position block은 PrismPositionRecommendationItem을 사용해 version/companyLogo를 보존합니다. onPositionOpen(id,reference)는 card 참조, onAction(kind,id,reference?)는 position 본문/표/analysis 링크에 version이 없는 link 참조를 전달합니다. 다른 action은 기존 두 인자를 유지합니다. selectedPositionReference로 같은 id의 서로 다른 대화 버전을 구분할 수 있습니다. API 조회와 취소는 호스트 소유이며 패널 링크의 기존 inert 표시를 유지합니다.
+States: default, empty, loading, error, versioned
 Registry: /prism/r/prism-response.json
 Source: packages/prism/src/prism-response.tsx
 Usage kind: component-example
@@ -1060,21 +1121,25 @@ export function AnalysisExample() {
 
 ## Position recommendations / Reveal and selection
 현재 포지션 추천 카드·선택·단계별 더 보기·반응형/수동 크기
-Contract: 같은 추천 레이아웃을 일반·panel 응답에 사용하며 rank를 표시하지 않습니다. 넓은 폭은 4~6개 최초3개/7개 이상6개, 400px 이하 최초4개·두 개씩/마지막 최대3개 추가·접기를 지원합니다. 마지막 묶음은 표시한 수와 실제 추가 수가 일치합니다. 240px 이하 한 열로 개선합니다. selectedId/onSelect는 호스트 소유이며 callback이 없으면 비대화형입니다. 데이터 ID 순서/datasetKey/breakpoint 변경은 접습니다. companyLogo는 호스트가 제공하는 비대화형 회사 자산 slot이며 기본은 회사명입니다. resize로 수동 폭/높이와 scroll을 지원합니다.
-States: default, empty, readonly, long
+Contract: Typed 카드의 version은 positive safe integer입니다. 없는 오래된 카드는 참조에서 version1을 사용하며 입력 item은 변경하지 않습니다. onSelect(item,reference)는 기존 첫 인자와 새 card 참조를 전달합니다. selectedReference는 id/source/version이 모두 같은 카드만 선택하며 명시적 null은 선택 해제입니다. undefined이면 기존 selectedId 계약을 유지합니다. wide는3/6개 뒤 전체 펼침,400px 이하에서는4개부터 마지막 남은 개수에 맞춰 추가 표시합니다. 데이터와 조회·선택·권한은 호스트 소유입니다. resize는 명시적으로 켜며 순위·평가를 계산하지 않습니다.
+States: default, empty, readonly, long, versioned
 Registry: /prism/r/prism-position-recommendations.json
 Source: packages/prism/src/prism-position-recommendations.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
 import { useState } from "react";
-import { PrismPositionRecommendations, type PrismPositionRecommendationItem } from "@/components/ui/prism-position-recommendations";
+import { PrismPositionRecommendations, type PrismPositionRecommendationItem, type PrismPositionReference } from "@/components/ui/prism-position-recommendations";
 export function PositionRecommendationsExample() {
-  const [selected,setSelected]=useState("");
-  const items: PrismPositionRecommendationItem[]=Array.from({length:9},(_,index)=>({id:`synthetic-${index}`,company:"가상전자",title:`가상 포지션 ${index+1}`,reasons:["합성 전문성 근거","합성 경험 근거"]}));
-  return <div data-prism="light"><PrismPositionRecommendations items={items} selectedId={selected} onSelect={item=>setSelected(item.id)} resize="both" style={{width:"100%"}}/><p role="status">{selected || "선택 없음"}</p></div>;
+    const [selected,setSelected] = useState<PrismPositionReference|null>(null);
+    const items:PrismPositionRecommendationItem[] = [
+        {id:"historical",version:3,company:"가상전자",title:"가상 포지션",reasons:["합성 추천 근거"]},
+        {id:"legacy",company:"가상회사",title:"오래된 카드",reasons:[]},
+    ];
+    return <div data-prism="light"><PrismPositionRecommendations items={items} selectedReference={selected}
+        onSelect={(_item,reference)=>setSelected(reference)} resize="both" />
+        <p role="status">{selected?.source === "card" ? selected.id+" 버전 "+selected.version : "선택 없음"}</p></div>;
 }
-
 ```
 
 ## Formatted text / Sanitized actions

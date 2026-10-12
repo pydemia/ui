@@ -893,17 +893,16 @@
       ]
     },
     "prism-position-recommendations": {
-      "visual": "partial",
-      "interaction": "selected-local-runtime-and-unit-tests",
-      "source": "087811ff current code and selected computed measurements",
-      "extensions": [
-        "140–1280px sizing",
-        "explicit host actions",
-        "native both-axis recommendations resize"
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Versioned/legacy card and live-link references preserve source purpose without input mutation.",
+        "Controlled same-ID/different-version selection and typed host example verified by source and synthetic JSDOM tests."
       ],
       "remaining": [
-        "원본 인증 상태의 전체 pixel/font 대조",
-        "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+        "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
+        "Authenticated historical/LIVE service and deployed revision binding.",
+        "Full source component purpose/style/extension coverage, current A4 and production."
       ]
     },
     "prism-rich-text": {
@@ -921,10 +920,16 @@
       ]
     },
     "prism-response": {
-      "visual": "partial",
-      "interaction": "unit-tested-current-analysis-and-recommendations-routing",
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Versioned/legacy card and live-link references preserve source purpose without input mutation.",
+        "Controlled same-ID/different-version selection and typed host example verified by source and synthetic JSDOM tests."
+      ],
       "remaining": [
-        "전체 원본 structured blocks·grouping·streaming 상태/시각 대조"
+        "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
+        "Authenticated historical/LIVE service and deployed revision binding.",
+        "Full source component purpose/style/extension coverage, current A4 and production."
       ]
     },
     "prism-profile-print": {
@@ -956,12 +961,13 @@
       "visual": "pending",
       "interaction": "partial",
       "checks": [
-        "Current PositionDetailView source displays definition, Business Context, expertise/experience requirements and common-competency footnote; these are now independently typed host inputs.",
-        "Source max840,scroll gap20/padding20,summary16px/radius12 and source-structure skeleton were implemented; source reading does not prove browser geometry.",
-        "SSR/JSDOM show whitespace/null absence, escaped host text, two empty groups, source footnote, no stale loading/error detail and retry intent."
+        "Versioned/legacy card and live-link references preserve source purpose without input mutation.",
+        "Controlled same-ID/different-version selection and typed host example verified by source and synthetic JSDOM tests."
       ],
       "remaining": [
-        "Current deployed original and isolated-render style/scroll/long-content comparison; live data and auth state."
+        "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
+        "Authenticated historical/LIVE service and deployed revision binding.",
+        "Full source component purpose/style/extension coverage, current A4 and production."
       ]
     },
     "prism-favorite-candidate": {
@@ -992,7 +998,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 165,
+      "passed": 171,
       "failed": 0
     },
     "registry": {
@@ -1001,13 +1007,13 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-current-leadership-detail-real-install-typecheck-build",
+      "status": "passed-current-position-reference-real-install-typecheck-build",
       "items": 53,
       "modules": 52,
       "completeExamples": 32,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "source": "All52 installed TSX modules and CSS match final emitted registry bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
+      "source": "All52 installed TSX modules and CSS match emitted bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
       "runtime": "Current real browser and A4 comparison remain pending."
@@ -1101,11 +1107,11 @@
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 197,
+      "count": 200,
       "checked": 0,
-      "pending": 197,
-      "status": "pending-current-leadership-detail-source-browser-policy",
-      "sourceSha256": "f2ee00893ee4f59e56bc661ed23805cfe7d4b4a342b64a152db9028258494847"
+      "pending": 200,
+      "status": "pending-current-position-reference-source-browser-policy",
+      "sourceSha256": "9a2ec3867fa65575d411433fcf5a35f72ecdd415d04a35fad10305530bb79009"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1184,13 +1190,13 @@
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 52,
-    "states": 197,
+    "states": 200,
     "checked": 0,
-    "status": "pending-current-leadership-detail-source-browser-policy",
-    "baseCommit": "78ef5a0301a710995d6768aac936b358a428f474",
-    "sourceSha256": "f2ee00893ee4f59e56bc661ed23805cfe7d4b4a342b64a152db9028258494847",
+    "status": "pending-current-position-reference-source-browser-policy",
+    "baseCommit": "efbd59a84016eee301e3919deedb419602d54740",
+    "sourceSha256": "9a2ec3867fa65575d411433fcf5a35f72ecdd415d04a35fad10305530bb79009",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
-    "inputCount": 71,
+    "inputCount": 72,
     "checks": [],
     "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
     "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
@@ -1466,7 +1472,6 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Position card/reference version and host current-LIVE fallback.",
       "Admin user/group/position display/action changes and authorization-owned state.",
       "Chat render link behavior and sidebar/context changes."
     ],
@@ -1475,6 +1480,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+    },
+    "reviewedPositionReferenceDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
     }
   },
   "inputLabelReferenceComparison": {
@@ -2393,5 +2403,81 @@
       "previousSourceSha256": "15d1c35715767b09ed4f587ef896d80643f21b983f645af35f78ad219e29663a",
       "pending": 25
     }
+  },
+  "previousPositionReferenceFixtureRenderChecks": {
+    "groups": 52,
+    "states": 197,
+    "checked": 0,
+    "status": "pending-current-leadership-detail-source-browser-policy",
+    "baseCommit": "78ef5a0301a710995d6768aac936b358a428f474",
+    "sourceSha256": "f2ee00893ee4f59e56bc661ed23805cfe7d4b4a342b64a152db9028258494847",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "inputCount": 71,
+    "checks": [],
+    "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
+    "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
+  },
+  "positionReferenceVerification": {
+    "status": "passed-local-source-and-synthetic-contract-tests; actual-browser-and-service-pending",
+    "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "sourceSha256": "9a2ec3867fa65575d411433fcf5a35f72ecdd415d04a35fad10305530bb79009",
+    "card": {
+      "version": "positive safe integer",
+      "legacyDefault": 1,
+      "callback": "onSelect(item,reference) / onPositionOpen(id,reference)",
+      "inputMutation": false
+    },
+    "bodyLink": {
+      "reference": "{id,source:link}",
+      "versionPropertyPresent": false,
+      "callback": "onAction(kind,id,reference?) for positions only; other action arity retained"
+    },
+    "selection": "Explicit reference matches id/source/version; explicit null clears; undefined uses legacy ID selection.",
+    "hostExample": "Default synthetic100ms provider. Injected typed provider owns API/auth/history/LIVE; abort/active/key/loader guards, retry and dismissal are covered by JSDOM tests, not real-service evidence.",
+    "sourceLayout": "Card/detail CSS and geometry unchanged; existing resize retained.",
+    "tests": "171 full PRISM tests;14 chat recipe cases including6 new reference/host-request cases passed.",
+    "browser": "pending HTTP protocol-policy refusal; no bypass",
+    "independentConsumer": "All52 installed TSX modules and CSS match emitted bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
+    "publication": "review branch; production not-published",
+    "previousComponents": {
+      "prism-position-recommendations": {
+        "visual": "partial",
+        "interaction": "selected-local-runtime-and-unit-tests",
+        "source": "087811ff current code and selected computed measurements",
+        "extensions": [
+          "140–1280px sizing",
+          "explicit host actions",
+          "native both-axis recommendations resize"
+        ],
+        "remaining": [
+          "원본 인증 상태의 전체 pixel/font 대조",
+          "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+        ]
+      },
+      "prism-response": {
+        "visual": "partial",
+        "interaction": "unit-tested-current-analysis-and-recommendations-routing",
+        "remaining": [
+          "전체 원본 structured blocks·grouping·streaming 상태/시각 대조"
+        ]
+      },
+      "prism-position": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "Current PositionDetailView source displays definition, Business Context, expertise/experience requirements and common-competency footnote; these are now independently typed host inputs.",
+          "Source max840,scroll gap20/padding20,summary16px/radius12 and source-structure skeleton were implemented; source reading does not prove browser geometry.",
+          "SSR/JSDOM show whitespace/null absence, escaped host text, two empty groups, source footnote, no stale loading/error detail and retry intent."
+        ],
+        "remaining": [
+          "Current deployed original and isolated-render style/scroll/long-content comparison; live data and auth state."
+        ]
+      }
+    },
+    "remaining": [
+      "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
+      "Authenticated historical/LIVE service and deployed revision binding.",
+      "Full source component purpose/style/extension coverage, current A4 and production."
+    ]
   }
 }

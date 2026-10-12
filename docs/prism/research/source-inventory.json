@@ -404,7 +404,12 @@
       "target": "prism-response",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/conversation/ChatJSONRendererPanel.tsx",
@@ -417,7 +422,12 @@
         "prism-position-recommendations",
         "prism-analysis"
       ],
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/conversation/ChatMarkdownRenderer.tsx",
@@ -425,7 +435,12 @@
       "target": "prism-response",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/conversation/ChatMarkdownRendererPanel.tsx",
@@ -433,7 +448,12 @@
       "target": "prism-response",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/conversation/ChatMessageQuestion.tsx",
@@ -631,7 +651,12 @@
       "coverage": "purpose-mapped",
       "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
       "recipe": null,
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/position/PositionDetailViewSkeleton.tsx",
@@ -652,7 +677,12 @@
       "additionalTargets": [
         "prism-content"
       ],
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/position/PositionRequirementGroup.tsx",
@@ -1217,7 +1247,12 @@
       "additionalTargets": [
         "prism-content"
       ],
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/templates/ChatTemplateProfile.tsx",
@@ -2400,7 +2435,6 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Position card/reference version and host current-LIVE fallback.",
       "Admin user/group/position display/action changes and authorization-owned state.",
       "Chat render link behavior and sidebar/context changes."
     ],
@@ -2409,6 +2443,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+    },
+    "reviewedPositionReferenceDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
     }
   }
 }

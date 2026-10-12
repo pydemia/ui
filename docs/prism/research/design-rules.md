@@ -33,6 +33,14 @@ The outer box uses 16px padding/gap and a 12px radius; its chart/comment row use
 
 Print uses 8pt padding/gap/radius, an 80pt minimum height, a 20pt main-row gap, a 2pt chart gap and a 6pt comment gap. Caption, summary and detail are 10pt. The default tag uses a 15pt height, 3.5pt 4pt .5pt padding, a 4pt radius and 8pt/11pt text. Full print text is the default. The optional reference limits shorten title/summary in a copied display model and retain all detail, matching the current source mapping. These rules were checked against local source; current deployed revision binding, rendered comparison and A4 pagination remain unverified.
 
+## Position references
+
+The local dev `27c4fdbf` JSON/Markdown mappers preserve the card's position version; legacy cards without one use version 1. Body links have no version and open the current LIVE position. The detail view selects the historical or LIVE provider and restarts for id/version/retry changes. This is a local source audit; deployed revision binding is unverified.
+
+`PrismPositionReference` distinguishes `{id, source:"card", version}` from `{id, source:"link"}`. `createPrismPositionReference` returns a separate minimal reference and never changes the item. Explicit versions must be positive safe integers; raw DTO conversion belongs to the host. Card callbacks preserve the existing first argument and add the reference. `PrismResponse.onAction` adds a versionless reference only for position links in text, tables and analysis; other actions retain their two arguments. It does not also dispatch the card callback.
+
+Use controlled `selectedReference` or `selectedPositionReference` when different conversations contain the same id at different versions. Explicit null clears selection; undefined preserves legacy id selection. Version references do not change card geometry, disclose ranks or compute recommendations. The complete host example connects a typed loader, AbortSignal, late-response guard, retry and immediate stale-data masking. Its default provider is an identified synthetic fixture, not a real-service integration check. Authentication, history/LIVE services and persistence remain host-owned.
+
 ## Empty states and profile memos
 
 The current source separates the base HRX empty state, the tab wrapper and the memo panel. Use `PrismEmptyState`'s explicit `variant` to preserve that distinction. The empty-state content has no outer padding; the caller provides layout spacing. `PrismRequestState` supplies the tab wrapper's 70px vertical padding.
