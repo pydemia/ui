@@ -21,3 +21,11 @@
 원본 파일 수186을 독립 구현 목표로 삼지 않도록countUnit/source audit와생성LLM설명/Coverage문구를정정했습니다. detailed source audit는별도prism-component-count-audit-20261012.md에있습니다. 기존일반registry snapshot은변경하지않았고 main/production은게시하지않았습니다. 검토branch/PR/CI/preview readback이후최종기록을이어갑니다.
 
 완전 예제의 trailing whitespace를 제거하고 catalog·최종 source fingerprint를 갱신했습니다. UI 로직과 설치 모듈/CSS bytes는 변하지 않았습니다.
+
+## 검토 게시 확인
+
+Source d9963f4c/generated 9ac1df6d646bb63a44e75d6dfc7075dd7f8a7165을 codex/prism-leadership-pie에 push했습니다. credential exact-match0과 Git config 보존을 확인했습니다. PR162는 draft/base main/정확한9ac1df6d이며 body에55그룹/56항목/36예제/214테스트와 파일 수 집계의 한계를 반영했습니다. origin/main은288b0838입니다.
+
+Verify UI38258828099는 completed/success입니다. 자동 새 preview가 아직 보이지 않아 기존preview dpl_pMdP8SKF9vAfi1ZeyEm1EMgEE5TY에서 withLatestCommit=true/target생략으로 같은review branch를 재배포했습니다. 생성 직후의새 dpl_Fvg8UurErMrnFrxVs8EQyNU9tzWW가정확한9ac1df6d/target null임을확인했고최종READY입니다. https://pydemia-o5ryk19fi-pydemia-7822.vercel.app의8개자산(registry/components/source-inventory/verification JSON·MD/position management/directory/tokens)은로컬파일과exact bytes/SHA가일치했습니다. proof는ignored admin-positions-preview-readback.json에있습니다.
+
+최종source fingerprint는 fabc5bccee5d33b01a8677b4f0a93a082a6ffab72da4d00a66af68e563dc4820/78 inputs입니다.4개canonical research와site자산bytes,git diff --check가일치했고기존generic snapshot sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896도통과했습니다. main/production은게시하지않았습니다. 실제원본인증UI/나머지관리자·chat기능목적·전체상태/font/pixel/A4 비교는남아있으며goal은active입니다. 이publication readback 기록만다음source commit용으로미커밋상태에남깁니다.

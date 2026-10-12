@@ -1,5 +1,57 @@
 @import "pretendard/dist/web/variable/pretendardvariable.css";
 
+/* Company-group and notice management share source admin geometry, with separate filter layouts. */
+.prism-admin-lists {container:prism-admin-lists/inline-size;min-width:0;--prism-admin-table-min-width:940px;}
+.prism-admin-notices {--prism-admin-table-min-width:1100px;}
+.prism-admin-lists .prism-admin-header {height:64px;min-height:64px;padding:8px 20px;justify-content:flex-start;}
+.prism-admin-lists .prism-admin-header>div {display:grid;gap:2px;min-width:0;}
+.prism-admin-lists .prism-admin-header h1 {font-size:18px;font-weight:600;line-height:25px;color:#1f1f1f;}
+.prism-admin-lists .prism-admin-filters {display:block;min-width:0;}
+.prism-admin-list-filter {display:flex;justify-content:space-between;align-items:flex-end;gap:20px;width:100%;min-width:0;padding:20px;border:1px solid var(--prism-cool-200);border-radius:12px;}
+.prism-admin-group-fields {display:grid;grid-template-columns:140px 140px 436px;gap:20px;min-width:0;}
+.prism-admin-notice-filter-stack {display:flex;flex-direction:column;gap:20px;min-width:0;}
+.prism-admin-notice-fields {display:grid;grid-template-columns:120px 120px 275px 275px;gap:20px;min-width:0;}
+.prism-admin-notice-keyword {width:250px;max-width:100%;}
+.prism-admin-list-filter-actions {display:flex;gap:6px;flex-shrink:0;}
+.prism-admin-list-summary {display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14px;font-weight:500;min-width:0;}
+.prism-admin-list-summary>span {white-space:nowrap;}
+.prism-admin-list-summary>span:nth-child(3) {color:var(--prism-sub);}
+.prism-admin-list-error {display:flex;align-items:center;gap:12px;overflow-wrap:anywhere;}
+.prism-admin-page-sort-note {margin:0 0 6px;font-size:12px;line-height:1.5;color:var(--prism-sub);}
+.prism-admin-list-date {border:0;padding:0;margin:0;min-width:0;}
+.prism-admin-list-date>legend {margin-bottom:8px;padding:0;font-size:14px;font-weight:600;line-height:20px;}
+.prism-admin-list-date>div {display:grid;grid-template-columns:minmax(0,1fr) 7px minmax(0,1fr);align-items:center;gap:4px;}
+.prism-admin-list-date .prism-field>label {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+.prism-admin-list-date .prism-field {gap:0;}
+.prism-admin-list-date .prism-date-input {min-width:0;}
+.prism-admin-notice-empty {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;min-height:400px;}
+@container prism-admin-lists (max-width:1088px) {
+    .prism-admin-notices .prism-admin-list-filter {flex-wrap:wrap;}
+    .prism-admin-notice-filter-stack {width:100%;}
+    .prism-admin-notice-fields {grid-template-columns:repeat(2,minmax(0,1fr));}
+    .prism-admin-notices .prism-admin-list-filter-actions {margin-left:auto;}
+}
+@container prism-admin-lists (max-width:1000px) {
+    .prism-admin-list-filter {flex-wrap:wrap;}
+    .prism-admin-group-fields {grid-template-columns:repeat(3,minmax(0,1fr));width:100%;}
+    .prism-admin-list-filter-actions {margin-left:auto;}
+}
+@container prism-admin-lists (max-width:620px) {
+    .prism-admin-list-filter {padding:16px;gap:16px;}
+    .prism-admin-group-fields {grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+    .prism-admin-group-fields>.prism-field:last-child {grid-column:1 / -1;}
+    .prism-admin-notice-fields {gap:16px;}
+    .prism-admin-list-date {grid-column:1 / -1;}
+    .prism-admin-lists .prism-admin-toolbar {flex-wrap:wrap;}
+}
+@container prism-admin-lists (max-width:380px) {
+    .prism-admin-group-fields,.prism-admin-notice-fields {grid-template-columns:minmax(0,1fr);}
+    .prism-admin-list-date>div {grid-template-columns:minmax(0,1fr);gap:8px;}
+    .prism-admin-list-date>div>span {display:none;}
+    .prism-admin-list-date .prism-field>label {position:static;width:auto;height:auto;margin:0;clip-path:none;white-space:normal;}
+    .prism-admin-list-date .prism-field {gap:4px;}
+}
+
 /* Position administration: source desktop dimensions, container-sized filter wrapping. */
 .prism-admin-positions {container:prism-positions/inline-size;min-width:0;--prism-admin-table-min-width:1100px;}
 .prism-admin-positions .prism-admin-header {height:64px;min-height:64px;padding:8px 20px;justify-content:flex-start;}
@@ -1393,7 +1445,7 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 .prism-sidebar-copyright>button:hover {text-decoration:underline;}
 
 .prism-date-input {gap:4px;padding:6px 12px;}
-.prism-date-input input {padding:0;height:100%;outline:none;}
+.prism-date-input input {padding:0;height:1.4375em;line-height:23px;outline:none;}
 .prism-date-input[data-calendar-only] input {cursor:pointer;}
 .prism-date-input[data-size="large"] {padding:8px 12px;}
 .prism-date-input[data-size="small"] {padding:5px 8px;border-radius:4px;}

@@ -89,10 +89,11 @@ function parseDate(value: string): Date | undefined {
     const [year,month,day] = value.split("-").map(Number); const date = new Date(year,month-1,day);
     return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day ? date : undefined;
 }
-export function PrismDatePicker({ label, value, onValueChange, size = "medium", disabled, readOnly, error, min, max, inputEditable = false }: {
+export function PrismDatePicker({ label, value, onValueChange, size = "medium", disabled, readOnly, error, min, max, inputEditable = false, displayFormat = "YYYY-MM-DD", placeholder = displayFormat }: {
     label: string; value: string | null; onValueChange: (value: string | null) => void;
-    size?: "large" | "medium" | "small"; disabled?: boolean; readOnly?: boolean; error?: string; min?: string; max?: string; inputEditable?: boolean;
+    size?: "large" | "medium" | "small"; disabled?: boolean; readOnly?: boolean; error?: string; min?: string; max?: string; inputEditable?: boolean; displayFormat?: "YYYY-MM-DD" | "YYYY.MM.DD"; placeholder?: string;
 }) {
+    if (displayFormat !== "YYYY-MM-DD" && displayFormat !== "YYYY.MM.DD") throw new RangeError("Unsupported date display format.");
     if((min&&!parseDate(min))||(max&&!parseDate(max))||(min&&max&&min>max))throw new RangeError("Date bounds must be valid YYYY-MM-DD values with min <= max.");
     const id = useId(); const [draft,setDraft] = useState(value ?? ""); const [open,setOpen] = useState(false); const [invalid,setInvalid] = useState(false);
     const [month,setMonth] = useState(value ? parseDate(value) ?? new Date() : new Date()); const [yearView,setYearView] = useState(false); const yearGrid=useRef<HTMLDivElement>(null);
@@ -106,8 +107,8 @@ export function PrismDatePicker({ label, value, onValueChange, size = "medium", 
         setInvalid(false); onValueChange(draft); };
     return <div className="prism-field"><label htmlFor={id}>{label}</label><Popover open={open} onOpenChange={setCalendarOpen}>
         <PopoverAnchor asChild><div className="prism-date-input" data-size={size} data-calendar-only={!inputEditable||undefined} data-invalid={!!error || invalid || undefined} data-disabled={disabled || readOnly || undefined}>
-            <input id={id} aria-invalid={!!error || invalid} aria-describedby={error || invalid ? `${id}-error` : undefined} placeholder="YYYY-MM-DD"
-                value={draft} disabled={disabled} readOnly={readOnly||!inputEditable} inputMode="numeric" aria-haspopup="dialog" aria-expanded={open} aria-controls={`${id}-calendar`} onClick={()=>{if(!inputEditable)setCalendarOpen(true);}} onChange={e => setDraft(e.target.value)} onBlur={commit}
+            <input id={id} aria-invalid={!!error || invalid} aria-describedby={error || invalid ? `${id}-error` : undefined} placeholder={placeholder}
+                value={displayFormat === "YYYY.MM.DD" ? draft.replaceAll("-", ".") : draft} disabled={disabled} readOnly={readOnly||!inputEditable} inputMode="numeric" aria-haspopup="dialog" aria-expanded={open} aria-controls={`${id}-calendar`} onClick={()=>{if(!inputEditable)setCalendarOpen(true);}} onChange={e => setDraft(displayFormat === "YYYY.MM.DD" ? e.target.value.replaceAll(".", "-") : e.target.value)} onBlur={commit}
                 onKeyDown={e => { if (e.key === "Enter" && !e.nativeEvent.isComposing) { e.preventDefault(); if(inputEditable)commit();else setCalendarOpen(true); }if(e.key==="ArrowDown"&&e.altKey){e.preventDefault();setCalendarOpen(true);} }} />
             <PopoverTrigger asChild><button type="button" aria-label={`${label} 달력 열기`} disabled={disabled || readOnly}><CalendarDays aria-hidden="true" size={size==="small" ? 16 : 20}/></button></PopoverTrigger></div></PopoverAnchor>
         <PopoverContent data-prism="light" className="prism-calendar-popover" align="start" sideOffset={0} id={`${id}-calendar`} aria-label={`${label} 달력`}>
