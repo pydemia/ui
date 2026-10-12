@@ -2264,7 +2264,12 @@
       "target": "prism-field",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Optional beforeInput ReactNode slot preserves the native label/input association and default textarea behavior; block source uses label→helper→generate→textarea order."
+      }
     },
     {
       "source": "components/ui/logo/HRXAffiliateLogo.tsx",
@@ -2551,6 +2556,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-13",
       "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+    },
+    "reviewedPositionBlockCommonControls": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved."
     }
   },
   "integrationReferences": [

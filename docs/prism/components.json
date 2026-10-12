@@ -116,6 +116,11 @@
         "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "observedAt": "2026-10-13",
         "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      },
+      "reviewedPositionBlockCommonControls": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved."
       }
     }
   },
@@ -201,8 +206,16 @@
       "name": "Input / Textarea / Select",
       "category": "Inputs",
       "purpose": "레이블·필수·읽기 전용·입력 오류를 포함한 값 입력",
-      "contract": "label은 필수이며 description·error를 aria-describedby로 연결합니다. Select의 required·name은 native form validation·FormData와 연동하며 미선택 오류 시 trigger로 포커스를 옮깁니다. uncontrolled Select는 form reset 시 defaultValue로 돌아갑니다. readonly 값은 전송되지만 변경할 수 없습니다. onClear는 controlled 값의 초기화 의도를 전달하고 입력 포커스를 유지합니다. endAdornment를 넣을 수 있으며 저장과 업무 검증은 호출자 책임입니다.",
+      "contract": "label은 필수이며 description·error를 aria-describedby로 연결합니다. Select의 required·name은 native form validation·FormData와 연동하며 미선택 오류 시 trigger로 포커스를 옮깁니다. uncontrolled Select는 form reset 시 defaultValue로 돌아갑니다. readonly 값은 전송되지만 변경할 수 없습니다. onClear는 controlled 값의 초기화 의도를 전달하고 입력 포커스를 유지합니다. endAdornment를 넣을 수 있으며 저장과 업무 검증은 호출자 책임입니다. Textarea beforeInput은label과입력사이에생성버튼·안내등을배치하는선택적ReactNode입니다. 기본입력/label/error/value계약을유지하며DOM속성으로전달하지않습니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "sourceDeltaAudits": [
+        {
+          "source": "components/ui/input/HRXTextField.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Optional beforeInput ReactNode slot preserves the native label/input association and default textarea behavior; block source uses label→helper→generate→textarea order."
+        }
+      ],
       "states": [
         "default",
         "disabled",
@@ -5007,7 +5020,7 @@
       "responsivePreviewUrl": "/prism?component=prism-position-blocks&view=responsive",
       "verification": {
         "visual": "source-contract-reviewed;authenticated-original-pending",
-        "interaction": "passed-selected-workspace-and-independent-install-browser",
+        "interaction": "passed-current-workspace-and-corrected-install-selected-workflows",
         "checks": [
           "20 new contracts;12 new states1280/320; creation/impact/save/remap retry flows."
         ],

@@ -27,7 +27,7 @@ import { PrismButton } from "@/components/ui/prism-button";
 
 ## Input / Textarea / Select
 레이블·필수·읽기 전용·입력 오류를 포함한 값 입력
-Contract: label은 필수이며 description·error를 aria-describedby로 연결합니다. Select의 required·name은 native form validation·FormData와 연동하며 미선택 오류 시 trigger로 포커스를 옮깁니다. uncontrolled Select는 form reset 시 defaultValue로 돌아갑니다. readonly 값은 전송되지만 변경할 수 없습니다. onClear는 controlled 값의 초기화 의도를 전달하고 입력 포커스를 유지합니다. endAdornment를 넣을 수 있으며 저장과 업무 검증은 호출자 책임입니다.
+Contract: label은 필수이며 description·error를 aria-describedby로 연결합니다. Select의 required·name은 native form validation·FormData와 연동하며 미선택 오류 시 trigger로 포커스를 옮깁니다. uncontrolled Select는 form reset 시 defaultValue로 돌아갑니다. readonly 값은 전송되지만 변경할 수 없습니다. onClear는 controlled 값의 초기화 의도를 전달하고 입력 포커스를 유지합니다. endAdornment를 넣을 수 있으며 저장과 업무 검증은 호출자 책임입니다. Textarea beforeInput은label과입력사이에생성버튼·안내등을배치하는선택적ReactNode입니다. 기본입력/label/error/value계약을유지하며DOM속성으로전달하지않습니다.
 States: default, disabled, readonly, error, long
 Registry: /prism/r/prism-field.json
 Source: packages/prism/src/prism-field.tsx

@@ -1024,7 +1024,7 @@
     },
     "prism-position-blocks": {
       "visual": "source-contract-reviewed;authenticated-original-pending",
-      "interaction": "passed-selected-workspace-and-independent-install-browser",
+      "interaction": "passed-current-workspace-and-corrected-install-selected-workflows",
       "checks": [
         "20 new contracts;12 new states1280/320; creation/impact/save/remap retry flows."
       ],
@@ -1047,7 +1047,7 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-installed-position-blocks",
+      "status": "passed-installed-source-control-correction",
       "items": 58,
       "modules": 56,
       "completeExamples": 37,
@@ -1056,8 +1056,8 @@
       "source": "56 installed TSX modules and corrected CSS match emitted bytes exactly;0 transforms.37 complete examples/entry build,font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Installed example edit/impact confirmation/job conflict/remap/secondary clear/delete; final caption update reinstalled with320px dialog296/table264/760 and accessible caption;logs0.",
-      "sourceSha256": "8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5",
+      "runtime": "Corrected installed job editor:320px dialog296/nooverflow;label/helper/generation/textarea order;rednotice;impact+save flow;console0. Earlier installed remap preserved separately.",
+      "sourceSha256": "24f6875e7f3aa078e2c927100585b52274d7788c75207ae70c9352506239d1b6",
       "groups": 57,
       "examples": 38,
       "sourceTransforms": 0
@@ -1087,10 +1087,10 @@
     },
     "currentFixtureStates": {
       "count": 244,
-      "checked": 13,
-      "pending": 231,
+      "checked": 14,
+      "pending": 230,
       "status": "partial-current-position-blocks-synthetic-browser",
-      "sourceSha256": "8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5"
+      "sourceSha256": "24f6875e7f3aa078e2c927100585b52274d7788c75207ae70c9352506239d1b6"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1170,9 +1170,9 @@
   "fixtureRenderChecks": {
     "groups": 57,
     "states": 244,
-    "checked": 13,
+    "checked": 14,
     "status": "partial-current-position-blocks-synthetic-browser",
-    "sourceSha256": "8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5",
+    "sourceSha256": "24f6875e7f3aa078e2c927100585b52274d7788c75207ae70c9352506239d1b6",
     "inputCount": 82,
     "checks": [
       {
@@ -1207,6 +1207,17 @@
           320
         ],
         "rootOverflow": 0
+      },
+      {
+        "component": "prism-field",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320
+        ],
+        "rootOverflow": 0,
+        "nestedButtons": 0
       }
     ],
     "claim": "12 new synthetic states at1280/320px plus legacy tag/default320px. Original authenticated visual/font/service parity remains unverified.",
@@ -1529,6 +1540,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-13",
       "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+    },
+    "reviewedPositionBlockCommonControls": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved."
     }
   },
   "inputLabelReferenceComparison": {
@@ -2952,19 +2968,26 @@
   },
   "positionBlocksVerification": {
     "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
-    "sourceSha256": "8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5",
-    "status": "passed-source-contracts-selected-workspace-and-installed-runtime;review-publication-pending",
+    "sourceSha256": "24f6875e7f3aa078e2c927100585b52274d7788c75207ae70c9352506239d1b6",
+    "status": "passed-source-controls-and-selected-local-runtime;review-publication-pending",
     "tests": "252 full PRISM tests passed;20 new block cases. Final target rerun after source skeleton/state/one-request fault corrections recorded separately.",
     "reference": "Source list/tag/section/skeleton/summary/edit/delete TSX and SCSS, job group and mapped position semantics. Correct deployed /chat/admin/position-blocks is document complete with empty visible text. Initial /admin path404 is a navigation mistake, not authentication proof.",
     "localBrowser": "Industry duplicate/name-check/generation/manual edit/create; job generation/remove-all block/add name+description/create; edit impact review/save failure+same-confirmation retry/persisted sub-job description; remap other-job conflict, clear secondary/delete failure/selection retention/retry/deleted tag disabled. Browser warnings/errors0.",
     "responsive": "12 states at1280 and320; header64/title14/tag26, three/one category columns. At320 root288/dialog296; remap table760 inside264px internal scroll. Absolutely positioned hidden labels were contained in each field to remove dialog scrollWidth607 overflow.",
     "contracts": "Host callbacks/AbortSignal; name-specific debounced result; generation before editing; job description pairs/dirty guard/impact confirmation; required primary and optional secondary remap; stale/deleted/applying/conflict candidate rejection; explicit failures/retry; frozen public-only payload; duplicate/immediate-close and synchronous callback replacement fences.",
-    "independentConsumer": "57 emitted TSX/CSS exact bytes/0 transforms;38 examples TypeScript/Vite/font/notices. Installed edit/impact/job-remap and final caption/mobile rendering passed.",
+    "independentConsumer": "Final corrected57TSX/CSS exact bytes/0 transforms and38examples TypeScript/Vite/font/notices;current installed320px source-controls/order/edit-impact-save passed;earlier remap runtime retained separately.",
     "publication": "pending review preview; production not published",
     "remaining": [
       "Authenticated source rendering/permissions and real API/AI/RBAC/cache/sync effects.",
       "Other source purposes including chat-log composition and complete state parity.",
-      "Original whole-page static/variable font,pixel/A4 and production publication."
-    ]
+      "Original whole-page static/variable font,pixel/A4 and production publication.",
+      "Original generation overlays and the complete editor busy-state visual comparison remain unverified."
+    ],
+    "followupSourceControls": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved.",
+      "local": "Measured values match read source CSS;14 current unique states (24 new state/width renders,2 legacy states320). Current slot/order edit/impact/save browser flow and console0 passed. Authenticated source/busy-overlay/fullpixel comparison still pending."
+    }
   }
 }
