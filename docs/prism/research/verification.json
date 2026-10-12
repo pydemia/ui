@@ -445,7 +445,7 @@
       ]
     },
     "prism-sidebar": {
-      "visual": "partial",
+      "visual": "pending-current-menu-comparison",
       "interaction": "partial",
       "checks": [
         "Original vector navigation artwork and 36px navigation rows",
@@ -454,15 +454,15 @@
         "History rename Enter, Escape cancellation",
         "Profile action intent and 256px popover",
         "Rename blur trims synthetic title",
-        "Delete request preserves one DOM history row until explicit fixture confirm; after confirm row count is zero"
+        "Delete request preserves one DOM history row until explicit fixture confirm; after confirm row count is zero",
+        "Current five-link menu and host capability/route matching checked in synthetic DOM."
       ],
       "evidence": [
         "local-sidebar-profile-menu",
         "local-sidebar-delete-confirm"
       ],
       "remaining": [
-        "IME rename path",
-        "full authenticated source sidebar visual comparison"
+        "Source current menu capability, keyboard/layout and full authenticated interaction comparison."
       ]
     },
     "prism-candidate": {
@@ -972,27 +972,40 @@
         "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
         "Authenticated original source and production."
       ]
+    },
+    "prism-detail-state": {
+      "visual": "pending-host-composition-comparison",
+      "interaction": "partial",
+      "checks": [
+        "Atomic host selection and conditional DOM cleanup; classified403/404 and other-status boundaries.",
+        "Opaque request identity rejects stale and foreign errors; complete synthetic workspace tested."
+      ],
+      "remaining": [
+        "Administrator lists, page restore/bulk/status and remaining chat/authStore context.",
+        "Authenticated current source/deployed revision and full design/interaction/purpose parity.",
+        "Current full-font/pixel/A4 comparison and production publication."
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 179,
+      "passed": 189,
       "failed": 0
     },
     "registry": {
-      "groups": 52,
-      "items": 53,
+      "groups": 53,
+      "items": 54,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-final-admin-account-real-install-typecheck-build",
-      "items": 53,
-      "modules": 52,
-      "completeExamples": 32,
+      "status": "passed-final-chat-detail-real-install-typecheck-build",
+      "items": 54,
+      "modules": 53,
+      "completeExamples": 34,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "source": "All52 final installed TSX modules and CSS match emitted bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
+      "source": "All53 installed TSX modules and CSS match final emitted bytes exactly;0 transforms.34 final complete examples compile; Vite/font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
       "runtime": "Current real browser and A4 comparison remain pending."
@@ -1078,19 +1091,19 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 49,
-      "componentExamples": 28,
-      "integrationFragments": 21,
+      "groups": 53,
+      "componentExamples": 34,
+      "integrationFragments": 19,
       "workspaceTypecheck": "passed check-prism.mjs",
       "installedTypecheck": "passed final independent install",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 202,
+      "count": 206,
       "checked": 0,
-      "pending": 202,
-      "status": "pending-current-admin-account-source-browser-policy",
-      "sourceSha256": "7ea7cd89e57bfaa5f165b8d2cd0c620fc4b0143244881270c2147c659874adec"
+      "pending": 206,
+      "status": "pending-current-chat-detail-source-browser-policy",
+      "sourceSha256": "b49fd5df2019734965d9090c11203f2d7dc694171b2babe94167385b4fa976b4"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1168,14 +1181,14 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 52,
-    "states": 202,
+    "groups": 53,
+    "states": 206,
     "checked": 0,
-    "status": "pending-current-admin-account-source-browser-policy",
-    "baseCommit": "cd8529c2177d0ec79e9c4a24f415db381775fcf8",
-    "sourceSha256": "7ea7cd89e57bfaa5f165b8d2cd0c620fc4b0143244881270c2147c659874adec",
+    "status": "pending-current-chat-detail-source-browser-policy",
+    "baseCommit": "1218c9ff2ffe582d380a11502be2060e236d5260",
+    "sourceSha256": "b49fd5df2019734965d9090c11203f2d7dc694171b2babe94167385b4fa976b4",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
-    "inputCount": 72,
+    "inputCount": 74,
     "checks": [],
     "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
     "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
@@ -1289,7 +1302,16 @@
       "Remaining original long-content and domain states",
       "Current Profile/Memo/Position/Chat panel recipes, guarded leave confirmation and source-aligned position detail; all current manifest states.",
       "Current source profile header, evaluation/favorite/portrait interaction and A4 header/pagination after metadata changes."
-    ]
+    ],
+    "lastInventoryObservation": {
+      "observedAt": "2026-10-12",
+      "surfaces": [
+        "Chrome",
+        "Edge",
+        "Codex In-app Browser"
+      ],
+      "claim": "Inventory visibility only. No recovery of page operations or current rendered parity established."
+    }
   },
   "fileSelectionVerification": {
     "scope": "Fresh anonymous deployed original samples and local built synthetic fixtures; no server upload or existing login",
@@ -1452,7 +1474,7 @@
     ],
     "pendingRevisionAudit": [
       "Administrator user list/API role/status selection, bulk actions, position-list restoration and page-level access/permission states remain pending; local form delta is reviewed separately.",
-      "Chat render link behavior and sidebar/context changes."
+      "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
     "reviewedLeadershipDelta": {
@@ -1469,6 +1491,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+    },
+    "reviewedChatDetailDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
     }
   },
   "inputLabelReferenceComparison": {
@@ -2543,6 +2570,56 @@
       "Administrator page/list/bulk/role API/position restoration purpose and style comparison.",
       "Current source/consumer/preview keyboard, restricted, optional company, long/compact and font/pixel comparison.",
       "Real authenticated backend and deployed revision binding; current A4 and production."
+    ]
+  },
+  "previousChatDetailFixtureRenderChecks": {
+    "groups": 52,
+    "states": 202,
+    "checked": 0,
+    "status": "pending-current-admin-account-source-browser-policy",
+    "baseCommit": "cd8529c2177d0ec79e9c4a24f415db381775fcf8",
+    "sourceSha256": "7ea7cd89e57bfaa5f165b8d2cd0c620fc4b0143244881270c2147c659874adec",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "inputCount": 72,
+    "checks": [],
+    "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
+    "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
+  },
+  "chatDetailVerification": {
+    "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "sourceSha256": "b49fd5df2019734965d9090c11203f2d7dc694171b2babe94167385b4fa976b4",
+    "status": "passed-source-and-synthetic-contract-tests; current-browser-and-service-pending",
+    "selection": "One profile or card-version/LIVE position; close/classified403/404 clears selection and conditional host panel DOM.",
+    "requestTickets": "Opaque instance/generation UI identity; same-event capture, stale/same-id/reopen/version/source/cross-instance/unmounted checks; no authorization meaning or subject data.",
+    "adminMenu": "Host canManage gate; source Admin label and five links; opt-in descendant path matching preserves legacy exact routes.",
+    "interaction": "189 full PRISM tests, including10 new detail/sidebar/complete-workspace cases. No real-service/RBAC/browser claim.",
+    "independentConsumer": "Real shadcn install;53 final exact TSX modules/CSS,0 transforms,34 examples,TypeScript/Vite/font/notices passed.",
+    "publication": "review branch; production not-published",
+    "previousSidebar": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Original vector navigation artwork and 36px navigation rows",
+        "Collapsed width 72px, header 64px, new-chat height 40px",
+        "Admin submenu toggle and child navigation",
+        "History rename Enter, Escape cancellation",
+        "Profile action intent and 256px popover",
+        "Rename blur trims synthetic title",
+        "Delete request preserves one DOM history row until explicit fixture confirm; after confirm row count is zero"
+      ],
+      "evidence": [
+        "local-sidebar-profile-menu",
+        "local-sidebar-delete-confirm"
+      ],
+      "remaining": [
+        "IME rename path",
+        "full authenticated source sidebar visual comparison"
+      ]
+    },
+    "remaining": [
+      "Administrator lists, page restore/bulk/status and remaining chat/authStore context.",
+      "Authenticated current source/deployed revision and full design/interaction/purpose parity.",
+      "Current full-font/pixel/A4 comparison and production publication."
     ]
   }
 }

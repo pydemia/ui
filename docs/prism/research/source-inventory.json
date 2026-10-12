@@ -2325,7 +2325,12 @@
       "target": "prism-sidebar",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Admin five-link menu including users, host capability gate and descendant route matching. Current deployed visual comparison and real role authorization remain unverified."
+      }
     },
     {
       "source": "layouts/common/BlankLayout.tsx",
@@ -2451,7 +2456,7 @@
     ],
     "pendingRevisionAudit": [
       "Administrator user list/API role/status selection, bulk actions, position-list restoration and page-level access/permission states remain pending; local form delta is reviewed separately.",
-      "Chat render link behavior and sidebar/context changes."
+      "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
     "reviewedLeadershipDelta": {
@@ -2468,6 +2473,31 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+    },
+    "reviewedChatDetailDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
     }
-  }
+  },
+  "integrationReferences": [
+    {
+      "source": "pages/chat/ChatMain.tsx",
+      "target": "prism-detail-state",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Classified detail API403/404 clears profile/position panels and subject selection. Atomic host-owned selection and optional UI request tickets extend stale-error handling. API classification, cancellation, session and authorization stay host-owned; actual deployed behavior comparison remains unverified."
+      }
+    },
+    {
+      "source": "lib/axios.ts",
+      "target": "prism-detail-state",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Classified detail API403/404 clears profile/position panels and subject selection. Atomic host-owned selection and optional UI request tickets extend stale-error handling. API classification, cancellation, session and authorization stay host-owned; actual deployed behavior comparison remains unverified."
+      }
+    }
+  ]
 }

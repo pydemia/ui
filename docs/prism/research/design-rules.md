@@ -41,6 +41,14 @@ Map source role_code/role_name/requires_company_group to option value/label/need
 
 The current company add-picker supports name search and keeps the regular input border after a successful name check. Name validation, selected company IDs and the host draft remain independent. PositionForm's explicit view mode delivers current-company 403/404 errors through onAccessError once per request, including StrictMode. Supply companyContextRequestId to mask mismatched error.requestId values even for the same company; the host still owns cancellation. Stale-company errors, callback rerenders, create/edit and other error codes do not exit the form. The host owns context requests, error reset, retry and list restoration; the UI preserves editable drafts and exposes an inline error/retry surface.
 
+## Chat detail selection and administrator navigation
+
+Local dev `27c4fdbf` clears both detail panels and selected subjects when axios reports 403/404 for its classified candidate subresource, position/history, company-context, memo-create or candidate-delete APIs. The library exposes host-owned `usePrismDetailSelection` rather than copying the source HTTP/session singleton. Only call `handleAccessError` after your host classifies that error. Other statuses leave the detail selected. A request ticket optionally binds the callback to its hook instance and selection generation, including same-ID reopen and historical/LIVE changes. This UI identity contains no subject data and does not authorize a server request. The host owns cancellation and error notices.
+
+Access revocation must remove the subject and its draft content. `PrismPanel` normally keeps closed children mounted; render it conditionally from `selection` for this path. Do not defer revocation through an ordinary unsaved-edit leave guard. The complete workspace example removes its panel DOM, while continuing to use the existing responsive workspace and panel resizing.
+
+`createPrismAdminMenu(canManage,basePath)` supplies the source's Admin label and user, company-group, position-block, position and notice links. The host supplies `canManage`; menu visibility is not server authorization. Opt-in `matchDescendants` uses a slash boundary; existing custom navigation items keep exact matching. The integration references for ChatMain/axios are recorded separately from the component inventory and do not increase its purpose-mapping count.
+
 ## Position references
 
 The local dev `27c4fdbf` JSON/Markdown mappers preserve the card's position version; legacy cards without one use version 1. Body links have no version and open the current LIVE position. The detail view selects the historical or LIVE provider and restarts for id/version/retry changes. This is a local source audit; deployed revision binding is unverified.

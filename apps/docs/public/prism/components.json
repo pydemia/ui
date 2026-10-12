@@ -68,7 +68,7 @@
       ],
       "pendingRevisionAudit": [
         "Administrator user list/API role/status selection, bulk actions, position-list restoration and page-level access/permission states remain pending; local form delta is reviewed separately.",
-        "Chat render link behavior and sidebar/context changes."
+        "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
       ],
       "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
       "reviewedLeadershipDelta": {
@@ -85,6 +85,11 @@
         "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "observedAt": "2026-10-12",
         "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+      },
+      "reviewedChatDetailDelta": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
       }
     }
   },
@@ -557,23 +562,32 @@
       "name": "Chat sidebar",
       "category": "Navigation",
       "purpose": "새 대화·후보자·즐겨찾기·관리·대화기록 탐색",
-      "contract": "collapsed/onCollapsedChange와 activeId/onNavigate는 controlled입니다. 펼침 280px·접힘 72px. 원본 벡터·관리 하위 메뉴·대화기록 접기·사용자 팝오버를 제공합니다. expandedIds와 historyOpen은 선택적 controlled입니다. 이름 변경은 IME를 보존하고 Enter/blur로 확정, Escape로 취소합니다. 삭제 요청·프로필 작업·방침은 callback이며 권한과 실제 저장은 소비자가 소유합니다.",
+      "contract": "collapsed/onCollapsedChange와 activeId/onNavigate는 controlled입니다. 펼침280px·접힘72px. createPrismAdminMenu(canManage,basePath)는 호스트가 허용할 때 Admin과 사용자·회사그룹·포지션블럭·포지션·공지사항의5개 메뉴를 제공합니다. 이는 서버 권한 판정이 아닙니다. matchDescendants를 지정한 항목은 정확한 경로 또는 / 경계의 하위 경로에서 활성화하며 기존 항목의 기본값은 정확 일치입니다. expandedIds/historyOpen을 선택적으로 제어할 수 있습니다. 이름 변경은 IME/Enter/blur/Escape를 보존합니다. 삭제·프로필 작업·방침·저장은 호스트 콜백입니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "sourceDeltaAudits": [
+        {
+          "source": "layouts/chat/ChatSidebar.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Admin five-link menu including users, host capability gate and descendant route matching. Current deployed visual comparison and real role authorization remain unverified."
+        }
+      ],
       "states": [
         "default",
         "loading",
-        "empty"
+        "empty",
+        "restricted"
       ],
       "source": [
         "../layouts/chat/ChatSidebar.tsx"
       ],
-      "usage": "import { PrismSidebar } from \"@pydemia/prism\";\n<PrismSidebar items={items} activeId={active} onNavigate={setActive} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={newChat} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismSidebar, createPrismAdminMenu } from \"@pydemia/prism\";\nexport function SidebarExample() {\n    const [canManage,setCanManage]=useState(true),[collapsed,setCollapsed]=useState(false);\n    const [route,setRoute]=useState(\"/chat/admin/users/synthetic-user\");\n    const admin=createPrismAdminMenu(canManage);\n    return <div data-prism=\"light\"><label><input type=\"checkbox\" checked={canManage} onChange={event=>setCanManage(event.target.checked)}/>관리자 메뉴 표시</label>\n        <PrismSidebar items={admin?[admin]:[]} activeId={route} onNavigate={setRoute} collapsed={collapsed} onCollapsedChange={setCollapsed}\n            onNewChat={()=>setRoute(\"/chat\")} user={{name:\"가상 사용자\",description:\"demo@example.com\"}}/>\n        <p role=\"status\">선택한 메뉴: {route}</p></div>;\n}",
       "sourcePath": "packages/prism/src/prism-sidebar.tsx",
       "previewUrl": "/prism?component=prism-sidebar",
       "embedUrl": "/prism?component=prism-sidebar&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-sidebar&view=responsive",
       "verification": {
-        "visual": "partial",
+        "visual": "pending-current-menu-comparison",
         "interaction": "partial",
         "checks": [
           "Original vector navigation artwork and 36px navigation rows",
@@ -582,21 +596,25 @@
           "History rename Enter, Escape cancellation",
           "Profile action intent and 256px popover",
           "Rename blur trims synthetic title",
-          "Delete request preserves one DOM history row until explicit fixture confirm; after confirm row count is zero"
+          "Delete request preserves one DOM history row until explicit fixture confirm; after confirm row count is zero",
+          "Current five-link menu and host capability/route matching checked in synthetic DOM."
         ],
         "evidence": [
           "local-sidebar-profile-menu",
           "local-sidebar-delete-confirm"
         ],
         "remaining": [
-          "IME rename path",
-          "full authenticated source sidebar visual comparison"
+          "Source current menu capability, keyboard/layout and full authenticated interaction comparison."
         ]
       },
       "exports": [
         {
           "name": "PrismNavItem",
           "kind": "type"
+        },
+        {
+          "name": "createPrismAdminMenu",
+          "kind": "function"
         },
         {
           "name": "PrismHistoryItem",
@@ -615,8 +633,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismSidebar } from \"@/components/ui/prism-sidebar\";\n<PrismSidebar items={items} activeId={active} onNavigate={setActive} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={newChat} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismSidebar, createPrismAdminMenu } from \"@/components/ui/prism-sidebar\";\nexport function SidebarExample() {\n    const [canManage,setCanManage]=useState(true),[collapsed,setCollapsed]=useState(false);\n    const [route,setRoute]=useState(\"/chat/admin/users/synthetic-user\");\n    const admin=createPrismAdminMenu(canManage);\n    return <div data-prism=\"light\"><label><input type=\"checkbox\" checked={canManage} onChange={event=>setCanManage(event.target.checked)}/>관리자 메뉴 표시</label>\n        <PrismSidebar items={admin?[admin]:[]} activeId={route} onNavigate={setRoute} collapsed={collapsed} onCollapsedChange={setCollapsed}\n            onNewChat={()=>setRoute(\"/chat\")} user={{name:\"가상 사용자\",description:\"demo@example.com\"}}/>\n        <p role=\"status\">선택한 메뉴: {route}</p></div>;\n}"
     },
     {
       "id": "prism-chat",
@@ -4285,6 +4303,71 @@
       ],
       "usageKind": "component-example",
       "registryUsage": "import {useEffect,useRef,useState} from \"react\";\nimport { PrismProfilePrintDocument, PrismProfilePrintViewport, renderPrismProfilePdf, type PrismProfilePrintModel } from \"@/components/ui/prism-profile-print\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismPrintButton } from \"@/components/ui/prism-print\";\nimport { PrismHtmlExportButton } from \"@/components/ui/prism-html-export\";\nimport { downloadPrismBlob } from \"@/components/ui/prism-export\";\nconst model:PrismProfilePrintModel={\n id:\"synthetic\",candidate:{id:\"synthetic\",name:\"김가상\",company:\"가상전자\",position:\"기술전략담당\"},\n leader:{name:\"Good 리더\",summary:\"합성 요약입니다.\",definition:\"합성 정의입니다.\"},\n basicInfo:[{label:\"최종 학위\",value:[\"합성 학위\"]}],\n career:[{id:\"career\",period:\"합성 기간\",company:\"가상전자\",role:[\"가상 직무\",\"합성 업무\"]}],\n compensation:{years:[\"2026\"],rows:[{label:\"현금\",values:[0]}]},\n expertise:{summary:null,fields:[],survey:[]},\n success:{summary:null,topics:[\"합성 경험\"],essays:[{id:\"essay\",topic:\"합성 경험\",representative:true,title:\"합성 경험\",description:\"가상 근거입니다.\",keywords:[]}],failures:[]},\n design:{grade:null,description:null,essays:[{id:\"missing\",name:\"근거 없음\",score:null,max:null,description:null}],survey:[],diversity:null},\n agility:{grade:null,description:null,essays:[],survey:[],experiences:[]},\n attitude:{summary:null,diagnosis:null,risk:[],survey:[]},\n leadership:{summary:{items:[{label:\"지\",value:33},{label:\"덕\",value:32},{label:\"용\",value:35}],title:\"가상 유형\",description:\"합성 요약\",detail:\"상세 설명을 모두 보존합니다.\\n실제 평가 결과가 아닙니다.\"},survey:[],strengths:[],improvements:[],trend:null},\n};\nexport function ProfilePrintExample(){\n const root=useRef<HTMLDivElement>(null),controller=useRef<AbortController|null>(null);\n const [busy,setBusy]=useState(false),[message,setMessage]=useState(\"\");\n const [files,setFiles]=useState<{name:string;href:string}[]>([]);\n useEffect(()=>()=>controller.current?.abort(),[]);\n const remember=(blob:Blob,name:string)=>{const reader=new FileReader();reader.onload=()=>{if(typeof reader.result===\"string\")setFiles(items=>[...items,{name,href:reader.result as string}]);};reader.readAsDataURL(blob);};\n const pdf=async()=>{const current=new AbortController();controller.current=current;setBusy(true);\n  try{const result=await renderPrismProfilePdf(model,{options:{summary:true,compensation:true},signal:current.signal,onProgress:p=>setMessage(p.done+\"/\"+p.total+\"쪽\")});current.signal.throwIfAborted();remember(result.blob,\"profile.pdf\");downloadPrismBlob(result.blob,\"profile.pdf\");setMessage(result.pageCount+\"쪽 PDF 다운로드 시작\");}\n  catch(error){if(!current.signal.aborted)setMessage(error instanceof Error?error.message:\"PDF 생성 실패\");}\n  finally{if(controller.current===current){controller.current=null;setBusy(false);}}\n };\n return <section data-prism=\"light\"><PrismPrintButton getRoot={()=>root.current} title=\"가상 7분류 프로필\" onRequested={()=>setMessage(\"인쇄를 요청했습니다.\")} onAfterPrint={()=>setMessage(\"인쇄 요청 처리가 끝났습니다.\")} onError={()=>setMessage(\"인쇄 문서 준비 실패\")}/><PrismButton disabled={busy} onClick={()=>void pdf()}>7분류 PDF 다운로드</PrismButton>\n  {busy&&<PrismButton variant=\"line\" onClick={()=>{controller.current?.abort();setMessage(\"PDF 생성 취소\");}}>생성 취소</PrismButton>}\n  <PrismHtmlExportButton getRoot={()=>root.current} title=\"가상 7분류 프로필\" onComplete={result=>remember(result.blob,\"profile.html\")} onError={()=>setMessage(\"HTML 생성 실패\")}/>\n  <p role=\"status\">{message}</p>{files.map((file,index)=><a key={index} href={file.href} download={file.name}>완료된 파일: {file.name}</a>)}\n  <PrismProfilePrintViewport style={{height:800}}><div ref={root}><PrismProfilePrintDocument model={model} options={{summary:true,compensation:true}}/></div></PrismProfilePrintViewport>\n </section>;\n}\n"
+    },
+    {
+      "id": "prism-detail-state",
+      "name": "Chat detail selection",
+      "category": "Recipes",
+      "purpose": "후보자·포지션 상세 전환과 접근 오류의 패널·선택 정리",
+      "contract": "usePrismDetailSelection은 호스트가 소유하는 후보자 또는 포지션 상세 선택입니다. selectProfile/selectPosition은 서로 배타적이고 close는 선택도 함께 비웁니다. 지정된 상세 API 오류로 분류한 뒤 handleAccessError(403|404)를 호출하면 원본처럼 현재 상세를 닫습니다. 다른 상태는 유지합니다. captureRequest의 불투명 UI ticket을 두 번째 인자로 전달하면 이전 선택·같은 ID 재열기·버전 변경·다른 훅의 늦은 오류를 무시합니다. ticket은 인증 토큰이 아니며 명시적 null은 무시합니다. API 경로 분류·요청 취소·토스트·권한 판정은 호스트 소유입니다. PrismPanel은 닫힌 본문을 보존하므로 접근 철회에서는 selection 조건으로 패널을 unmount해 이전 subject와 draft DOM을 제거해야 합니다. 예시는 합성 데이터와 오류 이벤트를 사용하며 실제 서비스 결과가 아닙니다.",
+      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "sourceDeltaAudits": [
+        {
+          "source": "pages/chat/ChatMain.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Classified detail API403/404 clears profile/position panels and subject selection. Atomic host-owned selection and optional UI request tickets extend stale-error handling. API classification, cancellation, session and authorization stay host-owned; actual deployed behavior comparison remains unverified."
+        },
+        {
+          "source": "lib/axios.ts",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Classified detail API403/404 clears profile/position panels and subject selection. Atomic host-owned selection and optional UI request tickets extend stale-error handling. API classification, cancellation, session and authorization stay host-owned; actual deployed behavior comparison remains unverified."
+        }
+      ],
+      "states": [
+        "default",
+        "position",
+        "closed"
+      ],
+      "source": [
+        "chat/ChatMain.tsx",
+        "../lib/axios.ts"
+      ],
+      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismCandidateCard, PrismDetailList, PrismPanel, PrismPositionDetail, PrismSidebar, PrismWorkspace, createPrismAdminMenu, usePrismDetailSelection, type PrismCandidate, type PrismDetailRequestTicket, type PrismDetailSelection } from \"@pydemia/prism\";\n\nconst candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\", executiveYears: 3 };\n\n/** Synthetic host integration. Call handleAccessError only for your service's classified detail errors. */\nexport function DetailSelectionExample({ initialMode = \"profile\" }: { initialMode?: \"profile\" | \"position\" | \"closed\" }) {\n    const initial: PrismDetailSelection | null = initialMode === \"profile\" ? { kind: \"profile\", candidate }\n        : initialMode === \"position\" ? { kind: \"position\", reference: { id: \"synthetic-position\", source: \"card\", version: 2 } } : null;\n    const detail = usePrismDetailSelection(initial);\n    const [canManage, setCanManage] = useState(true), [collapsed, setCollapsed] = useState(false);\n    const [menus, setMenus] = useState([\"admin\"]);\n    const [route, setRoute] = useState(\"/chat/admin/users/synthetic-user\"), [message, setMessage] = useState(\"\");\n    const [ticket, setTicket] = useState<PrismDetailRequestTicket | null>(null);\n    const [expanded, setExpanded] = useState(false);\n    const admin = createPrismAdminMenu(canManage);\n    const selection = detail.selection;\n    function applyError(status: number, request?: PrismDetailRequestTicket | null) {\n        const cleared = detail.handleAccessError(status, request);\n        if (cleared) setExpanded(false);\n        setMessage(cleared ? `합성 ${status}: 상세 선택 해제` : `합성 ${status}: 현재 상세 유지`);\n    }\n    const panel = selection && <PrismPanel open title={selection.kind === \"profile\" ? \"프로필\" : \"포지션\"}\n        onOpenChange={open => { if (!open) detail.close(); }} resizable expanded={expanded} onExpandedChange={setExpanded}\n        contentStyle={{ padding: 20, overflow: \"auto\" }}>\n        {selection.kind === \"profile\" ? <PrismDetailList items={[\n            { label: \"성명\", value: selection.candidate.name }, { label: \"회사\", value: selection.candidate.company }, { label: \"직책\", value: selection.candidate.position },\n        ]}/> : <PrismPositionDetail company=\"가상전자\" role=\"가상 기술전략담당\" items={[\n            { label: \"조회 대상\", value: selection.reference.source === \"card\" ? `과거 버전 ${selection.reference.version}` : \"현재 운영본\" },\n        ]} definition=\"합성 포지션 정의입니다.\" groups={[]}/>}\n    </PrismPanel>;\n    return <div data-prism=\"light\" style={{ display: \"flex\", flexDirection: \"column\", gap: 12 }}>\n        <label><input type=\"checkbox\" checked={canManage} onChange={event => setCanManage(event.target.checked)}/>관리자 메뉴 표시</label>\n        <div style={{ display: \"flex\", flexWrap: \"wrap\", gap: 8 }}>\n            <PrismButton variant=\"line\" onClick={() => { setTicket(detail.captureRequest()); setMessage(\"합성 요청 식별자 보관\"); }} disabled={!detail.open}>현재 요청 보관</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(403)}>상세 API 403</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(404)}>상세 API 404</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(500)}>상세 API 500</PrismButton>\n            <PrismButton variant=\"line\" disabled={!ticket} onClick={() => applyError(403, ticket)}>보관한 요청의 늦은 403</PrismButton>\n        </div>\n        <p role=\"status\">{message || \"합성 데이터로 상세 선택과 접근 오류를 확인합니다.\"}</p>\n        <PrismWorkspace height={560} sidebar={<PrismSidebar items={admin ? [admin] : []} expandedIds={menus} onExpandedIdsChange={setMenus}\n            activeId={route} onNavigate={setRoute} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={detail.close}/>}\n            header={<span>선택한 메뉴: {route}</span>} panel={panel}>\n            <div style={{ padding: 20, display: \"flex\", flexDirection: \"column\", gap: 12 }}>\n                <PrismCandidateCard candidate={candidate} selected={selection?.kind === \"profile\"} onOpen={value => { setExpanded(false); detail.selectProfile(value); }}/>\n                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: \"synthetic-position\", source: \"card\", version: 2 }); }}>포지션 과거 버전 2</PrismButton>\n                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: \"synthetic-position\", source: \"link\" }); }}>포지션 현재 운영본</PrismButton>\n                <p role=\"status\">{selection ? `${selection.kind}: ${selection.kind === \"profile\" ? selection.candidate.id : selection.reference.id}` : \"선택된 상세 없음\"}</p>\n            </div>\n        </PrismWorkspace>\n    </div>;\n}\n",
+      "sourcePath": "packages/prism/src/prism-detail-state.tsx",
+      "previewUrl": "/prism?component=prism-detail-state",
+      "embedUrl": "/prism?component=prism-detail-state&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-detail-state&view=responsive",
+      "verification": {
+        "visual": "pending-host-composition-comparison",
+        "interaction": "partial",
+        "checks": [
+          "Atomic host selection and conditional DOM cleanup; classified403/404 and other-status boundaries.",
+          "Opaque request identity rejects stale and foreign errors; complete synthetic workspace tested."
+        ],
+        "remaining": [
+          "Administrator lists, page restore/bulk/status and remaining chat/authStore context.",
+          "Authenticated current source/deployed revision and full design/interaction/purpose parity.",
+          "Current full-font/pixel/A4 comparison and production publication."
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismDetailSelection",
+          "kind": "type"
+        },
+        {
+          "name": "PrismDetailRequestTicket",
+          "kind": "type"
+        },
+        {
+          "name": "usePrismDetailSelection",
+          "kind": "function"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismCandidateCard, type PrismCandidate } from \"@/components/ui/prism-candidate\";\nimport { PrismDetailList } from \"@/components/ui/prism-detail\";\nimport { PrismPanel } from \"@/components/ui/prism-panel\";\nimport { PrismPositionDetail } from \"@/components/ui/prism-position\";\nimport { PrismSidebar, createPrismAdminMenu } from \"@/components/ui/prism-sidebar\";\nimport { PrismWorkspace } from \"@/components/ui/prism-workspace\";\nimport { usePrismDetailSelection, type PrismDetailRequestTicket, type PrismDetailSelection } from \"@/components/ui/prism-detail-state\";\n\nconst candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\", executiveYears: 3 };\n\n/** Synthetic host integration. Call handleAccessError only for your service's classified detail errors. */\nexport function DetailSelectionExample({ initialMode = \"profile\" }: { initialMode?: \"profile\" | \"position\" | \"closed\" }) {\n    const initial: PrismDetailSelection | null = initialMode === \"profile\" ? { kind: \"profile\", candidate }\n        : initialMode === \"position\" ? { kind: \"position\", reference: { id: \"synthetic-position\", source: \"card\", version: 2 } } : null;\n    const detail = usePrismDetailSelection(initial);\n    const [canManage, setCanManage] = useState(true), [collapsed, setCollapsed] = useState(false);\n    const [menus, setMenus] = useState([\"admin\"]);\n    const [route, setRoute] = useState(\"/chat/admin/users/synthetic-user\"), [message, setMessage] = useState(\"\");\n    const [ticket, setTicket] = useState<PrismDetailRequestTicket | null>(null);\n    const [expanded, setExpanded] = useState(false);\n    const admin = createPrismAdminMenu(canManage);\n    const selection = detail.selection;\n    function applyError(status: number, request?: PrismDetailRequestTicket | null) {\n        const cleared = detail.handleAccessError(status, request);\n        if (cleared) setExpanded(false);\n        setMessage(cleared ? `합성 ${status}: 상세 선택 해제` : `합성 ${status}: 현재 상세 유지`);\n    }\n    const panel = selection && <PrismPanel open title={selection.kind === \"profile\" ? \"프로필\" : \"포지션\"}\n        onOpenChange={open => { if (!open) detail.close(); }} resizable expanded={expanded} onExpandedChange={setExpanded}\n        contentStyle={{ padding: 20, overflow: \"auto\" }}>\n        {selection.kind === \"profile\" ? <PrismDetailList items={[\n            { label: \"성명\", value: selection.candidate.name }, { label: \"회사\", value: selection.candidate.company }, { label: \"직책\", value: selection.candidate.position },\n        ]}/> : <PrismPositionDetail company=\"가상전자\" role=\"가상 기술전략담당\" items={[\n            { label: \"조회 대상\", value: selection.reference.source === \"card\" ? `과거 버전 ${selection.reference.version}` : \"현재 운영본\" },\n        ]} definition=\"합성 포지션 정의입니다.\" groups={[]}/>}\n    </PrismPanel>;\n    return <div data-prism=\"light\" style={{ display: \"flex\", flexDirection: \"column\", gap: 12 }}>\n        <label><input type=\"checkbox\" checked={canManage} onChange={event => setCanManage(event.target.checked)}/>관리자 메뉴 표시</label>\n        <div style={{ display: \"flex\", flexWrap: \"wrap\", gap: 8 }}>\n            <PrismButton variant=\"line\" onClick={() => { setTicket(detail.captureRequest()); setMessage(\"합성 요청 식별자 보관\"); }} disabled={!detail.open}>현재 요청 보관</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(403)}>상세 API 403</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(404)}>상세 API 404</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(500)}>상세 API 500</PrismButton>\n            <PrismButton variant=\"line\" disabled={!ticket} onClick={() => applyError(403, ticket)}>보관한 요청의 늦은 403</PrismButton>\n        </div>\n        <p role=\"status\">{message || \"합성 데이터로 상세 선택과 접근 오류를 확인합니다.\"}</p>\n        <PrismWorkspace height={560} sidebar={<PrismSidebar items={admin ? [admin] : []} expandedIds={menus} onExpandedIdsChange={setMenus}\n            activeId={route} onNavigate={setRoute} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={detail.close}/>}\n            header={<span>선택한 메뉴: {route}</span>} panel={panel}>\n            <div style={{ padding: 20, display: \"flex\", flexDirection: \"column\", gap: 12 }}>\n                <PrismCandidateCard candidate={candidate} selected={selection?.kind === \"profile\"} onOpen={value => { setExpanded(false); detail.selectProfile(value); }}/>\n                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: \"synthetic-position\", source: \"card\", version: 2 }); }}>포지션 과거 버전 2</PrismButton>\n                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: \"synthetic-position\", source: \"link\" }); }}>포지션 현재 운영본</PrismButton>\n                <p role=\"status\">{selection ? `${selection.kind}: ${selection.kind === \"profile\" ? selection.candidate.id : selection.reference.id}` : \"선택된 상세 없음\"}</p>\n            </div>\n        </PrismWorkspace>\n    </div>;\n}\n"
     }
   ]
 }
