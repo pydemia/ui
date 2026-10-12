@@ -997,30 +997,42 @@
         "Real role/status services and authenticated deployed revision/design/interaction comparison.",
         "Remaining chat/authStore and full font/pixel/A4/production."
       ]
+    },
+    "prism-position-management": {
+      "visual": "pending-authenticated-original-comparison",
+      "interaction": "passed-synthetic-and-selected-local-browser",
+      "checks": [
+        "13 position contract tests;10 synthetic states at1280/320px and real local restoration/schedule/cancel."
+      ],
+      "remaining": [
+        "Other administrator lists, page access and real role/status/sync services.",
+        "Authenticated deployed revision, original UI/state/interaction and full pixel/font/A4 parity.",
+        "Remaining chat/authStore and production publication."
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 201,
+      "passed": 214,
       "failed": 0
     },
     "registry": {
-      "groups": 54,
-      "items": 55,
+      "groups": 55,
+      "items": 56,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-final-admin-users-real-install-typecheck-build",
-      "items": 55,
-      "modules": 54,
-      "completeExamples": 35,
+      "status": "passed-current-position-list-real-install-typecheck-build-and-selected-browser",
+      "items": 56,
+      "modules": 55,
+      "completeExamples": 36,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "source": "54 final installed TSX modules and corrected CSS match emitted bytes exactly;0 transforms.35 complete examples compile; Vite/font/notices passed.",
+      "source": "55 installed TSX modules and final CSS match emitted bytes exactly;0 transforms.36 complete examples compile; independent entry build,font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Current rendered and A4 comparison pending."
+      "runtime": "Installed position example search/detail restoration,schedule/cancel and320px internal table scroll passed; authenticated original/all fixture behavior remains unverified."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1103,19 +1115,19 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 54,
-      "componentExamples": 35,
+      "groups": 55,
+      "componentExamples": 36,
       "integrationFragments": 19,
-      "workspaceTypecheck": "passed check-prism.mjs",
-      "installedTypecheck": "passed final independent install",
+      "workspaceTypecheck": "passed check-prism.mjs and workspace typecheck",
+      "installedTypecheck": "passed current actual install",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 212,
-      "checked": 0,
-      "pending": 212,
-      "status": "pending-current-admin-users-source-browser-policy",
-      "sourceSha256": "fd45b856fb976b64d11cc82a973e04cb799e224c7ba579f3c2c6c3c6f8292fb7"
+      "count": 222,
+      "checked": 11,
+      "pending": 211,
+      "status": "partial-current-position-list-local-browser",
+      "sourceSha256": "fabc5bccee5d33b01a8677b4f0a93a082a6ffab72da4d00a66af68e563dc4820"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1193,17 +1205,50 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 54,
-    "states": 212,
-    "checked": 0,
-    "status": "pending-current-admin-users-source-browser-policy",
+    "groups": 55,
+    "states": 222,
+    "checked": 11,
+    "status": "partial-current-position-list-local-browser",
     "baseCommit": "3aaf558a09c436d5fff8dd82a68f7d87603063c3",
-    "sourceSha256": "fd45b856fb976b64d11cc82a973e04cb799e224c7ba579f3c2c6c3c6f8292fb7",
+    "sourceSha256": "fabc5bccee5d33b01a8677b4f0a93a082a6ffab72da4d00a66af68e563dc4820",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
-    "inputCount": 76,
-    "checks": [],
-    "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
-    "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
+    "inputCount": 78,
+    "checks": [
+      {
+        "component": "prism-position-management",
+        "states": [
+          "default",
+          "edit",
+          "scheduled",
+          "running",
+          "failed",
+          "empty",
+          "error",
+          "loading",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          1280,
+          320
+        ],
+        "rootOverflow": 0,
+        "nestedButtons": 0
+      },
+      {
+        "component": "prism-admin-users",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320
+        ],
+        "rootOverflow": 0,
+        "nestedButtons": 0
+      }
+    ],
+    "claim": "11 unique local synthetic states rendered:10 position states at1280/320px and user/default at320px. Selected position restoration and schedule/cancel workflows passed. Not a full source/consumer/preview or authenticated parity claim.",
+    "pendingReason": "Other current states, installed and preview interaction, authenticated source/style/pixel/font/A4 comparison and production remain unverified."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1303,18 +1348,12 @@
     }
   },
   "runtimeVerificationAvailability": {
-    "status": "restricted",
-    "method": "Browser inventory is visible, but HTTP page actions were refused by URL protocol policy; no recovery of page operations has been confirmed.",
-    "inAppBrowser": "Actual local pages, standalone HTML and installed consumer used successfully.",
-    "sourceBrowser": "Previous authenticated candidate tabs are historical. Current existing testuser001 home was read, but click timed out and direct navigation left the root empty; fresh memo runtime unverified. The original /chat URL was restored.",
-    "sourceDeployedRevision": "not reported by the observed UI; local source revision remains separately scoped",
-    "newChangesPendingRuntime": [
-      "Full authenticated original screen/state and print export comparison",
-      "Native dialog paper/margin/fragmentation, OS save and physical output",
-      "Remaining original long-content and domain states",
-      "Current Profile/Memo/Position/Chat panel recipes, guarded leave confirmation and source-aligned position detail; all current manifest states.",
-      "Current source profile header, evaluation/favorite/portrait interaction and A4 header/pagination after metadata changes."
-    ],
+    "status": "available-local-IAB-page-operations",
+    "method": "Existing Codex In-app Browser; observed navigation, DOM reads and clicks after permission-profile change.",
+    "inAppBrowser": "Actual local rendering and selected workflows passed; no transport recovery inferred from inventory alone.",
+    "sourceBrowser": "Public source panel previously read; new admin/positions document complete with empty visible body and no warning/error logs.",
+    "sourceDeployedRevision": "unbound",
+    "newChangesPendingRuntime": "Authenticated original, installed/preview behavior and remaining states.",
     "lastInventoryObservation": {
       "observedAt": "2026-10-12",
       "surfaces": [
@@ -1485,7 +1524,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Administrator real role/status authorization/API integration,non-user lists,position-list restoration and page-level access states remain pending; source/synthetic user-list UI reviewed separately.",
+      "Administrator real role/status/sync authorization/API integration, other administrator lists and page-level access remain pending; user and position list source/synthetic composition reviewed separately.",
       "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -1513,6 +1552,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+    },
+    "reviewedPositionListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
     }
   },
   "inputLabelReferenceComparison": {
@@ -2669,5 +2713,73 @@
       "Remaining chat/authStore and full font/pixel/A4/production."
     ],
     "desktopFilters": "Original five columns above1140px;3/2/1 column wrapping below. Actual rendered comparison pending."
+  },
+  "previousPositionManagementFixtureRenderChecks": {
+    "groups": 54,
+    "states": 212,
+    "checked": 0,
+    "status": "pending-current-admin-users-source-browser-policy",
+    "baseCommit": "3aaf558a09c436d5fff8dd82a68f7d87603063c3",
+    "sourceSha256": "fd45b856fb976b64d11cc82a973e04cb799e224c7ba579f3c2c6c3c6f8292fb7",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "inputCount": 76,
+    "checks": [],
+    "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
+    "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
+  },
+  "previousPositionRuntimeVerificationAvailability": {
+    "status": "restricted",
+    "method": "Browser inventory is visible, but HTTP page actions were refused by URL protocol policy; no recovery of page operations has been confirmed.",
+    "inAppBrowser": "Actual local pages, standalone HTML and installed consumer used successfully.",
+    "sourceBrowser": "Previous authenticated candidate tabs are historical. Current existing testuser001 home was read, but click timed out and direct navigation left the root empty; fresh memo runtime unverified. The original /chat URL was restored.",
+    "sourceDeployedRevision": "not reported by the observed UI; local source revision remains separately scoped",
+    "newChangesPendingRuntime": [
+      "Full authenticated original screen/state and print export comparison",
+      "Native dialog paper/margin/fragmentation, OS save and physical output",
+      "Remaining original long-content and domain states",
+      "Current Profile/Memo/Position/Chat panel recipes, guarded leave confirmation and source-aligned position detail; all current manifest states.",
+      "Current source profile header, evaluation/favorite/portrait interaction and A4 header/pagination after metadata changes."
+    ],
+    "lastInventoryObservation": {
+      "observedAt": "2026-10-12",
+      "surfaces": [
+        "Chrome",
+        "Edge",
+        "Codex In-app Browser"
+      ],
+      "claim": "Inventory visibility only. No recovery of page operations or current rendered parity established."
+    }
+  },
+  "adminPositionsVerification": {
+    "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "sourceSha256": "fabc5bccee5d33b01a8677b4f0a93a082a6ffab72da4d00a66af68e563dc4820",
+    "status": "passed-source-contracts-local-and-installed-selected-browser; review-publication-pending",
+    "tests": "214 PRISM tests including13 new position list/data/snapshot/async/complete-example cases; final13 targeted cases also passed after CSS class separation.",
+    "list": "LIVE7/TEMP8 source columns, staged/public filters, all/none omitted, server sort fields and complete unpaged change-status filtering before client paging. Partial pages rejected; restored page bounded by result count.",
+    "restoration": "Host-owned context/source/history snapshot copies only draft/applied/page/sort. Literal restore flag or matching history required; no records/selection/session. First asynchronous metadata load preserves restored draft.",
+    "actions": "Frozen deletion IDs; domain-wide schedule/cancel, no-change/duplicate/retry, AbortSignal and scope/permission/version/sync-status/unmount fences; delete-last-page moves back; later selection retained.",
+    "localBrowser": {
+      "renderedStates": 10,
+      "widths": [
+        1280,
+        320
+      ],
+      "rootOverflow": 0,
+      "nestedButtons": 0,
+      "table": "1100px scroll width inside256px mobile table region",
+      "workflows": [
+        "Real detail unmount/remount restores draft/applied/page2/sort and clears selection.",
+        "Schedule locks editing and cancel restores it."
+      ],
+      "consoleWarningsErrors": 0
+    },
+    "sourceBrowser": "Original admin/positions remained visibly empty; authenticated original comparison not established.",
+    "independentConsumer": "passed-real-install;55 TSX/CSS exact,36 complete examples typed/built,installed search/detail restoration/schedule/cancel/320px passed",
+    "publication": "review branch; production not-published",
+    "remaining": [
+      "Other administrator lists, page access and real role/status/sync services.",
+      "Authenticated deployed revision, original UI/state/interaction and full pixel/font/A4 parity.",
+      "Remaining chat/authStore and production publication."
+    ]
   }
 }
