@@ -977,7 +977,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 178,
+      "passed": 179,
       "failed": 0
     },
     "registry": {
@@ -986,13 +986,13 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-current-admin-account-real-install-typecheck-build",
+      "status": "passed-final-admin-account-real-install-typecheck-build",
       "items": 53,
       "modules": 52,
       "completeExamples": 32,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "source": "All52 installed TSX modules and CSS match emitted bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
+      "source": "All52 final installed TSX modules and CSS match emitted bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
       "runtime": "Current real browser and A4 comparison remain pending."
@@ -1090,7 +1090,7 @@
       "checked": 0,
       "pending": 202,
       "status": "pending-current-admin-account-source-browser-policy",
-      "sourceSha256": "4f1a37550edde1dc459f5f5ec726cc2756d9ba7e3d04e355f1f0674a901db54e"
+      "sourceSha256": "7ea7cd89e57bfaa5f165b8d2cd0c620fc4b0143244881270c2147c659874adec"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1173,7 +1173,7 @@
     "checked": 0,
     "status": "pending-current-admin-account-source-browser-policy",
     "baseCommit": "cd8529c2177d0ec79e9c4a24f415db381775fcf8",
-    "sourceSha256": "4f1a37550edde1dc459f5f5ec726cc2756d9ba7e3d04e355f1f0674a901db54e",
+    "sourceSha256": "7ea7cd89e57bfaa5f165b8d2cd0c620fc4b0143244881270c2147c659874adec",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
     "inputCount": 72,
     "checks": [],
@@ -2479,7 +2479,7 @@
   },
   "adminAccountVerification": {
     "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
-    "sourceSha256": "4f1a37550edde1dc459f5f5ec726cc2756d9ba7e3d04e355f1f0674a901db54e",
+    "sourceSha256": "7ea7cd89e57bfaa5f165b8d2cd0c620fc4b0143244881270c2147c659874adec",
     "status": "passed-source-and-synthetic-contract-tests; current-browser-and-service-pending",
     "accountFields": [
       "email",
@@ -2502,8 +2502,8 @@
     "groupCompanyLabels": "Stable{id,name} and legacy strings",
     "companyPicker": "searchable and regular verified-name border",
     "positionView": "Current-company403/404 only; once per request; active-request ID masks same-company stale errors; StrictMode/other mode or status do not navigate; retry and drafts host-owned",
-    "interaction": "178 full PRISM tests passed;13 administrator cases include7 new account/context/search cases. No real-service/RBAC/browser claim.",
-    "independentConsumer": "All52 installed TSX modules and CSS match emitted bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
+    "interaction": "179 full PRISM tests passed;14 administrator cases include8 new account/context/search cases. No real-service/RBAC/browser claim.",
+    "independentConsumer": "All52 final installed TSX modules and CSS match emitted bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
     "publication": "review branch; production not-published",
     "previousComponent": {
       "visual": "partial",
