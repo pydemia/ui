@@ -83,6 +83,14 @@ test("source detail account edits basic data, locks only email and reports dirty
     await type("이름","변경한 이름");assert.equal(save().disabled,false);await act(async()=>[...document.querySelectorAll('button')].find(button=>button.textContent==="취소").click());assert.deepEqual(cancels,[false,true]);
     await act(async()=>document.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));assert.equal(saves[0].firstName,"변경한 이름");await act(async()=>root.render(null));
 });
+test("create cancellation compares the initial draft independently of whether creation is valid",async()=>{
+    const initial=account(),cancels=[];let reset;
+    function Demo(){const[value,setValue]=useState(initial);reset=()=>setValue({...initial});return h(PrismUserForm,{mode:"create",value,onValueChange:setValue,companies:options,roles:accountRoles,companyGroups:accountGroups,onSubmit(){},onCancel:dirty=>cancels.push(dirty)});}
+    const cancel=async()=>act(async()=>[...document.querySelectorAll('button')].find(button=>button.textContent==="취소").click());
+    await act(async()=>root.render(h(Demo)));assert.equal(save().disabled,false);await cancel();
+    await type("이름","변경한 이름");await cancel();await act(async()=>reset());await cancel();
+    assert.deepEqual(cancels,[false,true,false]);await act(async()=>root.render(null));
+});
 test("blocked roles remain visible only if selected and missing metadata never discards stored fields",async()=>{
     const initial=account(),changes=[];const props={mode:"detail",initialValue:initial,value:initial,onValueChange:value=>changes.push(value),companies:options,roles:accountRoles,companyGroups:accountGroups,disabledRoleCodes:["system"],onSubmit(){},onCancel(){}};
     await act(async()=>root.render(h(PrismUserForm,props)));assert.equal(document.querySelector('input[value="system"]'),null);

@@ -141,8 +141,9 @@ function UserFormBody<T extends PrismUserDraft>({value,onValueChange,roles,compa
 const sourceUserEmail=(value:string)=>/^[^\s@]+@sk\.com$/i.test(value.trim());
 function isAccountUserForm(props:PrismUserFormProps):props is PrismUserAccountFormProps {return "roleCode" in props.value;}
 function AccountUserForm({value,onValueChange,companies,roles,initialValue,mode,detail,onSubmit,onCancel,...actions}:PrismUserAccountFormProps) {
+    const firstValue=useRef({...value}),baseline=initialValue??firstValue.current;
     const current=preparePrismUserAccountDraft(value,roles);
-    const dirty=mode==="create"||Object.keys(current).some(key=>current[key as keyof PrismUserAccountDraft]!==initialValue![key as keyof PrismUserAccountDraft]);
+    const dirty=Object.keys(current).some(key=>current[key as keyof PrismUserAccountDraft]!==baseline[key as keyof PrismUserAccountDraft]);
     const normalized:PrismUserRegistrationDraft={email:value.email,lastName:value.lastName,firstName:value.firstName,companyId:value.companyId,division:value.team,roleId:value.roleCode,companyGroupId:value.companyGroupId};
     const change=(next:PrismUserRegistrationDraft)=>onValueChange({email:next.email,lastName:next.lastName,firstName:next.firstName,companyId:next.companyId,team:next.division,roleCode:next.roleId,companyGroupId:next.companyGroupId});
     const locked=actions.readOnly;
@@ -155,7 +156,7 @@ function AccountUserForm({value,onValueChange,companies,roles,initialValue,mode,
     </div></>;
     const displayRoles=roles.map(role=>({...role,notice:role.notice!==undefined?role.notice:<><span>모든 회사 및 메뉴에 접근할 수 있습니다.</span><br/>{role.label}는 별도의 회사 그룹 설정이 필요하지 않습니다.</>}));
     return <UserFormBody {...actions} value={normalized} onValueChange={change} roles={displayRoles} modern basicFields={basics}
-        basicValid={!!current.lastName&&!!current.firstName&&!!current.team} dirty={dirty} detailStatus={detail?.status} emailReadOnly={mode==="detail"} emailValidator={sourceUserEmail}
+        basicValid={!!current.lastName&&!!current.firstName&&!!current.team} dirty={mode==="create"||dirty} detailStatus={detail?.status} emailReadOnly={mode==="detail"} emailValidator={sourceUserEmail}
         unknownRoleNotice="선택한 권한의 정보를 확인할 수 없습니다. 권한 목록을 확인해 주세요."
         onSubmit={()=>onSubmit(preparePrismUserAccountDraft(value,roles))} onCancel={()=>onCancel(dirty)} submitLabel={actions.submitLabel??(mode==="detail"?"수정":"등록")}/>;
 }

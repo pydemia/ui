@@ -27,3 +27,9 @@ PrismPositionForm의mode=view는현재companyId와일치하는403/404를onAccess
 
 
 표준npm run build가성공했습니다. canonical/generated 연구자료4개와generic release25ca4393를최종대조합니다. 최신ChatSidebar diff는사용자관리메뉴추가이고ChatMain diff는API403/404 toast listener에서profile/position panel open과선택subject를함께비우는동작입니다. 이변경과관리자목록/position-list restore는다음대조로남겨둡니다. 이번sourceform반영만으로전체최신frontend대응을완료했다고하지않습니다.
+
+
+게시전source대조에서create의dirty를항상true로전달하던계산을수정했습니다. initialValue 또는최초controlled draft를기준으로취소의실제변경여부를판정하고등록가능여부는별도로유지합니다. 초기false/수정true/복원false와valid creation을함께검사합니다. 이전178개검사/commit은이후보정이전증거이며최종검사·source fingerprint·설치/생성물을다시확인합니다.
+
+
+취소보정후최종179 tests/0 fail,workspace typecheck와32개완전예시계약검사가통과했습니다. 실제최종shadcn재설치/TypeScript/Vite/font/고지와52개module/CSS exact bytes,변환예외0도통과했습니다. 최종source7ea7cd89e57bfaa5f165b8d2cd0c620fc4b0143244881270c2147c659874adec/72 inputs입니다. 이전4f1a/178개증거는보정전범위입니다. 현재202 actual-render검사0을유지합니다.
