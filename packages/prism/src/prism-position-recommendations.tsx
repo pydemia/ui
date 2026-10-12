@@ -2,14 +2,29 @@ import { useId, useLayoutEffect, useRef, useState, type CSSProperties, type Reac
 import { PrismButton } from "./prism-button";
 import { PrismIcon } from "./prism-icon";
 
-export type PrismPositionRecommendationItem = { id: string; title: string; company: string; reasons: readonly string[]; companyLogo?: ReactNode };
+/** Cards refer to a historical snapshot; body links refer to the current live position. */
+export type PrismPositionReference = { id: string } & (
+    { source: "card"; version: number } | { source: "link"; version?: never }
+);
+/** Missing card versions use the source's legacy version 1. No API request or host mutation occurs. */
+export function createPrismPositionReference(item: { id: string; version?: number }, source: "card" | "link" = "card"): PrismPositionReference {
+    if (!item.id.trim()) throw new Error("A position reference requires its identifier.");
+    if (source === "link") return { id: item.id, source };
+    if (source !== "card") throw new Error("Unknown position reference source.");
+    const version = item.version ?? 1;
+    if (!Number.isSafeInteger(version) || version < 1) throw new RangeError("Position versions must be positive safe integers.");
+    return { id: item.id, source, version };
+}
+export type PrismPositionRecommendationItem = { id: string; title: string; company: string; reasons: readonly string[]; companyLogo?: ReactNode; version?: number };
+export type PrismPositionSelectHandler = (item: PrismPositionRecommendationItem, reference: PrismPositionReference) => void;
 export type PrismPositionRecommendationProps = {
-    item: PrismPositionRecommendationItem; selected?: boolean; onSelect?: (item: PrismPositionRecommendationItem) => void;
+    item: PrismPositionRecommendationItem; selected?: boolean; onSelect?: PrismPositionSelectHandler;
     headerMinHeight?: number; className?: string; style?: CSSProperties;
 };
 export function PrismPositionRecommendation({ item, selected, onSelect, headerMinHeight, className = "", style }: PrismPositionRecommendationProps) {
     if (headerMinHeight !== undefined && (!Number.isFinite(headerMinHeight) || headerMinHeight <= 0)) throw new RangeError("Position header minimum must be positive.");
-    const action = () => onSelect?.(item);
+    const reference = createPrismPositionReference(item);
+    const action = () => onSelect?.(item, reference);
     return <article className={`prism-position-recommendation ${className}`} style={style} data-selected={selected || undefined} role={onSelect ? "button" : undefined} tabIndex={onSelect ? 0 : undefined}
         aria-label={onSelect ? `${item.company} ${item.title}` : undefined} aria-pressed={onSelect ? !!selected : undefined} onClick={onSelect ? action : undefined}
         onKeyDown={onSelect ? event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); action(); } } : undefined}>
@@ -18,12 +33,16 @@ export function PrismPositionRecommendation({ item, selected, onSelect, headerMi
     </article>;
 }
 export type PrismPositionRecommendationsProps = {
-    items: readonly PrismPositionRecommendationItem[]; selectedId?: string; onSelect?: (item: PrismPositionRecommendationItem) => void;
+    items: readonly PrismPositionRecommendationItem[]; selectedId?: string; onSelect?: PrismPositionSelectHandler;
+    /** Explicit null clears selection; undefined retains legacy selectedId matching. */
+    selectedReference?: PrismPositionReference | null;
     title?: string; datasetKey?: string | number; resize?: "horizontal" | "both"; className?: string; style?: CSSProperties;
 };
-export function PrismPositionRecommendations({ items, selectedId, onSelect, title = "추천 포지션", datasetKey, resize, className = "", style }: PrismPositionRecommendationsProps) {
+export function PrismPositionRecommendations({ items, selectedId, selectedReference, onSelect, title = "추천 포지션", datasetKey, resize, className = "", style }: PrismPositionRecommendationsProps) {
     const id = useId(), element = useRef<HTMLDivElement>(null), [narrow,setNarrow] = useState(true);
     if (new Set(items.map(item => item.id)).size !== items.length || items.some(item => !item.id || !item.title.trim())) throw new Error("Position recommendations require unique identifiers and titles.");
+    for (const item of items) createPrismPositionReference(item);
+    if (selectedReference) createPrismPositionReference(selectedReference, selectedReference.source);
     useLayoutEffect(() => { const node = element.current; if (!node) return;
         const measure = () => setNarrow(node.clientWidth <= 400); measure(); const observer = new ResizeObserver(entries => setNarrow(entries[0].contentRect.width <= 400));
         observer.observe(node); return () => observer.disconnect(); },[]);
@@ -35,7 +54,8 @@ export function PrismPositionRecommendations({ items, selectedId, onSelect, titl
     const all = count > initial && hidden === 0, next = hidden <= 3 ? hidden : 2;
     return <div ref={element} className={`prism-position-recommendations ${className}`} style={style} data-resize={resize} data-narrow={narrow} aria-label={title}>
         <div id={id} className="prism-position-recommendation-list" data-layout={items.length === 1 ? "single" : items.length === 2 ? "pair" : "grid"}>
-            {items.length ? items.slice(0,count).map(item => <PrismPositionRecommendation key={item.id} item={item} selected={selectedId === item.id} onSelect={onSelect}/>) : <p className="prism-no-data">관련 데이터 없음</p>}
+            {items.length ? items.slice(0,count).map(item => <PrismPositionRecommendation key={item.id} item={item}
+                selected={selectedReference === undefined ? selectedId === item.id : selectedReference?.source === "card" && selectedReference.id === item.id && selectedReference.version === (item.version ?? 1)} onSelect={onSelect}/>) : <p className="prism-no-data">관련 데이터 없음</p>}
         </div>
         {(hidden > 0 || all) && <PrismButton variant="line" size="large" className="prism-position-reveal" aria-controls={id} aria-expanded={count > initial}
             icon={<PrismIcon name="ChevronDownIcon" style={{transform:all ? "rotate(180deg)" : undefined}}/>} iconPosition="right"

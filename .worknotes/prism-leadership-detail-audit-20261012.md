@@ -26,3 +26,12 @@ Registry 재생성·실제 shadcn consumer 설치·전체 site build·generic re
 52그룹/53항목,32개 완전 예시와 실제 shadcn 재설치,TypeScript/Vite/font/고지 검사가 통과했습니다.52개 TSX와CSS 모두 exact emitted bytes이며 변환 예외는0입니다. 표준 npm run build가 성공했습니다. Source fingerprint는f2ee00893ee4f59e56bc661ed23805cfe7d4b4a342b64a152db9028258494847/71 inputs이고197 current fixture의 실제 화면 검사는0입니다. canonical/generated 연구 자료4개는 최종 byte 대조합니다.
 
 다음 source delta는 포지션 카드의 version입니다. 원본 JSON mapper는 legacy card의 version을1로 표시하고 카드 상세는 해당 version으로 조회하며 본문 링크에는 version이 없어 현재LIVE를 조회합니다. 현재 PrismResponse.onPositionOpen은 id만 전달해 이 목적을 보존하지 못합니다. typed recommendation/reference 전달과 host 조회 분리를 이어가야 합니다.
+
+
+## PR·CI·preview readback
+
+Source bfffb526/generated efbd59a84016eee301e3919deedb419602d54740을 기존 review 브랜치에 push했습니다. Credential exact-match0과 Git config 보존을 확인했습니다. PR162는 draft true/base main/정확한efbd59a8 head로 읽고 재첨부했습니다. Verify UI38208649272는 completed/success입니다. 로컬과 CI에서 generic current release25ca4393 및 생성물 재현 검사가 통과했습니다.
+
+Vercel dpl_DoAuLFFPqv7XZXh7CMZGj7u3ohfm은 READY/target null/정확한efbd59a8 SHA의 preview입니다. https://pydemia-clr6plygh-pydemia-7822.vercel.app에서 기존 CLI 인증으로 registry810258bytes/SHA280e1916,manifest267629bytes/SHA323bda59,verification109719bytes/SHAa3772a6a,profile-sections13948bytes/SHA97db980b,chart16974bytes/SHA704e0dd4,profile-print20831bytes/SHA2b4d2176의 로컬 exact bytes를 확인했습니다. 전체 hash는 leadership-detail-preview-readback.json에 보존합니다. HTTP readback은 화면·pixel·print 비교 증거가 아닙니다.
+
+코드/생성물은 게시한 head에 있고 이 readback 메모만 local modified로 보존합니다. Consumer source/lock/dist/node_modules를 보존했고 helper registry server는 finally에서 종료됐습니다. 이 phase에서 자체 dev server를 시작하지 않았습니다. 전체 goal은 active이며 최신 position version/admin/chat와 인증 원본·전체 디자인/동작 목적·확장 coverage/실화면/A4/production은 이어서 확인해야 합니다.

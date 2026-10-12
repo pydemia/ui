@@ -33,7 +33,7 @@ export function PrismPositionDetailSkeleton() {
         {index === 2 && <PrismSkeleton height={180} radius={12}/>}
     </section>)}</div></div>;
 }
-/** Data, LIVE/draft selection and stale-request cancellation belong to the host. */
+/** Data, historical/LIVE selection and stale-request cancellation belong to the host. */
 export function PrismPositionDetail({ company, role, brand, items, groups, definition, businessContext,
     footnote = prismPositionFootnote, status = "ready", onRetry }: PrismPositionDetailProps) {
     const emptyGroups: readonly PrismRequirementGroup[] = [{ id: "expertise", title: "전문성", items: [] }, { id: "experience", title: "성공경험", items: [] }];
