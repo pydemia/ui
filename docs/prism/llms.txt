@@ -929,30 +929,39 @@ export function AccessExample({ status, onRetry }: {
 
 ## Notice / Group / User / Position forms
 공지 노출 범위·게시기간, 사용자 기본 정보·역할별 회사 그룹과 포지션 요구 사항 입력
-Contract: 소비자가 값·선택지·권한·업무 검증과 저장을 소유합니다. UserForm의 mode=create는 PrismUserRegistrationDraft의 이메일·성·이름·회사·본부/팀을 필수로 받고 mode=detail은 initialValue를 요구하며 기본 정보를 읽기 전용으로 표시합니다. 역할·회사 그룹 변경 후 수정 가능합니다. 그룹의 활성/비활성 배지는 선택값과 옵션에 표시합니다. emailStatus/onCheckEmail은 업무 검증용이며 기본 검사는 이메일 형식만 확인합니다. CompanyGroupForm의 validateName(name,{signal})은 등록 blur 또는 상세 이름 변경 600ms 후 호출되며 오래된 결과·중복·확인 오류는 저장을 막습니다. 이름이 그대로인 상세는 회사만 바꿔 저장 가능합니다. 사용자/그룹 양식은 Promise 저장의 진행·실패·재시도와 중복 제출 방지를 지원합니다. mode 없는 기존 3필드 UserForm도 지원합니다. 공지 팝업을 끄면 게시기간을 null로 변경하며 포지션 요구 선택 제한과 중복 직무를 표시합니다.
-States: default, readonly, loading, error, long
+Contract: 현재 소스 모델은 PrismUserAccountDraft의 email/lastName/firstName/companyId/team/roleCode/companyGroupId입니다. 회사는 선택하지 않아도 되며 등록 이메일은 기본 @sk.com 형식을 검사합니다. 상세는 이메일만 잠그고 이름·회사·팀을 수정할 수 있으며 initialValue로 dirty와 취소 인자를 계산합니다. onSubmit은 공백 정리·공개7필드·역할별 그룹을 반영한 복사 모델을 받습니다. roles(value=role_code,label=role_name,needsCompanyGroup=requires_company_group)와 disabledRoleCodes는 호스트 소유입니다. 제한 Role은 현재 선택된 경우에만 disabled로 보이고 메타데이터가 없는 값/그룹은 자동 삭제하지 않습니다. 그룹 companies는{id,name} 또는 기존 문자열을 받습니다. roleId/division의 기존 RegistrationDraft와 mode 없는 3필드도 유지합니다. emailStatus/onCheckEmail로 업무 검증을 연결합니다. CompanyGroupForm은 회사 검색과 validateName(name,{signal})의 blur/600ms 상세 검사·stale/오류·중복 제출 처리를 지원합니다. 현재 소스의 확인 완료 입력은 기본 테두리를 유지합니다. PositionForm의 companyContextRequestId는 현재 요청 ID이며 error.requestId가 다르면 이전 요청 오류를 표시하거나 복귀하지 않습니다. mode=view의 회사에 바인딩된403/404는 onAccessError를 요청별 한 번 호출합니다. create/edit은 초안을 보존하며 retry는 호스트 콜백입니다. API/auth/저장/권한 판정·목록 복귀는 소비자가 소유합니다.
+States: default, readonly, loading, error, long, restricted, access-error
 Registry: /prism/r/prism-domain-forms.json
 Source: packages/prism/src/prism-domain-forms.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
 import { useState } from "react";
-import { PrismUserForm, PrismCompanyGroupForm, type PrismUserRegistrationDraft, type PrismCompanyGroupDraft, type PrismGroupNameValidator } from "@/components/ui/prism-domain-forms";
-const companies = [{ value: "demo", label: "가상전자" }, { value: "example", label: "예시사업" }];
+import { PrismUserForm, PrismCompanyGroupForm, PrismPositionForm, type PrismUserAccountDraft, type PrismCompanyGroupDraft, type PrismPositionDraft, type PrismGroupNameValidator } from "@/components/ui/prism-domain-forms";
+const companies=[{value:"demo",label:"가상전자"},{value:"example",label:"예시사업"}];
 export function UserFormExample() {
-  const [value, setValue] = useState<PrismUserRegistrationDraft>({ email: "", lastName: "", firstName: "", companyId: "", division: "", roleId: "member", companyGroupId: "" });
-  const [saved, setSaved] = useState(false);
-  return <div data-prism="light"><PrismUserForm mode="create" value={value} onValueChange={setValue} companies={companies}
-    roles={[{ value: "member", label: "멤버사 사용자", needsCompanyGroup: true }, { value: "group", label: "그룹 담당자" }]}
-    companyGroups={[{ id: "group", name: "가상 회사 그룹", status: "활성", companies: ["가상전자"] }]}
-    onSubmit={async () => { setSaved(true); }} onCancel={() => setSaved(false)} /><p role="status">{saved ? "가상 입력 확인 완료" : ""}</p></div>;
+    const [value,setValue]=useState<PrismUserAccountDraft>({email:"",lastName:"",firstName:"",companyId:"",team:"",roleCode:"GENERAL_USER",companyGroupId:""});
+    const [message,setMessage]=useState("");
+    return <div data-prism="light"><PrismUserForm mode="create" value={value} onValueChange={setValue} companies={companies}
+        roles={[{value:"GENERAL_USER",label:"멤버사 사용자",needsCompanyGroup:true},{value:"GROUP_HR",label:"그룹 담당자"},{value:"SYSTEM_ADMIN",label:"시스템 운영자"}]} disabledRoleCodes={["SYSTEM_ADMIN"]}
+        companyGroups={[{id:"group",name:"가상 회사 그룹",status:"활성",companies:[{id:"demo",name:"가상전자"}]}]}
+        onSubmit={async draft=>setMessage("합성 입력 확인: "+draft.roleCode)} onCancel={dirty=>setMessage(dirty?"변경된 입력의 취소 의도":"변경 없는 취소 의도")}/><p role="status">{message}</p></div>;
 }
 export function CompanyGroupFormExample() {
-  const [value, setValue] = useState<PrismCompanyGroupDraft>({ name: "", companyIds: [] });
-  const [saved, setSaved] = useState(false);
-  // Synthetic validation only. Supply the service's validator in an application.
-  const validateName: PrismGroupNameValidator = async (name, { signal }) => { if (signal.aborted) throw signal.reason; return name !== "중복 그룹"; };
-  return <div data-prism="light"><PrismCompanyGroupForm mode="create" value={value} onValueChange={setValue} companies={companies} validateName={validateName} onSubmit={async () => { setSaved(true); }} onCancel={() => setSaved(false)} /><p role="status">{saved ? "가상 그룹 확인 완료" : ""}</p></div>;
+    const [value,setValue]=useState<PrismCompanyGroupDraft>({name:"",companyIds:[]});
+    const [message,setMessage]=useState("");
+    // Synthetic validation. Supply your service's validator without changing the input draft.
+    const validateName:PrismGroupNameValidator=async(name,{signal})=>{signal.throwIfAborted();return name!=="중복 그룹";};
+    return <div data-prism="light"><PrismCompanyGroupForm mode="create" value={value} onValueChange={setValue} companies={companies} validateName={validateName}
+        onSubmit={async()=>setMessage("합성 그룹 확인")} onCancel={()=>setMessage("취소 의도")}/><p role="status">{message}</p></div>;
+}
+export function PositionAccessExample() {
+    const [value,setValue]=useState<PrismPositionDraft>({name:"가상 포지션",companyId:"demo",industryId:"ict",roleId:"leader",mainJobId:"tech",subJobId:"",isCore:false,context:"가상 Business Context",definition:"",expertise:"",experience:"",subExpertise:"",subExperience:"",expertiseIds:[],experienceIds:[]});
+    const [failed,setFailed]=useState(true),[message,setMessage]=useState("");
+    return <div data-prism="light"><PrismPositionForm mode="view" value={value} onValueChange={setValue} companies={companies}
+        industries={[{value:"ict",label:"ICT"}]} roles={[{value:"leader",label:"책임"}]} jobs={[{value:"tech",label:"기술"}]} expertiseOptions={[]} experienceOptions={[]}
+        companyContextRequestId="synthetic" companyContextError={failed?{companyId:"demo",status:403,requestId:"synthetic"}:undefined} onAccessError={()=>setMessage("합성 접근 오류: 목록 복귀 의도")}
+        onRetryCompanyContext={()=>setFailed(false)} onSubmit={()=>{}} onCancel={()=>setMessage("취소 의도")}/><p role="status">{message}</p></div>;
 }
 ```
 

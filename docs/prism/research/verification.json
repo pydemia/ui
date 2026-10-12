@@ -230,37 +230,16 @@
       ]
     },
     "prism-domain-forms": {
-      "visual": "partial",
+      "visual": "pending",
       "interaction": "partial",
       "checks": [
-        "All companies disables company selector",
-        "Notice popup requires valid date range",
-        "Disabling popup clears both dates",
-        "User role without group hides selector and clears group ID",
-        "company group selects two companies and emits synthetic save intent",
-        "duplicate position sub-job rejected",
-        "expertise limit 3 and experience limit 2 preserve removal",
-        "position generate and save intent callbacks",
-        "Current source 087811ff user create: required email/lastName/firstName/companyId/division, searchable company select",
-        "Current user detail: read-only basics, unchanged save disabled, role/group changes enable save; active/inactive rich group labels",
-        "Group create blur validation and detail 600ms debounce; unchanged detail name allows company-only edit",
-        "Stale/aborted name responses ignored, duplicate and failed checks block save; retry is available",
-        "Promise save busy state, duplicate submission guard, rejected-save recovery",
-        "Actual local Chrome: source field gap 2px, header 18px/600/1.4, status colors #009A93/#363636, error helper 12px; focused error remains red",
-        "Long synthetic current forms at 140/200/320/800/1280px: no page or visible form-control overflow after grid/action wrapping fix"
-      ],
-      "evidence": [
-        "local-notice-form",
-        "local-user-form",
-        "local-group-form",
-        "local-position-form",
-        "current-admin-forms.test.mjs",
-        "current-admin-user-long.jpg",
-        "current-admin-cua-runtime.json"
+        "Latest account fields, optional company, editable detail, restricted/unknown roles and compound group labels verified by local source and synthetic tests.",
+        "Search and view-only company-bound403/404 callbacks preserve form drafts and host-owned navigation."
       ],
       "remaining": [
-        "Fresh authenticated source create/detail visual and behavior comparison",
-        "Complete notice/position form states and source-specific authorization/business-validation contracts"
+        "Administrator page/list/bulk/role API/position restoration purpose and style comparison.",
+        "Current source/consumer/preview keyboard, restricted, optional company, long/compact and font/pixel comparison.",
+        "Real authenticated backend and deployed revision binding; current A4 and production."
       ]
     },
     "prism-notice": {
@@ -998,7 +977,7 @@
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 171,
+      "passed": 178,
       "failed": 0
     },
     "registry": {
@@ -1007,7 +986,7 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-current-position-reference-real-install-typecheck-build",
+      "status": "passed-current-admin-account-real-install-typecheck-build",
       "items": 53,
       "modules": 52,
       "completeExamples": 32,
@@ -1107,11 +1086,11 @@
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 200,
+      "count": 202,
       "checked": 0,
-      "pending": 200,
-      "status": "pending-current-position-reference-source-browser-policy",
-      "sourceSha256": "9a2ec3867fa65575d411433fcf5a35f72ecdd415d04a35fad10305530bb79009"
+      "pending": 202,
+      "status": "pending-current-admin-account-source-browser-policy",
+      "sourceSha256": "4f1a37550edde1dc459f5f5ec726cc2756d9ba7e3d04e355f1f0674a901db54e"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1190,11 +1169,11 @@
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
     "groups": 52,
-    "states": 200,
+    "states": 202,
     "checked": 0,
-    "status": "pending-current-position-reference-source-browser-policy",
-    "baseCommit": "efbd59a84016eee301e3919deedb419602d54740",
-    "sourceSha256": "9a2ec3867fa65575d411433fcf5a35f72ecdd415d04a35fad10305530bb79009",
+    "status": "pending-current-admin-account-source-browser-policy",
+    "baseCommit": "cd8529c2177d0ec79e9c4a24f415db381775fcf8",
+    "sourceSha256": "4f1a37550edde1dc459f5f5ec726cc2756d9ba7e3d04e355f1f0674a901db54e",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
     "inputCount": 72,
     "checks": [],
@@ -1472,7 +1451,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Admin user/group/position display/action changes and authorization-owned state.",
+      "Administrator user list/API role/status selection, bulk actions, position-list restoration and page-level access/permission states remain pending; local form delta is reviewed separately.",
       "Chat render link behavior and sidebar/context changes."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -1485,6 +1464,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+    },
+    "reviewedAdminFormDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
     }
   },
   "inputLabelReferenceComparison": {
@@ -2478,6 +2462,87 @@
       "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
       "Authenticated historical/LIVE service and deployed revision binding.",
       "Full source component purpose/style/extension coverage, current A4 and production."
+    ]
+  },
+  "previousAdminAccountFixtureRenderChecks": {
+    "groups": 52,
+    "states": 200,
+    "checked": 0,
+    "status": "pending-current-position-reference-source-browser-policy",
+    "baseCommit": "efbd59a84016eee301e3919deedb419602d54740",
+    "sourceSha256": "9a2ec3867fa65575d411433fcf5a35f72ecdd415d04a35fad10305530bb79009",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "inputCount": 72,
+    "checks": [],
+    "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
+    "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
+  },
+  "adminAccountVerification": {
+    "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "sourceSha256": "4f1a37550edde1dc459f5f5ec726cc2756d9ba7e3d04e355f1f0674a901db54e",
+    "status": "passed-source-and-synthetic-contract-tests; current-browser-and-service-pending",
+    "accountFields": [
+      "email",
+      "lastName",
+      "firstName",
+      "companyId",
+      "team",
+      "roleCode",
+      "companyGroupId"
+    ],
+    "optionalCompany": true,
+    "detailEditable": [
+      "lastName",
+      "firstName",
+      "companyId",
+      "team"
+    ],
+    "email": "source @sk.com create validation; detail readonly; business validation host-owned",
+    "roleConstraints": "Selected restricted role stays visible/disabled; other restricted roles hidden. Unknown metadata/data retained.",
+    "groupCompanyLabels": "Stable{id,name} and legacy strings",
+    "companyPicker": "searchable and regular verified-name border",
+    "positionView": "Current-company403/404 only; once per request; active-request ID masks same-company stale errors; StrictMode/other mode or status do not navigate; retry and drafts host-owned",
+    "interaction": "178 full PRISM tests passed;13 administrator cases include7 new account/context/search cases. No real-service/RBAC/browser claim.",
+    "independentConsumer": "All52 installed TSX modules and CSS match emitted bytes exactly;0 transforms.32 complete examples compile; Vite/font/notices passed.",
+    "publication": "review branch; production not-published",
+    "previousComponent": {
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "All companies disables company selector",
+        "Notice popup requires valid date range",
+        "Disabling popup clears both dates",
+        "User role without group hides selector and clears group ID",
+        "company group selects two companies and emits synthetic save intent",
+        "duplicate position sub-job rejected",
+        "expertise limit 3 and experience limit 2 preserve removal",
+        "position generate and save intent callbacks",
+        "Current source 087811ff user create: required email/lastName/firstName/companyId/division, searchable company select",
+        "Current user detail: read-only basics, unchanged save disabled, role/group changes enable save; active/inactive rich group labels",
+        "Group create blur validation and detail 600ms debounce; unchanged detail name allows company-only edit",
+        "Stale/aborted name responses ignored, duplicate and failed checks block save; retry is available",
+        "Promise save busy state, duplicate submission guard, rejected-save recovery",
+        "Actual local Chrome: source field gap 2px, header 18px/600/1.4, status colors #009A93/#363636, error helper 12px; focused error remains red",
+        "Long synthetic current forms at 140/200/320/800/1280px: no page or visible form-control overflow after grid/action wrapping fix"
+      ],
+      "evidence": [
+        "local-notice-form",
+        "local-user-form",
+        "local-group-form",
+        "local-position-form",
+        "current-admin-forms.test.mjs",
+        "current-admin-user-long.jpg",
+        "current-admin-cua-runtime.json"
+      ],
+      "remaining": [
+        "Fresh authenticated source create/detail visual and behavior comparison",
+        "Complete notice/position form states and source-specific authorization/business-validation contracts"
+      ]
+    },
+    "remaining": [
+      "Administrator page/list/bulk/role API/position restoration purpose and style comparison.",
+      "Current source/consumer/preview keyboard, restricted, optional company, long/compact and font/pixel comparison.",
+      "Real authenticated backend and deployed revision binding; current A4 and production."
     ]
   }
 }
