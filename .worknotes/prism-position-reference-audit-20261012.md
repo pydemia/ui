@@ -27,3 +27,12 @@ Targeted14 tests와 workspace typecheck가 통과했습니다. 새6 cases는 참
 
 
 표준 npm run build와generic current release25ca4393 검사가 통과했고canonical/generated 연구 자료4개의 exact bytes와최종72-input source fingerprint를 대조했습니다. Panel JSON의 delegated handler만 보고 링크를 활성화하지 않았습니다. TextContent는 transformMarkdownLinks(...,true),표/목록/인용은 stripActionLinksToText/stripActionLinks로 profile/position을 label로 바꾸는 경로를 다시 확인했습니다. Popup은 별도 경로이고 원래 onAction 계약을 유지합니다.
+
+
+## PR·CI·preview readback
+
+Source66d25516/generated cd8529c2177d0ec79e9c4a24f415db381775fcf8을 기존 review 브랜치에 push했습니다. Credential exact-match0과 Git config 보존을 확인했습니다. PR162 draft true/base main/정확한cd8529c2 head를 읽고 재첨부했습니다. Verify UI38211598756는 completed/success이며 생성물 재현과generic current release 검사가 포함됩니다.
+
+Vercel dpl_DgEj6y6QMH3NTH4SbvF9DL9XNish는READY/target null/정확한cd8529c2 SHA의 preview입니다. https://pydemia-bgd9caumn-pydemia-7822.vercel.app에서 기존 CLI 인증으로 registry815922bytes/SHA94ff5b3d,manifest283298bytes/SHAb438e97f,verification114674bytes/SHA c101ae37,response9497bytes/SHA c135541d,recommendations8330bytes/SHA c90c8590,position6484bytes/SHA dc921c01의 로컬 exact bytes를 확인했습니다. 전체 hash는position-reference-preview-readback.json에 보존합니다. HTTP readback은 실제 화면·font/pixel·A4 비교의 증거가 아닙니다.
+
+코드/생성물은 게시된 head에 있고 이 readback 메모만 local modified로 보존합니다. Consumer와 검증 기록을 보존했고 helper registry server는 finally에서 종료됐습니다. 새 dev server를 시작하지 않았습니다. 전체 goal은active이며 관리자·chat context의 최신 변경,전체 source 디자인/동작/목적/확장 coverage와실제DEV·A4·production은미완료입니다.

@@ -70,7 +70,7 @@ export function PrismCompanyGroupForm({value,onValueChange,companies,nameStatus,
             {status==="checking"&&<span className="prism-sr-only" role="status">회사 그룹명을 확인하고 있습니다.</span>}
             {status==="error"&&hasValidator&&<PrismButton variant="line" size="small" disabled={busy||actions.readOnly} onClick={()=>runCheck(currentName)}>다시 확인</PrismButton>}<hr/>
             <div className="prism-company-select-area">
-            {modern ? <PrismSelect label="회사 선택" placeholder="회사 선택" requiredIndicator value="" options={[...(selectable.length?[{value:"__all__",label:"전체"}]:[]),...selectable]} disabled={busy} readOnly={actions.readOnly}
+            {modern ? <PrismSelect label="회사 선택" placeholder="회사 선택" searchable searchPlaceholder="회사명 검색" requiredIndicator value="" options={[...(selectable.length?[{value:"__all__",label:"전체"}]:[]),...selectable]} disabled={busy} readOnly={actions.readOnly}
                 onValueChange={id=>onValueChange({...value,companyIds:id==="__all__"?companies.map(company=>company.value):[...new Set([...value.companyIds,id])]})}/>
                 : <PrismMultiSelect label="회사 선택" options={companies} value={value.companyIds} onValueChange={companyIds=>onValueChange({...value,companyIds})} disabled={busy} readOnly={actions.readOnly}/>}
             {selected.length ? <div className="prism-domain-company-box"><span>총 {selected.length}개</span><div>{selected.map(company=><PrismTag key={company.value} label={company.label} onRemove={actions.readOnly||busy?undefined:()=>onValueChange({...value,companyIds:value.companyIds.filter(id=>id!==company.value)})}>{company.label}</PrismTag>)}</div></div> : <div className="prism-domain-role-notice">회사 그룹에 포함할 회사를 선택해 주세요.</div>}</div>
@@ -78,49 +78,86 @@ export function PrismCompanyGroupForm({value,onValueChange,companies,nameStatus,
             leftAction={onToggleStatus&&<PrismButton variant="line" disabled={busy||actions.readOnly} onClick={onToggleStatus}>{detail?.status==="활성"?"비활성":"활성"}</PrismButton>}/>
     </form>;
 }
-/** Legacy three-field model; use PrismUserRegistrationDraft for the current create/detail recipe. */
+/** Legacy three-field model; the latest source account recipe uses PrismUserAccountDraft. */
 export type PrismUserDraft={email:string;roleId:string;companyGroupId:string};
 export type PrismUserRegistrationDraft=PrismUserDraft & {lastName:string;firstName:string;companyId:string;division:string};
-export type PrismUserRoleOption={value:string;label:string;needsCompanyGroup?:boolean;notice?:ReactNode};
-export type PrismUserCompanyGroup={id:string;name:string;status?:"활성"|"비활성";companies:readonly string[]};
+export type PrismUserRoleOption={value:string;label:string;needsCompanyGroup?:boolean;notice?:ReactNode;disabled?:boolean};
+export type PrismUserCompanyGroup={id:string;name:string;status?:"활성"|"비활성";companies:readonly (string|{id:string;name:string})[]};
 type UserCommonProps<T extends PrismUserDraft>=PrismFormActions & {
     value:T;onValueChange:(value:T)=>void;roles:readonly PrismUserRoleOption[];companyGroups:readonly PrismUserCompanyGroup[];
     emailStatus?:"idle"|"checking"|"available"|"invalid"|"duplicate";onCheckEmail?:()=>void;onToggleStatus?:()=>void;
+    disabledRoleCodes?:readonly string[];
 };
 export type PrismLegacyUserFormProps=UserCommonProps<PrismUserDraft> & {mode?:undefined;detail?:{status:string;name:string;company:string;division:string;employeeNo:string}};
 export type PrismUserRegistrationFormProps=UserCommonProps<PrismUserRegistrationDraft> & {
     companies:readonly {value:string;label:string}[];detail?:{status:string};
 } & ({mode:"create";initialValue?:PrismUserRegistrationDraft}|{mode:"detail";initialValue:PrismUserRegistrationDraft});
-export type PrismUserFormProps=PrismLegacyUserFormProps|PrismUserRegistrationFormProps;
-function UserFormBody<T extends PrismUserDraft>({value,onValueChange,roles,companyGroups,emailStatus:providedStatus,onCheckEmail,onToggleStatus,basicFields,basicValid=true,dirty=true,detailStatus,emailReadOnly=false,modern=false,...actions}:UserCommonProps<T> & {
+export type PrismUserAccountDraft={email:string;lastName:string;firstName:string;companyId:string;team:string;roleCode:string;companyGroupId:string};
+export type PrismUserAccountFormProps=Omit<UserCommonProps<PrismUserDraft>,"value"|"onValueChange"|"onSubmit"|"onCancel"> & {
+    value:PrismUserAccountDraft;onValueChange:(value:PrismUserAccountDraft)=>void;companies:readonly {value:string;label:string}[];detail?:{status:string};
+    onSubmit:(value:PrismUserAccountDraft)=>void|Promise<void>;onCancel:(dirty:boolean)=>void;
+} & ({mode:"create";initialValue?:PrismUserAccountDraft}|{mode:"detail";initialValue:PrismUserAccountDraft});
+/** Normalizes only the public save fields; unknown role metadata never clears a stored group. */
+export function preparePrismUserAccountDraft(value:PrismUserAccountDraft,roles:readonly PrismUserRoleOption[]):PrismUserAccountDraft {
+    const role=roles.find(option=>option.value===value.roleCode);
+    return {email:value.email.trim(),lastName:value.lastName.trim(),firstName:value.firstName.trim(),companyId:value.companyId,
+        team:value.team.trim(),roleCode:value.roleCode,companyGroupId:role&&!role.needsCompanyGroup?"":value.companyGroupId};
+}
+export type PrismUserFormProps=PrismLegacyUserFormProps|PrismUserRegistrationFormProps|PrismUserAccountFormProps;
+function UserFormBody<T extends PrismUserDraft>({value,onValueChange,roles,companyGroups,disabledRoleCodes=[],emailStatus:providedStatus,onCheckEmail,onToggleStatus,basicFields,basicValid=true,dirty=true,detailStatus,emailReadOnly=false,modern=false,emailValidator,unknownRoleNotice,...actions}:UserCommonProps<T> & {
     basicFields?:ReactNode|((busy:boolean)=>ReactNode);basicValid?:boolean;dirty?:boolean;detailStatus?:string;emailReadOnly?:boolean;modern?:boolean;
+    emailValidator?:(value:string)=>boolean;unknownRoleNotice?:ReactNode;
 }) {
     const submission=useSubmission(actions.onSubmit,actions.onSubmitError),busy=!!actions.busy||submission.busy;
-    const emailInput=useRef<HTMLInputElement>(null),[autoEmail,setAutoEmail]=useState<{value:string;status:"available"|"invalid"}>();
+    const emailInput=useRef<HTMLInputElement>(null),[autoEmail,setAutoEmail]=useState<{value:string;status:"available"|"invalid"}|undefined>(()=>emailValidator&&value.email.trim()?{value:value.email,status:emailValidator(value.email)?"available":"invalid"}:undefined);
     const emailStatus=providedStatus??(autoEmail?.value===value.email ? autoEmail.status : "idle");
     const role=roles.find(option=>option.value===value.roleId),selected=companyGroups.find(group=>group.id===value.companyGroupId);
+    const blocked=(option:PrismUserRoleOption)=>option.disabled||disabledRoleCodes.includes(option.value);
+    const visibleRoles=roles.filter(option=>!blocked(option)||option.value===value.roleId).map(option=>({...option,disabled:!!blocked(option)}));
+    if(!role&&value.roleId&&unknownRoleNotice!==undefined)visibleRoles.push({value:value.roleId,label:value.roleId,disabled:true});
     const valid=basicValid&&dirty&&!!role&&!!value.email.trim()&&emailStatus!=="invalid"&&emailStatus!=="duplicate"&&emailStatus!=="checking"&&(!modern&&!onCheckEmail||emailReadOnly||emailStatus==="available")&&(!role?.needsCompanyGroup||!!selected);
     const groupLabel=(id:string)=>{const group=companyGroups.find(item=>item.id===id);return group ? <span className="prism-user-group-option">{group.status&&<PrismChip color={statusColor(group.status)}>{group.status}</PrismChip>}<span>{group.name}</span></span> : "회사 그룹 선택";};
     const title=modern ? <span>기본 정보<span className="prism-input-required" aria-hidden="true">*</span></span> : "기본 정보";
     return <form className={`prism-domain-form prism-user-form ${modern?"prism-user-current":""}`} aria-busy={busy||undefined} onSubmit={event=>{event.preventDefault();if(valid&&!busy&&!actions.readOnly)void submission.submit();}}>
         <PrismOutline title={title} actions={detailStatus&&<PrismChip color={statusColor(detailStatus)}>{detailStatus}</PrismChip>}>
             <PrismInput ref={emailInput} label="이메일 (로그인 ID)" type="email" required value={value.email} placeholder={modern?"@sk.com 이메일 입력":"이메일 입력"} readOnly={actions.readOnly||emailReadOnly} disabled={busy}
-                onChange={event=>onValueChange({...value,email:event.target.value})} onBlur={emailReadOnly?undefined:()=>{if(onCheckEmail)onCheckEmail();else if(modern)setAutoEmail({value:value.email,status:emailInput.current?.validity.valid?"available":"invalid"});}}
-                error={emailStatus==="invalid"?fieldError("올바른 이메일 형식으로 입력해 주세요."):emailStatus==="duplicate"?fieldError("이미 등록된 이메일 주소입니다."):undefined}/>
+                onChange={event=>onValueChange({...value,email:event.target.value})} onBlur={emailReadOnly?undefined:()=>{if(onCheckEmail)onCheckEmail();else if(modern)setAutoEmail({value:value.email,status:(emailValidator?emailValidator(value.email):emailInput.current?.validity.valid)?"available":"invalid"});}}
+                error={emailStatus==="invalid"?fieldError(emailValidator?"올바른 이메일 형식으로 입력해 주세요. (@sk.com)":"올바른 이메일 형식으로 입력해 주세요."):emailStatus==="duplicate"?fieldError("이미 등록된 이메일 주소입니다."):undefined}/>
             {(typeof basicFields==="function"?basicFields(busy):basicFields)??<p className="prism-help">이름 · 소속 회사 · 본부/팀 · 사번은 사용자 등록 후 반영됩니다.</p>}
         </PrismOutline>
         <PrismOutline title={modern?<span>Role<span className="prism-input-required" aria-hidden="true">*</span></span>:"Role"}>
-            <div className="prism-user-role"><PrismRadioGroup label="Role" options={roles} value={value.roleId} disabled={busy||actions.readOnly}
-                onValueChange={roleId=>onValueChange({...value,roleId,companyGroupId:roles.find(option=>option.value===roleId)?.needsCompanyGroup?(value.companyGroupId||(modern?companyGroups[0]?.id??"":"")):""})}/></div><hr/>
+            <div className="prism-user-role"><PrismRadioGroup label="Role" options={visibleRoles} value={value.roleId} disabled={busy||actions.readOnly}
+                onValueChange={roleId=>{const next=roles.find(option=>option.value===roleId);if(!next||blocked(next)||busy||actions.readOnly)return;onValueChange({...value,roleId,companyGroupId:next.needsCompanyGroup?(value.companyGroupId||(modern?companyGroups[0]?.id??"":"")):""});}}/></div><hr/>
             {role?.needsCompanyGroup ? <div className="prism-user-group-field"><PrismSelect label="회사 그룹" required value={value.companyGroupId} placeholder="회사 그룹 선택" options={companyGroups.map(group=>({value:group.id,label:group.name}))} disabled={busy} readOnly={actions.readOnly}
                 renderOption={option=>groupLabel(option.value)} renderValue={option=>option?groupLabel(option.value):"회사 그룹 선택"} onValueChange={companyGroupId=>onValueChange({...value,companyGroupId})}/>
-                <div className="prism-domain-company-box"><span>총 {selected?.companies.length??0}개</span><div>{selected?.companies.map(company=><PrismTag key={company}>{company}</PrismTag>)}</div></div>
+                <div className="prism-domain-company-box"><span>총 {selected?.companies.length??0}개</span><div>{selected?.companies.map(company=><PrismTag key={typeof company==="string"?company:company.id||company.name}>{typeof company==="string"?company:company.name}</PrismTag>)}</div></div>
                 <p className="prism-help">회사 그룹 생성 및 수정은 [회사 그룹 관리] 메뉴에서 할 수 있습니다.</p></div>
-                : <div className="prism-domain-role-notice">{role?.notice??(role?`${role.label}는 별도의 회사 그룹 설정이 필요하지 않습니다.`:"역할을 선택해 주세요.")}</div>}
+                : <div className="prism-domain-role-notice">{role&&role.notice!==undefined?role.notice:role?`${role.label}는 별도의 회사 그룹 설정이 필요하지 않습니다.`:unknownRoleNotice??"역할을 선택해 주세요."}</div>}
         </PrismOutline>
         <Actions {...actions} onSubmit={submission.submit} busy={busy} error={actions.error??submission.error} valid={valid}
             leftAction={onToggleStatus&&<PrismButton variant="line" disabled={busy||actions.readOnly} onClick={onToggleStatus}>{detailStatus==="활성"?"비활성":"활성"}</PrismButton>}/>
     </form>;
+}
+const sourceUserEmail=(value:string)=>/^[^\s@]+@sk\.com$/i.test(value.trim());
+function isAccountUserForm(props:PrismUserFormProps):props is PrismUserAccountFormProps {return "roleCode" in props.value;}
+function AccountUserForm({value,onValueChange,companies,roles,initialValue,mode,detail,onSubmit,onCancel,...actions}:PrismUserAccountFormProps) {
+    const current=preparePrismUserAccountDraft(value,roles);
+    const dirty=mode==="create"||Object.keys(current).some(key=>current[key as keyof PrismUserAccountDraft]!==initialValue![key as keyof PrismUserAccountDraft]);
+    const normalized:PrismUserRegistrationDraft={email:value.email,lastName:value.lastName,firstName:value.firstName,companyId:value.companyId,division:value.team,roleId:value.roleCode,companyGroupId:value.companyGroupId};
+    const change=(next:PrismUserRegistrationDraft)=>onValueChange({email:next.email,lastName:next.lastName,firstName:next.firstName,companyId:next.companyId,team:next.division,roleCode:next.roleId,companyGroupId:next.companyGroupId});
+    const locked=actions.readOnly;
+    const basics=(busy:boolean)=><><hr/><div className="prism-domain-form-grid">
+        <PrismInput label="성" required value={value.lastName} placeholder="성 입력" readOnly={locked} disabled={busy} onChange={event=>onValueChange({...value,lastName:event.target.value})}/>
+        <PrismInput label="이름" required value={value.firstName} placeholder="이름 입력" readOnly={locked} disabled={busy} onChange={event=>onValueChange({...value,firstName:event.target.value})}/>
+        <PrismSelect label="소속 회사" value={value.companyId} placeholder="회사 선택" options={[{value:"",label:"선택 안 함"},...companies]} searchable searchPlaceholder="회사명 검색" readOnly={locked} disabled={busy}
+            renderValue={option=>option?.value?option.label:<span className="prism-user-company-placeholder">회사 선택</span>} onValueChange={companyId=>onValueChange({...value,companyId})}/>
+        <PrismInput label="본부/팀" required value={value.team} placeholder="본부/팀 입력" readOnly={locked} disabled={busy} onChange={event=>onValueChange({...value,team:event.target.value})}/>
+    </div></>;
+    const displayRoles=roles.map(role=>({...role,notice:role.notice!==undefined?role.notice:<><span>모든 회사 및 메뉴에 접근할 수 있습니다.</span><br/>{role.label}는 별도의 회사 그룹 설정이 필요하지 않습니다.</>}));
+    return <UserFormBody {...actions} value={normalized} onValueChange={change} roles={displayRoles} modern basicFields={basics}
+        basicValid={!!current.lastName&&!!current.firstName&&!!current.team} dirty={dirty} detailStatus={detail?.status} emailReadOnly={mode==="detail"} emailValidator={sourceUserEmail}
+        unknownRoleNotice="선택한 권한의 정보를 확인할 수 없습니다. 권한 목록을 확인해 주세요."
+        onSubmit={()=>onSubmit(preparePrismUserAccountDraft(value,roles))} onCancel={()=>onCancel(dirty)} submitLabel={actions.submitLabel??(mode==="detail"?"수정":"등록")}/>;
 }
 function RegistrationUserForm(props:PrismUserRegistrationFormProps) {
     const {value,onValueChange,companies,mode,initialValue,detail,...actions}=props;
@@ -136,21 +173,31 @@ function RegistrationUserForm(props:PrismUserRegistrationFormProps) {
     return <UserFormBody {...actions} value={value} onValueChange={onValueChange} modern basicFields={basics} basicValid={basicValid} dirty={dirty} detailStatus={detail?.status} emailReadOnly={mode==="detail"} submitLabel={props.submitLabel??(mode==="detail"?"수정":"등록")}/>;
 }
 export function PrismUserForm(props:PrismUserFormProps) {
+    if(isAccountUserForm(props))return <AccountUserForm {...props}/>;
     if(props.mode) return <RegistrationUserForm {...props}/>;
     const {detail,...legacy}=props;
     const basics=detail&&<div className="prism-domain-form-grid">{[["이름",detail.name],["소속 회사",detail.company],["본부/팀",detail.division],["사번",detail.employeeNo]].map(([label,text])=><PrismInput key={label} label={label} value={text} readOnly/>)}</div>;
     return <UserFormBody {...legacy} basicFields={basics||undefined} detailStatus={detail?.status} emailReadOnly={!!detail}/>;
 }
 export type PrismPositionDraft={name:string;companyId:string;industryId:string;roleId:string;mainJobId:string;subJobId:string;isCore:boolean;context:string;definition:string;expertise:string;experience:string;subExpertise:string;subExperience:string;expertiseIds:readonly string[];experienceIds:readonly string[]};
-export function PrismPositionForm({value,onValueChange,companies,industries,roles,jobs,expertiseOptions,experienceOptions,canEditCore,companyContext,onCompanyContext,onGenerate,generating,...actions}:PrismFormActions & {
+export type PrismPositionContextError={companyId:string;status:number;requestId?:string|number};
+export function PrismPositionForm({value,onValueChange,companies,industries,roles,jobs,expertiseOptions,experienceOptions,canEditCore,companyContext,onCompanyContext,onGenerate,generating,mode,companyContextError,companyContextRequestId,onAccessError,onRetryCompanyContext,...actions}:PrismFormActions & {
     value:PrismPositionDraft;onValueChange:(value:PrismPositionDraft)=>void;companies:readonly {value:string;label:string}[];industries:readonly {value:string;label:string}[];roles:readonly {value:string;label:string}[];jobs:readonly {value:string;label:string}[];
     expertiseOptions:readonly {id:string;label:string;description:string}[];experienceOptions:readonly {id:string;label:string;description:string}[];canEditCore?:boolean;companyContext?:ReactNode;onCompanyContext?:()=>void;onGenerate?:(section:"definition"|"experience")=>void;generating?:"definition"|"experience"|null;
+    mode?:"create"|"edit"|"view";companyContextError?:PrismPositionContextError;companyContextRequestId?:string|number;onAccessError?:()=>void;onRetryCompanyContext?:()=>void;
 }) {
-    const locked=actions.readOnly||actions.busy||!!generating; const update=(next:Partial<PrismPositionDraft>)=>onValueChange({...value,...next});
+    const accessError=useRef(onAccessError),delivered=useRef<string|null>(null);accessError.current=onAccessError;
+    const errorCompany=companyContextError?.companyId,errorStatus=companyContextError?.status,errorRequest=companyContextError?.requestId;
+    useEffect(()=>{
+        if(mode!=="view"||!value.companyId||errorCompany!==value.companyId||(companyContextRequestId!==undefined&&errorRequest!==companyContextRequestId)||(errorStatus!==403&&errorStatus!==404)){delivered.current=null;return;}
+        const ticket=JSON.stringify([value.companyId,errorStatus,errorRequest]);if(delivered.current===ticket)return;delivered.current=ticket;accessError.current?.();
+    },[mode,value.companyId,errorCompany,errorStatus,errorRequest,companyContextRequestId]);
+    const currentContextError=!!value.companyId&&errorCompany===value.companyId&&(companyContextRequestId===undefined||errorRequest===companyContextRequestId);
+    const locked=mode==="view"||actions.readOnly||actions.busy||!!generating; const update=(next:Partial<PrismPositionDraft>)=>onValueChange({...value,...next});
     const duplicate=!!value.subJobId&&value.mainJobId===value.subJobId; const valid=!!value.name.trim()&&!!value.companyId&&!!value.industryId&&!!value.roleId&&!!value.mainJobId&&!duplicate;
-    return <form className="prism-domain-form" onSubmit={e=>{e.preventDefault();if(valid&&!locked)actions.onSubmit();}}><h3>포지션 {actions.readOnly||actions.submitLabel==="수정" ? "상세" : "등록"}</h3><PrismOutline title="포지션 기본 정보"><PrismSelect label="회사" value={value.companyId} options={companies} onValueChange={companyId=>update({companyId})} disabled={locked}/><div className="prism-domain-form-grid"><PrismInput label="포지션 명" value={value.name} required onChange={e=>update({name:e.target.value})} disabled={locked}/><PrismSwitch label="핵심 포지션" checked={value.isCore} onCheckedChange={isCore=>update({isCore})} disabled={locked||!canEditCore}/><PrismSelect label="산업" value={value.industryId} options={industries} disabled={locked} onValueChange={industryId=>update({industryId})}/><PrismSelect label="역할" value={value.roleId} options={roles} disabled={locked} onValueChange={roleId=>update({roleId})}/><PrismSelect label="주 직무" value={value.mainJobId} options={jobs} disabled={locked} onValueChange={mainJobId=>update({mainJobId})}/><PrismSelect label="부 직무" value={value.subJobId} options={[{value:"",label:"선택 안 함"},...jobs]} disabled={locked} error={duplicate ? "이미 선택된 직무입니다. 다른 직무를 선택해 주세요." : undefined} onValueChange={subJobId=>update({subJobId})}/></div></PrismOutline>
-        <PrismOutline title="Business Context" actions={onCompanyContext && <PrismButton variant="line" size="small" onClick={onCompanyContext}>회사 Task 확인</PrismButton>}>{companyContext}<PrismTextarea label="Business Context" value={value.context} onChange={e=>update({context:e.target.value})} disabled={locked}/></PrismOutline>
+    return <form className="prism-domain-form" onSubmit={e=>{e.preventDefault();if(valid&&!locked)actions.onSubmit();}}><h3>포지션 {mode==="view"||mode==="edit"||actions.readOnly||actions.submitLabel==="수정" ? "상세" : "등록"}</h3><PrismOutline title="포지션 기본 정보"><PrismSelect label="회사" value={value.companyId} options={companies} onValueChange={companyId=>update({companyId})} disabled={locked}/><div className="prism-domain-form-grid"><PrismInput label="포지션 명" value={value.name} required onChange={e=>update({name:e.target.value})} disabled={locked}/><PrismSwitch label="핵심 포지션" checked={value.isCore} onCheckedChange={isCore=>update({isCore})} disabled={locked||!canEditCore}/><PrismSelect label="산업" value={value.industryId} options={industries} disabled={locked} onValueChange={industryId=>update({industryId})}/><PrismSelect label="역할" value={value.roleId} options={roles} disabled={locked} onValueChange={roleId=>update({roleId})}/><PrismSelect label="주 직무" value={value.mainJobId} options={jobs} disabled={locked} onValueChange={mainJobId=>update({mainJobId})}/><PrismSelect label="부 직무" value={value.subJobId} options={[{value:"",label:"선택 안 함"},...jobs]} disabled={locked} error={duplicate ? "이미 선택된 직무입니다. 다른 직무를 선택해 주세요." : undefined} onValueChange={subJobId=>update({subJobId})}/></div></PrismOutline>
+        <PrismOutline title="Business Context" actions={onCompanyContext && <PrismButton variant="line" size="small" onClick={onCompanyContext}>회사 Task 확인</PrismButton>}>{currentContextError?<div className="prism-position-context-error"><p role="alert">회사 Business Context를 조회하지 못했습니다.</p>{onRetryCompanyContext&&<PrismButton variant="line" size="small" disabled={actions.busy} onClick={onRetryCompanyContext}>다시 시도</PrismButton>}</div>:companyContext}<PrismTextarea label="Business Context" value={value.context} onChange={e=>update({context:e.target.value})} disabled={locked}/></PrismOutline>
         <PrismOutline title="포지션 정의" actions={onGenerate && <PrismAiGenerateButton label="정의 생성" busy={generating==="definition"} disabled={locked} onGenerate={()=>onGenerate("definition")}/>}><PrismTextarea label="Mission" value={value.definition} onChange={e=>update({definition:e.target.value})} disabled={locked}/></PrismOutline>
         <PrismOutline title="요구 역량" actions={onGenerate && <PrismAiGenerateButton label="경험 생성" busy={generating==="experience"} disabled={locked} onGenerate={()=>onGenerate("experience")}/>}><h4>전문성 · 최대 3개</h4><div className="prism-domain-form-grid">{expertiseOptions.map(o=><PrismContextOptionCard key={o.id} option={{value:o.id,label:o.label,description:o.description}} checked={value.expertiseIds.includes(o.id)} disabled={locked||(!value.expertiseIds.includes(o.id)&&value.expertiseIds.length>=3)} onCheckedChange={checked=>update({expertiseIds:checked ? [...value.expertiseIds,o.id] : value.expertiseIds.filter(id=>id!==o.id)})}/>)}</div><h4>성공경험 · 최대 2개</h4><div className="prism-domain-form-grid">{experienceOptions.map(o=><PrismContextOptionCard key={o.id} option={{value:o.id,label:o.label,description:o.description}} checked={value.experienceIds.includes(o.id)} disabled={locked||(!value.experienceIds.includes(o.id)&&value.experienceIds.length>=2)} onCheckedChange={checked=>update({experienceIds:checked ? [...value.experienceIds,o.id] : value.experienceIds.filter(id=>id!==o.id)})}/>)}</div>
-        <div className="prism-domain-form-grid">{([['expertise','주 직무 전문성'],['experience','주 직무 성공경험'],...(value.subJobId ? [['subExpertise','부 직무 전문성'],['subExperience','부 직무 성공경험']] : [])] as ["expertise"|"experience"|"subExpertise"|"subExperience",string][]).map(([key,label])=><PrismTextarea key={key} label={label} value={value[key]} onChange={e=>update({[key]:e.target.value})} disabled={locked}/>)}</div></PrismOutline>{generating && <p role="status">요구 사항을 생성하는 중입니다.</p>}<Actions {...actions} busy={actions.busy||!!generating} valid={valid}/></form>;
+        <div className="prism-domain-form-grid">{([['expertise','주 직무 전문성'],['experience','주 직무 성공경험'],...(value.subJobId ? [['subExpertise','부 직무 전문성'],['subExperience','부 직무 성공경험']] : [])] as ["expertise"|"experience"|"subExpertise"|"subExperience",string][]).map(([key,label])=><PrismTextarea key={key} label={label} value={value[key]} onChange={e=>update({[key]:e.target.value})} disabled={locked}/>)}</div></PrismOutline>{generating && <p role="status">요구 사항을 생성하는 중입니다.</p>}<Actions {...actions} readOnly={actions.readOnly||mode==="view"} busy={actions.busy||!!generating} valid={valid}/></form>;
 }

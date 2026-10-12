@@ -1003,16 +1003,20 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 .prism-user-current>.prism-outline:first-of-type {gap:12px;}
 .prism-user-current>.prism-outline>header {display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:0;}
 .prism-user-current>.prism-outline>header h3 {font-size:18px;font-weight:600;line-height:1.4;margin:0;}
+.prism-user-current>.prism-outline:nth-of-type(2)>header h3 {font-size:14px;line-height:20px;}
 .prism-user-current>.prism-outline>header h3>span {display:inline-flex;align-items:center;}
 .prism-user-current .prism-user-role .prism-radio-group>legend {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
 .prism-group-name {position:relative;min-width:0;}
 .prism-group-name>.prism-chip {position:absolute;top:0;right:0;}
 .prism-group-name[data-has-status] .prism-input-label {min-height:22px;padding-right:48px;}
-.prism-group-name[data-validation="available"] .prism-input:not(:focus):not([aria-invalid="true"]) {border-color:#009A93;}
+.prism-company-form:not(.prism-company-current) .prism-group-name[data-validation="available"] .prism-input:not(:focus):not([aria-invalid="true"]) {border-color:#009A93;}
+.prism-user-company-placeholder {color:var(--prism-caption);}
+.prism-position-context-error {display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
+.prism-position-context-error p {margin:0;color:var(--danger);font-size:12px;line-height:1.4;}
 .prism-group-name .prism-error,.prism-user-current .prism-error {display:flex;align-items:center;gap:4px;font-size:12px;line-height:1.4;}
 .prism-company-select-area,.prism-user-group-field {display:flex;flex-direction:column;gap:12px;min-width:0;}
 .prism-domain-role-notice {padding:24px 12px;border-radius:8px;background:var(--prism-lnb);font-size:13px;line-height:1.4;text-align:center;color:var(--prism-sub);}
-.prism-domain-company-box .prism-tag {color:#222;max-width:100%;min-width:0;min-height:21px;height:auto;overflow-wrap:anywhere;}
+.prism-domain-company-box .prism-tag {color:#222;max-width:100%;min-width:0;height:21px;white-space:nowrap;}
 .prism-domain-company-box .prism-tag>button {flex-shrink:0;}
 .prism-user-group-option {display:flex;align-items:center;gap:8px;min-width:0;width:100%;height:100%;}
 .prism-user-group-option>.prism-chip {flex-shrink:0;}
@@ -1020,6 +1024,7 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 .prism-company-current .prism-domain-form-actions,.prism-user-current .prism-domain-form-actions {flex-wrap:wrap;}
 .prism-company-current .prism-domain-form-actions>div,.prism-user-current .prism-domain-form-actions>div {flex-wrap:wrap;}
 @container (max-width:480px) {.prism-company-current .prism-domain-form-grid,.prism-user-current .prism-domain-form-grid {grid-template-columns:minmax(0,1fr);}}
+@container (max-width:480px) {.prism-company-current .prism-domain-company-box .prism-tag,.prism-user-current .prism-domain-company-box .prism-tag {height:auto;min-height:21px;white-space:normal;overflow-wrap:anywhere;}}
 .prism-chat-intro {position:relative;display:flex;flex-direction:column;justify-content:center;gap:40px;width:100%;max-width:800px;margin:0 auto;}
 .prism-chat-intro>header {text-align:center;}
 .prism-chat-intro>header>div {width:65px;height:65px;margin:0 auto 34px;}

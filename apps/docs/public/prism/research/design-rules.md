@@ -33,6 +33,14 @@ The outer box uses 16px padding/gap and a 12px radius; its chart/comment row use
 
 Print uses 8pt padding/gap/radius, an 80pt minimum height, a 20pt main-row gap, a 2pt chart gap and a 6pt comment gap. Caption, summary and detail are 10pt. The default tag uses a 15pt height, 3.5pt 4pt .5pt padding, a 4pt radius and 8pt/11pt text. Full print text is the default. The optional reference limits shorten title/summary in a copied display model and retain all detail, matching the current source mapping. These rules were checked against local source; current deployed revision binding, rendered comparison and A4 pagination remain unverified.
 
+## Admin account forms
+
+Local dev `27c4fdbf` uses the seven-field `PrismUserAccountDraft`: email, lastName, firstName, companyId, team, roleCode and companyGroupId. The account recipe is selected by roleCode. Its company is optional; create email defaults to the source @sk.com rule. Detail locks email while names, company and team stay editable. initialValue supplies the dirty baseline. onCancel receives dirty; onSubmit receives a copied, trimmed public model with the group omitted only for a known role that does not require one. Unknown role metadata never erases a stored group. The older roleId/division registration and three-field models remain available.
+
+Map source role_code/role_name/requires_company_group to option value/label/needsCompanyGroup. The host supplies role options and disabledRoleCodes. Restricted options are hidden unless already selected, then stay disabled. Group company tags accept stable `{id,name}` records and legacy strings. The basic heading remains 18px; Role is the source input label's 14px/20px. Default company tags retain 21px height; compact containers wrap them. Empty notices are caller-owned. Authorization and actual account mutations remain server/host responsibilities.
+
+The current company add-picker supports name search and keeps the regular input border after a successful name check. Name validation, selected company IDs and the host draft remain independent. PositionForm's explicit view mode delivers current-company 403/404 errors through onAccessError once per request, including StrictMode. Supply companyContextRequestId to mask mismatched error.requestId values even for the same company; the host still owns cancellation. Stale-company errors, callback rerenders, create/edit and other error codes do not exit the form. The host owns context requests, error reset, retry and list restoration; the UI preserves editable drafts and exposes an inline error/retry surface.
+
 ## Position references
 
 The local dev `27c4fdbf` JSON/Markdown mappers preserve the card's position version; legacy cards without one use version 1. Body links have no version and open the current LIVE position. The detail view selects the historical or LIVE provider and restarts for id/version/retry changes. This is a local source audit; deployed revision binding is unverified.

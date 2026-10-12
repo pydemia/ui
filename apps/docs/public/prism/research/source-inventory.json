@@ -105,7 +105,12 @@
       "coverage": "purpose-mapped",
       "verification": "Current create/detail fields and name-validation behavior implemented and checked with synthetic local fixtures. Fresh authenticated source visual/state comparison remains pending.",
       "recipe": null,
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+      }
     },
     {
       "source": "components/admin/notices/NoticeForm.tsx",
@@ -193,7 +198,12 @@
       "target": "prism-domain-forms",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+      }
     },
     {
       "source": "components/admin/positions/PositionFormSkeleton.tsx",
@@ -210,7 +220,12 @@
       "coverage": "purpose-mapped",
       "verification": "Current create/detail fields and name-validation behavior implemented and checked with synthetic local fixtures. Fresh authenticated source visual/state comparison remains pending.",
       "recipe": null,
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+      }
     },
     {
       "source": "components/auth/AuthBootstrapLayout.tsx",
@@ -2435,7 +2450,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Admin user/group/position display/action changes and authorization-owned state.",
+      "Administrator user list/API role/status selection, bulk actions, position-list restoration and page-level access/permission states remain pending; local form delta is reviewed separately.",
       "Chat render link behavior and sidebar/context changes."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -2448,6 +2463,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+    },
+    "reviewedAdminFormDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
     }
   }
 }
