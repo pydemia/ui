@@ -178,3 +178,11 @@ Favorite cards use16px padding/12px radius,70px portrait,121px minimum info and1
 Source evaluation history removes blank/null grades, sorts valid years descending and groups badge/year labels. Parentheses are display-only highlight markers; explicit active flags take priority. Do not infer evaluation or person ranking. Unknown year labels retain host text and order. explicit/empty props preserve alternative per-year unknown/absence display. Public formatting outputs contain no internal sort state.
 
 Portraits retry on a new subject/source and expose missing-image fallback without rewriting protected URLs or credentials. Named fields and explicit empty aliases remain authoritative host values.
+
+## Position-block management audit 2026-10-13
+
+Current workspace:57 install groups/58 registry items/38 complete examples/244 canonical fixture states;252 full PRISM tests passed. This is not a completion denominator. Non-vector source files remain186; current purpose mapping uses49 primary/50 total non-vector groups, and final independent target total remains unestablished.
+
+Position-block list/editor/deletion follow current source27c4fdbf: LIVE/TEMP, role view-only, sync lock, deleted counts, debounced duplicate check, description+sub-job generation and manual editing, dirty guard, impact review before edit confirmation, required primary/optional secondary remap and other-job conflict. Services are typed host callbacks with cancellation; failed requests retain input or selection for retry. Twelve new states at1280/320 and legacy tag/default320 were checked; document/dialog overflow and nested buttons0 after containing hidden labels within remap fields. Actual create/edit/save/remap flows are synthetic. The original authenticated administrator page is blank, and real service/RBAC/sync/full visual/font/A4 parity remains pending.
+
+Current source fingerprint:8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5 from82 inputs. Independent consumer passed:57 TSX/CSS exact bytes,0 transforms,38 examples TypeScript/Vite/font/notices. Installed edit/impact/remap flows and final accessible caption/320px dialog296/table264/760 passed. Standard full site and unchanged generic registry checks passed. Current review publication remains pending until its separate readback.

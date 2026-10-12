@@ -67,7 +67,7 @@
         "src/styles/_btn.scss"
       ],
       "pendingRevisionAudit": [
-        "Administrator real role/status/sync authorization/API and original page-level access,position-block/chat-log purposes remain pending. Source/synthetic user,position,company-group and notice lists reviewed separately.",
+        "Administrator authenticated original rendering,real role/status/sync authorization/API,chat-log composition and full design/state parity remain pending. User,position,company-group,notice and position-block source/synthetic contracts reviewed separately.",
         "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
       ],
       "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -111,6 +111,11 @@
         "head": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "originDev": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "workingTree": "clean"
+      },
+      "reviewedPositionBlocksDelta": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
       }
     }
   },
@@ -2896,8 +2901,16 @@
       "name": "Criteria editor / Remap / Company context",
       "category": "Administration",
       "purpose": "Criterion editing, sub-jobs, affected positions and replacement mapping",
-      "contract": "Draft fields, duplicate check status, generation and replacement mappings are controlled. Criteria deletion emits only a callback after every affected position has a valid replacement. The target itself cannot be a replacement. API, permissions and transactions belong to the consumer.",
+      "contract": "Draft fields, duplicate check status, generation and replacement mappings are controlled. Criteria deletion emits only a callback after every affected position has a valid replacement. The target itself cannot be a replacement. API, permissions and transactions belong to the consumer. 원본 블록 업무의 상세/생성/수정·영향확인과주직무/보조직무삭제는prism-position-blocks를사용합니다. CriteriaTag는added(추가됨)를지원하고deleted는열기/삭제불가,applying은삭제불가이며26px높이를유지합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "sourceDeltaAudits": [
+        {
+          "source": "components/admin/position-blocks/CriteriaTag.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Added state label, deleted/applying action restrictions, source26px tags and hover/check source colors; long labels truncate without widening the container."
+        }
+      ],
       "states": [
         "default",
         "loading",
@@ -4901,6 +4914,205 @@
       ],
       "usageKind": "component-example",
       "registryUsage": "import { useState } from \"react\";\nimport { PrismCompanyGroupManagement, PrismNoticeManagement, createPrismCompanyGroupFilterDraft, normalizePrismCompanyGroupFilters, createPrismNoticeFilterDraft, preparePrismNoticeFilters, settlePrismNoticeDeletion, type PrismCompanyGroupRow, type PrismCompanyGroupAppliedFilters, type PrismCompanyGroupSort, type PrismNoticeListRow, type PrismNoticeAppliedFilters, type PrismNoticeListSort } from \"@/components/ui/prism-admin-lists\";\n\ntype Mode = \"default\" | \"loading\" | \"empty\" | \"error\" | \"readonly\" | \"long\" | \"notice\" | \"partial\" | \"filtered-empty\" | \"missing\";\nconst companies = [{ value: \"demo\", label: \"가상전자\" }, { value: \"example\", label: \"예시사업\" }];\nconst initialGroups: PrismCompanyGroupRow[] = Array.from({ length: 23 }, (_, index) => ({ id: `synthetic-group-${index + 1}`, name: `가상 그룹 ${String(index + 1).padStart(2, \"0\")}`,\n    active: index % 3 !== 0, companies: [{ id: companies[index % 2].value, name: companies[index % 2].label }], registrant: \"가상 관리자(가상전자)\", createdAt: \"2026.10.01\", updatedAt: `2026.10.${String(index + 1).padStart(2, \"0\")}` }));\nconst initialNotices: PrismNoticeListRow[] = Array.from({ length: 23 }, (_, index) => ({ id: `synthetic-notice-${index + 1}`, title: `가상 공지 ${String(index + 1).padStart(2, \"0\")}`,\n    companies: index % 2 ? [{ id: \"demo\", name: \"가상전자\" }] : [], popupStatus: index % 3 === 0 ? \"ENDED\" : index % 3 === 1 ? \"ACTIVE\" : \"INACTIVE\",\n    popupStartDate: \"2026.10.01\", popupEndDate: \"2026.10.31\", author: { name: \"가상 작성자\", company: \"가상전자\", email: \"synthetic@example.com\" }, createdDate: `2026.10.${String(index + 1).padStart(2, \"0\")}` }));\nasync function delay(signal: AbortSignal) {\n    signal.throwIfAborted();\n    await new Promise<void>((resolve, reject) => {\n        const abort = () => { clearTimeout(timer); reject(signal.reason); };\n        const timer = setTimeout(() => { signal.removeEventListener(\"abort\", abort); resolve(); }, 50);\n        signal.addEventListener(\"abort\", abort, { once: true });\n    });\n    signal.throwIfAborted();\n}\nfunction CompanyGroupExample({ mode, requestScope }: { mode: Mode; requestScope: string }) {\n    const [records, setRecords] = useState(initialGroups), [filters, setFilters] = useState(() => createPrismCompanyGroupFilterDraft(companies));\n    const [applied, setApplied] = useState<PrismCompanyGroupAppliedFilters>(() => normalizePrismCompanyGroupFilters(filters, companies));\n    const [page, setPage] = useState(1), [sort, setSort] = useState<PrismCompanyGroupSort | null>({ column: \"updatedAt\", direction: \"desc\" }), [selected, setSelected] = useState<string[]>([]);\n    const [message, setMessage] = useState(\"\"), [loading, setLoading] = useState(mode === \"loading\"), [error, setError] = useState(mode === \"error\" ? \"합성 회사 그룹 조회 오류\" : \"\");\n    const filtered = records.filter(row => (!applied.isActive.length || applied.isActive.includes(row.active)) && (!applied.companyIds.length || row.companies.some(company => applied.companyIds.includes(company.id))) && (!applied.keyword || row.name.includes(applied.keyword)));\n    const value = (row: PrismCompanyGroupRow) => sort?.column === \"status\" ? String(row.active) : String(row[sort?.column ?? \"updatedAt\"] ?? \"\");\n    const ordered = sort ? [...filtered].sort((a, b) => value(a).localeCompare(value(b), \"ko\") * (sort.direction === \"asc\" ? 1 : -1)) : filtered;\n    const pageCount = Math.max(1, Math.ceil(ordered.length / 10)), currentPage = Math.min(page, pageCount);\n    return <>\n        {loading&&<button type=\"button\" onClick={() => setLoading(false)}>합성 로딩 종료</button>}\n        <PrismCompanyGroupManagement companies={companies} filters={filters} onFiltersChange={setFilters} onSearch={next => { setApplied(next); setError(\"\"); }} rows={ordered.slice((currentPage - 1) * 10, currentPage * 10)} total={ordered.length}\n            selected={selected} onSelectionChange={setSelected} page={currentPage} pageCount={pageCount} onPageChange={setPage} sort={sort} onSortChange={setSort} readOnly={mode === \"readonly\"} loading={loading} error={error || undefined} onRetry={() => setError(\"\")}\n            scopeKey={JSON.stringify([requestScope, applied, currentPage, sort])} onOpen={row => setMessage(`회사 그룹 상세 열기 의도: ${row.id}`)} onCreate={() => setMessage(\"회사 그룹 등록 의도\")}\n            onStatusChange={async (_request, { signal }) => { await delay(signal); if (mode === \"missing\") throw new Error(\"Synthetic missing groups\"); }}\n            classifyStatusError={() => ({ message: \"합성 회사 그룹이 더 이상 존재하지 않습니다.\", missing: mode === \"missing\" })}\n            onGroupsMissing={request => { setRecords(current => current.filter(row => !request.ids.includes(row.id))); setMessage(\"누락된 합성 그룹을 목록에서 다시 확인했습니다.\"); }}\n            onStatusApplied={request => { setRecords(current => current.map(row => request.ids.includes(row.id) ? { ...row, active: request.active } : row)); setMessage(`합성 그룹 ${request.ids.length}개 ${request.active ? \"활성화\" : \"비활성화\"} 완료`); }}/>\n        <p role=\"status\">{message}</p>\n    </>;\n}\nfunction NoticeExample({ mode, requestScope }: { mode: Mode; requestScope: string }) {\n    const [records, setRecords] = useState(() => mode === \"empty\" ? [] : initialNotices.map(row => mode === \"long\" ? { ...row, title: row.title + \" 매우 긴 공지 제목과 안내 내용으로 좁은 화면에서도 정보가 유지되는지 확인합니다.\" } : row));\n    const [filters, setFilters] = useState(() => ({ ...createPrismNoticeFilterDraft(companies), keyword: mode === \"filtered-empty\" ? \"존재하지 않는 합성 공지\" : \"\" }));\n    const [applied, setApplied] = useState<PrismNoticeAppliedFilters>(() => { const result = preparePrismNoticeFilters(filters, companies); if (!result.ok) throw new Error(result.message); return result.filters; });\n    const [page, setPage] = useState(1), [sort, setSort] = useState<PrismNoticeListSort | null>(null), [selected, setSelected] = useState<string[]>([]), [message, setMessage] = useState(\"\");\n    const [partialFailure, setPartialFailure] = useState(mode === \"partial\"), [readOnly, setReadOnly] = useState(mode === \"readonly\"), [loading, setLoading] = useState(mode === \"loading\"), [error, setError] = useState(mode === \"error\" ? \"합성 공지 조회 오류\" : \"\");\n    const filtered = records.filter(row => (!applied.companyIds.length || !row.companies.length || row.companies.some(company => applied.companyIds.includes(company.id)))\n        && (!applied.popupStatus.length || applied.popupStatus.some(status => status === row.popupStatus)) && (!applied.keyword || row.title.includes(applied.keyword))\n        && (!applied.popupFrom || row.popupStartDate && row.popupStartDate >= applied.popupFrom) && (!applied.popupTo || row.popupEndDate && row.popupEndDate <= applied.popupTo)\n        && (!applied.createdFrom || row.createdDate >= applied.createdFrom) && (!applied.createdTo || row.createdDate <= applied.createdTo));\n    const pageCount = Math.max(1, Math.ceil(filtered.length / 10)), currentPage = Math.min(page, pageCount);\n    return <>\n        <div style={{ display: \"flex\", flexWrap: \"wrap\", gap: 12 }}><label><input type=\"checkbox\" checked={partialFailure} onChange={event => setPartialFailure(event.target.checked)}/>두 번째 공지 삭제 실패 예시</label>\n            <label><input type=\"checkbox\" checked={readOnly} onChange={event => setReadOnly(event.target.checked)}/>읽기 전용</label>{loading&&<button type=\"button\" onClick={() => setLoading(false)}>합성 로딩 종료</button>}</div>\n        <PrismNoticeManagement companies={companies} filters={filters} applied={applied} onFiltersChange={setFilters} onSearch={next => { setApplied(next); setError(\"\"); }} rows={filtered.slice((currentPage - 1) * 10, currentPage * 10)} total={filtered.length}\n            selected={selected} onSelectionChange={setSelected} page={currentPage} pageCount={pageCount} onPageChange={setPage} sort={sort} onSortChange={setSort} readOnly={readOnly} loading={loading} error={error || undefined} onRetry={() => setError(\"\")}\n            scopeKey={JSON.stringify([requestScope, applied, currentPage, partialFailure])} onOpen={row => setMessage(`공지 상세 열기 의도: ${row.id}`)} onCreate={() => setMessage(\"공지 등록 의도\")} dateInputEditable\n            onDelete={(request, { signal }) => settlePrismNoticeDeletion(request, async id => { await delay(signal); if (partialFailure && id === \"synthetic-notice-2\") throw new Error(\"Synthetic deletion failure\"); }, { signal, concurrency: 3, getErrorMessage: () => \"합성 공지2 삭제 실패\" })}\n            onDeletionApplied={(_request, result) => { setRecords(current => current.filter(row => !result.deletedIds.includes(row.id))); setMessage(`합성 공지 ${result.deletedIds.length}개 삭제 완료, ${result.failures.length}개 실패`); }}/>\n        <p role=\"status\">{message}</p>\n    </>;\n}\n/** Self-contained examples; every service mutation applies only to synthetic records. */\nexport function AdminListsExample({ initialMode = \"default\", requestScope = \"synthetic-account\" }: { initialMode?: Mode; requestScope?: string }) {\n    const [family, setFamily] = useState([\"empty\", \"long\", \"notice\", \"partial\", \"filtered-empty\"].includes(initialMode) ? \"notices\" : \"groups\");\n    return <div data-prism=\"light\" style={{ minWidth: 0 }}><p>합성 회사 그룹·공지 목록입니다. 실제 사용자·권한·공지를 변경하지 않습니다.</p>\n        <label>관리 목록 예제 <select value={family} onChange={event => setFamily(event.target.value)}><option value=\"groups\">회사 그룹</option><option value=\"notices\">공지사항</option></select></label>\n        {family === \"groups\" ? <CompanyGroupExample key={requestScope} mode={initialMode} requestScope={requestScope}/> : <NoticeExample key={requestScope} mode={initialMode} requestScope={requestScope}/>}\n    </div>;\n}\n"
+    },
+    {
+      "id": "prism-position-blocks",
+      "name": "Position blocks / Editing / Remapping",
+      "category": "Administration",
+      "purpose": "산업·직책·직무 버전 목록과 이름 검사·설명/소직무 생성·영향 확인·삭제 및 재매핑",
+      "contract": "PrismPositionBlockManagement는 LIVE/TEMP 목록·직무 대분류·동기화 상태를 host에서 받습니다. 직책은 항상 상세 보기이며 TEMP scheduled/running에는 기준 조작을 잠급니다. 삭제 기준은 count에서 제외하고 deleted tag는 열기/삭제를 막으며 applying은 상세만 제공합니다. 산업/직무 생성, 대분류 3열과26px tag를 원본에 맞추고 좁은 컨테이너에서는2/1열과긴이름ellipsis를지원합니다. PrismBlockEditor는 kind/mode/initial과600ms 이름 검사를 사용합니다. 기존 이름과 같으면 재검사하지 않고 결과는 현재trimmed name에만 유효합니다. 생성 이후 설명을 직접 편집할 수 있으며 재생성의덮어쓰기를안내합니다. 직무는유효한대분류·설명·1개이상모든소직무의이름/설명이필요하고소직무생성/추가/삭제를지원합니다. 변경없는수정은차단하며수정은영향포지션조회→확인→이전/수정확정순서입니다. 조회실패를빈영향목록으로바꾸지않고다시조회할수있습니다. 생성실패/저장실패는기존입력을보존하고재시도합니다. preparePrismBlockSubmission은공개폼필드만복사하고UI용소직무id를제외합니다. PrismBlockDeletionDialog는조회성공후에만삭제를허용합니다. preparePrismBlockRemap은삭제대상/deleted/applying을후보에서제외하고산업/주직무는대체필수,보조직무는미선택해제를허용하며같은포지션의다른직무와중복을금지합니다. 영향0건은성공조회후빈remap으로삭제할수있습니다. pending은닫힘/중복요청을막고scopeKey/대상/kind/mode/readonly/open/unmount변경은AbortSignal과세대검사로오래된응답을버립니다. hostcallback이동기scope교체를일으켜도옛완료가새창을닫지않습니다. scopeKey는계정/권한/버전/동기화잠금/provider맥락변경시에갱신합니다. 서버에서이미실행된변경을rollback한다고주장하지않습니다. host가권한/실서비스/AI/캐시/최종레코드를소유하며예시는합성저장소입니다. 기존PrismCriteriaEditor/RemapDialog는일반controlled계약을보존하고원본블록업무에는이그룹을사용합니다.",
+      "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "sourceDeltaAudits": [
+        {
+          "source": "components/admin/position-blocks/AffectedPositionSummary.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        },
+        {
+          "source": "components/admin/position-blocks/CriteriaDeleteDialog.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        },
+        {
+          "source": "components/admin/position-blocks/CriteriaDialog.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        },
+        {
+          "source": "components/admin/position-blocks/CriteriaSection.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        },
+        {
+          "source": "components/admin/position-blocks/JobCriteriaDialog.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        },
+        {
+          "source": "pages/admin/position-blocks/PositionBlockPage.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        },
+        {
+          "source": "pages/admin/position-blocks/mapBlocks.ts",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        },
+        {
+          "source": "service/blocks.ts",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        },
+        {
+          "source": "components/admin/position-blocks/types.ts",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-13",
+          "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+        }
+      ],
+      "states": [
+        "default",
+        "edit",
+        "create",
+        "job",
+        "remap",
+        "empty",
+        "loading",
+        "error",
+        "scheduled",
+        "running",
+        "readonly",
+        "long"
+      ],
+      "source": [
+        "../pages/admin/position-blocks/PositionBlockPage.tsx",
+        "admin/position-blocks/CriteriaDialog.tsx",
+        "admin/position-blocks/JobCriteriaDialog.tsx",
+        "admin/position-blocks/CriteriaDeleteDialog.tsx",
+        "admin/position-blocks/CriteriaSection.tsx",
+        "admin/position-blocks/AffectedPositionSummary.tsx"
+      ],
+      "usage": "import { useRef, useState } from \"react\";\nimport { PrismPositionBlockManagement, PrismBlockEditor, PrismBlockDeletionDialog, type PrismBlockItem, type PrismBlockKind, type PrismBlockOpenRequest,\n    type PrismBlockAffectedPosition, type PrismPositionSource, type PrismPositionSyncStatus } from \"@pydemia/prism\";\n\ntype Mode = \"default\" | \"edit\" | \"create\" | \"job\" | \"remap\" | \"empty\" | \"loading\" | \"error\" | \"scheduled\" | \"running\" | \"readonly\" | \"long\";\nconst categories = [{ id: \"tech\", name: \"기술·연구개발\" }, { id: \"business\", name: \"사업·운영\" }, { id: \"support\", name: \"경영지원\" }];\nconst industries: PrismBlockItem[] = [\n    { id: \"industry-1\", name: \"전자·제조\", description: \"합성 산업 기준입니다. 실제 추천이나 인사 판단에 사용하지 않습니다.\" },\n    { id: \"industry-2\", name: \"서비스\", description: \"합성 서비스 산업 기준입니다.\", change: \"added\" },\n    { id: \"industry-3\", name: \"에너지\", description: \"합성 에너지 산업 기준입니다.\", change: \"modified\" },\n    { id: \"industry-4\", name: \"삭제 예시\", description: \"합성 삭제 상태입니다.\", change: \"deleted\" },\n    { id: \"industry-5\", name: \"반영 예시\", description: \"합성 반영 상태입니다.\", change: \"applying\" },\n    { id: \"industry-6\", name: \"실패 예시\", description: \"합성 실패 상태입니다.\", change: \"failed\" },\n];\nconst roles: PrismBlockItem[] = [{ id: \"role-1\", name: \"총괄\", description: \"직책 기준은 읽기 전용으로 제공합니다.\" }, { id: \"role-2\", name: \"담당\", description: \"합성 직책 기준입니다.\" }];\nconst jobs: PrismBlockItem[] = [\n    { id: \"job-1\", categoryId: \"tech\", name: \"기술 전략\", description: \"합성 기술 전략 직무 기준입니다.\", subJobs: [{ id: \"sub-1\", name: \"전략 수립\", description: \"합성 소직무의 이름과 설명을 모두 편집할 수 있습니다.\" }] },\n    { id: \"job-2\", categoryId: \"tech\", name: \"연구 개발\", description: \"합성 연구 개발 직무 기준입니다.\", subJobs: [{ id: \"sub-2\", name: \"연구 기획\", description: \"합성 연구 기획 설명입니다.\" }], change: \"modified\" },\n    { id: \"job-3\", categoryId: \"business\", name: \"사업 운영\", description: \"합성 사업 운영 직무 기준입니다.\", subJobs: [{ id: \"sub-3\", name: \"운영 관리\", description: \"합성 운영 관리 설명입니다.\" }] },\n    { id: \"job-4\", categoryId: \"support\", name: \"삭제 직무\", description: \"삭제 직무는 대체 후보에서 제외됩니다.\", subJobs: [], change: \"deleted\" },\n    { id: \"job-5\", categoryId: \"support\", name: \"반영 직무\", description: \"반영 중인 직무는 대체 후보에서 제외됩니다.\", subJobs: [], change: \"applying\" },\n];\nfunction delay(signal: AbortSignal) {\n    return new Promise<void>((resolve, reject) => {\n        if (signal.aborted) { reject(new Error(\"Synthetic request aborted\")); return; }\n        const abort = () => { clearTimeout(timer); reject(new Error(\"Synthetic request aborted\")); };\n        const timer = setTimeout(() => { signal.removeEventListener(\"abort\", abort); resolve(); }, 60);\n        signal.addEventListener(\"abort\", abort, { once: true });\n    });\n}\n/** All records and provider responses are synthetic. The consuming application supplies real services. */\nexport function PositionBlocksExample({ initialMode = \"default\" }: { initialMode?: Mode }) {\n    const editable = initialMode !== \"default\" && initialMode !== \"readonly\";\n    const [source, setSource] = useState<PrismPositionSource>(editable ? \"TEMP\" : \"LIVE\");\n    const [syncStatus, setSyncStatus] = useState<PrismPositionSyncStatus>(initialMode === \"scheduled\" || initialMode === \"running\" ? initialMode : editable ? \"editing\" : \"synced\");\n    const [lists, setLists] = useState({ industry: industries, position: roles, job: jobs });\n    const [fault, setFault] = useState<\"none\" | \"name\" | \"generation\" | \"impact\" | \"save\" | \"delete\">(\"none\");\n    const [editor, setEditor] = useState<PrismBlockOpenRequest | null>(() => initialMode === \"create\" ? { kind: \"industry\", mode: \"create\" } : initialMode === \"job\" ? { kind: \"job\", mode: \"edit\", initial: jobs[0] } : null);\n    const [deletion, setDeletion] = useState<{ kind: \"industry\" | \"job\"; item: PrismBlockItem } | null>(() => initialMode === \"remap\" ? { kind: \"job\", item: jobs[0] } : null);\n    const [result, setResult] = useState(\"\"); const sequence = useRef(0);\n    const scopeKey = `synthetic-blocks:${source}:${syncStatus}:${initialMode === \"readonly\"}`;\n    const loadAffected = async (request: { kind: PrismBlockKind; targetId: string }, { signal }: { signal: AbortSignal }): Promise<PrismBlockAffectedPosition[]> => {\n        await delay(signal); if (fault === \"impact\") { setFault(\"none\"); throw new Error(\"Synthetic impact failure\"); }\n        const common = [{ id: \"position-1\", company: \"가상전자\", name: \"가상 기술전략담당\" }, { id: \"position-2\", company: \"예시사업\", name: \"가상 운영담당\" }];\n        return request.kind === \"job\" ? [{ ...common[0], mapping: \"primary\", otherCriteria: { id: \"job-2\", name: \"연구 개발\" } }, { ...common[1], mapping: \"secondary\", otherCriteria: { id: \"job-3\", name: \"사업 운영\" } }] : common;\n    };\n    return <section data-prism=\"light\" className=\"prism-demo-stack\">\n        <div className=\"prism-demo-row\"><label>합성 동기화 상태 <select aria-label=\"합성 동기화 상태\" value={syncStatus} onChange={event => { setSyncStatus(event.target.value as PrismPositionSyncStatus); setEditor(null); setDeletion(null); }}><option value=\"editing\">편집 중</option><option value=\"scheduled\">예정</option><option value=\"running\">진행 중</option><option value=\"synced\">완료</option><option value=\"failed\">실패</option></select></label>\n            <label>합성 실패 예시 (다음 요청) <select aria-label=\"합성 실패 예시\" value={fault} onChange={event => setFault(event.target.value as typeof fault)}><option value=\"none\">없음</option><option value=\"name\">이름 검사</option><option value=\"generation\">AI 생성</option><option value=\"impact\">영향 조회</option><option value=\"save\">저장</option><option value=\"delete\">삭제</option></select></label></div>\n        <PrismPositionBlockManagement source={source} onSourceChange={value => { setEditor(null); setDeletion(null); setSource(value); setSyncStatus(value === \"LIVE\" ? \"synced\" : \"editing\"); }}\n            industries={initialMode === \"empty\" ? [] : initialMode === \"long\" ? lists.industry.map(item => ({ ...item, name: item.name.repeat(12) })) : lists.industry} positions={initialMode === \"empty\" ? [] : lists.position} jobs={initialMode === \"empty\" ? [] : lists.job} categories={categories}\n            sync={{ status: syncStatus, date: \"2026.10.13\" }} loading={initialMode === \"loading\"} readOnly={initialMode === \"readonly\"} error={initialMode === \"error\" ? \"합성 블록 목록을 불러오지 못했습니다.\" : undefined}\n            onRetry={() => setResult(\"합성 목록 재조회 요청\")} onOpen={setEditor} onDelete={(kind, item) => setDeletion({ kind, item })}/>\n        {editor && <PrismBlockEditor open scopeKey={scopeKey} kind={editor.kind} mode={editor.mode} initial={editor.initial} categories={categories} readOnly={initialMode === \"readonly\"} onOpenChange={open => { if (!open) setEditor(null); }}\n            onCheckName={async (request, { signal }) => { await delay(signal); if (fault === \"name\") { setFault(\"none\"); throw new Error(\"Synthetic name failure\"); } return !lists[request.kind].some(item => item.id !== request.excludeId && item.name.trim() === request.name); }}\n            onGenerateDescription={async (request, { signal }) => { await delay(signal); if (fault === \"generation\") { setFault(\"none\"); throw new Error(\"Synthetic generation failure\"); } return `${request.name}의 합성 설명입니다. 생성된 내용을 직접 수정할 수 있습니다.`; }}\n            onGenerateSubJobs={async (request, { signal }) => { await delay(signal); if (fault === \"generation\") { setFault(\"none\"); throw new Error(\"Synthetic generation failure\"); } return [{ name: `${request.name} 기획`, description: \"합성 기획 직무 설명입니다.\" }, { name: `${request.name} 운영`, description: \"합성 운영 직무 설명입니다.\" }]; }}\n            onLoadAffected={loadAffected} onSubmit={async (request, { signal }) => {\n                await delay(signal); if (fault === \"save\") { setFault(\"none\"); throw new Error(\"Synthetic save failure\"); }\n                const id = request.targetId ?? `synthetic-${++sequence.current}`;\n                const next: PrismBlockItem = { id, name: request.name, description: request.description, change: request.targetId ? \"modified\" : \"added\", ...(request.kind === \"job\" ? { categoryId: request.categoryId, subJobs: request.subJobs.map(job => ({ ...job, id: `synthetic-sub-${++sequence.current}` })) } : {}) };\n                setLists(previous => ({ ...previous, [request.kind]: request.targetId ? previous[request.kind].map(item => item.id === id ? next : item) : [...previous[request.kind], next] }));\n            }} onSubmitted={request => setResult(`합성 ${request.kind === \"job\" ? \"직무\" : \"산업\"} 기준 ${request.targetId ? \"수정\" : \"생성\"} 완료`)}/>}\n        {deletion && <PrismBlockDeletionDialog open scopeKey={scopeKey} kind={deletion.kind} target={deletion.item} candidates={lists[deletion.kind]} onOpenChange={open => { if (!open) setDeletion(null); }} onLoadAffected={loadAffected}\n            onConfirm={async (request, { signal }) => { await delay(signal); if (fault === \"delete\") { setFault(\"none\"); throw new Error(\"Synthetic deletion failure\"); } setLists(previous => ({ ...previous, [request.kind]: previous[request.kind].map(item => item.id === request.targetId ? { ...item, change: \"deleted\" } : item) })); }}\n            onDeleted={request => setResult(`합성 기준 삭제 및 ${Object.keys(request.remap).length}건 재매핑 완료${request.kind === \"job\" ? \" (미선택 보조직무 해제)\" : \"\"}`)}/>}\n        <p role=\"status\">{result}</p>\n    </section>;\n}\n",
+      "sourcePath": "packages/prism/src/prism-position-blocks.tsx",
+      "previewUrl": "/prism?component=prism-position-blocks",
+      "embedUrl": "/prism?component=prism-position-blocks&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-position-blocks&view=responsive",
+      "verification": {
+        "visual": "source-contract-reviewed;authenticated-original-pending",
+        "interaction": "passed-selected-workspace-and-independent-install-browser",
+        "checks": [
+          "20 new contracts;12 new states1280/320; creation/impact/save/remap retry flows."
+        ],
+        "remaining": [
+          "Authenticated source rendering/permissions and real API/AI/RBAC/cache/sync effects.",
+          "Other source purposes including chat-log composition and complete state parity.",
+          "Original whole-page static/variable font,pixel/A4 and production publication."
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismBlockKind",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockMode",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockCategory",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockSubJob",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockItem",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockAffectedPosition",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockTaskContext",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockSubmitRequest",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockNameRequest",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockImpactRequest",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockDeleteRequest",
+          "kind": "type"
+        },
+        {
+          "name": "validatePrismBlockDraft",
+          "kind": "function"
+        },
+        {
+          "name": "hasPrismBlockChanges",
+          "kind": "function"
+        },
+        {
+          "name": "preparePrismBlockSubmission",
+          "kind": "function"
+        },
+        {
+          "name": "preparePrismBlockRemap",
+          "kind": "function"
+        },
+        {
+          "name": "PrismBlockEditorProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockEditor",
+          "kind": "component"
+        },
+        {
+          "name": "PrismBlockDeletionDialogProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismBlockDeletionDialog",
+          "kind": "component"
+        },
+        {
+          "name": "PrismBlockOpenRequest",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPositionBlockManagementProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismPositionBlockManagement",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismPositionBlockManagement, PrismBlockEditor, PrismBlockDeletionDialog, type PrismBlockItem, type PrismBlockKind, type PrismBlockOpenRequest, type PrismBlockAffectedPosition } from \"@/components/ui/prism-position-blocks\";\nimport { type PrismPositionSource, type PrismPositionSyncStatus } from \"@/components/ui/prism-position-management\";\n\ntype Mode = \"default\" | \"edit\" | \"create\" | \"job\" | \"remap\" | \"empty\" | \"loading\" | \"error\" | \"scheduled\" | \"running\" | \"readonly\" | \"long\";\nconst categories = [{ id: \"tech\", name: \"기술·연구개발\" }, { id: \"business\", name: \"사업·운영\" }, { id: \"support\", name: \"경영지원\" }];\nconst industries: PrismBlockItem[] = [\n    { id: \"industry-1\", name: \"전자·제조\", description: \"합성 산업 기준입니다. 실제 추천이나 인사 판단에 사용하지 않습니다.\" },\n    { id: \"industry-2\", name: \"서비스\", description: \"합성 서비스 산업 기준입니다.\", change: \"added\" },\n    { id: \"industry-3\", name: \"에너지\", description: \"합성 에너지 산업 기준입니다.\", change: \"modified\" },\n    { id: \"industry-4\", name: \"삭제 예시\", description: \"합성 삭제 상태입니다.\", change: \"deleted\" },\n    { id: \"industry-5\", name: \"반영 예시\", description: \"합성 반영 상태입니다.\", change: \"applying\" },\n    { id: \"industry-6\", name: \"실패 예시\", description: \"합성 실패 상태입니다.\", change: \"failed\" },\n];\nconst roles: PrismBlockItem[] = [{ id: \"role-1\", name: \"총괄\", description: \"직책 기준은 읽기 전용으로 제공합니다.\" }, { id: \"role-2\", name: \"담당\", description: \"합성 직책 기준입니다.\" }];\nconst jobs: PrismBlockItem[] = [\n    { id: \"job-1\", categoryId: \"tech\", name: \"기술 전략\", description: \"합성 기술 전략 직무 기준입니다.\", subJobs: [{ id: \"sub-1\", name: \"전략 수립\", description: \"합성 소직무의 이름과 설명을 모두 편집할 수 있습니다.\" }] },\n    { id: \"job-2\", categoryId: \"tech\", name: \"연구 개발\", description: \"합성 연구 개발 직무 기준입니다.\", subJobs: [{ id: \"sub-2\", name: \"연구 기획\", description: \"합성 연구 기획 설명입니다.\" }], change: \"modified\" },\n    { id: \"job-3\", categoryId: \"business\", name: \"사업 운영\", description: \"합성 사업 운영 직무 기준입니다.\", subJobs: [{ id: \"sub-3\", name: \"운영 관리\", description: \"합성 운영 관리 설명입니다.\" }] },\n    { id: \"job-4\", categoryId: \"support\", name: \"삭제 직무\", description: \"삭제 직무는 대체 후보에서 제외됩니다.\", subJobs: [], change: \"deleted\" },\n    { id: \"job-5\", categoryId: \"support\", name: \"반영 직무\", description: \"반영 중인 직무는 대체 후보에서 제외됩니다.\", subJobs: [], change: \"applying\" },\n];\nfunction delay(signal: AbortSignal) {\n    return new Promise<void>((resolve, reject) => {\n        if (signal.aborted) { reject(new Error(\"Synthetic request aborted\")); return; }\n        const abort = () => { clearTimeout(timer); reject(new Error(\"Synthetic request aborted\")); };\n        const timer = setTimeout(() => { signal.removeEventListener(\"abort\", abort); resolve(); }, 60);\n        signal.addEventListener(\"abort\", abort, { once: true });\n    });\n}\n/** All records and provider responses are synthetic. The consuming application supplies real services. */\nexport function PositionBlocksExample({ initialMode = \"default\" }: { initialMode?: Mode }) {\n    const editable = initialMode !== \"default\" && initialMode !== \"readonly\";\n    const [source, setSource] = useState<PrismPositionSource>(editable ? \"TEMP\" : \"LIVE\");\n    const [syncStatus, setSyncStatus] = useState<PrismPositionSyncStatus>(initialMode === \"scheduled\" || initialMode === \"running\" ? initialMode : editable ? \"editing\" : \"synced\");\n    const [lists, setLists] = useState({ industry: industries, position: roles, job: jobs });\n    const [fault, setFault] = useState<\"none\" | \"name\" | \"generation\" | \"impact\" | \"save\" | \"delete\">(\"none\");\n    const [editor, setEditor] = useState<PrismBlockOpenRequest | null>(() => initialMode === \"create\" ? { kind: \"industry\", mode: \"create\" } : initialMode === \"job\" ? { kind: \"job\", mode: \"edit\", initial: jobs[0] } : null);\n    const [deletion, setDeletion] = useState<{ kind: \"industry\" | \"job\"; item: PrismBlockItem } | null>(() => initialMode === \"remap\" ? { kind: \"job\", item: jobs[0] } : null);\n    const [result, setResult] = useState(\"\"); const sequence = useRef(0);\n    const scopeKey = `synthetic-blocks:${source}:${syncStatus}:${initialMode === \"readonly\"}`;\n    const loadAffected = async (request: { kind: PrismBlockKind; targetId: string }, { signal }: { signal: AbortSignal }): Promise<PrismBlockAffectedPosition[]> => {\n        await delay(signal); if (fault === \"impact\") { setFault(\"none\"); throw new Error(\"Synthetic impact failure\"); }\n        const common = [{ id: \"position-1\", company: \"가상전자\", name: \"가상 기술전략담당\" }, { id: \"position-2\", company: \"예시사업\", name: \"가상 운영담당\" }];\n        return request.kind === \"job\" ? [{ ...common[0], mapping: \"primary\", otherCriteria: { id: \"job-2\", name: \"연구 개발\" } }, { ...common[1], mapping: \"secondary\", otherCriteria: { id: \"job-3\", name: \"사업 운영\" } }] : common;\n    };\n    return <section data-prism=\"light\" className=\"prism-demo-stack\">\n        <div className=\"prism-demo-row\"><label>합성 동기화 상태 <select aria-label=\"합성 동기화 상태\" value={syncStatus} onChange={event => { setSyncStatus(event.target.value as PrismPositionSyncStatus); setEditor(null); setDeletion(null); }}><option value=\"editing\">편집 중</option><option value=\"scheduled\">예정</option><option value=\"running\">진행 중</option><option value=\"synced\">완료</option><option value=\"failed\">실패</option></select></label>\n            <label>합성 실패 예시 (다음 요청) <select aria-label=\"합성 실패 예시\" value={fault} onChange={event => setFault(event.target.value as typeof fault)}><option value=\"none\">없음</option><option value=\"name\">이름 검사</option><option value=\"generation\">AI 생성</option><option value=\"impact\">영향 조회</option><option value=\"save\">저장</option><option value=\"delete\">삭제</option></select></label></div>\n        <PrismPositionBlockManagement source={source} onSourceChange={value => { setEditor(null); setDeletion(null); setSource(value); setSyncStatus(value === \"LIVE\" ? \"synced\" : \"editing\"); }}\n            industries={initialMode === \"empty\" ? [] : initialMode === \"long\" ? lists.industry.map(item => ({ ...item, name: item.name.repeat(12) })) : lists.industry} positions={initialMode === \"empty\" ? [] : lists.position} jobs={initialMode === \"empty\" ? [] : lists.job} categories={categories}\n            sync={{ status: syncStatus, date: \"2026.10.13\" }} loading={initialMode === \"loading\"} readOnly={initialMode === \"readonly\"} error={initialMode === \"error\" ? \"합성 블록 목록을 불러오지 못했습니다.\" : undefined}\n            onRetry={() => setResult(\"합성 목록 재조회 요청\")} onOpen={setEditor} onDelete={(kind, item) => setDeletion({ kind, item })}/>\n        {editor && <PrismBlockEditor open scopeKey={scopeKey} kind={editor.kind} mode={editor.mode} initial={editor.initial} categories={categories} readOnly={initialMode === \"readonly\"} onOpenChange={open => { if (!open) setEditor(null); }}\n            onCheckName={async (request, { signal }) => { await delay(signal); if (fault === \"name\") { setFault(\"none\"); throw new Error(\"Synthetic name failure\"); } return !lists[request.kind].some(item => item.id !== request.excludeId && item.name.trim() === request.name); }}\n            onGenerateDescription={async (request, { signal }) => { await delay(signal); if (fault === \"generation\") { setFault(\"none\"); throw new Error(\"Synthetic generation failure\"); } return `${request.name}의 합성 설명입니다. 생성된 내용을 직접 수정할 수 있습니다.`; }}\n            onGenerateSubJobs={async (request, { signal }) => { await delay(signal); if (fault === \"generation\") { setFault(\"none\"); throw new Error(\"Synthetic generation failure\"); } return [{ name: `${request.name} 기획`, description: \"합성 기획 직무 설명입니다.\" }, { name: `${request.name} 운영`, description: \"합성 운영 직무 설명입니다.\" }]; }}\n            onLoadAffected={loadAffected} onSubmit={async (request, { signal }) => {\n                await delay(signal); if (fault === \"save\") { setFault(\"none\"); throw new Error(\"Synthetic save failure\"); }\n                const id = request.targetId ?? `synthetic-${++sequence.current}`;\n                const next: PrismBlockItem = { id, name: request.name, description: request.description, change: request.targetId ? \"modified\" : \"added\", ...(request.kind === \"job\" ? { categoryId: request.categoryId, subJobs: request.subJobs.map(job => ({ ...job, id: `synthetic-sub-${++sequence.current}` })) } : {}) };\n                setLists(previous => ({ ...previous, [request.kind]: request.targetId ? previous[request.kind].map(item => item.id === id ? next : item) : [...previous[request.kind], next] }));\n            }} onSubmitted={request => setResult(`합성 ${request.kind === \"job\" ? \"직무\" : \"산업\"} 기준 ${request.targetId ? \"수정\" : \"생성\"} 완료`)}/>}\n        {deletion && <PrismBlockDeletionDialog open scopeKey={scopeKey} kind={deletion.kind} target={deletion.item} candidates={lists[deletion.kind]} onOpenChange={open => { if (!open) setDeletion(null); }} onLoadAffected={loadAffected}\n            onConfirm={async (request, { signal }) => { await delay(signal); if (fault === \"delete\") { setFault(\"none\"); throw new Error(\"Synthetic deletion failure\"); } setLists(previous => ({ ...previous, [request.kind]: previous[request.kind].map(item => item.id === request.targetId ? { ...item, change: \"deleted\" } : item) })); }}\n            onDeleted={request => setResult(`합성 기준 삭제 및 ${Object.keys(request.remap).length}건 재매핑 완료${request.kind === \"job\" ? \" (미선택 보조직무 해제)\" : \"\"}`)}/>}\n        <p role=\"status\">{result}</p>\n    </section>;\n}\n"
     }
   ]
 }
