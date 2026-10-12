@@ -19,3 +19,13 @@ PositionPage의restore는같은tab이면서restoreList===true또는같은locatio
 저장중정렬도잠그고같은시험에서모든thead버튼disabled를확인했습니다. 최종201 tests/0fail과workspace typecheck,54 groups/55 items/35 complete usage의계약검사가통과했습니다. 실제최종shadcn설치에서54 TSX/CSS가emitted exact bytes,변환예외0이며35예시/TypeScript/Vite/font/고지가통과했습니다. Source72cac2b2fdf5ec6f009709f942206e5b3b534d5f8d9b3bb07f8340c3afce763d/76 inputs이고212개current render검사는0입니다. React 검토에서static columns,controlled host state,scope layout cleanup,conditional current confirmation과callback ownership을확인했습니다. Consumer와자료를보존했고registry server는finally에서종료됐습니다.
 
 표준npm run build가 성공했고canonical/generated 연구자료4개를동기화했습니다. 기존generic release와최종source fingerprint를확인한뒤source/생성물커밋과기존draft PR/CI/preview를진행합니다. 전체goal은active입니다.
+
+## Desktop filter threshold correction
+
+Source6dc075c3/generatedabac1838을검토branch에push했고PR162 draft/base main/정확한head,Verify UI38226785481 completed/success와Vercel dpl_4KeZvy4BWsKQ7XKjej99d5NEbt3j READY/동일SHA를확인했습니다. https://pydemia-1zz9zbf98-pydemia-7822.vercel.app의6개자산exact bytes/SHA가통과했습니다. 이보정전증거를admin-users-before-filter-breakpoint-readback.json에보존했습니다.
+
+원본5열필터896px와액션/간격/몸통·필터padding이들어가는desktop구간에서도1180px기준이3열로너무일찍바꾸는것을소스폭계산에서발견했습니다. 기준을1140px로낮춰1160px컨테이너에서는원본5열을유지합니다. 이변경은CSS분기만바꾸며TypeScript/201개동작시험의소스는그대로입니다. 새로운CSS/source fingerprint·최종token설치/site/PR/CI/preview를갱신하고actual browser checks는0으로유지합니다.
+
+최종CSS보정은1140px와원본clickable 행의pointer입니다. TypeScript/201개동작시험의소스는바뀌지않았습니다. Final sourcefd45b856fb976b64d11cc82a973e04cb799e224c7ba579f3c2c6c3c6f8292fb7/76 inputs의실제설치54 exact TSX/CSS/0변환/35예시/TypeScript/Vite/font/고지가통과했습니다.
+
+최종CSS보정후표준site build도성공했습니다. Canonical/generated4개와source fingerprint를다시대조하고보정커밋/PR/CI/preview를이어갑니다. 전체goal은active입니다.
