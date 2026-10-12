@@ -10,7 +10,7 @@ import "@pydemia/prism/styles.css";
 import "@pydemia/prism/pdf.css";
 import "./page.css";
 
-const stateLabels: Record<FixtureState, string> = { default: "기본", disabled: "비활성", readonly: "읽기 전용", error: "오류", loading: "로딩", empty: "빈 결과", long: "긴 내용", closed: "닫힘", expanded: "확대", memo: "메모", position: "포지션", chat: "채팅", "detail-only": "상세 설명만 있음", versioned: "포지션 버전", restricted: "선택 제한 권한", "access-error": "접근 오류", edit: "편집 버전", scheduled: "동기화 예정", running: "동기화 진행 중", failed: "동기화 실패", notice: "공지사항 목록", partial: "일부 삭제 실패", "filtered-empty": "필터 적용 후 빈 결과", missing: "목록 항목 누락" };
+const stateLabels: Record<FixtureState, string> = { create: "기준 생성", job: "직무 편집", remap: "기준 재매핑", default: "기본", disabled: "비활성", readonly: "읽기 전용", error: "오류", loading: "로딩", empty: "빈 결과", long: "긴 내용", closed: "닫힘", expanded: "확대", memo: "메모", position: "포지션", chat: "채팅", "detail-only": "상세 설명만 있음", versioned: "포지션 버전", restricted: "선택 제한 권한", "access-error": "접근 오류", edit: "편집 버전", scheduled: "동기화 예정", running: "동기화 진행 중", failed: "동기화 실패", notice: "공지사항 목록", partial: "일부 삭제 실패", "filtered-empty": "필터 적용 후 빈 결과", missing: "목록 항목 누락" };
 const referenceBase = (revision: string) => `https://github.com/skccmygit/skax-successionX-frontend/blob/${revision}/src/`;
 const genericEntries = catalog.map(entry => ({ ...entry, id: `pyd-${entry.id}` }));
 const verificationLabels:Record<string,string>={pending:"미확인",partial:"부분 확인","source-artwork-retained":"원본 벡터 형상 보존","not-applicable":"해당 없음"};

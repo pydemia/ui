@@ -25,3 +25,11 @@ frontend를 다시fetch해 HEAD=origin/dev=27c4fdbf/clean을 확인했습니다.
 실제shadcn설치56 TSX/CSS exact bytes/0변환,37예제와별도entry TypeScript/Vite/font/고지가통과했습니다. 설치browser에서도부분9/1·선택1·재시도1·그룹10상태변경과320px root/scrollWidth288·표256/1100·날짜높이20.125px가확인됐습니다. Native select의implicit label은option문자도포함하므로관찰한role/name으로선택했고selector실패를구현실패로보지않았습니다. 설치tab13과dev session46960은검사후닫고종료130을확인했습니다. consumer source/lockfile/dist-admin-lists/node_modules는보존합니다.
 
 source fingerprint df84bb38728ecc6cadb17f799906b55621622c2a41f669b6c17e84cff33392be/80 inputs입니다. 표준site build와 generic snapshot sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896이통과했습니다. 실제현재로컬확인은232고유상태중11개이며전체원본상태동일성검증이아닙니다. 기존date12 기록을보존하고새결과의관찰일은13으로기록합니다. 검토branch/PR/CI/preview readback을이어가며main/production은게시하지않습니다.
+
+## 검토 게시 확인
+
+Source4d973a9e/generated657349352f2b1bdb2473ac34b94367240ce9435f를검토branch에push했고credential exact-match0/config보존을확인했습니다. PR162는draft/base main/정확한65734935이며56그룹/57항목/37예제/232테스트와새부분삭제·날짜·그룹계약을반영했습니다. Verify UI38271590561은completed/success입니다.
+
+기존review preview dpl_Fvg8UurErMrnFrxVs8EQyNU9tzWW에서withLatestCommit=true/target생략으로preview를만들었습니다. 새dpl_EvZsZMxrCxLG5kvsaNUfreAyX849는생성직후부터정확한65734935/target null이며최종READY입니다. https://pydemia-pyiiqdr6z-pydemia-7822.vercel.app의8개자산(registry/components/source-inventory/verification JSON·MD/admin-lists/selection/tokens)이로컬과exact bytes/SHA가일치했습니다. proof는ignored admin-lists-preview-readback.json입니다. CI결과와배포READY는별도확인했으며GitHubcommit의Vercel status목록은이번조회에서비어있었습니다.
+
+최종local partial screenshot도동일소스에서다시저장했습니다. 기존source tab1과workspace tab9를보존했고viewport는reset/handoff했습니다. 공개production/main은변경하지않았으며position-block/chat-log 목적,원본인증전체화면·실제권한/서비스·source배포revision binding·전체font/pixel/A4 비교는남습니다. Goal은active이며이번readback기록만다음source commit용으로미커밋상태에남깁니다.

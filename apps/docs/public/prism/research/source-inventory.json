@@ -128,34 +128,54 @@
     {
       "source": "components/admin/position-blocks/AffectedPositionSummary.tsx",
       "name": "AffectedPositionSummary",
-      "target": "prism-management",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/CriteriaDeleteDialog.tsx",
       "name": "CriteriaDeleteDialog",
-      "target": "prism-management-tools",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/CriteriaDialog.tsx",
       "name": "CriteriaDialog",
-      "target": "prism-management-tools",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/CriteriaSection.tsx",
       "name": "CriteriaSection",
-      "target": "prism-management",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/CriteriaTag.tsx",
@@ -163,15 +183,25 @@
       "target": "prism-management-tools",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Added state label, deleted/applying action restrictions, source26px tags and hover/check source colors; long labels truncate without widening the container."
+      }
     },
     {
       "source": "components/admin/position-blocks/JobCriteriaDialog.tsx",
       "name": "JobCriteriaDialog",
-      "target": "prism-management-tools",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/PositionBlockSkeleton.tsx",
@@ -179,7 +209,10 @@
       "target": "prism-primitives",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-position-blocks"
+      ]
     },
     {
       "source": "components/admin/positions/CompanyTaskDialog.tsx",
@@ -2469,7 +2502,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Administrator real role/status/sync authorization/API and original page-level access,position-block/chat-log purposes remain pending. Source/synthetic user,position,company-group and notice lists reviewed separately.",
+      "Administrator authenticated original rendering,real role/status/sync authorization/API,chat-log composition and full design/state parity remain pending. User,position,company-group,notice and position-block source/synthetic contracts reviewed separately.",
       "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -2513,6 +2546,11 @@
       "head": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "originDev": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "workingTree": "clean"
+    },
+    "reviewedPositionBlocksDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
     }
   },
   "integrationReferences": [
@@ -2677,10 +2715,46 @@
         "observedAt": "2026-10-13",
         "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
       }
+    },
+    {
+      "source": "pages/admin/position-blocks/PositionBlockPage.tsx",
+      "target": "prism-position-blocks",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
+    },
+    {
+      "source": "pages/admin/position-blocks/mapBlocks.ts",
+      "target": "prism-position-blocks",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
+    },
+    {
+      "source": "service/blocks.ts",
+      "target": "prism-position-blocks",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
+    },
+    {
+      "source": "components/admin/position-blocks/types.ts",
+      "target": "prism-position-blocks",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     }
   ],
   "componentCountAudit": {
-    "observedAt": "2026-10-12",
+    "observedAt": "2026-10-13",
     "sourceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
     "method": "Static runtime-import dependency closure from src/main.tsx including literal dynamic import and Vite import.meta.glob expansion; product closure removes only routes/sampleRoutes.tsx. Includes composite and helper TSX modules; reachability is not independent component count or authenticated runtime proof.",
     "counts": {
@@ -2688,8 +2762,8 @@
       "sample-route-only": 7,
       "not-reachable-from-entry": 4
     },
-    "primaryMappedGroups": 48,
-    "allMappedGroupsExcludingVectors": 49,
+    "primaryMappedGroups": 49,
+    "allMappedGroupsExcludingVectors": 50,
     "sampleOnly": [
       "components/admin/common/AdminAttachmentList.tsx",
       "components/admin/common/AdminChipAutocomplete.tsx",
@@ -2705,6 +2779,6 @@
       "components/chat/successorCandidate/leadership/LeadershipSummary.tsx",
       "components/ui/popover/HRXPopover.tsx"
     ],
-    "claim": "186 is a non-vector TSX source-file count, not the number of independent components to implement.175 product-reachable files still include helpers, state variants and compositions.49 existing mapped groups do not prove functional or visual completion. Final independent target count remains unestablished."
+    "claim": "186 counts non-vector TSX source files.175 product-reachable files include helpers/state variants/compositions. Current 50 mapped groups are mappings, not verified completion or a fixed final target count. Independent target total remains unestablished."
   }
 }

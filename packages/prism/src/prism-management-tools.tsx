@@ -7,11 +7,12 @@ import { PrismAiGenerateButton, PrismAffectedPositions } from "./prism-managemen
 import { PrismTable } from "./prism-display";
 import { PrismContextOptionCard } from "./prism-context";
 
-export type PrismCriteriaChange = "new" | "modified" | "deleted" | "applying" | "failed";
+export type PrismCriteriaChange = "new" | "added" | "modified" | "deleted" | "applying" | "failed";
 export function PrismCriteriaTag({ label, change, disabled, onEdit, onDelete }: { label: string; change?: PrismCriteriaChange; disabled?: boolean; onEdit?: () => void; onDelete?: () => void }) {
-    const labels = {new:"신규",modified:"수정",deleted:"삭제 예정",applying:"반영 중",failed:"반영 실패"};
-    return <span className="prism-criteria-tag" data-change={change} data-disabled={disabled || undefined}><button type="button" disabled={disabled || !onEdit} onClick={onEdit}>{label}{change && <small>{labels[change]}</small>}</button>
-        {onDelete && <button type="button" className="prism-criteria-delete" aria-label={`${label} 삭제`} disabled={disabled || change === "applying"} onClick={onDelete}><X aria-hidden="true" /></button>}</span>;
+    const labels = {new:"신규",added:"추가됨",modified:"수정됨",deleted:"삭제됨",applying:"반영중",failed:"실패"};
+    const deletable = onDelete && !disabled && change !== "deleted" && change !== "applying";
+    return <span className="prism-criteria-tag" data-change={change} data-disabled={disabled || undefined}><button type="button" disabled={disabled || !onEdit || change === "deleted"} onClick={onEdit}><span className="prism-criteria-tag-name" title={label}>{label}</span>{change && <small>{labels[change]}</small>}</button>
+        {deletable && <button type="button" className="prism-criteria-delete" aria-label={`${label} 삭제`} onClick={onDelete}><X aria-hidden="true" /></button>}</span>;
 }
 export type PrismCriteriaDraft = { name: string; description: string; categoryId?: string; subJobs?: readonly { id: string; name: string }[] };
 export function PrismCriteriaEditor({ title, open, onOpenChange, value, onValueChange, onSubmit, categories, positions = [], checkStatus = "idle", onCheck, onGenerate, busy, error, children }: {

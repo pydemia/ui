@@ -1021,22 +1021,34 @@
         "Real member cascade/status/notice persistence and deployed source revision binding.",
         "Remaining chat/authStore/full source font/pixel/A4 parity and production."
       ]
+    },
+    "prism-position-blocks": {
+      "visual": "source-contract-reviewed;authenticated-original-pending",
+      "interaction": "passed-selected-workspace-and-independent-install-browser",
+      "checks": [
+        "20 new contracts;12 new states1280/320; creation/impact/save/remap retry flows."
+      ],
+      "remaining": [
+        "Authenticated source rendering/permissions and real API/AI/RBAC/cache/sync effects.",
+        "Other source purposes including chat-log composition and complete state parity.",
+        "Original whole-page static/variable font,pixel/A4 and production publication."
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 232,
+      "passed": 252,
       "failed": 0
     },
     "registry": {
-      "groups": 56,
-      "items": 57,
+      "groups": 57,
+      "items": 58,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-current-admin-lists-real-install-typecheck-build-and-selected-browser",
-      "items": 57,
+      "status": "passed-installed-position-blocks",
+      "items": 58,
       "modules": 56,
       "completeExamples": 37,
       "typecheck": "passed",
@@ -1044,87 +1056,26 @@
       "source": "56 installed TSX modules and corrected CSS match emitted bytes exactly;0 transforms.37 complete examples/entry build,font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Installed partial9/1 deletion,retry1,group10 deactivation and320px root/table/date metrics passed; no real member cascade/backend or full source parity claim."
+      "runtime": "Installed example edit/impact confirmation/job conflict/remap/secondary clear/delete; final caption update reinstalled with320px dialog296/table264/760 and accessible caption;logs0.",
+      "sourceSha256": "8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5",
+      "groups": 57,
+      "examples": 38,
+      "sourceTransforms": 0
     },
-    "fullSiteBuild": "passed",
+    "fullSiteBuild": "passed-current-position-blocks-standard-build",
     "publicDeployment": {
-      "status": "historical-public-readback; current-review-preview-pending",
-      "url": "https://ui.pydemia.ai/prism",
-      "readback": "Previous Tooltip publication: 119 fixture states; nine HTTP assets matched local bytes, registry SHA256 524ec86e783434311b6147339a6b2c0184d33948e06a7e1d638115215a1efae3.",
-      "attempts": [
-        {
-          "method": "normal-upload",
-          "result": "api-upload-free request limit exceeded (5000/day)"
-        },
-        {
-          "method": "archive-tgz",
-          "result": "archive upload completed; api-deployments-free-per-day limit exceeded (100/day)"
-        },
-        {
-          "method": "existing-git-deployment",
-          "sourceCommit": "bb351eb",
-          "result": "Vercel created deployment but build failed: ENOENT apps/docs/public/prism/research/verification.json",
-          "fix": "anchor generated output exclusion to /docs/ instead of docs/"
-        },
-        {
-          "method": "existing-git-integration-status",
-          "sourceCommit": "ef8d2c6",
-          "result": "Vercel commit status failure: Deployment rate limited — retry in 24 hours."
-        },
-        {
-          "method": "existing-git-integration",
-          "sourceCommit": "b533c5c",
-          "result": "Vercel commit status success: Deployment has completed; public HTTP readback verified"
-        },
-        {
-          "method": "existing-git-integration",
-          "sourceCommit": "ff1f27a",
-          "result": "Vercel Deployment has completed; current manifest/registry HTTP bytes and public consumer install verified"
-        },
-        {
-          "method": "existing-git-integration",
-          "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
-          "result": "Verify UI/Pages success, Vercel Deployment has completed; current manifest/registry HTTP and own headless browser verified"
-        }
-      ],
-      "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
-      "browserRender": "Previous Tooltip publication passed 119 states at actual 320px and selected SUMMARY touch, focus/Escape and long 320x240/wheel checks.",
-      "independentConsumer": {
-        "status": "passed",
-        "method": "public Avatar registry installation before font/print changes; final current registry CSS synchronized and rebuilt",
-        "items": 39,
-        "files": 62,
-        "componentExamples": 11,
-        "typecheck": "passed",
-        "viteBuild": "passed",
-        "portableFont": "emitted package font bytes matched",
-        "assetNotice": "installed and checked",
-        "browserRuntime": "consumer demo not executed; published catalogue font/print browser checks are separate"
-      },
-      "scope": "Previous Tooltip implementation, before current InputLabel changes.",
-      "currentImplementation": {
-        "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
-        "status": "published-browser-verified-before-input-label-changes",
-        "publicBrowser": "119 states and selected Tooltip interactions"
-      }
+      "status": "pending-current-position-blocks-preview;production-not-published"
     },
     "generalComponentTests": {
       "passed": 280,
       "failed": 0
     },
     "genericRegistry": {
-      "items": 146,
-      "catalogEntries": 144,
-      "immutableReleases": 83,
-      "status": "passed",
-      "currentRelease": "sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896",
-      "upstreamRevision": "316e95fc"
+      "status": "passed-unchanged",
+      "snapshot": "sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896"
     },
     "githubVerification": {
-      "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
-      "status": "passed-before-input-label-changes",
-      "url": "https://github.com/pydemia/ui/actions/runs/37105231272",
-      "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
+      "status": "pending-current-position-blocks-review-publication"
     },
     "usageContracts": {
       "groups": 56,
@@ -1135,11 +1086,11 @@
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 232,
-      "checked": 11,
-      "pending": 221,
-      "status": "partial-current-company-notice-local-browser",
-      "sourceSha256": "df84bb38728ecc6cadb17f799906b55621622c2a41f669b6c17e84cff33392be"
+      "count": 244,
+      "checked": 13,
+      "pending": 231,
+      "status": "partial-current-position-blocks-synthetic-browser",
+      "sourceSha256": "8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1217,28 +1168,28 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 56,
-    "states": 232,
-    "checked": 11,
-    "status": "partial-current-company-notice-local-browser",
-    "baseCommit": "3aaf558a09c436d5fff8dd82a68f7d87603063c3",
-    "sourceSha256": "df84bb38728ecc6cadb17f799906b55621622c2a41f669b6c17e84cff33392be",
-    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
-    "inputCount": 80,
+    "groups": 57,
+    "states": 244,
+    "checked": 13,
+    "status": "partial-current-position-blocks-synthetic-browser",
+    "sourceSha256": "8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5",
+    "inputCount": 82,
     "checks": [
       {
-        "component": "prism-admin-lists",
+        "component": "prism-position-blocks",
         "states": [
           "default",
-          "loading",
+          "edit",
+          "create",
+          "job",
+          "remap",
           "empty",
+          "loading",
           "error",
+          "scheduled",
+          "running",
           "readonly",
-          "long",
-          "notice",
-          "partial",
-          "filtered-empty",
-          "missing"
+          "long"
         ],
         "widths": [
           1280,
@@ -1248,7 +1199,7 @@
         "nestedButtons": 0
       },
       {
-        "component": "prism-selection",
+        "component": "prism-management-tools",
         "states": [
           "default"
         ],
@@ -1258,8 +1209,8 @@
         "rootOverflow": 0
       }
     ],
-    "claim": "10 new synthetic list states at1280/320px and selection/default320px. Current original public date input measurements compared; whole-page/service/static-variable-font/A4 parity not established.",
-    "pendingReason": "Other current states,final installed/preview behavior,authenticated source pages,full pixel/font/A4 and production remain unverified."
+    "claim": "12 new synthetic states at1280/320px plus legacy tag/default320px. Original authenticated visual/font/service parity remains unverified.",
+    "pendingReason": "Other current fixture states, independent install/publication and original authenticated full font/pixel/A4 verification pending."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -1535,7 +1486,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Administrator real role/status/sync authorization/API and original page-level access,position-block/chat-log purposes remain pending. Source/synthetic user,position,company-group and notice lists reviewed separately.",
+      "Administrator authenticated original rendering,real role/status/sync authorization/API,chat-log composition and full design/state parity remain pending. User,position,company-group,notice and position-block source/synthetic contracts reviewed separately.",
       "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -1573,6 +1524,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-13",
       "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+    },
+    "reviewedPositionBlocksDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
     }
   },
   "inputLabelReferenceComparison": {
@@ -2865,6 +2821,150 @@
       "Position-block/chat-log purposes and authenticated administrator/source/permission states.",
       "Real member cascade/status/notice persistence and deployed source revision binding.",
       "Remaining chat/authStore/full source font/pixel/A4 parity and production."
+    ]
+  },
+  "previousPositionBlocksFixtureRenderChecks": {
+    "groups": 56,
+    "states": 232,
+    "checked": 11,
+    "status": "partial-current-company-notice-local-browser",
+    "baseCommit": "3aaf558a09c436d5fff8dd82a68f7d87603063c3",
+    "sourceSha256": "df84bb38728ecc6cadb17f799906b55621622c2a41f669b6c17e84cff33392be",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "inputCount": 80,
+    "checks": [
+      {
+        "component": "prism-admin-lists",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "readonly",
+          "long",
+          "notice",
+          "partial",
+          "filtered-empty",
+          "missing"
+        ],
+        "widths": [
+          1280,
+          320
+        ],
+        "rootOverflow": 0,
+        "nestedButtons": 0
+      },
+      {
+        "component": "prism-selection",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320
+        ],
+        "rootOverflow": 0
+      }
+    ],
+    "claim": "10 new synthetic list states at1280/320px and selection/default320px. Current original public date input measurements compared; whole-page/service/static-variable-font/A4 parity not established.",
+    "pendingReason": "Other current states,final installed/preview behavior,authenticated source pages,full pixel/font/A4 and production remain unverified."
+  },
+  "previousPositionBlocksGates": {
+    "independentConsumer": {
+      "status": "passed-current-admin-lists-real-install-typecheck-build-and-selected-browser",
+      "items": 57,
+      "modules": 56,
+      "completeExamples": 37,
+      "typecheck": "passed",
+      "viteBuild": "passed",
+      "source": "56 installed TSX modules and corrected CSS match emitted bytes exactly;0 transforms.37 complete examples/entry build,font/notices passed.",
+      "portableFont": "emitted SHA256 matched",
+      "assetNotice": "installed and checked",
+      "runtime": "Installed partial9/1 deletion,retry1,group10 deactivation and320px root/table/date metrics passed; no real member cascade/backend or full source parity claim."
+    },
+    "fullSiteBuild": "passed",
+    "publicDeployment": {
+      "status": "historical-public-readback; current-review-preview-pending",
+      "url": "https://ui.pydemia.ai/prism",
+      "readback": "Previous Tooltip publication: 119 fixture states; nine HTTP assets matched local bytes, registry SHA256 524ec86e783434311b6147339a6b2c0184d33948e06a7e1d638115215a1efae3.",
+      "attempts": [
+        {
+          "method": "normal-upload",
+          "result": "api-upload-free request limit exceeded (5000/day)"
+        },
+        {
+          "method": "archive-tgz",
+          "result": "archive upload completed; api-deployments-free-per-day limit exceeded (100/day)"
+        },
+        {
+          "method": "existing-git-deployment",
+          "sourceCommit": "bb351eb",
+          "result": "Vercel created deployment but build failed: ENOENT apps/docs/public/prism/research/verification.json",
+          "fix": "anchor generated output exclusion to /docs/ instead of docs/"
+        },
+        {
+          "method": "existing-git-integration-status",
+          "sourceCommit": "ef8d2c6",
+          "result": "Vercel commit status failure: Deployment rate limited — retry in 24 hours."
+        },
+        {
+          "method": "existing-git-integration",
+          "sourceCommit": "b533c5c",
+          "result": "Vercel commit status success: Deployment has completed; public HTTP readback verified"
+        },
+        {
+          "method": "existing-git-integration",
+          "sourceCommit": "ff1f27a",
+          "result": "Vercel Deployment has completed; current manifest/registry HTTP bytes and public consumer install verified"
+        },
+        {
+          "method": "existing-git-integration",
+          "sourceCommit": "dd49ecbe9d3c9e75846a11085d1a4e5397d62a6b",
+          "result": "Verify UI/Pages success, Vercel Deployment has completed; current manifest/registry HTTP and own headless browser verified"
+        }
+      ],
+      "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+      "browserRender": "Previous Tooltip publication passed 119 states at actual 320px and selected SUMMARY touch, focus/Escape and long 320x240/wheel checks.",
+      "independentConsumer": {
+        "status": "passed",
+        "method": "public Avatar registry installation before font/print changes; final current registry CSS synchronized and rebuilt",
+        "items": 39,
+        "files": 62,
+        "componentExamples": 11,
+        "typecheck": "passed",
+        "viteBuild": "passed",
+        "portableFont": "emitted package font bytes matched",
+        "assetNotice": "installed and checked",
+        "browserRuntime": "consumer demo not executed; published catalogue font/print browser checks are separate"
+      },
+      "scope": "Previous Tooltip implementation, before current InputLabel changes.",
+      "currentImplementation": {
+        "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+        "status": "published-browser-verified-before-input-label-changes",
+        "publicBrowser": "119 states and selected Tooltip interactions"
+      }
+    },
+    "githubVerification": {
+      "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+      "status": "passed-before-input-label-changes",
+      "url": "https://github.com/pydemia/ui/actions/runs/37105231272",
+      "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
+    }
+  },
+  "positionBlocksVerification": {
+    "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "sourceSha256": "8bec6b373c04dcb00d4417ca6660eb419e00d2c9d9a5ae953daa9d8afcf4b0e5",
+    "status": "passed-source-contracts-selected-workspace-and-installed-runtime;review-publication-pending",
+    "tests": "252 full PRISM tests passed;20 new block cases. Final target rerun after source skeleton/state/one-request fault corrections recorded separately.",
+    "reference": "Source list/tag/section/skeleton/summary/edit/delete TSX and SCSS, job group and mapped position semantics. Correct deployed /chat/admin/position-blocks is document complete with empty visible text. Initial /admin path404 is a navigation mistake, not authentication proof.",
+    "localBrowser": "Industry duplicate/name-check/generation/manual edit/create; job generation/remove-all block/add name+description/create; edit impact review/save failure+same-confirmation retry/persisted sub-job description; remap other-job conflict, clear secondary/delete failure/selection retention/retry/deleted tag disabled. Browser warnings/errors0.",
+    "responsive": "12 states at1280 and320; header64/title14/tag26, three/one category columns. At320 root288/dialog296; remap table760 inside264px internal scroll. Absolutely positioned hidden labels were contained in each field to remove dialog scrollWidth607 overflow.",
+    "contracts": "Host callbacks/AbortSignal; name-specific debounced result; generation before editing; job description pairs/dirty guard/impact confirmation; required primary and optional secondary remap; stale/deleted/applying/conflict candidate rejection; explicit failures/retry; frozen public-only payload; duplicate/immediate-close and synchronous callback replacement fences.",
+    "independentConsumer": "57 emitted TSX/CSS exact bytes/0 transforms;38 examples TypeScript/Vite/font/notices. Installed edit/impact/job-remap and final caption/mobile rendering passed.",
+    "publication": "pending review preview; production not published",
+    "remaining": [
+      "Authenticated source rendering/permissions and real API/AI/RBAC/cache/sync effects.",
+      "Other source purposes including chat-log composition and complete state parity.",
+      "Original whole-page static/variable font,pixel/A4 and production publication."
     ]
   }
 }
