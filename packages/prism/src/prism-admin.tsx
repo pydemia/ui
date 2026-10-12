@@ -4,10 +4,10 @@ import { PrismFileTextGlyph as FileText } from "./prism-icon";
 import { PrismTooltip } from "./prism-utility";
 import { PrismButton } from "./prism-button";
 
-export function PrismAdminLayout({ title, description, actions, filters, toolbar, children, pagination }: {
-    title: string; description?: string; actions?: ReactNode; filters?: ReactNode; toolbar?: ReactNode; children: ReactNode; pagination?: ReactNode;
+export function PrismAdminLayout({ title, description, actions, filters, toolbar, children, pagination, className = "", breadcrumbs }: {
+    title: string; description?: string; actions?: ReactNode; filters?: ReactNode; toolbar?: ReactNode; children: ReactNode; pagination?: ReactNode; className?: string; breadcrumbs?: readonly string[];
 }) {
-    return <section className="prism-admin"><header className="prism-admin-header"><div><h1>{title}</h1>{description && <p>{description}</p>}</div>{actions}</header>
+    return <section className={`prism-admin ${className}`}><header className="prism-admin-header"><div>{breadcrumbs&&<nav className="prism-admin-breadcrumb" aria-label="현재 위치">{breadcrumbs.map((crumb,index)=><span key={index}>{crumb}</span>)}</nav>}<h1>{title}</h1>{description && <p>{description}</p>}</div>{actions}</header>
         <div className="prism-admin-body">{filters && <div className="prism-admin-filters">{filters}</div>}{toolbar && <div className="prism-admin-toolbar">{toolbar}</div>}
             <div className="prism-admin-content">{children}</div>{pagination}</div></section>;
 }

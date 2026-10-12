@@ -21,3 +21,13 @@ Frontend HEAD=origin/dev27c4fdbf입니다. 최종 Admin 펼침을 controlled로 
 React 검토에서는 global HTTP/session listener 복제를 피하고 안정적인 callback과instance ref,선택 조건의unmount,명시적route 경계/label/controlled menu 상태를 확인했습니다. 최초 loopback listen은 sandbox EPERM이었고 실제 설치용 임시 server 범위로 자동 승인을 받아 검증했습니다. Server는finally에서종료됐고 consumer source/lock/dist/node_modules와기록을보존했습니다. 표준site build와기존draft PR/CI/preview를이어갑니다.
 
 표준npm run build가 성공했습니다. Canonical/generated 연구자료4개를 동기화했습니다. 현재main과 기존generic release를 최종 대조하고 소스·생성물 커밋/기존draft PR/CI/HTTPS preview 자산 readback을 진행합니다. 전체goal은active입니다.
+
+## PR·CI·preview readback
+
+소스61e8d4bf/생성3aaf558a09c436d5fff8dd82a68f7d87603063c3을 기존검토branch에정상push했습니다. credential exact-match0과source/target Git config 보존을확인했습니다. PR162는draft true/base main/정확한3aaf558a head로읽고재첨부했습니다. Verify UI38222035867은completed/success입니다. origin/main288b0838과generic current release25ca4393를확인했고main/production을게시하지않았습니다.
+
+Vercel dpl_B41zforUuajgvwfSnpMbBkf9WMeN은READY/target null/정확한3aaf558a SHA입니다. https://pydemia-2fknfch2v-pydemia-7822.vercel.app에서기존CLI인증으로6개자산을읽어registry832910bytes/SHA35b251a9,manifest304878bytes/SHA7b71df40,verification122996bytes/SHA0c70c318,detail-state5918bytes/SHA14e25146,Sidebar11621bytes/SHAd5ca5726,tokens190283bytes/SHA53ce9e83의로컬exact bytes를확인했습니다. 전체hash는chat-access-preview-readback.json에보존합니다. HTTP자산검사와189개합성DOM시험을실제화면/RBAC/A4일치증거로사용하지않습니다.
+
+코드/생성물은게시된head에있고이readback기록만local modified로남깁니다. Consumer source/lock/dist/node_modules와기록을보존했고helper registry server는종료됐습니다. 새dev server를시작하지않았습니다. 전체goal은active입니다.
+
+후속소스위치: UserManagementPage.tsx는상태/이름/소속회사/이메일/Role/회사그룹columns,적용필터와현재선택bulk action을정의합니다. 현재PrismDirectoryTable은범용columns/selection이며전용사용자목록계약으로세지않습니다. positionListRestore.ts는라우터state.restoreList===true만복원표식으로인정합니다. 다음에는이페이지들과SCSS,실제consumer호스트의목록/상세복귀를대조합니다. 이초기읽기를전체관리자목록감사완료로분류하지않습니다. 나머지chat/authStore context와현재DEV의전체스타일/동작/목적/고도화coverage,full-font/pixel/A4/production도미완료입니다.

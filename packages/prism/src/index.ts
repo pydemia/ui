@@ -35,6 +35,7 @@ export * from "./prism-html-export";
 export { PrismWorkspace } from "./prism-workspace";
 export type { PrismWorkspaceProps } from "./prism-workspace";
 export * from "./prism-detail-state";
+export * from "./prism-admin-users";
 export { PrismRadarChart, PrismTrendChart, PrismLeadershipPie } from "./prism-chart";
 export type { PrismChartAxis, PrismChartSeries, PrismLeadershipPieItem, PrismLeadershipPieProps } from "./prism-chart";
 export { PrismSwitch, PrismTooltip, PrismTooltipContent, PrismInfoTooltip, PrismProgress, PrismFileDropzone, PrismFileAttach } from "./prism-utility";
