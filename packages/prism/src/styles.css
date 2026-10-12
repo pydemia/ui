@@ -1,5 +1,56 @@
 @import "pretendard/dist/web/variable/pretendardvariable.css";
 
+/* Position administration: source desktop dimensions, container-sized filter wrapping. */
+.prism-admin-positions {container:prism-positions/inline-size;min-width:0;--prism-admin-table-min-width:1100px;}
+.prism-admin-positions .prism-admin-header {height:64px;min-height:64px;padding:8px 20px;justify-content:flex-start;}
+.prism-admin-positions .prism-admin-header>div {display:grid;gap:2px;min-width:0;}
+.prism-admin-positions .prism-admin-header h1 {font-size:18px;font-weight:600;line-height:25px;color:#1f1f1f;}
+.prism-admin-positions .prism-admin-body {display:block;padding:0;}
+.prism-admin-positions .prism-tabs-content {margin-top:0;}
+.prism-position-content {display:flex;flex-direction:column;gap:16px;min-width:0;padding:20px 40px;}
+.prism-position-filter-bar {display:flex;justify-content:space-between;align-items:flex-end;gap:20px;min-width:0;width:100%;padding:20px;border:1px solid var(--prism-cool-200);border-radius:12px;}
+.prism-position-filter-fields {display:grid;grid-template-columns:140px 140px 140px 200px 140px;gap:20px;min-width:0;}
+.prism-position-filter-fields[data-source="TEMP"] {grid-template-columns:140px 140px 120px 140px 140px 140px;}
+.prism-position-filter-fields>.prism-field:has(.prism-position-keyword) {grid-column:1 / span 2;}
+.prism-position-filter-actions {display:flex;gap:6px;flex-shrink:0;}
+.prism-position-toolbar {display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;}
+.prism-position-list-summary {display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;min-width:0;}
+.prism-position-list-summary>span {white-space:nowrap;}
+.prism-position-list-summary>span:nth-child(3) {color:var(--prism-sub);}
+.prism-position-sync {display:flex;align-items:flex-start;justify-content:space-between;gap:16px;min-width:0;}
+.prism-position-sync-info {display:flex;flex-direction:column;gap:4px;flex:1 1 auto;min-width:0;}
+.prism-position-sync-info p {margin:0;font-size:13px;line-height:1.5;color:var(--prism-sub);overflow-wrap:anywhere;}
+.prism-position-sync>.prism-button {flex-shrink:0;}
+.prism-position-sync-label {display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;line-height:1.4;}
+.prism-position-sync-label>i {width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--prism-secondary);}
+.prism-position-sync-label[data-status="scheduled"]>i {background:#FBBC05;}
+.prism-position-sync-label[data-status="running"]>i {background:#0072C6;}
+.prism-position-sync-label[data-status="synced"]>i {background:#009A93;}
+.prism-position-sync-label[data-status="failed"]>i {background:#EA002C;}
+.prism-position-error {display:flex;align-items:center;gap:12px;overflow-wrap:anywhere;}
+@container prism-positions (max-width:1200px) {
+    .prism-position-filter-fields[data-source="TEMP"] {grid-template-columns:repeat(3,minmax(0,1fr));flex:1;}
+    .prism-position-filter-bar:has([data-source="TEMP"]) {flex-wrap:wrap;}
+}
+@container prism-positions (max-width:1120px) {
+    .prism-position-filter-bar {flex-wrap:wrap;}
+    .prism-position-filter-fields {grid-template-columns:repeat(3,minmax(0,1fr));width:100%;flex:1 1 100%;}
+    .prism-position-filter-fields[data-source="TEMP"] {flex:1 1 100%;}
+    .prism-position-filter-actions {margin-left:auto;}
+}
+@container prism-positions (max-width:620px) {
+    .prism-position-content {padding:16px;}
+    .prism-position-filter-bar {padding:16px;gap:16px;}
+    .prism-position-filter-fields,.prism-position-filter-fields[data-source="TEMP"] {grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+    .prism-position-list-summary {flex-wrap:wrap;}
+    .prism-position-sync {flex-wrap:wrap;}
+}
+@container prism-positions (max-width:380px) {
+    .prism-position-filter-fields,.prism-position-filter-fields[data-source="TEMP"] {grid-template-columns:minmax(0,1fr);}
+    .prism-position-filter-fields>.prism-field:has(.prism-position-keyword) {grid-column:auto;}
+    .prism-position-toolbar {flex-wrap:wrap;}
+}
+
 /* Administrator list geometry; generic directory and other AdminLayout callers keep their contracts. */
 .prism-admin-users {container:prism-users/inline-size;min-width:0;--prism-user-active:#009A93;--prism-user-inactive:#363636;--prism-admin-table-min-width:940px;}
 .prism-admin-users .prism-admin-header {height:64px;min-height:64px;padding:8px 20px;justify-content:flex-start;align-items:center;}

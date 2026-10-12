@@ -10,7 +10,7 @@ import "@pydemia/prism/styles.css";
 import "@pydemia/prism/pdf.css";
 import "./page.css";
 
-const stateLabels: Record<FixtureState, string> = { default: "기본", disabled: "비활성", readonly: "읽기 전용", error: "오류", loading: "로딩", empty: "빈 결과", long: "긴 내용", closed: "닫힘", expanded: "확대", memo: "메모", position: "포지션", chat: "채팅", "detail-only": "상세 설명만 있음", versioned: "포지션 버전", restricted: "선택 제한 권한", "access-error": "접근 오류" };
+const stateLabels: Record<FixtureState, string> = { default: "기본", disabled: "비활성", readonly: "읽기 전용", error: "오류", loading: "로딩", empty: "빈 결과", long: "긴 내용", closed: "닫힘", expanded: "확대", memo: "메모", position: "포지션", chat: "채팅", "detail-only": "상세 설명만 있음", versioned: "포지션 버전", restricted: "선택 제한 권한", "access-error": "접근 오류", edit: "편집 버전", scheduled: "동기화 예정", running: "동기화 진행 중", failed: "동기화 실패" };
 const referenceBase = (revision: string) => `https://github.com/skccmygit/skax-successionX-frontend/blob/${revision}/src/`;
 const genericEntries = catalog.map(entry => ({ ...entry, id: `pyd-${entry.id}` }));
 const verificationLabels:Record<string,string>={pending:"미확인",partial:"부분 확인","source-artwork-retained":"원본 벡터 형상 보존","not-applicable":"해당 없음"};
@@ -83,7 +83,7 @@ function PrismDocs() {
                         <tr><td>상태</td><td>기본·hover·focus·disabled·readOnly·selected·loading·empty·error를 분리합니다.</td><td>native semantics + Radix 계약</td></tr>
                         <tr><td>추가 기능</td><td>pydemia 컴포넌트의 동작은 공유하고 PRISM token profile을 적용합니다.</td><td>기존 pydemia component contract</td></tr>
                     </tbody></table><p>원본 dark theme의 근거가 없어 dark mode를 추가하지 않습니다. 원본 벡터 자산은 형상을 보존하고 React adapter와 SVG ID 처리를 추가했습니다. 실제 인사 데이터는 예시에 사용하지 않습니다.</p>
-                    <a className="prism-text-link" href="/prism/research/design-rules.md">상세 규칙과 차이 기록</a></> : <><h1>Coverage</h1><p>디자인과 동작의 목적별 대응표입니다. 재현·확장·미검증을 구분합니다.</p><p>기존 디자인 기준: <code>{manifest.reference.sourceRevision.slice(0,8)}</code> ({manifest.reference.observedAt}). 최근 소스 감사: <code>{manifest.reference.latestSourceAudit.revision.slice(0,8)}</code> ({manifest.reference.latestSourceAudit.observedAt}). 원본 inventory는 {manifest.sourceCoverage.total}개이며 미대응 신규 항목은 {manifest.sourceCoverage.pending}개입니다. 기존 항목의 원본 상태·시각 비교도 진행 중입니다.</p>
+                    <a className="prism-text-link" href="/prism/research/design-rules.md">상세 규칙과 차이 기록</a></> : <><h1>Coverage</h1><p>디자인과 동작의 목적별 대응표입니다. 재현·확장·미검증을 구분합니다.</p><p>기존 디자인 기준: <code>{manifest.reference.sourceRevision.slice(0,8)}</code> ({manifest.reference.observedAt}). 최근 소스 감사: <code>{manifest.reference.latestSourceAudit.revision.slice(0,8)}</code> ({manifest.reference.latestSourceAudit.observedAt}). 원본 inventory는 벡터 자산 {manifest.sourceCoverage.vectorAssets}개를 포함한 소스 파일 {manifest.sourceCoverage.total}개입니다. 독립 구현 목표 수를 뜻하지 않습니다. 목적별 대응이 연결되지 않은 파일은 {manifest.sourceCoverage.pending}개이며 대응 관계만으로 구현 완료를 판단하지 않습니다. 기존 항목의 원본 상태·시각 비교도 진행 중입니다.</p>
                     <table className="prism-rules-table"><thead><tr><th>컴포넌트</th><th>기능 목적</th><th>검증 상태</th></tr></thead><tbody>{manifest.components.map(item => <tr key={item.id}><td><button onClick={() => navigate(item.id)}>{item.name}</button></td><td>{item.purpose}</td><td>시각: {verificationLabel(item.verification.visual)}<br/>동작: {verificationLabel(item.verification.interaction)}</td></tr>)}</tbody></table>
                     <p>공통 pydemia 카탈로그의 {genericEntries.length}개 항목을 PRISM profile에서 실행할 수 있습니다. 이 숫자는 원본 PRISM coverage 또는 시각 일치율을 뜻하지 않습니다.</p>
                     <p>후보 상세 전체·6-frame 비교·출력·PDF·관리 화면·복합 입력의 원본 대응과 상태별 검증은 계속 진행합니다.</p>

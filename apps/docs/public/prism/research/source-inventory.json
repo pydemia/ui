@@ -2395,7 +2395,11 @@
   "counts": {
     "total": 273,
     "pending": 0,
-    "vectorAssets": 87
+    "vectorAssets": 87,
+    "countUnit": "source-file",
+    "nonVectorSourceFiles": 186,
+    "pendingPurposeMappings": 0,
+    "independentImplementationTargetCount": null
   },
   "baselineMappingRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "latestSourceAudit": {
@@ -2460,7 +2464,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Administrator real role/status authorization/API integration,non-user lists,position-list restoration and page-level access states remain pending; source/synthetic user-list UI reviewed separately.",
+      "Administrator real role/status/sync authorization/API integration, other administrator lists and page-level access remain pending; user and position list source/synthetic composition reviewed separately.",
       "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -2488,6 +2492,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+    },
+    "reviewedPositionListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
     }
   },
   "integrationReferences": [
@@ -2553,6 +2562,88 @@
         "observedAt": "2026-10-12",
         "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
       }
+    },
+    {
+      "source": "pages/admin/positions/PositionPage.tsx",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "pages/admin/positions/positionListRestore.ts",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminSyncStatusBar.tsx",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminSyncStatusLabel.tsx",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "service/data-management/positionManagement.ts",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "service/data-management/sync.ts",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
     }
-  ]
+  ],
+  "componentCountAudit": {
+    "observedAt": "2026-10-12",
+    "sourceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "method": "Static runtime-import dependency closure from src/main.tsx including literal dynamic import and Vite import.meta.glob expansion; product closure removes only routes/sampleRoutes.tsx. Includes composite and helper TSX modules; reachability is not independent component count or authenticated runtime proof.",
+    "counts": {
+      "product-route-reachable": 175,
+      "sample-route-only": 7,
+      "not-reachable-from-entry": 4
+    },
+    "primaryMappedGroups": 48,
+    "allMappedGroupsExcludingVectors": 49,
+    "sampleOnly": [
+      "components/admin/common/AdminAttachmentList.tsx",
+      "components/admin/common/AdminChipAutocomplete.tsx",
+      "components/ui/badge/HRXCountBadge.tsx",
+      "components/ui/input/HRXAutocomplete.tsx",
+      "components/ui/input/HRXFileAttach.tsx",
+      "components/ui/progressbar/HRXProgressBar.tsx",
+      "components/ui/table/HRXTable.tsx"
+    ],
+    "unreachable": [
+      "components/chat/common/DragDropOverlay.tsx",
+      "components/chat/successorCandidate/leadership/LeadershipRadar.tsx",
+      "components/chat/successorCandidate/leadership/LeadershipSummary.tsx",
+      "components/ui/popover/HRXPopover.tsx"
+    ],
+    "claim": "186 is a non-vector TSX source-file count, not the number of independent components to implement.175 product-reachable files still include helpers, state variants and compositions.49 existing mapped groups do not prove functional or visual completion. Final independent target count remains unestablished."
+  }
 }

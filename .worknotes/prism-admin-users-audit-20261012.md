@@ -29,3 +29,15 @@ Source6dc075c3/generatedabac1838을검토branch에push했고PR162 draft/base mai
 최종CSS보정은1140px와원본clickable 행의pointer입니다. TypeScript/201개동작시험의소스는바뀌지않았습니다. Final sourcefd45b856fb976b64d11cc82a973e04cb799e224c7ba579f3c2c6c3c6f8292fb7/76 inputs의실제설치54 exact TSX/CSS/0변환/35예시/TypeScript/Vite/font/고지가통과했습니다.
 
 최종CSS보정후표준site build도성공했습니다. Canonical/generated4개와source fingerprint를다시대조하고보정커밋/PR/CI/preview를이어갑니다. 전체goal은active입니다.
+
+## 최종 게시와 실행 경로 복구
+
+최종source554e6de0/generatedfee59ff0acb7c168e3f7636a33a2e41394caedc2을검토branch에push했고credential exact-match0/config보존을확인했습니다. PR162는draft/base main/정확한fee59ff0입니다. Verify UI38228864998은completed/success입니다. 최초Vercel dpl_bPbHUaBKqmVS95XU3wi1NpJJx65C는git_info_fail/ERROR였으며build events는비어있었습니다. 공식MCP안내에따라target을생략하고deploymentId/withLatestCommit=false로동일커밋preview를재요청했습니다. 초기target=preview의400은배포를생성하지않았습니다. 새dpl_pMdP8SKF9vAfi1ZeyEm1EMgEE5TY는READY/target null/동일fee59ff0입니다. https://pydemia-g1woqrdud-pydemia-7822.vercel.app에서6개자산exact bytes/SHA가통과했습니다. 전체값은admin-users-preview-readback.json에있습니다. main/production은게시하지않았습니다.
+
+사용자가permission profile을disabled로변경한뒤실제CUA 원본Sample tab읽기와기본패널열기/닫기가성공했습니다. 원본패널440px,header64px,heading18px700,Pretendard,close/button/SVG24px,shadowrgba(37,38,46,.06)-4px0px12px를다시측정했습니다. source-panel-current.json/jpg에보존하고원래닫힘상태/URL로복원했습니다. 이것이Source deployed Git revision binding이나전체UI일치를증명하지않습니다.
+
+현재fee59ff0의실제local browser에서UserManagement default를렌더했습니다. Container1160에서원본5열,1120에서3열,620에서2열,viewport320/container288에서1열입니다. 모든rootOverflow0/header64이며좁은table region은940px표를자체가로스크롤합니다. admin-users-current-widths.json과desktop/mobile JPG에있습니다. 검색어입력만으로는10행이유지되고조회후1행으로바뀌었습니다. 확인창의합성사용자1명비활성화가완료되고선택이0으로돌아갔습니다. 초기화후10행과23건,Role전체에서는그룹disabled/멤버사일반사용자선택후enabled이며query전행은유지됐습니다. 브라우저warn/error로그는빈배열입니다. Workflow/Role JPG에보존했습니다. 이는실제browser에서합성fixture를실행한증거이며실제계정/RBAC API검사가아닙니다.
+
+브라우저연결ID가2→4로재등록돼REPL binding이초기화됐습니다. 실제inventory의같은Codex In-app Browser/기존provider tab9를다시연결했고페이지의완료상태는유지돼있었습니다. 새대체브라우저/소프트웨어/CDP를사용하지않았습니다. 현재IAB4/tab9는handoff 표시했고viewport override는reset했습니다. 자체dev session79716/port63354를이어갈검증용으로유지합니다. Source/sample tab1과기존다른탭/로그인/credential은보존합니다.
+
+게시된canonical render checked0은이runtime관찰전snapshot입니다. 이번관찰은prism-admin-users default 한정이며전체212개상태/기타그룹의실제render검사는계속필요합니다. 다음단계는actual source의다른샘플/보호화면대조와position list restoration/non-user admin lists,전체font/pixel/A4입니다. 전체goal은active입니다.
