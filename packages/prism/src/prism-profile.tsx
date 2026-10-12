@@ -1,9 +1,10 @@
 import { useId, useState, type ReactNode, type CSSProperties } from "react";
 import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "./prism-tabs";
-import { PrismCandidateCard, type PrismCandidate } from "./prism-candidate";
+import { PrismCandidatePortrait, type PrismCandidate } from "./prism-candidate";
 import { PrismButton } from "./prism-button";
 import { PrismElpBadge, PrismTag } from "./prism-badge";
-import { PrismFavoriteToggle } from "./prism-primitives";
+import { PrismFavoriteToggle, PrismAffiliateLogo, PrismSkeleton } from "./prism-primitives";
+import { PrismEvaluationHistory } from "./prism-evaluation-history";
 import { PrismDetailList } from "./prism-detail";
 import { PrismIcon } from "./prism-icon";
 import { PrismInfoTooltip } from "./prism-utility";
@@ -35,12 +36,13 @@ export function PrismEvidence({ title, grade, children, source }: { title: strin
     return <PrismOutline title={title} actions={grade !== undefined && <strong className="prism-evidence-grade">{grade ?? "미평가"}</strong>}>
         <div className="prism-evidence-body">{children ?? "근거 정보가 없습니다."}</div>{source && <footer className="prism-help">{source}</footer>}</PrismOutline>;
 }
-export function PrismProfile({ candidate, activeTab, onTabChange, sections, favorite, onFavoriteChange, onComments, onPrint, commentCount }: {
+export function PrismProfile({ candidate, activeTab, onTabChange, sections, favorite, onFavoriteChange, onComments, onPrint, commentCount, loading, favoriteBusy, printBusy, readOnly }: {
     candidate: PrismCandidate; activeTab: PrismProfileTab; onTabChange: (tab: PrismProfileTab) => void;
     sections: Partial<Record<PrismProfileTab, ReactNode>>; favorite?: boolean; onFavoriteChange?: (favorite: boolean) => void;
     onComments?: () => void; onPrint?: () => void; commentCount?: number;
+    loading?: boolean; favoriteBusy?: boolean; printBusy?: boolean; readOnly?: boolean;
 }) {
-    return <div className="prism-profile"><PrismFavoriteProfile candidate={candidate} favorite={favorite} onFavoriteChange={onFavoriteChange} onComments={onComments} onPrint={onPrint} commentCount={commentCount} />
+    return <div className="prism-profile"><PrismFavoriteProfile candidate={candidate} favorite={favorite} onFavoriteChange={onFavoriteChange} onComments={onComments} onPrint={onPrint} commentCount={commentCount} loading={loading} favoriteBusy={favoriteBusy} printBusy={printBusy} readOnly={readOnly} />
         <PrismTabs value={activeTab} onValueChange={value => onTabChange(value as PrismProfileTab)}><PrismTabsList className="prism-profile-tabs" aria-label="후보자 상세 분류">
             {prismProfileTabs.map(tab => <PrismTabsTrigger value={tab.id} key={tab.id}>{tab.label}</PrismTabsTrigger>)}</PrismTabsList>
             {prismProfileTabs.map(tab => <PrismTabsContent value={tab.id} key={tab.id}><div className="prism-profile-section">
@@ -54,11 +56,33 @@ export function PrismCompetenceMatrix({ columns, rows }: { columns: readonly str
         <thead><tr><th scope="col">역량</th>{columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead>
         <tbody>{rows.map(row => <tr key={row.id}><th scope="row">{row.label}</th>{columns.map((column,index) => <td key={column} data-grade={row.values[index] ?? "missing"}>{row.values[index] ?? "정보 없음"}</td>)}</tr>)}</tbody></table></div>;
 }
-export function PrismFavoriteProfile({ candidate, favorite, onFavoriteChange, onComments, onPrint, commentCount = 0, children }: {
-    candidate: PrismCandidate; favorite?: boolean; onFavoriteChange?: (favorite: boolean) => void; onComments?: () => void; onPrint?: () => void; commentCount?: number; children?: ReactNode;
-}) {
-    return <div className="prism-favorite-profile"><div className="prism-favorite-photo" aria-hidden="true">{candidate.photo ? <img src={candidate.photo} alt="" /> : candidate.name.slice(0,1)}</div><div className="prism-favorite-info">
-        <div className="prism-favorite-name"><strong>{candidate.name}</strong>{candidate.elp && <PrismElpBadge type={candidate.elp} />}{onFavoriteChange && <PrismFavoriteToggle name={candidate.name} checked={!!favorite} onCheckedChange={onFavoriteChange} />}</div>
-        <p>{candidate.company} · {candidate.position}</p><div className="prism-favorite-tags">{candidate.birthDate && <PrismTag>{candidate.birthDate}</PrismTag>}{candidate.executiveYears !== undefined && <PrismTag>임원 {candidate.executiveYears}년차</PrismTag>}{candidate.speciality && <PrismTag>{candidate.speciality}</PrismTag>}</div>
-        {children}<div className="prism-favorite-actions">{onComments && <PrismButton variant="line" size="small" onClick={onComments}>메모 {commentCount}</PrismButton>}{onPrint && <PrismButton variant="line" size="small" onClick={onPrint}>출력</PrismButton>}</div></div></div>;
+export type PrismFavoriteProfileProps = {
+    candidate: PrismCandidate; favorite?: boolean; onFavoriteChange?: (favorite: boolean) => void;
+    onComments?: () => void; onPrint?: () => void; commentCount?: number; children?: ReactNode;
+    loading?: boolean; favoriteBusy?: boolean; printBusy?: boolean; readOnly?: boolean;
+    className?: string; style?: CSSProperties;
+};
+export function PrismFavoriteProfile({ candidate, favorite, onFavoriteChange, onComments, onPrint, commentCount = 0,
+    children, loading = false, favoriteBusy = false, printBusy = false, readOnly = false, className = "", style }: PrismFavoriteProfileProps) {
+    const affiliation = candidate.affiliation ?? candidate.companyField;
+    const jobFunction = candidate.jobFunction ?? candidate.domain;
+    const tenure = candidate.tenure ?? (candidate.executiveYears === undefined ? undefined : `임원 ${candidate.executiveYears}년차`);
+    if (loading) return <div className={`prism-favorite-profile prism-profile-skeleton ${className}`} style={style} role="status" aria-label="후보자 프로필 정보를 불러오고 있습니다.">
+        <div className="prism-favorite-photo"><PrismSkeleton width="100%" height="100%" radius={8}/></div><div className="prism-favorite-info">
+            <PrismSkeleton width={96} height={20}/><div className="prism-profile-skeleton-department"><PrismSkeleton height={20}/></div><div className="prism-profile-skeleton-position"><PrismSkeleton height={20}/></div>
+        </div></div>;
+    return <div className={`prism-favorite-profile ${className}`} style={style}>
+        <PrismCandidatePortrait name={candidate.name} subjectId={candidate.id} src={candidate.photo} className="prism-favorite-photo" fallback="initials"/>
+        <div className="prism-favorite-info"><div className="prism-favorite-name"><div className="prism-favorite-name-group">
+            <div className="prism-favorite-name-badge"><strong>{candidate.name}</strong>{candidate.elp && <PrismElpBadge type={candidate.elp}/>}</div>
+            {(candidate.birthDate || tenure) && <div className="prism-favorite-tags">{candidate.birthDate && <PrismTag>{candidate.birthDate}</PrismTag>}{tenure && <PrismTag>{tenure}</PrismTag>}</div>}
+        </div>{(onPrint || onFavoriteChange) && <div className="prism-favorite-actions">
+            {onPrint && <button type="button" className="prism-profile-print-button" aria-label="프로필 인쇄" aria-busy={printBusy || undefined} disabled={printBusy} onClick={onPrint}><PrismIcon name="PrintIcon" size={20}/></button>}
+            {onFavoriteChange && <PrismFavoriteToggle name={candidate.name} checked={!!favorite} disabled={favoriteBusy || readOnly} onCheckedChange={onFavoriteChange}/>}</div>}
+        </div>{(affiliation || jobFunction) && <div className="prism-profile-department">{affiliation && <b>{affiliation}</b>}{affiliation && jobFunction && <span className="prism-profile-divider"/>}{jobFunction}</div>}
+        {(candidate.company || candidate.position) && <div className="prism-profile-position">{candidate.company && <PrismAffiliateLogo brand={candidate.brand} affiliate={candidate.company} size={12}/>}{candidate.position && <span>{candidate.position}</span>}</div>}
+        <PrismEvaluationHistory items={candidate.recentEvaluations ?? []}/>{children}
+        {onComments && <PrismButton variant="line" size="small" className="prism-profile-memo-button" icon={<PrismIcon name="ChatBubbleIcon" size={16}/>} onClick={onComments}>메모 <span className="prism-profile-memo-count">{commentCount}</span></PrismButton>}
+        </div>
+    </div>;
 }

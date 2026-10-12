@@ -8,6 +8,7 @@ import { PrismProfileChip } from "./prism-display";
 import { PrismRequestState } from "./prism-feedback";
 import { PrismSkeletonGroup } from "./prism-primitives";
 import { PrismMemoCard } from "./prism-detail";
+import { PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid, PrismFavoriteCandidateSkeleton } from "./prism-favorite-candidate";
 
 export function PrismChatHeader({ title, actions }: { title: string; actions?: ReactNode }) { return <header className="prism-chat-header"><span>{title}</span>{actions}</header>; }
 export function PrismContentFrame({ children, fluid = false }: { children: ReactNode; fluid?: boolean }) { return <div className="prism-content-frame" data-fluid={fluid || undefined}>{children}</div>; }
@@ -22,13 +23,16 @@ export function PrismCandidateFilterBar({ value, onValueChange, seriesOptions, c
         <PrismInput label="이름" size="small" placeholder="이름" value={value.name} disabled={disabled} onChange={e => onValueChange({...value,name:e.target.value})} /></div><div>
         <PrismButton variant="line" size="small" iconOnly aria-label="검색 조건 초기화" icon={<RotateCcw />} disabled={disabled} onClick={onReset} /><PrismButton type="submit" size="small" disabled={disabled}>조회</PrismButton></div></form>;
 }
-export function PrismCandidateCollection({ title, candidates, view, onViewChange, onOpen, favorites = [], onFavoriteChange, filters, pagination, status = "ready", onRetry }: {
+export function PrismCandidateCollection({ title, candidates, view, onViewChange, onOpen, favorites = [], onFavoriteChange, filters, pagination, status = "ready", onRetry,
+    cardVariant = "candidate", favoriteBusyIds = [], readOnly = false }: {
     title: string; candidates: readonly PrismCandidate[]; view: "cards" | "table"; onViewChange: (view: "cards" | "table") => void; onOpen: (candidate: PrismCandidate) => void;
     favorites?: readonly string[]; onFavoriteChange?: (candidate: PrismCandidate, favorite: boolean) => void; filters?: ReactNode; pagination?: ReactNode; status?: "ready" | "loading" | "error"; onRetry?: () => void;
+    cardVariant?: "candidate" | "favorite"; favoriteBusyIds?: readonly string[]; readOnly?: boolean;
 }) {
-    return <section className="prism-candidate-collection"><PrismSectionTitle actions={<div><PrismButton variant="shape" iconOnly aria-label="카드 보기" aria-pressed={view === "cards"} icon={<LayoutGrid />} onClick={() => onViewChange("cards")} /><PrismButton variant="shape" iconOnly aria-label="표 보기" aria-pressed={view === "table"} icon={<List />} onClick={() => onViewChange("table")} /></div>}>{title} <span>({candidates.length})</span></PrismSectionTitle>{filters}
-        {status === "loading" ? <PrismSkeletonGroup rows={6} /> : status === "error" ? <PrismRequestState status="error" onRetry={onRetry} /> : !candidates.length ? <PrismRequestState status="empty" /> : view === "table" ? <PrismCandidateTable candidates={candidates} onOpen={onOpen} /> :
-            <div className="prism-candidate-grid">{candidates.map(candidate => <PrismCandidateCard key={candidate.id} candidate={candidate} variant="grid" onOpen={onOpen} favorite={favorites.includes(candidate.id)} onFavoriteChange={onFavoriteChange ? next => onFavoriteChange(candidate,next) : undefined} showDetails />)}</div>}{pagination}</section>;
+    return <section className="prism-candidate-collection" aria-busy={status === "loading" || undefined}><PrismSectionTitle actions={<div><PrismButton variant="shape" iconOnly aria-label="카드 보기" aria-pressed={view === "cards"} icon={<LayoutGrid />} onClick={() => onViewChange("cards")} /><PrismButton variant="shape" iconOnly aria-label="표 보기" aria-pressed={view === "table"} icon={<List />} onClick={() => onViewChange("table")} /></div>}>{title} <span>({candidates.length})</span></PrismSectionTitle>{filters}
+        {status === "loading" ? cardVariant === "favorite" ? <><span className="prism-sr-only" role="status">즐겨찾기 후보를 불러오고 있습니다.</span><PrismFavoriteCandidateGrid>{[0,1,2,3,4,5].map(index => <PrismFavoriteCandidateSkeleton key={index} announce={false}/>)}</PrismFavoriteCandidateGrid></> : <PrismSkeletonGroup rows={6} /> : status === "error" ? <PrismRequestState status="error" onRetry={onRetry} /> : !candidates.length ? <PrismRequestState status="empty" /> : view === "table" ? <PrismCandidateTable candidates={candidates} onOpen={onOpen} /> : cardVariant === "favorite"
+            ? <PrismFavoriteCandidateGrid>{candidates.map(candidate => <PrismFavoriteCandidateCard key={candidate.id} candidate={candidate} onOpen={onOpen} favorite={favorites.includes(candidate.id)} favoriteBusy={favoriteBusyIds.includes(candidate.id)} readOnly={readOnly} onFavoriteChange={onFavoriteChange ? next => onFavoriteChange(candidate,next) : undefined}/>)}</PrismFavoriteCandidateGrid>
+            : <div className="prism-candidate-grid">{candidates.map(candidate => <PrismCandidateCard key={candidate.id} candidate={candidate} variant="grid" onOpen={onOpen} favorite={favorites.includes(candidate.id)} onFavoriteChange={onFavoriteChange && !readOnly ? next => onFavoriteChange(candidate,next) : undefined} showDetails />)}</div>}{pagination}</section>;
 }
 export type PrismBoardRow = { id: string; company: string; position: string; current: readonly PrismCandidate[]; ranks: readonly (PrismCandidate | null)[] };
 export function PrismSuccessorBoard({ rows, onOpen, loading = false }: { rows: readonly PrismBoardRow[]; onOpen: (candidate: PrismCandidate) => void; loading?: boolean }) {

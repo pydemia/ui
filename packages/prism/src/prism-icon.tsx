@@ -1,6 +1,6 @@
-/* PRISM vector design assets, reference dev 7ecfc9a. Geometry retained; React adapter and per-instance SVG IDs added here. */
-
 import React, { useId, type SVGProps, type ComponentType, type CSSProperties } from "react";
+
+/* PRISM vector design assets, reference dev 7ecfc9a. Geometry retained; React adapter and per-instance SVG IDs added here. */
 
 const AccessDeniedIcon = () => {
     const prismVectorId = useId();

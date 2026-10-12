@@ -1,5 +1,11 @@
 # PRISM 검증 기록
 
+## 프로필 헤더·즐겨찾기·평가 이력 대조 (2026-10-12)
+
+프로필의132px 사진/gap12와 이름·태그·우측출력/즐겨찾기·계열/직무·회사/직책·평가·하단메모를 source에서 대조했습니다. 즐겨찾기는70px 사진·121px 정보·흰 전문 분야/평가 패널을 별도 카드로 제공하고, 상세와 즐겨찾기의 native 버튼을 형제로 분리했습니다. 제어형 busy/readonly와 subject/URL별 사진 오류 수명을 제공합니다. Source loading skeleton과3열/gap10·반응형2/1열·opt-in resize도 추가했습니다.
+
+평가는 원본처럼 공백/null을 제외하고 최근 연도순 배지와 연도 묶음을 표시하며, 기존 개별값 표시 목적은 explicit variant로 유지합니다. 입력 원문을 변경하지 않고 평가/사람 순위를 계산하지 않습니다. 새 헤더 검사9개를 포함한 최종161 tests와 타입 검사가 통과했습니다.53항목/32개 완전 예시의 실제 shadcn 독립 설치·TypeScript/Vite·폰트·고지가 통과했고52개 설치 module/CSS는 emitted bytes와 같습니다. 처음 삭제됐던 SVG 고지 원문은 import 뒤로 옮긴 뒤 실제 설치에서 보존됨을 확인했습니다. 실제 browser/pixel/print header와 A4 pagination은 미검증입니다. 이전source의 native/raster 증거를 새header 검증으로 사용하지 않습니다.
+
 ## 패널 조합과 포지션 상세 보완 (2026-10-12)
 
 최신 로컬 dev087811ff의 ProfilePanel/MemoPanel/PositionPanel/ChatPanel과 PositionDetailView를 대조했습니다. 프로필·메모의840px 본문과 여백, 메모 전환/24px 뒤로, 채팅의22px 제목·320px 질문·sticky 입력 영역을 별도 typed 조합으로 제공합니다. beforeLeave는 호스트가 소유하는 초안 확인이며 취소 시 확대·초안을 보존합니다. 후보 변경/외부 닫기/unmount는 이전 확인 결과를 취소합니다.
@@ -255,3 +261,7 @@ careerPages를제공하면누락/중복/순서를검사합니다. 생략하면so
 Source에맞춰leader70pt/140pt,경력11pt/130pt,photo80pt/10pt,Essay86pt/Survey65px·118pt와정적탭20pt/10pt/8pt/6pt를반영했습니다. min-height/overflow-visible로길어진본문을보존합니다.190mm paper를독립viewport에서너비맞춤/수동배율/양축resize하고인쇄시배율1과named A4 page(7/10/10mm margin)로설정합니다. 이는구현과source대조이며실제측정완료를의미하지않습니다.
 
 8개새검사를포함123tests,49그룹/26완전예시가통과했습니다. 독립소비자에50항목/75파일을fresh설치해26예시TypeScript/Vite·폰트bytes·고지를검증했습니다. 이전tmp소비자는없어서새폴더를할당했고component source는직접수정하지않았습니다. 현재172개정의상태의browser검사는0이며이전159개/후속22개부분검사와구분합니다. 실제A4/PDF/HTML/ZIP 문서·폰트/pixel·전체내용/머리말/페이지counter·독립소비자320px/resize/native print는미완료입니다.
+
+## 최신 source 차이 추적
+
+frontend를27c4fdbf로fetch/fast-forward해clean을확인했습니다. 이번header/favorite/evaluation및관련원본CSS는087811ff와같습니다. Leadership tag/content/detail/divider·print detail,position version조회,admin user/group/position및chat link/sidebar가변경됐으며재현여부는추가감사대상입니다. sourceFile 대응·기존검사수를latest전체일치로사용하지않습니다.

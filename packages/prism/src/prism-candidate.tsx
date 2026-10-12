@@ -1,27 +1,47 @@
-import { useId, type ReactNode } from "react";
+import { useId, useState, type CSSProperties, type ReactNode } from "react";
 import { PrismIcon } from "./prism-icon";
 import { PrismElpBadge, PrismChip } from "./prism-badge";
 import { PrismTable } from "./prism-display";
 import { PrismFavoriteToggle, PrismAffiliateLogo } from "./prism-primitives";
-import { PrismEvaluationHistory } from "./prism-record";
+import { PrismEvaluationHistory } from "./prism-evaluation-history";
 
 export type PrismCandidate = { id: string; name: string; company: string; position: string; executiveYears?: number;
     elp?: "ELP" | "s-ELP"; photo?: string; speciality?: string; summary?: string;
     birthDate?: string; appointmentDate?: string; groupJoinDate?: string; education?: string;
     brand?: string; companyField?: string; domain?: string; presidentPromotionDate?: string; groupJoinYears?: number;
-    recentEvaluations?: readonly {year:string;grade:string|null;active?:boolean}[]; compensationText?: string | null };
+    recentEvaluations?: readonly {year:string;grade:string|null;active?:boolean}[]; compensationText?: string | null;
+    tenure?: string; affiliation?: string; jobFunction?: string; expertAreas?: readonly string[] };
+export type PrismCandidatePortraitProps = {
+    name: string; src?: string | null; subjectId?: string;
+    fallback?: "initials" | "empty"; size?: CSSProperties["width"];
+    className?: string; style?: CSSProperties;
+};
+function Portrait({ name, src, fallback = "empty", size, className = "", style }: PrismCandidatePortraitProps) {
+    const [failed, setFailed] = useState(false);
+    const present = !!src?.trim() && !failed;
+    return <div className={`prism-candidate-portrait ${className}`} style={{ "--prism-portrait-size": typeof size === "number" ? `${size}px` : size, ...style } as CSSProperties}
+        role={present ? undefined : "img"} aria-label={present ? undefined : `${name} 프로필 사진 없음`} data-missing={!present || undefined}>
+        {present ? <img src={src!} alt={`${name} 프로필`} onError={() => setFailed(true)}/>
+            : fallback === "initials" ? <span aria-hidden="true">{Array.from(name.trim())[0] || "?"}</span> : null}
+    </div>;
+}
+/** A new subject/source gets a new image lifetime; the host resolves protected asset URLs. */
+export function PrismCandidatePortrait(props: PrismCandidatePortraitProps) {
+    return <Portrait key={`${props.subjectId ?? props.name}\0${props.src ?? ""}`} {...props}/>;
+}
 export type PrismCandidateCardProps = { candidate: PrismCandidate; rank?: number; selected?: boolean; favorite?: boolean;
     onOpen: (candidate: PrismCandidate) => void; onFavoriteChange?: (value: boolean) => void; children?: ReactNode;
     variant?: "stack" | "pair" | "grid"; panel?: boolean; showDetails?: boolean };
 export function PrismCandidateCard({ candidate, rank, selected, favorite, onOpen, onFavoriteChange, children, variant = "stack", panel, showDetails }: PrismCandidateCardProps) {
     const nameId=useId();
+    const affiliation=candidate.affiliation??candidate.companyField;
+    const jobFunction=candidate.jobFunction??candidate.domain??candidate.speciality;
     return <article className="prism-candidate-card" data-selected={selected || undefined} data-variant={variant} data-panel={panel || undefined}>
         <button type="button" className="prism-candidate-open" aria-labelledby={nameId} onClick={()=>onOpen(candidate)}/>
         {rank !== undefined && <span className="prism-rank">{rank}순위</span>}
-        <div className="prism-candidate-header"><div className="prism-candidate-photo" aria-hidden="true">
-            {candidate.photo && <img src={candidate.photo} alt="" />}</div>
+        <div className="prism-candidate-header"><PrismCandidatePortrait name={candidate.name} subjectId={candidate.id} src={candidate.photo} className="prism-candidate-photo"/>
             <div className="prism-candidate-info"><div className="prism-candidate-name"><span id={nameId} className="prism-candidate-label">{candidate.name}</span>
-                {candidate.elp && <PrismElpBadge type={candidate.elp} />}</div><div className="prism-candidate-categories">{candidate.companyField&&<b>{candidate.companyField}</b>}{(candidate.domain??candidate.speciality)&&<span>{candidate.domain??candidate.speciality}</span>}</div><p><PrismAffiliateLogo brand={candidate.brand} affiliate={candidate.company} size={12}/></p><p>{candidate.position}</p></div>
+                {candidate.elp && <PrismElpBadge type={candidate.elp} />}</div><div className="prism-candidate-categories">{affiliation&&<b>{affiliation}</b>}{jobFunction&&<span>{jobFunction}</span>}</div><p><PrismAffiliateLogo brand={candidate.brand} affiliate={candidate.company} size={12}/></p><p>{candidate.position}</p></div>
             {onFavoriteChange && <PrismFavoriteToggle name={candidate.name} checked={!!favorite} onCheckedChange={onFavoriteChange}/>}</div>
         <PrismCandidateBrief candidate={candidate} compact={variant==="grid"} single={variant==="stack"&&!panel}/>
         {candidate.summary && <p className="prism-candidate-summary">{candidate.summary}</p>}{children&&<div className="prism-candidate-extra">{children}</div>}

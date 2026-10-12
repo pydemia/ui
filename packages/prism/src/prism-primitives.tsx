@@ -1,6 +1,6 @@
 import { useId, type CSSProperties, type ReactNode } from "react";
 import { PrismIcon } from "./prism-icon";
-import { PrismChevronDownGlyph as ChevronDown, PrismStarGlyph as Star } from "./prism-icon";
+import { PrismChevronDownGlyph as ChevronDown } from "./prism-icon";
 import { Popover, PopoverTrigger, PopoverContent } from "@pydemia/ui";
 import { PrismButton } from "./prism-button";
 import { PrismInfoTooltip } from "./prism-utility";
@@ -34,7 +34,7 @@ export function PrismPopover({ trigger, children, open, onOpenChange }: { trigge
     return <Popover open={open} onOpenChange={onOpenChange}><PopoverTrigger asChild>{trigger}</PopoverTrigger><PopoverContent data-prism="light" className="prism-popover">{children}</PopoverContent></Popover>;
 }
 export function PrismFavoriteToggle({ name, checked, onCheckedChange, disabled }: { name: string; checked: boolean; onCheckedChange: (checked: boolean) => void; disabled?: boolean }) {
-    return <button type="button" className="prism-favorite-toggle" aria-label={`${name} 즐겨찾기`} aria-pressed={checked} disabled={disabled} onClick={() => onCheckedChange(!checked)}><Star aria-hidden="true" fill={checked ? "currentColor" : "none"} /></button>;
+    return <button type="button" className="prism-favorite-toggle" aria-label={`${name} 즐겨찾기`} aria-pressed={checked} disabled={disabled} onClick={() => onCheckedChange(!checked)}><PrismIcon name={checked || disabled ? "FavoriteOnIcon" : "FavoriteIcon"} size={20}/></button>;
 }
 export function PrismShowMore({ expanded, hiddenCount, onExpandedChange, children, label = "더보기" }: { expanded: boolean; hiddenCount: number; onExpandedChange: (expanded: boolean) => void; children?: ReactNode; label?: string }) {
     const id = useId(); return <div className="prism-show-more">{children && <div id={id} hidden={!expanded}>{children}</div>}<PrismButton variant="line" size="large" aria-expanded={expanded} aria-controls={children ? id : undefined} icon={<ChevronDown style={{transform:expanded ? "rotate(180deg)" : undefined}} />} iconPosition="right" onClick={() => onExpandedChange(!expanded)}>{expanded ? "접기" : `${label} (${hiddenCount})`}</PrismButton></div>;

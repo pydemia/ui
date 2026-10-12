@@ -21,3 +21,11 @@ frontend를 다시 fetch한 뒤 HEAD=origin/dev `087811ffba678ece20ee00b1c3c5d11
 독립 consumer는 `/private/var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-UAveFJ`입니다. source/lock/dist/의존성과 raw evidence를 보존했고 helper 종료 시 로컬 registry 서버가 정리됐습니다. 로그와 byte 대조는 `.worknotes/browser-evidence/panel-recipes-*`에 있습니다.
 
 인증 원본의 상태별 화면·전체 pixel/font·native unexpected pointer cancel·production은 미완료입니다. 구현과 검증 자료를 source/generated로 분리 commit해 기존 draft PR162를 갱신하고 정확한 head/CI/preview 자산을 확인합니다. 전체273 목적 대응이나 테스트·항목 수를 완료 기준으로 사용하지 않습니다.
+
+## Draft PR·CI·preview readback
+
+Source `36828846607f3150b4727830a438d8f5433b1a47`와 generated `cf38ab3d934afd2ec91dcb0cb748b0bf222dd827`를 기존 review 브랜치에 push했습니다. Credential exact-match0과 Git config 보존을 확인했습니다. PR162는 Add portable PRISM components and profile exports/draft true/base main/head cf38ab3d로 읽고 재첨부했습니다. Verify UI38153164385는 completed/success입니다.
+
+Vercel `dpl_F6DBA7rVpTweRjU94K6D3mCX8QyF`는 READY/target null/정확한 cf38ab3d SHA의 preview입니다. `https://pydemia-n1tqc82ez-pydemia-7822.vercel.app`에서 기존 CLI 인증으로 registry785668 bytes/SHAe7a1a534…, manifest251154 bytes/SHAd5965f7b…, verification95780 bytes/SHA5a03dd88…, 새 panel-recipes item9974 bytes/SHA2d2b7db2…의 로컬 exact bytes를 확인했습니다. HTTP readback을 실제 화면 조작이나 pixel 비교의 증거로 사용하지 않습니다.
+
+Preview browser render와 production은 확인하지 않았습니다. 인증 원본·모든 source 스타일/목적·고도화의 검증이 남아 전체 goal은 active입니다. 다음에는 원본별 본문·카드·서비스 상태의 남은 대응을 이어가고, 브라우저 정책이 해결되면 현재 source185 fixture·독립 설치·preview의 실제 조작과 원본 화면 대조를 수행해야 합니다. 코드와 생성물은 원격 head에 있으며 이 게시 readback 메모만 local modified로 보존합니다.

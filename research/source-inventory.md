@@ -1991,3 +1991,7 @@ source를 사용하지 않습니다.
 ## 2026-10-12 패널 caller 목적 대응
 
 ChatPanel/MemoPanel/PositionPanel/ProfilePanel은 prism-panel-recipes의 해당 typed 조합에 대응합니다. 기본 SidePanel은 prism-panel을 유지합니다. PositionDetailView는 정의·Business Context·전문성/성공경험·안내문과 로드 상태를 source에서 재확인했습니다. 이 대응은 원본의 모든 화면·상태 동일성 검증을 뜻하지 않습니다.
+
+## 2026-10-12 프로필·즐겨찾기·평가 목적 대응
+
+SuccessorCandidateFavoriteProfile은prism-profile,FavoriteCandidateCard/List는prism-favorite-candidate,CandidateEvaluationHistory는prism-evaluation-history에대응합니다. Original Favorite SVG를prism-primitives에서사용하며실제render/print비교는미완료입니다.
