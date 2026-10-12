@@ -1017,7 +1017,7 @@
       "completeExamples": 35,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "source": "54 final installed TSX modules and CSS match emitted bytes exactly;0 transforms.35 complete examples compile; Vite/font/notices passed.",
+      "source": "54 final installed TSX modules and corrected CSS match emitted bytes exactly;0 transforms.35 complete examples compile; Vite/font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
       "runtime": "Current rendered and A4 comparison pending."
@@ -1115,7 +1115,7 @@
       "checked": 0,
       "pending": 212,
       "status": "pending-current-admin-users-source-browser-policy",
-      "sourceSha256": "72cac2b2fdf5ec6f009709f942206e5b3b534d5f8d9b3bb07f8340c3afce763d"
+      "sourceSha256": "fd45b856fb976b64d11cc82a973e04cb799e224c7ba579f3c2c6c3c6f8292fb7"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1198,7 +1198,7 @@
     "checked": 0,
     "status": "pending-current-admin-users-source-browser-policy",
     "baseCommit": "3aaf558a09c436d5fff8dd82a68f7d87603063c3",
-    "sourceSha256": "72cac2b2fdf5ec6f009709f942206e5b3b534d5f8d9b3bb07f8340c3afce763d",
+    "sourceSha256": "fd45b856fb976b64d11cc82a973e04cb799e224c7ba579f3c2c6c3c6f8292fb7",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
     "inputCount": 76,
     "checks": [],
@@ -2654,19 +2654,20 @@
   },
   "adminUsersVerification": {
     "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
-    "sourceSha256": "72cac2b2fdf5ec6f009709f942206e5b3b534d5f8d9b3bb07f8340c3afce763d",
+    "sourceSha256": "fd45b856fb976b64d11cc82a973e04cb799e224c7ba579f3c2c6c3c6f8292fb7",
     "status": "passed-source-and-synthetic-contract-tests; current-rendered/service-pending",
     "filters": "Staged/apply separation, all/none omitted,role-owned group metadata,trimmed public query; apply/reset clears selection/page1; sort retains selection.",
     "table": "Six source columns; email not sortable,admin clear-all-if-any,keyboard name opening,10 loading rows,source empty/badge/geometry and responsive wrapping/scrolling.",
     "bulk": "Frozen public IDs/active confirmation,default500 limit,duplicate/busy/retry,AbortSignal/scope/readOnly/unmount guards; processed IDs removed from current selection while later choices survive.",
     "host": "Data load,API serialization,persistence,authorization,cache refresh and notices stay host callbacks.",
     "interaction": "201 PRISM tests include12 new list/async/complete synthetic example cases; no real-service/RBAC/browser proof.",
-    "independentConsumer": "Real final shadcn install;54 exact TSX/CSS,0 transforms,35 examples,TypeScript/Vite/font/notices passed.",
+    "independentConsumer": "Final1140px/pointer CSS real shadcn install;54 exact TSX/CSS,0 transforms,35 examples,TypeScript/Vite/font/notices passed.",
     "publication": "review branch; production not-published",
     "remaining": [
       "Position-list restoration,non-user administrator lists and page access/permission states.",
       "Real role/status services and authenticated deployed revision/design/interaction comparison.",
       "Remaining chat/authStore and full font/pixel/A4/production."
-    ]
+    ],
+    "desktopFilters": "Original five columns above1140px;3/2/1 column wrapping below. Actual rendered comparison pending."
   }
 }
