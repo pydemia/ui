@@ -67,7 +67,7 @@
         "src/styles/_btn.scss"
       ],
       "pendingRevisionAudit": [
-        "Administrator user list/API role/status selection, bulk actions, position-list restoration and page-level access/permission states remain pending; local form delta is reviewed separately.",
+        "Administrator real role/status authorization/API integration,non-user lists,position-list restoration and page-level access states remain pending; source/synthetic user-list UI reviewed separately.",
         "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
       ],
       "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -90,6 +90,11 @@
         "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "observedAt": "2026-10-12",
         "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
+      },
+      "reviewedUserListDelta": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
       }
     }
   },
@@ -3020,8 +3025,16 @@
       "name": "Selectable directory / Admin table",
       "category": "Data display",
       "purpose": "Accessible remote sort and row selection with eligibility constraints",
-      "contract": "Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. PrismCandidateDirectory uses the source candidate table: profile actions are sibling controls, role starts descending, and clicking a selected or partial header clears all pages. Candidate favorites are read-only.",
+      "contract": "Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. PrismCandidateDirectory uses the source candidate table: profile actions are sibling controls, role starts descending, and clicking a selected or partial header clears all pages. Candidate favorites are read-only. 관리자 variant=admin은고정폭표/10행loading/검색empty와source chevron을제공합니다. selectionBehavior=clear-all-if-any는현재페이지선택이있으면다른페이지도모두해제하고기본page동작은기존선택을보존합니다. openColumn으로키보드상세버튼의열을지정하고sortDisabled로저장중정렬을잠글수있습니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "sourceDeltaAudits": [
+        {
+          "source": "components/admin/common/AdminTable.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Opt-in admin directory variant, source clear-all-if-any selection,10 skeleton rows, source sort icons and name-column keyboard opening. Existing generic defaults preserved. Current rendered comparison pending."
+        }
+      ],
       "states": [
         "default",
         "empty",
@@ -4368,6 +4381,125 @@
       ],
       "usageKind": "component-example",
       "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismCandidateCard, type PrismCandidate } from \"@/components/ui/prism-candidate\";\nimport { PrismDetailList } from \"@/components/ui/prism-detail\";\nimport { PrismPanel } from \"@/components/ui/prism-panel\";\nimport { PrismPositionDetail } from \"@/components/ui/prism-position\";\nimport { PrismSidebar, createPrismAdminMenu } from \"@/components/ui/prism-sidebar\";\nimport { PrismWorkspace } from \"@/components/ui/prism-workspace\";\nimport { usePrismDetailSelection, type PrismDetailRequestTicket, type PrismDetailSelection } from \"@/components/ui/prism-detail-state\";\n\nconst candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\", executiveYears: 3 };\n\n/** Synthetic host integration. Call handleAccessError only for your service's classified detail errors. */\nexport function DetailSelectionExample({ initialMode = \"profile\" }: { initialMode?: \"profile\" | \"position\" | \"closed\" }) {\n    const initial: PrismDetailSelection | null = initialMode === \"profile\" ? { kind: \"profile\", candidate }\n        : initialMode === \"position\" ? { kind: \"position\", reference: { id: \"synthetic-position\", source: \"card\", version: 2 } } : null;\n    const detail = usePrismDetailSelection(initial);\n    const [canManage, setCanManage] = useState(true), [collapsed, setCollapsed] = useState(false);\n    const [menus, setMenus] = useState([\"admin\"]);\n    const [route, setRoute] = useState(\"/chat/admin/users/synthetic-user\"), [message, setMessage] = useState(\"\");\n    const [ticket, setTicket] = useState<PrismDetailRequestTicket | null>(null);\n    const [expanded, setExpanded] = useState(false);\n    const admin = createPrismAdminMenu(canManage);\n    const selection = detail.selection;\n    function applyError(status: number, request?: PrismDetailRequestTicket | null) {\n        const cleared = detail.handleAccessError(status, request);\n        if (cleared) setExpanded(false);\n        setMessage(cleared ? `합성 ${status}: 상세 선택 해제` : `합성 ${status}: 현재 상세 유지`);\n    }\n    const panel = selection && <PrismPanel open title={selection.kind === \"profile\" ? \"프로필\" : \"포지션\"}\n        onOpenChange={open => { if (!open) detail.close(); }} resizable expanded={expanded} onExpandedChange={setExpanded}\n        contentStyle={{ padding: 20, overflow: \"auto\" }}>\n        {selection.kind === \"profile\" ? <PrismDetailList items={[\n            { label: \"성명\", value: selection.candidate.name }, { label: \"회사\", value: selection.candidate.company }, { label: \"직책\", value: selection.candidate.position },\n        ]}/> : <PrismPositionDetail company=\"가상전자\" role=\"가상 기술전략담당\" items={[\n            { label: \"조회 대상\", value: selection.reference.source === \"card\" ? `과거 버전 ${selection.reference.version}` : \"현재 운영본\" },\n        ]} definition=\"합성 포지션 정의입니다.\" groups={[]}/>}\n    </PrismPanel>;\n    return <div data-prism=\"light\" style={{ display: \"flex\", flexDirection: \"column\", gap: 12 }}>\n        <label><input type=\"checkbox\" checked={canManage} onChange={event => setCanManage(event.target.checked)}/>관리자 메뉴 표시</label>\n        <div style={{ display: \"flex\", flexWrap: \"wrap\", gap: 8 }}>\n            <PrismButton variant=\"line\" onClick={() => { setTicket(detail.captureRequest()); setMessage(\"합성 요청 식별자 보관\"); }} disabled={!detail.open}>현재 요청 보관</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(403)}>상세 API 403</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(404)}>상세 API 404</PrismButton>\n            <PrismButton variant=\"line\" onClick={() => applyError(500)}>상세 API 500</PrismButton>\n            <PrismButton variant=\"line\" disabled={!ticket} onClick={() => applyError(403, ticket)}>보관한 요청의 늦은 403</PrismButton>\n        </div>\n        <p role=\"status\">{message || \"합성 데이터로 상세 선택과 접근 오류를 확인합니다.\"}</p>\n        <PrismWorkspace height={560} sidebar={<PrismSidebar items={admin ? [admin] : []} expandedIds={menus} onExpandedIdsChange={setMenus}\n            activeId={route} onNavigate={setRoute} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={detail.close}/>}\n            header={<span>선택한 메뉴: {route}</span>} panel={panel}>\n            <div style={{ padding: 20, display: \"flex\", flexDirection: \"column\", gap: 12 }}>\n                <PrismCandidateCard candidate={candidate} selected={selection?.kind === \"profile\"} onOpen={value => { setExpanded(false); detail.selectProfile(value); }}/>\n                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: \"synthetic-position\", source: \"card\", version: 2 }); }}>포지션 과거 버전 2</PrismButton>\n                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: \"synthetic-position\", source: \"link\" }); }}>포지션 현재 운영본</PrismButton>\n                <p role=\"status\">{selection ? `${selection.kind}: ${selection.kind === \"profile\" ? selection.candidate.id : selection.reference.id}` : \"선택된 상세 없음\"}</p>\n            </div>\n        </PrismWorkspace>\n    </div>;\n}\n"
+    },
+    {
+      "id": "prism-admin-users",
+      "name": "Administrator user list",
+      "category": "Administration",
+      "purpose": "사용자 필터 적용·정렬·다중 선택·일괄 상태 변경과 상세/등록 의도",
+      "contract": "PrismUserManagement는 rows/filters/selected/page/sort와 host callback을 받습니다. draft 변경은 조회 전에 API query를 바꾸지 않습니다. normalizePrismUserFilters는 전체/미선택을빈필터로정규화하고Role metadata의 needsCompanyGroup일때만그룹을전달하며keyword를trim합니다. 조회·초기화는선택을비우고page1로복귀하며정렬은선택을유지합니다. 여섯열은상태/이름/소속회사/이메일/Role/회사그룹이고이메일은정렬하지않습니다. checkbox는상세열기를발생시키지않으며관리자전체체크해제는다른페이지의선택도비웁니다. 일괄변경은기본500명한도와확인창을사용해공개ID/active snapshot을고정합니다. onStatusChange(request,{signal})가저장하고onStatusApplied가host cache/notice를연결합니다. 요청중복/busy,실패재시도,scopeKey/readOnly변경과unmount시취소·늦은완료를처리합니다. scopeKey는적용query/account/permission/provider가달라질때변경해야합니다. 성공은처리한ID만현재선택에서제거하며이후선택을보존합니다. API/auth/DTO직렬화/실제권한은host 소유입니다. 원본filter폭·64pxheader·18pxtitle·22px상태배지를기준으로좁은컨테이너의필터wrap과표가로스크롤을추가합니다. 예시는합성23행/10행페이지와mock상태변경이며실제계정을변경하지않습니다.",
+      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "sourceDeltaAudits": [
+        {
+          "source": "pages/admin/users/UserManagementPage.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+        },
+        {
+          "source": "components/admin/common/AdminPageHeader.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+        },
+        {
+          "source": "components/admin/common/AdminFilterBar.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+        },
+        {
+          "source": "components/admin/common/AdminTableToolbar.tsx",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+        },
+        {
+          "source": "service/users.ts",
+          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+          "observedAt": "2026-10-12",
+          "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+        }
+      ],
+      "states": [
+        "default",
+        "loading",
+        "empty",
+        "error",
+        "readonly",
+        "long"
+      ],
+      "source": [
+        "../pages/admin/users/UserManagementPage.tsx",
+        "admin/common/AdminTable.tsx",
+        "admin/common/AdminFilterBar.tsx",
+        "admin/common/AdminTableToolbar.tsx"
+      ],
+      "usage": "import { useState } from \"react\";\nimport { PrismUserManagement, createPrismUserFilterDraft, normalizePrismUserFilters, type PrismUserAppliedFilters, type PrismUserFilterOptions, type PrismUserListRow, type PrismUserListSort, type PrismUserStatusRequest } from \"@pydemia/prism\";\n\nconst options: PrismUserFilterOptions = {\n    companies: [{ value: \"demo\", label: \"가상전자\" }, { value: \"example\", label: \"예시사업\" }],\n    companyGroups: [{ value: \"group-a\", label: \"가상 회사 그룹\" }, { value: \"group-b\", label: \"예시 회사 그룹\" }],\n    roles: [{ value: \"SYSTEM_ADMIN\", label: \"시스템 운영자\" }, { value: \"GROUP_HR\", label: \"그룹 HR 담당자\" }, { value: \"GROUP_USER\", label: \"그룹 일반 사용자\" },\n        { value: \"GENERAL_HR\", label: \"멤버사 HR 담당자\", needsCompanyGroup: true }, { value: \"GENERAL_USER\", label: \"멤버사 일반 사용자\", needsCompanyGroup: true }],\n};\ntype SyntheticUser = PrismUserListRow & { companyId: string; roleCode: string; groupId: string };\nconst initialRows: SyntheticUser[] = Array.from({ length: 23 }, (_, index) => ({ id: `synthetic-${index + 1}`, active: index % 3 !== 0,\n    name: `김가상${String(index + 1).padStart(2, \"0\")}`, company: index % 2 ? \"예시사업\" : \"가상전자\", companyId: index % 2 ? \"example\" : \"demo\",\n    email: `synthetic${index + 1}@example.com`, role: \"멤버사 일반 사용자\", roleCode: \"GENERAL_USER\", groupId: index % 2 ? \"group-b\" : \"group-a\",\n    companyGroup: { name: index % 2 ? \"예시 회사 그룹\" : \"가상 회사 그룹\", active: index % 2 === 0 } }));\n/** Synthetic provider only. Supply authenticated mutation and host-owned cache refresh in your application. */\nasync function applySyntheticStatus(_request: PrismUserStatusRequest, signal: AbortSignal) {\n    signal.throwIfAborted();\n    await new Promise<void>((resolve, reject) => {\n        const abort = () => { clearTimeout(timer); reject(signal.reason); };\n        const timer = setTimeout(() => { signal.removeEventListener(\"abort\", abort); resolve(); }, 100);\n        signal.addEventListener(\"abort\", abort, { once: true });\n    });\n    signal.throwIfAborted();\n}\nexport function UserManagementExample({ initialMode = \"default\", applyStatus = applySyntheticStatus, requestScope = \"synthetic\" }: {\n    initialMode?: \"default\" | \"empty\" | \"loading\" | \"error\" | \"readonly\" | \"long\";\n    applyStatus?: (request: PrismUserStatusRequest, signal: AbortSignal) => Promise<void>; requestScope?: string;\n}) {\n    const [records, setRecords] = useState(() => initialMode === \"empty\" ? [] : initialRows.map(row => initialMode === \"long\" ? { ...row, name: row.name + \" 매우 긴 가상 이름\", companyGroup: { ...row.companyGroup!, name: \"매우 긴 가상 회사 그룹 이름과 독립적인 표시 목적의 합성 정보\" } } : row));\n    const [filters, setFilters] = useState(() => createPrismUserFilterDraft(options));\n    const [applied, setApplied] = useState<PrismUserAppliedFilters>(() => normalizePrismUserFilters(filters, options));\n    const [page, setPage] = useState(1), [sort, setSort] = useState<PrismUserListSort | null>({ column: \"name\", direction: \"asc\" });\n    const [selected, setSelected] = useState<string[]>([]), [message, setMessage] = useState(\"\");\n    const [readOnly, setReadOnly] = useState(initialMode === \"readonly\"), [fail, setFail] = useState(initialMode === \"error\");\n    const [loading, setLoading] = useState(initialMode === \"loading\"), [error, setError] = useState(initialMode === \"error\" ? \"합성 목록 조회 오류\" : \"\");\n    const filtered = records.filter(row => (!applied.isActive.length || applied.isActive.includes(row.active)) && (!applied.companyIds.length || applied.companyIds.includes(row.companyId))\n        && (!applied.roleCode || applied.roleCode === row.roleCode) && (!applied.companyGroupIds.length || applied.companyGroupIds.includes(row.groupId))\n        && (!applied.keyword || `${row.name} ${row.email} ${row.company}`.toLocaleLowerCase().includes(applied.keyword.toLocaleLowerCase())));\n    const value = (row: SyntheticUser) => sort?.column === \"status\" ? String(row.active) : sort?.column === \"companyGroup\" ? row.companyGroup?.name ?? \"\" : String(row[sort?.column ?? \"name\"] ?? \"\");\n    const ordered = sort ? [...filtered].sort((a, b) => value(a).localeCompare(value(b)) * (sort.direction === \"asc\" ? 1 : -1)) : filtered;\n    const pageCount = Math.max(1, Math.ceil(ordered.length / 10)), currentPage = Math.min(page, pageCount);\n    return <div data-prism=\"light\" style={{ minWidth: 0 }}>\n        <p>합성 사용자 목록입니다. 필터는 조회할 때 적용하며 실제 계정·권한을 변경하지 않습니다.</p>\n        <div style={{ display: \"flex\", flexWrap: \"wrap\", gap: 12 }}><label><input type=\"checkbox\" checked={readOnly} onChange={event => setReadOnly(event.target.checked)}/>읽기 전용</label>\n            <label><input type=\"checkbox\" checked={fail} onChange={event => setFail(event.target.checked)}/>일괄 변경 실패 예시</label>\n            {loading&&<button type=\"button\" onClick={() => setLoading(false)}>합성 로딩 종료</button>}</div>\n        <PrismUserManagement {...options} filters={filters} onFiltersChange={setFilters} onSearch={setApplied}\n            rows={ordered.slice((currentPage - 1) * 10, currentPage * 10)} total={ordered.length} page={currentPage} pageCount={pageCount} onPageChange={setPage}\n            selected={selected} onSelectionChange={setSelected} sort={sort} onSortChange={setSort} readOnly={readOnly} loading={loading} error={error || undefined} onRetry={() => setError(\"\")}\n            scopeKey={JSON.stringify([requestScope, applied, currentPage, sort])} onOpen={row => setMessage(`상세 열기 의도: ${row.id}`)} onCreate={() => setMessage(\"사용자 등록 의도\")}\n            onStatusChange={async (request, { signal }) => { await applyStatus(request, signal); signal.throwIfAborted(); if (fail) throw new Error(\"Synthetic status failure\"); }}\n            onStatusApplied={request => { setRecords(current => current.map(row => request.ids.includes(row.id) ? { ...row, active: request.active } : row)); setMessage(`합성 ${request.ids.length}명 ${request.active ? \"활성화\" : \"비활성화\"} 완료`); }}/>\n        <p role=\"status\">{message}</p>\n    </div>;\n}\n",
+      "sourcePath": "packages/prism/src/prism-admin-users.tsx",
+      "previewUrl": "/prism?component=prism-admin-users",
+      "embedUrl": "/prism?component=prism-admin-users&embed=1",
+      "responsivePreviewUrl": "/prism?component=prism-admin-users&view=responsive",
+      "verification": {
+        "visual": "pending",
+        "interaction": "partial",
+        "checks": [
+          "Source-based filters/table/status and responsive composition;12 new synthetic contract cases."
+        ],
+        "remaining": [
+          "Position-list restoration,non-user administrator lists and page access/permission states.",
+          "Real role/status services and authenticated deployed revision/design/interaction comparison.",
+          "Remaining chat/authStore and full font/pixel/A4/production."
+        ]
+      },
+      "exports": [
+        {
+          "name": "PrismUserListRow",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserFilterDraft",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserAppliedFilters",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserListRoleOption",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserFilterOptions",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserListSort",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserStatusRequest",
+          "kind": "type"
+        },
+        {
+          "name": "normalizePrismUserFilters",
+          "kind": "function"
+        },
+        {
+          "name": "createPrismUserFilterDraft",
+          "kind": "function"
+        },
+        {
+          "name": "PrismUserManagementProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismUserManagement",
+          "kind": "component"
+        }
+      ],
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismUserManagement, createPrismUserFilterDraft, normalizePrismUserFilters, type PrismUserAppliedFilters, type PrismUserFilterOptions, type PrismUserListRow, type PrismUserListSort, type PrismUserStatusRequest } from \"@/components/ui/prism-admin-users\";\n\nconst options: PrismUserFilterOptions = {\n    companies: [{ value: \"demo\", label: \"가상전자\" }, { value: \"example\", label: \"예시사업\" }],\n    companyGroups: [{ value: \"group-a\", label: \"가상 회사 그룹\" }, { value: \"group-b\", label: \"예시 회사 그룹\" }],\n    roles: [{ value: \"SYSTEM_ADMIN\", label: \"시스템 운영자\" }, { value: \"GROUP_HR\", label: \"그룹 HR 담당자\" }, { value: \"GROUP_USER\", label: \"그룹 일반 사용자\" },\n        { value: \"GENERAL_HR\", label: \"멤버사 HR 담당자\", needsCompanyGroup: true }, { value: \"GENERAL_USER\", label: \"멤버사 일반 사용자\", needsCompanyGroup: true }],\n};\ntype SyntheticUser = PrismUserListRow & { companyId: string; roleCode: string; groupId: string };\nconst initialRows: SyntheticUser[] = Array.from({ length: 23 }, (_, index) => ({ id: `synthetic-${index + 1}`, active: index % 3 !== 0,\n    name: `김가상${String(index + 1).padStart(2, \"0\")}`, company: index % 2 ? \"예시사업\" : \"가상전자\", companyId: index % 2 ? \"example\" : \"demo\",\n    email: `synthetic${index + 1}@example.com`, role: \"멤버사 일반 사용자\", roleCode: \"GENERAL_USER\", groupId: index % 2 ? \"group-b\" : \"group-a\",\n    companyGroup: { name: index % 2 ? \"예시 회사 그룹\" : \"가상 회사 그룹\", active: index % 2 === 0 } }));\n/** Synthetic provider only. Supply authenticated mutation and host-owned cache refresh in your application. */\nasync function applySyntheticStatus(_request: PrismUserStatusRequest, signal: AbortSignal) {\n    signal.throwIfAborted();\n    await new Promise<void>((resolve, reject) => {\n        const abort = () => { clearTimeout(timer); reject(signal.reason); };\n        const timer = setTimeout(() => { signal.removeEventListener(\"abort\", abort); resolve(); }, 100);\n        signal.addEventListener(\"abort\", abort, { once: true });\n    });\n    signal.throwIfAborted();\n}\nexport function UserManagementExample({ initialMode = \"default\", applyStatus = applySyntheticStatus, requestScope = \"synthetic\" }: {\n    initialMode?: \"default\" | \"empty\" | \"loading\" | \"error\" | \"readonly\" | \"long\";\n    applyStatus?: (request: PrismUserStatusRequest, signal: AbortSignal) => Promise<void>; requestScope?: string;\n}) {\n    const [records, setRecords] = useState(() => initialMode === \"empty\" ? [] : initialRows.map(row => initialMode === \"long\" ? { ...row, name: row.name + \" 매우 긴 가상 이름\", companyGroup: { ...row.companyGroup!, name: \"매우 긴 가상 회사 그룹 이름과 독립적인 표시 목적의 합성 정보\" } } : row));\n    const [filters, setFilters] = useState(() => createPrismUserFilterDraft(options));\n    const [applied, setApplied] = useState<PrismUserAppliedFilters>(() => normalizePrismUserFilters(filters, options));\n    const [page, setPage] = useState(1), [sort, setSort] = useState<PrismUserListSort | null>({ column: \"name\", direction: \"asc\" });\n    const [selected, setSelected] = useState<string[]>([]), [message, setMessage] = useState(\"\");\n    const [readOnly, setReadOnly] = useState(initialMode === \"readonly\"), [fail, setFail] = useState(initialMode === \"error\");\n    const [loading, setLoading] = useState(initialMode === \"loading\"), [error, setError] = useState(initialMode === \"error\" ? \"합성 목록 조회 오류\" : \"\");\n    const filtered = records.filter(row => (!applied.isActive.length || applied.isActive.includes(row.active)) && (!applied.companyIds.length || applied.companyIds.includes(row.companyId))\n        && (!applied.roleCode || applied.roleCode === row.roleCode) && (!applied.companyGroupIds.length || applied.companyGroupIds.includes(row.groupId))\n        && (!applied.keyword || `${row.name} ${row.email} ${row.company}`.toLocaleLowerCase().includes(applied.keyword.toLocaleLowerCase())));\n    const value = (row: SyntheticUser) => sort?.column === \"status\" ? String(row.active) : sort?.column === \"companyGroup\" ? row.companyGroup?.name ?? \"\" : String(row[sort?.column ?? \"name\"] ?? \"\");\n    const ordered = sort ? [...filtered].sort((a, b) => value(a).localeCompare(value(b)) * (sort.direction === \"asc\" ? 1 : -1)) : filtered;\n    const pageCount = Math.max(1, Math.ceil(ordered.length / 10)), currentPage = Math.min(page, pageCount);\n    return <div data-prism=\"light\" style={{ minWidth: 0 }}>\n        <p>합성 사용자 목록입니다. 필터는 조회할 때 적용하며 실제 계정·권한을 변경하지 않습니다.</p>\n        <div style={{ display: \"flex\", flexWrap: \"wrap\", gap: 12 }}><label><input type=\"checkbox\" checked={readOnly} onChange={event => setReadOnly(event.target.checked)}/>읽기 전용</label>\n            <label><input type=\"checkbox\" checked={fail} onChange={event => setFail(event.target.checked)}/>일괄 변경 실패 예시</label>\n            {loading&&<button type=\"button\" onClick={() => setLoading(false)}>합성 로딩 종료</button>}</div>\n        <PrismUserManagement {...options} filters={filters} onFiltersChange={setFilters} onSearch={setApplied}\n            rows={ordered.slice((currentPage - 1) * 10, currentPage * 10)} total={ordered.length} page={currentPage} pageCount={pageCount} onPageChange={setPage}\n            selected={selected} onSelectionChange={setSelected} sort={sort} onSortChange={setSort} readOnly={readOnly} loading={loading} error={error || undefined} onRetry={() => setError(\"\")}\n            scopeKey={JSON.stringify([requestScope, applied, currentPage, sort])} onOpen={row => setMessage(`상세 열기 의도: ${row.id}`)} onCreate={() => setMessage(\"사용자 등록 의도\")}\n            onStatusChange={async (request, { signal }) => { await applyStatus(request, signal); signal.throwIfAborted(); if (fail) throw new Error(\"Synthetic status failure\"); }}\n            onStatusApplied={request => { setRecords(current => current.map(row => request.ids.includes(row.id) ? { ...row, active: request.active } : row)); setMessage(`합성 ${request.ids.length}명 ${request.active ? \"활성화\" : \"비활성화\"} 완료`); }}/>\n        <p role=\"status\">{message}</p>\n    </div>;\n}\n"
     }
   ]
 }

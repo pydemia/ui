@@ -80,7 +80,12 @@
       "target": "prism-directory",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Opt-in admin directory variant, source clear-all-if-any selection,10 skeleton rows, source sort icons and name-column keyboard opening. Existing generic defaults preserved. Current rendered comparison pending."
+      }
     },
     {
       "source": "components/admin/common/AdminTableToolbar.tsx",
@@ -2455,7 +2460,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Administrator user list/API role/status selection, bulk actions, position-list restoration and page-level access/permission states remain pending; local form delta is reviewed separately.",
+      "Administrator real role/status authorization/API integration,non-user lists,position-list restoration and page-level access states remain pending; source/synthetic user-list UI reviewed separately.",
       "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -2478,6 +2483,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
+    },
+    "reviewedUserListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
     }
   },
   "integrationReferences": [
@@ -2497,6 +2507,51 @@
         "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "observedAt": "2026-10-12",
         "scope": "Classified detail API403/404 clears profile/position panels and subject selection. Atomic host-owned selection and optional UI request tickets extend stale-error handling. API classification, cancellation, session and authorization stay host-owned; actual deployed behavior comparison remains unverified."
+      }
+    },
+    {
+      "source": "pages/admin/users/UserManagementPage.tsx",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminPageHeader.tsx",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminFilterBar.tsx",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminTableToolbar.tsx",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "service/users.ts",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
       }
     }
   ]

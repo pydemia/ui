@@ -985,30 +985,42 @@
         "Authenticated current source/deployed revision and full design/interaction/purpose parity.",
         "Current full-font/pixel/A4 comparison and production publication."
       ]
+    },
+    "prism-admin-users": {
+      "visual": "pending",
+      "interaction": "partial",
+      "checks": [
+        "Source-based filters/table/status and responsive composition;12 new synthetic contract cases."
+      ],
+      "remaining": [
+        "Position-list restoration,non-user administrator lists and page access/permission states.",
+        "Real role/status services and authenticated deployed revision/design/interaction comparison.",
+        "Remaining chat/authStore and full font/pixel/A4/production."
+      ]
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "passed": 189,
+      "passed": 201,
       "failed": 0
     },
     "registry": {
-      "groups": 53,
-      "items": 54,
+      "groups": 54,
+      "items": 55,
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-final-chat-detail-real-install-typecheck-build",
-      "items": 54,
-      "modules": 53,
-      "completeExamples": 34,
+      "status": "passed-final-admin-users-real-install-typecheck-build",
+      "items": 55,
+      "modules": 54,
+      "completeExamples": 35,
       "typecheck": "passed",
       "viteBuild": "passed",
-      "source": "All53 installed TSX modules and CSS match final emitted bytes exactly;0 transforms.34 final complete examples compile; Vite/font/notices passed.",
+      "source": "54 final installed TSX modules and CSS match emitted bytes exactly;0 transforms.35 complete examples compile; Vite/font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "Current real browser and A4 comparison remain pending."
+      "runtime": "Current rendered and A4 comparison pending."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -1091,19 +1103,19 @@
       "scope": "Previous Tooltip publication; current merged InputLabel checks are local before push."
     },
     "usageContracts": {
-      "groups": 53,
-      "componentExamples": 34,
+      "groups": 54,
+      "componentExamples": 35,
       "integrationFragments": 19,
       "workspaceTypecheck": "passed check-prism.mjs",
       "installedTypecheck": "passed final independent install",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 206,
+      "count": 212,
       "checked": 0,
-      "pending": 206,
-      "status": "pending-current-chat-detail-source-browser-policy",
-      "sourceSha256": "b49fd5df2019734965d9090c11203f2d7dc694171b2babe94167385b4fa976b4"
+      "pending": 212,
+      "status": "pending-current-admin-users-source-browser-policy",
+      "sourceSha256": "72cac2b2fdf5ec6f009709f942206e5b3b534d5f8d9b3bb07f8340c3afce763d"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1181,14 +1193,14 @@
   ],
   "evidencePolicy": "Raw DOM/JPEG records stay in ignored .worknotes/browser-evidence and are not included in the public site. Public records contain check names and synthetic fixture results only.",
   "fixtureRenderChecks": {
-    "groups": 53,
-    "states": 206,
+    "groups": 54,
+    "states": 212,
     "checked": 0,
-    "status": "pending-current-chat-detail-source-browser-policy",
-    "baseCommit": "1218c9ff2ffe582d380a11502be2060e236d5260",
-    "sourceSha256": "b49fd5df2019734965d9090c11203f2d7dc694171b2babe94167385b4fa976b4",
+    "status": "pending-current-admin-users-source-browser-policy",
+    "baseCommit": "3aaf558a09c436d5fff8dd82a68f7d87603063c3",
+    "sourceSha256": "72cac2b2fdf5ec6f009709f942206e5b3b534d5f8d9b3bb07f8340c3afce763d",
     "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
-    "inputCount": 74,
+    "inputCount": 76,
     "checks": [],
     "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
     "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
@@ -1473,7 +1485,7 @@
       "src/styles/_btn.scss"
     ],
     "pendingRevisionAudit": [
-      "Administrator user list/API role/status selection, bulk actions, position-list restoration and page-level access/permission states remain pending; local form delta is reviewed separately.",
+      "Administrator real role/status authorization/API integration,non-user lists,position-list restoration and page-level access states remain pending; source/synthetic user-list UI reviewed separately.",
       "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
     ],
     "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
@@ -1496,6 +1508,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-12",
       "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
+    },
+    "reviewedUserListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
     }
   },
   "inputLabelReferenceComparison": {
@@ -2620,6 +2637,36 @@
       "Administrator lists, page restore/bulk/status and remaining chat/authStore context.",
       "Authenticated current source/deployed revision and full design/interaction/purpose parity.",
       "Current full-font/pixel/A4 comparison and production publication."
+    ]
+  },
+  "previousAdminUsersFixtureRenderChecks": {
+    "groups": 53,
+    "states": 206,
+    "checked": 0,
+    "status": "pending-current-chat-detail-source-browser-policy",
+    "baseCommit": "1218c9ff2ffe582d380a11502be2060e236d5260",
+    "sourceSha256": "b49fd5df2019734965d9090c11203f2d7dc694171b2babe94167385b4fa976b4",
+    "sourceHashMethod": "Sorted recursive packages/prism/src and apps/docs/src/prism path, NUL, file bytes",
+    "inputCount": 74,
+    "checks": [],
+    "claim": "Historical panel/profile/print runtime checks are scoped to their recorded source; no current rendered parity claim.",
+    "pendingReason": "Browser HTTP protocol-policy refusal is unresolved; inventory visibility does not prove page-operation recovery."
+  },
+  "adminUsersVerification": {
+    "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "sourceSha256": "72cac2b2fdf5ec6f009709f942206e5b3b534d5f8d9b3bb07f8340c3afce763d",
+    "status": "passed-source-and-synthetic-contract-tests; current-rendered/service-pending",
+    "filters": "Staged/apply separation, all/none omitted,role-owned group metadata,trimmed public query; apply/reset clears selection/page1; sort retains selection.",
+    "table": "Six source columns; email not sortable,admin clear-all-if-any,keyboard name opening,10 loading rows,source empty/badge/geometry and responsive wrapping/scrolling.",
+    "bulk": "Frozen public IDs/active confirmation,default500 limit,duplicate/busy/retry,AbortSignal/scope/readOnly/unmount guards; processed IDs removed from current selection while later choices survive.",
+    "host": "Data load,API serialization,persistence,authorization,cache refresh and notices stay host callbacks.",
+    "interaction": "201 PRISM tests include12 new list/async/complete synthetic example cases; no real-service/RBAC/browser proof.",
+    "independentConsumer": "Real final shadcn install;54 exact TSX/CSS,0 transforms,35 examples,TypeScript/Vite/font/notices passed.",
+    "publication": "review branch; production not-published",
+    "remaining": [
+      "Position-list restoration,non-user administrator lists and page access/permission states.",
+      "Real role/status services and authenticated deployed revision/design/interaction comparison.",
+      "Remaining chat/authStore and full font/pixel/A4/production."
     ]
   }
 }
