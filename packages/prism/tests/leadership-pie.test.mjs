@@ -39,7 +39,7 @@ test("invalid and ambiguous pie values cannot produce a misleading distribution"
 test("summary keeps print, empty data and provided comments separate",()=>{
  const print=render(PrismLeadershipPieSummary,{items:items([33,32,35]),title:"가상 유형",description:"첫 줄\n다음 줄",print:true});
  assert.ok(print.querySelector('[data-print="true"]'));
- assert.equal(print.querySelector("strong").textContent,"가상 유형");
+ assert.equal(print.querySelector('.prism-tag[data-variant="blue"]').textContent,"가상 유형");
  assert.equal(print.querySelector(".prism-leadership-summary-comment p").textContent,"첫 줄\n다음 줄");
  const empty=render(PrismLeadershipPieSummary,{items:items([null,0,null]),title:" ",description:"\n"});
  assert.equal(empty.querySelector("svg"),null);
@@ -48,4 +48,37 @@ test("summary keeps print, empty data and provided comments separate",()=>{
  const paired=new JSDOM(renderToStaticMarkup(h("div",null,h(PrismLeadershipPie,{title:"첫 차트",items:items([33,32,35])}),h(PrismLeadershipPie,{title:"두 번째",items:items([33,32,35])})))).window.document;
  const labels=[...paired.querySelectorAll('svg[role="img"]')].map(el=>el.getAttribute("aria-labelledby"));assert.equal(new Set(labels).size,2);
  for(const names of labels)for(const id of names.split(" "))assert.ok(paired.getElementById(id));
+});
+test("summary and detail retain their distinct source roles and preserve host text",()=>{
+ const props={items:items([33,32,35]),title:"  가상 유형  ",description:"  요약 첫 줄\n요약 다음 줄  ",detail:"  상세 첫 줄\n상세 다음 줄 <script>가상 원문</script>  "};
+ const before=JSON.stringify(props),doc=render(PrismLeadershipPieSummary,props);
+ const box=doc.querySelector('.prism-leadership-summary-box');
+ assert.equal(box.querySelector('.prism-tag').textContent,'가상 유형');
+ assert.equal(box.querySelector('.prism-leadership-summary-comment p').textContent,'요약 첫 줄\n요약 다음 줄');
+ assert.equal(box.querySelector('.prism-leadership-summary-detail').textContent,'상세 첫 줄\n상세 다음 줄 <script>가상 원문</script>');
+ assert.equal(box.querySelector('.prism-leadership-summary-main').contains(box.querySelector('.prism-leadership-summary-detail')),false);
+ assert.equal(box.querySelector('hr').nextElementSibling,box.querySelector('.prism-leadership-summary-detail'));
+ assert.equal(doc.querySelector('script'),null);assert.equal(JSON.stringify(props),before);
+ assert.deepEqual([...doc.querySelectorAll('.prism-pie-slice')].map(el=>el.getAttribute('fill')),['#327bb7','#42938a','#ddb77d']);
+});
+test("detail alone is information even when chart percentages are missing or zero",()=>{
+ for(const values of [[null,null,null],[0,0,0]])for(const print of [false,true]){
+  const doc=render(PrismLeadershipPieSummary,{items:items(values),title:' ',description:'\n',detail:' 상세 설명 ',print});
+  assert.equal(doc.querySelector('.prism-leadership-summary-detail').textContent,'상세 설명');
+  assert.equal(doc.querySelector('.prism-leadership-summary-empty'),null);
+  assert.equal(doc.querySelectorAll('.prism-leadership-summary-divider').length,1);
+  assert.equal(doc.querySelector('.prism-tag'),null);
+  assert.deepEqual([...doc.querySelectorAll('tbody td')].map(el=>el.textContent),values.map(v=>v===null?'정보 없음':'0%'));
+ }
+});
+test("omitted or blank details add no divider and preserve summary-only compatibility",()=>{
+ for(const detail of [undefined,'',' \n\t ']){
+  const doc=render(PrismLeadershipPieSummary,{items:items([33,32,35]),description:'기존 요약',detail,chartTitle:'호스트 차트 제목'});
+  assert.equal(doc.querySelector('.prism-leadership-summary-detail'),null);
+  assert.equal(doc.querySelector('.prism-leadership-summary-divider'),null);
+  assert.equal(doc.querySelector('.prism-leadership-summary-comment p').textContent,'기존 요약');
+  assert.equal(doc.querySelector('.prism-leadership-summary-chart > p > span').textContent,'호스트 차트 제목');
+ }
+ const empty=render(PrismLeadershipPieSummary,{items:items([null,null,null]),detail:' \n '});
+ assert.ok(empty.querySelector('.prism-leadership-summary-empty'));
 });

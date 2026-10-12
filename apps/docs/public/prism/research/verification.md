@@ -265,3 +265,10 @@ Source에맞춰leader70pt/140pt,경력11pt/130pt,photo80pt/10pt,Essay86pt/Survey
 ## 최신 source 차이 추적
 
 frontend를27c4fdbf로fetch/fast-forward해clean을확인했습니다. 이번header/favorite/evaluation및관련원본CSS는087811ff와같습니다. Leadership tag/content/detail/divider·print detail,position version조회,admin user/group/position및chat link/sidebar가변경됐으며재현여부는추가감사대상입니다. sourceFile 대응·기존검사수를latest전체일치로사용하지않습니다.
+
+
+## Leadership summary detail and palette, 2026-10-12
+
+Local dev27c4fdbf adds the blue type tag, bold summary.content, separate summary.description detail/divider, print detail propagation and #327BB7/#42938A/#DDB77D palette. The independent summary and7-chapter print document preserve these roles, including detail-only missing/zero cases and full detail under both text policies. Default tags retain21px/15pt height; wrapTitle and480px compact layout support long labels.
+
+Final165 PRISM tests, workspace typecheck and32 complete example contracts passed. Real shadcn installation into the owned isolated consumer passed TypeScript/Vite/font/notices; all52 installed modules andCSS match emitted bytes with0 transforms. Source fingerprint f2ee00893ee4f59e56bc661ed23805cfe7d4b4a342b64a152db9028258494847 covers71 inputs. Current197 rendered fixture states remain0 checked because the HTTP protocol-policy refusal is unresolved. Previous chart/font/native/PDF evidence is historical. Deployed revision binding, current visual/pagination comparison and production remain unverified.

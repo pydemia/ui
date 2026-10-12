@@ -6,6 +6,7 @@ import ts from "typescript";
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), "utf8").replace(/\r\n/g, "\n");
 const manifest = JSON.parse(read("apps/docs/public/prism/components.json"));
 const index = JSON.parse(read("apps/docs/public/prism/r/registry.json"));
+const sourceInventory = JSON.parse(read("apps/docs/public/prism/research/source-inventory.json"));
 const generic = new Set(JSON.parse(read("registry.json")).items.map(item => item.name));
 const names = new Set(index.items.map(item => item.name));
 const components = readdirSync(new URL("../packages/prism/src/",import.meta.url)).filter(file => file.endsWith(".tsx"));
@@ -25,6 +26,10 @@ for (const item of index.items) {
     }
 }
 for (const entry of manifest.components) {
+    const deltaAudits = sourceInventory.components.filter(item => item.target === entry.id && item.latestDeltaAudit)
+        .map(item => ({ source: item.source, ...item.latestDeltaAudit }));
+    assert.deepEqual(entry.sourceDeltaAudits ?? [], deltaAudits, "Manifest source delta audits must preserve their scoped provenance");
+    assert.deepEqual(index.items.find(item => item.name === entry.id)?.meta?.sourceDeltaAudits ?? [], deltaAudits, "Registry source delta audits must match the manifest");
     assert.ok(names.has(entry.id)); assert.ok(entry.states.length); assert.ok(entry.contract); assert.ok(entry.source.length);
     assert.equal(read(entry.sourcePath).includes("export "),true);
     const code = ts.createSourceFile("usage.tsx",entry.usage,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);

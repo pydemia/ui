@@ -7,6 +7,7 @@ import { PrismTrendChart, PrismRadarChart, PrismLeadershipPie, type PrismLeaders
 import { PrismTable } from "./prism-display";
 import { PrismRequestState } from "./prism-feedback";
 import { PrismSkeletonGroup } from "./prism-primitives";
+import { PrismTag } from "./prism-badge";
 
 export type PrismProfileStatus="ready"|"loading"|"error"|"empty";
 export function PrismProfileSectionState({status="ready",onRetry,children}: {status?:PrismProfileStatus;onRetry?:()=>void;children:ReactNode}) {
@@ -39,19 +40,30 @@ export function PrismAttitudeSection({summary,diagnosis,risk,documentAction,surv
 }
 export type PrismLeadershipTrendRow={year:string;evaluators:number|null;respondents:number|null;score:number|null;groupAverage:number|null;percentile:number|null};
 export type PrismLeadershipPieSummaryProps = Omit<PrismLeadershipPieProps,"title"> & {
-    title?: string; description?: string; chartTitle?: string; print?: boolean;
+    /** Type label; maps to the source summary.title. */
+    title?: string;
+    /** Bold summary; maps to the source summary.content. */
+    description?: string;
+    /** Full explanation below the divider; maps to the source summary.description. */
+    detail?: string;
+    /** Allow multiline type labels; compact containers also wrap them automatically. */
+    wrapTitle?: boolean;
+    chartTitle?: string; print?: boolean;
 };
-export function PrismLeadershipPieSummary({ items, title = "", description = "", chartTitle = "리더십 특성", print = false, ...chart }: PrismLeadershipPieSummaryProps) {
+export function PrismLeadershipPieSummary({ items, title = "", description = "", detail = "", wrapTitle = false, chartTitle = "리더십 특성", print = false, ...chart }: PrismLeadershipPieSummaryProps) {
     if (!chartTitle.trim() || !items.length || items.length>3 || new Set(items.map(item=>item.label.trim())).size!==items.length || items.some(item=>!item.label.trim())) throw new Error("Leadership summary requires a chart title and one to three unique labels.");
     const total = items.reduce((sum,item)=>sum+(item.value??0),0);
     if (items.some(item=>item.value!==null&&(!Number.isFinite(item.value)||item.value<0||item.value>100)) || total>100.2 || (items.every(item=>item.value!==null)&&total>0&&Math.abs(total-100)>.2)) throw new RangeError("Leadership summary values must be null or percentages with a complete positive total of100.");
-    const commentTitle = title.trim(), commentDescription = description.trim();
-    const hasData = items.some(item => (item.value ?? 0)>0) || !!commentTitle || !!commentDescription;
-    return <section className="prism-leadership-summary" data-print={print || undefined}><h3>SUMMARY</h3>
+    const commentTitle = title.trim(), commentDescription = description.trim(), commentDetail = detail.trim();
+    const hasData = items.some(item => (item.value ?? 0)>0) || !!commentTitle || !!commentDescription || !!commentDetail;
+    return <section className="prism-leadership-summary" data-print={print || undefined} data-wrap-title={wrapTitle || undefined}><h3>SUMMARY</h3>
         <div className="prism-leadership-summary-box">{hasData ? <>
-            <div className="prism-leadership-summary-chart"><PrismLeadershipPie {...chart} items={items} title={chartTitle} animate={print ? false : chart.animate}/>
-                <p>리더십 특성 (지・덕・용 중 1위 득표수 비중)</p></div>
-            <div className="prism-leadership-summary-comment">{commentTitle && <strong>{commentTitle}</strong>}{commentDescription && <p>{commentDescription}</p>}</div>
+            <div className="prism-leadership-summary-main">
+                <div className="prism-leadership-summary-chart"><PrismLeadershipPie {...chart} items={items} title={chartTitle} animate={print ? false : chart.animate}/>
+                    <p><span>{chartTitle}</span> <span>(지・덕・용 중 1위 득표수 비중)</span></p></div>
+                <div className="prism-leadership-summary-comment">{commentTitle && <PrismTag variant="blue">{commentTitle}</PrismTag>}{commentDescription && <p>{commentDescription}</p>}</div>
+            </div>
+            {commentDetail && <><hr className="prism-leadership-summary-divider"/><p className="prism-leadership-summary-detail">{commentDetail}</p></>}
         </> : <div className="prism-leadership-summary-empty"><PrismNoData message={items.every(item=>item.value===0) ? "비중 모두 0%" : undefined}/>
             <div className="prism-sr-only"><table><caption>{chartTitle} 데이터</caption><tbody>{items.map(item => <tr key={item.label}><th scope="row">{item.label}</th><td>{item.value===null ? "정보 없음" : `${item.value}%`}</td></tr>)}</tbody></table></div>
         </div>}</div>

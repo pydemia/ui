@@ -21,3 +21,11 @@ Source fingerprint는 `b27a07b18ed2b915e5ab73219241dff4352d5fbbbb434ded0b329c116
 Consumer `/private/var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-UAveFJ`의 source/lock/dist/의존성을 보존했습니다. 검증 server는 helper 종료 시 정리됐습니다. 로그와 source/byte 대조는 `.worknotes/browser-evidence/profile-header-*`에 있습니다. 공간은336MiB에서56GiB로 회복된 상태를 확인했으며 이번 phase에서 다른 파일을 삭제하지 않았습니다.
 
 코드·조사 자료와 generated registry/docs를 분리 commit해 기존 draft PR162에 올리고 정확한 head/CI/preview 자산을 확인합니다. 인증 원본·전체 source 스타일/목적·새27c4fdbf 차이·고도화·production은 미완료입니다. 항목/검사/대응 수를 완료 기준으로 사용하지 않습니다.
+
+## PR·CI·preview readback
+
+Source2248a20725eeb225a78007e865d6e1360a4401f3/generated78ef5a0301a710995d6768aac936b358a428f474를 기존 review 브랜치에 push했습니다. Credential exact-match0과 Git config 보존을 확인했습니다. PR162는 draft true/base main/정확한78ef5a03 head로 읽고 재첨부했습니다. Verify UI38206305110은 completed/success입니다.
+
+Vercel dpl_Ckvq4iUuwKzDY7rM4mMM7GoywkF7는 READY/target null/정확한 head의 preview입니다. https://pydemia-mde2bu64t-pydemia-7822.vercel.app에서 기존 CLI 인증으로 registry806485bytes/SHAb0c356b2, manifest265189bytes/SHAf22f4fcc, verification104375bytes/SHAef6c3150, history3489bytes/SHA29b95220, favorite5389bytes/SHA8a5ed0cf의 로컬 exact bytes를 확인했습니다. 전체 hash는 profile-header-preview-readback.json에 보존합니다. HTTP readback은 실제 화면·pixel·print 비교의 증거가 아닙니다.
+
+코드와 생성물은 원격 head에 있고 이 게시 readback 메모만 local modified로 보존합니다. Preview browser render와 production은 미검증입니다. 다음에는 최신27c4fdbf의 리더십 요약 상세/태그/인쇄, 포지션 version, 관리자·chat 변경 대응을 이어갑니다. 전체 goal은 active입니다.

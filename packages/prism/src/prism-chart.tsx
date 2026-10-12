@@ -5,7 +5,7 @@ export type PrismLeadershipPieItem = { label: string; value: number | null };
 export type PrismLeadershipPieProps = {
     title: string; items: readonly PrismLeadershipPieItem[]; size?: number; labelFontSize?: number; animate?: boolean;
 };
-const leadershipColors = ["#706ee7", "#55c4ae", "#ff928a"];
+const leadershipColors = ["#327bb7", "#42938a", "#ddb77d"];
 const turn = Math.PI * 2;
 function pieSector(cx: number, cy: number, radius: number, start: number, end: number) {
     const point = (angle: number) => `${cx+Math.cos(angle)*radius},${cy+Math.sin(angle)*radius}`;

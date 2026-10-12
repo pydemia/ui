@@ -33,8 +33,11 @@ const metadata = entries.elements.map(entry => {
     const value = key => fields.get(key)?.text;
     const referenceRevision = sourceInventory.components.some(item => (item.target === value("id") || item.additionalTargets?.includes(value("id"))) && item.mappedAtRevision === sourceInventory.referenceRevision)
         ? sourceInventory.referenceRevision : verification.sourceRevision;
+    const sourceDeltaAudits = sourceInventory.components.filter(item => item.target === value("id") && item.latestDeltaAudit)
+        .map(item => ({ source: item.source, ...item.latestDeltaAudit }));
     return { id: value("id"), name: value("name"), category: value("category"), purpose: value("purpose"), contract: value("contract"),
         referenceRevision,
+        ...(sourceDeltaAudits.length ? { sourceDeltaAudits } : {}),
         states: fields.get("states").elements.map(node => node.text), source: fields.get("source").elements.map(node => node.text),
         usage: value("code"), sourcePath: `packages/prism/src/${value("id")}.tsx`,
         previewUrl:`/prism?component=${value("id")}`,embedUrl:`/prism?component=${value("id")}&embed=1`,
@@ -125,7 +128,7 @@ for (const file of readdirSync(new URL("packages/prism/src/", root)).filter(file
     const item = { $schema: "https://ui.shadcn.com/schema/registry-item.json", name, type: "registry:ui", title: meta.name,
         description: meta.purpose, dependencies: [...dependencies], registryDependencies: [...registryDependencies],
         files: [{ path: sourcePath, type: "registry:ui", target: `@ui/${file}`, content }],
-        meta: { sourceRevision: meta.referenceRevision, sourceSha256: createHash("sha256").update(source).digest("hex"), provenance: name === "prism-icon" ? "PRISM reference vector artwork retained with a typed adapter and instance-scoped SVG IDs. Rights remain with the original asset owners." : "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference." } };
+        meta: { sourceRevision: meta.referenceRevision, ...(meta.sourceDeltaAudits ? { sourceDeltaAudits: meta.sourceDeltaAudits } : {}), sourceSha256: createHash("sha256").update(source).digest("hex"), provenance: name === "prism-icon" ? "PRISM reference vector artwork retained with a typed adapter and instance-scoped SVG IDs. Rights remain with the original asset owners." : "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference." } };
     if (name === "prism-icon") {
         const noticePath = "packages/prism/THIRD_PARTY_NOTICES.md";
         item.files.push({ path: noticePath, type: "registry:file", target: "@ui/PRISM_ASSET_NOTICES.md", content: read(noticePath) });

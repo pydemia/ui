@@ -312,21 +312,30 @@
 .prism-pie-legend i { display: inline-block; width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; }
 .prism-pie-legend li > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .prism-pie-legend b { white-space: nowrap; margin-left: auto; }
-.prism-leadership-summary { width: 100%; min-width: 0; container-type: inline-size; }
+.prism-leadership-summary { width: 100%; min-width: 0; container-type: inline-size; container-name: prism-leadership-summary; }
 [data-prism="light"] .prism-leadership-summary > h3 { font-size: 14px; font-weight: 600; line-height: 1.4; margin: 0 0 8px; }
-.prism-leadership-summary-box { display: flex; align-items: center; gap: 20px; padding: 16px; border: 1px solid #b6bec9; border-radius: 12px; background: #fff; break-inside: avoid; min-width: 0; }
-.prism-leadership-summary-chart { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; width: min-content; max-width: 100%; }
+.prism-leadership-summary-box { display: flex; flex-direction: column; gap: 16px; padding: 16px; border: 1px solid #b6bec9; border-radius: 12px; background: #fff; break-inside: avoid; min-width: 0; }
+.prism-leadership-summary-main { display: flex; align-items: center; gap: 20px; min-width: 0; }
+.prism-leadership-summary-divider { width: 100%; margin: 0; border: 0; border-top: 1px solid var(--prism-border); }
+.prism-leadership-summary-detail { margin: 0; font-size: 14px; font-weight: 400; line-height: 1.4; color: #363636; white-space: pre-line; overflow-wrap: anywhere; }
+.prism-leadership-summary-chart { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; max-width: 100%; }
 .prism-leadership-summary-chart > p { margin: 0; text-align: center; font-size: 12px; font-weight: 400; line-height: 1.4; color: #868686; }
-.prism-leadership-summary-comment { display: flex; flex: 1; flex-direction: column; min-width: 0; gap: 8px; overflow-wrap: anywhere; }
-.prism-leadership-summary-comment strong { font-size: 14px; font-weight: 700; line-height: 1.4; color: #222; }
-.prism-leadership-summary-comment p { margin: 0; font-size: 14px; font-weight: 400; line-height: 1.4; color: #363636; white-space: pre-line; }
+.prism-leadership-summary-comment { display: flex; flex: 1; flex-direction: column; align-items: flex-start; min-width: 0; gap: 6px; overflow-wrap: anywhere; }
+.prism-leadership-summary-comment > .prism-tag { max-width: 100%; white-space: nowrap; }
+.prism-leadership-summary[data-wrap-title] .prism-leadership-summary-comment > .prism-tag { height: auto; min-height: 21px; white-space: normal; overflow-wrap: anywhere; }
+.prism-leadership-summary-comment p { margin: 0; font-size: 14px; font-weight: 700; line-height: 1.4; color: #222; white-space: pre-line; }
 .prism-leadership-summary-empty { display: flex; flex: 1; justify-content: center; align-items: center; }
 .prism-leadership-summary[data-print] > h3 { font-size: 11pt; margin-bottom: 4pt; }
-.prism-leadership-summary[data-print] .prism-leadership-summary-box { min-height: 80pt; }
-.prism-leadership-summary[data-print] .prism-leadership-summary-chart { width: auto; }
+.prism-leadership-summary[data-print] .prism-leadership-summary-box { gap: 8pt; min-height: 80pt; padding: 8pt; border-radius: 8pt; }
+.prism-leadership-summary[data-print] .prism-leadership-summary-main { gap: 20pt; }
+.prism-leadership-summary[data-print] .prism-leadership-summary-chart { gap: 2pt; }
+.prism-leadership-summary[data-print] .prism-leadership-summary-comment { gap: 6pt; }
+.prism-leadership-summary[data-print] .prism-leadership-summary-comment > .prism-tag { height: 15pt; min-height: 15pt; padding: 3.5pt 4pt .5pt; border-radius: 4pt; font-size: 8pt; line-height: 11pt; }
+.prism-leadership-summary[data-print][data-wrap-title] .prism-leadership-summary-comment > .prism-tag { height: auto; }
 .prism-leadership-summary[data-print] .prism-leadership-summary-chart > p { white-space: nowrap; }
-.prism-leadership-summary[data-print] .prism-leadership-summary-chart > p,.prism-leadership-summary[data-print] .prism-leadership-summary-comment strong,.prism-leadership-summary[data-print] .prism-leadership-summary-comment p { font-size: 10pt; }
-@container (max-width: 480px) { .prism-leadership-summary-box { flex-direction: column; align-items: stretch; } .prism-leadership-summary-chart { align-self: center; width: 100%; } .prism-leadership-summary[data-print] .prism-leadership-summary-chart > p { white-space: normal; } }
+.prism-leadership-summary[data-print] .prism-leadership-summary-chart > p,.prism-leadership-summary[data-print] .prism-leadership-summary-comment p,.prism-leadership-summary[data-print] .prism-leadership-summary-detail { font-size: 10pt; }
+@container prism-leadership-summary (max-width: 660px) { .prism-leadership-summary-chart > p > span { display: block; } }
+@container prism-leadership-summary (max-width: 480px) { .prism-leadership-summary-main { flex-direction: column; align-items: stretch; } .prism-leadership-summary-chart { align-self: center; width: 100%; } .prism-leadership-summary-comment > .prism-tag { height: auto; min-height: 21px; white-space: normal; overflow-wrap: anywhere; } .prism-leadership-summary[data-print] .prism-leadership-summary-comment > .prism-tag { height: auto; min-height: 15pt; } .prism-leadership-summary[data-print] .prism-leadership-summary-chart > p { white-space: normal; } }
 .prism-switch { width: 35px; height: 20px; padding: 2px; border: 0; background: #b6bec9; border-radius: 10px; opacity: 1; }.prism-switch[data-state='checked'] { background: var(--prism-primary); }.prism-switch:disabled { background: var(--prism-neutral-100); opacity: 1; }.prism-switch > span { width: 16px; height: 16px; background: white; transform: translateX(0); box-shadow: 0 .69px .69px .69px #00000038; }.prism-switch > span[data-state='checked'] { transform: translateX(15px); }
 .prism-tooltip { position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 90px; min-height: 32px; max-width: min(320px, var(--radix-tooltip-content-available-width, calc(100vw - 16px))); padding: 8px 16px; border-radius: 6px; background: #0c1f4d; color: #fff; box-shadow: none; font-size: 12px; font-weight: 500; line-height: 1.4; text-align: center; white-space: normal; word-break: break-word; }
 .prism-tooltip-text { min-width: 0; max-height: max(16.8px, calc(var(--radix-tooltip-content-available-height, 100vh) - 16px)); overflow: auto; }

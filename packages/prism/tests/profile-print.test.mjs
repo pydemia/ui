@@ -56,6 +56,21 @@ test('empty profile sections render missing information; SUMMARY title is not du
  assert.equal(documentOf(h(PrismPrintLeaderSummary,{})).querySelectorAll('h3').length,1);
  const summary=documentOf(h(PrismPrintLeaderSummary,{name:'Good 리더',summary:'합성 요약',definition:' 합성 정의 '}));assert.ok(summary.querySelector('.prism-print-leader-badge br'));assert.match(text(summary.body),/Good 리더 : 합성 정의.*Excellent > Good > Solid > Developing > Struggling/);
 });
+test('leadership detail survives all print options and both display text policies without changing host data',()=>{
+ const model=base(),detail='상세 설명 😀\n'.repeat(100);
+ model.leadership={summary:{items:[{label:'지',value:null},{label:'덕',value:null},{label:'용',value:null}],title:'',description:'',detail},survey:[],strengths:[],improvements:[],trend:null};
+ const before=JSON.stringify(model);
+ for(const textPolicy of ['full','reference-limits'])for(const summary of [false,true])for(const compensation of [false,true]){
+  const prepared=preparePrismPrintProfile(model,textPolicy);
+  assert.equal(prepared.model.leadership.summary.detail,detail);assert.ok(!prepared.shortened.includes('leadership.detail'));
+  const doc=documentOf(h(PrismProfilePrintDocument,{model,textPolicy,options:{summary,compensation}}));
+  const chapter=doc.querySelector('[data-print-section="leadership"]');
+  assert.equal(chapter.querySelector('.prism-leadership-summary-detail').textContent,detail.trim());
+  assert.ok(chapter.querySelector('.prism-leadership-summary[data-print="true"]'));
+  assert.equal(chapter.querySelector('.prism-leadership-summary-empty'),null);
+ }
+ assert.equal(JSON.stringify(model),before);
+});
 test('multi-profile documents keep each candidate and all chapters separate, with unique identity validation',()=>{
  const one=base(),two={...base(),id:'two',candidate:{...candidate,id:'two',name:'이가상'}};const doc=documentOf(h(PrismProfilePrintDocuments,{documents:[one,two]}));
  assert.deepEqual([...doc.querySelectorAll('[data-profile-id]')].map(node=>node.dataset.profileId),['synthetic','two']);assert.equal(doc.querySelectorAll('[data-print-section]').length,14);assert.equal(doc.querySelectorAll('.prism-print-page').length,14);
