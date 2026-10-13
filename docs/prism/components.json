@@ -4865,7 +4865,10 @@
           "140/200/320/440/800/1000/1280px에서 코멘트 영역 가로 넘침0; 5행 내용115px/긴 내용638px와 자동 scrollHeight 일치; 수동 drag113→193px; 최종 빌드에서 수동·자동180px 제한",
           "43그룹/152상태를 실제320px iframe에서 component/state 표식 확인 후 검사; 렌더 누락·페이지 넘침·중첩 버튼·이름 없는 표시 입력·수집 브라우저 오류0",
           "새 독립 소비자에44항목/20예시를 설치하고 최종 레지스트리로 재설치; TypeScript/Vite/font bytes/고지 검증. 설치 component 소스를 수정하지 않고 검증 앱만320px iframe+StrictMode로 구성",
-          "독립 production 예시의 등록3/수정/삭제2, 자동638px/제한180px, 실제320px·Pretendard·넘침/중첩/오류0 확인"
+          "독립 production 예시의 등록3/수정/삭제2, 자동638px/제한180px, 실제320px·Pretendard·넘침/중첩/오류0 확인",
+          "2026-10-14: 현재 dev의 코멘트 UI/SCSS는 이전 대조 기준에서 변경 없음; 서비스의 CEO 요청 경로·payload·응답 계약도 유지",
+          "로컬 브라우저 320px 등록2→3·상세 편집·수정·확인 삭제3→2, 140px 작성 양식 넘침0; 기본/빈 값/로딩/오류/읽기 전용/긴 내용 확인",
+          "현 registry로 별도 shadcn 소비자 재설치; 59개 모듈과 CSS 바이트 일치, 43개 예제 타입 검사, Vite/Pretendard/고지 통과; 실제 320px에서 등록3·넘침0"
         ],
         "evidence": [
           "mgmt-comments.test.mjs",
@@ -4873,12 +4876,13 @@
           "mgmt-cua-runtime.json",
           "mgmt-isolated-consumer.log",
           "mgmt-final-consumer-retry.log",
-          "mgmt-consumer-runtime.json"
+          "mgmt-consumer-runtime.json",
+          "mgmt-goal-installed-bytes.json",
+          "prism-mgmt-comments-audit-2026-10-14.md"
         ],
         "remaining": [
           "인증된 원본 CEO/ELP 추가·편집·오류 상태의 전체 시각 및 폰트 대조",
-          "실제 backend 권한·저장·캐시/query 통합",
-          "현재 screenshot capture는5000ms timeout; 새 UI screenshot 없음"
+          "실제 backend 권한·저장·캐시/query 통합"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -4896,6 +4900,31 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/successorCandidate/mgmtComments/CeoCommentForm.tsx",
+            "chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx",
+            "chat/successorCandidate/mgmtComments/CeoCommentForm.module.scss",
+            "chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.module.scss"
+          ],
+          "evidence": [
+            "Current dev comment UI and SCSS are unchanged from the prior deployed CSS comparison; source purpose and the CEO service request contract were reviewed.",
+            "The local browser exercised six catalog states, 320px create/detail/edit/delete and 140px form containment without collected errors.",
+            "An isolated shadcn consumer reinstalled the emitted registry, matched 59 module sources and CSS, typechecked 43 examples, built with Vite/font/notices, and created a synthetic record at 320px without overflow."
+          ],
+          "intentionalImprovements": [
+            "The collection locks fields during pending writes, fences stale subject operations, preserves failed drafts and retries refresh separately after a successful write; the editor auto-sizes and changes to one column at narrow widths."
+          ],
+          "hostOwned": [
+            "The consuming app supplies CEO/ELP records, authoritative isMine and server authorization, API requests, cache invalidation and persistent mutation outcomes."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed create/edit/error states and the deployed source commit identity are not established."
+          ]
         }
       },
       "exports": [
