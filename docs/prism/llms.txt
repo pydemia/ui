@@ -666,10 +666,15 @@ Usage kind: component-example
 Installed usage:
 ```tsx
 import { PrismEvaluationHistory } from "@/components/ui/prism-evaluation-history";
+const items = [
+  { year: "2023", grade: "B" }, { year: "2025", grade: "(A)" },
+  { year: "2024", grade: "0" }, { year: "2022", grade: null },
+];
 export function EvaluationHistoryExample() {
-  return <div data-prism="light"><PrismEvaluationHistory items={[
-    { year: "2023", grade: "B" }, { year: "2025", grade: "(A)" }, { year: "2024", grade: null },
-  ]} /></div>;
+  return <div data-prism="light" style={{ display: "grid", gap: 12 }}>
+    <PrismEvaluationHistory items={items} />
+    <PrismEvaluationHistory items={items} variant="explicit" />
+  </div>;
 }
 ```
 

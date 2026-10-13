@@ -2983,7 +2983,7 @@
       "category": "Domain",
       "purpose": "원본 최근 평가의 정렬·강조 배지·연도 묶음과 개별값 표시",
       "contract": "기본 source variant는 공백/null을 제외하고 유효한4자리 연도 내림차순으로 배지와 연도 묶음을 표시합니다. 괄호 등급은 표시용 강조이며 active가 명시되면 그 값을 우선합니다. 입력/보관 원문을 변경하지 않고0문자열을 보존합니다. 알 수 없는 연도는 원문/입력 순서를 유지하고 유효 연도 뒤에 표시합니다. Source empty는 null이며 explicit은 개별grade/year·null의--·빈이력 안내를 유지합니다. empty slot은 명시적 null도 존중합니다. 배지는 각 연도의 접근 가능한 설명을 제공하고 평가 계산/사람 순위/API를 수행하지 않습니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "empty",
@@ -2992,21 +2992,23 @@
       "source": [
         "chat/common/CandidateEvaluationHistory.tsx"
       ],
-      "usage": "import { PrismEvaluationHistory } from \"@pydemia/prism\";\nexport function EvaluationHistoryExample() {\n  return <div data-prism=\"light\"><PrismEvaluationHistory items={[\n    { year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: null },\n  ]} /></div>;\n}",
+      "usage": "import { PrismEvaluationHistory } from \"@pydemia/prism\";\nconst items = [\n  { year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" },\n  { year: \"2024\", grade: \"0\" }, { year: \"2022\", grade: null },\n];\nexport function EvaluationHistoryExample() {\n  return <div data-prism=\"light\" style={{ display: \"grid\", gap: 12 }}>\n    <PrismEvaluationHistory items={items} />\n    <PrismEvaluationHistory items={items} variant=\"explicit\" />\n  </div>;\n}",
       "sourcePath": "packages/prism/src/prism-evaluation-history.tsx",
       "previewUrl": "/prism?component=prism-evaluation-history",
       "embedUrl": "/prism?component=prism-evaluation-history&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-evaluation-history&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "partial",
+        "visual": "partial-source-print-and-full-pixel-parity",
+        "interaction": "passed-local-source-and-contract-tests",
         "checks": [
-          "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
+          "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content",
+          "Current frontend dev 2eeb26ff source and public deployed candidate-profile-print sample checked for three 18px evaluation badges, grouped years and 10pt print text.",
+          "Source and explicit variants, sorted valid years, wrapped active grade, real 0 string, missing grade and long history checked locally; the long fixture remains inside a 140px parent.",
+          "Independent shadcn consumer installed exact evaluation module and token CSS, typechecked 48 complete examples, and built with Vite/font/notices; browser checked 320px viewport, 140px parent, grouped years and explicit missing-value display with zero console errors."
         ],
         "remaining": [
-          "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
-          "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
-          "Authenticated original source and production."
+          "Full pixel/font and A4 document comparison belongs to the separate profile-print acceptance; representative badge design and states are checked here.",
+          "Authenticated product route, deployed frontend source SHA and real service-fed evaluation values remain unverified."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -3021,6 +3023,14 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "evidence": "Current source and public deployed print sample checked; complete installed example and independent browser verified source badges/grouped years, explicit values, missing/0 distinction, 320px viewport and 140px parent, with accessible year descriptions.",
+          "intentionalImprovement": "At narrow parent widths the badges and grouped years wrap inside the component. The complete example now shows both source and explicit display contracts, while the empty demo explains the source null output.",
+          "limitations": "Full A4/profile print parity is tracked by prism-profile-print; the authenticated deployed revision and real host data binding remain unverified."
         }
       },
       "exports": [
@@ -3042,7 +3052,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { PrismEvaluationHistory } from \"@/components/ui/prism-evaluation-history\";\nexport function EvaluationHistoryExample() {\n  return <div data-prism=\"light\"><PrismEvaluationHistory items={[\n    { year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: null },\n  ]} /></div>;\n}"
+      "registryUsage": "import { PrismEvaluationHistory } from \"@/components/ui/prism-evaluation-history\";\nconst items = [\n  { year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" },\n  { year: \"2024\", grade: \"0\" }, { year: \"2022\", grade: null },\n];\nexport function EvaluationHistoryExample() {\n  return <div data-prism=\"light\" style={{ display: \"grid\", gap: 12 }}>\n    <PrismEvaluationHistory items={items} />\n    <PrismEvaluationHistory items={items} variant=\"explicit\" />\n  </div>;\n}"
     },
     {
       "id": "prism-favorite-candidate",

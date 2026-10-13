@@ -56,5 +56,7 @@ export function EvaluationHistoryDemo({ state }: { state: FixtureState }) {
     const [variant, setVariant] = useState<"source" | "explicit">("source");
     const items = state === "empty" ? [{ year: "2024", grade: null }] : state === "long" ? Array.from({ length: 12 }, (_, index) => ({ year: String(2014 + index), grade: index === 10 ? "(A)" : "B" })) : base.recentEvaluations!;
     return <div className="prism-demo-stack"><label>이력 표시 <select value={variant} onChange={event => setVariant(event.target.value as typeof variant)}><option value="source">원본 배지·연도 묶음</option><option value="explicit">연도별 개별값</option></select></label>
-        <PrismEvaluationHistory items={items} variant={variant}/></div>;
+        <div style={{ width: state === "long" ? 140 : "100%", maxWidth: "100%", minWidth: 0 }}>
+            <PrismEvaluationHistory items={items} variant={variant}/>
+        </div>{state === "empty" && variant === "source" && <p className="prism-help">원본 배지형은 유효한 평가가 없으면 표시하지 않습니다.</p>}</div>;
 }
