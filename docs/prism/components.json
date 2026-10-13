@@ -5110,8 +5110,15 @@
       ],
       "source": [
         "chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
+        "chat/successorCandidate/attitude/SuccessorCandidateAttitude.module.scss",
+        "chat/successorCandidate/attitude/AttitudeSummary.tsx",
+        "chat/successorCandidate/attitude/AttitudeSummary.module.scss",
         "chat/successorCandidate/attitude/AttitudeDiagnosis.tsx",
-        "chat/successorCandidate/attitude/PdfViewerDialog.tsx"
+        "chat/successorCandidate/attitude/AttitudeDiagnosis.module.scss",
+        "chat/successorCandidate/attitude/AttitudeDerailmentRisk.tsx",
+        "chat/successorCandidate/attitude/AttitudeDerailmentRisk.module.scss",
+        "chat/successorCandidate/attitude/PdfViewerDialog.tsx",
+        "chat/successorCandidate/attitude/PdfViewerDialog.module.scss"
       ],
       "usage": "import { PrismAttitudeReport } from \"@pydemia/prism\";\nimport \"@pydemia/prism/pdf.css\";\nexport function AttitudeReportExample({workerUrl}: {workerUrl: string}) {\n    return <section data-prism=\"light\"><PrismAttitudeReport subjectId=\"synthetic-candidate\"\n        summary={{heading:\"가상 Attitude 요약\",description:\"외부에서 제공한 가상 근거를 표시합니다.\"}}\n        diagnosis={{title:\"성격·가치관 진단 결과\",axes:[\"개방성\",\"성실성\",\"외향성\",\"우호성\",\"정서 안정\"],values:[8,7,5,6,8],heading:\"가상 성격 해석\",description:\"실제 평가 결과를 의미하지 않습니다.\",shares:[{label:\"자기초월\",percent:30},{label:\"안정\",percent:0},{label:\"개방\",percent:40},{label:\"자기증진\",percent:30}],valueDescription:\"호출자가 제공한 가상 비중입니다.\"}}\n        risk={{items:[{id:\"one\",label:\"가상 Risk\",latent:false,manifest:null}]}}\n        survey={{columns:2,items:[{id:\"one\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]}]}}\n        report={{url:\"/synthetic-report.pdf\",workerUrl,title:\"가상 심리적강인함 결과\",filename:\"가상 보고서.pdf\"}}/>\n    </section>;\n}",
       "sourcePath": "packages/prism/src/prism-attitude-report.tsx",
@@ -5131,19 +5138,24 @@
           "진단140~1280px 넘침0,좁은 차트 내부scroll 및 범례wrap. PDF140~1280px/240~1000px의7조합 ready/넘침0;140×240에서viewport0 문제를36px로 수정",
           "실제320px iframe에서모달296px·3페이지 ready/페이지 넘침0. 후보 자동전환 중 대기모달 닫힘과 계약 Signal 확인",
           "현재45그룹/159개 고유 상태의 표식·가로 넘침·중첩 버튼·이름 없는 표시 입력·수집 오류 검사; 긴 Survey 접근성 표의870px 넘침 수정 후 재측정0",
-          "새46항목/71파일·22예시의독립설치와최종registry재설치,TypeScript/Vite/font bytes/고지 통과. 실제production320px StrictMode native3페이지·text layer·이동/줌/필드·넘침/오류0. download event25초timeout;OSsave미확인."
+          "새46항목/71파일·22예시의독립설치와최종registry재설치,TypeScript/Vite/font bytes/고지 통과. 실제production320px StrictMode native3페이지·text layer·이동/줌/필드·넘침/오류0. download event25초timeout;OSsave미확인.",
+          "2026-10-14: 현재 dev Attitude TSX/SCSS 10개가 기존 비교 기준 이후 동일함을 확인; 원본 primary line 보고서 버튼에 맞춰 tone=primary 적용, 28px·rgb(47,84,140) 측정.",
+          "로컬 320px 진단·PDF 3페이지/3 canvas/3 text layer·페이지/배율·오류 재시도 및 140px 차트 내부 스크롤을 확인. 독립 설치본의 320px iframe PDF 폭/scrollWidth/viewport 296px, 3페이지를 확인.",
+          "현재 registry 독립 설치 59개 모듈과 tokens/PDF CSS 바이트 일치, 완전 예제 43개 타입 검사, Vite·Pretendard·고지 통과. 실제 다운로드 4351바이트는 합성 fixture SHA256과 일치함."
         ],
         "remaining": [
-          "인증된 원본 Attitude/PDF 상태·전체 font/pixel 비교",
-          "진단 SVG의 source Chart.js 전체 geometry·motion/print 대조",
-          "실제backend 권한/query/캐시·OS 저장·native 인쇄",
-          "현재 screenshot capture5000ms timeout"
+          "인증된 원본 Attitude/PDF 전체 상태와 현재 배포 소스 SHA 연결",
+          "실제 backend 권한·요청·캐시와 호스트의 일반 인쇄 동작",
+          "원본 Chart.js 모든 좌표·모션과 설치용 SVG의 픽셀 일치(새 기준의 완료 필수조건 아님)"
         ],
         "evidence": [
           "pdf-report.test.mjs",
           "attitude-deployed-css.json",
           "attitude-cua-runtime.json",
-          "attitude-downloaded-bytes.pdf"
+          "attitude-downloaded-bytes.pdf",
+          "prism-attitude-report-audit-2026-10-14.md",
+          "attitude-goal-runtime.json",
+          "attitude-goal-installed-bytes.json"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -5159,6 +5171,38 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
+            "chat/successorCandidate/attitude/SuccessorCandidateAttitude.module.scss",
+            "chat/successorCandidate/attitude/AttitudeSummary.tsx",
+            "chat/successorCandidate/attitude/AttitudeSummary.module.scss",
+            "chat/successorCandidate/attitude/AttitudeDiagnosis.tsx",
+            "chat/successorCandidate/attitude/AttitudeDiagnosis.module.scss",
+            "chat/successorCandidate/attitude/AttitudeDerailmentRisk.tsx",
+            "chat/successorCandidate/attitude/AttitudeDerailmentRisk.module.scss",
+            "chat/successorCandidate/attitude/PdfViewerDialog.tsx",
+            "chat/successorCandidate/attitude/PdfViewerDialog.module.scss"
+          ],
+          "evidence": [
+            "The current frontend Attitude UI and SCSS are unchanged from the prior comparison baseline; the source purpose and selected deployed CSS were reviewed. The report action now uses the source primary line color.",
+            "Local browser exercised summary, diagnosis, Risk, Survey and conditional PDF; a synthetic PDF rendered three pages with text layers, page/zoom controls and error retry. The 140px diagnosis and 320px dialog remained contained.",
+            "An isolated shadcn consumer reinstalled the current registry, matched 59 module sources plus token and PDF CSS bytes, typechecked 43 complete examples, built with Vite/font/notices, and rendered a three-page PDF in a real 320px iframe. Its downloaded 4351-byte file matched the fixture SHA256."
+          ],
+          "intentionalImprovements": [
+            "The radar chart scrolls inside a narrow diagnosis; the PDF dialog resizes within a narrow viewport while preserving page and text-layer behavior."
+          ],
+          "hostOwned": [
+            "The consuming app supplies assessment data, authenticated PDF requests and authorization, URL fallback and native print integration."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed full-profile/PDF states and the deployed source commit identity are not established.",
+            "Exact Chart.js motion and SVG pixel alignment are outside the accepted purpose/design criteria."
+          ]
         }
       },
       "exports": [
