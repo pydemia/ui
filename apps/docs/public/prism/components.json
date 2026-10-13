@@ -3831,7 +3831,7 @@
       "name": "Structured response / Rich text / Conversation",
       "category": "AI & agent",
       "purpose": "Typed blocks, rich text, actionable references and streaming status",
-      "contract": "Consumers adapt backend payloads into a discriminated block union and own action callbacks. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur. Position block은 PrismPositionRecommendationItem을 사용해 version/companyLogo를 보존합니다. onPositionOpen(id,reference)는 card 참조, onAction(kind,id,reference?)는 position 본문/표/analysis 링크에 version이 없는 link 참조를 전달합니다. 다른 action은 기존 두 인자를 유지합니다. selectedPositionReference로 같은 id의 서로 다른 대화 버전을 구분할 수 있습니다. API 조회와 취소는 호스트 소유이며 패널 링크의 기존 inert 표시를 유지합니다.",
+      "contract": "Consumers adapt backend payloads into a discriminated block union and own action callbacks. Source처럼 text와 바로 다음 비텍스트 블록을 묶고 그룹 사이 40px, 패널 32px, 묶음 내부 20px 간격을 둡니다. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur. Position block은 PrismPositionRecommendationItem을 사용해 version/companyLogo를 보존합니다. onPositionOpen(id,reference)는 card 참조, onAction(kind,id,reference?)는 position 본문/표/6 Frame/analysis 링크에 version이 없는 link 참조를 전달합니다. 다른 action은 기존 두 인자를 유지합니다. selectedPositionReference로 같은 id의 서로 다른 대화 버전을 구분할 수 있습니다. API 조회와 취소는 호스트 소유이며 패널 링크의 기존 inert 표시를 유지합니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "sourceDeltaAudits": [
         {
@@ -3864,13 +3864,19 @@
         "empty",
         "loading",
         "error",
+        "panel",
+        "long",
         "versioned"
       ],
       "source": [
         "chat/conversation/ChatJSONRenderer.tsx",
+        "chat/conversation/ChatJSONRenderer.module.scss",
         "chat/conversation/ChatJSONRendererPanel.tsx",
+        "chat/conversation/ChatJSONRendererPanel.module.scss",
+        "chat/conversation/ChatAnswer.tsx",
         "chat/conversation/InlineMarkdown.tsx",
         "ui/table/HRXChatTable.tsx",
+        "chat/templates/ChatSixFrameTable.tsx",
         "chat/conversation/ChatConversation.tsx"
       ],
       "usage": "import { useState } from \"react\";\nimport { PrismResponse, type PrismResponseBlock } from \"@pydemia/prism\";\n\nexport function ResponseExample() {\n  const [selected, setSelected] = useState(\"\");\n  const blocks: PrismResponseBlock[] = [\n    { id: \"text\", type: \"text\", content: \"표시 계약을 확인하는 가상 응답입니다.\" },\n    { id: \"table\", type: \"table\", title: \"자료 상태\", columns: [\"영역\", \"값\"],\n      rows: [{ id: \"row-1\", cells: [\"진단 점수\", null] }] },\n    { id: \"options\", type: \"options\", title: \"다음 조회\", selected,\n      options: [{ id: \"profile\", label: \"프로필 조회\" }, { id: \"comparison\", label: \"비교 조회\" }] },\n  ];\n  return <PrismResponse blocks={blocks} status=\"complete\" onOptionSelect={setSelected} />;\n}",
@@ -3879,16 +3885,17 @@
       "embedUrl": "/prism?component=prism-response&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-response&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "partial",
+        "visual": "current-source-and-deployed-public-sample-plus-local-and-independent-browser-geometry-passed;authenticated-source-parity-unverified",
+        "interaction": "passed-target-tests-and-independent-browser-workflow;host-service-effects-unverified",
         "checks": [
-          "Versioned/legacy card and live-link references preserve source purpose without input mutation.",
-          "Controlled same-ID/different-version selection and typed host example verified by source and synthetic JSDOM tests."
+          "Current source JSON renderers, ChatAnswer/text/criteria/table/six-frame styles and public deployed Templates sample were compared for response grouping, 16px/500/160% text and representative structure.",
+          "Local docs exercised default, empty, generating, error, long and panel; installed 320px consumer confirmed 40/32px group gaps, 20px paired gap, 16px text and a 6-column internally scrolling sticky-first-column table.",
+          "Response text and six-frame LIVE position links pass typed versionless references; card references retain versions, while panel rich links are inert.",
+          "Separate shadcn installation matched 59 module sources and CSS; 43 complete examples typechecked; Vite, Pretendard and notices passed."
         ],
         "remaining": [
-          "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
-          "Authenticated historical/LIVE service and deployed revision binding.",
-          "Full source component purpose/style/extension coverage, current A4 and production."
+          "Authenticated deployed full response states and deployed source revision binding.",
+          "Actual host API, permission, navigation and persistence outcomes."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -3905,7 +3912,44 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-        }
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/conversation/ChatJSONRenderer.tsx",
+            "chat/conversation/ChatJSONRenderer.module.scss",
+            "chat/conversation/ChatJSONRendererPanel.tsx",
+            "chat/conversation/ChatJSONRendererPanel.module.scss",
+            "chat/conversation/ChatAnswer.tsx",
+            "chat/templates/ChatTemplateText.module.scss",
+            "chat/templates/ChatTemplateCriteria.module.scss",
+            "chat/conversation/InlineMarkdown.tsx",
+            "ui/table/HRXChatTable.tsx",
+            "chat/templates/ChatSixFrameTable.tsx",
+            "chat/conversation/ChatConversation.tsx"
+          ],
+          "evidence": [
+            "Current source groups text with the following non-text block, with 40px main, 32px panel and 20px paired gaps; public deployed sample text is 16px/500/160%.",
+            "Local and independent browsers covered empty/generating/error/panel/long states, 320px internal table scrolling and typed host action intent.",
+            "Separate shadcn consumer installed byte-identical modules and CSS, typechecked 43 complete examples, built with bundled Pretendard and notices."
+          ],
+          "intentionalImprovements": [
+            "Block identities are preserved while grouped; a narrow six-column table scrolls internally with a sticky first column and does not widen its containing response."
+          ],
+          "hostOwned": [
+            "The consuming application adapts response JSON and supplies data, authorization, historical/LIVE lookups, navigation and persistence."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed full response states and deployed source commit identity are not established."
+          ]
+        },
+        "evidence": [
+          "prism-response-audit-2026-10-14.md",
+          "response-goal-installed-bytes.json",
+          "chat-recipes.test.mjs"
+        ]
       },
       "exports": [
         {

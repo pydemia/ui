@@ -903,8 +903,8 @@ export function NoticeExample() {
 
 ## Structured response / Rich text / Conversation
 Typed blocks, rich text, actionable references and streaming status
-Contract: Consumers adapt backend payloads into a discriminated block union and own action callbacks. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur. Position block은 PrismPositionRecommendationItem을 사용해 version/companyLogo를 보존합니다. onPositionOpen(id,reference)는 card 참조, onAction(kind,id,reference?)는 position 본문/표/analysis 링크에 version이 없는 link 참조를 전달합니다. 다른 action은 기존 두 인자를 유지합니다. selectedPositionReference로 같은 id의 서로 다른 대화 버전을 구분할 수 있습니다. API 조회와 취소는 호스트 소유이며 패널 링크의 기존 inert 표시를 유지합니다.
-States: default, empty, loading, error, versioned
+Contract: Consumers adapt backend payloads into a discriminated block union and own action callbacks. Source처럼 text와 바로 다음 비텍스트 블록을 묶고 그룹 사이 40px, 패널 32px, 묶음 내부 20px 간격을 둡니다. Custom inline markup is parsed and sanitized before React rendering. Internal profile/position links become buttons and are rendered as text in panel mode. null cells remain missing data. No API calls or automatic navigation occur. Position block은 PrismPositionRecommendationItem을 사용해 version/companyLogo를 보존합니다. onPositionOpen(id,reference)는 card 참조, onAction(kind,id,reference?)는 position 본문/표/6 Frame/analysis 링크에 version이 없는 link 참조를 전달합니다. 다른 action은 기존 두 인자를 유지합니다. selectedPositionReference로 같은 id의 서로 다른 대화 버전을 구분할 수 있습니다. API 조회와 취소는 호스트 소유이며 패널 링크의 기존 inert 표시를 유지합니다.
+States: default, empty, loading, error, panel, long, versioned
 Registry: /prism/r/prism-response.json
 Source: packages/prism/src/prism-response.tsx
 Usage kind: component-example
