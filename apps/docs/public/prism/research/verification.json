@@ -2728,6 +2728,40 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/conversation/ChatMarkdownRenderer.tsx",
+          "chat/templates/ChatTemplateNudge.tsx",
+          "chat/templates/ChatTemplateNudge.module.scss",
+          "chat/templates/ChatTemplateGenerating.tsx",
+          "chat/templates/ChatTemplateGenerating.module.scss",
+          "chat/templates/ChatTemplateComplete.tsx",
+          "chat/templates/ChatTemplateComplete.module.scss",
+          "chat/templates/ChatTemplatePositionRecommend.tsx"
+        ],
+        "evidence": [
+          "Current source and public deployed Templates sample establish a 32px follow-up button, three labeled generation stages and a stopped state. The deployed sample button is 14px/500 with #f9fafc background and #d4d8dd border; local computed styles match.",
+          "The reusable content module now provides one-shot follow-up locking, an explicit repeatable input-fill mode, safe bold/newline text, analyzing/fetching/generating/stopped/complete/error status and a stop intent callback. The source recommendation grid and reveal remain covered by the separately accepted prism-position-recommendations group.",
+          "Local browser exercises default selection, repeatable selection, analysis stop and a 320px long response with no document overflow. Independent shadcn installation matches all 59 source modules and CSS byte-for-byte, typechecks 46 complete examples and builds with Vite, font and notices.",
+          "The installed published example exercises a stop transition and one-shot selection. At a 140px parent, long choices and a position summary stay within 140px, the five-column Markdown table scrolls inside its region and click/Enter invoke the position intent. Browser console errors are zero.",
+          "PRISM tests (337 including safe Markdown, selection locking and generation transitions), workspace typecheck and site build passed."
+        ],
+        "intentionalImprovements": [
+          "Native buttons expose selection and keyboard intent without nested interactive markup. After a follow-up selection, all choices lock to avoid duplicate request intents; noLockOnSelect explicitly supports repeatable draft filling.",
+          "Long suggestion text wraps within independent narrow hosts and Markdown tables scroll internally.",
+          "A generic one-card position link is documented separately from the source recommendation-list layout and reveal behavior."
+        ],
+        "hostOwned": [
+          "The consuming application supplies answer text, option identity, response stage, actual stop/cancellation, data requests, navigation and permissions."
+        ],
+        "nonBlockingUnknowns": [
+          "The deployed source SHA is not bound to the checked-out frontend revision; authenticated full conversation and service results remain unverified.",
+          "The public sample shows representative states, not every long/narrow or error state on the deployed product."
+        ]
       }
     },
     "prism-admin": {
@@ -6738,10 +6772,11 @@
       "prism-position-directory",
       "prism-chat",
       "prism-detail",
-      "prism-detail-state"
+      "prism-detail-state",
+      "prism-content"
     ],
-    "acceptedCount": 26,
-    "unassessedGroups": 32,
+    "acceptedCount": 27,
+    "unassessedGroups": 31,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
