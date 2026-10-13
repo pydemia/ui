@@ -4639,16 +4639,60 @@
       "embedUrl": "/prism?component=prism-profile-sections&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-profile-sections&view=responsive",
       "verification": {
-        "visual": "pending-current-leadership-detail-rendered-comparison",
-        "interaction": "passed-local-source-and-contract-tests",
+        "visual": "passed-selected-source-purpose-local-and-installed; authenticated full-profile parity pending",
+        "interaction": "passed-selected-local-and-installed-synthetic-states",
         "checks": [
-          "Latest27c4fdbf source delta: tag/content/detail/divider, ordered palette and screen/print rules.",
-          "Detail-only and full detail under both print text policies retain host-provided text without mutation."
+          "At frontend dev 2eeb26ff, all eight tab purposes were compared with the portable recipes. Expertise, Design, Agility and Leadership now use source-purpose Survey sections; Design adds score essay and company/function/current-position diversity; Success Experience adds representative-topic essay, keywords, AI interview and failure essays.",
+          "The synthetic local 320px preview rendered eight tabs, long content, empty/loading/error and retry without expanding the document. Empty compensation preserves supplied-year Total/Salary/IB rows; empty leadership trend shows one no-data region.",
+          "The isolated shadcn consumer installed 59 byte-identical modules and CSS, typechecked 43 examples, built with Vite/font/notices and rendered a 320px container with a 262px internally scrolling Design matrix, topic changes and a distinct Survey zero.",
+          "327 PRISM tests, workspace typecheck, site build and registry release check passed. LeadershipPieSummary retains previously verified source print geometry."
+        ],
+        "evidence": [
+          "local-profile-total",
+          "local-profile-expertise",
+          "local-profile-experience",
+          "local-profile-design",
+          "local-profile-agility",
+          "local-profile-attitude",
+          "local-profile-leadership",
+          "local-profile-comments",
+          "local-profile-interactions"
         ],
         "remaining": [
-          "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
-          "Authenticated deployed source and deployed revision binding."
+          "Authenticated deployed full-profile rendering and deployed source revision binding remain unavailable; current runtime checks use local and isolated synthetic data.",
+          "Host API mapping, permissions and writes belong to the consuming product; comment CRUD and profile print are evaluated in their separate groups."
         ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/successorCandidate/total/SuccessorCandidateTotal.tsx",
+            "chat/successorCandidate/expertise/SuccessorCandidateExpertise.tsx",
+            "chat/successorCandidate/successExperience/SuccessorCandidateSuccessExperience.tsx",
+            "chat/successorCandidate/competence/SuccessorCandidateCompetence.tsx",
+            "chat/successorCandidate/learningAgility/SuccessorCandidateLearningAgility.tsx",
+            "chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
+            "chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+            "chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx"
+          ],
+          "evidence": [
+            "Source-purpose comparison found and resolved missing Survey, Essay, representative-topic, AI interview and Design diversity paths while keeping legacy props.",
+            "Local 320px browser showed all eight tabs, long content, empty/loading/error and retry with contained width; the installed consumer showed topic changes, Survey zero and internal matrix scroll.",
+            "An isolated shadcn consumer installed 59 exact modules and CSS, typechecked 43 examples and built with Vite, bundled font and asset notices.",
+            "327 PRISM tests, workspace typecheck, site build and registry release check passed."
+          ],
+          "intentionalImprovements": [
+            "A semantic Design position table scrolls within a narrow container, and no-data trend content avoids an empty chart/table.",
+            "Loading/error replace stale tab content; Survey zero is distinct from unavailable values."
+          ],
+          "hostOwned": [
+            "The consuming product maps API results, selects tab data, handles retry, permissions, PDF intent and comment persistence."
+          ],
+          "nonBlockingUnknowns": [
+            "The authenticated deployed full profile and deployed source commit identity are not established."
+          ]
+        },
         "localRenderGate": {
           "status": "passed",
           "states": [
