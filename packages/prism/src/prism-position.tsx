@@ -4,6 +4,19 @@ import { PrismAffiliateLogo, PrismSkeleton } from "./prism-primitives";
 import { PrismRequestState } from "./prism-feedback";
 
 export type PrismRequirementGroup = { id: string; title: string; items: readonly { id: string; title?: string; content: string | null }[] };
+const sourceRequirementGroups = [{ id: "expertise", title: "전문성" }, { id: "experience", title: "성공경험" }] as const;
+function completePositionRequirements(groups: readonly PrismRequirementGroup[]): readonly PrismRequirementGroup[] {
+    const matched: (PrismRequirementGroup | undefined)[] = [];
+    for (const { id, title } of sourceRequirementGroups) {
+        matched.push(groups.find(group => !matched.includes(group) && group.title === title)
+            ?? groups.find(group => !matched.includes(group) && group.id === id));
+    }
+    if (groups.length && matched.every(group => !group)) return groups;
+    return [
+        ...sourceRequirementGroups.map(({ id, title }, index) => matched[index] ?? { id, title, items: [] }),
+        ...groups.filter(group => !matched.includes(group)),
+    ];
+}
 export function PrismPositionHeader({ company, brand, role, items }: { company: string; brand?: string; role: string; items: readonly { label: string; value: ReactNode }[] }) {
     return <header className="prism-position-header"><div><PrismAffiliateLogo brand={brand} affiliate={company} size={16} /><h2>{role}</h2></div><PrismDetailList items={items} /></header>;
 }
@@ -36,14 +49,13 @@ export function PrismPositionDetailSkeleton() {
 /** Data, historical/LIVE selection and stale-request cancellation belong to the host. */
 export function PrismPositionDetail({ company, role, brand, items, groups, definition, businessContext,
     footnote = prismPositionFootnote, status = "ready", onRetry }: PrismPositionDetailProps) {
-    const emptyGroups: readonly PrismRequirementGroup[] = [{ id: "expertise", title: "전문성", items: [] }, { id: "experience", title: "성공경험", items: [] }];
     return <div className="prism-position-detail">{status === "loading" ? <PrismPositionDetailSkeleton/>
         : status === "error" ? <div className="prism-position-fallback"><PrismRequestState status="error" onRetry={onRetry}/></div>
         : <><PrismPositionHeader company={company} brand={brand} role={role} items={items}/><div className="prism-position-scroll">
             <PositionSummary title="포지션 정의" text={definition}/>
             <PositionSummary title="Business Context" text={businessContext} context/>
             <section className="prism-position-section"><h3>전문성・성공경험 요구사항</h3><div className="prism-position-groups">
-                {(groups.length ? groups : emptyGroups).map(group => <PrismPositionRequirements key={group.id} group={group}/>)}</div></section>
+                {completePositionRequirements(groups).map(group => <PrismPositionRequirements key={group.id} group={group}/>)}</div></section>
             {footnote && <p className="prism-position-footnote">{footnote}</p>}
         </div></>}</div>;
 }

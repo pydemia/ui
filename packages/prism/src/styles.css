@@ -870,6 +870,11 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
     [data-prism="light"] .prism-position-header dl { flex-wrap:wrap; }
     [data-prism="light"] .prism-position-header dl>div { flex-basis:100%; }
 }
+@container prism-position (max-width:200px) {
+    [data-prism="light"] .prism-position-header { max-height:45%; overflow-y:auto; padding:12px; }
+    [data-prism="light"] .prism-position-header h2 { overflow-wrap:anywhere; }
+    .prism-position-scroll { padding:12px; }
+}
 [data-prism="light"] .prism-requirement { border: 1px solid var(--prism-control-border); border-radius: 12px; overflow: hidden; }
 [data-prism="light"] .prism-requirement > header { padding: 16px; background: var(--prism-cool-100); border-bottom: 1px solid var(--prism-control-border); }
 [data-prism="light"] .prism-requirement h3 { margin: 0; color: var(--accent); font-size: 16px; font-weight: 600; line-height: 1.6; }

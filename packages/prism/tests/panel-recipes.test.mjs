@@ -128,6 +128,21 @@ test("position renders definition, business context, two missing groups and sour
     assert.equal(doc.querySelector(".prism-position-footnote").textContent, prismPositionFootnote);
 });
 
+test("position retains both source requirement groups when only one has data and preserves custom groups", () => {
+    const groups = [{ id: "expertise", title: "전문성", items: [{ id: "one", content: "합성 기술 근거" }] },
+        { id: "custom", title: "추가 요구", items: [{ id: "two", content: "합성 추가 근거" }] }];
+    const before = JSON.stringify(groups);
+    const props = { company: "가상 회사", role: "가상 직책", items: [], groups };
+    const doc = new JSDOM(renderToStaticMarkup(h(PrismPositionDetail, props))).window.document;
+    assert.deepEqual([...doc.querySelectorAll(".prism-requirement h3")].map(node => node.textContent), ["전문성", "성공경험", "추가 요구"]);
+    assert.equal(doc.querySelectorAll(".prism-requirement")[1].querySelector(".prism-no-data").textContent, "관련 데이터 없음");
+    assert.match(doc.querySelectorAll(".prism-requirement")[0].textContent, /합성 기술 근거/);
+    assert.match(doc.querySelectorAll(".prism-requirement")[2].textContent, /합성 추가 근거/);
+    assert.equal(JSON.stringify(groups), before);
+    const customOnly = new JSDOM(renderToStaticMarkup(h(PrismPositionDetail, { ...props, groups: groups.slice(1) }))).window.document;
+    assert.deepEqual([...customOnly.querySelectorAll(".prism-requirement h3")].map(node => node.textContent), ["추가 요구"]);
+});
+
 test("position loading/error hide stale detail and error retry reaches host", async () => {
     let retries = 0;
     const props = { company: "STALE company", role: "STALE role", items: [], definition: "STALE definition", businessContext: "STALE context", groups: [], onRetry: () => retries++ };

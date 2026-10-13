@@ -37,7 +37,7 @@ export function PositionDemo({ state }: { state: FixtureState }) {
     return <div style={{height:560,minWidth:0}}><PrismPositionDetail company="가상전자" role="기술전략담당"
         items={[{label:"산업",value:"전자"},{label:"직무",value:"기술·연구개발"},{label:"직책",value:"담당"}]}
         definition={empty ? null : text} businessContext={empty ? " " : "가상 사업의 연구개발 방향을 정리합니다."}
-        groups={empty ? [] : [{id:"expertise",title:"전문성",items:[{id:"expertise-1",content:text}]},{id:"experience",title:"성공경험",items:[]}]}
+        groups={empty ? [] : state === "partial-groups" ? [{id:"expertise",title:"전문성",items:[{id:"expertise-1",content:text}]}] : [{id:"expertise",title:"전문성",items:[{id:"expertise-1",content:text}]},{id:"experience",title:"성공경험",items:[{id:"experience-1",content:"가상 사업 전환 경험"}]}]}
         status={!retried && (state === "loading" || state === "error") ? state : "ready"} onRetry={()=>setRetried(true)}/></div>;
 }
 export function AssessmentDemo({ state }: { state: FixtureState }) {
