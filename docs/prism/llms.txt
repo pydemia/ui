@@ -379,7 +379,7 @@ export function SelectionExample() {
 
 ## Candidate profile / Evidence
 후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시
-Contract: PrismProfile은 제어형8분류와 원본132px/gap12 헤더를 조합합니다. 이름·ELP·생년월/tenure 태그, 우측Print/Favorite20px, 계열/직무·12px 로고/직책·평가 이력·하단메모/blue 건수를 표시합니다. tenure/affiliation/jobFunction은 호스트 문자열이며 명시된 빈문자열을 다른 값으로 덮지 않습니다. companyField/domain은 legacy alias입니다. loading은 stale header와 동작을 감추며 sections의 별도load/error와 candidate 변경의 activeTab reset은 호스트 소유입니다. favorite/activeTab과 favoriteBusy/printBusy/readOnly는 제어형이고 readOnly는 즐겨찾기 변경만 막습니다. Portrait는 subject/URL 변경 시 재시도하고 보호URL/인증을 해석하지 않습니다. 좁은 본문은 사진/정보를 줄바꿈하고 긴 정보를 보존합니다. print는80pt 사진/10pt 정보/18pt 태그를 사용하며 callbacks가 없으면 앱 동작을 포함하지 않습니다.
+Contract: PrismProfile은 제어형8분류와 원본132px/gap12 헤더를 조합합니다. 이름·ELP·생년월/tenure 태그, 우측Print/Favorite20px, 계열/직무·12px 로고/직책·평가 이력·하단메모/blue 건수를 표시합니다. tenure/affiliation/jobFunction은 호스트 문자열이며 명시된 빈문자열을 다른 값으로 덮지 않습니다. companyField/domain은 legacy alias입니다. loading은 stale header와 동작을 감추며 sections의 별도load/error와 candidate 변경의 activeTab reset은 호스트 소유입니다. favorite/activeTab과 favoriteBusy/printBusy/readOnly는 제어형이고 readOnly는 즐겨찾기 변경만 막습니다. Portrait는 subject/URL 변경 시 재시도하고 보호URL/인증을 해석하지 않습니다. 기본 정보의 복수 값과 경력의 복수 직무 설명을 분리해 표시하고 isStart/isEnd로 이어지는 경력 구간을 표현합니다. PrismDesignCompetenceMatrix는 원본의 Function 행·열과 현재 위치 한 셀을 표시하며 좁은 화면에서 내부 스크롤합니다. 좁은 본문은 사진/정보를 줄바꿈하고 긴 정보를 보존합니다. print는80pt 사진/10pt 정보/18pt 태그를 사용하며 callbacks가 없으면 앱 동작을 포함하지 않습니다.
 States: default, empty, loading, error, readonly, long
 Registry: /prism/r/prism-profile.json
 Source: packages/prism/src/prism-profile.tsx
@@ -387,19 +387,30 @@ Usage kind: component-example
 Installed usage:
 ```tsx
 import { useState } from "react";
-import { PrismProfile, type PrismProfileTab } from "@/components/ui/prism-profile";
+import { PrismProfile, PrismBasicInfo, PrismCareerTimeline, PrismOutline, PrismSummaryBadge, PrismEvidence, PrismDesignCompetenceMatrix, type PrismProfileTab } from "@/components/ui/prism-profile";
 import { type PrismCandidate } from "@/components/ui/prism-candidate";
+
+const candidate: PrismCandidate = { id: "synthetic-profile", name: "김가상", company: "가상전자",
+  position: "기술전략담당", affiliation: "ICT 계열", jobFunction: "R&D/기술",
+  birthDate: "1980.01", executiveYears: 0, recentEvaluations: [{ year: "2025", grade: "(A)" }] };
 export function ProfileExample() {
   const [tab, setTab] = useState<PrismProfileTab>("total");
   const [favorite, setFavorite] = useState(false);
   const [action, setAction] = useState("");
-  const candidate: PrismCandidate = { id: "synthetic-profile", name: "김가상", company: "가상전자", position: "기술전략담당",
-    affiliation: "ICT 계열", jobFunction: "R&D/기술", birthDate: "1980.01", executiveYears: 0,
-    recentEvaluations: [{ year: "2023", grade: "B" }, { year: "2025", grade: "(A)" }] };
   return <div data-prism="light"><PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab}
     favorite={favorite} onFavoriteChange={setFavorite} commentCount={0}
     onComments={() => setAction("메모 열기 intent")} onPrint={() => setAction("인쇄 intent")}
-    sections={{ total: <p>호스트가 제공한 후보자 상세 영역</p> }} /><p role="status">{action}</p></div>;
+    sections={{
+      total: <><PrismOutline title="기본 정보"><PrismBasicInfo items={[{ label: "학력", value: ["가상대학교", "예시 대학원"] }]} /></PrismOutline>
+        <PrismOutline title="경력"><PrismCareerTimeline entries={[{ id: "career-1", period: "2023–현재",
+          company: "가상전자", role: ["기술전략담당", "신사업 책임"] }]} /></PrismOutline></>,
+      design: <PrismDesignCompetenceMatrix matrix={{ rowAxisLabel: "Function",
+        columns: [{ key: "strategy", label: "전략" }, { key: "technology", label: "기술" }],
+        rows: [{ key: "business", label: "사업" }],
+        currentPosition: { rowKey: "business", columnKey: "strategy" } }} />,
+      expertise: <><PrismSummaryBadge label="전문성" summary="합성 데이터 표시 예시입니다." note="실제 평가가 아닙니다." />
+        <PrismEvidence title="전문분야 검증" grade={null}>근거 정보가 없습니다.</PrismEvidence></>,
+    }} /><p role="status">{action}</p></div>;
 }
 ```
 

@@ -1039,17 +1039,17 @@
       }
     },
     "prism-profile": {
-      "visual": "pending",
+      "visual": "partial",
       "interaction": "partial",
       "checks": [
         "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content",
-        "At frontend dev 2eeb26ff, the deployed Candidate Common sample SUMMARY circle measured 88x88px with 10px 4px padding; local and independently installed PrismSummaryBadge matched that geometry."
+        "At frontend dev 2eeb26ff, the deployed Candidate Common sample SUMMARY circle measured 88x88px with 10px 4px padding; local and independently installed PrismSummaryBadge matched that geometry.",
+        "Current source BasicInfo string arrays, CareerTimeline repeated descriptions and DesignCompetenceMatrix currentPosition are represented by separate visible values, roles and a semantic position table.",
+        "At 320px the local profile long/loading/readonly states kept the document width, eight tabs used two rows, the position table scrolled inside its region, the tooltip dismissed with Escape, and loading hid the previous section values. The isolated installed consumer kept width, changed tabs, and emitted favorite, memo and print intents."
       ],
       "remaining": [
-        "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
-        "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
-        "Authenticated original source and production.",
-        "Other SUMMARY states, long labels, tooltip, print and narrow widths require original-versus-installed comparison."
+        "Authenticated deployed full-profile visual comparison and deployed revision binding are unavailable; current comparison uses source code and the public Candidate Common sample.",
+        "A4 print and pagination remain in the separately counted prism-profile-print group; native print output is not established by profile action callbacks."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1067,6 +1067,33 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/successorCandidate/SuccessorCandidateDetail.tsx",
+          "chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+          "chat/successorCandidate/total/SuccessorCandidateBasicInfo.tsx",
+          "chat/successorCandidate/total/SuccessorCandidateCareerTimeline.tsx",
+          "chat/successorCandidate/competence/DesignCompetenceMatrix.tsx"
+        ],
+        "evidence": [
+          "The public deployed Candidate Common SUMMARY circle and the local/installed badge shared the measured 88x88px geometry and 10px 4px padding; source header and eight-tab contracts were checked separately.",
+          "The local 320px default, long, readonly and loading profile retained document width and distinct values/roles; the Design current-position table scrolled internally and its help closed with Escape.",
+          "An isolated shadcn consumer installed 59 exact module sources and CSS, typechecked 43 examples, built with Vite and verified font/notices; its 320px profile changed tabs and emitted separate favorite, memo and print intents.",
+          "321 PRISM tests, workspace typecheck, site build and registry release check passed."
+        ],
+        "intentionalImprovements": [
+          "The current-position matrix uses a semantic table with accessible row and column labels instead of unlabeled visual grid cells.",
+          "Long career roles and multi-value basic fields remain distinct, and narrow profile tabs/matrix scroll without expanding the document.",
+          "The loading example hides previous section data and shows loading state for each tab."
+        ],
+        "hostOwned": [
+          "The consumer owns candidate fetching, permission checks, favorites, memo persistence and print handling; synthetic callbacks do not prove service outcomes.",
+          "Authenticated deployed profile comparison and source SHA binding remain unavailable; A4 print implementation is counted separately."
+        ]
       }
     },
     "prism-feedback": {
@@ -6259,10 +6286,11 @@
       "prism-panel",
       "prism-memo",
       "prism-tabs",
-      "prism-selection"
+      "prism-selection",
+      "prism-profile"
     ],
-    "acceptedCount": 12,
-    "unassessedGroups": 46,
+    "acceptedCount": 13,
+    "unassessedGroups": 45,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

@@ -1796,7 +1796,7 @@
       "name": "Candidate profile / Evidence",
       "category": "Domain",
       "purpose": "후보 상세 8개 분류·경력·등급·근거·역량 매트릭스 표시",
-      "contract": "PrismProfile은 제어형8분류와 원본132px/gap12 헤더를 조합합니다. 이름·ELP·생년월/tenure 태그, 우측Print/Favorite20px, 계열/직무·12px 로고/직책·평가 이력·하단메모/blue 건수를 표시합니다. tenure/affiliation/jobFunction은 호스트 문자열이며 명시된 빈문자열을 다른 값으로 덮지 않습니다. companyField/domain은 legacy alias입니다. loading은 stale header와 동작을 감추며 sections의 별도load/error와 candidate 변경의 activeTab reset은 호스트 소유입니다. favorite/activeTab과 favoriteBusy/printBusy/readOnly는 제어형이고 readOnly는 즐겨찾기 변경만 막습니다. Portrait는 subject/URL 변경 시 재시도하고 보호URL/인증을 해석하지 않습니다. 좁은 본문은 사진/정보를 줄바꿈하고 긴 정보를 보존합니다. print는80pt 사진/10pt 정보/18pt 태그를 사용하며 callbacks가 없으면 앱 동작을 포함하지 않습니다.",
+      "contract": "PrismProfile은 제어형8분류와 원본132px/gap12 헤더를 조합합니다. 이름·ELP·생년월/tenure 태그, 우측Print/Favorite20px, 계열/직무·12px 로고/직책·평가 이력·하단메모/blue 건수를 표시합니다. tenure/affiliation/jobFunction은 호스트 문자열이며 명시된 빈문자열을 다른 값으로 덮지 않습니다. companyField/domain은 legacy alias입니다. loading은 stale header와 동작을 감추며 sections의 별도load/error와 candidate 변경의 activeTab reset은 호스트 소유입니다. favorite/activeTab과 favoriteBusy/printBusy/readOnly는 제어형이고 readOnly는 즐겨찾기 변경만 막습니다. Portrait는 subject/URL 변경 시 재시도하고 보호URL/인증을 해석하지 않습니다. 기본 정보의 복수 값과 경력의 복수 직무 설명을 분리해 표시하고 isStart/isEnd로 이어지는 경력 구간을 표현합니다. PrismDesignCompetenceMatrix는 원본의 Function 행·열과 현재 위치 한 셀을 표시하며 좁은 화면에서 내부 스크롤합니다. 좁은 본문은 사진/정보를 줄바꿈하고 긴 정보를 보존합니다. print는80pt 사진/10pt 정보/18pt 태그를 사용하며 callbacks가 없으면 앱 동작을 포함하지 않습니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
@@ -1815,23 +1815,23 @@
         "chat/successorCandidate/total/SuccessorCandidateCareerTimeline.tsx",
         "chat/successorCandidate/competence/DesignCompetenceMatrix.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismProfile, type PrismProfileTab, type PrismCandidate } from \"@pydemia/prism\";\nexport function ProfileExample() {\n  const [tab, setTab] = useState<PrismProfileTab>(\"total\");\n  const [favorite, setFavorite] = useState(false);\n  const [action, setAction] = useState(\"\");\n  const candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", birthDate: \"1980.01\", executiveYears: 0,\n    recentEvaluations: [{ year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" }] };\n  return <div data-prism=\"light\"><PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab}\n    favorite={favorite} onFavoriteChange={setFavorite} commentCount={0}\n    onComments={() => setAction(\"메모 열기 intent\")} onPrint={() => setAction(\"인쇄 intent\")}\n    sections={{ total: <p>호스트가 제공한 후보자 상세 영역</p> }} /><p role=\"status\">{action}</p></div>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismProfile, PrismBasicInfo, PrismCareerTimeline, PrismOutline, PrismSummaryBadge, PrismEvidence, PrismDesignCompetenceMatrix,\n  type PrismProfileTab, type PrismCandidate } from \"@pydemia/prism\";\n\nconst candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\",\n  position: \"기술전략담당\", affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\",\n  birthDate: \"1980.01\", executiveYears: 0, recentEvaluations: [{ year: \"2025\", grade: \"(A)\" }] };\nexport function ProfileExample() {\n  const [tab, setTab] = useState<PrismProfileTab>(\"total\");\n  const [favorite, setFavorite] = useState(false);\n  const [action, setAction] = useState(\"\");\n  return <div data-prism=\"light\"><PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab}\n    favorite={favorite} onFavoriteChange={setFavorite} commentCount={0}\n    onComments={() => setAction(\"메모 열기 intent\")} onPrint={() => setAction(\"인쇄 intent\")}\n    sections={{\n      total: <><PrismOutline title=\"기본 정보\"><PrismBasicInfo items={[{ label: \"학력\", value: [\"가상대학교\", \"예시 대학원\"] }]} /></PrismOutline>\n        <PrismOutline title=\"경력\"><PrismCareerTimeline entries={[{ id: \"career-1\", period: \"2023–현재\",\n          company: \"가상전자\", role: [\"기술전략담당\", \"신사업 책임\"] }]} /></PrismOutline></>,\n      design: <PrismDesignCompetenceMatrix matrix={{ rowAxisLabel: \"Function\",\n        columns: [{ key: \"strategy\", label: \"전략\" }, { key: \"technology\", label: \"기술\" }],\n        rows: [{ key: \"business\", label: \"사업\" }],\n        currentPosition: { rowKey: \"business\", columnKey: \"strategy\" } }} />,\n      expertise: <><PrismSummaryBadge label=\"전문성\" summary=\"합성 데이터 표시 예시입니다.\" note=\"실제 평가가 아닙니다.\" />\n        <PrismEvidence title=\"전문분야 검증\" grade={null}>근거 정보가 없습니다.</PrismEvidence></>,\n    }} /><p role=\"status\">{action}</p></div>;\n}",
       "sourcePath": "packages/prism/src/prism-profile.tsx",
       "previewUrl": "/prism?component=prism-profile",
       "embedUrl": "/prism?component=prism-profile&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-profile&view=responsive",
       "verification": {
-        "visual": "pending",
+        "visual": "partial",
         "interaction": "partial",
         "checks": [
           "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content",
-          "At frontend dev 2eeb26ff, the deployed Candidate Common sample SUMMARY circle measured 88x88px with 10px 4px padding; local and independently installed PrismSummaryBadge matched that geometry."
+          "At frontend dev 2eeb26ff, the deployed Candidate Common sample SUMMARY circle measured 88x88px with 10px 4px padding; local and independently installed PrismSummaryBadge matched that geometry.",
+          "Current source BasicInfo string arrays, CareerTimeline repeated descriptions and DesignCompetenceMatrix currentPosition are represented by separate visible values, roles and a semantic position table.",
+          "At 320px the local profile long/loading/readonly states kept the document width, eight tabs used two rows, the position table scrolled inside its region, the tooltip dismissed with Escape, and loading hid the previous section values. The isolated installed consumer kept width, changed tabs, and emitted favorite, memo and print intents."
         ],
         "remaining": [
-          "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
-          "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
-          "Authenticated original source and production.",
-          "Other SUMMARY states, long labels, tooltip, print and narrow widths require original-versus-installed comparison."
+          "Authenticated deployed full-profile visual comparison and deployed revision binding are unavailable; current comparison uses source code and the public Candidate Common sample.",
+          "A4 print and pagination remain in the separately counted prism-profile-print group; native print output is not established by profile action callbacks."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -1849,6 +1849,33 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/successorCandidate/SuccessorCandidateDetail.tsx",
+            "chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+            "chat/successorCandidate/total/SuccessorCandidateBasicInfo.tsx",
+            "chat/successorCandidate/total/SuccessorCandidateCareerTimeline.tsx",
+            "chat/successorCandidate/competence/DesignCompetenceMatrix.tsx"
+          ],
+          "evidence": [
+            "The public deployed Candidate Common SUMMARY circle and the local/installed badge shared the measured 88x88px geometry and 10px 4px padding; source header and eight-tab contracts were checked separately.",
+            "The local 320px default, long, readonly and loading profile retained document width and distinct values/roles; the Design current-position table scrolled internally and its help closed with Escape.",
+            "An isolated shadcn consumer installed 59 exact module sources and CSS, typechecked 43 examples, built with Vite and verified font/notices; its 320px profile changed tabs and emitted separate favorite, memo and print intents.",
+            "321 PRISM tests, workspace typecheck, site build and registry release check passed."
+          ],
+          "intentionalImprovements": [
+            "The current-position matrix uses a semantic table with accessible row and column labels instead of unlabeled visual grid cells.",
+            "Long career roles and multi-value basic fields remain distinct, and narrow profile tabs/matrix scroll without expanding the document.",
+            "The loading example hides previous section data and shows loading state for each tab."
+          ],
+          "hostOwned": [
+            "The consumer owns candidate fetching, permission checks, favorites, memo persistence and print handling; synthetic callbacks do not prove service outcomes.",
+            "Authenticated deployed profile comparison and source SHA binding remain unavailable; A4 print implementation is counted separately."
+          ]
         }
       },
       "exports": [
@@ -1893,6 +1920,14 @@
           "kind": "component"
         },
         {
+          "name": "PrismDesignCompetenceMatrixModel",
+          "kind": "type"
+        },
+        {
+          "name": "PrismDesignCompetenceMatrix",
+          "kind": "component"
+        },
+        {
           "name": "PrismFavoriteProfileProps",
           "kind": "type"
         },
@@ -1902,7 +1937,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismProfile, type PrismProfileTab } from \"@/components/ui/prism-profile\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\nexport function ProfileExample() {\n  const [tab, setTab] = useState<PrismProfileTab>(\"total\");\n  const [favorite, setFavorite] = useState(false);\n  const [action, setAction] = useState(\"\");\n  const candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", birthDate: \"1980.01\", executiveYears: 0,\n    recentEvaluations: [{ year: \"2023\", grade: \"B\" }, { year: \"2025\", grade: \"(A)\" }] };\n  return <div data-prism=\"light\"><PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab}\n    favorite={favorite} onFavoriteChange={setFavorite} commentCount={0}\n    onComments={() => setAction(\"메모 열기 intent\")} onPrint={() => setAction(\"인쇄 intent\")}\n    sections={{ total: <p>호스트가 제공한 후보자 상세 영역</p> }} /><p role=\"status\">{action}</p></div>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismProfile, PrismBasicInfo, PrismCareerTimeline, PrismOutline, PrismSummaryBadge, PrismEvidence, PrismDesignCompetenceMatrix, type PrismProfileTab } from \"@/components/ui/prism-profile\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\n\nconst candidate: PrismCandidate = { id: \"synthetic-profile\", name: \"김가상\", company: \"가상전자\",\n  position: \"기술전략담당\", affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\",\n  birthDate: \"1980.01\", executiveYears: 0, recentEvaluations: [{ year: \"2025\", grade: \"(A)\" }] };\nexport function ProfileExample() {\n  const [tab, setTab] = useState<PrismProfileTab>(\"total\");\n  const [favorite, setFavorite] = useState(false);\n  const [action, setAction] = useState(\"\");\n  return <div data-prism=\"light\"><PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab}\n    favorite={favorite} onFavoriteChange={setFavorite} commentCount={0}\n    onComments={() => setAction(\"메모 열기 intent\")} onPrint={() => setAction(\"인쇄 intent\")}\n    sections={{\n      total: <><PrismOutline title=\"기본 정보\"><PrismBasicInfo items={[{ label: \"학력\", value: [\"가상대학교\", \"예시 대학원\"] }]} /></PrismOutline>\n        <PrismOutline title=\"경력\"><PrismCareerTimeline entries={[{ id: \"career-1\", period: \"2023–현재\",\n          company: \"가상전자\", role: [\"기술전략담당\", \"신사업 책임\"] }]} /></PrismOutline></>,\n      design: <PrismDesignCompetenceMatrix matrix={{ rowAxisLabel: \"Function\",\n        columns: [{ key: \"strategy\", label: \"전략\" }, { key: \"technology\", label: \"기술\" }],\n        rows: [{ key: \"business\", label: \"사업\" }],\n        currentPosition: { rowKey: \"business\", columnKey: \"strategy\" } }} />,\n      expertise: <><PrismSummaryBadge label=\"전문성\" summary=\"합성 데이터 표시 예시입니다.\" note=\"실제 평가가 아닙니다.\" />\n        <PrismEvidence title=\"전문분야 검증\" grade={null}>근거 정보가 없습니다.</PrismEvidence></>,\n    }} /><p role=\"status\">{action}</p></div>;\n}"
     },
     {
       "id": "prism-content",
