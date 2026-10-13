@@ -466,4 +466,12 @@ Real shadcn installation additionally verified58 exact module/CSS sources,39 com
 
 개선을 허용하는 새 기준으로 `prism-button`을 완료 판정했습니다. 대응 원본은 `HRXBtn`과 `HRXNewChatBtn` 두 파일입니다. 원본 사용처에서 확인된 `label` 단독 문구와 오른쪽 아이콘 순서를 공개 API에 보완했습니다. 원본 공개 버튼 샘플과 독립 예제의 대표 크기·색·비활성·새 대화 상태를 비교했고, 클릭·Enter·focus-visible과 접근 가능한 아이콘 이름을 확인했습니다. 320px 기본·비활성 화면의 문서 가로 넘침은 0px입니다. 아이콘 버튼의 이름 요구, 기본 `type=button`, 오른쪽 아이콘의 대칭 간격은 의도한 개선입니다.
 
-최종 296개 PRISM 테스트, workspace typecheck, site build, registry release check가 통과했습니다. 실제 shadcn 독립 소비자에는 59개 모듈과 CSS가 생성 산출물과 바이트 단위로 일치하며, 40개 완전 예제의 타입 검사, Vite·폰트·고지를 확인했습니다. 새 기준의 완료 판정은 **1/58개**입니다. 나머지 57개는 미판정입니다. 기존 `visual`/`interaction`의 `partial` 표기는 더 엄격한 원본 전체 시각·상호작용 일치 기준의 미검증을 계속 나타냅니다. 배포 원본의 commit 동일성 및 실제 제품 탐색·API 연동은 확인하지 못했고 소비자 앱이 소유합니다.
+최종 296개 PRISM 테스트, workspace typecheck, site build, registry release check가 통과했습니다. 실제 shadcn 독립 소비자에는 59개 모듈과 CSS가 생성 산출물과 바이트 단위로 일치하며, 40개 완전 예제의 타입 검사, Vite·폰트·고지를 확인했습니다. 버튼 감사 당시 완료 판정은 **1/58개**였고, 나머지 57개는 미판정이었습니다. 기존 `visual`/`interaction`의 `partial` 표기는 더 엄격한 원본 전체 시각·상호작용 일치 기준의 미검증을 계속 나타냅니다. 배포 원본의 commit 동일성 및 실제 제품 탐색·API 연동은 확인하지 못했고 소비자 앱이 소유합니다.
+
+## Goal 배지·태그·칩 그룹 완료 판정, 2026-10-13
+
+`prism-badge`의 대응 원본 네 파일을 원본 사용처와 공개 배포 샘플에 다시 대조했습니다. 배포 화면에서 ELP 16px, 24px 알림 아이콘의 1/99+ 건수, 명시 색상 Chip 52×22px, 세 가지 Tag 21px과 대표 색을 확인했습니다. 원본 사용처의 `label` 단독 전달을 Tag/Chip의 공개 API에 반영했고, 색상 미지정 Chip의 원본 fallback은 `tone="neutral"`로 선택할 수 있게 했습니다. 기존 primary 기본값은 유지했습니다.
+
+짧은 Tag/Chip의 21/22px 높이를 유지하면서 `wrap`을 선택한 긴 문구만 여러 줄로 표시합니다. 로컬 및 독립 설치본의 320px 미리보기에서 180px 폭의 긴 Tag/Chip은 각각 약 39.6/37.6px 높이로 줄바뀌었고 문서 폭은 320px였습니다. 태그 삭제 버튼은 Enter로 합성 항목을 제거했습니다. 직접 연 설치본에는 브라우저 오류 로그가 없었습니다. iframe에서 관찰된 `MutationObserver` 오류는 빈 iframe에서도 재현되어 해당 컴포넌트의 오류로 연결하지 않았습니다.
+
+최종 297개 PRISM 테스트, workspace typecheck, site build, registry release check가 통과했습니다. 실제 shadcn 설치본에서 59개 모듈·CSS의 바이트 일치, 40개 예제 타입 검사, Vite·폰트·고지를 확인했습니다. 현재 새 기준의 완료 판정은 **2/58개**이며 56개는 미판정입니다. 원본 배포 revision 동일성, 제품 서비스의 Tag 삭제, 전체 제품 사용처의 시각·상호작용은 이 판정의 증거에 포함되지 않습니다.

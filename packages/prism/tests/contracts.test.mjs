@@ -3,7 +3,7 @@ import test from "node:test";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { JSDOM } from "jsdom";
-import { PrismButton, PrismNewChatButton, PrismInput, PrismCountBadge, PrismCandidateCard, PrismEvaluationTable, PrismRequestState, PrismRadarChart, PrismTrendChart, PrismSixFrame, PrismPagination, PrismProgress } from "../dist/index.js";
+import { PrismButton, PrismNewChatButton, PrismInput, PrismCountBadge, PrismTag, PrismChip, PrismCandidateCard, PrismEvaluationTable, PrismRequestState, PrismRadarChart, PrismTrendChart, PrismSixFrame, PrismPagination, PrismProgress } from "../dist/index.js";
 
 const render = (component, props) => renderToStaticMarkup(h(component, props));
 test("form labels connect to separate descriptions and errors", () => {
@@ -64,6 +64,16 @@ test("overflowing counts retain their exact accessible value", () => {
     const markup = render(PrismCountBadge, { count: 120 });
     assert.match(markup, /120건/); assert.match(markup, /99\+/);
     assert.throws(() => render(PrismCountBadge, { count: -1 }), /nonnegative/);
+});
+test("tag and chip render source-style label props while children can override them", () => {
+    const tag = new JSDOM(render(PrismTag, { label: "재무", onRemove() {} })).window.document;
+    assert.equal(tag.querySelector(".prism-tag").textContent, "재무");
+    assert.equal(tag.querySelector(".prism-tag button").getAttribute("aria-label"), "재무 삭제");
+    const chip = new JSDOM(render(PrismChip, { label: "활성", color: "#0072C6" })).window.document.querySelector(".prism-chip");
+    assert.equal(chip.textContent, "활성");
+    assert.equal(chip.getAttribute("label"), null);
+    assert.equal(new JSDOM(render(PrismChip, { label: "기본값", children: "수정값" })).window.document.querySelector(".prism-chip").textContent, "수정값");
+    assert.equal(new JSDOM(render(PrismChip, { label: "기본 상태", tone: "neutral" })).window.document.querySelector(".prism-chip").getAttribute("data-tone"), "neutral");
 });
 test("chart gaps do not draw zero or interpolate missing evidence", () => {
     const axes = [{id:"a",label:"A"},{id:"b",label:"B"},{id:"c",label:"C"}];

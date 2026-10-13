@@ -1853,6 +1853,38 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "ui/badge/HRXElpBadge.tsx",
+          "ui/badge/HRXCountBadge.tsx",
+          "ui/tag/HRXTag.tsx",
+          "ui/chip/HRXChip.tsx"
+        ],
+        "evidence": [
+          "Current deployed public Badge, Chip and Tag samples remeasured: ELP 16px, Count 1/99+ over 24px icon, explicit-color Chips 52x22px and three Tag variants 21px with matching sampled colors.",
+          "Source product call sites mostly pass label alone to Tag/Chip; portable components now render label when children are absent. Source no-color Chip fallback is selectable with tone=neutral; existing primary default remains stable.",
+          "Local and installed 320px examples show 21px short Tags and 22px Chips. Explicit wrap renders long Tag/Chip at 180px width and 39.59/37.59px height with 320px document scroll width.",
+          "Native Tag remove button responds to Enter and removes the item from synthetic state; accessible action name includes the label. Direct installed page has no browser error logs.",
+          "297 PRISM tests, workspace typecheck, site build and registry release check passed; isolated shadcn consumer installed 59 exact TSX sources plus CSS, typechecked 40 examples and built with Vite/font/notices."
+        ],
+        "intentionalImprovements": [
+          "Tag/Chip accept both source-style label and composition children.",
+          "Long text wrapping is opt-in, preserving the source short-item heights.",
+          "Explicit neutral tone exposes the source no-color soft fallback while retaining the established primary default.",
+          "Count retains the exact value in its accessible name when the visible value is capped."
+        ],
+        "hostOwned": [
+          "Removing a Tag signals an action; collection mutation, service writes and permissions belong to the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "The deployed source commit identity and Tag deletion in an authenticated product flow are not established.",
+          "Full font/pixel comparison and all product caller combinations remain outside this group acceptance evidence.",
+          "The IAB MutationObserver console error occurs in an empty iframe as well; the direct installed page has no error logs."
+        ]
       }
     },
     "prism-chat": {
@@ -5895,10 +5927,11 @@
   "goalAcceptance": {
     "targetGroups": 58,
     "acceptedGroups": [
-      "prism-button"
+      "prism-button",
+      "prism-badge"
     ],
-    "acceptedCount": 1,
-    "unassessedGroups": 57,
+    "acceptedCount": 2,
+    "unassessedGroups": 56,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

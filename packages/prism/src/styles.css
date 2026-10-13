@@ -350,12 +350,16 @@
 .prism-elp[data-type="s-ELP"] { border: 1px solid #d2daaa; background: #f6fcd6; color: #6a7b00; }
 .prism-elp[data-type="ELP"] { border: 1px solid #e5d9f2; background: #f4ecfa; color: #68127a; }
 .prism-count { display: inline-flex; align-items: center; justify-content: center; min-width: 14px; height: 14px; padding: 0 4px; border-radius: 10px; background: var(--prism-secondary); color: #fff; font-size: 10px; font-weight: 500; }
-.prism-tag { display: inline-flex; align-items: center; justify-content: center; height: 21px; padding: 2px 4px; border-radius: 4px; font-size: 12px; line-height: 1.4; font-weight: 500; gap: 2px; border: 1px solid var(--prism-border); background: var(--prism-neutral-50); }
+.prism-tag { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; height: 21px; padding: 2px 4px; border-radius: 4px; font-size: 12px; line-height: 1.4; font-weight: 500; gap: 2px; border: 1px solid var(--prism-border); background: var(--prism-neutral-50); }
+.prism-tag[data-wrap] { flex-shrink: 1; min-width: 0; max-width: 100%; height: auto; min-height: 21px; white-space: normal; overflow-wrap: anywhere; }
 .prism-tag[data-variant="blue"] { font-weight: 600; border-color: var(--prism-cool-200); background: var(--prism-cool-100); color: var(--accent); }
 .prism-tag[data-variant="mainBlue"] { font-weight: 600; border:0; background: var(--prism-cool-800); color: #fff; }
 .prism-tag button { border: 0; background: none; padding: 0; display: inline-flex; color: inherit; }
-.prism-chip { display: inline-flex; align-items: center; justify-content: center; height: 22px; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; line-height: 1.4; background: color-mix(in srgb,var(--chip-tone) 10%,transparent); color: var(--chip-tone); }
+.prism-chip { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; height: 22px; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; line-height: 1.4; background: color-mix(in srgb,var(--chip-tone) 10%,transparent); color: var(--chip-tone); }
+.prism-chip[data-wrap] { flex-shrink: 1; min-width: 0; max-width: 100%; height: auto; min-height: 22px; white-space: normal; overflow-wrap: anywhere; }
+.prism-chip[data-tone="neutral"][data-variant="soft"] { background: rgb(189 189 189 / 10%); color: rgb(34 34 34 / 14%); }
 .prism-chip[data-variant="solid"] { background: var(--chip-tone); color: #fff; font-size: 14px; }
+.prism-chip[data-tone="neutral"][data-variant="solid"] { background: #626a75; }
 .prism-avatar { display: flex; align-items: center; gap: 12px; min-width: 0; width:100%; }
 .prism-avatar-image { width: 40px; height: 40px; border: 0; border-radius: 25px; background: #626a75; color: #fff; }
 .prism-avatar-image > span { font-size: 20px; font-weight: 600; }
