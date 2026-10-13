@@ -2787,20 +2787,17 @@
       }
     },
     "prism-position-directory": {
-      "visual": "partial-authenticated-default-list-geometry",
-      "interaction": "passed-synthetic-and-installed-filter-sort-pagination-tabs;deployed-detail-input-unverified",
+      "visual": "previous-authenticated-default-geometry-plus-current-source-and-independent-container-browser-passed;current-deployed-detail-unverified",
+      "interaction": "passed-local-and-installed-filter-sort-pagination-tab-lifecycle-retry;live-host-effects-unverified",
       "checks": [
-        "Authenticated testuser001 default page showed 1023 total and 10 live rows; five columns measured at 800px, 160/280/120/120/120px, 60px row, 50px filters and 14px Pretendard.",
-        "284 final PRISM tests passed; four new tests cover staged LIVE query, page/sort, tab reuse/close and complete synthetic example including retry.",
-        "Five synthetic states rendered at 320/1280px with no document overflow or nested buttons.",
-        "Actual shadcn install of 60 items and 40 examples passed TypeScript/Vite/font/notices; installed browser covered filters, paging, sorting, tabs, retry and 320px scroll.",
-        "At source 2eeb26ff, opened detail panels stay mounted and existing rows stay visible during refresh. One focused lifecycle/refresh test and 295 full PRISM tests passed; local and installed browser fixtures retained hidden detail after returning to the list."
+        "Previous authenticated testuser001 default showed 1023 rows total, 10 visible rows, five 800px columns at 160/280/120/120/120px, 60px row and 14px Pretendard; current deployed route was blank in the in-app browser.",
+        "Current 2eeb26ff source keeps existing rows during refresh and mounted hidden detail panels; portable directory retains both behaviors.",
+        "Installed consumer in 1280px viewport and 320px parent stacked three 288px filters and scrolled the 680px table inside a 288px region; no document overflow. Resizing the mounted parent 320 to 800px yielded three 252px columns without losing the draft or changing 24 rows before apply.",
+        "Installed browser covered draft 24 to applied 12 rows, detail tab mount retention and close, initial skeleton, refresh with 10 rows, empty/error/long states and retry to 24 rows; console errors were zero.",
+        "Separate shadcn installation matched 59 module sources and CSS; 43 complete examples typechecked; Vite, Pretendard and notices passed."
       ],
       "remaining": [
-        "Deployed detail row click and real service/permission/error behavior.",
-        "Full original visual/font/pixel comparison across states and widths.",
-        "Current position-directory review/preview and production publication.",
-        "The 2eeb26ff source behavior is not bound to the deployed PRISM-DEV revision; full state and pixel comparison remains open."
+        "Current authenticated deployed detail opening, actual LIVE API/permissions, and deployed source SHA binding."
       ],
       "localRenderGate": {
         "status": "passed-synthetic-workspace",
@@ -2817,7 +2814,43 @@
         ],
         "sourceSha256": "0f670cbd3b4b5cb83caef2797fe74241ccfb5b59184b3c705f0e84c2331f51dc",
         "scope": "DOM geometry, font after recheck, root overflow, nested buttons and internal table scroll; original parity is separate."
-      }
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/position-list/PositionFilterBar.tsx",
+          "chat/position-list/PositionFilterBar.module.scss",
+          "chat/position-list/PositionListContent.tsx",
+          "chat/position-list/PositionListContent.module.scss",
+          "chat/position-list/PositionTable.tsx",
+          "chat/position-list/PositionTable.module.scss",
+          "chat/position-list/types.ts",
+          "pages/chat/PositionList.tsx",
+          "pages/chat/PositionList.module.scss"
+        ],
+        "evidence": [
+          "Prior authenticated default-page geometry and current source establish the LIVE filter/table/detail purpose; source changes since the prior audit are retained in the portable component.",
+          "Local and installed browsers cover staged query, table and tab workflows with loading, refresh, empty, error and long states.",
+          "Isolated shadcn consumer matched module/CSS bytes, typechecked 43 examples and built with bundled Pretendard and notices."
+        ],
+        "intentionalImprovements": [
+          "Responsive filter stacking and internal table scroll follow the independent component parent width rather than the browser viewport; mounted resizing preserves the draft and result state.",
+          "Row and sort actions have explicit accessible names, and hidden detail stays mounted until its tab closes."
+        ],
+        "hostOwned": [
+          "The consuming application provides and authorizes LIVE rows, filter options, detail content, request cancellation and persistence."
+        ],
+        "nonBlockingUnknowns": [
+          "Current authenticated deployed detail interaction and deployed source commit identity are not established."
+        ]
+      },
+      "evidence": [
+        "prism-position-directory-goal-audit-2026-10-14.md",
+        "position-directory-goal-installed-bytes.json",
+        "position-directory.test.mjs"
+      ]
     }
   },
   "gates": {
@@ -6612,10 +6645,11 @@
       "prism-position-recommendations",
       "prism-response",
       "prism-rich-text",
-      "prism-position"
+      "prism-position",
+      "prism-position-directory"
     ],
-    "acceptedCount": 22,
-    "unassessedGroups": 36,
+    "acceptedCount": 23,
+    "unassessedGroups": 35,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
