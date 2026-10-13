@@ -14,7 +14,7 @@ export { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "./
 export { PrismDialog, PrismConfirmDialog } from "./prism-dialog";
 export type { PrismDialogProps, PrismConfirmDialogProps } from "./prism-dialog";
 export { PrismToast, PrismEmptyState, PrismRequestState } from "./prism-feedback";
-export type { PrismEmptyStateProps, PrismEmptyStateVariant } from "./prism-feedback";
+export type { PrismEmptyStateProps, PrismEmptyStateVariant, PrismToastTone } from "./prism-feedback";
 export { PrismSidebar, createPrismAdminMenu, getPrismHistoryDeletionAction, getPrismHistorySelectionId } from "./prism-sidebar";
 export type { PrismSidebarProps, PrismNavItem, PrismHistoryItem, PrismProfileAction, PrismHistoryDeletionAction, PrismHistoryOpenIntent } from "./prism-sidebar";
 export { PrismChatInput, PrismMessage, PrismCriteria } from "./prism-chat";

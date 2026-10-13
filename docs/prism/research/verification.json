@@ -944,7 +944,7 @@
         "local-fixed-toast-dismiss"
       ],
       "remaining": [
-        "all original Toast tones, long content and placement states"
+        "deployed placement, auto-dismiss lifecycle and authenticated caller states"
       ],
       "localRenderGate": {
         "status": "passed",
@@ -960,6 +960,35 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "ui/toast/HRXToast.tsx",
+          "ui/empty-state/HRXEmptyState.tsx",
+          "../styles/_toast.scss",
+          "../styles/_empty-state.scss"
+        ],
+        "evidence": [
+          "The deployed public Toast sample measured a 191.9375x40px success notice with 12px outer gap, 6px body gap, 4px content gap, 20px close control and rgb(56,74,125) background; title-only and title-plus-description long states wrapped without overflow.",
+          "An isolated shadcn consumer installed 59 exact modules and CSS and typechecked 40 complete examples. Its browser rendered all five source tones, long title/body states, the embedded retry action, three empty-state variants and a string image URL.",
+          "The installed long title measured 59.1875px high and long title-plus-description 79.96875px, matching the selected deployed sample within font subpixels; at 320px the notice and close control stayed inside the viewport with zero document overflow.",
+          "The embedded retry action and notification dismissal emitted separate intents; request failure retry incremented once. 303 PRISM tests, workspace typecheck, site build and registry release check passed."
+        ],
+        "intentionalImprovements": [
+          "Only error notices use alert semantics; other tones use status to avoid interrupting assistive technology.",
+          "Custom body actions are rendered in a valid container and keep their own button sizing; the close control alone receives 20px styling.",
+          "The host controls notice placement, queue, auto-dismiss and request retry, keeping the component independent of a particular snackbar provider."
+        ],
+        "hostOwned": [
+          "The consuming application owns notification lifecycle and actual retry/network outcomes; browser callbacks and the illustration were synthetic."
+        ],
+        "nonBlockingUnknowns": [
+          "The deployed source commit identity, authenticated placements and all caller states are not established.",
+          "Full font/pixel parity outside selected public samples remains unverified."
+        ]
       }
     },
     "prism-display": {
@@ -5988,10 +6017,11 @@
       "prism-button",
       "prism-badge",
       "prism-field",
-      "prism-dialog"
+      "prism-dialog",
+      "prism-feedback"
     ],
-    "acceptedCount": 4,
-    "unassessedGroups": 54,
+    "acceptedCount": 5,
+    "unassessedGroups": 53,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

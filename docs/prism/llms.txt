@@ -103,20 +103,22 @@ import { PrismButton } from "@/components/ui/prism-button";
 
 ## Toast / Request state
 알림과 로딩·빈 결과·실패·재시도 구분
-Contract: 오류는 alert, 일반 알림은 status로 표시합니다. 요청 실패를 빈 결과로 바꾸지 않습니다. 자동 닫힘·queue·서버 재시도 정책은 호출자가 결정합니다. 빈 상태의 variant는 default(일반 140px/18px·16px), tab(탭 120px/16px·14px·제목 간격 10px), panel(메모 140px/16px·14px·간격 6px)을 구분합니다. 기존 panel=true는 tab 표시를 유지하며 명시적 variant가 우선합니다.
+Contract: Toast는 원본의 default/info/warning/success/error 유형과 최대 760px 줄바꿈을 지원하며 오류는 alert, 일반 알림은 status로 표시합니다. 닫기 버튼은 호출자의 onClose를 실행합니다. 요청 실패를 빈 결과로 바꾸지 않습니다. 자동 닫힘·queue·서버 재시도 정책은 호출자가 결정합니다. 빈 상태의 variant는 default(일반 140px/18px·16px), tab(탭 120px/16px·14px·제목 간격 10px), panel(메모 140px/16px·14px·간격 6px)을 구분합니다. 기존 panel=true는 tab 표시를 유지하며 명시적 variant가 우선합니다. 빈 상태 icon에는 원본처럼 이미지 URL 문자열 또는 React 노드를 전달할 수 있습니다.
 States: default, loading, empty, error
 Registry: /prism/r/prism-feedback.json
 Source: packages/prism/src/prism-feedback.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismEmptyState, PrismRequestState, type PrismEmptyStateVariant } from "@/components/ui/prism-feedback";
+import { PrismEmptyState, PrismRequestState, PrismToast, type PrismEmptyStateVariant } from "@/components/ui/prism-feedback";
 import { PrismIcon } from "@/components/ui/prism-icon";
 
-export function FeedbackExample({ status, variant = "panel", onRetry }: {
+export function FeedbackExample({ status, variant = "panel", notice, onRetry, onDismiss }: {
   status?: "loading" | "empty" | "error";
   variant?: PrismEmptyStateVariant;
+  notice?: string;
   onRetry?: () => void;
+  onDismiss?: () => void;
 } = {}) {
   return <section data-prism="light">
     {status ? <PrismRequestState status={status} onRetry={onRetry} /> :
@@ -124,6 +126,7 @@ export function FeedbackExample({ status, variant = "panel", onRetry }: {
         icon={variant === "panel" ? <PrismIcon name="NoMemoIcon" size={140} /> : undefined}
         title={variant === "panel" ? "등록된 프로필 메모가 없습니다." : "표시할 데이터가 없습니다"}
         description={variant === "panel" ? "후보자에 대한 의견이나 참고사항을 기록해보세요." : "데이터가 준비되면 여기서 확인할 수 있어요."} />}
+    {notice && <PrismToast title={notice} tone="success" onClose={onDismiss} />}
   </section>;
 }
 ```

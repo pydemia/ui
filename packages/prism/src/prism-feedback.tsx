@@ -1,15 +1,15 @@
 import type { ReactNode } from "react";
 import { PrismIcon } from "./prism-icon";
-import { PrismInfoGlyph as Info, PrismXGlyph as X } from "./prism-icon";
 import { PrismButton } from "./prism-button";
 import { PrismSkeletonGroup } from "./prism-primitives";
 
-export function PrismToast({ title, children, tone = "info", onClose }: { title: string; children?: ReactNode; tone?: "info" | "success" | "error"; onClose?: () => void }) {
-    const iconName = tone === "success" ? "ToastCheckIcon" : tone === "error" ? "ToastErrorIcon" : "ToastInfoIcon";
+export type PrismToastTone = "default" | "info" | "warning" | "success" | "error";
+export function PrismToast({ title, children, tone = "info", onClose }: { title: string; children?: ReactNode; tone?: PrismToastTone; onClose?: () => void }) {
+    const iconName = tone === "success" || tone === "default" ? "ToastCheckIcon" : tone === "error" ? "ToastErrorIcon" : "ToastInfoIcon";
     return <div className="prism-toast" role={tone === "error" ? "alert" : "status"}>
         <div className="prism-toast-body"><span className="prism-toast-icon" aria-hidden="true"><PrismIcon name={iconName} size={20} /></span>
-            <div className="prism-toast-content"><strong>{title}</strong>{children && <p>{children}</p>}</div></div>
-        {onClose && <button type="button" onClick={onClose} aria-label="알림 닫기"><X size={20} aria-hidden="true" /></button>}</div>;
+            <div className="prism-toast-content"><strong>{title}</strong>{children != null && children !== false && <div className="prism-toast-text">{children}</div>}</div></div>
+        {onClose && <button type="button" className="prism-toast-close" onClick={onClose} aria-label="알림 닫기"><PrismIcon name="CloseIcon" size={20} /></button>}</div>;
 }
 export type PrismEmptyStateVariant = "default" | "tab" | "panel";
 export type PrismEmptyStateProps = {
@@ -19,7 +19,8 @@ export type PrismEmptyStateProps = {
 };
 export function PrismEmptyState({ title, description, variant, panel = false, action, icon }: PrismEmptyStateProps) {
     const resolved = variant ?? (panel ? "tab" : "default");
-    return <div className="prism-empty" data-panel={resolved !== "default" || undefined} data-empty-variant={resolved}><div className="prism-empty-icon" aria-hidden="true">{icon ?? <PrismIcon name="NoSearchResultIcon" size={resolved === "tab" ? 120 : 140} />}</div>
+    const imageSource = typeof icon === "string";
+    return <div className="prism-empty" data-panel={resolved !== "default" || undefined} data-empty-variant={resolved}><div className="prism-empty-icon" aria-hidden={imageSource ? undefined : true}>{imageSource ? <img src={icon} alt={title} /> : icon ?? <PrismIcon name="NoSearchResultIcon" size={resolved === "tab" ? 120 : 140} />}</div>
         <h3>{title}</h3>{description && <p>{description}</p>}{action}</div>;
 }
 export function PrismRequestState({ status, error, onRetry, variant="panel" }: { status: "loading" | "empty" | "error"; error?: string; onRetry?: () => void; variant?:"panel"|"generic" }) {
