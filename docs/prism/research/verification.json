@@ -1392,15 +1392,20 @@
       }
     },
     "prism-chart": {
-      "visual": "pending-current-leadership-detail-rendered-comparison",
+      "visual": "partial-source-print-and-full-pixel-parity",
       "interaction": "passed-local-source-and-contract-tests",
       "checks": [
         "Latest27c4fdbf source delta: tag/content/detail/divider, ordered palette and screen/print rules.",
-        "Detail-only and full detail under both print text policies retain host-provided text without mutation."
+        "Detail-only and full detail under both print text policies retain host-provided text without mutation.",
+        "Current frontend dev 2eeb26ff and public deployed /sample/chat/chart and /sample/chat/candidate-profile-print were inspected for Radar, SUMMARY pie and five-year leadership bar layout.",
+        "Catalog source mapping now names the existing RadarChart, LeadershipPie, LeadershipPieSummary, LeadershipTrendChart and LeadershipTrend files and styles; the prior LeadershipRadar.tsx path did not exist.",
+        "PrismLeadershipTrendBars now renders five host-supplied calendar years, 24px blue bars, 0 versus N/A, year dividers, optional company/position detail and keyboard-accessible metadata; the generic line Trend remains a separate purpose.",
+        "Independent shadcn consumer installed 59 exact module sources and CSS, typechecked 48 complete examples, and built with Vite/font/notices.",
+        "Independent browser checked desktop and 320px chart composition, 140px parent with internal detail scrolling, focused/clicked bar metadata and Escape dismissal, and print SUMMARY 8pt padding/radius and 10pt text; console errors were empty."
       ],
       "remaining": [
-        "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
-        "Authenticated deployed source and deployed revision binding."
+        "Full pixel/font and A4 pagination comparison belongs to the separate profile-print acceptance; representative chart design and states are checked here.",
+        "Authenticated product route, deployed frontend source SHA and service-fed candidate values remain unverified."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1416,6 +1421,14 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "evidence": "Current source and two public deployed samples checked; complete installed example and independent browser verified pie, Radar, generic line and source-purpose five-year bar chart, missing/zero separation, 320px and 140px layout, accessible detail and print SUMMARY styling.",
+        "intentionalImprovement": "The portable bar chart uses semantic buttons and an accessible data table; at 140px its long company/position detail scrolls within the component instead of widening the page.",
+        "limitations": "Full A4/profile print parity is tracked by prism-profile-print; the authenticated deployed revision and real host data binding remain unverified."
       }
     },
     "prism-export": {
@@ -6915,10 +6928,11 @@
       "prism-sidebar",
       "prism-panel-recipes",
       "prism-primitives",
-      "prism-utility"
+      "prism-utility",
+      "prism-chart"
     ],
-    "acceptedCount": 33,
-    "unassessedGroups": 25,
+    "acceptedCount": 34,
+    "unassessedGroups": 24,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

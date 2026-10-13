@@ -125,3 +125,49 @@ export function PrismTrendChart({ title, labels, series, max = 5 }: { title: str
             <circle cx={x(index)} cy={y(value)} r={4} fill={s.color ?? "#0072C6"} tabIndex={0} aria-label={`${labels[index]} ${s.label} ${value} / ${max}`}><title>{`${labels[index]}: ${value} / ${max}`}</title></circle></g>)}</g>)}</svg>
         <figcaption>{title}</figcaption><table className="prism-sr-only"><caption>{title} 데이터</caption><thead><tr><th scope="col">시점</th>{series.map(s => <th scope="col" key={s.id}>{s.label}</th>)}</tr></thead><tbody>{labels.map((label,index) => <tr key={`${label}-${index}`}><th scope="row">{label}</th>{series.map(s => <td key={s.id}>{s.values[index] ?? "정보 없음"}</td>)}</tr>)}</tbody></table></figure>;
 }
+
+export type PrismLeadershipTrendBarRow = {
+    year: number; candidateScore: number | null; companyName: string | null; positionTitle: string | null;
+};
+export type PrismLeadershipTrendBarsProps = {
+    title: string; rows: readonly PrismLeadershipTrendBarRow[]; endYear?: number;
+    showDetail?: boolean; disableTooltip?: boolean;
+};
+/** Five calendar years of host-supplied scores. Missing years remain missing rather than becoming zero. */
+export function PrismLeadershipTrendBars({ title, rows, endYear, showDetail = false, disableTooltip = false }: PrismLeadershipTrendBarsProps) {
+    const [active, setActive] = useState<number | null>(null);
+    if (!title.trim() || rows.some(row => !Number.isInteger(row.year) || row.candidateScore !== null && (!Number.isFinite(row.candidateScore) || row.candidateScore < 0)) || new Set(rows.map(row => row.year)).size !== rows.length)
+        throw new RangeError("Leadership trend requires a title, unique integer years and nonnegative finite scores or null.");
+    if (endYear !== undefined && !Number.isInteger(endYear)) throw new RangeError("Trend end year must be an integer.");
+    const latest = endYear ?? (rows.length ? Math.max(...rows.map(row => row.year)) : new Date().getFullYear());
+    const years = Array.from({length: 5}, (_, index) => latest - 4 + index);
+    const displayed = years.map(year => rows.find(row => row.year === year) ?? null);
+    const yMax = Math.max(0, ...displayed.map(row => row?.candidateScore ?? 0));
+    const scale = yMax > 0 ? yMax * 1.25 : 10;
+    const selected = active === null ? null : displayed[active];
+    const tooltip = !disableTooltip && selected?.candidateScore !== null && selected?.companyName && selected?.positionTitle ? selected : null;
+    return <figure className="prism-leadership-trend-bars" aria-label={title}>
+        <div className="prism-leadership-trend-plot">
+            {displayed.map((row, index) => {
+                const score = row?.candidateScore;
+                const fill = score === null || score === undefined ? 0 : score / scale * 140;
+                return <div className="prism-leadership-trend-cell" key={years[index]}>
+                    {score === null || score === undefined ? <span className="prism-leadership-trend-na">N/A</span> :
+                        <button type="button" className="prism-leadership-trend-trigger" style={{height: fill + 28}}
+                            aria-label={`${years[index]}년 ${score}점${row?.companyName && row.positionTitle ? `, ${row.companyName} ${row.positionTitle}` : ""}`}
+                            onFocus={() => setActive(index)} onBlur={() => setActive(null)}
+                            onMouseEnter={() => setActive(index)} onMouseLeave={event => { if (document.activeElement !== event.currentTarget) setActive(null); }}
+                            onClick={() => setActive(index)} onKeyDown={event => { if (event.key === "Escape") setActive(null); }}>
+                            <span className="prism-leadership-trend-bar" style={{height:fill}} aria-hidden="true" />
+                            <span className="prism-leadership-trend-value" style={{bottom:fill+8}} aria-hidden="true">{score}</span>
+                        </button>}
+                </div>;
+            })}
+        </div>
+        <div className="prism-leadership-trend-years" aria-hidden="true">{years.map(year => <span key={year}>{year}</span>)}</div>
+        {tooltip && <div className="prism-leadership-trend-tooltip" role="status"><strong>{tooltip.companyName}</strong><span>{tooltip.positionTitle}</span></div>}
+        {showDetail && <div className="prism-leadership-trend-details">{displayed.map((row,index) => <div key={years[index]}><span>{row?.companyName ?? ""}</span><span>{row?.positionTitle ?? ""}</span></div>)}</div>}
+        <div className="prism-sr-only"><table><caption>{title} 데이터</caption><thead><tr><th scope="col">연도</th><th scope="col">점수</th><th scope="col">회사</th><th scope="col">포지션</th></tr></thead>
+            <tbody>{displayed.map((row,index) => <tr key={years[index]}><th scope="row">{years[index]}</th><td>{row?.candidateScore ?? "정보 없음"}</td><td>{row?.companyName ?? "정보 없음"}</td><td>{row?.positionTitle ?? "정보 없음"}</td></tr>)}</tbody></table></div>
+    </figure>;
+}
