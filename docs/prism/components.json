@@ -2561,15 +2561,18 @@
       "name": "Workspace shell",
       "category": "Layout",
       "purpose": "LNB·64px header·스크롤 본문·상세 패널 조합",
-      "contract": "sidebar·header·panel은 slot입니다. height/minHeight를 지정할 수 있고 responsive는 컨테이너 폭이 breakpoint(기본 768px)보다 작으면 탐색 Drawer를 사용합니다. navigationOpen/onNavigationOpenChange로 메뉴를 제어할 수 있으며 넓은 화면으로 전환하면 메뉴를 닫고 header에 포커스를 옮깁니다. 경로·로그인·서버 상태는 소비자가 소유합니다.",
+      "contract": "sidebar·header·panel은 slot입니다. height/minHeight를 지정할 수 있고 responsive는 컨테이너 폭이 breakpoint(기본 768px)보다 작으면 탐색 Drawer를 사용합니다. navigationOpen/onNavigationOpenChange로 메뉴를 제어할 수 있으며 넓은 화면으로 전환하면 메뉴를 닫고 header에 포커스를 옮깁니다. 사이드바는 폭 전환과 Drawer 닫힘에 다시 마운트되므로 접힘·메뉴 상태는 소비자가 제어합니다. 공지 팝업·토스트·PDF 작업은 shell 바깥의 호스트가 배치하고, 경로·로그인·서버 상태도 소비자가 소유합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default"
       ],
       "source": [
-        "../layouts/chat/ChatLayout.tsx"
+        "../layouts/chat/ChatLayout.tsx",
+        "chat/main/ChatConversationSection.tsx",
+        "chat/panel/SidePanel.tsx",
+        "chat/notice/NoticePopup.tsx"
       ],
-      "usage": "import { PrismWorkspace } from \"@pydemia/prism\";\n<PrismWorkspace sidebar={sidebar} header={header} panel={panel}>{content}</PrismWorkspace>;",
+      "usage": "import { useState } from \"react\";\nimport { PrismWorkspace, PrismSidebar, PrismPanel, PrismButton } from \"@pydemia/prism\";\nexport function WorkspaceShellExample() {\n  const [page, setPage] = useState(\"chat\");\n  const [collapsed, setCollapsed] = useState(false);\n  const [navigationOpen, setNavigationOpen] = useState(false);\n  const [detailOpen, setDetailOpen] = useState(false);\n  return <div data-prism=\"light\" style={{ width: \"100%\", minWidth: 0 }}>\n    <PrismWorkspace height={620} navigationOpen={navigationOpen} onNavigationOpenChange={setNavigationOpen} sidebar={<PrismSidebar items={[{ id: \"chat\", label: \"대화\" }, { id: \"candidates\", label: \"후보자 목록\" }]} activeId={page} onNavigate={id => { setPage(id); setNavigationOpen(false); }} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={() => { setPage(\"chat\"); setNavigationOpen(false); }} />} header={<strong>{page === \"chat\" ? \"새로운 대화\" : \"후보자 목록\"}</strong>} panel={<PrismPanel title=\"후보자 상세\" open={detailOpen} onOpenChange={setDetailOpen}><p style={{ padding: 20 }}>가상 후보자 정보</p></PrismPanel>}>\n      <div style={{ padding: 24 }}><h1>Leadership PRISM</h1><PrismButton onClick={() => setDetailOpen(true)}>가상 후보자 보기</PrismButton></div>\n    </PrismWorkspace>\n  </div>;\n}",
       "sourcePath": "packages/prism/src/prism-workspace.tsx",
       "previewUrl": "/prism?component=prism-workspace",
       "embedUrl": "/prism?component=prism-workspace&embed=1",
@@ -2584,16 +2587,23 @@
           "Container widths 288/358/736 use compact navigation; 992px uses desktop navigation",
           "Open Drawer closes when growing to 1024px and focus returns to workspace header",
           "Draft text persists through width changes",
-          "Candidate detail keeps all eight profile tabs at 390px"
+          "Candidate detail keeps all eight profile tabs at 390px",
+          "Current ChatLayout, ChatConversationSection, SidePanel and NoticePopup source responsibilities compared with the reusable shell",
+          "At 560px the closed navigation mounts no sidebar and the open Drawer mounts exactly one sidebar",
+          "Twenty synthetic conversations scroll inside the workspace while the composer and 440px desktop or 318px mobile detail panel remain usable",
+          "Host-owned notice popup overlays the long conversation and open detail panel without document overflow at desktop width; at a real 320px viewport it fits 288px",
+          "An independently installed complete example opens detail at desktop and mobile widths, navigates from the mobile Drawer and closes it without document overflow or console errors",
+          "59 installed module sources and CSS match emitted registry bytes; 47 complete examples typecheck; Vite, font and notices pass; all 337 PRISM tests pass"
         ],
         "remaining": [
-          "complete source layout comparison",
-          "popup and long-content combinations beyond fixture rendering"
+          "Authenticated product navigation, notice delivery and PDF jobs remain host integrations; deployed source SHA is not established"
         ],
         "evidence": [
           "local-workspace-sizing",
           "local-workspace-growth",
-          "local-workspace-mobile-profile-390"
+          "local-workspace-mobile-profile-390",
+          "workspace-goal-local-browser-long-panel-popup",
+          "workspace-goal-installed-consumer-320"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -2606,6 +2616,37 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "layouts/chat/ChatLayout.tsx",
+            "layouts/chat/ChatLayout.module.scss",
+            "components/chat/main/ChatConversationSection.tsx",
+            "components/chat/main/ChatConversationSection.module.scss",
+            "components/chat/panel/SidePanel.tsx",
+            "components/chat/notice/NoticePopup.tsx"
+          ],
+          "evidence": [
+            "Current source separates sidebar/main placement, conversation scroll/input, nonmodal detail and host-owned notice/global providers; the standalone shell preserves those layout purposes.",
+            "Local browser checked the 320px and desktop compositions, twenty-message scrolling, candidate detail, popup overlay, Drawer count, overflow and focus transition.",
+            "Independent shadcn installation checked 59 exact TSX sources and CSS, 47 complete examples, Vite/font/notices, and the mobile Drawer navigation and panel in a real browser.",
+            "337 PRISM tests and workspace typecheck passed."
+          ],
+          "intentionalImprovements": [
+            "The shell adapts to its container rather than inheriting the source layout's 1440px minimum width.",
+            "Only the active desktop or mobile sidebar is mounted; unmeasured zero-width shells keep their previous mode.",
+            "The complete installation example controls the Drawer and closes it after navigation."
+          ],
+          "hostOwned": [
+            "Route and authentication state, notice retrieval/dismissal, toasts, confirmation dialogs, PDF jobs, service requests and persistence belong to the consuming application."
+          ],
+          "nonBlockingUnknowns": [
+            "The authenticated deployed product's complete navigation and notice/PDF integrations and deployed source SHA are not established.",
+            "Sidebar-local transient state remounts when the Drawer closes or layout mode changes; consumers should control state that must persist."
+          ]
         }
       },
       "exports": [
@@ -2618,8 +2659,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismWorkspace } from \"@/components/ui/prism-workspace\";\n<PrismWorkspace sidebar={sidebar} header={header} panel={panel}>{content}</PrismWorkspace>;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismWorkspace } from \"@/components/ui/prism-workspace\";\nimport { PrismSidebar } from \"@/components/ui/prism-sidebar\";\nimport { PrismPanel } from \"@/components/ui/prism-panel\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nexport function WorkspaceShellExample() {\n  const [page, setPage] = useState(\"chat\");\n  const [collapsed, setCollapsed] = useState(false);\n  const [navigationOpen, setNavigationOpen] = useState(false);\n  const [detailOpen, setDetailOpen] = useState(false);\n  return <div data-prism=\"light\" style={{ width: \"100%\", minWidth: 0 }}>\n    <PrismWorkspace height={620} navigationOpen={navigationOpen} onNavigationOpenChange={setNavigationOpen} sidebar={<PrismSidebar items={[{ id: \"chat\", label: \"대화\" }, { id: \"candidates\", label: \"후보자 목록\" }]} activeId={page} onNavigate={id => { setPage(id); setNavigationOpen(false); }} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={() => { setPage(\"chat\"); setNavigationOpen(false); }} />} header={<strong>{page === \"chat\" ? \"새로운 대화\" : \"후보자 목록\"}</strong>} panel={<PrismPanel title=\"후보자 상세\" open={detailOpen} onOpenChange={setDetailOpen}><p style={{ padding: 20 }}>가상 후보자 정보</p></PrismPanel>}>\n      <div style={{ padding: 24 }}><h1>Leadership PRISM</h1><PrismButton onClick={() => setDetailOpen(true)}>가상 후보자 보기</PrismButton></div>\n    </PrismWorkspace>\n  </div>;\n}"
     },
     {
       "id": "prism-chart",

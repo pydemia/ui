@@ -550,15 +550,29 @@ import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
 ## Workspace shell
 LNB·64px header·스크롤 본문·상세 패널 조합
-Contract: sidebar·header·panel은 slot입니다. height/minHeight를 지정할 수 있고 responsive는 컨테이너 폭이 breakpoint(기본 768px)보다 작으면 탐색 Drawer를 사용합니다. navigationOpen/onNavigationOpenChange로 메뉴를 제어할 수 있으며 넓은 화면으로 전환하면 메뉴를 닫고 header에 포커스를 옮깁니다. 경로·로그인·서버 상태는 소비자가 소유합니다.
+Contract: sidebar·header·panel은 slot입니다. height/minHeight를 지정할 수 있고 responsive는 컨테이너 폭이 breakpoint(기본 768px)보다 작으면 탐색 Drawer를 사용합니다. navigationOpen/onNavigationOpenChange로 메뉴를 제어할 수 있으며 넓은 화면으로 전환하면 메뉴를 닫고 header에 포커스를 옮깁니다. 사이드바는 폭 전환과 Drawer 닫힘에 다시 마운트되므로 접힘·메뉴 상태는 소비자가 제어합니다. 공지 팝업·토스트·PDF 작업은 shell 바깥의 호스트가 배치하고, 경로·로그인·서버 상태도 소비자가 소유합니다.
 States: default
 Registry: /prism/r/prism-workspace.json
 Source: packages/prism/src/prism-workspace.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
+import { useState } from "react";
 import { PrismWorkspace } from "@/components/ui/prism-workspace";
-<PrismWorkspace sidebar={sidebar} header={header} panel={panel}>{content}</PrismWorkspace>;
+import { PrismSidebar } from "@/components/ui/prism-sidebar";
+import { PrismPanel } from "@/components/ui/prism-panel";
+import { PrismButton } from "@/components/ui/prism-button";
+export function WorkspaceShellExample() {
+  const [page, setPage] = useState("chat");
+  const [collapsed, setCollapsed] = useState(false);
+  const [navigationOpen, setNavigationOpen] = useState(false);
+  const [detailOpen, setDetailOpen] = useState(false);
+  return <div data-prism="light" style={{ width: "100%", minWidth: 0 }}>
+    <PrismWorkspace height={620} navigationOpen={navigationOpen} onNavigationOpenChange={setNavigationOpen} sidebar={<PrismSidebar items={[{ id: "chat", label: "대화" }, { id: "candidates", label: "후보자 목록" }]} activeId={page} onNavigate={id => { setPage(id); setNavigationOpen(false); }} collapsed={collapsed} onCollapsedChange={setCollapsed} onNewChat={() => { setPage("chat"); setNavigationOpen(false); }} />} header={<strong>{page === "chat" ? "새로운 대화" : "후보자 목록"}</strong>} panel={<PrismPanel title="후보자 상세" open={detailOpen} onOpenChange={setDetailOpen}><p style={{ padding: 20 }}>가상 후보자 정보</p></PrismPanel>}>
+      <div style={{ padding: 24 }}><h1>Leadership PRISM</h1><PrismButton onClick={() => setDetailOpen(true)}>가상 후보자 보기</PrismButton></div>
+    </PrismWorkspace>
+  </div>;
+}
 ```
 
 ## Leadership pie / Radar / Trend

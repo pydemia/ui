@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PrismIcon, PrismWorkspace, PrismSidebar, PrismPanel, PrismButton, PrismInput, PrismMessage, PrismChatInput,
+import { PrismIcon, PrismWorkspace, PrismSidebar, PrismPanel, PrismNoticePopup, PrismButton, PrismInput, PrismMessage, PrismChatInput,
     PrismCandidateCard, PrismCandidateTable, PrismProfile, PrismSixFrame, PrismRequestState, PrismAdminLayout,
     type PrismCandidate, type PrismProfileTab } from "@pydemia/prism";
 import { candidates, frameColumns, profileSections } from "./catalog";
@@ -10,6 +10,7 @@ export function WorkspaceDemo() {
     const [messages,setMessages] = useState<string[]>([]); const [busy,setBusy] = useState(false); const [error,setError] = useState(false);
     const [selected,setSelected] = useState<PrismCandidate | null>(null); const [panelType,setPanelType] = useState("profile"); const [expanded,setExpanded] = useState(false);
     const [tab,setTab] = useState<PrismProfileTab>("total"); const [favorites,setFavorites] = useState<string[]>([]); const [filter,setFilter] = useState("");
+    const [noticeOpen,setNoticeOpen] = useState(false);
     const choose = (candidate: PrismCandidate) => { setSelected(candidate); setPanelType("profile"); setTab("total"); };
     const toggleFavorite = (candidate: PrismCandidate, favorite: boolean) => setFavorites(favorite ? [...new Set([...favorites,candidate.id])] : favorites.filter(id => id !== candidate.id));
     const list = candidates.filter(c => (nav !== "favorites" || favorites.includes(c.id)) && `${c.name} ${c.company} ${c.position}`.includes(filter));
@@ -27,10 +28,10 @@ export function WorkspaceDemo() {
                 <PrismButton variant="line" onClick={() => { setSelected(null); setPanelType("compare"); }}>6-frame 비교</PrismButton></div>)}
             {error && <PrismRequestState status="error" error="검증을 위해 표시한 오류입니다." onRetry={() => setError(false)} />}{busy && <PrismRequestState status="loading" />}</div>
             <div className="prism-workspace-composer"><PrismChatInput value={query} onValueChange={setQuery} onSubmit={text => { setMessages([...messages,text]); setQuery(""); }} busy={busy} onStop={() => setBusy(false)} />
-                <div className="prism-demo-row"><PrismButton variant="shape" size="small" onClick={() => setBusy(!busy)}>생성 중 상태</PrismButton><PrismButton variant="shape" size="small" onClick={() => setError(!error)}>오류 상태</PrismButton></div></div></div> :
+                <div className="prism-demo-row"><PrismButton variant="shape" size="small" onClick={() => setBusy(!busy)}>생성 중 상태</PrismButton><PrismButton variant="shape" size="small" onClick={() => setError(!error)}>오류 상태</PrismButton><PrismButton variant="shape" size="small" onClick={() => setMessages(Array.from({length:20},(_,index)=>`가상 대화 ${index+1}: 긴 내용과 패널 동시 표시를 확인합니다.`))}>긴 대화</PrismButton><PrismButton variant="shape" size="small" onClick={() => setNoticeOpen(true)}>공지 팝업</PrismButton></div></div></div> :
             nav === "admin" ? <PrismAdminLayout title="포지션 관리" filters={<PrismInput label="포지션 검색" value={filter} onChange={e => setFilter(e.target.value)} />}
                 toolbar={<span>총 {list.length}건</span>}><PrismCandidateTable candidates={list} onOpen={choose} caption="가상 포지션 목록" /></PrismAdminLayout> :
             <div className="prism-workspace-list"><PrismInput label="후보자 검색" placeholder="이름·회사·직책" value={filter} onChange={e => setFilter(e.target.value)} /><p>총 {list.length}명</p>
                 {list.length ? list.map(candidate => <PrismCandidateCard key={candidate.id} candidate={candidate} onOpen={choose} favorite={favorites.includes(candidate.id)} onFavoriteChange={next => toggleFavorite(candidate,next)} />) : <PrismRequestState status="empty" />}</div>}
-    </PrismWorkspace></div></div>;
+    </PrismWorkspace><PrismNoticePopup open={noticeOpen} notices={[{id:"synthetic-notice",title:"가상 공지",date:"2026.10.14",author:"데모",content:"작업공간 위에 표시하는 공지 팝업입니다."}]} index={0} onIndexChange={() => {}} onClose={() => setNoticeOpen(false)} /></div></div>;
 }
