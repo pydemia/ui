@@ -1120,7 +1120,10 @@
         "Summary click opens tooltip; Escape dismisses",
         "InputLabel source coordinates and short tooltip match measured dimensions and style",
         "Native label/help sibling association and controlled info state tests",
-        "Selected real touch/focus/Space/Escape and narrow long tooltip behavior"
+        "Selected real touch/focus/Space/Escape and narrow long tooltip behavior",
+        "2026-10-14: current frontend/dev 2eeb26ff retains the original logo, sidebar profile, popover, skeleton, show-more, floating chat, favorite, input label and drag overlay source/style files audited earlier. Source DragDropOverlay is present but commented out in ChatLayout.",
+        "2026-10-14: complete registry example composes all ten exported primitives. Isolated shadcn consumer matched 59 installed TSX sources and CSS, typechecked 48 complete examples, built with Vite/font/notices. Browser verified favorite controlled state, popover/Escape, show-more, input tooltip, file overlay and floating-chat intent; 320px document scrollWidth was 320px.",
+        "Portal selector corrected: isolated browser computed popover minWidth90/maxWidth350/radius6, and at 320px viewport maxWidth296 with x=83–236.484 and document scrollWidth320."
       ],
       "evidence": [
         "reference-candidate-common-metrics",
@@ -1130,8 +1133,8 @@
         "installed-input-label"
       ],
       "remaining": [
-        "All other primitive states and domain callers",
-        "Latest source-purpose mappings are implemented; changed source styles and domain caller states remain unverified."
+        "Current authenticated deployed /chat could not be loaded in the in-app browser (net::ERR_CONNECTION_RESET); current deployed primitive views and SHA binding are unverified. Earlier public InputLabel/summary measurements and current unchanged source are the comparison basis.",
+        "Host authentication, actual file drag/drop/upload and chat routing belong to product integration; source DragDropOverlay is currently commented out in ChatLayout."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1147,6 +1150,13 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "evidence": "Current primitive source and styles unchanged; earlier deployed InputLabel measurements, complete example, narrow browser states and isolated install verified. Drag overlay now conveys file name and optional preview while keeping host upload ownership.",
+        "limitations": "Latest authenticated deployment and real host upload/auth/routing remain unverified."
       }
     },
     "prism-profile": {
@@ -6888,10 +6898,11 @@
       "prism-workspace",
       "prism-intro",
       "prism-sidebar",
-      "prism-panel-recipes"
+      "prism-panel-recipes",
+      "prism-primitives"
     ],
-    "acceptedCount": 31,
-    "unassessedGroups": 27,
+    "acceptedCount": 32,
+    "unassessedGroups": 26,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

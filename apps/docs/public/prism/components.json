@@ -3354,8 +3354,8 @@
       "name": "Logo / Profile / Label / Popover / Skeleton / More",
       "category": "Utility",
       "purpose": "텍스트 브랜드·사용자 요약·입력 라벨과 도움말·팝오버·즐겨찾기·접기·로딩",
-      "contract": "InputLabel은 htmlFor로 입력과 연결하고 required 표시와 suffix를 유지합니다. tooltip은 11px 회색 도움말로 hover/focus와 터치·Space 토글, Escape·바깥 클릭 닫기를 지원합니다. tooltipLabel은 복합 children의 도움말 접근성 이름을 지정합니다. 입력 required/disabled와 값은 소비자가 지정하며 도움말 버튼은 label 밖에 배치합니다. className/style로 폭을 지정할 수 있고 긴 라벨은 줄바꿈합니다. SkeletonGroup은 기본 3개·120px 블록과 16px 간격을 사용하며 rows·height를 조절할 수 있습니다. 브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 사내 SVG 로고와 인증 검사는 포함하지 않습니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "contract": "InputLabel은 htmlFor로 입력과 연결하고 required 표시와 suffix를 유지합니다. tooltip은 11px 회색 도움말로 hover/focus와 터치·Space 토글, Escape·바깥 클릭 닫기를 지원합니다. tooltipLabel은 복합 children의 도움말 접근성 이름을 지정합니다. 입력 required/disabled와 값은 소비자가 지정하며 도움말 버튼은 label 밖에 배치합니다. className/style로 폭을 지정할 수 있고 긴 라벨은 줄바꿈합니다. SkeletonGroup은 기본 3개·120px 블록과 16px 간격을 사용하며 rows·height를 조절할 수 있습니다. 브랜드 문자열은 소비자가 제공합니다. 팝오버는 Radix 포커스·Escape를 따르고 다른 동작은 controlled callback입니다. 파일 드래그 오버레이는 호스트가 active·파일명·선택적 미리보기 URL을 제공하며 실제 드롭/첨부 처리와 인증 검사는 포함하지 않습니다. 사내 SVG 로고는 텍스트 브랜드로 대체합니다.",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "disabled",
@@ -3364,16 +3364,23 @@
       ],
       "source": [
         "ui/avatar/HRXSidebarProfile.tsx",
+        "styles/_avatar.scss",
         "ui/logo/HRXAffiliateLogo.tsx",
+        "styles/_affiliate-logo.scss",
         "ui/popover/HRXPopover.tsx",
+        "styles/_popover.scss",
         "ui/skeleton/HRXSkeleton.tsx",
+        "styles/_skeleton.scss",
         "ui/button/HRXShowMoreBtn.tsx",
+        "styles/_btn.scss",
         "ui/button/HRXFloatingChatBtn.tsx",
         "ui/button/HRXFavoriteToggle.tsx",
         "ui/input/HRXInputLabel.tsx",
-        "chat/common/DragDropOverlay.tsx"
+        "styles/_input-label.scss",
+        "chat/common/DragDropOverlay.tsx",
+        "chat/common/DragDropOverlay.module.scss"
       ],
-      "usage": "import { useId } from \"react\";\nimport { PrismInputLabel, PrismSkeletonGroup } from \"@pydemia/prism\";\nexport function LabelAndLoadingExample() {\n  const id = useId();\n  return <section data-prism=\"light\">\n    <PrismInputLabel htmlFor={id} required tooltip=\"가상 표시 이름을 입력하세요.\">표시 이름</PrismInputLabel>\n    <input id={id} name=\"display-name\" required />\n    <PrismSkeletonGroup rows={3} height={120} />\n  </section>;\n}",
+      "usage": "import { useId, useState } from \"react\";\nimport { PrismAffiliateLogo, PrismSidebarProfile, PrismInputLabel, PrismSkeleton, PrismSkeletonGroup,\n  PrismPopover, PrismFavoriteToggle, PrismShowMore, PrismFloatingChatButton, PrismDragOverlay } from \"@pydemia/prism\";\n\nexport function PrimitivesExample() {\n  const id = useId();\n  const [favorite, setFavorite] = useState(false);\n  const [expanded, setExpanded] = useState(false);\n  const [overlay, setOverlay] = useState(false);\n  const [chatOpened, setChatOpened] = useState(false);\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 16, minWidth: 0, maxWidth: 440 }}>\n    <PrismAffiliateLogo brand=\"가상\" affiliate=\"전자\" size={16} />\n    <PrismSidebarProfile name=\"김가상\" email=\"demo@example.com\" />\n    <PrismSidebarProfile name=\"김가상\" email=\"demo@example.com\" collapsed />\n    <div style={{ display: \"flex\", alignItems: \"center\", gap: 8 }}>\n      <PrismFavoriteToggle name=\"김가상\" checked={favorite} onCheckedChange={setFavorite} />\n      <span>즐겨찾기 {favorite ? \"선택됨\" : \"미선택\"}</span>\n    </div>\n    <div style={{ display: \"grid\", gap: 4, minWidth: 0 }}>\n      <PrismInputLabel htmlFor={id} required tooltip=\"가상 표시 이름을 입력하세요.\">표시 이름</PrismInputLabel>\n      <input id={id} name=\"display-name\" required style={{ maxWidth: \"100%\" }} />\n    </div>\n    <PrismPopover trigger={<button type=\"button\">추가 정보 열기</button>}>\n      <p>가상 후보 정보입니다.</p>\n    </PrismPopover>\n    <PrismShowMore expanded={expanded} hiddenCount={2} onExpandedChange={setExpanded} label=\"후보\">\n      <p>가상 후보 2명의 추가 정보입니다.</p>\n    </PrismShowMore>\n    <PrismSkeleton width=\"60%\" height={20} />\n    <PrismSkeletonGroup rows={2} height={60} label=\"목록 불러오는 중\" />\n    <button type=\"button\" onClick={() => setOverlay(value => !value)}>파일 드래그 미리보기 {overlay ? \"닫기\" : \"열기\"}</button>\n    <div style={{ position: \"relative\", height: 160, minWidth: 0, background: \"#eef1f8\" }}>\n      <PrismFloatingChatButton onClick={() => setChatOpened(true)} right={12} bottom={12} />\n      <PrismDragOverlay active={overlay} fileName=\"가상자료.pdf\" />\n    </div>\n    <p role=\"status\">{chatOpened ? \"대화 열기 의도를 전달했습니다.\" : \"\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-primitives.tsx",
       "previewUrl": "/prism?component=prism-primitives",
       "embedUrl": "/prism?component=prism-primitives&embed=1",
@@ -3389,7 +3396,9 @@
           "Summary click opens tooltip; Escape dismisses",
           "InputLabel source coordinates and short tooltip match measured dimensions and style",
           "Native label/help sibling association and controlled info state tests",
-          "Selected real touch/focus/Space/Escape and narrow long tooltip behavior"
+          "Selected real touch/focus/Space/Escape and narrow long tooltip behavior",
+          "2026-10-14: current frontend/dev 2eeb26ff retains the original logo, sidebar profile, popover, skeleton, show-more, floating chat, favorite, input label and drag overlay source/style files audited earlier. Source DragDropOverlay is present but commented out in ChatLayout.",
+          "2026-10-14: complete registry example composes all ten exported primitives. Isolated shadcn consumer matched 59 installed TSX sources and CSS, typechecked 48 complete examples, built with Vite/font/notices. Browser verified favorite controlled state, popover/Escape, show-more, input tooltip, file overlay and floating-chat intent; 320px document scrollWidth was 320px."
         ],
         "evidence": [
           "reference-candidate-common-metrics",
@@ -3399,8 +3408,8 @@
           "installed-input-label"
         ],
         "remaining": [
-          "All other primitive states and domain callers",
-          "Latest source-purpose mappings are implemented; changed source styles and domain caller states remain unverified."
+          "Current authenticated deployed /chat could not be loaded in the in-app browser (net::ERR_CONNECTION_RESET); current deployed primitive views and SHA binding are unverified. Earlier public InputLabel/summary measurements and current unchanged source are the comparison basis.",
+          "Host authentication, actual file drag/drop/upload and chat routing belong to product integration; source DragDropOverlay is currently commented out in ChatLayout."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -3416,6 +3425,13 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "evidence": "Current primitive source and styles unchanged; earlier deployed InputLabel measurements, complete example, narrow browser states and isolated install verified. Drag overlay now conveys file name and optional preview while keeping host upload ownership.",
+          "limitations": "Latest authenticated deployment and real host upload/auth/routing remain unverified."
         }
       },
       "exports": [
@@ -3465,7 +3481,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useId } from \"react\";\nimport { PrismInputLabel, PrismSkeletonGroup } from \"@/components/ui/prism-primitives\";\nexport function LabelAndLoadingExample() {\n  const id = useId();\n  return <section data-prism=\"light\">\n    <PrismInputLabel htmlFor={id} required tooltip=\"가상 표시 이름을 입력하세요.\">표시 이름</PrismInputLabel>\n    <input id={id} name=\"display-name\" required />\n    <PrismSkeletonGroup rows={3} height={120} />\n  </section>;\n}"
+      "registryUsage": "import { useId, useState } from \"react\";\nimport { PrismAffiliateLogo, PrismSidebarProfile, PrismInputLabel, PrismSkeleton, PrismSkeletonGroup, PrismPopover, PrismFavoriteToggle, PrismShowMore, PrismFloatingChatButton, PrismDragOverlay } from \"@/components/ui/prism-primitives\";\n\nexport function PrimitivesExample() {\n  const id = useId();\n  const [favorite, setFavorite] = useState(false);\n  const [expanded, setExpanded] = useState(false);\n  const [overlay, setOverlay] = useState(false);\n  const [chatOpened, setChatOpened] = useState(false);\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 16, minWidth: 0, maxWidth: 440 }}>\n    <PrismAffiliateLogo brand=\"가상\" affiliate=\"전자\" size={16} />\n    <PrismSidebarProfile name=\"김가상\" email=\"demo@example.com\" />\n    <PrismSidebarProfile name=\"김가상\" email=\"demo@example.com\" collapsed />\n    <div style={{ display: \"flex\", alignItems: \"center\", gap: 8 }}>\n      <PrismFavoriteToggle name=\"김가상\" checked={favorite} onCheckedChange={setFavorite} />\n      <span>즐겨찾기 {favorite ? \"선택됨\" : \"미선택\"}</span>\n    </div>\n    <div style={{ display: \"grid\", gap: 4, minWidth: 0 }}>\n      <PrismInputLabel htmlFor={id} required tooltip=\"가상 표시 이름을 입력하세요.\">표시 이름</PrismInputLabel>\n      <input id={id} name=\"display-name\" required style={{ maxWidth: \"100%\" }} />\n    </div>\n    <PrismPopover trigger={<button type=\"button\">추가 정보 열기</button>}>\n      <p>가상 후보 정보입니다.</p>\n    </PrismPopover>\n    <PrismShowMore expanded={expanded} hiddenCount={2} onExpandedChange={setExpanded} label=\"후보\">\n      <p>가상 후보 2명의 추가 정보입니다.</p>\n    </PrismShowMore>\n    <PrismSkeleton width=\"60%\" height={20} />\n    <PrismSkeletonGroup rows={2} height={60} label=\"목록 불러오는 중\" />\n    <button type=\"button\" onClick={() => setOverlay(value => !value)}>파일 드래그 미리보기 {overlay ? \"닫기\" : \"열기\"}</button>\n    <div style={{ position: \"relative\", height: 160, minWidth: 0, background: \"#eef1f8\" }}>\n      <PrismFloatingChatButton onClick={() => setChatOpened(true)} right={12} bottom={12} />\n      <PrismDragOverlay active={overlay} fileName=\"가상자료.pdf\" />\n    </div>\n    <p role=\"status\">{chatOpened ? \"대화 열기 의도를 전달했습니다.\" : \"\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-panel-recipes",

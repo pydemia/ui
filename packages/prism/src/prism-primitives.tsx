@@ -42,6 +42,14 @@ export function PrismShowMore({ expanded, hiddenCount, onExpandedChange, childre
 export function PrismFloatingChatButton({ onClick, right = 40, bottom = 40 }: { onClick: () => void; right?: CSSProperties["right"]; bottom?: CSSProperties["bottom"] }) {
     return <button className="prism-floating-chat" type="button" aria-label="대화 열기" style={{right,bottom}} onClick={onClick}><PrismIcon name="SymbolIcon" size={30} /></button>;
 }
-export function PrismDragOverlay({ active, label = "파일을 놓아 첨부하세요." }: { active: boolean; label?: string }) {
-    return active ? <div className="prism-drag-overlay" role="status">{label}</div> : null;
+export function PrismDragOverlay({ active, label = "파일을 드래그하여 대화에 추가하세요", fileName, previewUrl }: { active: boolean; label?: string; fileName?: string | null; previewUrl?: string | null }) {
+    if (!active) return null;
+    const extension = fileName?.split(".").pop();
+    return <div className="prism-drag-overlay" role="status">
+        <div className="prism-drag-overlay-content">
+            <div className="prism-drag-overlay-thumbnail">{previewUrl ? <img src={previewUrl} alt={fileName || "파일 미리보기"} /> : <><PrismIcon name="DragDropIcon" size={140} />{fileName && extension !== fileName && <small>{extension?.toUpperCase()}</small>}</>}</div>
+            {fileName && <p className="prism-drag-overlay-name" title={fileName}>{fileName}</p>}
+            <p className="prism-drag-overlay-label">{label}</p>
+        </div>
+    </div>;
 }
