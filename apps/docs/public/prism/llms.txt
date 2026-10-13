@@ -235,15 +235,37 @@ export function SidebarHistoryExample({ initialMode = "default" }: { initialMode
 
 ## Message / Composer / Criteria
 질문 입력·전송·중단, 답변 상태와 판단 기준 표시
-Contract: value/onValueChange/onSubmit은 controlled입니다. 800px 예시는 원본 110px 외곽·60px 입력 영역·20px 첫 글줄·48px 동작 영역·28px 버튼을 따릅니다. 기본 2000자 상한과 최대 5줄 자동 높이를 사용하고 값이 있을 때만 글자 수를 표시합니다. Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공하며 busy는 입력을 잠그고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다. onAttach는 현재 배포 원본에서 숨겨진 첨부 기능의 선택적 확장입니다.
-States: default, disabled, loading, error
+Contract: value/onValueChange/onSubmit은 controlled입니다. 800px 예시는 원본 110px 외곽·60px 입력 영역·20px 첫 글줄·48px 동작 영역·28px 버튼을 따릅니다. 기본 2000자 상한과 최대 5줄 자동 높이를 사용하고 값이 있을 때만 글자 수를 표시합니다. Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공하며 busy는 입력을 잠그고 onStop을 호출합니다. 제출 성공 후 입력값을 지우는 시점은 호출자가 결정합니다. 질문 복사는 plain string children 또는 copyText가 있을 때 제공하며 onCopy로 호스트 동작을 연결할 수 있습니다. 복사 버튼은 키보드 포커스·터치에서도 보입니다. 판단 기준은 목록·제목·굵게 표시와 panelMode를 지원하며 텍스트를 HTML로 실행하지 않습니다. onAttach는 현재 배포 원본에서 숨겨진 첨부 기능의 선택적 확장입니다. 답변 생성과 API 상태는 호스트가 제공합니다.
+States: default, disabled, loading, error, long, panel
 Registry: /prism/r/prism-chat.json
 Source: packages/prism/src/prism-chat.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismChatInput } from "@/components/ui/prism-chat";
-<PrismChatInput value={text} onValueChange={setText} onSubmit={send} busy={busy} onStop={stop} />;
+import { useState } from "react";
+import { PrismChatInput, PrismMessage, PrismCriteria } from "@/components/ui/prism-chat";
+
+export function ChatExample({ busy = false, onSubmit, onStop }: {
+  busy?: boolean;
+  onSubmit: (text: string) => Promise<void>;
+  onStop?: () => void;
+}) {
+  const [text, setText] = useState("");
+  const [error, setError] = useState(false);
+  const send = async (message: string) => {
+    setError(false);
+    try { await onSubmit(message); setText(""); }
+    catch { setError(true); }
+  };
+  return <section data-prism="light" style={{ maxWidth: 800 }}>
+    <PrismMessage role="user">기술 분야 후보자를 알려 주세요.</PrismMessage>
+    <PrismMessage role="assistant" status={error ? "error" : busy ? "generating" : "complete"}>
+      {error ? "답변을 표시할 수 없습니다." : busy ? "답변 생성을 기다리는 중입니다." : "가상 데이터를 사용한 답변 예시입니다."}
+    </PrismMessage>
+    <PrismCriteria items={["# 기술 분야", "**전문분야**를 확인합니다."]} />
+    <PrismChatInput value={text} onValueChange={setText} onSubmit={message => { void send(message); }} busy={busy} onStop={onStop} />
+  </section>;
+}
 ```
 
 ## Candidate / Evaluation

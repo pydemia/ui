@@ -2557,6 +2557,39 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/common/ChatInput.tsx",
+          "chat/common/ChatInput.module.scss",
+          "chat/conversation/ChatMessageQuestion.tsx",
+          "chat/conversation/ChatMessageQuestion.module.scss",
+          "chat/templates/ChatTemplateCriteria.tsx",
+          "chat/templates/ChatTemplateCriteria.module.scss"
+        ],
+        "evidence": [
+          "Authenticated deployed composer geometry and send affordance were compared previously; current public Templates sample confirms question copy button and ordered criteria markup.",
+          "Local IAB default/error/loading/panel/long examples render question, answer status, criteria and composer; at 320px long content has no document overflow.",
+          "Local keyboard fixture inserts a newline with Shift+Enter and submits once with Enter; source and tests cover IME and 2000-character limit.",
+          "Independent shadcn consumer reinstalled 59 exact module sources and CSS, typechecked 44 complete examples and built with Vite, Pretendard and notices. In a 1280px viewport, a 320px host wraps long question/criteria without document overflow; panel, busy/stop and send interactions pass with zero console errors.",
+          "333 PRISM tests, workspace typecheck, site build and registry release check passed."
+        ],
+        "intentionalImprovements": [
+          "Question copy remains reachable with keyboard focus and is visible on touch devices, rather than relying solely on hover.",
+          "Criteria text is rendered literally except for safe heading and bold emphasis; arbitrary HTML is not executed.",
+          "Component layout adapts to narrow independent hosts without reproducing problematic clipping."
+        ],
+        "hostOwned": [
+          "Authenticated answer generation, request cancellation, attachment upload, clipboard override, service state and permissions belong to the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "Current authenticated product busy/long/mobile response flows and deployed source SHA are not established.",
+          "The in-app browser virtual clipboard did not expose copied text, so real clipboard paste was not independently confirmed; the copy button state and host callback success/failure paths were checked.",
+          "Other-browser IME behavior and full static-versus-variable font pixel comparison are not established."
+        ]
       }
     },
     "prism-detail": {
@@ -6646,10 +6679,11 @@
       "prism-response",
       "prism-rich-text",
       "prism-position",
-      "prism-position-directory"
+      "prism-position-directory",
+      "prism-chat"
     ],
-    "acceptedCount": 23,
-    "unassessedGroups": 35,
+    "acceptedCount": 24,
+    "unassessedGroups": 34,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

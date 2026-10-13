@@ -992,20 +992,25 @@
       "name": "Message / Composer / Criteria",
       "category": "AI & agent",
       "purpose": "질문 입력·전송·중단, 답변 상태와 판단 기준 표시",
-      "contract": "value/onValueChange/onSubmit은 controlled입니다. 800px 예시는 원본 110px 외곽·60px 입력 영역·20px 첫 글줄·48px 동작 영역·28px 버튼을 따릅니다. 기본 2000자 상한과 최대 5줄 자동 높이를 사용하고 값이 있을 때만 글자 수를 표시합니다. Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공하며 busy는 입력을 잠그고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다. onAttach는 현재 배포 원본에서 숨겨진 첨부 기능의 선택적 확장입니다.",
+      "contract": "value/onValueChange/onSubmit은 controlled입니다. 800px 예시는 원본 110px 외곽·60px 입력 영역·20px 첫 글줄·48px 동작 영역·28px 버튼을 따릅니다. 기본 2000자 상한과 최대 5줄 자동 높이를 사용하고 값이 있을 때만 글자 수를 표시합니다. Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공하며 busy는 입력을 잠그고 onStop을 호출합니다. 제출 성공 후 입력값을 지우는 시점은 호출자가 결정합니다. 질문 복사는 plain string children 또는 copyText가 있을 때 제공하며 onCopy로 호스트 동작을 연결할 수 있습니다. 복사 버튼은 키보드 포커스·터치에서도 보입니다. 판단 기준은 목록·제목·굵게 표시와 panelMode를 지원하며 텍스트를 HTML로 실행하지 않습니다. onAttach는 현재 배포 원본에서 숨겨진 첨부 기능의 선택적 확장입니다. 답변 생성과 API 상태는 호스트가 제공합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
         "disabled",
         "loading",
-        "error"
+        "error",
+        "long",
+        "panel"
       ],
       "source": [
         "chat/common/ChatInput.tsx",
+        "chat/common/ChatInput.module.scss",
         "chat/conversation/ChatMessageQuestion.tsx",
-        "chat/templates/ChatTemplateCriteria.tsx"
+        "chat/conversation/ChatMessageQuestion.module.scss",
+        "chat/templates/ChatTemplateCriteria.tsx",
+        "chat/templates/ChatTemplateCriteria.module.scss"
       ],
-      "usage": "import { PrismChatInput } from \"@pydemia/prism\";\n<PrismChatInput value={text} onValueChange={setText} onSubmit={send} busy={busy} onStop={stop} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismChatInput, PrismMessage, PrismCriteria } from \"@pydemia/prism\";\n\nexport function ChatExample({ busy = false, onSubmit, onStop }: {\n  busy?: boolean;\n  onSubmit: (text: string) => Promise<void>;\n  onStop?: () => void;\n}) {\n  const [text, setText] = useState(\"\");\n  const [error, setError] = useState(false);\n  const send = async (message: string) => {\n    setError(false);\n    try { await onSubmit(message); setText(\"\"); }\n    catch { setError(true); }\n  };\n  return <section data-prism=\"light\" style={{ maxWidth: 800 }}>\n    <PrismMessage role=\"user\">기술 분야 후보자를 알려 주세요.</PrismMessage>\n    <PrismMessage role=\"assistant\" status={error ? \"error\" : busy ? \"generating\" : \"complete\"}>\n      {error ? \"답변을 표시할 수 없습니다.\" : busy ? \"답변 생성을 기다리는 중입니다.\" : \"가상 데이터를 사용한 답변 예시입니다.\"}\n    </PrismMessage>\n    <PrismCriteria items={[\"# 기술 분야\", \"**전문분야**를 확인합니다.\"]} />\n    <PrismChatInput value={text} onValueChange={setText} onSubmit={message => { void send(message); }} busy={busy} onStop={onStop} />\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-chat.tsx",
       "previewUrl": "/prism?component=prism-chat",
       "embedUrl": "/prism?component=prism-chat&embed=1",
@@ -1045,6 +1050,39 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/common/ChatInput.tsx",
+            "chat/common/ChatInput.module.scss",
+            "chat/conversation/ChatMessageQuestion.tsx",
+            "chat/conversation/ChatMessageQuestion.module.scss",
+            "chat/templates/ChatTemplateCriteria.tsx",
+            "chat/templates/ChatTemplateCriteria.module.scss"
+          ],
+          "evidence": [
+            "Authenticated deployed composer geometry and send affordance were compared previously; current public Templates sample confirms question copy button and ordered criteria markup.",
+            "Local IAB default/error/loading/panel/long examples render question, answer status, criteria and composer; at 320px long content has no document overflow.",
+            "Local keyboard fixture inserts a newline with Shift+Enter and submits once with Enter; source and tests cover IME and 2000-character limit.",
+            "Independent shadcn consumer reinstalled 59 exact module sources and CSS, typechecked 44 complete examples and built with Vite, Pretendard and notices. In a 1280px viewport, a 320px host wraps long question/criteria without document overflow; panel, busy/stop and send interactions pass with zero console errors.",
+            "333 PRISM tests, workspace typecheck, site build and registry release check passed."
+          ],
+          "intentionalImprovements": [
+            "Question copy remains reachable with keyboard focus and is visible on touch devices, rather than relying solely on hover.",
+            "Criteria text is rendered literally except for safe heading and bold emphasis; arbitrary HTML is not executed.",
+            "Component layout adapts to narrow independent hosts without reproducing problematic clipping."
+          ],
+          "hostOwned": [
+            "Authenticated answer generation, request cancellation, attachment upload, clipboard override, service state and permissions belong to the consuming application."
+          ],
+          "nonBlockingUnknowns": [
+            "Current authenticated product busy/long/mobile response flows and deployed source SHA are not established.",
+            "The in-app browser virtual clipboard did not expose copied text, so real clipboard paste was not independently confirmed; the copy button state and host callback success/failure paths were checked.",
+            "Other-browser IME behavior and full static-versus-variable font pixel comparison are not established."
+          ]
         }
       },
       "exports": [
@@ -1057,6 +1095,10 @@
           "kind": "component"
         },
         {
+          "name": "PrismMessageProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismMessage",
           "kind": "component"
         },
@@ -1065,8 +1107,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismChatInput } from \"@/components/ui/prism-chat\";\n<PrismChatInput value={text} onValueChange={setText} onSubmit={send} busy={busy} onStop={stop} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismChatInput, PrismMessage, PrismCriteria } from \"@/components/ui/prism-chat\";\n\nexport function ChatExample({ busy = false, onSubmit, onStop }: {\n  busy?: boolean;\n  onSubmit: (text: string) => Promise<void>;\n  onStop?: () => void;\n}) {\n  const [text, setText] = useState(\"\");\n  const [error, setError] = useState(false);\n  const send = async (message: string) => {\n    setError(false);\n    try { await onSubmit(message); setText(\"\"); }\n    catch { setError(true); }\n  };\n  return <section data-prism=\"light\" style={{ maxWidth: 800 }}>\n    <PrismMessage role=\"user\">기술 분야 후보자를 알려 주세요.</PrismMessage>\n    <PrismMessage role=\"assistant\" status={error ? \"error\" : busy ? \"generating\" : \"complete\"}>\n      {error ? \"답변을 표시할 수 없습니다.\" : busy ? \"답변 생성을 기다리는 중입니다.\" : \"가상 데이터를 사용한 답변 예시입니다.\"}\n    </PrismMessage>\n    <PrismCriteria items={[\"# 기술 분야\", \"**전문분야**를 확인합니다.\"]} />\n    <PrismChatInput value={text} onValueChange={setText} onSubmit={message => { void send(message); }} busy={busy} onStop={onStop} />\n  </section>;\n}"
     },
     {
       "id": "prism-candidate",
