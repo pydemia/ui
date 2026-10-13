@@ -272,7 +272,9 @@
       "evidence": [
         "local-selection-fixed",
         "local-selection-keyboard",
-        "local-calendar-year"
+        "local-calendar-year",
+        "local-selection-goal-2026-10-14",
+        "installed-selection-goal-2026-10-14"
       ],
       "remaining": [
         "every size and disabled/readOnly state",
@@ -294,6 +296,39 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "ui/input/HRXAutocomplete.tsx",
+          "ui/input/HRXMultiSelect.tsx",
+          "ui/input/HRXCheckbox.tsx",
+          "ui/input/HRXRadio.tsx",
+          "ui/datepicker/HRXDatePicker.tsx",
+          "ui/pagination/HRXPagination.tsx",
+          "admin/common/AdminDateRangeField.tsx",
+          "admin/common/AdminChipAutocomplete.tsx"
+        ],
+        "evidence": [
+          "Original selection sources and call sites were audited for autocomplete, optional multiselect search, three-character candidate chip search, calendar-only date fields, range bounds and pagination.",
+          "Earlier deployed/local checks cover the checkbox selected color, calendar geometry, multi-select and chip/keyboard flows; the current local browser confirmed multi-select, candidate chip focus restoration, calendar selection and page changes.",
+          "Local responsive iframe rendered default and error at 320px with 320px document width; an inverted date range shows one error message. Isolated installation rendered within a 320px container without descendant overflow and exercised multiselect, chip, date and pagination.",
+          "319 PRISM tests, workspace typecheck and site build passed; isolated shadcn installation matched 59 module sources and CSS byte for byte, typechecked 43 complete examples and built with Vite/font/notices."
+        ],
+        "intentionalImprovements": [
+          "Read-only or disabled transitions close an open selection menu/calendar, preserve committed values and discard an uncommitted date draft.",
+          "An inverted range announces its error once and prevents choosing an end date before the start date.",
+          "The range stacks at narrow widths instead of preserving the original fixed-width layout."
+        ],
+        "hostOwned": [
+          "Option queries, committed selection/date/page state and downstream navigation or service requests belong to the consumer."
+        ],
+        "nonBlockingUnknowns": [
+          "The deployed source commit identity and authenticated product save/query effects are unverified.",
+          "Every source caller and keyboard, typeahead, hover, size or pixel combination was not exhaustively sampled."
+        ]
       }
     },
     "prism-domain-forms": {
@@ -6223,10 +6258,11 @@
       "prism-six-frame",
       "prism-panel",
       "prism-memo",
-      "prism-tabs"
+      "prism-tabs",
+      "prism-selection"
     ],
-    "acceptedCount": 11,
-    "unassessedGroups": 47,
+    "acceptedCount": 12,
+    "unassessedGroups": 46,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
