@@ -3155,16 +3155,18 @@
       "embedUrl": "/prism?component=prism-panel-recipes&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-panel-recipes&view=responsive",
       "verification": {
-        "visual": "pending",
+        "visual": "partial",
         "interaction": "partial",
         "checks": [
           "Source ProfilePanel/MemoPanel max840 and padding20/0 20;24px back/gap6 title;mounted hidden memo and subject reset.",
           "Source ChatPanel22px title,panel#EEF1F8,message20px,user bubble320px/#D6DCEE,sticky composer bottom30px and bottom-action34px.",
-          "Nine new JSDOM/SSR tests cover guarded leave deny/accept/rejection/duplicate/stale subject/abort, draft and expansion persistence, chat unmount, full-profile memo callback, position empty/text/status/retry."
+          "Nine JSDOM/SSR tests cover guarded leave deny/accept/rejection/duplicate/stale subject/abort, draft and expansion persistence, chat unmount, full-profile memo callback, position empty/text/status/retry.",
+          "Local browser: profile memo close/back opens the unsaved-draft dialog; cancel retains the draft and confirm returns to profile. At 320px the standalone memo panel is 288x320px, its composer is visible, and document scrollWidth is 320px. Long chat scroll-to-bottom reaches scrollTop 944/944 with composer pinned to the panel bottom.",
+          "Separate isolated shadcn consumer: the complete panel-recipes example opens profile memo and preserves a draft after canceling close or Escape, including while expanded at 320px; document scrollWidth remains 320px. All 59 installed TSX sources and CSS match registry bytes; 41 examples typecheck, Vite build/font/notices pass. PRISM tests 313/313 pass."
         ],
         "remaining": [
-          "Actual source and independent-consumer rendered geometry, pixels and real keyboard/focus/modal/scroll at compact/expanded/short heights.",
-          "Authenticated original view and production publication."
+          "Authenticated deployed profile/memo/position/chat views are unavailable in the current browser session; compare representative layout and behavior once accessible. Current /chat loads a blank root.",
+          "Production publication and authenticated host API, permission and streaming behavior remain separate from the reusable component verification."
         ],
         "localRenderGate": {
           "status": "passed",
