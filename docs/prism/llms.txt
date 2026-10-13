@@ -40,7 +40,7 @@ import { PrismInput } from "@/components/ui/prism-field";
 
 ## ELP / Count / Tag / Chip
 ELP 구분·건수·필터 제거·평가 상태 표시
-Contract: ELP와 s-ELP는 별도 색·16px 규격입니다. Count는 0 이상 정수입니다. 제거 가능한 Tag에는 label과 onRemove를 제공합니다. Chip의 상태는 텍스트로도 표현합니다.
+Contract: ELP와 s-ELP는 별도 색·16px 규격입니다. Count는 0 이상 정수이며 원본 알림 샘플에서는 24px 아이콘에 겹칩니다. 제거 가능한 Tag에는 label과 onRemove를 제공합니다. 원본 사용처의 Chip은 색을 명시하며 상태는 텍스트로도 표현합니다. tone 기본값은 독립 확장입니다.
 States: default
 Registry: /prism/r/prism-badge.json
 Source: packages/prism/src/prism-badge.tsx

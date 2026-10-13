@@ -234,7 +234,7 @@
       "name": "ELP / Count / Tag / Chip",
       "category": "Data display",
       "purpose": "ELP 구분·건수·필터 제거·평가 상태 표시",
-      "contract": "ELP와 s-ELP는 별도 색·16px 규격입니다. Count는 0 이상 정수입니다. 제거 가능한 Tag에는 label과 onRemove를 제공합니다. Chip의 상태는 텍스트로도 표현합니다.",
+      "contract": "ELP와 s-ELP는 별도 색·16px 규격입니다. Count는 0 이상 정수이며 원본 알림 샘플에서는 24px 아이콘에 겹칩니다. 제거 가능한 Tag에는 label과 onRemove를 제공합니다. 원본 사용처의 Chip은 색을 명시하며 상태는 텍스트로도 표현합니다. tone 기본값은 독립 확장입니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default"
@@ -251,8 +251,20 @@
       "embedUrl": "/prism?component=prism-badge&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-badge&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending",
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Deployed badge/tag/chip sample pages compared with the independent default demo in the in-app browser on 2026-10-13.",
+          "Count 1 and 99+ overlay a 24px AlarmIcon at anchor offset +13px/-2px; displayed badge widths are 14px and 14.359375px.",
+          "s-ELP and ELP are 16px tall; their measured widths and source colors match the local render.",
+          "Gray/blue/mainBlue Tags are 21px tall and four explicit-color Status Chips are 52x22px with matching computed colors and typography.",
+          "A removable local Tag removes itself after one click using synthetic state."
+        ],
+        "remaining": [
+          "Source sample does not exercise Tag removal; deployed removal behavior and keyboard interactions remain unverified.",
+          "Other size, long-text, hover/focus, disabled and caller combinations and complete font/pixel comparison remain unverified.",
+          "Source has an unused no-color Chip fallback; library tone defaults are an independent extension, not measured parity."
+        ],
         "localRenderGate": {
           "status": "passed",
           "states": [

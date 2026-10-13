@@ -1789,8 +1789,20 @@
       }
     },
     "prism-badge": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Deployed badge/tag/chip sample pages compared with the independent default demo in the in-app browser on 2026-10-13.",
+        "Count 1 and 99+ overlay a 24px AlarmIcon at anchor offset +13px/-2px; displayed badge widths are 14px and 14.359375px.",
+        "s-ELP and ELP are 16px tall; their measured widths and source colors match the local render.",
+        "Gray/blue/mainBlue Tags are 21px tall and four explicit-color Status Chips are 52x22px with matching computed colors and typography.",
+        "A removable local Tag removes itself after one click using synthetic state."
+      ],
+      "remaining": [
+        "Source sample does not exercise Tag removal; deployed removal behavior and keyboard interactions remain unverified.",
+        "Other size, long-text, hover/focus, disabled and caller combinations and complete font/pixel comparison remain unverified.",
+        "Source has an unused no-color Chip fallback; library tone defaults are an independent extension, not measured parity."
+      ],
       "localRenderGate": {
         "status": "passed",
         "states": [

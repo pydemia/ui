@@ -93,6 +93,7 @@ These rules use local dev `087811ff` and the observed deployed empty-state CSS. 
 - Button large/medium/small/x-small heights: 40/32/28/26px. Padding 12px (x-small 8px). Radius 6px large, 4px other sizes. Icon-only widths follow 40/32/28/26px sizes; small uses radius 6px.
 - Input medium/small: 32/28px, radius 6px, padding 12px horizontal. Preserve required, invalid, readOnly, disabled independently.
 - Tag 21px/radius 4px, chip 22px/radius 4px, ELP 16px/radius 10px, count 14px.
+- Count overlays a 24px AlarmIcon at +13px horizontally and -2px vertically in the deployed sample. Keep source-style icon anchoring in the demo; standalone counts are a separate library usage. Explicit-color soft Chips measure 52×22px for the sample `Status` label. Product callers supply `color`; the library `tone` default is an extension.
 - Avatar 40px; candidate photo 70px/radius 8px. Profile chip 30px (small 27px).
 - Tabs line 44px with 24px gap; fill tabs use 32px triggers and top padding 14px.
 - Table header padding 6px 10px; cells 10px; 14px type; neutral-200 row/column dividers. Keep native table and internal overflow rather than clipping content.
