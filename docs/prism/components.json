@@ -6,8 +6,8 @@
     "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
     "observedAt": "2026-10-03",
     "latestSourceAudit": {
-      "observedAt": "2026-10-09",
-      "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "observedAt": "2026-10-13",
+      "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
       "checkout": "dev fast-forwarded to27c4fdbf and clean",
       "previousMappedCount": 269,
       "newComponents": [
@@ -126,16 +126,18 @@
         "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "observedAt": "2026-10-13",
         "scope": "Chat-log placeholder source and typed host query/copy/archive contracts; source generation overlays with selected local/installed browser checks. Authenticated original visual/API parity remains unverified."
-      }
+      },
+      "previousRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "scope": "Latest source delta: retired disconnected Radar/Summary; leadership analysis result tags; route-vs-root-session history deletion. Baseline design evidence and prior source audits are retained separately; deployed revision remains unbound."
     }
   },
   "sourceCoverage": {
     "inventoryUrl": "/prism/research/source-inventory.json",
-    "total": 273,
+    "total": 271,
     "pending": 0,
     "vectorAssets": 87,
     "countUnit": "source-file",
-    "nonVectorSourceFiles": 186,
+    "nonVectorSourceFiles": 184,
     "pendingPurposeMappings": 0,
     "independentImplementationTargetCount": null,
     "claim": "Source-purpose mapping is separate from state/visual verification. Vector artwork is retained as design assets; API/auth/persistence remains host-owned. Pending entries must be resolved explicitly before completion."
@@ -708,14 +710,13 @@
       "name": "Chat sidebar",
       "category": "Navigation",
       "purpose": "새 대화·후보자·즐겨찾기·관리·대화기록 탐색",
-      "contract": "collapsed/onCollapsedChange와 activeId/onNavigate는 controlled입니다. 펼침280px·접힘72px. createPrismAdminMenu(canManage,basePath)는 호스트가 허용할 때 Admin과 사용자·회사그룹·포지션블럭·포지션·공지사항의5개 메뉴를 제공합니다. 이는 서버 권한 판정이 아닙니다. matchDescendants를 지정한 항목은 정확한 경로 또는 / 경계의 하위 경로에서 활성화하며 기존 항목의 기본값은 정확 일치입니다. expandedIds/historyOpen을 선택적으로 제어할 수 있습니다. 이름 변경은 IME/Enter/blur/Escape를 보존합니다. 삭제·프로필 작업·방침·저장은 호스트 콜백입니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "contract": "메뉴·대화 목록·이름 변경·삭제 의도는 소비자 소유입니다. createPrismAdminMenu는 표시 계약이며 API 권한을 부여하지 않습니다. getPrismHistoryDeletionAction은 삭제 성공 후 최신 routeConversationId/activeConversationId로 호출합니다. URL의 현재 ID 삭제는 navigate-intro, 기본 경로의 현재 ID 삭제는 reset-intro-session, 다른 기록 삭제는 preserve-view입니다. 경로 이동과 세션 reset을 동시에 수행하지 않습니다. helper는 API·라우팅·저장을 실행하지 않습니다. 예제는 합성 삭제 실패/재시도와 세 가지 현재 화면 문맥을 지원합니다.",
+      "referenceRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
       "sourceDeltaAudits": [
         {
           "source": "layouts/chat/ChatSidebar.tsx",
-          "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
-          "observedAt": "2026-10-12",
-          "scope": "Admin five-link menu including users, host capability gate and descendant route matching. Current deployed visual comparison and real role authorization remain unverified."
+          "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+          "scope": "Leadership results rendered as blue readonly tags; deletion effect after success depends on latest route/session context."
         }
       ],
       "states": [
@@ -727,14 +728,14 @@
       "source": [
         "../layouts/chat/ChatSidebar.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismSidebar, createPrismAdminMenu } from \"@pydemia/prism\";\nexport function SidebarExample() {\n    const [canManage,setCanManage]=useState(true),[collapsed,setCollapsed]=useState(false);\n    const [route,setRoute]=useState(\"/chat/admin/users/synthetic-user\");\n    const admin=createPrismAdminMenu(canManage);\n    return <div data-prism=\"light\"><label><input type=\"checkbox\" checked={canManage} onChange={event=>setCanManage(event.target.checked)}/>관리자 메뉴 표시</label>\n        <PrismSidebar items={admin?[admin]:[]} activeId={route} onNavigate={setRoute} collapsed={collapsed} onCollapsedChange={setCollapsed}\n            onNewChat={()=>setRoute(\"/chat\")} user={{name:\"가상 사용자\",description:\"demo@example.com\"}}/>\n        <p role=\"status\">선택한 메뉴: {route}</p></div>;\n}",
+      "usage": "import { useLayoutEffect, useRef, useState } from \"react\";\nimport { PrismSidebar, PrismConfirmDialog, PrismIcon, createPrismAdminMenu, getPrismHistoryDeletionAction } from \"@pydemia/prism\";\n\ntype Mode = \"default\" | \"loading\" | \"empty\" | \"restricted\";\nconst records = [{ id: \"current\", title: \"현재 합성 대화\" }, { id: \"other\", title: \"다른 합성 대화\" }];\ntype Context = { routeConversationId: string | null; activeConversationId: string | null; view: string };\n\n/** Host-owned synthetic deletion and route state; no service or browser history is changed. */\nexport function SidebarHistoryExample({ initialMode = \"default\" }: { initialMode?: Mode }) {\n    const [collapsed, setCollapsed] = useState(false), [history, setHistory] = useState(records);\n    const [context, setContext] = useState<Context>({ routeConversationId: \"current\", activeConversationId: \"current\", view: \"current\" });\n    const latest = useRef(context), pending = useRef<AbortController | null>(null), mounted = useRef(false);\n    const [session, setSession] = useState(0), [deleting, setDeleting] = useState<string | null>(null), [busy, setBusy] = useState(false);\n    const [failNext, setFailNext] = useState(false), [error, setError] = useState<string | undefined>(), [result, setResult] = useState(\"\");\n    useLayoutEffect(() => { latest.current = context; }, [context]);\n    useLayoutEffect(() => { mounted.current = true; return () => { mounted.current = false; pending.current?.abort(); }; }, []);\n    const intro = () => setContext({ routeConversationId: null, activeConversationId: null, view: \"intro\" });\n    const remove = async () => {\n        if (!deleting || pending.current) return;\n        const id = deleting, controller = new AbortController(), failure = failNext;\n        pending.current = controller; setBusy(true); setError(undefined);\n        try {\n            await new Promise(resolve => setTimeout(resolve, 40));\n            if (controller.signal.aborted || !mounted.current) return;\n            if (failure) { setFailNext(false); throw new Error(\"Synthetic deletion failure\"); }\n            setHistory(items => items.filter(item => item.id !== id));\n            const action = getPrismHistoryDeletionAction(id, latest.current);\n            if (action === \"navigate-intro\") intro();\n            else if (action === \"reset-intro-session\") { intro(); setSession(value => value + 1); }\n            setDeleting(null); setResult(`합성 기록 ${id} 삭제 · ${action}`);\n        } catch {\n            if (mounted.current && !controller.signal.aborted) setError(\"합성 삭제에 실패했습니다. 기록은 유지됩니다.\");\n        } finally {\n            if (mounted.current && pending.current === controller) { pending.current = null; setBusy(false); }\n        }\n    };\n    return <div data-prism=\"light\" className=\"prism-sidebar-demo\">\n        <PrismSidebar collapsed={collapsed} onCollapsedChange={setCollapsed} activeId={context.view}\n            onNavigate={id => setContext(history.some(item => item.id === id) ? { routeConversationId: id, activeConversationId: id, view: id } : { routeConversationId: null, activeConversationId: null, view: id })}\n            onNewChat={() => { intro(); setSession(value => value + 1); }}\n            items={[{ id: \"favorites\", label: \"후보자 즐겨찾기\", icon: <PrismIcon name=\"FavoriteLargeIcon\" size={24}/> }, ...(initialMode === \"restricted\" ? [] : [createPrismAdminMenu(true)!])]}\n            history={initialMode === \"empty\" ? [] : history.map(item => ({ ...item, generating: initialMode === \"loading\" }))}\n            onHistoryRename={(id, title) => setHistory(items => items.map(item => item.id === id ? { ...item, title } : item))}\n            onHistoryDeleteRequest={id => { setError(undefined); setDeleting(id); }}\n            user={{ name: \"demo-user\", description: \"demo@example.com\", team: \"가상 전략팀\" }}\n            profileActions={[{ id: \"notice\", label: \"공지사항\" }, { id: \"logout\", label: \"로그아웃\", tone: \"muted\" }]}\n            onProfileAction={id => setResult(`${id} 의도 전달`)} onPrivacyPolicy={() => setResult(\"방침 열기 의도 전달\")} copyright=\"© 가상기업\"/>\n        <div className=\"prism-sidebar-demo-main\">\n            <p>합성 기록만 삭제합니다. 경로와 세션 키는 이 예제 안의 표시 값입니다.</p>\n            <label>현재 대화 위치 <select aria-label=\"현재 대화 위치\" value={context.view === \"intro\" ? \"intro\" : context.view === \"other\" ? \"other\" : context.routeConversationId ? \"linked\" : \"root\"}\n                onChange={event => { const value = event.target.value; if (value === \"intro\") intro(); else setContext({ routeConversationId: value === \"root\" ? null : value === \"other\" ? \"other\" : \"current\", activeConversationId: value === \"other\" ? \"other\" : \"current\", view: value === \"other\" ? \"other\" : \"current\" }); }}>\n                <option value=\"linked\">URL에 ID가 있는 현재 대화</option><option value=\"root\">기본 경로의 현재 대화</option><option value=\"other\">다른 대화 조회 중</option><option value=\"intro\">초기 화면</option>\n            </select></label>\n            <label><input type=\"checkbox\" checked={failNext} disabled={busy} onChange={event => setFailNext(event.target.checked)}/> 다음 합성 삭제 실패</label>\n            <p role=\"status\">선택한 화면: {context.view} · 세션 키: {session}</p><p role=\"status\">{result}</p>\n        </div>\n        <PrismConfirmDialog open={deleting !== null} onOpenChange={open => { if (!open && !pending.current) setDeleting(null); }}\n            title=\"가상 대화를 삭제하시겠습니까?\" content=\"삭제 성공 후 현재 경로와 대화 ID를 확인합니다.\" type=\"error\" confirmTone=\"danger\" confirmLabel=\"삭제\"\n            busy={busy} error={error} onConfirm={() => { void remove(); }}/>\n    </div>;\n}\n",
       "sourcePath": "packages/prism/src/prism-sidebar.tsx",
       "previewUrl": "/prism?component=prism-sidebar",
       "embedUrl": "/prism?component=prism-sidebar&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-sidebar&view=responsive",
       "verification": {
-        "visual": "pending-current-menu-comparison",
-        "interaction": "partial",
+        "visual": "latest-source-delta-local-geometry-passed;authenticated-source-parity-unverified",
+        "interaction": "passed-target-tests-and-selected-synthetic-browser-workflow;all-host-service-effects-unverified",
         "checks": [
           "Original vector navigation artwork and 36px navigation rows",
           "Collapsed width 72px, header 64px, new-chat height 40px",
@@ -753,7 +754,7 @@
           "Source current menu capability, keyboard/layout and full authenticated interaction comparison."
         ],
         "localRenderGate": {
-          "status": "passed",
+          "status": "passed-current-source-delta",
           "states": [
             "default",
             "loading",
@@ -764,8 +765,8 @@
             320,
             1280
           ],
-          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
-          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+          "sourceSha256": "94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc",
+          "scope": "Local synthetic render/geometry;selected interaction checks andsource code comparison are separate."
         }
       },
       "exports": [
@@ -782,6 +783,14 @@
           "kind": "type"
         },
         {
+          "name": "PrismHistoryDeletionAction",
+          "kind": "type"
+        },
+        {
+          "name": "getPrismHistoryDeletionAction",
+          "kind": "function"
+        },
+        {
           "name": "PrismProfileAction",
           "kind": "type"
         },
@@ -795,7 +804,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismSidebar, createPrismAdminMenu } from \"@/components/ui/prism-sidebar\";\nexport function SidebarExample() {\n    const [canManage,setCanManage]=useState(true),[collapsed,setCollapsed]=useState(false);\n    const [route,setRoute]=useState(\"/chat/admin/users/synthetic-user\");\n    const admin=createPrismAdminMenu(canManage);\n    return <div data-prism=\"light\"><label><input type=\"checkbox\" checked={canManage} onChange={event=>setCanManage(event.target.checked)}/>관리자 메뉴 표시</label>\n        <PrismSidebar items={admin?[admin]:[]} activeId={route} onNavigate={setRoute} collapsed={collapsed} onCollapsedChange={setCollapsed}\n            onNewChat={()=>setRoute(\"/chat\")} user={{name:\"가상 사용자\",description:\"demo@example.com\"}}/>\n        <p role=\"status\">선택한 메뉴: {route}</p></div>;\n}"
+      "registryUsage": "import { useLayoutEffect, useRef, useState } from \"react\";\nimport { PrismSidebar, createPrismAdminMenu, getPrismHistoryDeletionAction } from \"@/components/ui/prism-sidebar\";\nimport { PrismConfirmDialog } from \"@/components/ui/prism-dialog\";\nimport { PrismIcon } from \"@/components/ui/prism-icon\";\n\ntype Mode = \"default\" | \"loading\" | \"empty\" | \"restricted\";\nconst records = [{ id: \"current\", title: \"현재 합성 대화\" }, { id: \"other\", title: \"다른 합성 대화\" }];\ntype Context = { routeConversationId: string | null; activeConversationId: string | null; view: string };\n\n/** Host-owned synthetic deletion and route state; no service or browser history is changed. */\nexport function SidebarHistoryExample({ initialMode = \"default\" }: { initialMode?: Mode }) {\n    const [collapsed, setCollapsed] = useState(false), [history, setHistory] = useState(records);\n    const [context, setContext] = useState<Context>({ routeConversationId: \"current\", activeConversationId: \"current\", view: \"current\" });\n    const latest = useRef(context), pending = useRef<AbortController | null>(null), mounted = useRef(false);\n    const [session, setSession] = useState(0), [deleting, setDeleting] = useState<string | null>(null), [busy, setBusy] = useState(false);\n    const [failNext, setFailNext] = useState(false), [error, setError] = useState<string | undefined>(), [result, setResult] = useState(\"\");\n    useLayoutEffect(() => { latest.current = context; }, [context]);\n    useLayoutEffect(() => { mounted.current = true; return () => { mounted.current = false; pending.current?.abort(); }; }, []);\n    const intro = () => setContext({ routeConversationId: null, activeConversationId: null, view: \"intro\" });\n    const remove = async () => {\n        if (!deleting || pending.current) return;\n        const id = deleting, controller = new AbortController(), failure = failNext;\n        pending.current = controller; setBusy(true); setError(undefined);\n        try {\n            await new Promise(resolve => setTimeout(resolve, 40));\n            if (controller.signal.aborted || !mounted.current) return;\n            if (failure) { setFailNext(false); throw new Error(\"Synthetic deletion failure\"); }\n            setHistory(items => items.filter(item => item.id !== id));\n            const action = getPrismHistoryDeletionAction(id, latest.current);\n            if (action === \"navigate-intro\") intro();\n            else if (action === \"reset-intro-session\") { intro(); setSession(value => value + 1); }\n            setDeleting(null); setResult(`합성 기록 ${id} 삭제 · ${action}`);\n        } catch {\n            if (mounted.current && !controller.signal.aborted) setError(\"합성 삭제에 실패했습니다. 기록은 유지됩니다.\");\n        } finally {\n            if (mounted.current && pending.current === controller) { pending.current = null; setBusy(false); }\n        }\n    };\n    return <div data-prism=\"light\" className=\"prism-sidebar-demo\">\n        <PrismSidebar collapsed={collapsed} onCollapsedChange={setCollapsed} activeId={context.view}\n            onNavigate={id => setContext(history.some(item => item.id === id) ? { routeConversationId: id, activeConversationId: id, view: id } : { routeConversationId: null, activeConversationId: null, view: id })}\n            onNewChat={() => { intro(); setSession(value => value + 1); }}\n            items={[{ id: \"favorites\", label: \"후보자 즐겨찾기\", icon: <PrismIcon name=\"FavoriteLargeIcon\" size={24}/> }, ...(initialMode === \"restricted\" ? [] : [createPrismAdminMenu(true)!])]}\n            history={initialMode === \"empty\" ? [] : history.map(item => ({ ...item, generating: initialMode === \"loading\" }))}\n            onHistoryRename={(id, title) => setHistory(items => items.map(item => item.id === id ? { ...item, title } : item))}\n            onHistoryDeleteRequest={id => { setError(undefined); setDeleting(id); }}\n            user={{ name: \"demo-user\", description: \"demo@example.com\", team: \"가상 전략팀\" }}\n            profileActions={[{ id: \"notice\", label: \"공지사항\" }, { id: \"logout\", label: \"로그아웃\", tone: \"muted\" }]}\n            onProfileAction={id => setResult(`${id} 의도 전달`)} onPrivacyPolicy={() => setResult(\"방침 열기 의도 전달\")} copyright=\"© 가상기업\"/>\n        <div className=\"prism-sidebar-demo-main\">\n            <p>합성 기록만 삭제합니다. 경로와 세션 키는 이 예제 안의 표시 값입니다.</p>\n            <label>현재 대화 위치 <select aria-label=\"현재 대화 위치\" value={context.view === \"intro\" ? \"intro\" : context.view === \"other\" ? \"other\" : context.routeConversationId ? \"linked\" : \"root\"}\n                onChange={event => { const value = event.target.value; if (value === \"intro\") intro(); else setContext({ routeConversationId: value === \"root\" ? null : value === \"other\" ? \"other\" : \"current\", activeConversationId: value === \"other\" ? \"other\" : \"current\", view: value === \"other\" ? \"other\" : \"current\" }); }}>\n                <option value=\"linked\">URL에 ID가 있는 현재 대화</option><option value=\"root\">기본 경로의 현재 대화</option><option value=\"other\">다른 대화 조회 중</option><option value=\"intro\">초기 화면</option>\n            </select></label>\n            <label><input type=\"checkbox\" checked={failNext} disabled={busy} onChange={event => setFailNext(event.target.checked)}/> 다음 합성 삭제 실패</label>\n            <p role=\"status\">선택한 화면: {context.view} · 세션 키: {session}</p><p role=\"status\">{result}</p>\n        </div>\n        <PrismConfirmDialog open={deleting !== null} onOpenChange={open => { if (!open && !pending.current) setDeleting(null); }}\n            title=\"가상 대화를 삭제하시겠습니까?\" content=\"삭제 성공 후 현재 경로와 대화 ID를 확인합니다.\" type=\"error\" confirmTone=\"danger\" confirmLabel=\"삭제\"\n            busy={busy} error={error} onConfirm={() => { void remove(); }}/>\n    </div>;\n}\n"
     },
     {
       "id": "prism-chat",
@@ -4785,8 +4794,15 @@
       "name": "Profile analysis / Leader explanation",
       "category": "Domain",
       "purpose": "리더 유형 도움말과 6 Frame 목적별 근거 표시",
-      "contract": "Factor kind를 명시합니다. 전문성 tag·대표 성공경험 star·Design/Learning 첫 결과·Attitude Derailment·Leadership 제목/설명을 원본대로 구분합니다. 리더 본문은 aiComment ?? description이며 빈 aiComment도 보존합니다. 누락/trim empty는 관련 데이터 없음입니다. Description은 sanitized inline markup이며 panel의 내부 action은 label입니다. 평가·등급을 계산하지 않습니다. CSS style로 크기를 조절하고 280px 이하에 label 열을 재배치합니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "contract": "Factor kind를 명시합니다. 전문성 tag·대표 성공경험 star·Design/Learning 첫 결과·Attitude Derailment·Leadership 제목/설명을 원본대로 구분합니다. 리더 본문은 aiComment ?? description이며 빈 aiComment도 보존합니다. 누락/trim empty는 관련 데이터 없음입니다. Description은 sanitized inline markup이며 panel의 내부 action은 label입니다. 평가·등급을 계산하지 않습니다. CSS style로 크기를 조절하고 280px 이하에 label 열을 재배치합니다. 최신 leadership.results는 원본처럼 blue 정적 태그를 제목/설명 앞에 모두 표시합니다. 순서와 중복 및 원문을 보존하고 HTML로 해석하지 않습니다. 긴 태그는 원문/title을 유지한 채 한 줄 말줄임하며 기본21px/12px/600을 유지합니다.",
+      "referenceRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+      "sourceDeltaAudits": [
+        {
+          "source": "components/chat/templates/ChatProfileAnalysis.tsx",
+          "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+          "scope": "Leadership results rendered as blue readonly tags; deletion effect after success depends on latest route/session context."
+        }
+      ],
       "states": [
         "default",
         "empty",
@@ -4801,8 +4817,8 @@
       "embedUrl": "/prism?component=prism-analysis&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-analysis&view=responsive",
       "verification": {
-        "visual": "partial",
-        "interaction": "selected-local-runtime-and-unit-tests",
+        "visual": "latest-source-delta-local-geometry-passed;authenticated-source-parity-unverified",
+        "interaction": "passed-target-tests-and-selected-synthetic-browser-workflow;all-host-service-effects-unverified",
         "source": "087811ff current code and selected computed measurements",
         "extensions": [
           "140–1280px sizing",
@@ -4814,7 +4830,7 @@
           "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
         ],
         "localRenderGate": {
-          "status": "passed",
+          "status": "passed-current-source-delta",
           "states": [
             "default",
             "empty",
@@ -4824,8 +4840,8 @@
             320,
             1280
           ],
-          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
-          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+          "sourceSha256": "94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc",
+          "scope": "Local synthetic render/geometry;selected interaction checks andsource code comparison are separate."
         }
       },
       "exports": [
