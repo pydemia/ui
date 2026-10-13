@@ -15,12 +15,15 @@ export const prismProfileTabs = [
     { id: "leadership", label: "Leadership" }, { id: "comments", label: "Mgmt. Comments" },
 ] as const;
 export type PrismProfileTab = typeof prismProfileTabs[number]["id"];
-export type PrismCareerEntry = { id: string; period: string; company: string; role: string };
+export type PrismCareerEntry = { id: string; period: string; company: string; role: string | readonly string[] };
 export function PrismOutline({ title, children, actions }: { title?: ReactNode; children: ReactNode; actions?: ReactNode }) {
     const id = useId(); return <section className="prism-outline" aria-labelledby={title ? id : undefined}>{(title||actions)&&<header>{title&&<h3 id={id}>{title}</h3>}{actions}</header>}{children}</section>;
 }
-export function PrismCareerTimeline({ entries }: { entries: readonly PrismCareerEntry[] }) {
-    return <ol className="prism-career">{entries.length ? entries.map(item => <li key={item.id}><strong>{item.period}</strong><div><b>{item.company}</b><p>{item.role}</p></div></li>) : <li>경력 정보가 없습니다.</li>}</ol>;
+export function PrismCareerTimeline({ entries, isStart = true, isEnd = true }: { entries: readonly PrismCareerEntry[]; isStart?: boolean; isEnd?: boolean }) {
+    return entries.length ? <ol className="prism-career" data-start={isStart} data-end={isEnd}>{entries.map(item => <li key={item.id}>
+        <div className="prism-career-content"><strong>{item.period}</strong><ul className="prism-career-descriptions">{(Array.isArray(item.role) ? item.role : [item.role]).map((role, index) =>
+            <li key={`${item.id}-${index}`}><span className="prism-career-company"><span aria-hidden="true" />{item.company}</span><span className="prism-career-role">{role}</span></li>)}</ul></div>
+    </li>)}</ol> : <p className="prism-career-empty">경력 정보가 없습니다.</p>;
 }
 function SummaryHelp({label,note,tooltipClassName,tooltipStyle}:{label:string;note:ReactNode;tooltipClassName?:string;tooltipStyle?:CSSProperties}) {
     return <PrismInfoTooltip panel side="bottom" label={`${label} 설명`} className="prism-summary-info" content={<div className={`prism-summary-tooltip ${tooltipClassName ?? ""}`} style={tooltipStyle}>{note}</div>}/>;
@@ -49,12 +52,28 @@ export function PrismProfile({ candidate, activeTab, onTabChange, sections, favo
                 {sections[tab.id] ?? <p className="prism-help">{tab.label} 정보가 없습니다.</p>}</div></PrismTabsContent>)}</PrismTabs></div>;
 }
 export function PrismBasicInfo({ items }: { items: readonly { label: string; value: ReactNode }[] }) {
-    return <div className="prism-basic-info"><PrismDetailList items={items} /></div>;
+    return <div className="prism-basic-info"><PrismDetailList items={items.map(item => ({ ...item, value: Array.isArray(item.value)
+        ? <span className="prism-basic-info-values">{item.value.map((value: ReactNode, index: number) => <span key={index}>{value}</span>)}</span> : item.value }))} /></div>;
 }
 export function PrismCompetenceMatrix({ columns, rows }: { columns: readonly string[]; rows: readonly { id: string; label: string; values: readonly (string | null)[] }[] }) {
     return <div className="prism-matrix-scroll" tabIndex={0} role="region" aria-label="Design 역량 매트릭스"><table className="prism-matrix"><caption className="prism-sr-only">Design 역량 매트릭스</caption>
         <thead><tr><th scope="col">역량</th>{columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead>
         <tbody>{rows.map(row => <tr key={row.id}><th scope="row">{row.label}</th>{columns.map((column,index) => <td key={column} data-grade={row.values[index] ?? "missing"}>{row.values[index] ?? "정보 없음"}</td>)}</tr>)}</tbody></table></div>;
+}
+export type PrismDesignCompetenceMatrixModel = {
+    columns: readonly { key: string; label: string }[];
+    rows: readonly { key: string; label: string }[];
+    rowAxisLabel: string;
+    currentPosition?: { rowKey: string; columnKey: string } | null;
+};
+export function PrismDesignCompetenceMatrix({ matrix }: { matrix: PrismDesignCompetenceMatrixModel }) {
+    const width = Math.max(320, (matrix.columns.length + 1) * 90);
+    return <div className="prism-design-competence-matrix" role="region" aria-label="Design 역량 위치 매트릭스" tabIndex={0}>
+        <table style={{ minWidth: width }}><caption className="prism-sr-only">Design 역량 위치 매트릭스</caption><thead><tr><th scope="col"><span className="prism-sr-only">{matrix.rowAxisLabel}</span></th>{matrix.columns.map(column => <th key={column.key} scope="col">{column.label}</th>)}</tr></thead>
+            <tbody>{matrix.rows.map(row => <tr key={row.key}><th scope="row">{matrix.rowAxisLabel} {row.label}</th>{matrix.columns.map(column => {
+                const current = matrix.currentPosition?.rowKey === row.key && matrix.currentPosition.columnKey === column.key;
+                return <td key={column.key} data-current={current || undefined}>{current ? "현재 위치" : <span className="prism-sr-only">해당 없음</span>}</td>;
+            })}</tr>)}</tbody></table></div>;
 }
 export type PrismFavoriteProfileProps = {
     candidate: PrismCandidate; favorite?: boolean; onFavoriteChange?: (favorite: boolean) => void;

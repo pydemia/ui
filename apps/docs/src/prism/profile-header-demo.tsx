@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PrismProfile, PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid, PrismFavoriteCandidateSkeleton,
-    PrismEvaluationHistory, PrismRequestState, PrismBasicInfo, PrismCareerTimeline, PrismEvidence, PrismSummaryBadge, PrismCompetenceMatrix,
+    PrismEvaluationHistory, PrismRequestState, PrismOutline, PrismBasicInfo, PrismCareerTimeline, PrismEvidence, PrismSummaryBadge, PrismDesignCompetenceMatrix, prismProfileTabs,
     type PrismCandidate, type PrismProfileTab } from "@pydemia/prism";
 import type { FixtureState } from "./catalog";
 
@@ -18,6 +18,7 @@ export function ProfileHeaderDemo({ state }: { state: FixtureState }) {
         : { ...base, name: state === "long" ? "긴 이름을 가진 가상 후보자 프로필 확인 예시" : base.name, tenure: state === "long" ? "호스트가 제공한 임원 경력 표시" : undefined,
             position: state === "long" ? "긴 직책과 여러 조직명을 함께 제공한 가상 데이터입니다." : base.position,
             photo: photo === "present" ? syntheticPhoto : photo === "failed" ? "https://example.invalid/synthetic-photo.png" : undefined };
+    const loadingSections = Object.fromEntries(prismProfileTabs.map(({ id }) => [id, <PrismRequestState key={id} status="loading" />]));
     return <div className="prism-demo-stack"><div className="prism-demo-row"><label>합성 사진 <select value={photo} onChange={event => setPhoto(event.target.value)}>
         <option value="present">제공됨</option><option value="missing">없음</option><option value="failed">로드 오류</option></select></label>
         <label><input type="checkbox" checked={favoriteBusy} onChange={event => setFavoriteBusy(event.target.checked)}/> 즐겨찾기 처리 중</label>
@@ -25,11 +26,13 @@ export function ProfileHeaderDemo({ state }: { state: FixtureState }) {
         <PrismProfile candidate={candidate} activeTab={tab} onTabChange={setTab} favorite={favorite} onFavoriteChange={setFavorite}
             loading={state === "loading"} readOnly={state === "readonly"} favoriteBusy={favoriteBusy} printBusy={printBusy}
             onComments={() => setResult("메모 열기 intent")} commentCount={0} onPrint={() => setResult("프로필 인쇄 intent")}
-            sections={{ total: <div className="prism-demo-stack"><PrismBasicInfo items={[{ label: "최종 학력", value: "가상대학교 공학 석사" }]}/>
-                <PrismCareerTimeline entries={[{ id: "synthetic-career", period: "2023~현재", company: "가상전자", role: "기술전략담당" }]}/></div>,
+            sections={state === "loading" ? loadingSections : { total: <div className="prism-demo-stack"><PrismOutline title="기본 정보"><PrismBasicInfo items={[{ label: "최종 학력", value: state === "long" ? ["가상대학교 공학 석사", "예시대학교 경영학 박사"] : "가상대학교 공학 석사" }]}/></PrismOutline>
+                <PrismOutline title="경력"><PrismCareerTimeline entries={[{ id: "synthetic-career", period: "2023~현재", company: "가상전자", role: state === "long" ? ["기술전략담당", "신사업·조직 운영 책임"] : "기술전략담당" }]}/></PrismOutline></div>,
                 expertise: <PrismEvidence title="전문성" grade={state === "empty" ? null : "A"}>합성 근거를 표시합니다.</PrismEvidence>,
-                design: <div className="prism-demo-stack"><PrismSummaryBadge label="합성 등급" summary={state === "empty" ? null : "호스트가 제공한 역량 요약입니다."}/>
-                    <PrismCompetenceMatrix columns={["전략", "기술"]} rows={[{ id: "synthetic-matrix", label: "합성 조직", values: [state === "empty" ? null : "A", null] }]}/></div> }}/>
+                design: <div className="prism-demo-stack"><PrismSummaryBadge label="합성 등급" summary={state === "empty" ? null : "호스트가 제공한 역량 요약입니다."} note="실제 평가 결과가 아닌 UI 확인용 설명입니다."/>
+                    <PrismDesignCompetenceMatrix matrix={{ rowAxisLabel: "Function", columns: [{key:"strategy",label:"전략"},{key:"technology",label:"기술"}],
+                        rows: [{key:"business",label:"사업"},{key:"organization",label:"조직"}],
+                        currentPosition: state === "empty" ? null : {rowKey:"business",columnKey:"strategy"} }}/></div> }}/>
         <p role="status">{result || "호스트 동작 대기"}</p>
     </div>;
 }

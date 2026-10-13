@@ -13,7 +13,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const { createElement: h, act } = await import("react");
 const { createRoot } = await import("react-dom/client");
 const { renderToStaticMarkup } = await import("react-dom/server");
-const { PrismFavoriteProfile, PrismProfile, PrismCandidatePortrait, PrismFavoriteCandidateCard, PrismCandidateCollection,
+const { PrismFavoriteProfile, PrismProfile, PrismBasicInfo, PrismCareerTimeline, PrismDesignCompetenceMatrix, PrismCandidatePortrait, PrismFavoriteCandidateCard, PrismCandidateCollection,
     PrismEvaluationHistory, preparePrismEvaluationHistory, PrismProfilePrintDocument } = await import("../dist/index.js");
 const root = createRoot(document.getElementById("root"));
 afterEach(async () => { await act(async () => root.render(null)); });
@@ -60,6 +60,31 @@ test("profile controls preserve host favorite state and busy/readonly protect on
     await act(async () => root.render(h(PrismFavoriteProfile, { ...props, favorite: true, readOnly: true, printBusy: true })));
     assert.equal(document.querySelector('.prism-favorite-toggle').disabled, true); await click("프로필 인쇄"); await click("메모 0"); assert.equal(prints, 0); assert.equal(memos, 1);
     await act(async () => root.render(h(PrismFavoriteProfile, { ...props, favoriteBusy: true, readOnly: false }))); assert.equal(document.querySelector('.prism-favorite-toggle').disabled, true);
+});
+
+test("profile basic values and repeated career descriptions remain distinct", () => {
+    const basic = new JSDOM(renderToStaticMarkup(h(PrismBasicInfo, { items: [{ label: "학력", value: ["가상 대학교", "예시 대학원"] }] }))).window.document;
+    assert.deepEqual([...basic.querySelectorAll('.prism-basic-info-values > span')].map(node => node.textContent), ["가상 대학교", "예시 대학원"]);
+    const career = new JSDOM(renderToStaticMarkup(h(PrismCareerTimeline, { entries: [
+        { id: "career-a", period: "2022–현재", company: "가상 회사", role: ["기술총괄", "신사업 담당"] },
+    ], isStart: false, isEnd: false }))).window.document;
+    assert.equal(career.querySelector('.prism-career').getAttribute('data-start'), 'false');
+    assert.equal(career.querySelector('.prism-career').getAttribute('data-end'), 'false');
+    assert.deepEqual([...career.querySelectorAll('.prism-career-role')].map(node => node.textContent), ["기술총괄", "신사업 담당"]);
+    assert.equal(career.querySelectorAll('.prism-career-company').length, 2);
+});
+
+test("design competence matrix marks only the source position and keeps row-column semantics", () => {
+    const matrix = { rowAxisLabel: "Function", columns: [{ key: "strategy", label: "전략" }, { key: "technology", label: "기술" }],
+        rows: [{ key: "business", label: "사업" }, { key: "organization", label: "조직" }],
+        currentPosition: { rowKey: "organization", columnKey: "technology" } };
+    const doc = new JSDOM(renderToStaticMarkup(h(PrismDesignCompetenceMatrix, { matrix }))).window.document;
+    assert.deepEqual([...doc.querySelectorAll('thead th')].map(node => node.textContent), ["Function", "전략", "기술"]);
+    assert.deepEqual([...doc.querySelectorAll('tbody th')].map(node => node.textContent), ["Function 사업", "Function 조직"]);
+    assert.equal(doc.querySelectorAll('td').length, 4);
+    assert.equal(doc.querySelectorAll('td[data-current]').length, 1);
+    assert.equal(doc.querySelector('td[data-current]').textContent, "현재 위치");
+    assert.equal(doc.querySelectorAll('.prism-sr-only').length, 5);
 });
 
 test("loading hides stale identity and actions through the full profile and explicit empty fields override legacy aliases", async () => {
