@@ -2789,8 +2789,8 @@
       "name": "Switch / Tooltip / Progress / Files",
       "category": "Utility",
       "purpose": "환경 선택·도움말·진행률·파일 선택과 제거",
-      "contract": "Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip 기본 hover delay는 원본과 같은 100ms이며 delayDuration으로 조절합니다. PrismInfoTooltip은 같은 토글·닫기 동작을 정보 버튼과 조합하고 open/onOpenChange로 제어할 수 있습니다. Tooltip은 focus와 hover에서 열리며 side/align/small/arrow로 배치를 지정합니다. none 배치는 side=top/arrow=false입니다. 긴 도움말은 viewport에 맞춰 줄바꿈·내용 스크롤을 지원합니다. PrismTooltipContent는 같은 스타일을 직접 Tooltip root/trigger와 조합하며 sideOffset은 본문과 트리거 사이의 간격입니다. SUMMARY 설명은 터치·Space로 토글하고 Escape·바깥 클릭으로 닫습니다. Progress null은 indeterminate이며 showPercent 기본값은 false입니다. Dropzone 기본 형식은 .xlsx/.csv/.pdf/.png/.jpg, 최대 10MB입니다. 확장자가 있으면 MIME보다 확장자로 검사하며 유효한 파일만 선택하고 혼합 거부는 onInvalid(partial)과 onFilesRejected로 전달합니다. maxFiles는 선택 1회당 제한이며 기본값은 제한 없음입니다. 두 파일 입력은 같은 파일 재선택과 제거, disabled/readOnly, 소비자 소유 files의 ready/uploading/error를 지원합니다. FileAttach는 accept로 선택기를 제한하고 multiple 기본값은 true입니다. 파일 업로드·완료·실패·다운로드는 소비자가 처리합니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "contract": "Switch는 Radix checked/onCheckedChange를 공유합니다. Tooltip 기본 hover delay는 원본과 같은 100ms이며 delayDuration으로 조절합니다. PrismInfoTooltip은 같은 토글·닫기 동작을 정보 버튼과 조합하고 open/onOpenChange로 제어할 수 있습니다. Tooltip은 focus와 hover에서 열리며 side/align/small/arrow로 배치를 지정합니다. none 배치는 side=top/arrow=false입니다. 긴 도움말은 viewport에 맞춰 줄바꿈·내용 스크롤을 지원합니다. PrismTooltipContent는 같은 스타일을 직접 Tooltip root/trigger와 조합하며 sideOffset은 본문과 트리거 사이의 간격입니다. SUMMARY 설명은 터치·Space로 토글하고 Escape·바깥 클릭으로 닫습니다. Progress null은 indeterminate이며 showPercent 기본값은 false입니다. Dropzone 기본 형식은 .xlsx/.csv/.pdf/.png/.jpg, 최대 10MB입니다. 확장자가 있으면 MIME보다 확장자로 검사하며 유효한 파일만 선택하고 혼합 거부는 onInvalid(partial)과 onFilesRejected로 전달합니다. maxFiles는 선택 1회당 제한이며 기본값은 제한 없음입니다. 두 파일 입력은 같은 파일 재선택과 제거, disabled/readOnly, 소비자 소유 files의 ready/uploading/error를 지원합니다. FileAttach는 accept로 선택기를 제한하고 multiple 기본값은 true입니다. 파일 업로드·완료·실패·다운로드는 소비자가 처리합니다. 완전 예제는 Switch·두 종류의 Tooltip·Progress·파일 선택을 합성 상태로 연결합니다.",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "disabled",
@@ -2800,12 +2800,17 @@
       ],
       "source": [
         "ui/input/HRXSwitch.tsx",
+        "styles/_switch.scss",
         "ui/tooltip/HRXTooltip.tsx",
+        "styles/_tooltip.scss",
         "ui/progressbar/HRXProgressBar.tsx",
+        "styles/_progressbar.scss",
         "ui/input/HRXFileAttach.tsx",
-        "ui/input/HRXFileDropzone.tsx"
+        "styles/_file-attach.scss",
+        "ui/input/HRXFileDropzone.tsx",
+        "styles/_file-dropzone.scss"
       ],
-      "usage": "import { useRef, useState } from \"react\";\nimport { PrismFileDropzone, PrismFileAttach, PrismButton, type PrismAttachment } from \"@pydemia/prism\";\nexport function FileSelectionExample() {\n    const nextId = useRef(0);\n    const [files, setFiles] = useState<PrismAttachment[]>([]);\n    const [error, setError] = useState(\"\");\n    function select(selected: File[]) {\n        // Upload in your host; update status from its result. This demo only stores names.\n        setFiles(current => [...current, ...selected.map(file => ({\n            id: `file-${nextId.current++}`, name: file.name, status: \"ready\" as const,\n            sizeLabel: `${Math.max(1, Math.round(file.size / 1024))}KB`,\n        }))]);\n    }\n    const remove = (id: string) => setFiles(current => current.filter(file => file.id !== id));\n    return <section data-prism=\"light\">\n        <PrismFileDropzone files={files} onFilesSelected={select} onRemove={remove}\n            onInvalid={reason => setError(reason === \"partial\" ? \"일부 파일만 첨부되었습니다.\" : \"파일을 확인해 주세요.\")} />\n        <PrismFileAttach files={files} onFilesSelected={select} onRemove={remove} />\n        {error && <p role=\"alert\">{error}<PrismButton variant=\"shape\" onClick={() => setError(\"\")}>닫기</PrismButton></p>}\n    </section>;\n}",
+      "usage": "import { useRef, useState } from \"react\";\nimport { PrismSwitch, PrismTooltip, PrismInfoTooltip, PrismProgress, PrismFileDropzone, PrismFileAttach,\n  type PrismAttachment } from \"@pydemia/prism\";\n\nexport function UtilityExample() {\n  const nextId = useRef(0);\n  const [enabled, setEnabled] = useState(true);\n  const [busy, setBusy] = useState(false);\n  const [files, setFiles] = useState<PrismAttachment[]>([]);\n  const [error, setError] = useState(\"\");\n  function select(selected: File[]) {\n    // The host owns upload requests and changes each status after the result.\n    setFiles(current => [...current, ...selected.map(file => ({\n      id: `file-${nextId.current++}`, name: file.name, status: \"uploading\" as const,\n      sizeLabel: `${Math.max(1, Math.round(file.size / 1024))}KB`,\n    }))]);\n  }\n  const remove = (id: string) => setFiles(current => current.filter(file => file.id !== id));\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 16, minWidth: 0 }}>\n    <PrismSwitch label=\"알림 사용\" checked={enabled} onCheckedChange={setEnabled} />\n    <div style={{ display: \"flex\", alignItems: \"center\", flexWrap: \"wrap\", gap: 8 }}>\n      <PrismTooltip content=\"가상 설정의 설명입니다.\" side=\"bottom\">\n        <button type=\"button\">설정 도움말</button>\n      </PrismTooltip>\n      <PrismInfoTooltip label=\"진행률 설명\" content=\"업로드 결과에 따라 호스트가 진행률을 갱신합니다.\" />\n    </div>\n    <PrismProgress value={busy ? null : 65} showPercent label=\"가상 진행률\" />\n    <button type=\"button\" onClick={() => setBusy(value => !value)}>{busy ? \"진행률 표시\" : \"로딩 표시\"}</button>\n    <PrismFileDropzone files={files} onFilesSelected={select} onRemove={remove}\n      onInvalid={reason => setError(reason === \"partial\" ? \"일부 파일만 첨부되었습니다.\" : \"파일을 확인해 주세요.\")} />\n    <PrismFileAttach files={files} onFilesSelected={select} onRemove={remove} accept=\".xlsx,.csv,.pdf,.png,.jpg\" />\n    {files.some(file => file.status === \"uploading\") && <button type=\"button\" onClick={() =>\n      setFiles(current => current.map(file => file.status === \"uploading\" ? { ...file, status: \"ready\" } : file))}>\n      가상 업로드 완료\n    </button>}\n    {error && <p role=\"alert\">{error} <button type=\"button\" onClick={() => setError(\"\")}>닫기</button></p>}\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-utility.tsx",
       "previewUrl": "/prism?component=prism-utility",
       "embedUrl": "/prism?component=prism-utility&embed=1",
@@ -2831,7 +2836,13 @@
           "SUMMARY touch toggle twice, outside touch dismissal, focus/Escape and Space toggle passed; Avatar full truncated text and Escape passed",
           "788-character synthetic dark/panel content at 1280x900, 320x900 and 320x240: viewport clamp, complete text, internal scroll and centered anchor tracking passed",
           "Native browser mouse wheel scrolls both dark and panel interiors while Tooltip remains open",
-          "PRISM 32 component tests and 12 complete example typechecks passed"
+          "PRISM 32 component tests and 12 complete example typechecks passed",
+          "Current dev 2eeb26ff retains the five utility component purposes and styles; the source tooltip removed word-break:break-word while the reusable tooltip retains safe long-content wrapping",
+          "Complete registry example now composes Switch, standard and info Tooltip, determinate/indeterminate Progress, Dropzone and Attach with controlled file state",
+          "Independent install: 59 TSX sources and CSS matched registry bytes, 48 complete examples typechecked, and Vite/font/notices passed",
+          "Independent installed browser: Switch toggled, keyboard-focused standard Tooltip opened and Escape closed it, info Tooltip toggled, Progress changed 65% to indeterminate",
+          "Independent installed browser: both native file choosers selected a synthetic CSV; host-controlled uploading/ready and removal synchronized both file displays",
+          "At a real 320px viewport the installed example kept document client and scroll widths at 320px; browser error log was empty"
         ],
         "evidence": [
           "local-reference-files-comparison-direct",
@@ -2851,7 +2862,8 @@
           "Switch/Progress source state combinations; Tooltip caller, browser, timing, zoom and aligned edge-collision combinations outside measured cases",
           "native operating-system drag and file dialog interactions beyond the browser filechooser event",
           "authenticated upload/download service integration belongs to the host; not executed",
-          "all accepted format/size/count/browser combinations"
+          "all accepted format/size/count/browser combinations",
+          "the current deployment's exact code revision and authenticated upload/download integration"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -2868,6 +2880,14 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "evidence": "Five current source utilities and styles checked against prior deployed measurements; the complete installable example and independent consumer/browser verified controls, native selection, host-controlled status/removal, keyboard tooltip dismissal, 320px width and empty error log.",
+          "intentionalImprovement": "Long tooltip text retains safe wrapping after the current source removed word-break:break-word; the example names simulated upload completion rather than implying service integration.",
+          "limitations": "The latest authenticated deployment revision and real upload/download services remain unverified; exhaustive visual, OS drag and format permutations remain outside the representative acceptance scope."
         }
       },
       "exports": [
@@ -2925,7 +2945,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismFileDropzone, PrismFileAttach } from \"@/components/ui/prism-utility\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { type PrismAttachment } from \"@/components/ui/prism-admin\";\nexport function FileSelectionExample() {\n    const nextId = useRef(0);\n    const [files, setFiles] = useState<PrismAttachment[]>([]);\n    const [error, setError] = useState(\"\");\n    function select(selected: File[]) {\n        // Upload in your host; update status from its result. This demo only stores names.\n        setFiles(current => [...current, ...selected.map(file => ({\n            id: `file-${nextId.current++}`, name: file.name, status: \"ready\" as const,\n            sizeLabel: `${Math.max(1, Math.round(file.size / 1024))}KB`,\n        }))]);\n    }\n    const remove = (id: string) => setFiles(current => current.filter(file => file.id !== id));\n    return <section data-prism=\"light\">\n        <PrismFileDropzone files={files} onFilesSelected={select} onRemove={remove}\n            onInvalid={reason => setError(reason === \"partial\" ? \"일부 파일만 첨부되었습니다.\" : \"파일을 확인해 주세요.\")} />\n        <PrismFileAttach files={files} onFilesSelected={select} onRemove={remove} />\n        {error && <p role=\"alert\">{error}<PrismButton variant=\"shape\" onClick={() => setError(\"\")}>닫기</PrismButton></p>}\n    </section>;\n}"
+      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismSwitch, PrismTooltip, PrismInfoTooltip, PrismProgress, PrismFileDropzone, PrismFileAttach } from \"@/components/ui/prism-utility\";\nimport { type PrismAttachment } from \"@/components/ui/prism-admin\";\n\nexport function UtilityExample() {\n  const nextId = useRef(0);\n  const [enabled, setEnabled] = useState(true);\n  const [busy, setBusy] = useState(false);\n  const [files, setFiles] = useState<PrismAttachment[]>([]);\n  const [error, setError] = useState(\"\");\n  function select(selected: File[]) {\n    // The host owns upload requests and changes each status after the result.\n    setFiles(current => [...current, ...selected.map(file => ({\n      id: `file-${nextId.current++}`, name: file.name, status: \"uploading\" as const,\n      sizeLabel: `${Math.max(1, Math.round(file.size / 1024))}KB`,\n    }))]);\n  }\n  const remove = (id: string) => setFiles(current => current.filter(file => file.id !== id));\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 16, minWidth: 0 }}>\n    <PrismSwitch label=\"알림 사용\" checked={enabled} onCheckedChange={setEnabled} />\n    <div style={{ display: \"flex\", alignItems: \"center\", flexWrap: \"wrap\", gap: 8 }}>\n      <PrismTooltip content=\"가상 설정의 설명입니다.\" side=\"bottom\">\n        <button type=\"button\">설정 도움말</button>\n      </PrismTooltip>\n      <PrismInfoTooltip label=\"진행률 설명\" content=\"업로드 결과에 따라 호스트가 진행률을 갱신합니다.\" />\n    </div>\n    <PrismProgress value={busy ? null : 65} showPercent label=\"가상 진행률\" />\n    <button type=\"button\" onClick={() => setBusy(value => !value)}>{busy ? \"진행률 표시\" : \"로딩 표시\"}</button>\n    <PrismFileDropzone files={files} onFilesSelected={select} onRemove={remove}\n      onInvalid={reason => setError(reason === \"partial\" ? \"일부 파일만 첨부되었습니다.\" : \"파일을 확인해 주세요.\")} />\n    <PrismFileAttach files={files} onFilesSelected={select} onRemove={remove} accept=\".xlsx,.csv,.pdf,.png,.jpg\" />\n    {files.some(file => file.status === \"uploading\") && <button type=\"button\" onClick={() =>\n      setFiles(current => current.map(file => file.status === \"uploading\" ? { ...file, status: \"ready\" } : file))}>\n      가상 업로드 완료\n    </button>}\n    {error && <p role=\"alert\">{error} <button type=\"button\" onClick={() => setError(\"\")}>닫기</button></p>}\n  </section>;\n}"
     },
     {
       "id": "prism-evaluation-history",

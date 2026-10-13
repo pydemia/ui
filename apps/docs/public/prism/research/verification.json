@@ -613,7 +613,13 @@
         "SUMMARY touch toggle twice, outside touch dismissal, focus/Escape and Space toggle passed; Avatar full truncated text and Escape passed",
         "788-character synthetic dark/panel content at 1280x900, 320x900 and 320x240: viewport clamp, complete text, internal scroll and centered anchor tracking passed",
         "Native browser mouse wheel scrolls both dark and panel interiors while Tooltip remains open",
-        "PRISM 32 component tests and 12 complete example typechecks passed"
+        "PRISM 32 component tests and 12 complete example typechecks passed",
+        "Current dev 2eeb26ff retains the five utility component purposes and styles; the source tooltip removed word-break:break-word while the reusable tooltip retains safe long-content wrapping",
+        "Complete registry example now composes Switch, standard and info Tooltip, determinate/indeterminate Progress, Dropzone and Attach with controlled file state",
+        "Independent install: 59 TSX sources and CSS matched registry bytes, 48 complete examples typechecked, and Vite/font/notices passed",
+        "Independent installed browser: Switch toggled, keyboard-focused standard Tooltip opened and Escape closed it, info Tooltip toggled, Progress changed 65% to indeterminate",
+        "Independent installed browser: both native file choosers selected a synthetic CSV; host-controlled uploading/ready and removal synchronized both file displays",
+        "At a real 320px viewport the installed example kept document client and scroll widths at 320px; browser error log was empty"
       ],
       "evidence": [
         "local-reference-files-comparison-direct",
@@ -633,7 +639,8 @@
         "Switch/Progress source state combinations; Tooltip caller, browser, timing, zoom and aligned edge-collision combinations outside measured cases",
         "native operating-system drag and file dialog interactions beyond the browser filechooser event",
         "authenticated upload/download service integration belongs to the host; not executed",
-        "all accepted format/size/count/browser combinations"
+        "all accepted format/size/count/browser combinations",
+        "the current deployment's exact code revision and authenticated upload/download integration"
       ],
       "localRenderGate": {
         "status": "passed",
@@ -650,6 +657,14 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "evidence": "Five current source utilities and styles checked against prior deployed measurements; the complete installable example and independent consumer/browser verified controls, native selection, host-controlled status/removal, keyboard tooltip dismissal, 320px width and empty error log.",
+        "intentionalImprovement": "Long tooltip text retains safe wrapping after the current source removed word-break:break-word; the example names simulated upload completion rather than implying service integration.",
+        "limitations": "The latest authenticated deployment revision and real upload/download services remain unverified; exhaustive visual, OS drag and format permutations remain outside the representative acceptance scope."
       }
     },
     "prism-workspace": {
@@ -6899,10 +6914,11 @@
       "prism-intro",
       "prism-sidebar",
       "prism-panel-recipes",
-      "prism-primitives"
+      "prism-primitives",
+      "prism-utility"
     ],
-    "acceptedCount": 32,
-    "unassessedGroups": 26,
+    "acceptedCount": 33,
+    "unassessedGroups": 25,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
