@@ -14,7 +14,7 @@ Use data-prism="light" at the application root. Load pydemia tokens then prism.c
 
 ## Button / New chat
 일반·파괴적·아이콘 작업과 새 대화 진입
-Contract: variant solid/line/shape, size large/medium/small/x-small, tone primary/danger. iconOnly는 접근 가능한 이름이 필요합니다. 기본 type은 button입니다.
+Contract: variant solid/line/shape, size large/medium/small/x-small, tone primary/danger. iconOnly는 접근 가능한 이름이 필요합니다. 기본 type은 button입니다. 새 대화 버튼은 원본 AddIcon 28px과 '새로운 대화' 문구를 기본으로 제공하고 부모 폭을 채웁니다.
 States: default, disabled
 Registry: /prism/r/prism-button.json
 Source: packages/prism/src/prism-button.tsx
