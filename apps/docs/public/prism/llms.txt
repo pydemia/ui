@@ -281,17 +281,27 @@ import { PrismCandidateProfiles } from "@/components/ui/prism-candidate";
 <PrismCandidateProfiles candidates={candidates} selectedId={selectedId} favorites={favorites} onOpen={openProfile} onFavoriteChange={(candidate, favorite) => saveFavorite(candidate.id, favorite)} panel />;
 ```
 
-## Side panel / Detail
-후보자·포지션 상세를 독립 패널에서 확인
-Contract: 패널 440px, 작은 화면에서는 viewport 안에 배치합니다. open/onOpenChange는 controlled입니다. null 상세 값은 정보 없음으로 표시합니다. 기존 PrismMemoCard의 작성자 header는 이전 형식의 호환 API이며 현재 프로필 메모는 prism-memo를 사용합니다.
-States: default
+## Detail drawer / List
+독립된 모달 상세와 읽기 전용 속성 목록 표시
+Contract: PrismSidePanel은 집중해서 상세를 읽는 모달 drawer 확장으로, 배포 채팅의 비모달 SidePanel과 동일한 작업 흐름에는 prism-panel의 PrismPanel을 사용합니다. 모달은 440px이고 작은 viewport에서는 전체 폭으로 제한됩니다. open/onOpenChange는 controlled이며 Escape·닫기 버튼·바깥 클릭과 포커스 복귀는 Radix Dialog가 처리합니다. 긴 내용은 고정 헤더 아래 본문만 스크롤합니다. PrismDetailList는 null을 정보 없음으로 표시하고 240px 미만의 독립 부모에서는 라벨과 값을 세로로 배치합니다. 기존 PrismMemoCard의 작성자 header는 이전 형식의 호환 API이며 현재 프로필 메모는 prism-memo를 사용합니다. 조회·권한·오류·데이터 갱신은 호스트 소유입니다.
+States: default, panel, loading, empty, error, long
 Registry: /prism/r/prism-detail.json
 Source: packages/prism/src/prism-detail.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
+import { useState } from "react";
 import { PrismSidePanel, PrismDetailList } from "@/components/ui/prism-detail";
-<PrismSidePanel title="프로필" description="후보 정보" open={open} onOpenChange={setOpen}><PrismDetailList items={items} /></PrismSidePanel>;
+
+export function DetailDrawerExample() {
+  const [open, setOpen] = useState(false);
+  return <section data-prism="light">
+    <button type="button" onClick={() => setOpen(true)}>상세 열기</button>
+    <PrismSidePanel title="가상 프로필" description="합성 상세 정보입니다." open={open} onOpenChange={setOpen}>
+      <PrismDetailList items={[{ label: "회사", value: "가상전자" }, { label: "직책", value: null }]} />
+    </PrismSidePanel>
+  </section>;
+}
 ```
 
 ## Personal profile memos
@@ -1396,7 +1406,7 @@ export function ProfilePrintExample(){
 
 ## Chat detail selection
 후보자·포지션 상세 전환과 접근 오류의 패널·선택 정리
-Contract: usePrismDetailSelection은 호스트가 소유하는 후보자 또는 포지션 상세 선택입니다. selectProfile/selectPosition은 서로 배타적이고 close는 선택도 함께 비웁니다. 지정된 상세 API 오류로 분류한 뒤 handleAccessError(403|404)를 호출하면 원본처럼 현재 상세를 닫습니다. 다른 상태는 유지합니다. captureRequest의 불투명 UI ticket을 두 번째 인자로 전달하면 이전 선택·같은 ID 재열기·버전 변경·다른 훅의 늦은 오류를 무시합니다. ticket은 인증 토큰이 아니며 명시적 null은 무시합니다. API 경로 분류·요청 취소·토스트·권한 판정은 호스트 소유입니다. PrismPanel은 닫힌 본문을 보존하므로 접근 철회에서는 selection 조건으로 패널을 unmount해 이전 subject와 draft DOM을 제거해야 합니다. 예시는 합성 데이터와 오류 이벤트를 사용하며 실제 서비스 결과가 아닙니다.
+Contract: usePrismDetailSelection은 호스트가 소유하는 후보자 또는 포지션 상세 선택입니다. selectProfile/selectPosition은 서로 배타적이고 close는 선택도 함께 비웁니다. 지정된 상세 API 오류로 분류한 뒤 handleAccessError(403|404)를 호출하면 원본처럼 현재 상세를 닫습니다. 다른 상태는 유지합니다. captureRequest의 불투명 UI ticket을 두 번째 인자로 전달하면 이전 선택·같은 ID 재열기·버전 변경·다른 훅의 늦은 오류를 무시합니다. ticket은 인증 토큰이 아니며 명시적 null은 무시합니다. API 경로 분류·요청 취소·토스트·권한 판정은 호스트 소유입니다. PrismPanel은 닫힌 본문을 보존하므로 접근 철회에서는 selection 조건으로 패널을 unmount해 이전 subject와 draft DOM을 제거해야 합니다. 경로·대화가 바뀔 때의 선택 정리도 호스트가 close를 호출해 결정합니다. 예시는 합성 데이터와 오류 이벤트를 사용하며 실제 서비스 결과가 아닙니다.
 States: default, position, closed
 Registry: /prism/r/prism-detail-state.json
 Source: packages/prism/src/prism-detail-state.tsx
@@ -1449,6 +1459,8 @@ export function DetailSelectionExample({ initialMode = "profile" }: { initialMod
             <PrismButton variant="line" onClick={() => applyError(404)}>상세 API 404</PrismButton>
             <PrismButton variant="line" onClick={() => applyError(500)}>상세 API 500</PrismButton>
             <PrismButton variant="line" disabled={!ticket} onClick={() => applyError(403, ticket)}>보관한 요청의 늦은 403</PrismButton>
+            <PrismButton variant="line" onClick={() => { setExpanded(false); detail.selectPosition({ id: "synthetic-position", source: "card", version: 2 }); }}>포지션 과거 버전 2</PrismButton>
+            <PrismButton variant="line" onClick={() => { setExpanded(false); detail.selectPosition({ id: "synthetic-position", source: "link" }); }}>포지션 현재 운영본</PrismButton>
         </div>
         <p role="status">{message || "합성 데이터로 상세 선택과 접근 오류를 확인합니다."}</p>
         <PrismWorkspace height={560} sidebar={<PrismSidebar items={admin ? [admin] : []} expandedIds={menus} onExpandedIdsChange={setMenus}
@@ -1456,8 +1468,6 @@ export function DetailSelectionExample({ initialMode = "profile" }: { initialMod
             header={<span>선택한 메뉴: {route}</span>} panel={panel}>
             <div style={{ padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
                 <PrismCandidateCard candidate={candidate} selected={selection?.kind === "profile"} onOpen={value => { setExpanded(false); detail.selectProfile(value); }}/>
-                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: "synthetic-position", source: "card", version: 2 }); }}>포지션 과거 버전 2</PrismButton>
-                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: "synthetic-position", source: "link" }); }}>포지션 현재 운영본</PrismButton>
                 <p role="status">{selection ? `${selection.kind}: ${selection.kind === "profile" ? selection.candidate.id : selection.reference.id}` : "선택된 상세 없음"}</p>
             </div>
         </PrismWorkspace>
