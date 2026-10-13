@@ -3407,7 +3407,7 @@
       "name": "Position definition / Context / Requirements",
       "category": "Domain",
       "purpose": "포지션 기본 정보·정의·Business Context·전문성/성공경험 요구사항과 빈 값·로드 상태 표시",
-      "contract": "호스트가 회사·산업/직무/직책·정의·Business Context와 요구사항 그룹을 제공합니다. 본문 max840px/scroll gap20·padding20, 두 요약 카드16px/12px, 전문성·성공경험 그룹을 표시합니다. 빈 문자열/공백/null은 관련 데이터 없음이며 groups=[]는 빈 전문성·성공경험 그룹을 유지합니다. loading은 원본 구조 skeleton, error는 stale detail을 감추고 retry intent를 보냅니다. 기본 안내문은 원본의 공통 역량·자질 설명이며 footnote로 변경하거나 null로 숨길 수 있습니다. LIVE/draft 조회·주직무 requirements 선택·요청 취소·재시도 결과는 호스트가 소유합니다. 320px 이하 부모에서는 기본 정보 카드를 한 열로 배치하고 긴 문자열을 줄바꿈합니다. 카드의 과거 버전과 본문 링크의 현재LIVE를 구분하는 완전 host 예시를 제공합니다. createPrismPositionReference로 입력을 변형하지 않고 요청 대상을 정하며 provider에 AbortSignal을 전달합니다. id/version/provider가 바뀌면 오래된 완료·실패와 화면 데이터를 무시합니다. 기본 provider는 합성100ms fixture이며 실제 API/auth 연동 증거가 아닙니다.",
+      "contract": "호스트가 회사·산업/직무/직책·정의·Business Context와 요구사항 그룹을 제공합니다. 본문 max840px/scroll gap20·padding20, 두 요약 카드16px/12px, 전문성·성공경험 그룹을 표시합니다. 빈 문자열/공백/null은 관련 데이터 없음이며 groups=[] 또는 한쪽 요구사항만 있으면 빈 전문성·성공경험 그룹을 보완합니다. 추가 그룹은 유지합니다. loading은 원본 구조 skeleton, error는 stale detail을 감추고 retry intent를 보냅니다. 기본 안내문은 원본의 공통 역량·자질 설명이며 footnote로 변경하거나 null로 숨길 수 있습니다. LIVE/draft 조회·주직무 requirements 선택·요청 취소·재시도 결과는 호스트가 소유합니다. 320px 이하 부모에서는 기본 정보 카드를 한 열로 배치하고 긴 문자열을 줄바꿈합니다. 카드의 과거 버전과 본문 링크의 현재LIVE를 구분하는 완전 host 예시를 제공합니다. createPrismPositionReference로 입력을 변형하지 않고 요청 대상을 정하며 provider에 AbortSignal을 전달합니다. id/version/provider가 바뀌면 오래된 완료·실패와 화면 데이터를 무시합니다. 기본 provider는 합성100ms fixture이며 실제 API/auth 연동 증거가 아닙니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "sourceDeltaAudits": [
         {
@@ -3420,6 +3420,7 @@
       "states": [
         "default",
         "empty",
+        "partial-groups",
         "loading",
         "error",
         "long",
@@ -3427,9 +3428,14 @@
       ],
       "source": [
         "chat/position/PositionDetailHeader.tsx",
+        "chat/position/PositionDetailHeader.module.scss",
         "chat/position/PositionDetailView.tsx",
+        "chat/position/PositionDetailView.module.scss",
         "chat/position/PositionRequirementGroup.tsx",
-        "chat/position/PositionDetailViewSkeleton.tsx"
+        "chat/position/PositionRequirementGroup.module.scss",
+        "chat/position/PositionDetailViewSkeleton.tsx",
+        "chat/position/PositionDetailViewSkeleton.module.scss",
+        "chat/position/positionRequirementGroups.ts"
       ],
       "usage": "import { useEffect, useState } from \"react\";\nimport { PrismButton, PrismPositionDetail, PrismResponse, createPrismPositionReference, type PrismPositionDetailProps, type PrismPositionReference, type PrismResponseBlock } from \"@pydemia/prism\";\n\ntype PositionData = Omit<PrismPositionDetailProps, \"status\" | \"onRetry\">;\ntype PositionLoader = (reference: PrismPositionReference, signal: AbortSignal, simulateFailure: boolean) => Promise<PositionData>;\ntype PositionRequest = { key: string; loader: PositionLoader; status: \"ready\" | \"loading\" | \"error\"; data: PositionData | null };\n\n/** Synthetic provider for this example. Supply your authenticated historical/LIVE loader instead. */\nasync function loadSyntheticPosition(reference: PrismPositionReference, signal: AbortSignal, fail: boolean): Promise<PositionData> {\n    signal.throwIfAborted();\n    await new Promise<void>((resolve, reject) => {\n        const abort = () => { clearTimeout(timer); reject(signal.reason); };\n        const timer = setTimeout(() => { signal.removeEventListener(\"abort\", abort); resolve(); }, 100);\n        signal.addEventListener(\"abort\", abort, { once: true });\n    });\n    signal.throwIfAborted();\n    if (fail) throw new Error(\"Synthetic request failure\");\n    const label = reference.source === \"card\" ? `과거 버전 ${reference.version}` : \"현재 운영본\";\n    return { company: \"가상전자\", role: \"가상 기술전략담당\", items: [{ label: \"조회 대상\", value: label }],\n        definition: `${label}의 합성 포지션 정의입니다. 실제 API 조회 결과가 아닙니다.`, businessContext: \"합성 사업 환경입니다.\",\n        groups: [{ id: \"expertise\", title: \"전문성\", items: [{ id: \"tech\", content: \"가상 기술전략 경험\" }] }] };\n}\n\n/** Host-owned request example: aborts old id/version loads and hides stale data before the next effect. */\nexport function PositionReferenceExample({ loadPosition = loadSyntheticPosition }: {\n    loadPosition?: PositionLoader;\n}) {\n    const [reference, setReference] = useState<PrismPositionReference | null>(null);\n    const [fail, setFail] = useState(false), [retry, setRetry] = useState(0);\n    const [result, setResult] = useState<PositionRequest | null>(null);\n    const id = reference?.id, source = reference?.source, version = reference?.source === \"card\" ? reference.version : undefined;\n    const key = JSON.stringify([id, source, version, fail, retry]);\n    useEffect(() => {\n        if (!id || !source) { setResult(null); return; }\n        let active = true;\n        const controller = new AbortController(), snapshot = createPrismPositionReference({ id, version }, source);\n        const requestKey = JSON.stringify([id, source, version, fail, retry]);\n        setResult({ key: requestKey, loader: loadPosition, status: \"loading\", data: null });\n        void (async () => {\n            try {\n                const data = await loadPosition(snapshot, controller.signal, fail);\n                if (active && !controller.signal.aborted) setResult({ key: requestKey, loader: loadPosition, status: \"ready\", data });\n            } catch {\n                if (active && !controller.signal.aborted) setResult({ key: requestKey, loader: loadPosition, status: \"error\", data: null });\n            }\n        })();\n        return () => { active = false; controller.abort(); };\n    }, [id, source, version, fail, retry, loadPosition]);\n    const blocks: PrismResponseBlock[] = [\n        { id: \"current\", type: \"text\", content: \"[같은 포지션의 현재 운영본](position://synthetic-position)\" },\n        { id: \"old\", type: \"positions\", positions: [{ id: \"synthetic-position\", version: 2, company: \"가상전자\", title: \"가상 기술전략담당\", reasons: [\"과거 대화의 합성 추천 근거\"] }] },\n        { id: \"new\", type: \"positions\", positions: [{ id: \"synthetic-position\", version: 3, company: \"가상전자\", title: \"가상 기술전략담당\", reasons: [\"후속 대화의 합성 추천 근거\"] }] },\n        { id: \"legacy\", type: \"positions\", positions: [{ id: \"synthetic-legacy\", company: \"가상회사\", title: \"버전이 없는 오래된 카드\", reasons: [\"합성 추천 근거\"] }] },\n    ];\n    const current = result?.key === key && result.loader === loadPosition ? result : null;\n    const empty: PositionData = { company: \"\", role: \"\", items: [], groups: [] };\n    return <div data-prism=\"light\" style={{ display: \"flex\", flexDirection: \"column\", gap: 12 }}>\n        <p>합성 조회 예시입니다. 카드는 과거 버전을, 본문 링크는 현재 운영본을 요청합니다.</p>\n        <label><input type=\"checkbox\" checked={fail} onChange={event => setFail(event.target.checked)}/>조회 실패 예시</label>\n        <PrismResponse blocks={blocks} selectedPositionReference={reference} onPositionOpen={(_id, next) => setReference(next)}\n            onAction={(kind, _id, next) => { if (kind === \"position\" && next) setReference(next); }}/>\n        <PrismButton variant=\"line\" onClick={() => setReference(null)}>선택 해제</PrismButton>\n        <p role=\"status\">{reference ? reference.source === \"card\" ? `요청: ${reference.id} 과거 버전 ${reference.version}` : `요청: ${reference.id} 현재 운영본` : \"포지션을 선택해 주세요.\"}</p>\n        {reference && <div style={{ height: 440, resize: \"both\", overflow: \"auto\", minWidth: 140, maxWidth: \"100%\" }}>\n            <PrismPositionDetail {...(current?.data ?? empty)} status={current?.status ?? \"loading\"} onRetry={() => setRetry(value => value + 1)}/>\n        </div>}\n    </div>;\n}\n",
       "sourcePath": "packages/prism/src/prism-position.tsx",
@@ -3437,16 +3443,16 @@
       "embedUrl": "/prism?component=prism-position&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-position&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "partial",
+        "visual": "current-source-and-local/independent-browser-purpose-and-geometry-passed;authenticated-deployed-detail-unverified",
+        "interaction": "passed-target-tests-and-independent-browser-retry/versioned-workflow;host-service-effects-unverified",
         "checks": [
-          "Versioned/legacy card and live-link references preserve source purpose without input mutation.",
-          "Controlled same-ID/different-version selection and typed host example verified by source and synthetic JSDOM tests."
+          "Current PositionDetailView/Header/RequirementGroup, group specification, skeleton and SCSS were compared; both requirement groups remain visible when one has no data.",
+          "Local docs covered default, empty, partial groups, loading, error, long and versioned historical/LIVE synthetic references; 320px had no document overflow.",
+          "Installed 320px consumer retained three stacked info cards, both groups and internal scroll; at 140px the constrained header left 330px for the content; retry restored ready detail and console errors were zero.",
+          "Separate shadcn installation matched 59 module sources and CSS; 43 complete examples typechecked; Vite, Pretendard and notices passed."
         ],
         "remaining": [
-          "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
-          "Authenticated historical/LIVE service and deployed revision binding.",
-          "Full source component purpose/style/extension coverage, current A4 and production."
+          "Authenticated deployed position detail, historical/LIVE service responses, permissions and deployed source revision binding."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -3464,7 +3470,45 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-        }
+        },
+        "source": "2eeb26ff current frontend detail/SCSS and selected computed measurements",
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/position/PositionDetailView.tsx",
+            "chat/position/PositionDetailView.module.scss",
+            "chat/position/PositionDetailHeader.tsx",
+            "chat/position/PositionDetailHeader.module.scss",
+            "chat/position/PositionRequirementGroup.tsx",
+            "chat/position/PositionRequirementGroup.module.scss",
+            "chat/position/PositionDetailViewSkeleton.tsx",
+            "chat/position/PositionDetailViewSkeleton.module.scss",
+            "chat/position/positionRequirementGroups.ts"
+          ],
+          "evidence": [
+            "Current source establishes company/role/three facts, two summary sections, fixed expertise and success-experience groups, source footnote, loading/error and historical/LIVE request ownership.",
+            "Local and independent browsers covered representative states, 320px cards and 140px long role, versioned synthetic references and retry.",
+            "Isolated shadcn consumer matched module/CSS bytes, typechecked 43 examples and built with bundled Pretendard and notices."
+          ],
+          "intentionalImprovements": [
+            "Missing one source requirement group is completed as an empty card while custom groups and caller input remain intact.",
+            "At widths up to 200px, a long header scrolls within a capped height so the position body remains usable."
+          ],
+          "hostOwned": [
+            "The consuming application supplies and authorizes position data, historical/LIVE lookups, main-job requirements, navigation and persistence."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed position detail and deployed source commit identity are not established."
+          ]
+        },
+        "evidence": [
+          "prism-position-audit-2026-10-14.md",
+          "position-goal-installed-bytes.json",
+          "panel-recipes.test.mjs",
+          "chat-recipes.test.mjs"
+        ]
       },
       "exports": [
         {

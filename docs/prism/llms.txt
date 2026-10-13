@@ -734,8 +734,8 @@ export function PanelRecipesExample() {
 
 ## Position definition / Context / Requirements
 포지션 기본 정보·정의·Business Context·전문성/성공경험 요구사항과 빈 값·로드 상태 표시
-Contract: 호스트가 회사·산업/직무/직책·정의·Business Context와 요구사항 그룹을 제공합니다. 본문 max840px/scroll gap20·padding20, 두 요약 카드16px/12px, 전문성·성공경험 그룹을 표시합니다. 빈 문자열/공백/null은 관련 데이터 없음이며 groups=[]는 빈 전문성·성공경험 그룹을 유지합니다. loading은 원본 구조 skeleton, error는 stale detail을 감추고 retry intent를 보냅니다. 기본 안내문은 원본의 공통 역량·자질 설명이며 footnote로 변경하거나 null로 숨길 수 있습니다. LIVE/draft 조회·주직무 requirements 선택·요청 취소·재시도 결과는 호스트가 소유합니다. 320px 이하 부모에서는 기본 정보 카드를 한 열로 배치하고 긴 문자열을 줄바꿈합니다. 카드의 과거 버전과 본문 링크의 현재LIVE를 구분하는 완전 host 예시를 제공합니다. createPrismPositionReference로 입력을 변형하지 않고 요청 대상을 정하며 provider에 AbortSignal을 전달합니다. id/version/provider가 바뀌면 오래된 완료·실패와 화면 데이터를 무시합니다. 기본 provider는 합성100ms fixture이며 실제 API/auth 연동 증거가 아닙니다.
-States: default, empty, loading, error, long, versioned
+Contract: 호스트가 회사·산업/직무/직책·정의·Business Context와 요구사항 그룹을 제공합니다. 본문 max840px/scroll gap20·padding20, 두 요약 카드16px/12px, 전문성·성공경험 그룹을 표시합니다. 빈 문자열/공백/null은 관련 데이터 없음이며 groups=[] 또는 한쪽 요구사항만 있으면 빈 전문성·성공경험 그룹을 보완합니다. 추가 그룹은 유지합니다. loading은 원본 구조 skeleton, error는 stale detail을 감추고 retry intent를 보냅니다. 기본 안내문은 원본의 공통 역량·자질 설명이며 footnote로 변경하거나 null로 숨길 수 있습니다. LIVE/draft 조회·주직무 requirements 선택·요청 취소·재시도 결과는 호스트가 소유합니다. 320px 이하 부모에서는 기본 정보 카드를 한 열로 배치하고 긴 문자열을 줄바꿈합니다. 카드의 과거 버전과 본문 링크의 현재LIVE를 구분하는 완전 host 예시를 제공합니다. createPrismPositionReference로 입력을 변형하지 않고 요청 대상을 정하며 provider에 AbortSignal을 전달합니다. id/version/provider가 바뀌면 오래된 완료·실패와 화면 데이터를 무시합니다. 기본 provider는 합성100ms fixture이며 실제 API/auth 연동 증거가 아닙니다.
+States: default, empty, partial-groups, loading, error, long, versioned
 Registry: /prism/r/prism-position.json
 Source: packages/prism/src/prism-position.tsx
 Usage kind: component-example
