@@ -412,6 +412,7 @@
 .prism-dialog-body { padding: 24px;min-height:124px;max-height:663px;overflow-y:auto;display:grid;gap:20px; }
 .prism-dialog > footer { padding: 20px; border-top: 1px solid var(--prism-control-border); display: flex; justify-content: flex-end; gap: 8px; }
 .prism-dialog > footer {flex-shrink:0;background:var(--prism-base);}
+.prism-dialog[data-scrollable] > footer {box-shadow:0 -4px 4px 0 #0000000a;}
 .prism-confirm-dialog>header {height:65px;min-height:65px;padding:20px;}
 .prism-confirm-dialog>header h2 {display:flex;align-items:center;gap:6px;line-height:25px;}
 .prism-confirm-dialog .prism-dialog-body {min-height:0;}

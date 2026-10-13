@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import { useCallback, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogClose } from "@pydemia/ui";
 import { PrismIcon } from "./prism-icon";
 import { PrismButton } from "./prism-button";
@@ -14,20 +14,31 @@ export type PrismDialogProps = { title: string; titlePrefix?: ReactNode; descrip
     footer?: ReactNode; open?: boolean; onOpenChange?: (open: boolean) => void; className?: string; width?: number; style?: CSSProperties };
 export function PrismDialog({ title, titlePrefix, description, children, trigger, footer, open, onOpenChange, className, width = 620, style }: PrismDialogProps) {
     const returnFocus=useReturnFocus(trigger,open);
+    const [scrollable,setScrollable]=useState(false);
+    const observeBody=useCallback((node:HTMLDivElement|null)=>{
+        if(!node)return;
+        const check=()=>setScrollable(node.scrollHeight>node.clientHeight+1);
+        const size=typeof ResizeObserver === "undefined" ? null : new ResizeObserver(check);
+        const observeChildren=()=>{size?.observe(node);for(const child of node.children)size?.observe(child);check();};
+        const mutation=typeof MutationObserver === "undefined" ? null : new MutationObserver(observeChildren);
+        observeChildren();mutation?.observe(node,{childList:true,characterData:true,subtree:true});
+        window.addEventListener("resize",check);
+        return ()=>{size?.disconnect();mutation?.disconnect();window.removeEventListener("resize",check);};
+    },[]);
     if(!Number.isFinite(width)||width<=0)throw new RangeError("Dialog width must be positive.");
     return <Dialog open={open} onOpenChange={onOpenChange}>
         {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
-        <DialogContent {...returnFocus} data-prism="light" style={{"--prism-dialog-width":`${width}px`,...style} as CSSProperties} className={`prism-dialog ${className ?? ""}`}>
+        <DialogContent {...returnFocus} data-prism="light" data-scrollable={scrollable||undefined} style={{"--prism-dialog-width":`${width}px`,...style} as CSSProperties} className={`prism-dialog ${className ?? ""}`}>
             <header>{titlePrefix}<DialogTitle title={title}>{title}</DialogTitle><DialogClose asChild><button type="button" className="prism-dialog-close" aria-label="닫기"><PrismIcon name="ModalCloseIcon" size={24}/></button></DialogClose></header>
-            <div className="prism-dialog-body"><DialogDescription>{description}</DialogDescription>{children}</div>
+            <div ref={observeBody} className="prism-dialog-body"><DialogDescription>{description}</DialogDescription>{children}</div>
             {footer && <footer>{footer}</footer>}
         </DialogContent></Dialog>;
 }
 
 export type PrismConfirmDialogProps={open:boolean;onOpenChange:(open:boolean)=>void;title?:string;content?:ReactNode;type?:"success"|"error";
-    showIcon?:boolean;showCancel?:boolean;cancelLabel?:string;confirmLabel?:string;contentMinHeight?:number;confirmTone?:"primary"|"danger";
+    showIcon?:boolean;showCancel?:boolean;cancelLabel?:string;confirmLabel?:string;contentMinHeight?:number|string;confirmTone?:"primary"|"danger";
     busy?:boolean;error?:string;onConfirm:()=>void;onCancel?:()=>void;trigger?:ReactNode;};
-export function PrismConfirmDialog({open,onOpenChange,title,content,type="success",showIcon=true,showCancel=true,cancelLabel="취소",confirmLabel="확인",contentMinHeight,confirmTone="primary",busy,error,onConfirm,onCancel,trigger}:PrismConfirmDialogProps) {
+export function PrismConfirmDialog({open,onOpenChange,title,content,type="success",showIcon=true,showCancel=true,cancelLabel="취소",confirmLabel="확인",contentMinHeight=123,confirmTone="primary",busy,error,onConfirm,onCancel,trigger}:PrismConfirmDialogProps) {
     const returnFocus=useReturnFocus(trigger,open);
     const cancel=()=>{if(busy)return;onCancel?.();onOpenChange(false);};
     return <Dialog open={open} onOpenChange={next=>{if(!next)cancel();else onOpenChange(true);}}>{trigger&&<DialogTrigger asChild>{trigger}</DialogTrigger>}

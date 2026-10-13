@@ -570,7 +570,7 @@
       "name": "Dialog",
       "category": "Overlays",
       "purpose": "명시적 확인과 짧은 정보 편집",
-      "contract": "Radix dialog의 focus containment·Escape·focus restoration을 사용합니다. 기본 폭은 620px이며 width로 440/560/620px 등을 지정할 수 있습니다. 일반 Dialog의 title과 description은 필수입니다. ConfirmDialog는 성공·오류 아이콘, 선택적 취소, busy/error 상태와 확인 의도 callback을 제공합니다. onConfirm 이후 닫기와 실제 작업 성공 처리는 호출자가 소유합니다. Portal의 light profile을 직접 선언합니다.",
+      "contract": "Radix dialog의 focus containment·Escape·focus restoration을 사용합니다. 기본 폭은 620px이며 width로 440/560/620px 등을 지정할 수 있습니다. 일반 Dialog의 title과 description은 필수입니다. ConfirmDialog는 기본 본문 최소 높이 123px(숫자 또는 CSS 길이로 변경 가능), 성공·오류 아이콘, 선택적 취소, busy/error 상태와 확인 의도 callback을 제공합니다. onConfirm 이후 닫기와 실제 작업 성공 처리는 호출자가 소유합니다. Portal의 light profile을 직접 선언합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
@@ -603,7 +603,6 @@
           "local-dialog-busy-focus"
         ],
         "remaining": [
-          "long body and no-title confirm variants",
           "all deployed error/busy states"
         ],
         "localRenderGate": {
@@ -620,6 +619,33 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "ui/dialog/HRXDialog.tsx",
+            "ui/dialog/HRXConfirmDialog.tsx"
+          ],
+          "evidence": [
+            "Deployed public dialog sample measured 440px standard and confirm frames, 66.1875px standard header, 65px confirm header, 123px confirm body and 73px footer; source defines the overflow footer shadow.",
+            "An isolated shadcn consumer installed 59 exact modules and CSS and typechecked 40 complete examples; browser checks covered 440/560/620px dialogs, success/error confirms, titleless confirm, long-body internal scrolling and 320px containment.",
+            "Installed busy confirm blocked Escape and disabled close/cancel/confirm until the host released busy state; closing restored focus to the opener. Long-body footer stayed fixed with the source-style shadow.",
+            "301 PRISM tests, workspace typecheck, site build and generic registry release check passed."
+          ],
+          "intentionalImprovements": [
+            "Dialog title and close button have separate accessible names instead of naming the dialog with the close label.",
+            "Titleless confirmation receives a screen-reader heading, and the narrow viewport keeps actions reachable with internal scrolling.",
+            "The portable confirm defaults to a neutral action label; destructive labeling and tone are explicit caller choices."
+          ],
+          "hostOwned": [
+            "The consuming application owns the confirmation action, pending state, data persistence and authorization; the browser fixture used synthetic values."
+          ],
+          "nonBlockingUnknowns": [
+            "The deployed source commit identity and every authenticated product caller are not established.",
+            "All deployed error/busy combinations and full font/pixel parity remain outside this group acceptance evidence."
+          ]
         }
       },
       "exports": [
