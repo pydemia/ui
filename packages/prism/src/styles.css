@@ -1520,6 +1520,21 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 
 .prism-domain-profile-section {display:flex;flex-direction:column;gap:20px;padding-bottom:36px;}
 .prism-domain-profile-section h3 {font-size:14px;font-weight:600;line-height:1.4;margin:0 0 10px;}
+.prism-success-experience-section>section {min-width:0;}
+.prism-success-summary {display:grid;gap:8px;white-space:pre-line;font-size:14px;line-height:1.5;overflow-wrap:anywhere;}
+.prism-success-summary p,.prism-success-essay p {margin:0;}
+.prism-success-essay-list {display:grid;gap:12px;margin-top:10px;}
+.prism-success-essay {display:grid;gap:12px;font-size:14px;line-height:1.4;white-space:pre-line;overflow-wrap:anywhere;}
+.prism-success-essay-title {display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.prism-success-essay-keywords {display:flex;flex-wrap:wrap;gap:5px;}
+.prism-success-essay-interview {display:grid;gap:6px;padding:16px;border-radius:12px;background:var(--prism-cool-100);}
+.prism-success-essay-interview strong {color:var(--prism-primary);}
+.prism-design-diversity {display:grid;gap:12px;min-width:0;}
+.prism-design-diversity-summary {border:1px solid var(--prism-control-border);border-radius:8px;padding:12px;min-width:0;}
+.prism-design-diversity-summary dl {display:grid;gap:10px;margin:12px 0 0;}
+.prism-design-diversity-summary dl>div {display:grid;grid-template-columns:minmax(90px,max-content) minmax(0,1fr);gap:8px;font-size:14px;line-height:1.4;}
+.prism-design-diversity-summary dt {font-weight:600;}.prism-design-diversity-summary dd {margin:0;overflow-wrap:anywhere;}
+@container (max-width:420px) {.prism-design-diversity-summary dl>div {grid-template-columns:minmax(0,1fr);gap:2px;}}
 .prism-compensation-grid>header,.prism-leadership-trend>header {display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
 .prism-compensation-grid>header>span,.prism-leadership-trend>header>span {font-size:12px;color:#636363;}
 .prism-compensation-grid .prism-table-scroll {border:1px solid var(--prism-neutral-200);border-radius:8px;}
