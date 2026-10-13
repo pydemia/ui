@@ -19,3 +19,13 @@
 현재 집계는 설치 그룹 58개, 토큰 포함 registry 59개, 완전한 예제 39개, canonical 상태 252개입니다. 이번 fingerprint에서 확인한 canonical 상태는 로그 8개와 블록 edit 1개를 합친 9개이며 동적 오버레이 6회는 새 상태로 계상하지 않습니다. 원본 비벡터 186파일은 최종 독립 목표 수나 진행률 분모가 아닙니다.
 
 증거는 ignored browser-evidence의 chat-logs-render-checks.json, generation-overlay-render-checks.json, chat-logs-installed-bytes.json, chat-logs-installed-runtime.json과 대상/전체 테스트·설치·빌드 로그에 보존했습니다. review branch CI와 preview readback은 다음 단계이며 production/main 배포는 수행하지 않습니다. 전체 goal은 active입니다.
+
+## 검토 게시 후 CI 재현성 보정
+
+소스 bdc644fd, 생성물 c9cac7d8을 검토 브랜치에 push하고 draft PR #162의 head/base를 확인했습니다. c9cac7d8 preview는 READY이며 공개 파일 11개의 바이트/SHA readback은 통과했습니다. 첫 readback 실행은 모두 실패했고 시스템 CA를 사용한 재실행이 통과했습니다. Preview의 자체 브라우저 렌더는 Vercel 로그인 보호로 확인하지 못했습니다. 인증 보호를 변경하지 않았습니다.
+
+CI run 38343548616은 typecheck·UI 테스트·build·PRISM 계약/테스트·registry 검사를 통과했지만 마지막 docs diff 검사에서 실패했습니다. 검증 metadata를 갱신한 뒤 registry만 재생성하고 사이트를 다시 빌드하지 않아 components.json을 import하는 문서 번들이 이전 manifest를 포함한 것이 원인입니다. 당시 생성물의 HTML은 index-CNuHECV9.js를 참조했고 CI rebuild는 index-C4tXqy2k.js를 참조합니다. 테스트 실패나 런타임 기능 오류로 기록하지 않습니다.
+
+최종 manifest를 반영한 사이트를 다시 빌드합니다. 보정된 마지막 커밋의 CI/preview를 다시 확인하고 registry 자료 외에 실제 HTML 및 JS/CSS 번들도 readback 대상으로 포함합니다. 전체 goal 및 원본 인증·font/pixel/A4 검증은 여전히 미완료입니다.
+
+최종 metadata를 반영한 로컬 전체 rebuild가 통과했고 HTML의 index-C4tXqy2k.js 참조는 실패한 CI가 재생성했던 이름과 일치합니다. 원본 코드·테스트·registry contract는 바뀌지 않았습니다. 새 커밋에서 전체 CI를 다시 확인합니다. consumer 임시 서버는 소유한 PID/CWD를 확인한 뒤 종료했으며 기존 consumer 산출물은 보존했습니다. workspace 서버는 port63354/session99159, 자체 브라우저의 tab10은 후속 검증을 위해 유지합니다.
