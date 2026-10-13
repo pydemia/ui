@@ -622,7 +622,7 @@
       }
     },
     "prism-sidebar": {
-      "visual": "latest-source-delta-local-geometry-passed;authenticated-source-parity-unverified",
+      "visual": "selected-authenticated-source-dimensions-and-typography-matched;new-position-menu-and-full-parity-pending",
       "interaction": "passed-target-tests-and-selected-synthetic-browser-workflow;all-host-service-effects-unverified",
       "checks": [
         "Original vector navigation artwork and 36px navigation rows",
@@ -639,22 +639,25 @@
         "local-sidebar-delete-confirm"
       ],
       "remaining": [
-        "Source current menu capability, keyboard/layout and full authenticated interaction comparison."
+        "Source current menu capability, keyboard/layout and full authenticated interaction comparison.",
+        "New deployed positions menu/purpose and EtcIcon; history starts 40px lower in source.",
+        "Complete source glyph/font/pixel comparison at equivalent content and viewport."
       ],
       "localRenderGate": {
-        "status": "passed-current-sidebar-selection",
+        "status": "passed-current-sidebar-fidelity",
         "states": [
           "default",
           "loading",
           "empty",
-          "restricted"
+          "restricted",
+          "long"
         ],
         "widths": [
           320,
           1280
         ],
-        "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
-        "scope": "8 synthetic renders and selected independent selection/draft/persistence/background-deletion interactions;full source parity is separate."
+        "sourceSha256": "69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4",
+        "claim": "10 synthetic renders and selected long-history/candidate navigation flows; full interactions and source parity remain separate."
       }
     },
     "prism-candidate": {
@@ -1989,9 +1992,9 @@
     "typecheck": "passed",
     "contractTests": {
       "status": "passed",
-      "passed": 279,
+      "passed": 280,
       "failed": 0,
-      "targeted": 23,
+      "targeted": 24,
       "targetedFailed": 0
     },
     "registry": {
@@ -2000,19 +2003,19 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-current-sidebar-selection-install-and-selected-runtime",
-      "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
+      "status": "passed-current-sidebar-fidelity-install-and-selected-runtime",
+      "sourceSha256": "69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4",
       "groups": 58,
       "examples": 39,
       "sourceTransformations": 0,
       "css": "exact",
       "font": "exact",
-      "runtime": "Default320/1280;independent favorites/history selection;local-draft persistence/opening",
-      "claim": "Real install andselected synthetic browser flows;full installed/source parity is separate."
+      "runtime": "100-row 320/1280; inner history scroll and footer retention; candidate navigation clears selected history",
+      "claim": "Real install and selected synthetic flows; full installed/source parity remains separate."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
-      "status": "pending-current-sidebar-selection-preview;production-not-published"
+      "status": "pending-current-sidebar-fidelity-preview;production-not-published"
     },
     "generalComponentTests": {
       "passed": 280,
@@ -2023,23 +2026,23 @@
       "snapshot": "sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896"
     },
     "githubVerification": {
-      "status": "pending-current-sidebar-selection-review"
+      "status": "pending-current-sidebar-fidelity-review"
     },
     "usageContracts": {
-      "groups": 56,
-      "componentExamples": 37,
+      "groups": 58,
+      "componentExamples": 39,
       "integrationFragments": 19,
       "workspaceTypecheck": "passed workspace and check-prism.mjs",
       "installedTypecheck": "passed final actual install",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 252,
-      "checked": 4,
+      "count": 253,
+      "checked": 5,
       "pending": 248,
-      "currentDeltaRenders": 8,
-      "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
-      "status": "passed-current-sidebar-selection-delta;other-baseline-evidence-retained"
+      "currentDeltaRenders": 10,
+      "sourceSha256": "69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4",
+      "status": "passed-current-sidebar-fidelity-delta;other-baseline-evidence-retained"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -3293,7 +3296,8 @@
   "runtimeVerificationAvailability": {
     "status": "available-local-iab;authenticated-original-unverified",
     "observedAt": "2026-10-13",
-    "detail": "IAB browser2 recovered while native Mac UI remains locked. Local workspace and installed examples rendered. Source-defined /chat/admin/chat-logs is document complete/visible body empty in IAB; existing Chrome source tab displays /admin-login."
+    "detail": "IAB browser2 recovered while native Mac UI remains locked. Local workspace and installed examples rendered. Source-defined /chat/admin/chat-logs is document complete/visible body empty in IAB; existing Chrome source tab displays /admin-login.",
+    "authenticatedOriginal": "available-selected-testuser001-sidebar;deployed-revision-and-other-purpose-parity-pending"
   },
   "fileSelectionVerification": {
     "scope": "Fresh anonymous deployed original samples and local built synthetic fixtures; no server upload or existing login",
@@ -5417,5 +5421,194 @@
       "claim": "Real install andselected synthetic browser flows;full installed/source parity is separate."
     },
     "fullSiteBuild": "passed"
+  },
+  "previousSidebarSelectionGates20261013": {
+    "typecheck": "passed",
+    "contractTests": {
+      "status": "passed",
+      "passed": 279,
+      "failed": 0,
+      "targeted": 23,
+      "targetedFailed": 0
+    },
+    "registry": {
+      "groups": 58,
+      "items": 59,
+      "status": "generated"
+    },
+    "independentConsumer": {
+      "status": "passed-current-sidebar-selection-install-and-selected-runtime",
+      "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
+      "groups": 58,
+      "examples": 39,
+      "sourceTransformations": 0,
+      "css": "exact",
+      "font": "exact",
+      "runtime": "Default320/1280;independent favorites/history selection;local-draft persistence/opening",
+      "claim": "Real install andselected synthetic browser flows;full installed/source parity is separate."
+    },
+    "fullSiteBuild": "passed",
+    "publicDeployment": {
+      "status": "pending-current-sidebar-selection-preview;production-not-published"
+    },
+    "generalComponentTests": {
+      "passed": 280,
+      "failed": 0
+    },
+    "genericRegistry": {
+      "status": "passed-unchanged",
+      "snapshot": "sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896"
+    },
+    "githubVerification": {
+      "status": "pending-current-sidebar-selection-review"
+    },
+    "usageContracts": {
+      "groups": 56,
+      "componentExamples": 37,
+      "integrationFragments": 19,
+      "workspaceTypecheck": "passed workspace and check-prism.mjs",
+      "installedTypecheck": "passed final actual install",
+      "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
+    },
+    "currentFixtureStates": {
+      "count": 252,
+      "checked": 4,
+      "pending": 248,
+      "currentDeltaRenders": 8,
+      "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
+      "status": "passed-current-sidebar-selection-delta;other-baseline-evidence-retained"
+    },
+    "tooltipPublication": {
+      "status": "published-http-and-browser-verified",
+      "sourceCommit": "0d33797b2d9ec744f865505bddc59f2e8eb3a56f",
+      "verifyUiRun": 37105231272,
+      "pagesRun": 37105230581,
+      "fixtureStates": 119,
+      "scope": "Nine placements, small, SUMMARY touch/focus and long 320x240/wheel checks; whole-domain parity remains partial."
+    },
+    "inputLabelPublication": {
+      "status": "published-http-and-browser-verified",
+      "sourceCommit": "288b0838aec424f7c83686f3d3b00677d749fa4b",
+      "verifyUiRun": 37901827017,
+      "pagesRun": 37901826283,
+      "states": 120,
+      "publicAssetsMatching": 13
+    },
+    "leadershipPublication": {
+      "status": "recorded-before-publication",
+      "scope": "New pie,summary,typed recipe and source-reference revision; publication readback will be recorded after push."
+    },
+    "contextImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified;draft-publication-pending",
+      "production": "pending human-approved publication",
+      "purposeMappingIsFullParity": false
+    },
+    "candidateListImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified;draft-publication-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
+    },
+    "mgmtCommentsImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified; draft-update-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
+    },
+    "attitudeReportImplementation": {
+      "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "status": "local-and-independent-runtime-verified; draft-update-pending",
+      "production": "pending human-approved publication",
+      "completeParity": false
+    },
+    "chatRecipesImplementation": {
+      "status": "implemented-unit-and-selected-local-runtime-verified",
+      "newTests": 8,
+      "independentBuild": "passed",
+      "independentBrowserRuntime": "pending-browser-availability",
+      "fullFixtureRuntime": "All 172 current synthetic states checked for render/accessibility structure; not all interactions.",
+      "originalAuthenticatedParity": "unverified",
+      "production": "not-published"
+    },
+    "profilePrintDocumentImplementation": {
+      "status": "implemented-content-and-type-verified",
+      "newTests": 8,
+      "sections": 7,
+      "outputOptionCombinations": 4,
+      "textPolicyDefault": "full",
+      "pagePlanning": "source-based estimate or validated host-provided career pages",
+      "fullBrowserRuntime": "Selected synthetic full-document PDF/HTML/ZIP and preview passed; all 172 render states checked.",
+      "fullA4PdfLayout": "Selected 9-page default/two-profile and 21-page long raster outputs checked; all original lengths/pixel comparison pending.",
+      "nativePrint": "Actual isolated print invocation, one Escape, browser afterprint and owned-frame cleanup passed; OS dialog/pagination/save unverified.",
+      "production": "not-published"
+    }
+  },
+  "sidebarFidelityVerification": {
+    "sourceSha256": "69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4",
+    "inputCount": 85,
+    "baselineSourceRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+    "latestRetrievedSourceRevision": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
+    "deployedRevision": null,
+    "authenticatedSource": {
+      "url": "http://dev.prism.ai/chat",
+      "requestedAccountConfirmed": true,
+      "rows": 100,
+      "comparedChecks": 16,
+      "matchedChecks": 15,
+      "difference": "History y 329 vs 289 due to new source positions menu; equivalent full-content parity remains pending.",
+      "capturedLibraryFingerprint": "259cf5a223358cf3497e68de7de53b1bc65e6e175db06558a1b580efa63530a0"
+    },
+    "changes": [
+      "nav line-height 21px",
+      "history/submenu line-height 19.6px",
+      "enabled new-chat text #fdfdfd",
+      "scoped 10px history scrollbar",
+      "100-row synthetic long fixture",
+      "candidate navigation clears active conversation/draft selection"
+    ],
+    "browser": {
+      "renders": 10,
+      "widths": [
+        320,
+        1280
+      ],
+      "rootOverflow": 0,
+      "nestedButtons": 0,
+      "lastRowVisibleAndSelected": true,
+      "footerYBefore": 428,
+      "footerYAfter": 428
+    },
+    "remaining": [
+      "New positions menu and user position-list purpose",
+      "Other d677 source deltas",
+      "Equivalent content/viewport full font and pixel parity",
+      "All authenticated interactions",
+      "Production publication"
+    ],
+    "layoutPortability": {
+      "initialInstalledRuntime": "failed: docs-only layout dependency; sidebar expanded to content height",
+      "fix": "Explicit container height/flex layout in the complete example",
+      "finalInstalledRuntime": "passed: 100 rows, row width 213, sidebar height 518, footer y 375 unchanged, inner scrollTop 3313",
+      "fullInstalledParity": false
+    },
+    "tests": {
+      "fullPassed": 280,
+      "failed": 0,
+      "relatedPassed": 24,
+      "focusTransitionRegressionPassed": 22
+    }
+  },
+  "latestRetrievedSourceDelta": {
+    "revision": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
+    "baseline": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+    "status": "retrieved;new-purpose-and-delta-audit-pending",
+    "newComponents": [
+      "components/chat/position-list/PositionFilterBar.tsx",
+      "components/chat/position-list/PositionListContent.tsx",
+      "components/chat/position-list/PositionTable.tsx",
+      "components/ui/icons/EtcIcon.tsx"
+    ],
+    "note": "The source inventory and mapped-at revisions remain scoped to the previously audited e5 revision, not this newly retrieved checkout."
   }
 }

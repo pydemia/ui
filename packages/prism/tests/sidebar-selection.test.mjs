@@ -91,3 +91,18 @@ test("complete example separates favorites and history selection, and promotes a
     assert.match(document.body.textContent, /선택한 화면: favorites · 세션 키: 1/);
     assert.equal(document.querySelector('.prism-nav-item[aria-current="page"]').textContent, "후보자 즐겨찾기");
 });
+
+test("long example opens all history rows and candidate navigation clears the active conversation", async () => {
+    await render(h(SidebarHistoryExample, { initialMode: "long" }));
+    assert.equal(document.querySelectorAll('.prism-history-row').length, 100);
+    await click("후보자 즐겨찾기");
+    assert.equal(document.querySelectorAll('.prism-history-row[data-selected]').length, 1);
+    await click("후보자 목록");
+    assert.equal(document.querySelectorAll('.prism-history-row[data-selected]').length, 0);
+    assert.equal(document.querySelector('.prism-nav-item[aria-current="page"]').textContent, "후보자 목록");
+    assert.equal(document.querySelector('select[aria-label="현재 대화 위치"]').value, "candidates");
+    const last = [...document.querySelectorAll('.prism-history-link')].at(-1);
+    await click(last.textContent);
+    assert.equal(document.querySelector('.prism-history-row[data-selected] .prism-history-link'), last);
+    assert.match(document.body.textContent, /선택한 화면: synthetic-history-100/);
+});

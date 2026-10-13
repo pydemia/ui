@@ -21,3 +21,17 @@ onHistoryOpen은 conversation 또는 local-draft의 공개 intent만 전달합�
 실제 shadcn 설치에서 58개 module/CSS 원본 일치와 39개 완전한 예제의 타입 검사·Vite build·font/notices가 통과했습니다. dist-sidebar-selection과 새 HTML/entry를 사용해 기존 소비자 산출물을 보존했습니다. 설치된 browser에서 default 320/1280px, 즐겨찾기와 대화의 독립 선택, 저장 전 대화의 저장 상태 전환·서버 대화 열기를 직접 확인했습니다. 다른 설치 runtime 조합을 모두 확인했다고 주장하지 않습니다.
 
 최종 전체 재검사는 279 tests/0 failures로 끝났습니다. `npm run build`와 `npm run registry:release-check`도 통과했으며 기존 generic registry의 고정 snapshot은 `sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896`과 일치합니다. 마지막 source fingerprint 재계산은 위 dfd7cb66/85 inputs와 일치했고 canonical research 4파일과 docs 미러의 bytes가 같습니다. `git diff --check`도 통과했습니다. 다음 단계는 source/generated 분리 커밋, 검토 브랜치 push 및 해당 최종 SHA의 CI·preview readback입니다.
+
+## 검토 브랜치와 원본 접근 재확인
+
+Source 커밋 `deea49c4`, generated 커밋 `bb52fb1c9c8c3f7ff23173d0cb84c3302a7bae5e`를 검토 브랜치에 push했습니다. draft PR #162의 head가 해당 최종 SHA이고 base가 main인 것을 readback했습니다. main은 `288b0838aec424f7c83686f3d3b00677d749fa4b`이며 이번 작업에서 변경하지 않았습니다. Git credential source/target config checksum도 유지했습니다.
+
+Vercel 자동 preview `dpl_9BpRnSCqo4Wrhg79f3rwtpN7RBED`는 READY, target=null, 해당 최종 SHA입니다. URL은 https://pydemia-o7ihyj4c5-pydemia-7822.vercel.app 입니다. 인증된 HTTP readback 16개가 통과했습니다. 15개는 bytes/SHA가 정확히 같고 HTML은 이 배포 ID와 opt-in을 확인한 Vercel feedback script 한 개만 제외한 application bytes가 같습니다. 증거는 ignored `sidebar-selection-final-preview-readback.json`입니다. 브라우저 렌더와 pixel parity를 뜻하지 않습니다. Verify UI run `38355599635`는 마지막 조회에서 build 단계 진행 중이므로 최종 판정은 뒤에 기록합니다.
+
+Chrome 연결 브라우저의 현재 원본 `/chat` 화면을 읽을 수 있었습니다. 기존 사용자 탭의 개인정보처리방침 dialog는 유지했고 별도 측정용 탭에서 footer가 요청한 `testuser001` 계정과 일치하는지 확인했습니다. 원본 채팅 실행·기록 이름 변경·삭제·계정 변경은 하지 않았습니다. 측정용 탭은 이력 펼침을 되돌린 뒤 닫았습니다.
+
+원본과 라이브러리의 computed-style 비교에서 sidebar width 280, header height 64/padding 12px 24px, new-chat 231×40, nav row 255×36, history row height 32, footer height 144/padding 20px 12px가 일치했습니다. content/viewport/state가 달라 전체 높이·위치·선택색·이력 너비를 동일 조건의 parity로 판정하지 않습니다. 원본의 이력 100행에서는 세로 scrollbar 때문에 row 폭이 213이고 현재 합성 예제는 223이므로 긴 이력의 동일 조건 비교가 필요합니다.
+
+보정 후보를 실제 측정으로 확인했습니다. 원본 nav 텍스트 line-height는 21px, 현재는 normal(텍스트 box 16px)입니다. 원본 history 텍스트는 19.6px, 현재 버튼 텍스트는 normal입니다. 원본 새 대화 글자색은 rgb(253,253,253), 현재는 rgb(255,255,255)입니다. font-family는 원본 Pretendard와 현재 Pretendard Variable로 표시되며 같은 glyph/pixel이라고 단정하지 않습니다. 해당 CSS 차이와 긴 이력 비교를 다음 fidelity 작업에서 처리합니다. 증거는 ignored `sidebar-authenticated-style-comparison.json` 및 개인정보가 없는 상단 crop `sidebar-authenticated-header.png`입니다. deployed revision과 다른 인증 화면·전체 목적 검증은 여전히 미완료입니다.
+
+최종 Verify UI run `38355599635`가 completed/success이고 Vercel status도 success인 것을 확인했습니다. CI는 해당 최종 SHA의 타입·테스트·build·PRISM 계약/registry·release 보존·docs 재생성 차이를 검사했습니다. 게시 뒤 추가한 이 절만 다음 source 커밋을 위해 로컬 수정으로 남습니다. 전체 goal은 active이며 다음 작업은 측정된 CSS 차이와 긴 이력의 원본 비교입니다.

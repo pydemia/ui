@@ -26,11 +26,17 @@ async function start(overrides = {}) { await clear(); calls = { submit: [], clos
     onOpenChange: value => calls.closed.push(value), onCheckName: async request => { calls.name.push(request); return true; }, onGenerateDescription: async () => "새 합성 설명", onLoadAffected: async () => [{ id: "p1", name: "가상 포지션", company: "가상 회사" }], onSubmit: async request => calls.submit.push(request), ...overrides }; await render(editor()); }
 async function input(label, value) { const node = [...document.querySelectorAll('input,textarea')].find(node => node.getAttribute('aria-label') === label || document.querySelector('label[for="' + node.id + '"]')?.textContent.replace(/\*|필수/g, '') === label); assert.ok(node, label); await act(async () => { Object.getOwnPropertyDescriptor(node.tagName === "TEXTAREA" ? dom.window.HTMLTextAreaElement.prototype : dom.window.HTMLInputElement.prototype, "value").set.call(node, value); node.dispatchEvent(new Event('input', { bubbles: true })); }); }
 async function select(label, option) { const node = [...document.querySelectorAll('[role="combobox"]')].find(node => document.querySelector('label[for="' + node.id + '"]')?.textContent.replace('*', '') === label); assert.ok(node, label);
+    await act(async () => node.focus());
     await act(async () => node.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })));
     const find = () => [...document.getElementById(node.getAttribute('aria-controls'))?.querySelectorAll('[role="option"]') ?? []].find(item => item.textContent === option);
     const deadline = Date.now() + 1000;
     while (!find() && Date.now() < deadline) await wait(5);
-    await click(find()); }
+    await click(find());
+    // Finish the close/focus transition before opening another synthetic combobox.
+    const closedDeadline = Date.now() + 1000;
+    while ((node.getAttribute('aria-expanded') !== 'false' || document.activeElement !== node) && Date.now() < closedDeadline) await wait(5);
+    assert.equal(node.getAttribute('aria-expanded'), 'false', 'Selected options close their list');
+    assert.equal(document.activeElement, node, 'Selection restores focus to its trigger'); }
 async function deletion(overrides = {}) { await clear(); calls = { submit: [], closed: [] }; config = { open: true, kind: "job", target: job, candidates, scopeKey: "one", onOpenChange: value => calls.closed.push(value), onLoadAffected: async () => affected, onConfirm: async request => calls.submit.push(request), ...overrides }; await render(h(PrismBlockDeletionDialog, config)); }
 test.afterEach(clear);
 
