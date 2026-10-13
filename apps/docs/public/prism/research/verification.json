@@ -1999,8 +1999,22 @@
       }
     },
     "prism-intro": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Authenticated deployed /chat intro measured at 800px width with 167px greeting, 149.1875px favorite card, 45.59375px prompt and 110px composer",
+        "Source card groups title and description in one body; local card now matches 149.1875px height with source prompt background and text colors",
+        "Deployed and local prompt selection populate the draft and focus the textarea without sending",
+        "Installed consumer loading state uses one 48px icon and 120/180px text skeletons inside a 152px card and removes the card button; source code shape checked, deployed loading state not observed",
+        "Installed consumer prompt selection focuses the textarea with zero sends and favorite card callback fires once",
+        "Independent shadcn consumer verified 59 installed module sources and exact CSS, 40 examples, Vite, font and notices",
+        "Installed consumer 320px default and loading states have zero document horizontal overflow"
+      ],
+      "evidence": ["authenticated-chat-intro-default-2026-10-13", "local-chat-intro-2026-10-13", "installed-chat-intro-2026-10-13"],
+      "remaining": [
+        "Deployed loading/mobile/hover intro states and real favorite-card navigation",
+        "Full source/font/pixel comparison and deployed revision binding"
+      ],
       "localRenderGate": {
         "status": "passed",
         "states": [
