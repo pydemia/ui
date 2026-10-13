@@ -480,6 +480,37 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/panel/SidePanel.tsx",
+          "chat/panel/SidePanel.module.scss",
+          "pages/sample/chat/SidePanelPage.tsx"
+        ],
+        "evidence": [
+          "Current public SidePanel sample measured a 440px panel, 64px header, 24px close control, rgb(221,229,235) border and rgba(37,38,46,.06) -4px 0 12px shadow; the expanded panel measured 1281px in a 1280px viewport with z-index 1250.",
+          "The current isolated shadcn installation measured the same default 440px panel, 64px header, 24px controls, border and shadow. Expanded width was the containing block content width plus 1px and the placeholder retained 440px.",
+          "Installed browser keyboard resize reached 456px after ArrowLeft, 320px on Home and 800px on End; double-click returned to 440px, and an 80px pointer drag changed width to 520px.",
+          "At a 240px parent, visible width became 238px while preferred width stayed 520px; restoring the parent to 1000px restored the visible 520px width.",
+          "At 320px, the long-title header was 125px and the body 313px, the document width remained 320px, a synthetic textarea draft survived Escape close and reopen, and scrolling reached the last action.",
+          "The current isolated shadcn consumer installed 59 exact TSX module sources plus CSS, typechecked 41 examples and built with Vite/font/notices. The unchanged source SHA also passed 313 PRISM tests, workspace typecheck, site build, registry check and the Verify UI CI run."
+        ],
+        "intentionalImprovements": [
+          "A compact parent fits the panel inside its available width and hides the resize handle while preserving the preferred width for later restoration.",
+          "The resize separator supports pointer, keyboard, Home/End and double-click; the caller controls width and guarded close intent.",
+          "Closed content remains mounted and inert so the host can preserve an in-progress draft; long titles grow the header and the caller controls body scrolling."
+        ],
+        "hostOwned": [
+          "Profile, memo, position and chat panel content, authorization, data requests and guarded draft persistence belong to the consuming application or the separate panel-recipes group."
+        ],
+        "nonBlockingUnknowns": [
+          "The deployed source commit identity and authenticated wrapper-by-wrapper product flow are not established.",
+          "Native unexpected pointer cancellation/capture loss is covered by DOM regression tests, not every OS or device.",
+          "Full static/variable font and pixel comparison is outside this group acceptance evidence."
+        ]
       }
     },
     "prism-utility": {
@@ -6122,10 +6153,11 @@
       "prism-feedback",
       "prism-display",
       "prism-candidate",
-      "prism-six-frame"
+      "prism-six-frame",
+      "prism-panel"
     ],
-    "acceptedCount": 8,
-    "unassessedGroups": 50,
+    "acceptedCount": 9,
+    "unassessedGroups": 49,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
