@@ -65,7 +65,7 @@ export function PrismSidebar({items,activeId,onNavigate,collapsed,onCollapsedCha
     return <aside className="prism-sidebar" data-collapsed={collapsed} aria-label="PRISM 탐색">
         <header>{!collapsed&&<button className="prism-wordmark" type="button" onClick={onNewChat} aria-label="PRISM 새 대화"><PrismIcon name="LogoHorizontalIcon" size={32} style={{width:110}}/></button>}
             <button className="prism-sidebar-toggle" type="button" aria-label={collapsed ? "사이드바 펼치기" : "사이드바 접기"} onClick={()=>onCollapsedChange(!collapsed)}><PrismIcon name="ExpandedIcon" size={24}/></button></header>
-        <div className="prism-sidebar-new"><PrismNewChatButton icon={<PrismIcon name="PlusIcon" size={28}/>} iconOnly={collapsed} aria-label="새로운 대화" onClick={onNewChat}>새로운 대화</PrismNewChatButton></div>
+        <div className="prism-sidebar-new"><PrismNewChatButton iconOnly={collapsed} aria-label="새로운 대화" onClick={onNewChat}/></div>
         <hr className="prism-sidebar-divider"/>
         <nav className="prism-sidebar-nav" aria-label="주요 메뉴">{items.map(item=><div className="prism-sidebar-nav-group" key={item.id}>
             <button className="prism-nav-item" type="button" aria-label={item.label} disabled={item.disabled} aria-current={navItemActive(item,activeId) ? "page" : undefined}

@@ -3,7 +3,7 @@ import test from "node:test";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { JSDOM } from "jsdom";
-import { PrismButton, PrismInput, PrismCountBadge, PrismCandidateCard, PrismEvaluationTable, PrismRequestState, PrismRadarChart, PrismTrendChart, PrismSixFrame, PrismPagination, PrismProgress } from "../dist/index.js";
+import { PrismButton, PrismNewChatButton, PrismInput, PrismCountBadge, PrismCandidateCard, PrismEvaluationTable, PrismRequestState, PrismRadarChart, PrismTrendChart, PrismSixFrame, PrismPagination, PrismProgress } from "../dist/index.js";
 
 const render = (component, props) => renderToStaticMarkup(h(component, props));
 test("form labels connect to separate descriptions and errors", () => {
@@ -19,6 +19,16 @@ test("icon-only actions must be named and buttons do not submit implicitly", () 
     assert.throws(() => render(PrismButton, { iconOnly: true }), /accessible name/);
     const doc = new JSDOM(render(PrismButton, { children: "저장" })).window.document;
     assert.equal(doc.querySelector("button").type, "button");
+});
+test("new-chat button supplies the source label and AddIcon without caller markup", () => {
+    const doc = new JSDOM(render(PrismNewChatButton, {})).window.document;
+    const button = doc.querySelector("button");
+    assert.equal(button.type, "button");
+    assert.equal(button.textContent, "새로운 대화");
+    assert.equal(button.querySelector("svg")?.getAttribute("viewBox"), "0 0 28 28");
+    const collapsed = new JSDOM(render(PrismNewChatButton, { iconOnly: true, "aria-label": "새로운 대화" })).window.document;
+    assert.equal(collapsed.querySelector("button").getAttribute("aria-label"), "새로운 대화");
+    assert.equal(collapsed.querySelector("button").textContent, "");
 });
 test("insufficient assessment evidence and real zero remain different", () => {
     const doc = new JSDOM(render(PrismEvaluationTable, { assessments: [

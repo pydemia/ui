@@ -195,13 +195,21 @@
   "components": {
     "prism-button": {
       "visual": "partial",
-      "interaction": "pending",
+      "interaction": "partial",
       "checks": [
         "Deployed new-chat 40px height, 8px radius, 14px type",
-        "Button sample default geometry and token values compared"
+        "Button sample default geometry and token values compared",
+        "Deployed and local warning medium/disabled, line and shape icon-disabled samples match sampled 28/32px heights, 28px icon-button widths and computed colors/borders on 2026-10-13.",
+        "New-chat default AddIcon is 28px in both samples; 40px height, gradient, 8px radius and disabled border removal match. The samples use different container widths.",
+        "Selected warning-button hover uses #e45858 and a visible overlay in both samples.",
+        "Local and independently installed synthetic new-chat click and Enter each call the handler once; disabled new-chat cannot be activated.",
+        "Independent shadcn consumer reinstalled button/sidebar/tokens: 59 exact module sources and CSS, 40 example typechecks, Vite/font/notices passed; installed browser measured 40px buttons and 28px AddIcon.",
+        "Local sidebar expanded/collapsed buttons render at 231/40px with 28px icons; collapsed button retains its accessible name and has zero document overflow."
       ],
       "remaining": [
-        "hover/focus/disabled combinations"
+        "Source sample has no new-chat action handler; deployed product navigation and keyboard activation remain unverified.",
+        "Other variants/callers, focus-visible and all hover/disabled combinations remain unverified.",
+        "Original static versus standalone variable font and complete pixel comparison remain unverified."
       ],
       "localRenderGate": {
         "status": "passed",

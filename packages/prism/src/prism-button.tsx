@@ -1,5 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 import { Button } from "@pydemia/ui";
+import { PrismIcon } from "./prism-icon";
 
 export type PrismButtonProps = Omit<ComponentProps<typeof Button>, "variant" | "size"> & {
     variant?: "solid" | "line" | "shape";
@@ -24,6 +25,6 @@ export function PrismButton({ variant = "solid", size = "medium", tone = variant
     </Button>;
 }
 
-export function PrismNewChatButton(props: Omit<PrismButtonProps, "variant" | "size">) {
-    return <PrismButton {...props} size="large" className={`prism-new-chat ${props.className ?? ""}`} />;
+export function PrismNewChatButton({ icon = <PrismIcon name="AddIcon" size={28}/>, children = "새로운 대화", ...props }: Omit<PrismButtonProps, "variant" | "size">) {
+    return <PrismButton {...props} icon={icon} size="large" className={`prism-new-chat ${props.className ?? ""}`}>{children}</PrismButton>;
 }

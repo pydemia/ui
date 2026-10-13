@@ -316,8 +316,9 @@
 .prism-button[data-size="x-small"] .prism-button-icon svg { width:14px;height:14px; }
 .prism-new-chat[data-variant="solid"] { width: 100%; border: 1px solid #416395; border-radius: 8px; background: linear-gradient(90deg,#44689f,#284d85); font-size: 14px; }
 .prism-new-chat[data-variant="solid"]:not(:disabled) { color: var(--prism-base); }
-.prism-new-chat .prism-button-icon svg { width: 28px; height: 28px; }
+.prism-button.prism-new-chat .prism-button-icon svg { width: 28px; height: 28px; }
 .prism-new-chat[data-variant="solid"]:hover:not(:disabled) { border:0;background:var(--prism-primary); }
+.prism-new-chat[data-variant="solid"]:disabled { border: 0; }
 .prism-field { display: grid; gap: 6px; min-width: 0; }
 .prism-field > label { font-size: 14px; font-weight: 600; line-height: 1.4; }
 .prism-required, .prism-error { color: var(--danger); }

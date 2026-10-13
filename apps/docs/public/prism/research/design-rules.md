@@ -91,6 +91,7 @@ These rules use local dev `087811ff` and the observed deployed empty-state CSS. 
 ## Geometry
 
 - Button large/medium/small/x-small heights: 40/32/28/26px. Padding 12px (x-small 8px). Radius 6px large, 4px other sizes. Icon-only widths follow 40/32/28/26px sizes; small uses radius 6px.
+- The new-chat button uses the source 28px AddIcon and default `새로운 대화` label in a 40px, 8px-radius gradient control. Its disabled state has no border. Keep the icon at 28px despite the generic large-button 16px icon rule; the button fills the width supplied by its host container.
 - Input medium/small: 32/28px, radius 6px, padding 12px horizontal. Preserve required, invalid, readOnly, disabled independently.
 - Tag 21px/radius 4px, chip 22px/radius 4px, ELP 16px/radius 10px, count 14px.
 - Count overlays a 24px AlarmIcon at +13px horizontally and -2px vertically in the deployed sample. Keep source-style icon anchoring in the demo; standalone counts are a separate library usage. Explicit-color soft Chips measure 52×22px for the sample `Status` label. Product callers supply `color`; the library `tone` default is an extension.
