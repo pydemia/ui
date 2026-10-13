@@ -1841,16 +1841,15 @@
     },
     "prism-analysis": {
       "visual": "latest-source-delta-local-geometry-passed;authenticated-source-parity-unverified",
-      "interaction": "passed-target-tests-and-selected-synthetic-browser-workflow;all-host-service-effects-unverified",
-      "source": "087811ff current code and selected computed measurements",
+      "interaction": "passed-target-tests-and-local-plus-independent-browser-workflow;host-service-effects-unverified",
+      "source": "Current frontend dev 2eeb26ff and selected source CSS/previous measured sample",
       "extensions": [
         "140–1280px sizing",
-        "explicit host actions",
-        "native both-axis recommendations resize"
+        "explicit host actions"
       ],
       "remaining": [
-        "원본 인증 상태의 전체 pixel/font 대조",
-        "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+        "인증된 원본 전체 프로필 상태와 현재 배포 소스 SHA 연결",
+        "실제 호스트 분석 데이터·프로필 이동·권한 결과"
       ],
       "localRenderGate": {
         "status": "passed-current-source-delta",
@@ -1864,8 +1863,38 @@
           1280
         ],
         "sourceSha256": "94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc",
-        "scope": "Local synthetic render/geometry;selected interaction checks andsource code comparison are separate."
-      }
+        "scope": "Local synthetic render/geometry;selected interaction checks and source code comparison are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/templates/ChatProfileAnalysis.tsx",
+          "chat/templates/ChatProfileAnalysis.module.scss"
+        ],
+        "evidence": [
+          "The current source preserves distinct leader and six-factor purposes, including Leadership result tags; the catalog now includes its SCSS source.",
+          "Local browser measured the 60px leader badge and 80px factor label at the ordinary width; tooltip, Escape and synthetic host action worked. Long content at 140px and the empty state stayed within their containers.",
+          "A separate shadcn consumer reinstalled the current registry, matched 59 installed module sources and CSS, typechecked 43 examples, built with Vite/font/notices, and exercised 320px default and 140px long/empty states, tooltip, host action and panel read-only representation in a real browser. Direct browser collected no console errors."
+        ],
+        "intentionalImprovements": [
+          "Below 280px the factor label stacks; below 180px the leader badge stacks. Long Leadership tags keep their original text/title and truncate visibly without document overflow."
+        ],
+        "hostOwned": [
+          "The consuming app supplies leader/factor evidence and handles profile navigation, data loading, errors and permissions."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed full-profile states and the deployed source commit identity are not established."
+        ]
+      },
+      "evidence": [
+        "prism-analysis-audit-2026-10-14.md",
+        "analysis-goal-runtime.json",
+        "analysis-goal-installed-bytes.json",
+        "chat-cua-runtime.json",
+        "latest-source-analysis.png"
+      ]
     },
     "prism-position-recommendations": {
       "visual": "pending",
@@ -6432,10 +6461,11 @@
       "prism-profile-sections",
       "prism-survey",
       "prism-mgmt-comments",
-      "prism-attitude-report"
+      "prism-attitude-report",
+      "prism-analysis"
     ],
-    "acceptedCount": 17,
-    "unassessedGroups": 41,
+    "acceptedCount": 18,
+    "unassessedGroups": 40,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
