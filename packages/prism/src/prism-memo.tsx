@@ -165,7 +165,7 @@ export type PrismProfileMemoCollectionProps = {
 };
 export function PrismProfileMemoCollection({ items, editingId, onEditingChange, onSave, onDelete, onMutationError, composer, status = "ready", onRetry, readOnly, height, className = "", style, dateFormatter }: PrismProfileMemoCollectionProps) {
     const visible = items.filter(item => item.isMine === true);
-    const showTotal = status === "loading" || visible.length > 0;
+    const showTotal = status === "loading" || (status === "ready" && visible.length > 0);
     const container = useRef<HTMLElement>(null), specifiedHeight = style?.height ?? height;
     const bounded = specifiedHeight !== undefined && specifiedHeight !== "auto";
     useLayoutEffect(() => {

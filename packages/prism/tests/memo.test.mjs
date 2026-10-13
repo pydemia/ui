@@ -43,6 +43,21 @@ test("an empty bounded collection keeps its composer usable as permitted records
     assert.equal(document.querySelector('textarea').value, "보존할 작성 내용"); await unmount();
 });
 
+test("a failed memo query does not show a stale total beside the error and can retry", async () => {
+    let retried = 0;
+    const props = { items: [own], editingId: null, onEditingChange() {}, status: "error", onRetry: () => retried++,
+        composer: h(PrismProfileMemoComposer, { value: "보존할 초안", onValueChange() {}, onSubmit() {} }) };
+    await act(async () => root.render(h(PrismProfileMemoCollection, props)));
+    assert.equal(document.querySelector('.prism-profile-memo-total'), null);
+    assert.equal(document.querySelectorAll('.prism-profile-memo').length, 0);
+    assert.match(document.querySelector('.prism-profile-memo-scroll').textContent, /불러오지 못했습니다/);
+    assert.equal(document.querySelector('textarea').value, "보존할 초안");
+    await click(buttons("다시 시도")[0]); assert.equal(retried, 1);
+    await act(async () => root.render(h(PrismProfileMemoCollection, { ...props, status: "ready" })));
+    assert.equal(document.querySelector('.prism-profile-memo-total').textContent, "전체 1");
+    assert.equal(document.querySelector('textarea').value, "보존할 초안"); await unmount();
+});
+
 test("one controlled editor locks other cards and saves an immutable draft once", async () => {
     let resolveSave, update; const calls = [];
     function Demo() {
