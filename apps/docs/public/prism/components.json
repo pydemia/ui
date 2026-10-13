@@ -5757,15 +5757,20 @@
       "name": "Formatted text / Sanitized actions",
       "category": "AI & agent",
       "purpose": "독립적인 rich text·custom inline tag·호스트 action",
-      "contract": "PrismResponse의 기존 PrismRichText와 동일한 sanitizer 및 URL 계약을 독립적으로 제공합니다. profile/position 링크는 callback이 있을 때만 button, panel에서는 label입니다. HTTP/mailto/root URL만 허용하며 이미지 로드와 raw script 실행을 하지 않습니다. host가 action을 처리합니다.",
+      "contract": "PrismResponse의 기존 PrismRichText와 동일한 sanitizer 및 URL 계약을 독립적으로 제공합니다. 원본 h1/h2 단축 태그, 11색의 color/highlight/badge, size·bullet·bold/italic/underline과 일반 Markdown을 표현합니다. profile/position 링크는 callback이 있을 때만 button, panel에서는 label입니다. popup 문서 링크는 패널에서도 host action을 보냅니다. 일반 링크는 HTTP(S)·mailto·root 경로·fragment만 허용하고 popup은 HTTP(S)·root 경로만 host action으로 전달합니다. 이미지 로드와 raw script 실행을 하지 않습니다. host가 action을 처리합니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
         "empty",
-        "long"
+        "long",
+        "panel",
+        "markup",
+        "unsafe"
       ],
       "source": [
-        "chat/conversation/InlineMarkdown.tsx"
+        "chat/conversation/InlineMarkdown.tsx",
+        "styles/_markdown.scss",
+        "pages/sample/chat/MarkdownPage.tsx"
       ],
       "usage": "import {useState} from \"react\";\nimport {PrismFormattedText} from \"@pydemia/prism\";\nexport function FormattedTextExample(){\n  const [action,setAction]=useState(\"\");\n  return <div data-prism=\"light\"><PrismFormattedText source=\"**합성 근거**와 [후보 확인](profile://synthetic)\" onAction={(kind,id)=>setAction(`${kind}: ${id}`)}/><p role=\"status\">{action}</p></div>;\n}\n",
       "sourcePath": "packages/prism/src/prism-rich-text.tsx",
@@ -5773,8 +5778,8 @@
       "embedUrl": "/prism?component=prism-rich-text&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-rich-text&view=responsive",
       "verification": {
-        "visual": "partial",
-        "interaction": "selected-local-runtime-and-unit-tests",
+        "visual": "current-source-and-deployed-public-sample-plus-local-and-independent-browser-geometry-passed;authenticated-source-parity-unverified",
+        "interaction": "passed-target-tests-and-independent-browser-workflow;host-service-effects-unverified",
         "source": "087811ff current code and selected computed measurements",
         "extensions": [
           "140–1280px sizing",
@@ -5782,8 +5787,8 @@
           "native both-axis recommendations resize"
         ],
         "remaining": [
-          "원본 인증 상태의 전체 pixel/font 대조",
-          "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+          "Authenticated deployed full chat formatting states and deployed source revision binding.",
+          "Actual host popup window, API, permissions and navigation outcomes."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -5798,7 +5803,44 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-        }
+        },
+        "checks": [
+          "Current InlineMarkdown, markdown SCSS and deployed public Markdown sample were compared; white and blue badge color, border, font and padding were measured.",
+          "Independent 320px consumer rendered all 11 badge and highlight colors, 24/20px heading shortcuts and three bullet depths; 140px long heading and badge kept scrollWidth at 140px.",
+          "Profile intent, panel inert profile/position labels, panel document intent, empty source and removal of executable markup/URLs were exercised; direct-page console errors were zero.",
+          "Separate shadcn installation matched 59 module sources and CSS; 43 complete examples typechecked; Vite, Pretendard and notices passed."
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/conversation/InlineMarkdown.tsx",
+            "styles/_markdown.scss",
+            "pages/sample/chat/MarkdownPage.tsx"
+          ],
+          "evidence": [
+            "Current source and public sample confirm custom heading, color, highlight, badge, bullet and link purposes, including measured white/blue badge geometry.",
+            "Standalone renderer preserves source custom tags, safe host actions and panel behavior while removing executable markup.",
+            "Isolated shadcn consumer matched module/CSS bytes, typechecked 43 examples and exercised 320px/140px, long, empty, panel, links and unsafe input."
+          ],
+          "intentionalImprovements": [
+            "A long heading or badge wraps within a 140px parent, preserving content without the source narrow-screen overflow.",
+            "Highlight uses semantic mark markup and only documented style classes survive sanitization."
+          ],
+          "hostOwned": [
+            "The consuming application handles profile/position/document actions, popup navigation, data, permissions and authentication."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed full-chat formatting and deployed source commit identity are not established."
+          ]
+        },
+        "evidence": [
+          "prism-rich-text-audit-2026-10-14.md",
+          "rich-text-goal-browser.json",
+          "rich-text-goal-installed-bytes.json",
+          "chat-recipes.test.mjs"
+        ]
       },
       "exports": [
         {

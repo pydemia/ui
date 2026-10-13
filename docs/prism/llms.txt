@@ -1307,8 +1307,8 @@ export function PositionRecommendationsExample() {
 
 ## Formatted text / Sanitized actions
 독립적인 rich text·custom inline tag·호스트 action
-Contract: PrismResponse의 기존 PrismRichText와 동일한 sanitizer 및 URL 계약을 독립적으로 제공합니다. profile/position 링크는 callback이 있을 때만 button, panel에서는 label입니다. HTTP/mailto/root URL만 허용하며 이미지 로드와 raw script 실행을 하지 않습니다. host가 action을 처리합니다.
-States: default, empty, long
+Contract: PrismResponse의 기존 PrismRichText와 동일한 sanitizer 및 URL 계약을 독립적으로 제공합니다. 원본 h1/h2 단축 태그, 11색의 color/highlight/badge, size·bullet·bold/italic/underline과 일반 Markdown을 표현합니다. profile/position 링크는 callback이 있을 때만 button, panel에서는 label입니다. popup 문서 링크는 패널에서도 host action을 보냅니다. 일반 링크는 HTTP(S)·mailto·root 경로·fragment만 허용하고 popup은 HTTP(S)·root 경로만 host action으로 전달합니다. 이미지 로드와 raw script 실행을 하지 않습니다. host가 action을 처리합니다.
+States: default, empty, long, panel, markup, unsafe
 Registry: /prism/r/prism-rich-text.json
 Source: packages/prism/src/prism-rich-text.tsx
 Usage kind: component-example

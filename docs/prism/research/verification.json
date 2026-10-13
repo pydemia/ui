@@ -1959,8 +1959,8 @@
       ]
     },
     "prism-rich-text": {
-      "visual": "partial",
-      "interaction": "selected-local-runtime-and-unit-tests",
+      "visual": "current-source-and-deployed-public-sample-plus-local-and-independent-browser-geometry-passed;authenticated-source-parity-unverified",
+      "interaction": "passed-target-tests-and-independent-browser-workflow;host-service-effects-unverified",
       "source": "087811ff current code and selected computed measurements",
       "extensions": [
         "140–1280px sizing",
@@ -1968,8 +1968,8 @@
         "native both-axis recommendations resize"
       ],
       "remaining": [
-        "원본 인증 상태의 전체 pixel/font 대조",
-        "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
+        "Authenticated deployed full chat formatting states and deployed source revision binding.",
+        "Actual host popup window, API, permissions and navigation outcomes."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1984,7 +1984,44 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-      }
+      },
+      "checks": [
+        "Current InlineMarkdown, markdown SCSS and deployed public Markdown sample were compared; white and blue badge color, border, font and padding were measured.",
+        "Independent 320px consumer rendered all 11 badge and highlight colors, 24/20px heading shortcuts and three bullet depths; 140px long heading and badge kept scrollWidth at 140px.",
+        "Profile intent, panel inert profile/position labels, panel document intent, empty source and removal of executable markup/URLs were exercised; direct-page console errors were zero.",
+        "Separate shadcn installation matched 59 module sources and CSS; 43 complete examples typechecked; Vite, Pretendard and notices passed."
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/conversation/InlineMarkdown.tsx",
+          "styles/_markdown.scss",
+          "pages/sample/chat/MarkdownPage.tsx"
+        ],
+        "evidence": [
+          "Current source and public sample confirm custom heading, color, highlight, badge, bullet and link purposes, including measured white/blue badge geometry.",
+          "Standalone renderer preserves source custom tags, safe host actions and panel behavior while removing executable markup.",
+          "Isolated shadcn consumer matched module/CSS bytes, typechecked 43 examples and exercised 320px/140px, long, empty, panel, links and unsafe input."
+        ],
+        "intentionalImprovements": [
+          "A long heading or badge wraps within a 140px parent, preserving content without the source narrow-screen overflow.",
+          "Highlight uses semantic mark markup and only documented style classes survive sanitization."
+        ],
+        "hostOwned": [
+          "The consuming application handles profile/position/document actions, popup navigation, data, permissions and authentication."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed full-chat formatting and deployed source commit identity are not established."
+        ]
+      },
+      "evidence": [
+        "prism-rich-text-audit-2026-10-14.md",
+        "rich-text-goal-browser.json",
+        "rich-text-goal-installed-bytes.json",
+        "chat-recipes.test.mjs"
+      ]
     },
     "prism-response": {
       "visual": "current-source-and-deployed-public-sample-plus-local-and-independent-browser-geometry-passed;authenticated-source-parity-unverified",
@@ -6535,10 +6572,11 @@
       "prism-attitude-report",
       "prism-analysis",
       "prism-position-recommendations",
-      "prism-response"
+      "prism-response",
+      "prism-rich-text"
     ],
-    "acceptedCount": 20,
-    "unassessedGroups": 38,
+    "acceptedCount": 21,
+    "unassessedGroups": 37,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
