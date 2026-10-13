@@ -353,3 +353,9 @@ All 58 groups and 252 canonical states were inspected through CUA at 320px and 1
 Selected panel interactions confirmed keyboard changes from 440px to 456px and 800px, expansion to the parent content, and closing/reopening with drafts and the preferred width retained. A 240px parent produced compact mode; restoring a 1200px parent restored the preferred 800px panel. Closing moved focus to BODY; caller focus restoration remains a review item. Pointer dragging, cancellation/guard combinations, all popups/callbacks/service effects, independent installed-state coverage and original font/pixel/A4 comparison remain incomplete.
 
 Source fingerprint remains 31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7, covering 84 inputs. Previous generation/chat-log and publication evidence is preserved. Passing 252/252 render checks does not establish full-goal completion. Production/main has not been published by this work.
+
+## Source spinner motion correction 2026-10-13
+
+After the full baseline matrix, source review and browser computed styles found two concurrent 1s rotations on the block generation icon: its original SVG rotation plus an added wrapper rotation. The source dialog SCSS adds no wrapper motion. The additional wrapper animations were removed from block validation and generation overlays, preserving the original SVG rotation, geometry and reduced-motion rules.
+
+At 320px and 1280px, the corrected overlay has no wrapper animation and one SVG rotation at 1s. All 12 affected block states were checked at both widths (24 renders), and 22 related tests passed. The current fingerprint is ad7537d8e868b73bf79d21e941ae003fc2d21790a4b44bd7fd855d04fe372988. The 504-render matrix remains evidence for baseline31cf2003; it was not rerun at the new fingerprint. Unchanged scopes retain that baseline evidence. Authenticated source parity and full-goal completion remain unverified.

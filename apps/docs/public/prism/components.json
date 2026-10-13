@@ -5883,7 +5883,7 @@
           "Original whole-page static/variable font,pixel/A4 and production publication."
         ],
         "localRenderGate": {
-          "status": "passed",
+          "status": "passed-current-css-delta",
           "states": [
             "default",
             "edit",
@@ -5902,8 +5902,8 @@
             320,
             1280
           ],
-          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
-          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+          "sourceSha256": "ad7537d8e868b73bf79d21e941ae003fc2d21790a4b44bd7fd855d04fe372988",
+          "scope": "24 fixture renders plus single source SVG rotation at1s; full source parity remains separate."
         }
       },
       "exports": [

@@ -1715,7 +1715,7 @@
         "Original whole-page static/variable font,pixel/A4 and production publication."
       ],
       "localRenderGate": {
-        "status": "passed",
+        "status": "passed-current-css-delta",
         "states": [
           "default",
           "edit",
@@ -1734,8 +1734,8 @@
           320,
           1280
         ],
-        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
-        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        "sourceSha256": "ad7537d8e868b73bf79d21e941ae003fc2d21790a4b44bd7fd855d04fe372988",
+        "scope": "24 fixture renders plus single source SVG rotation at1s; full source parity remains separate."
       }
     },
     "prism-chat-logs": {
@@ -1992,7 +1992,8 @@
       "passed": 266,
       "failed": 0,
       "targeted": 34,
-      "targetedFailed": 0
+      "targetedFailed": 0,
+      "currentDeltaPassed": 22
     },
     "registry": {
       "groups": 58,
@@ -2000,7 +2001,7 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-current-chat-log-and-block-install",
+      "status": "passed-current-spinner-css-install",
       "items": 58,
       "modules": 56,
       "completeExamples": 37,
@@ -2009,15 +2010,15 @@
       "source": "56 installed TSX modules and corrected CSS match emitted bytes exactly;0 transforms.37 complete examples/entry build,font/notices passed.",
       "portableFont": "emitted SHA256 matched",
       "assetNotice": "installed and checked",
-      "runtime": "log default/detail at1280/320;retained block generation at1280",
-      "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+      "runtime": "Prior selected installed runtime is retained separately;current spinner CSS is exact andinstalled examples tsc/Vite/font/notices passed.",
+      "sourceSha256": "ad7537d8e868b73bf79d21e941ae003fc2d21790a4b44bd7fd855d04fe372988",
       "groups": 58,
       "examples": 39,
       "sourceTransforms": 0,
       "sourceTransformations": 0,
       "css": "exact",
       "font": "exact",
-      "claim": "Real shadcn add,installed tsc/Vite,exact58 module/CSS/font/notices and selected browser flows. Does not prove full installed/source parity."
+      "claim": "58 module sources and CSS match emitted bytes;39 examples typecheck andbuild. Current spinner runtime in the installed consumer was not separately observed."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
@@ -2044,17 +2045,15 @@
     },
     "currentFixtureStates": {
       "count": 252,
-      "checked": 252,
-      "pending": 0,
-      "browserRenders": 504,
-      "status": "passed-current-local-render-structure-and-layout;source-parity-unverified",
-      "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
-      "pendingOtherDimensions": [
-        "Authenticated source/deployed revision comparison",
-        "Full interaction and independent consumer state coverage",
-        "Full font/pixel/A4/native print/save",
-        "Remaining functional purposes and enhancements"
-      ]
+      "checked": 12,
+      "pending": 240,
+      "baselineChecked": 252,
+      "baselineBrowserRenders": 504,
+      "currentDeltaRenders": 24,
+      "status": "current-block-css-delta-verified;full-baseline-matrix-retained",
+      "sourceSha256": "ad7537d8e868b73bf79d21e941ae003fc2d21790a4b44bd7fd855d04fe372988",
+      "baselineSourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+      "claim": "Direct current-fingerprint checks cover the changed block component. The other240 states retain baseline evidence; this is not a completion percentage."
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -2136,7 +2135,7 @@
     "states": 252,
     "checked": 252,
     "browserRenders": 504,
-    "status": "passed-current-local-render-structure-and-layout;source-parity-unverified",
+    "status": "passed-full-matrix-at-baseline;current-block-css-delta-checked",
     "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
     "inputCount": 84,
     "checks": [
@@ -3205,7 +3204,8 @@
         "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
       }
     ],
-    "claim": "All 252 canonical states rendered at 320px and 1280px. Checked component/state identity, fixture presence, document horizontal overflow, nested buttons, native input labels and font loading status. Selected panel sizing/retention interactions are recorded separately. This does not prove all callbacks, permissions, storage, APIs, popups or original font/pixel/A4 parity."
+    "claim": "The 504 unique renders are measured at baseline source31cf2003. The only subsequent source change removes duplicate wrapper rotation in two block-specific CSS selectors. All 12 block states were directly checked at both widths after that change; other baseline measurements are retained, not reported as rerun. Full interactions and authenticated source parity remain unverified.",
+    "currentSourceSha256": "ad7537d8e868b73bf79d21e941ae003fc2d21790a4b44bd7fd855d04fe372988"
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -5131,5 +5131,31 @@
       "A 1200px parent restores the preferred 800px width."
     ],
     "remaining": "Pointer dragging, cancellation/guard variants and source comparison are not covered by this run. Closing moves focus to BODY; host focus restoration needs review."
+  },
+  "spinnerMotionVerification": {
+    "status": "passed-source-and-local-browser",
+    "sourceSha256": "ad7537d8e868b73bf79d21e941ae003fc2d21790a4b44bd7fd855d04fe372988",
+    "baselineSourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+    "change": "Removed duplicate1s wrapper animation from block validation andgeneration overlay; retained original SVG1s rotation andexisting reduced-motion rules.",
+    "browserChecks": [
+      {
+        "overflow": 0,
+        "parentAnimation": "none",
+        "parentDuration": "0s",
+        "svgAnimation": "generating-spinner-spin",
+        "svgDuration": "1s",
+        "width": 1280
+      },
+      {
+        "overflow": 0,
+        "parentAnimation": "none",
+        "svgAnimation": "generating-spinner-spin",
+        "svgDuration": "1s",
+        "width": 320
+      }
+    ],
+    "targetTests": 22,
+    "remaining": "Authenticated original motion/pixel comparison andall installed state interactions remain unverified.",
+    "independentConsumer": "passed exact CSS/module installation,39-example tsc/Vite andfont/notices"
   }
 }
