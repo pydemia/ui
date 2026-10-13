@@ -1986,63 +1986,96 @@
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
       }
+    },
+    "prism-position-directory": {
+      "visual": "partial-authenticated-default-list-geometry",
+      "interaction": "passed-synthetic-and-installed-filter-sort-pagination-tabs;deployed-detail-input-unverified",
+      "checks": [
+        "Authenticated testuser001 default page showed 1023 total and 10 live rows; five columns measured at 800px, 160/280/120/120/120px, 60px row, 50px filters and 14px Pretendard.",
+        "284 final PRISM tests passed; four new tests cover staged LIVE query, page/sort, tab reuse/close and complete synthetic example including retry.",
+        "Five synthetic states rendered at 320/1280px with no document overflow or nested buttons.",
+        "Actual shadcn install of 60 items and 40 examples passed TypeScript/Vite/font/notices; installed browser covered filters, paging, sorting, tabs, retry and 320px scroll."
+      ],
+      "remaining": [
+        "Deployed detail row click and real service/permission/error behavior.",
+        "Full original visual/font/pixel comparison across states and widths.",
+        "Current position-directory review/preview and production publication."
+      ],
+      "localRenderGate": {
+        "status": "passed-synthetic-workspace",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "0f670cbd3b4b5cb83caef2797fe74241ccfb5b59184b3c705f0e84c2331f51dc",
+        "scope": "DOM geometry, font after recheck, root overflow, nested buttons and internal table scroll; original parity is separate."
+      }
     }
   },
   "gates": {
     "typecheck": "passed",
     "contractTests": {
-      "status": "passed",
-      "passed": 280,
+      "status": "passed-final",
+      "passed": 284,
       "failed": 0,
-      "targeted": 24,
+      "targeted": 4,
       "targetedFailed": 0
     },
     "registry": {
-      "groups": 58,
-      "items": 59,
-      "status": "generated"
+      "groups": 59,
+      "items": 60,
+      "status": "generated-and-check-prism-passed"
     },
     "independentConsumer": {
-      "status": "passed-current-sidebar-fidelity-install-and-selected-runtime",
-      "sourceSha256": "69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4",
-      "groups": 58,
-      "examples": 39,
+      "status": "passed-current-position-directory-install-and-selected-runtime",
+      "sourceSha256": "0f670cbd3b4b5cb83caef2797fe74241ccfb5b59184b3c705f0e84c2331f51dc",
+      "groups": 59,
+      "items": 60,
+      "examples": 40,
       "sourceTransformations": 0,
-      "css": "exact",
       "font": "exact",
-      "runtime": "100-row 320/1280; inner history scroll and footer retention; candidate navigation clears selected history",
-      "claim": "Real install and selected synthetic flows; full installed/source parity remains separate."
+      "assetNotices": "present",
+      "runtime": "search draft/applied, company/industry filters, page/sort, row detail tab reuse/close, error retry and 320px inner table scroll",
+      "claim": "Real install with synthetic data and selected runtime flows; authenticated source/API and full visual parity remain separate."
     },
-    "fullSiteBuild": "passed",
+    "fullSiteBuild": "passed-current-position-directory-and-generic-release-check",
     "publicDeployment": {
-      "status": "pending-current-sidebar-fidelity-preview;production-not-published"
+      "status": "pending-current-position-directory-preview;production-not-published"
     },
     "generalComponentTests": {
-      "passed": 280,
-      "failed": 0
+      "passed": 284,
+      "failed": 0,
+      "scope": "Final full PRISM run after source/demo/test changes."
     },
     "genericRegistry": {
       "status": "passed-unchanged",
       "snapshot": "sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896"
     },
     "githubVerification": {
-      "status": "pending-current-sidebar-fidelity-review"
+      "status": "pending-current-position-directory-review"
     },
     "usageContracts": {
-      "groups": 58,
-      "componentExamples": 39,
+      "groups": 59,
+      "componentExamples": 40,
       "integrationFragments": 19,
-      "workspaceTypecheck": "passed workspace and check-prism.mjs",
-      "installedTypecheck": "passed final actual install",
+      "workspaceTypecheck": "passed",
+      "installedTypecheck": "passed final actual shadcn install of 60 items and 40 examples",
       "installationDependencyClosure": "전용 CSS가 reachable item의 실제 file target에 포함되는지도 검사"
     },
     "currentFixtureStates": {
-      "count": 253,
+      "count": 258,
       "checked": 5,
-      "pending": 248,
+      "pending": 253,
       "currentDeltaRenders": 10,
-      "sourceSha256": "69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4",
-      "status": "passed-current-sidebar-fidelity-delta;other-baseline-evidence-retained"
+      "sourceSha256": "0f670cbd3b4b5cb83caef2797fe74241ccfb5b59184b3c705f0e84c2331f51dc",
+      "status": "passed-current-position-directory-synthetic-delta;other-baseline-evidence-retained"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -5602,13 +5635,77 @@
   "latestRetrievedSourceDelta": {
     "revision": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
     "baseline": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
-    "status": "retrieved;new-purpose-and-delta-audit-pending",
+    "status": "new-position-purpose-mapped;other-delta-audit-pending",
     "newComponents": [
       "components/chat/position-list/PositionFilterBar.tsx",
       "components/chat/position-list/PositionListContent.tsx",
       "components/chat/position-list/PositionTable.tsx",
       "components/ui/icons/EtcIcon.tsx"
     ],
-    "note": "The source inventory and mapped-at revisions remain scoped to the previously audited e5 revision, not this newly retrieved checkout."
+    "note": "Current source inventory covers 275 components/layouts source files and maps the four additions. Mapping is not independent implementation target or completed state count; other changed source files need delta review."
+  },
+  "sidebarFidelityPublication": {
+    "sourceCommit": "c96cf1a0",
+    "generatedCommit": "aa761eb9dee71463a08eab45d195eda99dd61679",
+    "verifyUiRun": 38362050081,
+    "verifyUiConclusion": "success",
+    "previewDeployment": "dpl_DqcLE7xPTnGrWZEEJayrME8YHdUF",
+    "previewUrl": "https://pydemia-5b5p6pa79-pydemia-7822.vercel.app",
+    "previewState": "READY",
+    "httpArtifactChecks": 16,
+    "scope": "Sidebar typography/portable history example deployment; full original UI parity is separate."
+  },
+  "positionDirectoryVerification": {
+    "sourceRevision": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
+    "deployedRevisionBinding": "unverified",
+    "authenticatedRoute": "/chat/positions",
+    "observedTotal": 1023,
+    "observedColumns": [
+      "company",
+      "name",
+      "industry",
+      "job",
+      "role"
+    ],
+    "observedGeometry": {
+      "contentWidth": 800,
+      "filterHeight": 50,
+      "columnWidths": [
+        160,
+        280,
+        120,
+        120,
+        120
+      ],
+      "rowHeight": 60,
+      "headerBackground": "#eef2fa",
+      "cellFont": "Pretendard 14px / 19.6px"
+    },
+    "syntheticStates": [
+      "default",
+      "loading",
+      "empty",
+      "error",
+      "long"
+    ],
+    "widths": [
+      320,
+      1280
+    ],
+    "currentSourceSha256": "0f670cbd3b4b5cb83caef2797fe74241ccfb5b59184b3c705f0e84c2331f51dc",
+    "sourceInputs": 87,
+    "sourceState": "user position directory and source sidebar menu added",
+    "remaining": [
+      "Authenticated deployed detail row-open interaction",
+      "Real host service integration and authorization",
+      "Full font/pixel/state parity and production publication"
+    ],
+    "installedConsumer": {
+      "status": "passed",
+      "path": "/var/folders/ht/0ztx9m_d3xz1lg1m0rsy6bk80000gn/T/prism-consumer-zJfxHC",
+      "evidence": "position-directory-installed-runtime.json",
+      "sourceSha256": "0f670cbd3b4b5cb83caef2797fe74241ccfb5b59184b3c705f0e84c2331f51dc",
+      "scope": "Synthetic installed runtime, not real PRISM service."
+    }
   }
 }

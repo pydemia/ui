@@ -23,7 +23,7 @@
     }
   ],
   "meta": {
-    "sourceRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+    "sourceRevision": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
     "sourceDeltaAudits": [
       {
         "source": "layouts/chat/ChatSidebar.tsx",

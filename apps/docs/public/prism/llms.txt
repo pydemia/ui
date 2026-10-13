@@ -2,7 +2,7 @@
 
 Isolated PRISM-DEV design and interaction references using React 19, pydemia/ui and shadcn/Radix primitives.
 
-Latest source inventory: 271 source-file entries (87 vector assets), 0 pending purpose mappings. Source-file counts are not independent implementation targets. Purpose mapping and selected runtime checks do not prove all source states or visual parity.
+Latest source inventory: 275 source-file entries (88 vector assets), 0 pending purpose mappings. Source-file counts are not independent implementation targets. Purpose mapping and selected runtime checks do not prove all source states or visual parity.
 
 - [Contracts and source mapping](/prism/components.json)
 - [Ground rules](/prism/research/design-rules.md)
@@ -180,10 +180,10 @@ export function SidebarHistoryExample({ initialMode = "default" }: { initialMode
     return <div data-prism="light" className="prism-sidebar-demo" style={{display:"flex",height:520,boxSizing:"border-box",fontSize:14,border:"1px solid var(--prism-control-border)",overflow:"auto"}}>
         <PrismSidebar collapsed={collapsed} onCollapsedChange={setCollapsed} activeId={context.view}
             activeHistoryId={getPrismHistorySelectionId(history,{...context,isChatHome:["current","draft","intro"].includes(context.view)})}
-            onNavigate={id => setContext(value=>({...value,routeConversationId:null,activeConversationId:id==="candidates" ? null : value.activeConversationId,activeLocalDraftId:id==="candidates" ? null : value.activeLocalDraftId,view:id}))}
+            onNavigate={id => setContext(value=>({...value,routeConversationId:null,activeConversationId:id==="candidates"||id==="positions" ? null : value.activeConversationId,activeLocalDraftId:id==="candidates"||id==="positions" ? null : value.activeLocalDraftId,view:id}))}
             onHistoryOpen={intent=>{if(intent.kind==="conversation")setContext({routeConversationId:intent.conversationId,activeConversationId:intent.conversationId,activeLocalDraftId:null,view:intent.rowId});else {setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:intent.localDraftId,view:"draft"});setSession(value=>value+1);}}}
             onNewChat={() => { intro(); setSession(value => value + 1); }}
-            items={[{id:"candidates",label:"후보자 목록",icon:<PrismIcon name="UsersIcon" size={24}/>},{ id: "favorites", label: "후보자 즐겨찾기", icon: <PrismIcon name="FavoriteLargeIcon" size={24}/> }, ...(initialMode === "restricted" ? [] : [createPrismAdminMenu(true)!])]}
+            items={[{id:"candidates",label:"후보자 목록",icon:<PrismIcon name="UsersIcon" size={24}/>},{ id: "favorites", label: "후보자 즐겨찾기", icon: <PrismIcon name="FavoriteLargeIcon" size={24}/> },{id:"positions",label:"포지션 목록",icon:<PrismIcon name="EtcIcon" size={24}/>}, ...(initialMode === "restricted" ? [] : [createPrismAdminMenu(true)!])]}
             history={initialMode === "empty" ? [] : history.map(item => ({ ...item, generating: initialMode === "loading" }))}
             onHistoryRename={(id, title) => setHistory(items => items.map(item => serverId(item) === id ? { ...item, title } : item))}
             onHistoryDeleteRequest={id => { setError(undefined); setDeleting(id); }}
@@ -192,10 +192,10 @@ export function SidebarHistoryExample({ initialMode = "default" }: { initialMode
             onProfileAction={id => setResult(`${id} 의도 전달`)} onPrivacyPolicy={() => setResult("방침 열기 의도 전달")} copyright="© 가상기업"/>
         <div className="prism-sidebar-demo-main" style={{flex:1,padding:24,minWidth:200}}>
             <p>합성 기록만 삭제합니다. 경로와 세션 키는 이 예제 안의 표시 값입니다.</p>
-            <label>현재 대화 위치 <select aria-label="현재 대화 위치" value={context.view === "intro" ? "intro" : context.view === "other" ? "other" : context.view==="draft" ? "draft" : context.view==="favorites" ? "favorites" : context.view==="candidates" ? "candidates" : context.routeConversationId ? "linked" : "root"}
-                onChange={event => { const value = event.target.value; if (value === "intro") intro(); else if(value==="candidates")setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:null,view:"candidates"});else if(value==="favorites")setContext(current=>({...current,routeConversationId:null,view:"favorites"}));else if(value==="draft")setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:"synthetic-draft",view:"draft"});else setContext({ routeConversationId: value === "root" ? null : value === "other" ? "other" : "current", activeConversationId: value === "other" ? "other" : "current", activeLocalDraftId:null, view: value === "other" ? "other" : "current" }); }}>
+            <label>현재 대화 위치 <select aria-label="현재 대화 위치" value={context.view === "intro" ? "intro" : context.view === "other" ? "other" : context.view==="draft" ? "draft" : context.view==="favorites" ? "favorites" : context.view==="candidates" ? "candidates" : context.view==="positions" ? "positions" : context.routeConversationId ? "linked" : "root"}
+                onChange={event => { const value = event.target.value; if (value === "intro") intro(); else if(value==="candidates"||value==="positions")setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:null,view:value});else if(value==="favorites")setContext(current=>({...current,routeConversationId:null,view:"favorites"}));else if(value==="draft")setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:"synthetic-draft",view:"draft"});else setContext({ routeConversationId: value === "root" ? null : value === "other" ? "other" : "current", activeConversationId: value === "other" ? "other" : "current", activeLocalDraftId:null, view: value === "other" ? "other" : "current" }); }}>
                 <option value="linked">URL에 ID가 있는 현재 대화</option><option value="root">기본 경로의 현재 대화</option><option value="other">다른 대화 조회 중</option><option value="intro">초기 화면</option>
-                <option value="draft">저장 전 대화 선택</option><option value="candidates">후보자 목록</option><option value="favorites">즐겨찾기 메뉴와 대화 선택 유지</option>
+                <option value="draft">저장 전 대화 선택</option><option value="candidates">후보자 목록</option><option value="favorites">즐겨찾기 메뉴와 대화 선택 유지</option><option value="positions">포지션 목록</option>
             </select></label>
             <label><input type="checkbox" checked={failNext} disabled={busy} onChange={event => setFailNext(event.target.checked)}/> 다음 합성 삭제 실패</label>
             <button type="button" disabled={!history.some(item=>item.id==="draft-row"&&item.conversationId===null)} onClick={()=>{setHistory(items=>items.map(item=>item.id==="draft-row" ? {...item,conversationId:"saved-draft",title:"저장된 합성 대화"} : item));setContext(value=>value.activeLocalDraftId==="synthetic-draft" ? {...value,activeConversationId:"saved-draft",activeLocalDraftId:null} : value);}}>저장 완료 예시</button>
@@ -1524,6 +1524,63 @@ export function PositionManagementExample({ initialMode = "default", contextKey 
             <button type="button" onClick={() => setRoute({ source: route.source, restore: true })}>목록으로 이동</button></section> : <PositionListExample key={contextKey} mode={initialMode} source={route.source} contextKey={contextKey}
             snapshot={snapshot.current} restore={route.restore} records={records} onRecords={setRecords} syncStatus={syncStatus} onSyncStatus={setSyncStatus}
             onLeave={(state, id) => { snapshot.current = capturePrismPositionListSnapshot(state, { contextKey, locationKey: "synthetic-history" }); setRoute({ source: state.source, detail: id, restore: false }); }}/>}
+    </div>;
+}
+
+```
+
+## User position directory / Detail tabs
+LIVE 포지션 회사·산업·이름 필터, 5열 정렬·페이지 이동, 상세 탭 열기와 복귀
+Contract: 호스트가 LIVE 포지션·회사/산업 선택지·상세 데이터 조회와 권한·오류·취소를 소유합니다. draft 필터는 조회 전 결과에 반영하지 않습니다. createPrismPositionDirectoryQuery는 적용 필터·서버 정렬·페이지 크기를 API 필드로 변환합니다. 행을 열면 ID로 상세 탭을 재사용하고 닫을 때 이전 탭 또는 목록을 선택합니다. routeKey 변경 시 목록으로 돌아오되 열린 탭은 유지합니다. 예제는 합성 데이터만 사용하며 배포 서비스 연결을 뜻하지 않습니다.
+States: default, loading, empty, error, long
+Registry: /prism/r/prism-position-directory.json
+Source: packages/prism/src/prism-position-directory.tsx
+Usage kind: component-example
+Installed usage:
+```tsx
+import { useState } from "react";
+import { PrismPositionDirectory, createPrismPositionDirectoryQuery, createPrismPositionDirectoryState, type PrismPositionDirectoryRow, type PrismPositionDirectoryState } from "@/components/ui/prism-position-directory";
+import { PrismPositionDetail } from "@/components/ui/prism-position";
+
+type Mode = "default" | "loading" | "empty" | "error" | "long";
+const companies = [{ value: "example", label: "가상전자" }, { value: "sample", label: "예시서비스" }];
+const industries = [{ value: "technology", label: "기술" }, { value: "service", label: "서비스" }];
+const sourceRows: PrismPositionDirectoryRow[] = Array.from({ length: 24 }, (_, index) => ({
+    id: `synthetic-position-${index + 1}`,
+    company: index % 2 ? "예시서비스" : "가상전자",
+    name: index % 2 ? `서비스 운영 담당 ${index + 1}` : `기술전략 담당 ${index + 1}`,
+    industry: index % 2 ? "서비스" : "기술",
+    job: index % 2 ? "운영·기획" : "연구개발·전략",
+    role: index % 3 ? "담당" : "본부장",
+}));
+
+/** Synthetic consumer with host-owned filtering, paging, sorting and detail content. */
+export function PositionDirectoryExample({ initialMode = "default" }: { initialMode?: Mode }) {
+    const [state, setState] = useState<PrismPositionDirectoryState>(createPrismPositionDirectoryState);
+    const [mode, setMode] = useState<Mode>(initialMode);
+    const query = createPrismPositionDirectoryQuery(state);
+    const filtered = mode === "empty" ? [] : sourceRows.filter(row =>
+        (!query.company_id?.length || row.company === companies.find(option => option.value === query.company_id?.[0])?.label) &&
+        (!query.industry_block_id.length || query.industry_block_id.some(id => row.industry === industries.find(option => option.value === id)?.label)) &&
+        (!query.name || row.name.includes(query.name)));
+    const sorted = [...filtered];
+    if (state.sort) {
+        const { column, direction } = state.sort;
+        sorted.sort((a, b) => (direction === "asc" ? 1 : -1) * a[column].localeCompare(b[column], "ko"));
+    }
+    const pageCount = Math.max(1, Math.ceil(sorted.length / query.size));
+    const rows = sorted.slice((query.page - 1) * query.size, query.page * query.size).map(row => mode === "long" ? {
+        ...row, name: `${row.name} · 아주 긴 합성 포지션 이름의 말줄임과 표 크기 조절 확인`,
+    } : row);
+    return <div data-prism="light" style={{ height: 620, minWidth: 0 }}>
+        <PrismPositionDirectory state={state} onStateChange={setState} companies={companies} industries={industries}
+            rows={rows} total={sorted.length} pageCount={pageCount} status={mode === "loading" || mode === "error" ? mode : "ready"}
+            onRetry={() => { setState(createPrismPositionDirectoryState()); setMode("default"); }}
+            renderDetail={tab => <PrismPositionDetail company={tab.company} role={tab.name}
+                items={[{ label: "산업", value: "기술" }, { label: "직무", value: "연구개발·전략" }, { label: "직책", value: "담당" }]}
+                definition="가상 포지션의 기술 전략을 수립합니다." businessContext="독립 설치 예제의 합성 데이터입니다."
+                groups={[{ id: "expertise", title: "전문성", items: [{ id: "expertise-item", content: "기술 전략 수립" }] },
+                    { id: "experience", title: "성공경험", items: [{ id: "experience-item", content: "협업 경험" }] }]}/>}/>
     </div>;
 }
 
