@@ -895,7 +895,9 @@
         "Fetched frontend dev at 2eeb26ff confirms the new positions menu and independent administrator access versus keycloak-only logout behavior.",
         "An existing authenticated deployed tab measured 280px sidebar, 64px header, 40px new-chat button, 36px navigation row and 172px administrator submenu; its loaded client did not show the current source's positions entry.",
         "The isolated installed browser matched those selected dimensions and verified initial expanded administrator/collapsed history states, profile-action variants, rename Enter/Escape, synthetic deletion, 72px collapse and re-opening an expanded administrator menu.",
-        "At 320px the document had zero horizontal overflow; the navigation region scrolled to the history control and the 100-row history region scrolled to the final row."
+        "At 320px the document had zero horizontal overflow; the navigation region scrolled to the history control and the 100-row history region scrolled to the final row.",
+        "The 256px profile menu previously opened at x=290–546 outside a 320px viewport; it now opens above the trigger at x=29–285 and repositions right at 800px and back above at 320px while still open.",
+        "A separate shadcn consumer with a 320px parent in a 1280px browser placed the installed menu at x=13–269, kept 100 rows and zero document overflow, and delivered the notice action; 59 sources/CSS matched and 48 examples typechecked."
       ],
       "evidence": [
         "local-sidebar-profile-menu",
@@ -905,7 +907,7 @@
       "remaining": [
         "Fresh authenticated deployment access to verify the current positions menu and role-specific profile actions; the existing authenticated tab may have loaded an older client.",
         "Real navigation, session, rename and deletion service effects remain host-owned and were not exercised against the product.",
-        "Complete source glyph/font/pixel comparison at equivalent content and viewport."
+        "Complete source glyph/font/pixel comparison at equivalent content and viewport; current in-app access to /chat failed with a connection reset."
       ],
       "localRenderGate": {
         "status": "passed-current-sidebar-fidelity",
@@ -922,6 +924,33 @@
         ],
         "sourceSha256": "69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4",
         "claim": "10 synthetic renders and selected long-history/candidate navigation flows; full interactions and source parity remain separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "../layouts/chat/ChatSidebar.tsx",
+          "../styles/_chat-sidebar.scss"
+        ],
+        "evidence": [
+          "Earlier authenticated /chat measurements supplied the 280px sidebar, 64px header, 40px new-chat, 36px navigation, 213px history-row and 256px profile-menu reference; current dev sidebar and SCSS are unchanged since that source comparison.",
+          "Current source and the portable catalog cover the positions entry, five-link administrator menu, role-gated menu versus authentication-source logout, local draft and persisted conversation selection, rename, delete and navigation intents.",
+          "Current local 320px long fixture rendered 100 rows without document overflow; the profile menu stayed inside the viewport and moved between top and right as the iframe resized while open.",
+          "A separate shadcn consumer reinstalled the sidebar, matched 59 module sources and CSS byte for byte, typechecked 48 examples and passed Vite/font/notices; its 320px parent inside a 1280px viewport kept the profile menu within x=13–269 and delivered its host action.",
+          "337 PRISM contract tests passed, including sidebar selection, draft transition and deletion boundaries."
+        ],
+        "intentionalImprovements": [
+          "The user menu opens above the trigger when the containing layout lacks room on the right and updates when its parent or viewport changes size; ordinary desktop placement remains on the right.",
+          "Stable history row keys and typed conversation/local-draft intents keep unsaved records separate from server rename and delete actions."
+        ],
+        "hostOwned": [
+          "The consuming application supplies authorized menu items, user actions, history records and real route, session, rename and deletion effects."
+        ],
+        "nonBlockingUnknowns": [
+          "The current dev.prism.ai /chat connection reset in the in-app browser; the loaded client seen in an earlier authenticated tab lacked the current positions entry, and deployed revision identity remains unbound.",
+          "Synthetic browser callbacks do not establish actual service effects or full font/pixel parity."
+        ]
       }
     },
     "prism-candidate": {
@@ -6841,10 +6870,11 @@
       "prism-detail-state",
       "prism-content",
       "prism-workspace",
-      "prism-intro"
+      "prism-intro",
+      "prism-sidebar"
     ],
-    "acceptedCount": 29,
-    "unassessedGroups": 29,
+    "acceptedCount": 30,
+    "unassessedGroups": 28,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

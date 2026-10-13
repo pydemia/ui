@@ -52,11 +52,27 @@ export function PrismSidebar({items,activeId,onNavigate,collapsed,onCollapsedCha
     historyOpen:controlledHistoryOpen,defaultHistoryOpen=false,onHistoryOpenChange,onHistoryRename,onHistoryDeleteRequest,profileActions=[],onProfileAction,onPrivacyPolicy,copyright}:PrismSidebarProps) {
     const id=useId();const [internalExpanded,setInternalExpanded]=useState<string[]>(()=>[...defaultExpandedIds]);const expanded=expandedIds??internalExpanded;
     const [internalHistoryOpen,setInternalHistoryOpen]=useState(defaultHistoryOpen);const historyOpen=controlledHistoryOpen??internalHistoryOpen;
-    const [profileOpen,setProfileOpen]=useState(false);const [more,setMore]=useState<string|null>(null);const [editing,setEditing]=useState<string|null>(null);const [draft,setDraft]=useState("");
+    const [profileOpen,setProfileOpen]=useState(false);const [profileSide,setProfileSide]=useState<"right"|"top">("right");const [more,setMore]=useState<string|null>(null);const [editing,setEditing]=useState<string|null>(null);const [draft,setDraft]=useState("");
+    const profileTrigger=useRef<HTMLButtonElement>(null);
     const renameComposing=useRef(false);const renameCancelled=useRef(false);const renameInput=useRef<HTMLInputElement>(null);
     const renameTarget=useRef<{rowId:string;conversationId:string}|null>(null);
     const menuTarget=useRef<{rowId:string;conversationId:string}|null>(null);
     const selectedHistory=activeHistoryId===undefined ? activeId : activeHistoryId;
+    useLayoutEffect(()=>{
+        if(!profileOpen||!profileTrigger.current)return;
+        const trigger=profileTrigger.current;
+        const boundary=trigger.closest(".prism-sidebar")?.parentElement;
+        const update=()=>{
+            const rightEdge=Math.min(window.innerWidth-8,boundary?.getBoundingClientRect().right??window.innerWidth);
+            setProfileSide(rightEdge-trigger.getBoundingClientRect().right>=256+6+8 ? "right" : "top");
+        };
+        update();
+        const observer=typeof ResizeObserver==="undefined" ? null : new ResizeObserver(update);
+        if(boundary)observer?.observe(boundary);
+        observer?.observe(trigger);
+        window.addEventListener("resize",update);
+        return ()=>{observer?.disconnect();window.removeEventListener("resize",update);};
+    },[profileOpen]);
     useLayoutEffect(()=>{const target=renameTarget.current;if(!target)return;const row=history.find(item=>item.id===target.rowId);if(!row||conversationIdFor(row)!==target.conversationId||row.editable===false||row.generating){renameTarget.current=null;renameCancelled.current=true;setEditing(null);}},[history]);
     useLayoutEffect(()=>{const target=menuTarget.current;if(!target)return;const row=history.find(item=>item.id===target.rowId);if(!row||conversationIdFor(row)!==target.conversationId||row.editable===false||row.generating){menuTarget.current=null;setMore(null);}},[history]);
     const toggleMenu=(key:string)=>{if(collapsed){if(!expanded.includes(key)){const next=[...expanded,key];if(expandedIds===undefined)setInternalExpanded(next);onExpandedIdsChange?.(next);}onCollapsedChange(false);return;}const next=expanded.includes(key) ? expanded.filter(v=>v!==key) : [...expanded,key];if(expandedIds===undefined)setInternalExpanded(next);onExpandedIdsChange?.(next);};
@@ -84,8 +100,8 @@ export function PrismSidebar({items,activeId,onNavigate,collapsed,onCollapsedCha
                         {onHistoryDeleteRequest&&<button type="button" data-danger onClick={()=>{setMore(null);onHistoryDeleteRequest(conversationId);}}>채팅 삭제<PrismIcon name="TrashIcon" size={16}/></button>}
                     </PopoverContent></Popover>}</>}
         </div>;})}</div></nav>
-        {user&&<footer>{profileActions.length ? <Popover open={profileOpen} onOpenChange={setProfileOpen}><PopoverTrigger asChild><button className="prism-sidebar-user" type="button" aria-label={`${user.name} 사용자 메뉴`}><PrismSidebarProfile name={user.name} email={user.description??""} collapsed={collapsed}/></button></PopoverTrigger>
-            <PopoverContent data-prism="light" className="prism-sidebar-profile-menu" side="right" align="center"><div><PrismAvatar name={user.name} description={user.description} team={user.team}/></div><hr/>{profileActions.map(action=><button type="button" key={action.id} disabled={action.disabled} data-tone={action.tone} onClick={()=>{setProfileOpen(false);onProfileAction?.(action.id);}}>{action.label}{action.icon}</button>)}</PopoverContent></Popover> : <PrismSidebarProfile name={user.name} email={user.description??""} collapsed={collapsed}/>}
+        {user&&<footer>{profileActions.length ? <Popover open={profileOpen} onOpenChange={setProfileOpen}><PopoverTrigger asChild><button ref={profileTrigger} className="prism-sidebar-user" type="button" aria-label={`${user.name} 사용자 메뉴`}><PrismSidebarProfile name={user.name} email={user.description??""} collapsed={collapsed}/></button></PopoverTrigger>
+            <PopoverContent data-prism="light" className="prism-sidebar-profile-menu" side={profileSide} align="center"><div><PrismAvatar name={user.name} description={user.description} team={user.team}/></div><hr/>{profileActions.map(action=><button type="button" key={action.id} disabled={action.disabled} data-tone={action.tone} onClick={()=>{setProfileOpen(false);onProfileAction?.(action.id);}}>{action.label}{action.icon}</button>)}</PopoverContent></Popover> : <PrismSidebarProfile name={user.name} email={user.description??""} collapsed={collapsed}/>}
             {!collapsed&&(onPrivacyPolicy||copyright)&&<div className="prism-sidebar-copyright">{onPrivacyPolicy&&<button type="button" onClick={onPrivacyPolicy}>개인정보처리방침</button>}{copyright&&<span>{onPrivacyPolicy ? "| " : ""}{copyright}</span>}</div>}
         </footer>}
     </aside>;
