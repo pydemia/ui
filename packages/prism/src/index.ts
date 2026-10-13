@@ -3,6 +3,7 @@ export type { PrismButtonProps } from "./prism-button";
 export * from "./prism-position-management";
 export * from "./prism-admin-lists";
 export * from "./prism-position-blocks";
+export * from "./prism-chat-logs";
 export { PrismInput, PrismTextarea, PrismSelect } from "./prism-field";
 export type { PrismInputProps, PrismTextareaProps, PrismSelectProps, PrismSelectOption } from "./prism-field";
 export { PrismElpBadge, PrismCountBadge, PrismTag, PrismChip } from "./prism-badge";

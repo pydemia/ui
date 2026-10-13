@@ -20,21 +20,22 @@ const jobs: PrismBlockItem[] = [
     { id: "job-4", categoryId: "support", name: "삭제 직무", description: "삭제 직무는 대체 후보에서 제외됩니다.", subJobs: [], change: "deleted" },
     { id: "job-5", categoryId: "support", name: "반영 직무", description: "반영 중인 직무는 대체 후보에서 제외됩니다.", subJobs: [], change: "applying" },
 ];
-function delay(signal: AbortSignal) {
+function delay(signal: AbortSignal, milliseconds = 60) {
     return new Promise<void>((resolve, reject) => {
         if (signal.aborted) { reject(new Error("Synthetic request aborted")); return; }
         const abort = () => { clearTimeout(timer); reject(new Error("Synthetic request aborted")); };
-        const timer = setTimeout(() => { signal.removeEventListener("abort", abort); resolve(); }, 60);
+        const timer = setTimeout(() => { signal.removeEventListener("abort", abort); resolve(); }, milliseconds);
         signal.addEventListener("abort", abort, { once: true });
     });
 }
 /** All records and provider responses are synthetic. The consuming application supplies real services. */
-export function PositionBlocksExample({ initialMode = "default" }: { initialMode?: Mode }) {
+export function PositionBlocksExample({ initialMode = "default", simulateSlowGeneration = false }: { initialMode?: Mode; simulateSlowGeneration?: boolean }) {
     const editable = initialMode !== "default" && initialMode !== "readonly";
     const [source, setSource] = useState<PrismPositionSource>(editable ? "TEMP" : "LIVE");
     const [syncStatus, setSyncStatus] = useState<PrismPositionSyncStatus>(initialMode === "scheduled" || initialMode === "running" ? initialMode : editable ? "editing" : "synced");
     const [lists, setLists] = useState({ industry: industries, position: roles, job: jobs });
     const [fault, setFault] = useState<"none" | "name" | "generation" | "impact" | "save" | "delete">("none");
+    const [slowGeneration, setSlowGeneration] = useState(simulateSlowGeneration);
     const [editor, setEditor] = useState<PrismBlockOpenRequest | null>(() => initialMode === "create" ? { kind: "industry", mode: "create" } : initialMode === "job" ? { kind: "job", mode: "edit", initial: jobs[0] } : null);
     const [deletion, setDeletion] = useState<{ kind: "industry" | "job"; item: PrismBlockItem } | null>(() => initialMode === "remap" ? { kind: "job", item: jobs[0] } : null);
     const [result, setResult] = useState(""); const sequence = useRef(0);
@@ -46,15 +47,15 @@ export function PositionBlocksExample({ initialMode = "default" }: { initialMode
     };
     return <section data-prism="light" className="prism-demo-stack">
         <div className="prism-demo-row"><label>합성 동기화 상태 <select aria-label="합성 동기화 상태" value={syncStatus} onChange={event => { setSyncStatus(event.target.value as PrismPositionSyncStatus); setEditor(null); setDeletion(null); }}><option value="editing">편집 중</option><option value="scheduled">예정</option><option value="running">진행 중</option><option value="synced">완료</option><option value="failed">실패</option></select></label>
-            <label>합성 실패 예시 (다음 요청) <select aria-label="합성 실패 예시" value={fault} onChange={event => setFault(event.target.value as typeof fault)}><option value="none">없음</option><option value="name">이름 검사</option><option value="generation">AI 생성</option><option value="impact">영향 조회</option><option value="save">저장</option><option value="delete">삭제</option></select></label></div>
+            <label>합성 실패 예시 (다음 요청) <select aria-label="합성 실패 예시" value={fault} onChange={event => setFault(event.target.value as typeof fault)}><option value="none">없음</option><option value="name">이름 검사</option><option value="generation">AI 생성</option><option value="impact">영향 조회</option><option value="save">저장</option><option value="delete">삭제</option></select></label><label><input type="checkbox" checked={slowGeneration} onChange={event => setSlowGeneration(event.target.checked)}/> 생성 지연 예시 (6초)</label></div>
         <PrismPositionBlockManagement source={source} onSourceChange={value => { setEditor(null); setDeletion(null); setSource(value); setSyncStatus(value === "LIVE" ? "synced" : "editing"); }}
             industries={initialMode === "empty" ? [] : initialMode === "long" ? lists.industry.map(item => ({ ...item, name: item.name.repeat(12) })) : lists.industry} positions={initialMode === "empty" ? [] : lists.position} jobs={initialMode === "empty" ? [] : lists.job} categories={categories}
             sync={{ status: syncStatus, date: "2026.10.13" }} loading={initialMode === "loading"} readOnly={initialMode === "readonly"} error={initialMode === "error" ? "합성 블록 목록을 불러오지 못했습니다." : undefined}
             onRetry={() => setResult("합성 목록 재조회 요청")} onOpen={setEditor} onDelete={(kind, item) => setDeletion({ kind, item })}/>
         {editor && <PrismBlockEditor open scopeKey={scopeKey} kind={editor.kind} mode={editor.mode} initial={editor.initial} categories={categories} readOnly={initialMode === "readonly"} onOpenChange={open => { if (!open) setEditor(null); }}
             onCheckName={async (request, { signal }) => { await delay(signal); if (fault === "name") { setFault("none"); throw new Error("Synthetic name failure"); } return !lists[request.kind].some(item => item.id !== request.excludeId && item.name.trim() === request.name); }}
-            onGenerateDescription={async (request, { signal }) => { await delay(signal); if (fault === "generation") { setFault("none"); throw new Error("Synthetic generation failure"); } return `${request.name}의 합성 설명입니다. 생성된 내용을 직접 수정할 수 있습니다.`; }}
-            onGenerateSubJobs={async (request, { signal }) => { await delay(signal); if (fault === "generation") { setFault("none"); throw new Error("Synthetic generation failure"); } return [{ name: `${request.name} 기획`, description: "합성 기획 직무 설명입니다." }, { name: `${request.name} 운영`, description: "합성 운영 직무 설명입니다." }]; }}
+            onGenerateDescription={async (request, { signal }) => { await delay(signal, slowGeneration ? 6000 : 60); if (fault === "generation") { setFault("none"); throw new Error("Synthetic generation failure"); } return `${request.name}의 합성 설명입니다. 생성된 내용을 직접 수정할 수 있습니다.`; }}
+            onGenerateSubJobs={async (request, { signal }) => { await delay(signal, slowGeneration ? 6000 : 60); if (fault === "generation") { setFault("none"); throw new Error("Synthetic generation failure"); } return [{ name: `${request.name} 기획`, description: "합성 기획 직무 설명입니다." }, { name: `${request.name} 운영`, description: "합성 운영 직무 설명입니다." }]; }}
             onLoadAffected={loadAffected} onSubmit={async (request, { signal }) => {
                 await delay(signal); if (fault === "save") { setFault("none"); throw new Error("Synthetic save failure"); }
                 const id = request.targetId ?? `synthetic-${++sequence.current}`;

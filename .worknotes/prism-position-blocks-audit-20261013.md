@@ -33,3 +33,11 @@ Source4d1a662d/generated74c29ce670334d0bad5be052ce96739cd2ec56b6를검토branch�
 74c29ce6의CI38278773605는completed/success입니다. 후속보정에서는Textarea의optional beforeInput 슬롯으로label→helper→generate→textarea 순서를유지하고기본label/value/error/DOM계약을보존했습니다. Tag삭제도실제ChipCloseIcon16px/Neutral400와label-hover규칙을사용합니다. source의notice/상태/box/delete 규격은실제computedStyle과일치했고전체252tests/0fail,workspace typecheck와57소스/38예제 계약검사가다시통과했습니다. 현재14개고유상태(신규12개1280/320,tag/field default320)의overflow0/중첩button0입니다.
 
 마지막보정도실제설치57TSX/CSS exact/0변환과38예제TypeScript/Vite/font/고지가통과했습니다. 설치tab19에서320px dialog296/scroll296,Red50/Red400,동일label순서와영향확인→직무수정완료/console0을확인했고tab19/dev57941은닫고종료130을확인했습니다. 최종source fingerprint24f6875e7f3aa078e2c927100585b52274d7788c75207ae70c9352506239d1b6/82inputs입니다. 최신source-controls source/generated commit·CI·preview readback을이어갑니다. 원본generation overlay/전체busy-state 및인증된원본font/pixel/A4는아직미확인입니다.
+
+## 최신 검토 게시 확인
+
+Source61994850/generatedbaa3d5b4375ac677b0922d73914c97397a327b55를검토branch에push했고credential exact-match0/config보존을확인했습니다. PR162는draft/base main/정확한baa3d5b4로갱신했습니다. Verify UI38283263288은completed/success입니다.
+
+최신preview dpl_DSkqtYL3K1gwCpSsAtgygb6JjiH1는READY/target null/정확한baa3d5b4이며https://pydemia-frd1vx2xm-pydemia-7822.vercel.app의9개자산(registry/components/source-inventory/verification JSON·MD/block-editor/management-tools/field/tokens)이로컬과exact bytes/SHA로일치했습니다. 이는인증된HTTP자산readback이며remote browser/source원본/fullpixel/print 증거로확대하지않습니다. proof는ignored position-blocks-final-preview-readback.json입니다. GitHub의Vercel commit status목록은비어있었고배포READY는별도확인했습니다.
+
+현재source fingerprint24f6875e/82inputs,57설치그룹/58registry/38완전예제/244fixture/252tests/현재선택검증14상태입니다. production/main은게시하지않았습니다. 기존workspace tabs9/15와dev79716을보존하고임시source/설치/스타일tabs14/16/17/18/19 및consumer servers는정리했습니다. 이게시readback만다음sourcecommit용미커밋기록으로남깁니다. Goal은active이며다음작업은원본generation overlay/busy 상태와chat-log 목적,이후인증원본의전체font/pixel/A4비교입니다.

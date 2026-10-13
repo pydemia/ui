@@ -21,12 +21,13 @@ export function PrismInput({ label, description, error, size = "medium", id: sup
         {input}<div className="prism-input-adornment">{onClear && String(props.value ?? "").length > 0 && !props.disabled && !props.readOnly && <button type="button" aria-label={`${label} 지우기`} onClick={e=>{onClear();e.currentTarget.closest('.prism-input-control')?.querySelector('input')?.focus();}}><PrismIcon name="CloseCircleIcon" size={16}/></button>}{endAdornment}</div>
         </div> : input}</FieldFrame>;
 }
-export type PrismTextareaProps = FieldProps & ComponentProps<typeof Textarea> & { beforeInput?: ReactNode };
-export function PrismTextarea({ label, description, error, id: suppliedId, className = "", beforeInput, ...props }: PrismTextareaProps) {
+export type PrismTextareaProps = FieldProps & ComponentProps<typeof Textarea> & { beforeInput?: ReactNode; inputOverlay?: ReactNode };
+export function PrismTextarea({ label, description, error, id: suppliedId, className = "", beforeInput, inputOverlay, ...props }: PrismTextareaProps) {
     const generatedId = useId(); const id = suppliedId ?? generatedId;
     const field = { label, description, error, required: props.required };
-    return <FieldFrame id={id} {...field}>{beforeInput}<Textarea {...props} id={id} className={`prism-textarea ${className}`}
-        aria-invalid={error ? true : props["aria-invalid"]} aria-describedby={describedBy(id, field, props["aria-describedby"])} /></FieldFrame>;
+    const input = <Textarea {...props} id={id} className={`prism-textarea ${className}`}
+        aria-invalid={error ? true : props["aria-invalid"]} aria-describedby={describedBy(id, field, props["aria-describedby"])} />;
+    return <FieldFrame id={id} {...field}>{beforeInput}{inputOverlay !== undefined ? <div className="prism-textarea-overlay-area">{input}{inputOverlay}</div> : input}</FieldFrame>;
 }
 export type PrismSelectOption = { value: string; label: string; disabled?: boolean };
 export type PrismSelectProps = FieldProps & {

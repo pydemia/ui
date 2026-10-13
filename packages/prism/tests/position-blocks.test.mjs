@@ -80,6 +80,20 @@ test("job editing requires at least one complete sub-job and supports adding/rem
     await start({ kind: "job", initial: job }); await input("소직무 1 설명", ""); assert.equal(button("영향 포지션 확인").disabled, true); await input("소직무 1 설명", "변경 설명"); assert.equal(button("영향 포지션 확인").disabled, false);
     await click([...document.querySelectorAll('button')].find(node => node.getAttribute('aria-label') === "소직무 1 삭제")); assert.equal(button("영향 포지션 확인").disabled, true); await click(button("소직무 추가")); await input("소직무 1 명", "추가 직무"); await input("소직무 1 설명", "추가 설명"); assert.equal(button("영향 포지션 확인").disabled, false);
 });
+test("description generation overlays only its input and keeps the native textarea mounted", async () => {
+    const pending = deferred(); await start({ onGenerateDescription: () => pending.promise }); const textarea = document.querySelector('textarea');
+    await click(button("AI로 다시 생성")); const overlay = document.querySelector('.prism-textarea-overlay-area .prism-block-generation-overlay');
+    assert.match(overlay.textContent, /설명을 생성하는 중/); assert.equal(overlay.getAttribute('role'), 'status'); assert.equal(document.querySelector('textarea'), textarea); assert.equal(textarea.value, initial.description); assert.equal(textarea.disabled, true); assert.equal(button('영향 포지션 확인').disabled, true);
+    await act(async () => pending.resolve('생성 완료 설명')); assert.equal(document.querySelector('.prism-block-generation-overlay'), null); assert.equal(document.querySelector('textarea'), textarea); assert.equal(textarea.value, '생성 완료 설명'); assert.equal(textarea.disabled, false);
+});
+test("sub-job generation shows an empty placeholder or covers retained records without replacing them on failure", async () => {
+    for (const empty of [true, false]) {
+        const pending = deferred(); await start({ kind: 'job', initial: { ...job, subJobs: empty ? [] : job.subJobs }, onGenerateSubJobs: () => pending.promise });
+        await click(document.querySelector('.prism-block-field .prism-block-generate button'));
+        const overlay = document.querySelector('.prism-block-generate-area .prism-block-generation-overlay'); assert.ok(overlay); assert.equal(overlay.hasAttribute('data-empty'), empty); assert.equal(document.querySelector('.prism-textarea-overlay-area .prism-block-generation-overlay'), null);
+        assert.equal(document.querySelectorAll('.prism-block-sub-job').length, empty ? 0 : 1); await act(async () => pending.reject(new Error('Synthetic generation failure'))); assert.equal(document.querySelector('.prism-block-generation-overlay'), null); assert.equal(document.querySelectorAll('.prism-block-sub-job').length, empty ? 0 : 1); if (!empty) assert.equal(document.querySelector('input[aria-label="소직무 1 설명"]').value, job.subJobs[0].description); assert.match(document.querySelector('[role="alert"]').textContent, /소직무를 생성하지 못/);
+    }
+});
 test("editing reviews affected positions and can return before confirming immutable public fields", async () => {
     await start(); await input("설명", "변경 설명"); await click(button("영향 포지션 확인")); assert.ok(button("수정 확정")); assert.equal(calls.submit.length, 0); assert.match(document.querySelector('.prism-block-summary').textContent, /영향 포지션1건/);
     await click(button("이전")); assert.equal(document.querySelector('textarea').value, "변경 설명"); await input("설명", "다시 변경"); await click(button("영향 포지션 확인")); await click(button("수정 확정")); assert.deepEqual(calls.submit, [{ kind: "industry", targetId: "i1", name: initial.name, description: "다시 변경" }]); assert.deepEqual(calls.closed, [false]);

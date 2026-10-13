@@ -17,3 +17,15 @@ src/main.tsx에서 runtime import, literal dynamic import, Vite import.meta.glob
 진행 중인 포지션 작업: 13개 신규 검증을 포함한 PRISM 전체214 tests/0fail, workspace typecheck와 최종명칭 보정 후 대상13 tests가 통과했습니다. 10개 position fixture를1280/320px에서 렌더해 rootOverflow0/중첩button0을 확인했고, 사용자 default의320px 회귀도 확인했습니다. 최신 원본 관리자 URL은 document complete/visible body empty이며 로그 오류도 없어 원본 디자인 비교를 확인하지 못했습니다. 새로운 source fingerprint/registry/consumer/build/게시 증거는 다음 단계입니다.
 
 후속 검증에서 포지션 관리의 실제 설치·예제·브라우저·site build가 통과했습니다. 설치 그룹은55개/토큰 포함registry56개가되었으며 원본186파일을독립목표수로세지않는원칙은동일합니다. 원본대응49그룹수도새복합UI의추가에맞춰최종목표총수나완료수로확정하지않습니다. 게시검증은포지션작업기록에서별도로확인합니다.
+
+## 2026-10-13 재확인
+
+사용자의 186개 산정 질문에 맞춰 현재 원본 HEAD `27c4fdbf3e73234b7ab5c46e379a04d083c12df8`에서 조사 스크립트를 다시 실행했습니다. 원본 components/layouts TSX 273개와 inventory의 경로 집합은 완전히 일치하며 누락·중복 경로는 없습니다. 벡터 자산 87개를 제외한 186개는 파일 수로는 정확합니다. 이를 독립 구현 목표 수로 제시한 것은 과대계상입니다.
+
+- 실행 진입점의 정적 import 연결: 본서비스 175파일, 샘플 전용 7파일, 미연결 4파일입니다. 배포 화면의 실제 렌더 여부를 증명하는 수치는 아닙니다.
+- 현재 비벡터 원본 대응표: primary 49그룹, additionalTargets의 독립 HTML export를 포함하면 50그룹입니다. 이전 본문의 48/49는 당시 대응표 수치입니다.
+- 예를 들어 프로필 내부 섹션 17파일은 `prism-profile-sections`, 평가 관련 14파일은 `prism-assessment`, 응답 렌더링 13파일은 `prism-response` 그룹으로 대응합니다. 개별 파일을 모두 독립 설치 단위로 만들지는 않습니다.
+- 현재 로컬 catalog에는 58그룹이 등록되어 있습니다. 진행 중인 변경을 포함한 등록 수이며 검증 완료 수나 최종 목표 수로 사용하지 않습니다.
+- 최종 독립 구현 목표 총수는 미확정입니다. 기능 목적·공개 계약·화면 조합·상태별 누락을 기준으로 확정해야 하며, 186 또는 175를 진행률 분모로 사용하지 않습니다. 50그룹 대응 완료도 전체 디자인·동작 재현 완료를 의미하지 않습니다.
+
+이번 재확인은 로컬 소스·inventory·정적 의존관계 조사입니다. 브라우저 조작, 원격 갱신, 배포 및 구현 변경은 수행하지 않았습니다. 상세 결과는 기존 ignored `.worknotes/browser-evidence/component-count-audit.json`에 갱신했습니다.
