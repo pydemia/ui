@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-13",
+  "updatedAt": "2026-10-14",
   "sourceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "status": "in-progress",
   "claim": "Source correspondence and runtime checks are separate from visual parity. No complete parity claim.",
@@ -1286,7 +1286,11 @@
         "Current source/deployed empty CSS separate140px memo panel from120px tab; memo empty total0 omitted and bounded editor measure updates as permitted results appear/disappear.",
         "Actual20 width/height cases keep empty title, explanation and composer visible; only decorative icon hidden in short bounded space.",
         "Actual synthetic create/delete cycle remeasured editor max-height96→132px without header0 or stale empty state.",
-        "Final50-item/75-file/27-example independent reinstall passed TypeScript/Vite/font bytes/notices and selected real320px runtime."
+        "Final50-item/75-file/27-example independent reinstall passed TypeScript/Vite/font bytes/notices and selected real320px runtime.",
+        "At current frontend dev 2eeb26ff the memo/card/input and empty-state source files are unchanged since the prior deployed-CSS audit. Current browser exercised single-editor locking, edit, confirmed delete and Enter create with synthetic data.",
+        "At 320px the ready, empty, loading, error, readonly and long fixtures retain a bounded list and composer without document horizontal overflow; a 240px empty fixture keeps its message and composer visible while hiding the decorative icon. Long-list scroll moved 0 to 680px without moving the composer.",
+        "An error previously displayed a stale total beside the error message. The corrected error hides the count; retry restores ready items and count without losing the composer. A targeted regression test passes.",
+        "Current isolated shadcn installation has 59 exact TSX sources and CSS, 41 typechecked examples, Vite/font/notices success; its 320px browser example completed edit, Enter create and confirmed delete with document width 320px. Workspace typecheck and 314 PRISM tests pass."
       ],
       "evidence": [
         "memo.test.mjs",
@@ -1296,10 +1300,8 @@
         "memo-consumer-install.log"
       ],
       "remaining": [
-        "Fresh authenticated deployed memo states and complete rendered/source geometry or pixel comparison",
-        "Original static font versus installed variable font measurements for every state",
-        "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
-        "Complete authenticated source memo/card/long-state screenshot and pixel/font comparison; current source interaction could not render the target state."
+        "Fresh authenticated deployed memo interaction and deployment commit binding remain unverified; previously captured deployed bundle rules and current unchanged source provide the design reference.",
+        "Real service permission, storage, touch and OS IME behavior remain host integration checks."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1317,6 +1319,37 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/memo/MemoCard.tsx",
+          "chat/memo/MemoContent.tsx",
+          "chat/memo/MemoInput.tsx",
+          "chat/memo/MemoCardListSkeleton.tsx",
+          "chat/memo/MemoCard.module.scss",
+          "chat/memo/MemoContent.module.scss",
+          "chat/memo/MemoInput.module.scss"
+        ],
+        "evidence": [
+          "Previously captured deployed memo bundle rules and the current unchanged source agree on card spacing, text, date and action geometry; the public empty-state sample establishes the panel empty variant.",
+          "Current local browser exercised edit/lock, delete confirmation, Enter create, error/retry and ready/empty/loading/readonly/long states. At 320px the document remained 320px wide, the 240px empty collection retained explanation and composer, and long-list scrolling kept the composer in place.",
+          "Current independent consumer installed 59 exact TSX files and CSS, typechecked 41 complete examples and passed Vite/font/notices. Its 320px browser example completed edit, create and delete without horizontal overflow. Workspace typecheck and 314 PRISM tests passed."
+        ],
+        "intentionalImprovements": [
+          "The bounded collection allocates separate list and composer space, and hides only the decorative empty icon when height is short.",
+          "Failed mutations retain drafts and permit retry; pending deletion cannot dismiss its confirmation; stale results are aborted on entity change.",
+          "An error screen hides the stale memo total until a successful retry restores ready items."
+        ],
+        "hostOwned": [
+          "The consuming application loads only authorized personal memos and owns service writes, draft persistence, permission checks and result refresh. Browser mutations used synthetic data."
+        ],
+        "nonBlockingUnknowns": [
+          "The authenticated deployed memo view and deployed commit identity could not be rebound in this browser session; final whole-product comparison remains open.",
+          "Native touch and OS IME behavior were not exercised on the real service."
+        ]
       }
     },
     "prism-context": {
@@ -6156,10 +6189,11 @@
       "prism-display",
       "prism-candidate",
       "prism-six-frame",
-      "prism-panel"
+      "prism-panel",
+      "prism-memo"
     ],
-    "acceptedCount": 9,
-    "unassessedGroups": 49,
+    "acceptedCount": 10,
+    "unassessedGroups": 48,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
