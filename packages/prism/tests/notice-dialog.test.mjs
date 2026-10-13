@@ -12,7 +12,7 @@ globalThis.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const { createElement: h, act } = await import("react");
 const { createRoot } = await import("react-dom/client");
-const { PrismNoticeDialog } = await import("../dist/index.js");
+const { PrismNoticeDialog, PrismPrivacyPolicyDialog } = await import("../dist/index.js");
 const root = createRoot(document.getElementById("root"));
 afterEach(async () => { await act(async () => root.render(null)); });
 const rows = [
@@ -61,4 +61,32 @@ test("loading list uses six table skeleton rows and locks ordering", async () =>
     assert.equal([...dialog().querySelectorAll("button")].find(node => node.textContent === "등록 최신순").disabled, true);
     await render({ items: [], total: 0 });
     assert.match(dialog().textContent, /등록된 공지사항이 없습니다/);
+});
+
+test("policy dialog keeps a prior document while a version loads and isolates its HTML", async () => {
+    let closed = false;
+    const props = { open: true, onOpenChange: next => { closed = !next; }, versions: [{ id: "one", label: "v1" }], value: "one", onValueChange: () => {}, documentHtml: "<!doctype html><html><body><h1>Example policy</h1></body></html>" };
+    await act(async () => root.render(h(PrismPrivacyPolicyDialog, props)));
+    const frame = dialog().querySelector("iframe");
+    assert.ok(frame);
+    assert.equal(frame.getAttribute("sandbox"), "allow-same-origin allow-popups allow-popups-to-escape-sandbox");
+    assert.doesNotMatch(frame.getAttribute("sandbox"), /allow-scripts/);
+    assert.equal(dialog().querySelector('[role="combobox"]')?.textContent, "v1");
+    await act(async () => root.render(h(PrismPrivacyPolicyDialog, { ...props, loading: true })));
+    assert.equal(dialog().querySelector("iframe"), frame);
+    assert.equal(frame.getAttribute("aria-busy"), "true");
+    assert.equal(frame.style.opacity, "0.5");
+    assert.equal(dialog().querySelector('[role="combobox"]').disabled, false);
+    await click([...dialog().querySelectorAll("footer button")].find(node => node.textContent === "닫기"));
+    assert.equal(closed, true);
+});
+
+test("policy dialog shows loading and failure states when no document is available", async () => {
+    const props = { open: true, onOpenChange: () => {}, versions: [], value: "", onValueChange: () => {}, documentHtml: "", loading: true };
+    await act(async () => root.render(h(PrismPrivacyPolicyDialog, props)));
+    assert.equal(dialog().querySelector('[role="combobox"]'), null);
+    assert.equal(dialog().querySelectorAll(".prism-policy-skeleton > span").length, 23);
+    await act(async () => root.render(h(PrismPrivacyPolicyDialog, { ...props, loading: false })));
+    assert.match(dialog().textContent, /개인정보처리방침을 불러오지 못했습니다/);
+    assert.match(dialog().textContent, /잠시 후 다시 시도해 주세요/);
 });

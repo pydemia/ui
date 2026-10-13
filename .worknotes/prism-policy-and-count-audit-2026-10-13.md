@@ -1,0 +1,9 @@
+# PRISM 방침 대화상자와 컴포넌트 수 재검토 (2026-10-13)
+
+- 원본 checkout `prism/frontend`는 clean `dev` `d677e551a61f672025dcc1803a56ff0cab1e36ee`입니다. `src/components`와 `src/layouts`의 TSX는 실제 파일 275개이며 `source-inventory.json` 275개 항목과 경로 차집합이 0개입니다. 벡터 88개를 빼면 비벡터 187개입니다. 과거 `27c4fdbf`에는 전체 273개, 벡터 87개, 비벡터 186개였습니다.
+- 현재 187개 중 inventory의 `purpose-mapped` 185개, host-owned/nonvisual 1개, composition 1개입니다. 비벡터 primary target 50개와 추가 HTML export target 1개가 있습니다. 51개 모두 현재 registry에 항목이 있지만, 이 수는 독립 구현 최종 목표 수나 시각·동작 완료율이 아닙니다. 기존 정적 import 감사는 본서비스 178개, 샘플 전용 7개, entry에서 미연결 2개로 분류했습니다. 이번 턴에는 그 import closure 알고리즘을 다시 실행하지 않았고 같은 source SHA의 기록을 확인했습니다.
+- `InquiryHistoryDialog`는 mount되지만 `ChatSidebar.tsx`의 문의 내역 메뉴 버튼은 주석 처리되어 있습니다. 현재 배포 UI의 접근 가능한 목적에 추가하지 않습니다.
+- 인증된 원본 방침 대화상자에서 620px dialog, 663px body, 140px version control, 73px footer와 긴 iframe 문서를 측정했습니다. 원본 배포 SHA와 frontend checkout SHA는 연결되지 않았습니다. 실제 본문/개인정보는 worknote에 저장하지 않았습니다.
+- 독립 `PrismPrivacyPolicyDialog`와 `PrismPolicyViewer`를 보완했습니다. 호스트가 버전·HTML·loading·request ordering을 소유합니다. iframe에는 `allow-scripts` 없이 원본과 같은 sandbox를 적용하고 HTML 실제 너비/높이를 측정합니다. 대화상자 본문이 세로/가로 스크롤하며 320px에서 footer가 보입니다. 긴/넓은 HTML은 합성 데이터만 사용했습니다.
+- 최종 289개 PRISM 테스트, workspace typecheck, site build, generic registry release-check가 통과했습니다. 59개 독립 설치 모듈과 CSS가 생성 레지스트리 바이트와 일치하고, 40개 사용 예제의 tsc/Vite/font/notices 검사가 통과했습니다. 최종 설치본 브라우저에서 620px dialog, 140px control, 320px dialog 296px와 넓은 문서의 내부 가로 스크롤, footer 닫기를 확인했습니다.
+- 미완료: 실제 정책 API의 요청 경쟁/오류 상태, 원본의 모든 버전과 좁은 화면, 배포 원본과 설치본의 픽셀·폰트 일치, 전체 goal의 모든 component/state 시각 검증. 이번 변경은 draft PR #162의 검토 브랜치에 게시해 CI·preview를 같은 SHA로 읽어야 합니다. main/production 배포는 하지 않습니다.

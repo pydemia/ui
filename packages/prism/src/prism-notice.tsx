@@ -1,4 +1,4 @@
-import { useId, useRef, useEffect, useState } from "react";
+import { useId, useRef, useEffect } from "react";
 import { PrismArrowLeftGlyph as ArrowLeft, PrismArrowDownUpGlyph as ArrowDownUp, PrismChevronLeftGlyph as ChevronLeft, PrismChevronRightGlyph as ChevronRight, PrismXGlyph as X } from "./prism-icon";
 import { PrismDialog } from "./prism-dialog";
 import { PrismButton } from "./prism-button";
@@ -6,7 +6,6 @@ import { PrismChip } from "./prism-badge";
 import { PrismAttachmentList, type PrismAttachment } from "./prism-admin";
 import { PrismSelect } from "./prism-field";
 import { PrismEmptyState, PrismRequestState } from "./prism-feedback";
-import { PrismSkeletonGroup } from "./prism-primitives";
 
 export type PrismNotice = { id: string; title: string; date: string; author: string; content: string; attachments?: readonly PrismAttachment[] };
 export type PrismNoticeListItem = Pick<PrismNotice, "id" | "title" | "date" | "author"> & { createdAt?: string };
@@ -51,13 +50,34 @@ export function PrismInquiryHistory({ items, selectedId, onSelect }: { items: re
     return selected ? <div className="prism-inquiry-detail"><PrismButton variant="line" icon={<ArrowLeft />} onClick={() => onSelect(null)}>목록으로</PrismButton><PrismNoticeDetail notice={{...selected,author:"문의자"}} /><PrismChip>{selected.status}</PrismChip><section><h3>답변</h3><p>{selected.answer ?? "답변 대기 중입니다."}</p></section></div> :
         <div className="prism-notice-list"><table><caption className="prism-sr-only">문의 내역</caption><tbody>{items.length ? items.map(item => <tr key={item.id}><td><PrismChip>{item.status}</PrismChip></td><td><button type="button" onClick={() => onSelect(item.id)}>{item.title}</button></td><td>{item.date}</td></tr>) : <tr><td colSpan={3}>등록된 문의가 없습니다.</td></tr>}</tbody></table></div>;
 }
-export function PrismPolicyViewer({ versions, value, onValueChange, documentHtml, loading = false }: { versions: readonly { id: string; label: string }[]; value: string; onValueChange: (value: string) => void; documentHtml: string; loading?: boolean }) {
-    const frame = useRef<HTMLIFrameElement>(null); const observer = useRef<ResizeObserver | null>(null); const [height,setHeight] = useState(400);
-    useEffect(() => () => observer.current?.disconnect(),[]);
-    const measure = () => { observer.current?.disconnect(); const doc = frame.current?.contentDocument; if (!doc) return;
-        const update = () => { const body=doc.body; if (!body) return; const style=doc.defaultView?.getComputedStyle(body); const margins=(parseFloat(style?.marginTop??"0")||0)+(parseFloat(style?.marginBottom??"0")||0);
-            const next=Math.max(120,Math.ceil(Math.max(body.scrollHeight,body.getBoundingClientRect().height)+margins));setHeight(previous=>previous===next ? previous : next); };
-        update(); observer.current = new ResizeObserver(update); observer.current.observe(doc.body ?? doc.documentElement); };
-    return <div className="prism-policy"><PrismSelect label="방침 버전" value={value} onChange={e => onValueChange(e.target.value)} disabled={loading}>{versions.map(v => <option value={v.id} key={v.id}>{v.label}</option>)}</PrismSelect>
-        {documentHtml ? <iframe ref={frame} title="개인정보처리방침" srcDoc={documentHtml} sandbox="allow-same-origin" onLoad={measure} style={{height,opacity:loading ? .5 : 1}} aria-busy={loading} /> : loading ? <PrismSkeletonGroup rows={12} /> : <PrismRequestState status="empty" />}</div>;
+export type PrismPolicyViewerProps = { versions: readonly { id: string; label: string }[]; value: string; onValueChange: (value: string) => void; documentHtml: string; loading?: boolean };
+export function PrismPolicyViewer({ versions, value, onValueChange, documentHtml, loading = false }: PrismPolicyViewerProps) {
+    const frame = useRef<HTMLIFrameElement>(null); const observer = useRef<ResizeObserver | null>(null);
+    useEffect(() => () => observer.current?.disconnect(), []);
+    const measure = () => {
+        observer.current?.disconnect();
+        const element = frame.current; const doc = element?.contentDocument;
+        if (!element || !doc) return;
+        const guard = doc.createElement("style"); guard.textContent = "html{overflow:hidden}"; doc.head.appendChild(guard);
+        const update = () => {
+            element.style.height = "0px";
+            element.style.minWidth = "0px";
+            const width = doc.documentElement.scrollWidth;
+            element.style.minWidth = width > element.clientWidth ? `${width}px` : "";
+            element.style.height = `${doc.documentElement.scrollHeight}px`;
+        };
+        update();
+        observer.current = new ResizeObserver(update);
+        observer.current.observe(doc.documentElement);
+    };
+    return <div className="prism-policy">
+        {versions.length > 0 && <div className="prism-policy-version"><PrismSelect label="방침 버전" value={value} onChange={e => onValueChange(e.target.value)}>{versions.map(v => <option value={v.id} key={v.id}>{v.label}</option>)}</PrismSelect></div>}
+        {documentHtml ? <iframe ref={frame} title="개인정보처리방침" srcDoc={documentHtml} sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" onLoad={measure} style={{height:0,opacity:loading ? .5 : 1}} aria-busy={loading} />
+            : loading ? <div className="prism-policy-skeleton" aria-label="개인정보처리방침 불러오는 중"><span />{Array.from({length:22},(_,index)=><span key={index} />)}</div>
+            : <div className="prism-policy-empty"><PrismEmptyState variant="tab" title="개인정보처리방침을 불러오지 못했습니다" description="잠시 후 다시 시도해 주세요" /></div>}
+    </div>;
+}
+export function PrismPrivacyPolicyDialog({ open, onOpenChange, ...viewerProps }: PrismPolicyViewerProps & { open: boolean; onOpenChange: (open: boolean) => void }) {
+    return <PrismDialog className="prism-policy-dialog" title="개인정보처리방침" description="버전별 개인정보처리방침 문서를 확인합니다." open={open} onOpenChange={onOpenChange}
+        footer={<PrismButton onClick={() => onOpenChange(false)}>닫기</PrismButton>}><PrismPolicyViewer {...viewerProps} /></PrismDialog>;
 }
