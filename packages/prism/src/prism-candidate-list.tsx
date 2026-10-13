@@ -62,6 +62,8 @@ export function PrismCandidateList({ filters, total, page, pageCount, onPageChan
         if (new Set(directory.selected).size > maxSelected) { showLimit(); return; }
         setOptions([]); setMode(kind);
     };
+    const closePreparation = (kind: PrismCandidateOutputKind) => setConfirmation(current =>
+        current?.kind === "preparing" && current.output === kind ? null : current);
     const execute = async (request: PrismCandidateOutputRequest) => {
         if (readOnly || pending.current[request.kind]) return;
         pending.current[request.kind] = true;
@@ -76,11 +78,14 @@ export function PrismCandidateList({ filters, total, page, pageCount, onPageChan
             if (!mounted.current) return;
             // A ready print preview may be another modal owned by the consumer. Closing
             // the preparation notice prevents two sibling modal roots hiding each other.
-            if (request.kind === "print" && result.preparedCount) setConfirmation(current => current?.kind === "preparing" && current.output === "print" ? null : current);
+            if (request.kind === "print" || !result.preparedCount) closePreparation(request.kind);
             if (!result.preparedCount) setFeedback({ message: `${action}할 프로필 데이터를 찾을 수 없습니다.`, tone: "error", retry: request });
             else if (excluded) setFeedback({ message: `일부 후보자(${excluded}명)는 ${action} 대상에서 제외되었습니다.`, tone: "info" });
         } catch {
-            if (mounted.current) setFeedback({ message: `${action} 프로필을 불러오는 중 오류가 발생했습니다.`, tone: "error", retry: request });
+            if (mounted.current) {
+                closePreparation(request.kind);
+                setFeedback({ message: `${action} 프로필을 불러오는 중 오류가 발생했습니다.`, tone: "error", retry: request });
+            }
         } finally {
             pending.current[request.kind] = false;
             if (mounted.current) setBusy(value => ({ ...value, [request.kind]: false }));
@@ -99,7 +104,7 @@ export function PrismCandidateList({ filters, total, page, pageCount, onPageChan
     const retry = (request: PrismCandidateOutputRequest) => {
         void execute(Object.freeze({ ...request, id: `${instance}-${++sequence.current}` }));
     };
-    return <section className={`prism-candidate-list ${className}`} style={{ height, ...style }} tabIndex={0} aria-label="후보 목록 작업">
+    return <section className={`prism-candidate-list ${className}`} style={{ height, ...style }} tabIndex={0} aria-label="후보 목록 작업" aria-busy={status === "loading" || undefined}>
         <PrismCandidateFilterBar {...filters} disabled={filters.disabled || readOnly}
             onSearch={value => { directory.onSelectionChange([]); filters.onSearch(value); }}
             onReset={() => { directory.onSelectionChange([]); filters.onReset(); }}/>

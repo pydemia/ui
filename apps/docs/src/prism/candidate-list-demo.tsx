@@ -14,7 +14,7 @@ export function CandidateListDemo({ state }: { state: FixtureState }) {
     const [page, setPage] = useState(state === "long" ? 2 : 1), [pageSize, setPageSize] = useState(state === "long" ? 100 : 10);
     const [width, setWidth] = useState(1000), [height, setHeight] = useState(650);
     const [pause, setPause] = useState(false), release = useRef(new Map<string, () => void>()), [waiting, setWaiting] = useState(false);
-    const [fail, setFail] = useState(false), [shown, setShown] = useState(true), [error, setError] = useState(state === "error");
+    const [fail, setFail] = useState(false), [shown, setShown] = useState(true), [error, setError] = useState(state === "error"), [refreshing, setRefreshing] = useState(false);
     const [exclude, setExclude] = useState(false), [status, setStatus] = useState("");
     const [jobs, setJobs] = useState<PrismPdfExportJob<DemoProfile>[]>([]), [print, setPrint] = useState<DemoProfile[]>([]);
     const [files, setFiles] = useState<{ name: string; href: string }[]>([]), [printMessage, setPrintMessage] = useState("");
@@ -39,13 +39,14 @@ export function CandidateListDemo({ state }: { state: FixtureState }) {
         <div className="prism-demo-row"><label><input type="checkbox" checked={pause} onChange={event => setPause(event.target.checked)}/> 출력 준비 대기</label>
             <label><input type="checkbox" checked={fail} onChange={event => setFail(event.target.checked)}/> 준비 실패</label>
             <label><input type="checkbox" checked={exclude} onChange={event => setExclude(event.target.checked)}/> 일부 대상 제외</label>
+            <label><input type="checkbox" checked={refreshing} onChange={event => setRefreshing(event.target.checked)}/> 기존 행을 유지한 재조회</label>
             <label><input type="checkbox" checked={shown} onChange={event => setShown(event.target.checked)}/> 목록 표시</label>
             {waiting && <PrismButton onClick={() => release.current.forEach(resolve => resolve())}>준비 계속</PrismButton>}</div>
         {shown && <div style={{ width: "100%", maxWidth: width }}><PrismCandidateList rows={rows} selected={selected} onSelectionChange={setSelected} sort={sort} onSortChange={setSort}
             onOpen={row => setStatus(`${row.name} 상세 조회 의도`)} filters={{ value: filters, onValueChange: setFilters, seriesOptions: [{ value: "all", label: "전체" }, { value: "manufacturing", label: "제조" }],
                 companyOptions: [{ value: "a", label: "가상전자" }, { value: "b", label: "예시사업" }], onSearch: () => { setPage(1); setStatus("가상 조회 의도"); }, onReset: () => { setPage(1); setFilters({ series: "all", companies: [], name: "" }); setStatus("가상 초기화 의도"); } }}
             total={total} page={page} pageCount={Math.max(1, Math.ceil(total / pageSize))} onPageChange={setPage} rowsPerPage={pageSize} onRowsPerPageChange={value => { setPage(1); setPageSize(value); }}
-            height={height} status={error ? "error" : state === "loading" ? "loading" : "ready"} onRetry={() => setError(false)} readOnly={state === "readonly"} onOutput={prepare}/></div>}
+            height={height} status={error ? "error" : state === "loading" || refreshing ? "loading" : "ready"} onRetry={() => setError(false)} readOnly={state === "readonly"} onOutput={prepare}/></div>}
         <p role="status">{status}</p>
         {files.length > 0 && <div className="prism-demo-stack">{files.map((file, index) => <a key={index} href={file.href} download={file.name}>완료된 파일: {file.name}</a>)}</div>}
         <PrismPdfDownloadHost jobs={jobs} renderPdf={async (profile, { signal }) => {

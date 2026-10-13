@@ -92,12 +92,22 @@ test("failed output retries the original request after selection changes and emp
     const calls = [];
     let current = ["a"];
     const output = async request => { calls.push(request); if (calls.length === 1) throw new Error("service failed"); return { preparedCount: 0 }; };
-    await render(h(PrismCandidateList, { ...base, selected: current, onOutput: output })); await openOutput("print"); await confirmOutput("print"); await closeNotice();
+    await render(h(PrismCandidateList, { ...base, selected: current, onOutput: output })); await openOutput("print"); await confirmOutput("print");
+    assert.equal(document.querySelector('.prism-confirm-dialog'), null, "failed preparation must not hide its retry action");
     assert.match(document.querySelector('.prism-toast').textContent, /인쇄 프로필.*오류/);
     current = ["b"];
     await render(h(PrismCandidateList, { ...base, selected: current, onOutput: output })); await click(byText("다시 시도"));
-    assert.deepEqual(calls.map(request => request.candidateIds), [["a"], ["a"]]); assert.notEqual(calls[0].id, calls[1].id); await closeNotice();
+    assert.deepEqual(calls.map(request => request.candidateIds), [["a"], ["a"]]); assert.notEqual(calls[0].id, calls[1].id);
+    assert.equal(document.querySelector('.prism-confirm-dialog'), null, "zero prepared profiles must not leave a generating notice");
     assert.match(document.querySelector('.prism-toast').textContent, /인쇄할 프로필 데이터를 찾을 수 없습니다/); await clear();
+});
+
+test("refresh keeps existing rows visible while announcing that the list is busy", async () => {
+    await render(h(PrismCandidateList, { ...base, status: "loading" }));
+    assert.equal(document.querySelector('.prism-candidate-list').getAttribute('aria-busy'), 'true');
+    assert.equal(document.querySelectorAll('.prism-candidate-directory tbody tr').length, rows.length);
+    assert.equal(document.querySelectorAll('.prism-candidate-directory .prism-skeleton').length, 0);
+    await clear();
 });
 
 test("unmount leaves application-owned output preparation running and ignores late local feedback", async () => {
