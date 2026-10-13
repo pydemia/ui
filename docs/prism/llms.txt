@@ -1617,7 +1617,7 @@ export function PositionManagementExample({ initialMode = "default", contextKey 
 
 ## User position directory / Detail tabs
 LIVE 포지션 회사·산업·이름 필터, 5열 정렬·페이지 이동, 상세 탭 열기와 복귀
-Contract: 호스트가 LIVE 포지션·회사/산업 선택지·상세 데이터 조회와 권한·오류·취소를 소유합니다. draft 필터는 조회 전 결과에 반영하지 않습니다. createPrismPositionDirectoryQuery는 적용 필터·서버 정렬·페이지 크기를 API 필드로 변환합니다. 행을 열면 ID로 상세 탭을 재사용하고 닫을 때 이전 탭 또는 목록을 선택합니다. routeKey 변경 시 목록으로 돌아오되 열린 상세 패널의 mount 상태를 유지합니다. 기존 행이 있으면 재조회 중에도 행과 조작을 유지하고 초기 조회만 skeleton으로 표시합니다. 예제는 합성 데이터만 사용하며 배포 서비스 연결을 뜻하지 않습니다.
+Contract: 호스트가 LIVE 포지션·회사/산업 선택지·상세 데이터 조회와 권한·오류·취소를 소유합니다. draft 필터는 조회 전 결과에 반영하지 않습니다. createPrismPositionDirectoryQuery는 적용 필터·서버 정렬·페이지 크기를 API 필드로 변환합니다. 행을 열면 ID로 상세 탭을 재사용하고 닫을 때 이전 탭 또는 목록을 선택합니다. routeKey 변경 시 목록으로 돌아오되 열린 상세 패널의 mount 상태를 유지합니다. 기존 행이 있으면 재조회 중에도 행과 조작을 유지하고 초기 조회만 skeleton으로 표시합니다. 부모 폭 600px 이하에서는 필터를 세로로 배치하고 표를 내부 가로 스크롤하며, 900px 이하의 여백도 컨테이너 기준으로 적용합니다. 예제는 합성 데이터만 사용하며 배포 서비스 연결을 뜻하지 않습니다.
 States: default, loading, refreshing, empty, error, long
 Registry: /prism/r/prism-position-directory.json
 Source: packages/prism/src/prism-position-directory.tsx
