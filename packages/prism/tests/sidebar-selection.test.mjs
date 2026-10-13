@@ -11,7 +11,7 @@ globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(dom.win
 globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(dom.window);
 globalThis.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} };
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
-const { createElement: h, act } = await import("react");
+const { createElement: h, act, useState } = await import("react");
 const { createRoot } = await import("react-dom/client");
 const { renderToStaticMarkup } = await import("react-dom/server");
 const { PrismSidebar, getPrismHistorySelectionId } = await import("../dist/index.js");
@@ -42,6 +42,38 @@ test("independent history selection retains legacy fallback and explicit null cl
     const legacy = [{ id: "legacy", title: "기존 기록" }];
     assert.ok(doc({ history: legacy, activeId: "legacy" }).querySelector('.prism-history-row[data-selected]'));
     assert.equal(doc({ history: legacy, activeId: "legacy", activeHistoryId: null }).querySelector('.prism-history-row[data-selected]'), null);
+});
+test("sidebar initial disclosure state follows explicit host defaults and controlled overrides", () => {
+    const admin = { id: "admin", label: "Admin", children: [{ id: "users", label: "사용자 관리" }] };
+    const doc = props => new JSDOM(renderToStaticMarkup(h(PrismSidebar, { ...base, items: [admin], ...props }))).window.document;
+    const initial = doc({ defaultExpandedIds: ["admin"] });
+    assert.equal(initial.querySelector('button[aria-label="Admin"]').getAttribute("aria-expanded"), "true");
+    assert.equal(initial.querySelector('.prism-sidebar-submenu').hidden, false);
+    assert.equal(initial.querySelector('button[aria-label="대화기록"]').getAttribute("aria-expanded"), "false");
+    const loginReturn = doc({ defaultExpandedIds: ["admin"], defaultHistoryOpen: true });
+    assert.equal(loginReturn.querySelector('button[aria-label="대화기록"]').getAttribute("aria-expanded"), "true");
+    const controlled = doc({ defaultExpandedIds: ["admin"], expandedIds: [], defaultHistoryOpen: true, historyOpen: false });
+    assert.equal(controlled.querySelector('button[aria-label="Admin"]').getAttribute("aria-expanded"), "false");
+    assert.equal(controlled.querySelector('button[aria-label="대화기록"]').getAttribute("aria-expanded"), "false");
+});
+test("opening a collapsed sidebar from an expanded administrator menu keeps that menu open", async () => {
+    const admin = { id: "admin", label: "Admin", children: [{ id: "users", label: "사용자 관리" }] };
+    function Host() {
+        const [collapsed, setCollapsed] = useState(false);
+        return h(PrismSidebar, { ...base, items: [admin], collapsed, onCollapsedChange: setCollapsed, defaultExpandedIds: ["admin"] });
+    }
+    await render(h(Host));
+    assert.equal(button("Admin").getAttribute("aria-expanded"), "true");
+    await click("사이드바 접기");
+    assert.equal(document.querySelector('.prism-sidebar').getAttribute("data-collapsed"), "true");
+    await click("Admin");
+    assert.equal(document.querySelector('.prism-sidebar').getAttribute("data-collapsed"), "false");
+    assert.equal(button("Admin").getAttribute("aria-expanded"), "true");
+    assert.equal(document.querySelector('.prism-sidebar-submenu').hidden, false);
+    await click("Admin");
+    await click("사이드바 접기");
+    await click("Admin");
+    assert.equal(button("Admin").getAttribute("aria-expanded"), "true");
 });
 test("persisted open/delete actions use server IDs while the public intent omits private fields", async () => {
     const opened = [], deleted = [];
@@ -77,15 +109,33 @@ test("draft persistence preserves the row/button while changing the typed open i
 const compiled = await transform(await readFile(new URL('../../../apps/docs/src/prism/sidebar-history-demo.tsx', import.meta.url), 'utf8'), { loader: 'tsx', jsx: 'automatic', format: 'esm' });
 const code = compiled.code.replace(/\bfrom\s+["']([^"']+)["']/g, (_match, name) => { assert.ok(['react', 'react/jsx-runtime', '@pydemia/prism'].includes(name)); return 'from ' + JSON.stringify(import.meta.resolve(name)); });
 const { SidebarHistoryExample } = await import('data:text/javascript;base64,' + Buffer.from(code).toString('base64'));
+test("profile menu keeps administrator access separate from logout availability", async () => {
+    await render(h(SidebarHistoryExample));
+    assert.ok(button("Admin"));
+    await click("demo-user 사용자 메뉴");
+    await waitFor(() => button("공지사항"));
+    assert.equal(button("로그아웃"), undefined);
+    await render(null);
+    await render(h(SidebarHistoryExample, { initialMode: "admin-login" }));
+    assert.ok(button("Admin"));
+    await click("demo-user 사용자 메뉴");
+    await waitFor(() => button("로그아웃"));
+    await render(null);
+    await render(h(SidebarHistoryExample, { initialMode: "restricted" }));
+    assert.equal(button("Admin"), undefined);
+});
 test("complete example separates favorites and history selection, and promotes a local draft", async () => {
     await render(h(SidebarHistoryExample)); await click("후보자 즐겨찾기");
+    assert.equal(button("대화기록").getAttribute("aria-expanded"), "false");
+    assert.equal(button("Admin").getAttribute("aria-expanded"), "true");
+    await click("대화기록");
     assert.equal(document.querySelector('.prism-nav-item[aria-current="page"]').textContent, "후보자 즐겨찾기");
     assert.equal(document.querySelector('.prism-history-row[data-selected] .prism-history-link').textContent, "현재 합성 대화");
     await click("저장 전 합성 대화"); assert.match(document.body.textContent, /선택한 화면: draft · 세션 키: 1/);
     const original = button("저장 전 합성 대화"); await click("저장 완료 예시"); assert.equal(button("저장된 합성 대화"), original);
     assert.equal(document.querySelector('.prism-history-row[data-selected] .prism-history-link').textContent, "저장된 합성 대화");
     await click("저장된 합성 대화"); assert.match(document.body.textContent, /선택한 화면: draft-row · 세션 키: 1/);
-    await render(null); await render(h(SidebarHistoryExample)); await click("후보자 즐겨찾기");
+    await render(null); await render(h(SidebarHistoryExample)); await click("후보자 즐겨찾기"); await click("대화기록");
     await click("현재 합성 대화 메뉴 열기"); await waitFor(() => button("채팅 삭제")); await click("채팅 삭제"); await click("삭제");
     await waitFor(() => document.body.textContent.includes("reset-intro-session"));
     assert.match(document.body.textContent, /선택한 화면: favorites · 세션 키: 1/);

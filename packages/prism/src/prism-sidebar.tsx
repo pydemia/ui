@@ -43,15 +43,15 @@ export type PrismSidebarProps = { items: readonly PrismNavItem[]; activeId: stri
     collapsed: boolean; onCollapsedChange: (value: boolean) => void; onNewChat: () => void;
     history?: readonly PrismHistoryItem[]; user?: { name: string; description?: string; team?:string };
     activeHistoryId?:string|null;onHistoryOpen?:(intent:PrismHistoryOpenIntent)=>void;
-    expandedIds?:readonly string[];onExpandedIdsChange?:(ids:string[])=>void;
-    historyOpen?:boolean;onHistoryOpenChange?:(open:boolean)=>void;
+    expandedIds?:readonly string[];defaultExpandedIds?:readonly string[];onExpandedIdsChange?:(ids:string[])=>void;
+    historyOpen?:boolean;defaultHistoryOpen?:boolean;onHistoryOpenChange?:(open:boolean)=>void;
     onHistoryRename?:(id:string,title:string)=>void;onHistoryDeleteRequest?:(id:string)=>void;
     profileActions?:readonly PrismProfileAction[];onProfileAction?:(id:string)=>void;onPrivacyPolicy?:()=>void;copyright?:string;
 };
-export function PrismSidebar({items,activeId,onNavigate,collapsed,onCollapsedChange,onNewChat,history=[],user,activeHistoryId,onHistoryOpen,expandedIds,onExpandedIdsChange,
-    historyOpen:controlledHistoryOpen,onHistoryOpenChange,onHistoryRename,onHistoryDeleteRequest,profileActions=[],onProfileAction,onPrivacyPolicy,copyright}:PrismSidebarProps) {
-    const id=useId();const [internalExpanded,setInternalExpanded]=useState<string[]>([]);const expanded=expandedIds??internalExpanded;
-    const [internalHistoryOpen,setInternalHistoryOpen]=useState(true);const historyOpen=controlledHistoryOpen??internalHistoryOpen;
+export function PrismSidebar({items,activeId,onNavigate,collapsed,onCollapsedChange,onNewChat,history=[],user,activeHistoryId,onHistoryOpen,expandedIds,defaultExpandedIds=[],onExpandedIdsChange,
+    historyOpen:controlledHistoryOpen,defaultHistoryOpen=false,onHistoryOpenChange,onHistoryRename,onHistoryDeleteRequest,profileActions=[],onProfileAction,onPrivacyPolicy,copyright}:PrismSidebarProps) {
+    const id=useId();const [internalExpanded,setInternalExpanded]=useState<string[]>(()=>[...defaultExpandedIds]);const expanded=expandedIds??internalExpanded;
+    const [internalHistoryOpen,setInternalHistoryOpen]=useState(defaultHistoryOpen);const historyOpen=controlledHistoryOpen??internalHistoryOpen;
     const [profileOpen,setProfileOpen]=useState(false);const [more,setMore]=useState<string|null>(null);const [editing,setEditing]=useState<string|null>(null);const [draft,setDraft]=useState("");
     const renameComposing=useRef(false);const renameCancelled=useRef(false);const renameInput=useRef<HTMLInputElement>(null);
     const renameTarget=useRef<{rowId:string;conversationId:string}|null>(null);
@@ -59,7 +59,7 @@ export function PrismSidebar({items,activeId,onNavigate,collapsed,onCollapsedCha
     const selectedHistory=activeHistoryId===undefined ? activeId : activeHistoryId;
     useLayoutEffect(()=>{const target=renameTarget.current;if(!target)return;const row=history.find(item=>item.id===target.rowId);if(!row||conversationIdFor(row)!==target.conversationId||row.editable===false||row.generating){renameTarget.current=null;renameCancelled.current=true;setEditing(null);}},[history]);
     useLayoutEffect(()=>{const target=menuTarget.current;if(!target)return;const row=history.find(item=>item.id===target.rowId);if(!row||conversationIdFor(row)!==target.conversationId||row.editable===false||row.generating){menuTarget.current=null;setMore(null);}},[history]);
-    const toggleMenu=(key:string)=>{const next=expanded.includes(key) ? expanded.filter(v=>v!==key) : [...expanded,key];if(expandedIds===undefined)setInternalExpanded(next);onExpandedIdsChange?.(next);if(collapsed)onCollapsedChange(false);};
+    const toggleMenu=(key:string)=>{if(collapsed){if(!expanded.includes(key)){const next=[...expanded,key];if(expandedIds===undefined)setInternalExpanded(next);onExpandedIdsChange?.(next);}onCollapsedChange(false);return;}const next=expanded.includes(key) ? expanded.filter(v=>v!==key) : [...expanded,key];if(expandedIds===undefined)setInternalExpanded(next);onExpandedIdsChange?.(next);};
     const toggleHistory=()=>{const next=collapsed||!historyOpen;if(controlledHistoryOpen===undefined)setInternalHistoryOpen(next);onHistoryOpenChange?.(next);if(collapsed)onCollapsedChange(false);};
     const submitRename=(item:PrismHistoryItem)=>{const target=renameTarget.current,id=conversationIdFor(item);if(target&&target.rowId===item.id&&target.conversationId===id&&!renameCancelled.current&&item.editable!==false&&!item.generating&&draft.trim()&&draft.trim()!==item.title)onHistoryRename?.(id!,draft.trim());renameTarget.current=null;setEditing(null);renameCancelled.current=false;};
     return <aside className="prism-sidebar" data-collapsed={collapsed} aria-label="PRISM 탐색">

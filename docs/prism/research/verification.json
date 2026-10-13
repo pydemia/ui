@@ -733,8 +733,8 @@
       }
     },
     "prism-sidebar": {
-      "visual": "selected-authenticated-source-dimensions-and-typography-matched;new-position-menu-and-full-parity-pending",
-      "interaction": "passed-target-tests-and-selected-synthetic-browser-workflow;all-host-service-effects-unverified",
+      "visual": "selected-authenticated-source-dimensions-and-typography-matched;current-deployment-revision-and-full-parity-pending",
+      "interaction": "passed-target-tests-and-selected-installed-browser-workflow;all-host-service-effects-unverified",
       "checks": [
         "Original vector navigation artwork and 36px navigation rows",
         "Collapsed width 72px, header 64px, new-chat height 40px",
@@ -743,15 +743,20 @@
         "Profile action intent and 256px popover",
         "Rename blur trims synthetic title",
         "Delete request preserves one DOM history row until explicit fixture confirm; after confirm row count is zero",
-        "Current five-link menu and host capability/route matching checked in synthetic DOM."
+        "Current five-link menu and host capability/route matching checked in synthetic DOM.",
+        "Fetched frontend dev at 2eeb26ff confirms the new positions menu and independent administrator access versus keycloak-only logout behavior.",
+        "An existing authenticated deployed tab measured 280px sidebar, 64px header, 40px new-chat button, 36px navigation row and 172px administrator submenu; its loaded client did not show the current source's positions entry.",
+        "The isolated installed browser matched those selected dimensions and verified initial expanded administrator/collapsed history states, profile-action variants, rename Enter/Escape, synthetic deletion, 72px collapse and re-opening an expanded administrator menu.",
+        "At 320px the document had zero horizontal overflow; the navigation region scrolled to the history control and the 100-row history region scrolled to the final row."
       ],
       "evidence": [
         "local-sidebar-profile-menu",
-        "local-sidebar-delete-confirm"
+        "local-sidebar-delete-confirm",
+        "sidebar-initial-state-installed-browser"
       ],
       "remaining": [
-        "Source current menu capability, keyboard/layout and full authenticated interaction comparison.",
-        "New deployed positions menu/purpose and EtcIcon; history starts 40px lower in source.",
+        "Fresh authenticated deployment access to verify the current positions menu and role-specific profile actions; the existing authenticated tab may have loaded an older client.",
+        "Real navigation, session, rename and deletion service effects remain host-owned and were not exercised against the product.",
         "Complete source glyph/font/pixel comparison at equivalent content and viewport."
       ],
       "localRenderGate": {

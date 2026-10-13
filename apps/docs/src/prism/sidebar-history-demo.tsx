@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { PrismSidebar, PrismConfirmDialog, PrismIcon, createPrismAdminMenu, getPrismHistoryDeletionAction, getPrismHistorySelectionId, type PrismHistoryItem } from "@pydemia/prism";
 
-type Mode = "default" | "loading" | "empty" | "restricted" | "long";
+type Mode = "default" | "loading" | "empty" | "restricted" | "admin-login" | "long";
 const records:PrismHistoryItem[] = [{ id: "current", title: "현재 합성 대화" }, { id: "other", title: "다른 합성 대화" }, { id:"draft-row",title:"저장 전 합성 대화",conversationId:null,localDraftId:"synthetic-draft" }];
 const longRecords:PrismHistoryItem[] = [...records,...Array.from({length:97},(_,index)=>({id:`synthetic-history-${index+4}`,title:`합성 대화 ${index+4} · 긴 제목의 말줄임과 스크롤을 확인하는 예시입니다`}))];
 type Context = { routeConversationId: string | null; activeConversationId: string | null; activeLocalDraftId?:string|null; view: string };
@@ -38,6 +38,8 @@ export function SidebarHistoryExample({ initialMode = "default" }: { initialMode
     };
     return <div data-prism="light" className="prism-sidebar-demo" style={{display:"flex",height:520,boxSizing:"border-box",fontSize:14,border:"1px solid var(--prism-control-border)",overflow:"auto"}}>
         <PrismSidebar collapsed={collapsed} onCollapsedChange={setCollapsed} activeId={context.view}
+            defaultExpandedIds={initialMode === "restricted" ? [] : ["admin"]}
+            defaultHistoryOpen={initialMode === "loading" || initialMode === "empty" || initialMode === "long"}
             activeHistoryId={getPrismHistorySelectionId(history,{...context,isChatHome:["current","draft","intro"].includes(context.view)})}
             onNavigate={id => setContext(value=>({...value,routeConversationId:null,activeConversationId:id==="candidates"||id==="positions" ? null : value.activeConversationId,activeLocalDraftId:id==="candidates"||id==="positions" ? null : value.activeLocalDraftId,view:id}))}
             onHistoryOpen={intent=>{if(intent.kind==="conversation")setContext({routeConversationId:intent.conversationId,activeConversationId:intent.conversationId,activeLocalDraftId:null,view:intent.rowId});else {setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:intent.localDraftId,view:"draft"});setSession(value=>value+1);}}}
@@ -47,7 +49,7 @@ export function SidebarHistoryExample({ initialMode = "default" }: { initialMode
             onHistoryRename={(id, title) => setHistory(items => items.map(item => serverId(item) === id ? { ...item, title } : item))}
             onHistoryDeleteRequest={id => { setError(undefined); setDeleting(id); }}
             user={{ name: "demo-user", description: "demo@example.com", team: "가상 전략팀" }}
-            profileActions={[{ id: "notice", label: "공지사항" }, { id: "logout", label: "로그아웃", tone: "muted" }]}
+            profileActions={[{ id: "notice", label: "공지사항" }, ...(initialMode === "admin-login" ? [{ id: "logout", label: "로그아웃", tone: "muted" as const }] : [])]}
             onProfileAction={id => setResult(`${id} 의도 전달`)} onPrivacyPolicy={() => setResult("방침 열기 의도 전달")} copyright="© 가상기업"/>
         <div className="prism-sidebar-demo-main" style={{flex:1,padding:24,minWidth:200}}>
             <p>합성 기록만 삭제합니다. 경로와 세션 키는 이 예제 안의 표시 값입니다.</p>
