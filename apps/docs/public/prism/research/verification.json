@@ -1707,25 +1707,31 @@
       }
     },
     "prism-survey": {
-      "visual": "partial",
-      "interaction": "partial",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "visual": "passed-selected-deployed-css-local-and-installed; authenticated full-profile parity pending",
+      "interaction": "passed-selected-synthetic-sizing-and-action",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "checks": [
         "source36px bars/24px track/100px height·role 색·정수 평균선·0.0과null 구분을 구현",
         "CUA 카드194px/padding8/12px radius,bars36/24,평균61/63/75/82px·Red400,role Green200/Blue200/Orange200 확인",
         "140~1280px 넘침0·3/2/1열 재배치,가변320px 막대와평균195px",
         "print class의118pt=157.328px 카드·70px 막대·legend10pt 확인. 실제OS/native print와 구분",
-        "긴 제목의sr-only table min-content가 페이지 너비를 늘리던 문제를clip wrapper로 수정하고 실제320px 재측정"
+        "긴 제목의sr-only table min-content가 페이지 너비를 늘리던 문제를clip wrapper로 수정하고 실제320px 재측정",
+        "Current frontend dev SurveyValidation/ValidationItem and SCSS are unchanged since the earlier source comparison; the 2026-10-10 deployed CSS sample retains their card, bar, legend and print rules.",
+        "The local 140px long-title Survey wraps its optional Culture Survey action to 140px instead of overflowing by 16px; a 320px-high bar retains the integer 195px group-average line and visible zero.",
+        "At 800px print style the action is omitted, cards measure 157.328px, bars 70px and the legend 13.333px. Empty result removes cards and legend without stale content.",
+        "An isolated shadcn consumer reinstalled the Survey registry and exact CSS, verified 59 module bytes and 43 examples, built with Vite/font/notices, and rendered the 140px action, zero and missing values without browser errors."
       ],
       "remaining": [
-        "인증 원본 모든 Survey 상태·전체 pixel/font 대조",
-        "실제프로필 전체 출력/native print"
+        "Authenticated deployed full-profile Survey states and the deployed source revision remain unbound; selected deployed CSS and current source/local/installed checks support this group acceptance.",
+        "Native print output, PDF fetching, permissions and actual candidate score mapping belong to the profile-print or host integration scope."
       ],
       "evidence": [
         "pdf-report.test.mjs",
         "attitude-deployed-css.json",
         "survey-cua-runtime.json",
-        "attitude-cua-runtime.json"
+        "attitude-cua-runtime.json",
+        "survey-goal-installed-bytes.json",
+        "prism-survey-audit-2026-10-14.md"
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1740,6 +1746,31 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/successorCandidate/expertise/SurveyValidation.tsx",
+          "chat/successorCandidate/expertise/ValidationItem.tsx",
+          "chat/successorCandidate/expertise/SurveyValidation.module.scss",
+          "chat/successorCandidate/expertise/ValidationItem.module.scss"
+        ],
+        "evidence": [
+          "Current dev sources are unchanged from the selected deployed CSS comparison; local cards, bars, role colors, average lines and print dimensions were measured.",
+          "Local browser exercised default, long, empty, dynamic height, print style and the optional host action, including 140px containment after the button wrap improvement.",
+          "An isolated shadcn consumer reinstalled the registry, matched 59 module sources and CSS, typechecked 43 examples, built with Vite/font/notices and rendered the 140px Survey with distinct zero/null values and a working host intent."
+        ],
+        "intentionalImprovements": [
+          "The optional action wraps below 180px without changing its ordinary source-style height; missing bars remain represented in an accessible data table."
+        ],
+        "hostOwned": [
+          "The consuming app supplies scores and averages, authorizes and opens any Culture Survey document, and handles native print or PDF output."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed full-profile states and the deployed source commit identity are not established."
+        ]
       }
     },
     "prism-analysis": {
@@ -6332,10 +6363,11 @@
       "prism-tabs",
       "prism-selection",
       "prism-profile",
-      "prism-profile-sections"
+      "prism-profile-sections",
+      "prism-survey"
     ],
-    "acceptedCount": 14,
-    "unassessedGroups": 44,
+    "acceptedCount": 15,
+    "unassessedGroups": 43,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

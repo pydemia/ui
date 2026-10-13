@@ -1859,6 +1859,7 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 }
 @container (max-width:520px) {.prism-diagnosis-row {flex-direction:column;}.prism-survey-grid[data-columns="3"] {grid-template-columns:repeat(2,minmax(0,1fr));}}
 @container (max-width:360px) {.prism-profile-section-header {flex-wrap:wrap;}.prism-survey-grid[data-columns] {grid-template-columns:minmax(0,1fr);}.prism-diagnosis header {flex-wrap:wrap;}}
+@container (max-width:180px) {.prism-survey .prism-profile-section-header>.prism-button {flex-shrink:1;min-width:0;max-width:100%;height:auto;min-height:28px;padding-top:4px;padding-bottom:4px;overflow-wrap:anywhere;text-align:center;}}
 .candidate-profile-print .prism-survey {display:grid;grid-template-columns:1fr auto;align-items:center;}
 .candidate-profile-print .prism-survey>.prism-profile-section-header {grid-row:1;grid-column:1;}
 .candidate-profile-print .prism-survey-legend {grid-row:1;grid-column:2;margin-top:0;justify-content:flex-end;font-size:10pt;font-weight:400;}

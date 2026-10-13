@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { PrismAttitudeReport, PrismSurveyValidation, loadPrismPdfBytes, type PrismSurveyItem } from "@pydemia/prism";
+import { PrismAttitudeReport, PrismButton, PrismSurveyValidation, loadPrismPdfBytes, type PrismSurveyItem } from "@pydemia/prism";
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import type { FixtureState } from "./catalog";
 const items: PrismSurveyItem[] = [
@@ -9,11 +9,13 @@ const items: PrismSurveyItem[] = [
 ];
 export function SurveyDemo({state}:{state:FixtureState}) {
     const [width,setWidth]=useState(800),[height,setHeight]=useState(100),[columns,setColumns]=useState<2|3>(3),[printStyle,setPrintStyle]=useState(false);
+    const [result,setResult]=useState("");
     return <div className="prism-demo-stack"><div className="prism-demo-row"><label>Survey 너비 <input type="number" aria-label="Survey 너비" min={140} max={1280} value={width} onChange={event=>setWidth(Math.max(140,Math.min(1280,Number(event.target.value)||140)))}/></label>
         <label>막대 높이 <input type="number" aria-label="막대 높이" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>
         <label>표시 열 <select aria-label="표시 열" value={columns} onChange={event=>setColumns(Number(event.target.value) as 2|3)}><option value={2}>2</option><option value={3}>3</option></select></label>
         <label><input type="checkbox" checked={printStyle} onChange={event=>{setPrintStyle(event.target.checked);if(event.target.checked)setHeight(70);}}/> 인쇄 스타일</label></div>
-        <div className={printStyle?"candidate-profile-print":undefined} style={{width:"100%",maxWidth:width}}><PrismSurveyValidation items={state==="empty"?[]:state==="long"?items.map(item=>({...item,category:item.category+" 가상 진단 분야의 긴 제목 ".repeat(8)})):items} columns={columns} barMaxHeight={height}/></div></div>;
+        <div className={printStyle?"candidate-profile-print":undefined} style={{width:"100%",maxWidth:width}}><PrismSurveyValidation items={state==="empty"?[]:state==="long"?items.map(item=>({...item,category:item.category+" 가상 진단 분야의 긴 제목 ".repeat(8)})):items} columns={columns} barMaxHeight={height}
+            action={printStyle?undefined:<PrismButton type="button" variant="line" tone="primary" size="small" onClick={()=>setResult("Culture Survey 문서 열기 의도")}>Culture Survey 결과 보기</PrismButton>}/></div><p role="status">{result}</p></div>;
 }
 export function AttitudeReportDemo({state}:{state:FixtureState}) {
     const [width,setWidth]=useState(800),[dialogWidth,setDialogWidth]=useState(1200),[dialogHeight,setDialogHeight]=useState(700),[sized,setSized]=useState(false),[pause,setPause]=useState(false),[failure,setFailure]=useState(state==="error"),[subject,setSubject]=useState("synthetic-a");
