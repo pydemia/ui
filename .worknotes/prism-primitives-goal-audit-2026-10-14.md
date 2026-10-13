@@ -13,3 +13,5 @@
 Portal 선택자 수정 후 재설치 브라우저의 팝오버 계산 스타일은 minWidth 90px/maxWidth 350px/borderRadius 6px, 현재 내용 폭 153.484px이다. 320px viewport에서는 maxWidth 296px이고 x=83–236.484px, document scrollWidth 320px으로 유지됐다. 최종 CSS를 포함한 site build와 독립 설치 재검증도 통과했다.
 
 첫 preview readback에서 `components.json`만 189바이트 차이가 났다. 마지막 검증 문구를 추가한 뒤 manifest를 다시 생성하지 않은 것이 원인이었다. `npm run build`로 manifest를 재생성해 원격의 같은 커밋 배포 파일과 6개 공개 자산을 바이트 단위로 다시 대조했고 모두 일치했다. 해시만 달라진 사이트 번들 파일은 이전 커밋 상태를 유지한다.
+
+이후 `946ca5f4`의 CI는 테스트가 아니라 생성된 `docs/` 번들 해시 불일치로 실패했다. manifest만 고치면서 이전 `docs/assets`와 HTML을 보존한 것이 원인이다. 최종 검증 자료를 기준으로 `npm run build`를 다시 실행한 결과 CI 로그가 요구한 `index-B3jMpGc6.js`가 재현됐다. 이 번들·HTML을 함께 커밋해 동일 커밋에서 CI를 다시 확인한다.
