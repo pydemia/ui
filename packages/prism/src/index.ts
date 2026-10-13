@@ -10,7 +10,8 @@ export type { PrismInputProps, PrismTextareaProps, PrismSelectProps, PrismSelect
 export { PrismElpBadge, PrismCountBadge, PrismTag, PrismChip } from "./prism-badge";
 export { PrismAvatar, PrismProfileChip, PrismAnchorChip, PrismTable, PrismGridTable, PrismDataTable, PrismSection } from "./prism-display";
 export type { PrismAvatarProps, PrismGridColumn, PrismGridTableProps } from "./prism-display";
-export { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "./prism-tabs";
+export { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismClosableTabTrigger, PrismTabsContent } from "./prism-tabs";
+export type { PrismClosableTabTriggerProps } from "./prism-tabs";
 export { PrismDialog, PrismConfirmDialog } from "./prism-dialog";
 export type { PrismDialogProps, PrismConfirmDialogProps } from "./prism-dialog";
 export { PrismToast, PrismEmptyState, PrismRequestState } from "./prism-feedback";

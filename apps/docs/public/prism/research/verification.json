@@ -910,13 +910,19 @@
       "visual": "partial",
       "interaction": "partial",
       "checks": [
-        "320px tab list scrolls internally without growing root width"
+        "Current source line/fill rules match local 44px/46px list heights, 13px/14px type and 24px/4px gaps",
+        "Local browser ArrowRight switches tabs and skips a disabled tab; active close selects the adjacent tab and restores keyboard focus",
+        "320px long fixture keeps document width 320px and scrolls nine tabs within a 288px list (1743px scroll content)",
+        "Close action is a sibling button with a distinct accessible name and no nested buttons",
+        "Independent shadcn consumer installed 59 exact TSX modules and CSS, typechecked 42 complete examples, built with Vite/font/notices, and closed an active tab with focus returning to list"
       ],
       "evidence": [
-        "local-all-components-narrow"
+        "current-frontend-dev-tabs-source",
+        "local-tabs-default-disabled-long-320",
+        "installed-tabs-goal-320-container"
       ],
       "remaining": [
-        "all source tab states and keyboard focus placement"
+        "Authenticated deployed product tab flow and deployed source revision binding"
       ],
       "localRenderGate": {
         "status": "passed",
@@ -929,6 +935,32 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "styles/_tabs.scss",
+          "pages/chat/CandidateList.tsx",
+          "pages/chat/PositionList.tsx"
+        ],
+        "evidence": [
+          "The current frontend dev source defines 44px line tabs and 46px fill lists with 32px triggers, plus dynamic close controls. Local browser measured matching list heights, font sizes and gaps.",
+          "The local browser exercised line Arrow navigation past a disabled tab, controlled fill tab close and focus recovery. At a real 320px iframe viewport, nine long tabs scroll inside a 288px list while document width stays 320px.",
+          "An isolated shadcn consumer installed 59 exact TSX sources and CSS, typechecked 42 complete examples, passed Vite/font/notices, and closed the active tab in a 320px container with focus on the selected list tab. Workspace typecheck and 316 PRISM tests passed."
+        ],
+        "intentionalImprovements": [
+          "The close control is a sibling button rather than an icon nested inside the tab button, so keyboard users can operate it independently.",
+          "Close controls remain visible on inactive tabs; long labels do not wrap and the tab list scrolls horizontally at narrow widths.",
+          "The host owns tab removal and next selection; the component restores focus after a synchronous close."
+        ],
+        "hostOwned": [
+          "The consuming application owns opened tab IDs, content loading, the selected value and the next active value after close. Browser data was synthetic."
+        ],
+        "nonBlockingUnknowns": [
+          "The authenticated deployed tab flow and deployed commit identity could not be observed in this browser session; final whole-product comparison remains open."
+        ]
       }
     },
     "prism-primitives": {
@@ -6190,10 +6222,11 @@
       "prism-candidate",
       "prism-six-frame",
       "prism-panel",
-      "prism-memo"
+      "prism-memo",
+      "prism-tabs"
     ],
-    "acceptedCount": 10,
-    "unassessedGroups": 48,
+    "acceptedCount": 11,
+    "unassessedGroups": 47,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
