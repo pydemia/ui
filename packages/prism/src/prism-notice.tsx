@@ -5,23 +5,37 @@ import { PrismButton } from "./prism-button";
 import { PrismChip } from "./prism-badge";
 import { PrismAttachmentList, type PrismAttachment } from "./prism-admin";
 import { PrismSelect } from "./prism-field";
-import { PrismRequestState } from "./prism-feedback";
+import { PrismEmptyState, PrismRequestState } from "./prism-feedback";
 import { PrismSkeletonGroup } from "./prism-primitives";
 
 export type PrismNotice = { id: string; title: string; date: string; author: string; content: string; attachments?: readonly PrismAttachment[] };
+export type PrismNoticeListItem = Pick<PrismNotice, "id" | "title" | "date" | "author"> & { createdAt?: string };
 export function PrismNoticeDetail({ notice, onDownload }: { notice: PrismNotice; onDownload?: (id: string) => void }) {
     return <article className="prism-notice-detail"><header><small>{notice.date}</small><h3>{notice.title}</h3></header><dl><div><dt>작성자</dt><dd>{notice.author}</dd></div></dl><hr /><p>{notice.content}</p>{notice.attachments?.length ? <><hr /><PrismAttachmentList files={notice.attachments} onDownload={onDownload ? file => onDownload(file.id) : undefined} /></> : null}</article>;
 }
-export function PrismNoticeDialog({ open, onOpenChange, items, selectedId, onSelect, order = "latest", onOrderChange, status = "ready", onRetry, onDownload }: {
-    open: boolean; onOpenChange: (open: boolean) => void; items: readonly PrismNotice[]; selectedId: string | null; onSelect: (id: string | null) => void;
+export function PrismNoticeDialog({ open, onOpenChange, items, total, selectedId, onSelect, detail, detailStatus = "ready", onDetailRetry, order = "latest", onOrderChange, status = "ready", onRetry, onDownload }: {
+    open: boolean; onOpenChange: (open: boolean) => void; items: readonly PrismNoticeListItem[]; total?: number; selectedId: string | null; onSelect: (id: string | null) => void;
+    detail?: PrismNotice | null; detailStatus?: "ready" | "loading" | "error"; onDetailRetry?: () => void;
     order?: "latest" | "oldest"; onOrderChange?: (order: "latest" | "oldest") => void; status?: "ready" | "loading" | "error"; onRetry?: () => void; onDownload?: (id: string) => void;
 }) {
-    const selected = items.find(i => i.id === selectedId);
-    return <PrismDialog className="prism-notice-dialog" title={selectedId ? "공지사항 상세" : "공지사항"} description="공지사항을 조회하고 첨부파일을 확인합니다." open={open} onOpenChange={onOpenChange}
-        footer={<>{selectedId && <PrismButton variant="line" icon={<ArrowLeft />} onClick={() => onSelect(null)}>목록으로</PrismButton>}<PrismButton variant="line" onClick={() => onOpenChange(false)}>닫기</PrismButton></>}>
-        {status === "loading" ? <PrismSkeletonGroup rows={8} /> : status === "error" ? <PrismRequestState status="error" onRetry={onRetry} /> : selectedId ? selected ? <PrismNoticeDetail notice={selected} onDownload={onDownload} /> : <PrismRequestState status="empty" /> :
-            <div className="prism-notice-list"><header><span>Total {items.length}</span>{onOrderChange && <PrismButton variant="line" size="small" icon={<ArrowDownUp />} iconPosition="right" onClick={() => onOrderChange(order === "latest" ? "oldest" : "latest")}>{order === "latest" ? "등록 최신순" : "등록 오래된 순"}</PrismButton>}</header>
-                <table><caption className="prism-sr-only">공지사항 목록</caption><tbody>{items.length ? items.map(item => <tr key={item.id}><td><button type="button" onClick={() => onSelect(item.id)}>{item.title}</button></td><td>{item.author}</td><td>{item.date}</td></tr>) : <tr><td colSpan={3}>등록된 공지사항이 없습니다.</td></tr>}</tbody></table></div>}
+    const fallback = items.find(i => i.id === selectedId);
+    const selected = detail === undefined ? fallback && "content" in fallback ? fallback as PrismNotice : null : detail?.id === selectedId ? detail : null;
+    const ordered = [...items].sort((a, b) => {
+        const date = (item: PrismNoticeListItem) => Date.parse((item.createdAt ?? item.date).replace(/^(\d{4})\.(\d{2})\.(\d{2})/, "$1-$2-$3"));
+        const aDate = date(a), bDate = date(b);
+        return Number.isFinite(aDate) && Number.isFinite(bDate) ? aDate - bDate : 0;
+    });
+    if (order === "latest") ordered.reverse();
+    const goList = () => onSelect(null);
+    return <PrismDialog className={`prism-notice-dialog prism-notice-dialog--${selectedId ? "detail" : "list"}`} title={selectedId ? "공지사항 상세" : "공지사항"}
+        titlePrefix={selectedId ? <button type="button" className="prism-notice-back" aria-label="목록으로" onClick={goList}><ChevronLeft /></button> : undefined}
+        description="공지사항을 조회하고 첨부파일을 확인합니다." open={open} onOpenChange={onOpenChange}
+        footer={<><PrismButton variant="line" onClick={() => onOpenChange(false)}>닫기</PrismButton>{selectedId && <PrismButton variant="line" onClick={goList}>목록으로</PrismButton>}</>}>
+        {selectedId ? detailStatus === "loading" ? <div className="prism-notice-detail-skeleton" aria-label="공지사항 상세 불러오는 중"><span /><span /><span /><span /><span /></div>
+            : detailStatus === "error" || !selected ? <div className="prism-notice-detail-state"><PrismEmptyState variant="tab" title="공지사항을 불러오지 못했습니다" description="잠시 후 다시 시도해 주세요." action={onDetailRetry && <PrismButton variant="line" onClick={onDetailRetry}>다시 시도</PrismButton>} /></div>
+            : <PrismNoticeDetail notice={selected} onDownload={onDownload} />
+            : <div className="prism-notice-list"><header><span>Total {status === "loading" ? 0 : total ?? items.length}</span>{onOrderChange && <PrismButton variant="line" size="small" icon={<ArrowDownUp />} iconPosition="right" disabled={status === "loading"} onClick={() => onOrderChange(order === "latest" ? "oldest" : "latest")}>{order === "latest" ? "등록 최신순" : "등록 오래된 순"}</PrismButton>}</header>
+                <div className="prism-notice-list-body">{status === "error" ? <PrismRequestState status="error" onRetry={onRetry} /> : status === "ready" && items.length === 0 ? <PrismEmptyState variant="tab" title="등록된 공지사항이 없습니다" /> : <table><caption className="prism-sr-only">공지사항 목록</caption><colgroup><col /><col /><col /></colgroup><tbody>{status === "loading" ? Array.from({ length: 6 }, (_, row) => <tr key={row} className="prism-notice-skeleton-row" aria-hidden="true"><td><span /></td><td><span /></td><td><span /></td></tr>) : ordered.map(item => <tr key={item.id}><td><button type="button" onClick={() => onSelect(item.id)}>{item.title}</button></td><td>{item.author}</td><td>{item.date}</td></tr>)}</tbody></table>}</div></div>}
     </PrismDialog>;
 }
 export function PrismNoticePopup({ open, notices, index, onIndexChange, onClose }: { open: boolean; notices: readonly PrismNotice[]; index: number; onIndexChange: (index: number) => void; onClose: () => void }) {

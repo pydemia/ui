@@ -9,3 +9,9 @@
 전체 원본 상태·폰트/픽셀 일치와 인증 서비스 실행은 아직 미확인입니다. 이전 포지션 목록 게시 proof는 `b1526da5`에만 적용되며 현재 줄바꿈 변경의 CI/preview는 별도 확인합니다.
 
 표준 사이트 build와 generic registry release-check가 통과했습니다. 게시된 리비전 검증은 다음 단계입니다.
+
+## 검토 브랜치 게시 결과
+
+소스·검증 기록 `89952008`과 생성 registry·docs `b1cf2212`를 검토 브랜치에 푸시했습니다. draft PR #162는 `main` 대상으로 최종 head `b1cf22121efeae882c0316c541ebb8bd70202a20`을 가리킵니다. 이 SHA의 Verify UI run `38370135025`는 completed/success입니다.
+
+자동 Vercel preview `dpl_BFxcFLejqMj5AvG1XqQcpanvcayR`은 READY/target null/동일 SHA입니다. `https://pydemia-c47cxxqmt-pydemia-7822.vercel.app`의 인증된 HTTP 산출물 18개가 readback에 통과했습니다. 17개는 로컬 build 바이트와 같고 `/prism/index.html`은 Vercel feedback script 하나를 제외한 앱 HTML이 같습니다. 상세 파일별 결과는 ignored `browser-evidence/word-wrap-final-preview-readback.json`에 있습니다. 일반 인앱 브라우저로 preview를 열면 Vercel 로그인 화면으로 이동하므로 배포 브라우저 렌더는 미검증입니다. main/production은 변경하지 않았습니다.
