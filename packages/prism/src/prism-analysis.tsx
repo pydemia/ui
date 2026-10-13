@@ -1,5 +1,6 @@
 import { Fragment, useId, type CSSProperties } from "react";
 import { PrismAnchorChip } from "./prism-display";
+import { PrismTag } from "./prism-badge";
 import { PrismIcon } from "./prism-icon";
 import { PrismInfoTooltip } from "./prism-utility";
 import { PrismFormattedText } from "./prism-rich-text";
@@ -30,7 +31,7 @@ export function PrismAnalysis({ leader, factors, title = "6 Frame 분석 결과 
             case "success": return <>{factor.results.length > 0 && <div className="prism-analysis-chips">{factor.results.map((value,index) => chip(value,index,false,!!factor.starred?.includes(value)))}</div>}{description}</>;
             case "design": case "agility": return <>{factor.results.length > 0 && chip(factor.results[0],0,true)}{description}</>;
             case "attitude": return <>{heading}{description}{factor.results.length > 0 && <div className="prism-analysis-derail"><span>Derailment:</span><div className="prism-analysis-chips">{factor.results.map((value,index) => <span key={index} className="prism-analysis-derail-chip">{value}</span>)}</div></div>}</>;
-            case "leadership": return <>{heading}{description}</>;
+            case "leadership": return <>{factor.results.map((value,index) => <PrismTag key={index} variant="blue" className="prism-analysis-leadership-result" title={value}><span>{value}</span></PrismTag>)}{heading}{description}</>;
             case "other": return <>{factor.results.length > 0 && <div className="prism-analysis-chips">{factor.results.map((value,index) => chip(value,index))}</div>}{description}</>;
         }
     }

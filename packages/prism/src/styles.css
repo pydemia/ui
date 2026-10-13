@@ -738,6 +738,8 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 [data-prism="light"] .prism-analysis-factor + .prism-analysis-factor { padding-top: 8px; border-top: 1px solid var(--prism-neutral-100); }
 [data-prism="light"] .prism-analysis-factor h4 { flex: 0 0 80px; overflow-wrap: anywhere; }
 [data-prism="light"] .prism-analysis-factor-content { min-width: 0; flex: 1 1 auto; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+[data-prism="light"] .prism-analysis-leadership-result {max-width:100%;min-width:0;flex-shrink:0;}
+[data-prism="light"] .prism-analysis-leadership-result>span {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 [data-prism="light"] .prism-analysis-factor-title { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--accent); overflow-wrap: anywhere; }
 [data-prism="light"] .prism-analysis-description { min-width: 0; width: 100%; color: #363636; font-size: 14px; font-weight: 400; line-height: 1.4; overflow-wrap: anywhere; }
 [data-prism="light"] .prism-analysis-description .prism-rich-text { font: inherit; color: inherit; }

@@ -930,25 +930,9 @@
       "recipe": "PrismGradeSummary"
     },
     {
-      "source": "components/chat/successorCandidate/leadership/LeadershipRadar.tsx",
-      "name": "LeadershipRadar",
-      "target": "prism-chart",
-      "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
-    },
-    {
       "source": "components/chat/successorCandidate/leadership/LeadershipReason.tsx",
       "name": "LeadershipReason",
       "target": "prism-assessment",
-      "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
-    },
-    {
-      "source": "components/chat/successorCandidate/leadership/LeadershipSummary.tsx",
-      "name": "LeadershipSummary",
-      "target": "prism-profile-sections",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
       "recipe": null
@@ -1240,7 +1224,11 @@
       "additionalTargets": [
         "prism-assessment"
       ],
-      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+        "scope": "Leadership results rendered as blue readonly tags; deletion effect after success depends on latest route/session context."
+      }
     },
     {
       "source": "components/chat/templates/ChatProfileBrief.tsx",
@@ -2375,9 +2363,8 @@
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
       "recipe": null,
       "latestDeltaAudit": {
-        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
-        "observedAt": "2026-10-12",
-        "scope": "Admin five-link menu including users, host capability gate and descendant route matching. Current deployed visual comparison and real role authorization remain unverified."
+        "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+        "scope": "Leadership results rendered as blue readonly tags; deletion effect after success depends on latest route/session context."
       }
     },
     {
@@ -2436,18 +2423,18 @@
     }
   ],
   "counts": {
-    "total": 273,
+    "total": 271,
     "pending": 0,
     "vectorAssets": 87,
     "countUnit": "source-file",
-    "nonVectorSourceFiles": 186,
+    "nonVectorSourceFiles": 184,
     "pendingPurposeMappings": 0,
     "independentImplementationTargetCount": null
   },
   "baselineMappingRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "latestSourceAudit": {
-    "observedAt": "2026-10-09",
-    "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "observedAt": "2026-10-13",
+    "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
     "checkout": "dev fast-forwarded to27c4fdbf and clean",
     "previousMappedCount": 269,
     "newComponents": [
@@ -2566,7 +2553,9 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-13",
       "scope": "Chat-log placeholder source and typed host query/copy/archive contracts; source generation overlays with selected local/installed browser checks. Authenticated original visual/API parity remains unverified."
-    }
+    },
+    "previousRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "scope": "Latest source delta: retired disconnected Radar/Summary; leadership analysis result tags; route-vs-root-session history deletion. Baseline design evidence and prior source audits are retained separately; deployed revision remains unbound."
   },
   "integrationReferences": [
     {
@@ -2797,12 +2786,12 @@
   ],
   "componentCountAudit": {
     "observedAt": "2026-10-13",
-    "sourceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "sourceRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
     "method": "Static runtime-import dependency closure from src/main.tsx including literal dynamic import and Vite import.meta.glob expansion; product closure removes only routes/sampleRoutes.tsx. Includes composite and helper TSX modules; reachability is not independent component count or authenticated runtime proof.",
     "counts": {
       "product-route-reachable": 175,
       "sample-route-only": 7,
-      "not-reachable-from-entry": 4
+      "not-reachable-from-entry": 2
     },
     "primaryMappedGroups": 49,
     "allMappedGroupsExcludingVectors": 50,
@@ -2817,10 +2806,155 @@
     ],
     "unreachable": [
       "components/chat/common/DragDropOverlay.tsx",
-      "components/chat/successorCandidate/leadership/LeadershipRadar.tsx",
-      "components/chat/successorCandidate/leadership/LeadershipSummary.tsx",
       "components/ui/popover/HRXPopover.tsx"
     ],
-    "claim": "186 counts non-vector TSX source files.175 product-reachable files include helpers/state variants/compositions. Current 50 mapped groups are mappings, not verified completion or a fixed final target count. Independent target total remains unestablished."
+    "claim": "184 counts current non-vector TSX files at e5d4d79a. The previous186 count remains historical at27c4fdbf.175 reachable files include helpers/compositions; the final independent target count is still unestablished."
+  },
+  "retiredSourceReferences": [
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipRadar.tsx",
+      "name": "LeadershipRadar",
+      "target": "prism-chart",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null,
+      "removedAtRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+      "previousRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "claim": "Removed from latest source; portable chart/summary functionality is retained as an extension."
+    },
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipSummary.tsx",
+      "name": "LeadershipSummary",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null,
+      "removedAtRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+      "previousRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "claim": "Removed from latest source; portable chart/summary functionality is retained as an extension."
+    }
+  ],
+  "previousLatestSourceAudit20261013": {
+    "observedAt": "2026-10-09",
+    "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "checkout": "dev fast-forwarded to27c4fdbf and clean",
+    "previousMappedCount": 269,
+    "newComponents": [
+      "components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+      "components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+      "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
+      "components/chat/successorCandidate/print/PdfDownloadHost.tsx"
+    ],
+    "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date.",
+    "newPurposeMappedComponents": 4,
+    "pendingComponents": [],
+    "localRecheckedAt": "2026-10-12",
+    "fetchedRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "previousReferenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "changedFilesSinceReference": [
+      "src/components/admin/company-groups/CompanyGroupForm.module.scss",
+      "src/components/admin/company-groups/CompanyGroupForm.tsx",
+      "src/components/admin/positions/PositionForm.tsx",
+      "src/components/admin/users/UserForm.tsx",
+      "src/components/chat/conversation/ChatJSONRenderer.tsx",
+      "src/components/chat/conversation/ChatJSONRendererPanel.tsx",
+      "src/components/chat/conversation/ChatMarkdownRenderer.tsx",
+      "src/components/chat/conversation/ChatMarkdownRendererPanel.tsx",
+      "src/components/chat/position/PositionDetailView.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.module.scss",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+      "src/components/chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+      "src/components/chat/successorCandidate/leadership/mapLeadershipPie.ts",
+      "src/components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+      "src/components/chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts",
+      "src/layouts/chat/ChatSidebar.tsx",
+      "src/lib/axios.ts",
+      "src/pages/admin/positions/PositionFormPage.tsx",
+      "src/pages/admin/positions/PositionPage.tsx",
+      "src/pages/admin/positions/positionListRestore.ts",
+      "src/pages/admin/users/UserFormPage.tsx",
+      "src/pages/admin/users/UserManagementPage.tsx",
+      "src/pages/chat/ChatMain.tsx",
+      "src/pages/sample/chat/candidateProfilePrintDummy.ts",
+      "src/service/data-management/positionManagement.ts",
+      "src/service/hrx/agent.ts",
+      "src/service/recommendation/candidates.ts",
+      "src/service/users.ts",
+      "src/store/useAuthStore.ts"
+    ],
+    "unchangedProfileReferenceFiles": [
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateCard.tsx",
+      "src/components/chat/favorite/FavoriteCandidateCard.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateList.tsx",
+      "src/components/chat/favorite/FavoriteCandidateList.module.scss",
+      "src/components/chat/common/CandidateEvaluationHistory.tsx",
+      "src/components/chat/common/CandidateEvaluationHistory.module.scss",
+      "src/components/ui/button/HRXFavoriteToggle.tsx",
+      "src/styles/_btn.scss"
+    ],
+    "pendingRevisionAudit": [
+      "Administrator authenticated original rendering,real role/status/sync authorization/API,chat-log composition and full design/state parity remain pending. User,position,company-group,notice and position-block source/synthetic contracts reviewed separately.",
+      "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
+    ],
+    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
+    "reviewedLeadershipDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+    },
+    "reviewedPositionReferenceDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+    },
+    "reviewedAdminFormDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+    },
+    "reviewedChatDetailDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
+    },
+    "reviewedUserListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+    },
+    "reviewedPositionListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+    },
+    "reviewedCompanyNoticeListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+    },
+    "lastFetch": {
+      "observedAt": "2026-10-13",
+      "head": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "originDev": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "workingTree": "clean"
+    },
+    "reviewedPositionBlocksDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+    },
+    "reviewedPositionBlockCommonControls": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved."
+    },
+    "reviewedChatLogAndGenerationStates": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Chat-log placeholder source and typed host query/copy/archive contracts; source generation overlays with selected local/installed browser checks. Authenticated original visual/API parity remains unverified."
+    }
   }
 }

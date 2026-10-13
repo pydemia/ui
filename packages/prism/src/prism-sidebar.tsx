@@ -18,6 +18,14 @@ function navItemActive(item: PrismNavItem, activeId: string) {
     return activeId === item.id || !!item.matchDescendants && activeId.startsWith(item.id.endsWith("/") ? item.id : item.id + "/");
 }
 export type PrismHistoryItem = { id:string;title:string;generating?:boolean;editable?:boolean };
+export type PrismHistoryDeletionAction = "navigate-intro" | "reset-intro-session" | "preserve-view";
+/** Call after successful host deletion with the latest route/session IDs, not a request-time snapshot. */
+export function getPrismHistoryDeletionAction(deletedId: string, context: { routeConversationId?: string | null; activeConversationId?: string | null }): PrismHistoryDeletionAction {
+    if (!deletedId.trim()) throw new Error("A deleted conversation requires an identifier.");
+    if (context.routeConversationId === deletedId) return "navigate-intro";
+    if (!context.routeConversationId && context.activeConversationId === deletedId) return "reset-intro-session";
+    return "preserve-view";
+}
 export type PrismProfileAction = { id:string;label:string;icon?:ReactNode;tone?:"default"|"muted"|"danger";disabled?:boolean };
 export type PrismSidebarProps = { items: readonly PrismNavItem[]; activeId: string; onNavigate: (id: string) => void;
     collapsed: boolean; onCollapsedChange: (value: boolean) => void; onNewChat: () => void;

@@ -29,3 +29,7 @@ src/main.tsx에서 runtime import, literal dynamic import, Vite import.meta.glob
 - 최종 독립 구현 목표 총수는 미확정입니다. 기능 목적·공개 계약·화면 조합·상태별 누락을 기준으로 확정해야 하며, 186 또는 175를 진행률 분모로 사용하지 않습니다. 50그룹 대응 완료도 전체 디자인·동작 재현 완료를 의미하지 않습니다.
 
 이번 재확인은 로컬 소스·inventory·정적 의존관계 조사입니다. 브라우저 조작, 원격 갱신, 배포 및 구현 변경은 수행하지 않았습니다. 상세 결과는 기존 ignored `.worknotes/browser-evidence/component-count-audit.json`에 갱신했습니다.
+
+## e5d4d79a source 갱신
+
+2026-10-13 다시 fetch/fast-forward한 원본에서 미연결 Radar/Summary 두 TSX가 삭제됐습니다. 현재 271파일 = 벡터87 + 비벡터184이며 본서비스175/샘플7/미연결2입니다. 이전 273/186은 27c4fdbf 기준의 수치로 보존합니다. 독립 목표 총수로 사용하지 않는 기준과 원본 대응49/50그룹은 유지합니다. 최신 delta 작업 기록에서 상세 검증을 확인합니다.

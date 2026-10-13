@@ -32,3 +32,13 @@
 관련 테스트의 최초 실행은 21개 통과/1개 실패였습니다. 재매핑 선택 helper가 원하는 option을 최대 100ms만 기다리는 과정에서 제어를 찾지 못했습니다. 선택값·충돌·비공개 필드 제외 등의 기존 assertion을 유지하고 option이 실제 DOM에 나타날 때까지 최대 1초 기다리도록 바꿨습니다. 수정 후 22개 모두 통과했습니다. 최초 실패 로그는 보존했으며 CSS 기능 실패나 최초 실행 성공으로 기록하지 않습니다.
 
 새 CSS를 실제 shadcn add로 consumer에 설치했고 58개 module source/CSS의 바이트 일치, 39개 예제의 타입 검사·Vite build, font/notices 검사가 통과했습니다. dist-spinner-motion으로 이전 산출물을 보존했습니다. 설치된 consumer에서의 새 spinner runtime은 별도로 관찰하지 않았으며 workspace browser의 motion 증거와 설치·빌드 증거를 구분합니다. 최종 게이트를 반영한 뒤 사이트 전체를 다시 빌드하고 검토 브랜치의 마지막 SHA에서 CI와 preview를 확인합니다.
+
+## 최종 검토 게시
+
+최종 소스 보정 commit은 1fd1a562, 생성물 HEAD는 `26106c34547c373c9d4ff2be386fae4ee4773507`입니다. draft PR #162의 head가 위 HEAD와 일치하고 base는 main입니다. Verify UI run `38348137392`는 completed/success이며 생성물 docs diff 검사도 통과했습니다. 테스트 helper의 assertion을 제거하거나 CI를 완화하지 않았습니다.
+
+Preview `dpl_BgtRWZuF259AAfvzpo4hRUoPzKGq`는 READY/target null/위 HEAD와 같은 commit입니다. URL은 https://pydemia-poi9lrex1-pydemia-7822.vercel.app 입니다. 공개 자료와 실제 HTML/JS/CSS 16개 readback을 완료했습니다. 15개는 바이트/SHA 일치이며 HTML은 해당 deployment의 Vercel feedback script 하나만 제외하면 application HTML이 정확히 일치합니다. 보호된 preview 브라우저 렌더와 HTTP 검증을 혼동하지 않습니다.
+
+최종 증거는 ignored spinner-final-ci-latest.log, spinner-final-preview-readback.json, spinner-single-rotation-final.png에 보존했습니다. 이전 전체 504회 matrix, 새 블록 24회 회귀와 두 폭의 단일 회전 증거는 서로 다른 fingerprint·범위로 구분했습니다. 임시 viewport를 reset하고 소유한 tab10을 후속 검증용으로 유지했습니다. 기존 사용자·원본 탭과 consumer 산출물은 보존했습니다.
+
+전체 goal은 active입니다. 배포 원본 인증·revision·전체 동작·font/pixel/A4·나머지 기능 목적·추가 종류·고도화·production/main 반영은 미완료입니다. 이 게시 후 기록은 다음 소스 commit에 포함할 의도적인 작업 트리 변경입니다.
