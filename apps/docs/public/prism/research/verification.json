@@ -202,7 +202,20 @@
       ],
       "remaining": [
         "hover/focus/disabled combinations"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-selection": {
       "visual": "partial",
@@ -227,7 +240,24 @@
       "remaining": [
         "every size and disabled/readOnly state",
         "all dropdown keyboard and typeahead variants"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled",
+          "readonly",
+          "loading",
+          "error",
+          "empty"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-domain-forms": {
       "visual": "pending",
@@ -240,7 +270,25 @@
         "Administrator page/list/bulk/role API/position restoration purpose and style comparison.",
         "Current source/consumer/preview keyboard, restricted, optional company, long/compact and font/pixel comparison.",
         "Real authenticated backend and deployed revision binding; current A4 and production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "readonly",
+          "loading",
+          "error",
+          "long",
+          "restricted",
+          "access-error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-notice": {
       "visual": "pending",
@@ -257,7 +305,22 @@
       ],
       "remaining": [
         "Dialog list selection/order and all states"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-profile-sections": {
       "visual": "pending-current-leadership-detail-rendered-comparison",
@@ -269,7 +332,22 @@
       "remaining": [
         "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
         "Authenticated deployed source and deployed revision binding."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-document": {
       "visual": "pending",
@@ -289,7 +367,20 @@
       ],
       "evidence": [
         "local-pdf-responsive"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-panel": {
       "visual": "partial",
@@ -321,7 +412,22 @@
         "panel-independent-resize.json",
         "panel-drag-compact-before.log",
         "panel-drag-compact-after.log"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "closed",
+          "expanded",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-utility": {
       "visual": "partial",
@@ -365,7 +471,23 @@
         "native operating-system drag and file dialog interactions beyond the browser filechooser event",
         "authenticated upload/download service integration belongs to the host; not executed",
         "all accepted format/size/count/browser combinations"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled",
+          "loading",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-workspace": {
       "visual": "pending",
@@ -387,7 +509,19 @@
         "local-workspace-sizing",
         "local-workspace-growth",
         "local-workspace-mobile-profile-390"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-icon": {
       "visual": "source-artwork-retained",
@@ -398,7 +532,19 @@
       ],
       "remaining": [
         "rendered currentColor and placement in every host component"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-field": {
       "visual": "partial",
@@ -422,7 +568,23 @@
         "typeahead runtime",
         "all source option states",
         "all input size/adornment/error combinations"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled",
+          "readonly",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-dialog": {
       "visual": "partial",
@@ -442,7 +604,22 @@
       "remaining": [
         "long body and no-title confirm variants",
         "all deployed error/busy states"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-sidebar": {
       "visual": "pending-current-menu-comparison",
@@ -463,7 +640,22 @@
       ],
       "remaining": [
         "Source current menu capability, keyboard/layout and full authenticated interaction comparison."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "restricted"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-candidate": {
       "visual": "partial",
@@ -481,7 +673,22 @@
       ],
       "evidence": [
         "local-candidate-card"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-record": {
       "visual": "partial",
@@ -494,7 +701,22 @@
       ],
       "remaining": [
         "deployed evaluation/compensation/validation geometry and all interactive states"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-tabs": {
       "visual": "partial",
@@ -507,7 +729,19 @@
       ],
       "remaining": [
         "all source tab states and keyboard focus placement"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-primitives": {
       "visual": "partial",
@@ -532,7 +766,22 @@
       "remaining": [
         "All other primitive states and domain callers",
         "Latest source-purpose mappings are implemented; changed source styles and domain caller states remain unverified."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-profile": {
       "visual": "pending",
@@ -544,7 +793,24 @@
         "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
         "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
         "Authenticated original source and production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-feedback": {
       "visual": "partial",
@@ -563,7 +829,22 @@
       ],
       "remaining": [
         "all original Toast tones, long content and placement states"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-display": {
       "visual": "partial",
@@ -589,7 +870,22 @@
       "remaining": [
         "fresh original comparison across lengths and widths",
         "all chip and table visual/interactive states"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-print": {
       "visual": "partial-source-style-alignment",
@@ -601,7 +897,21 @@
       "checks": [
         "Isolated static document waits embedded fonts/images and paint; preparation timeout, abort/dispose and afterprint release only its owned iframe.",
         "Parent title/DOM retained; browser invocation and event are not physical-output confirmation."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-chart": {
       "visual": "pending-current-leadership-detail-rendered-comparison",
@@ -613,7 +923,22 @@
       "remaining": [
         "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
         "Authenticated deployed source and deployed revision binding."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "long",
+          "detail-only"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-export": {
       "visual": "source-confirmed-options-layout; profile-print parity pending",
@@ -638,7 +963,22 @@
         "consumer-export-runtime",
         "local-export-125",
         "final-static-export"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-html-export": {
       "visual": "passed-online-vs-offline-selected-layout; original full profile parity remains partial",
@@ -665,7 +1005,22 @@
         "reference-html-export-20261009",
         "reference-html-export-offline",
         "parsed-css-html-export"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-memo": {
       "visual": "partial",
@@ -697,7 +1052,24 @@
         "Original static font versus installed variable font measurements for every state",
         "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
         "Complete authenticated source memo/card/long-state screenshot and pixel/font comparison; current source interaction could not render the target state."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-context": {
       "visual": "partial",
@@ -728,7 +1100,24 @@
         "Default section animation in the locked environment did not advance beyond its initial frame;interaction checks usedreduceMotion=true",
         "Page.captureScreenshot timed out after5000ms in this phase;no new screenshot file",
         "Full service schema/query continuation,OSIME/touch andallfont/low-height combinations"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "readonly",
+          "long",
+          "empty"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-candidate-list": {
       "visual": "partial",
@@ -764,7 +1153,24 @@
         "Native OS save andautomatic browser print integration in thelocked environment",
         "Full real profile query/mapping andoriginal printable layout;synthetic generated PDFs are integration fixtures",
         "Current UI screenshot capture timed out after5000ms;no newUI screenshot produced;PDF raster is export evidence only"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "readonly",
+          "long",
+          "empty"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-directory": {
       "visual": "partial",
@@ -776,7 +1182,21 @@
       ],
       "remaining": [
         "Complete authenticated source table state/pixel comparison"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-mgmt-comments": {
       "visual": "partial",
@@ -805,7 +1225,24 @@
         "인증된 원본 CEO/ELP 추가·편집·오류 상태의 전체 시각 및 폰트 대조",
         "실제 backend 권한·저장·캐시/query 통합",
         "현재 screenshot capture는5000ms timeout; 새 UI screenshot 없음"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-attitude-report": {
       "visual": "partial",
@@ -833,7 +1270,22 @@
         "attitude-deployed-css.json",
         "attitude-cua-runtime.json",
         "attitude-downloaded-bytes.pdf"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-survey": {
       "visual": "partial",
@@ -855,7 +1307,21 @@
         "attitude-deployed-css.json",
         "survey-cua-runtime.json",
         "attitude-cua-runtime.json"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-analysis": {
       "visual": "partial",
@@ -869,7 +1335,21 @@
       "remaining": [
         "원본 인증 상태의 전체 pixel/font 대조",
         "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-position-recommendations": {
       "visual": "pending",
@@ -882,7 +1362,23 @@
         "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
         "Authenticated historical/LIVE service and deployed revision binding.",
         "Full source component purpose/style/extension coverage, current A4 and production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "readonly",
+          "long",
+          "versioned"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-rich-text": {
       "visual": "partial",
@@ -896,7 +1392,21 @@
       "remaining": [
         "원본 인증 상태의 전체 pixel/font 대조",
         "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-response": {
       "visual": "pending",
@@ -909,7 +1419,23 @@
         "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
         "Authenticated historical/LIVE service and deployed revision binding.",
         "Full source component purpose/style/extension coverage, current A4 and production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "versioned"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-profile-print": {
       "visual": "pending-current-leadership-detail-rendered-comparison",
@@ -921,7 +1447,22 @@
       "remaining": [
         "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
         "Authenticated deployed source and deployed revision binding."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "long",
+          "detail-only"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-panel-recipes": {
       "visual": "pending",
@@ -934,7 +1475,27 @@
       "remaining": [
         "Actual source and independent-consumer rendered geometry, pixels and real keyboard/focus/modal/scroll at compact/expanded/short heights.",
         "Authenticated original view and production publication."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "memo",
+          "position",
+          "chat",
+          "closed",
+          "expanded",
+          "long",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-position": {
       "visual": "pending",
@@ -947,7 +1508,24 @@
         "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
         "Authenticated historical/LIVE service and deployed revision binding.",
         "Full source component purpose/style/extension coverage, current A4 and production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "long",
+          "versioned"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-favorite-candidate": {
       "visual": "pending",
@@ -959,7 +1537,23 @@
         "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
         "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
         "Authenticated original source and production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-evaluation-history": {
       "visual": "pending",
@@ -971,7 +1565,21 @@
         "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
         "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
         "Authenticated original source and production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-detail-state": {
       "visual": "pending-host-composition-comparison",
@@ -984,7 +1592,21 @@
         "Administrator lists, page restore/bulk/status and remaining chat/authStore context.",
         "Authenticated current source/deployed revision and full design/interaction/purpose parity.",
         "Current full-font/pixel/A4 comparison and production publication."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "position",
+          "closed"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-admin-users": {
       "visual": "pending",
@@ -996,7 +1618,24 @@
         "Position-list restoration,non-user administrator lists and page access/permission states.",
         "Real role/status services and authenticated deployed revision/design/interaction comparison.",
         "Remaining chat/authStore and full font/pixel/A4/production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-position-management": {
       "visual": "pending-authenticated-original-comparison",
@@ -1008,7 +1647,28 @@
         "Other administrator lists, page access and real role/status/sync services.",
         "Authenticated deployed revision, original UI/state/interaction and full pixel/font/A4 parity.",
         "Remaining chat/authStore and production publication."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "edit",
+          "scheduled",
+          "running",
+          "failed",
+          "empty",
+          "error",
+          "loading",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-admin-lists": {
       "visual": "partial-source-date-primitive;original-pages-unverified",
@@ -1020,7 +1680,28 @@
         "Position-block/chat-log purposes and authenticated administrator/source/permission states.",
         "Real member cascade/status/notice persistence and deployed source revision binding.",
         "Remaining chat/authStore/full source font/pixel/A4 parity and production."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "readonly",
+          "long",
+          "notice",
+          "partial",
+          "filtered-empty",
+          "missing"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-position-blocks": {
       "visual": "passed-current-generation-overlays-at1280-320;authenticated-source-parity-unverified",
@@ -1032,7 +1713,30 @@
         "Authenticated source rendering/permissions and real API/AI/RBAC/cache/sync effects.",
         "Other source purposes including chat-log composition and complete state parity.",
         "Original whole-page static/variable font,pixel/A4 and production publication."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "edit",
+          "create",
+          "job",
+          "remap",
+          "empty",
+          "loading",
+          "error",
+          "scheduled",
+          "running",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     },
     "prism-chat-logs": {
       "visual": "passed-eight-synthetic-local-states-at1280-320;authenticated-source-parity-unverified",
@@ -1044,7 +1748,241 @@
         "Authenticated original rendering and deployed revision binding: IAB source route is blank;existing Chrome source tab displays admin-login. Original chat-log source is a placeholder with no real API integration.",
         "Full source font/pixel/A4 and all canonical state parity,remaining purposes and improvements.",
         "Review branch CI/preview readback pending current revision;production not published."
-      ]
+      ],
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "long",
+          "filtered-empty",
+          "detail-only",
+          "access-error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-badge": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-chat": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-detail": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-six-frame": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-content": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "disabled",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-admin": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-management": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "readonly",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-assessment": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-collection": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-management-tools": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-page-state": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
+    },
+    "prism-intro": {
+      "visual": "pending",
+      "interaction": "pending",
+      "localRenderGate": {
+        "status": "passed",
+        "states": [
+          "default",
+          "empty",
+          "disabled",
+          "loading"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+        "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      }
     }
   },
   "gates": {
@@ -1106,10 +2044,17 @@
     },
     "currentFixtureStates": {
       "count": 252,
-      "checked": 9,
-      "pending": 243,
-      "status": "partial-current-chat-log-eight-states-and-block-generation",
-      "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7"
+      "checked": 252,
+      "pending": 0,
+      "browserRenders": 504,
+      "status": "passed-current-local-render-structure-and-layout;source-parity-unverified",
+      "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+      "pendingOtherDimensions": [
+        "Authenticated source/deployed revision comparison",
+        "Full interaction and independent consumer state coverage",
+        "Full font/pixel/A4/native print/save",
+        "Remaining functional purposes and enhancements"
+      ]
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -1189,11 +2134,1054 @@
   "fixtureRenderChecks": {
     "groups": 58,
     "states": 252,
-    "checked": 9,
-    "status": "partial-current-chat-log-eight-states-and-block-generation",
+    "checked": 252,
+    "browserRenders": 504,
+    "status": "passed-current-local-render-structure-and-layout;source-parity-unverified",
     "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
     "inputCount": 84,
     "checks": [
+      {
+        "component": "prism-button",
+        "states": [
+          "default",
+          "disabled"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-field",
+        "states": [
+          "default",
+          "disabled",
+          "readonly",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-badge",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-display",
+        "states": [
+          "default",
+          "disabled",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-tabs",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-dialog",
+        "states": [
+          "default",
+          "disabled",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-feedback",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-sidebar",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "restricted"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-chat",
+        "states": [
+          "default",
+          "disabled",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-candidate",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-detail",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-memo",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-panel",
+        "states": [
+          "default",
+          "closed",
+          "expanded",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-six-frame",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-selection",
+        "states": [
+          "default",
+          "disabled",
+          "readonly",
+          "loading",
+          "error",
+          "empty"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-profile",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-content",
+        "states": [
+          "default",
+          "disabled",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-admin",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-html-export",
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-export",
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-document",
+        "states": [
+          "default",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-workspace",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-chart",
+        "states": [
+          "default",
+          "empty",
+          "long",
+          "detail-only"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-utility",
+        "states": [
+          "default",
+          "disabled",
+          "loading",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-evaluation-history",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-favorite-candidate",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-record",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-management",
+        "states": [
+          "default",
+          "readonly",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-context",
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "readonly",
+          "long",
+          "empty"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-primitives",
+        "states": [
+          "default",
+          "disabled",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-panel-recipes",
+        "states": [
+          "default",
+          "memo",
+          "position",
+          "chat",
+          "closed",
+          "expanded",
+          "long",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-position",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "long",
+          "versioned"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-assessment",
+        "states": [
+          "default",
+          "empty"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-collection",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-notice",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-response",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "versioned"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-management-tools",
+        "states": [
+          "default",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-candidate-list",
+        "states": [
+          "default",
+          "loading",
+          "error",
+          "readonly",
+          "long",
+          "empty"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-directory",
+        "states": [
+          "default",
+          "empty",
+          "loading"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-page-state",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-domain-forms",
+        "states": [
+          "default",
+          "readonly",
+          "loading",
+          "error",
+          "long",
+          "restricted",
+          "access-error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-print",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-intro",
+        "states": [
+          "default",
+          "empty",
+          "disabled",
+          "loading"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-profile-sections",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-mgmt-comments",
+        "states": [
+          "default",
+          "empty",
+          "loading",
+          "error",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-survey",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-attitude-report",
+        "states": [
+          "default",
+          "empty",
+          "error",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-icon",
+        "states": [
+          "default"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-analysis",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-position-recommendations",
+        "states": [
+          "default",
+          "empty",
+          "readonly",
+          "long",
+          "versioned"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-rich-text",
+        "states": [
+          "default",
+          "empty",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-profile-print",
+        "states": [
+          "default",
+          "empty",
+          "long",
+          "detail-only"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-detail-state",
+        "states": [
+          "default",
+          "position",
+          "closed"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-admin-users",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-position-management",
+        "states": [
+          "default",
+          "edit",
+          "scheduled",
+          "running",
+          "failed",
+          "empty",
+          "error",
+          "loading",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-admin-lists",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "readonly",
+          "long",
+          "notice",
+          "partial",
+          "filtered-empty",
+          "missing"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
+      {
+        "component": "prism-position-blocks",
+        "states": [
+          "default",
+          "edit",
+          "create",
+          "job",
+          "remap",
+          "empty",
+          "loading",
+          "error",
+          "scheduled",
+          "running",
+          "readonly",
+          "long"
+        ],
+        "widths": [
+          320,
+          1280
+        ],
+        "rendered": true,
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
+      },
       {
         "component": "prism-chat-logs",
         "states": [
@@ -1207,33 +3195,17 @@
           "access-error"
         ],
         "widths": [
-          1280,
-          320
+          320,
+          1280
         ],
+        "rendered": true,
         "rootOverflow": 0,
         "nestedButtons": 0,
-        "browserRenders": 16
-      },
-      {
-        "component": "prism-position-blocks",
-        "states": [
-          "edit"
-        ],
-        "widths": [
-          1280,
-          320
-        ],
-        "rootOverflow": 0,
-        "dynamicChecks": [
-          "description overlay",
-          "retained sub-job overlay",
-          "48px empty sub-job overlay"
-        ],
-        "browserRenders": 6
+        "unlabeledNativeInputs": 0,
+        "scope": "Workspace synthetic fixture render and DOM geometry; full interaction and source parity are separate."
       }
     ],
-    "claim": "9 canonical states checked;16 log state/width renders and6 dynamic overlay checks. Full252 fixture state/source comparison is incomplete. Busy variants are not new canonical states.",
-    "pendingReason": "Other canonical states,current source font/pixel/A4 and authenticated deployed revision comparison remain incomplete."
+    "claim": "All 252 canonical states rendered at 320px and 1280px. Checked component/state identity, fixture presence, document horizontal overflow, nested buttons, native input labels and font loading status. Selected panel sizing/retention interactions are recorded separately. This does not prove all callbacks, permissions, storage, APIs, popups or original font/pixel/A4 parity."
   },
   "extensions": {
     "responsiveWorkspace": {
@@ -3098,5 +5070,66 @@
     "status": "passed-source-dom-contracts-and-six-local-browser-checks",
     "claim": "Base0.6,24px spinner,input-only overlay; retained sub-job overlay or48px empty loader. Native textarea stays mounted and previous values survive failure; two new meaningful tests and existing context cancellation checks passed.",
     "localBrowser": "Description overlay matches native textarea bounds;disabled input retains value,Base0.6/24px CSS icon. Retained/empty subjob area at1280/320;empty overlay48px. Installed retained generation observed at1280."
+  },
+  "previousCanonicalStateRenderChecks20261013": {
+    "groups": 58,
+    "states": 252,
+    "checked": 9,
+    "status": "partial-current-chat-log-eight-states-and-block-generation",
+    "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+    "inputCount": 84,
+    "checks": [
+      {
+        "component": "prism-chat-logs",
+        "states": [
+          "default",
+          "loading",
+          "empty",
+          "error",
+          "long",
+          "filtered-empty",
+          "detail-only",
+          "access-error"
+        ],
+        "widths": [
+          1280,
+          320
+        ],
+        "rootOverflow": 0,
+        "nestedButtons": 0,
+        "browserRenders": 16
+      },
+      {
+        "component": "prism-position-blocks",
+        "states": [
+          "edit"
+        ],
+        "widths": [
+          1280,
+          320
+        ],
+        "rootOverflow": 0,
+        "dynamicChecks": [
+          "description overlay",
+          "retained sub-job overlay",
+          "48px empty sub-job overlay"
+        ],
+        "browserRenders": 6
+      }
+    ],
+    "claim": "9 canonical states checked;16 log state/width renders and6 dynamic overlay checks. Full252 fixture state/source comparison is incomplete. Busy variants are not new canonical states.",
+    "pendingReason": "Other canonical states,current source font/pixel/A4 and authenticated deployed revision comparison remain incomplete."
+  },
+  "currentPanelSizingInteractionChecks": {
+    "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+    "status": "passed-selected-keyboard-sizing-and-draft-retention",
+    "checks": [
+      "ArrowLeft changes 440px to 456px; End reaches 800px, matching aria-valuenow.",
+      "Expansion fits the parent content and hides the separator.",
+      "Closing and reopening clears expanded state and retains both drafts and the preferred 800px width.",
+      "A 240px parent enters compact mode with a 238px content width and no document overflow.",
+      "A 1200px parent restores the preferred 800px width."
+    ],
+    "remaining": "Pointer dragging, cancellation/guard variants and source comparison are not covered by this run. Closing moves focus to BODY; host focus restoration needs review."
   }
 }

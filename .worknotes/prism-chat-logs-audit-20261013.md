@@ -29,3 +29,13 @@ CI run 38343548616은 typecheck·UI 테스트·build·PRISM 계약/테스트·re
 최종 manifest를 반영한 사이트를 다시 빌드합니다. 보정된 마지막 커밋의 CI/preview를 다시 확인하고 registry 자료 외에 실제 HTML 및 JS/CSS 번들도 readback 대상으로 포함합니다. 전체 goal 및 원본 인증·font/pixel/A4 검증은 여전히 미완료입니다.
 
 최종 metadata를 반영한 로컬 전체 rebuild가 통과했고 HTML의 index-C4tXqy2k.js 참조는 실패한 CI가 재생성했던 이름과 일치합니다. 원본 코드·테스트·registry contract는 바뀌지 않았습니다. 새 커밋에서 전체 CI를 다시 확인합니다. consumer 임시 서버는 소유한 PID/CWD를 확인한 뒤 종료했으며 기존 consumer 산출물은 보존했습니다. workspace 서버는 port63354/session99159, 자체 브라우저의 tab10은 후속 검증을 위해 유지합니다.
+
+## 최종 검토 게시 증거
+
+보정한 마지막 HEAD는 `cdc9c8ed5238558b66b0720efb32c54008225c4d`이며 draft PR #162의 head와 일치하고 base는 main입니다. Verify UI run `38344431926`이 completed/success로 종료됐습니다. 처음 실패한 run `38343548616`과 보정 이유는 위에 보존했습니다. 생성물 diff 검사를 제거하거나 완화하지 않았습니다.
+
+Preview `dpl_482aptJZYEAxavn8gqsqWkCxrD95`는 READY, target null, 위 HEAD와 같은 commit입니다. URL은 https://pydemia-rleh4g9pt-pydemia-7822.vercel.app 입니다. Registry·AI 안내·research 및 실제 HTML/JS/CSS 16개 readback을 완료했습니다. 15개는 원본 바이트와 SHA가 정확히 일치합니다. HTML에는 Vercel이 추가한 vercel.live/_next-live/feedback/feedback.js 스크립트 하나가 있었으며 해당 deployment id와 명시적 opt-in을 확인했습니다. 그 스크립트 하나만 제외한 application HTML은 로컬 730바이트와 정확히 일치합니다. Raw HTML의 바이트/SHA와 정규화 범위를 증거에 따로 기록했으며 HTML 전체 바이트가 같다고 주장하지 않습니다.
+
+최종 증거는 ignored `.worknotes/browser-evidence/chat-logs-corrected-preview-readback.json`, `chat-logs-corrected-ci-final.log`에 저장했습니다. Preview의 자체 브라우저 렌더는 Vercel 로그인 보호로 미검증입니다. 기존 Chrome 원본 탭과 원래 자체 브라우저 탭은 유지했으며 임시 source/overlay/consumer/preview 탭은 정리했습니다. Preview 보호나 인증 설정을 변경하지 않았습니다.
+
+전체 goal은 active입니다. 원본 인증 화면·배포 revision·전체 font/pixel/A4, 나머지 canonical 상태·기능 목적·고도화 및 production/main 반영은 미완료입니다. 공개 verification의 원격 게이트는 해당 커밋 생성 시점의 pending 상태이며 위 증거가 이후 원격 완료를 보여줍니다. 최종 SHA를 생성물에 다시 삽입해 번들이 바뀌는 순환을 피하기 위해 게시 후 증거는 작업 기록에 남깁니다. 이 마지막 기록은 다음 소스 변경과 함께 commit할 의도적인 작업 트리 변경입니다.
