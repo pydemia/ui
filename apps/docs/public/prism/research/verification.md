@@ -475,3 +475,11 @@ Real shadcn installation additionally verified58 exact module/CSS sources,39 com
 짧은 Tag/Chip의 21/22px 높이를 유지하면서 `wrap`을 선택한 긴 문구만 여러 줄로 표시합니다. 로컬 및 독립 설치본의 320px 미리보기에서 180px 폭의 긴 Tag/Chip은 각각 약 39.6/37.6px 높이로 줄바뀌었고 문서 폭은 320px였습니다. 태그 삭제 버튼은 Enter로 합성 항목을 제거했습니다. 직접 연 설치본에는 브라우저 오류 로그가 없었습니다. iframe에서 관찰된 `MutationObserver` 오류는 빈 iframe에서도 재현되어 해당 컴포넌트의 오류로 연결하지 않았습니다.
 
 최종 297개 PRISM 테스트, workspace typecheck, site build, registry release check가 통과했습니다. 실제 shadcn 설치본에서 59개 모듈·CSS의 바이트 일치, 40개 예제 타입 검사, Vite·폰트·고지를 확인했습니다. 현재 새 기준의 완료 판정은 **2/58개**이며 56개는 미판정입니다. 원본 배포 revision 동일성, 제품 서비스의 Tag 삭제, 전체 제품 사용처의 시각·상호작용은 이 판정의 증거에 포함되지 않습니다.
+
+## Goal 입력 필드 그룹 완료 판정, 2026-10-13
+
+`prism-field`는 원본 `HRXTextField`·`HRXInputField`·`HRXSelect`의 입력 목적을 묶습니다. 배포 공개 샘플에서 TextField 중간/작은 크기는 32/28px이며 읽기 전용·비활성·오류 상태를 확인했습니다. Select는 큰/중간/작은 크기 40/32/28px, 읽기 전용·비활성 상태를 확인했습니다. 검색 가능한 원본 Select는 메뉴를 열면 검색 입력에 포커스가 가고 목록을 표시합니다. 배포 SHA와 고정 기준 소스 SHA가 같은지는 확인되지 않았습니다.
+
+독립 `PrismInput`은 레이블·설명·오류를 입력과 연결하고 controlled 지우기 의도와 포커스를 유지합니다. `PrismSelect`는 필수 미선택 제출을 막고 보이는 trigger에 포커스·오류를 표시하며, 검색/키보드 선택과 native `FormData`를 제공합니다. JSX 옵션의 중첩 내용은 원본처럼 텍스트를 추출하도록 수정해 `[object Object]`가 표시되지 않습니다. 읽기 전용 선택값은 전송되지만 변경할 수 없습니다. `PrismTextarea`의 생성 상태는 입력 초안을 유지하고 helper를 가리지 않습니다.
+
+실제 shadcn 소비자에 field를 재설치해 59개 모듈·CSS 바이트 일치, 40개 예제 타입 검사, Vite·폰트·고지를 확인했습니다. 직접 연 설치본 브라우저에서 지우기/포커스, 필수값 오류, 중첩 옵션 검색·비활성 건너뛰기·첫 글자 탐색, `bravo` 제출, textarea 초안 보존을 확인했습니다. 320px와 1280px에서 문서 가로 넘침은 없었습니다. 최종 PRISM 299개 테스트, workspace typecheck, site build, registry release check가 통과했습니다. 현재 완료 판정은 **3/58개**이고 55개는 미판정입니다. 실제 저장·권한은 소비자 앱이 소유하며 전체 사용처와 폰트·픽셀 일치는 확인하지 않았습니다.

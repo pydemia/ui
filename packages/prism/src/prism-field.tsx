@@ -30,6 +30,12 @@ export function PrismTextarea({ label, description, error, id: suppliedId, class
     return <FieldFrame id={id} {...field}>{beforeInput}{inputOverlay !== undefined ? <div className="prism-textarea-overlay-area">{input}{inputOverlay}</div> : input}</FieldFrame>;
 }
 export type PrismSelectOption = { value: string; label: string; disabled?: boolean };
+function optionText(node: ReactNode): string {
+    if (typeof node === "string" || typeof node === "number") return String(node);
+    if (Array.isArray(node)) return node.map(optionText).join("");
+    if (isValidElement<{ primary?: ReactNode; children?: ReactNode }>(node)) return optionText(node.props.primary ?? node.props.children);
+    return "";
+}
 export type PrismSelectProps = FieldProps & {
     children?: ReactNode; options?: readonly PrismSelectOption[];
     renderOption?: (option: PrismSelectOption) => ReactNode; renderValue?: (option: PrismSelectOption | undefined) => ReactNode;
@@ -47,7 +53,7 @@ export function PrismSelect({ label, description, error, required, size = "mediu
     const [nativeInvalid,setNativeInvalid]=useState(false);
     const typeahead = useRef({text:"",at:0});
     const options = suppliedOptions ?? Children.toArray(children).flatMap(child => isValidElement<{value?: string; children?: ReactNode; disabled?: boolean}>(child) ? [{
-        value: child.props.value ?? String(child.props.children ?? ""), label: String(child.props.children ?? ""), disabled: child.props.disabled }] : []);
+        value: child.props.value ?? optionText(child.props.children), label: optionText(child.props.children), disabled: child.props.disabled }] : []);
     const value = controlledValue ?? internalValue; const filtered = options.filter(o => o.label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()));
     const select = (next: string) => { if (disabled || readOnly) return; if (controlledValue === undefined) setInternalValue(next); onValueChange?.(next); onChange?.({target:{value:next}}); setOpen(false); };
     useEffect(()=>{const control=native.current;if(!control)return;const resetValue=controlledValue===undefined ? defaultValue : value;for(const option of control.options)option.defaultSelected=option.value===resetValue;},[controlledValue,defaultValue,value]);

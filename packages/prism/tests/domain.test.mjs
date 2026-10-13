@@ -3,13 +3,13 @@ import test from "node:test";
 import { JSDOM } from "jsdom";
 
 const dom=new JSDOM('<!doctype html><html><body><div id="root"></div></body></html>',{url:"http://localhost/",pretendToBeVisual:true});
-for(const key of ["window","document","HTMLElement","Element","Node","Event","KeyboardEvent","MouseEvent","MutationObserver","HTMLInputElement","HTMLFormElement","DocumentFragment","CustomEvent","NodeFilter"])globalThis[key]=dom.window[key];
+for(const key of ["window","document","HTMLElement","HTMLButtonElement","Element","Node","Event","KeyboardEvent","MouseEvent","MutationObserver","HTMLInputElement","HTMLFormElement","DocumentFragment","CustomEvent","NodeFilter"])globalThis[key]=dom.window[key];
 Object.defineProperty(globalThis,"navigator",{configurable:true,value:dom.window.navigator});
 globalThis.getComputedStyle=dom.window.getComputedStyle;globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);
 globalThis.ResizeObserver=class {observe(){}unobserve(){}disconnect(){}};
 globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const {createElement:h,act,useState}=await import("react");const {createRoot}=await import("react-dom/client");const {renderToStaticMarkup}=await import("react-dom/server");
-const {PrismRichText,PrismRiskTable,PrismCompensationGrid,PrismContextForm,PrismDirectoryTable,PrismNoticeForm,PrismUserForm,PrismAutocomplete,PrismChipAutocomplete,PrismPanel,PrismInput,PrismSelect}=await import("../dist/index.js");
+const {PrismRichText,PrismRiskTable,PrismCompensationGrid,PrismContextForm,PrismDirectoryTable,PrismNoticeForm,PrismUserForm,PrismAutocomplete,PrismChipAutocomplete,PrismPanel,PrismInput,PrismTextarea,PrismSelect}=await import("../dist/index.js");
 const root=createRoot(document.getElementById("root"));
 const render=(Component,props)=>renderToStaticMarkup(h(Component,props));
 
@@ -38,6 +38,38 @@ test("select reset restores uncontrolled default and preserves controlled owners
     await act(async()=>document.querySelector('form').reset());
     assert.equal(document.querySelector('[role="combobox"]').textContent,"재무");
     assert.equal(new dom.window.FormData(document.querySelector('form')).get("field"),"finance");
+});
+test("select extracts nested option text for its value, search label and keyboard typeahead",async()=>{
+    const children=[
+        h("span",{value:"alpha",key:"alpha"},h("span",{primary:"Alpha"})),
+        h("span",{value:"beta",disabled:true,key:"beta"},h("span",{},"Beta")),
+        h("span",{value:"bravo",key:"bravo"},h("span",{},"Bravo")),
+    ];
+    let chosen;
+    await act(async()=>root.render(h(PrismSelect,{label:"분야",defaultValue:"alpha",onValueChange:value=>chosen=value},children)));
+    const trigger=document.querySelector('[role="combobox"]');
+    assert.match(trigger.textContent,/Alpha/);assert.doesNotMatch(trigger.textContent,/object Object/);
+    await act(async()=>trigger.click());
+    const choices=[...document.querySelectorAll('[role="option"]')];
+    assert.deepEqual(choices.map(choice=>choice.textContent),["Alpha","Beta","Bravo"]);
+    assert.equal(choices[1].disabled,true);
+    choices[0].focus();
+    await act(async()=>choices[0].dispatchEvent(new KeyboardEvent("keydown",{key:"b",bubbles:true})));
+    assert.equal(document.activeElement,choices[2]);
+    await act(async()=>choices[2].click());
+    assert.equal(chosen,"bravo");assert.match(trigger.textContent,/Bravo/);
+});
+test("textarea generation overlay preserves the editing node and keeps helpers outside the overlay",async()=>{
+    const props={label:"설명",description:"업무 설명",beforeInput:h("button",{type:"button"},"생성"),inputOverlay:null,defaultValue:"작성 중"};
+    await act(async()=>root.render(h(PrismTextarea,props)));
+    const textarea=document.querySelector("textarea");textarea.value="수정한 초안";
+    await act(async()=>root.render(h(PrismTextarea,{...props,inputOverlay:h("div",{role:"status"},"생성 중")})));
+    assert.equal(document.querySelector("textarea"),textarea);assert.equal(textarea.value,"수정한 초안");
+    assert.equal(document.querySelector(".prism-textarea-overlay-area [role='status']").textContent,"생성 중");
+    assert.equal(document.querySelector(".prism-textarea-overlay-area .prism-help"),null);
+    assert.equal(document.querySelector(".prism-help").textContent,"업무 설명");
+    await act(async()=>root.render(h(PrismTextarea,{...props,inputOverlay:null})));
+    assert.equal(document.querySelector("textarea"),textarea);assert.equal(textarea.value,"수정한 초안");
 });
 
 test("rich text removes executable HTML and unsafe URLs while preserving allowed marks",()=>{

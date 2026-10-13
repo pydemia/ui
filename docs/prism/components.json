@@ -206,15 +206,18 @@
           "readOnly Select remains focusable and submits value without opening",
           "native required Select blocks empty submit and focuses trigger",
           "uncontrolled form reset restores default; controlled reset preserves value",
-          "ArrowUp from search selects last option"
+          "ArrowUp from search selects last option",
+          "Nested React option labels extract text and primary content instead of [object Object]",
+          "Independent browser searchable Select filters nested labels, skips disabled options in typeahead, validates required, and submits FormData",
+          "Independent Input clear keeps focus and controlled value ownership; Textarea overlay preserves the draft"
         ],
         "evidence": [
           "local-select-open-contract",
           "local-select-readonly-sizes",
-          "local-select-native-form"
+          "local-select-native-form",
+          "field-independent-acceptance"
         ],
         "remaining": [
-          "typeahead runtime",
           "all source option states",
           "all input size/adornment/error combinations"
         ],
@@ -233,6 +236,35 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "ui/input/HRXTextField.tsx",
+            "ui/input/HRXInputField.tsx",
+            "ui/input/HRXSelect.tsx"
+          ],
+          "evidence": [
+            "Current deployed public Text Field sample shows 32/28px medium/small inputs with readonly, disabled and error; Select sample shows 40/32/28px sizes and readonly/disabled; searchable Select menu supplies a focused search input and option list.",
+            "Portable Input, Textarea and Select expose labelled controls, helper/error relationships, controlled clear intent, native required/name validation, readonly values and searchable options. Nested React option labels now resolve to visible text and support search/typeahead.",
+            "Direct independently installed browser checked clear focus and value, required validation focus and error, nested option search/disabled state/typeahead, Bravo FormData submission, and textarea draft retention through overlay. At 320px and 1280px the document has zero horizontal overflow.",
+            "299 PRISM tests, workspace typecheck, site build and registry release check passed; shadcn consumer reinstalled the field and verified 59 exact TSX sources plus CSS, 40 examples, Vite/font/notices."
+          ],
+          "intentionalImprovements": [
+            "The label is natively associated with each control and helper/error text is announced via aria-describedby; the source samples do not establish this association.",
+            "Readonly Select remains keyboard focusable and submits its value while blocking changes.",
+            "Native required validation focuses the visible Select trigger and reports its error.",
+            "Nested option content uses accessible text extraction without requiring MUI MenuItem markup in the portable API."
+          ],
+          "hostOwned": [
+            "The consuming application owns data loading, persistence, authorization and business validation. The browser fixture uses synthetic values."
+          ],
+          "nonBlockingUnknowns": [
+            "The deployed source commit identity and every authenticated product caller are not established.",
+            "All source option combinations and full font/pixel parity remain outside this group acceptance evidence."
+          ]
         }
       },
       "exports": [
