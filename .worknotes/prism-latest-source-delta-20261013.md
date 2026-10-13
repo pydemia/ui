@@ -25,3 +25,13 @@ getPrismHistoryDeletionAction은 삭제 성공 후 최신 routeConversationId/ac
 Site build 완료 후 fullSiteBuild 게이트만 passed로 갱신하고 해당 JSON을 docs에 복사했습니다. Registry를 다시 생성해 bundled components manifest의 SHA가 변하지 않은 것을 확인했습니다. 네 research 자료도 source/public과 docs의 바이트가 일치합니다. 컴포넌트 검증 필드를 바꾼 뒤 site build를 생략했던 이전 번들 불일치와 구분합니다.
 
 후속 원본 대응 조사에서는 사이드바의 메뉴 활성 상태와 전역 진행 대화 선택 상태를 함께 확인해야 합니다. 현재 단일 activeId 계약으로 모든 원본 선택 조합을 입증했다고 주장하지 않습니다. 원본 인증 화면과 배포 revision 검증도 별도 미완료입니다.
+
+## 최종 검토 게시 증거
+
+소스 commit은 1afd95df, 생성물 HEAD는 `30a6b3cc59665bec7d00965ac705eb479f393525`입니다. draft PR #162의 head가 같고 base는 main입니다. Verify UI run `38351883784`는 completed/success로 종료했으며 docs 재현성 검사도 통과했습니다. 최신 frontend HEAD=origin/dev=e5d4d79a이고 working tree는 clean입니다.
+
+Preview `dpl_842kmKNTuxFR2V9MUGWUfgFfMYnA`는 READY/target null/위 UI HEAD와 같은 commit입니다. URL은 https://pydemia-mu47vvjms-pydemia-7822.vercel.app 입니다. analysis/sidebar/badge/tokens registry, source inventory/검증 자료, 실제 HTML 및 JS/CSS를 포함한 16개 readback이 통과했습니다. 15개는 원본 바이트/SHA가 일치합니다. HTML은 해당 deployment의 Vercel feedback script 하나만 제외하면 application HTML이 정확히 일치하며 원문 hash와 정규화 범위를 따로 기록했습니다.
+
+증거는 ignored latest-source-final-ci-complete.log, latest-source-final-preview-readback.json, latest-source-analysis.png에 보존했습니다. 임시 viewport는 reset했고 소유한 tab10은 다음 검증용으로 유지했습니다. 기존 사용자·원본 browser tabs, Git credential configs, 이전 consumer 산출물은 보존했습니다. Preview 보호나 인증 설정을 변경하지 않았습니다.
+
+원본 인증 UI·배포 revision·모든 기능 목적/상호작용·font/pixel/A4·설치 runtime·추가 종류·고도화와 production/main 반영은 미완료이며 전체 goal은 active입니다. 게시 후 기록은 다음 source commit에 포함할 의도적인 working-tree 변경으로 남깁니다.

@@ -642,7 +642,7 @@
         "Source current menu capability, keyboard/layout and full authenticated interaction comparison."
       ],
       "localRenderGate": {
-        "status": "passed-current-source-delta",
+        "status": "passed-current-sidebar-selection",
         "states": [
           "default",
           "loading",
@@ -653,8 +653,8 @@
           320,
           1280
         ],
-        "sourceSha256": "94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc",
-        "scope": "Local synthetic render/geometry;selected interaction checks andsource code comparison are separate."
+        "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
+        "scope": "8 synthetic renders and selected independent selection/draft/persistence/background-deletion interactions;full source parity is separate."
       }
     },
     "prism-candidate": {
@@ -1989,9 +1989,9 @@
     "typecheck": "passed",
     "contractTests": {
       "status": "passed",
-      "passed": 272,
+      "passed": 279,
       "failed": 0,
-      "targeted": 6,
+      "targeted": 23,
       "targetedFailed": 0
     },
     "registry": {
@@ -2000,18 +2000,19 @@
       "status": "generated"
     },
     "independentConsumer": {
-      "status": "passed-current-source-delta-install",
-      "sourceSha256": "94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc",
+      "status": "passed-current-sidebar-selection-install-and-selected-runtime",
+      "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
       "groups": 58,
       "examples": 39,
       "sourceTransformations": 0,
       "css": "exact",
       "font": "exact",
-      "claim": "Real shadcn add,58 exact module/CSS sources and39 complete examples tsc/Vite/font/notices. Current installed runtime was not separately observed."
+      "runtime": "Default320/1280;independent favorites/history selection;local-draft persistence/opening",
+      "claim": "Real install andselected synthetic browser flows;full installed/source parity is separate."
     },
     "fullSiteBuild": "passed",
     "publicDeployment": {
-      "status": "pending-current-source-delta-preview;production-not-published"
+      "status": "pending-current-sidebar-selection-preview;production-not-published"
     },
     "generalComponentTests": {
       "passed": 280,
@@ -2022,7 +2023,7 @@
       "snapshot": "sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896"
     },
     "githubVerification": {
-      "status": "pending-current-source-delta-review"
+      "status": "pending-current-sidebar-selection-review"
     },
     "usageContracts": {
       "groups": 56,
@@ -2034,12 +2035,11 @@
     },
     "currentFixtureStates": {
       "count": 252,
-      "checked": 7,
-      "pending": 245,
-      "currentDeltaRenders": 14,
-      "status": "passed-latest-source-analysis-sidebar-delta;baseline-evidence-retained",
-      "sourceSha256": "94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc",
-      "claim": "Direct current checks cover analysis3/sidebar4 states. Prior 504 baseline andspinner delta evidence is retained at its measured fingerprints;not rerun."
+      "checked": 4,
+      "pending": 248,
+      "currentDeltaRenders": 8,
+      "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
+      "status": "passed-current-sidebar-selection-delta;other-baseline-evidence-retained"
     },
     "tooltipPublication": {
       "status": "published-http-and-browser-verified",
@@ -5355,6 +5355,66 @@
       "css": "exact",
       "font": "exact",
       "claim": "Real shadcn add,58 exact module/CSS sources and39 complete examples tsc/Vite/font/notices. Current installed runtime was not separately observed."
+    },
+    "fullSiteBuild": "passed"
+  },
+  "previousLatestSourceDeltaGates20261013": {
+    "currentFixtureStates": {
+      "count": 252,
+      "checked": 7,
+      "pending": 245,
+      "currentDeltaRenders": 14,
+      "status": "passed-latest-source-analysis-sidebar-delta;baseline-evidence-retained",
+      "sourceSha256": "94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc",
+      "claim": "Direct current checks cover analysis3/sidebar4 states. Prior 504 baseline andspinner delta evidence is retained at its measured fingerprints;not rerun."
+    },
+    "independentConsumer": {
+      "status": "passed-current-source-delta-install",
+      "sourceSha256": "94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc",
+      "groups": 58,
+      "examples": 39,
+      "sourceTransformations": 0,
+      "css": "exact",
+      "font": "exact",
+      "claim": "Real shadcn add,58 exact module/CSS sources and39 complete examples tsc/Vite/font/notices. Current installed runtime was not separately observed."
+    },
+    "fullSiteBuild": "passed",
+    "githubVerification": {
+      "status": "pending-current-source-delta-review"
+    },
+    "publicDeployment": {
+      "status": "pending-current-source-delta-preview;production-not-published"
+    }
+  },
+  "sidebarSelectionVerification": {
+    "referenceRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+    "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
+    "inputCount": 85,
+    "status": "passed-source-review-tests-workspace-and-selected-installed-runtime;final-site-review-pending",
+    "contracts": "Independent navigation and history selection;legacy fallback/explicit null;stable row keys separated from server anddraft IDs;public discriminated open intent;server actions forbidden for local drafts;old edit/menu cancelled after target replacement.",
+    "browser": "Favorites page andstored conversation selection independent;local draft hasno server menu;promoted row retains selection;server ID used foropen/delete;background deletion preserves favorites andincrements session only.",
+    "tests": {
+      "target": 23,
+      "full": 279,
+      "failed": 0
+    },
+    "renders": 8,
+    "remaining": [
+      "Authenticated original anddeployed revision comparison",
+      "All permission/service/cache/storage effects andpopup/focus variants",
+      "Full installed runtime/font/pixel/A4 parity",
+      "Remaining purposes,additional kinds,enhancements andproduction publication"
+    ],
+    "independentConsumer": {
+      "status": "passed-current-sidebar-selection-install-and-selected-runtime",
+      "sourceSha256": "dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091",
+      "groups": 58,
+      "examples": 39,
+      "sourceTransformations": 0,
+      "css": "exact",
+      "font": "exact",
+      "runtime": "Default320/1280;independent favorites/history selection;local-draft persistence/opening",
+      "claim": "Real install andselected synthetic browser flows;full installed/source parity is separate."
     },
     "fullSiteBuild": "passed"
   }
