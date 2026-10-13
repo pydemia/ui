@@ -1,11 +1,11 @@
-import { useId, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useId, useState, type CSSProperties, type ReactNode } from "react";
 import { PrismIcon } from "./prism-icon";
 import { PrismElpBadge, PrismChip } from "./prism-badge";
 import { PrismTable } from "./prism-display";
 import { PrismFavoriteToggle, PrismAffiliateLogo } from "./prism-primitives";
 import { PrismEvaluationHistory } from "./prism-evaluation-history";
 
-export type PrismCandidate = { id: string; name: string; company: string; position: string; executiveYears?: number;
+export type PrismCandidate = { id: string; name: string; company: string; position: string; executiveYears?: number; rank?: number;
     elp?: "ELP" | "s-ELP"; photo?: string; speciality?: string; summary?: string;
     birthDate?: string; appointmentDate?: string; groupJoinDate?: string; education?: string;
     brand?: string; companyField?: string; domain?: string; presidentPromotionDate?: string; groupJoinYears?: number;
@@ -39,13 +39,50 @@ export function PrismCandidateCard({ candidate, rank, selected, favorite, onOpen
     return <article className="prism-candidate-card" data-selected={selected || undefined} data-variant={variant} data-panel={panel || undefined}>
         <button type="button" className="prism-candidate-open" aria-labelledby={nameId} onClick={()=>onOpen(candidate)}/>
         {rank !== undefined && <span className="prism-rank">{rank}순위</span>}
-        <div className="prism-candidate-header"><PrismCandidatePortrait name={candidate.name} subjectId={candidate.id} src={candidate.photo} className="prism-candidate-photo"/>
+        <div className="prism-candidate-header"><PrismCandidatePortrait name={candidate.name} subjectId={candidate.id} src={candidate.photo} size={70} className="prism-candidate-photo"/>
             <div className="prism-candidate-info"><div className="prism-candidate-name"><span id={nameId} className="prism-candidate-label">{candidate.name}</span>
                 {candidate.elp && <PrismElpBadge type={candidate.elp} />}</div><div className="prism-candidate-categories">{affiliation&&<b>{affiliation}</b>}{jobFunction&&<span>{jobFunction}</span>}</div><p><PrismAffiliateLogo brand={candidate.brand} affiliate={candidate.company} size={12}/></p><p>{candidate.position}</p></div>
             {onFavoriteChange && <PrismFavoriteToggle name={candidate.name} checked={!!favorite} onCheckedChange={onFavoriteChange}/>}</div>
         <PrismCandidateBrief candidate={candidate} compact={variant==="grid"} single={variant==="stack"&&!panel}/>
         {candidate.summary && <p className="prism-candidate-summary">{candidate.summary}</p>}{children&&<div className="prism-candidate-extra">{children}</div>}
         {(showDetails??(variant==="stack"&&!panel)) && <button type="button" className="prism-candidate-detail-button" onClick={() => onOpen(candidate)}>상세 프로필 보기<PrismIcon name="ChevronRightIcon" size={16}/></button>}</article>;
+}
+export type PrismCandidateProfilesProps = {
+    candidates: readonly PrismCandidate[];
+    selectedId?: string | null;
+    favorites?: Readonly<Record<string, boolean>>;
+    onOpen: (candidate: PrismCandidate) => void;
+    onFavoriteChange?: (candidate: PrismCandidate, favorite: boolean) => void;
+    panel?: boolean;
+    initialVisibleCount?: number;
+    revealStep?: number;
+};
+/** Arrange a profile answer by its total candidate count; the host owns selection and bookmarks. */
+export function PrismCandidateProfiles({ candidates, selectedId, favorites, onOpen, onFavoriteChange, panel = false,
+    initialVisibleCount = 3, revealStep = 2 }: PrismCandidateProfilesProps) {
+    if (!Number.isInteger(initialVisibleCount) || initialVisibleCount < 1 || !Number.isInteger(revealStep) || revealStep < 1) {
+        throw new RangeError("Candidate collection reveal counts must be positive integers.");
+    }
+    const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
+    const candidateIds = candidates.map(candidate => candidate.id).join("\0");
+    useEffect(() => setVisibleCount(initialVisibleCount), [candidateIds, initialVisibleCount]);
+    const count = candidates.length;
+    const variant = count >= 3 ? "grid" : count === 2 ? "pair" : "stack";
+    const shown = panel ? Math.min(visibleCount, count) : count;
+    const hidden = count - shown;
+    const canCollapse = panel && hidden === 0 && count > initialVisibleCount;
+    return <div className="prism-candidate-profiles" data-variant={variant} data-panel={panel || undefined}>
+        {count === 0 ? <p className="prism-candidate-profiles-empty">표시할 후보자가 없습니다.</p> : <div className="prism-candidate-profiles-grid">
+            {candidates.slice(0, shown).map(candidate => <PrismCandidateCard key={candidate.id} candidate={candidate}
+                variant={variant} panel={panel} rank={count > 3 ? candidate.rank : undefined}
+                selected={selectedId === candidate.id} favorite={favorites?.[candidate.id]}
+                onOpen={onOpen} onFavoriteChange={onFavoriteChange ? value => onFavoriteChange(candidate, value) : undefined}/>)}</div>}
+        {(hidden > 0 || canCollapse) && <button type="button" className="prism-candidate-profiles-more"
+            aria-expanded={hidden === 0}
+            onClick={() => setVisibleCount(hidden > 0 ? Math.min(shown + revealStep, count) : initialVisibleCount)}>
+            {hidden > 0 ? `후보자 ${Math.min(hidden, revealStep)}명 더 보기` : "후보자 접기"}
+        </button>}
+    </div>;
 }
 /** Values are prepared by the consumer; no currency conversion or evaluation rules run here. */
 export function PrismCandidateBrief({candidate,compact=false,single=true}:{candidate:PrismCandidate;compact?:boolean;single?:boolean}) {
@@ -62,6 +99,25 @@ export function PrismCandidateTable({ candidates, onOpen, caption = "후보자 �
             {candidate.executiveYears !== undefined && <PrismChip>임원 {candidate.executiveYears}년차</PrismChip>}
             {candidate.elp && <PrismElpBadge type={candidate.elp} />}</div></td><td>{candidate.company} / {candidate.position}</td></tr>)
             : <tr><td colSpan={2}>표시할 후보자가 없습니다.</td></tr>}</tbody></PrismTable>;
+}
+export type PrismCandidateAssessmentRow = { id: string | number; frame: string; content: string;
+    result?: string | null; level?: string | null };
+export type PrismCandidateAssessmentTableProps = { title: string; rows: readonly PrismCandidateAssessmentRow[];
+    layout?: "detail" | "result"; headers?: readonly [string, string, string?] };
+/** Prepared chat assessment rows; result labels are displayed without deriving a score or judgement. */
+export function PrismCandidateAssessmentTable({ title, rows, layout = "result", headers = ["평가 영역", "내용", "결과"] }: PrismCandidateAssessmentTableProps) {
+    const chip = (value: string) => value === "적합" || value === "보완필요"
+        ? <PrismChip color={value === "적합" ? "#009A93" : "#EA002C"}>{value}</PrismChip> : value || "-";
+    return <PrismTable caption={title} className="prism-candidate-assessment-table">
+        <thead><tr><th scope="col">{headers[0]}</th><th scope="col">{headers[1]}</th>
+            {layout === "result" && <th scope="col">{headers[2] ?? "결과"}</th>}</tr></thead>
+        <tbody>{rows.length ? rows.map(row => <tr key={row.id}><th scope="row">{row.frame}</th>
+            <td>{layout === "detail" && (row.level === "적합" || row.level === "보완필요")
+                ? <div className="prism-candidate-assessment-detail">{chip(row.level)}<p>{row.content || "-"}</p></div>
+                : row.content || "-"}</td>
+            {layout === "result" && <td>{chip(row.result ?? "")}</td>}</tr>)
+            : <tr><td colSpan={layout === "result" ? 3 : 2}>표시할 평가가 없습니다.</td></tr>}</tbody>
+    </PrismTable>;
 }
 export type PrismAssessment = { id: string; area: string; score: number | null; evidence: string };
 export function PrismEvaluationTable({ assessments, caption = "적합성 평가" }: { assessments: readonly PrismAssessment[]; caption?: string }) {

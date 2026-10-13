@@ -1029,19 +1029,22 @@
       "name": "Candidate / Evaluation",
       "category": "Domain",
       "purpose": "후보자 프로필·즐겨찾기·목록·평가 근거 표시",
-      "contract": "onOpen과 onFavoriteChange는 의도만 전달합니다. stack/pair/grid와 panel 배치를 제공합니다. PrismCandidateBrief의 날짜·평가 이력·보상 문자열은 소비자가 준비하며 금액 환산이나 평가를 계산하지 않습니다. 평가 점수는 0–5 또는 null이며 null을 0으로 바꾸지 않습니다.",
+      "contract": "PrismCandidateProfiles는 후보 수에 따라 stack/pair/grid를 선택하고 패널에서 3명부터 2명씩 더 보여 줍니다. 좁은 영역에서는 열 수를 줄이고 긴 이름은 잘리지 않게 표시합니다. onOpen과 onFavoriteChange는 의도만 전달합니다. 카드의 개별 stack/pair/grid와 panel 배치도 제공합니다. PrismCandidateBrief의 날짜·평가 이력·보상 문자열은 소비자가 준비하며 금액 환산이나 평가를 계산하지 않습니다. PrismGridTable은 원본의 임의 열·행 표를, PrismCandidateAssessmentTable은 준비된 6-Frame 평가 행의 결과/상세 배치를 제공합니다. 적합·보완필요만 상태 칩으로 표시하고 알 수 없는 결과는 원문 그대로 둡니다. 평가 점수는 0–5 또는 null이며 null을 0으로 바꾸지 않습니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
         "loading",
         "empty",
-        "error"
+        "error",
+        "readonly",
+        "long"
       ],
       "source": [
         "chat/templates/ChatProfile.tsx",
+        "chat/templates/ChatTemplateProfile.tsx",
         "chat/templates/ChatTemplateTable.tsx"
       ],
-      "usage": "import { PrismCandidateCard } from \"@pydemia/prism\";\n<PrismCandidateCard candidate={candidate} favorite={favorite} onOpen={openProfile} onFavoriteChange={setFavorite} />;",
+      "usage": "import { PrismCandidateProfiles } from \"@pydemia/prism\";\n<PrismCandidateProfiles candidates={candidates} selectedId={selectedId} favorites={favorites} onOpen={openProfile} onFavoriteChange={(candidate, favorite) => saveFavorite(candidate.id, favorite)} panel />;",
       "sourcePath": "packages/prism/src/prism-candidate.tsx",
       "previewUrl": "/prism?component=prism-candidate",
       "embedUrl": "/prism?component=prism-candidate&embed=1",
@@ -1101,11 +1104,31 @@
           "kind": "component"
         },
         {
+          "name": "PrismCandidateProfilesProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateProfiles",
+          "kind": "component"
+        },
+        {
           "name": "PrismCandidateBrief",
           "kind": "component"
         },
         {
           "name": "PrismCandidateTable",
+          "kind": "component"
+        },
+        {
+          "name": "PrismCandidateAssessmentRow",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateAssessmentTableProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismCandidateAssessmentTable",
           "kind": "component"
         },
         {
@@ -1118,7 +1141,7 @@
         }
       ],
       "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismCandidateCard } from \"@/components/ui/prism-candidate\";\n<PrismCandidateCard candidate={candidate} favorite={favorite} onOpen={openProfile} onFavoriteChange={setFavorite} />;"
+      "registryUsage": "import { PrismCandidateProfiles } from \"@/components/ui/prism-candidate\";\n<PrismCandidateProfiles candidates={candidates} selectedId={selectedId} favorites={favorites} onOpen={openProfile} onFavoriteChange={(candidate, favorite) => saveFavorite(candidate.id, favorite)} panel />;"
     },
     {
       "id": "prism-detail",

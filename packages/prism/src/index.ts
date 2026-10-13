@@ -19,8 +19,8 @@ export { PrismSidebar, createPrismAdminMenu, getPrismHistoryDeletionAction, getP
 export type { PrismSidebarProps, PrismNavItem, PrismHistoryItem, PrismProfileAction, PrismHistoryDeletionAction, PrismHistoryOpenIntent } from "./prism-sidebar";
 export { PrismChatInput, PrismMessage, PrismCriteria } from "./prism-chat";
 export type { PrismChatInputProps } from "./prism-chat";
-export { PrismCandidateCard, PrismCandidateBrief, PrismCandidateTable, PrismEvaluationTable, PrismCandidatePortrait } from "./prism-candidate";
-export type { PrismCandidate, PrismCandidateCardProps, PrismAssessment, PrismCandidatePortraitProps } from "./prism-candidate";
+export { PrismCandidateCard, PrismCandidateProfiles, PrismCandidateBrief, PrismCandidateTable, PrismCandidateAssessmentTable, PrismEvaluationTable, PrismCandidatePortrait } from "./prism-candidate";
+export type { PrismCandidate, PrismCandidateCardProps, PrismCandidateProfilesProps, PrismCandidateAssessmentRow, PrismCandidateAssessmentTableProps, PrismAssessment, PrismCandidatePortraitProps } from "./prism-candidate";
 export { PrismSidePanel, PrismDetailList, PrismMemoCard } from "./prism-detail";
 export { PrismPanel } from "./prism-panel";
 export type { PrismPanelProps } from "./prism-panel";
