@@ -1201,7 +1201,7 @@ export function MgmtCommentsExample() {
 
 ## 6 Frame Survey / Group averages
 응답자별 진단 점수와 그룹 평균선·누락값·2/3열 카드 표시
-Contract: 점수와 평균은 호스트가 제공한0~10 값입니다. 실제0은0.0과0높이 막대로 표시하고 null 막대는 원본처럼 생략하되 접근성 데이터 표에는 정보 없음으로 남깁니다. role은boss/peer/member이며 한 범주에 중복할 수 없습니다. 그룹 평균선은 정수px로 반올림합니다. columns2/3·barMaxHeight·제목 action·style/className을 지원하며 좁은 컨테이너에서는 열과 막대를 재배치합니다. 평가나 평균을 계산하지 않습니다.
+Contract: 점수와 평균은 호스트가 제공한0~10 값입니다. 실제0은0.0과0높이 막대로 표시하고 null 막대는 원본처럼 생략하되 접근성 데이터 표에는 정보 없음으로 남깁니다. role은boss/peer/member이며 한 범주에 중복할 수 없습니다. 그룹 평균선은 정수px로 반올림합니다. columns2/3·barMaxHeight·제목 action·style/className을 지원합니다. 문서 열기 action의 실제 동작은 호스트가 소유하며 좁은 컨테이너에서는 열과 막대를 재배치합니다. 평가나 평균을 계산하지 않습니다.
 States: default, empty, long
 Registry: /prism/r/prism-survey.json
 Source: packages/prism/src/prism-survey.tsx
@@ -1209,14 +1209,16 @@ Usage kind: component-example
 Installed usage:
 ```tsx
 import { useState } from "react";
+import { PrismButton } from "@/components/ui/prism-button";
 import { PrismSurveyValidation } from "@/components/ui/prism-survey";
 export function SurveyExample() {
     const [height,setHeight]=useState(100);
+    const [result,setResult]=useState("");
     return <section data-prism="light"><label>막대 높이 <input type="number" aria-label="막대 높이" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>
-        <PrismSurveyValidation columns={2} barMaxHeight={height} items={[
+        <PrismSurveyValidation columns={2} barMaxHeight={height} action={<PrismButton type="button" variant="line" tone="primary" size="small" onClick={()=>setResult("문서 열기 의도")}>Culture Survey 결과 보기</PrismButton>} items={[
             {id:"example",category:"가상 신뢰",bars:[{role:"boss",value:0,average:6.1},{role:"peer",value:7.2,average:6.45},{role:"member",value:null}]},
             {id:"missing",category:"가상 존중",bars:[{role:"boss",value:null},{role:"peer",value:null},{role:"member",value:null}]},
-        ]}/></section>;
+        ]}/><p role="status">{result}</p></section>;
 }
 ```
 

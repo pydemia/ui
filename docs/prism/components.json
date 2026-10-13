@@ -4964,7 +4964,7 @@
       "name": "6 Frame Survey / Group averages",
       "category": "Domain",
       "purpose": "응답자별 진단 점수와 그룹 평균선·누락값·2/3열 카드 표시",
-      "contract": "점수와 평균은 호스트가 제공한0~10 값입니다. 실제0은0.0과0높이 막대로 표시하고 null 막대는 원본처럼 생략하되 접근성 데이터 표에는 정보 없음으로 남깁니다. role은boss/peer/member이며 한 범주에 중복할 수 없습니다. 그룹 평균선은 정수px로 반올림합니다. columns2/3·barMaxHeight·제목 action·style/className을 지원하며 좁은 컨테이너에서는 열과 막대를 재배치합니다. 평가나 평균을 계산하지 않습니다.",
+      "contract": "점수와 평균은 호스트가 제공한0~10 값입니다. 실제0은0.0과0높이 막대로 표시하고 null 막대는 원본처럼 생략하되 접근성 데이터 표에는 정보 없음으로 남깁니다. role은boss/peer/member이며 한 범주에 중복할 수 없습니다. 그룹 평균선은 정수px로 반올림합니다. columns2/3·barMaxHeight·제목 action·style/className을 지원합니다. 문서 열기 action의 실제 동작은 호스트가 소유하며 좁은 컨테이너에서는 열과 막대를 재배치합니다. 평가나 평균을 계산하지 않습니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
@@ -4977,31 +4977,37 @@
         "chat/successorCandidate/expertise/SurveyValidation.module.scss",
         "chat/successorCandidate/expertise/ValidationItem.module.scss"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismSurveyValidation } from \"@pydemia/prism\";\nexport function SurveyExample() {\n    const [height,setHeight]=useState(100);\n    return <section data-prism=\"light\"><label>막대 높이 <input type=\"number\" aria-label=\"막대 높이\" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>\n        <PrismSurveyValidation columns={2} barMaxHeight={height} items={[\n            {id:\"example\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]},\n            {id:\"missing\",category:\"가상 존중\",bars:[{role:\"boss\",value:null},{role:\"peer\",value:null},{role:\"member\",value:null}]},\n        ]}/></section>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismSurveyValidation } from \"@pydemia/prism\";\nexport function SurveyExample() {\n    const [height,setHeight]=useState(100);\n    const [result,setResult]=useState(\"\");\n    return <section data-prism=\"light\"><label>막대 높이 <input type=\"number\" aria-label=\"막대 높이\" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>\n        <PrismSurveyValidation columns={2} barMaxHeight={height} action={<PrismButton type=\"button\" variant=\"line\" tone=\"primary\" size=\"small\" onClick={()=>setResult(\"문서 열기 의도\")}>Culture Survey 결과 보기</PrismButton>} items={[\n            {id:\"example\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]},\n            {id:\"missing\",category:\"가상 존중\",bars:[{role:\"boss\",value:null},{role:\"peer\",value:null},{role:\"member\",value:null}]},\n        ]}/><p role=\"status\">{result}</p></section>;\n}",
       "sourcePath": "packages/prism/src/prism-survey.tsx",
       "previewUrl": "/prism?component=prism-survey",
       "embedUrl": "/prism?component=prism-survey&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-survey&view=responsive",
       "verification": {
-        "visual": "partial",
-        "interaction": "partial",
-        "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+        "visual": "passed-selected-deployed-css-local-and-installed; authenticated full-profile parity pending",
+        "interaction": "passed-selected-synthetic-sizing-and-action",
+        "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
         "checks": [
           "source36px bars/24px track/100px height·role 색·정수 평균선·0.0과null 구분을 구현",
           "CUA 카드194px/padding8/12px radius,bars36/24,평균61/63/75/82px·Red400,role Green200/Blue200/Orange200 확인",
           "140~1280px 넘침0·3/2/1열 재배치,가변320px 막대와평균195px",
           "print class의118pt=157.328px 카드·70px 막대·legend10pt 확인. 실제OS/native print와 구분",
-          "긴 제목의sr-only table min-content가 페이지 너비를 늘리던 문제를clip wrapper로 수정하고 실제320px 재측정"
+          "긴 제목의sr-only table min-content가 페이지 너비를 늘리던 문제를clip wrapper로 수정하고 실제320px 재측정",
+          "Current frontend dev SurveyValidation/ValidationItem and SCSS are unchanged since the earlier source comparison; the 2026-10-10 deployed CSS sample retains their card, bar, legend and print rules.",
+          "The local 140px long-title Survey wraps its optional Culture Survey action to 140px instead of overflowing by 16px; a 320px-high bar retains the integer 195px group-average line and visible zero.",
+          "At 800px print style the action is omitted, cards measure 157.328px, bars 70px and the legend 13.333px. Empty result removes cards and legend without stale content.",
+          "An isolated shadcn consumer reinstalled the Survey registry and exact CSS, verified 59 module bytes and 43 examples, built with Vite/font/notices, and rendered the 140px action, zero and missing values without browser errors."
         ],
         "remaining": [
-          "인증 원본 모든 Survey 상태·전체 pixel/font 대조",
-          "실제프로필 전체 출력/native print"
+          "Authenticated deployed full-profile Survey states and the deployed source revision remain unbound; selected deployed CSS and current source/local/installed checks support this group acceptance.",
+          "Native print output, PDF fetching, permissions and actual candidate score mapping belong to the profile-print or host integration scope."
         ],
         "evidence": [
           "pdf-report.test.mjs",
           "attitude-deployed-css.json",
           "survey-cua-runtime.json",
-          "attitude-cua-runtime.json"
+          "attitude-cua-runtime.json",
+          "survey-goal-installed-bytes.json",
+          "prism-survey-audit-2026-10-14.md"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -5016,6 +5022,31 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/successorCandidate/expertise/SurveyValidation.tsx",
+            "chat/successorCandidate/expertise/ValidationItem.tsx",
+            "chat/successorCandidate/expertise/SurveyValidation.module.scss",
+            "chat/successorCandidate/expertise/ValidationItem.module.scss"
+          ],
+          "evidence": [
+            "Current dev sources are unchanged from the selected deployed CSS comparison; local cards, bars, role colors, average lines and print dimensions were measured.",
+            "Local browser exercised default, long, empty, dynamic height, print style and the optional host action, including 140px containment after the button wrap improvement.",
+            "An isolated shadcn consumer reinstalled the registry, matched 59 module sources and CSS, typechecked 43 examples, built with Vite/font/notices and rendered the 140px Survey with distinct zero/null values and a working host intent."
+          ],
+          "intentionalImprovements": [
+            "The optional action wraps below 180px without changing its ordinary source-style height; missing bars remain represented in an accessible data table."
+          ],
+          "hostOwned": [
+            "The consuming app supplies scores and averages, authorizes and opens any Culture Survey document, and handles native print or PDF output."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed full-profile states and the deployed source commit identity are not established."
+          ]
         }
       },
       "exports": [
@@ -5033,7 +5064,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismSurveyValidation } from \"@/components/ui/prism-survey\";\nexport function SurveyExample() {\n    const [height,setHeight]=useState(100);\n    return <section data-prism=\"light\"><label>막대 높이 <input type=\"number\" aria-label=\"막대 높이\" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>\n        <PrismSurveyValidation columns={2} barMaxHeight={height} items={[\n            {id:\"example\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]},\n            {id:\"missing\",category:\"가상 존중\",bars:[{role:\"boss\",value:null},{role:\"peer\",value:null},{role:\"member\",value:null}]},\n        ]}/></section>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismSurveyValidation } from \"@/components/ui/prism-survey\";\nexport function SurveyExample() {\n    const [height,setHeight]=useState(100);\n    const [result,setResult]=useState(\"\");\n    return <section data-prism=\"light\"><label>막대 높이 <input type=\"number\" aria-label=\"막대 높이\" min={20} max={320} value={height} onChange={event=>setHeight(Math.max(20,Math.min(320,Number(event.target.value)||20)))}/></label>\n        <PrismSurveyValidation columns={2} barMaxHeight={height} action={<PrismButton type=\"button\" variant=\"line\" tone=\"primary\" size=\"small\" onClick={()=>setResult(\"문서 열기 의도\")}>Culture Survey 결과 보기</PrismButton>} items={[\n            {id:\"example\",category:\"가상 신뢰\",bars:[{role:\"boss\",value:0,average:6.1},{role:\"peer\",value:7.2,average:6.45},{role:\"member\",value:null}]},\n            {id:\"missing\",category:\"가상 존중\",bars:[{role:\"boss\",value:null},{role:\"peer\",value:null},{role:\"member\",value:null}]},\n        ]}/><p role=\"status\">{result}</p></section>;\n}"
     },
     {
       "id": "prism-attitude-report",
