@@ -345,3 +345,11 @@ IAB recovered. All8 log states rendered at1280/320 with no document horizontal o
 Current9 of252 canonical states have scoped browser evidence. Full source/installed state coverage,authenticated original font/pixel/A4 and deployed revision comparison remain incomplete. The source-defined /chat/admin/chat-logs route is document complete but visibly blank in IAB;the existing Chrome source tab displays /admin-login. These observations do not establish an authentication or implementation cause. Review branch CI/preview readback is pending;production is not published.
 
 Current source fingerprint:31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7/84 inputs.
+
+## Current canonical-state browser audit 2026-10-13
+
+All 58 groups and 252 canonical states were inspected through CUA at 320px and 1280px: 504 unique state/width renders. Component/state identity and fixture presence matched. Document horizontal overflow, nested buttons and visible unlabeled native inputs were zero. Font loading status was loaded, and the selected tab had no browser error logs. This is a local synthetic render and DOM-layout gate. It does not establish authenticated source parity or complete interaction coverage.
+
+Selected panel interactions confirmed keyboard changes from 440px to 456px and 800px, expansion to the parent content, and closing/reopening with drafts and the preferred width retained. A 240px parent produced compact mode; restoring a 1200px parent restored the preferred 800px panel. Closing moved focus to BODY; caller focus restoration remains a review item. Pointer dragging, cancellation/guard combinations, all popups/callbacks/service effects, independent installed-state coverage and original font/pixel/A4 comparison remain incomplete.
+
+Source fingerprint remains 31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7, covering 84 inputs. Previous generation/chat-log and publication evidence is preserved. Passing 252/252 render checks does not establish full-goal completion. Production/main has not been published by this work.

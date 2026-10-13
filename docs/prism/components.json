@@ -187,7 +187,20 @@
         ],
         "remaining": [
           "hover/focus/disabled combinations"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -260,7 +273,23 @@
           "typeahead runtime",
           "all source option states",
           "all input size/adornment/error combinations"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled",
+            "readonly",
+            "error",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -318,7 +347,19 @@
       "responsivePreviewUrl": "/prism?component=prism-badge&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -389,7 +430,22 @@
         "remaining": [
           "fresh original comparison across lengths and widths",
           "all chip and table visual/interactive states"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled",
+            "empty",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -453,7 +509,19 @@
         ],
         "remaining": [
           "all source tab states and keyboard focus placement"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -516,7 +584,22 @@
         "remaining": [
           "long body and no-title confirm variants",
           "all deployed error/busy states"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -578,7 +661,22 @@
         ],
         "remaining": [
           "all original Toast tones, long content and placement states"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "empty",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -653,7 +751,22 @@
         ],
         "remaining": [
           "Source current menu capability, keyboard/layout and full authenticated interaction comparison."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "empty",
+            "restricted"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -709,7 +822,22 @@
       "responsivePreviewUrl": "/prism?component=prism-chat&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -770,7 +898,22 @@
         ],
         "evidence": [
           "local-candidate-card"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "empty",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -833,7 +976,19 @@
       "responsivePreviewUrl": "/prism?component=prism-detail&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -908,7 +1063,24 @@
           "Original static font versus installed variable font measurements for every state",
           "Native wheel/touch/OS IME integration and all low-height/error/text combinations",
           "Complete authenticated source memo/card/long-state screenshot and pixel/font comparison; current source interaction could not render the target state."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error",
+            "readonly",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1002,7 +1174,22 @@
           "panel-independent-resize.json",
           "panel-drag-compact-before.log",
           "panel-drag-compact-after.log"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "closed",
+            "expanded",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1039,7 +1226,21 @@
       "responsivePreviewUrl": "/prism?component=prism-six-frame&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1118,7 +1319,24 @@
         "remaining": [
           "every size and disabled/readOnly state",
           "all dropdown keyboard and typeahead variants"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled",
+            "readonly",
+            "loading",
+            "error",
+            "empty"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1204,7 +1422,24 @@
           "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
           "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
           "Authenticated original source and production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error",
+            "readonly",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1286,7 +1521,22 @@
       "responsivePreviewUrl": "/prism?component=prism-content&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1338,7 +1588,22 @@
       "responsivePreviewUrl": "/prism?component=prism-admin&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1411,7 +1676,22 @@
           "reference-html-export-20261009",
           "reference-html-export-offline",
           "parsed-css-html-export"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "error",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1487,7 +1767,22 @@
           "consumer-export-runtime",
           "local-export-125",
           "final-static-export"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "error",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1609,7 +1904,20 @@
         ],
         "evidence": [
           "local-pdf-responsive"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1718,7 +2026,19 @@
           "local-workspace-sizing",
           "local-workspace-growth",
           "local-workspace-mobile-profile-390"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1775,7 +2095,22 @@
         "remaining": [
           "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
           "Authenticated deployed source and deployed revision binding."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "long",
+            "detail-only"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1878,7 +2213,23 @@
           "native operating-system drag and file dialog interactions beyond the browser filechooser event",
           "authenticated upload/download service integration belongs to the host; not executed",
           "all accepted format/size/count/browser combinations"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled",
+            "loading",
+            "error",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -1967,7 +2318,21 @@
           "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
           "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
           "Authenticated original source and production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2023,7 +2388,23 @@
           "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
           "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
           "Authenticated original source and production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "readonly",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2085,7 +2466,22 @@
         ],
         "remaining": [
           "deployed evaluation/compensation/validation geometry and all interactive states"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2138,7 +2534,22 @@
       "responsivePreviewUrl": "/prism?component=prism-management&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "readonly",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2223,7 +2634,24 @@
           "Default section animation in the locked environment did not advance beyond its initial frame;interaction checks usedreduceMotion=true",
           "Page.captureScreenshot timed out after5000ms in this phase;no new screenshot file",
           "Full service schema/query continuation,OSIME/touch andallfont/low-height combinations"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "error",
+            "readonly",
+            "long",
+            "empty"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2334,7 +2762,22 @@
         "remaining": [
           "All other primitive states and domain callers",
           "Latest source-purpose mappings are implemented; changed source styles and domain caller states remain unverified."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "disabled",
+            "empty",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2425,7 +2868,27 @@
         "remaining": [
           "Actual source and independent-consumer rendered geometry, pixels and real keyboard/focus/modal/scroll at compact/expanded/short heights.",
           "Authenticated original view and production publication."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "memo",
+            "position",
+            "chat",
+            "closed",
+            "expanded",
+            "long",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2537,7 +3000,24 @@
           "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
           "Authenticated historical/LIVE service and deployed revision binding.",
           "Full source component purpose/style/extension coverage, current A4 and production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error",
+            "long",
+            "versioned"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2600,7 +3080,20 @@
       "responsivePreviewUrl": "/prism?component=prism-assessment&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2703,7 +3196,22 @@
       "responsivePreviewUrl": "/prism?component=prism-collection&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2793,7 +3301,22 @@
         ],
         "remaining": [
           "Dialog list selection/order and all states"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2891,7 +3414,23 @@
           "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
           "Authenticated historical/LIVE service and deployed revision binding.",
           "Full source component purpose/style/extension coverage, current A4 and production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error",
+            "versioned"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -2949,7 +3488,21 @@
       "responsivePreviewUrl": "/prism?component=prism-management-tools&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3044,7 +3597,24 @@
           "Native OS save andautomatic browser print integration in thelocked environment",
           "Full real profile query/mapping andoriginal printable layout;synthetic generated PDFs are integration fixtures",
           "Current UI screenshot capture timed out after5000ms;no newUI screenshot produced;PDF raster is export evidence only"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "error",
+            "readonly",
+            "long",
+            "empty"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3118,7 +3688,21 @@
         ],
         "remaining": [
           "Complete authenticated source table state/pixel comparison"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3169,7 +3753,19 @@
       "responsivePreviewUrl": "/prism?component=prism-page-state&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3250,7 +3846,25 @@
           "Administrator page/list/bulk/role API/position restoration purpose and style comparison.",
           "Current source/consumer/preview keyboard, restricted, optional company, long/compact and font/pixel comparison.",
           "Real authenticated backend and deployed revision binding; current A4 and production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "readonly",
+            "loading",
+            "error",
+            "long",
+            "restricted",
+            "access-error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3375,7 +3989,21 @@
         "checks": [
           "Isolated static document waits embedded fonts/images and paint; preparation timeout, abort/dispose and afterprint release only its owned iframe.",
           "Parent title/DOM retained; browser invocation and event are not physical-output confirmation."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3453,7 +4081,22 @@
       "responsivePreviewUrl": "/prism?component=prism-intro&view=responsive",
       "verification": {
         "visual": "pending",
-        "interaction": "pending"
+        "interaction": "pending",
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "disabled",
+            "loading"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3511,7 +4154,22 @@
         "remaining": [
           "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
           "Authenticated deployed source and deployed revision binding."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3647,7 +4305,24 @@
           "인증된 원본 CEO/ELP 추가·편집·오류 상태의 전체 시각 및 폰트 대조",
           "실제 backend 권한·저장·캐시/query 통합",
           "현재 screenshot capture는5000ms timeout; 새 UI screenshot 없음"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "loading",
+            "error",
+            "readonly",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3753,7 +4428,21 @@
           "attitude-deployed-css.json",
           "survey-cua-runtime.json",
           "attitude-cua-runtime.json"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3821,7 +4510,22 @@
           "attitude-deployed-css.json",
           "attitude-cua-runtime.json",
           "attitude-downloaded-bytes.pdf"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "error",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -3953,7 +4657,19 @@
         ],
         "remaining": [
           "rendered currentColor and placement in every host component"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -4096,7 +4812,21 @@
         "remaining": [
           "원본 인증 상태의 전체 pixel/font 대조",
           "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -4172,7 +4902,23 @@
           "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
           "Authenticated historical/LIVE service and deployed revision binding.",
           "Full source component purpose/style/extension coverage, current A4 and production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "readonly",
+            "long",
+            "versioned"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -4243,7 +4989,21 @@
         "remaining": [
           "원본 인증 상태의 전체 pixel/font 대조",
           "긴 문장/모든 상태 actual320 및 독립 설치본 browser 검증"
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -4297,7 +5057,22 @@
         "remaining": [
           "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
           "Authenticated deployed source and deployed revision binding."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "empty",
+            "long",
+            "detail-only"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -4422,7 +5197,21 @@
           "Administrator lists, page restore/bulk/status and remaining chat/authStore context.",
           "Authenticated current source/deployed revision and full design/interaction/purpose parity.",
           "Current full-font/pixel/A4 comparison and production publication."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "position",
+            "closed"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -4509,7 +5298,24 @@
           "Position-list restoration,non-user administrator lists and page access/permission states.",
           "Real role/status services and authenticated deployed revision/design/interaction comparison.",
           "Remaining chat/authStore and full font/pixel/A4/production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "empty",
+            "error",
+            "readonly",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -4638,7 +5444,28 @@
           "Other administrator lists, page access and real role/status/sync services.",
           "Authenticated deployed revision, original UI/state/interaction and full pixel/font/A4 parity.",
           "Remaining chat/authStore and production publication."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "edit",
+            "scheduled",
+            "running",
+            "failed",
+            "empty",
+            "error",
+            "loading",
+            "readonly",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -4822,7 +5649,28 @@
           "Position-block/chat-log purposes and authenticated administrator/source/permission states.",
           "Real member cascade/status/notice persistence and deployed source revision binding.",
           "Remaining chat/authStore/full source font/pixel/A4 parity and production."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "empty",
+            "error",
+            "readonly",
+            "long",
+            "notice",
+            "partial",
+            "filtered-empty",
+            "missing"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -5033,7 +5881,30 @@
           "Authenticated source rendering/permissions and real API/AI/RBAC/cache/sync effects.",
           "Other source purposes including chat-log composition and complete state parity.",
           "Original whole-page static/variable font,pixel/A4 and production publication."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "edit",
+            "create",
+            "job",
+            "remap",
+            "empty",
+            "loading",
+            "error",
+            "scheduled",
+            "running",
+            "readonly",
+            "long"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
@@ -5190,7 +6061,26 @@
           "Authenticated original rendering and deployed revision binding: IAB source route is blank;existing Chrome source tab displays admin-login. Original chat-log source is a placeholder with no real API integration.",
           "Full source font/pixel/A4 and all canonical state parity,remaining purposes and improvements.",
           "Review branch CI/preview readback pending current revision;production not published."
-        ]
+        ],
+        "localRenderGate": {
+          "status": "passed",
+          "states": [
+            "default",
+            "loading",
+            "empty",
+            "error",
+            "long",
+            "filtered-empty",
+            "detail-only",
+            "access-error"
+          ],
+          "widths": [
+            320,
+            1280
+          ],
+          "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
+          "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        }
       },
       "exports": [
         {
