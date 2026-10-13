@@ -346,15 +346,35 @@ export function SixFrameExample() {
 
 ## Selection / Date / Pagination
 검색·다중 선택·기간 검증·페이지 탐색
-Contract: 선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 중복을 추가하지 않으며 첫 칩을 해제해도 나머지 값은 보존합니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다. DatePicker displayFormat는YYYY-MM-DD(기본)/YYYY.MM.DD만지원하고placeholder를선택적으로지정합니다. 표시와수동입력은format을따르며value/onValueChange는기존ISO YYYY-MM-DD를유지합니다.
+Contract: 선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 원본처럼 검색이 기본으로 표시되지 않으며 searchable로 켤 수 있습니다. 중복을 추가하지 않고 첫 칩을 해제해도 나머지 값을 보존합니다. 메뉴가 열린 채 disabled/readOnly가 되면 선택과 달력을 닫고 미확정 날짜 입력을 버립니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다. DatePicker displayFormat는 YYYY-MM-DD(기본)/YYYY.MM.DD만 지원하고 placeholder를 선택적으로 지정합니다. 표시와 수동 입력은 format을 따르며 value/onValueChange는 ISO YYYY-MM-DD를 유지합니다.
 States: default, disabled, readonly, loading, error, empty
 Registry: /prism/r/prism-selection.json
 Source: packages/prism/src/prism-selection.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismMultiSelect } from "@/components/ui/prism-selection";
-<PrismMultiSelect label="분야" options={options} value={value} onValueChange={setValue} />;
+import { useState } from "react";
+import { PrismAutocomplete, PrismMultiSelect, PrismChipAutocomplete, PrismCheckbox, PrismRadioGroup, PrismDateRange, PrismPagination } from "@/components/ui/prism-selection";
+
+const fields = [{ value: "tech", label: "기술·연구개발" }, { value: "finance", label: "재무" }];
+export function SelectionExample() {
+  const [field, setField] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [candidate, setCandidate] = useState<string | null>(null);
+  const [includeElp, setIncludeElp] = useState(false);
+  const [radio, setRadio] = useState("tech");
+  const [range, setRange] = useState<{ start: string | null; end: string | null }>({ start: null, end: null });
+  const [page, setPage] = useState(1);
+  return <section data-prism="light" style={{ display: "grid", gap: 16, maxWidth: 560 }}>
+    <PrismAutocomplete label="분야 검색" options={fields} value={field} onValueChange={setField} />
+    <PrismMultiSelect label="분야 선택" options={fields} value={selected} onValueChange={setSelected} />
+    <PrismChipAutocomplete label="후보자 검색" options={[{ value: "candidate-1", label: "김가상 (가상회사)" }]} value={candidate} onValueChange={setCandidate} />
+    <PrismCheckbox label="ELP 후보 포함" checked={includeElp} onCheckedChange={value => setIncludeElp(value === true)} />
+    <PrismRadioGroup label="기준 분야" options={fields} value={radio} onValueChange={setRadio} />
+    <PrismDateRange label="조회 기간" {...range} onValueChange={setRange} />
+    <PrismPagination page={page} pageCount={3} onPageChange={setPage} />
+  </section>;
+}
 ```
 
 ## Candidate profile / Evidence

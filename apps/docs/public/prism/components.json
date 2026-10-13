@@ -1636,7 +1636,7 @@
       "name": "Selection / Date / Pagination",
       "category": "Inputs",
       "purpose": "검색·다중 선택·기간 검증·페이지 탐색",
-      "contract": "선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 중복을 추가하지 않으며 첫 칩을 해제해도 나머지 값은 보존합니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다. DatePicker displayFormat는YYYY-MM-DD(기본)/YYYY.MM.DD만지원하고placeholder를선택적으로지정합니다. 표시와수동입력은format을따르며value/onValueChange는기존ISO YYYY-MM-DD를유지합니다.",
+      "contract": "선택값·날짜·페이지는 controlled입니다. 검색은 방향키·Enter·Escape와 IME 입력을 지원합니다. freeSolo를 켜면 목록 밖 문자열을 Enter/blur로 확정합니다. 다중 선택은 원본처럼 검색이 기본으로 표시되지 않으며 searchable로 켤 수 있습니다. 중복을 추가하지 않고 첫 칩을 해제해도 나머지 값을 보존합니다. 메뉴가 열린 채 disabled/readOnly가 되면 선택과 달력을 닫고 미확정 날짜 입력을 버립니다. 후보자 칩 검색은 기본 세 글자 이상에서 열리고 선택 해제 시 검색 입력으로 포커스를 돌려줍니다. 날짜는 YYYY-MM-DD와 null을 사용하고 역전 기간을 오류로 표시합니다. DatePicker 기본값은 필드 클릭으로 달력을 여는 원본 방식입니다. inputEditable을 켜면 직접 입력·유효 날짜 검증을 지원합니다. pageCount는 1 이상입니다. DatePicker displayFormat는 YYYY-MM-DD(기본)/YYYY.MM.DD만 지원하고 placeholder를 선택적으로 지정합니다. 표시와 수동 입력은 format을 따르며 value/onValueChange는 ISO YYYY-MM-DD를 유지합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "sourceDeltaAudits": [
         {
@@ -1656,6 +1656,7 @@
       ],
       "source": [
         "ui/input/HRXAutocomplete.tsx",
+        "ui/input/HRXMultiSelect.tsx",
         "ui/input/HRXCheckbox.tsx",
         "ui/input/HRXRadio.tsx",
         "ui/datepicker/HRXDatePicker.tsx",
@@ -1663,7 +1664,7 @@
         "admin/common/AdminDateRangeField.tsx",
         "admin/common/AdminChipAutocomplete.tsx"
       ],
-      "usage": "import { PrismMultiSelect } from \"@pydemia/prism\";\n<PrismMultiSelect label=\"분야\" options={options} value={value} onValueChange={setValue} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismAutocomplete, PrismMultiSelect, PrismChipAutocomplete, PrismCheckbox, PrismRadioGroup, PrismDateRange, PrismPagination } from \"@pydemia/prism\";\n\nconst fields = [{ value: \"tech\", label: \"기술·연구개발\" }, { value: \"finance\", label: \"재무\" }];\nexport function SelectionExample() {\n  const [field, setField] = useState<string | null>(null);\n  const [selected, setSelected] = useState<string[]>([]);\n  const [candidate, setCandidate] = useState<string | null>(null);\n  const [includeElp, setIncludeElp] = useState(false);\n  const [radio, setRadio] = useState(\"tech\");\n  const [range, setRange] = useState<{ start: string | null; end: string | null }>({ start: null, end: null });\n  const [page, setPage] = useState(1);\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 16, maxWidth: 560 }}>\n    <PrismAutocomplete label=\"분야 검색\" options={fields} value={field} onValueChange={setField} />\n    <PrismMultiSelect label=\"분야 선택\" options={fields} value={selected} onValueChange={setSelected} />\n    <PrismChipAutocomplete label=\"후보자 검색\" options={[{ value: \"candidate-1\", label: \"김가상 (가상회사)\" }]} value={candidate} onValueChange={setCandidate} />\n    <PrismCheckbox label=\"ELP 후보 포함\" checked={includeElp} onCheckedChange={value => setIncludeElp(value === true)} />\n    <PrismRadioGroup label=\"기준 분야\" options={fields} value={radio} onValueChange={setRadio} />\n    <PrismDateRange label=\"조회 기간\" {...range} onValueChange={setRange} />\n    <PrismPagination page={page} pageCount={3} onPageChange={setPage} />\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-selection.tsx",
       "previewUrl": "/prism?component=prism-selection",
       "embedUrl": "/prism?component=prism-selection&embed=1",
@@ -1686,7 +1687,9 @@
         "evidence": [
           "local-selection-fixed",
           "local-selection-keyboard",
-          "local-calendar-year"
+          "local-calendar-year",
+          "local-selection-goal-2026-10-14",
+          "installed-selection-goal-2026-10-14"
         ],
         "remaining": [
           "every size and disabled/readOnly state",
@@ -1708,6 +1711,39 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "ui/input/HRXAutocomplete.tsx",
+            "ui/input/HRXMultiSelect.tsx",
+            "ui/input/HRXCheckbox.tsx",
+            "ui/input/HRXRadio.tsx",
+            "ui/datepicker/HRXDatePicker.tsx",
+            "ui/pagination/HRXPagination.tsx",
+            "admin/common/AdminDateRangeField.tsx",
+            "admin/common/AdminChipAutocomplete.tsx"
+          ],
+          "evidence": [
+            "Original selection sources and call sites were audited for autocomplete, optional multiselect search, three-character candidate chip search, calendar-only date fields, range bounds and pagination.",
+            "Earlier deployed/local checks cover the checkbox selected color, calendar geometry, multi-select and chip/keyboard flows; the current local browser confirmed multi-select, candidate chip focus restoration, calendar selection and page changes.",
+            "Local responsive iframe rendered default and error at 320px with 320px document width; an inverted date range shows one error message. Isolated installation rendered within a 320px container without descendant overflow and exercised multiselect, chip, date and pagination.",
+            "319 PRISM tests, workspace typecheck and site build passed; isolated shadcn installation matched 59 module sources and CSS byte for byte, typechecked 43 complete examples and built with Vite/font/notices."
+          ],
+          "intentionalImprovements": [
+            "Read-only or disabled transitions close an open selection menu/calendar, preserve committed values and discard an uncommitted date draft.",
+            "An inverted range announces its error once and prevents choosing an end date before the start date.",
+            "The range stacks at narrow widths instead of preserving the original fixed-width layout."
+          ],
+          "hostOwned": [
+            "Option queries, committed selection/date/page state and downstream navigation or service requests belong to the consumer."
+          ],
+          "nonBlockingUnknowns": [
+            "The deployed source commit identity and authenticated product save/query effects are unverified.",
+            "Every source caller and keyboard, typeahead, hover, size or pixel combination was not exhaustively sampled."
+          ]
         }
       },
       "exports": [
@@ -1752,8 +1788,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismMultiSelect } from \"@/components/ui/prism-selection\";\n<PrismMultiSelect label=\"분야\" options={options} value={value} onValueChange={setValue} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismAutocomplete, PrismMultiSelect, PrismChipAutocomplete, PrismCheckbox, PrismRadioGroup, PrismDateRange, PrismPagination } from \"@/components/ui/prism-selection\";\n\nconst fields = [{ value: \"tech\", label: \"기술·연구개발\" }, { value: \"finance\", label: \"재무\" }];\nexport function SelectionExample() {\n  const [field, setField] = useState<string | null>(null);\n  const [selected, setSelected] = useState<string[]>([]);\n  const [candidate, setCandidate] = useState<string | null>(null);\n  const [includeElp, setIncludeElp] = useState(false);\n  const [radio, setRadio] = useState(\"tech\");\n  const [range, setRange] = useState<{ start: string | null; end: string | null }>({ start: null, end: null });\n  const [page, setPage] = useState(1);\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 16, maxWidth: 560 }}>\n    <PrismAutocomplete label=\"분야 검색\" options={fields} value={field} onValueChange={setField} />\n    <PrismMultiSelect label=\"분야 선택\" options={fields} value={selected} onValueChange={setSelected} />\n    <PrismChipAutocomplete label=\"후보자 검색\" options={[{ value: \"candidate-1\", label: \"김가상 (가상회사)\" }]} value={candidate} onValueChange={setCandidate} />\n    <PrismCheckbox label=\"ELP 후보 포함\" checked={includeElp} onCheckedChange={value => setIncludeElp(value === true)} />\n    <PrismRadioGroup label=\"기준 분야\" options={fields} value={radio} onValueChange={setRadio} />\n    <PrismDateRange label=\"조회 기간\" {...range} onValueChange={setRange} />\n    <PrismPagination page={page} pageCount={3} onPageChange={setPage} />\n  </section>;\n}"
     },
     {
       "id": "prism-profile",
