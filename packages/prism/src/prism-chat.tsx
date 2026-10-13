@@ -1,4 +1,4 @@
-import { useId, useLayoutEffect, useRef, type ReactNode } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { PrismIcon } from "./prism-icon";
 import { PrismButton } from "./prism-button";
 
@@ -46,13 +46,63 @@ export function PrismChatInput({ value, onValueChange, onSubmit, onStop, busy = 
         </div>
     </form>;
 }
-export function PrismMessage({ role, children, status, actions }: { role: "user" | "assistant"; children: ReactNode;
-    status?: "generating" | "complete" | "error"; actions?: ReactNode }) {
+async function copyMessageText(text: string): Promise<void> {
+    if (navigator.clipboard?.writeText && window.isSecureContext) { await navigator.clipboard.writeText(text); return; }
+    const temporary = document.createElement("textarea");
+    const previousFocus = document.activeElement;
+    temporary.value = text;
+    temporary.readOnly = true;
+    temporary.style.position = "fixed";
+    temporary.style.left = "-9999px";
+    document.body.appendChild(temporary);
+    try {
+        temporary.select();
+        if (!document.execCommand?.("copy")) throw new Error("Clipboard copy failed");
+    } finally {
+        temporary.remove();
+        if (previousFocus instanceof HTMLElement) previousFocus.focus();
+    }
+}
+export type PrismMessageProps = { role: "user" | "assistant"; children: ReactNode;
+    status?: "generating" | "complete" | "error"; actions?: ReactNode;
+    /** User-question text to copy. Plain string children are copied by default. */
+    copyText?: string; onCopy?: (text: string) => void | Promise<void> };
+export function PrismMessage({ role, children, status, actions, copyText, onCopy }: PrismMessageProps) {
+    const [copiedText, setCopiedText] = useState<string | null>(null);
+    const pendingCopy = useRef(false);
+    const resetCopy = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const questionText = copyText ?? (typeof children === "string" ? children : undefined);
+    const copied = questionText !== undefined && copiedText === questionText;
+    useEffect(() => () => { if (resetCopy.current) clearTimeout(resetCopy.current); }, []);
+    const copyQuestion = async () => {
+        if (questionText === undefined || copied || pendingCopy.current) return;
+        pendingCopy.current = true;
+        try {
+            await (onCopy ? onCopy(questionText) : copyMessageText(questionText));
+            setCopiedText(questionText);
+            if (resetCopy.current) clearTimeout(resetCopy.current);
+            resetCopy.current = setTimeout(() => setCopiedText(null), 3000);
+        } catch { /* A failed copy must not be reported as complete. */ }
+        finally { pendingCopy.current = false; }
+    };
     return <article className="prism-message" data-role={role} aria-label={role === "user" ? "사용자 메시지" : "PRISM 답변"}>
         <div className="prism-message-content">{children}</div>
+        {role === "user" && questionText !== undefined && <div className="prism-message-actions">
+            <button type="button" className="prism-message-copy" data-copied={copied || undefined} aria-label={copied ? "복사 완료" : "질문 복사"} title={copied ? "복사 완료" : "복사"} onClick={() => { void copyQuestion(); }}>
+                <PrismIcon name={copied ? "CheckLineIcon" : "CopyIcon"} size={20}/>
+            </button>
+        </div>}
         {status && <p className="prism-answer-status" role={status === "error" ? "alert" : "status"}>
             {status === "generating" ? "답변 생성 중" : status === "error" ? "답변을 생성하지 못했습니다." : "답변 완료"}</p>}{actions}</article>;
 }
-export function PrismCriteria({ items }: { items: readonly string[] }) {
-    return <section className="prism-criteria" aria-label="판단 기준"><ul>{items.map((item, index) => <li key={index}>{item}</li>)}</ul></section>;
+function formatCriteriaText(text: string): ReactNode {
+    const heading = text.match(/^#{1,6}\s+(.+)/);
+    if (heading) return <strong>{heading[1]}</strong>;
+    return text.split(/(\*{2,}[^*]+\*{2,})/g).map((part, index) => {
+        const bold = part.match(/^\*{2,}([^*]+)\*{2,}$/);
+        return bold ? <strong key={index}>{bold[1]}</strong> : part;
+    });
+}
+export function PrismCriteria({ items, panelMode = false }: { items: readonly string[]; panelMode?: boolean }) {
+    return <section className="prism-criteria" data-panel={panelMode || undefined} aria-label="판단 기준"><ol>{items.map((item, index) => <li key={index}>{formatCriteriaText(item)}</li>)}</ol></section>;
 }

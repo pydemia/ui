@@ -11,7 +11,7 @@ let width=800;const observers=[];
 Object.defineProperty(dom.window.HTMLElement.prototype,"clientWidth",{configurable:true,get:()=>width});
 globalThis.ResizeObserver=class{constructor(callback){this.callback=callback;this.closed=false;observers.push(this);}observe(node){this.node=node;}unobserve(){}disconnect(){this.closed=true;}};
 const {createElement:h,act,StrictMode}=await import("react"),{createRoot}=await import("react-dom/client");
-const {PrismAnalysis,PrismProfileAnalysis,PrismFormattedText,PrismPositionRecommendations,PrismResponse,createPrismPositionReference}=await import("../dist/index.js");
+const {PrismAnalysis,PrismProfileAnalysis,PrismFormattedText,PrismPositionRecommendations,PrismResponse,PrismMessage,PrismCriteria,createPrismPositionReference}=await import("../dist/index.js");
 const root=createRoot(document.getElementById("root")),render=node=>act(async()=>root.render(node)),clear=()=>render(null),click=node=>act(async()=>node.click());
 const items=count=>Array.from({length:count},(_,index)=>({id:`p-${index}`,company:"가상전자",title:`가상 포지션 ${index+1}`,reasons:["합성 전문성","합성 경험"]}));
 const cards=()=>[...document.querySelectorAll('.prism-position-recommendation')],more=()=>document.querySelector('.prism-position-reveal');
@@ -186,4 +186,20 @@ test("complete host example retries errors, replaces loader generations and canc
     assert.equal(requests[1].signal.aborted,true);assert.equal(document.querySelector('.prism-position-header h2'),null);assert.equal(nextRequests.length,1);
     const dismiss=[...document.querySelectorAll('button')].find(button=>button.textContent==='선택 해제');await click(dismiss);assert.equal(nextRequests[0].signal.aborted,true);
     await act(async()=>nextRequests[0].resolve(positionData('선택 해제 뒤 늦은 결과')));assert.equal(document.querySelector('.prism-position-detail'),null);await clear();
+});
+test("question copy reports only successful host work and assistant messages do not expose copy",async()=>{
+    const copied=[];
+    await render(h(PrismMessage,{role:'user',onCopy:async text=>copied.push(text)},'합성 질문'));
+    const button=document.querySelector('.prism-message-copy');assert.equal(button.getAttribute('aria-label'),'질문 복사');
+    await click(button);assert.deepEqual(copied,['합성 질문']);assert.equal(button.getAttribute('aria-label'),'복사 완료');
+    await render(h(PrismMessage,{role:'user',onCopy:()=>{throw new Error('synthetic copy failure');}},'다른 질문'));
+    await click(document.querySelector('.prism-message-copy'));assert.equal(document.querySelector('.prism-message-copy').getAttribute('aria-label'),'질문 복사');
+    await render(h(PrismMessage,{role:'assistant'},'합성 답변'));assert.equal(document.querySelector('.prism-message-copy'),null);await clear();
+});
+test("criteria preserve source heading and bold semantics while rendering untrusted text literally",async()=>{
+    await render(h(PrismCriteria,{items:['# 합성 제목','합성 **판단** 근거','<img src=x onerror=alert(1)>'],panelMode:true}));
+    const criteria=document.querySelector('.prism-criteria');assert.ok(criteria.hasAttribute('data-panel'));
+    assert.equal(criteria.querySelectorAll('ol > li').length,3);
+    assert.deepEqual([...criteria.querySelectorAll('strong')].map(node=>node.textContent),['합성 제목','판단']);
+    assert.equal(criteria.querySelector('img'),null);assert.match(criteria.textContent,/<img src=x onerror=alert\(1\)>/);await clear();
 });
