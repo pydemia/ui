@@ -18,7 +18,10 @@ export function RecommendationsDemo({ state }: {state:FixtureState}) {
         <PrismPositionRecommendations items={items} selectedId={selected} onSelect={state === "readonly" ? undefined : item=>setSelected(item.id)} resize="both" style={{width,maxWidth:"100%"}}/><p role="status">{selected ? `선택: ${selected}` : "선택 없음"}</p></div>;
 }
 export function FormattedTextDemo({state}: {state:FixtureState}) {
-    const [panel,setPanel]=useState(false),[action,setAction]=useState("");
-    const source=state==="empty" ? "" : state==="long" ? "**합성 근거**와 긴 문장을 줄바꿈해 표시합니다. ".repeat(50) : "<color-blue>합성 근거</color>와 [후보 확인](profile://synthetic), [포지션 확인](position://synthetic-position)\n\n<bullet depth=1>**합성 설명**입니다.</bullet>";
+    const [panel,setPanel]=useState(state==="panel"),[action,setAction]=useState("");
+    const source=state==="empty" ? "" : state==="long" ? `<h2>${"긴합성제목".repeat(16)}</h2> <badge-blue>${"긴합성배지".repeat(16)}</badge>\n`+"**합성 근거**와 긴 문장을 줄바꿈해 표시합니다. ".repeat(50) : state==="unsafe"
+        ? '<script>alert(1)</script><img src="/private" onerror="alert(2)"><span onclick="alert(3)">안전한 본문</span> [차단](javascript:alert(4))'
+        : state==="markup" ? '<h1>합성 제목</h1> <h2>합성 소제목</h2>\n<highlight-yellow>강조</highlight> <badge-white>흰 배지</badge> <badge-black>검은 배지</badge> <color-blue>파란 글자</color> <size-large>크기</size> <bold>굵게</bold> <italic>기울임</italic> <underline>밑줄</underline>\n<bullet depth=1>첫 근거</bullet>\n<bullet depth=2>둘째 근거</bullet>\n<bullet depth=3>셋째 근거</bullet>'
+        : "<color-blue>합성 근거</color>와 [후보 확인](profile://synthetic), [포지션 확인](position://synthetic-position), [문서 확인](popup:/synthetic.pdf)\n\n<bullet depth=1>**합성 설명**입니다.</bullet>";
     return <div className="prism-demo-stack"><label><input type="checkbox" checked={panel} onChange={event=>setPanel(event.target.checked)}/>패널 모드</label><PrismFormattedText source={source} panel={panel} onAction={(kind,id)=>setAction(`${kind}: ${id}`)}/><p role="status">{action}</p></div>;
 }

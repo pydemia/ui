@@ -4,12 +4,16 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 const colors = "white|black|gray|red|orange|yellow|green|blue|purple|brown|pink";
+const richClass = new RegExp(`^prism-rich-(?:color-(?:${colors})|highlight-(?:${colors})|badge-(?:${colors})|size-(?:extra-small|small|normal|large|extra-large)|bullet-[1-3]|bold|italic|underline|h[12])$`);
 const schema = { ...defaultSchema, tagNames:[...(defaultSchema.tagNames ?? []),"mark"], attributes:{...defaultSchema.attributes,
-    span:[["className",/^prism-rich-(?:color|highlight|badge|size|bullet|bold|italic|underline|h1|h2)/]], mark:[["className",/^prism-rich-highlight/]],
+    span:[["className",richClass]], mark:[["className",richClass]],
 }, protocols:{...defaultSchema.protocols,href:["http","https","mailto","profile","position","popup"]} };
 function formatTags(source: string): string {
-    let formatted = source.replace(new RegExp(`<(color|highlight|badge)-(${colors})>`,'g'),(_,kind,color) => `<span class="prism-rich-${kind}-${color}">`)
-        .replace(/<\/(color|highlight|badge)>/g,"</span>")
+    let formatted = source.replace(/<h([12])>([\s\S]*?)<\/h\1>/g,(_,level,content) => `<span class="prism-rich-h${level}">${content}</span>`)
+        .replace(new RegExp(`<highlight-(${colors})>`,'g'),(_,color) => `<mark class="prism-rich-highlight-${color}">`)
+        .replace(/<\/highlight>/g,"</mark>")
+        .replace(new RegExp(`<(color|badge)-(${colors})>`,'g'),(_,kind,color) => `<span class="prism-rich-${kind}-${color}">`)
+        .replace(/<\/(color|badge)>/g,"</span>")
         .replace(/<size-(extra-small|small|normal|large|extra-large)>/g,'<span class="prism-rich-size-$1">').replace(/<\/size>/g,"</span>")
         .replace(/<(bold|italic|underline)>/g,'<span class="prism-rich-$1">').replace(/<\/(bold|italic|underline)>/g,"</span>")
         .replace(/<bullet\s+depth=["']?([1-3])["']?>/g,'<span class="prism-rich-bullet-$1">').replace(/<\/bullet>/g,"</span>");

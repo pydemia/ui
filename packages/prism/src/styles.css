@@ -1168,6 +1168,8 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 [data-prism="light"] .prism-rich-bold { font-weight: 700; }
 [data-prism="light"] .prism-rich-italic { font-style: italic; }
 [data-prism="light"] .prism-rich-underline { text-decoration: underline; text-underline-offset: 3px; }
+[data-prism="light"] .prism-rich-h1 { font-size: 24px; font-weight: 700; line-height: 1.4; }
+[data-prism="light"] .prism-rich-h2 { display: inline-block; max-width: 100%; margin: 19px 0; font-size: 20px; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; }
 [data-prism="light"] [class*="prism-rich-bullet-"] { display: block; }
 [data-prism="light"] [class*="prism-rich-bullet-"]::before { content: "•"; margin-right: 8px; }
 [data-prism="light"] .prism-rich-bullet-2 { padding-left: 22px; }
@@ -1191,28 +1193,29 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 [data-prism="light"] .prism-rich-color-purple { color: #7244d9; }
 [data-prism="light"] .prism-rich-color-brown { color: #92400e; }
 [data-prism="light"] .prism-rich-color-pink { color: #dd1c7b; }
+[data-prism="light"] [class*="prism-rich-badge-"] { display: inline-block; max-width: 100%; padding: 2px 6px; border: 1px solid transparent; border-radius: 4px; font-size: 16px; font-weight: 400; line-height: 1.4; overflow-wrap: anywhere; }
 [data-prism="light"] .prism-rich-highlight-white { padding: 2px 4px; background: #f4f5f8; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-white { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #f4f5f8; color: #ffffff; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-white { border-color: #ededed; background: #f4f5f8; color: #222222; }
 [data-prism="light"] .prism-rich-highlight-black { padding: 2px 4px; background: #e3e7ed; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-black { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #e3e7ed; color: #222222; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-black { border-color: #000000; background: #222222; color: #ffffff; }
 [data-prism="light"] .prism-rich-highlight-gray { padding: 2px 4px; background: #edf0f5; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-gray { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #edf0f5; color: #646e82; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-gray { border-color: #e8ebef; background: #f2f4f8; color: #58647a; }
 [data-prism="light"] .prism-rich-highlight-red { padding: 2px 4px; background: #fff0f0; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-red { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #fff0f0; color: #ef4444; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-red { border-color: #ffe2e2; background: #fff5f5; color: #ef4444; }
 [data-prism="light"] .prism-rich-highlight-orange { padding: 2px 4px; background: #ffecdc; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-orange { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #ffecdc; color: #f26b0d; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-orange { border-color: #f8e7d9; background: #fff3ea; color: #f26b0d; }
 [data-prism="light"] .prism-rich-highlight-yellow { padding: 2px 4px; background: #fffae3; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-yellow { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #fffae3; color: #d8a900; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-yellow { border-color: #f1ebd0; background: #fffce1; color: #967500; }
 [data-prism="light"] .prism-rich-highlight-green { padding: 2px 4px; background: #eeffe0; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-green { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #eeffe0; color: #109842; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-green { border-color: #daeeca; background: #f2ffe8; color: #109842; }
 [data-prism="light"] .prism-rich-highlight-blue { padding: 2px 4px; background: #e9f4ff; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-blue { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #e9f4ff; color: #3977db; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-blue { border-color: #dce8f4; background: #f1f8ff; color: #3977db; }
 [data-prism="light"] .prism-rich-highlight-purple { padding: 2px 4px; background: #f4ecfa; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-purple { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #f4ecfa; color: #7244d9; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-purple { border-color: #ece5f1; background: #fbf7ff; color: #7244d9; }
 [data-prism="light"] .prism-rich-highlight-brown { padding: 2px 4px; background: #faf3ed; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-brown { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #faf3ed; color: #92400e; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-brown { border-color: #ece5de; background: #faf3ed; color: #92400e; }
 [data-prism="light"] .prism-rich-highlight-pink { padding: 2px 4px; background: #ffeaf6; line-height: 1.9; }
-[data-prism="light"] .prism-rich-badge-pink { display: inline-block; padding: 2px 6px; border-radius: 4px; background: #ffeaf6; color: #dd1c7b; line-height: 1.4; }
+[data-prism="light"] .prism-rich-badge-pink { border-color: #f0e5eb; background: #fff5fb; color: #dd1c7b; }
 [data-prism="light"] .prism-checkbox[data-size="small"] { width: 16px; height: 16px; }
 [data-prism="light"] .prism-criteria-tag { display: inline-flex; align-items: center; height: 26px; padding: 0 6px 0 8px; border: 1px solid var(--prism-border); border-radius: 4px; background: var(--prism-base); }
 [data-prism="light"] .prism-criteria-tag > button { display: inline-flex; align-items: center; gap: 4px; height: 100%; padding: 0; border: 0; background: transparent; font-size: 12px; font-weight: 500; cursor: pointer; }

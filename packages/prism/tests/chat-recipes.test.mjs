@@ -52,6 +52,23 @@ test("standalone formatted text dispatches host actions once, makes panel labels
     await render(h(PrismFormattedText,props));await click(document.querySelector('button'));assert.deepEqual(calls,[['profile','synthetic']]);assert.equal(document.querySelector('script,img'),null);
     await render(h(PrismFormattedText,{...props,panel:true}));assert.equal(document.querySelector('button'),null);assert.match(document.body.textContent,/후보/);await clear();
 });
+test("formatted text keeps source heading, highlight and badge tags while limiting actions",async()=>{
+    const calls=[];
+    const source='<h1>합성 제목</h1> <h2>합성 소제목</h2> <highlight-yellow>강조</highlight> <badge-white>흰 배지</badge> <badge-black>검은 배지</badge> <bullet depth=2>근거</bullet> [문서](popup:/synthetic.pdf) [차단](javascript:alert(1))';
+    await render(h(PrismFormattedText,{source,onAction:(...args)=>calls.push(args)}));
+    assert.equal(document.querySelector('.prism-rich-h1').textContent,'합성 제목');
+    assert.equal(document.querySelector('.prism-rich-h2').textContent,'합성 소제목');
+    assert.equal(document.querySelector('mark.prism-rich-highlight-yellow').textContent,'강조');
+    assert.equal(document.querySelector('.prism-rich-badge-white').textContent,'흰 배지');
+    assert.equal(document.querySelector('.prism-rich-badge-black').textContent,'검은 배지');
+    assert.equal(document.querySelector('.prism-rich-bullet-2').textContent,'근거');
+    assert.equal(document.querySelectorAll('a[href^="javascript:"]').length,0);
+    await click(document.querySelector('button.prism-rich-action'));
+    assert.deepEqual(calls,[['document','/synthetic.pdf']]);
+    await render(h(PrismFormattedText,{source,panel:true,onAction:(...args)=>calls.push(args)}));
+    assert.equal(document.querySelectorAll('button.prism-rich-action').length,1);
+    await clear();
+});
 test("wide recommendations disclose 3 of 4 and 6 of 7 then collapse, without inventing ranks",async()=>{
     width=800;
     for(const [count,initial] of [[0,0],[1,1],[2,2],[3,3],[4,3],[6,3],[7,6],[9,6]]){
