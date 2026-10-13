@@ -726,7 +726,7 @@
       "name": "Message / Composer / Criteria",
       "category": "AI & agent",
       "purpose": "질문 입력·전송·중단, 답변 상태와 판단 기준 표시",
-      "contract": "value/onValueChange/onSubmit은 controlled이며 Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공합니다. busy는 전송을 막고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다.",
+      "contract": "value/onValueChange/onSubmit은 controlled입니다. 800px 예시는 원본 110px 외곽·60px 입력 영역·20px 첫 글줄·48px 동작 영역·28px 버튼을 따릅니다. 기본 2000자 상한과 최대 5줄 자동 높이를 사용하고 값이 있을 때만 글자 수를 표시합니다. Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공하며 busy는 입력을 잠그고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다. onAttach는 현재 배포 원본에서 숨겨진 첨부 기능의 선택적 확장입니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
@@ -745,8 +745,26 @@
       "embedUrl": "/prism?component=prism-chat&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-chat&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending",
+        "visual": "partial",
+        "interaction": "partial",
+        "checks": [
+          "Authenticated deployed empty composer measured at 800x110px with 60px input field, 20px first text line, 48px actions and 28px send button",
+          "Deployed empty input hides count; synthetic five-character draft shows 5/2000 and activates send, then was cleared",
+          "Local default composer matches selected geometry and focus shadow; native input maxLength is 2000",
+          "Local 320px long synthetic draft caps textarea at five lines with inner scrolling and no document overflow",
+          "Local loading state shows disabled input, loading placeholder, 20px spinner and 28px stop",
+          "Independent installed browser regression: stop retains the five-character synthetic draft with zero submits; one send-button click increments submit count to one"
+        ],
+        "evidence": [
+          "authenticated-chat-composer-default-2026-10-13",
+          "local-chat-composer-2026-10-13",
+          "installed-chat-composer-2026-10-13"
+        ],
+        "remaining": [
+          "Deployed busy/long/mobile composer and file attachment states",
+          "Actual chat API submit/stop and other-browser IME behavior",
+          "Full source/font/pixel comparison and deployed revision binding"
+        ],
         "localRenderGate": {
           "status": "passed",
           "states": [

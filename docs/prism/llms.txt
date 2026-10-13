@@ -211,7 +211,7 @@ export function SidebarHistoryExample({ initialMode = "default" }: { initialMode
 
 ## Message / Composer / Criteria
 질문 입력·전송·중단, 답변 상태와 판단 기준 표시
-Contract: value/onValueChange/onSubmit은 controlled이며 Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공합니다. busy는 전송을 막고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다.
+Contract: value/onValueChange/onSubmit은 controlled입니다. 800px 예시는 원본 110px 외곽·60px 입력 영역·20px 첫 글줄·48px 동작 영역·28px 버튼을 따릅니다. 기본 2000자 상한과 최대 5줄 자동 높이를 사용하고 값이 있을 때만 글자 수를 표시합니다. Enter 전송·Shift+Enter 개행·IME 조합 보호를 제공하며 busy는 입력을 잠그고 onStop을 호출합니다. 입력은 제출 결과를 받은 뒤 호출자가 지웁니다. onAttach는 현재 배포 원본에서 숨겨진 첨부 기능의 선택적 확장입니다.
 States: default, disabled, loading, error
 Registry: /prism/r/prism-chat.json
 Source: packages/prism/src/prism-chat.tsx

@@ -1805,8 +1805,22 @@
       }
     },
     "prism-chat": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "partial",
+      "interaction": "partial",
+      "checks": [
+        "Authenticated deployed empty composer measured at 800x110px with 60px input field, 20px first text line, 48px actions and 28px send button",
+        "Deployed empty input hides count; synthetic five-character draft shows 5/2000 and activates send, then was cleared",
+        "Local default composer matches selected geometry and focus shadow; native input maxLength is 2000",
+        "Local 320px long synthetic draft caps textarea at five lines with inner scrolling and no document overflow",
+        "Local loading state shows disabled input, loading placeholder, 20px spinner and 28px stop",
+        "Independent installed browser regression: stop retains the five-character synthetic draft with zero submits; one send-button click increments submit count to one"
+      ],
+      "evidence": ["authenticated-chat-composer-default-2026-10-13", "local-chat-composer-2026-10-13", "installed-chat-composer-2026-10-13"],
+      "remaining": [
+        "Deployed busy/long/mobile composer and file attachment states",
+        "Actual chat API submit/stop and other-browser IME behavior",
+        "Full source/font/pixel comparison and deployed revision binding"
+      ],
       "localRenderGate": {
         "status": "passed",
         "states": [
