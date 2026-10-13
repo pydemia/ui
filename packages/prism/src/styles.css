@@ -310,6 +310,9 @@
 .prism-button[data-size="medium"]:not([data-icon-only]):has(.prism-button-icon) {padding-left:8px;}
 .prism-button[data-size="small"]:not([data-icon-only]):has(.prism-button-icon) {padding:0 8px 0 6px;}
 .prism-button[data-size="x-small"]:not([data-icon-only]):has(.prism-button-icon) {padding:0 4px 0 8px;}
+.prism-button[data-size="medium"][data-icon-position="right"]:has(.prism-button-icon) {padding:0 8px 0 12px;}
+.prism-button[data-size="small"][data-icon-position="right"]:has(.prism-button-icon) {padding:0 6px 0 8px;}
+.prism-button[data-size="x-small"][data-icon-position="right"]:has(.prism-button-icon) {padding:0 8px 0 4px;}
 .prism-button-icon { display: inline-flex; align-items: center; justify-content: center; }
 .prism-button-icon svg { width: 20px; height: 20px; }
 .prism-button[data-size="large"] .prism-button-icon svg { width: 16px; height: 16px; }

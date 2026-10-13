@@ -223,6 +223,35 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "ui/button/HRXBtn.tsx",
+          "ui/button/HRXNewChatBtn.tsx"
+        ],
+        "evidence": [
+          "Deployed public button sample and local examples compared for solid, warning, line, shape, icon-only, new-chat and disabled geometry, colors, icon sizing and hover.",
+          "Source call sites confirm label-only and right-icon use; portable API now renders children ?? label and places right icons after text.",
+          "Local IAB 320px default/disabled renders have 320px document scroll width; label-only click increments once, right icon follows text, and disabled examples are native disabled.",
+          "Local new-chat click and Enter each invoke one synthetic callback; focus-visible outline and accessible icon-only names observed.",
+          "296 PRISM tests, workspace typecheck, site build and registry release check passed; isolated shadcn consumer installed 59 exact TSX sources plus CSS, typechecked 40 examples and built with Vite/font/notices."
+        ],
+        "intentionalImprovements": [
+          "Icon-only actions require an accessible name.",
+          "Right-icon spacing is symmetrical to its position.",
+          "Button defaults to type=button to avoid unintended form submission.",
+          "The new-chat example fills its container rather than reproducing the deployed sample container width."
+        ],
+        "hostOwned": [
+          "Product navigation, service requests and authorization are supplied by the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "Deployed source commit identity and every product caller/hover/focus combination are not established.",
+          "Full static-versus-variable font and pixel comparison are not required by this goal criterion."
+        ]
       }
     },
     "prism-selection": {
@@ -1837,7 +1866,11 @@
         "Local loading state shows disabled input, loading placeholder, 20px spinner and 28px stop",
         "Independent installed browser regression: stop retains the five-character synthetic draft with zero submits; one send-button click increments submit count to one"
       ],
-      "evidence": ["authenticated-chat-composer-default-2026-10-13", "local-chat-composer-2026-10-13", "installed-chat-composer-2026-10-13"],
+      "evidence": [
+        "authenticated-chat-composer-default-2026-10-13",
+        "local-chat-composer-2026-10-13",
+        "installed-chat-composer-2026-10-13"
+      ],
       "remaining": [
         "Deployed busy/long/mobile composer and file attachment states",
         "Actual chat API submit/stop and other-browser IME behavior",
@@ -2032,7 +2065,11 @@
         "Independent shadcn consumer verified 59 installed module sources and exact CSS, 40 examples, Vite, font and notices",
         "Installed consumer 320px default and loading states have zero document horizontal overflow"
       ],
-      "evidence": ["authenticated-chat-intro-default-2026-10-13", "local-chat-intro-2026-10-13", "installed-chat-intro-2026-10-13"],
+      "evidence": [
+        "authenticated-chat-intro-default-2026-10-13",
+        "local-chat-intro-2026-10-13",
+        "installed-chat-intro-2026-10-13"
+      ],
       "remaining": [
         "Deployed loading/mobile/hover intro states and real favorite-card navigation",
         "Full source/font/pixel comparison and deployed revision binding"
@@ -5778,8 +5815,16 @@
     },
     "latestSourceDelta": {
       "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
-      "scope": ["mounted detail panels", "existing rows visible while refreshing"],
-      "evidence": ["source diff", "mount-lifecycle/refresh test", "local browser", "independent installed browser"],
+      "scope": [
+        "mounted detail panels",
+        "existing rows visible while refreshing"
+      ],
+      "evidence": [
+        "source diff",
+        "mount-lifecycle/refresh test",
+        "local browser",
+        "independent installed browser"
+      ],
       "deployedRevisionBinding": "unverified",
       "responsive320": "Real 320px iframe: document width 320px, 680px table inside 256px scroll area; detail remains hidden/mounted after return to 10-row list."
     }
@@ -5830,9 +5875,30 @@
     "remaining": "Other source states and full pixel/font parity unverified; current CSS review preview pending."
   },
   "twoComponentScope20261013": {
-    "components": ["PrismPositionDirectory", "PrismSummaryBadge"],
+    "components": [
+      "PrismPositionDirectory",
+      "PrismSummaryBadge"
+    ],
     "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
-    "localChecks": ["295 PRISM tests", "59 installed module sources and 40 usage examples", "installed tab retention and 88x88px badge geometry"],
-    "remaining": ["deployed revision binding", "full visual/state parity", "remaining original/installed pixel and state comparison", "main or production publication"]
+    "localChecks": [
+      "295 PRISM tests",
+      "59 installed module sources and 40 usage examples",
+      "installed tab retention and 88x88px badge geometry"
+    ],
+    "remaining": [
+      "deployed revision binding",
+      "full visual/state parity",
+      "remaining original/installed pixel and state comparison",
+      "main or production publication"
+    ]
+  },
+  "goalAcceptance": {
+    "targetGroups": 58,
+    "acceptedGroups": [
+      "prism-button"
+    ],
+    "acceptedCount": 1,
+    "unassessedGroups": 57,
+    "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

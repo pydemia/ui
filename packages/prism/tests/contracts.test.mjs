@@ -20,6 +20,15 @@ test("icon-only actions must be named and buttons do not submit implicitly", () 
     const doc = new JSDOM(render(PrismButton, { children: "저장" })).window.document;
     assert.equal(doc.querySelector("button").type, "button");
 });
+test("button label fallback and trailing icon follow the source contract", () => {
+    const labelOnly = new JSDOM(render(PrismButton, { label: "다시 시도", variant: "line" })).window.document.querySelector("button");
+    assert.equal(labelOnly.textContent, "다시 시도");
+    assert.equal(labelOnly.getAttribute("label"), null);
+    const trailing = new JSDOM(render(PrismButton, { label: "대체 문구", children: "더 보기", icon: h("svg", { role: "img" }), iconPosition: "right" })).window.document.querySelector("button");
+    assert.equal(trailing.textContent, "더 보기");
+    assert.equal(trailing.lastElementChild.className, "prism-button-icon");
+    assert.equal(trailing.lastElementChild.getAttribute("aria-hidden"), "true");
+});
 test("new-chat button supplies the source label and AddIcon without caller markup", () => {
     const doc = new JSDOM(render(PrismNewChatButton, {})).window.document;
     const button = doc.querySelector("button");
