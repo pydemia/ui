@@ -379,3 +379,11 @@ Navigation activeId and history activeHistoryId are independent. Omitted activeH
 Current fingerprint:dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091/85 inputs. Prior source/renderer evidence retains its original fingerprints. Installed runtime, authenticated source/deployed revision, full font/pixel/A4 and all-purpose completion remain unverified.
 
 Real shadcn installation additionally verified58 exact module/CSS sources,39 complete examples tsc/Vite build,font andartwork notices. The installed sidebar rendered at320/1280 andits independent menu/history selection andlocal-draft promotion/opening worked. This does not establish all installed interactions orsource parity.
+
+## 사이드바 실제 원본 비교와 긴 이력 보정
+
+실제 testuser001 원본과 비교해 메뉴 line-height 21px, 이력 19.6px, 새 대화 글자색 #fdfdfd와 10px 이력 스크롤바를 보정했습니다. 100행 합성 이력과 후보자 목록 진입 시 대화 선택 해제 예제를 추가했습니다. 관련 24개/전체 280개 테스트와 typecheck가 통과했고 5개 상태를 320/1280px에서 10회 렌더했습니다. 마지막 행 이동 전후 footer 위치는 유지됐습니다.
+
+선택한 16개 치수·스타일 중 15개가 일치합니다. 배포 원본에는 새 포지션 목록 메뉴가 있어 history 시작 y가 40px 다릅니다. 최신 원본 d677e551은 fetch/fast-forward했으며 새 position-list 목적·EtcIcon과 다른 delta의 감사/구현은 미완료입니다. 기존 source inventory의 e5 기준 수치를 최신 원본 수치로 재사용하지 않습니다. 전체 font/pixel/동작과 배포 revision은 미확인입니다. 원본 비교 당시 fingerprint는 259cf5a223358cf3497e68de7de53b1bc65e6e175db06558a1b580efa63530a0/85 inputs입니다.
+
+실제 설치 browser에서 문서 전용 CSS에 의존하던 예제 높이를 발견해 완전한 예제 안에 layout을 명시했습니다. 최종 fingerprint 69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4의 10회 렌더와 소비자 320/1280px 100행 검사가 통과했습니다. 소비자 sidebar는 518px, row는 213px이며 마지막 행 이동 시 footer는 y375로 유지되고 내부 scrollTop만 3313으로 바뀝니다. 58개 module/CSS와 39개 예제의 재설치 검증이 통과했습니다.
