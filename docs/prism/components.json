@@ -1057,14 +1057,21 @@
           "Photo slot 70px; grid header is column, panel header is row",
           "Favorite is 20 x 20px and checked color rgb(251,188,5)",
           "Favorite click does not open profile; clicking date in card body opens profile",
-          "Grid compact brief excludes degree and compensation; no nested buttons"
+          "Grid compact brief excludes degree and compensation; no nested buttons",
+          "Deployed public Templates sample shows one full profile, two paired profiles and five/six compact grid profiles; source uses total candidate count for layout.",
+          "Portable profile group selects one/two/three-column variants, shows three then two more in a panel, and preserves host-owned selection/favorite intents.",
+          "Local 320px profile cards use one column, 70px photos and top-right favorites without document overflow; 320px assessment table scrolls inside 288px region.",
+          "Prepared assessment table covers source two-column detail and three-column result modes; only 적합 and 보완필요 use result chips."
         ],
         "remaining": [
-          "all source card placement and long-name states",
-          "authenticated deployed candidate card comparison; public Candidate Common sample contains helpers"
+          "Authenticated product candidate navigation/bookmark persistence is host-owned and was not exercised in the public sample.",
+          "Deployed source commit identity and every profile caller/visual state are not established."
         ],
         "evidence": [
-          "local-candidate-card"
+          "local-candidate-card",
+          "deployed-public-chat-template-profiles",
+          "local-candidate-profiles-320",
+          "candidate-installed-bytes"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -1080,6 +1087,37 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/templates/ChatProfile.tsx",
+            "chat/templates/ChatTemplateProfile.tsx",
+            "chat/templates/ChatTemplateTable.tsx",
+            "ui/table/HRXChatTable.tsx"
+          ],
+          "evidence": [
+            "Deployed public Templates sample shows one full card, two paired cards and five/six compact cards; card photo is 70px and favorite occupies the upper-right corner.",
+            "Source profile group drives variants by total count and panel reveal of three then two; portable group keeps selection and bookmark values with the host.",
+            "Local IAB 1280px and 320px profile examples checked; 320px document scroll width is 320px, profile grid is one column, photo is 70x70px and favorites remain at the upper-right.",
+            "Local panel displays three of five profiles then two more and exposes a collapse action; assessment table has two or three columns and scrolls inside 288px at 320px.",
+            "311 PRISM tests, workspace typecheck, site build and registry check passed; independent shadcn consumer installed 59 exact TSX sources plus CSS, typechecked 40 examples and built with Vite/font/notices."
+          ],
+          "intentionalImprovements": [
+            "Profile cards use one column below 560px and two columns through 800px instead of forcing the source three-column layout into narrow containers.",
+            "Long names wrap without clipping; nested favorite and open actions remain separate native controls.",
+            "The candidate table uses semantic table headers, and unknown result labels remain text rather than acquiring an invented verdict.",
+            "Bookmark controls are omitted when a consumer supplies no bookmark action, including read-only use."
+          ],
+          "hostOwned": [
+            "Protected photos, profile navigation, bookmark persistence, source API mapping and authorization are supplied by the consuming application."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated product candidate workflow and deployed source commit identity are not established.",
+            "Full pixel parity in every state is not required by this goal criterion."
+          ]
         }
       },
       "exports": [
