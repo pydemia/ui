@@ -1536,8 +1536,8 @@ export function PositionManagementExample({ initialMode = "default", contextKey 
 
 ## User position directory / Detail tabs
 LIVE 포지션 회사·산업·이름 필터, 5열 정렬·페이지 이동, 상세 탭 열기와 복귀
-Contract: 호스트가 LIVE 포지션·회사/산업 선택지·상세 데이터 조회와 권한·오류·취소를 소유합니다. draft 필터는 조회 전 결과에 반영하지 않습니다. createPrismPositionDirectoryQuery는 적용 필터·서버 정렬·페이지 크기를 API 필드로 변환합니다. 행을 열면 ID로 상세 탭을 재사용하고 닫을 때 이전 탭 또는 목록을 선택합니다. routeKey 변경 시 목록으로 돌아오되 열린 탭은 유지합니다. 예제는 합성 데이터만 사용하며 배포 서비스 연결을 뜻하지 않습니다.
-States: default, loading, empty, error, long
+Contract: 호스트가 LIVE 포지션·회사/산업 선택지·상세 데이터 조회와 권한·오류·취소를 소유합니다. draft 필터는 조회 전 결과에 반영하지 않습니다. createPrismPositionDirectoryQuery는 적용 필터·서버 정렬·페이지 크기를 API 필드로 변환합니다. 행을 열면 ID로 상세 탭을 재사용하고 닫을 때 이전 탭 또는 목록을 선택합니다. routeKey 변경 시 목록으로 돌아오되 열린 상세 패널의 mount 상태를 유지합니다. 기존 행이 있으면 재조회 중에도 행과 조작을 유지하고 초기 조회만 skeleton으로 표시합니다. 예제는 합성 데이터만 사용하며 배포 서비스 연결을 뜻하지 않습니다.
+States: default, loading, refreshing, empty, error, long
 Registry: /prism/r/prism-position-directory.json
 Source: packages/prism/src/prism-position-directory.tsx
 Usage kind: component-example
@@ -1547,7 +1547,7 @@ import { useState } from "react";
 import { PrismPositionDirectory, createPrismPositionDirectoryQuery, createPrismPositionDirectoryState, type PrismPositionDirectoryRow, type PrismPositionDirectoryState } from "@/components/ui/prism-position-directory";
 import { PrismPositionDetail } from "@/components/ui/prism-position";
 
-type Mode = "default" | "loading" | "empty" | "error" | "long";
+type Mode = "default" | "loading" | "refreshing" | "empty" | "error" | "long";
 const companies = [{ value: "example", label: "가상전자" }, { value: "sample", label: "예시서비스" }];
 const industries = [{ value: "technology", label: "기술" }, { value: "service", label: "서비스" }];
 const sourceRows: PrismPositionDirectoryRow[] = Array.from({ length: 24 }, (_, index) => ({
@@ -1579,7 +1579,7 @@ export function PositionDirectoryExample({ initialMode = "default" }: { initialM
     } : row);
     return <div data-prism="light" style={{ height: 620, minWidth: 0 }}>
         <PrismPositionDirectory state={state} onStateChange={setState} companies={companies} industries={industries}
-            rows={rows} total={sorted.length} pageCount={pageCount} status={mode === "loading" || mode === "error" ? mode : "ready"}
+            rows={mode === "loading" ? [] : rows} total={mode === "loading" ? 0 : sorted.length} pageCount={pageCount} status={mode === "loading" || mode === "refreshing" ? "loading" : mode === "error" ? "error" : "ready"}
             onRetry={() => { setState(createPrismPositionDirectoryState()); setMode("default"); }}
             renderDetail={tab => <PrismPositionDetail company={tab.company} role={tab.name}
                 items={[{ label: "산업", value: "기술" }, { label: "직무", value: "연구개발·전략" }, { label: "직책", value: "담당" }]}

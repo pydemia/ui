@@ -814,12 +814,14 @@
       "visual": "pending",
       "interaction": "partial",
       "checks": [
-        "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
+        "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content",
+        "At frontend dev 2eeb26ff, the deployed Candidate Common sample SUMMARY circle measured 88x88px with 10px 4px padding; local and independently installed PrismSummaryBadge matched that geometry."
       ],
       "remaining": [
         "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
         "Current A4 print header and pagination geometry; previous print raster/native evidence is historical.",
-        "Authenticated original source and production."
+        "Authenticated original source and production.",
+        "Other SUMMARY states, long labels, tooltip, print and narrow widths require original-versus-installed comparison."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -2058,12 +2060,14 @@
         "Authenticated testuser001 default page showed 1023 total and 10 live rows; five columns measured at 800px, 160/280/120/120/120px, 60px row, 50px filters and 14px Pretendard.",
         "284 final PRISM tests passed; four new tests cover staged LIVE query, page/sort, tab reuse/close and complete synthetic example including retry.",
         "Five synthetic states rendered at 320/1280px with no document overflow or nested buttons.",
-        "Actual shadcn install of 60 items and 40 examples passed TypeScript/Vite/font/notices; installed browser covered filters, paging, sorting, tabs, retry and 320px scroll."
+        "Actual shadcn install of 60 items and 40 examples passed TypeScript/Vite/font/notices; installed browser covered filters, paging, sorting, tabs, retry and 320px scroll.",
+        "At source 2eeb26ff, opened detail panels stay mounted and existing rows stay visible during refresh. One focused lifecycle/refresh test and 295 full PRISM tests passed; local and installed browser fixtures retained hidden detail after returning to the list."
       ],
       "remaining": [
         "Deployed detail row click and real service/permission/error behavior.",
         "Full original visual/font/pixel comparison across states and widths.",
-        "Current position-directory review/preview and production publication."
+        "Current position-directory review/preview and production publication.",
+        "The 2eeb26ff source behavior is not bound to the deployed PRISM-DEV revision; full state and pixel comparison remains open."
       ],
       "localRenderGate": {
         "status": "passed-synthetic-workspace",
@@ -5771,6 +5775,13 @@
       "evidence": "position-directory-installed-runtime.json",
       "sourceSha256": "0f670cbd3b4b5cb83caef2797fe74241ccfb5b59184b3c705f0e84c2331f51dc",
       "scope": "Synthetic installed runtime, not real PRISM service."
+    },
+    "latestSourceDelta": {
+      "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+      "scope": ["mounted detail panels", "existing rows visible while refreshing"],
+      "evidence": ["source diff", "mount-lifecycle/refresh test", "local browser", "independent installed browser"],
+      "deployedRevisionBinding": "unverified",
+      "responsive320": "Real 320px iframe: document width 320px, 680px table inside 256px scroll area; detail remains hidden/mounted after return to 10-row list."
     }
   },
   "positionDirectoryPublication": {
@@ -5817,5 +5828,11 @@
     "mobileTableScroll": "680px table inside 256px scroll area",
     "independentConsumer": "60 items,40 examples, TypeScript/Vite/font/notices passed; installed prism.css matches source bytes",
     "remaining": "Other source states and full pixel/font parity unverified; current CSS review preview pending."
+  },
+  "twoComponentScope20261013": {
+    "components": ["PrismPositionDirectory", "PrismSummaryBadge"],
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "localChecks": ["295 PRISM tests", "59 installed module sources and 40 usage examples", "installed tab retention and 88x88px badge geometry"],
+    "remaining": ["deployed revision binding", "full visual/state parity", "remaining original/installed pixel and state comparison", "main or production publication"]
   }
 }

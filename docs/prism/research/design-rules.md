@@ -136,6 +136,7 @@ Print previews retain the source 190mm width and 280mm minimum screen height. Pr
 - Panel body has no padding, minimum size or shadow inheritance. Its white surface has a #dee7fb border, radius 12px and 0 4px 16px rgba(0,0,0,.12) shadow. An inner container owns 12px padding and the original 507px maximum width. SUMMARY content uses 14px/500/1.4 and preserves newlines.
 - `PrismTooltip` composes a trigger and content. `PrismTooltipContent` provides the same surface inside a consumer-owned Tooltip root/trigger; its `sideOffset` measures the body gap. Keep content informational. Interactive forms/actions belong in a Popover or Dialog.
 - Viewport collision handling, an 8px boundary inset, width clamping and internal vertical scrolling extend the reference for long content. SUMMARY help retains hover/focus and adds touch/Space toggling, Escape and outside dismissal. Empty string explanations omit the trigger. These additions are explicit behavior improvements.
+- The Candidate Common SUMMARY circle is 88×88px with `10px 4px` internal padding and the `#44689f`→`#284d85` diagonal gradient. The surrounding badge wrapper owns separate `10px 16px` spacing.
 
 
 ## Standalone document exports
@@ -213,7 +214,7 @@ Current source fingerprint:31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab5
 
 The `/chat/positions` page serves the LIVE position source. Its list is a separate user purpose from administrator position editing and synchronization. Keep a staged company, industry and position-name filter; Search applies a trimmed name and resets the page, and Reset clears both staged and applied filters. An empty or all-selected industry filter sends no restriction. Sort each of the five columns through the host API and reset to page 1; page sizes are 10, 20, 50 and 100. The host owns authorized options, records, total count, pagination, request cancellation, errors and detail loading.
 
-At the observed 800px content width, the list has a 50px filter bar, a 24px gap before the toolbar, a 10px gap before the table, 20/35/15/15/15% columns and 60px rows. The sticky header uses the cool-100 surface and 14px Pretendard. A loading result shows four skeleton rows; an empty result shows its message in a 400px table region. Horizontal table scrolling stays inside the component on narrow screens. Tabs reuse a position ID, display the full active label and truncate inactive labels; closing the active tab selects its predecessor or the list. A route change returns to the list without discarding open detail tabs. Consumer code supplies the actual detail content, normally with `PrismPositionDetail`.
+At the observed 800px content width, the list has a 50px filter bar, a 24px gap before the toolbar, a 10px gap before the table, 20/35/15/15/15% columns and 60px rows. The sticky header uses the cool-100 surface and 14px Pretendard. Initial loading without rows shows four skeleton rows; a refresh with existing rows keeps them visible and usable. An empty result shows its message in a 400px table region. Horizontal table scrolling stays inside the component on narrow screens. Tabs reuse a position ID, display the full active label and truncate inactive labels; closing the active tab selects its predecessor or the list. Keep opened detail panels mounted and hide inactive panels, so switching tabs does not restart their component state or data loading. A route change returns to the list without discarding open detail tabs. Consumer code supplies the actual detail content, normally with `PrismPositionDetail`.
 
 The authenticated deployment exposed the default list with 1,023 records on 2026-10-13. The deployed revision was not bound to the local checkout, and direct deployed detail-tab input timed out. Local synthetic flows and geometry checks do not prove full deployed behavior or visual parity.
 
@@ -232,3 +233,7 @@ The authenticated deployment exposed the default list with 1,023 records on 2026
 원본 빈 입력창의 외곽은 800×110px이고, 내부 입력 영역 60px·첫 글줄 20px·동작 영역 48px·전송 버튼 28px입니다. 입력은 최대 2000자이고 값이 있을 때만 `현재/2000자`를 표시합니다. Enter는 전송, Shift+Enter는 줄바꿈이며 IME 조합 중 전송하지 않습니다. 생성 중에는 입력을 잠그고 placeholder·spinner·중단 버튼을 표시합니다. 호스트가 입력 값, 실제 전송과 중단 결과를 관리합니다.
 
 독립 입력창은 가용 폭에 맞춰 줄바꿈하고 최대 5줄까지 높이를 늘린 뒤 textarea 안에서 스크롤합니다. 320px 합성 입력에서 문서 가로 넘침은 없었습니다. 생성 중단 시 버튼이 전송 버튼으로 전환되어도 브라우저의 기본 제출 동작이 실행되지 않도록 전송 버튼은 명시적 클릭으로 처리합니다. 독립 설치본에서 중단 후 초안 유지·전송 0회를 확인했습니다. 파일 첨부 버튼은 현재 배포 원본에서 숨겨져 있으며 독립 컴포넌트의 `onAttach`는 소비자가 명시적으로 제공할 때만 표시되는 확장 기능입니다. 배포된 생성 중·첨부 상태와 실제 API 동작은 별도 검증이 필요합니다.
+
+## Goal 완료 판정 범위, 2026-10-13
+
+기준 원본 `dev` `2eeb26ff`에서 독립 구현 목표는 **58개 UI 컴포넌트 그룹**입니다. 원본 비벡터 UI의 목적별 대응 50개와 프로필 HTML export·별도 기능 7개를 합산했습니다. `prism-icon` 벡터 자산 그룹과 디자인 토큰은 필수 지원 자산이지만 개수에서 제외합니다. 그룹별 원본 목적과 적용 가능한 상태의 디자인·동작, 독립 설치, 반응형·크기 조절·접근성 개선을 확인해야 완료로 셉니다. 현재 catalog 등록 수가 곧 검증 완료 수는 아닙니다. 대상 ID는 [컴포넌트 목록](/prism/components.json)에서 `prism-icon`을 제외한 전체 항목입니다.
