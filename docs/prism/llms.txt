@@ -446,17 +446,30 @@ export function ProfileExample() {
 }
 ```
 
-## Markdown / Suggestions / Position
-답변 구조·생성 상태·후속 질문·포지션 안내
-Contract: Markdown은 GFM 표·목록을 지원하며 raw HTML을 건너뜁니다. remote image는 alt로 표시합니다. 제안 선택·포지션 열기는 callback으로 전달하고 자동 전송·생성은 하지 않습니다.
-States: default, disabled, loading, error
+## Markdown / Suggestions / Generation
+안전한 답변 서식·후속 선택지·생성 단계·독립 포지션 링크
+Contract: PrismMarkdown은 GFM 표·목록을 스크롤 가능한 영역에 표시하고 raw HTML을 건너뛰며 원격 이미지는 alt 텍스트로 표시합니다. PrismSuggestions는 선택된 값을 표시하고 기본적으로 한 번 선택하면 추가 선택을 잠급니다. 반복 입력 채우기에는 noLockOnSelect를 사용하며 panel은 폭을 제한합니다. 질문·항목의 줄바꿈과 **강조**를 안전한 텍스트로 표시합니다. PrismGenerationStatus는 분석·자료 조회·생성·중단·완료·오류 단계를 나타내며 onStop은 중단 의도만 전달합니다. PrismPositionCard는 단일 링크형 요약 카드이고 원본 추천 목록의 배치·펼치기는 prism-position-recommendations를 사용합니다. 선택·중단·포지션 열기는 호스트 callback이며 자동 전송·요청·생성을 수행하지 않습니다.
+States: default, analyzing, fetching, generating, stopped, error, disabled, repeatable, long, panel
 Registry: /prism/r/prism-content.json
 Source: packages/prism/src/prism-content.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismMarkdown } from "@/components/ui/prism-content";
-<PrismMarkdown source={answer} />;
+import { useState } from "react";
+import { PrismMarkdown, PrismSuggestions, PrismGenerationStatus, PrismPositionCard } from "@/components/ui/prism-content";
+
+export function ContentExample() {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [step, setStep] = useState<"analyzing" | "stopped">("analyzing");
+  const [opened, setOpened] = useState(false);
+  return <section data-prism="light">
+    <PrismGenerationStatus status={step} showLabel onStop={() => setStep("stopped")} />
+    <PrismMarkdown source={"## 가상 답변\n\n근거 자료는 호출자가 제공합니다."} />
+    <PrismSuggestions title="어떤 내용을 확인하시겠습니까?" options={[{ id: "profile", label: "후보자 프로필" }, { id: "compare", label: "6-frame 비교" }]} selected={selected} onSelect={setSelected} />
+    <PrismPositionCard title="기술전략담당" company="가상전자" onOpen={() => setOpened(true)}>가상 포지션 요약입니다.</PrismPositionCard>
+    <p role="status">{opened ? "포지션 열기 의도" : ""}</p>
+  </section>;
+}
 ```
 
 ## Admin layout / Attachments / Sync

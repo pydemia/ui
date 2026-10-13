@@ -2017,25 +2017,34 @@
     },
     {
       "id": "prism-content",
-      "name": "Markdown / Suggestions / Position",
+      "name": "Markdown / Suggestions / Generation",
       "category": "AI & agent",
-      "purpose": "답변 구조·생성 상태·후속 질문·포지션 안내",
-      "contract": "Markdown은 GFM 표·목록을 지원하며 raw HTML을 건너뜁니다. remote image는 alt로 표시합니다. 제안 선택·포지션 열기는 callback으로 전달하고 자동 전송·생성은 하지 않습니다.",
+      "purpose": "안전한 답변 서식·후속 선택지·생성 단계·독립 포지션 링크",
+      "contract": "PrismMarkdown은 GFM 표·목록을 스크롤 가능한 영역에 표시하고 raw HTML을 건너뛰며 원격 이미지는 alt 텍스트로 표시합니다. PrismSuggestions는 선택된 값을 표시하고 기본적으로 한 번 선택하면 추가 선택을 잠급니다. 반복 입력 채우기에는 noLockOnSelect를 사용하며 panel은 폭을 제한합니다. 질문·항목의 줄바꿈과 **강조**를 안전한 텍스트로 표시합니다. PrismGenerationStatus는 분석·자료 조회·생성·중단·완료·오류 단계를 나타내며 onStop은 중단 의도만 전달합니다. PrismPositionCard는 단일 링크형 요약 카드이고 원본 추천 목록의 배치·펼치기는 prism-position-recommendations를 사용합니다. 선택·중단·포지션 열기는 호스트 callback이며 자동 전송·요청·생성을 수행하지 않습니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
+        "analyzing",
+        "fetching",
+        "generating",
+        "stopped",
+        "error",
         "disabled",
-        "loading",
-        "error"
+        "repeatable",
+        "long",
+        "panel"
       ],
       "source": [
         "chat/conversation/ChatMarkdownRenderer.tsx",
         "chat/templates/ChatTemplateNudge.tsx",
+        "chat/templates/ChatTemplateNudge.module.scss",
         "chat/templates/ChatTemplateGenerating.tsx",
+        "chat/templates/ChatTemplateGenerating.module.scss",
         "chat/templates/ChatTemplateComplete.tsx",
+        "chat/templates/ChatTemplateComplete.module.scss",
         "chat/templates/ChatTemplatePositionRecommend.tsx"
       ],
-      "usage": "import { PrismMarkdown } from \"@pydemia/prism\";\n<PrismMarkdown source={answer} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismMarkdown, PrismSuggestions, PrismGenerationStatus, PrismPositionCard } from \"@pydemia/prism\";\n\nexport function ContentExample() {\n  const [selected, setSelected] = useState<string | null>(null);\n  const [step, setStep] = useState<\"analyzing\" | \"stopped\">(\"analyzing\");\n  const [opened, setOpened] = useState(false);\n  return <section data-prism=\"light\">\n    <PrismGenerationStatus status={step} showLabel onStop={() => setStep(\"stopped\")} />\n    <PrismMarkdown source={\"## 가상 답변\\n\\n근거 자료는 호출자가 제공합니다.\"} />\n    <PrismSuggestions title=\"어떤 내용을 확인하시겠습니까?\" options={[{ id: \"profile\", label: \"후보자 프로필\" }, { id: \"compare\", label: \"6-frame 비교\" }]} selected={selected} onSelect={setSelected} />\n    <PrismPositionCard title=\"기술전략담당\" company=\"가상전자\" onOpen={() => setOpened(true)}>가상 포지션 요약입니다.</PrismPositionCard>\n    <p role=\"status\">{opened ? \"포지션 열기 의도\" : \"\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-content.tsx",
       "previewUrl": "/prism?component=prism-content",
       "embedUrl": "/prism?component=prism-content&embed=1",
@@ -2057,6 +2066,40 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/conversation/ChatMarkdownRenderer.tsx",
+            "chat/templates/ChatTemplateNudge.tsx",
+            "chat/templates/ChatTemplateNudge.module.scss",
+            "chat/templates/ChatTemplateGenerating.tsx",
+            "chat/templates/ChatTemplateGenerating.module.scss",
+            "chat/templates/ChatTemplateComplete.tsx",
+            "chat/templates/ChatTemplateComplete.module.scss",
+            "chat/templates/ChatTemplatePositionRecommend.tsx"
+          ],
+          "evidence": [
+            "Current source and public deployed Templates sample establish a 32px follow-up button, three labeled generation stages and a stopped state. The deployed sample button is 14px/500 with #f9fafc background and #d4d8dd border; local computed styles match.",
+            "The reusable content module now provides one-shot follow-up locking, an explicit repeatable input-fill mode, safe bold/newline text, analyzing/fetching/generating/stopped/complete/error status and a stop intent callback. The source recommendation grid and reveal remain covered by the separately accepted prism-position-recommendations group.",
+            "Local browser exercises default selection, repeatable selection, analysis stop and a 320px long response with no document overflow. Independent shadcn installation matches all 59 source modules and CSS byte-for-byte, typechecks 46 complete examples and builds with Vite, font and notices.",
+            "The installed published example exercises a stop transition and one-shot selection. At a 140px parent, long choices and a position summary stay within 140px, the five-column Markdown table scrolls inside its region and click/Enter invoke the position intent. Browser console errors are zero.",
+            "PRISM tests (337 including safe Markdown, selection locking and generation transitions), workspace typecheck and site build passed."
+          ],
+          "intentionalImprovements": [
+            "Native buttons expose selection and keyboard intent without nested interactive markup. After a follow-up selection, all choices lock to avoid duplicate request intents; noLockOnSelect explicitly supports repeatable draft filling.",
+            "Long suggestion text wraps within independent narrow hosts and Markdown tables scroll internally.",
+            "A generic one-card position link is documented separately from the source recommendation-list layout and reveal behavior."
+          ],
+          "hostOwned": [
+            "The consuming application supplies answer text, option identity, response stage, actual stop/cancellation, data requests, navigation and permissions."
+          ],
+          "nonBlockingUnknowns": [
+            "The deployed source SHA is not bound to the checked-out frontend revision; authenticated full conversation and service results remain unverified.",
+            "The public sample shows representative states, not every long/narrow or error state on the deployed product."
+          ]
         }
       },
       "exports": [
@@ -2069,6 +2112,10 @@
           "kind": "component"
         },
         {
+          "name": "PrismGenerationStep",
+          "kind": "type"
+        },
+        {
           "name": "PrismGenerationStatus",
           "kind": "component"
         },
@@ -2077,8 +2124,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismMarkdown } from \"@/components/ui/prism-content\";\n<PrismMarkdown source={answer} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismMarkdown, PrismSuggestions, PrismGenerationStatus, PrismPositionCard } from \"@/components/ui/prism-content\";\n\nexport function ContentExample() {\n  const [selected, setSelected] = useState<string | null>(null);\n  const [step, setStep] = useState<\"analyzing\" | \"stopped\">(\"analyzing\");\n  const [opened, setOpened] = useState(false);\n  return <section data-prism=\"light\">\n    <PrismGenerationStatus status={step} showLabel onStop={() => setStep(\"stopped\")} />\n    <PrismMarkdown source={\"## 가상 답변\\n\\n근거 자료는 호출자가 제공합니다.\"} />\n    <PrismSuggestions title=\"어떤 내용을 확인하시겠습니까?\" options={[{ id: \"profile\", label: \"후보자 프로필\" }, { id: \"compare\", label: \"6-frame 비교\" }]} selected={selected} onSelect={setSelected} />\n    <PrismPositionCard title=\"기술전략담당\" company=\"가상전자\" onOpen={() => setOpened(true)}>가상 포지션 요약입니다.</PrismPositionCard>\n    <p role=\"status\">{opened ? \"포지션 열기 의도\" : \"\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-admin",
