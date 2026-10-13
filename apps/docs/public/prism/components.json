@@ -4414,7 +4414,7 @@
       "verification": {
         "visual": "partial",
         "interaction": "partial",
-        "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+        "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
         "checks": [
           "Source and deployed selected gp77p/ekoga CSS match list padding36,toolbar margins24/10 andgap20,informationgap10,actiongap8,page-sizewidth120,andconfirmnote14px/1.4/subgray/margin8",
           "Controlled selection rejects an excess100 change atomically;page changes retain it;search/reset clear it;candidate partial/all header clears every page",
@@ -4427,7 +4427,11 @@
           "Live visual inspection found a legacycard class collision causing stackedtablecells andmissingneutral400 token;final table-cell geometry and16px grey sort icons corrected",
           "42 groups/146 current-source fixtures rendered inactual320px iframe with component/state DOMmarkers;nohorizontaloverflow,nestedbuttons,unnameddisplayedinputs orbrowsererrors",
           "Fresh43items/67files/19examples passedTypeScript/Vite/fontbytes/notices. Installed component sources unchanged;portableexample synchronized tofinalusage. ProductionbuiltStrictMode example atactual320px generatedoneZIP withtwoA4 PDFs andbothoptionalfields visibleinraster",
-          "Print preparation notice closes after a successful result; actual consumer-owned dialog remains accessible with two profiles/14 chapters. Regression test and CUA passed."
+          "Print preparation notice closes after a successful result; actual consumer-owned dialog remains accessible with two profiles/14 chapters. Regression test and CUA passed.",
+          "Current frontend dev component/SCSS sources are unchanged from the prior deployed CSS measurement; only CandidateList.tsx removed a console.error in a catch block. Current authenticated /chat/candidates rendered an empty React root in IAB and Chrome, so fresh deployment state was not verified.",
+          "Failure or zero prepared profiles close the preparation notice and expose the original-request retry; retained-row loading announces aria-busy. Candidate-list tests pass for both cases.",
+          "Local browser checked failed retry, retained-row refresh, 320px default/loading/error/readonly/empty and 100-row long state; long table scrolls internally at 640px while document remains 320px, with no browser console errors.",
+          "Independent shadcn consumer installed 59 exact TSX module sources plus CSS, typechecked 48 complete examples, built with Vite/font/notices, and rendered selection and print options at 320px without document overflow or console errors."
         ],
         "evidence": [
           "candidate-list.test.mjs",
@@ -4438,7 +4442,9 @@
           "candidate-static-146-cua.json",
           "candidate-consumer-install.log",
           "candidate-consumer-BXqIdv.json",
-          "candidate-consumer-zip-validation.json"
+          "candidate-consumer-zip-validation.json",
+          "candidate-list-goal-installed-bytes.json",
+          "prism-candidate-list-goal-audit-2026-10-14.md"
         ],
         "remaining": [
           "Fresh authenticated deployed candidate list states andcomplete rendered/pixel/static-font comparison",
@@ -4462,6 +4468,24 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/candidate/CandidateListContent.tsx",
+            "chat/candidate/CandidateFilterBar.tsx",
+            "chat/candidate/CandidateTable.tsx",
+            "chat/successorCandidate/print/PrintOptionsDialog.tsx"
+          ],
+          "evidence": "Prior deployed CSS measurements and unchanged current source, controlled selection/sort/page/output tests, local browser states and responsive widths, synthetic PDF/ZIP validation, and independent 59-module/48-example consumer installation with 320px interaction.",
+          "intentionalImprovements": [
+            "Failed or empty preparation dismisses the notice so retry is reachable.",
+            "Retained rows during loading expose aria-busy.",
+            "Long content and narrow layouts use internal scrolling rather than widening the document."
+          ],
+          "limitations": "Current authenticated /chat/candidates remained blank in IAB and Chrome; deployment SHA, real service mapping, native print/OS save, and full profile A4 parity are unverified."
         }
       },
       "exports": [
