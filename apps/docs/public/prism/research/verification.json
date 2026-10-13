@@ -1897,16 +1897,17 @@
       ]
     },
     "prism-position-recommendations": {
-      "visual": "pending",
-      "interaction": "partial",
+      "visual": "current-source-and-local-plus-independent-browser-geometry-passed;authenticated-source-parity-unverified",
+      "interaction": "passed-target-tests-and-local-plus-independent-browser-workflow;host-service-effects-unverified",
       "checks": [
-        "Versioned/legacy card and live-link references preserve source purpose without input mutation.",
-        "Controlled same-ID/different-version selection and typed host example verified by source and synthetic JSDOM tests."
+        "Current source card/template/SCSS and source reveal button/panel purpose were rechecked; catalog includes all six source paths.",
+        "Local and isolated installed browsers exercised 320px 4→6→9 reveal, 400/401px layout, selection by keyboard, dataset reset, empty, readonly and 140px long text.",
+        "Synthetic host example distinguished historical card versions 2/3, legacy version 1 and the current LIVE link; error, retry and recovery displayed.",
+        "Isolated shadcn installation matched 59 module sources and CSS; 43 complete examples typechecked; Vite, Pretendard and notices passed."
       ],
       "remaining": [
-        "Current source/consumer/preview keyboard/compact/reference interactions and font/pixel comparison.",
-        "Authenticated historical/LIVE service and deployed revision binding.",
-        "Full source component purpose/style/extension coverage, current A4 and production."
+        "Authenticated deployed recommendation states and deployed source revision binding.",
+        "Actual historical/LIVE host service lookup, permissions and panel opening."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1923,7 +1924,39 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-      }
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/templates/ChatTemplatePositionRecommend.tsx",
+          "chat/templates/ChatTemplatePositionRecommend.module.scss",
+          "chat/position/PositionRecommend.tsx",
+          "chat/position/PositionRecommend.module.scss",
+          "ui/button/HRXShowMoreBtn.tsx",
+          "chat/conversation/ChatJSONRendererPanel.tsx"
+        ],
+        "evidence": [
+          "Current source preserves one/two/three-plus layouts, company/title/reasons, selection, reveal, 400px breakpoint and selected styling.",
+          "Local browser covered default, empty, readonly, long and versioned examples with keyboard selection, exact version references, synthetic failure/retry, 400/401px boundary and reveal reset.",
+          "A separate shadcn consumer matched installed module/CSS bytes, typechecked 43 examples, built with Vite/font/notices and exercised 320px, 140px, keyboard selection and no direct-page console errors."
+        ],
+        "intentionalImprovements": [
+          "Narrow reveal labels now equal the number of cards actually added; below 240px cards stack in one column and long source text is retained in title attributes while clamped visually."
+        ],
+        "hostOwned": [
+          "The consuming app supplies company logo assets, position data, historical/LIVE requests, permissions and panel navigation."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed full recommendation states and deployed source commit identity are not established."
+        ]
+      },
+      "evidence": [
+        "prism-position-recommendations-audit-2026-10-14.md",
+        "recommendation-goal-installed-bytes.json",
+        "chat-recipes.test.mjs"
+      ]
     },
     "prism-rich-text": {
       "visual": "partial",
@@ -6462,10 +6495,11 @@
       "prism-survey",
       "prism-mgmt-comments",
       "prism-attitude-report",
-      "prism-analysis"
+      "prism-analysis",
+      "prism-position-recommendations"
     ],
-    "acceptedCount": 18,
-    "unassessedGroups": 40,
+    "acceptedCount": 19,
+    "unassessedGroups": 39,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
