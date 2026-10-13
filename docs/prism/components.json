@@ -4605,7 +4605,7 @@
       "name": "Profile tab recipes / Compensation / Trends",
       "category": "Domain",
       "purpose": "8개 프로필 분류를 조합하는 typed recipe와 보상·리더십 추이 표",
-      "contract": "API 결과를 외부에서 typed 표시 모델로 변환해 각 분류 recipe에 전달합니다. null 근거와 실제 0을 구분합니다. 보상 표의 행은 구분, 열은 연도이며 원화·외화·통화 단위를 별도로 표시합니다. 상태와 재시도는 소비자 소유입니다. LeadershipSection은 summary 또는 pieSummary 중 하나를 받습니다. pieSummary.title은 원본 summary.title의 파란 태그, description은 summary.content의 굵은 요약, detail은 summary.description의 구분선 아래 상세 설명입니다. 공백만 있는 상세는 구분선을 만들지 않고 상세만 있는 응답도 빈 결과로 바꾸지 않습니다. print와 좁은 컨테이너를 지원합니다. 기본 태그 높이는 화면21px/인쇄15pt이고 wrapTitle로 긴 유형명을 줄바꿈합니다.480px 이하 컨테이너는 자동으로 줄바꿈합니다.",
+      "contract": "API 결과는 호스트가 typed 표시 모델로 변환하고, 각 탭의 loading/empty/error와 재시도도 호스트가 소유합니다. 종합은 SUMMARY·기본 정보·경력·연도별 보상, 전문성은 SUMMARY·분야별 업적·6 Frame Survey를 표시합니다. 성공경험은 대표 영역을 기본 선택하고 영역별 Essay·키워드·AI 인터뷰·좌절/실패 Essay를 구분합니다. Design과 Learning Agility는 등급 SUMMARY·점수 Essay·Survey를 공통으로 사용하며, Design에는 회사/Function 다양성과 현재 위치, Learning Agility에는 관련 경험이 이어집니다. Leadership은 파이 SUMMARY·Survey·역할별 이유·추이를 표시합니다. Attitude의 PDF와 CEO/ELP 코멘트는 기존 독립 컴포넌트를 조합합니다. Survey의 실제 0과 null, 보상의 원화·외화, 빈 근거를 구분하고 탭·표는 작은 컨테이너에서 내부 스크롤합니다. 기존 경량 레시피 props도 유지합니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "sourceDeltaAudits": [
         {
@@ -4619,7 +4619,8 @@
         "default",
         "empty",
         "loading",
-        "error"
+        "error",
+        "long"
       ],
       "source": [
         "chat/successorCandidate/total/SuccessorCandidateTotal.tsx",
@@ -4632,7 +4633,7 @@
         "chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx",
         "chat/successorCandidate/leadership/LeadershipPieSummary.tsx"
       ],
-      "usage": "import { PrismLeadershipPieSummary } from \"@pydemia/prism\";\nexport function LeadershipSummaryExample() {\n    return <section data-prism=\"light\"><PrismLeadershipPieSummary\n        items={[{label:\"지\",value:33},{label:\"덕\",value:32},{label:\"용\",value:35}]}\n        title=\"가상 리더십 유형\" description=\"비중과 해석은 호출자가 제공합니다.\"\n        detail={\"상세 근거를 구분선 아래에 표시합니다.\\n실제 평가가 아닌 합성 예시입니다.\"} /></section>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismSuccessExperienceSection, PrismDesignSection } from \"@pydemia/prism\";\nexport function ProfileSectionsExample() {\n  const [topic, setTopic] = useState(\"사업 성장\");\n  const survey = { items: [{ id: \"cooperation\", category: \"협업\", bars: [\n    { role: \"boss\" as const, value: 0, average: 6.1 },\n    { role: \"peer\" as const, value: null, average: null },\n  ] }] };\n  return <section data-prism=\"light\" style={{ maxWidth: 800 }}>\n    <PrismSuccessExperienceSection\n      summary={{ title: \"가상 성과\", description: \"호스트가 제공한 합성 요약입니다.\" }}\n      topics={[\"사업 성장\", \"사업 전환\"]} activeTopic={topic} onTopicChange={setTopic}\n      essays={[{ id: \"growth\", topic: \"사업 성장\", representative: true,\n        title: \"가상 프로젝트\", description: \"합성 근거\", keywords: [\"협업\"],\n        aiInterview: \"가상 면담 결과\" }]}\n      failures={[{ id: \"failure\", title: \"실패 원인\", description: \"후속 조치\" }]} />\n    <PrismDesignSection grade={{ grade: \"A\", summary: \"가상 역량 요약\" }}\n      essay={{ title: \"Design 역량 Essay\", items: [{ id: \"strategy\", name: \"전략\",\n        score: 0, max: 10, description: \"합성 근거\" }] }} survey={survey}\n      diversity={{ companies: [\"가상전자\"], functions: [\"기술\"],\n        matrix: { rowAxisLabel: \"회사\", columns: [{ key: \"function-1\", label: \"Function 1\" }],\n          rows: [{ key: \"company-1\", label: \"1\" }],\n          currentPosition: { rowKey: \"company-1\", columnKey: \"function-1\" } } }} />\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-profile-sections.tsx",
       "previewUrl": "/prism?component=prism-profile-sections",
       "embedUrl": "/prism?component=prism-profile-sections&embed=1",
@@ -4686,6 +4687,10 @@
           "kind": "component"
         },
         {
+          "name": "PrismExpertiseSectionProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismExpertiseSection",
           "kind": "component"
         },
@@ -4694,8 +4699,40 @@
           "kind": "component"
         },
         {
+          "name": "PrismSuccessEssay",
+          "kind": "type"
+        },
+        {
+          "name": "PrismFailureEssay",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSuccessExperienceSectionProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismSuccessExperienceSection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDesignDiversityModel",
+          "kind": "type"
+        },
+        {
+          "name": "PrismDesignDiversitySection",
+          "kind": "component"
+        },
+        {
+          "name": "PrismDesignSectionProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismDesignSection",
           "kind": "component"
+        },
+        {
+          "name": "PrismAgilitySectionProps",
+          "kind": "type"
         },
         {
           "name": "PrismAgilitySection",
@@ -4743,7 +4780,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { PrismLeadershipPieSummary } from \"@/components/ui/prism-profile-sections\";\nexport function LeadershipSummaryExample() {\n    return <section data-prism=\"light\"><PrismLeadershipPieSummary\n        items={[{label:\"지\",value:33},{label:\"덕\",value:32},{label:\"용\",value:35}]}\n        title=\"가상 리더십 유형\" description=\"비중과 해석은 호출자가 제공합니다.\"\n        detail={\"상세 근거를 구분선 아래에 표시합니다.\\n실제 평가가 아닌 합성 예시입니다.\"} /></section>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismSuccessExperienceSection, PrismDesignSection } from \"@/components/ui/prism-profile-sections\";\nexport function ProfileSectionsExample() {\n  const [topic, setTopic] = useState(\"사업 성장\");\n  const survey = { items: [{ id: \"cooperation\", category: \"협업\", bars: [\n    { role: \"boss\" as const, value: 0, average: 6.1 },\n    { role: \"peer\" as const, value: null, average: null },\n  ] }] };\n  return <section data-prism=\"light\" style={{ maxWidth: 800 }}>\n    <PrismSuccessExperienceSection\n      summary={{ title: \"가상 성과\", description: \"호스트가 제공한 합성 요약입니다.\" }}\n      topics={[\"사업 성장\", \"사업 전환\"]} activeTopic={topic} onTopicChange={setTopic}\n      essays={[{ id: \"growth\", topic: \"사업 성장\", representative: true,\n        title: \"가상 프로젝트\", description: \"합성 근거\", keywords: [\"협업\"],\n        aiInterview: \"가상 면담 결과\" }]}\n      failures={[{ id: \"failure\", title: \"실패 원인\", description: \"후속 조치\" }]} />\n    <PrismDesignSection grade={{ grade: \"A\", summary: \"가상 역량 요약\" }}\n      essay={{ title: \"Design 역량 Essay\", items: [{ id: \"strategy\", name: \"전략\",\n        score: 0, max: 10, description: \"합성 근거\" }] }} survey={survey}\n      diversity={{ companies: [\"가상전자\"], functions: [\"기술\"],\n        matrix: { rowAxisLabel: \"회사\", columns: [{ key: \"function-1\", label: \"Function 1\" }],\n          rows: [{ key: \"company-1\", label: \"1\" }],\n          currentPosition: { rowKey: \"company-1\", columnKey: \"function-1\" } } }} />\n  </section>;\n}"
     },
     {
       "id": "prism-mgmt-comments",
