@@ -2917,10 +2917,11 @@
         "Authenticated deployed /chat intro measured at 800px width with 167px greeting, 149.1875px favorite card, 45.59375px prompt and 110px composer",
         "Source card groups title and description in one body; local card now matches 149.1875px height with source prompt background and text colors",
         "Deployed and local prompt selection populate the draft and focus the textarea without sending",
-        "Installed consumer loading state uses one 48px icon and 120/180px text skeletons inside a 152px card and removes the card button; source code shape checked, deployed loading state not observed",
+        "Installed consumer loading state uses one 48px icon and 120/180px text skeletons inside a 152px card and removes the card button; skeletons now shrink within a 140px parent, deployed loading state not observed",
         "Installed consumer prompt selection focuses the textarea with zero sends and favorite card callback fires once",
-        "Independent shadcn consumer verified 59 installed module sources and exact CSS, 40 examples, Vite, font and notices",
-        "Installed consumer 320px default and loading states have zero document horizontal overflow"
+        "Independent shadcn consumer verified 59 installed module sources and exact CSS, 48 complete examples, Vite, font and notices",
+        "Local 320px long fixture stacks two cards, wraps long names and prompts, and keeps question selection and card callbacks usable",
+        "Installed consumer 140px default and loading states keep cards, prompt, composer and skeletons inside the parent with zero document horizontal overflow"
       ],
       "evidence": [
         "authenticated-chat-intro-default-2026-10-13",
@@ -2929,7 +2930,7 @@
       ],
       "remaining": [
         "Deployed loading/mobile/hover intro states and real favorite-card navigation",
-        "Full source/font/pixel comparison and deployed revision binding"
+        "Full source/font/pixel comparison and deployed revision binding; current in-app /chat returned a blank page"
       ],
       "localRenderGate": {
         "status": "passed",
@@ -2945,6 +2946,33 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/main/ChatIntroSection.tsx",
+          "chat/main/ChatIntroSection.module.scss",
+          "chat/main/ChatInput.tsx"
+        ],
+        "evidence": [
+          "Prior authenticated /chat default supplied the 800px intro, 167px greeting, 149.1875px card, 45.59375px prompt and 110px composer reference; those source files are unchanged in current dev and local default geometry matches.",
+          "Prior deployed and current local prompt selection fill a controlled draft and focus the textarea without sending; installed consumer confirmed prompt and card callbacks.",
+          "Local 320px long-content fixture wraps and stacks two cards; an isolated 140px shadcn consumer contains the default card, composer and loading skeletons with no document overflow.",
+          "Separate installation matched 59 module/CSS sources byte for byte, typechecked 48 complete examples and passed Vite, bundled font and notices checks; 337 PRISM tests passed."
+        ],
+        "intentionalImprovements": [
+          "Cards wrap by parent width; long names, descriptions and prompts break safely without changing the measured desktop single-card layout.",
+          "Loading skeletons shrink within narrow parent cards instead of protruding beyond them."
+        ],
+        "hostOwned": [
+          "Authentication, favorite-card navigation, suggested-question service data and actual chat submission stay with the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "Current authenticated deployed /chat was blank in the in-app browser; deployed loading/mobile/hover states and revision identity remain unverified.",
+          "The synthetic browser flows do not prove real route or service effects, full font/pixel parity or production publication."
+        ]
       }
     },
     "prism-position-directory": {
@@ -6812,10 +6840,11 @@
       "prism-detail",
       "prism-detail-state",
       "prism-content",
-      "prism-workspace"
+      "prism-workspace",
+      "prism-intro"
     ],
-    "acceptedCount": 28,
-    "unassessedGroups": 30,
+    "acceptedCount": 29,
+    "unassessedGroups": 29,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

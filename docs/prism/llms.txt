@@ -1173,15 +1173,26 @@ import { PrismPrintPage } from "@/components/ui/prism-print";
 
 ## Chat intro / Prompt cards
 초기 인사말·즐겨찾기 카드·시작 질문·대화 입력
-Contract: 800px 기준 원본의 167px 인사말·149px 카드·45.6px 질문·110px 입력창을 따릅니다. 카드 제목·설명을 한 본문으로 묶고 로딩 중에는 48px 아이콘과 문구 skeleton을 표시합니다. 최대 5개 질문 선택은 onPromptSelect로 전달하고 textarea에 포커스를 이동하며 전송하지 않습니다. 카드는 명시적 onOpen callback으로 동작하며 인증·라우팅을 수행하지 않습니다. 좁은 폭에서는 문구가 줄바꿈됩니다.
-States: default, empty, disabled, loading
+Contract: 800px 기준 원본의 167px 인사말·149px 카드·45.6px 질문·110px 입력창을 따릅니다. 카드 제목·설명을 한 본문으로 묶고 로딩 중에는 48px 아이콘과 문구 skeleton을 표시합니다. 최대 5개 질문 선택은 onPromptSelect로 전달하고 textarea에 포커스를 이동하며 전송하지 않습니다. 카드는 명시적 onOpen callback으로 동작하며 인증·라우팅을 수행하지 않습니다. 여러 카드와 긴 문구는 좁은 부모에서 줄바꿈·재배치합니다.
+States: default, empty, disabled, loading, long
 Registry: /prism/r/prism-intro.json
 Source: packages/prism/src/prism-intro.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
+import { useState } from "react";
 import { PrismChatIntro } from "@/components/ui/prism-intro";
-<PrismChatIntro name="김가상" cards={cards} questions={questions} onPromptSelect={setDraft} composer={composer} />;
+import { PrismIcon } from "@/components/ui/prism-icon";
+export function IntroExample() {
+  const [draft, setDraft] = useState("");
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+  return <section data-prism="light" style={{ width: "100%", minWidth: 0 }}>
+    <button type="button" onClick={() => setLoading(value => !value)}>카드 로딩 전환</button>
+    <PrismChatIntro name="김가상" loading={loading} cards={[{ id: "favorite", title: "후보자 즐겨찾기", description: "저장한 후보자를 다시 확인합니다.", icon: <PrismIcon name="FavoriteLargeIcon" size={24}/>, onOpen: () => setStatus("즐겨찾기 열기") }]} questions={["기술 분야 후보자를 알려 주세요."]} onPromptSelect={setDraft} composer={{ value: draft, onValueChange: setDraft, onSubmit: text => { setStatus(text); setDraft(""); } }}/>
+    <p role="status">{status}</p>
+  </section>;
+}
 ```
 
 ## Profile tab recipes / Compensation / Trends

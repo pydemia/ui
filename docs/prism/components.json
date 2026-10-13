@@ -4790,18 +4790,20 @@
       "name": "Chat intro / Prompt cards",
       "category": "AI & agent",
       "purpose": "초기 인사말·즐겨찾기 카드·시작 질문·대화 입력",
-      "contract": "800px 기준 원본의 167px 인사말·149px 카드·45.6px 질문·110px 입력창을 따릅니다. 카드 제목·설명을 한 본문으로 묶고 로딩 중에는 48px 아이콘과 문구 skeleton을 표시합니다. 최대 5개 질문 선택은 onPromptSelect로 전달하고 textarea에 포커스를 이동하며 전송하지 않습니다. 카드는 명시적 onOpen callback으로 동작하며 인증·라우팅을 수행하지 않습니다. 좁은 폭에서는 문구가 줄바꿈됩니다.",
+      "contract": "800px 기준 원본의 167px 인사말·149px 카드·45.6px 질문·110px 입력창을 따릅니다. 카드 제목·설명을 한 본문으로 묶고 로딩 중에는 48px 아이콘과 문구 skeleton을 표시합니다. 최대 5개 질문 선택은 onPromptSelect로 전달하고 textarea에 포커스를 이동하며 전송하지 않습니다. 카드는 명시적 onOpen callback으로 동작하며 인증·라우팅을 수행하지 않습니다. 여러 카드와 긴 문구는 좁은 부모에서 줄바꿈·재배치합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
         "empty",
         "disabled",
-        "loading"
+        "loading",
+        "long"
       ],
       "source": [
-        "chat/main/ChatIntroSection.tsx"
+        "chat/main/ChatIntroSection.tsx",
+        "chat/main/ChatIntroSection.module.scss"
       ],
-      "usage": "import { PrismChatIntro } from \"@pydemia/prism\";\n<PrismChatIntro name=\"김가상\" cards={cards} questions={questions} onPromptSelect={setDraft} composer={composer} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismChatIntro, PrismIcon } from \"@pydemia/prism\";\nexport function IntroExample() {\n  const [draft, setDraft] = useState(\"\");\n  const [status, setStatus] = useState(\"\");\n  const [loading, setLoading] = useState(false);\n  return <section data-prism=\"light\" style={{ width: \"100%\", minWidth: 0 }}>\n    <button type=\"button\" onClick={() => setLoading(value => !value)}>카드 로딩 전환</button>\n    <PrismChatIntro name=\"김가상\" loading={loading} cards={[{ id: \"favorite\", title: \"후보자 즐겨찾기\", description: \"저장한 후보자를 다시 확인합니다.\", icon: <PrismIcon name=\"FavoriteLargeIcon\" size={24}/>, onOpen: () => setStatus(\"즐겨찾기 열기\") }]} questions={[\"기술 분야 후보자를 알려 주세요.\"]} onPromptSelect={setDraft} composer={{ value: draft, onValueChange: setDraft, onSubmit: text => { setStatus(text); setDraft(\"\"); } }}/>\n    <p role=\"status\">{status}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-intro.tsx",
       "previewUrl": "/prism?component=prism-intro",
       "embedUrl": "/prism?component=prism-intro&embed=1",
@@ -4813,10 +4815,11 @@
           "Authenticated deployed /chat intro measured at 800px width with 167px greeting, 149.1875px favorite card, 45.59375px prompt and 110px composer",
           "Source card groups title and description in one body; local card now matches 149.1875px height with source prompt background and text colors",
           "Deployed and local prompt selection populate the draft and focus the textarea without sending",
-          "Installed consumer loading state uses one 48px icon and 120/180px text skeletons inside a 152px card and removes the card button; source code shape checked, deployed loading state not observed",
+          "Installed consumer loading state uses one 48px icon and 120/180px text skeletons inside a 152px card and removes the card button; skeletons now shrink within a 140px parent, deployed loading state not observed",
           "Installed consumer prompt selection focuses the textarea with zero sends and favorite card callback fires once",
-          "Independent shadcn consumer verified 59 installed module sources and exact CSS, 40 examples, Vite, font and notices",
-          "Installed consumer 320px default and loading states have zero document horizontal overflow"
+          "Independent shadcn consumer verified 59 installed module sources and exact CSS, 48 complete examples, Vite, font and notices",
+          "Local 320px long fixture stacks two cards, wraps long names and prompts, and keeps question selection and card callbacks usable",
+          "Installed consumer 140px default and loading states keep cards, prompt, composer and skeletons inside the parent with zero document horizontal overflow"
         ],
         "evidence": [
           "authenticated-chat-intro-default-2026-10-13",
@@ -4825,7 +4828,7 @@
         ],
         "remaining": [
           "Deployed loading/mobile/hover intro states and real favorite-card navigation",
-          "Full source/font/pixel comparison and deployed revision binding"
+          "Full source/font/pixel comparison and deployed revision binding; current in-app /chat returned a blank page"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -4841,6 +4844,33 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/main/ChatIntroSection.tsx",
+            "chat/main/ChatIntroSection.module.scss",
+            "chat/main/ChatInput.tsx"
+          ],
+          "evidence": [
+            "Prior authenticated /chat default supplied the 800px intro, 167px greeting, 149.1875px card, 45.59375px prompt and 110px composer reference; those source files are unchanged in current dev and local default geometry matches.",
+            "Prior deployed and current local prompt selection fill a controlled draft and focus the textarea without sending; installed consumer confirmed prompt and card callbacks.",
+            "Local 320px long-content fixture wraps and stacks two cards; an isolated 140px shadcn consumer contains the default card, composer and loading skeletons with no document overflow.",
+            "Separate installation matched 59 module/CSS sources byte for byte, typechecked 48 complete examples and passed Vite, bundled font and notices checks; 337 PRISM tests passed."
+          ],
+          "intentionalImprovements": [
+            "Cards wrap by parent width; long names, descriptions and prompts break safely without changing the measured desktop single-card layout.",
+            "Loading skeletons shrink within narrow parent cards instead of protruding beyond them."
+          ],
+          "hostOwned": [
+            "Authentication, favorite-card navigation, suggested-question service data and actual chat submission stay with the consuming application."
+          ],
+          "nonBlockingUnknowns": [
+            "Current authenticated deployed /chat was blank in the in-app browser; deployed loading/mobile/hover states and revision identity remain unverified.",
+            "The synthetic browser flows do not prove real route or service effects, full font/pixel parity or production publication."
+          ]
         }
       },
       "exports": [
@@ -4849,8 +4879,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismChatIntro } from \"@/components/ui/prism-intro\";\n<PrismChatIntro name=\"김가상\" cards={cards} questions={questions} onPromptSelect={setDraft} composer={composer} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismChatIntro } from \"@/components/ui/prism-intro\";\nimport { PrismIcon } from \"@/components/ui/prism-icon\";\nexport function IntroExample() {\n  const [draft, setDraft] = useState(\"\");\n  const [status, setStatus] = useState(\"\");\n  const [loading, setLoading] = useState(false);\n  return <section data-prism=\"light\" style={{ width: \"100%\", minWidth: 0 }}>\n    <button type=\"button\" onClick={() => setLoading(value => !value)}>카드 로딩 전환</button>\n    <PrismChatIntro name=\"김가상\" loading={loading} cards={[{ id: \"favorite\", title: \"후보자 즐겨찾기\", description: \"저장한 후보자를 다시 확인합니다.\", icon: <PrismIcon name=\"FavoriteLargeIcon\" size={24}/>, onOpen: () => setStatus(\"즐겨찾기 열기\") }]} questions={[\"기술 분야 후보자를 알려 주세요.\"]} onPromptSelect={setDraft} composer={{ value: draft, onValueChange: setDraft, onSubmit: text => { setStatus(text); setDraft(\"\"); } }}/>\n    <p role=\"status\">{status}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-profile-sections",

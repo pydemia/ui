@@ -164,7 +164,12 @@ export function PrintDemo({state}:{state:FixtureState}) {
     return <div style={{overflow:"auto"}}><PrismPrintPage name="김가상" company={{brand:"가상",affiliate:"전자"}} jobTitle="기술전략담당" repeatHeader><PrismPrintLeaderSummary name="전략 리더" summary="화면 및 출력 검증을 위한 가상 데이터입니다." definition="기술 및 사업 전략을 연결하는 유형 표시"/><PrismPrintCareer items={career}/><PrismPrintRisk items={[{id:"a",label:"자기 중심",latent:true,manifest:null},{id:"b",label:"충동성",latent:false,manifest:null}]}/><PrismPrintExperience topics={["사업 성장","사업 전환"]} activeTopic="사업 성장" items={state==="empty" ? [] : [{id:"one",topic:"사업 성장",representative:true,title:"가상 제품 개발",description:"가상 사례를 표시하는 예시입니다.",keywords:["기술","협업"],interview:"외부에서 전달한 근거 텍스트 표시"}]}/></PrismPrintPage></div>;
 }
 export function IntroDemo({state}:{state:FixtureState}) {
-    const [value,setValue]=useState(""); const [result,setResult]=useState("");return <><PrismChatIntro name="김가상" loading={state==="loading"} questions={state==="empty" ? [] : ["기술 분야 후보자를 알려 주세요.","현재 포지션의 요구 사항을 확인해 주세요."]} onPromptSelect={setValue} cards={[{id:"favorite",title:"후보자 즐겨찾기",description:"저장한 후보자를 한곳에서 다시 확인해보세요",icon:<PrismIcon name="FavoriteLargeIcon" size={24}/>,onOpen:()=>setResult("즐겨찾기 열기") }]} composer={{value,onValueChange:setValue,onSubmit:text=>{setResult(text);setValue("");},disabled:state==="disabled"}}/><p role="status">{result}</p></>;
+    const [value,setValue]=useState(""); const [result,setResult]=useState("");
+    const long=state==="long";
+    const cards=[{id:"favorite",title:long?"후보자즐겨찾기와긴이름을가진추가분류":"후보자 즐겨찾기",description:long?"좁은 카드에 담기는 긴 설명과 여러 카드를 확인하기 위한 합성 문구입니다. ".repeat(3):"저장한 후보자를 한곳에서 다시 확인해보세요",icon:<PrismIcon name="FavoriteLargeIcon" size={24}/>,onOpen:()=>setResult("즐겨찾기 열기")},
+        ...(long?[{id:"second",title:"가상 추가 카드",description:"두 번째 카드의 줄바꿈과 배치를 확인합니다.",onOpen:()=>setResult("추가 카드 열기")}]:[])];
+    const questions=state==="empty"?[]:long?["기술전략담당후보자의장기프로젝트와협업사례를자세히알려주세요".repeat(2),"현재 포지션의 요구 사항을 확인해 주세요."]: ["기술 분야 후보자를 알려 주세요.","현재 포지션의 요구 사항을 확인해 주세요."];
+    return <><PrismChatIntro name={long?"김가상후보자와여러조직을담당하는사용자":"김가상"} loading={state==="loading"} questions={questions} onPromptSelect={setValue} cards={cards} composer={{value,onValueChange:setValue,onSubmit:text=>{setResult(text);setValue("");},disabled:state==="disabled"}}/><p role="status">{result}</p></>;
 }
 export function ProfileSectionsDemo({state}:{state:FixtureState}) {
     const [tab,setTab]=useState("total");const [topic,setTopic]=useState("사업 성장");const [result,setResult]=useState("");const [comments,setComments]=useState<PrismCeoCommentItem[]>([{id:"one",year:2026,category:"가상 육성 회의",author:"가상 CEO 김작성",comment:"가상 프로젝트의 협업 사례를 확인했습니다.",isMine:true}]);const [retried,setRetried]=useState(false);
