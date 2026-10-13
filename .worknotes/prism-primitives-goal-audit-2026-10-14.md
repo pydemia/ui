@@ -11,3 +11,5 @@
 최종 로컬 검사: workspace typecheck, `npm run build`, `npm run prism:check`(338/338), `npm run registry:release-check`, 재설치 소비자의 59개 TSX/CSS 바이트 일치·48개 완전 예제 타입 검사·Vite/폰트/고지가 통과했다. 재설치 브라우저에서 파일명 최종 글자색은 rgb(255, 255, 255)였다.
 
 Portal 선택자 수정 후 재설치 브라우저의 팝오버 계산 스타일은 minWidth 90px/maxWidth 350px/borderRadius 6px, 현재 내용 폭 153.484px이다. 320px viewport에서는 maxWidth 296px이고 x=83–236.484px, document scrollWidth 320px으로 유지됐다. 최종 CSS를 포함한 site build와 독립 설치 재검증도 통과했다.
+
+첫 preview readback에서 `components.json`만 189바이트 차이가 났다. 마지막 검증 문구를 추가한 뒤 manifest를 다시 생성하지 않은 것이 원인이었다. `npm run build`로 manifest를 재생성해 원격의 같은 커밋 배포 파일과 6개 공개 자산을 바이트 단위로 다시 대조했고 모두 일치했다. 해시만 달라진 사이트 번들 파일은 이전 커밋 상태를 유지한다.
