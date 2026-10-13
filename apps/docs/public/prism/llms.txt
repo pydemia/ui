@@ -1053,7 +1053,7 @@ import { PrismPrintPage } from "@/components/ui/prism-print";
 
 ## Chat intro / Prompt cards
 초기 인사말·즐겨찾기 카드·시작 질문·대화 입력
-Contract: 이름·카드·최대 5개 시작 질문을 표시합니다. 질문 선택은 onPromptSelect로 전달하고 textarea에 포커스를 이동합니다. 카드는 명시적 onOpen callback으로 동작하며 인증·라우팅을 수행하지 않습니다.
+Contract: 800px 기준 원본의 167px 인사말·149px 카드·45.6px 질문·110px 입력창을 따릅니다. 카드 제목·설명을 한 본문으로 묶고 로딩 중에는 48px 아이콘과 문구 skeleton을 표시합니다. 최대 5개 질문 선택은 onPromptSelect로 전달하고 textarea에 포커스를 이동하며 전송하지 않습니다. 카드는 명시적 onOpen callback으로 동작하며 인증·라우팅을 수행하지 않습니다. 좁은 폭에서는 문구가 줄바꿈됩니다.
 States: default, empty, disabled, loading
 Registry: /prism/r/prism-intro.json
 Source: packages/prism/src/prism-intro.tsx
