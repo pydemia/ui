@@ -3060,7 +3060,7 @@
       "category": "Domain",
       "purpose": "즐겨찾기 목록의70px 사진·정보·전문 분야/평가 카드와 독립 동작·반응형/수동 크기",
       "contract": "원본16px padding/12px radius·70px 사진·121px 정보 영역·12px 흰 전문 분야/평가 패널을 사용합니다. 긴 정보는 min-height/줄바꿈으로 보존합니다. 상세와 즐겨찾기는 형제 native buttons이며 callback 없는 상세 action을 생성하지 않습니다. favorite/selected/busy/readOnly는 호스트 값이고 API 저장/성공 toast를 모사하지 않습니다. 초기 favorite=true는 즐겨찾기 카드의 표시 기본값이며 실제 계정 상태는 호스트가 제공합니다. Grid는 source3열/gap10,600px 이하2열/360px 이하1열과 opt-in resize/overflow를 소유한 container입니다. Collection.cardVariant=favorite로 조합하고 필터/조회/총건수/페이지 데이터는 호스트 경계입니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "empty",
@@ -3072,7 +3072,7 @@
         "chat/favorite/FavoriteCandidateCard.tsx",
         "chat/favorite/FavoriteCandidateList.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid, type PrismCandidate } from \"@pydemia/prism\";\nexport function FavoriteCandidatesExample() {\n  const [favorite, setFavorite] = useState(true);\n  const [selected, setSelected] = useState(\"\");\n  const candidate: PrismCandidate = { id: \"synthetic-favorite\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", expertAreas: [\"기술\", \"전략\"],\n    recentEvaluations: [{ year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: \"B\" }] };\n  return <div data-prism=\"light\"><PrismFavoriteCandidateGrid resize=\"both\" style={{ width: \"100%\", height: 440 }}>\n    <PrismFavoriteCandidateCard candidate={candidate} favorite={favorite} onFavoriteChange={setFavorite}\n      selected={selected === candidate.id} onOpen={item => setSelected(item.id)} />\n  </PrismFavoriteCandidateGrid><p role=\"status\">{selected || \"선택 없음\"}</p></div>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid, type PrismCandidate } from \"@pydemia/prism\";\n\nconst candidates: PrismCandidate[] = [\n  { id: \"favorite-a\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", expertAreas: [\"기술\", \"전략\"],\n    recentEvaluations: [{ year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: \"B\" }] },\n  { id: \"favorite-b\", name: \"이예시\", company: \"예시사업\", position: \"연구개발담당\",\n    affiliation: \"제조 계열\", jobFunction: \"연구\", expertAreas: [\"연구개발\"] },\n  { id: \"favorite-c\", name: \"박가상\", company: \"가상서비스\", position: \"사업기획담당\",\n    affiliation: \"서비스 계열\", jobFunction: \"기획\", expertAreas: [\"사업기획\", \"운영\"] },\n];\n\nexport function FavoriteCandidatesExample() {\n  const [favorites, setFavorites] = useState(candidates.map(item => item.id));\n  const [selected, setSelected] = useState(\"\");\n  return <section data-prism=\"light\">\n    <PrismFavoriteCandidateGrid resize=\"both\" style={{ width: \"100%\", height: 440 }}>\n      {candidates.map(candidate => <PrismFavoriteCandidateCard key={candidate.id} candidate={candidate}\n        favorite={favorites.includes(candidate.id)} selected={selected === candidate.id}\n        onOpen={item => setSelected(item.id)}\n        onFavoriteChange={next => setFavorites(ids => next\n          ? [...new Set([...ids, candidate.id])]\n          : ids.filter(id => id !== candidate.id))} />)}\n    </PrismFavoriteCandidateGrid>\n    <p role=\"status\">{selected ? selected + \" 상세 조회 의도\" : \"선택 없음\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-favorite-candidate.tsx",
       "previewUrl": "/prism?component=prism-favorite-candidate",
       "embedUrl": "/prism?component=prism-favorite-candidate&embed=1",
@@ -3081,7 +3081,12 @@
         "visual": "pending",
         "interaction": "partial",
         "checks": [
-          "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
+          "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content",
+          "Current frontend dev FavoriteCandidateCard/List TSX and SCSS are unchanged from reference source 087811ff; source defines 16px padding, 12px radius, 70px portrait, 121px information, 12px expertise panel and three 10px-gapped grid columns.",
+          "Local IAB browser checked 1280px three-column cards, 320px one-column default/loading/empty/readonly/long, and a 140px long-content parent with internal vertical scroll and no horizontal document overflow.",
+          "Complete portable example now supplies three synthetic favorite candidates and controlled favorite/detail states; independent shadcn consumer installed 59 exact module sources plus CSS, typechecked 48 examples, and passed Vite/font/notices.",
+          "Independent browser confirmed 1280px three columns, 560px two columns, 320px one column, separate favorite/detail callbacks, selected state, no document overflow and no console errors.",
+          "Authenticated /chat/favorites rendered an empty React root in IAB and logged-in Chrome, so current deployed pixels and service data could not be compared."
         ],
         "remaining": [
           "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
@@ -3103,6 +3108,29 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "evidence": [
+          "favorite-candidate-goal-installed-bytes.json",
+          "prism-favorite-candidate-goal-audit-2026-10-14.md"
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/favorite/FavoriteCandidateCard.tsx",
+            "chat/favorite/FavoriteCandidateCard.module.scss",
+            "chat/favorite/FavoriteCandidateList.tsx",
+            "chat/favorite/FavoriteCandidateList.module.scss"
+          ],
+          "evidence": "Current source design metrics and unchanged source, local representative states including 140px long content, complete three-card portable example, independent 59-module/48-example installation, 1280/560/320px grid behavior and separate controls.",
+          "intentionalImprovements": [
+            "Detail and favorite actions are sibling native buttons.",
+            "Long content wraps and grid columns respond to container width; the original fixed three-column grid is retained at wide widths.",
+            "Portrait failures render an honest fallback rather than a broken image."
+          ],
+          "limitations": "Authenticated deployed /chat/favorites rendered an empty root in IAB and Chrome; deployed SHA, exact pixel/font parity, real bookmark persistence and profile A4 layout remain unverified."
         }
       },
       "exports": [
@@ -3128,7 +3156,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid } from \"@/components/ui/prism-favorite-candidate\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\nexport function FavoriteCandidatesExample() {\n  const [favorite, setFavorite] = useState(true);\n  const [selected, setSelected] = useState(\"\");\n  const candidate: PrismCandidate = { id: \"synthetic-favorite\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", expertAreas: [\"기술\", \"전략\"],\n    recentEvaluations: [{ year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: \"B\" }] };\n  return <div data-prism=\"light\"><PrismFavoriteCandidateGrid resize=\"both\" style={{ width: \"100%\", height: 440 }}>\n    <PrismFavoriteCandidateCard candidate={candidate} favorite={favorite} onFavoriteChange={setFavorite}\n      selected={selected === candidate.id} onOpen={item => setSelected(item.id)} />\n  </PrismFavoriteCandidateGrid><p role=\"status\">{selected || \"선택 없음\"}</p></div>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid } from \"@/components/ui/prism-favorite-candidate\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\n\nconst candidates: PrismCandidate[] = [\n  { id: \"favorite-a\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\",\n    affiliation: \"ICT 계열\", jobFunction: \"R&D/기술\", expertAreas: [\"기술\", \"전략\"],\n    recentEvaluations: [{ year: \"2025\", grade: \"(A)\" }, { year: \"2024\", grade: \"B\" }] },\n  { id: \"favorite-b\", name: \"이예시\", company: \"예시사업\", position: \"연구개발담당\",\n    affiliation: \"제조 계열\", jobFunction: \"연구\", expertAreas: [\"연구개발\"] },\n  { id: \"favorite-c\", name: \"박가상\", company: \"가상서비스\", position: \"사업기획담당\",\n    affiliation: \"서비스 계열\", jobFunction: \"기획\", expertAreas: [\"사업기획\", \"운영\"] },\n];\n\nexport function FavoriteCandidatesExample() {\n  const [favorites, setFavorites] = useState(candidates.map(item => item.id));\n  const [selected, setSelected] = useState(\"\");\n  return <section data-prism=\"light\">\n    <PrismFavoriteCandidateGrid resize=\"both\" style={{ width: \"100%\", height: 440 }}>\n      {candidates.map(candidate => <PrismFavoriteCandidateCard key={candidate.id} candidate={candidate}\n        favorite={favorites.includes(candidate.id)} selected={selected === candidate.id}\n        onOpen={item => setSelected(item.id)}\n        onFavoriteChange={next => setFavorites(ids => next\n          ? [...new Set([...ids, candidate.id])]\n          : ids.filter(id => id !== candidate.id))} />)}\n    </PrismFavoriteCandidateGrid>\n    <p role=\"status\">{selected ? selected + \" 상세 조회 의도\" : \"선택 없음\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-record",

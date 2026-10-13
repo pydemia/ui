@@ -690,16 +690,31 @@ Installed usage:
 import { useState } from "react";
 import { PrismFavoriteCandidateCard, PrismFavoriteCandidateGrid } from "@/components/ui/prism-favorite-candidate";
 import { type PrismCandidate } from "@/components/ui/prism-candidate";
-export function FavoriteCandidatesExample() {
-  const [favorite, setFavorite] = useState(true);
-  const [selected, setSelected] = useState("");
-  const candidate: PrismCandidate = { id: "synthetic-favorite", name: "김가상", company: "가상전자", position: "기술전략담당",
+
+const candidates: PrismCandidate[] = [
+  { id: "favorite-a", name: "김가상", company: "가상전자", position: "기술전략담당",
     affiliation: "ICT 계열", jobFunction: "R&D/기술", expertAreas: ["기술", "전략"],
-    recentEvaluations: [{ year: "2025", grade: "(A)" }, { year: "2024", grade: "B" }] };
-  return <div data-prism="light"><PrismFavoriteCandidateGrid resize="both" style={{ width: "100%", height: 440 }}>
-    <PrismFavoriteCandidateCard candidate={candidate} favorite={favorite} onFavoriteChange={setFavorite}
-      selected={selected === candidate.id} onOpen={item => setSelected(item.id)} />
-  </PrismFavoriteCandidateGrid><p role="status">{selected || "선택 없음"}</p></div>;
+    recentEvaluations: [{ year: "2025", grade: "(A)" }, { year: "2024", grade: "B" }] },
+  { id: "favorite-b", name: "이예시", company: "예시사업", position: "연구개발담당",
+    affiliation: "제조 계열", jobFunction: "연구", expertAreas: ["연구개발"] },
+  { id: "favorite-c", name: "박가상", company: "가상서비스", position: "사업기획담당",
+    affiliation: "서비스 계열", jobFunction: "기획", expertAreas: ["사업기획", "운영"] },
+];
+
+export function FavoriteCandidatesExample() {
+  const [favorites, setFavorites] = useState(candidates.map(item => item.id));
+  const [selected, setSelected] = useState("");
+  return <section data-prism="light">
+    <PrismFavoriteCandidateGrid resize="both" style={{ width: "100%", height: 440 }}>
+      {candidates.map(candidate => <PrismFavoriteCandidateCard key={candidate.id} candidate={candidate}
+        favorite={favorites.includes(candidate.id)} selected={selected === candidate.id}
+        onOpen={item => setSelected(item.id)}
+        onFavoriteChange={next => setFavorites(ids => next
+          ? [...new Set([...ids, candidate.id])]
+          : ids.filter(id => id !== candidate.id))} />)}
+    </PrismFavoriteCandidateGrid>
+    <p role="status">{selected ? selected + " 상세 조회 의도" : "선택 없음"}</p>
+  </section>;
 }
 ```
 

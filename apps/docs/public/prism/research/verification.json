@@ -2362,7 +2362,12 @@
       "visual": "pending",
       "interaction": "partial",
       "checks": [
-        "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content"
+        "Nine new JSDOM/SSR tests cover immutable/sorted history, grouped years, header actions, controlled/busy/readonly/loading, portrait source/subject retry, sibling card actions, collection variants and print header content",
+        "Current frontend dev FavoriteCandidateCard/List TSX and SCSS are unchanged from reference source 087811ff; source defines 16px padding, 12px radius, 70px portrait, 121px information, 12px expertise panel and three 10px-gapped grid columns.",
+        "Local IAB browser checked 1280px three-column cards, 320px one-column default/loading/empty/readonly/long, and a 140px long-content parent with internal vertical scroll and no horizontal document overflow.",
+        "Complete portable example now supplies three synthetic favorite candidates and controlled favorite/detail states; independent shadcn consumer installed 59 exact module sources plus CSS, typechecked 48 examples, and passed Vite/font/notices.",
+        "Independent browser confirmed 1280px three columns, 560px two columns, 320px one column, separate favorite/detail callbacks, selected state, no document overflow and no console errors.",
+        "Authenticated /chat/favorites rendered an empty React root in IAB and logged-in Chrome, so current deployed pixels and service data could not be compared."
       ],
       "remaining": [
         "Actual source/installed/preview compact/long/readonly/loading interaction and pixel/font comparison.",
@@ -2384,6 +2389,29 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+      "evidence": [
+        "favorite-candidate-goal-installed-bytes.json",
+        "prism-favorite-candidate-goal-audit-2026-10-14.md"
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/favorite/FavoriteCandidateCard.tsx",
+          "chat/favorite/FavoriteCandidateCard.module.scss",
+          "chat/favorite/FavoriteCandidateList.tsx",
+          "chat/favorite/FavoriteCandidateList.module.scss"
+        ],
+        "evidence": "Current source design metrics and unchanged source, local representative states including 140px long content, complete three-card portable example, independent 59-module/48-example installation, 1280/560/320px grid behavior and separate controls.",
+        "intentionalImprovements": [
+          "Detail and favorite actions are sibling native buttons.",
+          "Long content wraps and grid columns respond to container width; the original fixed three-column grid is retained at wide widths.",
+          "Portrait failures render an honest fallback rather than a broken image."
+        ],
+        "limitations": "Authenticated deployed /chat/favorites rendered an empty root in IAB and Chrome; deployed SHA, exact pixel/font parity, real bookmark persistence and profile A4 layout remain unverified."
       }
     },
     "prism-evaluation-history": {
@@ -6965,10 +6993,11 @@
       "prism-utility",
       "prism-chart",
       "prism-evaluation-history",
-      "prism-candidate-list"
+      "prism-candidate-list",
+      "prism-favorite-candidate"
     ],
-    "acceptedCount": 36,
-    "unassessedGroups": 22,
+    "acceptedCount": 37,
+    "unassessedGroups": 21,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
