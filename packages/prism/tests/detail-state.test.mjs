@@ -107,3 +107,23 @@ test("the portable workspace example ignores stale errors and removes actual pro
     await click(button("상세 API 404")); assert.equal(document.querySelector('.prism-panel'), null);
     await click(document.querySelector('input[type="checkbox"]')); assert.equal(document.querySelector('[aria-label="Admin"]'), null); await clear();
 });
+test("published detail-selection example keeps a previous request from closing the switched panel", async () => {
+    const manifest = JSON.parse(await readFile(new URL("../../../apps/docs/public/prism/components.json", import.meta.url), "utf8"));
+    const usage = manifest.components.find(item => item.id === "prism-detail-state")?.usage;
+    assert.ok(usage);
+    const published = (await transform(usage, { loader: "tsx", jsx: "automatic", format: "esm" })).code
+        .replace(/\bfrom\s+["']([^"']+)["']/g, (_match, specifier) => {
+            assert.ok(["react", "react/jsx-runtime", "@pydemia/prism"].includes(specifier));
+            return "from " + JSON.stringify(import.meta.resolve(specifier));
+        });
+    const { DetailSelectionExample: PublishedExample } = await import("data:text/javascript;base64," + Buffer.from(published).toString("base64"));
+    await render(h(PublishedExample));
+    await click(button("현재 요청 보관"));
+    await click(button("포지션 과거 버전 2"));
+    await click(button("보관한 요청의 늦은 403"));
+    assert.match(document.body.textContent, /합성 403: 현재 상세 유지/);
+    assert.match(document.querySelector(".prism-panel").textContent, /과거 버전 2/);
+    await click(button("상세 API 403"));
+    assert.equal(document.querySelector(".prism-panel"), null);
+    await clear();
+});

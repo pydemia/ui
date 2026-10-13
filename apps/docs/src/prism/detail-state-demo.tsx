@@ -37,6 +37,8 @@ export function DetailSelectionExample({ initialMode = "profile" }: { initialMod
             <PrismButton variant="line" onClick={() => applyError(404)}>상세 API 404</PrismButton>
             <PrismButton variant="line" onClick={() => applyError(500)}>상세 API 500</PrismButton>
             <PrismButton variant="line" disabled={!ticket} onClick={() => applyError(403, ticket)}>보관한 요청의 늦은 403</PrismButton>
+            <PrismButton variant="line" onClick={() => { setExpanded(false); detail.selectPosition({ id: "synthetic-position", source: "card", version: 2 }); }}>포지션 과거 버전 2</PrismButton>
+            <PrismButton variant="line" onClick={() => { setExpanded(false); detail.selectPosition({ id: "synthetic-position", source: "link" }); }}>포지션 현재 운영본</PrismButton>
         </div>
         <p role="status">{message || "합성 데이터로 상세 선택과 접근 오류를 확인합니다."}</p>
         <PrismWorkspace height={560} sidebar={<PrismSidebar items={admin ? [admin] : []} expandedIds={menus} onExpandedIdsChange={setMenus}
@@ -44,8 +46,6 @@ export function DetailSelectionExample({ initialMode = "profile" }: { initialMod
             header={<span>선택한 메뉴: {route}</span>} panel={panel}>
             <div style={{ padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
                 <PrismCandidateCard candidate={candidate} selected={selection?.kind === "profile"} onOpen={value => { setExpanded(false); detail.selectProfile(value); }}/>
-                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: "synthetic-position", source: "card", version: 2 }); }}>포지션 과거 버전 2</PrismButton>
-                <PrismButton onClick={() => { setExpanded(false); detail.selectPosition({ id: "synthetic-position", source: "link" }); }}>포지션 현재 운영본</PrismButton>
                 <p role="status">{selection ? `${selection.kind}: ${selection.kind === "profile" ? selection.candidate.id : selection.reference.id}` : "선택된 상세 없음"}</p>
             </div>
         </PrismWorkspace>

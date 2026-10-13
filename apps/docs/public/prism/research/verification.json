@@ -2299,6 +2299,34 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "../pages/chat/ChatMain.tsx",
+          "../lib/axios.ts",
+          "chat/panel/SidePanel.tsx"
+        ],
+        "evidence": [
+          "Current ChatMain keeps profile and position selection mutually exclusive; its classified toast-error listener clears both panels and subjects. Axios defines the relevant 403/404 request classification before the listener.",
+          "The hook tests cover exclusive selection, classified 403/404, unrelated statuses, stale request tickets across same IDs/versions/instances and unmount cleanup; a separate test executes the published catalog example.",
+          "Local and independently installed browsers exercise 320px selection and a previous request 403 retaining the current position panel; 500 retains it and a current 403/404 removes the panel DOM. The installed browser reports zero console errors and no document overflow.",
+          "The complete example now places synthetic selection controls outside the compact panel so its behavior is reachable by a real browser; 59 installed modules/CSS are byte-identical and 45 complete examples typecheck."
+        ],
+        "intentionalImprovements": [
+          "Instance-scoped opaque UI tickets prevent a previous or foreign request from closing a newer selection.",
+          "Conditional unmount removes subject/draft DOM on classified access loss, including when a generic panel normally preserves hidden contents.",
+          "The standalone example exposes selection controls outside the compact panel without changing product selection rules."
+        ],
+        "hostOwned": [
+          "API path/status classification, real request cancellation, authorization, notifications and route/conversation transitions remain with the host."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed profile/position access-error flows and deployed source SHA are not established.",
+          "The synthetic browser example does not prove actual service responses or host route transitions."
+        ]
       }
     },
     "prism-admin-users": {
@@ -2606,6 +2634,34 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/panel/SidePanel.tsx",
+          "chat/panel/SidePanel.module.scss"
+        ],
+        "evidence": [
+          "Current source and public deployed Side Panel sample show the nonmodal 440px right-side layout and 24px action icon; the already accepted PrismPanel supplies that product workflow. This group supplies a separate focused modal detail drawer and label/value list.",
+          "Local browser default/open/loading/empty/error/retry/long states render. At 320px the long drawer scrolls its 3403px body under a fixed header without document overflow, and Escape or close restores focus to the external trigger.",
+          "Independent shadcn consumer renders the modal from its installed example; a 180px host stacks duplicate-label rows, preserves numeric zero and shows null as information unavailable without document overflow.",
+          "Published complete example typechecks in the installed consumer; 59 module sources and CSS match emitted registry bytes. Full PRISM tests, typecheck, site build and registry release check passed."
+        ],
+        "intentionalImprovements": [
+          "The modal drawer provides a focused standalone detail view; inline chat details use the nonmodal PrismPanel.",
+          "A long title can grow the header while only the content region scrolls; the close control remains available.",
+          "The close control is keyboard-visible and restores focus to the previously active trigger.",
+          "Detail rows stack in narrow independent hosts and repeated labels no longer collide as React keys."
+        ],
+        "hostOwned": [
+          "Profile/position requests, authorization, loading/error results, mutations and side effects belong to the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "The public deployed sample does not provide a modal detail drawer; this is an additional component, so modal pixel parity is not claimed.",
+          "Authenticated real detail data and the deployed source SHA remain unverified."
+        ]
       }
     },
     "prism-six-frame": {
@@ -6680,10 +6736,12 @@
       "prism-rich-text",
       "prism-position",
       "prism-position-directory",
-      "prism-chat"
+      "prism-chat",
+      "prism-detail",
+      "prism-detail-state"
     ],
-    "acceptedCount": 24,
-    "unassessedGroups": 34,
+    "acceptedCount": 26,
+    "unassessedGroups": 32,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
