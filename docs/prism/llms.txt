@@ -808,7 +808,7 @@ export function CollectionExample() {
 
 ## Notice / Inquiry / Policy
 공지 목록·상세·비모달 팝업·문의 내역·방침 버전
-Contract: 공지 팝업은 비모달입니다. 목록·선택·정렬·버전은 소비자 소유이며 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서 높이를 관찰합니다.
+Contract: 공지 팝업은 비모달입니다. 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서 높이를 관찰합니다.
 States: default, empty, loading, error
 Registry: /prism/r/prism-notice.json
 Source: packages/prism/src/prism-notice.tsx
@@ -817,20 +817,25 @@ Installed usage:
 ```tsx
 import { useState } from "react";
 import { PrismButton } from "@/components/ui/prism-button";
-import { PrismNoticeDialog, type PrismNotice } from "@/components/ui/prism-notice";
+import { PrismNoticeDialog, type PrismNotice, type PrismNoticeListItem } from "@/components/ui/prism-notice";
 
-const notices: PrismNotice[] = [
-  { id: "notice-demo", title: "가상 서비스 안내", date: "2026-10-03",
-    author: "예시 운영자", content: "공지 목록과 상세 전환을 확인하는 합성 데이터입니다." },
+const rows: PrismNoticeListItem[] = [
+  { id: "notice-demo", title: "가상 서비스 안내", date: "2026.10.03", author: "예시 운영자" },
 ];
+const detail: PrismNotice = {
+  ...rows[0], content: "공지 상세 조회 결과를 표시하는 합성 데이터입니다.",
+};
 
 export function NoticeExample() {
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [order, setOrder] = useState<"latest" | "oldest">("latest");
   return <section>
-    <PrismButton onClick={() => { setSelectedId(null); setOpen(true); }}>공지사항 열기</PrismButton>
-    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={notices}
-      selectedId={selectedId} onSelect={setSelectedId} />
+    <PrismButton onClick={() => { setSelectedId(null); setOrder("latest"); setOpen(true); }}>공지사항 열기</PrismButton>
+    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={rows} total={12}
+      selectedId={selectedId} onSelect={setSelectedId}
+      detail={selectedId === detail.id ? detail : null}
+      order={order} onOrderChange={setOrder} />
   </section>;
 }
 ```

@@ -3191,7 +3191,7 @@
       "name": "Notice / Inquiry / Policy",
       "category": "Overlays",
       "purpose": "공지 목록·상세·비모달 팝업·문의 내역·방침 버전",
-      "contract": "공지 팝업은 비모달입니다. 목록·선택·정렬·버전은 소비자 소유이며 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서 높이를 관찰합니다.",
+      "contract": "공지 팝업은 비모달입니다. 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서 높이를 관찰합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
@@ -3205,7 +3205,7 @@
         "chat/sidebar/InquiryHistoryDialog.tsx",
         "chat/sidebar/PrivacyPolicyDialog.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismNoticeDialog, type PrismNotice } from \"@pydemia/prism\";\n\nconst notices: PrismNotice[] = [\n  { id: \"notice-demo\", title: \"가상 서비스 안내\", date: \"2026-10-03\",\n    author: \"예시 운영자\", content: \"공지 목록과 상세 전환을 확인하는 합성 데이터입니다.\" },\n];\n\nexport function NoticeExample() {\n  const [open, setOpen] = useState(false);\n  const [selectedId, setSelectedId] = useState<string | null>(null);\n  return <section>\n    <PrismButton onClick={() => { setSelectedId(null); setOpen(true); }}>공지사항 열기</PrismButton>\n    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={notices}\n      selectedId={selectedId} onSelect={setSelectedId} />\n  </section>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismNoticeDialog, type PrismNotice, type PrismNoticeListItem } from \"@pydemia/prism\";\n\nconst rows: PrismNoticeListItem[] = [\n  { id: \"notice-demo\", title: \"가상 서비스 안내\", date: \"2026.10.03\", author: \"예시 운영자\" },\n];\nconst detail: PrismNotice = {\n  ...rows[0], content: \"공지 상세 조회 결과를 표시하는 합성 데이터입니다.\",\n};\n\nexport function NoticeExample() {\n  const [open, setOpen] = useState(false);\n  const [selectedId, setSelectedId] = useState<string | null>(null);\n  const [order, setOrder] = useState<\"latest\" | \"oldest\">(\"latest\");\n  return <section>\n    <PrismButton onClick={() => { setSelectedId(null); setOrder(\"latest\"); setOpen(true); }}>공지사항 열기</PrismButton>\n    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={rows} total={12}\n      selectedId={selectedId} onSelect={setSelectedId}\n      detail={selectedId === detail.id ? detail : null}\n      order={order} onOrderChange={setOrder} />\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-notice.tsx",
       "previewUrl": "/prism?component=prism-notice",
       "embedUrl": "/prism?component=prism-notice&embed=1",
@@ -3217,14 +3217,20 @@
           "Policy version changes iframe content",
           "Policy height stabilizes at content height",
           "Policy sandbox has allow-same-origin without allow-scripts",
-          "Notice popup is nonmodal and next notice changes to 2/2"
+          "Notice popup is nonmodal and next notice changes to 2/2",
+          "Authenticated deployed list order toggles and detail opens; source list/detail geometry measured",
+          "Local default list geometry matches 560px dialog, 500px body, 412px scrolling list and 40px rows",
+          "Separate total, list order, detail loading/result/stale ID and six skeleton rows pass synthetic DOM tests"
         ],
         "evidence": [
           "local-policy",
-          "local-notice-popup"
+          "local-notice-popup",
+          "authenticated-notice-list-detail-2026-10-13",
+          "local-notice-dialog-2026-10-13"
         ],
         "remaining": [
-          "Dialog list selection/order and all states"
+          "Deployed empty/error/attachments and narrow-screen states",
+          "Full notice detail font/pixel parity and deployed source revision binding"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -3245,6 +3251,10 @@
       "exports": [
         {
           "name": "PrismNotice",
+          "kind": "type"
+        },
+        {
+          "name": "PrismNoticeListItem",
           "kind": "type"
         },
         {
@@ -3273,7 +3283,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismNoticeDialog, type PrismNotice } from \"@/components/ui/prism-notice\";\n\nconst notices: PrismNotice[] = [\n  { id: \"notice-demo\", title: \"가상 서비스 안내\", date: \"2026-10-03\",\n    author: \"예시 운영자\", content: \"공지 목록과 상세 전환을 확인하는 합성 데이터입니다.\" },\n];\n\nexport function NoticeExample() {\n  const [open, setOpen] = useState(false);\n  const [selectedId, setSelectedId] = useState<string | null>(null);\n  return <section>\n    <PrismButton onClick={() => { setSelectedId(null); setOpen(true); }}>공지사항 열기</PrismButton>\n    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={notices}\n      selectedId={selectedId} onSelect={setSelectedId} />\n  </section>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismNoticeDialog, type PrismNotice, type PrismNoticeListItem } from \"@/components/ui/prism-notice\";\n\nconst rows: PrismNoticeListItem[] = [\n  { id: \"notice-demo\", title: \"가상 서비스 안내\", date: \"2026.10.03\", author: \"예시 운영자\" },\n];\nconst detail: PrismNotice = {\n  ...rows[0], content: \"공지 상세 조회 결과를 표시하는 합성 데이터입니다.\",\n};\n\nexport function NoticeExample() {\n  const [open, setOpen] = useState(false);\n  const [selectedId, setSelectedId] = useState<string | null>(null);\n  const [order, setOrder] = useState<\"latest\" | \"oldest\">(\"latest\");\n  return <section>\n    <PrismButton onClick={() => { setSelectedId(null); setOrder(\"latest\"); setOpen(true); }}>공지사항 열기</PrismButton>\n    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={rows} total={12}\n      selectedId={selectedId} onSelect={setSelectedId}\n      detail={selectedId === detail.id ? detail : null}\n      order={order} onOrderChange={setOrder} />\n  </section>;\n}"
     },
     {
       "id": "prism-response",

@@ -297,14 +297,20 @@
         "Policy version changes iframe content",
         "Policy height stabilizes at content height",
         "Policy sandbox has allow-same-origin without allow-scripts",
-        "Notice popup is nonmodal and next notice changes to 2/2"
+        "Notice popup is nonmodal and next notice changes to 2/2",
+        "Authenticated deployed list order toggles and detail opens; source list/detail geometry measured",
+        "Local default list geometry matches 560px dialog, 500px body, 412px scrolling list and 40px rows",
+        "Separate total, list order, detail loading/result/stale ID and six skeleton rows pass synthetic DOM tests"
       ],
       "evidence": [
         "local-policy",
-        "local-notice-popup"
+        "local-notice-popup",
+        "authenticated-notice-list-detail-2026-10-13",
+        "local-notice-dialog-2026-10-13"
       ],
       "remaining": [
-        "Dialog list selection/order and all states"
+        "Deployed empty/error/attachments and narrow-screen states",
+        "Full notice detail font/pixel parity and deployed source revision binding"
       ],
       "localRenderGate": {
         "status": "passed",

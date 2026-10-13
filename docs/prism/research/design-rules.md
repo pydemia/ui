@@ -27,6 +27,10 @@ Pretendard is verified in deployed computed styles. The standalone site uses off
 
 The deployed chat body and answer/table cells use `word-break: keep-all` with `overflow-wrap: anywhere`, matching the latest frontend reset at `d677e551`. The independent PRISM light root carries those inherited values within its own scope, so Korean word units remain together where possible and oversized tokens can still wrap in narrow containers.
 
+## Notice list and detail
+
+The authenticated list dialog measures 560px wide with a 500px content region, a 40px list heading and a 412px scrolling body at desktop size. Its three table columns use the remaining title width plus 100px author and date columns; rows are about 40px high. The detail dialog keeps a 300px minimum content region and offers both a header back control and a footer list action. Source list summaries omit the body and attachments, so the host supplies a separate detail response and loading/error state. `total` is the server's full result count and can exceed the displayed rows. The component sorts supplied timestamps locally without changing its input array. Requests, stale-result cancellation and access control remain host responsibilities.
+
 ## Leadership summary
 
 The local dev revision `27c4fdbf3e73234b7ab5c46e379a04d083c12df8` changes the summary to a blue type tag, a bold summary and a separate explanation below a divider. `PrismLeadershipPieSummary.title` maps to `summary.title`; `description` maps to `summary.content`; `detail` maps to `summary.description`. Whitespace-only detail adds no divider. Detail alone is information, including when all percentages are missing or zero. The host supplies the values and interpretation.
