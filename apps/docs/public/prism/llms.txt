@@ -308,15 +308,21 @@ export function PanelExample() {
 
 ## 6-frame comparison
 리더 유형·경험·역량·자질을 후보별로 비교
-Contract: 열 ID는 고유하며 값은 ReactNode 또는 null입니다. null은 정보 없음으로 표시합니다. 첫 두 열과 header를 고정하고 경험·역량 행을 병합합니다. 비교 점수나 순위는 계산하지 않습니다.
+Contract: 원본 분석 표의 첫 열을 6-Frame 행 이름으로 변환하며 알려진 행이 없으면 null을 반환해 일반 표로 표시할 수 있습니다. 열 ID는 고유하며 값은 ReactNode 또는 null입니다. null은 정보 없음, 빈 문자열은 -로 표시하고 숫자 0은 보존합니다. 문자열 셀은 안전한 강조·링크 표시를 지원하고 profile/position/document 의도는 호스트 callback으로만 보냅니다. 패널에서는 profile/position 링크를 일반 라벨로 표시합니다. 첫 두 열과 header를 고정하고 경험·역량 행을 병합하며 비교 점수나 순위는 계산하지 않습니다. 좁은 표는 내부에서 스크롤합니다.
 States: default, empty, long
 Registry: /prism/r/prism-six-frame.json
 Source: packages/prism/src/prism-six-frame.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismSixFrame } from "@/components/ui/prism-six-frame";
-<PrismSixFrame columns={columns} panel={false} />;
+import { PrismSixFrame, preparePrismSixFrameColumns } from "@/components/ui/prism-six-frame";
+const columns = preparePrismSixFrameColumns({
+  columns: ["구분", "가상 후보 A", "가상 후보 B"],
+  rows: [["리더 유형", "전략형", "실행형"], ["전문성", "기술 전략", "사업 운영"]],
+}) ?? [];
+export function SixFrameExample() {
+  return <section data-prism="light"><PrismSixFrame columns={columns} title="6 Frame 분석 결과" /></section>;
+}
 ```
 
 ## Selection / Date / Pagination

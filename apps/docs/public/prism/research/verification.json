@@ -2115,6 +2115,35 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/templates/ChatSixFrameTable.tsx",
+          "chat/templates/sixFrameTable.ts",
+          "ui/table/HRXChatTable.tsx"
+        ],
+        "evidence": [
+          "Deployed public six-frame sample has a five-candidate main table in an 800px region and a two-candidate panel table in a 400px region; source groups the six rows into leader type, experience, capability and quality.",
+          "Portable parser maps recognized analysis row labels, preserves duplicate candidate headers with unique IDs and returns null for an unknown-only table so the host can render a generic table.",
+          "Local IAB at 1280px, 400px panel and 320px main width shows six rows, grouped headers and fixed leading columns; the 320px document stays 320px wide while the 1110px table scrolls inside 288px. Empty and eight-candidate long states render without document overflow.",
+          "Profile action in the local browser calls the host with profile: demo-01; panel mode displays the link label without an action.",
+          "313 PRISM tests, workspace typecheck, site build and registry check passed; isolated shadcn consumer installed 59 exact TSX sources plus CSS, typechecked 41 examples and built with Vite/font/notices."
+        ],
+        "intentionalImprovements": [
+          "Missing values say 정보 없음 while an explicitly empty string displays -; numeric zero remains visible.",
+          "Rich cells render supported emphasis and safe action intents through a host callback, with no built-in navigation.",
+          "The narrow table scrolls internally, keeps a keyboard-focusable region and names its grouped headers for assistive technology."
+        ],
+        "hostOwned": [
+          "Candidate/profile navigation, document opening, analysis data and authorization belong to the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "The deployed source commit identity and authenticated product action routes are not established.",
+          "Full pixel parity and every product caller combination are outside this group acceptance evidence."
+        ]
       }
     },
     "prism-content": {
@@ -6091,10 +6120,12 @@
       "prism-field",
       "prism-dialog",
       "prism-feedback",
-      "prism-display"
+      "prism-display",
+      "prism-candidate",
+      "prism-six-frame"
     ],
-    "acceptedCount": 6,
-    "unassessedGroups": 52,
+    "acceptedCount": 8,
+    "unassessedGroups": 50,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
