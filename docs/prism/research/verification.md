@@ -331,3 +331,17 @@ Current workspace:57 install groups/58 registry items/38 complete examples/244 c
 Position-block list/editor/deletion follow current source27c4fdbf: LIVE/TEMP, role view-only, sync lock, deleted counts, debounced duplicate check, description+sub-job generation and manual editing, dirty guard, impact review before edit confirmation, required primary/optional secondary remap and other-job conflict. Services are typed host callbacks with cancellation; failed requests retain input or selection for retry. Twelve new states at1280/320 and legacy tag/default320 were checked; document/dialog overflow and nested buttons0 after containing hidden labels within remap fields. Actual create/edit/save/remap flows are synthetic. The original authenticated administrator page is blank, and real service/RBAC/sync/full visual/font/A4 parity remains pending.
 
 Current source fingerprint:24f6875e7f3aa078e2c927100585b52274d7788c75207ae70c9352506239d1b6 from82 inputs. Corrected57 TSX/CSS and38 examples passed actual shadcn installation,TypeScript/Vite/font/notices. Source common-control CSS values and label/helper/generation/textarea order were measured. Fourteen current unique states were checked (12 new plus tag/field regressions); authenticated source and full busy/visual comparison remain pending. Corrected installed mobile/order/red notice/edit-impact-save were checked with console0. Full site and generic checks passed; latest review publication pending.
+
+## Chat-log and generation-state audit 2026-10-13
+
+Current source:58 install groups/59 registry items/39 complete examples/252 canonical fixture states. The independent final target total remains unestablished;186 source files are not a completion denominator.
+
+The source chat-log pages are placeholders with100 mock rows,no-op search/reset,header/page-only sort and a fixed archive. The portable list has typed host-owned query/page/sort/records and confirmed copy success/failure. The readonly archive preserves context-nudge question omission and selected responses. Public examples use23 synthetic rows/4turns and never change the system clipboard.
+
+34 target and266 full PRISM tests passed. Real shadcn installation,58 exact module sources/CSS,39 complete examples typecheck,Vite,font/notices and full site build passed. The generic registry still matches immutable snapshot sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896.
+
+IAB recovered. All8 log states rendered at1280/320 with no document horizontal overflow or nested buttons. Browser interactions proved copy failure/retry,invalid-date submit rejection,page2/detail/back,readonly choices and context-nudge omission. Six dynamic generation checks at1280/320 proved input-only bounds,retained values,Base0.6,24px CSS spinner and48px empty subjob loader. They are not extra canonical states. Installed list/archive rendered atboth widths and retained generation at1280.
+
+Current9 of252 canonical states have scoped browser evidence. Full source/installed state coverage,authenticated original font/pixel/A4 and deployed revision comparison remain incomplete. The source-defined /chat/admin/chat-logs route is document complete but visibly blank in IAB;the existing Chrome source tab displays /admin-login. These observations do not establish an authentication or implementation cause. Review branch CI/preview readback is pending;production is not published.
+
+Current source fingerprint:31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7/84 inputs.

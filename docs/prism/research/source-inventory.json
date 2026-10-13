@@ -2268,7 +2268,7 @@
       "latestDeltaAudit": {
         "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "observedAt": "2026-10-13",
-        "scope": "Optional beforeInput ReactNode slot preserves the native label/input association and default textarea behavior; block source uses label→helper→generate→textarea order."
+        "scope": "Optional inputOverlay preserves default textarea DOM; explicit null holds the same native node through generation. Source overlay covers input only and host retains disabled/readonly ownership."
       }
     },
     {
@@ -2561,6 +2561,11 @@
       "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "observedAt": "2026-10-13",
       "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved."
+    },
+    "reviewedChatLogAndGenerationStates": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Chat-log placeholder source and typed host query/copy/archive contracts; source generation overlays with selected local/installed browser checks. Authenticated original visual/API parity remains unverified."
     }
   },
   "integrationReferences": [
@@ -2760,6 +2765,33 @@
         "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
         "observedAt": "2026-10-13",
         "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
+    },
+    {
+      "source": "pages/admin/chat-logs/ChatLogPage.tsx",
+      "target": "prism-chat-logs",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Chat-log source placeholder list/archive, typed host query and clipboard completion, context-nudge/answer selection, block generation overlays. Current Mac lock interrupts browser verification; no original live/API parity claim."
+      }
+    },
+    {
+      "source": "pages/admin/chat-logs/ChatLogDetailPage.tsx",
+      "target": "prism-chat-logs",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Chat-log source placeholder list/archive, typed host query and clipboard completion, context-nudge/answer selection, block generation overlays. Current Mac lock interrupts browser verification; no original live/API parity claim."
+      }
+    },
+    {
+      "source": "pages/admin/chat-logs/chatLogFixture.ts",
+      "target": "prism-chat-logs",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Chat-log source placeholder list/archive, typed host query and clipboard completion, context-nudge/answer selection, block generation overlays. Current Mac lock interrupts browser verification; no original live/API parity claim."
       }
     }
   ],
