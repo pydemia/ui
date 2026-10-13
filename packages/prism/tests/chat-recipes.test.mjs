@@ -86,6 +86,24 @@ test("response panel uses the same recommendation recipe and legacy analysis ada
     await render(h(PrismProfileAnalysis,{leader:{label:'Good 리더',description:'합성 설명',aiComment:'합성 요약'},factors:[{id:'a',label:'Attitude',results:['Risk'],summary:null},{id:'d',label:'Design',results:['A','B'],summary:null}]}));
     assert.ok(document.querySelector('[data-kind="attitude"] .prism-analysis-derail-chip'));assert.equal(document.querySelectorAll('[data-kind="design"] .prism-anchor-chip').length,1);await clear();
 });
+test("response keeps a text block with its following visual block in both conversation widths",async()=>{
+    const blocks=[
+        {id:'intro',type:'text',content:'합성 소개'},
+        {id:'criteria',type:'criteria',items:['합성 기준']},
+        {id:'followup',type:'text',content:'합성 후속 설명'},
+        {id:'table',type:'table',title:'합성 표',columns:['항목','값'],rows:[{id:'one',cells:['점수',0]}]},
+        {id:'closing',type:'text',content:'합성 마무리'},
+    ];
+    for(const panel of [false,true]){
+        await render(h(PrismResponse,{blocks,panel}));
+        const groups=[...document.querySelectorAll('.prism-response-group')];
+        assert.deepEqual(groups.map(group=>group.querySelectorAll('.prism-response-block').length),[2,2,1]);
+        assert.deepEqual(groups.map(group=>!!group.hasAttribute('data-paired')),[true,true,false]);
+        assert.equal(document.querySelector('.prism-response-table tbody td:last-child').textContent,'0');
+        assert.equal(document.querySelector('.prism-response > .prism-generation').textContent,'답변 완료');
+    }
+    await clear();
+});
 test("position references distinguish historical and legacy cards from live links without mutating input",()=>{
     const item={id:'same-position',version:3,company:'가상전자'},before=JSON.stringify(item);
     assert.deepEqual(createPrismPositionReference(item),{id:'same-position',source:'card',version:3});
@@ -121,6 +139,15 @@ test("response text and table links remain live references independently of sele
     assert.equal(actions.length,5);assert.deepEqual(actions.filter(call=>call[0]==='position'),Array.from({length:3},()=>['position','same-position',{id:'same-position',source:'link'}]));
     assert.deepEqual(actions.filter(call=>call[0]!=='position'),[['profile','synthetic'],['document','/fixture.pdf']]);assert.deepEqual(cardsOpened,[]);
     await render(h(PrismResponse,{blocks}));assert.equal(document.querySelector('.prism-rich-action'),null);await clear();
+});
+test("response six-frame cells route live position links and panel cells remain inert",async()=>{
+    const calls=[],blocks=[{id:'frame',type:'six-frame',title:'합성 6 Frame',columns:[{id:'candidate',label:'김가상',values:{expertise:'[현재 포지션](position://synthetic-position)'}}]}];
+    await render(h(PrismResponse,{blocks,onAction:(...args)=>calls.push(args)}));
+    const action=document.querySelector('.prism-six-frame .prism-rich-action');assert.ok(action);await click(action);
+    assert.deepEqual(calls,[['position','synthetic-position',{id:'synthetic-position',source:'link'}]]);
+    await render(h(PrismResponse,{blocks,panel:true,onAction:(...args)=>calls.push(args)}));
+    assert.equal(document.querySelector('.prism-six-frame .prism-rich-action'),null);
+    assert.match(document.querySelector('.prism-six-frame').textContent,/현재 포지션/);await clear();
 });
 test("complete host example aborts old versions, ignores providers that finish late and keeps live links versionless",async()=>{
     const requests=[],loadPosition=(reference,signal)=>new Promise((resolve,reject)=>requests.push({reference,signal,resolve,reject}));

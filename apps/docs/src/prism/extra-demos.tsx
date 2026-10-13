@@ -7,7 +7,7 @@ import { PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismCriteriaTag, PrismP
     PrismPositionDetail, PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis,
     PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismProfileMemoComposer, PrismProfileMemoCollection, type PrismProfileMemoItem,
     PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistory, PrismPrivacyPolicyDialog,
-    type PrismContextValues, type PrismCandidateFilters, type PrismCandidate, type PrismNotice,
+    type PrismContextValues, type PrismCandidateFilters, type PrismCandidate, type PrismNotice, type PrismResponseBlock,
 } from "@pydemia/prism";
 import type { FixtureState } from "./catalog";
 const demoCandidates: PrismCandidate[] = [{id:"one",name:"김가상",company:"가상전자",position:"기술전략담당",elp:"ELP",birthDate:"1980.01.01",executiveYears:3},{id:"two",name:"이예시",company:"예시사업",position:"운영총괄",elp:"s-ELP",executiveYears:5}];
@@ -86,14 +86,19 @@ export function NoticeDemo({ state }: { state: FixtureState }) {
 
 export function ResponseDemo({ state }: { state: FixtureState }) {
     const [result,setResult] = useState("");
-    return <div className="prism-demo-stack"><PrismResponse status={state === "loading" ? "generating" : state === "error" ? "error" : "complete"} blocks={[
-        {id:"text",type:"text",content:'<bold>Independent response</bold> <color-blue>Blue text</color> <highlight-yellow>Highlight</highlight> <badge-green>Evidence</badge>\n[Profile](profile://one) [Position](position://one)'},
+    const panel=state==="panel",long=state==="long";
+    const blocks:PrismResponseBlock[]=state==="empty"?[]:[
+        {id:"text",type:"text",content:long?'긴 합성 응답의 표와 근거를 함께 확인합니다. '.repeat(12)+'\n\n| 영역 | 값 |\n| --- | --- |\n| 점수 | 0 |':'<bold>Independent response</bold> <color-blue>Blue text</color> <highlight-yellow>Highlight</highlight> <badge-green>Evidence</badge>\n[Profile](profile://one) [Position](position://one)'},
         {id:"criteria",type:"criteria",items:["Synthetic fixture data only"]},
-        {id:"candidates",type:"candidates",candidates:state === "empty" ? [] : demoCandidates},
-        {id:"table",type:"table",title:"Comparison",columns:["Area","Value"],rows:[{id:"one",cells:["Evidence",null]},{id:"two",cells:["Score",0]}]},
+        {id:"candidates",type:"candidates",candidates:demoCandidates},
+        {id:"table",type:"table",title:"Comparison",columns:long?["Area","Value","Source","Revision","Note","State"]:["Area","Value"],rows:long?[{id:"one",cells:["Evidence",0,"합성 자료",3,"긴 근거를 표시하면서 표 안에서 가로로 이동합니다. ".repeat(3),null]}]:[{id:"one",cells:["Evidence",null]},{id:"two",cells:["Score",0]}]},
         {id:"options",type:"options",title:"Next step",options:[{id:"profile",label:"Show profile"},{id:"position",label:"Show position"}]},
         {id:"callout",type:"callout",tone:"blue",content:"This example displays supplied data without running HR decisions."},
-    ]} onCandidateOpen={c => setResult(c.name)} onOptionSelect={setResult} onAction={(kind,id) => setResult(`${kind}: ${id}`)} /><p role="status">{result}</p></div>;
+        ...(panel?[{id:"positions",type:"positions",positions:[{id:"synthetic-position",version:2,company:"가상전자",title:"가상 기술전략담당",reasons:["합성 추천 근거"]}]},{id:"six-frame",type:"six-frame",title:"가상 6 Frame",columns:[{id:"one",label:"김가상",values:{expertise:"[현재 포지션](position://synthetic-position)"}}]},{id:"analysis",type:"analysis",candidate:demoCandidates[0],leader:{label:"Good 리더",description:"합성 설명",aiComment:"합성 요약"},factors:[{id:"expertise",kind:"expertise",label:"전문성",results:["합성 기술"],summary:"합성 근거"}]},{id:"quote",type:"quote",content:"합성 인용문"},{id:"code",type:"code",content:"const result = 0;"},{id:"list",type:"list",items:["합성 목록 첫째","합성 목록 둘째"]}] as PrismResponseBlock[]:[]),
+    ];
+    return <div className="prism-demo-stack"><PrismResponse panel={panel} status={state === "loading" ? "generating" : state === "error" ? "error" : "complete"} blocks={blocks}
+        onCandidateOpen={c => setResult(c.name)} onPositionOpen={(_id,reference)=>setResult(`card: ${reference.id} v${reference.source==="card"?reference.version:"LIVE"}`)}
+        onOptionSelect={setResult} onAction={(kind,id) => setResult(`${kind}: ${id}`)} /><p role="status">{result}</p></div>;
 }
 
 export function ManagementToolsDemo({ state }: { state: FixtureState }) {
