@@ -369,3 +369,13 @@ Leadership analysis now renders all results as readonly blue tags before the tit
 Six new tests and 272 full PRISM tests passed. Analysis3/sidebar4 states rendered at 320px and 1280px (14 renders) without document overflow or nested buttons. Browser flows confirmed failure/retry and all three deletion contexts. Real shadcn installation verified 58 exact module/CSS sources, 39 complete examples typecheck/Vite build, font and artwork notices. Installed browser runtime is a separate unverified scope.
 
 Current fingerprint:94e6b3cb00379a04af777a571735f0d722247f20dfc5b718aaa34b921f5a71fc, covering85 inputs. The prior full matrix and spinner evidence retains its measured fingerprints. Authenticated source rendering, deployed revision, full interactions, font/pixel/A4 comparison, remaining purposes and enhancements are incomplete. Production/main has not been published by this work.
+
+## Sidebar selection and local drafts, 2026-10-13
+
+Navigation activeId and history activeHistoryId are independent. Omitted activeHistoryId preserves legacy selection; null clears it. A stable history row key is distinct from an optional server conversationId or localDraftId. Typed open intents expose only public identity fields. Local drafts have no server rename/delete menu, and a missing typed open handler cannot create a fake server route. Target replacement cancels the old menu/rename draft.
+
+23 targeted and 279 full tests passed. Four sidebar states rendered at 320px and 1280px without document overflow or nested buttons. Workspace interactions confirmed independent favorites/history selection, local draft opening, stable promotion to a server record, server-ID deletion and background-session reset preserving the current menu. These synthetic effects do not prove backend transactions or authorization.
+
+Current fingerprint:dfd7cb666da2422a27ecb4684855713acbaf5fb0f90aef96fd09093bcc146091/85 inputs. Prior source/renderer evidence retains its original fingerprints. Installed runtime, authenticated source/deployed revision, full font/pixel/A4 and all-purpose completion remain unverified.
+
+Real shadcn installation additionally verified58 exact module/CSS sources,39 complete examples tsc/Vite build,font andartwork notices. The installed sidebar rendered at320/1280 andits independent menu/history selection andlocal-draft promotion/opening worked. This does not establish all installed interactions orsource parity.
