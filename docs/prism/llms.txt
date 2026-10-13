@@ -75,16 +75,35 @@ export function DisplayExample() {
 ```
 
 ## Tabs
-프로필·경력·메모를 한 영역에서 전환
-Contract: Radix의 value/onValueChange, Arrow/Home/End, 연결된 tabpanel을 사용합니다. line 44px와 fill 32px를 구분합니다.
-States: default
+프로필·경력·메모 전환과 열린 상세 탭 닫기
+Contract: Radix의 value/onValueChange, Arrow/Home/End, 연결된 tabpanel을 사용합니다. line 44px와 fill 32px를 구분합니다. 채움형의 닫을 수 있는 탭은 별도 닫기 버튼으로 중첩 버튼을 피합니다. onClose는 탭 ID를 전달하며 목록 갱신과 다음 활성 탭 결정은 호출자가 소유합니다. 닫은 뒤 선택된 탭으로 키보드 포커스를 복구합니다.
+States: default, disabled, long
 Registry: /prism/r/prism-tabs.json
 Source: packages/prism/src/prism-tabs.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "@/components/ui/prism-tabs";
-<PrismTabs defaultValue="profile"><PrismTabsList><PrismTabsTrigger value="profile">프로필</PrismTabsTrigger></PrismTabsList><PrismTabsContent value="profile">내용</PrismTabsContent></PrismTabs>;
+import { useState } from "react";
+import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismClosableTabTrigger, PrismTabsContent } from "@/components/ui/prism-tabs";
+
+export function TabsExample() {
+  const [open, setOpen] = useState([{ id: "candidate-1", label: "김가상 후보자" }]);
+  const [active, setActive] = useState("candidate-1");
+  const close = (id: string) => {
+    setOpen(tabs => tabs.filter(tab => tab.id !== id));
+    if (active === id) setActive("list");
+  };
+  return <section data-prism="light">
+    <PrismTabs value={active} onValueChange={setActive}>
+      <PrismTabsList variant="fill" aria-label="열린 후보자 탭">
+        <PrismTabsTrigger value="list">목록</PrismTabsTrigger>
+        {open.map(tab => <PrismClosableTabTrigger key={tab.id} value={tab.id} label={tab.label} onClose={close} />)}
+      </PrismTabsList>
+      <PrismTabsContent value="list">후보자 목록</PrismTabsContent>
+      {open.map(tab => <PrismTabsContent key={tab.id} value={tab.id}>{tab.label}</PrismTabsContent>)}
+    </PrismTabs>
+  </section>;
+}
 ```
 
 ## Dialog

@@ -546,16 +546,20 @@
       "id": "prism-tabs",
       "name": "Tabs",
       "category": "Navigation",
-      "purpose": "프로필·경력·메모를 한 영역에서 전환",
-      "contract": "Radix의 value/onValueChange, Arrow/Home/End, 연결된 tabpanel을 사용합니다. line 44px와 fill 32px를 구분합니다.",
+      "purpose": "프로필·경력·메모 전환과 열린 상세 탭 닫기",
+      "contract": "Radix의 value/onValueChange, Arrow/Home/End, 연결된 tabpanel을 사용합니다. line 44px와 fill 32px를 구분합니다. 채움형의 닫을 수 있는 탭은 별도 닫기 버튼으로 중첩 버튼을 피합니다. onClose는 탭 ID를 전달하며 목록 갱신과 다음 활성 탭 결정은 호출자가 소유합니다. 닫은 뒤 선택된 탭으로 키보드 포커스를 복구합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
-        "default"
+        "default",
+        "disabled",
+        "long"
       ],
       "source": [
-        "../styles/_tabs.scss"
+        "../styles/_tabs.scss",
+        "pages/chat/CandidateList.tsx",
+        "pages/chat/PositionList.tsx"
       ],
-      "usage": "import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from \"@pydemia/prism\";\n<PrismTabs defaultValue=\"profile\"><PrismTabsList><PrismTabsTrigger value=\"profile\">프로필</PrismTabsTrigger></PrismTabsList><PrismTabsContent value=\"profile\">내용</PrismTabsContent></PrismTabs>;",
+      "usage": "import { useState } from \"react\";\nimport { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismClosableTabTrigger, PrismTabsContent } from \"@pydemia/prism\";\n\nexport function TabsExample() {\n  const [open, setOpen] = useState([{ id: \"candidate-1\", label: \"김가상 후보자\" }]);\n  const [active, setActive] = useState(\"candidate-1\");\n  const close = (id: string) => {\n    setOpen(tabs => tabs.filter(tab => tab.id !== id));\n    if (active === id) setActive(\"list\");\n  };\n  return <section data-prism=\"light\">\n    <PrismTabs value={active} onValueChange={setActive}>\n      <PrismTabsList variant=\"fill\" aria-label=\"열린 후보자 탭\">\n        <PrismTabsTrigger value=\"list\">목록</PrismTabsTrigger>\n        {open.map(tab => <PrismClosableTabTrigger key={tab.id} value={tab.id} label={tab.label} onClose={close} />)}\n      </PrismTabsList>\n      <PrismTabsContent value=\"list\">후보자 목록</PrismTabsContent>\n      {open.map(tab => <PrismTabsContent key={tab.id} value={tab.id}>{tab.label}</PrismTabsContent>)}\n    </PrismTabs>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-tabs.tsx",
       "previewUrl": "/prism?component=prism-tabs",
       "embedUrl": "/prism?component=prism-tabs&embed=1",
@@ -564,13 +568,19 @@
         "visual": "partial",
         "interaction": "partial",
         "checks": [
-          "320px tab list scrolls internally without growing root width"
+          "Current source line/fill rules match local 44px/46px list heights, 13px/14px type and 24px/4px gaps",
+          "Local browser ArrowRight switches tabs and skips a disabled tab; active close selects the adjacent tab and restores keyboard focus",
+          "320px long fixture keeps document width 320px and scrolls nine tabs within a 288px list (1743px scroll content)",
+          "Close action is a sibling button with a distinct accessible name and no nested buttons",
+          "Independent shadcn consumer installed 59 exact TSX modules and CSS, typechecked 42 complete examples, built with Vite/font/notices, and closed an active tab with focus returning to list"
         ],
         "evidence": [
-          "local-all-components-narrow"
+          "current-frontend-dev-tabs-source",
+          "local-tabs-default-disabled-long-320",
+          "installed-tabs-goal-320-container"
         ],
         "remaining": [
-          "all source tab states and keyboard focus placement"
+          "Authenticated deployed product tab flow and deployed source revision binding"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -583,6 +593,32 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "styles/_tabs.scss",
+            "pages/chat/CandidateList.tsx",
+            "pages/chat/PositionList.tsx"
+          ],
+          "evidence": [
+            "The current frontend dev source defines 44px line tabs and 46px fill lists with 32px triggers, plus dynamic close controls. Local browser measured matching list heights, font sizes and gaps.",
+            "The local browser exercised line Arrow navigation past a disabled tab, controlled fill tab close and focus recovery. At a real 320px iframe viewport, nine long tabs scroll inside a 288px list while document width stays 320px.",
+            "An isolated shadcn consumer installed 59 exact TSX sources and CSS, typechecked 42 complete examples, passed Vite/font/notices, and closed the active tab in a 320px container with focus on the selected list tab. Workspace typecheck and 316 PRISM tests passed."
+          ],
+          "intentionalImprovements": [
+            "The close control is a sibling button rather than an icon nested inside the tab button, so keyboard users can operate it independently.",
+            "Close controls remain visible on inactive tabs; long labels do not wrap and the tab list scrolls horizontally at narrow widths.",
+            "The host owns tab removal and next selection; the component restores focus after a synchronous close."
+          ],
+          "hostOwned": [
+            "The consuming application owns opened tab IDs, content loading, the selected value and the next active value after close. Browser data was synthetic."
+          ],
+          "nonBlockingUnknowns": [
+            "The authenticated deployed tab flow and deployed commit identity could not be observed in this browser session; final whole-product comparison remains open."
+          ]
         }
       },
       "exports": [
@@ -601,10 +637,18 @@
         {
           "name": "PrismTabsTrigger",
           "kind": "component"
+        },
+        {
+          "name": "PrismClosableTabTriggerProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismClosableTabTrigger",
+          "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from \"@/components/ui/prism-tabs\";\n<PrismTabs defaultValue=\"profile\"><PrismTabsList><PrismTabsTrigger value=\"profile\">프로필</PrismTabsTrigger></PrismTabsList><PrismTabsContent value=\"profile\">내용</PrismTabsContent></PrismTabs>;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismClosableTabTrigger, PrismTabsContent } from \"@/components/ui/prism-tabs\";\n\nexport function TabsExample() {\n  const [open, setOpen] = useState([{ id: \"candidate-1\", label: \"김가상 후보자\" }]);\n  const [active, setActive] = useState(\"candidate-1\");\n  const close = (id: string) => {\n    setOpen(tabs => tabs.filter(tab => tab.id !== id));\n    if (active === id) setActive(\"list\");\n  };\n  return <section data-prism=\"light\">\n    <PrismTabs value={active} onValueChange={setActive}>\n      <PrismTabsList variant=\"fill\" aria-label=\"열린 후보자 탭\">\n        <PrismTabsTrigger value=\"list\">목록</PrismTabsTrigger>\n        {open.map(tab => <PrismClosableTabTrigger key={tab.id} value={tab.id} label={tab.label} onClose={close} />)}\n      </PrismTabsList>\n      <PrismTabsContent value=\"list\">후보자 목록</PrismTabsContent>\n      {open.map(tab => <PrismTabsContent key={tab.id} value={tab.id}>{tab.label}</PrismTabsContent>)}\n    </PrismTabs>\n  </section>;\n}"
     },
     {
       "id": "prism-dialog",
