@@ -28,7 +28,8 @@ async function input(label, value) { const node = [...document.querySelectorAll(
 async function select(label, option) { const node = [...document.querySelectorAll('[role="combobox"]')].find(node => document.querySelector('label[for="' + node.id + '"]')?.textContent.replace('*', '') === label); assert.ok(node, label);
     await act(async () => node.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true })));
     const find = () => [...document.getElementById(node.getAttribute('aria-controls'))?.querySelectorAll('[role="option"]') ?? []].find(item => item.textContent === option);
-    for (let attempt = 0; !find() && attempt < 20; attempt++) await wait(5);
+    const deadline = Date.now() + 1000;
+    while (!find() && Date.now() < deadline) await wait(5);
     await click(find()); }
 async function deletion(overrides = {}) { await clear(); calls = { submit: [], closed: [] }; config = { open: true, kind: "job", target: job, candidates, scopeKey: "one", onOpenChange: value => calls.closed.push(value), onLoadAffected: async () => affected, onConfirm: async request => calls.submit.push(request), ...overrides }; await render(h(PrismBlockDeletionDialog, config)); }
 test.afterEach(clear);
