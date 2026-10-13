@@ -408,7 +408,7 @@
       "name": "Avatar / Chips / Table",
       "category": "Data display",
       "purpose": "사용자·후보 식별, 프로필 선택, 표 검색·정렬",
-      "contract": "Avatar는 실제 영역과 글자 폭을 측정해 이름·팀명 중 긴 쪽을 줄이고 양쪽이 길면 함께 줄입니다. 말줄임된 텍스트는 hover·focus로 전체 내용을 표시하며 resize·텍스트 변경·폰트 로딩에 맞춰 재측정합니다. PrismTable은 native table과 caption을 사용합니다. 대량 데이터 검색·정렬·페이지·원격 요청은 기존 DataTable 계약을 공유합니다. 이름 선택은 호출자의 onOpen으로 전달합니다.",
+      "contract": "Avatar는 실제 영역과 글자 폭을 측정해 이름·팀명 중 긴 쪽을 줄이고 양쪽이 길면 함께 줄입니다. 말줄임된 텍스트는 hover·focus로 전체 내용을 표시하며 resize·텍스트 변경·폰트 로딩에 맞춰 재측정합니다. ProfileChip은 onClick이 없거나 readOnly면 읽기 요소이고 동작이 있으면 버튼입니다. AnchorChip은 label/active와 children/selected를 모두 지원하며 비대화형 상태는 span입니다. PrismGridTable은 원본의 32px 헤더·40px 행·커스텀 셀과 고정 높이 내부 스크롤을 native table로 제공합니다. PrismTable은 자유로운 native 마크업, PrismDataTable은 검색·정렬·페이지·원격 요청을 담당합니다. 데이터와 선택 결과는 호출자가 소유합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
@@ -422,7 +422,7 @@
         "ui/chip/HRXAnchorChip.tsx",
         "ui/table/HRXTable.tsx"
       ],
-      "usage": "import { PrismAvatar, PrismTable } from \"@pydemia/prism\";\n\nexport function DisplayExample() {\n  return <section>\n    <PrismAvatar name=\"김가상\" team=\"가상 연구개발 및 기술전략 조직\"\n      description=\"demo@example.com\" style={{ width: \"100%\", maxWidth: 220 }} />\n    <PrismTable caption=\"포지션 목록\">\n      <thead><tr><th scope=\"col\">포지션</th></tr></thead>\n      <tbody><tr><td>기술전략담당</td></tr></tbody>\n    </PrismTable>\n  </section>;\n}",
+      "usage": "import { PrismAvatar, PrismProfileChip, PrismAnchorChip, PrismGridTable } from \"@pydemia/prism\";\nconst rows = [{ id: \"sample\", company: \"가상전자\", author: \"김가상\" }];\nexport function DisplayExample() {\n  return <section data-prism=\"light\">\n    <PrismAvatar name=\"김가상\" team=\"가상 연구개발 조직\" description=\"demo@example.com\" style={{ maxWidth: 220 }} />\n    <PrismProfileChip name=\"이성민\" />\n    <PrismAnchorChip label=\"전문성\" active interactive={false} />\n    <PrismGridTable caption=\"회사 목록\" height={200} rows={rows} getRowId={row => row.id}\n      columns={[{ id: \"company\", header: \"회사명\", cell: row => row.company },\n        { id: \"author\", header: \"작성자\", cell: row => row.author }]} />\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-display.tsx",
       "previewUrl": "/prism?component=prism-display",
       "embedUrl": "/prism?component=prism-display&embed=1",
@@ -449,8 +449,7 @@
           "tooltip-adaptive-runtime"
         ],
         "remaining": [
-          "fresh original comparison across lengths and widths",
-          "all chip and table visual/interactive states"
+          "all other source avatar width/text pairs and authenticated table caller states"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -466,6 +465,36 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "ui/avatar/HRXAvatar.tsx",
+            "ui/chip/HRXProfileChip.tsx",
+            "ui/chip/HRXAnchorChip.tsx",
+            "ui/table/HRXTable.tsx"
+          ],
+          "evidence": [
+            "Current deployed public samples measured 40px Avatar artwork and 12px gap, 93.3125x30px passive ProfileChip, four 30px AnchorChip states and a 932x200px grid with 32px header, 40px rows and approximately 184.39px equal columns.",
+            "The source-like portable PrismGridTable renders caller columns/rows and custom cell content with native table semantics; its installed browser measured 32px header, 40px rows and the same column widths at 932px, plus a 194px empty message.",
+            "An isolated shadcn consumer installed 59 exact modules and CSS and typechecked 40 complete examples. In its browser, Avatar allocated natural/name/team/both truncation at 140px, keyboard focus exposed full text and Escape dismissed it, passive ProfileChip was not a button, interactive ProfileChip and AnchorChip emitted selection intents.",
+            "At 320px the 288px table viewport scrolled horizontally and vertically with a sticky header and zero document overflow. A long ProfileChip stayed within 288px with its full accessible name; a long AnchorChip wrapped to 44px and remained selectable. The installed DataTable handled search, sort and paging with synthetic rows.",
+            "305 PRISM tests, workspace typecheck, site build, generic registry release check and isolated consumer Vite/font/notices passed."
+          ],
+          "intentionalImprovements": [
+            "ProfileChip uses a passive element without an action and a native button when clickable, avoiding a dead keyboard stop; source label and active props are accepted on AnchorChip.",
+            "PrismGridTable uses a native caption and focusable scroll region for source-like read-only rows, while PrismDataTable provides the separate search, sort, selection, paging and remote-data extension.",
+            "Long chips stay inside a narrow viewport; the original sample keeps its 942px Avatar content width at a 320px browser viewport."
+          ],
+          "hostOwned": [
+            "The consuming application owns rows, profile navigation, selected anchor state and remote requests; the installed fixture used sample and synthetic values."
+          ],
+          "nonBlockingUnknowns": [
+            "The deployed source commit identity, every authenticated product caller and all source avatar width/text combinations are not established.",
+            "Full font/pixel parity for every table state remains outside selected public-sample evidence."
+          ]
         }
       },
       "exports": [
@@ -490,6 +519,18 @@
           "kind": "component"
         },
         {
+          "name": "PrismGridColumn",
+          "kind": "type"
+        },
+        {
+          "name": "PrismGridTableProps",
+          "kind": "type"
+        },
+        {
+          "name": "PrismGridTable",
+          "kind": "component"
+        },
+        {
           "name": "PrismDataTable",
           "kind": "component"
         },
@@ -499,7 +540,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { PrismAvatar, PrismTable } from \"@/components/ui/prism-display\";\n\nexport function DisplayExample() {\n  return <section>\n    <PrismAvatar name=\"김가상\" team=\"가상 연구개발 및 기술전략 조직\"\n      description=\"demo@example.com\" style={{ width: \"100%\", maxWidth: 220 }} />\n    <PrismTable caption=\"포지션 목록\">\n      <thead><tr><th scope=\"col\">포지션</th></tr></thead>\n      <tbody><tr><td>기술전략담당</td></tr></tbody>\n    </PrismTable>\n  </section>;\n}"
+      "registryUsage": "import { PrismAvatar, PrismProfileChip, PrismAnchorChip, PrismGridTable } from \"@/components/ui/prism-display\";\nconst rows = [{ id: \"sample\", company: \"가상전자\", author: \"김가상\" }];\nexport function DisplayExample() {\n  return <section data-prism=\"light\">\n    <PrismAvatar name=\"김가상\" team=\"가상 연구개발 조직\" description=\"demo@example.com\" style={{ maxWidth: 220 }} />\n    <PrismProfileChip name=\"이성민\" />\n    <PrismAnchorChip label=\"전문성\" active interactive={false} />\n    <PrismGridTable caption=\"회사 목록\" height={200} rows={rows} getRowId={row => row.id}\n      columns={[{ id: \"company\", header: \"회사명\", cell: row => row.company },\n        { id: \"author\", header: \"작성자\", cell: row => row.author }]} />\n  </section>;\n}"
     },
     {
       "id": "prism-tabs",

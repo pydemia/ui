@@ -53,23 +53,23 @@ import { PrismElpBadge, PrismTag } from "@/components/ui/prism-badge";
 
 ## Avatar / Chips / Table
 사용자·후보 식별, 프로필 선택, 표 검색·정렬
-Contract: Avatar는 실제 영역과 글자 폭을 측정해 이름·팀명 중 긴 쪽을 줄이고 양쪽이 길면 함께 줄입니다. 말줄임된 텍스트는 hover·focus로 전체 내용을 표시하며 resize·텍스트 변경·폰트 로딩에 맞춰 재측정합니다. PrismTable은 native table과 caption을 사용합니다. 대량 데이터 검색·정렬·페이지·원격 요청은 기존 DataTable 계약을 공유합니다. 이름 선택은 호출자의 onOpen으로 전달합니다.
+Contract: Avatar는 실제 영역과 글자 폭을 측정해 이름·팀명 중 긴 쪽을 줄이고 양쪽이 길면 함께 줄입니다. 말줄임된 텍스트는 hover·focus로 전체 내용을 표시하며 resize·텍스트 변경·폰트 로딩에 맞춰 재측정합니다. ProfileChip은 onClick이 없거나 readOnly면 읽기 요소이고 동작이 있으면 버튼입니다. AnchorChip은 label/active와 children/selected를 모두 지원하며 비대화형 상태는 span입니다. PrismGridTable은 원본의 32px 헤더·40px 행·커스텀 셀과 고정 높이 내부 스크롤을 native table로 제공합니다. PrismTable은 자유로운 native 마크업, PrismDataTable은 검색·정렬·페이지·원격 요청을 담당합니다. 데이터와 선택 결과는 호출자가 소유합니다.
 States: default, disabled, empty, long
 Registry: /prism/r/prism-display.json
 Source: packages/prism/src/prism-display.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismAvatar, PrismTable } from "@/components/ui/prism-display";
-
+import { PrismAvatar, PrismProfileChip, PrismAnchorChip, PrismGridTable } from "@/components/ui/prism-display";
+const rows = [{ id: "sample", company: "가상전자", author: "김가상" }];
 export function DisplayExample() {
-  return <section>
-    <PrismAvatar name="김가상" team="가상 연구개발 및 기술전략 조직"
-      description="demo@example.com" style={{ width: "100%", maxWidth: 220 }} />
-    <PrismTable caption="포지션 목록">
-      <thead><tr><th scope="col">포지션</th></tr></thead>
-      <tbody><tr><td>기술전략담당</td></tr></tbody>
-    </PrismTable>
+  return <section data-prism="light">
+    <PrismAvatar name="김가상" team="가상 연구개발 조직" description="demo@example.com" style={{ maxWidth: 220 }} />
+    <PrismProfileChip name="이성민" />
+    <PrismAnchorChip label="전문성" active interactive={false} />
+    <PrismGridTable caption="회사 목록" height={200} rows={rows} getRowId={row => row.id}
+      columns={[{ id: "company", header: "회사명", cell: row => row.company },
+        { id: "author", header: "작성자", cell: row => row.author }]} />
   </section>;
 }
 ```

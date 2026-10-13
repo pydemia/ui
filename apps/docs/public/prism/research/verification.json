@@ -1013,8 +1013,7 @@
         "tooltip-adaptive-runtime"
       ],
       "remaining": [
-        "fresh original comparison across lengths and widths",
-        "all chip and table visual/interactive states"
+        "all other source avatar width/text pairs and authenticated table caller states"
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1030,6 +1029,36 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "ui/avatar/HRXAvatar.tsx",
+          "ui/chip/HRXProfileChip.tsx",
+          "ui/chip/HRXAnchorChip.tsx",
+          "ui/table/HRXTable.tsx"
+        ],
+        "evidence": [
+          "Current deployed public samples measured 40px Avatar artwork and 12px gap, 93.3125x30px passive ProfileChip, four 30px AnchorChip states and a 932x200px grid with 32px header, 40px rows and approximately 184.39px equal columns.",
+          "The source-like portable PrismGridTable renders caller columns/rows and custom cell content with native table semantics; its installed browser measured 32px header, 40px rows and the same column widths at 932px, plus a 194px empty message.",
+          "An isolated shadcn consumer installed 59 exact modules and CSS and typechecked 40 complete examples. In its browser, Avatar allocated natural/name/team/both truncation at 140px, keyboard focus exposed full text and Escape dismissed it, passive ProfileChip was not a button, interactive ProfileChip and AnchorChip emitted selection intents.",
+          "At 320px the 288px table viewport scrolled horizontally and vertically with a sticky header and zero document overflow. A long ProfileChip stayed within 288px with its full accessible name; a long AnchorChip wrapped to 44px and remained selectable. The installed DataTable handled search, sort and paging with synthetic rows.",
+          "305 PRISM tests, workspace typecheck, site build, generic registry release check and isolated consumer Vite/font/notices passed."
+        ],
+        "intentionalImprovements": [
+          "ProfileChip uses a passive element without an action and a native button when clickable, avoiding a dead keyboard stop; source label and active props are accepted on AnchorChip.",
+          "PrismGridTable uses a native caption and focusable scroll region for source-like read-only rows, while PrismDataTable provides the separate search, sort, selection, paging and remote-data extension.",
+          "Long chips stay inside a narrow viewport; the original sample keeps its 942px Avatar content width at a 320px browser viewport."
+        ],
+        "hostOwned": [
+          "The consuming application owns rows, profile navigation, selected anchor state and remote requests; the installed fixture used sample and synthetic values."
+        ],
+        "nonBlockingUnknowns": [
+          "The deployed source commit identity, every authenticated product caller and all source avatar width/text combinations are not established.",
+          "Full font/pixel parity for every table state remains outside selected public-sample evidence."
+        ]
       }
     },
     "prism-print": {
@@ -6018,10 +6047,11 @@
       "prism-badge",
       "prism-field",
       "prism-dialog",
-      "prism-feedback"
+      "prism-feedback",
+      "prism-display"
     ],
-    "acceptedCount": 5,
-    "unassessedGroups": 53,
+    "acceptedCount": 6,
+    "unassessedGroups": 52,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

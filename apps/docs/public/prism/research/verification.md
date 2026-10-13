@@ -495,3 +495,11 @@ Real shadcn installation additionally verified58 exact module/CSS sources,39 com
 `prism-feedback`은 원본 `HRXToast`·`HRXEmptyState`와 독립적인 요청 상태 표시를 묶습니다. 배포 Toast 샘플에서 성공 알림은 약 191.94×40px, 바깥 간격 12px, 본문 간격 6px, 제목·설명 간격 4px, 닫기 버튼 20px, 배경 `rgb(56,74,125)`였습니다. 긴 제목과 설명도 샘플 너비 안에서 줄바꿈됐습니다. 원본의 default/info/warning/success/error 다섯 유형과 문자열 이미지 경로 입력을 독립 API에 보완했습니다. 원본에서 정보·경고 유형은 같은 정보 아이콘을 사용하며 별도 디자인은 아직 없습니다.
 
 토스트의 임의 본문에 재시도 버튼이 들어갈 때 유효하지 않은 `<p>` 중첩과 닫기 버튼용 20px 스타일이 해당 버튼에 적용되는 문제를 고쳤습니다. 오류는 `alert`, 나머지 알림은 `status`로 알립니다. 독립 shadcn 소비자에서 59개 모듈·CSS 바이트 일치, 40개 예제 타입 검사, Vite·폰트·고지를 확인했습니다. 직접 연 설치본에서 다섯 유형, 긴 문구, 재시도 버튼과 닫기, 빈 상태 세 유형, 이미지 URL, 요청 실패 재시도를 확인했습니다. 긴 제목은 높이 59.1875px, 긴 제목·설명은 약 79.97px이었고 320px에서 토스트 폭 288px, 문서 가로 넘침 0px이었습니다. PRISM 303개 테스트, workspace typecheck, site build, registry release check가 통과했습니다. 완료 판정은 **5/58개**이고 53개는 미판정입니다. 실제 제품의 알림 배치·자동 닫힘·큐·네트워크 결과는 소비자 앱이 소유하며 이 판정에는 포함되지 않습니다.
+
+## Goal Avatar·프로필 Chip·Anchor Chip·표시 표 그룹 완료 판정, 2026-10-13
+
+`prism-display`는 원본 `HRXAvatar`·`HRXProfileChip`·`HRXAnchorChip`·`HRXTable`의 표시 목적을 묶습니다. 배포 공개 샘플에서 Avatar 이미지 40px와 간격 12px, 동작이 없는 프로필 Chip 93.3125×30px, 선택된 Anchor Chip의 30px 높이와 색상, 표 932×200px·헤더 32px·행 40px을 확인했습니다. 원본 표는 행·열과 사용자 지정 셀을 받아 표시하며 검색·정렬·페이지 이동은 이 샘플의 기능이 아닙니다. 배포 revision과 로컬 원본 SHA의 동일성은 확인되지 않았습니다.
+
+독립 API의 프로필 Chip은 동작이 없을 때 일반 표시 요소, 클릭할 때 버튼으로 렌더링합니다. Anchor Chip은 원본의 `label`·`active` 속성을 받습니다. 새 `PrismGridTable`은 호출자가 제공한 행·열·셀을 native 표로 렌더링하고 32px 헤더와 40px 행을 유지합니다. 검색·정렬·페이지 이동이 필요한 별도 용도는 기존 `PrismDataTable`이 맡습니다. 긴 Chip 문구는 좁은 화면에 맞춰 줄임 또는 줄바꿈 처리합니다.
+
+독립 shadcn 소비자에서 59개 모듈·CSS 바이트 일치, 40개 예제 타입 검사, Vite·폰트·고지를 확인했습니다. 직접 연 설치본에서 프로필·Anchor Chip의 대표 치수와 색상, 클릭 의도, Avatar의 네 가지 말줄임 조합과 키보드 도움말·Escape 닫기, 표의 원본과 같은 헤더·행·열 너비를 확인했습니다. 320px 화면에서는 표 영역이 가로·세로로 스크롤되고 문서 가로 넘침은 0px이었습니다. 긴 프로필 Chip은 288px 안에서 접근 가능한 전체 이름을 유지하고 긴 Anchor Chip은 줄바꿈 뒤에도 선택할 수 있었습니다. 합성 데이터로 `PrismDataTable`의 검색·정렬·페이지 이동도 확인했습니다. PRISM 305개 테스트, workspace typecheck, site build, registry release check가 통과했습니다. 새 기준의 완료 판정은 **6/58개**이고 52개는 미판정입니다. 모든 인증 제품 사용처와 Avatar의 모든 너비·문구 조합, 전체 폰트·픽셀 일치는 아직 확인하지 않았습니다.
