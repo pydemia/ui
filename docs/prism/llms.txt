@@ -740,7 +740,7 @@ export function LabelAndLoadingExample() {
 
 ## Profile / Memo / Position / Chat panels
 원본 패널별 본문 규격·프로필/메모 전환·초안 이탈 확인·채팅 입력과 스크롤
-Contract: Profile/Memo는 expandable·max840px이고 profile은20px20px0/memo view는0 20px/standalone memo는20px20px0 여백입니다. Profile의 memo는 hidden 상태에도 mounted이며 subjectId 변경 시 본문 경계를 새로 만들고 profile로 돌아갑니다. beforeLeave(back/close,{subjectId,signal})는 호스트의 초안·확인 정책입니다. false/reject는 현재 view·확대·초안을 보존하며 duplicate 요청을 막고 후보 변경/외부 닫기/unmount는 이전 결과를 취소합니다. 후보를 바꾸기 전의 이탈 확인은 호스트에서 수행합니다. PrismMemoLeaveDialog는 원본 메모 작성 중/계속 작성/나가기의 제어형 확인창입니다. Position은 기본 패널, Chat은22px 제목·#EEF1F8·messages20px·user bubble320px/#D6DCEE·sticky composer30px bottom·아래 이동34px이며 closed chat content는 unmount합니다. API/stream/권한/LIVE 조회/스크롤 판단은 호스트가 소유합니다. 패널 크기·responsive·contentRef는 기본 Panel 계약을 재사용합니다.
+Contract: Profile/Memo는 expandable·max840px이고 profile은20px20px0/memo view는0 20px/standalone memo는20px20px0 여백입니다. Profile의 memo는 hidden 상태에도 mounted이며 subjectId 변경 시 본문 경계를 새로 만들고 profile로 돌아갑니다. beforeLeave(back/close,{subjectId,signal})는 호스트의 초안·확인 정책입니다. false/reject는 현재 view·확대·초안을 보존하며 duplicate 요청을 막고 후보 변경/외부 닫기/unmount는 이전 결과를 취소합니다. 후보를 바꾸기 전의 이탈 확인은 호스트에서 수행합니다. PrismMemoLeaveDialog는 원본 메모 작성 중/계속 작성/나가기의 제어형 확인창입니다. Position은 기본 패널, Chat은22px 제목·#EEF1F8·messages20px·user bubble320px/#D6DCEE·sticky composer30px bottom·아래 이동34px이며 closed chat content는 unmount합니다. API/stream/권한/LIVE 조회/스크롤 판단은 호스트가 소유합니다. 완전 예제는 포지션 상세·채팅 입력·아래 이동을 합성 상태로 연결합니다. 패널 크기·responsive·contentRef는 기본 Panel 계약을 재사용합니다.
 States: default, memo, position, chat, closed, expanded, long, loading, error
 Registry: /prism/r/prism-panel-recipes.json
 Source: packages/prism/src/prism-panel-recipes.tsx
@@ -749,12 +749,20 @@ Installed usage:
 ```tsx
 import { useRef, useState } from "react";
 import { PrismProfilePanel, PrismMemoPanel, PrismPositionPanel, PrismChatPanel, PrismMemoLeaveDialog, type PrismPanelLeaveContext } from "@/components/ui/prism-panel-recipes";
+import { PrismPositionDetail } from "@/components/ui/prism-position";
+import { PrismMessage, PrismChatInput } from "@/components/ui/prism-chat";
+
+type Kind = "profile" | "memo" | "position" | "chat";
 export function PanelRecipesExample() {
   const [open, setOpen] = useState(true);
-  const [kind, setKind] = useState<"profile" | "memo" | "position" | "chat">("profile");
+  const [kind, setKind] = useState<Kind>("profile");
   const [draft, setDraft] = useState("");
   const [confirm, setConfirm] = useState(false);
+  const [question, setQuestion] = useState("");
+  const [sent, setSent] = useState<string[]>([]);
+  const [atBottom, setAtBottom] = useState(false);
   const decide = useRef<((allowed: boolean) => void) | null>(null);
+  const chatContent = useRef<HTMLDivElement>(null);
   function beforeLeave(_intent: "back" | "close", { signal }: PrismPanelLeaveContext) {
     if (!draft.trim()) return true;
     return new Promise<boolean>(resolve => {
@@ -772,22 +780,44 @@ export function PanelRecipesExample() {
       decide.current = finish; setConfirm(true);
     });
   }
+  function selectKind(next: Kind) {
+    if (next === kind || decide.current) return;
+    if (!draft.trim()) { setKind(next); setOpen(true); return; }
+    decide.current = allowed => {
+      decide.current = null; setConfirm(false);
+      if (allowed) { setDraft(""); setKind(next); setOpen(true); }
+    };
+    setConfirm(true);
+  }
   const memo = <label>메모 초안<textarea value={draft} onChange={e => setDraft(e.target.value)} /></label>;
   const shared = { open, onOpenChange: setOpen, resizable: true };
-  return <div data-prism="light">
-    <label>패널 종류<select value={kind} onChange={e => { decide.current?.(false); setKind(e.target.value as typeof kind); setOpen(true); }}>
-      <option value="profile">프로필</option><option value="memo">메모</option><option value="position">포지션</option><option value="chat">채팅</option>
+  return <section data-prism="light" style={{ minWidth: 0 }}>
+    <label>패널 종류<select value={kind} onChange={e => selectKind(e.target.value as Kind)}>
+      <option value="profile">프로필</option><option value="memo">메모</option>
+      <option value="position">포지션</option><option value="chat">채팅</option>
     </select></label>
     <div style={{ position: "relative", display: "flex", height: 440, minWidth: 0 }}>
       <main style={{ flex: 1, minWidth: 0 }}><button type="button" onClick={() => setOpen(true)}>패널 열기</button></main>
       {kind === "profile" && <PrismProfilePanel {...shared} subjectId="synthetic-candidate" beforeLeave={beforeLeave} memo={memo}
         profile={showMemo => <div>가상 후보 <button type="button" onClick={showMemo}>메모 보기</button></div>} />}
       {kind === "memo" && <PrismMemoPanel {...shared} subjectId="synthetic-candidate" beforeLeave={beforeLeave}>{memo}</PrismMemoPanel>}
-      {kind === "position" && <PrismPositionPanel {...shared}><p>호스트가 제공한 포지션 상세 영역</p></PrismPositionPanel>}
-      {kind === "chat" && <PrismChatPanel {...shared} messages={<p>가상 대화</p>} composer={<label>질문<textarea /></label>} />}
+      {kind === "position" && <PrismPositionPanel {...shared}><PrismPositionDetail company="가상전자" role="기술전략담당"
+        items={[{ label: "산업", value: "전자" }, { label: "직무", value: "연구개발" }]}
+        definition="가상 조직의 기술전략을 수립합니다." businessContext="합성 데이터로 패널 구성을 보여 줍니다."
+        groups={[{ id: "expertise", title: "전문성", items: [{ id: "one", content: "연구개발 경험" }] },
+          { id: "experience", title: "성공경험", items: [] }]}/></PrismPositionPanel>}
+      {kind === "chat" && <PrismChatPanel {...shared} contentRef={chatContent} atBottom={atBottom}
+        onScrollToBottom={() => { chatContent.current?.scrollTo({ top: chatContent.current.scrollHeight, behavior: "smooth" }); setAtBottom(true); }}
+        messages={<><PrismMessage role="user">기술전략 경험을 알려 주세요.</PrismMessage>
+          <PrismMessage role="assistant">{"가상 후보의 경험을 검토합니다. ".repeat(24)}</PrismMessage>
+          {sent.map((text, index) => <PrismMessage key={index} role="user">{text}</PrismMessage>)}</>}
+        composer={<PrismChatInput value={question} onValueChange={setQuestion} onSubmit={text => {
+          setSent(current => [...current, text]); setQuestion(""); setAtBottom(false);
+        }}/>} />}
     </div>
-    <PrismMemoLeaveDialog open={confirm} onOpenChange={next => { if (!next) decide.current?.(false); }} onConfirm={() => decide.current?.(true)} />
-  </div>;
+    <PrismMemoLeaveDialog open={confirm} onOpenChange={next => { if (!next) decide.current?.(false); }}
+      onConfirm={() => decide.current?.(true)} />
+  </section>;
 }
 ```
 

@@ -2192,11 +2192,13 @@
         "Source ChatPanel22px title,panel#EEF1F8,message20px,user bubble320px/#D6DCEE,sticky composer bottom30px and bottom-action34px.",
         "Nine JSDOM/SSR tests cover guarded leave deny/accept/rejection/duplicate/stale subject/abort, draft and expansion persistence, chat unmount, full-profile memo callback, position empty/text/status/retry.",
         "Local browser: profile memo close/back opens the unsaved-draft dialog; cancel retains the draft and confirm returns to profile. At 320px the standalone memo panel is 288x320px, its composer is visible, and document scrollWidth is 320px. Long chat scroll-to-bottom reaches scrollTop 944/944 with composer pinned to the panel bottom.",
-        "Separate isolated shadcn consumer: the complete panel-recipes example opens profile memo and preserves a draft after canceling close or Escape, including while expanded at 320px; document scrollWidth remains 320px. All 59 installed TSX sources and CSS match registry bytes; 41 examples typecheck, Vite build/font/notices pass. PRISM tests 313/313 pass."
+        "Separate isolated shadcn consumer: the complete panel-recipes example opens profile memo and preserves a draft after canceling close or Escape, including while expanded at 320px; document scrollWidth remains 320px. All 59 installed TSX sources and CSS match registry bytes; 41 examples typecheck, Vite build/font/notices pass. PRISM tests 313/313 pass.",
+        "2026-10-14: current frontend/dev 2eeb26ff retains the four panel implementations/styles audited earlier. Complete registry example now composes the actual position detail and chat message/input/scroll primitives; it guards a dirty memo when switching panel kinds.",
+        "2026-10-14 isolated shadcn consumer: source/CSS bytes exact for 59 TSX modules, 48 examples typecheck, Vite/font/notices pass. Browser: dirty profile memo switch cancel retains kind/draft; confirm clears draft and renders position detail; chat message submit and bottom action work; 320px chat and position have document scrollWidth 320px."
       ],
       "remaining": [
-        "Authenticated deployed profile/memo/position/chat views are unavailable in the current browser session; compare representative layout and behavior once accessible. Current /chat loads a blank root.",
-        "Production publication and authenticated host API, permission and streaming behavior remain separate from the reusable component verification."
+        "Current authenticated deployed /chat could not be loaded in the in-app browser (net::ERR_CONNECTION_RESET); latest deployed panel view and deployed source SHA binding are unverified. Existing deployed/source design measurements and unchanged current source are the comparison basis.",
+        "Host API, permission, persistence, streaming and live scroll-position assessment require product integration; the published example uses synthetic state."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -2217,6 +2219,13 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "evidence": "Four source panel purposes and styling re-audited; complete installable example, controlled memo leave, position body, chat submit/bottom action and 320px browser layout verified in isolated consumer.",
+        "limitations": "Latest authenticated deployment/runtime binding and real host services are unverified."
       }
     },
     "prism-position": {
@@ -5350,7 +5359,14 @@
     "sourceSha256": "2c69397ecc24ca100f693a5ce6959ca3cedcc9f65160c02a2f30a43b97efc828",
     "independentConsumer": "All51 items installed using shadcn;29 complete examples typechecked, Vite built, font bytes and asset notices checked. Current installed recipe/panel/position/profile sources match emitted registry bytes.",
     "testEvidence": "panel-recipes-full-tests.log:152 passed/0 failed;panel-recipes-guard-tests.log:9 passed/0 failed.",
-    "siteBuild": "Standard npm run build passed; generic current release remained sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896."
+    "siteBuild": "Standard npm run build passed; generic current release remained sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896.",
+    "goalAudit20261014": {
+      "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+      "currentBrowser": "Local and separately installed synthetic panel flows passed; authenticated dev /chat connection reset.",
+      "registryExample": "Profile/Memo/Position/Chat composition with memo leave confirmation on close/back/kind switch, position detail, chat input, messages and scroll-to-bottom.",
+      "independentConsumer": "59 installed TSX modules and CSS byte-exact, 48 complete examples typechecked, Vite/font/notices passed; 320px chat/position had no document overflow.",
+      "goalDecision": "Accepted 31/58 under purpose-and-design-with-improvements; live host and latest deployed binding remain unverified."
+    }
   },
   "previousProfileHeaderFixtureRenderChecks": {
     "groups": 50,
@@ -6871,10 +6887,11 @@
       "prism-content",
       "prism-workspace",
       "prism-intro",
-      "prism-sidebar"
+      "prism-sidebar",
+      "prism-panel-recipes"
     ],
-    "acceptedCount": 30,
-    "unassessedGroups": 28,
+    "acceptedCount": 31,
+    "unassessedGroups": 27,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
