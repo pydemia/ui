@@ -8,7 +8,7 @@ export function PrismAttitudeReport({ report, subjectId, diagnosis, ...sections 
     const [open,setOpen] = useState(false);
     const available = !!report && (report.data !== undefined || !!report.url?.trim());
     useLayoutEffect(() => setOpen(false), [subjectId,report?.url,report?.data]);
-    const action = available && <PrismButton variant="line" size="small" onClick={() => setOpen(true)}>{report.buttonLabel || "심리적강인함 결과 보기"}</PrismButton>;
+    const action = available && <PrismButton variant="line" tone="primary" size="small" onClick={() => setOpen(true)}>{report.buttonLabel || "심리적강인함 결과 보기"}</PrismButton>;
     return <><PrismAttitudeSection {...sections} diagnosis={{ ...diagnosis, action: action || diagnosis.action }}/>
         {available && <PrismPdfDialog {...report} title={report.title || "심리적강인함 결과"} open={open} onOpenChange={setOpen}/>}
     </>;
