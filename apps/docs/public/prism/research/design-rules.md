@@ -25,6 +25,8 @@ Independent UI materials for AI-assisted frontend maintenance. Reproduce design,
 
 Pretendard is verified in deployed computed styles. The standalone site uses official Pretendard 1.3.9 variable font (OFL-1.1); original uses static weights. Docs, embedded previews and SVG charts use the declared "Pretendard Variable" family through --font-ui; using only "Pretendard" would select a fallback. Font-metric equality with the original static font still requires comparison. Use 400 for body, 500 for supporting content, 600 for controls and sections, 700 for emphasized names/headings. General body is 14px; chat answer and criteria use 16px/1.6; micro badge uses 10px.
 
+The deployed chat body and answer/table cells use `word-break: keep-all` with `overflow-wrap: anywhere`, matching the latest frontend reset at `d677e551`. The independent PRISM light root carries those inherited values within its own scope, so Korean word units remain together where possible and oversized tokens can still wrap in narrow containers.
+
 ## Leadership summary
 
 The local dev revision `27c4fdbf3e73234b7ab5c46e379a04d083c12df8` changes the summary to a blue type tag, a bold summary and a separate explanation below a divider. `PrismLeadershipPieSummary.title` maps to `summary.title`; `description` maps to `summary.content`; `detail` maps to `summary.description`. Whitespace-only detail adds no divider. Detail alone is information, including when all percentages are missing or zero. The host supplies the values and interpretation.

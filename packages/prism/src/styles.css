@@ -276,6 +276,7 @@
     --shadow-float: 0 4px 24px rgb(37 38 46 / 16%);
     --shadow-medium: 0 4px 16px rgb(37 38 46 / 12%);
     font-family: var(--font-ui); color: var(--foreground); background: var(--background);
+    word-break: keep-all; overflow-wrap: anywhere;
     color-scheme: light;
 }
 [data-prism] *, [data-prism] *::before, [data-prism] *::after { box-sizing: border-box; }

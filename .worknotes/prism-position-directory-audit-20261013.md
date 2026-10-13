@@ -13,3 +13,9 @@
 최종 목적 검사4개와 전체 PRISM 284 tests/0fail, 레지스트리59그룹/40완전예제 검사가 통과했습니다. 마지막 재시도 보완을 포함한60항목 실제 shadcn 설치에서 TypeScript/Vite/font 바이트/자산 고지가 통과했습니다. 설치본 브라우저는24건의 합성 행에서 2페이지 이동, 직무 정렬의1페이지 복귀, 이름 검색 전24·후12건, 행 전체 클릭 상세 탭, 같은 ID 재열기 시2개 탭 유지, 닫기 시 목록 복귀를 확인했습니다. 회사 초안은 조회 전24건을 유지하고 적용 후12건, 다른 산업과 교차하면0건 빈 결과가 됩니다. 오류에서 재시도하면10행/24건으로 복구됩니다. 320px 설치 화면은 root320px/표680px/내부 스크롤이며 문서 넘침·중첩 버튼은0, font는 loaded입니다. `.worknotes/browser-evidence/position-directory-installed-runtime.json`과 설치 화면 PNG에 증거를 보존했습니다. 임시 소비자 서버는 종료했습니다. site build와 CI/preview 검증은 이어서 수행합니다. 전체 goal은 진행 중입니다.
 
 최신 d677 기준 비벡터 187파일의 정적 연결은 본서비스178·샘플 전용7·미연결2이며 primary 대응50/HTML export 포함51그룹입니다. 목적 매핑과 독립 구현 목표 수는 다릅니다. 기존186은 이전 원본 파일 집계로 철회한 목표 수입니다. 전체 site build와 generic registry release-check가 통과했습니다.
+
+## 검토 브랜치 게시 결과
+
+소스·검증 기록 `b5a234ca`와 생성 registry·docs `b1526da5`를 `codex/prism-leadership-pie`에 푸시했습니다. draft PR #162의 head가 최종 SHA `b1526da56ca380e8e9fbac6ae53905c01bc1fca3`, base가 `main`인 것을 읽어 확인했습니다. Verify UI run `38367655349`는 이 SHA에서 completed/success입니다.
+
+자동 Vercel preview `dpl_BtxhM2YQjD4G2XemoVrWVNkPtgxq`는 `READY`, target null, 같은 GitHub SHA입니다. `https://pydemia-fm75qysgq-pydemia-7822.vercel.app`에서 인증된 HTTP 산출물 18개를 대조했습니다. 17개는 로컬 build 바이트와 정확히 일치하고 `/prism/index.html`은 확인된 Vercel feedback script 하나를 제외한 앱 HTML 바이트가 일치합니다. 새 `prism-position-directory.json`, source inventory, verification, JS/CSS를 포함합니다. 상세 증거는 ignored `browser-evidence/position-directory-final-preview-readback.json`에 있습니다. 이 readback은 배포 브라우저 렌더나 원본 서비스와의 전체 일치를 입증하지 않습니다. main/production 배포는 수행하지 않았습니다.

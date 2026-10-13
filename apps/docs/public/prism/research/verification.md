@@ -1,5 +1,9 @@
 # PRISM 검증 기록
 
+## 2026-10-13 기본 글줄바꿈 규칙
+
+최신 frontend dev `d677e551`의 reset은 `body`에 `word-break: keep-all`과 `overflow-wrap: anywhere`를 둡니다. 인증된 배포 대화 화면의 body·답변 문단·표 셀에서도 두 computed 값이 같았습니다. 현재 배포 SHA와 소스 리비전의 동일성은 확인하지 못했습니다. 독립 PRISM light root에 같은 상속 규칙을 넣고 로컬 화면의 root·포지션 표 셀에서 값을 확인했습니다. 320px에서 문서 폭은 320px이고 680px 표는 256px 영역 안에서 스크롤합니다. 5개 합성 상태를 320/1280px에서 다시 확인했고 가로 넘침·중첩 버튼은 없었습니다. 전체 PRISM 284개 테스트와 workspace typecheck가 통과했습니다. 새 shadcn 설치에서는 60항목·40예제의 TypeScript/Vite/font/고지를 확인했고 설치된 `prism.css`가 현재 소스와 바이트 단위로 일치했습니다. 세부 포지션 검색·탭 동작의 설치본 브라우저 증거는 이전 source fingerprint에 속합니다. 현재 site build와 기존 generic registry release-check도 통과했습니다. 이 검사는 선택한 화면의 줄바꿈·가로 넘침만 확인한 것이며 다른 상태의 픽셀 일치는 별도입니다.
+
 ## 2026-10-13 사용자 포지션 목록
 
 최신 frontend dev d677e551에서 사용자용 LIVE 포지션 목록과 새 EtcIcon을 확인했습니다. 현재 components/layouts TSX는 275파일(벡터 88, 비벡터 187)입니다. 네 신규 파일을 목적별 대응표에 연결했습니다. 이 수는 원본 파일 수이며 구현 목표 컴포넌트 수나 완료율의 분모가 아닙니다. 현재 정적 연결은 본서비스 178파일·샘플 전용 7파일·미연결 2파일이며 비벡터 원본은 primary 50그룹(별도 HTML export 포함 51그룹)에 대응합니다. 연결 여부와 그룹 대응은 실제 렌더·완성 여부를 증명하지 않습니다. 나머지 변경 파일의 새 동작과 전체 원본 상태는 계속 감사해야 합니다.
