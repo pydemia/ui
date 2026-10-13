@@ -8,4 +8,4 @@
 
 독립 설치본: 별도 shadcn 소비자에 `prism-survey`와 토큰을 다시 설치했다. 59개 모듈 소스와 CSS 바이트 일치, 예제 43개 타입 검사, Vite 빌드·Pretendard·자산 고지가 통과했다. 실제 140px 설치 화면은 Survey와 버튼의 스크롤 폭이 모두 140px이고 외부 320px 컨테이너도 넘치지 않았다. 점수 0은 `0.0`, null 동료는 접근성 표의 `정보 없음`, 버튼 클릭은 호스트 intent로 표시됐다. 브라우저 오류 로그는 없었다.
 
-검사: PRISM 테스트 327개, workspace typecheck, site build, registry release check가 통과했다. 원본 목적, 배포 CSS의 대표 스타일, 로컬·독립 설치본의 기본·긴 내용·빈 결과·인쇄·가변 크기·액션을 확인해 `prism-survey`를 새 기준으로 완료 판정한다. 전체 진척도는 **15/58개**, 미판정 43개다. 인증된 배포 전체 프로필의 실제 Survey 상태, 배포 SHA 연결, 네이티브 인쇄와 문서 요청은 이 판정의 증거가 아니다. PR/미리보기 검증 결과는 후속 확인한다.
+검사: PRISM 테스트 327개, workspace typecheck, site build, registry release check가 통과했다. 원본 목적, 배포 CSS의 대표 스타일, 로컬·독립 설치본의 기본·긴 내용·빈 결과·인쇄·가변 크기·액션을 확인해 `prism-survey`를 새 기준으로 완료 판정한다. 전체 진척도는 **15/58개**, 미판정 43개다. 인증된 배포 전체 프로필의 실제 Survey 상태, 배포 SHA 연결, 네이티브 인쇄와 문서 요청은 이 판정의 증거가 아니다. 초안 PR #162의 구현 헤드 `c6aa765cf7d0b5366da4d386ba920e0fd9f7a6a1`에서 GitHub Verify UI와 Vercel preview가 성공했고, 배포된 정적 파일 5개가 로컬 생성본과 바이트 단위로 일치했다.
