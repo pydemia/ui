@@ -808,7 +808,7 @@ export function CollectionExample() {
 
 ## Notice / Inquiry / Policy
 공지 목록·상세·비모달 팝업·문의 내역·방침 버전
-Contract: 공지 팝업은 비모달입니다. 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서 높이를 관찰합니다.
+Contract: 공지 팝업은 비모달입니다. 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 개인정보처리방침은 620px 대화상자와 140px 버전 선택, 닫기 footer를 사용합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서의 너비·높이를 실측해 대화상자 본문에서 스크롤합니다. 버전 목록·HTML·조회 상태와 요청 경쟁 방지는 소비자가 소유합니다.
 States: default, empty, loading, error
 Registry: /prism/r/prism-notice.json
 Source: packages/prism/src/prism-notice.tsx

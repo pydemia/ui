@@ -214,3 +214,9 @@ The `/chat/positions` page serves the LIVE position source. Its list is a separa
 At the observed 800px content width, the list has a 50px filter bar, a 24px gap before the toolbar, a 10px gap before the table, 20/35/15/15/15% columns and 60px rows. The sticky header uses the cool-100 surface and 14px Pretendard. A loading result shows four skeleton rows; an empty result shows its message in a 400px table region. Horizontal table scrolling stays inside the component on narrow screens. Tabs reuse a position ID, display the full active label and truncate inactive labels; closing the active tab selects its predecessor or the list. A route change returns to the list without discarding open detail tabs. Consumer code supplies the actual detail content, normally with `PrismPositionDetail`.
 
 The authenticated deployment exposed the default list with 1,023 records on 2026-10-13. The deployed revision was not bound to the local checkout, and direct deployed detail-tab input timed out. Local synthetic flows and geometry checks do not prove full deployed behavior or visual parity.
+
+## 개인정보처리방침 표시, 2026-10-13
+
+원본은 620px 대화상자, 최대 663px 스크롤 본문, 140px 버전 선택기와 닫기 footer를 사용합니다. 소비자가 버전·현재 HTML·로딩 상태를 공급하고 요청 순서와 오류 복구를 관리합니다. 독립 `PrismPrivacyPolicyDialog`는 HTML을 script 실행 권한이 없는 sandbox iframe에 넣고 문서의 실제 너비·높이에 맞춰 iframe을 늘립니다. 긴 문서는 대화상자 본문에서 세로로, 넓은 문서는 본문 안에서 가로로 스크롤합니다. 320px 화면에서도 footer는 보이도록 유지합니다. 배포 화면과 로컬 소스의 revision 일치는 확인되지 않았으며 원본의 모든 버전과 상태를 비교한 것은 아닙니다.
+
+`InquiryHistoryDialog`는 현재 frontend에서 mount되지만 사이드바의 문의 내역 메뉴 버튼은 주석 처리되어 있습니다. 접근 가능한 배포 화면의 구현 목표 수를 셀 때 이 화면을 별도 진입 목적처럼 더하지 않습니다.

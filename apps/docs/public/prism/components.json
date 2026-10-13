@@ -3191,7 +3191,7 @@
       "name": "Notice / Inquiry / Policy",
       "category": "Overlays",
       "purpose": "공지 목록·상세·비모달 팝업·문의 내역·방침 버전",
-      "contract": "공지 팝업은 비모달입니다. 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서 높이를 관찰합니다.",
+      "contract": "공지 팝업은 비모달입니다. 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 개인정보처리방침은 620px 대화상자와 140px 버전 선택, 닫기 footer를 사용합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서의 너비·높이를 실측해 대화상자 본문에서 스크롤합니다. 버전 목록·HTML·조회 상태와 요청 경쟁 방지는 소비자가 소유합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
@@ -3220,17 +3220,27 @@
           "Notice popup is nonmodal and next notice changes to 2/2",
           "Authenticated deployed list order toggles and detail opens; source list/detail geometry measured",
           "Local default list geometry matches 560px dialog, 500px body, 412px scrolling list and 40px rows",
-          "Separate total, list order, detail loading/result/stale ID and six skeleton rows pass synthetic DOM tests"
+          "Separate total, list order, detail loading/result/stale ID and six skeleton rows pass synthetic DOM tests",
+          "Authenticated deployed policy dialog measured at 620px width with a 663px body, 140px version control and 73px footer; deployment revision is unbound",
+          "Local policy synthetic long and wide HTML scrolls within dialog body at desktop and 320px, with sandbox omitting allow-scripts",
+          "Policy loading preserves and dims prior HTML; absent-document loading, failure and close states pass independent DOM tests",
+          "Final 289 PRISM tests and workspace typecheck pass; 59 installed sources and CSS match registry bytes; 40 complete examples and Vite/font/notices pass",
+          "Installed policy browser shows version selection, long/wide document scrolling and footer close at desktop and 320px"
         ],
         "evidence": [
           "local-policy",
           "local-notice-popup",
           "authenticated-notice-list-detail-2026-10-13",
-          "local-notice-dialog-2026-10-13"
+          "local-notice-dialog-2026-10-13",
+          "authenticated-policy-dialog-2026-10-13",
+          "local-policy-dialog-2026-10-13",
+          "installed-policy-dialog-2026-10-13"
         ],
         "remaining": [
           "Deployed empty/error/attachments and narrow-screen states",
-          "Full notice detail font/pixel parity and deployed source revision binding"
+          "Full notice detail font/pixel parity and deployed source revision binding",
+          "Deployed policy version/error/mobile states and all policy font/pixel parity",
+          "Inquiry history menu trigger is commented out in current frontend source; mounted dialog is not currently reachable from that menu"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -3278,7 +3288,15 @@
           "kind": "component"
         },
         {
+          "name": "PrismPolicyViewerProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismPolicyViewer",
+          "kind": "component"
+        },
+        {
+          "name": "PrismPrivacyPolicyDialog",
           "kind": "component"
         }
       ],
