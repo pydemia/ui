@@ -200,3 +200,11 @@ IAB recovered. All8 log states rendered at1280/320 with no document horizontal o
 Current9 of252 canonical states have scoped browser evidence. Full source/installed state coverage,authenticated original font/pixel/A4 and deployed revision comparison remain incomplete. The source-defined /chat/admin/chat-logs route is document complete but visibly blank in IAB;the existing Chrome source tab displays /admin-login. These observations do not establish an authentication or implementation cause. Review branch CI/preview readback is pending;production is not published.
 
 Current source fingerprint:31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7/84 inputs.
+
+## User position directory, 2026-10-13
+
+The `/chat/positions` page serves the LIVE position source. Its list is a separate user purpose from administrator position editing and synchronization. Keep a staged company, industry and position-name filter; Search applies a trimmed name and resets the page, and Reset clears both staged and applied filters. An empty or all-selected industry filter sends no restriction. Sort each of the five columns through the host API and reset to page 1; page sizes are 10, 20, 50 and 100. The host owns authorized options, records, total count, pagination, request cancellation, errors and detail loading.
+
+At the observed 800px content width, the list has a 50px filter bar, a 24px gap before the toolbar, a 10px gap before the table, 20/35/15/15/15% columns and 60px rows. The sticky header uses the cool-100 surface and 14px Pretendard. A loading result shows four skeleton rows; an empty result shows its message in a 400px table region. Horizontal table scrolling stays inside the component on narrow screens. Tabs reuse a position ID, display the full active label and truncate inactive labels; closing the active tab selects its predecessor or the list. A route change returns to the list without discarding open detail tabs. Consumer code supplies the actual detail content, normally with `PrismPositionDetail`.
+
+The authenticated deployment exposed the default list with 1,023 records on 2026-10-13. The deployed revision was not bound to the local checkout, and direct deployed detail-tab input timed out. Local synthetic flows and geometry checks do not prove full deployed behavior or visual parity.

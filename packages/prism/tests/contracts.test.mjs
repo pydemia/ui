@@ -75,7 +75,7 @@ test("pagination and progress reject invalid ranges instead of inventing a value
 test("repeated vector assets preserve accessible labels and cannot collide in SVG IDs", async () => {
     const {PrismIcon,prismIconNames}=await import("../dist/index.js");
     const markup=renderToStaticMarkup(h("div",{},...prismIconNames.flatMap(name=>[h(PrismIcon,{key:name+"a",name,size:20}),h(PrismIcon,{key:name+"b",name,size:20,label:name})])));
-    const doc=new JSDOM(markup).window.document;assert.equal(prismIconNames.length,87);assert.equal(doc.querySelectorAll('svg').length,174);assert.equal(doc.querySelectorAll('[role="img"]').length,87);
+    const doc=new JSDOM(markup).window.document;assert.equal(prismIconNames.length,88);assert.equal(doc.querySelectorAll('svg').length,176);assert.equal(doc.querySelectorAll('[role="img"]').length,88);
     const ids=[...doc.querySelectorAll('svg [id]')].map(element=>element.id);assert.equal(new Set(ids).size,ids.length);
     for(const element of doc.querySelectorAll('svg *'))for(const attribute of element.attributes){const match=/^url\(#(.+)\)$/.exec(attribute.value);if(match)assert.ok(doc.getElementById(match[1]),`Missing SVG target ${match[1]}`);}
 });

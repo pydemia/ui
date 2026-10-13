@@ -32,3 +32,9 @@
 최신 원본 d677 기준 실제 components/layouts TSX는 275파일(벡터88/비벡터187)이며 이전 inventory 대비 새 4파일만 추가됐고 삭제는 없습니다. ignored sidebar-fidelity-latest-source-delta.json에 경로를 기록했습니다. 이 수는 파일 수이며 독립 구현 목표 총수나 구현 완료 수가 아닙니다. 기존 inventory는 이전 감사 범위로 보존하고 새 화면 대응은 다음 작업에 남깁니다.
 
 최종 site build, check-prism(58그룹/39 완전한 예제), release-check가 모두 통과했습니다. Generic registry는 기존 고정 snapshot sha256-25ca4393b38b8fcebbbd34ca3d8c73475e773a766e971da004f94e40728bc896과 같고 canonical research 4파일과 docs 미러가 일치합니다. Build 뒤 성공 gate만 갱신했으며 components manifest SHA가 바뀌지 않아 번들의 inline manifest와 생성물이 일치합니다. 다음 단계는 source/generated 분리 커밋과 최종 SHA의 CI·preview readback입니다.
+
+## 게시 검증
+
+source c96cf1a0과 generated aa761eb9를 draft PR #162에 게시했습니다. 최종 SHA aa761eb9dee71463a08eab45d195eda99dd61679의 Verify UI run 38362050081은 completed/success입니다. 자동 Vercel preview dpl_DqcLE7xPTnGrWZEEJayrME8YHdUF는 READY, target null이며 같은 GitHub SHA를 가리킵니다. https://pydemia-5b5p6pa79-pydemia-7822.vercel.app 의 16개 공개 파일을 인증된 HTTP로 읽어 로컬 산출물과 비교했습니다. 15개 파일은 원본 바이트가 일치했고 HTML은 확인된 Vercel feedback 스크립트 1개를 제외한 애플리케이션 바이트가 일치했습니다. 증거는 ignored `sidebar-fidelity-final-preview-readback.json`에 있습니다. 이 검증은 배포된 파일의 동일성을 뜻하며 모든 화면의 원본 디자인 일치를 뜻하지 않습니다.
+
+새 배포 화면 `/chat/positions`를 testuser001로 다시 확인했습니다. 로딩이 끝난 뒤 총 1023건, 10개 표 행, 회사·포지션·산업·직무·직책의 5개 열과 페이지 이동이 표시됐습니다. 표는 현재 창에서 800px 폭, 첫 행 높이 60px이며 열 폭은 160/280/120/120/120px입니다. 표 머리는 #eef2fa 배경/14px Pretendard이고 셀은 14px/19.6px입니다. 회사·산업 필터, 포지션 이름 입력, 초기화·조회와 정렬 버튼을 확인했습니다. 상세 탭 열기는 브라우저 입력이 시간 초과되어 이번 관찰에서 직접 검증하지 못했습니다. 새 목록 목적과 기존 상세 재료의 대응 감사·구현은 계속 진행합니다.

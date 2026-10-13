@@ -1,6 +1,7 @@
 export { PrismButton, PrismNewChatButton } from "./prism-button";
 export type { PrismButtonProps } from "./prism-button";
 export * from "./prism-position-management";
+export * from "./prism-position-directory";
 export * from "./prism-admin-lists";
 export * from "./prism-position-blocks";
 export * from "./prism-chat-logs";

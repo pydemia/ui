@@ -44,3 +44,7 @@ src/main.tsx에서 runtime import, literal dynamic import, Vite import.meta.glob
 - 묶음 사례: 현재 프로필 내부 섹션 16파일은 `prism-profile-sections`, 평가 14파일은 `prism-assessment`, 응답 렌더링 13파일은 `prism-response`에 대응합니다. 같은 그룹 안에서도 서로 다른 기능 목적과 공개 계약의 검증은 필요합니다.
 
 따라서 186개라는 독립 구현 목표 수는 철회합니다. 184나 175로 단순 교체하지 않습니다. 최종 독립 구현 목표 총수는 현재 미확정이며 진행률을 `58/186` 또는 `58/184`로 계산하지 않습니다. 이번 질문에는 파일 수, 재사용 그룹 수, 기능·상태별 검증 범위를 분리해 답합니다.
+
+## 2026-10-13 d677e551 재집계
+
+원본 dev d677e551과 현재 inventory의 components/layouts TSX 경로 275개를 집합으로 비교했습니다. 누락·잔존·중복이 없습니다. 벡터 88개를 제외한 비벡터 187개 중 정적 본서비스 연결 178개, 샘플 전용 7개, 진입점 미연결 2개입니다. 비벡터 원본의 primary 대응은 50그룹이고 독립 HTML export를 더한 합집합은 51그룹입니다. 원본 파일 수나 대응 그룹 수는 구현 최종 목표 수 또는 검증 완료 수가 아닙니다. 상세 행별 분류는 ignored `browser-evidence/component-count-current-d677.json`에 있습니다.

@@ -105,4 +105,8 @@ test("long example opens all history rows and candidate navigation clears the ac
     await click(last.textContent);
     assert.equal(document.querySelector('.prism-history-row[data-selected] .prism-history-link'), last);
     assert.match(document.body.textContent, /선택한 화면: synthetic-history-100/);
+    await click("포지션 목록");
+    assert.equal(document.querySelectorAll('.prism-history-row[data-selected]').length, 0);
+    assert.equal(document.querySelector('.prism-nav-item[aria-current="page"]').textContent, "포지션 목록");
+    assert.equal(document.querySelector('select[aria-label="현재 대화 위치"]').value, "positions");
 });
