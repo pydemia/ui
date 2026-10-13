@@ -558,7 +558,7 @@
 .prism-career > li > div { padding-bottom: 12px; }.prism-career b { font-size: 13px; font-weight: 600; }.prism-career p { font-size: 13px; font-weight: 400; }
 .prism-summary-field {min-width:0;}
 .prism-summary-title {font-size:14px;font-weight:600;line-height:1.4;margin:0 0 8px;color:#000;}
-.prism-summary-badge { display: flex; border: 1px solid #B6BEC9; border-radius: 12px; background: var(--prism-neutral-50); }.prism-summary-circle { width: 88px; height: 88px; flex-shrink: 0; margin: 10px 16px; padding: 16px; border-radius: 50%; background: linear-gradient(135deg,#44689f,#284d85); color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center;gap:4px; font-size: 14px; text-align: center; position: relative; }.prism-summary-circle strong {font-size:14px;font-weight:700;line-height:1.2;}.prism-summary-badge > div:last-child { flex-grow:1;min-width:0;border-left: 1px solid var(--prism-border); padding: 16px; display: flex; align-items: center; font-size: 14px; line-height: 1.4;color:#363636;white-space:pre-line; }
+.prism-summary-badge { display: flex; border: 1px solid #B6BEC9; border-radius: 12px; background: var(--prism-neutral-50); }.prism-summary-circle { width: 88px; height: 88px; flex-shrink: 0; margin: 10px 16px; padding: 10px 4px; border-radius: 50%; background: linear-gradient(135deg,#44689f,#284d85); color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center;gap:4px; font-size: 14px; text-align: center; position: relative; }.prism-summary-circle strong {font-size:14px;font-weight:700;line-height:1.2;}.prism-summary-badge > div:last-child { flex-grow:1;min-width:0;border-left: 1px solid var(--prism-border); padding: 16px; display: flex; align-items: center; font-size: 14px; line-height: 1.4;color:#363636;white-space:pre-line; }
 .prism-summary-info {display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;padding:0;border:0;background:none;color:#fff;cursor:pointer;}
 .prism-summary-info:focus-visible {outline:2px solid #fff;outline-offset:2px;border-radius:50%;}
 .prism-summary-tooltip {font-size:14px;font-weight:500;line-height:1.4;white-space:pre-line;}
@@ -1679,6 +1679,7 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 .prism-position-directory-tab>button[role="tab"] {padding-right:4px;}
 .prism-position-directory-close {display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;margin-right:8px;border:0;background:transparent;color:var(--prism-neutral-400);cursor:pointer;}
 .prism-position-directory-panel {flex:1;min-height:0;overflow:auto;}
+.prism-position-directory-panel[hidden] {display:none;}
 .prism-position-directory-list {display:flex;flex-direction:column;width:min(100%,800px);height:100%;min-height:0;margin:0 auto;padding-top:36px;box-sizing:border-box;}
 .prism-position-directory-filter {display:flex;align-items:flex-end;gap:20px;min-width:0;}
 .prism-position-directory-fields {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:6px;flex:1;min-width:0;}

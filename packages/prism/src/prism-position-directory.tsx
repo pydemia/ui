@@ -92,19 +92,19 @@ export function PrismPositionDirectory({ state, onStateChange, rows, total, page
     const updateDraft = (next: Partial<PrismPositionDirectoryFilter>) => onStateChange({ ...state, draft: { ...state.draft, ...next } });
     const apply = () => onStateChange(applyPrismPositionDirectoryFilters(state, industries));
     const active = state.tabs.find(tab => tab.id === state.activeTabId) ?? null;
-    const busy = status === "loading";
+    const busy = status === "loading" && rows.length === 0;
     return <section data-prism="light" className={`prism-position-directory ${className}`} style={{ height, ...style }} aria-label="포지션 목록">
         <div className="prism-position-directory-title">포지션 목록</div>
         <div className="prism-position-directory-tabs" role="tablist" aria-label="포지션 상세 탭">
-            <button type="button" role="tab" id={`${id}-list-tab`} aria-controls={`${id}-panel`} aria-selected={!active} onClick={() => onStateChange({ ...state, activeTabId: null })}>목록</button>
+            <button type="button" role="tab" id={`${id}-list-tab`} aria-controls={`${id}-list-panel`} aria-selected={!active} onClick={() => onStateChange({ ...state, activeTabId: null })}>목록</button>
             {state.tabs.map(tab => <div className="prism-position-directory-tab" key={tab.id}>
-                <button type="button" role="tab" id={`${id}-${tab.id}-tab`} aria-controls={`${id}-panel`} aria-selected={active?.id === tab.id}
+                <button type="button" role="tab" id={`${id}-${tab.id}-tab`} aria-controls={`${id}-${tab.id}-panel`} aria-selected={active?.id === tab.id}
                     title={tabLabel(tab)} onClick={() => onStateChange({ ...state, activeTabId: tab.id })}>{active?.id === tab.id ? tabLabel(tab) : shortLabel(tabLabel(tab))}</button>
                 <button type="button" className="prism-position-directory-close" aria-label={`${tabLabel(tab)} 닫기`} onClick={() => onStateChange(closePrismPositionDirectoryTab(state, tab.id))}><PrismIcon name="CloseIcon" size={14}/></button>
             </div>)}
         </div>
-        <div className="prism-position-directory-panel" role="tabpanel" id={`${id}-panel`} aria-labelledby={active ? `${id}-${active.id}-tab` : `${id}-list-tab`}>
-            {active ? renderDetail(active) : <div className="prism-position-directory-list">
+        <div className="prism-position-directory-panel" role="tabpanel" id={`${id}-list-panel`} aria-labelledby={`${id}-list-tab`} hidden={!!active}>
+            <div className="prism-position-directory-list">
                 <form className="prism-position-directory-filter" onSubmit={event => { event.preventDefault(); if (!busy) apply(); }}>
                     <div className="prism-position-directory-fields">
                         <PrismSelect label="회사" size="small" searchable searchPlaceholder="회사명 검색" value={state.draft.companyId ?? "ALL"}
@@ -140,7 +140,8 @@ export function PrismPositionDirectory({ state, onStateChange, rows, total, page
                         </tbody></table></div>}
                 {status !== "error" && total > 0 && <div className="prism-position-directory-pagination"><PrismPagination page={state.page} pageCount={pageCount} pageButtonCount={10} disabled={busy}
                     onPageChange={page => onStateChange({ ...state, page })}/></div>}
-            </div>}
+            </div>
         </div>
+        {state.tabs.map(tab => <div className="prism-position-directory-panel" role="tabpanel" id={`${id}-${tab.id}-panel`} aria-labelledby={`${id}-${tab.id}-tab`} hidden={active?.id !== tab.id} key={tab.id}>{renderDetail(tab)}</div>)}
     </section>;
 }

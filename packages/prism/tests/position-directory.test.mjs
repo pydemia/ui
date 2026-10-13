@@ -12,9 +12,9 @@ globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(dom.win
 globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(dom.window);
 globalThis.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} };
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
-const { createElement: h, act } = await import("react");
+const { createElement: h, act, useEffect, useState } = await import("react");
 const { createRoot } = await import("react-dom/client");
-const { createPrismPositionDirectoryState, applyPrismPositionDirectoryFilters, resetPrismPositionDirectoryFilters,
+const { PrismPositionDirectory, createPrismPositionDirectoryState, applyPrismPositionDirectoryFilters, resetPrismPositionDirectoryFilters,
     sortPrismPositionDirectory, openPrismPositionDirectoryTab, closePrismPositionDirectoryTab, createPrismPositionDirectoryQuery } = await import("../dist/index.js");
 const root = createRoot(document.getElementById("root"));
 const render = node => act(async () => root.render(node));
@@ -94,5 +94,38 @@ test("loading and empty states preserve the table contract, and error exposes re
     assert.ok(button("다시 시도") || button("다시 조회"));
     await click(button("다시 시도") || button("다시 조회"));
     assert.equal(document.querySelectorAll("tbody tr").length, 10);
+    await render(null);
+});
+test("open details stay mounted while hidden and existing rows remain visible during refresh", async () => {
+    const row = { id: "position-a", company: "가상전자", name: "전략", industry: "기술", job: "기획", role: "담당" };
+    let mounts = 0;
+    let unmounts = 0;
+    function Detail({ tab }) {
+        useEffect(() => { mounts++; return () => { unmounts++; }; }, []);
+        return h("p", null, `${tab.name} 상세`);
+    }
+    function Harness() {
+        const [state, setState] = useState(createPrismPositionDirectoryState);
+        return h(PrismPositionDirectory, { state, onStateChange: setState, rows: [row], total: 1, pageCount: 1,
+            companies: [], industries: [], status: "loading", renderDetail: tab => h(Detail, { tab }) });
+    }
+    await render(h(Harness));
+    assert.equal(document.querySelectorAll(".prism-position-directory-row").length, 1);
+    assert.equal(document.querySelectorAll(".prism-position-directory-scroll .prism-skeleton").length, 0);
+    assert.equal(button("포지션 정렬").disabled, false);
+    await click(document.querySelector(".prism-position-directory-open"));
+    assert.equal(mounts, 1);
+    const detailTab = document.querySelector('.prism-position-directory-tab button[role="tab"]');
+    const detailPanel = document.getElementById(detailTab.getAttribute("aria-controls"));
+    assert.equal(detailPanel.hidden, false);
+    await click(button("목록"));
+    assert.equal(detailPanel.hidden, true);
+    assert.equal(mounts, 1);
+    assert.equal(unmounts, 0);
+    await click(detailTab);
+    assert.equal(detailPanel.hidden, false);
+    assert.equal(mounts, 1);
+    await click(document.querySelector(".prism-position-directory-close"));
+    assert.equal(unmounts, 1);
     await render(null);
 });

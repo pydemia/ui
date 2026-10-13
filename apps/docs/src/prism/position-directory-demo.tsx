@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PrismPositionDirectory, PrismPositionDetail, createPrismPositionDirectoryQuery, createPrismPositionDirectoryState,
     type PrismPositionDirectoryRow, type PrismPositionDirectoryState } from "@pydemia/prism";
 
-type Mode = "default" | "loading" | "empty" | "error" | "long";
+type Mode = "default" | "loading" | "refreshing" | "empty" | "error" | "long";
 const companies = [{ value: "example", label: "가상전자" }, { value: "sample", label: "예시서비스" }];
 const industries = [{ value: "technology", label: "기술" }, { value: "service", label: "서비스" }];
 const sourceRows: PrismPositionDirectoryRow[] = Array.from({ length: 24 }, (_, index) => ({
@@ -34,7 +34,7 @@ export function PositionDirectoryExample({ initialMode = "default" }: { initialM
     } : row);
     return <div data-prism="light" style={{ height: 620, minWidth: 0 }}>
         <PrismPositionDirectory state={state} onStateChange={setState} companies={companies} industries={industries}
-            rows={rows} total={sorted.length} pageCount={pageCount} status={mode === "loading" || mode === "error" ? mode : "ready"}
+            rows={mode === "loading" ? [] : rows} total={mode === "loading" ? 0 : sorted.length} pageCount={pageCount} status={mode === "loading" || mode === "refreshing" ? "loading" : mode === "error" ? "error" : "ready"}
             onRetry={() => { setState(createPrismPositionDirectoryState()); setMode("default"); }}
             renderDetail={tab => <PrismPositionDetail company={tab.company} role={tab.name}
                 items={[{ label: "산업", value: "기술" }, { label: "직무", value: "연구개발·전략" }, { label: "직책", value: "담당" }]}

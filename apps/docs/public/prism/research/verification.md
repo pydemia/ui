@@ -447,3 +447,17 @@ Real shadcn installation additionally verified58 exact module/CSS sources,39 com
 선택한 16개 치수·스타일 중 15개가 일치합니다. 배포 원본에는 새 포지션 목록 메뉴가 있어 history 시작 y가 40px 다릅니다. 최신 원본 d677e551은 fetch/fast-forward했으며 새 position-list 목적·EtcIcon과 다른 delta의 감사/구현은 미완료입니다. 기존 source inventory의 e5 기준 수치를 최신 원본 수치로 재사용하지 않습니다. 전체 font/pixel/동작과 배포 revision은 미확인입니다. 원본 비교 당시 fingerprint는 259cf5a223358cf3497e68de7de53b1bc65e6e175db06558a1b580efa63530a0/85 inputs입니다.
 
 실제 설치 browser에서 문서 전용 CSS에 의존하던 예제 높이를 발견해 완전한 예제 안에 layout을 명시했습니다. 최종 fingerprint 69949a21ca0852e61f052617801fdc36259eb3a2255c3150309ba2436238afe4의 10회 렌더와 소비자 320/1280px 100행 검사가 통과했습니다. 소비자 sidebar는 518px, row는 213px이며 마지막 행 이동 시 footer는 y375로 유지되고 내부 scrollTop만 3313으로 바뀝니다. 58개 module/CSS와 39개 예제의 재설치 검증이 통과했습니다.
+
+## 포지션 목록과 SUMMARY 배지, 2026-10-13
+
+이번 작업 범위는 `PrismPositionDirectory`, `PrismSummaryBadge` 두 컴포넌트입니다. 최신 원본 `dev` `2eeb26ff`의 PositionList는 상세 탭을 숨겨 둔 채 mount 상태를 유지하고 기존 행이 있으면 재조회 중에도 표를 표시합니다. 독립 목록도 같은 상태 전환을 구현했습니다. 원본 Candidate Common 배포 샘플의 SUMMARY 원형 배지는 88×88px, padding `10px 4px`였고 로컬·독립 설치본에서 같은 치수를 확인했습니다.
+
+포지션 목록의 상세 mount 유지와 기존 행 재조회 테스트를 포함해 PRISM 295개 테스트가 통과했습니다. 로컬 브라우저에서 목록으로 돌아와도 숨겨진 상세 DOM이 남았고, 실제 shadcn 설치본은 상세 mount 횟수 1회를 유지했습니다. 설치본 재조회 상태에서는 기존 행과 정렬 버튼이 보였으며 기본 viewport에서 문서 가로 넘침은 0이었습니다. 레지스트리 59개 설치 그룹의 소스·CSS와 40개 예제 타입 검사, Vite·폰트·고지 검사가 통과했습니다.
+
+이번 delta의 실제 320px iframe에서 문서 너비 320px, 표 680px/스크롤 영역 256px를 확인했고 상세 탭 복귀 후 숨겨진 상세와 10개 행이 유지됐습니다. 이 검증은 두 컴포넌트의 해당 상태에 한정됩니다. 원본 배포 revision과 로컬 `dev`의 동일성, 포지션 상세의 실제 서비스 요청, 전체 프로필·목록의 pixel/font 일치는 아직 확인하지 못했습니다.
+
+## Goal 완료 기준 수량, 2026-10-13
+
+고정 기준 원본 `2eeb26ff`에서 구현 목표는 58개 UI 컴포넌트 그룹입니다. 원본 비벡터 UI 대응 50개와 HTML export·별도 기능 7개를 합산했고, 아이콘 자산 묶음과 디자인 토큰은 필수지만 개수에서 제외했습니다. 현재 58개 catalog 항목의 존재는 원본 대비 목적·상태·시각·동작 검증 완료를 뜻하지 않습니다. 완료 분자와 비율은 58개 모두를 동일한 판정 기준으로 감사한 뒤 산정합니다.
+
+현재 58개 그룹 모두 구현 코드와 registry 항목이 있습니다. 그러나 58개 검증 기록의 시각 항목은 전부 부분 검증 또는 미검증 상태입니다. 따라서 위 판정 기준으로 **완료가 확인된 그룹은 0/58개**이며, 이는 구현 코드의 부재를 뜻하지 않습니다.
