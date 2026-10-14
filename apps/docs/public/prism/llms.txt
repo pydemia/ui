@@ -1202,8 +1202,8 @@ export function ResponseExample() {
 
 ## Criteria editor / Remap / Company context
 Criterion editing, sub-jobs, affected positions and replacement mapping
-Contract: Draft fields, duplicate check status, generation and replacement mappings are controlled. Criteria deletion emits only a callback after every affected position has a valid replacement. The target itself cannot be a replacement. API, permissions and transactions belong to the consumer. 원본 블록 업무의 상세/생성/수정·영향확인과주직무/보조직무삭제는prism-position-blocks를사용합니다. CriteriaTag는added(추가됨)를지원하고deleted는열기/삭제불가,applying은삭제불가이며26px높이를유지합니다.
-States: default, loading, error
+Contract: 기준 편집의 이름 검사 결과는 checkedName과 현재 입력 이름이 같을 때만 저장·생성에 유효합니다. 재매핑은 호스트가 제공한 영향 목록의 loadState=ready이고 loadedTargetId가 현재 대상과 같을 때에만 확정하고 삭제·반영 중 기준을 후보에서 제외합니다. 0건 삭제는 성공 조회 후 허용합니다. 회사 과제 복사는 기본 Clipboard API와 fallback을 제공하며 실패를 표시합니다. API·권한·트랜잭션은 소비자 소유입니다. 원본 블록 업무의 상세/생성/수정·영향확인과 주직무/보조직무 삭제는 prism-position-blocks를 사용합니다.
+States: default, loading, error, long
 Registry: /prism/r/prism-management-tools.json
 Source: packages/prism/src/prism-management-tools.tsx
 Usage kind: component-example
@@ -1211,19 +1211,41 @@ Installed usage:
 ```tsx
 import { useState } from "react";
 import { PrismButton } from "@/components/ui/prism-button";
-import { PrismCriteriaEditor, type PrismCriteriaDraft } from "@/components/ui/prism-management-tools";
+import { PrismCriteriaTag, PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismPositionCheckCard, PrismCompanyContextDialog, type PrismCriteriaDraft } from "@/components/ui/prism-management-tools";
 
-export function CriteriaExample() {
-  const [open, setOpen] = useState(false);
-  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: "", description: "", categoryId: "" });
-  const [submitted, setSubmitted] = useState<PrismCriteriaDraft | null>(null);
+export function ManagementToolsExample() {
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [remapOpen, setRemapOpen] = useState(false);
+  const [contextOpen, setContextOpen] = useState(false);
+  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: "", description: "", categoryId: "tech" });
+  const [checkedName, setCheckedName] = useState("");
+  const [checkStatus, setCheckStatus] = useState<"idle" | "available" | "duplicate">("idle");
+  const [remap, setRemap] = useState<Readonly<Record<string, string>>>({});
+  const [checked, setChecked] = useState(false);
+  const [result, setResult] = useState("");
+  const positions = [{ id: "p1", name: "가상 기술전략담당", company: "가상전자" }];
   return <section>
-    <PrismButton onClick={() => setOpen(true)}>기준 편집</PrismButton>
-    <PrismCriteriaEditor title="가상 기준" open={open} onOpenChange={setOpen}
-      value={draft} onValueChange={setDraft} categories={[{ id: "technology", label: "기술" }]}
-      positions={[{ id: "position-demo", name: "기술전략담당", company: "가상전자" }]}
-      onSubmit={value => { setSubmitted(value); setOpen(false); }} />
-    <p role="status">{submitted ? submitted.name + " 저장 의도" : ""}</p>
+    <PrismButton onClick={() => setEditorOpen(true)}>기준 편집</PrismButton>
+    <PrismCriteriaTag label="가상 기존 기준" change="modified"
+      onEdit={() => setEditorOpen(true)} onDelete={() => setRemapOpen(true)} />
+    <PrismPositionCheckCard id="synthetic-position-option" title="가상 포지션 확인"
+      description="관리자가 검토할 항목입니다." checked={checked} onChange={setChecked} />
+    <PrismButton variant="line" onClick={() => setContextOpen(true)}>회사 주요 과제</PrismButton>
+    <PrismCriteriaEditor title="기준 편집" open={editorOpen} onOpenChange={setEditorOpen}
+      value={draft} onValueChange={next => { if (next.name !== draft.name) setCheckStatus("idle"); setDraft(next); }}
+      categories={[{ id: "tech", label: "기술" }]} positions={positions}
+      checkedName={checkedName} checkStatus={checkStatus}
+      onCheck={name => { setCheckedName(name); setCheckStatus(name === "중복 기준" ? "duplicate" : "available"); }}
+      onGenerate={() => setDraft(previous => ({ ...previous, description: "합성 기준 설명" }))}
+      onSubmit={next => { setResult(next.name + " 저장 의도"); setEditorOpen(false); }} />
+    <PrismCriteriaRemapDialog open={remapOpen} onOpenChange={setRemapOpen}
+      targetId="old" targetName="가상 기존 기준" positions={positions}
+      options={[{ id: "old", label: "가상 기존 기준" }, { id: "next", label: "가상 대체 기준" }]}
+      value={remap} onValueChange={setRemap} loadState="ready" loadedTargetId="old"
+      onConfirm={next => { setResult(Object.keys(next).length + "건 재매핑 의도"); setRemapOpen(false); }} />
+    <PrismCompanyContextDialog open={contextOpen} onOpenChange={setContextOpen}
+      company="가상전자" content="합성 회사 과제입니다." />
+    <p role="status">{result}</p>
   </section>;
 }
 ```

@@ -4524,7 +4524,7 @@
       "name": "Criteria editor / Remap / Company context",
       "category": "Administration",
       "purpose": "Criterion editing, sub-jobs, affected positions and replacement mapping",
-      "contract": "Draft fields, duplicate check status, generation and replacement mappings are controlled. Criteria deletion emits only a callback after every affected position has a valid replacement. The target itself cannot be a replacement. API, permissions and transactions belong to the consumer. 원본 블록 업무의 상세/생성/수정·영향확인과주직무/보조직무삭제는prism-position-blocks를사용합니다. CriteriaTag는added(추가됨)를지원하고deleted는열기/삭제불가,applying은삭제불가이며26px높이를유지합니다.",
+      "contract": "기준 편집의 이름 검사 결과는 checkedName과 현재 입력 이름이 같을 때만 저장·생성에 유효합니다. 재매핑은 호스트가 제공한 영향 목록의 loadState=ready이고 loadedTargetId가 현재 대상과 같을 때에만 확정하고 삭제·반영 중 기준을 후보에서 제외합니다. 0건 삭제는 성공 조회 후 허용합니다. 회사 과제 복사는 기본 Clipboard API와 fallback을 제공하며 실패를 표시합니다. API·권한·트랜잭션은 소비자 소유입니다. 원본 블록 업무의 상세/생성/수정·영향확인과 주직무/보조직무 삭제는 prism-position-blocks를 사용합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "sourceDeltaAudits": [
         {
@@ -4537,7 +4537,8 @@
       "states": [
         "default",
         "loading",
-        "error"
+        "error",
+        "long"
       ],
       "source": [
         "admin/position-blocks/CriteriaDialog.tsx",
@@ -4547,14 +4548,14 @@
         "admin/positions/CompanyTaskDialog.tsx",
         "admin/positions/PositionCheckCard.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismCriteriaEditor, type PrismCriteriaDraft } from \"@pydemia/prism\";\n\nexport function CriteriaExample() {\n  const [open, setOpen] = useState(false);\n  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: \"\", description: \"\", categoryId: \"\" });\n  const [submitted, setSubmitted] = useState<PrismCriteriaDraft | null>(null);\n  return <section>\n    <PrismButton onClick={() => setOpen(true)}>기준 편집</PrismButton>\n    <PrismCriteriaEditor title=\"가상 기준\" open={open} onOpenChange={setOpen}\n      value={draft} onValueChange={setDraft} categories={[{ id: \"technology\", label: \"기술\" }]}\n      positions={[{ id: \"position-demo\", name: \"기술전략담당\", company: \"가상전자\" }]}\n      onSubmit={value => { setSubmitted(value); setOpen(false); }} />\n    <p role=\"status\">{submitted ? submitted.name + \" 저장 의도\" : \"\"}</p>\n  </section>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismCriteriaTag, PrismCriteriaEditor, PrismCriteriaRemapDialog,\n  PrismPositionCheckCard, PrismCompanyContextDialog, type PrismCriteriaDraft } from \"@pydemia/prism\";\n\nexport function ManagementToolsExample() {\n  const [editorOpen, setEditorOpen] = useState(false);\n  const [remapOpen, setRemapOpen] = useState(false);\n  const [contextOpen, setContextOpen] = useState(false);\n  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: \"\", description: \"\", categoryId: \"tech\" });\n  const [checkedName, setCheckedName] = useState(\"\");\n  const [checkStatus, setCheckStatus] = useState<\"idle\" | \"available\" | \"duplicate\">(\"idle\");\n  const [remap, setRemap] = useState<Readonly<Record<string, string>>>({});\n  const [checked, setChecked] = useState(false);\n  const [result, setResult] = useState(\"\");\n  const positions = [{ id: \"p1\", name: \"가상 기술전략담당\", company: \"가상전자\" }];\n  return <section>\n    <PrismButton onClick={() => setEditorOpen(true)}>기준 편집</PrismButton>\n    <PrismCriteriaTag label=\"가상 기존 기준\" change=\"modified\"\n      onEdit={() => setEditorOpen(true)} onDelete={() => setRemapOpen(true)} />\n    <PrismPositionCheckCard id=\"synthetic-position-option\" title=\"가상 포지션 확인\"\n      description=\"관리자가 검토할 항목입니다.\" checked={checked} onChange={setChecked} />\n    <PrismButton variant=\"line\" onClick={() => setContextOpen(true)}>회사 주요 과제</PrismButton>\n    <PrismCriteriaEditor title=\"기준 편집\" open={editorOpen} onOpenChange={setEditorOpen}\n      value={draft} onValueChange={next => { if (next.name !== draft.name) setCheckStatus(\"idle\"); setDraft(next); }}\n      categories={[{ id: \"tech\", label: \"기술\" }]} positions={positions}\n      checkedName={checkedName} checkStatus={checkStatus}\n      onCheck={name => { setCheckedName(name); setCheckStatus(name === \"중복 기준\" ? \"duplicate\" : \"available\"); }}\n      onGenerate={() => setDraft(previous => ({ ...previous, description: \"합성 기준 설명\" }))}\n      onSubmit={next => { setResult(next.name + \" 저장 의도\"); setEditorOpen(false); }} />\n    <PrismCriteriaRemapDialog open={remapOpen} onOpenChange={setRemapOpen}\n      targetId=\"old\" targetName=\"가상 기존 기준\" positions={positions}\n      options={[{ id: \"old\", label: \"가상 기존 기준\" }, { id: \"next\", label: \"가상 대체 기준\" }]}\n      value={remap} onValueChange={setRemap} loadState=\"ready\" loadedTargetId=\"old\"\n      onConfirm={next => { setResult(Object.keys(next).length + \"건 재매핑 의도\"); setRemapOpen(false); }} />\n    <PrismCompanyContextDialog open={contextOpen} onOpenChange={setContextOpen}\n      company=\"가상전자\" content=\"합성 회사 과제입니다.\" />\n    <p role=\"status\">{result}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-management-tools.tsx",
       "previewUrl": "/prism?component=prism-management-tools",
       "embedUrl": "/prism?component=prism-management-tools&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-management-tools&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending",
+        "visual": "source-purpose-style-with-responsive-improvement-passed",
+        "interaction": "passed-local-and-independent-consumer",
         "localRenderGate": {
           "status": "passed",
           "states": [
@@ -4568,6 +4569,51 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "checks": [
+          "Current frontend 2eeb26ff source for criteria edit/delete/tag, company task and position check was compared with the portable group. The full block-specific create/edit/remap workflow remains owned by the separately accepted prism-position-blocks group.",
+          "A checked name authorizes only that exact current trimmed name. Save and definition generation are disabled after a name change until the host confirms the new value; submitted names are trimmed.",
+          "Generic remapping requires a ready affected-position response bound to the current target ID, excludes deleted/applying/target options, prevents incomplete confirmation and permits zero-affected deletion only after ready.",
+          "Company task retains the source title, company header, copy action and 340px content scroll; the default Clipboard API and host callback report success/failure without mutating supplied text.",
+          "Local browser exercised name-check invalidation, remap selection, error/retry, company copy and long labels; at 320px long tags stay within 288px and long company text scrolls internally.",
+          "Fresh external shadcn consumer installed 18 PRISM TSX sources plus exact PRISM CSS and generic tokens, typechecked and built the complete example with Pretendard and notices. Its 320px document remains 320px; the 520px remap table scrolls inside a 264px region, and the hidden third-column selector is keyboard/click accessible."
+        ],
+        "evidence": [
+          "packages/prism/tests/management-tools.test.mjs",
+          "local-prism-management-tools-2026-10-14",
+          "installed-prism-management-tools-2026-10-14"
+        ],
+        "remaining": [
+          "Authenticated deployed /chat/admin/position-blocks rendered an empty React root in the in-app browser; its deployed revision and direct pixel comparison remain unverified.",
+          "Real affected-position query, uniqueness check, AI generation, permissions, transaction and actual clipboard readback in the isolated browser remain outside the verified host integration."
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/admin/position-blocks/CriteriaDialog.tsx",
+            "components/admin/position-blocks/CriteriaDeleteDialog.tsx",
+            "components/admin/position-blocks/CriteriaTag.tsx",
+            "components/admin/positions/CompanyTaskDialog.tsx",
+            "components/admin/positions/PositionCheckCard.tsx"
+          ],
+          "evidence": [
+            "The current source purpose and representative SCSS were compared with the generic editor/remap, tag, check card and company context. Source company task uses a 16px company heading and a 340px scroll region.",
+            "Four focused tests passed for exact checked-name binding, ready/current-target remap gating and excluded options, callback failure/success and default Clipboard API content.",
+            "Local browser covered default/error/long and 320px; external shadcn install matched 18 TSX sources/CSS/tokens, typechecked the full example, built Vite/font/notices, and exercised save/remap/copy. The 320px remap table scrolls within 264px."
+          ],
+          "intentionalImprovements": [
+            "Stale uniqueness results cannot authorize a renamed criterion.",
+            "Failed or stale affected-position results cannot trigger deletion.",
+            "Copy failure is visible, and long criteria/large tables remain usable in narrow dialogs."
+          ],
+          "hostOwned": [
+            "The consuming application supplies uniqueness, AI text, affected-position query/result identity, access control and mutation transactions."
+          ],
+          "nonBlockingUnknowns": [
+            "The authenticated deployed admin route is blank in the current in-app browser, so exact deployed pixels and real backend outcomes remain unverified."
+          ]
         }
       },
       "exports": [
@@ -4601,7 +4647,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismCriteriaEditor, type PrismCriteriaDraft } from \"@/components/ui/prism-management-tools\";\n\nexport function CriteriaExample() {\n  const [open, setOpen] = useState(false);\n  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: \"\", description: \"\", categoryId: \"\" });\n  const [submitted, setSubmitted] = useState<PrismCriteriaDraft | null>(null);\n  return <section>\n    <PrismButton onClick={() => setOpen(true)}>기준 편집</PrismButton>\n    <PrismCriteriaEditor title=\"가상 기준\" open={open} onOpenChange={setOpen}\n      value={draft} onValueChange={setDraft} categories={[{ id: \"technology\", label: \"기술\" }]}\n      positions={[{ id: \"position-demo\", name: \"기술전략담당\", company: \"가상전자\" }]}\n      onSubmit={value => { setSubmitted(value); setOpen(false); }} />\n    <p role=\"status\">{submitted ? submitted.name + \" 저장 의도\" : \"\"}</p>\n  </section>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismCriteriaTag, PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismPositionCheckCard, PrismCompanyContextDialog, type PrismCriteriaDraft } from \"@/components/ui/prism-management-tools\";\n\nexport function ManagementToolsExample() {\n  const [editorOpen, setEditorOpen] = useState(false);\n  const [remapOpen, setRemapOpen] = useState(false);\n  const [contextOpen, setContextOpen] = useState(false);\n  const [draft, setDraft] = useState<PrismCriteriaDraft>({ name: \"\", description: \"\", categoryId: \"tech\" });\n  const [checkedName, setCheckedName] = useState(\"\");\n  const [checkStatus, setCheckStatus] = useState<\"idle\" | \"available\" | \"duplicate\">(\"idle\");\n  const [remap, setRemap] = useState<Readonly<Record<string, string>>>({});\n  const [checked, setChecked] = useState(false);\n  const [result, setResult] = useState(\"\");\n  const positions = [{ id: \"p1\", name: \"가상 기술전략담당\", company: \"가상전자\" }];\n  return <section>\n    <PrismButton onClick={() => setEditorOpen(true)}>기준 편집</PrismButton>\n    <PrismCriteriaTag label=\"가상 기존 기준\" change=\"modified\"\n      onEdit={() => setEditorOpen(true)} onDelete={() => setRemapOpen(true)} />\n    <PrismPositionCheckCard id=\"synthetic-position-option\" title=\"가상 포지션 확인\"\n      description=\"관리자가 검토할 항목입니다.\" checked={checked} onChange={setChecked} />\n    <PrismButton variant=\"line\" onClick={() => setContextOpen(true)}>회사 주요 과제</PrismButton>\n    <PrismCriteriaEditor title=\"기준 편집\" open={editorOpen} onOpenChange={setEditorOpen}\n      value={draft} onValueChange={next => { if (next.name !== draft.name) setCheckStatus(\"idle\"); setDraft(next); }}\n      categories={[{ id: \"tech\", label: \"기술\" }]} positions={positions}\n      checkedName={checkedName} checkStatus={checkStatus}\n      onCheck={name => { setCheckedName(name); setCheckStatus(name === \"중복 기준\" ? \"duplicate\" : \"available\"); }}\n      onGenerate={() => setDraft(previous => ({ ...previous, description: \"합성 기준 설명\" }))}\n      onSubmit={next => { setResult(next.name + \" 저장 의도\"); setEditorOpen(false); }} />\n    <PrismCriteriaRemapDialog open={remapOpen} onOpenChange={setRemapOpen}\n      targetId=\"old\" targetName=\"가상 기존 기준\" positions={positions}\n      options={[{ id: \"old\", label: \"가상 기존 기준\" }, { id: \"next\", label: \"가상 대체 기준\" }]}\n      value={remap} onValueChange={setRemap} loadState=\"ready\" loadedTargetId=\"old\"\n      onConfirm={next => { setResult(Object.keys(next).length + \"건 재매핑 의도\"); setRemapOpen(false); }} />\n    <PrismCompanyContextDialog open={contextOpen} onOpenChange={setContextOpen}\n      company=\"가상전자\" content=\"합성 회사 과제입니다.\" />\n    <p role=\"status\">{result}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-candidate-list",

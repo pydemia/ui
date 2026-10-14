@@ -3364,8 +3364,8 @@
       ]
     },
     "prism-management-tools": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "source-purpose-style-with-responsive-improvement-passed",
+      "interaction": "passed-local-and-independent-consumer",
       "localRenderGate": {
         "status": "passed",
         "states": [
@@ -3379,6 +3379,51 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "checks": [
+        "Current frontend 2eeb26ff source for criteria edit/delete/tag, company task and position check was compared with the portable group. The full block-specific create/edit/remap workflow remains owned by the separately accepted prism-position-blocks group.",
+        "A checked name authorizes only that exact current trimmed name. Save and definition generation are disabled after a name change until the host confirms the new value; submitted names are trimmed.",
+        "Generic remapping requires a ready affected-position response bound to the current target ID, excludes deleted/applying/target options, prevents incomplete confirmation and permits zero-affected deletion only after ready.",
+        "Company task retains the source title, company header, copy action and 340px content scroll; the default Clipboard API and host callback report success/failure without mutating supplied text.",
+        "Local browser exercised name-check invalidation, remap selection, error/retry, company copy and long labels; at 320px long tags stay within 288px and long company text scrolls internally.",
+        "Fresh external shadcn consumer installed 18 PRISM TSX sources plus exact PRISM CSS and generic tokens, typechecked and built the complete example with Pretendard and notices. Its 320px document remains 320px; the 520px remap table scrolls inside a 264px region, and the hidden third-column selector is keyboard/click accessible."
+      ],
+      "evidence": [
+        "packages/prism/tests/management-tools.test.mjs",
+        "local-prism-management-tools-2026-10-14",
+        "installed-prism-management-tools-2026-10-14"
+      ],
+      "remaining": [
+        "Authenticated deployed /chat/admin/position-blocks rendered an empty React root in the in-app browser; its deployed revision and direct pixel comparison remain unverified.",
+        "Real affected-position query, uniqueness check, AI generation, permissions, transaction and actual clipboard readback in the isolated browser remain outside the verified host integration."
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "components/admin/position-blocks/CriteriaDialog.tsx",
+          "components/admin/position-blocks/CriteriaDeleteDialog.tsx",
+          "components/admin/position-blocks/CriteriaTag.tsx",
+          "components/admin/positions/CompanyTaskDialog.tsx",
+          "components/admin/positions/PositionCheckCard.tsx"
+        ],
+        "evidence": [
+          "The current source purpose and representative SCSS were compared with the generic editor/remap, tag, check card and company context. Source company task uses a 16px company heading and a 340px scroll region.",
+          "Four focused tests passed for exact checked-name binding, ready/current-target remap gating and excluded options, callback failure/success and default Clipboard API content.",
+          "Local browser covered default/error/long and 320px; external shadcn install matched 18 TSX sources/CSS/tokens, typechecked the full example, built Vite/font/notices, and exercised save/remap/copy. The 320px remap table scrolls within 264px."
+        ],
+        "intentionalImprovements": [
+          "Stale uniqueness results cannot authorize a renamed criterion.",
+          "Failed or stale affected-position results cannot trigger deletion.",
+          "Copy failure is visible, and long criteria/large tables remain usable in narrow dialogs."
+        ],
+        "hostOwned": [
+          "The consuming application supplies uniqueness, AI text, affected-position query/result identity, access control and mutation transactions."
+        ],
+        "nonBlockingUnknowns": [
+          "The authenticated deployed admin route is blank in the current in-app browser, so exact deployed pixels and real backend outcomes remain unverified."
+        ]
       }
     },
     "prism-page-state": {
@@ -7416,10 +7461,11 @@
       "prism-position-management",
       "prism-domain-forms",
       "prism-page-state",
-      "prism-admin"
+      "prism-admin",
+      "prism-management-tools"
     ],
-    "acceptedCount": 49,
-    "unassessedGroups": 9,
+    "acceptedCount": 50,
+    "unassessedGroups": 8,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   },
   "domainFormsVerification": {
