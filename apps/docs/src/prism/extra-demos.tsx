@@ -6,7 +6,7 @@ import { PrismNoticeForm, PrismCompanyGroupForm, PrismUserForm, PrismPositionFor
 import { PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismCriteriaTag, PrismPositionCheckCard, PrismCompanyContextDialog, PrismCandidateDirectory, PrismDirectoryTable, PrismBlankLayout, PrismErrorContent, PrismServiceContact, type PrismCriteriaDraft, PrismResponse, PrismButton, PrismContextForm, PrismAffiliateLogo, PrismSidebarProfile, PrismSkeletonGroup, PrismPopover, PrismFavoriteToggle, PrismShowMore, PrismInputLabel,
     PrismPositionDetail, PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis,
     PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismProfileMemoComposer, PrismProfileMemoCollection, type PrismProfileMemoItem,
-    PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistoryDialog, PrismPrivacyPolicyDialog,
+    PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistoryDialog, PrismPrivacyPolicyDialog, PrismAccessGate,
     type PrismContextValues, type PrismCandidateFilters, type PrismCandidate, type PrismNotice, type PrismResponseBlock,
 } from "@pydemia/prism";
 import type { FixtureState } from "./catalog";
@@ -136,7 +136,14 @@ export function DirectoryDemo({ state }: { state: FixtureState }) {
 }
 export function PageStateDemo() {
     const [count,setCount] = useState(0);
-    return <div><div style={{height:500}}><PrismBlankLayout><PrismErrorContent code="404" message="Requested page was not found." buttonLabel="Return" onAction={() => setCount(count+1)} /></PrismBlankLayout></div><PrismServiceContact email="demo@example.com" /><p role="status">Action: {count}</p></div>;
+    const [status,setStatus] = useState<"ready"|"loading"|"denied">("denied");
+    const [code,setCode] = useState("403");
+    return <div className="prism-demo-stack">
+        <PrismSelect label="접근 상태" value={status} onValueChange={value=>setStatus(value as typeof status)} options={[{value:"ready",label:"접근 허용"},{value:"loading",label:"확인 중"},{value:"denied",label:"접근 거부"}]}/>
+        <PrismSelect label="오류 코드" value={code} onValueChange={setCode} options={[{value:"403",label:"403 접근 거부"},{value:"404",label:"404 찾을 수 없음"},{value:"503",label:"503 인증 서버 장애"}]}/>
+        <div style={{height:500}}><PrismBlankLayout><PrismAccessGate status={status} fallback={<PrismErrorContent code={code} message={code==="404"?"페이지를 찾을 수 없습니다.":code==="503"?"인증 서버에 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.":"페이지에 접근 권한이 없습니다.\n관리자에게 문의하세요."} buttonLabel="다시 확인" onAction={() => setCount(current=>current+1)} />}><p>호스트에서 접근을 승인한 화면입니다.</p></PrismAccessGate></PrismBlankLayout></div>
+        <PrismServiceContact email="demo@example.com" /><p role="status">Action: {count}</p>
+    </div>;
 }
 
 export function DomainFormsDemo({state}:{state:FixtureState}) {

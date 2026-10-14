@@ -4782,9 +4782,9 @@
       "id": "prism-page-state",
       "name": "Error / Access / Blank layout",
       "category": "Feedback",
-      "purpose": "Error pages, access states and service contact layout",
+      "purpose": "Error pages, access states and actionable service contact layout",
       "contract": "Error code, icon, message and action are presentation props. Access status comes from the host authentication layer; this component does not request a session or change routes. Original brand illustrations can be supplied through the icon slot.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default"
       ],
@@ -4795,14 +4795,14 @@
         "../layouts/auth/AuthLayout.tsx",
         "../layouts/common/BlankLayout.tsx"
       ],
-      "usage": "import { PrismAccessGate, PrismErrorContent } from \"@pydemia/prism\";\n\nexport function AccessExample({ status, onRetry }: {\n  status: \"ready\" | \"loading\" | \"denied\";\n  onRetry: () => void;\n}) {\n  // status는 호스트의 인증 계층에서 제공합니다.\n  return <PrismAccessGate status={status}\n    fallback={<PrismErrorContent code=\"403\" message=\"접근 권한을 확인해 주세요.\"\n      buttonLabel=\"다시 확인\" onAction={onRetry} />}>\n    <p>호스트에서 접근을 승인한 화면입니다.</p>\n  </PrismAccessGate>;\n}",
+      "usage": "import { PrismAccessGate, PrismBlankLayout, PrismErrorContent, PrismServiceContact } from \"@pydemia/prism\";\n\nexport function AccessExample({ status, onRetry, contactEmail }: {\n  status: \"ready\" | \"loading\" | \"denied\";\n  onRetry: () => void;\n  contactEmail: string;\n}) {\n  // status와 재시도 동작은 호스트의 인증 계층에서 제공합니다.\n  return <PrismBlankLayout>\n    <div>\n      <PrismAccessGate status={status}\n        fallback={<PrismErrorContent code=\"403\" message=\"접근 권한을 확인해 주세요.\"\n          buttonLabel=\"다시 확인\" onAction={onRetry} />}>\n        <p>호스트에서 접근을 승인한 화면입니다.</p>\n      </PrismAccessGate>\n      <PrismServiceContact email={contactEmail} />\n    </div>\n  </PrismBlankLayout>;\n}\n\nexport function ErrorPageExample({ code, message, onAction }: {\n  code: \"404\" | \"503\";\n  message: string;\n  onAction: () => void;\n}) {\n  return <PrismBlankLayout gradient={false}>\n    <PrismErrorContent code={code} message={message}\n      buttonLabel=\"돌아가기\" onAction={onAction} />\n  </PrismBlankLayout>;\n}",
       "sourcePath": "packages/prism/src/prism-page-state.tsx",
       "previewUrl": "/prism?component=prism-page-state",
       "embedUrl": "/prism?component=prism-page-state&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-page-state&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending",
+        "visual": "source-layout-with-responsive-improvements",
+        "interaction": "passed-local-and-independent-consumer",
         "localRenderGate": {
           "status": "passed",
           "states": [
@@ -4814,6 +4814,51 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "checks": [
+          "Current frontend 2eeb26ff error pages use 403/404/503 and unknown-error illustrations, message/action callbacks, a centered BlankLayout, and a service contact supplied by its auth pages.",
+          "Portable 503 and unknown errors now use the source Unauthorized illustration; 403/404 retain their dedicated icons. The service email is an active mailto link instead of the source-disabled link.",
+          "AccessGate tests cover loading, denied without fallback, ready content isolation, host fallback action and contact link; local browser exercised 403/503, retry, ready/loading and 320px width.",
+          "A fresh external shadcn consumer installed three exact TSX sources plus CSS/tokens, typechecked both complete examples, built with Vite/Pretendard and rendered denied/loading/ready/404/503 with zero 320px document overflow."
+        ],
+        "remaining": [
+          "Authenticated deployed error pages and exact deployment/source revision remain unverified.",
+          "Auth bootstrap, retry navigation, host permissions, actual email destination and error-boundary routing remain consuming-app responsibilities."
+        ],
+        "evidence": [
+          "local-page-state-goal-2026-10-14",
+          "installed-page-state-goal-2026-10-14"
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/error/ErrorContent.tsx",
+            "components/auth/ServiceContact.tsx",
+            "components/auth/AuthBootstrapLayout.tsx",
+            "layouts/auth/AuthLayout.tsx",
+            "layouts/common/BlankLayout.tsx",
+            "pages/error/ErrorAccessDeniedPage.tsx",
+            "pages/error/ErrorNotFoundPage.tsx",
+            "pages/error/ErrorAuthUnavailablePage.tsx"
+          ],
+          "evidence": [
+            "Source audit covered error codes, illustration variants, message/action, blank gradient layout and host auth bootstrap.",
+            "Two focused tests passed for access-state isolation, denied fallback, retry and mailto. Local browser exercised 403/503, ready/loading, retry and 320px containment.",
+            "Fresh independent shadcn consumer installed three exact TSX sources and CSS/tokens; two complete examples typechecked, Vite/font/notices built, and denied/loading/ready/404/503 rendered with 320px containment."
+          ],
+          "intentionalImprovements": [
+            "The service address remains configurable and becomes an actionable mailto link.",
+            "A missing denied fallback shows an accessible alert instead of an empty page.",
+            "Long error text, code and contact address wrap within narrow containers."
+          ],
+          "hostOwned": [
+            "Authentication/bootstrap, route selection, retry navigation, recipient address and authorization decision remain with the consuming application."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed states, exact pixel parity and real auth/navigation effects could not be verified from the current connection."
+          ]
         }
       },
       "exports": [
@@ -4835,7 +4880,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { PrismAccessGate, PrismErrorContent } from \"@/components/ui/prism-page-state\";\n\nexport function AccessExample({ status, onRetry }: {\n  status: \"ready\" | \"loading\" | \"denied\";\n  onRetry: () => void;\n}) {\n  // status는 호스트의 인증 계층에서 제공합니다.\n  return <PrismAccessGate status={status}\n    fallback={<PrismErrorContent code=\"403\" message=\"접근 권한을 확인해 주세요.\"\n      buttonLabel=\"다시 확인\" onAction={onRetry} />}>\n    <p>호스트에서 접근을 승인한 화면입니다.</p>\n  </PrismAccessGate>;\n}"
+      "registryUsage": "import { PrismAccessGate, PrismBlankLayout, PrismErrorContent, PrismServiceContact } from \"@/components/ui/prism-page-state\";\n\nexport function AccessExample({ status, onRetry, contactEmail }: {\n  status: \"ready\" | \"loading\" | \"denied\";\n  onRetry: () => void;\n  contactEmail: string;\n}) {\n  // status와 재시도 동작은 호스트의 인증 계층에서 제공합니다.\n  return <PrismBlankLayout>\n    <div>\n      <PrismAccessGate status={status}\n        fallback={<PrismErrorContent code=\"403\" message=\"접근 권한을 확인해 주세요.\"\n          buttonLabel=\"다시 확인\" onAction={onRetry} />}>\n        <p>호스트에서 접근을 승인한 화면입니다.</p>\n      </PrismAccessGate>\n      <PrismServiceContact email={contactEmail} />\n    </div>\n  </PrismBlankLayout>;\n}\n\nexport function ErrorPageExample({ code, message, onAction }: {\n  code: \"404\" | \"503\";\n  message: string;\n  onAction: () => void;\n}) {\n  return <PrismBlankLayout gradient={false}>\n    <PrismErrorContent code={code} message={message}\n      buttonLabel=\"돌아가기\" onAction={onAction} />\n  </PrismBlankLayout>;\n}"
     },
     {
       "id": "prism-domain-forms",

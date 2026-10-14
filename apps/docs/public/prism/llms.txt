@@ -1289,7 +1289,7 @@ export function DirectoryExample() {
 ```
 
 ## Error / Access / Blank layout
-Error pages, access states and service contact layout
+Error pages, access states and actionable service contact layout
 Contract: Error code, icon, message and action are presentation props. Access status comes from the host authentication layer; this component does not request a session or change routes. Original brand illustrations can be supplied through the icon slot.
 States: default
 Registry: /prism/r/prism-page-state.json
@@ -1297,18 +1297,35 @@ Source: packages/prism/src/prism-page-state.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismAccessGate, PrismErrorContent } from "@/components/ui/prism-page-state";
+import { PrismAccessGate, PrismBlankLayout, PrismErrorContent, PrismServiceContact } from "@/components/ui/prism-page-state";
 
-export function AccessExample({ status, onRetry }: {
+export function AccessExample({ status, onRetry, contactEmail }: {
   status: "ready" | "loading" | "denied";
   onRetry: () => void;
+  contactEmail: string;
 }) {
-  // status는 호스트의 인증 계층에서 제공합니다.
-  return <PrismAccessGate status={status}
-    fallback={<PrismErrorContent code="403" message="접근 권한을 확인해 주세요."
-      buttonLabel="다시 확인" onAction={onRetry} />}>
-    <p>호스트에서 접근을 승인한 화면입니다.</p>
-  </PrismAccessGate>;
+  // status와 재시도 동작은 호스트의 인증 계층에서 제공합니다.
+  return <PrismBlankLayout>
+    <div>
+      <PrismAccessGate status={status}
+        fallback={<PrismErrorContent code="403" message="접근 권한을 확인해 주세요."
+          buttonLabel="다시 확인" onAction={onRetry} />}>
+        <p>호스트에서 접근을 승인한 화면입니다.</p>
+      </PrismAccessGate>
+      <PrismServiceContact email={contactEmail} />
+    </div>
+  </PrismBlankLayout>;
+}
+
+export function ErrorPageExample({ code, message, onAction }: {
+  code: "404" | "503";
+  message: string;
+  onAction: () => void;
+}) {
+  return <PrismBlankLayout gradient={false}>
+    <PrismErrorContent code={code} message={message}
+      buttonLabel="돌아가기" onAction={onAction} />
+  </PrismBlankLayout>;
 }
 ```
 

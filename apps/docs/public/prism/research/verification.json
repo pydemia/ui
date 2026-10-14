@@ -3337,8 +3337,8 @@
       }
     },
     "prism-page-state": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "source-layout-with-responsive-improvements",
+      "interaction": "passed-local-and-independent-consumer",
       "localRenderGate": {
         "status": "passed",
         "states": [
@@ -3350,6 +3350,51 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "checks": [
+        "Current frontend 2eeb26ff error pages use 403/404/503 and unknown-error illustrations, message/action callbacks, a centered BlankLayout, and a service contact supplied by its auth pages.",
+        "Portable 503 and unknown errors now use the source Unauthorized illustration; 403/404 retain their dedicated icons. The service email is an active mailto link instead of the source-disabled link.",
+        "AccessGate tests cover loading, denied without fallback, ready content isolation, host fallback action and contact link; local browser exercised 403/503, retry, ready/loading and 320px width.",
+        "A fresh external shadcn consumer installed three exact TSX sources plus CSS/tokens, typechecked both complete examples, built with Vite/Pretendard and rendered denied/loading/ready/404/503 with zero 320px document overflow."
+      ],
+      "remaining": [
+        "Authenticated deployed error pages and exact deployment/source revision remain unverified.",
+        "Auth bootstrap, retry navigation, host permissions, actual email destination and error-boundary routing remain consuming-app responsibilities."
+      ],
+      "evidence": [
+        "local-page-state-goal-2026-10-14",
+        "installed-page-state-goal-2026-10-14"
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "components/error/ErrorContent.tsx",
+          "components/auth/ServiceContact.tsx",
+          "components/auth/AuthBootstrapLayout.tsx",
+          "layouts/auth/AuthLayout.tsx",
+          "layouts/common/BlankLayout.tsx",
+          "pages/error/ErrorAccessDeniedPage.tsx",
+          "pages/error/ErrorNotFoundPage.tsx",
+          "pages/error/ErrorAuthUnavailablePage.tsx"
+        ],
+        "evidence": [
+          "Source audit covered error codes, illustration variants, message/action, blank gradient layout and host auth bootstrap.",
+          "Two focused tests passed for access-state isolation, denied fallback, retry and mailto. Local browser exercised 403/503, ready/loading, retry and 320px containment.",
+          "Fresh independent shadcn consumer installed three exact TSX sources and CSS/tokens; two complete examples typechecked, Vite/font/notices built, and denied/loading/ready/404/503 rendered with 320px containment."
+        ],
+        "intentionalImprovements": [
+          "The service address remains configurable and becomes an actionable mailto link.",
+          "A missing denied fallback shows an accessible alert instead of an empty page.",
+          "Long error text, code and contact address wrap within narrow containers."
+        ],
+        "hostOwned": [
+          "Authentication/bootstrap, route selection, retry navigation, recipient address and authorization decision remain with the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed states, exact pixel parity and real auth/navigation effects could not be verified from the current connection."
+        ]
       }
     },
     "prism-intro": {
@@ -7324,10 +7369,11 @@
       "prism-notice",
       "prism-position-blocks",
       "prism-position-management",
-      "prism-domain-forms"
+      "prism-domain-forms",
+      "prism-page-state"
     ],
-    "acceptedCount": 47,
-    "unassessedGroups": 11,
+    "acceptedCount": 48,
+    "unassessedGroups": 10,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   },
   "domainFormsVerification": {
@@ -7337,5 +7383,12 @@
     "focusedTests": "15/15 passed, including new notice scope and popup-period coverage.",
     "localBrowser": "Four form types, notice all-companies/popup activation, 320px notice and position forms with document width320.",
     "independentConsumer": "Fresh external shadcn install: 17 exact TSX sources, CSS/tokens exact, five exports typechecked, Vite/font/notices build; five rendered and each retained document width320."
+  },
+  "pageStateVerification": {
+    "date": "2026-10-14",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "focusedTests": "2/2 passed for access isolation, fallback/action and contact link.",
+    "localBrowser": "403 and 503, ready/loading, retry and 320px document width320.",
+    "independentConsumer": "Fresh shadcn install: three exact TSX sources, CSS/tokens exact, two examples typechecked, Vite/font/notices build; denied/loading/ready/404/503 rendered and 320px document width320."
   }
 }
