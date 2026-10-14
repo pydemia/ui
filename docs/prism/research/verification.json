@@ -1598,7 +1598,7 @@
     "prism-context": {
       "visual": "partial",
       "interaction": "partial",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "checks": [
         "Current source and deployed CSS:14px-high required/optional badges,10px500 font,radius10,red228/88/88 andgray134;source11-row textarea,50 trimmed-unit minimum and800 raw-unit maximum",
         "Required49 rejects;50 trimmed UTF16 units including internal spaces accepts;raw counter and submitted whitespace remain intact",
@@ -1609,7 +1609,9 @@
         "Native textarea drag233.375 to333px with horizontal overflow0;source-compatible default300ms motion andexplicit reduceMotion override",
         "Six interaction tests added;75 full PRISM tests passed",
         "Radix hidden form input no longer interrupts state glyph andfocus CSS selectors;checked/unchecked glyph visibility measured in the form",
-        "Fresh42-item/66-file registry installation and18 complete examples passed TypeScript/Vite/font bytes/notices;installedContextExample inStrictMode at320px submitted preserved text andcanonical option descriptors withvisible glyphs/nooverflow/errors"
+        "Fresh42-item/66-file registry installation and18 complete examples passed TypeScript/Vite/font bytes/notices;installedContextExample inStrictMode at320px submitted preserved text andcanonical option descriptors withvisible glyphs/nooverflow/errors",
+        "2026-10-14: Current source and SCSS remain unchanged from the measured reference. A fresh isolated shadcn consumer matched six PRISM module sources and CSS byte-for-byte; the revised usage example typechecked and built with Pretendard and notices.",
+        "The installed browser verified 49/50 trimmed-unit validation, raw 54/800 counter and response text, max-two selection with deselection, clicked submit label, one/two option columns at 320/800px, no root overflow, nested buttons, visible unlabeled inputs or console errors."
       ],
       "evidence": [
         "context.test.mjs",
@@ -1617,7 +1619,8 @@
         "context-live-cua.json",
         "context-static-140-cua.json",
         "context-full-consumer-retry.log",
-        "context-consumer-u0eKVn.json"
+        "context-consumer-u0eKVn.json",
+        "context-goal-installed-bytes.json"
       ],
       "remaining": [
         "Fresh authenticated deployed Context states andcomplete rendered/source geometry orpixel comparison",
@@ -1641,6 +1644,35 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/contextInfo/ContextInfoLayer.tsx",
+          "chat/contextInfo/ContextInfoLayer.module.scss",
+          "chat/contextInfo/ContextInfoSection.tsx",
+          "chat/contextInfo/ContextInfoSection.module.scss",
+          "chat/contextInfo/ContextOptionCard.tsx",
+          "chat/contextInfo/ContextOptionCard.module.scss"
+        ],
+        "evidence": [
+          "Current frontend source and SCSS are unchanged from the measured context reference; the earlier public deployed CSS sample supports the required/optional badge and textarea-counter rules but does not establish the current deployed revision.",
+          "Six focused context tests passed. The fresh installed browser confirmed the source 50-unit trimmed minimum, 54/800 raw counter, max-two selection and re-selection, original text/option descriptor response and the clicked action label.",
+          "A new isolated shadcn consumer matched six installed PRISM module sources and CSS bytes, typechecked the complete usage example and built with Pretendard and notices. At 320px options formed one column; at 800px they formed two. Both widths had no document overflow, nested buttons, visible unlabeled inputs or browser errors."
+        ],
+        "intentionalImprovements": [
+          "The standalone example shows four options, custom service actions and an initially open required field so the max-two rule and action-label contract are directly usable.",
+          "Container-based option columns, resizable textarea, explicit input names and optional reduced motion preserve the source's purpose across narrow layouts."
+        ],
+        "hostOwned": [
+          "The consumer supplies authorized service fields, action labels, initial values, submission/continuation and request state."
+        ],
+        "nonBlockingUnknowns": [
+          "Fresh authenticated deployed context states, deployed source revision and full rendered comparison have not been established.",
+          "The synthetic browser does not prove the host service schema, resumed query, IME/touch or every font and low-height combination."
+        ]
       }
     },
     "prism-candidate-list": {
@@ -7085,10 +7117,11 @@
       "prism-favorite-candidate",
       "prism-admin-users",
       "prism-admin-lists",
-      "prism-directory"
+      "prism-directory",
+      "prism-context"
     ],
-    "acceptedCount": 40,
-    "unassessedGroups": 18,
+    "acceptedCount": 41,
+    "unassessedGroups": 17,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

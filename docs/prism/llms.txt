@@ -754,16 +754,33 @@ Usage kind: component-example
 Installed usage:
 ```tsx
 import { useState } from "react";
-import { PrismContextForm, type PrismContextValues, type PrismContextResponse } from "@/components/ui/prism-context";
+import { PrismContextForm, type PrismContextAction, type PrismContextField, type PrismContextValues, type PrismContextResponse } from "@/components/ui/prism-context";
+
+const fields: PrismContextField[] = [
+  { key: "issue", label: "핵심 현안·요구 사항", type: "textarea",
+    required: true, minLength: 50, maxLength: 800, rows: 11 },
+  { key: "expertise:job-1", label: "전문 분야", type: "options", maxSelections: 2,
+    options: [
+      { value: "research", label: "연구개발", description: "가상 연구개발 분야" },
+      { value: "strategy", label: "전략" },
+      { value: "finance", label: "재무" },
+      { value: "operations", label: "운영" },
+    ] },
+];
+const actions: PrismContextAction[] = [
+  { value: "cancel", label: "닫기" },
+  { value: "submit", label: "등록" },
+  { value: "submit", label: "계속하기" },
+];
+
 export function ContextExample({ reduceMotion = false }: { reduceMotion?: boolean } = {}) {
-  const [values, setValues] = useState<PrismContextValues>({ mission: "", areas: [] });
-  const [submitted, setSubmitted] = useState<PrismContextResponse | null>(null);
-  return <section data-prism="light"><PrismContextForm fields={[
-    { key: "mission", label: "포지션 Mission", type: "textarea", required: true, minLength: 50, maxLength: 800, rows: 11 },
-    { key: "areas", label: "주요 분야", type: "options", maxSelections: 2,
-      options: [{ value: "research", label: "연구개발", description: "가상 연구개발 분야" }, { value: "strategy", label: "전략" }] },
-  ]} values={values} onValueChange={setValues} onAction={response => setSubmitted(response)} reduceMotion={reduceMotion} />
-    <p role="status">{submitted ? JSON.stringify(submitted) : ""}</p>
+  const [values, setValues] = useState<PrismContextValues>({ issue: "", "expertise:job-1": [] });
+  const [result, setResult] = useState<{ response: PrismContextResponse; label: string } | null>(null);
+  return <section data-prism="light">
+    <PrismContextForm fields={fields} values={values} onValueChange={setValues}
+      actions={actions} defaultOpenFields={["issue"]} reduceMotion={reduceMotion}
+      onAction={(response, label) => setResult({ response, label })} />
+    <p role="status">{result ? JSON.stringify(result) : ""}</p>
   </section>;
 }
 ```

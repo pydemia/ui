@@ -3327,7 +3327,7 @@
         "chat/contextInfo/ContextInfoSection.tsx",
         "chat/contextInfo/ContextOptionCard.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextValues, type PrismContextResponse } from \"@pydemia/prism\";\nexport function ContextExample({ reduceMotion = false }: { reduceMotion?: boolean } = {}) {\n  const [values, setValues] = useState<PrismContextValues>({ mission: \"\", areas: [] });\n  const [submitted, setSubmitted] = useState<PrismContextResponse | null>(null);\n  return <section data-prism=\"light\"><PrismContextForm fields={[\n    { key: \"mission\", label: \"포지션 Mission\", type: \"textarea\", required: true, minLength: 50, maxLength: 800, rows: 11 },\n    { key: \"areas\", label: \"주요 분야\", type: \"options\", maxSelections: 2,\n      options: [{ value: \"research\", label: \"연구개발\", description: \"가상 연구개발 분야\" }, { value: \"strategy\", label: \"전략\" }] },\n  ]} values={values} onValueChange={setValues} onAction={response => setSubmitted(response)} reduceMotion={reduceMotion} />\n    <p role=\"status\">{submitted ? JSON.stringify(submitted) : \"\"}</p>\n  </section>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextAction, type PrismContextField,\n  type PrismContextValues, type PrismContextResponse } from \"@pydemia/prism\";\n\nconst fields: PrismContextField[] = [\n  { key: \"issue\", label: \"핵심 현안·요구 사항\", type: \"textarea\",\n    required: true, minLength: 50, maxLength: 800, rows: 11 },\n  { key: \"expertise:job-1\", label: \"전문 분야\", type: \"options\", maxSelections: 2,\n    options: [\n      { value: \"research\", label: \"연구개발\", description: \"가상 연구개발 분야\" },\n      { value: \"strategy\", label: \"전략\" },\n      { value: \"finance\", label: \"재무\" },\n      { value: \"operations\", label: \"운영\" },\n    ] },\n];\nconst actions: PrismContextAction[] = [\n  { value: \"cancel\", label: \"닫기\" },\n  { value: \"submit\", label: \"등록\" },\n  { value: \"submit\", label: \"계속하기\" },\n];\n\nexport function ContextExample({ reduceMotion = false }: { reduceMotion?: boolean } = {}) {\n  const [values, setValues] = useState<PrismContextValues>({ issue: \"\", \"expertise:job-1\": [] });\n  const [result, setResult] = useState<{ response: PrismContextResponse; label: string } | null>(null);\n  return <section data-prism=\"light\">\n    <PrismContextForm fields={fields} values={values} onValueChange={setValues}\n      actions={actions} defaultOpenFields={[\"issue\"]} reduceMotion={reduceMotion}\n      onAction={(response, label) => setResult({ response, label })} />\n    <p role=\"status\">{result ? JSON.stringify(result) : \"\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-context.tsx",
       "previewUrl": "/prism?component=prism-context",
       "embedUrl": "/prism?component=prism-context&embed=1",
@@ -3335,7 +3335,7 @@
       "verification": {
         "visual": "partial",
         "interaction": "partial",
-        "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+        "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
         "checks": [
           "Current source and deployed CSS:14px-high required/optional badges,10px500 font,radius10,red228/88/88 andgray134;source11-row textarea,50 trimmed-unit minimum and800 raw-unit maximum",
           "Required49 rejects;50 trimmed UTF16 units including internal spaces accepts;raw counter and submitted whitespace remain intact",
@@ -3346,7 +3346,9 @@
           "Native textarea drag233.375 to333px with horizontal overflow0;source-compatible default300ms motion andexplicit reduceMotion override",
           "Six interaction tests added;75 full PRISM tests passed",
           "Radix hidden form input no longer interrupts state glyph andfocus CSS selectors;checked/unchecked glyph visibility measured in the form",
-          "Fresh42-item/66-file registry installation and18 complete examples passed TypeScript/Vite/font bytes/notices;installedContextExample inStrictMode at320px submitted preserved text andcanonical option descriptors withvisible glyphs/nooverflow/errors"
+          "Fresh42-item/66-file registry installation and18 complete examples passed TypeScript/Vite/font bytes/notices;installedContextExample inStrictMode at320px submitted preserved text andcanonical option descriptors withvisible glyphs/nooverflow/errors",
+          "2026-10-14: Current source and SCSS remain unchanged from the measured reference. A fresh isolated shadcn consumer matched six PRISM module sources and CSS byte-for-byte; the revised usage example typechecked and built with Pretendard and notices.",
+          "The installed browser verified 49/50 trimmed-unit validation, raw 54/800 counter and response text, max-two selection with deselection, clicked submit label, one/two option columns at 320/800px, no root overflow, nested buttons, visible unlabeled inputs or console errors."
         ],
         "evidence": [
           "context.test.mjs",
@@ -3354,7 +3356,8 @@
           "context-live-cua.json",
           "context-static-140-cua.json",
           "context-full-consumer-retry.log",
-          "context-consumer-u0eKVn.json"
+          "context-consumer-u0eKVn.json",
+          "context-goal-installed-bytes.json"
         ],
         "remaining": [
           "Fresh authenticated deployed Context states andcomplete rendered/source geometry orpixel comparison",
@@ -3378,6 +3381,35 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-13 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/contextInfo/ContextInfoLayer.tsx",
+            "chat/contextInfo/ContextInfoLayer.module.scss",
+            "chat/contextInfo/ContextInfoSection.tsx",
+            "chat/contextInfo/ContextInfoSection.module.scss",
+            "chat/contextInfo/ContextOptionCard.tsx",
+            "chat/contextInfo/ContextOptionCard.module.scss"
+          ],
+          "evidence": [
+            "Current frontend source and SCSS are unchanged from the measured context reference; the earlier public deployed CSS sample supports the required/optional badge and textarea-counter rules but does not establish the current deployed revision.",
+            "Six focused context tests passed. The fresh installed browser confirmed the source 50-unit trimmed minimum, 54/800 raw counter, max-two selection and re-selection, original text/option descriptor response and the clicked action label.",
+            "A new isolated shadcn consumer matched six installed PRISM module sources and CSS bytes, typechecked the complete usage example and built with Pretendard and notices. At 320px options formed one column; at 800px they formed two. Both widths had no document overflow, nested buttons, visible unlabeled inputs or browser errors."
+          ],
+          "intentionalImprovements": [
+            "The standalone example shows four options, custom service actions and an initially open required field so the max-two rule and action-label contract are directly usable.",
+            "Container-based option columns, resizable textarea, explicit input names and optional reduced motion preserve the source's purpose across narrow layouts."
+          ],
+          "hostOwned": [
+            "The consumer supplies authorized service fields, action labels, initial values, submission/continuation and request state."
+          ],
+          "nonBlockingUnknowns": [
+            "Fresh authenticated deployed context states, deployed source revision and full rendered comparison have not been established.",
+            "The synthetic browser does not prove the host service schema, resumed query, IME/touch or every font and low-height combination."
+          ]
         }
       },
       "exports": [
@@ -3435,7 +3467,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextValues, type PrismContextResponse } from \"@/components/ui/prism-context\";\nexport function ContextExample({ reduceMotion = false }: { reduceMotion?: boolean } = {}) {\n  const [values, setValues] = useState<PrismContextValues>({ mission: \"\", areas: [] });\n  const [submitted, setSubmitted] = useState<PrismContextResponse | null>(null);\n  return <section data-prism=\"light\"><PrismContextForm fields={[\n    { key: \"mission\", label: \"포지션 Mission\", type: \"textarea\", required: true, minLength: 50, maxLength: 800, rows: 11 },\n    { key: \"areas\", label: \"주요 분야\", type: \"options\", maxSelections: 2,\n      options: [{ value: \"research\", label: \"연구개발\", description: \"가상 연구개발 분야\" }, { value: \"strategy\", label: \"전략\" }] },\n  ]} values={values} onValueChange={setValues} onAction={response => setSubmitted(response)} reduceMotion={reduceMotion} />\n    <p role=\"status\">{submitted ? JSON.stringify(submitted) : \"\"}</p>\n  </section>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismContextForm, type PrismContextAction, type PrismContextField, type PrismContextValues, type PrismContextResponse } from \"@/components/ui/prism-context\";\n\nconst fields: PrismContextField[] = [\n  { key: \"issue\", label: \"핵심 현안·요구 사항\", type: \"textarea\",\n    required: true, minLength: 50, maxLength: 800, rows: 11 },\n  { key: \"expertise:job-1\", label: \"전문 분야\", type: \"options\", maxSelections: 2,\n    options: [\n      { value: \"research\", label: \"연구개발\", description: \"가상 연구개발 분야\" },\n      { value: \"strategy\", label: \"전략\" },\n      { value: \"finance\", label: \"재무\" },\n      { value: \"operations\", label: \"운영\" },\n    ] },\n];\nconst actions: PrismContextAction[] = [\n  { value: \"cancel\", label: \"닫기\" },\n  { value: \"submit\", label: \"등록\" },\n  { value: \"submit\", label: \"계속하기\" },\n];\n\nexport function ContextExample({ reduceMotion = false }: { reduceMotion?: boolean } = {}) {\n  const [values, setValues] = useState<PrismContextValues>({ issue: \"\", \"expertise:job-1\": [] });\n  const [result, setResult] = useState<{ response: PrismContextResponse; label: string } | null>(null);\n  return <section data-prism=\"light\">\n    <PrismContextForm fields={fields} values={values} onValueChange={setValues}\n      actions={actions} defaultOpenFields={[\"issue\"]} reduceMotion={reduceMotion}\n      onAction={(response, label) => setResult({ response, label })} />\n    <p role=\"status\">{result ? JSON.stringify(result) : \"\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-primitives",
