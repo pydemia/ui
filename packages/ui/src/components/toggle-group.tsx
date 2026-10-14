@@ -10,6 +10,7 @@ function ToggleGroup({
     return (
         <ToggleGroupPrimitive.Root
             orientation={orientation}
+            data-ui="toggle-group"
             className={cn(
                 "inline-flex max-w-full items-center gap-1 rounded-sm " +
                 "border border-border bg-surface-subtle p-1 " +
@@ -29,6 +30,7 @@ function ToggleGroupItem({
 }: ComponentProps<typeof ToggleGroupPrimitive.Item>) {
     return (
         <ToggleGroupPrimitive.Item
+            data-ui="toggle-item"
             className={cn(
                 "inline-flex min-h-[var(--control-height)] shrink-0 " +
                 "items-center justify-center rounded-sm px-[var(--space-3)] " +

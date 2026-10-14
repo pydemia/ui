@@ -63,6 +63,8 @@ function ColorInput({
 
     return (
         <div
+            data-ui="color-input"
+            data-variant={variant}
             className={cn(
                 "grid min-w-0 grid-cols-[32px_minmax(0,1fr)] " +
                 "gap-x-2 gap-y-1 bg-surface text-foreground",
@@ -77,6 +79,7 @@ function ColorInput({
                 {label}
             </label>
             <input
+                data-slot="color-swatch"
                 type="color"
                 aria-label={`${label} 색상 선택`}
                 value={selected}
@@ -88,6 +91,8 @@ function ColorInput({
                 }
             />
             <input
+                data-ui="color-control"
+                data-appearance="outline"
                 id={inputId}
                 name={name}
                 type="text"

@@ -25,6 +25,7 @@ function ButtonGroup({
             role="group"
             aria-label={label}
             data-orientation={orientation}
+            data-ui="button-group"
             className={cn(
                 "inline-flex w-fit max-w-full items-stretch " +
                 "[&>button]:relative [&>button:focus-visible]:z-10",

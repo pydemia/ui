@@ -64,6 +64,7 @@ function SearchInput({
     return (
         <form
             {...props}
+            data-ui="search-input"
             role="search"
             aria-label={label}
             className={cn("grid min-w-0 gap-2 text-foreground", className)}
@@ -79,7 +80,8 @@ function SearchInput({
             )}>
                 {label}
             </label>
-            <div className="flex min-w-0 items-center gap-2">
+            <div data-slot="search-controls"
+                className="flex min-w-0 items-center gap-2">
                 <Input
                     ref={inputRef}
                     id={inputId}

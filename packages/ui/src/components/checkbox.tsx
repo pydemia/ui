@@ -31,6 +31,8 @@ function Checkbox({
 
     return (
         <CheckboxPrimitive.Root
+            data-ui="checkbox-control"
+            data-variant={variant}
             {...props}
             className={cn(
                 "group relative inline-flex shrink-0 items-center rounded-sm " +

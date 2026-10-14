@@ -50,6 +50,8 @@ assert(existsSync(npmCli), "Run with npm's Node installation or npm exec.");
 const items = [
     "pyd-design-modes", "pyd-tokens", "pyd-portal-scope", "pyd-button",
     "pyd-input", "pyd-table", "pyd-badge", "pyd-dialog",
+    "pyd-input-group", "pyd-field", "pyd-tags-input", "pyd-code-editor-shell",
+    "pyd-prompt-input", "pyd-tabs",
 ];
 const commands = [];
 const report = {

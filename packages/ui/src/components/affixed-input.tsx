@@ -24,6 +24,7 @@ function AffixedInput({
     const leading = prefix ? (
         <span
             aria-hidden="true"
+            data-slot="field-addon"
             className="flex items-center border-r border-border bg-surface-subtle px-[var(--space-3)] text-sm text-muted"
         >
             {prefix}
@@ -32,6 +33,7 @@ function AffixedInput({
     const trailing = suffix ? (
         <span
             aria-hidden="true"
+            data-slot="field-addon"
             className="flex items-center border-l border-border bg-surface-subtle px-[var(--space-3)] text-sm text-muted"
         >
             {suffix}
@@ -39,14 +41,15 @@ function AffixedInput({
     ) : null;
 
     return (
-        <div className="grid gap-2">
+        <div className="grid gap-2" data-ui="field">
             <Label htmlFor={inputId}>{label}</Label>
-            <div className="flex h-[var(--control-height)] items-stretch overflow-hidden rounded-sm border border-border bg-surface focus-within:outline-2 focus-within:outline-focus focus-within:outline-offset-2">
+            <div data-ui="field-frame" className="flex h-[var(--control-height)] items-stretch overflow-hidden rounded-sm border border-border bg-surface focus-within:outline-2 focus-within:outline-focus focus-within:outline-offset-2">
                 {leading}
                 <Input
                     id={inputId}
                     className={cn("h-full flex-1 rounded-none border-0 bg-transparent focus-visible:outline-none", className)}
                     {...props}
+                    data-slot="field-control"
                 />
                 {trailing}
             </div>

@@ -268,14 +268,15 @@ function NodeCanvas({
     }
 
     return (
-        <section aria-label={label}
+        <section aria-label={label} data-ui="node-canvas"
             className={cn(
                 "grid min-w-0 overflow-hidden rounded-sm border " +
                 "border-border bg-surface text-foreground",
                 className,
             )}>
             <div className={"flex flex-wrap items-center justify-between " +
-                "gap-2 border-b border-border px-3 py-2"}>
+                "gap-2 border-b border-border px-3 py-2"}
+                data-slot="editor-header">
                 <div>
                     <h3 className="m-0 text-sm font-semibold">{label}</h3>
                     <p className="m-0 text-xs text-muted">
@@ -404,7 +405,8 @@ function NodeCanvas({
                 Shift+방향키로 1px 이동하거나 아래 좌표를 입력합니다.
             </p>
             {selected && (
-                <div className="grid gap-3 border-t border-border p-3">
+                <div className="grid gap-3 border-t border-border p-3"
+                    data-slot="editor-footer">
                     <strong className="text-sm">{selected.title}</strong>
                     {onNodesChange && (
                         <div className="flex flex-wrap items-end gap-2">
@@ -412,6 +414,8 @@ function NodeCanvas({
                                 X 좌표
                                 <input type="number" min={0}
                                     max={width - nodeWidth} step={1}
+                                    data-ui="input"
+                                    data-appearance="outline"
                                     value={draft.x}
                                     onChange={(event) => setDraft({
                                         ...draft, x: event.target.value,
@@ -424,6 +428,8 @@ function NodeCanvas({
                                 Y 좌표
                                 <input type="number" min={0}
                                     max={height - nodeHeight} step={1}
+                                    data-ui="input"
+                                    data-appearance="outline"
                                     value={draft.y}
                                     onChange={(event) => setDraft({
                                         ...draft, y: event.target.value,

@@ -77,7 +77,7 @@ function CodeEditorShell({
     ].filter(Boolean).join(" ") || undefined;
 
     return (
-        <div {...props} data-variant={variant} data-disabled={disabled || undefined}
+        <div {...props} data-ui="code-editor" data-variant={variant} data-disabled={disabled || undefined}
             className={cn(
                 "min-w-0 overflow-hidden text-foreground",
                 variant === "panel" &&
@@ -85,7 +85,7 @@ function CodeEditorShell({
                 variant === "flat" && "border-b border-border bg-transparent",
                 className,
             )}>
-            <div className={cn(
+            <div data-slot="editor-header" className={cn(
                 "flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2 " +
                 "px-[var(--space-3)] py-[var(--space-2)]",
                 variant === "panel" &&
@@ -102,14 +102,15 @@ function CodeEditorShell({
                     {actions}
                 </div>}
             </div>
-            <div className={cn(
+            <div data-slot="code-surface" className={cn(
                 "flex min-w-0 overflow-hidden focus-within:ring-2 " +
                 "focus-within:ring-inset focus-within:ring-accent",
                 error && "ring-1 ring-inset ring-danger " +
                     "focus-within:ring-danger",
-            )} style={{ height: `calc(${rows} * 1.5rem + 1rem)` }}>
+            )} style={{ height: `calc(${rows} * 1.5rem + var(--code-surface-inset, 1rem))` }}>
                 {showLineNumbers && (
                     <div ref={gutterRef} aria-hidden="true"
+                        data-slot="code-gutter"
                         className={
                             "w-12 shrink-0 select-none overflow-hidden " +
                             "border-r border-border bg-surface-subtle " +
@@ -124,6 +125,7 @@ function CodeEditorShell({
                     </div>
                 )}
                 <Textarea id={inputId} name={name} rows={rows}
+                    data-slot="code-control"
                     value={value} required={required} disabled={disabled}
                     readOnly={readOnly} placeholder={placeholder}
                     aria-describedby={describedBy} aria-invalid={!!error}
@@ -145,7 +147,8 @@ function CodeEditorShell({
                     } />
             </div>
             {(description || error) && (
-                <div className="grid gap-1 px-[var(--space-3)] py-2">
+                <div className="grid gap-1 px-[var(--space-3)] py-2"
+                    data-slot="editor-footer">
                     {description && <p id={descriptionId}
                         className="m-0 text-xs text-muted">
                         {description}

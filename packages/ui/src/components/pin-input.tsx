@@ -81,7 +81,7 @@ function PinInput({
     }
 
     return (
-        <div className={cn("grid min-w-0 gap-2", className)}>
+        <div data-ui="field" className={cn("grid min-w-0 gap-2", className)}>
             <label htmlFor={inputId} className="text-sm font-medium">
                 {label}{required && <span aria-hidden="true"> *</span>}
             </label>
@@ -90,6 +90,7 @@ function PinInput({
                     {Array.from({ length }, (_, index) => (
                         <span
                             key={index}
+                            data-slot="pin-cell"
                             data-slot-index={index}
                             onClick={() => focusSlot(index)}
                             className={cn(

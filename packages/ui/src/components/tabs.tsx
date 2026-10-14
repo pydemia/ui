@@ -27,6 +27,7 @@ function TabsList({ className, variant = "default", ...props }: TabsListProps) {
                 )}
                 {...props}
                 data-variant={variant}
+                data-ui="tabs-list"
             />
         </TabsVariantContext.Provider>
     );
@@ -50,6 +51,8 @@ function TabsTrigger({ className, ...props }: ComponentProps<typeof TabsPrimitiv
                 className,
             )}
             {...props}
+            data-ui="tab"
+            data-variant={variant}
         />
     );
 }

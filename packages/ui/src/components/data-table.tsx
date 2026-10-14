@@ -324,6 +324,7 @@ function DataTable<Row>({
                 </ActionBar>
             )}
             <div role="region" aria-label={`${caption} 가로 스크롤`}
+                data-ui="table-frame"
                 aria-busy={remote?.status === "loading" || undefined}
                 ref={tableRegion}
                 tabIndex={0}

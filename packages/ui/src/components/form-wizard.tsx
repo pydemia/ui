@@ -125,6 +125,7 @@ function FormWizard({
 
     return (
         <form {...props} aria-label={label} onSubmit={handleSubmit}
+            data-ui="form-wizard"
             className={cn(
                 "grid min-w-0 gap-4 text-foreground",
                 appearance === "panel" &&

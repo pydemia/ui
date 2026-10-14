@@ -91,7 +91,7 @@ function DateTimePicker({
     const localDateTime = complete ? `${value.date}T${value.time}` : "";
 
     return (
-        <div role="group" aria-labelledby={labelId}
+        <div data-ui="field" role="group" aria-labelledby={labelId}
             className={cn("@container grid min-w-0 gap-2", className)}>
             <p id={labelId} className="m-0 text-sm font-medium text-foreground">
                 {label}

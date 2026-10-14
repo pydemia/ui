@@ -35,7 +35,8 @@ function Field({
     const describedBy = [descriptionId, errorId].filter(Boolean).join(" ");
 
     return (
-        <div className={cn("grid gap-2", className)} {...props}>
+        <div className={cn("grid gap-2", className)} {...props}
+            data-ui="field">
             <Label htmlFor={inputId}>
                 {label}
                 {required && <span aria-hidden="true"> *</span>}

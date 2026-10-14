@@ -18,6 +18,7 @@ function InputGroup({ className, ...props }: ComponentProps<"div">) {
                 className,
             )}
             {...props}
+            data-ui="field-frame"
         />
     );
 }

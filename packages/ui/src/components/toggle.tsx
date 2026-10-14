@@ -8,6 +8,7 @@ function Toggle({
 }: ComponentProps<typeof TogglePrimitive.Root>) {
     return (
         <TogglePrimitive.Root
+            data-ui="toggle"
             className={cn(
                 "inline-flex min-h-[var(--control-height)] min-w-[var(--control-height)] " +
                 "items-center justify-center rounded-sm border border-border " +

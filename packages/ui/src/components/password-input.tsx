@@ -18,7 +18,8 @@ function PasswordInput({
     const [visible, setVisible] = useState(false);
 
     return (
-        <div className={cn("relative w-full", containerClassName)}>
+        <div data-ui="password-input"
+            className={cn("relative w-full", containerClassName)}>
             <Input
                 id={inputId}
                 type={visible ? "text" : "password"}

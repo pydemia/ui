@@ -151,6 +151,8 @@ function MultiSelect({
                             "aria-invalid:border-danger disabled:opacity-50",
                             className,
                         )}
+                        data-ui="select-trigger"
+                        data-appearance="outline"
                     >
                         <span className={selected.length ? undefined :
                             "text-muted"}>

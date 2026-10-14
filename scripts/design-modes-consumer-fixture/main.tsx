@@ -3,6 +3,12 @@ import { createRoot } from "react-dom/client";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Badge } from "./components/ui/badge";
+import { Field } from "./components/ui/field";
+import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupText } from "./components/ui/input-group";
+import { TagsInput } from "./components/ui/tags-input";
+import { CodeEditorShell } from "./components/ui/code-editor-shell";
+import { PromptInput } from "./components/ui/prompt-input";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/ui/tabs";
 import { Table, TableCell, TableHead } from "./components/ui/table";
 import {
     Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle,
@@ -60,6 +66,25 @@ function App() {
                 <Badge>Installed source</Badge>
                 <Input aria-label="Preserved draft" value={draft}
                     onChange={(event) => setDraft(event.target.value)} />
+                <Field label="Installed compound draft" description="One field frame around an editable value.">
+                    {(control) => <InputGroup>
+                        <InputGroupAddon><InputGroupText>REQ</InputGroupText></InputGroupAddon>
+                        <InputGroupInput {...control} value={draft}
+                            onChange={(event) => setDraft(event.target.value)} />
+                    </InputGroup>}
+                </Field>
+                <TagsInput label="Installed tags" defaultValue={["review"]} />
+                <CodeEditorShell label="Installed code draft" value={draft}
+                    onValueChange={setDraft} rows={4} />
+                <PromptInput label="Installed prompt" onSend={setDraft} />
+                <Tabs defaultValue="overview">
+                    <TabsList variant="contained" aria-label="Installed tabs">
+                        <TabsTrigger value="overview">Overview</TabsTrigger>
+                        <TabsTrigger value="details">Details</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="overview">Overview content</TabsContent>
+                    <TabsContent value="details">Details content</TabsContent>
+                </Tabs>
                 <Table>
                     <thead><tr><TableHead>Mode</TableHead>
                         <TableHead>Appearance</TableHead></tr></thead>
@@ -83,6 +108,11 @@ function App() {
                         </label>
                         <Input aria-label="Dialog draft" value={draft}
                             onChange={(event) => setDraft(event.target.value)} />
+                        <InputGroup>
+                            <InputGroupInput aria-label="Dialog compound draft" value={draft}
+                                onChange={(event) => setDraft(event.target.value)} />
+                            <InputGroupAddon><InputGroupText>REQ</InputGroupText></InputGroupAddon>
+                        </InputGroup>
                         <DialogClose asChild><Button className="mt-4">Close</Button></DialogClose>
                     </DialogContent>
                 </Dialog>

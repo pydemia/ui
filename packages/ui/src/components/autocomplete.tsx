@@ -195,7 +195,7 @@ function Autocomplete({
                 }}
             />
             {popupOpen && (
-                <div className={
+                <div data-ui="overlay-panel" className={
                     "absolute inset-x-0 top-full z-30 mt-1 max-h-56 " +
                     "overflow-y-auto rounded-sm border border-border " +
                     "bg-surface p-1 text-foreground " +

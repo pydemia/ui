@@ -51,6 +51,7 @@ function FilterBar({
     return (
         <form aria-labelledby={labelId}
             data-variant={variant}
+            data-ui="filter-bar"
             onSubmit={(event) => {
                 event.preventDefault();
                 onApply(new FormData(event.currentTarget));

@@ -73,6 +73,7 @@ function ApprovalCard({
 
     return (
         <section {...props} aria-labelledby={titleId}
+            data-ui="approval-card"
             aria-describedby={descriptionId}
             aria-busy={pending}
             data-status={status}

@@ -272,7 +272,7 @@ function QueryBuilder({
         const describedBy = attempted && error ? errorId : undefined;
         const invalid = attempted && Boolean(error);
         return (
-            <div key={condition.id} className={
+            <div key={condition.id} data-slot="query-condition" className={
                 "grid min-w-0 gap-2 rounded-sm border " +
                 "border-border bg-surface p-[var(--space-2)]"
             }>
@@ -393,6 +393,7 @@ function QueryBuilder({
         const groupError = errors.get(group.id);
         return (
             <fieldset key={group.id} disabled={disabled}
+                data-slot="query-group"
                 className={cn(
                     "min-w-0 space-y-[var(--space-3)] rounded-sm",
                     variant === "panel"
@@ -480,6 +481,7 @@ function QueryBuilder({
 
     return (
         <form {...props} aria-label={label} data-variant={variant}
+            data-ui="query-builder"
             className={cn("grid min-w-0 gap-[var(--space-3)] text-foreground",
                 className)}
             onSubmit={(event) => {

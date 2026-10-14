@@ -103,6 +103,14 @@ npx shadcn@4.21.0 add https://ui.pydemia.ai/r/pyd-design-modes.json https://ui.p
 소비자 CSS는 token을 먼저 연결합니다. 재질·디자인 표현을 사용하려면
 optional `design-modes.css`도 연결합니다.
 
+합성 입력, 편집기, 작성기, 탭과 선택 그룹도 선택한 디자인의 재질·형태·여백을
+따릅니다. 개별 component에 디자인 prop을 반복해서 전달할 필요가 없습니다.
+합성 입력은 외곽 프레임이 경계·그림자·포커스를 담당하며 내부 입력은 하나의
+편집면으로 연결됩니다. 이 표현과 내부 Basic 격리는 CSS `@scope` 지원
+브라우저에서 적용됩니다. 560px 이하에서는 입력·편집기의 내부 여백을 줄입니다.
+문서의 `rem` 기준은 기존 Basic의 14px로 유지하며 `--type-root-size`로
+앱 전체의 기준을 조정할 수 있습니다. 모드별 본문 크기·폰트는 별도로 유지됩니다.
+
 ```css
 @import "tailwindcss";
 @import "./components/ui/tokens.css";
