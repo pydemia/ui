@@ -1541,11 +1541,38 @@ Contract: 출력 미리보기는 190mm 폭과 최소 280mm 높이를 사용합�
 States: default, empty, long
 Registry: /prism/r/prism-print.json
 Source: packages/prism/src/prism-print.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismPrintPage } from "@/components/ui/prism-print";
-<PrismPrintPage name="김가상" repeatHeader>{content}</PrismPrintPage>;
+import { useRef, useState } from "react";
+import { PrismPrintButton, PrismPrintPage, PrismPrintLeaderSummary, PrismPrintCareer, PrismPrintRisk, PrismPrintExperience } from "@/components/ui/prism-print";
+
+export function PrintExample() {
+  const root = useRef<HTMLDivElement>(null);
+  const [message, setMessage] = useState("");
+  return <section data-prism="light">
+    <PrismPrintButton getRoot={() => root.current} title="가상 프로필 인쇄"
+      onRequested={() => setMessage("인쇄를 요청했습니다.")}
+      onAfterPrint={() => setMessage("인쇄 요청 처리가 끝났습니다.")}
+      onError={() => setMessage("인쇄 문서 준비 실패")} />
+    <p role="status">{message}</p>
+    <div style={{ overflowX: "auto" }}><div ref={root}>
+      <PrismPrintPage name="김가상" company={{ brand: "가상", affiliate: "전자" }}
+        jobTitle="기술전략담당" repeatHeader>
+        <PrismPrintLeaderSummary name="전략 리더" summary="가상 요약입니다."
+          definition="합성 유형 설명입니다." />
+        <PrismPrintCareer items={[{ id: "career", period: "2024 ~ 현재",
+          company: "가상전자", role: "기술전략담당" }]} />
+        <PrismPrintRisk items={[{ id: "risk", label: "자기 중심",
+          latent: false, manifest: null }]} />
+        <PrismPrintExperience topics={["사업 성장"]} activeTopic="사업 성장"
+          items={[{ id: "essay", topic: "사업 성장", representative: true,
+            title: "가상 경험", description: "가상 근거입니다.",
+            keywords: ["기술"], interview: "합성 인터뷰 요약" }]} />
+      </PrismPrintPage>
+    </div></div>
+  </section>;
+}
 ```
 
 ## Chat intro / Prompt cards
@@ -1772,7 +1799,7 @@ export function FormattedTextExample(){
 
 ## Complete profile print document / Seven sections
 독립7분류 프로필 인쇄 문서·종합 경력 continuation·전체 topic/실패·정적 탭
-Contract: 표시 모델은 host-owned입니다. 종합·전문성·성공경험·Design·Learning·Attitude·Leadership의7분류를 모두 렌더하며 options.summary/compensation은 종합의해당영역만제어합니다. API/auth/자동인쇄를실행하지않습니다. careerPages로정확한호스트페이지를받거나source글꼴/예약높이의추정helper를사용합니다. 긴내용은숨기지않으며 실제font/browser pagination은별도검증입니다. 점수/최댓값null과0을구분합니다. textPolicy기본full은원문을보존하며reference-limits는복사한표시모델에원본한도를적용하고축약안내를표시합니다.190mm paper를viewport에서zoom/양축resize하며인쇄시named A4 page/배율1로돌립니다. Model의companyLogo는호스트가제공하는정적자산slot입니다. renderPrismProfilePdf로동일모델/옵션을미리보기배율과독립적인A4 raster PDF로만들수있으며createPrismHtmlDocument는전체7분류를독립HTML로내보냅니다. 기본full의긴본문을유지하고표시제한안내도첫인쇄페이지에포함합니다. 원본전체font/pixel/native print는미검증입니다. preparePrismPrintSession은 연결된 문서와 글꼴·사진·차트를 정적 iframe에 격리하고 준비 완료 후 print()를 제공합니다. 앱 제목과 원본 DOM은 보존하며 afterprint/AbortSignal/dispose로 작업 소유 iframe만 제거합니다. 준비 timeout·자산 오류는 인쇄하지 않고 실패합니다. PrismPrintButton은 이 경로를 연결하며 onRequested는 메서드 호출 반환, onAfterPrint는 브라우저 이벤트입니다. 실제 출력·OS 저장 완료를 뜻하지 않으며 준비 취소로 이미 요청한 printer job을 취소하지 않습니다. Leadership의 title/description/detail은 별도 표시 필드입니다. reference-limits에서도 상세 설명은 제한하지 않습니다.
+Contract: 표시 모델은 host-owned입니다. 종합·전문성·성공경험·Design·Learning·Attitude·Leadership의7분류를 모두 렌더하며 options.summary/compensation은 종합의해당영역만제어합니다. API/auth/자동인쇄를실행하지않습니다. careerPages로정확한호스트페이지를받거나source글꼴/예약높이의추정helper를사용합니다. 긴내용은숨기지않으며 실제font/browser pagination은별도검증입니다. 점수/최댓값null과0을구분합니다. textPolicy기본full은원문을보존하며reference-limits는복사한표시모델에원본한도를적용하고축약안내를표시합니다.190mm paper를viewport에서zoom/양축resize하며인쇄시named A4 page/배율1로돌립니다. Model의companyLogo는호스트가제공하는정적자산slot입니다. renderPrismProfilePdf로동일모델/옵션을미리보기배율과독립적인A4 raster PDF로만들수있으며createPrismHtmlDocument는전체7분류를독립HTML로내보냅니다. 기본full의긴본문을유지하고표시제한안내도첫인쇄페이지에포함합니다. 긴 heading 블록을 통째로 다음 장으로 넘기면 첫 장이 거의 비는 경우 글줄 경계에서 분할하고 forcedBreaks로 알립니다. 원본전체font/pixel/native print는미검증입니다. preparePrismPrintSession은 연결된 문서와 글꼴·사진·차트를 정적 iframe에 격리하고 준비 완료 후 print()를 제공합니다. 앱 제목과 원본 DOM은 보존하며 afterprint/AbortSignal/dispose로 작업 소유 iframe만 제거합니다. 준비 timeout·자산 오류는 인쇄하지 않고 실패합니다. PrismPrintButton은 이 경로를 연결하며 onRequested는 메서드 호출 반환, onAfterPrint는 브라우저 이벤트입니다. 실제 출력·OS 저장 완료를 뜻하지 않으며 준비 취소로 이미 요청한 printer job을 취소하지 않습니다. Leadership의 title/description/detail은 별도 표시 필드입니다. reference-limits에서도 상세 설명은 제한하지 않습니다.
 States: default, empty, long, detail-only
 Registry: /prism/r/prism-profile-print.json
 Source: packages/prism/src/prism-profile-print.tsx

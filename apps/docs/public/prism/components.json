@@ -2428,7 +2428,7 @@
       "category": "Documents",
       "purpose": "프로필 PDF 생성·여러 파일 ZIP·진행률·취소와 메뉴 이동 중 작업 유지",
       "contract": "PrismPdfDownloadHost를 route보다 위에 배치합니다. jobs의 ID는 고유하고 문서·renderer는 작업별 snapshot입니다. 소비자가 API/auth/프로필 표시·페이지 분할·PDF renderer를 소유하며 빈 문서는 오류입니다. 한 명은 PDF, 여러 명은 중복 이름을 (2)로 구분한 ZIP 하나로 출력합니다. onProgress는 생성 완료 수, onComplete는 다운로드 시작 또는 sink close이며 OS 저장 완료를 뜻하지 않습니다. 실패한 작업의 불완전 ZIP은 다운로드하지 않습니다. 작업 제거는 AbortSignal로 취소하고 메뉴 이동에는 유지하며 진행 중 beforeunload 경고를 등록합니다. 완료·실패 작업은 owner가 제거해야 합니다. openDownload로 소비자 소유 streaming writer와 비동기 backpressure를 연결하며 null이면 Blob fallback을 씁니다. createPrismImagePdf는 이미 분할한 JPEG 페이지를 PDF로 변환합니다. 이미지 PDF는 텍스트 검색을 제공하지 않습니다. createPrismPrintPdf는 unscaled data-print-page DOM을190×280mm 콘텐츠/A4여백7·10·10mm로분할하며머리말을반복합니다. html2canvas-pro를기본renderer로지연로드하고capture override·AbortSignal·페이지진행률을받습니다. 원본DOM은바꾸지않고글줄/작은카드의경계를피하며필수분할은forcedBreaks로알립니다. 사진 디코딩·캡처 resource 로드 실패는 오류를 반환하고 document.fonts.ready 이후 캡처합니다. 소비자 폰트 CSS 등록과 실제 글꼴 적용 확인은 별도로 필요합니다. renderPrismProfilePdf는typed7분류model을일시적으로렌더하고항상정리하며서비스워커를등록하지않습니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "loading",
@@ -2437,7 +2437,9 @@
       ],
       "source": [
         "chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
-        "chat/successorCandidate/print/PdfDownloadHost.tsx"
+        "chat/successorCandidate/print/PdfDownloadHost.tsx",
+        "chat/successorCandidate/print/buildCandidateProfilePdf.ts",
+        "utils/streamDownload.ts"
       ],
       "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismPdfDownloadHost, createPrismImagePdf, type PrismPdfExportJob } from \"@pydemia/prism\";\nexport function PdfDownloadExample() {\n  const [jobs, setJobs] = useState<PrismPdfExportJob<string>[]>([]);\n  return <section data-prism=\"light\"><PrismButton disabled={jobs.length > 0} onClick={() => setJobs([{id:\"example\",documents:[{filename:\"가상 프로필\",data:\"가상 프로필\"}]}])}>예시 PDF 다운로드</PrismButton>\n    <PrismPdfDownloadHost jobs={jobs} renderPdf={async (text, {signal}) => {\n      await document.fonts.ready; signal.throwIfAborted();\n      const canvas = document.createElement(\"canvas\"); canvas.width = 800; canvas.height = 1100;\n      const ctx = canvas.getContext(\"2d\"); if (!ctx) throw new Error(\"Canvas unavailable\");\n      ctx.fillStyle = \"white\"; ctx.fillRect(0,0,800,1100);\n      ctx.fillStyle = \"#363636\"; ctx.font = '24px \"Pretendard Variable\", sans-serif'; ctx.fillText(text,50,80);\n      return createPrismImagePdf([{jpeg:canvas.toDataURL(\"image/jpeg\"),width:210,height:297}],{signal,title:text});\n    }} onComplete={() => setJobs([])} onError={() => setJobs([])} />\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-export.tsx",
@@ -2445,8 +2447,8 @@
       "embedUrl": "/prism?component=prism-export&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-export&view=responsive",
       "verification": {
-        "visual": "source-confirmed-options-layout; profile-print parity pending",
-        "interaction": "passed-selected-synthetic-runtime",
+        "visual": "source-purpose-output-and-intentional-export-improvement-passed",
+        "interaction": "passed-local-and-independent-consumer",
         "checks": [
           "8 real PDF/ZIP downloads at1280/320; one/two/three profiles and long3-page PDF",
           "ZIP integrity and duplicate (2)/(3) names; all extracted files PDF",
@@ -2454,19 +2456,26 @@
           "fresh installed consumer actual menu change preserves one job under StrictMode",
           "fresh installed consumer two concurrent PDF/ZIP jobs and cancellation",
           "async writer backpressure, failure abort and pending renderer cancellation tests",
-          "PDF pages rasterized and inspected; synthetic header overlap fixed before final replay"
+          "PDF pages rasterized and inspected; synthetic header overlap fixed before final replay",
+          "Current frontend 2eeb26ff CandidateProfilesPdfDownload/PdfDownloadHost, buildCandidateProfilePdf and streamDownload were compared with the portable job host and PDF/ZIP pipeline. Both retain route-independent jobs, use PDF for one profile and ZIP for multiple, report progress and cancel on job removal.",
+          "Current local browser produced a one-page A4 PDF (78,531 bytes, %PDF-1.3) and a two-profile ZIP (157,456 bytes) with CRC-valid distinct names and two PDF signatures; source-shaped option dialog, progress 1/1 or 2/2 and download-start status were observed.",
+          "Current error state reported PDF generation failure and returned to idle; a delayed pending job showed 0/1 and immediate cancel restored idle with cancel status. Tests separately cover no partial download or late result.",
+          "Fresh isolated shadcn consumer matched emitted export and CSS sources, typechecked 52 complete examples with Vite/Pretendard/notices, and its installed complete example downloaded an 11,279-byte one-page A4 PDF.",
+          "Previous integrated profile-print runtime generated 21-page long A4 PDF, two-candidate 9-page-each ZIP and installed seven-section PDF/ZIP. This current audit did not rerun real host data or OS save."
         ],
         "remaining": [
-          "Original authenticated export comparison",
-          "Consumer DOM renderer and pagination integration",
-          "Actual source service-worker/OS cancellation integration",
-          "All real-profile print sections and HTML export"
+          "Authenticated original export session, service worker behavior, OS save completion and real candidate data/photo permissions remain unverified.",
+          "Complete seven-section content/layout and native print are audited separately in prism-profile-print and prism-print; synthetic download jobs do not prove real host integration.",
+          "Full source font/pixel parity for every output and browser is not claimed."
         ],
         "evidence": [
           "final-local-export-20261009",
           "consumer-export-runtime",
           "local-export-125",
-          "final-static-export"
+          "final-static-export",
+          "local-pdf-zip-goal-2026-10-14",
+          "installed-pdf-goal-2026-10-14",
+          ".worknotes/prism-export-goal-audit-2026-10-14.md"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -2482,6 +2491,33 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
+            "components/chat/successorCandidate/print/PdfDownloadHost.tsx",
+            "components/chat/successorCandidate/print/buildCandidateProfilePdf.ts",
+            "utils/streamDownload.ts"
+          ],
+          "evidence": [
+            "One profile PDF/multiple profile ZIP, duplicate naming, progress, cancellation, invalid PDF/failure and streaming backpressure are covered by focused tests and current local browser.",
+            "Fresh independent registry install typechecked 52 complete examples and produced a valid A4 PDF from its installed export example.",
+            "Earlier current implementation integrated full-profile PDF/ZIP runtime checks cover long and multiple seven-section documents; this group owns job/output mechanics, while profile content and native print remain distinct groups."
+          ],
+          "intentionalImprovements": [
+            "A failed renderer or incomplete PDF aborts the sink and never presents a successful partial ZIP.",
+            "Unique immutable job IDs and AbortSignal prevent a route change or callback rerender from restarting or misrouting an export.",
+            "The portable streaming writer awaits asynchronous backpressure and reports download start or sink close accurately instead of claiming OS save completion."
+          ],
+          "hostOwned": [
+            "The consuming application supplies candidate DTOs, authorization, profile rendering/pagination, stream opener and completed-job removal; the kit owns PDF/ZIP packaging and job lifecycle."
+          ],
+          "nonBlockingUnknowns": [
+            "The authenticated deployed source revision and real candidate/service/OS integration remain unverified."
+          ]
         }
       },
       "exports": [
@@ -4164,7 +4200,37 @@
           "Fresh authenticated deployed page comparison and exact rendered geometry",
           "Real service values and host-specific assessment mapping",
           "Print/browser combinations outside the tested synthetic default and empty states"
-        ]
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/successorCandidate/attitude/AttitudeDerailmentRisk.tsx",
+            "chat/successorCandidate/attitude/AttitudeDiagnosis.tsx",
+            "chat/successorCandidate/CandidateScoreEssay.tsx",
+            "chat/successorCandidate/expertise/SuccessorCandidateExpertiseField.tsx",
+            "chat/successorCandidate/competence/DesignCompetenceMatrix.tsx",
+            "chat/successorCandidate/learningAgility/LearningAgilityExperience.tsx",
+            "chat/successorCandidate/leadership/LeadershipReason.tsx",
+            "chat/templates/ChatProfileAnalysis.tsx"
+          ],
+          "evidence": [
+            "Current source and SCSS audit mapped eight assessment files, including Risk, diagnosis, score essay, expertise, experience, leadership reasons, matrix and profile analysis.",
+            "Local default/empty at 1280/320px and an isolated shadcn consumer checked the complete example, exact installed module/CSS bytes, Vite/font/notices, topic switching, zero/missing values and no root overflow.",
+            "Three focused assessment tests and the full PRISM suite passed in the original group audit; current full suite is checked separately."
+          ],
+          "intentionalImprovements": [
+            "Missing experience and leadership responses remain legible; source heading distinctions and externally supplied score/role semantics remain intact.",
+            "Narrow layouts retain their content without root horizontal overflow."
+          ],
+          "hostOwned": [
+            "The consuming application supplies assessment results, score calculations, evidence, permissions and service mapping."
+          ],
+          "nonBlockingUnknowns": [
+            "Current authenticated deployed geometry and deployed source revision are unverified; synthetic fixtures do not prove real service values or print combinations."
+          ]
+        }
       },
       "exports": [
         {
@@ -4308,7 +4374,39 @@
           "Fresh authenticated deployed route and exact rendered/source geometry comparison",
           "Real host filtering, paging, PDF actions and personal memo API integration",
           "Additional long-content, touch and assistive-technology combinations outside synthetic fixtures"
-        ]
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/candidate/CandidateFilterBar.tsx",
+            "chat/candidate/CandidateListContent.tsx",
+            "chat/candidate/CandidateTable.tsx",
+            "chat/favorite/FavoriteCandidateList.tsx",
+            "chat/successorBoard/SuccessorBoardTable.tsx",
+            "chat/memo/MemoContent.tsx",
+            "chat/memo/MemoInput.tsx",
+            "chat/common/ChatHeader.tsx",
+            "chat/common/ContentFrame.tsx",
+            "chat/common/SectionTitle.tsx"
+          ],
+          "evidence": [
+            "Current source audit mapped ten collection files covering filters, cards/table, favorites, ranked Board, memo, header and content frame.",
+            "Local default/empty/loading/error fixtures and an isolated shadcn consumer checked exact installed module/CSS bytes, the complete example, browser filters, table/Board switching and memo submission.",
+            "At 320px and in a 240px parent, cards and filters formed one column without root overflow; the Board retained internal scrolling. Two focused collection tests and the full PRISM suite passed in the original group audit."
+          ],
+          "intentionalImprovements": [
+            "Refresh retains existing rows with a busy state, while initial loading uses skeletons; collection total stays distinct from page rows.",
+            "Narrow filters/cards and ranked Board remain usable without clipping the document."
+          ],
+          "hostOwned": [
+            "The consuming application supplies candidate data, filtering, paging, PDF actions, persistence and authorization."
+          ],
+          "nonBlockingUnknowns": [
+            "Current authenticated deployed geometry and deployed source revision are unverified; synthetic fixtures do not prove live service effects or every touch/assistive-technology combination."
+          ]
+        }
       },
       "exports": [
         {
@@ -5348,7 +5446,7 @@
       "category": "Documents",
       "purpose": "인쇄 전용 Profile 머리말·경력·Risk·경험과 반복 표 머리말",
       "contract": "출력 미리보기는 190mm 폭과 최소 280mm 높이를 사용합니다. 인쇄 시 최소 높이를 해제해 짧은 내용의 빈 다음 페이지를 방지합니다. repeatHeader는 table thead를 사용해 출력 머리말을 반복합니다. 읽기 전용 경험 영역·대표 항목·누락 Risk 값을 표시하며 페이지 분할과 인쇄 실행은 호스트가 소유합니다. preparePrismPrintSession은 연결된 문서와 글꼴·사진·차트를 정적 iframe에 격리하고 준비 완료 후 print()를 제공합니다. 앱 제목과 원본 DOM은 보존하며 afterprint/AbortSignal/dispose로 작업 소유 iframe만 제거합니다. 준비 timeout·자산 오류는 인쇄하지 않고 실패합니다. PrismPrintButton은 이 경로를 연결하며 onRequested는 메서드 호출 반환, onAfterPrint는 브라우저 이벤트입니다. 실제 출력·OS 저장 완료를 뜻하지 않으며 준비 취소로 이미 요청한 printer job을 취소하지 않습니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "empty",
@@ -5359,23 +5457,30 @@
         "chat/successorCandidate/print/PrintLeaderSummary.tsx",
         "chat/successorCandidate/print/PrintCareerTimeline.tsx",
         "chat/successorCandidate/print/PrintAttitudeDerailmentRisk.tsx",
-        "chat/successorCandidate/print/PrintSuccessExperienceEssay.tsx"
+        "chat/successorCandidate/print/PrintSuccessExperienceEssay.tsx",
+        "chat/successorCandidate/print/CandidateProfilePrintPreview.tsx"
       ],
-      "usage": "import { PrismPrintPage } from \"@pydemia/prism\";\n<PrismPrintPage name=\"김가상\" repeatHeader>{content}</PrismPrintPage>;",
+      "usage": "import { useRef, useState } from \"react\";\nimport { PrismPrintButton, PrismPrintPage, PrismPrintLeaderSummary, PrismPrintCareer, PrismPrintRisk, PrismPrintExperience } from \"@pydemia/prism\";\n\nexport function PrintExample() {\n  const root = useRef<HTMLDivElement>(null);\n  const [message, setMessage] = useState(\"\");\n  return <section data-prism=\"light\">\n    <PrismPrintButton getRoot={() => root.current} title=\"가상 프로필 인쇄\"\n      onRequested={() => setMessage(\"인쇄를 요청했습니다.\")}\n      onAfterPrint={() => setMessage(\"인쇄 요청 처리가 끝났습니다.\")}\n      onError={() => setMessage(\"인쇄 문서 준비 실패\")} />\n    <p role=\"status\">{message}</p>\n    <div style={{ overflowX: \"auto\" }}><div ref={root}>\n      <PrismPrintPage name=\"김가상\" company={{ brand: \"가상\", affiliate: \"전자\" }}\n        jobTitle=\"기술전략담당\" repeatHeader>\n        <PrismPrintLeaderSummary name=\"전략 리더\" summary=\"가상 요약입니다.\"\n          definition=\"합성 유형 설명입니다.\" />\n        <PrismPrintCareer items={[{ id: \"career\", period: \"2024 ~ 현재\",\n          company: \"가상전자\", role: \"기술전략담당\" }]} />\n        <PrismPrintRisk items={[{ id: \"risk\", label: \"자기 중심\",\n          latent: false, manifest: null }]} />\n        <PrismPrintExperience topics={[\"사업 성장\"]} activeTopic=\"사업 성장\"\n          items={[{ id: \"essay\", topic: \"사업 성장\", representative: true,\n            title: \"가상 경험\", description: \"가상 근거입니다.\",\n            keywords: [\"기술\"], interview: \"합성 인터뷰 요약\" }]} />\n      </PrismPrintPage>\n    </div></div>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-print.tsx",
       "previewUrl": "/prism?component=prism-print",
       "embedUrl": "/prism?component=prism-print&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-print&view=responsive",
       "verification": {
-        "visual": "partial-source-style-alignment",
-        "interaction": "Five native-session tests plus existing print-content tests; actual PrismPrintButton invocation/Escape/afterprint cleanup and installed preparation checked.",
-        "source": "70pt/140pt leader layout,11pt/130pt timeline and all-topic success composition",
+        "visual": "source-purpose-print-page-and-intentional-improvements-passed",
+        "interaction": "passed-local-and-independent-consumer-with-prior-native-request",
+        "source": "Current frontend 2eeb26ff PrintPage/LeaderSummary/Career/Risk/SuccessExperience and CandidateProfilePrintPreview; portable repeated header and isolated native session.",
         "remaining": [
-          "Original whole print style/pixel/font and actual pagination"
+          "Physical printer output/OS save and full browser-specific print-dialog settings remain unverified.",
+          "Exact source font/pixel and all long-document pagination/photo combinations belong to complete prism-profile-print acceptance; the portable page keeps all long content visible.",
+          "Authenticated deployed product print screen and its source revision are unverified."
         ],
         "checks": [
           "Isolated static document waits embedded fonts/images and paint; preparation timeout, abort/dispose and afterprint release only its owned iframe.",
-          "Parent title/DOM retained; browser invocation and event are not physical-output confirmation."
+          "Parent title/DOM retained; browser invocation and event are not physical-output confirmation.",
+          "Current local browser default print page measured 718.109375px (190mm) wide and 1058.265625px (280mm) high with one repeated thead; SUMMARY, two careers, Risk and representative experience rendered.",
+          "Empty state retained the print header and explicit no-data career/experience; long state retained all 36 career rows and grew to 1926.9375px instead of clipping content.",
+          "Complete standalone PrintExample now composes the five print primitives and PrismPrintButton with status callbacks; a fresh isolated shadcn install typechecked 53 complete examples and rendered the example with one repeated thead, 190x280mm paper, no browser warnings/errors.",
+          "Five native-session tests cover static iframe isolation, one print() invocation, afterprint cleanup, font/image readiness, resource failure, timeout, abort and disposal. Earlier same-implementation in-app browser invocation and Escape observed afterprint, owned-frame cleanup and unchanged parent title; current OS print was not rerun."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -5390,6 +5495,35 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/chat/successorCandidate/print/PrintPage.tsx",
+            "components/chat/successorCandidate/print/PrintLeaderSummary.tsx",
+            "components/chat/successorCandidate/print/PrintCareerTimeline.tsx",
+            "components/chat/successorCandidate/print/PrintAttitudeDerailmentRisk.tsx",
+            "components/chat/successorCandidate/print/PrintSuccessExperienceEssay.tsx",
+            "components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx"
+          ],
+          "evidence": [
+            "Current browser default/empty/long source-purpose paper content and 190x280mm dimensions, table header repeat and 36-row retention were measured.",
+            "Fresh independent shadcn install typechecked 53 complete examples and rendered the full PrintExample with identical emitted source/CSS and no console errors.",
+            "Focused static print session tests and prior same-implementation real browser print invocation/afterprint cleanup cover native request semantics without claiming physical output."
+          ],
+          "intentionalImprovements": [
+            "A static self-contained iframe excludes application chrome while leaving parent title/DOM intact; owned frame is cleaned after print, abort or failure.",
+            "Print requests wait for fonts, images and paint, and reject missing assets or timeout instead of printing incomplete content.",
+            "Long print content remains visible rather than inheriting fixed-height clipping from a problematic source layout."
+          ],
+          "hostOwned": [
+            "The consuming application supplies the print root, candidate data and authorized assets; the browser/OS owns actual print dialog, saved file and physical output."
+          ],
+          "nonBlockingUnknowns": [
+            "The authenticated deployed revision, OS output and exhaustive font/pixel/page-break parity remain unverified."
+          ]
         }
       },
       "exports": [
@@ -5442,8 +5576,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismPrintPage } from \"@/components/ui/prism-print\";\n<PrismPrintPage name=\"김가상\" repeatHeader>{content}</PrismPrintPage>;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useRef, useState } from \"react\";\nimport { PrismPrintButton, PrismPrintPage, PrismPrintLeaderSummary, PrismPrintCareer, PrismPrintRisk, PrismPrintExperience } from \"@/components/ui/prism-print\";\n\nexport function PrintExample() {\n  const root = useRef<HTMLDivElement>(null);\n  const [message, setMessage] = useState(\"\");\n  return <section data-prism=\"light\">\n    <PrismPrintButton getRoot={() => root.current} title=\"가상 프로필 인쇄\"\n      onRequested={() => setMessage(\"인쇄를 요청했습니다.\")}\n      onAfterPrint={() => setMessage(\"인쇄 요청 처리가 끝났습니다.\")}\n      onError={() => setMessage(\"인쇄 문서 준비 실패\")} />\n    <p role=\"status\">{message}</p>\n    <div style={{ overflowX: \"auto\" }}><div ref={root}>\n      <PrismPrintPage name=\"김가상\" company={{ brand: \"가상\", affiliate: \"전자\" }}\n        jobTitle=\"기술전략담당\" repeatHeader>\n        <PrismPrintLeaderSummary name=\"전략 리더\" summary=\"가상 요약입니다.\"\n          definition=\"합성 유형 설명입니다.\" />\n        <PrismPrintCareer items={[{ id: \"career\", period: \"2024 ~ 현재\",\n          company: \"가상전자\", role: \"기술전략담당\" }]} />\n        <PrismPrintRisk items={[{ id: \"risk\", label: \"자기 중심\",\n          latent: false, manifest: null }]} />\n        <PrismPrintExperience topics={[\"사업 성장\"]} activeTopic=\"사업 성장\"\n          items={[{ id: \"essay\", topic: \"사업 성장\", representative: true,\n            title: \"가상 경험\", description: \"가상 근거입니다.\",\n            keywords: [\"기술\"], interview: \"합성 인터뷰 요약\" }]} />\n      </PrismPrintPage>\n    </div></div>\n  </section>;\n}"
     },
     {
       "id": "prism-intro",
@@ -6755,8 +6889,8 @@
       "name": "Complete profile print document / Seven sections",
       "category": "Documents",
       "purpose": "독립7분류 프로필 인쇄 문서·종합 경력 continuation·전체 topic/실패·정적 탭",
-      "contract": "표시 모델은 host-owned입니다. 종합·전문성·성공경험·Design·Learning·Attitude·Leadership의7분류를 모두 렌더하며 options.summary/compensation은 종합의해당영역만제어합니다. API/auth/자동인쇄를실행하지않습니다. careerPages로정확한호스트페이지를받거나source글꼴/예약높이의추정helper를사용합니다. 긴내용은숨기지않으며 실제font/browser pagination은별도검증입니다. 점수/최댓값null과0을구분합니다. textPolicy기본full은원문을보존하며reference-limits는복사한표시모델에원본한도를적용하고축약안내를표시합니다.190mm paper를viewport에서zoom/양축resize하며인쇄시named A4 page/배율1로돌립니다. Model의companyLogo는호스트가제공하는정적자산slot입니다. renderPrismProfilePdf로동일모델/옵션을미리보기배율과독립적인A4 raster PDF로만들수있으며createPrismHtmlDocument는전체7분류를독립HTML로내보냅니다. 기본full의긴본문을유지하고표시제한안내도첫인쇄페이지에포함합니다. 원본전체font/pixel/native print는미검증입니다. preparePrismPrintSession은 연결된 문서와 글꼴·사진·차트를 정적 iframe에 격리하고 준비 완료 후 print()를 제공합니다. 앱 제목과 원본 DOM은 보존하며 afterprint/AbortSignal/dispose로 작업 소유 iframe만 제거합니다. 준비 timeout·자산 오류는 인쇄하지 않고 실패합니다. PrismPrintButton은 이 경로를 연결하며 onRequested는 메서드 호출 반환, onAfterPrint는 브라우저 이벤트입니다. 실제 출력·OS 저장 완료를 뜻하지 않으며 준비 취소로 이미 요청한 printer job을 취소하지 않습니다. Leadership의 title/description/detail은 별도 표시 필드입니다. reference-limits에서도 상세 설명은 제한하지 않습니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "contract": "표시 모델은 host-owned입니다. 종합·전문성·성공경험·Design·Learning·Attitude·Leadership의7분류를 모두 렌더하며 options.summary/compensation은 종합의해당영역만제어합니다. API/auth/자동인쇄를실행하지않습니다. careerPages로정확한호스트페이지를받거나source글꼴/예약높이의추정helper를사용합니다. 긴내용은숨기지않으며 실제font/browser pagination은별도검증입니다. 점수/최댓값null과0을구분합니다. textPolicy기본full은원문을보존하며reference-limits는복사한표시모델에원본한도를적용하고축약안내를표시합니다.190mm paper를viewport에서zoom/양축resize하며인쇄시named A4 page/배율1로돌립니다. Model의companyLogo는호스트가제공하는정적자산slot입니다. renderPrismProfilePdf로동일모델/옵션을미리보기배율과독립적인A4 raster PDF로만들수있으며createPrismHtmlDocument는전체7분류를독립HTML로내보냅니다. 기본full의긴본문을유지하고표시제한안내도첫인쇄페이지에포함합니다. 긴 heading 블록을 통째로 다음 장으로 넘기면 첫 장이 거의 비는 경우 글줄 경계에서 분할하고 forcedBreaks로 알립니다. 원본전체font/pixel/native print는미검증입니다. preparePrismPrintSession은 연결된 문서와 글꼴·사진·차트를 정적 iframe에 격리하고 준비 완료 후 print()를 제공합니다. 앱 제목과 원본 DOM은 보존하며 afterprint/AbortSignal/dispose로 작업 소유 iframe만 제거합니다. 준비 timeout·자산 오류는 인쇄하지 않고 실패합니다. PrismPrintButton은 이 경로를 연결하며 onRequested는 메서드 호출 반환, onAfterPrint는 브라우저 이벤트입니다. 실제 출력·OS 저장 완료를 뜻하지 않으며 준비 취소로 이미 요청한 printer job을 취소하지 않습니다. Leadership의 title/description/detail은 별도 표시 필드입니다. reference-limits에서도 상세 설명은 제한하지 않습니다.",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "sourceDeltaAudits": [
         {
           "source": "components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
@@ -6784,15 +6918,22 @@
       "embedUrl": "/prism?component=prism-profile-print&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-profile-print&view=responsive",
       "verification": {
-        "visual": "pending-current-leadership-detail-rendered-comparison",
-        "interaction": "passed-local-source-and-contract-tests",
+        "visual": "source-purpose-seven-section-output-with-intentional-pagination-improvement-passed",
+        "interaction": "passed-local-and-independent-consumer",
         "checks": [
           "Latest27c4fdbf source delta: tag/content/detail/divider, ordered palette and screen/print rules.",
-          "Detail-only and full detail under both print text policies retain host-provided text without mutation."
+          "Detail-only and full detail under both print text policies retain host-provided text without mutation.",
+          "Current frontend 2eeb26ff CandidateProfilePrintPreview/mapComprehensiveProfileToPrintPreview/PrintPage source was compared, including the new Leadership detail field; nine profile-print tests cover seven section order, four options, career continuation, all topics/failures, zero versus null, text policy and multi-profile identity.",
+          "Current local browser default showed seven ordered sections on 190mm paper, real zero compensation, missing values and Leadership detail. Four SUMMARY/compensation combinations changed only their total-section content while seven sections and three careers remained.",
+          "Current local empty and detail-only states kept seven sections; detail-only retained Leadership detail. Long state kept 48 careers, topic B, actual zero and the final Leadership detail paragraph across ten source pages.",
+          "A current long A4 PDF before the pagination improvement had 22 pages and an almost blank first page. Splitting a too-large heading block at a text line now yields 21 pages; raster inspection of first, second and final pages showed first-page SUMMARY content, continuation header and final Leadership trend. Forced splits are reported (6); 7 focused pagination tests pass.",
+          "Current long standalone HTML contained all seven sections, 48 careers, topic B, last Leadership detail, zero, embedded font and no script or external DOM/CSS asset URLs. The in-app browser file-URL policy prevented current offline reopening.",
+          "Fresh isolated shadcn install matched profile-print/export/print/CSS registry bytes, typechecked 53 complete examples and built with Vite/Pretendard/notices. Its full example rendered seven sections and downloaded a 7-page A4 PDF plus static HTML containing seven sections, detail, embedded font and no script."
         ],
         "remaining": [
-          "Current source/consumer/preview renders, compact/long/detail-only/font/pixel and A4 pagination comparison.",
-          "Authenticated deployed source and deployed revision binding."
+          "Authenticated deployed product profile and exact deployed source revision are unverified; synthetic fixtures do not prove actual service data, photo permission or production authorization.",
+          "Physical/native OS print save and exhaustive font/pixel comparison across every real profile and browser are unverified.",
+          "Long unbreakable print cards may still require explicitly reported forced splits; real-content pagination should be checked during consumer integration."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -6808,6 +6949,34 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+            "components/chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts",
+            "components/chat/successorCandidate/print/PrintPage.tsx",
+            "components/chat/successorCandidate/print/PrintLeaderSummary.tsx",
+            "components/chat/successorCandidate/print/PrintCareerTimeline.tsx"
+          ],
+          "evidence": [
+            "Current source and local browser checked all seven sections, four SUMMARY/compensation options, default/empty/long/detail-only, 48 careers, topic B, actual zero versus missing and Leadership detail.",
+            "Current 21-page long A4 PDF after page-break improvement and full seven-section HTML were generated and inspected; the first-page blank gap was removed while continuation headers and the final chapter remained.",
+            "Fresh independent shadcn consumer installed exact current sources, typechecked 53 complete examples and generated a seven-page A4 PDF and seven-section static HTML."
+          ],
+          "intentionalImprovements": [
+            "Long source text is preserved by default instead of being silently clipped; optional reference limits change only a copied display model and disclose truncation.",
+            "A heading-plus-content pair may split on a text line when keeping it whole would leave an almost empty page; forcedBreaks reports the split.",
+            "Narrow preview scales or scrolls its paper without changing physical A4 PDF dimensions, and zero remains distinct from missing."
+          ],
+          "hostOwned": [
+            "The consuming application supplies the typed model from authorized service data, photo/logo assets, exact career page hints when needed and OS print/save behavior."
+          ],
+          "nonBlockingUnknowns": [
+            "Deployed SHA binding, real authenticated data/photo paths, OS save/physical output and exhaustive browser pixel parity remain unverified."
+          ]
         }
       },
       "exports": [
@@ -8147,6 +8316,31 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "../pages/admin/chat-logs/ChatLogPage.tsx",
+            "../pages/admin/chat-logs/ChatLogDetailPage.tsx",
+            "chat/conversation/ChatConversation.tsx",
+            "admin/common/AdminPageHeader.tsx"
+          ],
+          "evidence": [
+            "Current source leaves the chat-log pages, styles and shared conversation renderer unchanged from the audited source baseline.",
+            "Twelve focused tests passed; local 1280/320px browser checked readable table headers, internal scrolling, read-only detail and return to page 2.",
+            "An earlier independent shadcn consumer installed exact module/CSS sources, typechecked its complete example and built with Vite/font/notices; current 80px error-header improvement was checked locally."
+          ],
+          "intentionalImprovements": [
+            "The error column is 80px wide so its heading remains readable; the narrow table scrolls inside a 320px document."
+          ],
+          "hostOwned": [
+            "The consuming application supplies log API, authorization, retention, route/cache behavior and clipboard effects."
+          ],
+          "nonBlockingUnknowns": [
+            "The authenticated deployed chat-log route and deployed source revision are unverified; the synthetic example does not prove live API/RBAC effects."
+          ]
         }
       },
       "exports": [

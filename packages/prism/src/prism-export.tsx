@@ -114,15 +114,16 @@ export async function createPrismImagePdf(pages: readonly PrismImagePdfPage[], {
 export type PrismPrintInterval = readonly [number, number];
 export type PrismPrintPdfSlice = { parts: readonly PrismPrintInterval[]; heightMm: number; forcedBreak: boolean };
 /** Measures are unscaled CSS pixels. Every body interval is retained, including oversized cards. */
-export function planPrismPrintPdfPage({ width, height, headerHeight = 0, headerParts, avoid = [], lines = [] }: {
-    width: number; height: number; headerHeight?: number; headerParts?: readonly PrismPrintInterval[]; avoid?: readonly PrismPrintInterval[]; lines?: readonly PrismPrintInterval[];
+export function planPrismPrintPdfPage({ width, height, headerHeight = 0, headerParts, avoid = [], keepWithNext = [], lines = [] }: {
+    width: number; height: number; headerHeight?: number; headerParts?: readonly PrismPrintInterval[]; avoid?: readonly PrismPrintInterval[];
+    keepWithNext?: readonly PrismPrintInterval[]; lines?: readonly PrismPrintInterval[];
 }): PrismPrintPdfSlice[] {
     const capacity = width * 280 / 190;
     const headers: readonly PrismPrintInterval[] = headerParts ?? (headerHeight ? [[0, headerHeight]] : []);
     const repeatedHeight = headers.reduce((sum, [start, end]) => sum + end - start, 0);
     if (![width, height, headerHeight, repeatedHeight].every(Number.isFinite) || width <= 0 || height <= 0 || headerHeight < 0 || repeatedHeight >= capacity)
         throw new RangeError("Provide positive unscaled page dimensions and a header smaller than the A4 content area.");
-    for (const [start, end] of [...headers, ...avoid, ...lines]) if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end < start || end > height + 1)
+    for (const [start, end] of [...headers, ...avoid, ...keepWithNext, ...lines]) if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end < start || end > height + 1)
         throw new RangeError("Print intervals must be ordered and inside their source page.");
     if (headers.some(([start], index) => index > 0 && start < headers[index - 1][1])) throw new RangeError("Repeated header parts must be ordered and must not overlap.");
     const cutBefore = (limit: number, intervals: readonly PrismPrintInterval[]) => {
@@ -139,10 +140,13 @@ export function planPrismPrintPdfPage({ width, height, headerHeight = 0, headerP
         if (limit < height) {
             const intact = avoid.filter(([a, b]) => b - a <= available && b > offset && a < limit);
             const cardCut = cutBefore(limit, intact);
+            const paired = keepWithNext.filter(([a, b]) => b - a <= available && b > offset && a < limit);
+            const headingCut = cutBefore(limit, paired);
             if (cardCut < limit && cardCut > offset + .5) end = cardCut;
+            else if (headingCut < limit && headingCut - offset >= available * .4) end = headingCut;
             else end = cutBefore(limit, lines.filter(([, b]) => b > offset));
             if (end <= offset + .5) { end = limit; forcedBreak = true; }
-            forcedBreak ||= [...avoid, ...lines].some(([a, b]) => a < end && end < b);
+            forcedBreak ||= [...avoid, ...keepWithNext, ...lines].some(([a, b]) => a < end && end < b);
         }
         const parts: PrismPrintInterval[] = repeated ? [...headers, [offset, end]] : [[offset, end]];
         result.push({ parts, heightMm: parts.reduce((sum, [a, b]) => sum + b - a, 0) * 190 / width, forcedBreak });
@@ -171,7 +175,7 @@ export async function createPrismPrintPdf(root: HTMLElement, { title = "프로�
     const pages = [...root.querySelectorAll<HTMLElement>("[data-print-page]")];
     if (!pages.length) throw new Error("No print pages were found.");
     const planned = pages.map(page => {
-        const rect = page.getBoundingClientRect(), intervals: PrismPrintInterval[] = [], lines: PrismPrintInterval[] = [];
+        const rect = page.getBoundingClientRect(), intervals: PrismPrintInterval[] = [], keepWithNext: PrismPrintInterval[] = [], lines: PrismPrintInterval[] = [];
         // Preview zoom is deliberately excluded: the same content must paginate at physical paper size.
         if (Math.abs(rect.width - page.offsetWidth) > 2) throw new Error("Render an unscaled print root before PDF capture.");
         const interval = (r: DOMRect) => [Math.min(rect.height, Math.max(0, r.top - rect.top)), Math.max(0, Math.min(rect.height, r.bottom - rect.top))] as const;
@@ -188,7 +192,7 @@ export async function createPrismPrintPdf(root: HTMLElement, { title = "프로�
             const heading = element.matches("h3,h4") || (element.localName === "header" && !!element.querySelector("h3,h4"));
             if (heading && element.nextElementSibling) {
                 const next = element.nextElementSibling.getBoundingClientRect();
-                if (next.height > 0) intervals.push([Math.max(0, r.top - rect.top), Math.min(rect.height, next.bottom - rect.top)]);
+                if (next.height > 0) keepWithNext.push([Math.max(0, r.top - rect.top), Math.min(rect.height, next.bottom - rect.top)]);
             }
             if (style.breakAfter.startsWith("avoid") || style.pageBreakAfter === "avoid") {
                 const next = element.nextElementSibling?.getBoundingClientRect();
@@ -203,7 +207,7 @@ export async function createPrismPrintPdf(root: HTMLElement, { title = "프로�
             const gap = element.parentElement ? Math.max(0, parseFloat(view.getComputedStyle(element.parentElement).rowGap) || 0) : 0;
             return [Math.max(0, r.top - rect.top), Math.min(rect.height, r.bottom - rect.top + gap)];
         });
-        return { page, width: rect.width, slices: planPrismPrintPdfPage({ width: rect.width, height: rect.height, headerParts, avoid: intervals, lines }) };
+        return { page, width: rect.width, slices: planPrismPrintPdfPage({ width: rect.width, height: rect.height, headerParts, avoid: intervals, keepWithNext, lines }) };
     });
     const defaultCapture: PrismPrintPdfCapture = async (page, context) => {
         const { default: render } = await import("html2canvas-pro"); checkAbort(context.signal);

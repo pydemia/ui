@@ -23,7 +23,7 @@
     }
   ],
   "meta": {
-    "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
     "sourceSha256": "24e12126b55f00215821091ffbb535f1da8536b4dbbbaf35c0bd0a3f43a573be",
     "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
   }

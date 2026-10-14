@@ -24,6 +24,17 @@ test('a fitting card moves intact and a text line is not split at the A4 boundar
     assert.ok(text[0].parts[0][1]<275);assertBodyRetained(text,650,0);
     assert.ok(text.every(s=>!s.forcedBreak));
 });
+test('a long heading block may split on a text line instead of leaving the first page almost blank',()=>{
+    const long=planPrismPrintPdfPage({width:190,height:430,keepWithNext:[[60,300]],lines:[[265,285]]});
+    assert.ok(long[0].parts[0][1]>=250);
+    assert.ok(long[0].parts[0][1]<265);
+    assert.equal(long[0].forcedBreak,true);
+    assertBodyRetained(long,430,0);
+    const short=planPrismPrintPdfPage({width:190,height:430,keepWithNext:[[220,310]],lines:[[265,285]]});
+    assert.ok(short[0].parts[0][1]<220);
+    assert.equal(short[0].forcedBreak,false);
+    assertBodyRetained(short,430,0);
+});
 test('separate title and tab ranges repeat without repeating the intervening profile photo',()=>{
     const headers=[[0,20],[80,110]];
     const slices=planPrismPrintPdfPage({width:190,height:650,headerParts:headers});
