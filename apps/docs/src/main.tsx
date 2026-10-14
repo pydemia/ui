@@ -421,8 +421,10 @@ function App() {
                             <button className="colormap-option" type="button"
                                 aria-pressed={colormap === "design"} onClick={() => selectColormap("design")}>
                                 <span className="colormap-preview" aria-hidden="true">
-                                    {["--background", "--accent", "--message-user-background"].map((token) => <span key={token} style={{ background: getDesignMode(settings.design).palettes[mode][token as ColorToken] }} />)}
-                                </span><strong>Design default</strong><small>디자인의 기본 팔레트</small>
+                                    {(getDesignMode(settings.design).defaultColormap?.swatches[mode]
+                                        ?? ["--background", "--accent", "--message-user-background"].map((token) => getDesignMode(settings.design).palettes[mode][token as ColorToken]))
+                                        .map((color, index) => <span key={index} style={{ background: color }} />)}
+                                </span><strong>Design default</strong><small>{getDesignMode(settings.design).defaultColormap?.name ?? "기존 Neutral 팔레트"}</small>
                             </button>
                             {colormaps.map((option) => (
                                 <button
@@ -442,6 +444,12 @@ function App() {
                                 </button>
                             ))}
                         </div>
+                        {getDesignMode(settings.design).defaultColormap && <p className="section-note">
+                            {getDesignMode(settings.design).defaultColormap!.name} · 시안의 기준색에서 만든 디자인 전용 팔레트입니다. {" "}
+                            <a className="text-link" href={`/colormaps/design/${settings.design}-${mode}.json`} download>Colors 프로젝트 JSON 받기</a>{" · "}
+                            <a className="text-link" href="https://colors.pydemia.ai/" target="_blank" rel="noreferrer">Colors에서 다듬기 ↗</a>
+                            {" · JSON 가져오기로 기준색·역할색을 그대로 이어서 편집할 수 있습니다."}
+                        </p>}
                         <div className="colormap-editor">
                             <div>
                                 <h3>Hex 직접 조정</h3>
@@ -505,7 +513,7 @@ function App() {
                             </a>
                         </div>
                         <div className="analytics-example-frame">
-                            <AnalyticsWorkspace />
+                            <AnalyticsWorkspace design={settings.design} />
                         </div>
                         <details className="analytics-install">
                             <summary>이 화면에 사용한 registry item 설치</summary>

@@ -72,3 +72,22 @@ design-concepts-family-r7.csv(624 family 관측, witness0을 API 통과로 해�
 실제21화면 갤러리: design-concepts-gallery-r7-2026-10-14.html.
 독립 검토 후 수정 delta는 현재 7개 source파일 hash로 별도 기록했다.
 운영 적용·공개 readback은 아직 수행 전이다.
+
+제출: source dffbc3cefa0ecfa85695d2b8a2204f419628e73b commit/push,
+PR164 https://github.com/pydemia/ui/pull/164 (ready, artifact 연결).
+기존86 snapshots의 변경 없음 검사0. PR CI38565208333 진행 중.
+branch deployment dpl_CsQq1GDLbWTjkq1w3qb99dmtjvmr READY/동일 SHA.
+운영 main/alias는 CI 성공·병합·production readback 후에 완료 기록한다.
+
+PR CI38565208333 completed/success: current snapshot·PRISM contracts와
+generated docs 재현까지 통과. expected head dffbc3ce를 고정해 PR164 병합.
+main/merge9d9a8c13d911a9313cf4dc5cb0208da40d789fd7이며 feature와 main의
+제품 source/registry/generated/PRISM 변경 내용은 동일하다.
+production dpl_FayWiW6nCL6FJf9npKVinEsRp2QG는 해당 main SHA로 BUILDING.
+로컬 PRISM363/363도 통과. 최종 공개 readback은 아직 수행 전이다.
+## R7 공개 완료 · 다음 R8 작업의 기준
+
+PR164/main9d9a8c13, mainCI38565930791성공, dpl_FayWiW6nCL6FJf9npKVinEsRp2QG READY.
+공개21모드의문서/profile입력/고정iframeSRC유지, 공개manifest148items/hash로컬일치.
+공개CLI attempt-7n1sSP +실제21모드열린Dialog/독립BasicForest/초안검수통과.
+개정Atlas·개별palette/font사용자요청은 별도 R8기록에서이어감.

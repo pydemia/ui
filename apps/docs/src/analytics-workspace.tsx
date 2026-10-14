@@ -6,8 +6,11 @@ import {
     ContentList, Dashboard, DashboardMetrics, DashboardPanels,
     DataChart, DataList, DataTable, GlobalNav, GlobalNavLink, LogConsole,
     MetricCard, NativeSelect, PageHeader, SideNav, SideNavLink,
-    type DataTableColumn, type LogEntry,
+    type DataTableColumn, type DesignModeId, type LogEntry,
 } from "@pydemia/ui";
+import {
+    DesignConceptFrame, PixelQuestProgress, SkeuomorphicPeriodDial, TerminalActivityTable,
+} from "./components/design-concept-experience";
 
 type RunStatus = "completed" | "running" | "failed";
 type Run = {
@@ -93,11 +96,15 @@ const rowId = (run: Run) => run.id;
 const rowLabel = (run: Run) => run.name;
 const searchText = (run: Run) => `${run.name} ${run.team} ${run.id}`;
 
-function AnalyticsWorkspace({ idPrefix = "analytics" }: { idPrefix?: string }) {
+function AnalyticsWorkspace({ idPrefix = "analytics", design = "basic" }: {
+    idPrefix?: string;
+    design?: DesignModeId;
+}) {
     const overviewId = `${idPrefix}-overview`;
     const runsId = `${idPrefix}-runs`;
     const periodId = useId();
     const nextLogId = useRef(3);
+    const workspace = useRef<HTMLDivElement>(null);
     const [period, setPeriod] = useState<"week" | "month">("week");
     const [runs, setRuns] = useState(initialRuns);
     const [logs, setLogs] = useState(initialLogs);
@@ -124,7 +131,16 @@ function AnalyticsWorkspace({ idPrefix = "analytics" }: { idPrefix?: string }) {
     }
 
     return (
-        <AppShell appearance="canvas" className="min-h-[42rem]">
+        <DesignConceptFrame design={design} label="운영 작업 공간"
+            onSearch={() => workspace.current?.querySelector<HTMLInputElement>(
+                'input[type="search"]',
+            )?.focus()}
+            onOverview={() => document.getElementById(overviewId)?.focus()}
+            onRuns={() => document.getElementById(runsId)?.focus()}
+            onHelp={() => workspace.current?.querySelector<HTMLButtonElement>(
+                'button[aria-label="작업 공간 도움말"]',
+            )?.click()}>
+        <AppShell ref={workspace} appearance="canvas" className="min-h-[42rem]">
             <AppHeader className="flex-wrap justify-between py-2">
                 <strong className="text-sm">pydemia / operations</strong>
                 <GlobalNav aria-label="작업 공간 전역 탐색">
@@ -145,7 +161,7 @@ function AnalyticsWorkspace({ idPrefix = "analytics" }: { idPrefix?: string }) {
                 </AppSidebar>
                 <AppMain as="div" className="min-w-0 space-y-6">
                     <Dashboard>
-                        <div id={overviewId} className="space-y-4">
+                        <div id={overviewId} tabIndex={-1} className="space-y-4">
                             <PageHeader level={2} size="compact"
                                 title="운영 현황"
                                 subtitle="작업 실행과 처리 결과를 확인합니다." />
@@ -163,6 +179,17 @@ function AnalyticsWorkspace({ idPrefix = "analytics" }: { idPrefix?: string }) {
                                         <option value="month">최근 4주</option>
                                     </NativeSelect>
                                 </div>
+                            </div>
+                            <div hidden={design !== "skeuo"}>
+                                <SkeuomorphicPeriodDial value={period} onChange={setPeriod} />
+                            </div>
+                            <div hidden={design !== "pixel"}>
+                                <PixelQuestProgress completed={statusCounts.completed}
+                                    total={runs.length} running={statusCounts.running}
+                                    failed={statusCounts.failed} />
+                            </div>
+                            <div hidden={design !== "terminal"}>
+                                <TerminalActivityTable points={data.points} />
                             </div>
                         </div>
                         <DashboardMetrics aria-label="기간별 주요 지표">
@@ -198,7 +225,7 @@ function AnalyticsWorkspace({ idPrefix = "analytics" }: { idPrefix?: string }) {
                                 target={5} max={runs.length} unit="건" />
                         </DashboardPanels>
                     </Dashboard>
-                    <section id={runsId} className="space-y-3"
+                    <section id={runsId} tabIndex={-1} className="space-y-3"
                         aria-labelledby={`${runsId}-heading`}>
                         <h3 data-ui="heading" id={`${runsId}-heading`}
                             className="text-lg font-semibold">최근 실행</h3>
@@ -246,6 +273,7 @@ function AnalyticsWorkspace({ idPrefix = "analytics" }: { idPrefix?: string }) {
                 ]} />
             </AppFloatingDisclosure>
         </AppShell>
+        </DesignConceptFrame>
     );
 }
 

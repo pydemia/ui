@@ -423,6 +423,10 @@ export {
     colorTokens, colormaps, paletteTokens, basicShapeTokens, basicDocumentTokens,
     designModeIds, designModes, releasedDesignModes, getDesignMode, isDesignModeId,
 } from "./components/foundation/design-modes";
+export { designDefaultColormaps } from "./components/foundation/design-default-colormaps";
+export type { DesignDefaultColormap } from "./components/foundation/design-default-colormaps";
+export { designTypography } from "./components/foundation/design-typography";
+export type { DesignTypography } from "./components/foundation/design-typography";
 export type {
     Appearance, ColorToken, ColormapId, PaletteId, ColorOverrides, ThemeTokenMap,
     ColorPalette, DesignModeId, DesignModeDefinition, ThemeSettings,

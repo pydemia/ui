@@ -1,4 +1,6 @@
 /** Pure metadata for the 21 supported design modes. */
+import { designDefaultColormaps, type DesignDefaultColormap } from "./design-default-colormaps";
+import { designTypography, type DesignTypography } from "./design-typography";
 export type Appearance = "light" | "dark";
 export const colorTokens = [
     { name: "Background", token: "--background" },
@@ -265,6 +267,7 @@ export type DesignModeDefinition = {
     id: DesignModeId;
     name: string;
     group: string;
+    kind: "기본" | "시각 스타일" | "디자인 시스템" | "레이아웃" | "테마" | "인터페이스 방식";
     description: string;
     atlasCaseId: string | null;
     releaseStatus: "released" | "ready" | "draft";
@@ -274,6 +277,8 @@ export type DesignModeDefinition = {
     recipe: "standard" | "bento" | "spatial";
     tokens: ThemeTokenMap;
     palettes: Record<Appearance, ColorPalette>;
+    defaultColormap: DesignDefaultColormap | null;
+    typography: DesignTypography | null;
 };
 export type ThemeSettings = {
     version: 1;
@@ -926,6 +931,10 @@ const profiles: ModeProfile[] = [
 export const designModes: readonly DesignModeDefinition[] = profiles.map(
     ([id, name, group, description, palette, tokens, colors], index) => ({
         id, name, group, description,
+        kind: id === "basic" ? "기본" : id === "material" || id === "fluent"
+            ? "디자인 시스템" : id === "bento" ? "레이아웃"
+                : id === "dark-ui" ? "테마" : id === "terminal" || id === "spatial"
+                    ? "인터페이스 방식" : "시각 스타일",
         atlasCaseId: index === 0 ? null : String(index).padStart(2, "0"),
         releaseStatus: "released",
         appearances: ["dark-ui", "cyber", "terminal"].includes(id)
@@ -934,10 +943,19 @@ export const designModes: readonly DesignModeDefinition[] = profiles.map(
             ? "dark" : "light",
         colormaps: allPalettes,
         recipe: id === "bento" || id === "spatial" ? id : "standard",
-        tokens,
+        tokens: id === "basic" ? tokens : {
+            ...tokens,
+            "--font-ui": `"Pydemia Design ${designTypography[id].ui}", "Pydemia Design Nanum Gothic", system-ui, sans-serif`,
+            "--font-heading": `"Pydemia Design ${designTypography[id].headline}", "Pydemia Design ${["editorial", "skeuo", "drawn"].includes(id) ? "Nanum Myeongjo" : "Nanum Gothic"}", system-ui, sans-serif`,
+            "--font-data": `"Pydemia Design ${designTypography[id].data}", "Pydemia Design Nanum Gothic", ui-monospace, monospace`,
+        },
+        typography: id === "basic" ? null : designTypography[id],
+        defaultColormap: id === "basic" ? null : designDefaultColormaps[id],
         palettes: {
-            light: { ...paletteTokens[palette].light, ...colors?.light },
-            dark: { ...paletteTokens[palette].dark, ...colors?.dark },
+            light: id === "basic" ? { ...paletteTokens[palette].light, ...colors?.light }
+                : designDefaultColormaps[id].colors.light,
+            dark: id === "basic" ? { ...paletteTokens[palette].dark, ...colors?.dark }
+                : designDefaultColormaps[id].colors.dark,
         },
     }),
 );
@@ -966,5 +984,5 @@ function freezeMetadata(value: object): void {
 }
 for (const value of [
     colorTokens, colormaps, paletteTokens, basicShapeTokens,
-    basicDocumentTokens, designModeIds, designModes, releasedDesignModes,
+    basicDocumentTokens, designModeIds, designModes, releasedDesignModes, designDefaultColormaps, designTypography,
 ]) freezeMetadata(value);

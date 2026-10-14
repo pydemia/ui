@@ -306,3 +306,21 @@
 - 최신 PRISM source/design·Pretendard·기존 배경·440px Dialog 유지 확인
 - 최신 사용자 결정의 공개 기준 W01–W14 14/14=100%. ENV는 후속 미검수 유지
 - 최종 commit/release와 증거·화면·인계 상태는 release-r6 기록에 연결
+
+## R7 사용자 시각 품질 개선 요청
+
+- R6 공개 후 사용자 의견으로 비Basic20종의 재질·형태·타이포·구성 전면 개선
+- Basic/PRISM 보존, Neobrutalism 기존 특징 유지. 독립 visual/engineering
+  리뷰 3건 수정 후 새 actionable finding 없음
+- source dffbc3ce, release87 0454d1db…/148 items, PR164/CI38565208333 진행
+- 39지원 조합×144 catalog 렌더 오류0, 열린 Dialog·필터·선택·입력 유지,
+  320/390×21종 후보/적용·overflow0, Basic 전후 스타일·PRISM 회귀 확인
+- R7 운영 적용은 아직 미완료. 후속 최신 판정과 실제 근거는
+  design-concepts-overhaul-r7-2026-10-14.md에 기록
+# 최신 상태 · R8 / 2026-10-15
+
+R7은 PR164/main9d9a8c13, production READY/공개21종/공개CLI attempt-7n1sSP 검증 완료.
+추가 개정판·개별colormap·폰트 요청을 R8로 구현 중. Basic/PRISM 보존.
+20개개별팔레트/40ColorsJSON/10승인폰트, 원본hash/API10/10검증, localCLI/301UI/15docs/363PRISM통과.
+snapshot88 4123c714…/148items 생성. 공개R8 배포는 아직대기.
+상세와 최신 후속 상태는 design-concepts-atlas-revision-r8-2026-10-14.md 참조.

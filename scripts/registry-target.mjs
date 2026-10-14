@@ -4,6 +4,7 @@ const componentPrefix = "packages/ui/src/components/";
 export function registryTarget(path) {
     if (path === "packages/ui/src/styles.css") return "@ui/tokens.css";
     if (path === "packages/ui/src/design-modes.css") return "@ui/design-modes.css";
+    if (path === "packages/ui/src/design-fonts.css") return "@ui/design-fonts.css";
     if (path === "registry/SHADCN_UI_LICENSE.md") return "@ui/SHADCN_UI_LICENSE.md";
     if (path.startsWith(componentPrefix)) {
         const relative = path.slice(componentPrefix.length);

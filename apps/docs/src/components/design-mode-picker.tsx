@@ -38,7 +38,7 @@ export function DesignModePicker({
     const applied = getDesignMode(settings.design);
     const candidate = getDesignMode(candidateId);
     const filtered = designModes.filter((mode) =>
-        `${mode.name} ${mode.group} ${mode.description}`
+        `${mode.name} ${mode.group} ${mode.kind} ${mode.description}`
             .toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()),
     );
     const groups = [false, true].flatMap((prepared) => {
@@ -163,16 +163,21 @@ export function DesignModePicker({
                 </div>
                 <section className="design-mode-detail" aria-labelledby={`${id}-candidate`}>
                     <div className="design-mode-detail-heading">
-                        <p className="design-mode-eyebrow">CANDIDATE PREVIEW</p>
+                        <p className="design-mode-eyebrow">CANDIDATE PREVIEW · {candidate.kind}</p>
                         <h3 id={`${id}-candidate`}>{candidate.name}</h3>
                         <p>{candidate.description}</p>
                         <p>지원 밝기: {candidate.appearances.join(" / ")} · 미리보기: {appearance}</p>
-                        <p>팔레트: {previewSettings.colormap === "design" ? "Design default" :
+                        <p>팔레트: {previewSettings.colormap === "design" ? `Design default · ${candidate.defaultColormap?.name ?? "Neutral"}` :
                             colormaps.find(({ id }) => id === previewSettings.colormap)?.name}
                             {Object.values(previewSettings.overrides).some((colors) => Object.keys(colors).length) && " · 직접 조정 반영"}</p>
+                        {candidate.typography && <p>폰트: {candidate.typography.headline} / {candidate.typography.ui}
+                            {" · "}<a href="https://skills.pydemia.ai/fonts" target="_blank" rel="noreferrer">Font library ↗</a></p>}
                         {appearance !== settings.appearance && <p>이 디자인의 기본 밝기 {appearance}로 전환됩니다.</p>}
                         {!canApply && <p>검수 중인 디자인입니다. 미리보기만 사용할 수 있습니다.</p>}
                         {candidate.recipe !== "standard" && <p>업무 화면에서 격자와 패널 배치를 먼저 확인하세요.</p>}
+                        {candidate.atlasCaseId && <p><a
+                            href={`/ui-design-atlas-20.html#detail-${candidate.atlasCaseId}`}
+                            target="_blank" rel="noreferrer">스타일 설명과 원본 예시 보기 ↗</a></p>}
                     </div>
                     <DesignModePreview settings={previewSettings} />
                 </section>

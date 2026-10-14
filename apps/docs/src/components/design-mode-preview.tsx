@@ -19,7 +19,8 @@ export function DesignModePreview({ settings }: { settings: ThemeSettings }) {
     const [status, setStatus] = useState("all");
     const [notice, setNotice] = useState("");
     const [workspaceExpanded, setWorkspaceExpanded] = useState(false);
-    const composition = getDesignMode(settings.design).recipe !== "standard";
+    const composition = getDesignMode(settings.design).recipe !== "standard"
+        || ["skeuo", "terminal", "retro", "pixel"].includes(settings.design);
     const workspaceVisible = composition || workspaceExpanded;
 
     return (
@@ -30,10 +31,27 @@ export function DesignModePreview({ settings }: { settings: ThemeSettings }) {
                     <div>
                         <p className="design-mode-eyebrow">WORKSPACE / DESIGN</p>
                         <h3>Project overview</h3>
+                        <svg className="design-mode-drawn-accent" viewBox="0 0 100 24"
+                            aria-hidden="true" style={{ display: settings.design === "drawn" ? undefined : "none" }}>
+                            <path d="M3 15Q19 7 34 14T66 13T91 10M80 4l14 6-11 10"
+                                fill="none" stroke="currentColor" strokeWidth="2"
+                                strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                         <p>같은 데이터와 컴포넌트로 디자인을 비교합니다.</p>
                     </div>
                     <Badge variant="accent">Live preview</Badge>
                 </header>
+                <article className="design-mode-editorial-report"
+                    aria-label="프로젝트 현황 리포트" hidden={settings.design !== "editorial"}>
+                    <p className="design-mode-eyebrow">PROJECT REPORT / WEEKLY</p>
+                    <h4>세 프로젝트의 다음 단계</h4>
+                    <p>전체 {previewRows.length}개 프로젝트 중
+                        {previewRows.filter((row) => row.status === "Ready").length}개가 배포 준비 상태입니다.
+                        검토와 초안 단계의 작업은 담당자와 상태를 확인해 다음 순서로 이어갑니다.</p>
+                    <p>현재 선택한 프로젝트는 {previewRows.find((row) => row.id === selected)?.name}입니다.
+                        아래 목록의 상태 필터와 선택 항목으로 필요한 작업을 찾아볼 수 있습니다.</p>
+                    <p className="design-mode-report-caption">데이터 기준 · 아래 Projects 목록</p>
+                </article>
                 <div className="design-mode-preview-actions">
                     <Button onClick={() => setNotice("미리보기 변경을 저장했습니다.")}>
                         Save changes
@@ -129,7 +147,8 @@ export function DesignModePreview({ settings }: { settings: ThemeSettings }) {
                             조합 화면 상세 미리보기
                         </button>}
                     <div id={`${id}-workspace`} hidden={!workspaceVisible}>
-                        <AnalyticsWorkspace idPrefix={`design-preview-${id}`} />
+                        <AnalyticsWorkspace idPrefix={`design-preview-${id}`}
+                            design={settings.design} />
                     </div>
                 </section>
             </div>

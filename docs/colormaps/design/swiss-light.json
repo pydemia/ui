@@ -1,0 +1,465 @@
+{
+  "schemaVersion": 2,
+  "projectId": "49025725-6d94-4d49-8c3a-fde57c67cd7f",
+  "source": {
+    "kind": "baseColor",
+    "hex": "#D6A23A",
+    "harmony": "complementary",
+    "generationIndex": 0
+  },
+  "generatorVersion": "intent-2.0.0",
+  "swatches": [
+    {
+      "id": "s1",
+      "hex": "#000000",
+      "origin": "input",
+      "locked": true
+    },
+    {
+      "id": "s2",
+      "hex": "#F5F5F2",
+      "origin": "input",
+      "locked": true
+    },
+    {
+      "id": "s3",
+      "hex": "#D6A23A",
+      "origin": "input",
+      "locked": true
+    },
+    {
+      "id": "s4",
+      "hex": "#FFEEE8",
+      "origin": "generated",
+      "locked": false
+    },
+    {
+      "id": "s5",
+      "hex": "#0A1506",
+      "origin": "generated",
+      "locked": false
+    },
+    {
+      "id": "s6",
+      "hex": "#7887A0",
+      "origin": "generated",
+      "locked": false
+    }
+  ],
+  "roleSets": {
+    "web": {
+      "background": {
+        "swatchId": "s2",
+        "overrideHex": "#F7F7F5",
+        "reason": "userEdit"
+      },
+      "text": {
+        "swatchId": "s1",
+        "overrideHex": "#151515",
+        "reason": "userEdit"
+      },
+      "primary": {
+        "swatchId": "s1",
+        "overrideHex": "#9A6F00",
+        "reason": "userEdit"
+      },
+      "secondary": {
+        "swatchId": "s4",
+        "overrideHex": "#4A3300",
+        "reason": "userEdit"
+      },
+      "accent": {
+        "swatchId": "s5",
+        "overrideHex": "#9A6F00",
+        "reason": "userEdit"
+      },
+      "link": {
+        "swatchId": "s1",
+        "overrideHex": "#9A6F00",
+        "reason": "userEdit"
+      },
+      "success": {
+        "swatchId": "s1",
+        "overrideHex": "#236645",
+        "reason": "userEdit"
+      },
+      "warning": {
+        "swatchId": "s5",
+        "overrideHex": "#8B5A06",
+        "reason": "userEdit"
+      },
+      "error": {
+        "swatchId": "s5",
+        "overrideHex": "#A22C36",
+        "reason": "userEdit"
+      },
+      "surface": {
+        "swatchId": "s2",
+        "overrideHex": "#FFFFFF",
+        "reason": "userEdit"
+      },
+      "textMuted": {
+        "swatchId": "s1",
+        "overrideHex": "#4E4E4A",
+        "reason": "userEdit"
+      },
+      "onPrimary": {
+        "swatchId": "s2",
+        "overrideHex": "#FFFFFF",
+        "reason": "userEdit"
+      },
+      "onSuccess": {
+        "swatchId": "s2",
+        "overrideHex": "#FFFFFF",
+        "reason": "contrastAccepted"
+      },
+      "onWarning": {
+        "swatchId": "s3",
+        "overrideHex": "#FFFFFF",
+        "reason": "contrastAccepted"
+      },
+      "onError": {
+        "swatchId": "s2",
+        "overrideHex": "#FFFFFF",
+        "reason": "contrastAccepted"
+      },
+      "focusRing": {
+        "swatchId": "s1",
+        "overrideHex": "#BE8B1E",
+        "reason": "userEdit"
+      }
+    },
+    "publication": {
+      "cover": {
+        "swatchId": "s1",
+        "overrideHex": null,
+        "reason": null
+      },
+      "onCover": {
+        "swatchId": "s2",
+        "overrideHex": "#F5F5F2",
+        "reason": "generated"
+      },
+      "bodyBackground": {
+        "swatchId": "s2",
+        "overrideHex": null,
+        "reason": null
+      },
+      "bodyText": {
+        "swatchId": "s1",
+        "overrideHex": "#000000",
+        "reason": "generated"
+      },
+      "accent": {
+        "swatchId": "s5",
+        "overrideHex": "#0A1506",
+        "reason": "generated"
+      }
+    },
+    "powerPoint": {
+      "dark1": {
+        "swatchId": "s1",
+        "overrideHex": "#000000",
+        "reason": "generated"
+      },
+      "light1": {
+        "swatchId": "s2",
+        "overrideHex": null,
+        "reason": null
+      },
+      "dark2": {
+        "swatchId": "s1",
+        "overrideHex": null,
+        "reason": null
+      },
+      "light2": {
+        "swatchId": "s4",
+        "overrideHex": null,
+        "reason": null
+      },
+      "accent1": {
+        "swatchId": "s1",
+        "overrideHex": "#000000",
+        "reason": "generated"
+      },
+      "accent2": {
+        "swatchId": "s2",
+        "overrideHex": "#8C8C8A",
+        "reason": "generated"
+      },
+      "accent3": {
+        "swatchId": "s3",
+        "overrideHex": "#B78512",
+        "reason": "generated"
+      },
+      "accent4": {
+        "swatchId": "s4",
+        "overrideHex": "#988883",
+        "reason": "generated"
+      },
+      "accent5": {
+        "swatchId": "s5",
+        "overrideHex": "#0A1506",
+        "reason": "generated"
+      },
+      "accent6": {
+        "swatchId": "s6",
+        "overrideHex": "#7887A0",
+        "reason": "generated"
+      },
+      "hyperlink": {
+        "swatchId": "s1",
+        "overrideHex": null,
+        "reason": null
+      },
+      "followedHyperlink": {
+        "swatchId": "s1",
+        "overrideHex": "#9553A4",
+        "reason": "generated"
+      }
+    },
+    "editor": {
+      "background": {
+        "swatchId": "s2",
+        "overrideHex": null,
+        "reason": null
+      },
+      "foreground": {
+        "swatchId": "s1",
+        "overrideHex": "#000000",
+        "reason": "generated"
+      },
+      "comment": {
+        "swatchId": "s4",
+        "overrideHex": "#846B62",
+        "reason": "generated"
+      },
+      "keyword": {
+        "swatchId": "s1",
+        "overrideHex": "#007892",
+        "reason": "generated"
+      },
+      "string": {
+        "swatchId": "s1",
+        "overrideHex": "#3E7C42",
+        "reason": "generated"
+      },
+      "number": {
+        "swatchId": "s5",
+        "overrideHex": "#4C7A38",
+        "reason": "generated"
+      },
+      "type": {
+        "swatchId": "s1",
+        "overrideHex": "#007C7B",
+        "reason": "generated"
+      },
+      "function": {
+        "swatchId": "s4",
+        "overrideHex": "#7A6B66",
+        "reason": "generated"
+      },
+      "variable": {
+        "swatchId": "s2",
+        "overrideHex": "#6F6F6C",
+        "reason": "generated"
+      },
+      "error": {
+        "swatchId": "s5",
+        "overrideHex": "#B4514C",
+        "reason": "generated"
+      },
+      "warning": {
+        "swatchId": "s5",
+        "overrideHex": "#986600",
+        "reason": "generated"
+      },
+      "selection": {
+        "swatchId": "s1",
+        "overrideHex": "#004A5C",
+        "reason": "generated"
+      }
+    },
+    "terminal": {
+      "background": {
+        "swatchId": "s2",
+        "overrideHex": null,
+        "reason": null
+      },
+      "foreground": {
+        "swatchId": "s1",
+        "overrideHex": "#000000",
+        "reason": "generated"
+      },
+      "cursor": {
+        "swatchId": "s2",
+        "overrideHex": null,
+        "reason": null
+      },
+      "selection": {
+        "swatchId": "s1",
+        "overrideHex": "#004A5C",
+        "reason": "generated"
+      },
+      "black": {
+        "swatchId": "s3",
+        "overrideHex": null,
+        "reason": null
+      },
+      "red": {
+        "swatchId": "s5",
+        "overrideHex": "#BE2E31",
+        "reason": "generated"
+      },
+      "green": {
+        "swatchId": "s1",
+        "overrideHex": "#146D34",
+        "reason": "generated"
+      },
+      "yellow": {
+        "swatchId": "s5",
+        "overrideHex": "#B77B00",
+        "reason": "generated"
+      },
+      "blue": {
+        "swatchId": "s1",
+        "overrideHex": null,
+        "reason": null
+      },
+      "magenta": {
+        "swatchId": "s1",
+        "overrideHex": "#9553A4",
+        "reason": "generated"
+      },
+      "cyan": {
+        "swatchId": "s1",
+        "overrideHex": "#448A48",
+        "reason": "generated"
+      },
+      "white": {
+        "swatchId": "s4",
+        "overrideHex": null,
+        "reason": null
+      },
+      "brightBlack": {
+        "swatchId": "s3",
+        "overrideHex": "#72644C",
+        "reason": "generated"
+      },
+      "brightRed": {
+        "swatchId": "s5",
+        "overrideHex": "#F17871",
+        "reason": "generated"
+      },
+      "brightGreen": {
+        "swatchId": "s1",
+        "overrideHex": "#7FC88F",
+        "reason": "generated"
+      },
+      "brightYellow": {
+        "swatchId": "s5",
+        "overrideHex": "#F5BC69",
+        "reason": "generated"
+      },
+      "brightBlue": {
+        "swatchId": "s1",
+        "overrideHex": "#3DBFE2",
+        "reason": "generated"
+      },
+      "brightMagenta": {
+        "swatchId": "s1",
+        "overrideHex": "#CD97D9",
+        "reason": "generated"
+      },
+      "brightCyan": {
+        "swatchId": "s1",
+        "overrideHex": "#72D0D0",
+        "reason": "generated"
+      },
+      "brightWhite": {
+        "swatchId": "s2",
+        "overrideHex": null,
+        "reason": null
+      }
+    }
+  },
+  "updatedAt": "2026-10-14T12:00:00.000Z",
+  "studio": {
+    "anchors": [
+      {
+        "id": "s1",
+        "originalHex": "#000000",
+        "locked": true,
+        "maxDelta": 0.05,
+        "maxL": 0.08,
+        "maxC": 0.04,
+        "maxH": 15,
+        "t": 0,
+        "positionLocked": false
+      },
+      {
+        "id": "s2",
+        "originalHex": "#F5F5F2",
+        "locked": true,
+        "maxDelta": 0.05,
+        "maxL": 0.08,
+        "maxC": 0.04,
+        "maxH": 15,
+        "t": 0.5,
+        "positionLocked": false
+      },
+      {
+        "id": "s3",
+        "originalHex": "#D6A23A",
+        "locked": true,
+        "maxDelta": 0.05,
+        "maxL": 0.08,
+        "maxC": 0.04,
+        "maxH": 15,
+        "t": 1,
+        "positionLocked": false
+      }
+    ],
+    "count": 6,
+    "harmony": "complementary",
+    "wheel": "oklch",
+    "editingSpace": "oklch",
+    "theme": "light",
+    "domain": "ui",
+    "intent": "inferred",
+    "concept": {
+      "useCases": [
+        "web"
+      ],
+      "moods": [
+        "calm"
+      ],
+      "hueDirection": "any",
+      "lightness": "light",
+      "saturation": "muted",
+      "avoidHexes": [],
+      "note": ""
+    },
+    "recipeId": null,
+    "warm": 0,
+    "tint": 0,
+    "shadow": 0.18,
+    "midtone": 0.55,
+    "highlight": 0.96,
+    "contrast": 1,
+    "surroundingChroma": 1,
+    "asymmetric": true,
+    "tintedShadow": true,
+    "texture": false,
+    "area": [
+      60,
+      30,
+      10
+    ],
+    "mapKind": "qualitative",
+    "mixModel": "perceptual",
+    "generation": 0
+  },
+  "sequence": [],
+  "name": "Ink and Ochre · light"
+}

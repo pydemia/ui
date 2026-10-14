@@ -12,11 +12,14 @@
       "registryDependencies": ["./pyd-tokens.json", "./pyd-portal-scope.json"],
       "files": [
         { "path": "packages/ui/src/components/foundation/design-modes.ts", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/foundation/design-default-colormaps.ts", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/foundation/design-typography.ts", "type": "registry:ui" },
         { "path": "packages/ui/src/components/foundation/design-mode-settings.ts", "type": "registry:ui" },
         { "path": "packages/ui/src/components/foundation/theme-dom.ts", "type": "registry:ui" },
         { "path": "packages/ui/src/components/foundation/theme-messages.ts", "type": "registry:ui" },
         { "path": "packages/ui/src/components/foundation/theme-scope.tsx", "type": "registry:ui" },
-        { "path": "packages/ui/src/design-modes.css", "type": "registry:file", "target": "@ui/design-modes.css" }
+        { "path": "packages/ui/src/design-modes.css", "type": "registry:file", "target": "@ui/design-modes.css" },
+        { "path": "packages/ui/src/design-fonts.css", "type": "registry:file", "target": "@ui/design-fonts.css" }
       ]
     },
     {

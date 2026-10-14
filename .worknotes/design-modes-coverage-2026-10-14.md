@@ -177,3 +177,23 @@ R4의 최신 build→snapshot→build→release-check와 installer attempt-WmV7Z
 overflow0 확인. 현재 snapshot은5736ea60…2c0a90d0/148 items다.
 실제 media·screen reader/200% zoom 등의 상태는 manual-validation에
 미검수로 유지한다. 추가20종 ready를 운영 지원 완료로 보고하지 않는다.
+
+## R7 최신 콘셉트 개선 검증
+
+R6 공개21종을 유지하며 R7에서 비Basic20종의 시각 특성을 개선했다.
+39지원 밝기 조합 각각 catalog144개 렌더 오류0,16family 관측624행,
+열린 Dialog의39조합 전환·업무 필터/행 선택/입력·지역 Basic 격리 확인.
+관측된 family witness0은 해당 개별 API/상태의 실행 통과가 아니다.
+모바일320/390×21종42cases에서 후보/확정·입력 유지·document overflow0.
+Basic 전후 주요7면의 계산된 스타일 일치, PRISM 기존 표면 확인.
+UI301/301, docs15/15, typecheck/build/snapshot/release-check 및 독립
+설치 attempt-v0qaks 통과. release87 0454d1db…/148items.
+최신 운영 배포·공개 소비자 readback은 R7 작업 기록에서 후속 갱신한다.
+실제 media·screen reader/200% zoom은 기존 후속 미검수 범위다.
+# 최신 추가 범위 · R8 / 2026-10-15
+
+개정20개상세문서와실제구성/조작예시, 개별Colors팔레트20/40JSON, 승인폰트10개 추가.
+팔레트320contrastpairs4.5이상/기준색lock/JSONsemantic일치, 폰트bytes/catalog/공개APIhash10/10확인.
+local301UI/15docs/363PRISM +fullbuild/localconsumer통과.
+이전R8 39catalog·39portal·21문서/profile·42mobile 실측은 팔레트/폰트추가전소스임.
+최종새팔레트/폰트공개실측은 R8 상세기록에후속추가. 실제ENV/포인터drag는미검수범위유지.

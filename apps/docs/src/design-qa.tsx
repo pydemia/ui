@@ -121,7 +121,7 @@ function App() {
                 </DashboardPanels></Dashboard>
             </ThemeScope>
             <div className="my-5 grid gap-5">
-                <section aria-label="QA Operations"><AnalyticsWorkspace /></section>
+                <section aria-label="QA Operations"><AnalyticsWorkspace design={settings.design} /></section>
                 <section aria-label="QA Review"><ReviewWorkspace /></section>
                 <section aria-label="QA Intake"><IntakeWorkspace /></section>
             </div>
