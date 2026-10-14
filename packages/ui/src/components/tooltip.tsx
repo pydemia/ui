@@ -1,6 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
+import { usePortalContainer } from "./foundation/portal-scope";
 
 function TooltipProvider({
     delayDuration = 300,
@@ -13,12 +14,15 @@ const Tooltip = TooltipPrimitive.Root;
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 function TooltipContent({
+    container,
     className,
     sideOffset = 6,
     ...props
-}: ComponentProps<typeof TooltipPrimitive.Content>) {
+}: ComponentProps<typeof TooltipPrimitive.Content> &
+    Pick<ComponentProps<typeof TooltipPrimitive.Portal>, "container">) {
+    const portalContainer = usePortalContainer(container);
     return (
-        <TooltipPrimitive.Portal>
+        <TooltipPrimitive.Portal container={portalContainer}>
             <TooltipPrimitive.Content
                 sideOffset={sideOffset}
                 className={cn(

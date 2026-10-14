@@ -1,31 +1,36 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
+import { usePortalContainer } from "./foundation/portal-scope";
 
 const Dialog = DialogPrimitive.Root;
 const DialogTrigger = DialogPrimitive.Trigger;
 const DialogClose = DialogPrimitive.Close;
 
-type DialogContentProps = ComponentProps<typeof DialogPrimitive.Content> & {
+type DialogContentProps = ComponentProps<typeof DialogPrimitive.Content> &
+    Pick<ComponentProps<typeof DialogPrimitive.Portal>, "container"> & {
     size?: "default" | "wide" | "fullscreen";
 };
 
 function DialogContent({
+    container,
     size = "default",
     className,
     children,
     ...props
 }: DialogContentProps) {
+    const portalContainer = usePortalContainer(container);
     if (size !== "default" && size !== "wide" && size !== "fullscreen") {
         throw new RangeError("DialogContent size is not supported.");
     }
 
     return (
-        <DialogPrimitive.Portal>
+        <DialogPrimitive.Portal container={portalContainer}>
             <DialogPrimitive.Overlay
                 className="fixed inset-0 z-50 bg-[var(--overlay)]"
             />
             <DialogPrimitive.Content
+                data-ui="overlay-panel"
                 data-size={size}
                 className={cn(
                     "fixed z-50 overflow-y-auto border border-border " +
@@ -67,6 +72,7 @@ function DialogTitle({
 }: ComponentProps<typeof DialogPrimitive.Title>) {
     return (
         <DialogPrimitive.Title
+            data-ui="heading"
             className={cn("text-base font-semibold", className)}
             {...props}
         />

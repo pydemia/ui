@@ -2,6 +2,16 @@
   "reviewed_at": "2026-10-02",
   "items": [
     {
+      "name": "pyd-portal-scope", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": [], "accessibility": { "semantics": "React context for scoped overlay containers; no visual or interaction primitive", "keyboard": "inherited from consumer primitive", "screen_reader": "inherited from consumer primitive" }
+    },
+    {
+      "name": "pyd-design-modes", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-tokens", "pyd-portal-scope"], "accessibility": { "semantics": "Regional presentation tokens and stable scoped overlay host; business component semantics unchanged", "keyboard": "browser verification pending", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-utils", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["clsx", "tailwind-merge"], "accessibility": { "semantics": "not-applicable", "keyboard": "not-applicable", "screen_reader": "not-applicable" }
@@ -87,7 +97,7 @@
       "name": "pyd-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Radix UI", "url": "https://www.radix-ui.com/primitives/docs/components/select" },
-      "dependencies": ["@radix-ui/react-select@2.3.7 (MIT)", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "Radix single select with labeled trigger and form value", "keyboard": "Chromium: Enter, ArrowDown, selection and form value verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-select@2.3.7 (MIT)", "lucide-react", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "Radix single select with labeled trigger and form value", "keyboard": "Chromium: Enter, ArrowDown, selection and form value verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-combobox", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
@@ -151,7 +161,7 @@
     {
       "name": "pyd-dialog", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/dialog.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
-      "dependencies": ["@radix-ui/react-dialog", "pyd-utils"], "accessibility": { "semantics": "Radix modal dialog; title required", "keyboard": "Chromium: Tab containment, Escape and focus return verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-dialog", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "Radix modal dialog; title required", "keyboard": "Chromium: Tab containment, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-command-palette", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
@@ -187,7 +197,7 @@
     {
       "name": "pyd-tooltip", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/tooltip.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
-      "dependencies": ["@radix-ui/react-tooltip", "pyd-utils"], "accessibility": { "semantics": "Radix tooltip description; trigger needs its own accessible name", "keyboard": "Chromium: focus, hover and Escape verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-tooltip", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "Radix tooltip description; trigger needs its own accessible name", "keyboard": "Chromium: focus, hover and Escape verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-accordion", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
@@ -202,18 +212,18 @@
     {
       "name": "pyd-popover", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/popover.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
-      "dependencies": ["@radix-ui/react-popover", "pyd-utils"], "accessibility": { "semantics": "Radix popover dialog and focus management", "keyboard": "Chromium: open, Escape and focus return verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-popover", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "Radix popover dialog and focus management", "keyboard": "Chromium: open, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-hover-card", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui Hover Card", "url": "https://ui.shadcn.com/docs/components/radix/hover-card", "revision": "98a1fe67b439324ddc857f47fbdce056600a4329", "license": "MIT" },
-      "dependencies": ["@radix-ui/react-hover-card@1.1.23", "pyd-utils"], "accessibility": { "semantics": "sighted-only supplemental preview attached to a real link; no essential content in the card", "keyboard": "Chromium: focus opens; Escape closes and keeps link focus", "screen_reader": "Radix hides preview content; manual review pending" }
+      "dependencies": ["@radix-ui/react-hover-card@1.1.23", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "sighted-only supplemental preview attached to a real link; no essential content in the card", "keyboard": "Chromium: focus opens; Escape closes and keeps link focus", "screen_reader": "Radix hides preview content; manual review pending" }
     },
     {
       "name": "pyd-alert-dialog", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/alert-dialog.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
-      "dependencies": ["@radix-ui/react-alert-dialog", "pyd-utils"], "accessibility": { "semantics": "Radix alertdialog; title, description and cancel action required", "keyboard": "Chromium: open, Escape, action and focus return verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-alert-dialog", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "Radix alertdialog; title, description and cancel action required", "keyboard": "Chromium: open, Escape, action and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-avatar", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
@@ -523,7 +533,7 @@
       "name": "pyd-menubar", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui Menubar", "url": "https://ui.shadcn.com/docs/components/radix/menubar", "revision": "98a1fe67b439324ddc857f47fbdce056600a4329", "license": "MIT", "scope": "application command grouping and Radix composition only; no source copied" },
-      "dependencies": ["@radix-ui/react-menubar@1.1.24", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "named menubar with menu triggers, items, checkboxes, radio items, disabled items and submenus via Radix", "keyboard": "Chromium: top-menu ArrowRight, checkbox and radio selection, submenu action, Escape and focus return verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-menubar@1.1.24", "lucide-react", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "named menubar with menu triggers, items, checkboxes, radio items, disabled items and submenus via Radix", "keyboard": "Chromium: top-menu ArrowRight, checkbox and radio selection, submenu action, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-sidebar", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
@@ -738,7 +748,7 @@
       "name": "pyd-drawer", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Radix Dialog", "url": "https://www.radix-ui.com/primitives/docs/components/dialog", "license": "MIT" },
-      "dependencies": ["@radix-ui/react-dialog@1.1.23", "pyd-utils"], "accessibility": { "semantics": "modal dialog with title and description", "keyboard": "Chromium: Enter open, Escape close and focus restoration verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-dialog@1.1.23", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "modal dialog with title and description", "keyboard": "Chromium: Enter open, Escape close and focus restoration verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-pagination", "category": "Data display", "profiles": ["neutral-product", "developer-tool"],
@@ -773,13 +783,13 @@
       "name": "pyd-dropdown-menu", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Radix Dropdown Menu", "url": "https://www.radix-ui.com/primitives/docs/components/dropdown-menu", "license": "MIT" },
-      "dependencies": ["@radix-ui/react-dropdown-menu@2.1.22", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "menu items, menuitemcheckbox, menuitemradio, submenu and disabled item via Radix", "keyboard": "Chromium: Enter, arrows, checkbox, radio, submenu, Escape and focus restoration verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-dropdown-menu@2.1.22", "lucide-react", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "menu items, menuitemcheckbox, menuitemradio, submenu and disabled item via Radix", "keyboard": "Chromium: Enter, arrows, checkbox, radio, submenu, Escape and focus restoration verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-context-menu", "category": "Overlays", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui Context Menu", "url": "https://ui.shadcn.com/docs/components/radix/context-menu", "revision": "98a1fe67b439324ddc857f47fbdce056600a4329", "license": "MIT" },
-      "dependencies": ["@radix-ui/react-context-menu@2.3.7", "lucide-react", "pyd-utils"], "accessibility": { "semantics": "context menu with item, checkbox, radio, submenu and disabled item via Radix", "keyboard": "Chromium: right click, Shift+F10, arrows, checkbox, radio, submenu, Escape and focus restoration verified", "screen_reader": "pending manual review" }
+      "dependencies": ["@radix-ui/react-context-menu@2.3.7", "lucide-react", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "context menu with item, checkbox, radio, submenu and disabled item via Radix", "keyboard": "Chromium: right click, Shift+F10, arrows, checkbox, radio, submenu, Escape and focus restoration verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-password-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],

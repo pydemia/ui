@@ -93,7 +93,9 @@ const rowId = (run: Run) => run.id;
 const rowLabel = (run: Run) => run.name;
 const searchText = (run: Run) => `${run.name} ${run.team} ${run.id}`;
 
-function AnalyticsWorkspace() {
+function AnalyticsWorkspace({ idPrefix = "analytics" }: { idPrefix?: string }) {
+    const overviewId = `${idPrefix}-overview`;
+    const runsId = `${idPrefix}-runs`;
     const periodId = useId();
     const nextLogId = useRef(3);
     const [period, setPeriod] = useState<"week" | "month">("week");
@@ -126,24 +128,24 @@ function AnalyticsWorkspace() {
             <AppHeader className="flex-wrap justify-between py-2">
                 <strong className="text-sm">pydemia / operations</strong>
                 <GlobalNav aria-label="작업 공간 전역 탐색">
-                    <GlobalNavLink href="#analytics-overview"
+                    <GlobalNavLink href={`#${overviewId}`}
                         aria-current="page">개요</GlobalNavLink>
-                    <GlobalNavLink href="#analytics-runs">실행</GlobalNavLink>
+                    <GlobalNavLink href={`#${runsId}`}>실행</GlobalNavLink>
                 </GlobalNav>
             </AppHeader>
             <AppBody>
                 <AppSidebar aria-label="분석 영역 탐색"
                     className="@3xl:w-44">
                     <SideNav aria-label="분석 영역">
-                        <SideNavLink href="#analytics-overview"
+                        <SideNavLink href={`#${overviewId}`}
                             aria-current="page">운영 현황</SideNavLink>
-                        <SideNavLink href="#analytics-runs">
+                        <SideNavLink href={`#${runsId}`}>
                             최근 실행</SideNavLink>
                     </SideNav>
                 </AppSidebar>
                 <AppMain as="div" className="min-w-0 space-y-6">
                     <Dashboard>
-                        <div id="analytics-overview" className="space-y-4">
+                        <div id={overviewId} className="space-y-4">
                             <PageHeader level={2} size="compact"
                                 title="운영 현황"
                                 subtitle="작업 실행과 처리 결과를 확인합니다." />
@@ -196,9 +198,9 @@ function AnalyticsWorkspace() {
                                 target={5} max={runs.length} unit="건" />
                         </DashboardPanels>
                     </Dashboard>
-                    <section id="analytics-runs" className="space-y-3"
-                        aria-labelledby="analytics-runs-heading">
-                        <h3 id="analytics-runs-heading"
+                    <section id={runsId} className="space-y-3"
+                        aria-labelledby={`${runsId}-heading`}>
+                        <h3 data-ui="heading" id={`${runsId}-heading`}
                             className="text-lg font-semibold">최근 실행</h3>
                         <DataTable caption="최근 작업 실행"
                             rows={runs} columns={columns}

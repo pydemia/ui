@@ -1,6 +1,17 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import {
+    applyThemeToElement,
+    colorTokens,
+    colormaps,
+    createThemeAppliedMessage,
+    createThemeInvalidatedMessage,
+    getDesignMode,
+    parseThemeUrl,
+    readThemeMessage,
+    resolveThemeSettings,
+    type ColorOverrides,
+    type ThemeSettings,
     AffixedInput,
     Badge,
     Button,
@@ -17,7 +28,7 @@ import {
     TableHead,
 } from "@pydemia/ui";
 import { ArrowRight, Check, Moon, Search, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "./app.css";
 
 const requests = [
@@ -35,34 +46,27 @@ const commands = {
     api: 'import { Snippet, SnippetContent } from "@pydemia/ui";\nimport "@pydemia/ui/styles.css";',
 };
 
-const colormapIds = ["neutral", "pydemia", "ocean", "forest", "violet"] as const;
-const colorTokens = [
-    "--background", "--surface", "--surface-subtle", "--foreground",
-    "--muted", "--border", "--accent", "--accent-foreground",
-    "--focus", "--danger", "--success", "--warning",
-    "--message-user-background",
-    "--message-user-foreground",
-] as const;
-type ColorToken = (typeof colorTokens)[number];
-type ColorOverrides = Record<"light" | "dark", Partial<Record<ColorToken, string>>>;
-
+const themeOptions = { allowUnreleased: import.meta.env.DEV };
+const initialSettings = parseThemeUrl(
+    new URL(window.location.href), themeOptions,
+).settings;
 const hexColor = /^#[0-9a-fA-F]{6}$/;
-const initialParams = new URLSearchParams(window.location.search);
-const initialColormap = colormapIds.find(
-    (id) => id === initialParams.get("colormap"),
-) ?? "neutral";
-const initialOverrides: ColorOverrides = { light: {}, dark: {} };
-for (const mode of ["light", "dark"] as const) {
-    for (const token of colorTokens) {
-        const value = initialParams.get(`${mode}.${token.slice(2)}`);
-        if (value && hexColor.test(value)) initialOverrides[mode][token] = value;
-    }
-}
 
 function App() {
-    const [dark, setDark] = useState(initialParams.get("mode") === "dark");
-    const [colormap, setColormap] = useState<(typeof colormapIds)[number]>(initialColormap);
-    const [colorOverrides, setColorOverrides] = useState<ColorOverrides>(initialOverrides);
+    const [theme, setTheme] = useState<{
+        settings: ThemeSettings; revision: number | null;
+    }>({ settings: initialSettings, revision: null });
+    const latestRevision = useRef(-1);
+    const appliedTheme = useRef<typeof theme | null>(null);
+    const dark = theme.settings.appearance === "dark";
+    function setDark(value: boolean) {
+        setTheme((current) => ({
+            settings: resolveThemeSettings({
+                ...current.settings, appearance: value ? "dark" : "light",
+            }, themeOptions).settings,
+            revision: null,
+        }));
+    }
     const [query, setQuery] = useState("");
     const [scope, setScope] = useState("registry");
     const [reviewed, setReviewed] = useState(false);
@@ -73,50 +77,84 @@ function App() {
         ),
     );
 
-    useEffect(() => {
-        const root = document.documentElement;
-        root.classList.toggle("dark", dark);
-        root.dataset.colormap = colormap;
-        for (const token of colorTokens) {
-            const paletteToken = token.replace("--", "--palette-");
-            const color = colorOverrides[dark ? "dark" : "light"][token];
-            if (color) root.style.setProperty(paletteToken, color);
-            else root.style.removeProperty(paletteToken);
+    useLayoutEffect(() => {
+        const cleanup = applyThemeToElement(
+            document.documentElement, theme.settings, themeOptions,
+        );
+        appliedTheme.current = theme;
+        // Acknowledge only after this exact revision has reached the DOM.
+        if (theme.revision !== null && theme.revision === latestRevision.current) {
+            window.parent.postMessage(
+                createThemeAppliedMessage(theme.revision), window.location.origin,
+            );
+        } else if (theme.revision === null && latestRevision.current >= 0 &&
+            window.parent !== window) {
+            window.parent.postMessage(
+                createThemeInvalidatedMessage(latestRevision.current),
+                window.location.origin,
+            );
         }
         return () => {
-            root.classList.remove("dark");
-            delete root.dataset.colormap;
-            for (const token of colorTokens) {
-                root.style.removeProperty(token.replace("--", "--palette-"));
-            }
+            appliedTheme.current = null;
+            cleanup();
         };
-    }, [dark, colormap, colorOverrides]);
+    }, [theme]);
 
     useEffect(() => {
-        function receiveColormap(event: MessageEvent) {
+        function receiveTheme(event: MessageEvent) {
             if (event.origin !== window.location.origin ||
-                event.source !== window.parent ||
+                event.source !== window.parent) return;
+            const message = readThemeMessage(
+                event.data, latestRevision.current, themeOptions,
+            );
+            if (message) {
+                // Advance synchronously so queued messages cannot regress state.
+                latestRevision.current = message.revision;
+                setTheme({ settings: message.settings, revision: message.revision });
+                return;
+            }
+            // An onLoad retry can repeat an already applied revision. Acknowledge
+            // only an identical payload still present in the DOM; never reapply it.
+            const retry = readThemeMessage(
+                event.data, latestRevision.current - 1, themeOptions,
+            );
+            if (retry && retry.revision === appliedTheme.current?.revision &&
+                JSON.stringify(retry.settings) ===
+                JSON.stringify(appliedTheme.current.settings)) {
+                window.parent.postMessage(
+                    createThemeAppliedMessage(retry.revision), window.location.origin,
+                );
+                return;
+            }
+            // Stale revisions receive no ack. Legacy stops after modern.
+            if (latestRevision.current >= 0 ||
                 typeof event.data !== "object" || event.data === null ||
                 event.data.type !== "pydemia-ui-colormap" ||
-                !colormapIds.includes(event.data.colormap)) return;
-
-            const next: ColorOverrides = { light: {}, dark: {} };
-            for (const mode of ["light", "dark"] as const) {
-                const colors = event.data.overrides?.[mode];
+                !colormaps.some(({ id }) => id === event.data.colormap)) return;
+            const overrides: ColorOverrides = { light: {}, dark: {} };
+            for (const appearance of ["light", "dark"] as const) {
+                const colors = event.data.overrides?.[appearance];
                 if (!colors || typeof colors !== "object") continue;
-                for (const token of colorTokens) {
+                for (const { token } of colorTokens) {
                     const color = colors[token];
                     if (typeof color === "string" && hexColor.test(color)) {
-                        next[mode][token] = color;
+                        overrides[appearance][token] = color;
                     }
                 }
             }
-            setColormap(event.data.colormap);
-            setColorOverrides(next);
-            if (typeof event.data.dark === "boolean") setDark(event.data.dark);
+            setTheme((current) => ({
+                settings: resolveThemeSettings({
+                    version: 1, design: "basic", colormap: event.data.colormap,
+                    appearance: typeof event.data.dark === "boolean"
+                        ? event.data.dark ? "dark" : "light"
+                        : current.settings.appearance,
+                    overrides,
+                }, themeOptions).settings,
+                revision: null,
+            }));
         }
-        window.addEventListener("message", receiveColormap);
-        return () => window.removeEventListener("message", receiveColormap);
+        window.addEventListener("message", receiveTheme);
+        return () => window.removeEventListener("message", receiveTheme);
     }, []);
 
     return (
@@ -141,7 +179,7 @@ function App() {
             <main className="mx-auto max-w-6xl px-5 py-8 md:py-12">
                 <div className="mb-8 border-b border-border pb-6">
                     <p className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-accent">Developer tool / prototype</p>
-                    <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">Registry review</h1>
+                    <h1 data-ui="heading" className="text-2xl font-semibold tracking-tight md:text-3xl">Registry review</h1>
                     <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
                         제품 화면에 필요한 컴포넌트 요청을 검토하고 내부 registry에
                         추가하는 흐름의 예시입니다. 아래 요청과 상태는 데모 데이터입니다.
@@ -201,7 +239,9 @@ function App() {
                     <section aria-labelledby="profile-heading" className="min-w-0 space-y-5">
                         <div>
                             <h2 id="profile-heading" className="text-lg font-semibold">Normalization preview</h2>
-                            <p className="mt-1 text-sm text-muted">Neutral Product / compact density</p>
+                            <p className="mt-1 text-sm text-muted">
+                                {getDesignMode(theme.settings.design).name} / {dark ? "Dark" : "Light"}
+                            </p>
                         </div>
                         <div className="space-y-5 rounded-sm border border-border bg-surface p-5 shadow-[var(--shadow-float)]">
                             <div className="flex items-start justify-between gap-3 border-b border-border pb-4">
@@ -246,6 +286,8 @@ function App() {
     );
 }
 
-createRoot(document.getElementById("root")!).render(
+const root = createRoot(document.getElementById("root")!);
+import.meta.hot?.dispose(() => root.unmount());
+root.render(
     <React.StrictMode><App /></React.StrictMode>,
 );

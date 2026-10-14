@@ -23,6 +23,8 @@ function Badge({
 
     return (
         <span
+            data-ui="badge"
+            data-variant={variant}
             className={cn(
                 "inline-flex items-center rounded-sm border px-2 py-0.5 " +
                 "text-xs font-medium",

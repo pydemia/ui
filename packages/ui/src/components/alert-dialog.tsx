@@ -1,6 +1,7 @@
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
+import { usePortalContainer } from "./foundation/portal-scope";
 
 const AlertDialog = AlertDialogPrimitive.Root;
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
@@ -8,15 +9,19 @@ const AlertDialogAction = AlertDialogPrimitive.Action;
 const AlertDialogCancel = AlertDialogPrimitive.Cancel;
 
 function AlertDialogContent({
+    container,
     className,
     ...props
-}: ComponentProps<typeof AlertDialogPrimitive.Content>) {
+}: ComponentProps<typeof AlertDialogPrimitive.Content> &
+    Pick<ComponentProps<typeof AlertDialogPrimitive.Portal>, "container">) {
+    const portalContainer = usePortalContainer(container);
     return (
-        <AlertDialogPrimitive.Portal>
+        <AlertDialogPrimitive.Portal container={portalContainer}>
             <AlertDialogPrimitive.Overlay
                 className="fixed inset-0 z-50 bg-[var(--overlay)]"
             />
             <AlertDialogPrimitive.Content
+                data-ui="overlay-panel"
                 className={cn(
                     "fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] " +
                     "w-[calc(100vw-2rem)] max-w-lg -translate-x-1/2 " +
@@ -50,6 +55,7 @@ function AlertDialogTitle({
 }: ComponentProps<typeof AlertDialogPrimitive.Title>) {
     return (
         <AlertDialogPrimitive.Title
+            data-ui="heading"
             className={cn("text-base font-semibold", className)}
             {...props}
         />

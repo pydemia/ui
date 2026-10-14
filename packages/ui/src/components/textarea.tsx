@@ -14,6 +14,7 @@ function Textarea({
 
     return (
         <textarea
+            data-ui="textarea"
             data-appearance={appearance}
             className={cn(
                 "min-h-24 w-full min-w-0 rounded-sm border border-border " +

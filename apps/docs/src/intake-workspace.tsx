@@ -152,7 +152,7 @@ function IntakeWorkspace() {
     }
 
     return (
-        <div className="grid min-w-0 gap-5 p-[var(--space-4)]">
+        <div data-ui="workspace-intake" className="grid min-w-0 gap-5 p-[var(--space-4)]">
             <PageHeader level={2} size="compact" title="요청 접수"
                 subtitle="단계별 입력을 마치면 아래 목록에 즉시 반영됩니다." />
             <div className="grid min-w-0 items-start gap-5 xl:grid-cols-2">

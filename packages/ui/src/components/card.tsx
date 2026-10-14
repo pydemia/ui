@@ -32,6 +32,7 @@ function Card({
 
     return (
         <div
+            data-ui="card"
             className={cn(
                 "rounded-sm border text-foreground",
                 cardVariants[variant], cardSizes[size],
@@ -58,7 +59,7 @@ function CardHeader({ className, ...props }: ComponentProps<"div">) {
 }
 
 function CardTitle({ className, ...props }: ComponentProps<"div">) {
-    return <div className={cn("font-semibold", className)} {...props} />;
+    return <div data-ui="heading" className={cn("font-semibold", className)} {...props} />;
 }
 
 function CardDescription({ className, ...props }: ComponentProps<"div">) {

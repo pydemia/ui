@@ -10,11 +10,13 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./styles.css": "./src/styles.css"
+    "./styles.css": "./src/styles.css",
+    "./design-modes.css": "./src/design-modes.css"
   },
   "files": [
     "dist",
-    "src/styles.css"
+    "src/styles.css",
+    "src/design-modes.css"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --platform=neutral --format=esm --packages=external --jsx=automatic --outfile=dist/index.js",

@@ -72,6 +72,8 @@ jobs:
         if: steps.scope.outputs.full == 'true'
       - run: npm run test -w @pydemia/ui
         if: steps.scope.outputs.full == 'true'
+      - run: npm run test -w @pydemia/docs
+        if: steps.scope.outputs.full == 'true'
       - run: npm run build
         if: steps.scope.outputs.full == 'true'
       - name: Verify PRISM contracts and registry

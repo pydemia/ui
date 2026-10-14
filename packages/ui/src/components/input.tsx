@@ -15,6 +15,7 @@ function Input({
     return (
         <input
             type={type}
+            data-ui="input"
             data-appearance={appearance}
             className={cn(
                 "h-[var(--control-height)] w-full min-w-0 rounded-sm border " +

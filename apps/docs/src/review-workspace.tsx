@@ -98,7 +98,7 @@ function ReviewWorkspace() {
     }
 
     return (
-        <div className="min-w-0 space-y-4 p-[var(--space-4)]">
+        <div data-ui="workspace-review" className="min-w-0 space-y-4 p-[var(--space-4)]">
             <PageHeader level={2} size="compact" title="변경 요청 검토"
                 subtitle="변경 내용을 비교하고 의견과 결정을 남깁니다." />
             <div className="flex min-w-0 flex-wrap items-end gap-3">
@@ -147,7 +147,7 @@ function ReviewWorkspace() {
                                 "flex flex-wrap items-center " +
                                 "justify-between gap-2"
                             }>
-                                <h3 className="m-0 text-base font-semibold">
+                                <h3 data-ui="heading" className="m-0 text-base font-semibold">
                                     {request.title}
                                 </h3>
                                 <Badge>{statusText[statuses[request.id]]}</Badge>

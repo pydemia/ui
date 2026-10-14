@@ -16,6 +16,7 @@ function NativeSelect({
     return (
         <div className="relative w-full">
             <select
+                data-ui="native-select"
                 data-appearance={appearance}
                 className={cn(
                     "h-[var(--control-height)] w-full appearance-none rounded-sm " +

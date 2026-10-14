@@ -5,6 +5,7 @@ import { basename, join, posix } from "node:path";
 import { fileURLToPath } from "node:url";
 import ts from "typescript";
 import { shadcnSourceRecords } from "./shadcn-sources.mjs";
+import { registryTarget } from "./registry-target.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
@@ -193,15 +194,7 @@ for (const item of registry.items) {
             sourceContent,
             `Compiled source differs for ${item.name}: ${entry.path}`,
         );
-        let target;
-        if (entry.path === "packages/ui/src/styles.css") {
-            target = "@ui/tokens.css";
-        } else if (entry.path === noticePath) {
-            target = noticeTarget;
-        } else {
-            target = `@ui/${basename(entry.path)}`;
-        }
-        assert.equal(entry.target, target);
+        assert.equal(entry.target, registryTarget(entry.path));
         if (entry.path === noticePath) {
             assert.equal(entry.content, noticeContent);
         }
@@ -214,7 +207,8 @@ const sourceIds = readdirSync(join(root, componentPath))
     .map((name) => name.slice(0, -4)).sort();
 const registryComponents = registry.items.flatMap((item) =>
     item.files.filter((entry) =>
-        entry.path.startsWith(componentPath) && entry.path.endsWith(".tsx"),
+        entry.path.startsWith(componentPath) && entry.path.endsWith(".tsx") &&
+        !entry.path.slice(componentPath.length).includes("/"),
     ).map((entry) => ({ id: basename(entry.path, ".tsx"), name: item.name })),
 );
 const registryIds = registryComponents.map((entry) => entry.id).sort();
@@ -231,7 +225,8 @@ const exportIds = [...new Set(index.statements
         const specifier = statement.moduleSpecifier;
         if (!specifier || !ts.isStringLiteral(specifier) ||
             !specifier.text.startsWith("./components/")) return [];
-        return [specifier.text.slice("./components/".length)];
+        const relative = specifier.text.slice("./components/".length);
+        return relative.includes("/") ? [] : [relative];
     }))].sort();
 const exportOwners = new Map();
 for (const statement of index.statements) {
@@ -241,9 +236,12 @@ for (const statement of index.statements) {
         !statement.moduleSpecifier.text.startsWith("./components/") ||
         !statement.exportClause ||
         !ts.isNamedExports(statement.exportClause)) continue;
-    const owner = `pyd-${statement.moduleSpecifier.text.slice(
-        "./components/".length,
-    )}`;
+    const sourcePath = `packages/ui/src/${statement.moduleSpecifier.text.slice(2)}`;
+    const owners = sourceOwners.get(`${sourcePath}.tsx`) ??
+        sourceOwners.get(`${sourcePath}.ts`);
+    assert.equal(owners?.size, 1,
+        `Public export needs a unique registry owner: ${sourcePath}`);
+    const owner = [...owners][0];
     for (const symbol of statement.exportClause.elements) {
         assert(!exportOwners.has(symbol.name.text),
             `Duplicate public export: ${symbol.name.text}`);
@@ -253,6 +251,13 @@ for (const statement of index.statements) {
 const registryItems = new Map(registry.items.map((item) =>
     [item.name, item],
 ));
+for (const name of readdirSync(join(root, componentPath, "foundation"))) {
+    if (!/\.tsx?$/.test(name)) continue;
+    const sourcePath = `${componentPath}foundation/${name}`;
+    assert.equal(sourceOwners.get(sourcePath)?.size, 1,
+        `Foundation source needs one registry owner: ${sourcePath}`);
+    assert.equal(registryTarget(sourcePath), `@ui/foundation/${name}`);
+}
 const catalogPath = join(root, "apps/docs/src/catalog.tsx");
 const catalog = ts.createSourceFile(
     catalogPath, readFileSync(catalogPath, "utf8"),

@@ -3,6 +3,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, Github, Moon, Sun } from "lucide-react";
 import {
     Badge, ColorInput, Snippet, SnippetContent, SnippetCopyButton,
+    colorTokens, colormaps, getDesignMode, resolveThemeTokens, writeThemeUrl,
+    applyThemeToElement, parseThemeUrl,
+    type ColorToken, type PaletteId,
     SnippetHeader, SnippetTabsList, SnippetTabsTrigger,
     Popover, PopoverContent, PopoverTrigger,
 } from "@pydemia/ui";
@@ -11,68 +14,14 @@ import { AnalyticsWorkspace } from "./analytics-workspace";
 import { IntakeWorkspace } from "./intake-workspace";
 import { ReviewWorkspace } from "./review-workspace";
 import { catalog } from "./catalog";
+import { useThemeController } from "./theme/controller";
+import { useProfileBridge } from "./theme/profile-bridge";
+import { DesignModePicker } from "./components/design-mode-picker";
+import "@pydemia/ui/design-modes.css";
 import "./styles.css";
 
-const colorTokens = [
-    { name: "Background", token: "--background" },
-    { name: "Surface", token: "--surface" },
-    { name: "Surface subtle", token: "--surface-subtle" },
-    { name: "Foreground", token: "--foreground" },
-    { name: "Muted", token: "--muted" },
-    { name: "Border", token: "--border" },
-    { name: "Accent", token: "--accent" },
-    { name: "Accent text", token: "--accent-foreground" },
-    { name: "Focus", token: "--focus" },
-    { name: "Danger", token: "--danger" },
-    { name: "Success", token: "--success" },
-    { name: "Warning", token: "--warning" },
-    { name: "User message", token: "--message-user-background" },
-    { name: "User message text", token: "--message-user-foreground" },
-] as const;
-
-const colormaps = [
-    {
-        id: "neutral", name: "Neutral", description: "기존 청록",
-        colors: {
-            light: ["#f7f8fa", "#245d70", "#103344"],
-            dark: ["#131a21", "#83bfd2", "#245d70"],
-        },
-    },
-    {
-        id: "pydemia", name: "Pydemia", description: "로고 네이비·로즈",
-        colors: {
-            light: ["#f7f9fb", "#ba365b", "#103344"],
-            dark: ["#111a24", "#f19ab1", "#20465d"],
-        },
-    },
-    {
-        id: "ocean", name: "Ocean", description: "선명한 파랑",
-        colors: {
-            light: ["#f5f8fc", "#205ca3", "#163f70"],
-            dark: ["#111b2b", "#8fc0ff", "#285d96"],
-        },
-    },
-    {
-        id: "forest", name: "Forest", description: "차분한 초록",
-        colors: {
-            light: ["#f5f8f4", "#25684a", "#174a38"],
-            dark: ["#121e19", "#91d4aa", "#276348"],
-        },
-    },
-    {
-        id: "violet", name: "Violet", description: "절제된 보라",
-        colors: {
-            light: ["#faf7fc", "#68438e", "#4e326e"],
-            dark: ["#1d1726", "#d2a4f1", "#67418a"],
-        },
-    },
-] as const;
-
-type ColorToken = (typeof colorTokens)[number]["token"];
-type ColormapId = (typeof colormaps)[number]["id"];
-type ColorOverrides = Record<"light" | "dark", Partial<Record<ColorToken, string>>>;
-
 const hexColor = /^#[0-9a-fA-F]{6}$/;
+const profilePath = import.meta.env.DEV ? "profile-qa.html" : "examples/profile/index.html";
 const contrastPairs = [
     { name: "본문", foreground: "--foreground", background: "--background" },
     { name: "Accent", foreground: "--accent-foreground", background: "--accent" },
@@ -148,18 +97,21 @@ function App() {
         sidebarCategories[0],
     );
     const [componentMenuOpen, setComponentMenuOpen] = useState(false);
-    const [dark, setDark] = useState(false);
-    const [colormap, setColormap] = useState<ColormapId>("neutral");
-    const [overrides, setOverrides] = useState<ColorOverrides>({ light: {}, dark: {} });
-    const [values, setValues] = useState<Record<string, string>>({});
+    const theme = useThemeController({ allowUnreleased: import.meta.env.DEV });
+    const { settings, notice, resetOverrides } = theme;
+    const { colormap, overrides, appearance: mode } = settings;
+    const dark = mode === "dark";
+    const values = Object.fromEntries(Object.entries(theme.values).map(([token, value]) => [token, expandHex(value)]));
+    const shape = resolveThemeTokens(settings, { allowUnreleased: import.meta.env.DEV });
     const exampleFrame = useRef<HTMLIFrameElement>(null);
+    const profileBridge = useProfileBridge(exampleFrame, settings, theme.revision,
+        { allowUnreleased: import.meta.env.DEV });
     const sidebarInner = useRef<HTMLDivElement>(null);
     const mobileScroll = useRef<{ pageY: number; sidebarX: number } | null>(null);
     const mobileRestoreFrame = useRef<number | null>(null);
     const pointerScroll = useRef<{
         id: string; pageY: number; sidebarX: number;
     } | null>(null);
-    const mode = dark ? "dark" : "light";
     const hasOverrides = Object.values(overrides).some(
         (colors) => Object.keys(colors).length > 0,
     );
@@ -176,6 +128,7 @@ function App() {
         ).href)
         .join(" ");
     const tokensUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-tokens.json`, window.location.origin).href;
+    const designModesUrl = new URL(`${import.meta.env.BASE_URL}r/pyd-design-modes.json`, window.location.origin).href;
     const analyticsUrls = analyticsItems.map((item) => new URL(
         `${import.meta.env.BASE_URL}r/pyd-${item}.json`,
         window.location.origin,
@@ -188,53 +141,17 @@ function App() {
         `${import.meta.env.BASE_URL}r/pyd-${item}.json`,
         window.location.origin,
     ).href).join(" ");
-    const exampleUrl = new URL(
-        `${import.meta.env.BASE_URL}examples/profile/index.html`,
+    const exampleUrl = writeThemeUrl(new URL(
+        `${import.meta.env.BASE_URL}${profilePath}`,
         window.location.origin,
-    );
-    exampleUrl.searchParams.set("colormap", colormap);
-    if (dark) exampleUrl.searchParams.set("mode", "dark");
-    for (const theme of ["light", "dark"] as const) {
-        for (const [token, value] of Object.entries(overrides[theme])) {
-            exampleUrl.searchParams.set(`${theme}.${token.slice(2)}`, value);
-        }
-    }
-
-    useEffect(() => {
-        const root = document.documentElement;
-        root.classList.toggle("dark", dark);
-        root.dataset.colormap = colormap;
-        for (const { token } of colorTokens) {
-            const paletteToken = token.replace("--", "--palette-");
-            const override = overrides[mode][token];
-            if (override) root.style.setProperty(paletteToken, override);
-            else root.style.removeProperty(paletteToken);
-        }
-        const styles = getComputedStyle(root);
-        setValues(Object.fromEntries(colorTokens.map(({ token }) => [
-            token, expandHex(styles.getPropertyValue(token)),
-        ])));
-        return () => {
-            root.classList.remove("dark");
-            delete root.dataset.colormap;
-            for (const { token } of colorTokens) {
-                root.style.removeProperty(token.replace("--", "--palette-"));
-            }
-        };
-    }, [dark, colormap, mode, overrides]);
-
-    useEffect(() => {
-        sendColormapToExample();
-    }, [dark, colormap, overrides]);
+    ), settings, { allowUnreleased: import.meta.env.DEV });
 
     useEffect(() => {
         const handleHistory = () => {
             const id = new URLSearchParams(window.location.search).get("component");
-            const entry = catalog.find((item) => item.id === id);
-            if (entry) {
-                setSelectedId(entry.id);
-                setMenuCategory(entry.category);
-            }
+            const entry = catalog.find((item) => item.id === id) ?? catalog.find((item) => item.id === "button")!;
+            setSelectedId(entry.id);
+            setMenuCategory(entry.category);
         };
         window.addEventListener("popstate", handleHistory);
         return () => window.removeEventListener("popstate", handleHistory);
@@ -316,32 +233,9 @@ function App() {
         };
     }
 
-    function sendColormapToExample() {
-        exampleFrame.current?.contentWindow?.postMessage(
-            { type: "pydemia-ui-colormap", colormap, dark, overrides },
-            window.location.origin,
-        );
-    }
-
-    function selectColormap(id: ColormapId) {
-        setColormap(id);
-        resetOverrides();
-    }
-
-    function resetOverrides() {
-        setOverrides({ light: {}, dark: {} });
-    }
-
-    function toggleDark() {
-        setDark((current) => !current);
-    }
-
-    function setColor(token: ColorToken, value: string) {
-        setOverrides((current) => ({
-            ...current,
-            [mode]: { ...current[mode], [token]: value.toLowerCase() },
-        }));
-    }
+    function selectColormap(id: PaletteId) { theme.setColormap(id); }
+    function toggleDark() { theme.setAppearance(dark ? "light" : "dark"); }
+    function setColor(token: ColorToken, value: string) { theme.setOverride(token, value); }
 
     return (
         <div className="site-shell">
@@ -420,6 +314,8 @@ function App() {
                             <ArrowUpRight size={14} aria-hidden="true" />
                         </a>
                     </nav>
+                    <DesignModePicker settings={settings} onCommit={theme.commitDesign}
+                        getCandidateSettings={theme.previewDesign} allowUnreleased={import.meta.env.DEV} />
                     <button className="theme-button" type="button" aria-label={dark ? "라이트 모드로 전환" : "다크 모드로 전환"} onClick={toggleDark}>{dark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}</button>
                 </div>
             </header>
@@ -464,6 +360,7 @@ function App() {
                 </aside>
 
                 <main id="main" className="main-content">
+                    {notice && <p className="theme-notice" role="status">{notice}</p>}
                     <section id="overview" className="intro" aria-labelledby="page-heading">
                         <div className="eyebrow"><span className="eyebrow-line" /> DESIGN SYSTEM / OPEN CODE</div>
                         <div className="intro-head"><div><h1 id="page-heading">pydemia UI</h1><p>소스 코드를 직접 관리하는 React 컴포넌트와 검토된 내부 registry입니다.<br className="desktop-break" /> 같은 토큰을 쓰는 컴포넌트, 코드, 실제 사용 예시를 한곳에서 확인할 수 있습니다.</p></div><div className="intro-count"><strong>{String(catalog.length).padStart(2, "0")}</strong><span>COMPONENTS<br />IN THE PROTOTYPE</span></div></div>
@@ -480,7 +377,7 @@ function App() {
                                 "resizable-panels",
                                 "sidebar", "stepper",
                             ].includes(selected.id) ? "true" : undefined}>
-                            <div className="preview-panel"><div className="panel-caption"><span>LIVE PREVIEW</span><span>Neutral Product</span></div><div className="preview-stage">{selected.preview()}</div></div>
+                            <div className="preview-panel"><div className="panel-caption"><span>LIVE PREVIEW</span><span>{getDesignMode(settings.design).name} · {mode}</span></div><div className="preview-stage">{selected.preview()}</div></div>
                             <div className="code-panel"><div className="panel-caption"><span>REACT / TSX</span><span>Copy ready</span></div><Snippet className="docs-snippet" defaultValue="usage"><SnippetHeader><SnippetTabsList aria-label="코드 예시"><SnippetTabsTrigger value="usage">Usage</SnippetTabsTrigger></SnippetTabsList><SnippetCopyButton value={selected.code} /></SnippetHeader><SnippetContent value="usage">{selected.code}</SnippetContent></Snippet></div>
                         </div>
                         <div className="component-meta">
@@ -521,6 +418,12 @@ function App() {
                             </div>
                         </div>
                         <div className="colormap-grid" role="group" aria-label="Colormap 선택">
+                            <button className="colormap-option" type="button"
+                                aria-pressed={colormap === "design"} onClick={() => selectColormap("design")}>
+                                <span className="colormap-preview" aria-hidden="true">
+                                    {["--background", "--accent", "--message-user-background"].map((token) => <span key={token} style={{ background: getDesignMode(settings.design).palettes[mode][token as ColorToken] }} />)}
+                                </span><strong>Design default</strong><small>디자인의 기본 팔레트</small>
+                            </button>
                             {colormaps.map((option) => (
                                 <button
                                     key={option.id}
@@ -550,6 +453,8 @@ function App() {
                                 disabled={!hasOverrides}
                                 onClick={resetOverrides}
                             >직접 조정 초기화</button>
+                            <button className="colormap-reset" type="button" onClick={theme.restoreColorProfile}>저장한 색상 조정 복원</button>
+                            <button className="colormap-reset" type="button" onClick={theme.resetTheme}>전체 테마 초기화</button>
                         </div>
                         <div className="colormap-fields">
                             {colorTokens.map(({ name, token }) => (
@@ -582,10 +487,10 @@ function App() {
 
                     <section id="tokens" className="doc-section tokens-section" aria-labelledby="tokens-heading"><div className="section-lead"><div><p className="section-index">03 / DESIGN TOKENS</p><h2 id="tokens-heading">Color & density</h2><p>컴포넌트와 예시 화면이 공유하는 semantic token입니다. 상단의 테마 버튼으로 light/dark 값을 비교할 수 있습니다.</p></div></div>
                         <div className="swatch-grid">{colorTokens.map(({ name, token }) => <div className="swatch" key={token}><div className="swatch-color" style={{ background: `var(${token})` }} /><div className="swatch-info"><strong>{name}</strong><code>{token}</code><span>{values[token] ?? "—"}</span></div></div>)}</div>
-                        <div className="token-detail"><div><span className="meta-label">RADIUS</span><strong>5px</strong><span>컴포넌트 기본 radius</span></div><div><span className="meta-label">CONTROL</span><strong>36px</strong><span>기본 입력 및 버튼 높이</span></div><div><span className="meta-label">SHADOW</span><strong>0 4px 16px</strong><span>부유 표면에만 사용</span></div><div><span className="meta-label">MOTION</span><strong>150ms</strong><span>reduced motion 설정 존중</span></div></div>
+                        <div className="token-detail"><div><span className="meta-label">RADIUS</span><strong>{shape["--radius"]}</strong><span>컴포넌트 기본 radius</span></div><div><span className="meta-label">CONTROL</span><strong>{shape["--density-control-height"]}</strong><span>기본 입력 및 버튼 높이</span></div><div><span className="meta-label">SHADOW</span><strong>{shape["--shadow-float"]}</strong><span>부유 표면에만 사용</span></div><div><span className="meta-label">MOTION</span><strong>{shape["--motion-fast"]}</strong><span>reduced motion 설정 존중</span></div></div>
                     </section>
 
-                    <section id="examples" className="doc-section" aria-labelledby="examples-heading"><div className="section-lead"><div><p className="section-index">04 / COMPOSED EXAMPLE</p><h2 id="examples-heading">Registry review</h2><p>입력, 표, 코드 블록을 조합한 요청 검토 화면입니다. 요청과 상태는 예시용이며 colormap도 위의 선택을 따릅니다.</p></div><a className="text-link" href={exampleUrl.href} target="_blank" rel="noreferrer">전체 화면으로 열기 <ArrowUpRight size={16} aria-hidden="true" /></a></div><div className="example-frame"><iframe ref={exampleFrame} title="pydemia UI registry review 예시 화면" src={`${import.meta.env.BASE_URL}examples/profile/index.html`} loading="lazy" onLoad={sendColormapToExample} /></div></section>
+                    <section id="examples" className="doc-section" aria-labelledby="examples-heading"><div className="section-lead"><div><p className="section-index">04 / COMPOSED EXAMPLE</p><h2 id="examples-heading">Registry review</h2><p>입력, 표, 코드 블록을 조합한 요청 검토 화면입니다. 요청과 상태는 예시용이며 colormap도 위의 선택을 따릅니다.</p></div><a className="text-link" href={exampleUrl.href} target="_blank" rel="noreferrer">전체 화면으로 열기 <ArrowUpRight size={16} aria-hidden="true" /></a></div><div className="example-frame"><iframe ref={exampleFrame} title="pydemia UI registry review 예시 화면" src={`${import.meta.env.BASE_URL}${profilePath}`} loading="lazy" onLoad={profileBridge.send} /></div><p className="section-note" role="status">{profileBridge.status === "applied" ? "예시에 현재 디자인을 적용했습니다." : profileBridge.status === "waiting" ? "예시의 디자인 적용을 확인하고 있습니다." : profileBridge.status === "changed" ? "예시에서 밝기를 바꿨습니다. 문서 설정을 다시 적용할 수 있습니다." : "예시의 디자인 적용을 확인하지 못했습니다."}{(profileBridge.status === "unavailable" || profileBridge.status === "changed") && <button type="button" className="colormap-reset" onClick={profileBridge.send}>다시 연결</button>}</p></section>
                     <section id="analytics-example" className="doc-section" aria-labelledby="analytics-heading">
                         <div className="section-lead">
                             <div>
@@ -670,7 +575,35 @@ function App() {
                         </details>
                     </section>
 
-                    <section id="installation" className="doc-section usage-section" aria-labelledby="usage-heading"><div className="section-lead"><div><p className="section-index">08 / USING THE SOURCE</p><h2 id="usage-heading">코드 사용</h2><p>현재 패키지는 이 저장소의 private workspace package이며 npm registry에 게시되지 않았습니다. 소스에서 실행하거나 필요한 컴포넌트를 registry로 복사할 수 있습니다.</p></div></div><div className="usage-columns"><div><h3>Repository</h3><p>소스를 내려받아 문서와 예시 화면을 실행합니다.</p><pre><code>git clone https://github.com/pydemia/ui.git{"\n"}cd ui &amp;&amp; npm ci{"\n"}npm run build &amp;&amp; npm run dev</code></pre></div><div><h3>Registry</h3><p>컴포넌트와 token stylesheet를 설치한 뒤 앱의 CSS에서 <code>tokens.css</code>를 import합니다.</p><pre><code>npx shadcn@4.21.0 add {registryUrls}{"\n"}npx shadcn@4.21.0 add {tokensUrl}</code></pre><pre><code>@import "./components/ui/tokens.css";</code></pre></div></div><p className="section-note">위 Usage 코드는 private package import입니다. registry 소비자는 설치된 파일 경로로 import를 바꿔야 합니다. 로컬 registry 설치 검사는 README의 base URL 설정 후 빌드해야 합니다.</p></section>
+                    <section id="installation" className="doc-section usage-section" aria-labelledby="usage-heading">
+                        <div className="section-lead"><div>
+                            <p className="section-index">08 / USING THE SOURCE</p>
+                            <h2 id="usage-heading">코드 사용</h2>
+                            <p>현재 패키지는 이 저장소의 private workspace package이며 npm registry에 게시되지 않았습니다. 소스에서 실행하거나 필요한 컴포넌트를 registry로 복사할 수 있습니다.</p>
+                        </div></div>
+                        <div className="usage-columns">
+                            <div><h3>Repository</h3><p>소스를 내려받아 문서와 예시 화면을 실행합니다.</p>
+                                <pre><code>git clone https://github.com/pydemia/ui.git{"\n"}cd ui &amp;&amp; npm ci{"\n"}npm run build &amp;&amp; npm run dev</code></pre>
+                            </div>
+                            <div><h3>Registry</h3>
+                                <p>컴포넌트와 token stylesheet를 설치한 뒤 앱의 CSS에서 <code>tokens.css</code>를 import합니다.</p>
+                                <pre><code>npx shadcn@4.21.0 add {registryUrls}{"\n"}npx shadcn@4.21.0 add {tokensUrl}</code></pre>
+                                <pre><code>@import "./components/ui/tokens.css";</code></pre>
+                            </div>
+                        </div>
+                        <div className="usage-columns">
+                            <div><h3>Design mode 설치</h3>
+                                <p>형태·재질·지역 테마를 쓰려면 디자인 항목도 설치하고 optional CSS를 연결합니다. 필요한 컴포넌트는 별도로 설치합니다.</p>
+                                <pre><code>npx shadcn@4.21.0 add {designModesUrl}</code></pre>
+                                <pre><code>{'@import "./components/ui/tokens.css";\n@import "./components/ui/design-modes.css";'}</code></pre>
+                            </div>
+                            <div><h3>지역 테마 사용</h3>
+                                <p>출시된 ID를 <code>releasedDesignModes</code>에서 선택합니다. ThemeScope 안의 portal은 같은 설정을 따르며, 테마 전환 시 업무 화면의 key를 바꾸지 않습니다.</p>
+                                <pre><code>{'import { ThemeScope } from "./components/ui/foundation/theme-scope";\n\n<ThemeScope settings={{ design: "basic", appearance: "light", colormap: "neutral" }}>\n  <YourWorkspace />\n</ThemeScope>'}</code></pre>
+                            </div>
+                        </div>
+                        <p className="section-note">위 Usage 코드는 private package import입니다. registry 소비자는 설치된 파일 경로로 import를 바꿔야 합니다. 로컬 registry 설치 검사는 README의 base URL 설정 후 빌드해야 합니다.</p>
+                    </section>
                     <footer className="footer"><span>pydemia UI · prototype v0.1.0</span><a href="https://github.com/pydemia/ui/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noreferrer">Third-party notices</a></footer>
                 </main>
             </div>
@@ -684,5 +617,9 @@ import.meta.hot?.dispose(() => { disposed = true; root.unmount(); });
 if (location.pathname === "/prism" || location.pathname.startsWith("/prism/")) {
     import("./prism/page").then(({ mountPrism }) => { if (!disposed) mountPrism(root); });
 } else {
+    const bootOptions = { allowUnreleased: import.meta.env.DEV };
+    const restoreBootstrap = applyThemeToElement(document.documentElement,
+        parseThemeUrl(new URL(window.location.href), bootOptions).settings, bootOptions);
+    import.meta.hot?.dispose(restoreBootstrap);
     root.render(<App />);
 }

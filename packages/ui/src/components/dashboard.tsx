@@ -14,6 +14,7 @@ function Dashboard({
 
     return (
         <div
+            data-ui="dashboard"
             data-density={density}
             className={cn(
                 "@container grid min-w-0",
@@ -52,6 +53,7 @@ function DashboardMetrics({
 
     return (
         <section
+            data-ui="dashboard-metrics"
             data-columns={columns}
             className={cn(
                 "grid min-w-0 grid-cols-1 " +
@@ -83,6 +85,7 @@ function DashboardPanels({
 
     return (
         <section
+            data-ui="dashboard-panels"
             data-layout={layout}
             className={cn(
                 "grid min-w-0 grid-cols-1 items-start " +

@@ -1,6 +1,7 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
+import { usePortalContainer } from "./foundation/portal-scope";
 
 const Drawer = DialogPrimitive.Root;
 const DrawerTrigger = DialogPrimitive.Trigger;
@@ -8,13 +9,16 @@ const DrawerClose = DialogPrimitive.Close;
 const DrawerTitle = DialogPrimitive.Title;
 const DrawerDescription = DialogPrimitive.Description;
 
-type DrawerContentProps = ComponentProps<typeof DialogPrimitive.Content> & {
+type DrawerContentProps = ComponentProps<typeof DialogPrimitive.Content> &
+    Pick<ComponentProps<typeof DialogPrimitive.Portal>, "container"> & {
     side?: "left" | "right" | "bottom";
 };
 
 function DrawerContent({
+    container,
     side = "right", className, children, ...props
 }: DrawerContentProps) {
+    const portalContainer = usePortalContainer(container);
     const position = {
         left: "inset-y-0 left-0 w-[min(26rem,calc(100vw-2rem))]",
         right: "inset-y-0 right-0 w-[min(26rem,calc(100vw-2rem))]",
@@ -22,11 +26,12 @@ function DrawerContent({
     }[side];
 
     return (
-        <DialogPrimitive.Portal>
+        <DialogPrimitive.Portal container={portalContainer}>
             <DialogPrimitive.Overlay
                 className="fixed inset-0 z-50 bg-[var(--overlay)]"
             />
             <DialogPrimitive.Content
+                data-ui="drawer-panel"
                 className={cn(
                     "fixed z-50 overflow-y-auto border border-border " +
                     "bg-surface p-[var(--space-6)] text-foreground " +
