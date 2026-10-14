@@ -161,3 +161,15 @@
   수정 전 후보다. 새 source의 pipeline와 소비자 검증을 이어간다.
 - 운영은 아직 main6ea262ef/READY다. feature 공개 완료로 보고하지 않는다.
   완료율9/14=64.3%, Basic released/20 ready 유지.
+
+## R4 산출물과 원격 보존 준비
+
+- source16af79a2, UI300/docs15/PRISM363/typecheck와 최신 full build 통과.
+- build→snapshot→build→release-check 통과: 5736ea60…2c0a90d0/148 items.
+  최초83개 immutable와 R3/f18 후보도 보존했다.
+- 최신 installer attempt-WmV7Zz와 실제21종 소비자 Dialog/초안/지역 범위
+  확인. 현재 CSS priority 변경을 포함한 산출물과 source가 일치한다.
+- Git write dry run 통과. 후보 branch를 보존하고 운영 게시와 구분한다.
+- 실제 환경 검수 처리에 관한 async 질문은 응답 대기다. manual-validation
+  기록을 읽고 명시적 결과/조건 변경 전20 ready를 released로 올리지 않는다.
+  완료율9/14=64.3% 유지. 현재 turn은 실제 통합·수정·검증 progress다.

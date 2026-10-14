@@ -80,3 +80,9 @@ inline motion-fast/panel-shadow와 접근성 media 선언의 우선순위를 수
 수정 전 실패 재현, 설정8/8와 UI 전체300/300 통과. 이 CSSOM 검사는 실제
 media 또는 screen reader 실행이 아니다. 일반 모드의 39조합 근거는 유지하며
 새 CSS 소비자 대조와 최종 snapshot은 다시 필요하다.
+
+R4의 최신 build→snapshot→build→release-check와 installer attempt-WmV7Zz가
+통과했다. actual browser21종에서도 Dialog ID/초안과 지역 palette 유지,
+overflow0 확인. 현재 snapshot은5736ea60…2c0a90d0/148 items다.
+실제 media·screen reader/200% zoom 등의 상태는 manual-validation에
+미검수로 유지한다. 추가20종 ready를 운영 지원 완료로 보고하지 않는다.

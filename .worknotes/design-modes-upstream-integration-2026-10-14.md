@@ -79,3 +79,24 @@ important를 넣어 시스템의 접근성 선호를 우선한다. 일반 표시
 이는 실제 screen reader나 media 활성 환경의 실행 검증을 대체하지 않는다.
 현재 IAB의 reduced-motion/forced-colors는 false이며 backdrop은 지원된다.
 추가 CSS 뒤 build·새 snapshot·build·release-check와 소비자 재대조가 필요하다.
+
+## R4 후보 보존
+
+source16af79a2 뒤 전체 build→snapshot→build→release-check 통과.
+현재 snapshot은
+sha256-5736ea60ecd93db3396f22401bf16832c43fe9fd628c2c24e9f9f1372c0a90d0,
+148 items다. 기존83개와 미게시 R3/f18 후보를 보존했다.
+Atlas source/output hash는 원본과 일치하고 개발용 QA 문서는 출력에 없다.
+
+독립 CLI attempt-WmV7Zz에서 최신 CSS/TS source 일치, install·tsc·Vite와
+strict gate 통과. 실제 소비자 /?qa의21종에서 Dialog ID radix-_r_0_, 초안,
+지역 Light/Forest와 Dark root, overflow0 확인. raw CLI의 browserVerified=false는
+보존하고 실제 browser.json을 별도 기록한다. media 실검수로 확대하지 않는다.
+
+Git dry run은 기존 helper의 write 인증을 확인했다. GH CLI는 인증되지 않아
+GitHub connector의 pydemia identity와 Git의 기존 인증을 사용한다. 설정·token은
+변경하거나 출력하지 않는다. 운영은 여전히 main6ea262ef다.
+
+사용자에게 출시 전 환경 검수 유지/후속 검수로 조정 선택을 질문했다.
+응답은 아직 없으며 manual-validation 기록에 검수 ID와 조건을 보존한다.
+후보 branch 보존과 운영21종 공개 완료를 구분한다.
