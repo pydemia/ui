@@ -3263,8 +3263,8 @@
       "name": "History / Compensation / Validation / Comment",
       "category": "Domain",
       "purpose": "평가 이력·연도별 보상·검증 근거·경험 사례·의견 편집",
-      "contract": "이력·등급·금액·검증 상태는 이미 결정된 외부 값을 표시합니다. 보상 합계 계산이나 평가 확정은 하지 않습니다. 의견은 controlled 입력이며 공백 제출과 busy 중 저장을 막고 onSave로 의도를 전달합니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "contract": "이 그룹은 외부에서 확정한 기록을 조합하는 범용 구성요소입니다. 연도별 보상은 소비자가 정규화한 연도 행을 표시하며 0과 누락을 구분하고 합계를 계산하지 않습니다. 원본의 연도 열 보상 표는 prism-profile-sections의 PrismCompensationGrid, Survey 막대와 전체 성공경험 Essay는 prism-survey·prism-profile-sections, CEO 4필드 업무 흐름은 prism-mgmt-comments가 담당합니다. 범용 검증 목록은 빈 값·상태·근거를 표시하고 경험 카드는 제공된 내용만 보여 줍니다. 의견은 controlled 입력이며 공백 제출과 busy 중 저장을 막고 onSave로 의도를 전달합니다. 평가 확정·저장은 호스트 책임입니다.",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "empty",
@@ -3277,22 +3277,30 @@
         "chat/successorCandidate/expertise/ValidationItem.tsx",
         "chat/successorCandidate/successExperience/SuccessExperienceEssay.tsx"
       ],
-      "usage": "import { PrismCommentEditor } from \"@pydemia/prism\";\n<PrismCommentEditor value={value} onValueChange={setValue} onSave={save} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismEvaluationHistory, PrismCompensationTable, PrismValidationList, PrismExperienceCard, PrismCommentEditor } from \"@pydemia/prism\";\n\nexport function RecordExample() {\n  const [comment, setComment] = useState(\"\");\n  const [saved, setSaved] = useState(\"\");\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 20, maxWidth: 760 }}>\n    <PrismEvaluationHistory items={[{ year: \"2026\", grade: \"A\", active: true }, { year: \"2025\", grade: null }]} />\n    <PrismCompensationTable rows={[{ id: \"pay-2026\", year: \"2026\", cash: 0, stock: null, total: 0 }]} />\n    <PrismValidationList title=\"전문성 검증\" items={[\n      { id: \"experience\", label: \"직무 경험\", status: \"confirmed\", evidence: \"가상 근거입니다.\" },\n      { id: \"reference\", label: \"참고 자료\", status: \"missing\" },\n    ]} />\n    <PrismExperienceCard title=\"가상 프로젝트 사례\" area=\"미래 경쟁력 확보\"\n      company=\"가상전자\" period=\"2023–2025\" grade={null}>\n      경험의 목적·역할·과정·결과를 외부 근거로 제공합니다.\n    </PrismExperienceCard>\n    <PrismCommentEditor value={comment} onValueChange={setComment} onSave={setSaved} />\n    <p role=\"status\">{saved ? \"가상 의견 저장: \" + saved : \"\"}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-record.tsx",
       "previewUrl": "/prism?component=prism-record",
       "embedUrl": "/prism?component=prism-record&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-record&view=responsive",
       "verification": {
-        "visual": "partial",
-        "interaction": "partial",
+        "visual": "source-purpose-style-with-generic-record-improvement-passed",
+        "interaction": "passed-local-and-independent-consumer",
         "checks": [
-          "320px iframe preserves page width; compensation table scrolls internally"
+          "320px iframe preserves page width; compensation table scrolls internally",
+          "Current frontend 2eeb26ff record-related source purposes were separated from already accepted source-shaped compensation grid, Survey bars, full success essay and CEO comments; this group composes generic normalized records.",
+          "Compensation heading now follows source 보상 정보, a visually hidden caption prevents a duplicate heading, numeric zero remains distinct from missing, and empty validation shows explicit text.",
+          "Two focused tests cover zero/missing/empty output and controlled comment trim, blank and busy gates. Local 320px browser covered default, empty, loading and error; its 520px table scrolls within a 288px region.",
+          "Fresh external shadcn consumer installed 35 exact files including 14 PRISM TSX, typechecked/built the complete example with Pretendard, and at 320px showed zero/missing/validation/experience plus trimmed comment save without root overflow."
         ],
         "evidence": [
-          "local-all-components-narrow"
+          "packages/prism/tests/record.test.mjs",
+          "local-prism-record-2026-10-14",
+          "installed-prism-record-2026-10-14"
         ],
         "remaining": [
-          "deployed evaluation/compensation/validation geometry and all interactive states"
+          "Authenticated deployed record screens and their deployed revision remain unverified.",
+          "Actual candidate records, compensation/evaluation calculations, API persistence and permissions are host-owned and were not exercised by synthetic examples.",
+          "Source-specific Survey, full success experience and CEO comment workflows are independently audited in their own accepted groups."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -3308,6 +3316,34 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/chat/common/CandidateEvaluationHistory.tsx",
+            "components/chat/successorCandidate/total/SuccessorCandidateCompensation.tsx",
+            "components/chat/successorCandidate/expertise/SurveyValidation.tsx",
+            "components/chat/successorCandidate/successExperience/SuccessExperienceEssay.tsx",
+            "components/chat/successorCandidate/mgmtComments/CeoCommentForm.tsx"
+          ],
+          "evidence": [
+            "Generic record composition explicitly separates normalized year rows, validation status, experience snippets and single comment from already accepted source-specific workflows.",
+            "Focused tests and local browser covered numeric zero versus null, hidden table caption, empty content, controlled trim save and busy/error states.",
+            "Fresh independent shadcn consumer matched 35 files including 14 PRISM TSX, typechecked and built the full example, and exercised 320px table scrolling and comment save."
+          ],
+          "intentionalImprovements": [
+            "The duplicate visible compensation caption is hidden from sight while remaining available to assistive technology.",
+            "An empty validation list has an explicit no-data message; numeric zero is preserved.",
+            "The 520px generic compensation table scrolls inside narrow containers instead of widening the page."
+          ],
+          "hostOwned": [
+            "Candidate values, assessments, calculations, persistence and authorization are supplied by the consuming application."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed source rendering and real host integration remain unverified."
+          ]
         }
       },
       "exports": [
@@ -3328,8 +3364,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismCommentEditor } from \"@/components/ui/prism-record\";\n<PrismCommentEditor value={value} onValueChange={setValue} onSave={save} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismEvaluationHistory } from \"@/components/ui/prism-evaluation-history\";\nimport { PrismCompensationTable, PrismValidationList, PrismExperienceCard, PrismCommentEditor } from \"@/components/ui/prism-record\";\n\nexport function RecordExample() {\n  const [comment, setComment] = useState(\"\");\n  const [saved, setSaved] = useState(\"\");\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 20, maxWidth: 760 }}>\n    <PrismEvaluationHistory items={[{ year: \"2026\", grade: \"A\", active: true }, { year: \"2025\", grade: null }]} />\n    <PrismCompensationTable rows={[{ id: \"pay-2026\", year: \"2026\", cash: 0, stock: null, total: 0 }]} />\n    <PrismValidationList title=\"전문성 검증\" items={[\n      { id: \"experience\", label: \"직무 경험\", status: \"confirmed\", evidence: \"가상 근거입니다.\" },\n      { id: \"reference\", label: \"참고 자료\", status: \"missing\" },\n    ]} />\n    <PrismExperienceCard title=\"가상 프로젝트 사례\" area=\"미래 경쟁력 확보\"\n      company=\"가상전자\" period=\"2023–2025\" grade={null}>\n      경험의 목적·역할·과정·결과를 외부 근거로 제공합니다.\n    </PrismExperienceCard>\n    <PrismCommentEditor value={comment} onValueChange={setComment} onSave={setSaved} />\n    <p role=\"status\">{saved ? \"가상 의견 저장: \" + saved : \"\"}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-management",

@@ -11,3 +11,9 @@
 이 그룹은 PDF 열람·다운로드와 출력 섹션 선택 목적을 충족해 **53/58번째 완료 그룹**으로 판정한다. 미판정은 `prism-export`, `prism-html-export`, `prism-print`, `prism-profile-print`, `prism-record` 5개다. 인증된 배포 원본 PDF에 사용된 실제 서비스 URL·권한·배포 revision과 OS 출력 결과는 검증하지 못했다. PDF 바이트와 섹션 내용은 합성 자료였고, 실제 프로필 출력의 전체 페이지 분할·화소·글꼴 일치는 별도 출력 그룹 감사에 남긴다.
 
 전체 `npm run build`, `npm run prism:check`(360/360 테스트, 완전 사용 예제 51개 타입 검사), `npm run typecheck`, `npm run registry:release-check`가 통과했다. PR/preview readback 결과는 게시 후 덧붙인다.
+
+## 게시 후 검증
+
+커밋 `0517597203d1df50d4224824acc673dd2fcbed74`를 기존 초안 PR #162에 push했다. PR head와 본문의 53/58 판정을 다시 읽어 일치함을 확인했다. Verify UI run `38511632690`은 completed/success였고, Preview 배포 `7056875836`도 success였다. 보호된 preview에서 인증된 `vc curl`로 `components.json`, `llms.txt`, `verification.json`, PDF item, registry, 토큰, 합성 PDF fixture 7개를 읽어 해당 커밋의 로컬 `docs/` 생성물과 바이트 단위로 비교했다. 실제 인증된 PRISM PDF 서비스와 OS 인쇄 효과는 계속 미검증이다.
+
+이 게시 후 기록은 다음 소스 변경과 함께 커밋할 로컬 작업 기록 변경이다.

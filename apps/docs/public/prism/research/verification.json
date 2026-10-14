@@ -1139,16 +1139,24 @@
       }
     },
     "prism-record": {
-      "visual": "partial",
-      "interaction": "partial",
+      "visual": "source-purpose-style-with-generic-record-improvement-passed",
+      "interaction": "passed-local-and-independent-consumer",
       "checks": [
-        "320px iframe preserves page width; compensation table scrolls internally"
+        "320px iframe preserves page width; compensation table scrolls internally",
+        "Current frontend 2eeb26ff record-related source purposes were separated from already accepted source-shaped compensation grid, Survey bars, full success essay and CEO comments; this group composes generic normalized records.",
+        "Compensation heading now follows source 보상 정보, a visually hidden caption prevents a duplicate heading, numeric zero remains distinct from missing, and empty validation shows explicit text.",
+        "Two focused tests cover zero/missing/empty output and controlled comment trim, blank and busy gates. Local 320px browser covered default, empty, loading and error; its 520px table scrolls within a 288px region.",
+        "Fresh external shadcn consumer installed 35 exact files including 14 PRISM TSX, typechecked/built the complete example with Pretendard, and at 320px showed zero/missing/validation/experience plus trimmed comment save without root overflow."
       ],
       "evidence": [
-        "local-all-components-narrow"
+        "packages/prism/tests/record.test.mjs",
+        "local-prism-record-2026-10-14",
+        "installed-prism-record-2026-10-14"
       ],
       "remaining": [
-        "deployed evaluation/compensation/validation geometry and all interactive states"
+        "Authenticated deployed record screens and their deployed revision remain unverified.",
+        "Actual candidate records, compensation/evaluation calculations, API persistence and permissions are host-owned and were not exercised by synthetic examples.",
+        "Source-specific Survey, full success experience and CEO comment workflows are independently audited in their own accepted groups."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1164,6 +1172,34 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "components/chat/common/CandidateEvaluationHistory.tsx",
+          "components/chat/successorCandidate/total/SuccessorCandidateCompensation.tsx",
+          "components/chat/successorCandidate/expertise/SurveyValidation.tsx",
+          "components/chat/successorCandidate/successExperience/SuccessExperienceEssay.tsx",
+          "components/chat/successorCandidate/mgmtComments/CeoCommentForm.tsx"
+        ],
+        "evidence": [
+          "Generic record composition explicitly separates normalized year rows, validation status, experience snippets and single comment from already accepted source-specific workflows.",
+          "Focused tests and local browser covered numeric zero versus null, hidden table caption, empty content, controlled trim save and busy/error states.",
+          "Fresh independent shadcn consumer matched 35 files including 14 PRISM TSX, typechecked and built the full example, and exercised 320px table scrolling and comment save."
+        ],
+        "intentionalImprovements": [
+          "The duplicate visible compensation caption is hidden from sight while remaining available to assistive technology.",
+          "An empty validation list has an explicit no-data message; numeric zero is preserved.",
+          "The 520px generic compensation table scrolls inside narrow containers instead of widening the page."
+        ],
+        "hostOwned": [
+          "Candidate values, assessments, calculations, persistence and authorization are supplied by the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed source rendering and real host integration remain unverified."
+        ]
       }
     },
     "prism-tabs": {
@@ -7544,10 +7580,11 @@
       "prism-management-tools",
       "prism-chat-logs",
       "prism-management",
-      "prism-document"
+      "prism-document",
+      "prism-record"
     ],
-    "acceptedCount": 53,
-    "unassessedGroups": 5,
+    "acceptedCount": 54,
+    "unassessedGroups": 4,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   },
   "domainFormsVerification": {
@@ -7596,5 +7633,12 @@
     "result": "accepted as group 53 of 58",
     "independentConsumer": "25 exact installed files including 9 PRISM TSX; complete example typecheck/Vite, worker/font; 320px real two-page PDF, download byte identity, error/retry, options reset.",
     "limits": "Authenticated PDF service and physical/native print unavailable; complete profile document is separately audited."
+  },
+  "recordGoalAudit": {
+    "date": "2026-10-14",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "result": "accepted as group 54 of 58",
+    "independentConsumer": "35 exact installed files including 14 PRISM TSX; full example typecheck/Vite/Pretendard and 320px zero/missing/scroll/comment save.",
+    "limits": "Generic record composition is separate from source-specific Survey, essay, compensation grid and CEO workflow; authenticated service/permissions unverified."
   }
 }
