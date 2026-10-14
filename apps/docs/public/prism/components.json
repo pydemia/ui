@@ -7059,7 +7059,7 @@
       "category": "Administration",
       "purpose": "회사 그룹 상태 변경과 공지 조회·현재 페이지 정렬·건별 삭제 결과 처리",
       "contract": "PrismCompanyGroupManagement와 PrismNoticeManagement는 필터 draft/applied, 행·전체 건수·page/sort/선택을 host에서 받습니다. 회사 그룹은6열(회사 정렬 없음)과 서버 정렬이며 조회/초기화/정렬은page1, 정렬은선택을유지합니다. 활성/비활성 확인은공개ID snapshot이고 비활성화의소속사용자영향을안내합니다. classifyStatusError가missing을확인하면해당요청ID를선택에서제거하고onGroupsMissing이재조회하며성공으로처리하지않습니다. 공지는6열이며sortPrismNoticePage로현재페이지에서만정렬하고page/total/선택을유지합니다. 회사가빈배열이면전체회사이고알수없는팝업상태는원문을보존하면서dash로표시합니다. host가UTC timestamp를원본의local 날짜로정규화해행에전달합니다. preparePrismNoticeFilters는팝업기간쌍/날짜/순서를검증하고등록일은한쪽을허용하며ISO draft를YYYY.MM.DD API 날짜로복사합니다. 잘못된조회는기존조건/page/선택을유지하며표시중인invalid수동날짜도조회하지않습니다. 필터없는0건은등록안내,필터있는0건은표검색안내이고조회오류를빈결과로바꾸지않습니다. onDelete는deletedIds/failures의정확한요청ID별결과를반환해야하며성공ID만선택에서제거하고실패항목은재시도합니다. 전체실패는확인창을유지하고부분성공은결과를안내하며onDeletionApplied가host cache를갱신합니다. 전체현재페이지가실제로삭제되었을때만이전page로이동합니다. settlePrismNoticeDeletion은건별서비스의bounded concurrency/AbortSignal/queued취소와순서있는성공·실패결과를지원합니다. 중복요청/busy/scopeKey/권한/unmount와완료callback안의동기scope교체를fence합니다. scopeKey는account/permission/applied query/page/provider 의미가바뀌면갱신합니다. 실제회원비활성화·서비스/RBAC/API/cache/route는host 책임이고예시는합성23행만바꿉니다. 원본64pxheader/140·140·436 회사그룹필터/120·120·275·275 공지필터/130px 날짜쌍/표를유지하고좁은컨테이너에필터wrap·날짜stack·표내부scroll을추가합니다.",
-      "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "sourceDeltaAudits": [
         {
           "source": "pages/admin/company-groups/CompanyGroupPage.tsx",
@@ -7120,12 +7120,16 @@
         "visual": "partial-source-date-primitive;original-pages-unverified",
         "interaction": "passed-synthetic-and-selected-workspace-browser",
         "checks": [
-          "18 new contract cases and10 list fixtures; source date geometry measured; partial deletion/date/group workflows."
+          "Current frontend dev 2eeb26ff leaves company-group, notice and shared administrator source unchanged from the 27c4fdbf audit: service-backed staged filters, six columns per list, group status confirmation and per-item notice deletion are the source purposes.",
+          "The current public deployed Date Range Field sample retains 144px default/200px wide fields with 14px text, 23px line-height and 20.125px input height; local notice date inputs preserve the latter measurements and use the source page's 130px field width.",
+          "Current local browser checked 1280px three group filter columns and four notice filter columns, 64px header, 320px one-column notice filters, internal 1100/256px notice and 940/256px group tables, and no document overflow.",
+          "Local synthetic workflow retained one selected failed notice after nine of ten were deleted, then removed it on retry; group deactivation displayed the member impact and updated ten synthetic groups.",
+          "Independent shadcn consumer installed 59 exact module sources plus CSS, typechecked 48 complete examples, passed Vite/font/notices and confirmed 1280px notice layout, partial failure retention and 320px internal table scrolling.",
+          "Current PRISM suite includes focused notice date, filter, sorting, partial deletion, retry, cancellation and company-group status cases; overall 341 tests passed."
         ],
         "remaining": [
-          "Position-block/chat-log purposes and authenticated administrator/source/permission states.",
-          "Real member cascade/status/notice persistence and deployed source revision binding.",
-          "Remaining chat/authStore/full source font/pixel/A4 parity and production."
+          "Authenticated deployed group and notice pages did not render in the in-app browser; their current deployed revision, exact page geometry, API/RBAC, member cascade and persistence are unverified.",
+          "Position blocks and chat logs are separate component groups."
         ],
         "localRenderGate": {
           "status": "passed",
@@ -7147,6 +7151,33 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "evidence": [
+          "admin-lists-goal-installed-bytes.json",
+          "admin-lists-goal-installed-320.jpg",
+          "prism-admin-lists-goal-audit-2026-10-14.md"
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "pages/admin/company-groups/CompanyGroupPage.tsx",
+            "pages/admin/company-groups/CompanyGroupPage.module.scss",
+            "pages/admin/notices/NoticePage.tsx",
+            "pages/admin/notices/NoticePage.module.scss",
+            "components/admin/common/AdminDateRangeField.tsx",
+            "components/admin/common/AdminTable.tsx",
+            "components/admin/common/AdminFilterBar.tsx"
+          ],
+          "evidence": "Unchanged current source and live public date sample, 18 focused synthetic cases, local group/notice flows at 1280/320px and independent 59-module/48-example consumer with partial deletion and responsive checks.",
+          "intentionalImprovements": [
+            "Narrow filters wrap by container width and wide tables scroll within their own regions.",
+            "Notice deletion reports exact per-ID success/failure, retains failed selection and permits retry instead of reporting an all-success result after partial failure.",
+            "Operation snapshots and scope/permission/unmount fences prevent stale asynchronous completions from changing the current list."
+          ],
+          "limitations": "Authenticated deployed list pages and their Git SHA could not be verified; real member cascade, service persistence, permission states and full page font/pixel parity remain host integration checks."
         }
       },
       "exports": [
