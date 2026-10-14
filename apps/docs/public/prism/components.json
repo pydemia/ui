@@ -3893,7 +3893,7 @@
       "name": "Diagnosis / Risk / Essay / Matrix / Analysis",
       "category": "Domain",
       "purpose": "성격·가치관·Risk·경험·전문성·리더십 근거와 현재 위치",
-      "contract": "Risk의 true·false·null을 구분하고 전 항목 누락 열만 병합합니다. 점수와 비중은 외부 값이며 범위만 검증합니다. Matrix 현재 위치는 row/column ID로 지정합니다. 평가를 계산하지 않습니다.",
+      "contract": "Risk의 true·false·null을 구분하고 전 항목 누락 열만 병합합니다. 점수와 비중은 외부 값이며 범위만 검증합니다. 리더십 근거는 기본 상사·동료·구성원 행을 항상 표시하고, roles로 다른 역할을 명시할 수 있습니다. Matrix 현재 위치는 row/column ID로 지정합니다. 평가를 계산하지 않습니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
@@ -3909,14 +3909,14 @@
         "chat/successorCandidate/leadership/LeadershipReason.tsx",
         "chat/templates/ChatProfileAnalysis.tsx"
       ],
-      "usage": "import { PrismRiskTable } from \"@pydemia/prism\";\n\nexport function RiskExample() {\n  // 합성 데이터입니다. null은 평가 근거가 없다는 뜻입니다.\n  return <PrismRiskTable items={[\n    { id: \"demo-a\", label: \"가상 항목 A\", latent: false, manifest: null },\n    { id: \"demo-b\", label: \"가상 항목 B\", latent: true, manifest: null },\n  ]} />;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis } from \"@pydemia/prism\";\n\nexport function AssessmentExample() {\n  const [topic, setTopic] = useState(\"growth\");\n  // 모두 가상 값입니다. 점수·비중·평가 결과는 호출자가 제공합니다.\n  return <div data-prism=\"light\" style={{display:\"grid\",gap:20,maxWidth:760}}>\n    <PrismProfileAnalysis leader={{label:\"가상 리더\",description:\"가상 분석 설명\"}} factors={[{id:\"expertise\",label:\"전문성\",results:[\"기술\"],summary:\"가상 근거\"}]} />\n    <PrismRiskTable items={[{id:\"a\",label:\"가상 항목 A\",latent:false,manifest:null},{id:\"b\",label:\"가상 항목 B\",latent:true,manifest:null}]} />\n    <PrismDiagnosis title=\"성격·가치관 진단 결과\" axes={[\"개방성\",\"성실성\",\"외향성\",\"우호성\",\"정서 안정\"]} values={[8,7,null,6,5]} heading=\"가상 진단\" description=\"제공된 의견만 표시합니다.\" shares={[{label:\"자기초월\",percent:40},{label:\"변화\",percent:60}]} valueDescription=\"가상 비중 설명\" />\n    <PrismScoreEssay title=\"역량별 근거\" items={[{id:\"score\",name:\"문제 해결\",score:0,max:10,description:\"가상 사례\"}]} />\n    <PrismExpertiseCards items={[{id:\"field\",field:\"기술\",years:\"10년\",title:\"전략 수립\",description:\"가상 업적\"}]} />\n    <PrismExperienceTopics topics={[{id:\"growth\",label:\"성장\",starred:true},{id:\"change\",label:\"변화\"}]} value={topic} onValueChange={setTopic} />\n    <PrismExperienceEvidence title=\"관련 성공경험\" items={[{id:topic,label:topic === \"growth\" ? \"성장\" : \"변화\",hasExperience:true,description:\"가상 경험\"}]} />\n    <PrismLeadershipReasons title=\"리더십 근거\" items={[{id:\"manager\",role:\"상사\",text:\"가상 의견\"}]} comment=\"가상 요약\" />\n    <PrismPositionMatrix rowAxisLabel=\"회사\" columns={[{id:\"tech\",label:\"기술\"},{id:\"finance\",label:\"재무\"}]} rows={[{id:\"one\",label:\"가상 회사\"}]} current={{row:\"one\",column:\"tech\"}} />\n  </div>;\n}",
       "sourcePath": "packages/prism/src/prism-assessment.tsx",
       "previewUrl": "/prism?component=prism-assessment",
       "embedUrl": "/prism?component=prism-assessment&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-assessment&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending",
+        "visual": "partial",
+        "interaction": "partial",
         "localRenderGate": {
           "status": "passed",
           "states": [
@@ -3929,7 +3929,28 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-        }
+        },
+        "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "checks": [
+          "Source JSX/SCSS audit: eight mapped files; risk merged null columns, 14px/10px table, 8px radius, diagnosis 16px blocks and value shares, score essay and expertise cards, three fixed leadership roles, 40/52px matrix rows/cells",
+          "Risk false/true/null, score zero/null and external 0..max values, missing radar axes, share validation and ID-selected matrix remain distinct; no assessment is computed",
+          "Improved missing experience list with readable no-data output; leadership defaults to three visible roles with missing-response text, accepts explicit roles, preserves nonblank supplied response text and uses source blue/red heading distinction",
+          "Local docs default/empty rendered; empty state contains no leader, factor, score, experience or response values; 320px root and checked groups have zero horizontal overflow",
+          "Fresh isolated shadcn consumer: 42 installed files; 21 PRISM module sources byte-equal to emitted registry, exact CSS, portable full assessment example typechecked and Vite/font/notices passed",
+          "Installed example in Codex browser: topic switch changed aria-pressed and evidence label; zero score and missing roles present; no console errors; 320px root overflow zero",
+          "Three focused assessment tests passed; full PRISM suite, registry validation, docs typecheck and site build passed"
+        ],
+        "evidence": [
+          "assessment.test.mjs",
+          "assessment-goal-consumer.log",
+          "assessment-goal-installed-bytes.json",
+          "assessment-goal-cua.json"
+        ],
+        "remaining": [
+          "Fresh authenticated deployed page comparison and exact rendered geometry",
+          "Real service values and host-specific assessment mapping",
+          "Print/browser combinations outside the tested synthetic default and empty states"
+        ]
       },
       "exports": [
         {
@@ -3998,7 +4019,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { PrismRiskTable } from \"@/components/ui/prism-assessment\";\n\nexport function RiskExample() {\n  // 합성 데이터입니다. null은 평가 근거가 없다는 뜻입니다.\n  return <PrismRiskTable items={[\n    { id: \"demo-a\", label: \"가상 항목 A\", latent: false, manifest: null },\n    { id: \"demo-b\", label: \"가상 항목 B\", latent: true, manifest: null },\n  ]} />;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis } from \"@/components/ui/prism-assessment\";\n\nexport function AssessmentExample() {\n  const [topic, setTopic] = useState(\"growth\");\n  // 모두 가상 값입니다. 점수·비중·평가 결과는 호출자가 제공합니다.\n  return <div data-prism=\"light\" style={{display:\"grid\",gap:20,maxWidth:760}}>\n    <PrismProfileAnalysis leader={{label:\"가상 리더\",description:\"가상 분석 설명\"}} factors={[{id:\"expertise\",label:\"전문성\",results:[\"기술\"],summary:\"가상 근거\"}]} />\n    <PrismRiskTable items={[{id:\"a\",label:\"가상 항목 A\",latent:false,manifest:null},{id:\"b\",label:\"가상 항목 B\",latent:true,manifest:null}]} />\n    <PrismDiagnosis title=\"성격·가치관 진단 결과\" axes={[\"개방성\",\"성실성\",\"외향성\",\"우호성\",\"정서 안정\"]} values={[8,7,null,6,5]} heading=\"가상 진단\" description=\"제공된 의견만 표시합니다.\" shares={[{label:\"자기초월\",percent:40},{label:\"변화\",percent:60}]} valueDescription=\"가상 비중 설명\" />\n    <PrismScoreEssay title=\"역량별 근거\" items={[{id:\"score\",name:\"문제 해결\",score:0,max:10,description:\"가상 사례\"}]} />\n    <PrismExpertiseCards items={[{id:\"field\",field:\"기술\",years:\"10년\",title:\"전략 수립\",description:\"가상 업적\"}]} />\n    <PrismExperienceTopics topics={[{id:\"growth\",label:\"성장\",starred:true},{id:\"change\",label:\"변화\"}]} value={topic} onValueChange={setTopic} />\n    <PrismExperienceEvidence title=\"관련 성공경험\" items={[{id:topic,label:topic === \"growth\" ? \"성장\" : \"변화\",hasExperience:true,description:\"가상 경험\"}]} />\n    <PrismLeadershipReasons title=\"리더십 근거\" items={[{id:\"manager\",role:\"상사\",text:\"가상 의견\"}]} comment=\"가상 요약\" />\n    <PrismPositionMatrix rowAxisLabel=\"회사\" columns={[{id:\"tech\",label:\"기술\"},{id:\"finance\",label:\"재무\"}]} rows={[{id:\"one\",label:\"가상 회사\"}]} current={{row:\"one\",column:\"tech\"}} />\n  </div>;\n}"
     },
     {
       "id": "prism-collection",

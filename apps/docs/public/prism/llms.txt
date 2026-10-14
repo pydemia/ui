@@ -1001,21 +1001,30 @@ export function PositionReferenceExample({ loadPosition = loadSyntheticPosition 
 
 ## Diagnosis / Risk / Essay / Matrix / Analysis
 성격·가치관·Risk·경험·전문성·리더십 근거와 현재 위치
-Contract: Risk의 true·false·null을 구분하고 전 항목 누락 열만 병합합니다. 점수와 비중은 외부 값이며 범위만 검증합니다. Matrix 현재 위치는 row/column ID로 지정합니다. 평가를 계산하지 않습니다.
+Contract: Risk의 true·false·null을 구분하고 전 항목 누락 열만 병합합니다. 점수와 비중은 외부 값이며 범위만 검증합니다. 리더십 근거는 기본 상사·동료·구성원 행을 항상 표시하고, roles로 다른 역할을 명시할 수 있습니다. Matrix 현재 위치는 row/column ID로 지정합니다. 평가를 계산하지 않습니다.
 States: default, empty
 Registry: /prism/r/prism-assessment.json
 Source: packages/prism/src/prism-assessment.tsx
 Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismRiskTable } from "@/components/ui/prism-assessment";
+import { useState } from "react";
+import { PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis } from "@/components/ui/prism-assessment";
 
-export function RiskExample() {
-  // 합성 데이터입니다. null은 평가 근거가 없다는 뜻입니다.
-  return <PrismRiskTable items={[
-    { id: "demo-a", label: "가상 항목 A", latent: false, manifest: null },
-    { id: "demo-b", label: "가상 항목 B", latent: true, manifest: null },
-  ]} />;
+export function AssessmentExample() {
+  const [topic, setTopic] = useState("growth");
+  // 모두 가상 값입니다. 점수·비중·평가 결과는 호출자가 제공합니다.
+  return <div data-prism="light" style={{display:"grid",gap:20,maxWidth:760}}>
+    <PrismProfileAnalysis leader={{label:"가상 리더",description:"가상 분석 설명"}} factors={[{id:"expertise",label:"전문성",results:["기술"],summary:"가상 근거"}]} />
+    <PrismRiskTable items={[{id:"a",label:"가상 항목 A",latent:false,manifest:null},{id:"b",label:"가상 항목 B",latent:true,manifest:null}]} />
+    <PrismDiagnosis title="성격·가치관 진단 결과" axes={["개방성","성실성","외향성","우호성","정서 안정"]} values={[8,7,null,6,5]} heading="가상 진단" description="제공된 의견만 표시합니다." shares={[{label:"자기초월",percent:40},{label:"변화",percent:60}]} valueDescription="가상 비중 설명" />
+    <PrismScoreEssay title="역량별 근거" items={[{id:"score",name:"문제 해결",score:0,max:10,description:"가상 사례"}]} />
+    <PrismExpertiseCards items={[{id:"field",field:"기술",years:"10년",title:"전략 수립",description:"가상 업적"}]} />
+    <PrismExperienceTopics topics={[{id:"growth",label:"성장",starred:true},{id:"change",label:"변화"}]} value={topic} onValueChange={setTopic} />
+    <PrismExperienceEvidence title="관련 성공경험" items={[{id:topic,label:topic === "growth" ? "성장" : "변화",hasExperience:true,description:"가상 경험"}]} />
+    <PrismLeadershipReasons title="리더십 근거" items={[{id:"manager",role:"상사",text:"가상 의견"}]} comment="가상 요약" />
+    <PrismPositionMatrix rowAxisLabel="회사" columns={[{id:"tech",label:"기술"},{id:"finance",label:"재무"}]} rows={[{id:"one",label:"가상 회사"}]} current={{row:"one",column:"tech"}} />
+  </div>;
 }
 ```
 

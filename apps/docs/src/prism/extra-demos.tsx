@@ -42,14 +42,14 @@ export function PositionDemo({ state }: { state: FixtureState }) {
 }
 export function AssessmentDemo({ state }: { state: FixtureState }) {
     const [topic,setTopic] = useState("growth"); const empty = state === "empty";
-    return <div className="prism-demo-stack"><PrismProfileAnalysis leader={{label:"전략 리더",description:"가상 데이터로 구성한 유형 표시"}} factors={[{id:"expertise",label:"전문성",results:["기술"],summary:empty ? null : "기술 경험 근거 표시"},{id:"experience",label:"성공경험",results:["사업 전환"],starred:["사업 전환"],summary:"예시 근거"}]} />
+    return <div className="prism-demo-stack"><PrismProfileAnalysis leader={empty ? null : {label:"전략 리더",description:"가상 데이터로 구성한 유형 표시"}} factors={empty ? [] : [{id:"expertise",label:"전문성",results:["기술"],summary:"기술 경험 근거 표시"},{id:"experience",label:"성공경험",results:["사업 전환"],starred:["사업 전환"],summary:"예시 근거"}]} />
         <PrismRiskTable items={empty ? [] : [{id:"one",label:"자기 중심",latent:true,manifest:null},{id:"two",label:"충동성",latent:false,manifest:null},{id:"three",label:"낙관 편향",latent:null,manifest:null}]} />
-        <PrismDiagnosis title="성격·가치관 진단 결과" axes={["개방성","성실성","외향성","우호성","정서 안정"]} values={empty ? [null,null,null,null,null] : [8,7,5,6,8]} heading="가상 진단" description="이미 제공된 값과 근거만 표시합니다." shares={empty ? [] : [{label:"자기초월",percent:30},{label:"안정",percent:20},{label:"개방",percent:25},{label:"자기증진",percent:25}]} valueDescription="가상 가치관 비중" />
-        <PrismScoreEssay title="역량별 근거" items={[{id:"score",name:"문제 해결",score:empty ? null : 7,max:10,description:empty ? null : "가상 프로젝트의 문제 해결 경험"}]} />
+        <PrismDiagnosis title="성격·가치관 진단 결과" axes={["개방성","성실성","외향성","우호성","정서 안정"]} values={empty ? [null,null,null,null,null] : [8,7,5,6,8]} heading={empty ? undefined : "가상 진단"} description={empty ? undefined : "이미 제공된 값과 근거만 표시합니다."} shares={empty ? [] : [{label:"자기초월",percent:30},{label:"안정",percent:20},{label:"개방",percent:25},{label:"자기증진",percent:25}]} valueDescription={empty ? undefined : "가상 가치관 비중"} />
+        <PrismScoreEssay title="역량별 근거" items={empty ? [] : [{id:"score",name:"문제 해결",score:7,max:10,description:"가상 프로젝트의 문제 해결 경험"}]} />
         <PrismExpertiseCards items={empty ? [] : [{id:"one",field:"기술",years:"10년",title:"기술전략 수립",description:"공개 배포용 가상 사례"}]} />
         <PrismExperienceTopics topics={[{id:"growth",label:"성장",starred:true},{id:"change",label:"변화"}]} value={topic} onValueChange={setTopic} />
-        <PrismExperienceEvidence title="관련 성공경험" items={[{id:topic,label:topic === "growth" ? "성장" : "변화",hasExperience:!empty,description:"새로운 역할을 맡은 가상 경험입니다."}]} />
-        <PrismLeadershipReasons title="리더십 근거" items={[{id:"manager",role:"상사",text:empty ? null : "가상 동료 의견"}]} comment="가상 의견을 요약한 표시입니다." />
+        <PrismExperienceEvidence title="관련 성공경험" items={empty ? [] : [{id:topic,label:topic === "growth" ? "성장" : "변화",hasExperience:true,description:"새로운 역할을 맡은 가상 경험입니다."}]} />
+        <PrismLeadershipReasons title="리더십 근거" items={empty ? [] : [{id:"manager",role:"상사",text:"가상 동료 의견"}]} comment={empty ? undefined : "가상 의견을 요약한 표시입니다."} />
         <PrismPositionMatrix rowAxisLabel="회사" columns={[{id:"tech",label:"기술"},{id:"finance",label:"재무"}]} rows={[{id:"one",label:"가상전자"},{id:"two",label:"예시사업"}]} current={empty ? null : {row:"one",column:"tech"}} /></div>;
 }
 export function CollectionDemo({ state }: { state: FixtureState }) {

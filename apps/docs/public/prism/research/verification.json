@@ -3099,8 +3099,8 @@
       }
     },
     "prism-assessment": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "partial",
+      "interaction": "partial",
       "localRenderGate": {
         "status": "passed",
         "states": [
@@ -3113,7 +3113,28 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-      }
+      },
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+      "checks": [
+        "Source JSX/SCSS audit: eight mapped files; risk merged null columns, 14px/10px table, 8px radius, diagnosis 16px blocks and value shares, score essay and expertise cards, three fixed leadership roles, 40/52px matrix rows/cells",
+        "Risk false/true/null, score zero/null and external 0..max values, missing radar axes, share validation and ID-selected matrix remain distinct; no assessment is computed",
+        "Improved missing experience list with readable no-data output; leadership defaults to three visible roles with missing-response text, accepts explicit roles, preserves nonblank supplied response text and uses source blue/red heading distinction",
+        "Local docs default/empty rendered; empty state contains no leader, factor, score, experience or response values; 320px root and checked groups have zero horizontal overflow",
+        "Fresh isolated shadcn consumer: 42 installed files; 21 PRISM module sources byte-equal to emitted registry, exact CSS, portable full assessment example typechecked and Vite/font/notices passed",
+        "Installed example in Codex browser: topic switch changed aria-pressed and evidence label; zero score and missing roles present; no console errors; 320px root overflow zero",
+        "Three focused assessment tests passed; full PRISM suite, registry validation, docs typecheck and site build passed"
+      ],
+      "evidence": [
+        "assessment.test.mjs",
+        "assessment-goal-consumer.log",
+        "assessment-goal-installed-bytes.json",
+        "assessment-goal-cua.json"
+      ],
+      "remaining": [
+        "Fresh authenticated deployed page comparison and exact rendered geometry",
+        "Real service values and host-specific assessment mapping",
+        "Print/browser combinations outside the tested synthetic default and empty states"
+      ]
     },
     "prism-collection": {
       "visual": "pending",
@@ -7118,10 +7139,11 @@
       "prism-admin-users",
       "prism-admin-lists",
       "prism-directory",
-      "prism-context"
+      "prism-context",
+      "prism-assessment"
     ],
-    "acceptedCount": 41,
-    "unassessedGroups": 17,
+    "acceptedCount": 42,
+    "unassessedGroups": 16,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

@@ -1000,11 +1000,14 @@ button.prism-filetile-name,button.prism-file-attach-name { padding: 0; border: 0
 [data-prism="light"] .prism-experience-evidence article { border: 1px solid var(--prism-control-border); border-radius: 12px; padding: 16px; display: grid; gap: 8px; }
 [data-prism="light"] .prism-experience-evidence header { display: flex; align-items: center; gap: 8px; font-size: 14px; }
 [data-prism="light"] .prism-experience-evidence p { font-size: 14px; white-space: pre-line; margin: 0; }
+[data-prism="light"] .prism-leadership-title { color: #0072c6; font-size: 14px; font-weight: 600; }
+[data-prism="light"] .prism-leadership-title[data-danger] { color: #fa5252; }
 [data-prism="light"] .prism-leadership-reasons { padding: 16px; font-size: 12px; }
 [data-prism="light"] .prism-leadership-reasons dl { margin: 0; display: grid; gap: 10px; }
 [data-prism="light"] .prism-leadership-reasons dl > div { display: grid; grid-template-columns: 56px 1fr; gap: 10px; }
 [data-prism="light"] .prism-leadership-reasons dd { margin: 0; white-space: pre-line; }
 [data-prism="light"] .prism-leadership-reasons aside { margin-top: 12px; padding: 12px 14px; background: var(--prism-cool-100); border-radius: 8px; font-size: 14px; }
+[data-prism="light"] .prism-leadership-reasons aside strong { color: #0072c6; }
 [data-prism="light"] .prism-leadership-reasons aside p { margin: 6px 0 0; }
 [data-prism="light"] .prism-diversity-summary { display: grid; gap: 10px; padding: 16px; font-size: 14px; }
 [data-prism="light"] .prism-diversity-summary > div { display: grid; grid-template-columns: 90px 1fr; gap: 10px; }
