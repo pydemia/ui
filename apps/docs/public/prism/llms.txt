@@ -1179,7 +1179,7 @@ export function CandidateListExample() {
 
 ## Selectable directory / Admin table
 Accessible remote sort and row selection with eligibility constraints
-Contract: Rows, sort and selection are supplied by the consumer. Select-all includes eligible visible rows, preserves selections on other pages and ignores locked rows. aria-sort describes remote sort intent. PrismCandidateDirectory uses the source candidate table: profile actions are sibling controls, role starts descending, and clicking a selected or partial header clears all pages. Candidate favorites are read-only. 관리자 variant=admin은고정폭표/10행loading/검색empty와source chevron을제공합니다. selectionBehavior=clear-all-if-any는현재페이지선택이있으면다른페이지도모두해제하고기본page동작은기존선택을보존합니다. openColumn으로키보드상세버튼의열을지정하고sortDisabled로저장중정렬을잠글수있습니다.
+Contract: The consumer owns rows, remote sort, selection and navigation. PrismCandidateDirectory reproduces the candidate columns, four loading rows, read-only favorites and source sort defaults (position desc); selecting a partly selected header clears all pages. PrismDirectoryTable filters locked rows from select-all and keeps other-page selections in its default page mode. For the administrator table, set variant="admin" for fixed-column styling, ten loading rows and the search empty state, and selectionBehavior="clear-all-if-any" for the source header-clear behavior. Use openColumn to place the keyboard-accessible detail action and sortDisabled during a save. The consumer maps the library position sort key to its API field if needed.
 States: default, empty, loading
 Registry: /prism/r/prism-directory.json
 Source: packages/prism/src/prism-directory.tsx
@@ -1187,20 +1187,38 @@ Usage kind: component-example
 Installed usage:
 ```tsx
 import { useState } from "react";
-import { PrismDirectoryTable } from "@/components/ui/prism-directory";
+import { PrismCandidateDirectory, PrismDirectoryTable } from "@/components/ui/prism-directory";
 
-const rows = [
-  { id: "demo-1", name: "김가상", selectable: true },
-  { id: "demo-2", name: "이예시", selectable: false },
+const candidates = [
+  { id: "candidate-1", name: "김가상", company: "가상전자", position: "기술전략담당", series: "ICT" },
+  { id: "candidate-2", name: "이예시", company: "예시사업", position: "운영총괄", series: "ICT" },
 ];
+const criteria = [
+  { id: "shared", name: "공통 기준", locked: true },
+  { id: "editable", name: "편집 가능 기준", locked: false },
+];
+type Sort = { column: string; direction: "asc" | "desc" };
 
 export function DirectoryExample() {
-  const [selected, setSelected] = useState<string[]>(["other-page-row"]);
-  return <PrismDirectoryTable title="가상 후보자 선택" rows={rows}
-    getRowId={row => row.id} getRowLabel={row => row.name}
-    columns={[{ id: "name", label: "이름", cell: row => row.name }]}
-    selected={selected} onSelectionChange={setSelected}
-    isRowSelectable={row => row.selectable} />;
+  const [candidateIds, setCandidateIds] = useState<string[]>([]);
+  const [candidateSort, setCandidateSort] = useState<Sort | null>(null);
+  const [adminIds, setAdminIds] = useState<string[]>(["other-page"]);
+  const [adminSort, setAdminSort] = useState<Sort | null>(null);
+  const [opened, setOpened] = useState("");
+
+  return <div>
+    <PrismCandidateDirectory rows={candidates} selected={candidateIds}
+      onSelectionChange={setCandidateIds} sort={candidateSort} onSortChange={setCandidateSort}
+      onOpen={row => setOpened(row.name)} />
+    <PrismDirectoryTable title="관리 기준" variant="admin"
+      selectionBehavior="clear-all-if-any" rows={criteria}
+      getRowId={row => row.id} getRowLabel={row => row.name}
+      columns={[{ id: "name", label: "기준", cell: row => row.name, sortable: true }]}
+      selected={adminIds} onSelectionChange={setAdminIds}
+      isRowSelectable={row => !row.locked} sort={adminSort} onSortChange={setAdminSort}
+      onOpen={row => setOpened(row.name)} />
+    <p role="status">열린 항목: {opened || "없음"}</p>
+  </div>;
 }
 ```
 

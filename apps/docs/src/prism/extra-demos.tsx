@@ -112,11 +112,24 @@ export function ManagementToolsDemo({ state }: { state: FixtureState }) {
         <PrismCompanyContextDialog open={context} onOpenChange={setContext} company="Example company" content="Synthetic company context. No source internal content is included." onCopy={setResult} /><p role="status">{result}</p></div>;
 }
 export function DirectoryDemo({ state }: { state: FixtureState }) {
-    const [selected,setSelected] = useState<string[]>([]); const [sort,setSort] = useState<{column:string;direction:"asc" | "desc"} | null>(null); const [opened,setOpened] = useState("");
-    const rows = state === "empty" ? [] : demoCandidates.map(candidate => ({...candidate,series:"ICT",favorite:false}));
-    return <div className="prism-demo-stack"><PrismCandidateDirectory rows={rows} selected={selected} onSelectionChange={setSelected} sort={sort} onSortChange={setSort} onOpen={candidate => setOpened(candidate.name)} loading={state === "loading"} />
-        <PrismDirectoryTable title="Administration table" rows={[{id:"shared",name:"Shared criterion",locked:true},{id:"editable",name:"Editable criterion",locked:false}]} getRowId={r => r.id} getRowLabel={r => r.name} columns={[{id:"name",label:"Name",cell:r => r.name}]} selected={selected} onSelectionChange={setSelected} isRowSelectable={r => !r.locked} />
-        <p role="status">Selection: {selected.join(", ")} | Sort: {sort?.column} {sort?.direction} | Open: {opened}</p></div>;
+    const [candidateSelected,setCandidateSelected] = useState<string[]>([]);
+    const [candidateSort,setCandidateSort] = useState<{column:string;direction:"asc" | "desc"} | null>(null);
+    const [adminSelected,setAdminSelected] = useState<string[]>(["other-page"]);
+    const [adminSort,setAdminSort] = useState<{column:string;direction:"asc" | "desc"} | null>(null);
+    const [opened,setOpened] = useState("");
+    const loading = state === "loading";
+    const candidateRows = state === "empty" ? [] : demoCandidates.map(candidate => ({...candidate,series:"ICT",favorite:false}));
+    const adminRows = state === "empty" ? [] : [{id:"shared",name:"Shared criterion",locked:true},{id:"editable",name:"Editable criterion",locked:false}];
+    return <div className="prism-demo-stack">
+        <PrismCandidateDirectory rows={candidateRows} selected={candidateSelected} onSelectionChange={setCandidateSelected}
+            sort={candidateSort} onSortChange={setCandidateSort} onOpen={candidate => setOpened(`Candidate: ${candidate.name}`)} loading={loading} />
+        <PrismDirectoryTable title="Administration table" variant="admin" selectionBehavior="clear-all-if-any"
+            rows={adminRows} getRowId={row => row.id} getRowLabel={row => row.name}
+            columns={[{id:"name",label:"Name",cell:row => row.name,sortable:true}]}
+            selected={adminSelected} onSelectionChange={setAdminSelected} isRowSelectable={row => !row.locked}
+            sort={adminSort} onSortChange={setAdminSort} onOpen={row => setOpened(`Admin: ${row.name}`)} loading={loading} />
+        <p role="status">Candidate selection: {candidateSelected.join(", ") || "none"} | Candidate sort: {candidateSort?.column} {candidateSort?.direction} | Admin selection: {adminSelected.join(", ") || "none"} | Admin sort: {adminSort?.column} {adminSort?.direction} | Open: {opened}</p>
+    </div>;
 }
 export function PageStateDemo() {
     const [count,setCount] = useState(0);

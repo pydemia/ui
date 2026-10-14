@@ -1723,13 +1723,15 @@
     "prism-directory": {
       "visual": "partial",
       "interaction": "partial",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "checks": [
-        "Generic eligibility andother-page preservation preserved",
-        "Current candidate directory uses source-specific table,header-clear-all semantics androle descending default",
-        "Sibling profile button avoids nested buttons andemits oneopen action"
+        "The current candidate and administrator table source files and SCSS are unchanged from the previously measured reference revision.",
+        "Candidate directory retains the source columns, four loading rows, cross-page header-clear behavior and position-descending sort default.",
+        "Administrator variant retains eligible-row selection, cross-page header clear, ten loading rows and the search empty state; the portable example sets these options explicitly.",
+        "Local browser exercised sort, profile open, select-all and empty/loading states; the independently installed 320px example kept table overflow inside its container."
       ],
       "remaining": [
-        "Complete authenticated source table state/pixel comparison"
+        "Authenticated deployed table states, original source-to-deployment revision binding and real host/API integration remain unverified."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1744,6 +1746,32 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-13 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/candidate/CandidateTable.tsx",
+          "chat/candidate/CandidateTable.module.scss",
+          "admin/common/AdminTable.tsx",
+          "admin/common/AdminTable.module.scss"
+        ],
+        "evidence": [
+          "Current source confirms the candidate six-column table, four loading rows, role/position descending first sort and header clear across pages; the administrator source confirms locked rows, clear-all-if-any, ten loading rows and a search empty state.",
+          "The local browser confirmed candidate position-desc sorting and single profile open; administrator header selection kept off-page IDs when adding and cleared all IDs on the next click. Both tables rendered empty states and their expected loading row counts with aria-busy, no nested buttons and no root overflow.",
+          "A fresh shadcn consumer installed prism-directory and its registry dependencies; 12 installed PRISM module sources and CSS matched the emitted registry bytes. Its copied usage example typechecked and built with Pretendard and notices. At a 320px parent, the candidate table scrolled internally while the document had no horizontal overflow or unlabeled native inputs."
+        ],
+        "intentionalImprovements": [
+          "The candidate profile action is a sibling button and emits one open action without nested buttons; sortable headers and row checkboxes have explicit accessible names.",
+          "The documentation example presents separate candidate and administrator ownership, including explicit administrator clear-all selection behavior, instead of treating one generic table as both source views."
+        ],
+        "hostOwned": [
+          "Real rows, remote sort and pagination, authorization, cross-page selection storage and navigation remain with the consuming application."
+        ],
+        "nonBlockingUnknowns": [
+          "The authenticated deployed table states and deployed source revision have not been established; synthetic browser checks do not prove service or host-route integration."
+        ]
       }
     },
     "prism-mgmt-comments": {
@@ -7056,10 +7084,11 @@
       "prism-candidate-list",
       "prism-favorite-candidate",
       "prism-admin-users",
-      "prism-admin-lists"
+      "prism-admin-lists",
+      "prism-directory"
     ],
-    "acceptedCount": 39,
-    "unassessedGroups": 19,
+    "acceptedCount": 40,
+    "unassessedGroups": 18,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
