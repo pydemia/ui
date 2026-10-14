@@ -2509,12 +2509,15 @@
       "visual": "pending",
       "interaction": "partial",
       "checks": [
-        "Source-based filters/table/status and responsive composition;12 new synthetic contract cases."
+        "Current frontend dev 2eeb26ff uses service-backed users, staged status/company/role/group/keyword filters, six columns, page/sort, and a 500-user bulk status confirmation; the installable component exposes these as controlled host contracts.",
+        "Existing synthetic contract tests cover normalization, staged/reset filters, six columns, selection and detail separation, confirmation snapshot, failure/retry, scope/read-only/unmount cancellation, bulk limit, and loading/empty/error states.",
+        "Local browser checked 1280px default/loading/empty/error/readonly/long states with five filter columns and no document overflow; at 320px the 940px table scrolls inside its 256px region without document overflow.",
+        "Local synthetic browser confirmed keyword changes do not filter until Search, then 23 rows become one; bulk status failure stays in the dialog, and a later successful attempt clears selection and updates the row.",
+        "Independent shadcn consumer installed 59 exact module sources plus CSS, typechecked 48 portable examples, and passed Vite/font/notices; its browser confirmed 1280px five filter columns, staged Search, status confirmation/update, and 320px one-column filters with a 940px table scrolling inside 256px without document overflow."
       ],
       "remaining": [
-        "Position-list restoration,non-user administrator lists and page access/permission states.",
-        "Real role/status services and authenticated deployed revision/design/interaction comparison.",
-        "Remaining chat/authStore and full font/pixel/A4/production."
+        "Authenticated deployed admin route did not render content in the in-app browser; current deployed revision, exact geometry, real user API/RBAC and route transitions are unverified.",
+        "Position-list restoration and other administrator lists are separate component/host integration goals."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -2532,6 +2535,32 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+      "evidence": [
+        "admin-users-goal-installed-bytes.json",
+        "admin-users-goal-installed-320.jpg",
+        "prism-admin-users-goal-audit-2026-10-14.md"
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "pages/admin/users/UserManagementPage.tsx",
+          "pages/admin/users/UserManagementPage.module.scss",
+          "components/admin/common/AdminTable.tsx",
+          "components/admin/common/AdminFilterBar.tsx",
+          "components/admin/common/AdminTableToolbar.tsx",
+          "service/users.ts"
+        ],
+        "evidence": "Current source contract and service mapping, focused synthetic tests, local 1280/320px states and filter/status workflow, plus independent registry installation and consumer build.",
+        "intentionalImprovements": [
+          "Filters wrap by container width and the wide table scrolls within its region on narrow screens.",
+          "Name detail and row selection use separate keyboard-operable controls.",
+          "Bulk status requests freeze public IDs and active state and fence duplicate or stale async completions."
+        ],
+        "limitations": "Authenticated deployed admin route and its Git SHA could not be verified; real user service, role authorization, navigation and exact font/pixel parity remain host integration checks."
       }
     },
     "prism-position-management": {
@@ -6994,10 +7023,11 @@
       "prism-chart",
       "prism-evaluation-history",
       "prism-candidate-list",
-      "prism-favorite-candidate"
+      "prism-favorite-candidate",
+      "prism-admin-users"
     ],
-    "acceptedCount": 37,
-    "unassessedGroups": 21,
+    "acceptedCount": 38,
+    "unassessedGroups": 20,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
