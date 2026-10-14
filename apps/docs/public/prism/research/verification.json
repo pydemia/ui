@@ -3264,8 +3264,8 @@
       }
     },
     "prism-management": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "source-purpose-style-with-responsive-improvement-passed",
+      "interaction": "passed-local-and-independent-consumer",
       "localRenderGate": {
         "status": "passed",
         "states": [
@@ -3280,6 +3280,51 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "checks": [
+        "Current frontend 2eeb26ff management forms, AI button, criteria section and affected-position purpose were compared with the generic composition; domain-specific forms and remapping retain separate group ownership.",
+        "Required multi-select/date fields show a visible asterisk, screen-reader required text and aria-required; empty values block submission with field errors.",
+        "The 320px local user form uses one 254px field column instead of two cramped 121px columns; 1280px keeps two columns. Readonly/loading demo actions are suppressed.",
+        "Fresh external shadcn consumer installed 16 exact PRISM TSX sources and exact CSS, typechecked and built the complete example with Pretendard. Its 320px document stayed 320px wide; AI, criteria, affected-position dialog, required errors and valid controlled save were exercised."
+      ],
+      "evidence": [
+        "packages/prism/tests/management-form.test.mjs",
+        "local-prism-management-2026-10-14",
+        "installed-prism-management-2026-10-14"
+      ],
+      "remaining": [
+        "Authenticated deployed admin forms and their deployed revision/pixel parity remain unverified in this environment.",
+        "Real persistence, AI generation, affected-position API and RBAC remain owned by the consuming host and were not verified by synthetic browser flows."
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "components/admin/company-groups/CompanyGroupForm.tsx",
+          "components/admin/users/UserForm.tsx",
+          "components/admin/notices/NoticeForm.tsx",
+          "components/admin/positions/PositionForm.tsx",
+          "components/admin/common/AdminAiGenerateButton.tsx",
+          "components/admin/position-blocks/CriteriaSection.tsx",
+          "components/admin/position-blocks/AffectedPositionSummary.tsx"
+        ],
+        "evidence": [
+          "Generic management schema and controlled values cover form composition, required multi/date validation and callback-only save/AI/criteria actions; domain-specific rules are separately audited.",
+          "Focused test and local browser covered required errors, complete save, readonly/loading suppression, AI non-submission and 320/1280 responsive fields.",
+          "Fresh independent shadcn consumer installed 16 exact TSX sources/CSS, typechecked and built the complete example, and exercised the 320px valid save flow."
+        ],
+        "intentionalImprovements": [
+          "Below 520px form width, fields stack into one readable column rather than preserving the cramped two-column source presentation.",
+          "Required multi-select and date expose both visual and assistive-technology required indicators.",
+          "Readonly/loading example states suppress AI and criterion mutation actions."
+        ],
+        "hostOwned": [
+          "The consuming application supplies domain-specific fields, authorization, persistence, AI text and affected-position data."
+        ],
+        "nonBlockingUnknowns": [
+          "The authenticated deployed admin route and real backend outcomes remain unverified."
+        ]
       }
     },
     "prism-assessment": {
@@ -7465,10 +7510,11 @@
       "prism-page-state",
       "prism-admin",
       "prism-management-tools",
-      "prism-chat-logs"
+      "prism-chat-logs",
+      "prism-management"
     ],
-    "acceptedCount": 51,
-    "unassessedGroups": 7,
+    "acceptedCount": 52,
+    "unassessedGroups": 6,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   },
   "domainFormsVerification": {
@@ -7502,5 +7548,13 @@
     "localBrowser": "1280px header readable; 320px document width320, table 980 inside 256px scroll region; archive detail width320/no composer, page2 displays item11 after back.",
     "independentConsumer": "Prior external shadcn install verified 58 exact module sources/CSS, 39 complete examples typechecked, Vite/Pretendard/notices; current source delta is only the error width, checked in local browser and generated registry.",
     "nonBlockingUnknowns": "Current authenticated deployed chat-log route and real API/RBAC/retention are not verified. Preview is review deployment, not production publication."
+  },
+  "managementGoalAudit": {
+    "date": "2026-10-14",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "result": "accepted as group 52 of 58",
+    "responsiveImprovement": "320px user form changes from two approx. 121px fields to one approx. 254px field; desktop two-column layout retained.",
+    "consumer": "Fresh shadcn install: 16 exact TSX sources plus exact CSS; full example typecheck/Vite build and 320px valid save, required errors, AI, criteria, affected-position dialog.",
+    "limits": "Synthetic callback flows do not prove authenticated deployed pixels, backend persistence, AI, query or RBAC."
   }
 }

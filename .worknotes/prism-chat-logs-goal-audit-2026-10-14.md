@@ -7,3 +7,9 @@
 이번 로컬 화면 검사에서 원본의 65px 에러 열을 그대로 둔 설치형은 정렬 아이콘 옆 `에러` 제목을 두 줄로 쪼갰다. 열을 80px로 넓혀 1280px에서 한 줄로 표시했다. 320px에서는 문서 너비가 320px이고 980px 표는 256px 표 영역 안에서 스크롤한다. 상세 역시 문서 너비 320px, 입력 composer 없음, 뒤로 돌아온 뒤 2페이지 첫 항목이 `DEMO-CONVERSATION-011`인 것을 확인했다. 현재 레지스트리 생성과 전체 359개 PRISM 테스트, 예제 49개 타입 검사, 사이트 빌드, workspace typecheck, release-check가 통과했다. review CI/preview는 변경 커밋을 게시한 뒤 확인한다.
 
 인증된 배포 `/chat/admin/chat-logs`는 자체 브라우저에서 빈 화면이었고 기존 Chrome 탭은 관리자 로그인으로 이동했다. 배포 SHA와 실제 로그 API·권한·보존·클립보드 효과는 검증하지 못했다. 원본은 API 연결 자체가 placeholder이므로 이를 컴포넌트 목적 완료의 증거로 오인하지 않는다. 목적·대표 상태·설치 계약·반응형과 제목 가독성 개선을 확인해 이 그룹을 **51/58번째 완료 그룹**으로 판정한다. 미판정은 7개다.
+
+## 게시 후 검증
+
+커밋 `eab6dbb31c6a0cef6e641527ab4c568d2270791a`을 기존 초안 PR #162에 push했다. Verify UI run `38508518246`은 completed/success였고 PR head와 본문의 51/58 판정이 일치한다. Preview 배포 `7056398633`은 success이며 `components.json`, `verification.json`, 대화 로그 item, registry, `llms.txt` 5개를 보호된 preview에서 인증된 `vc curl`로 읽어 로컬 생성물과 바이트 단위로 비교했다. 현재 독립 shadcn 소비자에도 대화 로그 item과 토큰을 다시 설치해 TSX 원문 바이트 일치, 완전 예제 타입 검사·Vite/Pretendard 빌드, 320px 목록·상세의 문서 폭 320px와 80px 에러 열을 확인했다. 현재 원본 인증 화면과 호스트 API는 계속 미검증이다.
+
+이 게시 후 기록은 다음 소스 변경과 함께 커밋할 로컬 작업 기록 변경이다.

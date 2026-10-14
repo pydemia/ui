@@ -774,15 +774,48 @@ import { PrismCommentEditor } from "@/components/ui/prism-record";
 
 ## Management forms / Criteria
 회사 그룹·사용자·공지·포지션 정보 편집, 기준·영향 포지션 확인
-Contract: 분류된 Field schema와 controlled values로 관리 양식을 구성합니다. 필수 값과 native 이메일 검증을 제공하며 저장·생성·기준 추가/편집/제거는 callback입니다. 역할 변경의 권한과 API 검증은 서버 책임입니다. 원본 양식의 업무 검증을 모두 재구현한 것은 아닙니다.
+Contract: 분류된 Field schema와 controlled values로 관리 양식을 구성합니다. 필수 값과 native 이메일 검증을 제공하며 저장·생성·기준 추가/편집/제거는 callback입니다. required 다중 선택·날짜는 시각·ARIA 필수 표시와 제출 오류를 제공하고, 520px 이하 부모에서는 필드를 한 열로 배치합니다. 회사 그룹·사용자·공지·포지션의 업무별 조건·권한은 prism-domain-forms가 담당하며 기준 삭제 재매핑은 prism-management-tools가 담당합니다. 이 범용 조합의 실제 저장·AI 생성·영향 조회는 호스트 callback입니다.
 States: default, readonly, loading, error
 Registry: /prism/r/prism-management.json
 Source: packages/prism/src/prism-management.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismManagementForm } from "@/components/ui/prism-management";
-<PrismManagementForm title="관리 정보" fields={fields} values={values} onValueChange={change} onSubmit={save} />;
+import { useState } from "react";
+import { PrismManagementForm, PrismAiGenerateButton, PrismCriteriaSection, PrismAffectedPositions, type PrismManagementField, type PrismManagementValue } from "@/components/ui/prism-management";
+import { PrismDialog } from "@/components/ui/prism-dialog";
+import { PrismButton } from "@/components/ui/prism-button";
+
+const fields: PrismManagementField[] = [
+  { id: "groupName", label: "회사 그룹명", kind: "text", required: true, fullWidth: true },
+  { id: "companyIds", label: "회사 선택", kind: "multi", required: true, fullWidth: true,
+    options: [{ value: "company-a", label: "가상전자" }, { value: "company-b", label: "예시사업" }] },
+  { id: "effectiveDate", label: "적용일", kind: "date", required: true },
+];
+const affected = [{ id: "position-a", name: "가상 기술 포지션", company: "가상전자" }];
+
+export function ManagementExample() {
+  const [values, setValues] = useState<Record<string, PrismManagementValue>>({ groupName: "", companyIds: [], effectiveDate: null });
+  const [items, setItems] = useState([{ id: "criterion-a", label: "기술 분야", description: "합성 기준 설명" }]);
+  const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState("");
+  return <section data-prism="light" style={{ display: "grid", gap: 20, maxWidth: 760 }}>
+    <PrismManagementForm title="관리 정보" fields={fields} values={values}
+      onValueChange={(id, value) => setValues(previous => ({ ...previous, [id]: value }))}
+      onSubmit={draft => setStatus(String(draft.groupName) + " 저장 의도")}>
+      <PrismAiGenerateButton label="AI로 설명 생성" onGenerate={() => setStatus("설명 생성 의도")} />
+    </PrismManagementForm>
+    <PrismCriteriaSection title="포지션 블럭 기준" items={items}
+      onAdd={() => setItems(previous => [...previous, { id: crypto.randomUUID(), label: "새 기준", description: "합성 기준" }])}
+      onEdit={id => setStatus(id + " 편집 의도")}
+      onRemove={id => setItems(previous => previous.filter(item => item.id !== id))} />
+    <PrismButton variant="line" onClick={() => setOpen(true)}>영향 포지션 확인</PrismButton>
+    <PrismDialog title="영향 포지션" description="가상 기준에 연결된 포지션입니다." open={open} onOpenChange={setOpen}>
+      <PrismAffectedPositions positions={affected} />
+    </PrismDialog>
+    <p role="status">{status}</p>
+  </section>;
+}
 ```
 
 ## Context / Option card

@@ -49,9 +49,9 @@ export function PrismAutocomplete({ label, options, selectedOption: retained, va
         {errorMessage&&<p className="prism-error" role="alert" id={`${id}-error`}>{errorMessage}</p>}
     </div>;
 }
-export function PrismMultiSelect({ label, options, value, onValueChange, disabled, readOnly, error, searchable = false, size = "medium", allLabel = "전체", allToggleClearsSelection = false, placeholder = "선택하세요" }: {
+export function PrismMultiSelect({ label, options, value, onValueChange, disabled, readOnly, required, error, searchable = false, size = "medium", allLabel = "전체", allToggleClearsSelection = false, placeholder = "선택하세요" }: {
     label: string; options: readonly ComboboxOption[]; value: readonly string[]; onValueChange: (value: string[]) => void;
-    disabled?: boolean; readOnly?: boolean; error?: string; searchable?: boolean; size?: "large" | "medium" | "small"; allLabel?: string; allToggleClearsSelection?: boolean; placeholder?: string;
+    disabled?: boolean; readOnly?: boolean; required?: boolean; error?: string; searchable?: boolean; size?: "large" | "medium" | "small"; allLabel?: string; allToggleClearsSelection?: boolean; placeholder?: string;
 }) {
     const id = useId(); const [open,setOpen] = useState(false); const [query,setQuery] = useState(""); const locked = !!(disabled || readOnly);
     useEffect(() => { if (locked) { setOpen(false); setQuery(""); } }, [locked]);
@@ -59,8 +59,8 @@ export function PrismMultiSelect({ label, options, value, onValueChange, disable
     const filtered=options.filter(o => o.label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()));
     const toggle=(key:string) => {if (!locked) onValueChange(value.includes(key) ? value.filter(v => v!==key) : [...value,key]);};
     const first=value[0]; const summary=all ? allLabel : options.find(o => o.value===first)?.label ?? first;
-    return <div className="prism-field prism-multi-select"><label htmlFor={id}>{label}</label><div className="prism-multi-anchor"><Popover open={open && !locked} onOpenChange={next => {setOpen(next && !locked);setQuery("");}}>
-        <PopoverTrigger asChild><button id={id} className="prism-select-trigger" data-size={size} type="button" disabled={locked} role="combobox" aria-expanded={open && !locked} aria-controls={`${id}-options`} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} onKeyDown={e=>{if(!locked&&(e.key==="ArrowDown"||e.key==="ArrowUp")){e.preventDefault();setOpen(true);}}}>
+    return <div className="prism-field prism-multi-select"><label htmlFor={id}>{label}{required && <><span aria-hidden="true" className="prism-input-required">*</span><span className="prism-sr-only">필수</span></>}</label><div className="prism-multi-anchor"><Popover open={open && !locked} onOpenChange={next => {setOpen(next && !locked);setQuery("");}}>
+        <PopoverTrigger asChild><button id={id} className="prism-select-trigger" data-size={size} type="button" disabled={locked} role="combobox" aria-required={required} aria-expanded={open && !locked} aria-controls={`${id}-options`} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} onKeyDown={e=>{if(!locked&&(e.key==="ArrowDown"||e.key==="ArrowUp")){e.preventDefault();setOpen(true);}}}>
             <span className={value.length ? "prism-sr-only" : undefined}>{value.length ? `${summary}${!all && value.length>1 ? ` 외 ${value.length-1}개` : ""}` : placeholder}</span><ChevronDown aria-hidden="true" size={20} /></button></PopoverTrigger>
         <PopoverContent data-prism="light" className="prism-dropdown" align="start" id={`${id}-options`} aria-label={`${label} 선택 메뉴`} onKeyDown={e=>{
             const choices=Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>('button[role="checkbox"]:not(:disabled)'));
@@ -90,9 +90,9 @@ function parseDate(value: string): Date | undefined {
     const [year,month,day] = value.split("-").map(Number); const date = new Date(year,month-1,day);
     return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day ? date : undefined;
 }
-export function PrismDatePicker({ label, value, onValueChange, size = "medium", disabled, readOnly, error, min, max, inputEditable = false, displayFormat = "YYYY-MM-DD", placeholder = displayFormat }: {
+export function PrismDatePicker({ label, value, onValueChange, size = "medium", disabled, readOnly, required, error, min, max, inputEditable = false, displayFormat = "YYYY-MM-DD", placeholder = displayFormat }: {
     label: string; value: string | null; onValueChange: (value: string | null) => void;
-    size?: "large" | "medium" | "small"; disabled?: boolean; readOnly?: boolean; error?: string; min?: string; max?: string; inputEditable?: boolean; displayFormat?: "YYYY-MM-DD" | "YYYY.MM.DD"; placeholder?: string;
+    size?: "large" | "medium" | "small"; disabled?: boolean; readOnly?: boolean; required?: boolean; error?: string; min?: string; max?: string; inputEditable?: boolean; displayFormat?: "YYYY-MM-DD" | "YYYY.MM.DD"; placeholder?: string;
 }) {
     if (displayFormat !== "YYYY-MM-DD" && displayFormat !== "YYYY.MM.DD") throw new RangeError("Unsupported date display format.");
     if((min&&!parseDate(min))||(max&&!parseDate(max))||(min&&max&&min>max))throw new RangeError("Date bounds must be valid YYYY-MM-DD values with min <= max.");
@@ -106,9 +106,9 @@ export function PrismDatePicker({ label, value, onValueChange, size = "medium", 
     const commit = () => { if (!inputEditable || locked) return; if (!draft) { setInvalid(false); onValueChange(null); return; }
         if (!parseDate(draft) || (min && draft < min) || (max && draft > max)) { setInvalid(true); return; }
         setInvalid(false); onValueChange(draft); };
-    return <div className="prism-field"><label htmlFor={id}>{label}</label><Popover open={open && !locked} onOpenChange={setCalendarOpen}>
+    return <div className="prism-field"><label htmlFor={id}>{label}{required && <><span aria-hidden="true" className="prism-input-required">*</span><span className="prism-sr-only">필수</span></>}</label><Popover open={open && !locked} onOpenChange={setCalendarOpen}>
         <PopoverAnchor asChild><div className="prism-date-input" data-size={size} data-calendar-only={!inputEditable||undefined} data-invalid={!!error || invalid || undefined} data-disabled={disabled || readOnly || undefined}>
-            <input id={id} aria-invalid={!!error || invalid} aria-describedby={error || invalid ? `${id}-error` : undefined} placeholder={placeholder}
+            <input id={id} aria-required={required} aria-invalid={!!error || invalid} aria-describedby={error || invalid ? `${id}-error` : undefined} placeholder={placeholder}
                 value={displayFormat === "YYYY.MM.DD" ? draft.replaceAll("-", ".") : draft} disabled={disabled} readOnly={readOnly||!inputEditable} inputMode="numeric" aria-haspopup="dialog" aria-expanded={open} aria-controls={`${id}-calendar`} onClick={()=>{if(!inputEditable)setCalendarOpen(true);}} onChange={e => setDraft(displayFormat === "YYYY.MM.DD" ? e.target.value.replaceAll(".", "-") : e.target.value)} onBlur={commit}
                 onKeyDown={e => { if (e.key === "Enter" && !e.nativeEvent.isComposing) { e.preventDefault(); if(inputEditable)commit();else setCalendarOpen(true); }if(e.key==="ArrowDown"&&e.altKey){e.preventDefault();setCalendarOpen(true);} }} />
             <PopoverTrigger asChild><button type="button" aria-label={`${label} 달력 열기`} disabled={disabled || readOnly}><CalendarDays aria-hidden="true" size={size==="small" ? 16 : 20}/></button></PopoverTrigger></div></PopoverAnchor>

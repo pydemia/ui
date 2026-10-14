@@ -3305,8 +3305,8 @@
       "name": "Management forms / Criteria",
       "category": "Administration",
       "purpose": "회사 그룹·사용자·공지·포지션 정보 편집, 기준·영향 포지션 확인",
-      "contract": "분류된 Field schema와 controlled values로 관리 양식을 구성합니다. 필수 값과 native 이메일 검증을 제공하며 저장·생성·기준 추가/편집/제거는 callback입니다. 역할 변경의 권한과 API 검증은 서버 책임입니다. 원본 양식의 업무 검증을 모두 재구현한 것은 아닙니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "contract": "분류된 Field schema와 controlled values로 관리 양식을 구성합니다. 필수 값과 native 이메일 검증을 제공하며 저장·생성·기준 추가/편집/제거는 callback입니다. required 다중 선택·날짜는 시각·ARIA 필수 표시와 제출 오류를 제공하고, 520px 이하 부모에서는 필드를 한 열로 배치합니다. 회사 그룹·사용자·공지·포지션의 업무별 조건·권한은 prism-domain-forms가 담당하며 기준 삭제 재매핑은 prism-management-tools가 담당합니다. 이 범용 조합의 실제 저장·AI 생성·영향 조회는 호스트 callback입니다.",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "readonly",
@@ -3323,14 +3323,14 @@
         "admin/position-blocks/CriteriaTag.tsx",
         "admin/position-blocks/AffectedPositionSummary.tsx"
       ],
-      "usage": "import { PrismManagementForm } from \"@pydemia/prism\";\n<PrismManagementForm title=\"관리 정보\" fields={fields} values={values} onValueChange={change} onSubmit={save} />;",
+      "usage": "import { useState } from \"react\";\nimport { PrismManagementForm, PrismAiGenerateButton, PrismCriteriaSection, PrismAffectedPositions, PrismDialog, PrismButton, type PrismManagementField, type PrismManagementValue } from \"@pydemia/prism\";\n\nconst fields: PrismManagementField[] = [\n  { id: \"groupName\", label: \"회사 그룹명\", kind: \"text\", required: true, fullWidth: true },\n  { id: \"companyIds\", label: \"회사 선택\", kind: \"multi\", required: true, fullWidth: true,\n    options: [{ value: \"company-a\", label: \"가상전자\" }, { value: \"company-b\", label: \"예시사업\" }] },\n  { id: \"effectiveDate\", label: \"적용일\", kind: \"date\", required: true },\n];\nconst affected = [{ id: \"position-a\", name: \"가상 기술 포지션\", company: \"가상전자\" }];\n\nexport function ManagementExample() {\n  const [values, setValues] = useState<Record<string, PrismManagementValue>>({ groupName: \"\", companyIds: [], effectiveDate: null });\n  const [items, setItems] = useState([{ id: \"criterion-a\", label: \"기술 분야\", description: \"합성 기준 설명\" }]);\n  const [open, setOpen] = useState(false);\n  const [status, setStatus] = useState(\"\");\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 20, maxWidth: 760 }}>\n    <PrismManagementForm title=\"관리 정보\" fields={fields} values={values}\n      onValueChange={(id, value) => setValues(previous => ({ ...previous, [id]: value }))}\n      onSubmit={draft => setStatus(String(draft.groupName) + \" 저장 의도\")}>\n      <PrismAiGenerateButton label=\"AI로 설명 생성\" onGenerate={() => setStatus(\"설명 생성 의도\")} />\n    </PrismManagementForm>\n    <PrismCriteriaSection title=\"포지션 블럭 기준\" items={items}\n      onAdd={() => setItems(previous => [...previous, { id: crypto.randomUUID(), label: \"새 기준\", description: \"합성 기준\" }])}\n      onEdit={id => setStatus(id + \" 편집 의도\")}\n      onRemove={id => setItems(previous => previous.filter(item => item.id !== id))} />\n    <PrismButton variant=\"line\" onClick={() => setOpen(true)}>영향 포지션 확인</PrismButton>\n    <PrismDialog title=\"영향 포지션\" description=\"가상 기준에 연결된 포지션입니다.\" open={open} onOpenChange={setOpen}>\n      <PrismAffectedPositions positions={affected} />\n    </PrismDialog>\n    <p role=\"status\">{status}</p>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-management.tsx",
       "previewUrl": "/prism?component=prism-management",
       "embedUrl": "/prism?component=prism-management&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-management&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending",
+        "visual": "source-purpose-style-with-responsive-improvement-passed",
+        "interaction": "passed-local-and-independent-consumer",
         "localRenderGate": {
           "status": "passed",
           "states": [
@@ -3345,6 +3345,51 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "checks": [
+          "Current frontend 2eeb26ff management forms, AI button, criteria section and affected-position purpose were compared with the generic composition; domain-specific forms and remapping retain separate group ownership.",
+          "Required multi-select/date fields show a visible asterisk, screen-reader required text and aria-required; empty values block submission with field errors.",
+          "The 320px local user form uses one 254px field column instead of two cramped 121px columns; 1280px keeps two columns. Readonly/loading demo actions are suppressed.",
+          "Fresh external shadcn consumer installed 16 exact PRISM TSX sources and exact CSS, typechecked and built the complete example with Pretendard. Its 320px document stayed 320px wide; AI, criteria, affected-position dialog, required errors and valid controlled save were exercised."
+        ],
+        "evidence": [
+          "packages/prism/tests/management-form.test.mjs",
+          "local-prism-management-2026-10-14",
+          "installed-prism-management-2026-10-14"
+        ],
+        "remaining": [
+          "Authenticated deployed admin forms and their deployed revision/pixel parity remain unverified in this environment.",
+          "Real persistence, AI generation, affected-position API and RBAC remain owned by the consuming host and were not verified by synthetic browser flows."
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/admin/company-groups/CompanyGroupForm.tsx",
+            "components/admin/users/UserForm.tsx",
+            "components/admin/notices/NoticeForm.tsx",
+            "components/admin/positions/PositionForm.tsx",
+            "components/admin/common/AdminAiGenerateButton.tsx",
+            "components/admin/position-blocks/CriteriaSection.tsx",
+            "components/admin/position-blocks/AffectedPositionSummary.tsx"
+          ],
+          "evidence": [
+            "Generic management schema and controlled values cover form composition, required multi/date validation and callback-only save/AI/criteria actions; domain-specific rules are separately audited.",
+            "Focused test and local browser covered required errors, complete save, readonly/loading suppression, AI non-submission and 320/1280 responsive fields.",
+            "Fresh independent shadcn consumer installed 16 exact TSX sources/CSS, typechecked and built the complete example, and exercised the 320px valid save flow."
+          ],
+          "intentionalImprovements": [
+            "Below 520px form width, fields stack into one readable column rather than preserving the cramped two-column source presentation.",
+            "Required multi-select and date expose both visual and assistive-technology required indicators.",
+            "Readonly/loading example states suppress AI and criterion mutation actions."
+          ],
+          "hostOwned": [
+            "The consuming application supplies domain-specific fields, authorization, persistence, AI text and affected-position data."
+          ],
+          "nonBlockingUnknowns": [
+            "The authenticated deployed admin route and real backend outcomes remain unverified."
+          ]
         }
       },
       "exports": [
@@ -3373,8 +3418,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismManagementForm } from \"@/components/ui/prism-management\";\n<PrismManagementForm title=\"관리 정보\" fields={fields} values={values} onValueChange={change} onSubmit={save} />;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismManagementForm, PrismAiGenerateButton, PrismCriteriaSection, PrismAffectedPositions, type PrismManagementField, type PrismManagementValue } from \"@/components/ui/prism-management\";\nimport { PrismDialog } from \"@/components/ui/prism-dialog\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\n\nconst fields: PrismManagementField[] = [\n  { id: \"groupName\", label: \"회사 그룹명\", kind: \"text\", required: true, fullWidth: true },\n  { id: \"companyIds\", label: \"회사 선택\", kind: \"multi\", required: true, fullWidth: true,\n    options: [{ value: \"company-a\", label: \"가상전자\" }, { value: \"company-b\", label: \"예시사업\" }] },\n  { id: \"effectiveDate\", label: \"적용일\", kind: \"date\", required: true },\n];\nconst affected = [{ id: \"position-a\", name: \"가상 기술 포지션\", company: \"가상전자\" }];\n\nexport function ManagementExample() {\n  const [values, setValues] = useState<Record<string, PrismManagementValue>>({ groupName: \"\", companyIds: [], effectiveDate: null });\n  const [items, setItems] = useState([{ id: \"criterion-a\", label: \"기술 분야\", description: \"합성 기준 설명\" }]);\n  const [open, setOpen] = useState(false);\n  const [status, setStatus] = useState(\"\");\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 20, maxWidth: 760 }}>\n    <PrismManagementForm title=\"관리 정보\" fields={fields} values={values}\n      onValueChange={(id, value) => setValues(previous => ({ ...previous, [id]: value }))}\n      onSubmit={draft => setStatus(String(draft.groupName) + \" 저장 의도\")}>\n      <PrismAiGenerateButton label=\"AI로 설명 생성\" onGenerate={() => setStatus(\"설명 생성 의도\")} />\n    </PrismManagementForm>\n    <PrismCriteriaSection title=\"포지션 블럭 기준\" items={items}\n      onAdd={() => setItems(previous => [...previous, { id: crypto.randomUUID(), label: \"새 기준\", description: \"합성 기준\" }])}\n      onEdit={id => setStatus(id + \" 편집 의도\")}\n      onRemove={id => setItems(previous => previous.filter(item => item.id !== id))} />\n    <PrismButton variant=\"line\" onClick={() => setOpen(true)}>영향 포지션 확인</PrismButton>\n    <PrismDialog title=\"영향 포지션\" description=\"가상 기준에 연결된 포지션입니다.\" open={open} onOpenChange={setOpen}>\n      <PrismAffectedPositions positions={affected} />\n    </PrismDialog>\n    <p role=\"status\">{status}</p>\n  </section>;\n}"
     },
     {
       "id": "prism-context",
