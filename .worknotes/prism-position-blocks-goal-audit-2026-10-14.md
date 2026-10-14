@@ -7,3 +7,5 @@
 새 외부 디렉터리에 shadcn CLI로 그룹을 설치했다. 설치된 TSX 22개와 PRISM CSS·기본 토큰이 레지스트리 출력과 바이트 단위로 일치했다. 전체 사용 예제의 TypeScript 검사, Vite/Pretendard/고지 빌드, 외부 브라우저의 LIVE/TEMP/생성 대화상자가 통과했다. 320px 외부 브라우저에서 대화상자 폭은 296px, 문서 폭은 320px였다. 대상 계약 테스트 22/22, 전체 PRISM 테스트 348/348, 문서 typecheck, 전체 site build, registry release check가 통과했다.
 
 현재 배포 프런트엔드의 인증 화면과 소스 SHA는 연결하지 못했다. 실제 RBAC, API/AI, 캐시, 저장과 동기화 효과는 호스트가 제공해야 한다. 목적·대표 상태·독립 설치·좁은 화면의 수용 근거는 충족해 `prism-position-blocks`를 **45/58번째 완료 그룹**으로 기록한다. 미판정 13개다.
+
+미리보기 첫 바이트 대조에서 `prism/components.json`의 이 그룹 `verification` 필드만 로컬과 달랐다. 수용 기록을 원본 검증 JSON에 추가한 뒤 생성 단계를 다시 실행하지 않은 것이 원인이며, `npm run build`로 레지스트리·문서 전체를 재생성해 같은 배포의 manifest와 바이트 일치를 확인했다. 수정 산출물을 별도 커밋으로 반영한다.
