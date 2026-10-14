@@ -3,7 +3,7 @@ import test from "node:test";
 import { createElement as h } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { JSDOM } from "jsdom";
-import { PrismButton, PrismInput, PrismCountBadge, PrismCandidateCard, PrismEvaluationTable, PrismRequestState, PrismRadarChart, PrismTrendChart, PrismSixFrame, PrismPagination, PrismProgress } from "../dist/index.js";
+import { PrismButton, PrismNewChatButton, PrismInput, PrismCountBadge, PrismTag, PrismChip, PrismCandidateCard, PrismEvaluationTable, PrismRequestState, PrismRadarChart, PrismTrendChart, PrismSixFrame, PrismPagination, PrismProgress } from "../dist/index.js";
 
 const render = (component, props) => renderToStaticMarkup(h(component, props));
 test("form labels connect to separate descriptions and errors", () => {
@@ -19,6 +19,25 @@ test("icon-only actions must be named and buttons do not submit implicitly", () 
     assert.throws(() => render(PrismButton, { iconOnly: true }), /accessible name/);
     const doc = new JSDOM(render(PrismButton, { children: "저장" })).window.document;
     assert.equal(doc.querySelector("button").type, "button");
+});
+test("button label fallback and trailing icon follow the source contract", () => {
+    const labelOnly = new JSDOM(render(PrismButton, { label: "다시 시도", variant: "line" })).window.document.querySelector("button");
+    assert.equal(labelOnly.textContent, "다시 시도");
+    assert.equal(labelOnly.getAttribute("label"), null);
+    const trailing = new JSDOM(render(PrismButton, { label: "대체 문구", children: "더 보기", icon: h("svg", { role: "img" }), iconPosition: "right" })).window.document.querySelector("button");
+    assert.equal(trailing.textContent, "더 보기");
+    assert.equal(trailing.lastElementChild.className, "prism-button-icon");
+    assert.equal(trailing.lastElementChild.getAttribute("aria-hidden"), "true");
+});
+test("new-chat button supplies the source label and AddIcon without caller markup", () => {
+    const doc = new JSDOM(render(PrismNewChatButton, {})).window.document;
+    const button = doc.querySelector("button");
+    assert.equal(button.type, "button");
+    assert.equal(button.textContent, "새로운 대화");
+    assert.equal(button.querySelector("svg")?.getAttribute("viewBox"), "0 0 28 28");
+    const collapsed = new JSDOM(render(PrismNewChatButton, { iconOnly: true, "aria-label": "새로운 대화" })).window.document;
+    assert.equal(collapsed.querySelector("button").getAttribute("aria-label"), "새로운 대화");
+    assert.equal(collapsed.querySelector("button").textContent, "");
 });
 test("insufficient assessment evidence and real zero remain different", () => {
     const doc = new JSDOM(render(PrismEvaluationTable, { assessments: [
@@ -45,6 +64,16 @@ test("overflowing counts retain their exact accessible value", () => {
     const markup = render(PrismCountBadge, { count: 120 });
     assert.match(markup, /120건/); assert.match(markup, /99\+/);
     assert.throws(() => render(PrismCountBadge, { count: -1 }), /nonnegative/);
+});
+test("tag and chip render source-style label props while children can override them", () => {
+    const tag = new JSDOM(render(PrismTag, { label: "재무", onRemove() {} })).window.document;
+    assert.equal(tag.querySelector(".prism-tag").textContent, "재무");
+    assert.equal(tag.querySelector(".prism-tag button").getAttribute("aria-label"), "재무 삭제");
+    const chip = new JSDOM(render(PrismChip, { label: "활성", color: "#0072C6" })).window.document.querySelector(".prism-chip");
+    assert.equal(chip.textContent, "활성");
+    assert.equal(chip.getAttribute("label"), null);
+    assert.equal(new JSDOM(render(PrismChip, { label: "기본값", children: "수정값" })).window.document.querySelector(".prism-chip").textContent, "수정값");
+    assert.equal(new JSDOM(render(PrismChip, { label: "기본 상태", tone: "neutral" })).window.document.querySelector(".prism-chip").getAttribute("data-tone"), "neutral");
 });
 test("chart gaps do not draw zero or interpolate missing evidence", () => {
     const axes = [{id:"a",label:"A"},{id:"b",label:"B"},{id:"c",label:"C"}];
@@ -75,7 +104,7 @@ test("pagination and progress reject invalid ranges instead of inventing a value
 test("repeated vector assets preserve accessible labels and cannot collide in SVG IDs", async () => {
     const {PrismIcon,prismIconNames}=await import("../dist/index.js");
     const markup=renderToStaticMarkup(h("div",{},...prismIconNames.flatMap(name=>[h(PrismIcon,{key:name+"a",name,size:20}),h(PrismIcon,{key:name+"b",name,size:20,label:name})])));
-    const doc=new JSDOM(markup).window.document;assert.equal(prismIconNames.length,87);assert.equal(doc.querySelectorAll('svg').length,174);assert.equal(doc.querySelectorAll('[role="img"]').length,87);
+    const doc=new JSDOM(markup).window.document;assert.equal(prismIconNames.length,88);assert.equal(doc.querySelectorAll('svg').length,176);assert.equal(doc.querySelectorAll('[role="img"]').length,88);
     const ids=[...doc.querySelectorAll('svg [id]')].map(element=>element.id);assert.equal(new Set(ids).size,ids.length);
     for(const element of doc.querySelectorAll('svg *'))for(const attribute of element.attributes){const match=/^url\(#(.+)\)$/.exec(attribute.value);if(match)assert.ok(doc.getElementById(match[1]),`Missing SVG target ${match[1]}`);}
 });

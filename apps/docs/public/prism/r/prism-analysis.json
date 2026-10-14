@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-analysis",
+  "type": "registry:ui",
+  "title": "Profile analysis / Leader explanation",
+  "description": "리더 유형 도움말과 6 Frame 목적별 근거 표시",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-display.json",
+    "https://ui.pydemia.ai/prism/r/prism-badge.json",
+    "https://ui.pydemia.ai/prism/r/prism-icon.json",
+    "https://ui.pydemia.ai/prism/r/prism-utility.json",
+    "https://ui.pydemia.ai/prism/r/prism-rich-text.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-analysis.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-analysis.tsx",
+      "content": "import { Fragment, useId, type CSSProperties } from \"react\";\nimport { PrismAnchorChip } from \"./prism-display\";\nimport { PrismTag } from \"./prism-badge\";\nimport { PrismIcon } from \"./prism-icon\";\nimport { PrismInfoTooltip } from \"./prism-utility\";\nimport { PrismFormattedText } from \"./prism-rich-text\";\n\nexport type PrismAnalysisFactorKind = \"expertise\" | \"success\" | \"design\" | \"agility\" | \"attitude\" | \"leadership\" | \"other\";\nexport type PrismAnalysisFactor = { id: string; kind: PrismAnalysisFactorKind; label: string; title?: string | null; results: readonly string[]; summary?: string | null; starred?: readonly string[] };\nexport type PrismAnalysisLeader = { label: string; description?: string | null; aiComment?: string | null };\nexport type PrismAnalysisProps = {\n    leader?: PrismAnalysisLeader | null; factors: readonly PrismAnalysisFactor[]; title?: string;\n    panel?: boolean; onAction?: (kind: \"profile\" | \"position\" | \"document\", id: string) => void;\n    className?: string; style?: CSSProperties;\n};\nconst levels = \"(※ 리더 유형의 단계: Excellent > Good > Solid > Developing > Struggling)\";\nfunction badgeName(label: string) {\n    const index = Math.max(label.lastIndexOf(\"리더\"),label.toLowerCase().lastIndexOf(\"leader\"));\n    return index > 0 ? <>{label.slice(0,index).trimEnd()}<br/>{label.slice(index)}</> : label;\n}\nexport function PrismAnalysis({ leader, factors, title = \"6 Frame 분석 결과 요약\", panel, onAction, className = \"\", style }: PrismAnalysisProps) {\n    const id = useId();\n    if (new Set(factors.map(factor => factor.id)).size !== factors.length || factors.some(factor => !factor.id || !factor.label.trim() || ![\"expertise\",\"success\",\"design\",\"agility\",\"attitude\",\"leadership\",\"other\"].includes(factor.kind))) throw new Error(\"Analysis factors require unique identifiers, nonempty labels and a supported kind.\");\n    const summary = (value?: string | null) => value?.trim() ? <div className=\"prism-analysis-description\"><PrismFormattedText source={value} inline panel={panel} onAction={onAction}/></div> : <p className=\"prism-no-data\">관련 데이터 없음</p>;\n    const chip = (value: string, index: number, selected = false, starred = false) => <PrismAnchorChip key={index} selected={selected} small interactive={false}>{starred && <PrismIcon name=\"FavoriteOnIcon\" size={14} className=\"prism-analysis-star\"/>}{value}</PrismAnchorChip>;\n    function content(factor: PrismAnalysisFactor) {\n        const heading = factor.title?.trim() ? <strong className=\"prism-analysis-factor-title\">{factor.title.trim()}</strong> : null;\n        const description = summary(factor.summary);\n        switch (factor.kind) {\n            case \"expertise\": return <>{heading}{factor.results.length > 0 && <div className=\"prism-analysis-tags\">{factor.results.map((value,index) => <Fragment key={index}>{index > 0 && <span className=\"prism-analysis-tag-divider\" aria-hidden=\"true\"/>}<span>{value}</span></Fragment>)}</div>}{description}</>;\n            case \"success\": return <>{factor.results.length > 0 && <div className=\"prism-analysis-chips\">{factor.results.map((value,index) => chip(value,index,false,!!factor.starred?.includes(value)))}</div>}{description}</>;\n            case \"design\": case \"agility\": return <>{factor.results.length > 0 && chip(factor.results[0],0,true)}{description}</>;\n            case \"attitude\": return <>{heading}{description}{factor.results.length > 0 && <div className=\"prism-analysis-derail\"><span>Derailment:</span><div className=\"prism-analysis-chips\">{factor.results.map((value,index) => <span key={index} className=\"prism-analysis-derail-chip\">{value}</span>)}</div></div>}</>;\n            case \"leadership\": return <>{factor.results.map((value,index) => <PrismTag key={index} variant=\"blue\" className=\"prism-analysis-leadership-result\" title={value}><span>{value}</span></PrismTag>)}{heading}{description}</>;\n            case \"other\": return <>{factor.results.length > 0 && <div className=\"prism-analysis-chips\">{factor.results.map((value,index) => chip(value,index))}</div>}{description}</>;\n        }\n    }\n    return <div className={`prism-analysis ${className}`} style={style}>\n        <section className=\"prism-analysis-block prism-analysis-leader-block\" aria-label=\"리더 유형\"><h3>리더 유형</h3>{leader ? <div className=\"prism-analysis-leader-row\">\n            <span className=\"prism-analysis-leader-badge\" title={leader.label} aria-label={leader.label}><span>{badgeName(leader.label)}</span>{leader.description && <PrismInfoTooltip label=\"리더 유형 설명\" className=\"prism-analysis-info\" icon={<PrismIcon name=\"InfoIcon\" size={10}/>}\n                side=\"bottom\" panel content={<span className=\"prism-analysis-leader-note\">{leader.description}{\"\\n\"}{levels}</span>} contentProps={{className:\"prism-analysis-tooltip\"}}/>}</span>\n            <span className=\"prism-analysis-leader-divider\" aria-hidden=\"true\"/><p className=\"prism-analysis-leader-comment\">{leader.aiComment ?? leader.description}</p>\n        </div> : <p className=\"prism-no-data\">관련 데이터 없음</p>}</section>\n        <section className=\"prism-analysis-block prism-analysis-frame\" aria-labelledby={id}><h3 id={id}>{title}</h3>{factors.length ? factors.map(factor => <section key={factor.id} className=\"prism-analysis-factor\" data-kind={factor.kind}>\n            <h4>{factor.label}</h4><div className=\"prism-analysis-factor-content\">{content(factor)}</div>\n        </section>) : <p className=\"prism-no-data\">관련 데이터 없음</p>}</section>\n    </div>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+    "sourceDeltaAudits": [
+      {
+        "source": "components/chat/templates/ChatProfileAnalysis.tsx",
+        "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+        "scope": "Leadership results rendered as blue readonly tags; deletion effect after success depends on latest route/session context."
+      }
+    ],
+    "sourceSha256": "05d05de1c254b395d22fd2634e16d20a0323836542bc44811a8d410394037be7",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

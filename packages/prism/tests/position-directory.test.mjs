@@ -1,0 +1,131 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { readFile } from "node:fs/promises";
+import { transform } from "esbuild";
+import { JSDOM } from "jsdom";
+
+const dom = new JSDOM('<!doctype html><html><body><div id="root"></div></body></html>', { url: "http://localhost/", pretendToBeVisual: true });
+for (const key of ["window", "document", "HTMLElement", "Element", "Node", "Event", "MouseEvent", "KeyboardEvent", "MutationObserver", "DocumentFragment", "CustomEvent", "NodeFilter", "HTMLInputElement", "HTMLButtonElement", "HTMLFormElement"]) globalThis[key] = dom.window[key];
+Object.defineProperty(globalThis, "navigator", { configurable: true, value: dom.window.navigator });
+globalThis.getComputedStyle = dom.window.getComputedStyle;
+globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(dom.window);
+globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(dom.window);
+globalThis.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} };
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+const { createElement: h, act, useEffect, useState } = await import("react");
+const { createRoot } = await import("react-dom/client");
+const { PrismPositionDirectory, createPrismPositionDirectoryState, applyPrismPositionDirectoryFilters, resetPrismPositionDirectoryFilters,
+    sortPrismPositionDirectory, openPrismPositionDirectoryTab, closePrismPositionDirectoryTab, createPrismPositionDirectoryQuery } = await import("../dist/index.js");
+const root = createRoot(document.getElementById("root"));
+const render = node => act(async () => root.render(node));
+const click = node => { assert.ok(node, "Expected button"); return act(async () => node.click()); };
+const button = label => [...document.querySelectorAll("button")].find(node => node.getAttribute("aria-label") === label || node.textContent === label);
+const industries = [{ value: "tech", label: "기술" }, { value: "service", label: "서비스" }];
+
+test("draft search maps only applied filters to the LIVE server query, with all-industry normalization", () => {
+    const initial = createPrismPositionDirectoryState();
+    assert.deepEqual(createPrismPositionDirectoryQuery(initial), { source: "LIVE", page: 1, size: 10, name: undefined, company_id: undefined, industry_block_id: [], sort: undefined });
+    const draft = { ...initial, page: 3, draft: { companyId: "company", industryIds: ["tech"], name: "  전략  " } };
+    assert.equal(createPrismPositionDirectoryQuery(draft).name, undefined);
+    const applied = applyPrismPositionDirectoryFilters(draft, industries);
+    assert.equal(applied.page, 1);
+    assert.deepEqual(createPrismPositionDirectoryQuery(applied), { source: "LIVE", page: 1, size: 10, name: "전략", company_id: ["company"], industry_block_id: ["tech"], sort: undefined });
+    const all = applyPrismPositionDirectoryFilters({ ...draft, draft: { ...draft.draft, industryIds: ["tech", "service"] } }, industries);
+    assert.deepEqual(createPrismPositionDirectoryQuery(all).industry_block_id, []);
+    const sorted = sortPrismPositionDirectory(applied, "job");
+    assert.deepEqual(createPrismPositionDirectoryQuery(sorted).sort, ["main_job_name:asc"]);
+    assert.deepEqual(createPrismPositionDirectoryQuery(sortPrismPositionDirectory(sorted, "job")).sort, ["main_job_name:desc"]);
+    assert.equal(resetPrismPositionDirectoryFilters(sorted).sort.column, "job");
+    assert.equal(createPrismPositionDirectoryQuery(resetPrismPositionDirectoryFilters(sorted)).name, undefined);
+});
+test("opening the same position reuses its tab; closing an active tab selects its predecessor", () => {
+    const a = { id: "a", company: "가상전자", name: "전략", industry: "기술", job: "기획", role: "담당" };
+    const b = { ...a, id: "b", name: "운영" };
+    let state = openPrismPositionDirectoryTab(createPrismPositionDirectoryState(), a);
+    state = openPrismPositionDirectoryTab(state, b);
+    state = openPrismPositionDirectoryTab(state, a);
+    assert.deepEqual(state.tabs.map(tab => tab.id), ["a", "b"]);
+    assert.equal(state.activeTabId, "a");
+    state = closePrismPositionDirectoryTab(state, "a");
+    assert.equal(state.activeTabId, null);
+    state = closePrismPositionDirectoryTab({ ...state, activeTabId: "b" }, "b");
+    assert.equal(state.activeTabId, null);
+});
+const source = await readFile(new URL("../../../apps/docs/src/prism/position-directory-demo.tsx", import.meta.url), "utf8");
+const compiled = await transform(source, { loader: "tsx", jsx: "automatic", format: "esm" });
+const portable = compiled.code.replace(/\bfrom\s+["']([^"']+)["']/g, (_match, specifier) => {
+    assert.ok(["react", "react/jsx-runtime", "@pydemia/prism"].includes(specifier));
+    return "from " + JSON.stringify(import.meta.resolve(specifier));
+});
+const { PositionDirectoryExample } = await import("data:text/javascript;base64," + Buffer.from(portable).toString("base64"));
+test("installed-style example searches, pages, sorts, opens a detail and returns to the list", async () => {
+    await render(h(PositionDirectoryExample));
+    assert.equal(document.querySelectorAll("thead th").length, 5);
+    assert.equal(document.querySelectorAll("tbody tr").length, 10);
+    assert.match(document.querySelector(".prism-position-directory-toolbar").textContent, /총 24건/);
+    await click(button("다음 페이지"));
+    assert.equal(document.querySelector('button[aria-current="page"]').textContent, "2");
+    await click(button("직무 정렬"));
+    assert.equal(document.querySelector('button[aria-current="page"]').textContent, "1");
+    assert.equal([...document.querySelectorAll("th")].find(node => node.textContent.includes("직무")).getAttribute("aria-sort"), "ascending");
+    const input = document.querySelector('input[placeholder="포지션 이름"]');
+    await act(async () => { Object.getOwnPropertyDescriptor(dom.window.HTMLInputElement.prototype, "value").set.call(input, "기술전략"); input.dispatchEvent(new Event("input", { bubbles: true })); });
+    assert.match(document.querySelector(".prism-position-directory-toolbar").textContent, /총 24건/);
+    await act(async () => document.querySelector(".prism-position-directory-filter").dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })));
+    assert.match(document.querySelector(".prism-position-directory-toolbar").textContent, /총 12건/);
+    await click(document.querySelector("tbody tr td:nth-child(3)"));
+    assert.equal(document.querySelectorAll('[role="tab"]').length, 2);
+    assert.match(document.querySelector(".prism-position-detail").textContent, /기술 전략 수립/);
+    await click(button("목록"));
+    assert.equal(document.querySelectorAll("tbody tr").length, 10);
+    await click(document.querySelector(".prism-position-directory-open"));
+    assert.equal(document.querySelectorAll('[role="tab"]').length, 2);
+    await click(document.querySelector(".prism-position-directory-close"));
+    assert.equal(document.querySelectorAll('[role="tab"]').length, 1);
+    await render(null);
+});
+test("loading and empty states preserve the table contract, and error exposes retry", async () => {
+    await render(h(PositionDirectoryExample, { key: "loading", initialMode: "loading" }));
+    assert.equal(document.querySelectorAll("tbody tr").length, 4);
+    await render(h(PositionDirectoryExample, { key: "empty", initialMode: "empty" }));
+    assert.match(document.querySelector("tbody").textContent, /검색 조건을 변경/);
+    assert.equal(document.querySelector(".prism-position-directory-pagination"), null);
+    await render(h(PositionDirectoryExample, { key: "error", initialMode: "error" }));
+    assert.ok(button("다시 시도") || button("다시 조회"));
+    await click(button("다시 시도") || button("다시 조회"));
+    assert.equal(document.querySelectorAll("tbody tr").length, 10);
+    await render(null);
+});
+test("open details stay mounted while hidden and existing rows remain visible during refresh", async () => {
+    const row = { id: "position-a", company: "가상전자", name: "전략", industry: "기술", job: "기획", role: "담당" };
+    let mounts = 0;
+    let unmounts = 0;
+    function Detail({ tab }) {
+        useEffect(() => { mounts++; return () => { unmounts++; }; }, []);
+        return h("p", null, `${tab.name} 상세`);
+    }
+    function Harness() {
+        const [state, setState] = useState(createPrismPositionDirectoryState);
+        return h(PrismPositionDirectory, { state, onStateChange: setState, rows: [row], total: 1, pageCount: 1,
+            companies: [], industries: [], status: "loading", renderDetail: tab => h(Detail, { tab }) });
+    }
+    await render(h(Harness));
+    assert.equal(document.querySelectorAll(".prism-position-directory-row").length, 1);
+    assert.equal(document.querySelectorAll(".prism-position-directory-scroll .prism-skeleton").length, 0);
+    assert.equal(button("포지션 정렬").disabled, false);
+    await click(document.querySelector(".prism-position-directory-open"));
+    assert.equal(mounts, 1);
+    const detailTab = document.querySelector('.prism-position-directory-tab button[role="tab"]');
+    const detailPanel = document.getElementById(detailTab.getAttribute("aria-controls"));
+    assert.equal(detailPanel.hidden, false);
+    await click(button("목록"));
+    assert.equal(detailPanel.hidden, true);
+    assert.equal(mounts, 1);
+    assert.equal(unmounts, 0);
+    await click(detailTab);
+    assert.equal(detailPanel.hidden, false);
+    assert.equal(mounts, 1);
+    await click(document.querySelector(".prism-position-directory-close"));
+    assert.equal(unmounts, 1);
+    await render(null);
+});

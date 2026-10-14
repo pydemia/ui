@@ -49,18 +49,19 @@ export function PrismAutocomplete({ label, options, selectedOption: retained, va
         {errorMessage&&<p className="prism-error" role="alert" id={`${id}-error`}>{errorMessage}</p>}
     </div>;
 }
-export function PrismMultiSelect({ label, options, value, onValueChange, disabled, readOnly, error, searchable = true, size = "medium", allLabel = "전체", allToggleClearsSelection = false }: {
+export function PrismMultiSelect({ label, options, value, onValueChange, disabled, readOnly, required, error, searchable = false, size = "medium", allLabel = "전체", allToggleClearsSelection = false, placeholder = "선택하세요" }: {
     label: string; options: readonly ComboboxOption[]; value: readonly string[]; onValueChange: (value: string[]) => void;
-    disabled?: boolean; readOnly?: boolean; error?: string; searchable?: boolean; size?: "large" | "medium" | "small"; allLabel?: string; allToggleClearsSelection?: boolean;
+    disabled?: boolean; readOnly?: boolean; required?: boolean; error?: string; searchable?: boolean; size?: "large" | "medium" | "small"; allLabel?: string; allToggleClearsSelection?: boolean; placeholder?: string;
 }) {
-    const id = useId(); const [open,setOpen] = useState(false); const [query,setQuery] = useState("");
+    const id = useId(); const [open,setOpen] = useState(false); const [query,setQuery] = useState(""); const locked = !!(disabled || readOnly);
+    useEffect(() => { if (locked) { setOpen(false); setQuery(""); } }, [locked]);
     const eligible=options.filter(o => !o.disabled); const all=eligible.length>0 && eligible.every(o => value.includes(o.value));
     const filtered=options.filter(o => o.label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()));
-    const toggle=(key:string) => {if (!disabled && !readOnly) onValueChange(value.includes(key) ? value.filter(v => v!==key) : [...value,key]);};
+    const toggle=(key:string) => {if (!locked) onValueChange(value.includes(key) ? value.filter(v => v!==key) : [...value,key]);};
     const first=value[0]; const summary=all ? allLabel : options.find(o => o.value===first)?.label ?? first;
-    return <div className="prism-field prism-multi-select"><label htmlFor={id}>{label}</label><div className="prism-multi-anchor"><Popover open={open} onOpenChange={next => {setOpen(next);setQuery("");}}>
-        <PopoverTrigger asChild><button id={id} className="prism-select-trigger" data-size={size} type="button" disabled={disabled || readOnly} role="combobox" aria-expanded={open} aria-controls={`${id}-options`} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} onKeyDown={e=>{if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();setOpen(true);}}}>
-            <span className={value.length ? "prism-sr-only" : undefined}>{value.length ? `${summary}${!all && value.length>1 ? ` 외 ${value.length-1}개` : ""}` : "선택하세요"}</span><ChevronDown aria-hidden="true" size={20} /></button></PopoverTrigger>
+    return <div className="prism-field prism-multi-select"><label htmlFor={id}>{label}{required && <><span aria-hidden="true" className="prism-input-required">*</span><span className="prism-sr-only">필수</span></>}</label><div className="prism-multi-anchor"><Popover open={open && !locked} onOpenChange={next => {setOpen(next && !locked);setQuery("");}}>
+        <PopoverTrigger asChild><button id={id} className="prism-select-trigger" data-size={size} type="button" disabled={locked} role="combobox" aria-required={required} aria-expanded={open && !locked} aria-controls={`${id}-options`} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} onKeyDown={e=>{if(!locked&&(e.key==="ArrowDown"||e.key==="ArrowUp")){e.preventDefault();setOpen(true);}}}>
+            <span className={value.length ? "prism-sr-only" : undefined}>{value.length ? `${summary}${!all && value.length>1 ? ` 외 ${value.length-1}개` : ""}` : placeholder}</span><ChevronDown aria-hidden="true" size={20} /></button></PopoverTrigger>
         <PopoverContent data-prism="light" className="prism-dropdown" align="start" id={`${id}-options`} aria-label={`${label} 선택 메뉴`} onKeyDown={e=>{
             const choices=Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>('button[role="checkbox"]:not(:disabled)'));
             const index=choices.indexOf(document.activeElement as HTMLButtonElement);let next:number|undefined;
@@ -69,10 +70,10 @@ export function PrismMultiSelect({ label, options, value, onValueChange, disable
             if(next!==undefined&&choices.length){e.preventDefault();choices[next].focus();}
         }}>
             {searchable && <div className="prism-dropdown-search"><PrismIcon name="SearchIcon" size={16}/><input aria-label={`${label} 항목 검색`} placeholder="검색" value={query} onChange={e => setQuery(e.target.value)} /></div>}
-            {!query.trim() && <><PrismCheckbox label={allLabel} checked={all ? true : value.length ? "indeterminate" : false} onCheckedChange={() => onValueChange(all || (allToggleClearsSelection && value.length>0) ? value.filter(v => !eligible.some(o => o.value===v)) : [...new Set([...value,...eligible.map(o => o.value)])])} disabled={!eligible.length} /><hr /></>}
-            {filtered.map(o => <PrismCheckbox key={o.value} label={o.label} checked={value.includes(o.value)} disabled={o.disabled} onCheckedChange={() => toggle(o.value)} />)}
+            {!query.trim() && <><PrismCheckbox label={allLabel} checked={all ? true : value.length ? "indeterminate" : false} onCheckedChange={() => { if (!locked) onValueChange(all || (allToggleClearsSelection && value.length>0) ? value.filter(v => !eligible.some(o => o.value===v)) : [...new Set([...value,...eligible.map(o => o.value)])]); }} disabled={locked || !eligible.length} /><hr /></>}
+            {filtered.map(o => <PrismCheckbox key={o.value} label={o.label} checked={value.includes(o.value)} disabled={locked || o.disabled} onCheckedChange={() => toggle(o.value)} />)}
             {!filtered.length && <p role="status">검색 결과가 없습니다.</p>}</PopoverContent></Popover>
-        {value.length>0 && <span className="prism-multi-summary"><span className="prism-multi-chip"><span aria-hidden="true">{summary}</span>{!disabled&&!readOnly&&<button type="button" aria-label={all ? `${label} 전체 선택 해제` : `${summary} 선택 해제`} onClick={() => onValueChange(all ? [] : value.filter(v => v!==first))}><X size={14}/></button>}</span>{!all&&value.length>1&&<span className="prism-multi-count" aria-hidden="true">+{value.length-1}</span>}</span>}</div>
+        {value.length>0 && <span className="prism-multi-summary"><span className="prism-multi-chip"><span aria-hidden="true">{summary}</span>{!locked&&<button type="button" aria-label={all ? `${label} 전체 선택 해제` : `${summary} 선택 해제`} onClick={() => onValueChange(all ? [] : value.filter(v => v!==first))}><X size={14}/></button>}</span>{!all&&value.length>1&&<span className="prism-multi-count" aria-hidden="true">+{value.length-1}</span>}</span>}</div>
         {error && <p className="prism-error" id={`${id}-error`}>{error}</p>}</div>;
 }
 export function PrismCheckbox({ label, hideLabel, size = "medium", ...props }: Omit<ComponentProps<typeof Checkbox>, "variant" | "label" | "description"> & { label: string; hideLabel?: boolean; size?: "medium" | "small" }) {
@@ -89,25 +90,26 @@ function parseDate(value: string): Date | undefined {
     const [year,month,day] = value.split("-").map(Number); const date = new Date(year,month-1,day);
     return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day ? date : undefined;
 }
-export function PrismDatePicker({ label, value, onValueChange, size = "medium", disabled, readOnly, error, min, max, inputEditable = false }: {
+export function PrismDatePicker({ label, value, onValueChange, size = "medium", disabled, readOnly, required, error, min, max, inputEditable = false, displayFormat = "YYYY-MM-DD", placeholder = displayFormat }: {
     label: string; value: string | null; onValueChange: (value: string | null) => void;
-    size?: "large" | "medium" | "small"; disabled?: boolean; readOnly?: boolean; error?: string; min?: string; max?: string; inputEditable?: boolean;
+    size?: "large" | "medium" | "small"; disabled?: boolean; readOnly?: boolean; required?: boolean; error?: string; min?: string; max?: string; inputEditable?: boolean; displayFormat?: "YYYY-MM-DD" | "YYYY.MM.DD"; placeholder?: string;
 }) {
+    if (displayFormat !== "YYYY-MM-DD" && displayFormat !== "YYYY.MM.DD") throw new RangeError("Unsupported date display format.");
     if((min&&!parseDate(min))||(max&&!parseDate(max))||(min&&max&&min>max))throw new RangeError("Date bounds must be valid YYYY-MM-DD values with min <= max.");
-    const id = useId(); const [draft,setDraft] = useState(value ?? ""); const [open,setOpen] = useState(false); const [invalid,setInvalid] = useState(false);
+    const id = useId(); const [draft,setDraft] = useState(value ?? ""); const [open,setOpen] = useState(false); const [invalid,setInvalid] = useState(false); const locked = !!(disabled || readOnly);
     const [month,setMonth] = useState(value ? parseDate(value) ?? new Date() : new Date()); const [yearView,setYearView] = useState(false); const yearGrid=useRef<HTMLDivElement>(null);
     const firstYear=min ? parseDate(min)?.getFullYear() ?? 1900 : 1900;const lastYear=max ? parseDate(max)?.getFullYear() ?? 2099 : 2099;
-    const setCalendarOpen=(next:boolean)=>{if(next&&(disabled||readOnly))return;setOpen(next);if(next){setMonth(value ? parseDate(value) ?? new Date() : new Date());setYearView(false);}};
+    const setCalendarOpen=(next:boolean)=>{if(next&&locked)return;setOpen(next);if(next){setMonth(value ? parseDate(value) ?? new Date() : new Date());setYearView(false);}};
     useEffect(()=>{if(!yearView)return;const grid=yearGrid.current;const button=grid?.querySelector<HTMLButtonElement>(`[data-year="${month.getFullYear()}"]`);if(grid&&button){grid.scrollTop=button.offsetTop-grid.offsetTop-grid.clientHeight/2+18;button.focus({preventScroll:true});}},[yearView,month]);
-    const chooseYear=(year:number)=>{const base=value ? parseDate(value) ?? new Date() : new Date();const day=Math.min(base.getDate(),new Date(year,base.getMonth()+1,0).getDate());let date=new Date(year,base.getMonth(),day);if(min&&date<parseDate(min)!)date=parseDate(min)!;if(max&&date>parseDate(max)!)date=parseDate(max)!;setMonth(date);onValueChange(`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`);setYearView(false);};
-    useEffect(() => { setDraft(value ?? ""); setInvalid(false); },[value]);
-    const commit = () => { if (!inputEditable) return; if (!draft) { setInvalid(false); onValueChange(null); return; }
+    const chooseYear=(year:number)=>{if(locked)return;const base=value ? parseDate(value) ?? new Date() : new Date();const day=Math.min(base.getDate(),new Date(year,base.getMonth()+1,0).getDate());let date=new Date(year,base.getMonth(),day);if(min&&date<parseDate(min)!)date=parseDate(min)!;if(max&&date>parseDate(max)!)date=parseDate(max)!;setMonth(date);onValueChange(`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`);setYearView(false);};
+    useEffect(() => { setDraft(value ?? ""); setInvalid(false); if(locked)setOpen(false); },[value,locked]);
+    const commit = () => { if (!inputEditable || locked) return; if (!draft) { setInvalid(false); onValueChange(null); return; }
         if (!parseDate(draft) || (min && draft < min) || (max && draft > max)) { setInvalid(true); return; }
         setInvalid(false); onValueChange(draft); };
-    return <div className="prism-field"><label htmlFor={id}>{label}</label><Popover open={open} onOpenChange={setCalendarOpen}>
+    return <div className="prism-field"><label htmlFor={id}>{label}{required && <><span aria-hidden="true" className="prism-input-required">*</span><span className="prism-sr-only">필수</span></>}</label><Popover open={open && !locked} onOpenChange={setCalendarOpen}>
         <PopoverAnchor asChild><div className="prism-date-input" data-size={size} data-calendar-only={!inputEditable||undefined} data-invalid={!!error || invalid || undefined} data-disabled={disabled || readOnly || undefined}>
-            <input id={id} aria-invalid={!!error || invalid} aria-describedby={error || invalid ? `${id}-error` : undefined} placeholder="YYYY-MM-DD"
-                value={draft} disabled={disabled} readOnly={readOnly||!inputEditable} inputMode="numeric" aria-haspopup="dialog" aria-expanded={open} aria-controls={`${id}-calendar`} onClick={()=>{if(!inputEditable)setCalendarOpen(true);}} onChange={e => setDraft(e.target.value)} onBlur={commit}
+            <input id={id} aria-required={required} aria-invalid={!!error || invalid} aria-describedby={error || invalid ? `${id}-error` : undefined} placeholder={placeholder}
+                value={displayFormat === "YYYY.MM.DD" ? draft.replaceAll("-", ".") : draft} disabled={disabled} readOnly={readOnly||!inputEditable} inputMode="numeric" aria-haspopup="dialog" aria-expanded={open} aria-controls={`${id}-calendar`} onClick={()=>{if(!inputEditable)setCalendarOpen(true);}} onChange={e => setDraft(displayFormat === "YYYY.MM.DD" ? e.target.value.replaceAll(".", "-") : e.target.value)} onBlur={commit}
                 onKeyDown={e => { if (e.key === "Enter" && !e.nativeEvent.isComposing) { e.preventDefault(); if(inputEditable)commit();else setCalendarOpen(true); }if(e.key==="ArrowDown"&&e.altKey){e.preventDefault();setCalendarOpen(true);} }} />
             <PopoverTrigger asChild><button type="button" aria-label={`${label} 달력 열기`} disabled={disabled || readOnly}><CalendarDays aria-hidden="true" size={size==="small" ? 16 : 20}/></button></PopoverTrigger></div></PopoverAnchor>
         <PopoverContent data-prism="light" className="prism-calendar-popover" align="start" sideOffset={0} id={`${id}-calendar`} aria-label={`${label} 달력`}>
@@ -119,28 +121,29 @@ export function PrismDatePicker({ label, value, onValueChange, size = "medium", 
             <Calendar className="prism-calendar" locale={enUS} hideNavigation components={{MonthCaption:()=> <></>}} formatters={{formatWeekdayName:date=>date.toLocaleDateString("en-US",{weekday:"short"})}} month={month} onMonthChange={setMonth} mode="single" required autoFocus selected={value ? parseDate(value) : undefined}
                 startMonth={new Date(firstYear,0,1)} endMonth={new Date(lastYear,11,1)}
                 disabled={[...(min && parseDate(min) ? [{ before: parseDate(min)! }] : []),...(max && parseDate(max) ? [{ after: parseDate(max)! }] : [])]}
-                onSelect={date => { const next = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
+                onSelect={date => { if(locked)return; const next = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
                     setDraft(next); setInvalid(false); onValueChange(next); setOpen(false); }} />}</PopoverContent></Popover>
         {(error || invalid) && <p className="prism-error" id={`${id}-error`}>{error ?? "올바른 날짜를 YYYY-MM-DD로 입력해 주세요."}</p>}</div>;
 }
 export function PrismDateRange({ label, start, end, onValueChange, disabled, readOnly, inputEditable }: { label: string; start: string | null; end: string | null;
     onValueChange: (range: { start: string | null; end: string | null }) => void; disabled?: boolean; readOnly?: boolean; inputEditable?: boolean }) {
-    const id = useId(); const invalid = !!start && !!end && start > end;
+    const invalid = !!start && !!end && start > end;
     return <fieldset className="prism-date-range"><legend>{label}</legend>{readOnly ? <p>{start ?? "시작일 없음"} ~ {end ?? "종료일 없음"}</p> : <>
         <div className="prism-date-fields"><PrismDatePicker label={`${label} 시작일`} value={start} disabled={disabled} inputEditable={inputEditable}
             onValueChange={next => onValueChange({ start: next, end })} />
-            <span>~</span><PrismDatePicker label={`${label} 종료일`} value={end} disabled={disabled} inputEditable={inputEditable}
-                onValueChange={next => onValueChange({ start, end: next })} error={invalid ? "종료일은 시작일 이후여야 합니다." : undefined} /></div>
-        {invalid && <p id={id} className="prism-error">종료일은 시작일 이후여야 합니다.</p>}</>}</fieldset>;
+            <span>~</span><PrismDatePicker label={`${label} 종료일`} value={end} disabled={disabled} inputEditable={inputEditable} min={start ?? undefined}
+                onValueChange={next => onValueChange({ start, end: next })} error={invalid ? "종료일은 시작일 이후여야 합니다." : undefined} /></div></>}</fieldset>;
 }
-export function PrismPagination({ page, pageCount, onPageChange, disabled }: { page: number; pageCount: number;
-    onPageChange: (page: number) => void; disabled?: boolean }) {
+export function PrismPagination({ page, pageCount, onPageChange, disabled, pageButtonCount = 5 }: { page: number; pageCount: number;
+    onPageChange: (page: number) => void; disabled?: boolean; pageButtonCount?: number }) {
     if (!Number.isInteger(pageCount) || pageCount < 1 || !Number.isInteger(page) || page < 1 || page > pageCount) throw new RangeError("Pagination requires 1 <= page <= pageCount.");
-    const first = Math.max(1, Math.min(page - 2, pageCount - 4));
-    const pages = Array.from({ length: Math.min(5, pageCount) }, (_, i) => first + i);
+    if (!Number.isSafeInteger(pageButtonCount) || pageButtonCount < 1) throw new RangeError("Pagination pageButtonCount must be a positive integer.");
+    const count = Math.min(pageButtonCount, pageCount);
+    const first = Math.max(1, Math.min(page - Math.floor(count / 2), pageCount - count + 1));
+    const pages = Array.from({ length: count }, (_, i) => first + i);
     return <nav className="prism-pagination" aria-label="페이지 이동">{[[1,"첫 페이지",ChevronsLeft],[page - 1,"이전 페이지",ChevronLeft]].map(([next,label,Icon]) => {
         const Glyph = Icon as typeof ChevronLeft; return <button type="button" key={String(label)} aria-label={String(label)} disabled={disabled || page === 1} onClick={() => onPageChange(Number(next))}><Glyph aria-hidden="true" /></button>;
-    })}{pages.map(next => <button type="button" key={next} aria-current={next === page ? "page" : undefined} disabled={disabled} onClick={() => onPageChange(next)}>{next}</button>)}
+    })}<span className="prism-pagination-pages">{pages.map(next => <button type="button" key={next} aria-current={next === page ? "page" : undefined} disabled={disabled} onClick={() => onPageChange(next)}>{next}</button>)}</span>
         <button type="button" aria-label="다음 페이지" disabled={disabled || page === pageCount} onClick={() => onPageChange(page + 1)}><ChevronRight aria-hidden="true" /></button>
         <button type="button" aria-label="마지막 페이지" disabled={disabled || page === pageCount} onClick={() => onPageChange(pageCount)}><ChevronsRight aria-hidden="true" /></button></nav>;
 }
