@@ -2893,15 +2893,17 @@
       }
     },
     "prism-chat-logs": {
-      "visual": "passed-eight-synthetic-local-states-at1280-320;authenticated-source-parity-unverified",
-      "interaction": "passed12-target-contract-and-complete-synthetic-example-tests",
+      "visual": "accepted-purpose-and-responsive-layout;authenticated-deployed-revision-unverified",
+      "interaction": "accepted-query-copy-archive-and-page-return-contract",
       "checks": [
-        "7 columns/filter160/303/250 observed;12 meaningful query/copy/archive/complete-example tests."
+        "7 columns/filter160/303/250 observed;12 meaningful query/copy/archive/complete-example tests.",
+        "7 columns/filter160/303/250 observed; current source 2eeb26ff leaves chat-log pages/SCSS and ChatConversation unchanged from audited 27c4fdbf; current 12 focused tests pass.",
+        "Current local browser at 1280/320: error header 80px readable, 320px document width 320 and table 980px inside 256px scroll; archive detail has no composer, remains width 320; page 2 returns to its records.",
+        "Earlier independent shadcn consumer: 58 exact TSX/CSS sources, 39 examples typechecked and Vite/font/notices passed; previous review CI/preview readback completed. Current registry/CI awaits final revision."
       ],
       "remaining": [
-        "Authenticated original rendering and deployed revision binding: IAB source route is blank;existing Chrome source tab displays admin-login. Original chat-log source is a placeholder with no real API integration.",
-        "Full source font/pixel/A4 and all canonical state parity,remaining purposes and improvements.",
-        "Review branch CI/preview readback pending current revision;production not published."
+        "Authenticated original rendering and deployed revision binding are unavailable: IAB route was blank and existing Chrome route showed admin-login. Original chat-log source has no real API integration.",
+        "Host owns actual log API, authorization, retention, route/cache and live clipboard effects; current synthetic example does not prove those effects."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -7462,10 +7464,11 @@
       "prism-domain-forms",
       "prism-page-state",
       "prism-admin",
-      "prism-management-tools"
+      "prism-management-tools",
+      "prism-chat-logs"
     ],
-    "acceptedCount": 50,
-    "unassessedGroups": 8,
+    "acceptedCount": 51,
+    "unassessedGroups": 7,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   },
   "domainFormsVerification": {
@@ -7489,5 +7492,15 @@
     "focusedTests": "4/4 passed including shared position sync and keyboard-focusable long text.",
     "localBrowser": "Eight admin states and selected-row/filter/sync actions; 64px header, 18px title, 20px/12px filter; 320px document with internal table scroll.",
     "independentConsumer": "Fresh shadcn install: five exact TSX sources and CSS/tokens, complete example typechecked, Vite/font/notices build, paging/delete/sync and long tooltip; 320px document width320, table 560px scroll width inside 288px viewport."
+  },
+  "chatLogsGoalAudit": {
+    "date": "2026-10-14",
+    "currentSourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "sourceDelta": "No changes in chat-log pages, styles or shared ChatConversation since audited 27c4fdbf baseline.",
+    "improvement": "Error sortable header width enlarged from 65 to 80px after the 65px label wrapped on desktop.",
+    "focusedTests": "12/12 focused and 359/359 full PRISM tests passed on current branch; 49 complete examples typechecked.",
+    "localBrowser": "1280px header readable; 320px document width320, table 980 inside 256px scroll region; archive detail width320/no composer, page2 displays item11 after back.",
+    "independentConsumer": "Prior external shadcn install verified 58 exact module sources/CSS, 39 complete examples typechecked, Vite/Pretendard/notices; current source delta is only the error width, checked in local browser and generated registry.",
+    "nonBlockingUnknowns": "Current authenticated deployed chat-log route and real API/RBAC/retention are not verified. Preview is review deployment, not production publication."
   }
 }

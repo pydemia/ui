@@ -7928,7 +7928,7 @@
       "name": "Administrator chat logs / Archived conversation",
       "category": "Administration",
       "purpose": "대화 로그 조회·페이지/정렬·Conversation ID 복사와 읽기 전용 보관 대화 상세",
-      "contract": "현재원본대화로그는MOCK_ROWS100개와고정상세fixture이고조회/초기화는no-op,정렬은header/page1만바꾸며API계약이없습니다. PrismChatLogManagement는원본7열과160/303/250필터·페이지10·복사/행열기를유지하면서호스트의draft/applied/rows/total/page/sort를받습니다. preparePrismChatLogFilters는회사선택중복/알수없는ID를정리하고전체/없음은회사필터없음으로처리하며날짜한쪽/정상calendar/order와keywordtrim을지원합니다. 표시중invalid날짜는이전조건으로조회하지않습니다. createPrismChatLogQuery는application-neutral형태로공개필드만복사하고ISO bound를dotted문자열로제공합니다. 실제backendAPI를추측하지않습니다. 조회/초기화/정렬은page1,subject는정렬없음이고행은현재페이지만받으며onOpen은공개row whitelist입니다. 필터없는0건은안내,필터적용0건은표검색빈상태이며오류를빈결과로바꾸지않습니다. 복사는Conversation ID만navigator.clipboard또는onCopyConversation으로전달하며Promise성공이후에만성공알림입니다. 실패재시도/동시중복/scopeKey/allowCopy/unmount/완료callback의동기context교체를fence하며이미완료된clipboard쓰기를되돌리지않습니다. scopeKey는계정/권한/query/page/provider가바뀌면갱신합니다. source와달리keyboard행열기는subject의nativebutton으로제공하고ID복사버튼과중첩하지않습니다. PrismChatLogDetail은subject/typed turns를받아새질문입력없이기존Response를재사용하며options/profile/position콜백을제공하지않습니다. 맥락·추가를포함한options title/직전text의다음turn질문은원본규칙처럼숨기며원본데이터는수정하지않습니다. 상세64pxheader/20pxback/max900/padding24와좁은폭표내부scroll/컨트롤1열을지원합니다. 기록조회/권한/보존/route/cache는호스트책임이고예제23행/4turn/복사adapter는모두합성이며시스템clipboard를변경하지않습니다.",
+      "contract": "현재원본대화로그는MOCK_ROWS100개와고정상세fixture이고조회/초기화는no-op,정렬은header/page1만바꾸며API계약이없습니다. PrismChatLogManagement는원본7열과160/303/250필터·페이지10·복사/행열기를유지하고,에러열은헤더가쪼개지지않도록80px로확장하면서호스트의draft/applied/rows/total/page/sort를받습니다. preparePrismChatLogFilters는회사선택중복/알수없는ID를정리하고전체/없음은회사필터없음으로처리하며날짜한쪽/정상calendar/order와keywordtrim을지원합니다. 표시중invalid날짜는이전조건으로조회하지않습니다. createPrismChatLogQuery는application-neutral형태로공개필드만복사하고ISO bound를dotted문자열로제공합니다. 실제backendAPI를추측하지않습니다. 조회/초기화/정렬은page1,subject는정렬없음이고행은현재페이지만받으며onOpen은공개row whitelist입니다. 필터없는0건은안내,필터적용0건은표검색빈상태이며오류를빈결과로바꾸지않습니다. 복사는Conversation ID만navigator.clipboard또는onCopyConversation으로전달하며Promise성공이후에만성공알림입니다. 실패재시도/동시중복/scopeKey/allowCopy/unmount/완료callback의동기context교체를fence하며이미완료된clipboard쓰기를되돌리지않습니다. scopeKey는계정/권한/query/page/provider가바뀌면갱신합니다. source와달리keyboard행열기는subject의nativebutton으로제공하고ID복사버튼과중첩하지않습니다. PrismChatLogDetail은subject/typed turns를받아새질문입력없이기존Response를재사용하며options/profile/position콜백을제공하지않습니다. 맥락·추가를포함한options title/직전text의다음turn질문은원본규칙처럼숨기며원본데이터는수정하지않습니다. 상세64pxheader/20pxback/max900/padding24와좁은폭표내부scroll/컨트롤1열을지원합니다. 기록조회/권한/보존/route/cache는호스트책임이고예제23행/4turn/복사adapter는모두합성이며시스템clipboard를변경하지않습니다.",
       "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
       "sourceDeltaAudits": [
         {
@@ -7972,15 +7972,17 @@
       "embedUrl": "/prism?component=prism-chat-logs&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-chat-logs&view=responsive",
       "verification": {
-        "visual": "passed-eight-synthetic-local-states-at1280-320;authenticated-source-parity-unverified",
-        "interaction": "passed12-target-contract-and-complete-synthetic-example-tests",
+        "visual": "accepted-purpose-and-responsive-layout;authenticated-deployed-revision-unverified",
+        "interaction": "accepted-query-copy-archive-and-page-return-contract",
         "checks": [
-          "7 columns/filter160/303/250 observed;12 meaningful query/copy/archive/complete-example tests."
+          "7 columns/filter160/303/250 observed;12 meaningful query/copy/archive/complete-example tests.",
+          "7 columns/filter160/303/250 observed; current source 2eeb26ff leaves chat-log pages/SCSS and ChatConversation unchanged from audited 27c4fdbf; current 12 focused tests pass.",
+          "Current local browser at 1280/320: error header 80px readable, 320px document width 320 and table 980px inside 256px scroll; archive detail has no composer, remains width 320; page 2 returns to its records.",
+          "Earlier independent shadcn consumer: 58 exact TSX/CSS sources, 39 examples typechecked and Vite/font/notices passed; previous review CI/preview readback completed. Current registry/CI awaits final revision."
         ],
         "remaining": [
-          "Authenticated original rendering and deployed revision binding: IAB source route is blank;existing Chrome source tab displays admin-login. Original chat-log source is a placeholder with no real API integration.",
-          "Full source font/pixel/A4 and all canonical state parity,remaining purposes and improvements.",
-          "Review branch CI/preview readback pending current revision;production not published."
+          "Authenticated original rendering and deployed revision binding are unavailable: IAB route was blank and existing Chrome route showed admin-login. Original chat-log source has no real API integration.",
+          "Host owns actual log API, authorization, retention, route/cache and live clipboard effects; current synthetic example does not prove those effects."
         ],
         "localRenderGate": {
           "status": "passed",

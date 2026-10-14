@@ -57,7 +57,7 @@ export function PrismChatLogManagement(props: PrismChatLogManagementProps) {
     };
     const columns: PrismDirectoryColumn<PrismChatLogRow>[] = [
         { id: "conversationId", label: "Conversation ID", sortable: true, width: 200, cell: row => <span className="prism-chat-log-id"><span>{row.conversationId}</span><button type="button" aria-label={`${row.conversationId} 복사`} disabled={!allowCopy || loading || !!copying} aria-busy={copying === row.id || undefined} onClick={event => { event.stopPropagation(); void copy(row); }}><PrismIcon name="CopyAltIcon" size={20}/></button></span> },
-        { id: "error", label: "에러", sortable: true, width: 65, cell: row => <span className="prism-chat-log-error" data-error={row.error === "Y" || undefined}>{row.error}</span> },
+        { id: "error", label: "에러", sortable: true, width: 80, cell: row => <span className="prism-chat-log-error" data-error={row.error === "Y" || undefined}>{row.error}</span> },
         { id: "name", label: "이름", sortable: true, width: 120, cell: row => row.name }, { id: "company", label: "회사", sortable: true, width: 120, cell: row => row.company },
         { id: "employeeNo", label: "사번", sortable: true, width: 120, cell: row => row.employeeNo },
         { id: "subject", label: "대화 주제", cell: row => <span className="prism-chat-log-subject" title={row.subject}>{row.subject}</span> },
