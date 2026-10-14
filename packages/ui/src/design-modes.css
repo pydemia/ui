@@ -1,5 +1,7 @@
 /* Optional presentation layer. Each scope resets materials before inheritance. */
+@import "./design-fonts.css";
 [data-design] {
+  --heading-font-style: normal;
   --control-decoration: none;
   --field-decoration: none;
   --card-decoration: none;
@@ -57,11 +59,21 @@
   --recipe-workspace-radius: 0;
   --recipe-panel-lift: 0px;
   --recipe-panel-rest: 0px;
+  --overlay-fill: var(--surface-fill);
+  --overlay-image: var(--surface-image);
+  --overlay-filter: var(--surface-filter);
+  --control-border-width: var(--border-width, 1px);
+  --control-press-translate: none;
+  --secondary-decoration: var(--control-decoration);
+  --featured-decoration: initial;
+  --data-fill: initial;
+  --data-font: initial;
 }
 [data-design][data-appearance="dark"] {
   --material-highlight: rgb(255 255 255 / 7%);
 }
 [data-design="glass"] {
+  --data-fill: color-mix(in srgb, var(--surface) 96%, transparent);
   --surface-filter: blur(22px) saturate(145%);
   --surface-fill: color-mix(in srgb, var(--surface) 60%, transparent);
   --surface-image: linear-gradient(135deg, rgb(255 255 255 / 36%), rgb(255 255 255 / 3%) 55%, color-mix(in srgb, var(--accent) 12%, transparent));
@@ -79,15 +91,19 @@
   --field-filled-fill: color-mix(in srgb, var(--surface-subtle) 60%, transparent);
 }
 [data-design="fluent"] {
-  --surface-filter: blur(28px) saturate(125%);
-  --surface-fill: color-mix(in srgb, var(--surface) 78%, transparent);
-  --surface-image: repeating-linear-gradient(115deg, rgb(255 255 255 / 8%) 0 1px, transparent 1px 3px), radial-gradient(at 10% 0%, rgb(255 255 255 / 40%), transparent 65%);
+  --surface-filter: none;
+  --surface-fill: var(--surface);
+  --surface-image: none;
+  --overlay-filter: blur(28px) saturate(125%);
+  --overlay-fill: color-mix(in srgb, var(--surface) 78%, transparent);
+  --overlay-image: repeating-linear-gradient(115deg, rgb(255 255 255 / 8%) 0 1px, transparent 1px 3px), radial-gradient(at 10% 0%, rgb(255 255 255 / 40%), transparent 65%);
+  --data-fill: var(--surface);
   --control-image: linear-gradient(rgb(255 255 255 / 12%), transparent);
   --control-decoration: inset 0 1px 0 rgb(255 255 255 / 65%), 0 2px 3px rgb(12 28 45 / 10%);
   --card-decoration: var(--panel-shadow);
   --canvas-image: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--accent) 38%, transparent), transparent 62%), linear-gradient(135deg, transparent 35%, color-mix(in srgb, var(--accent) 16%, transparent));
-  --chrome-fill: color-mix(in srgb, var(--surface) 82%, transparent);
-  --rail-fill: color-mix(in srgb, var(--surface-subtle) 78%, transparent);
+  --chrome-fill: var(--surface);
+  --rail-fill: var(--surface-subtle);
   --scene-padding: 22px;
   --scene-border: 1px;
 }
@@ -102,6 +118,7 @@
   --table-heading-fill: color-mix(in srgb, var(--accent) 10%, var(--surface));
 }
 [data-design="neumorphic"] {
+  --control-border-width: 1px;
   --control-decoration: 5px 5px 10px rgb(0 0 0 / 20%), -5px -5px 10px var(--material-highlight);
   --field-decoration: inset 4px 4px 8px rgb(0 0 0 / 18%), inset -4px -4px 8px var(--material-highlight);
   --pressed-decoration: var(--field-decoration);
@@ -112,6 +129,9 @@
   --scene-padding: 26px;
 }
 [data-design="clay"] {
+  --data-fill: var(--surface);
+  --secondary-decoration: 0 2px 4px color-mix(in srgb, var(--foreground) 12%, transparent);
+  --featured-decoration: var(--panel-shadow);
   --control-radius: 999px;
   --control-image: linear-gradient(145deg, rgb(255 255 255 / 24%), transparent 65%);
   --control-decoration: inset 4px 5px 8px rgb(255 255 255 / 48%), inset -5px -6px 9px rgb(51 29 68 / 24%), 5px 9px 13px rgb(69 43 85 / 25%);
@@ -154,6 +174,8 @@
 }
 [data-design="brutal"] {
   --control-decoration: 3px 3px 0 var(--border);
+  --pressed-decoration: 1px 1px 0 var(--border);
+  --control-press-translate: 2px 2px;
   --card-decoration: var(--panel-shadow);
 }
 [data-design="brutal"], [data-design="swiss"] { --component-heading-weight: 800; }
@@ -199,13 +221,16 @@
   --scene-border: 1px;
 }
 [data-design="cyber"] {
+  --data-fill: var(--surface);
+  --data-font: var(--font-data, var(--font-heading));
+  --secondary-decoration: inset 0 -1px 0 var(--accent);
+  --card-decoration: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
   --control-focus-offset: -4px;
   --control-decoration: 3px 0 0 var(--focus), 0 0 18px color-mix(in srgb, var(--accent) 35%, transparent);
   --control-clip: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
   --control-tracking: .07em;
   --control-casing: uppercase;
   --field-decoration: inset 0 -2px 0 var(--accent);
-  --card-decoration: var(--panel-shadow);
   --title-ink: var(--accent);
   --title-fill: color-mix(in srgb, var(--accent) 8%, var(--surface));
   --canvas-image: repeating-linear-gradient(0deg, transparent 0 4px, rgb(0 0 0 / 14%) 4px 5px), repeating-linear-gradient(90deg, transparent 0 63px, color-mix(in srgb, var(--accent) 8%, transparent) 63px 64px), linear-gradient(135deg, color-mix(in srgb, var(--focus) 18%, transparent), transparent 60%);
@@ -240,9 +265,10 @@
   --canvas-repeat: repeat;
 }
 [data-design="drawn"] {
-  --control-radius: 32% 5% 35% 5% / 5% 28% 7% 22%;
-  --field-radius: 3% 30% 3% 28% / 30% 4% 28% 5%;
-  --panel-radius-material: 2% 22% 3% 24% / 25% 3% 22% 4%;
+  --heading-font-style: italic;
+  --control-radius: 5px 8px 6px 10px;
+  --field-radius: 6px;
+  --panel-radius-material: 12px 6px 14px 8px;
   --control-decoration: 2px 3px 0 var(--border), inset 0 0 0 1px color-mix(in srgb, var(--border) 30%, transparent);
   --card-decoration: var(--panel-shadow);
   --panel-border-style: dashed;
@@ -260,6 +286,8 @@
   --tile-fourth-fill: color-mix(in srgb, var(--warning) 16%, var(--surface));
 }
 [data-design="spatial"] {
+  --data-fill: var(--surface);
+  --featured-decoration: var(--panel-shadow);
   --surface-filter: blur(18px) saturate(120%);
   --surface-fill: color-mix(in srgb, var(--surface) 70%, transparent);
   --surface-image: linear-gradient(145deg, rgb(255 255 255 / 28%), transparent 65%);
@@ -297,7 +325,7 @@
   --recipe-panel-rest: 24px;
 }
 :where([data-design]) :where([data-ui="button"]:not([data-variant="ghost"])) {
-  border-width: var(--border-width, 1px);
+  border-width: var(--control-border-width);
   border-style: var(--control-border-style);
   border-radius: var(--control-radius);
   box-shadow: var(--control-decoration);
@@ -308,14 +336,18 @@
 }
 :where([data-design]) :where([data-ui="button"]:not([data-variant="ghost"]):active:not(:disabled), [data-ui="button"][aria-pressed="true"]) {
   box-shadow: var(--pressed-decoration);
+  translate: var(--control-press-translate);
 }
+:where([data-design]) :where([data-ui="button"][data-variant="outline"]) { box-shadow: var(--secondary-decoration); }
+:where([data-design]) :where(button[aria-pressed]) { box-shadow: var(--control-decoration); }
+:where([data-design]) :where(button[aria-pressed="true"]) { box-shadow: var(--pressed-decoration); }
 :where([data-design]) :where([data-ui="button"]:focus-visible) {
   /* Angular controls retain an inner focus ring even when corners are clipped. */
   outline: 2px solid var(--focus);
   outline-offset: var(--control-focus-offset);
 }
 :where([data-design]) :where([data-ui="input"], [data-ui="textarea"], [data-ui="select-trigger"], [data-ui="native-select"]):not([data-appearance="underline"]) {
-  border-width: var(--border-width, 1px);
+  border-width: var(--control-border-width);
   border-radius: var(--field-radius);
   box-shadow: var(--field-decoration);
   background-image: var(--field-image);
@@ -344,6 +376,7 @@
 }
 :where([data-design]) :where([data-ui="heading"]) {
   font-family: var(--font-heading, var(--font-ui));
+  font-style: var(--heading-font-style, normal);
   font-weight: var(--component-heading-weight);
 }
 :where([data-design]) :where([data-ui="card"][data-variant="elevated"]) {
@@ -357,15 +390,16 @@
 :where([data-design]) :where([data-ui="overlay-panel"]):not([data-size="fullscreen"]) {
   border-width: var(--border-width, 1px);
   border-radius: var(--panel-radius, var(--radius));
-  background-color: var(--surface-fill);
-  background-image: var(--surface-image);
-  backdrop-filter: var(--surface-filter);
+  background-color: var(--overlay-fill);
+  background-image: var(--overlay-image);
+  backdrop-filter: var(--overlay-filter);
   box-shadow: var(--panel-shadow, var(--shadow-float));
 }
 :where([data-design]) :where([data-ui="drawer-panel"]) {
   border-width: var(--border-width, 1px);
-  background-image: var(--surface-image);
-  backdrop-filter: var(--surface-filter);
+  background-color: var(--overlay-fill);
+  background-image: var(--overlay-image);
+  backdrop-filter: var(--overlay-filter);
   box-shadow: var(--panel-shadow, var(--shadow-float));
 }
 :where([data-design]) :where([data-ui="app-header"]) {
@@ -393,6 +427,13 @@
 :where([data-design]) :where([data-ui="dashboard-metrics"]) > [data-ui="card"]:nth-child(4):not([data-variant="featured"]) { background-color: var(--tile-fourth-fill); }
 :where([data-design]) :where(table) thead {
   background-color: var(--table-heading-fill);
+}
+:where([data-design]) :where(table, figure, [role="log"]) {
+  background-color: var(--data-fill, revert-layer);
+}
+:where([data-design]) :where(td, dd, [role="log"]) { font-family: var(--data-font, revert-layer); }
+:where([data-design]) :where([data-ui="card"][data-variant="featured"]) {
+  box-shadow: var(--featured-decoration, revert-layer);
 }
 :where([data-design]) :where(table) th {
   color: var(--table-heading-ink);
@@ -451,6 +492,8 @@
 @supports not (backdrop-filter: blur(1px)) {
   [data-design="glass"], [data-design="fluent"], [data-design="spatial"] {
     --surface-filter: none;
+    --overlay-filter: none;
+    --overlay-fill: var(--surface);
     --recipe-panel-lift: 0px;
     --recipe-panel-rest: 0px;
     --surface-fill: var(--surface);
@@ -478,5 +521,11 @@
     --panel-clip: none;
     --scene-shadow: none;
     --surface-filter: none;
+    --overlay-filter: none;
+    --overlay-image: none;
+    --overlay-fill: var(--surface);
+    --control-press-translate: none;
+    --secondary-decoration: none;
+    --featured-decoration: none;
   }
 }

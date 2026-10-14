@@ -44,6 +44,12 @@
 .design-mode-preview-heading { display: flex; align-items: start; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 .design-mode-preview-heading h3 { margin: 6px 0; font-family: var(--font-heading, var(--font-ui)); font-size: 21px; font-weight: var(--heading-weight, 650); }
 .design-mode-preview-heading p:not(.design-mode-eyebrow) { font-size: 12px; color: var(--muted); }
+.design-mode-drawn-accent { display: block; width: 100px; height: 24px; color: var(--accent); }
+.design-mode-editorial-report { max-width: 68ch; padding: 24px 0; border-block: 3px double var(--border); margin-top: 24px; }
+.design-mode-editorial-report[hidden] { display: none; }
+.design-mode-editorial-report h4 { margin: 8px 0 16px; font: 700 28px/1.2 var(--font-heading); }
+.design-mode-editorial-report p { line-height: 1.75; font-size: 14px; margin-top: 12px; }
+.design-mode-report-caption { font-size: 11px !important; color: var(--muted); }
 .design-mode-preview-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
 .design-mode-preview-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .design-mode-preview-fields label { display: grid; align-content: start; gap: 6px; min-width: 0; font-size: 12px; }

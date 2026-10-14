@@ -214,7 +214,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
     padding-block: 12px;
     margin-block: 3px;
 }
-:root[data-design="clay"] .sidebar-item {
+:root[data-design="clay"] .sidebar-item.selected {
     border: 0;
     border-radius: 999px;
     margin-bottom: 10px;
@@ -223,6 +223,10 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
     box-shadow: var(--control-decoration);
 }
 :root[data-design="clay"] .sidebar-item.selected { background: var(--tile-fourth-fill); }
+:root[data-design="glass"] .doc-section { background: var(--surface); backdrop-filter: none; }
+:root[data-design="editorial"] :is(.intro p, .section-lead > p, .usage-columns p) { max-width: 68ch; line-height: 1.75; }
+:root[data-design="drawn"] .eyebrow-line { width: 40px; height: 10px; background: none; border-bottom: 2px solid var(--border); border-radius: 45% 60% 30% 55%; rotate: -5deg; }
+:root[data-design="drawn"] .intro h1 { font-style: italic; }
 :root[data-design="neumorphic"] .sidebar-item.selected {
     border-radius: var(--radius);
     background: var(--background);

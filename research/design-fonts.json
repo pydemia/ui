@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "delivery": "application-owned, hash-addressed original TTF assets; no conversion or subsetting",
+  "assets": [
+    {
+      "familyId": "verified-worksans",
+      "family": "Work Sans",
+      "filename": "f50f61f2ba738e23.ttf",
+      "sha256": "f50f61f2ba738e239442d40bf1069adb195c224b6a5a73a581fc2f3ed62a9f63",
+      "bytes": 361072,
+      "style": "normal",
+      "weight": "100 900",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/verified-worksans/0",
+      "licenseSha256": "749aca05078664ce682dce1b1b10096ac397cb088c1a6df4e1bb56f0092a9272",
+      "axes": {
+        "wght": [
+          100.0,
+          900.0
+        ]
+      },
+      "hangulSyllables": 0
+    },
+    {
+      "familyId": "verified-manrope",
+      "family": "Manrope",
+      "filename": "3ae11c49db0455a3.ttf",
+      "sha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+      "bytes": 164700,
+      "style": "normal",
+      "weight": "200 800",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/verified-manrope/0",
+      "licenseSha256": "58172e0c0fac2cda8a37b348164bb55e44b0e69051e557e92b1d3f6910141f7b",
+      "axes": {
+        "wght": [
+          200.0,
+          800.0
+        ]
+      },
+      "hangulSyllables": 0
+    },
+    {
+      "familyId": "verified-jost",
+      "family": "Jost",
+      "filename": "6343b70971000b04.ttf",
+      "sha256": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076",
+      "bytes": 134996,
+      "style": "normal",
+      "weight": "100 900",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/verified-jost/0",
+      "licenseSha256": "1af3438a4d5f0ed2bdbc5751a5a67ebf6d537334161184b7fbb68503ef0ea0c5",
+      "axes": {
+        "wght": [
+          100.0,
+          900.0
+        ]
+      },
+      "hangulSyllables": 0
+    },
+    {
+      "familyId": "verified-sourceserif4",
+      "family": "Source Serif 4",
+      "filename": "97b2d4da6e3cb494.ttf",
+      "sha256": "97b2d4da6e3cb494b5a1e66ae176914d852ccabef49e0c02c0df25f3e39aca0b",
+      "bytes": 1209508,
+      "style": "normal",
+      "weight": "200 900",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/verified-sourceserif4/0",
+      "licenseSha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9",
+      "axes": {
+        "wght": [
+          200.0,
+          900.0
+        ],
+        "opsz": [
+          8.0,
+          60.0
+        ]
+      },
+      "hangulSyllables": 0
+    },
+    {
+      "familyId": "verified-sourceserif4",
+      "family": "Source Serif 4",
+      "filename": "15fbc7e4679489a5.ttf",
+      "sha256": "15fbc7e4679489a501998c3669272637a6646388ef7e4bd77eebb5bf967a1f42",
+      "bytes": 855432,
+      "style": "italic",
+      "weight": "200 900",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/verified-sourceserif4/0",
+      "licenseSha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9",
+      "axes": {
+        "wght": [
+          200.0,
+          900.0
+        ],
+        "opsz": [
+          8.0,
+          60.0
+        ]
+      },
+      "hangulSyllables": 0
+    },
+    {
+      "familyId": "jetbrains-mono",
+      "family": "JetBrains Mono",
+      "filename": "e6fd0d7e91550b3e.ttf",
+      "sha256": "e6fd0d7e91550b3ed2b735d4312474362c4716edc4fc0577a0f61ed782d5aed1",
+      "bytes": 270224,
+      "style": "normal",
+      "weight": "400",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/jetbrains-mono/0",
+      "licenseSha256": "a76abf002c49097d146e86740a3105a5d00450b1592e820a1109a8c5680cd697",
+      "axes": {},
+      "hangulSyllables": 0
+    },
+    {
+      "familyId": "verified-rajdhani",
+      "family": "Rajdhani",
+      "filename": "94bbd25a18ca6659.ttf",
+      "sha256": "94bbd25a18ca665999feb05a537de9fd2b860dcfb78bbe9ca00270825bf235da",
+      "bytes": 390340,
+      "style": "normal",
+      "weight": "600",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/verified-rajdhani/0",
+      "licenseSha256": "f62ef357d3a1c3d27edd35a6e1ba350e8a8d13499797964eeadefbf0b3b15d1f",
+      "axes": {},
+      "hangulSyllables": 0
+    },
+    {
+      "familyId": "nanum-gothic",
+      "family": "Nanum Gothic",
+      "filename": "76f45ef4a6bcff34.ttf",
+      "sha256": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+      "bytes": 2054744,
+      "style": "normal",
+      "weight": "400",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/nanum-gothic/0",
+      "licenseSha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "axes": {},
+      "hangulSyllables": 11172
+    },
+    {
+      "familyId": "nanum-gothic",
+      "family": "Nanum Gothic",
+      "filename": "f96298f9fb18e364.ttf",
+      "sha256": "f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674",
+      "bytes": 2073868,
+      "style": "normal",
+      "weight": "700",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/nanum-gothic/0",
+      "licenseSha256": "eeacf16032901d0ed0456876ec77b8f0fda6b3fecec7d972f8543eb602e6c30f",
+      "axes": {},
+      "hangulSyllables": 11172
+    },
+    {
+      "familyId": "nanum-myeongjo",
+      "family": "Nanum Myeongjo",
+      "filename": "7ed9e8653a8ed042.ttf",
+      "sha256": "7ed9e8653a8ed04285d51dc343ffea6eb3d9c73afc27383ea8929ee4ffd03205",
+      "bytes": 3058408,
+      "style": "normal",
+      "weight": "400",
+      "license": "SIL OFL 1.1",
+      "sourceUrl": "/api/fonts/assets/nanum-myeongjo/0",
+      "licenseSha256": "8eb1c1019fe7fe6d0b6e7d7bbbba1d9cbdd969d8c5f26455708f6cfb8a77284c",
+      "axes": {},
+      "hangulSyllables": 11172
+    }
+  ]
+}

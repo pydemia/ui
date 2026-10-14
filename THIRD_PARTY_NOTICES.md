@@ -57,3 +57,11 @@ Employee data is not redistributed here. `prism-icon.tsx` retains 87 vector desi
   serves the package's worker; its license is included at `/prism/vendor/PDFJS-LICENSE.txt`.
 - `react-markdown` and `remark-gfm`, MIT. They are npm dependencies; their source
   is consumed as packages rather than copied into PRISM registry source files.
+# Design mode fonts
+
+Design modes use approved original font assets from the [Font Library](https://skills.pydemia.ai/fonts).
+The files retain their original bytes and are served from this application's hash paths.
+All bundled copyright and SIL OFL 1.1 notices are preserved in
+[fonts/design/notices.txt](apps/docs/public/fonts/design/notices.txt).
+Exact asset SHA-256, license-evidence SHA-256, faces and coverage are listed in
+[research/design-fonts.json](research/design-fonts.json). No font conversion or subsetting is included.
