@@ -3137,8 +3137,8 @@
       ]
     },
     "prism-collection": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "partial",
+      "interaction": "partial",
       "localRenderGate": {
         "status": "passed",
         "states": [
@@ -3153,7 +3153,33 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-      }
+      },
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+      "checks": [
+        "Source JSX/SCSS audit: ten mapped files; 64px chat header, 720–860px content frame, three-column filter and favorite grid, 14px section heading, 6-column ranked Board, and current personal memo boundary",
+        "CandidateCollection distinguishes host total from page rows and retains existing cards/table during refresh; only initial loading uses skeletons; company multi-select is searchable",
+        "Board retains supplied current/rank values and contiguous company/position row spans; memo submission preserves original nonblank text, Shift+Enter and IME composition boundaries",
+        "Portable example composes working controlled filters, card/table toggle, favorites, Board selection and memo input with synthetic values; current personal memo editing and export remain separate documented groups",
+        "Fresh isolated shadcn consumer: 15 installed PRISM source modules and CSS byte-equal to registry; complete example typechecked, Vite/Pretendard/notices passed",
+        "Installed browser: company search filtered options and cards; table switch, Board opening and whitespace-preserving memo submission worked without console errors",
+        "320px viewport and 240px parent yielded one-column cards/filter with zero root overflow and Board-only internal scroll; 800px retained three-column cards",
+        "Local docs default/empty/loading/error fixtures rendered; name query/reset changed counts, initial skeletons hid rows, retry restored rows, 320px loading had no root overflow",
+        "Two focused collection tests and updated favorite refresh test passed; 346 full PRISM tests, docs typecheck and site build passed"
+      ],
+      "evidence": [
+        "collection.test.mjs",
+        "profile-header.test.mjs",
+        "collection-goal-check.log",
+        "collection-goal-build.log",
+        "collection-goal-consumer.log",
+        "collection-goal-installed-bytes.json",
+        "collection-goal-cua.json"
+      ],
+      "remaining": [
+        "Fresh authenticated deployed route and exact rendered/source geometry comparison",
+        "Real host filtering, paging, PDF actions and personal memo API integration",
+        "Additional long-content, touch and assistive-technology combinations outside synthetic fixtures"
+      ]
     },
     "prism-management-tools": {
       "visual": "pending",
@@ -7140,10 +7166,11 @@
       "prism-admin-lists",
       "prism-directory",
       "prism-context",
-      "prism-assessment"
+      "prism-assessment",
+      "prism-collection"
     ],
-    "acceptedCount": 42,
-    "unassessedGroups": 16,
+    "acceptedCount": 43,
+    "unassessedGroups": 15,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

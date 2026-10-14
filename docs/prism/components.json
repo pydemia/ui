@@ -4026,7 +4026,7 @@
       "name": "Filters / Candidate list / Board / Memo",
       "category": "Domain",
       "purpose": "후보 필터·카드/표 보기·후계자 Board·메모 작성",
-      "contract": "필터·조회·초기화·뷰 모드는 controlled입니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지를 지원합니다. cardVariant=favorite는 원본 즐겨찾기 카드/grid/skeleton을 조합합니다. favoriteBusyIds/readOnly는 변경만 보호하고 조회·뷰 선택은 유지합니다.",
+      "contract": "필터·조회·초기화·뷰 모드는 controlled입니다. candidates는 현재 페이지, total은 호스트가 제공한 전체 결과 건수입니다. 첫 로드에서는 skeleton을 표시하고 기존 행이 있는 재조회 중에는 행과 탐색을 유지합니다. 회사 필터는 검색 가능합니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지와 입력 원문 보존을 지원합니다. cardVariant=favorite는 원본 즐겨찾기 카드/grid/skeleton을 조합합니다. favoriteBusyIds/readOnly는 변경만 보호하고 조회·뷰 선택은 유지합니다. 후보 선택·원격 정렬·페이지 이동은 prism-candidate-list, PDF 출력은 prism-export와 조합합니다. 현재 개인 메모의 편집·삭제와 인증 범위는 prism-memo 그룹을 사용합니다.",
       "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
       "states": [
         "default",
@@ -4046,14 +4046,14 @@
         "chat/common/ContentFrame.tsx",
         "chat/common/SectionTitle.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismCandidateCollection, type PrismCandidate } from \"@pydemia/prism\";\n\nconst candidates: PrismCandidate[] = [\n  { id: \"demo-1\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\" },\n  { id: \"demo-2\", name: \"이예시\", company: \"예시사업\", position: \"연구개발담당\" },\n];\n\nexport function CollectionExample() {\n  const [view, setView] = useState<\"cards\" | \"table\">(\"cards\");\n  const [favorites, setFavorites] = useState<string[]>([]);\n  const [opened, setOpened] = useState<PrismCandidate | null>(null);\n  return <section>\n    <PrismCandidateCollection title=\"가상 후보자 목록\" candidates={candidates}\n      view={view} onViewChange={setView} onOpen={setOpened} favorites={favorites}\n      onFavoriteChange={(candidate, checked) => setFavorites(ids =>\n        checked ? [...new Set([...ids, candidate.id])] : ids.filter(id => id !== candidate.id))} />\n    <p role=\"status\">{opened ? opened.name + \" 상세 조회 의도\" : \"\"}</p>\n  </section>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismMemoComposer, PrismMemoCollection, type PrismCandidate, type PrismCandidateFilters } from \"@pydemia/prism\";\n\nconst records: { candidate: PrismCandidate; series: string }[] = [\n  { candidate: { id: \"one\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\" }, series: \"ICT\" },\n  { candidate: { id: \"two\", name: \"이예시\", company: \"예시사업\", position: \"연구개발담당\" }, series: \"ICT\" },\n  { candidate: { id: \"three\", name: \"박샘플\", company: \"가상금융\", position: \"사업기획담당\" }, series: \"Finance\" },\n];\nconst initial: PrismCandidateFilters = { series: \"all\", companies: [], name: \"\" };\n\nexport function CollectionExample() {\n  const [filters, setFilters] = useState<PrismCandidateFilters>(initial);\n  const [applied, setApplied] = useState<PrismCandidateFilters>(initial);\n  const [view, setView] = useState<\"cards\" | \"table\">(\"cards\");\n  const [favorites, setFavorites] = useState<string[]>([]);\n  const [opened, setOpened] = useState(\"\");\n  const [draft, setDraft] = useState(\"\");\n  const [memos, setMemos] = useState<{id:string;author:string;date:string;content:string}[]>([]);\n  const candidates = records.filter(({candidate,series}) =>\n    (applied.series === \"all\" || applied.series === series) &&\n    (!applied.companies.length || applied.companies.includes(candidate.company)) &&\n    candidate.name.includes(applied.name.trim())).map(({candidate}) => candidate);\n  return <div data-prism=\"light\" style={{display:\"grid\",gap:24,maxWidth:900}}>\n    <PrismCandidateCollection title=\"가상 후보자 목록\" candidates={candidates} total={candidates.length}\n      view={view} onViewChange={setView} onOpen={candidate => setOpened(candidate.name)} favorites={favorites}\n      onFavoriteChange={(candidate, checked) => setFavorites(ids => checked ? [...new Set([...ids,candidate.id])] : ids.filter(id => id !== candidate.id))}\n      filters={<PrismCandidateFilterBar value={filters} onValueChange={setFilters}\n        seriesOptions={[{value:\"all\",label:\"전체\"},{value:\"ICT\",label:\"ICT\"},{value:\"Finance\",label:\"Finance\"}]}\n        companyOptions={[{value:\"가상전자\",label:\"가상전자\"},{value:\"예시사업\",label:\"예시사업\"},{value:\"가상금융\",label:\"가상금융\"}]}\n        onSearch={setApplied} onReset={() => {setFilters(initial);setApplied(initial);}} />} />\n    <PrismSuccessorBoard rows={[{id:\"position\",company:\"가상전자\",position:\"기술전략담당\",current:[records[0].candidate],ranks:[records[1].candidate,null,null]}]}\n      onOpen={candidate => setOpened(candidate.name)} />\n    <PrismMemoCollection items={memos} composer={<PrismMemoComposer value={draft} onValueChange={setDraft}\n      onSubmit={content => {setMemos(items => [...items,{id:String(items.length+1),author:\"가상 사용자\",date:\"2026.10.14\",content}]);setDraft(\"\");}} />} />\n    <p role=\"status\">{opened ? opened + \" 상세 조회 의도\" : \"\"}</p>\n  </div>;\n}",
       "sourcePath": "packages/prism/src/prism-collection.tsx",
       "previewUrl": "/prism?component=prism-collection",
       "embedUrl": "/prism?component=prism-collection&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-collection&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending",
+        "visual": "partial",
+        "interaction": "partial",
         "localRenderGate": {
           "status": "passed",
           "states": [
@@ -4068,7 +4068,33 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
-        }
+        },
+        "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "checks": [
+          "Source JSX/SCSS audit: ten mapped files; 64px chat header, 720–860px content frame, three-column filter and favorite grid, 14px section heading, 6-column ranked Board, and current personal memo boundary",
+          "CandidateCollection distinguishes host total from page rows and retains existing cards/table during refresh; only initial loading uses skeletons; company multi-select is searchable",
+          "Board retains supplied current/rank values and contiguous company/position row spans; memo submission preserves original nonblank text, Shift+Enter and IME composition boundaries",
+          "Portable example composes working controlled filters, card/table toggle, favorites, Board selection and memo input with synthetic values; current personal memo editing and export remain separate documented groups",
+          "Fresh isolated shadcn consumer: 15 installed PRISM source modules and CSS byte-equal to registry; complete example typechecked, Vite/Pretendard/notices passed",
+          "Installed browser: company search filtered options and cards; table switch, Board opening and whitespace-preserving memo submission worked without console errors",
+          "320px viewport and 240px parent yielded one-column cards/filter with zero root overflow and Board-only internal scroll; 800px retained three-column cards",
+          "Local docs default/empty/loading/error fixtures rendered; name query/reset changed counts, initial skeletons hid rows, retry restored rows, 320px loading had no root overflow",
+          "Two focused collection tests and updated favorite refresh test passed; 346 full PRISM tests, docs typecheck and site build passed"
+        ],
+        "evidence": [
+          "collection.test.mjs",
+          "profile-header.test.mjs",
+          "collection-goal-check.log",
+          "collection-goal-build.log",
+          "collection-goal-consumer.log",
+          "collection-goal-installed-bytes.json",
+          "collection-goal-cua.json"
+        ],
+        "remaining": [
+          "Fresh authenticated deployed route and exact rendered/source geometry comparison",
+          "Real host filtering, paging, PDF actions and personal memo API integration",
+          "Additional long-content, touch and assistive-technology combinations outside synthetic fixtures"
+        ]
       },
       "exports": [
         {
@@ -4117,7 +4143,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismCandidateCollection } from \"@/components/ui/prism-collection\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\n\nconst candidates: PrismCandidate[] = [\n  { id: \"demo-1\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\" },\n  { id: \"demo-2\", name: \"이예시\", company: \"예시사업\", position: \"연구개발담당\" },\n];\n\nexport function CollectionExample() {\n  const [view, setView] = useState<\"cards\" | \"table\">(\"cards\");\n  const [favorites, setFavorites] = useState<string[]>([]);\n  const [opened, setOpened] = useState<PrismCandidate | null>(null);\n  return <section>\n    <PrismCandidateCollection title=\"가상 후보자 목록\" candidates={candidates}\n      view={view} onViewChange={setView} onOpen={setOpened} favorites={favorites}\n      onFavoriteChange={(candidate, checked) => setFavorites(ids =>\n        checked ? [...new Set([...ids, candidate.id])] : ids.filter(id => id !== candidate.id))} />\n    <p role=\"status\">{opened ? opened.name + \" 상세 조회 의도\" : \"\"}</p>\n  </section>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismMemoComposer, PrismMemoCollection, type PrismCandidateFilters } from \"@/components/ui/prism-collection\";\nimport { type PrismCandidate } from \"@/components/ui/prism-candidate\";\n\nconst records: { candidate: PrismCandidate; series: string }[] = [\n  { candidate: { id: \"one\", name: \"김가상\", company: \"가상전자\", position: \"기술전략담당\" }, series: \"ICT\" },\n  { candidate: { id: \"two\", name: \"이예시\", company: \"예시사업\", position: \"연구개발담당\" }, series: \"ICT\" },\n  { candidate: { id: \"three\", name: \"박샘플\", company: \"가상금융\", position: \"사업기획담당\" }, series: \"Finance\" },\n];\nconst initial: PrismCandidateFilters = { series: \"all\", companies: [], name: \"\" };\n\nexport function CollectionExample() {\n  const [filters, setFilters] = useState<PrismCandidateFilters>(initial);\n  const [applied, setApplied] = useState<PrismCandidateFilters>(initial);\n  const [view, setView] = useState<\"cards\" | \"table\">(\"cards\");\n  const [favorites, setFavorites] = useState<string[]>([]);\n  const [opened, setOpened] = useState(\"\");\n  const [draft, setDraft] = useState(\"\");\n  const [memos, setMemos] = useState<{id:string;author:string;date:string;content:string}[]>([]);\n  const candidates = records.filter(({candidate,series}) =>\n    (applied.series === \"all\" || applied.series === series) &&\n    (!applied.companies.length || applied.companies.includes(candidate.company)) &&\n    candidate.name.includes(applied.name.trim())).map(({candidate}) => candidate);\n  return <div data-prism=\"light\" style={{display:\"grid\",gap:24,maxWidth:900}}>\n    <PrismCandidateCollection title=\"가상 후보자 목록\" candidates={candidates} total={candidates.length}\n      view={view} onViewChange={setView} onOpen={candidate => setOpened(candidate.name)} favorites={favorites}\n      onFavoriteChange={(candidate, checked) => setFavorites(ids => checked ? [...new Set([...ids,candidate.id])] : ids.filter(id => id !== candidate.id))}\n      filters={<PrismCandidateFilterBar value={filters} onValueChange={setFilters}\n        seriesOptions={[{value:\"all\",label:\"전체\"},{value:\"ICT\",label:\"ICT\"},{value:\"Finance\",label:\"Finance\"}]}\n        companyOptions={[{value:\"가상전자\",label:\"가상전자\"},{value:\"예시사업\",label:\"예시사업\"},{value:\"가상금융\",label:\"가상금융\"}]}\n        onSearch={setApplied} onReset={() => {setFilters(initial);setApplied(initial);}} />} />\n    <PrismSuccessorBoard rows={[{id:\"position\",company:\"가상전자\",position:\"기술전략담당\",current:[records[0].candidate],ranks:[records[1].candidate,null,null]}]}\n      onOpen={candidate => setOpened(candidate.name)} />\n    <PrismMemoCollection items={memos} composer={<PrismMemoComposer value={draft} onValueChange={setDraft}\n      onSubmit={content => {setMemos(items => [...items,{id:String(items.length+1),author:\"가상 사용자\",date:\"2026.10.14\",content}]);setDraft(\"\");}} />} />\n    <p role=\"status\">{opened ? opened + \" 상세 조회 의도\" : \"\"}</p>\n  </div>;\n}"
     },
     {
       "id": "prism-notice",

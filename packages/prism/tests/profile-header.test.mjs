@@ -114,12 +114,13 @@ test("favorite card exposes sibling native actions and extra actions never open 
     assert.deepEqual([...document.querySelectorAll('.prism-favorite-candidate-expertise h3')].map(node => node.textContent), ["전문 분야", "최근 평가 이력"]);
 });
 
-test("collection favorite variant propagates controlled values and loading omits stale cards", async () => {
+test("collection favorite variant keeps retained cards during refresh and shows skeletons on initial load", async () => {
     let next;
     const props = { title: "즐겨찾기", candidates: [candidate], view: "cards", onViewChange() {}, onOpen() {}, cardVariant: "favorite", favorites: [candidate.id], onFavoriteChange: (item, value) => next = [item.id, value] };
     await act(async () => root.render(h(PrismCandidateCollection, props))); await click("김가상 즐겨찾기"); assert.deepEqual(next, [candidate.id, false]);
     await act(async () => root.render(h(PrismCandidateCollection, { ...props, favoriteBusyIds: [candidate.id] }))); assert.equal(document.querySelector('.prism-favorite-toggle').disabled, true);
-    await act(async () => root.render(h(PrismCandidateCollection, { ...props, status: "loading" }))); assert.equal(document.querySelector('.prism-favorite-candidate-card'), null); assert.equal(document.querySelectorAll('.prism-favorite-candidate-skeleton').length, 6); assert.doesNotMatch(document.getElementById("root").textContent, /김가상/); assert.equal(document.querySelectorAll('[role="status"]').length, 1);
+    await act(async () => root.render(h(PrismCandidateCollection, { ...props, status: "loading" }))); assert.ok(document.querySelector('.prism-favorite-candidate-card')); assert.equal(document.querySelectorAll('.prism-favorite-candidate-skeleton').length, 0); assert.equal(document.querySelector('.prism-candidate-collection').getAttribute('aria-busy'), 'true');
+    await act(async () => root.render(h(PrismCandidateCollection, { ...props, candidates: [], status: "loading" }))); assert.equal(document.querySelector('.prism-favorite-candidate-card'), null); assert.equal(document.querySelectorAll('.prism-favorite-candidate-skeleton').length, 6); assert.doesNotMatch(document.getElementById("root").textContent, /김가상/); assert.equal(document.querySelectorAll('[role="status"]').length, 1);
 });
 
 test("print profile retains source header fields and evaluation order without application action controls", () => {

@@ -54,12 +54,14 @@ export function AssessmentDemo({ state }: { state: FixtureState }) {
 }
 export function CollectionDemo({ state }: { state: FixtureState }) {
     const [view,setView] = useState<"cards" | "table">("cards"); const [filters,setFilters] = useState<PrismCandidateFilters>({series:"all",companies:[],name:""});
-    const [result,setResult] = useState(""); const [draft,setDraft] = useState(""); const [memos,setMemos] = useState<PrismProfileMemoItem[]>([]); const [editingId,setEditingId]=useState<string|null>(null); const [favorites,setFavorites] = useState<string[]>([]);
+    const [applied,setApplied] = useState<PrismCandidateFilters>({series:"all",companies:[],name:""});
+    const [result,setResult] = useState(""); const [draft,setDraft] = useState(""); const [memos,setMemos] = useState<PrismProfileMemoItem[]>([]); const [editingId,setEditingId]=useState<string|null>(null); const [favorites,setFavorites] = useState<string[]>([]); const [retried,setRetried] = useState(false);
     const nextMemoId=useRef(0);
-    const items = state === "empty" ? [] : demoCandidates;
-    return <div className="prism-demo-stack"><PrismCandidateCollection title="후보자 목록" candidates={items} view={view} onViewChange={setView} onOpen={candidate => setResult(`${candidate.name} 선택`)} favorites={favorites}
-        onFavoriteChange={(candidate,checked) => setFavorites(checked ? [...favorites,candidate.id] : favorites.filter(id => id !== candidate.id))} status={state === "loading" || state === "error" ? state : "ready"}
-        filters={<PrismCandidateFilterBar value={filters} onValueChange={setFilters} seriesOptions={[{value:"all",label:"전체"},{value:"ICT",label:"ICT"}]} companyOptions={demoCandidates.map(c => ({value:c.company,label:c.company}))} onSearch={value => setResult(JSON.stringify(value))} onReset={() => setFilters({series:"all",companies:[],name:""})} disabled={state === "loading"} />} />
+    const items = state === "empty" || state === "loading" ? [] : demoCandidates;
+    const visibleItems = items.filter(candidate => (applied.series === "all" || applied.series === "ICT") && (!applied.companies.length || applied.companies.includes(candidate.company)) && candidate.name.includes(applied.name.trim()));
+    return <div className="prism-demo-stack"><PrismCandidateCollection title="후보자 목록" candidates={visibleItems} total={visibleItems.length} view={view} onViewChange={setView} onOpen={candidate => setResult(`${candidate.name} 선택`)} favorites={favorites}
+        onFavoriteChange={(candidate,checked) => setFavorites(checked ? [...favorites,candidate.id] : favorites.filter(id => id !== candidate.id))} status={state === "loading" || state === "error" && !retried ? state : "ready"} onRetry={() => setRetried(true)}
+        filters={<PrismCandidateFilterBar value={filters} onValueChange={setFilters} seriesOptions={[{value:"all",label:"전체"},{value:"ICT",label:"ICT"}]} companyOptions={demoCandidates.map(c => ({value:c.company,label:c.company}))} onSearch={value => {setApplied(value);setResult(JSON.stringify(value));}} onReset={() => {const empty={series:"all",companies:[],name:""};setFilters(empty);setApplied(empty);}} disabled={state === "loading"} />} />
         <PrismSuccessorBoard rows={items.length ? [{id:"one",company:"가상전자",position:"기술전략담당",current:[demoCandidates[0]],ranks:[demoCandidates[1],null,null]}] : []} onOpen={candidate => setResult(`${candidate.name} 선택`)} loading={state === "loading"} />
         <PrismProfileMemoCollection items={memos} editingId={editingId} onEditingChange={setEditingId} height={340} status={state==="loading"?"loading":"ready"}
             onSave={async(id,content)=>setMemos(current=>current.map(memo=>memo.id===id?{...memo,content,updatedAt:"2026-10-09T17:30:00+09:00"}:memo))}

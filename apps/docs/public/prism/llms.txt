@@ -1030,7 +1030,7 @@ export function AssessmentExample() {
 
 ## Filters / Candidate list / Board / Memo
 후보 필터·카드/표 보기·후계자 Board·메모 작성
-Contract: 필터·조회·초기화·뷰 모드는 controlled입니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지를 지원합니다. cardVariant=favorite는 원본 즐겨찾기 카드/grid/skeleton을 조합합니다. favoriteBusyIds/readOnly는 변경만 보호하고 조회·뷰 선택은 유지합니다.
+Contract: 필터·조회·초기화·뷰 모드는 controlled입니다. candidates는 현재 페이지, total은 호스트가 제공한 전체 결과 건수입니다. 첫 로드에서는 skeleton을 표시하고 기존 행이 있는 재조회 중에는 행과 탐색을 유지합니다. 회사 필터는 검색 가능합니다. Board는 외부에서 선정된 순위를 표시합니다. 메모는 Enter 제출, Shift+Enter 줄바꿈, IME 조합 중 제출 방지와 입력 원문 보존을 지원합니다. cardVariant=favorite는 원본 즐겨찾기 카드/grid/skeleton을 조합합니다. favoriteBusyIds/readOnly는 변경만 보호하고 조회·뷰 선택은 유지합니다. 후보 선택·원격 정렬·페이지 이동은 prism-candidate-list, PDF 출력은 prism-export와 조합합니다. 현재 개인 메모의 편집·삭제와 인증 범위는 prism-memo 그룹을 사용합니다.
 States: default, empty, loading, error
 Registry: /prism/r/prism-collection.json
 Source: packages/prism/src/prism-collection.tsx
@@ -1038,25 +1038,42 @@ Usage kind: component-example
 Installed usage:
 ```tsx
 import { useState } from "react";
-import { PrismCandidateCollection } from "@/components/ui/prism-collection";
+import { PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismMemoComposer, PrismMemoCollection, type PrismCandidateFilters } from "@/components/ui/prism-collection";
 import { type PrismCandidate } from "@/components/ui/prism-candidate";
 
-const candidates: PrismCandidate[] = [
-  { id: "demo-1", name: "김가상", company: "가상전자", position: "기술전략담당" },
-  { id: "demo-2", name: "이예시", company: "예시사업", position: "연구개발담당" },
+const records: { candidate: PrismCandidate; series: string }[] = [
+  { candidate: { id: "one", name: "김가상", company: "가상전자", position: "기술전략담당" }, series: "ICT" },
+  { candidate: { id: "two", name: "이예시", company: "예시사업", position: "연구개발담당" }, series: "ICT" },
+  { candidate: { id: "three", name: "박샘플", company: "가상금융", position: "사업기획담당" }, series: "Finance" },
 ];
+const initial: PrismCandidateFilters = { series: "all", companies: [], name: "" };
 
 export function CollectionExample() {
+  const [filters, setFilters] = useState<PrismCandidateFilters>(initial);
+  const [applied, setApplied] = useState<PrismCandidateFilters>(initial);
   const [view, setView] = useState<"cards" | "table">("cards");
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [opened, setOpened] = useState<PrismCandidate | null>(null);
-  return <section>
-    <PrismCandidateCollection title="가상 후보자 목록" candidates={candidates}
-      view={view} onViewChange={setView} onOpen={setOpened} favorites={favorites}
-      onFavoriteChange={(candidate, checked) => setFavorites(ids =>
-        checked ? [...new Set([...ids, candidate.id])] : ids.filter(id => id !== candidate.id))} />
-    <p role="status">{opened ? opened.name + " 상세 조회 의도" : ""}</p>
-  </section>;
+  const [opened, setOpened] = useState("");
+  const [draft, setDraft] = useState("");
+  const [memos, setMemos] = useState<{id:string;author:string;date:string;content:string}[]>([]);
+  const candidates = records.filter(({candidate,series}) =>
+    (applied.series === "all" || applied.series === series) &&
+    (!applied.companies.length || applied.companies.includes(candidate.company)) &&
+    candidate.name.includes(applied.name.trim())).map(({candidate}) => candidate);
+  return <div data-prism="light" style={{display:"grid",gap:24,maxWidth:900}}>
+    <PrismCandidateCollection title="가상 후보자 목록" candidates={candidates} total={candidates.length}
+      view={view} onViewChange={setView} onOpen={candidate => setOpened(candidate.name)} favorites={favorites}
+      onFavoriteChange={(candidate, checked) => setFavorites(ids => checked ? [...new Set([...ids,candidate.id])] : ids.filter(id => id !== candidate.id))}
+      filters={<PrismCandidateFilterBar value={filters} onValueChange={setFilters}
+        seriesOptions={[{value:"all",label:"전체"},{value:"ICT",label:"ICT"},{value:"Finance",label:"Finance"}]}
+        companyOptions={[{value:"가상전자",label:"가상전자"},{value:"예시사업",label:"예시사업"},{value:"가상금융",label:"가상금융"}]}
+        onSearch={setApplied} onReset={() => {setFilters(initial);setApplied(initial);}} />} />
+    <PrismSuccessorBoard rows={[{id:"position",company:"가상전자",position:"기술전략담당",current:[records[0].candidate],ranks:[records[1].candidate,null,null]}]}
+      onOpen={candidate => setOpened(candidate.name)} />
+    <PrismMemoCollection items={memos} composer={<PrismMemoComposer value={draft} onValueChange={setDraft}
+      onSubmit={content => {setMemos(items => [...items,{id:String(items.length+1),author:"가상 사용자",date:"2026.10.14",content}]);setDraft("");}} />} />
+    <p role="status">{opened ? opened + " 상세 조회 의도" : ""}</p>
+  </div>;
 }
 ```
 
