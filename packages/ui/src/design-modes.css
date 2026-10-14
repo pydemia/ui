@@ -180,14 +180,15 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-design] { --motion-fast: 0ms; }
+  /* Accessibility preferences override the adapter's inline theme tokens. */
+  [data-design] { --motion-fast: 0ms !important; }
 }
 @media (forced-colors: active) {
   [data-design] {
     --control-decoration: none;
     --field-decoration: none;
     --card-decoration: none;
-    --panel-shadow: none;
+    --panel-shadow: none !important;
     --surface-image: none;
     --canvas-image: none;
   }

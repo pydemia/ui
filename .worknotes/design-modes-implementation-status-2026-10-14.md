@@ -148,3 +148,16 @@
   세부 판단과 독립 leaf 결과는 upstream-integration 기록에 있다.
 - 현재 완료율9/14=64.3%, Basic released/20 ready를 유지한다.
   통합 전 검증을 통합 후 출시 검증으로 계산하지 않는다.
+
+## 통합 후 source 검증
+
+- source37412d58, mergecab533c7. 최신 PRISM 전체를 보존하고 직접 diff0.
+- npm ci/typecheck/docs15/PRISM363/build 통과. 실제 Dialog/PDF와 공개
+  baseline 모바일을 대조했다. 기존 PRISM PDF overflow는 동일하다.
+- media 정책이 inline theme token보다 낮은 우선순위인 문제를 수정했다.
+  수정 전 실패 → 설정8/8 → UI 전체300/300 통과. 실제 media 환경 검수와
+  CSSOM 검사 결과를 구분한다.
+- 후보 snapshot f18d8d2c…는148 items로 release-check 통과했지만 media
+  수정 전 후보다. 새 source의 pipeline와 소비자 검증을 이어간다.
+- 운영은 아직 main6ea262ef/READY다. feature 공개 완료로 보고하지 않는다.
+  완료율9/14=64.3%, Basic released/20 ready 유지.

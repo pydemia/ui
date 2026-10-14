@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { JSDOM } from "jsdom";
 import {
     colorTokens, colormaps, designModes, paletteTokens, releasedDesignModes,
 } from "../dist/index.js";
@@ -11,6 +12,38 @@ import {
 
 const preview = { allowUnreleased: true };
 const resolve = (input, options = preview) => resolveThemeSettings(input, options).settings;
+
+test("accessibility media policies outrank applied inline theme tokens", () => {
+    const css = readFileSync(new URL("../src/design-modes.css",
+        import.meta.url), "utf8");
+    const mediaStart = css.indexOf("@media (prefers-reduced-motion");
+    assert.notEqual(mediaStart, -1);
+    const dom = new JSDOM(`<style>${css.slice(mediaStart)}</style>`);
+    const mediaRules = [...dom.window.document.styleSheets[0].cssRules];
+    assert.equal(mediaRules.length, 2);
+    const collisions = new Set();
+    for (const mode of designModes) {
+        for (const appearance of mode.appearances) {
+            const inline = resolveThemeTokens(resolve({
+                design: mode.id, appearance,
+            }), preview);
+            for (const media of mediaRules) {
+                for (const rule of media.cssRules) {
+                    for (let index = 0; index < rule.style.length; index++) {
+                        const name = rule.style[index];
+                        if (!(name in inline)) continue;
+                        collisions.add(name);
+                        assert.equal(rule.style.getPropertyPriority(name),
+                            "important", `${mode.id}/${appearance}: ${name}`);
+                    }
+                }
+            }
+        }
+    }
+    assert.deepEqual([...collisions].sort(),
+        ["--motion-fast", "--panel-shadow"]);
+    dom.window.close();
+});
 
 test("manifest has 21 unique modes, atlas cases and explicit support", () => {
     assert.equal(designModes.length, 21);

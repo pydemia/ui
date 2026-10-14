@@ -68,3 +68,15 @@ bento-workspace-candidate, mobile-b-r2-320/390의 2026-10-14.jpg.
 21종 release 판정, 공개 registry 설치, commit/push·운영 readback도 남았다.
 실제 screen reader/다른 엔진/200% zoom과 media fallback은 미검수다.
 해당 결과를 실제 통과로 만들거나 goal을 완료 처리하지 않는다.
+
+## 최신 source와 PRISM 기준
+
+main/6ea262ef를 feature에 통합했다. typecheck·docs15·PRISM363 통과,
+PRISM source/public/build scripts는 upstream과 diff0이다. 실제 최신 Dialog의
+Light/Pretendard·Escape focus, PDF2페이지 렌더를 확인했다. PRISM PDF 모바일
+overflow55/125는 공개 baseline과 같으며 이번 기능에서 수정하지 않는다.
+
+inline motion-fast/panel-shadow와 접근성 media 선언의 우선순위를 수정했다.
+수정 전 실패 재현, 설정8/8와 UI 전체300/300 통과. 이 CSSOM 검사는 실제
+media 또는 screen reader 실행이 아니다. 일반 모드의 39조합 근거는 유지하며
+새 CSS 소비자 대조와 최종 snapshot은 다시 필요하다.

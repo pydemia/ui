@@ -301,17 +301,15 @@ dependency의 license는 component source license와 구분합니다.
 
 문서 사이트는 GitHub에 연결된 Vercel 프로젝트
 [`pydemia-ui`](https://vercel.com/pydemia-7822/pydemia-ui)에 배포됩니다. 현재
-공개 주소는 [`https://pydemia-ui.vercel.app`](https://pydemia-ui.vercel.app/)입니다.
+공개 주소는 [`ui.pydemia.ai`](https://ui.pydemia.ai/)입니다.
+기존 [`pydemia-ui.vercel.app`](https://pydemia-ui.vercel.app/) 주소도 제공합니다.
 [`vercel.json`](vercel.json)은 저장소 루트에서 `npm ci`와 `npm run build`를
 실행하고 `docs/`를 정적 사이트로 게시하도록 지정합니다. `main`에 push하면
 Vercel이 다시 배포합니다.
 
-`ui.pydemia.ai`는 Vercel 프로젝트에 등록되어 있으며 Squarespace DNS 연결을
-기다리는 중입니다. Squarespace에서 `ui`의 CNAME을 프로젝트의 Vercel
-[Domains 설정](https://vercel.com/pydemia-7822/pydemia-ui/settings/domains)에
-표시되는 대상으로 지정해야 합니다. 기존 GitHub Pages 배포 설정은 도메인
-전환이 확인될 때까지 남아 있습니다. 따라서 이전 대상인
-`pydemia.github.io`로 CNAME을 새로 지정하지 마세요.
+`ui.pydemia.ai`는 위 프로젝트의 검증된 production 도메인입니다.
+기존 GitHub Pages 배포 설정도 저장소에 남아 있습니다. 실제 공개 버전은
+Vercel의 production deployment와 연결된 main commit으로 확인합니다.
 
 접근성과 브라우저 검증의 현재 상태는 [`research/verification.md`](research/verification.md)에
 기록했습니다. 화면의 상태 변경과 복사는 데모 기능이며 서버 데이터가 아닙니다.
