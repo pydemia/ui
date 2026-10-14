@@ -2,6 +2,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
+import { usePortalContainer } from "./foundation/portal-scope";
 
 const Select = SelectPrimitive.Root;
 const SelectValue = SelectPrimitive.Value;
@@ -23,6 +24,7 @@ function SelectTrigger({
 
     return (
         <SelectPrimitive.Trigger
+            data-ui="select-trigger"
             data-appearance={appearance}
             className={cn(
                 "flex h-[var(--control-height)] w-full items-center " +
@@ -47,15 +49,19 @@ function SelectTrigger({
 }
 
 function SelectContent({
+    container,
     className,
     children,
     position = "popper",
     sideOffset = 4,
     ...props
-}: ComponentProps<typeof SelectPrimitive.Content>) {
+}: ComponentProps<typeof SelectPrimitive.Content> &
+    Pick<ComponentProps<typeof SelectPrimitive.Portal>, "container">) {
+    const portalContainer = usePortalContainer(container);
     return (
-        <SelectPrimitive.Portal>
+        <SelectPrimitive.Portal container={portalContainer}>
             <SelectPrimitive.Content
+                data-ui="overlay-panel"
                 position={position}
                 sideOffset={sideOffset}
                 className={cn(

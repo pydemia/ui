@@ -1,0 +1,195 @@
+/* Optional presentation layer. Each scope resets materials before inheritance. */
+[data-design] {
+  --control-decoration: none;
+  --field-decoration: none;
+  --card-decoration: none;
+  --surface-filter: none;
+  --surface-image: none;
+  --surface-fill: var(--surface);
+  --canvas-image: none;
+  --title-fill: var(--surface-subtle);
+  --title-ink: var(--muted);
+  --component-heading-weight: 600;
+  --recipe-panel-columns: initial;
+  --recipe-mid-columns: minmax(0, 1fr);
+  --recipe-panel-gap: initial;
+  --recipe-chart-row: auto;
+  --recipe-last-column: auto;
+  --recipe-header-margin: 0;
+  --recipe-floating-radius: 0;
+  --recipe-header-shadow: none;
+  --recipe-sidebar-margin: 0;
+  --recipe-sidebar-shadow: none;
+  --recipe-main-padding: var(--space-4);
+  --recipe-workspace-shadow: none;
+  --recipe-workspace-radius: 0;
+}
+[data-design="glass"], [data-design="fluent"] {
+  --surface-filter: blur(12px);
+  --surface-fill: color-mix(in srgb, var(--surface) 90%, transparent);
+  --surface-image: linear-gradient(130deg, rgb(255 255 255 / 14%), transparent);
+  --control-decoration: 0 2px 8px rgb(15 40 65 / 12%);
+  --card-decoration: 0 10px 28px rgb(15 40 65 / 14%);
+  --canvas-image: radial-gradient(at 10% 20%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 60%);
+}
+[data-design="material"] {
+  --control-decoration: 0 2px 3px rgb(35 20 60 / 15%);
+  --card-decoration: 0 3px 10px rgb(35 20 60 / 10%);
+  --title-fill: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+[data-design="neumorphic"] {
+  --control-decoration: 3px 3px 7px rgb(0 0 0 / 14%), -2px -2px 5px rgb(255 255 255 / 15%);
+  --field-decoration: inset 2px 2px 5px rgb(0 0 0 / 10%);
+  --card-decoration: var(--panel-shadow);
+}
+[data-design="clay"] {
+  --control-decoration: inset 0 -3px 0 rgb(0 0 0 / 12%), 0 4px 8px rgb(50 20 75 / 14%);
+  --field-decoration: inset 0 2px 4px rgb(50 20 75 / 10%);
+  --card-decoration: var(--panel-shadow);
+}
+[data-design="skeuo"], [data-design="retro"] {
+  --control-decoration: inset 1px 1px 0 rgb(255 255 255 / 55%), inset -1px -2px 0 rgb(0 0 0 / 25%), 0 2px 0 rgb(0 0 0 / 12%);
+  --field-decoration: inset 1px 2px 3px rgb(0 0 0 / 18%);
+  --surface-image: linear-gradient(rgb(255 255 255 / 5%), rgb(0 0 0 / 3%));
+}
+[data-design="retro"] {
+  --title-fill: var(--accent);
+  --title-ink: var(--accent-foreground);
+}
+[data-design="brutal"], [data-design="pixel"], [data-design="drawn"] {
+  --control-decoration: 3px 3px 0 var(--border);
+  --card-decoration: var(--panel-shadow);
+}
+[data-design="brutal"], [data-design="swiss"] { --component-heading-weight: 800; }
+[data-design="aurora"] {
+  --canvas-image: radial-gradient(at 10% 10%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 65%), radial-gradient(at 95% 80%, color-mix(in srgb, var(--success) 12%, transparent), transparent 60%);
+  --card-decoration: var(--panel-shadow);
+}
+[data-design="cyber"] {
+  --control-decoration: 0 0 10px color-mix(in srgb, var(--accent) 20%, transparent);
+  --card-decoration: var(--panel-shadow);
+  --title-ink: var(--accent);
+}
+[data-design="spatial"], [data-design="bento"] {
+  --card-decoration: var(--panel-shadow);
+}
+[data-recipe="bento"] {
+  --recipe-panel-columns: minmax(0, 2fr) minmax(0, 1fr);
+  --recipe-panel-gap: 16px;
+  --recipe-chart-row: span 2;
+  --recipe-last-column: 1 / -1;
+  --recipe-workspace-radius: var(--panel-radius);
+  --recipe-workspace-shadow: var(--panel-shadow);
+}
+[data-recipe="spatial"] {
+  --recipe-panel-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  --recipe-mid-columns: var(--recipe-panel-columns);
+  --recipe-panel-gap: 28px;
+  --recipe-header-margin: var(--space-4);
+  --recipe-floating-radius: var(--radius);
+  --recipe-header-shadow: var(--panel-shadow);
+  --recipe-sidebar-margin: var(--space-4);
+  --recipe-sidebar-shadow: var(--panel-shadow);
+  --recipe-main-padding: var(--space-6);
+  --recipe-workspace-radius: var(--panel-radius);
+  --recipe-workspace-shadow: var(--panel-shadow);
+}
+:where([data-design]) :where([data-ui="button"]:not([data-variant="ghost"])) {
+  border-width: var(--border-width, 1px);
+  box-shadow: var(--control-decoration);
+}
+:where([data-design]) :where([data-ui="input"], [data-ui="textarea"], [data-ui="select-trigger"], [data-ui="native-select"]):not([data-appearance="underline"]) {
+  border-width: var(--border-width, 1px);
+  box-shadow: var(--field-decoration);
+}
+:where([data-design]) :where([data-ui="badge"]) {
+  border-width: var(--border-width, 1px);
+}
+:where([data-design]) :where([data-ui="card"][data-variant="default"]) {
+  border-width: var(--border-width, 1px);
+  box-shadow: var(--card-decoration);
+  background-image: var(--surface-image);
+  background-color: var(--surface-fill);
+  backdrop-filter: var(--surface-filter);
+}
+:where([data-design]) :where([data-ui="heading"]) {
+  font-family: var(--font-heading, var(--font-ui));
+  font-weight: var(--component-heading-weight);
+}
+:where([data-design]) :where([data-ui="card"][data-variant="elevated"]) {
+  border-width: var(--border-width, 1px);
+  box-shadow: var(--panel-shadow, var(--shadow-float));
+}
+:where([data-design]) :where([data-ui="overlay-panel"]):not([data-size="fullscreen"]) {
+  border-width: var(--border-width, 1px);
+  border-radius: var(--panel-radius, var(--radius));
+  background-color: var(--surface-fill);
+  background-image: var(--surface-image);
+  backdrop-filter: var(--surface-filter);
+  box-shadow: var(--panel-shadow, var(--shadow-float));
+}
+:where([data-design]) :where([data-ui="drawer-panel"]) {
+  border-width: var(--border-width, 1px);
+  background-image: var(--surface-image);
+  backdrop-filter: var(--surface-filter);
+  box-shadow: var(--panel-shadow, var(--shadow-float));
+}
+:where([data-design]) :where([data-ui="app-header"]) {
+  margin: var(--recipe-header-margin);
+  border-radius: var(--recipe-floating-radius);
+  box-shadow: var(--recipe-header-shadow);
+}
+:where([data-design]) :where([data-ui="app-sidebar"])[data-appearance="attached"] {
+  margin: var(--recipe-sidebar-margin);
+  border-radius: var(--recipe-floating-radius);
+  box-shadow: var(--recipe-sidebar-shadow);
+}
+:where([data-design]) :where([data-ui="app-main"]) {
+  padding: var(--recipe-main-padding);
+}
+:where([data-design]) :where([data-ui="workspace-review"], [data-ui="workspace-intake"]) {
+  border-radius: var(--recipe-workspace-radius);
+  box-shadow: var(--recipe-workspace-shadow);
+}
+:where([data-design]) :where([data-ui="dashboard-panels"]) {
+  gap: var(--recipe-panel-gap, var(--dashboard-panel-gap, var(--space-4)));
+}
+@container (min-width: 42rem) {
+  :where([data-design]) :where([data-ui="dashboard-panels"])[data-layout] {
+    grid-template-columns: var(--recipe-mid-columns);
+  }
+}
+@container (min-width: 48rem) {
+  :where([data-design]) :where([data-ui="dashboard-panels"])[data-layout="balanced"] {
+    grid-template-columns: var(--recipe-panel-columns, repeat(2, minmax(0, 1fr)));
+  }
+  :where([data-design]) :where([data-ui="dashboard-panels"])[data-layout="primary"] {
+    grid-template-columns: var(--recipe-panel-columns, minmax(0, 2fr) minmax(0, 1fr));
+  }
+  :where([data-design]) :where([data-ui="dashboard-panels"]) > :first-child {
+    grid-row: var(--recipe-chart-row);
+  }
+  :where([data-design]) :where([data-ui="dashboard-panels"]) > :last-child {
+    grid-column: var(--recipe-last-column);
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  [data-design="glass"], [data-design="fluent"] {
+    --surface-filter: none;
+    --surface-fill: var(--surface);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Accessibility preferences override the adapter's inline theme tokens. */
+  [data-design] { --motion-fast: 0ms !important; }
+}
+@media (forced-colors: active) {
+  [data-design] {
+    --control-decoration: none;
+    --field-decoration: none;
+    --card-decoration: none;
+    --panel-shadow: none !important;
+    --surface-image: none;
+    --canvas-image: none;
+  }
+}

@@ -2,6 +2,7 @@ import * as MenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronRight, Dot } from "lucide-react";
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
+import { usePortalContainer } from "./foundation/portal-scope";
 
 const DropdownMenu = MenuPrimitive.Root;
 const DropdownMenuTrigger = MenuPrimitive.Trigger;
@@ -21,11 +22,15 @@ const contentStyle =
     "p-1 text-foreground shadow-[var(--shadow-float)]";
 
 function DropdownMenuContent({
+    container,
     className, sideOffset = 4, ...props
-}: ComponentProps<typeof MenuPrimitive.Content>) {
+}: ComponentProps<typeof MenuPrimitive.Content> &
+    Pick<ComponentProps<typeof MenuPrimitive.Portal>, "container">) {
+    const portalContainer = usePortalContainer(container);
     return (
-        <MenuPrimitive.Portal>
+        <MenuPrimitive.Portal container={portalContainer}>
             <MenuPrimitive.Content
+                data-ui="overlay-panel"
                 sideOffset={sideOffset}
                 className={cn(contentStyle, className)}
                 {...props}
@@ -131,11 +136,15 @@ function DropdownMenuSubTrigger({
 }
 
 function DropdownMenuSubContent({
+    container,
     className, sideOffset = 4, ...props
-}: ComponentProps<typeof MenuPrimitive.SubContent>) {
+}: ComponentProps<typeof MenuPrimitive.SubContent> &
+    Pick<ComponentProps<typeof MenuPrimitive.Portal>, "container">) {
+    const portalContainer = usePortalContainer(container);
     return (
-        <MenuPrimitive.Portal>
+        <MenuPrimitive.Portal container={portalContainer}>
             <MenuPrimitive.SubContent
+                data-ui="overlay-panel"
                 sideOffset={sideOffset}
                 className={cn(contentStyle, className)}
                 {...props}

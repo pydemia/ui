@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "build": "vite build"
+    "build": "vite build",
+    "test": "node scripts/run-tests.mjs"
   },
   "dependencies": {
     "@pydemia/prism": "*",

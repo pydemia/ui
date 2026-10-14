@@ -2,6 +2,7 @@ import * as MenubarPrimitive from "@radix-ui/react-menubar";
 import { Check, ChevronRight, Dot } from "lucide-react";
 import type { ComponentProps } from "react";
 import { cn } from "./utils";
+import { usePortalContainer } from "./foundation/portal-scope";
 
 type MenubarProps = ComponentProps<typeof MenubarPrimitive.Root> & {
     "aria-label": string;
@@ -61,13 +62,17 @@ const contentStyle =
     "p-1 text-foreground shadow-[var(--shadow-float)]";
 
 function MenubarContent({
+    container,
     className,
     sideOffset = 4,
     ...props
-}: ComponentProps<typeof MenubarPrimitive.Content>) {
+}: ComponentProps<typeof MenubarPrimitive.Content> &
+    Pick<ComponentProps<typeof MenubarPrimitive.Portal>, "container">) {
+    const portalContainer = usePortalContainer(container);
     return (
-        <MenubarPrimitive.Portal>
+        <MenubarPrimitive.Portal container={portalContainer}>
             <MenubarPrimitive.Content
+                data-ui="overlay-panel"
                 align="start"
                 sideOffset={sideOffset}
                 className={cn(contentStyle, className)}
@@ -190,13 +195,17 @@ function MenubarSubTrigger({
 }
 
 function MenubarSubContent({
+    container,
     className,
     sideOffset = 4,
     ...props
-}: ComponentProps<typeof MenubarPrimitive.SubContent>) {
+}: ComponentProps<typeof MenubarPrimitive.SubContent> &
+    Pick<ComponentProps<typeof MenubarPrimitive.Portal>, "container">) {
+    const portalContainer = usePortalContainer(container);
     return (
-        <MenubarPrimitive.Portal>
+        <MenubarPrimitive.Portal container={portalContainer}>
             <MenubarPrimitive.SubContent
+                data-ui="overlay-panel"
                 sideOffset={sideOffset}
                 className={cn(contentStyle, className)}
                 {...props}

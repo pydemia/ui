@@ -83,6 +83,93 @@ SHA-256으로 기록합니다. `registry:check`는
 `npm run build`를 실행하세요. 환경 변수를 지정하지 않은 빌드는
 `https://pydemia-ui.vercel.app/r/`를 사용합니다.
 
+## Design mode 소비자 사용
+
+Design mode는 기존 컴포넌트의 형태·밝기·팔레트를 함께 설정합니다.
+PRISM은 별도 profile을 유지합니다. 일반 앱은 `releasedDesignModes`에서
+선택하고 `resolveThemeSettings`의 기본 출시 검사를 사용합니다.
+Basic과 atlas 20종을 합친 21종을 지원합니다. 18종은 Light/Dark,
+Dark UI·Cyberpunk·Terminal은 Dark를 지원합니다.
+지원 목록과 후속 수동 환경 검수 범위는 [Design modes](research/design-modes.md)에 있습니다.
+`allowUnreleased`는 내부 검수용이며 제품 사용 코드에 추가하지 않습니다.
+
+`aliases.ui: "@/components/ui"`인 Vite 소비자에서 다음 항목을 설치합니다.
+`pyd-design-modes`는 기본 token과 portal scope도 의존성으로 설치합니다.
+
+```bash
+npx shadcn@4.21.0 add https://ui.pydemia.ai/r/pyd-design-modes.json https://ui.pydemia.ai/r/pyd-button.json https://ui.pydemia.ai/r/pyd-input.json https://ui.pydemia.ai/r/pyd-table.json https://ui.pydemia.ai/r/pyd-badge.json https://ui.pydemia.ai/r/pyd-dialog.json
+```
+
+소비자 CSS는 token을 먼저 연결합니다. 재질·디자인 표현을 사용하려면
+optional `design-modes.css`도 연결합니다.
+
+```css
+@import "tailwindcss";
+@import "./components/ui/tokens.css";
+@import "./components/ui/design-modes.css";
+```
+
+설치 결과의 설정·scope 파일은 `components/ui/foundation/`에 있습니다.
+컴포넌트에서의 상대 import를 유지해야 하므로 foundation 파일만 상위
+디렉터리로 옮기지 않습니다. `design`은 형태, `appearance`는 밝기,
+`colormap`은 색상을 선택합니다. `colormap: "design"`은 선택한 디자인의
+기본 팔레트를 사용하고 `forest` 등은 명시한 팔레트를 사용합니다.
+
+```tsx
+import { Button } from "./components/ui/button";
+import {
+    Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger,
+} from "./components/ui/dialog";
+import { ThemeScope } from "./components/ui/foundation/theme-scope";
+import { resolveThemeSettings } from "./components/ui/foundation/design-mode-settings";
+
+const settings = resolveThemeSettings({
+    design: "basic", appearance: "light", colormap: "forest",
+}).settings;
+
+export function RegionalExample() {
+    return (
+        <ThemeScope settings={settings}>
+            <Dialog>
+                <DialogTrigger asChild><Button>상세 열기</Button></DialogTrigger>
+                <DialogContent>
+                    <DialogTitle>지역 테마 상세</DialogTitle>
+                    <DialogDescription>부모 scope의 표현을 따릅니다.</DialogDescription>
+                </DialogContent>
+            </Dialog>
+        </ThemeScope>
+    );
+}
+```
+
+페이지 전체에는 `foundation/theme-dom`의 `applyThemeToElement`를 React
+effect에서 호출하고 반환한 함수를 cleanup으로 사용합니다. 지역
+`ThemeScope`는 Dark root 안에서도 Light 토큰과 body portal host를
+관리합니다. 설정 변경 시 같은 scope를 유지하고 디자인 ID를 React
+`key`로 사용하지 않아야 입력과 열린 Dialog가 유지됩니다.
+`DialogContent`는 scope의 안정적인 container를 자동 사용합니다.
+직접 `container`를 전달할 때도 설정 변경마다 DOM 노드를 새로 만들지
+않습니다. `foundation/portal-scope`의 `PortalScope`는 소비자가 이미
+소유한 container를 연결할 때 사용할 수 있습니다.
+
+URL 공유에는 `foundation/design-mode-settings`의 `parseThemeUrl`과
+`writeThemeUrl`, 디자인 이름·지원 밝기·출시 상태에는
+`foundation/design-modes`의 metadata를 사용합니다.
+
+```bash
+node scripts/check-design-modes-consumer.mjs
+node scripts/check-design-modes-consumer.mjs --registry-base https://ui.pydemia.ai/r/
+```
+
+첫 명령은 현재 compiled JSON을 로컬 HTTP mirror에서 실제
+`shadcn@4.21.0` CLI로 새 프로젝트에 설치합니다. 내부 의존 URL만
+메모리에서 mirror 주소로 바꾸며 registry 원본과 target은 보존합니다.
+두 번째 명령은 지정한 공개 registry를 그대로 설치합니다. 두 명령 모두
+foundation 설치 경로·파일 내용, TypeScript, Tailwind/Vite build와 기본
+출시 검사를 확인합니다. 프로젝트·명령 로그·`verification.json`은
+`.worknotes/browser-evidence/design-modes-consumer-check/`에 보존합니다.
+이 검사는 브라우저의 시각 일치·focus·포털 동작을 확인한 결과가 아닙니다.
+
 ## Registry snapshot
 
 registry JSON과 내부 의존성, token 파일을 같은 내용 해시로 묶을 수
@@ -166,8 +253,11 @@ Badge에서 이 경로를 확인했습니다. [shadcn CLI 옵션](https://ui.sha
 
 문서 사이트의 Colormap 영역에서 Neutral, Pydemia, Ocean, Forest,
 Violet을 선택하거나 각 색을 `#RRGGBB`로 조정할 수 있습니다. 조정값은 현재
-light/dark 모드에 따로 적용되며 새로고침하면 초기화됩니다. 조합 예시의
-iframe에도 적용되고, 「전체 화면으로 열기」 링크에는 현재 선택이 담깁니다.
+light/dark 모드에 따로 적용되며 현재 설정은 URL에 포함됩니다. 디자인별
+팔레트와 직접 조정값은 명시적으로 디자인을 다시 선택할 때 복원합니다.
+설정 없는 첫 방문은 Basic·Light·Neutral입니다. 저장소에 접근할 수 없으면
+현재 탭에서 계속하고 안내를 표시합니다. 조합 예시의 iframe에도 적용되고,
+「전체 화면으로 열기」 링크에는 현재 선택이 담깁니다.
 
 공통 stylesheet는 `--accent`, `--background`, `--success`,
 `--warning` 같은 semantic token을
@@ -213,17 +303,15 @@ dependency의 license는 component source license와 구분합니다.
 
 문서 사이트는 GitHub에 연결된 Vercel 프로젝트
 [`pydemia-ui`](https://vercel.com/pydemia-7822/pydemia-ui)에 배포됩니다. 현재
-공개 주소는 [`https://pydemia-ui.vercel.app`](https://pydemia-ui.vercel.app/)입니다.
+공개 주소는 [`ui.pydemia.ai`](https://ui.pydemia.ai/)입니다.
+기존 [`pydemia-ui.vercel.app`](https://pydemia-ui.vercel.app/) 주소도 제공합니다.
 [`vercel.json`](vercel.json)은 저장소 루트에서 `npm ci`와 `npm run build`를
 실행하고 `docs/`를 정적 사이트로 게시하도록 지정합니다. `main`에 push하면
 Vercel이 다시 배포합니다.
 
-`ui.pydemia.ai`는 Vercel 프로젝트에 등록되어 있으며 Squarespace DNS 연결을
-기다리는 중입니다. Squarespace에서 `ui`의 CNAME을 프로젝트의 Vercel
-[Domains 설정](https://vercel.com/pydemia-7822/pydemia-ui/settings/domains)에
-표시되는 대상으로 지정해야 합니다. 기존 GitHub Pages 배포 설정은 도메인
-전환이 확인될 때까지 남아 있습니다. 따라서 이전 대상인
-`pydemia.github.io`로 CNAME을 새로 지정하지 마세요.
+`ui.pydemia.ai`는 위 프로젝트의 검증된 production 도메인입니다.
+기존 GitHub Pages 배포 설정도 저장소에 남아 있습니다. 실제 공개 버전은
+Vercel의 production deployment와 연결된 main commit으로 확인합니다.
 
 접근성과 브라우저 검증의 현재 상태는 [`research/verification.md`](research/verification.md)에
 기록했습니다. 화면의 상태 변경과 복사는 데모 기능이며 서버 데이터가 아닙니다.

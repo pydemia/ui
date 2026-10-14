@@ -1,5 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { basename } from "node:path";
+import { registryTarget } from "./registry-target.mjs";
 
 const registry = JSON.parse(await readFile("registry.json", "utf8"));
 const base = new URL(
@@ -21,19 +21,11 @@ for (const { name } of registry.items) {
         return new URL(dependency.slice(2), base).href;
     });
     for (const entry of item.files) {
-        if (entry.path === "packages/ui/src/styles.css") {
-            if (entry.target !== "@ui/tokens.css") {
-                throw new Error(`Unexpected token target: ${entry.target}`);
-            }
-        } else if (entry.path === "registry/SHADCN_UI_LICENSE.md") {
-            if (entry.target !== "@ui/SHADCN_UI_LICENSE.md") {
-                throw new Error(`Unexpected license target: ${entry.target}`);
-            }
-        } else if (entry.path.startsWith("packages/ui/src/components/")) {
-            entry.target = `@ui/${basename(entry.path)}`;
-        } else {
-            throw new Error(`Unexpected registry file: ${entry.path}`);
+        const target = registryTarget(entry.path);
+        if (entry.type === "registry:file" && entry.target !== target) {
+            throw new Error(`Unexpected registry target: ${entry.target}`);
         }
+        entry.target = target;
         entry.content = entry.content.replace(/\r\n/g, "\n");
     }
     await writeFile(file, JSON.stringify(item, null, 2));

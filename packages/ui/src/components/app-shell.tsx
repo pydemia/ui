@@ -17,6 +17,7 @@ function AppShell({
 
     return (
         <div
+            data-ui="app-shell"
             data-appearance={appearance}
             className={cn(
                 "@container relative flex min-h-0 w-full flex-col overflow-hidden " +
@@ -33,6 +34,7 @@ function AppShell({
 function AppHeader({ className, ...props }: ComponentProps<"header">) {
     return (
         <header
+            data-ui="app-header"
             className={cn(
                 "flex min-h-12 items-center gap-[var(--space-3)] " +
                 "border-b border-border bg-surface px-[var(--space-4)]",
@@ -70,6 +72,7 @@ function AppSidebar({
 
     return (
         <aside
+            data-ui="app-sidebar"
             data-appearance={appearance}
             className={cn(
                 "min-w-0 p-[var(--space-3)] @3xl:w-52 @3xl:shrink-0",
@@ -94,6 +97,7 @@ type AppMainProps = Omit<ComponentProps<"main">, "ref"> & {
 function AppMain({ as: Element = "main", className, ...props }: AppMainProps) {
     return (
         <Element
+            data-ui="app-main"
             className={cn("min-w-0 flex-1 p-[var(--space-4)]", className)}
             {...props}
         />

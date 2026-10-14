@@ -33,6 +33,8 @@ function Button({ className, variant, size, type = "button", ...props }: ButtonP
     return (
         <button
             type={type}
+            data-ui="button"
+            data-variant={variant ?? "primary"}
             className={cn(buttonVariants({ variant, size }), className)}
             {...props}
         />

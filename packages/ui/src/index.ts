@@ -419,3 +419,31 @@ export {
     SnippetTabsList,
     SnippetTabsTrigger,
 } from "./components/snippet";
+export {
+    colorTokens, colormaps, paletteTokens, basicShapeTokens, basicDocumentTokens,
+    designModeIds, designModes, releasedDesignModes, getDesignMode, isDesignModeId,
+} from "./components/foundation/design-modes";
+export type {
+    Appearance, ColorToken, ColormapId, PaletteId, ColorOverrides, ThemeTokenMap,
+    ColorPalette, DesignModeId, DesignModeDefinition, ThemeSettings,
+} from "./components/foundation/design-modes";
+export {
+    defaultThemeSettings, resolveThemeSettings, parseThemeUrl,
+    writeThemeUrl, resolveThemeTokens,
+} from "./components/foundation/design-mode-settings";
+export { applyThemeToElement } from "./components/foundation/theme-dom";
+export { ThemeScope } from "./components/foundation/theme-scope";
+export type { ThemeScopeProps } from "./components/foundation/theme-scope";
+export { PortalScope, usePortalContainer } from "./components/foundation/portal-scope";
+export type { PortalScopeProps, PortalContainer } from "./components/foundation/portal-scope";
+export {
+    createThemeMessage, readThemeMessage,
+    createThemeAppliedMessage, readThemeAppliedMessage,
+    createThemeInvalidatedMessage, readThemeInvalidatedMessage,
+} from "./components/foundation/theme-messages";
+export type {
+    ThemeMessage, ThemeAppliedMessage, ThemeInvalidatedMessage,
+} from "./components/foundation/theme-messages";
+export type {
+    ThemeResolutionOptions, ThemeResolution,
+} from "./components/foundation/design-mode-settings";

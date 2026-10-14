@@ -62,7 +62,7 @@ function PageHeader({
                         {eyebrow}
                     </p>
                 )}
-                <Heading className={cn(
+                <Heading data-ui="heading" className={cn(
                     "m-0 font-semibold leading-tight tracking-tight " +
                     "text-foreground",
                     styles.title,

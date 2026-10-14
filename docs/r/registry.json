@@ -4,6 +4,22 @@
   "homepage": "https://github.com/pydemia/ui",
   "items": [
     {
+      "name": "pyd-portal-scope", "type": "registry:ui", "title": "Regional portal scope",
+      "files": [{ "path": "packages/ui/src/components/foundation/portal-scope.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-design-modes", "type": "registry:ui", "title": "UI design modes and ThemeScope",
+      "registryDependencies": ["./pyd-tokens.json", "./pyd-portal-scope.json"],
+      "files": [
+        { "path": "packages/ui/src/components/foundation/design-modes.ts", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/foundation/design-mode-settings.ts", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/foundation/theme-dom.ts", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/foundation/theme-messages.ts", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/foundation/theme-scope.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/design-modes.css", "type": "registry:file", "target": "@ui/design-modes.css" }
+      ]
+    },
+    {
       "name": "pyd-utils", "type": "registry:ui", "title": "Class utility",
       "dependencies": ["clsx@2.1.1", "tailwind-merge@3.7.0"],
       "files": [{ "path": "packages/ui/src/components/utils.ts", "type": "registry:ui" }]
@@ -98,7 +114,7 @@
     {
       "name": "pyd-select", "type": "registry:ui", "title": "Select",
       "dependencies": ["@radix-ui/react-select@2.3.7", "lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [{ "path": "packages/ui/src/components/select.tsx", "type": "registry:ui" }]
     },
     {
@@ -167,7 +183,7 @@
     {
       "name": "pyd-dialog", "type": "registry:ui", "title": "Dialog",
       "dependencies": ["@radix-ui/react-dialog@1.1.23"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [
         { "path": "packages/ui/src/components/dialog.tsx", "type": "registry:ui" },
         { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
@@ -224,7 +240,7 @@
     {
       "name": "pyd-tooltip", "type": "registry:ui", "title": "Tooltip",
       "dependencies": ["@radix-ui/react-tooltip@1.2.16"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [
         { "path": "packages/ui/src/components/tooltip.tsx", "type": "registry:ui" },
         { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
@@ -251,7 +267,7 @@
     {
       "name": "pyd-popover", "type": "registry:ui", "title": "Popover",
       "dependencies": ["@radix-ui/react-popover@1.1.23"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [
         { "path": "packages/ui/src/components/popover.tsx", "type": "registry:ui" },
         { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
@@ -260,13 +276,13 @@
     {
       "name": "pyd-hover-card", "type": "registry:ui", "title": "Hover Card",
       "dependencies": ["@radix-ui/react-hover-card@1.1.23"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [{ "path": "packages/ui/src/components/hover-card.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-alert-dialog", "type": "registry:ui", "title": "Alert Dialog",
       "dependencies": ["@radix-ui/react-alert-dialog@1.1.23"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [
         { "path": "packages/ui/src/components/alert-dialog.tsx", "type": "registry:ui" },
         { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
@@ -611,7 +627,7 @@
     {
       "name": "pyd-menubar", "type": "registry:ui", "title": "Menubar",
       "dependencies": ["@radix-ui/react-menubar@1.1.24", "lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [{ "path": "packages/ui/src/components/menubar.tsx", "type": "registry:ui" }]
     },
     {
@@ -800,7 +816,7 @@
     {
       "name": "pyd-drawer", "type": "registry:ui", "title": "Drawer",
       "dependencies": ["@radix-ui/react-dialog@1.1.23"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [{ "path": "packages/ui/src/components/drawer.tsx", "type": "registry:ui" }]
     },
     {
@@ -834,13 +850,13 @@
     {
       "name": "pyd-dropdown-menu", "type": "registry:ui", "title": "Dropdown Menu",
       "dependencies": ["@radix-ui/react-dropdown-menu@2.1.22", "lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [{ "path": "packages/ui/src/components/dropdown-menu.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-context-menu", "type": "registry:ui", "title": "Context Menu",
       "dependencies": ["@radix-ui/react-context-menu@2.3.7", "lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [{ "path": "packages/ui/src/components/context-menu.tsx", "type": "registry:ui" }]
     },
     {
