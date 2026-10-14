@@ -2661,12 +2661,14 @@
       "visual": "pending-authenticated-original-comparison",
       "interaction": "passed-synthetic-and-selected-local-browser",
       "checks": [
-        "13 position contract tests;10 synthetic states at1280/320px and real local restoration/schedule/cancel."
+        "13 position contract tests;10 synthetic states at1280/320px and real local restoration/schedule/cancel.",
+        "Current frontend 2eeb26ff list, restore and sync source files are unchanged from 27c4fdbf; the only admin/positions delta is in form and company-task dialogs outside this group.",
+        "13 focused position list/restore/action tests passed; local browser exercised LIVE/TEMP, schedule lock/cancel restore and page-2 detail round trip at desktop; 320px document width 320, table 1100 inside 256px scroll region.",
+        "Fresh external shadcn consumer installed 16 exact TSX sources plus PRISM CSS/tokens, typechecked complete example, built Vite/font/notices and rendered schedule/cancel, detail restoration and 320px table inside 288px scroll region."
       ],
       "remaining": [
-        "Other administrator lists, page access and real role/status/sync services.",
-        "Authenticated deployed revision, original UI/state/interaction and full pixel/font/A4 parity.",
-        "Remaining chat/authStore and production publication."
+        "Authenticated deployed administrator position list and its exact source revision remain unverified.",
+        "Real RBAC, list/metadata API, deletion, scheduling, cache and synchronization results require host integration."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -2688,6 +2690,38 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "evidence": [
+        "local-position-management-goal-2026-10-14",
+        "installed-position-management-goal-2026-10-14"
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "pages/admin/positions/PositionPage.tsx",
+          "pages/admin/positions/PositionPage.module.scss",
+          "pages/admin/positions/positionListRestore.ts",
+          "components/admin/common/AdminSyncStatusBar.tsx",
+          "components/admin/common/AdminSyncStatusLabel.tsx"
+        ],
+        "evidence": [
+          "Current position list, restore and sync source files are unchanged from the prior audited reference.",
+          "13 focused contract tests passed; local browser exercised LIVE/TEMP, schedule/cancel locking and page-2 detail restoration, with no document overflow at 320px.",
+          "Fresh external shadcn consumer installed 16 exact TSX sources and CSS/tokens; full example typechecked and built, with schedule/cancel, page restoration and 320px table scrolling observed in its browser."
+        ],
+        "intentionalImprovements": [
+          "Filter columns reduce from three to two or one in narrow containers, and the 1100px table scrolls within its own region.",
+          "List restoration copies only public filter, page and sort fields within the same context/version; selection and data records are not restored.",
+          "Partial server pages are rejected when a TEMP change-status filter needs the complete result; stale asynchronous action completions cannot change a newer scope."
+        ],
+        "hostOwned": [
+          "The consuming application supplies real metadata/list queries, authorization, route context, deletion/scheduling callbacks, cache refresh and sync status."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed source SHA and real service effects are not established; exact pixel and A4 parity are outside this group acceptance."
+        ]
       }
     },
     "prism-admin-lists": {
@@ -6176,7 +6210,15 @@
       "Other administrator lists, page access and real role/status/sync services.",
       "Authenticated deployed revision, original UI/state/interaction and full pixel/font/A4 parity.",
       "Remaining chat/authStore and production publication."
-    ]
+    ],
+    "goalAudit": {
+      "date": "2026-10-14",
+      "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+      "sourceDelta": "Position list, restore, sync bar/label and their styles are unchanged from reference 27c4fdbf; only out-of-scope form and company-task dialogs changed.",
+      "focusedTests": "13/13 passed",
+      "localBrowser": "LIVE/TEMP, schedule lock/cancel, page-2 detail restoration; 320px document width320, table1100 inside256px scroll region.",
+      "independentConsumer": "Fresh external shadcn install: 16 exact TSX sources, CSS/tokens exact, full example typecheck, Vite/font/notices build; schedule/cancel, page-2 restoration and 320px table1100 inside288px region."
+    }
   },
   "previousAdminListsFixtureRenderChecks": {
     "groups": 55,
@@ -7247,10 +7289,11 @@
       "prism-assessment",
       "prism-collection",
       "prism-notice",
-      "prism-position-blocks"
+      "prism-position-blocks",
+      "prism-position-management"
     ],
-    "acceptedCount": 45,
-    "unassessedGroups": 13,
+    "acceptedCount": 46,
+    "unassessedGroups": 12,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }
