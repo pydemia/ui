@@ -2758,12 +2758,14 @@
       "visual": "passed-current-generation-overlays-at1280-320;authenticated-source-parity-unverified",
       "interaction": "passed22-target-tests;current-generation-browser-checks-passed",
       "checks": [
-        "20 new contracts;12 new states1280/320; creation/impact/save/remap retry flows."
+        "20 new contracts;12 new states1280/320; creation/impact/save/remap retry flows.",
+        "Current frontend 2eeb26ff source audit: list/section/tag, industry/job editors, affected-position and delete/remap flows; only eight catch handlers differ from prior reference, each resetting an already-finally-reset busy flag.",
+        "Focused block contracts 22/22; local browser LIVE/TEMP, edit/impact/save, remap duplicate guard and primary replacement/secondary clearing; 320px root width 320 with no horizontal overflow.",
+        "Fresh external shadcn consumer installed 22 exact TSX sources, PRISM CSS and tokens; complete block example typechecked, Vite/font/notices built, LIVE/TEMP/create dialog rendered, and 320px dialog width 296."
       ],
       "remaining": [
-        "Authenticated source rendering/permissions and real API/AI/RBAC/cache/sync effects.",
-        "Other source purposes including chat-log composition and complete state parity.",
-        "Original whole-page static/variable font,pixel/A4 and production publication."
+        "Authenticated deployed block UI revision and host permission/service integration are unverified.",
+        "AI, cache, persistence and synchronization effects require the consuming application and backend."
       ],
       "localRenderGate": {
         "status": "passed-current-css-delta",
@@ -2787,6 +2789,40 @@
         ],
         "sourceSha256": "ad7537d8e868b73bf79d21e941ae003fc2d21790a4b44bd7fd855d04fe372988",
         "scope": "24 fixture renders plus single source SVG rotation at1s; full source parity remains separate."
+      },
+      "evidence": [
+        "local-position-blocks-goal-2026-10-14",
+        "installed-position-blocks-goal-2026-10-14"
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "pages/admin/position-blocks/PositionBlockPage.tsx",
+          "components/admin/position-blocks/CriteriaSection.tsx",
+          "components/admin/position-blocks/CriteriaTag.tsx",
+          "components/admin/position-blocks/CriteriaDialog.tsx",
+          "components/admin/position-blocks/JobCriteriaDialog.tsx",
+          "components/admin/position-blocks/CriteriaDeleteDialog.tsx",
+          "components/admin/position-blocks/AffectedPositionSummary.tsx"
+        ],
+        "evidence": [
+          "Current source purpose and state audit; the delta from 27c4fdbf only resets busy flags in catch paths already covered by finally.",
+          "22 focused contract tests passed; local browser exercised LIVE/TEMP, impact/save and guarded deletion/remap at 1280px, with no root overflow at 320px.",
+          "Fresh external shadcn consumer installed 22 exact TSX sources plus CSS/tokens; complete example typechecked, Vite/font/notices built and key flows rendered at desktop and 320px."
+        ],
+        "intentionalImprovements": [
+          "Category columns reduce from three to two or one in narrow containers; long names truncate without expanding the page.",
+          "Deletion rejects a replacement that duplicates another job on the same position; primary requires a replacement and an omitted secondary is cleared.",
+          "Async name/generation/impact/save/delete failures preserve input or retry state and ignore stale completions after context changes."
+        ],
+        "hostOwned": [
+          "The consuming application supplies authorization, live block lists, AI and persistence callbacks, sync lifecycle and final API/cache effects."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed revision and host integration could not be bound to this source audit; full pixel parity is outside goal acceptance."
+        ]
       }
     },
     "prism-chat-logs": {
@@ -6360,6 +6396,14 @@
       "observedAt": "2026-10-13",
       "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved.",
       "local": "Measured values match read source CSS;14 current unique states (24 new state/width renders,2 legacy states320). Current slot/order edit/impact/save browser flow and console0 passed. Authenticated source/busy-overlay/fullpixel comparison still pending."
+    },
+    "goalAudit": {
+      "date": "2026-10-14",
+      "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+      "sourceDelta": "Eight catch handlers replace interceptor comments with redundant busy-flag resets; no visual structure or user contract change.",
+      "focusedTests": "22/22 passed",
+      "localBrowser": "1280px LIVE/TEMP, edit impact/save, remap duplicate guard and delete; 320px root scrollWidth=clientWidth=320.",
+      "independentConsumer": "Fresh external shadcn install: 22 exact TSX sources, CSS/tokens exact, complete example typecheck, Vite/font/notices build; LIVE/TEMP/create at desktop and 320px dialog=296/root=320."
     }
   },
   "previousChatLogsFixtureRenderChecks": {
@@ -7202,10 +7246,11 @@
       "prism-context",
       "prism-assessment",
       "prism-collection",
-      "prism-notice"
+      "prism-notice",
+      "prism-position-blocks"
     ],
-    "acceptedCount": 44,
-    "unassessedGroups": 14,
+    "acceptedCount": 45,
+    "unassessedGroups": 13,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

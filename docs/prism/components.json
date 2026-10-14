@@ -7444,7 +7444,7 @@
       "category": "Administration",
       "purpose": "산업·직책·직무 버전 목록과 이름 검사·설명/소직무 생성·영향 확인·삭제 및 재매핑",
       "contract": "PrismPositionBlockManagement는 LIVE/TEMP 목록·직무 대분류·동기화 상태를 host에서 받습니다. 직책은 항상 상세 보기이며 TEMP scheduled/running에는 기준 조작을 잠급니다. 삭제 기준은 count에서 제외하고 deleted tag는 열기/삭제를 막으며 applying은 상세만 제공합니다. 산업/직무 생성, 대분류 3열과26px tag를 원본에 맞추고 좁은 컨테이너에서는2/1열과긴이름ellipsis를지원합니다. PrismBlockEditor는 kind/mode/initial과600ms 이름 검사를 사용합니다. 기존 이름과 같으면 재검사하지 않고 결과는 현재trimmed name에만 유효합니다. 생성 이후 설명을 직접 편집할 수 있으며 재생성의덮어쓰기를안내합니다. 직무는유효한대분류·설명·1개이상모든소직무의이름/설명이필요하고소직무생성/추가/삭제를지원합니다. 변경없는수정은차단하며수정은영향포지션조회→확인→이전/수정확정순서입니다. 조회실패를빈영향목록으로바꾸지않고다시조회할수있습니다. 생성실패/저장실패는기존입력을보존하고재시도합니다. preparePrismBlockSubmission은공개폼필드만복사하고UI용소직무id를제외합니다. PrismBlockDeletionDialog는조회성공후에만삭제를허용합니다. preparePrismBlockRemap은삭제대상/deleted/applying을후보에서제외하고산업/주직무는대체필수,보조직무는미선택해제를허용하며같은포지션의다른직무와중복을금지합니다. 영향0건은성공조회후빈remap으로삭제할수있습니다. pending은닫힘/중복요청을막고scopeKey/대상/kind/mode/readonly/open/unmount변경은AbortSignal과세대검사로오래된응답을버립니다. hostcallback이동기scope교체를일으켜도옛완료가새창을닫지않습니다. scopeKey는계정/권한/버전/동기화잠금/provider맥락변경시에갱신합니다. 서버에서이미실행된변경을rollback한다고주장하지않습니다. host가권한/실서비스/AI/캐시/최종레코드를소유하며예시는합성저장소입니다. 기존PrismCriteriaEditor/RemapDialog는일반controlled계약을보존하고원본블록업무에는이그룹을사용합니다. Generation overlay: 설명입력/기존소직무영역에Base0.6·24pxspinner를겹치고빈소직무에는48px영역을확보합니다. pending에는기존값을유지하고실패는입력을보존하며외부context닫힘은오버레이와결과적용을취소합니다. 합성provider의6초지연으로실제pending을관찰할수있습니다.",
-      "referenceRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "sourceDeltaAudits": [
         {
           "source": "components/admin/position-blocks/AffectedPositionSummary.tsx",
