@@ -1,0 +1,69 @@
+import { useLayoutEffect, useRef, useState } from "react";
+import { PrismSidebar, PrismConfirmDialog, PrismIcon, createPrismAdminMenu, getPrismHistoryDeletionAction, getPrismHistorySelectionId, type PrismHistoryItem } from "@pydemia/prism";
+
+type Mode = "default" | "loading" | "empty" | "restricted" | "admin-login" | "long";
+const records:PrismHistoryItem[] = [{ id: "current", title: "현재 합성 대화" }, { id: "other", title: "다른 합성 대화" }, { id:"draft-row",title:"저장 전 합성 대화",conversationId:null,localDraftId:"synthetic-draft" }];
+const longRecords:PrismHistoryItem[] = [...records,...Array.from({length:97},(_,index)=>({id:`synthetic-history-${index+4}`,title:`합성 대화 ${index+4} · 긴 제목의 말줄임과 스크롤을 확인하는 예시입니다`}))];
+type Context = { routeConversationId: string | null; activeConversationId: string | null; activeLocalDraftId?:string|null; view: string };
+const serverId=(item:PrismHistoryItem)=>item.conversationId===undefined ? item.id : item.conversationId;
+
+/** Host-owned synthetic deletion and route state; no service or browser history is changed. */
+export function SidebarHistoryExample({ initialMode = "default" }: { initialMode?: Mode }) {
+    const [collapsed, setCollapsed] = useState(false), [history, setHistory] = useState(initialMode === "long" ? longRecords : records);
+    const [context, setContext] = useState<Context>({ routeConversationId: "current", activeConversationId: "current", view: "current" });
+    const latest = useRef(context), pending = useRef<AbortController | null>(null), mounted = useRef(false);
+    const [session, setSession] = useState(0), [deleting, setDeleting] = useState<string | null>(null), [busy, setBusy] = useState(false);
+    const [failNext, setFailNext] = useState(false), [error, setError] = useState<string | undefined>(), [result, setResult] = useState("");
+    useLayoutEffect(() => { latest.current = context; }, [context]);
+    useLayoutEffect(() => { mounted.current = true; return () => { mounted.current = false; pending.current?.abort(); }; }, []);
+    const intro = () => setContext({ routeConversationId: null, activeConversationId: null, activeLocalDraftId:null, view: "intro" });
+    const remove = async () => {
+        if (!deleting || pending.current) return;
+        const id = deleting, controller = new AbortController(), failure = failNext;
+        pending.current = controller; setBusy(true); setError(undefined);
+        try {
+            await new Promise(resolve => setTimeout(resolve, 40));
+            if (controller.signal.aborted || !mounted.current) return;
+            if (failure) { setFailNext(false); throw new Error("Synthetic deletion failure"); }
+            setHistory(items => items.filter(item => serverId(item) !== id));
+            const action = getPrismHistoryDeletionAction(id, latest.current);
+            if (action === "navigate-intro") intro();
+            else if (action === "reset-intro-session") { setContext(value=>({...value,activeConversationId:null,activeLocalDraftId:null,view:value.view==="current"||value.view==="draft" ? "intro" : value.view})); setSession(value => value + 1); }
+            setDeleting(null); setResult(`합성 기록 ${id} 삭제 · ${action}`);
+        } catch {
+            if (mounted.current && !controller.signal.aborted) setError("합성 삭제에 실패했습니다. 기록은 유지됩니다.");
+        } finally {
+            if (mounted.current && pending.current === controller) { pending.current = null; setBusy(false); }
+        }
+    };
+    return <div data-prism="light" className="prism-sidebar-demo" style={{display:"flex",height:520,boxSizing:"border-box",fontSize:14,border:"1px solid var(--prism-control-border)",overflow:"auto"}}>
+        <PrismSidebar collapsed={collapsed} onCollapsedChange={setCollapsed} activeId={context.view}
+            defaultExpandedIds={initialMode === "restricted" ? [] : ["admin"]}
+            defaultHistoryOpen={initialMode === "loading" || initialMode === "empty" || initialMode === "long"}
+            activeHistoryId={getPrismHistorySelectionId(history,{...context,isChatHome:["current","draft","intro"].includes(context.view)})}
+            onNavigate={id => setContext(value=>({...value,routeConversationId:null,activeConversationId:id==="candidates"||id==="positions" ? null : value.activeConversationId,activeLocalDraftId:id==="candidates"||id==="positions" ? null : value.activeLocalDraftId,view:id}))}
+            onHistoryOpen={intent=>{if(intent.kind==="conversation")setContext({routeConversationId:intent.conversationId,activeConversationId:intent.conversationId,activeLocalDraftId:null,view:intent.rowId});else {setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:intent.localDraftId,view:"draft"});setSession(value=>value+1);}}}
+            onNewChat={() => { intro(); setSession(value => value + 1); }}
+            items={[{id:"candidates",label:"후보자 목록",icon:<PrismIcon name="UsersIcon" size={24}/>},{ id: "favorites", label: "후보자 즐겨찾기", icon: <PrismIcon name="FavoriteLargeIcon" size={24}/> },{id:"positions",label:"포지션 목록",icon:<PrismIcon name="EtcIcon" size={24}/>}, ...(initialMode === "restricted" ? [] : [createPrismAdminMenu(true)!])]}
+            history={initialMode === "empty" ? [] : history.map(item => ({ ...item, generating: initialMode === "loading" }))}
+            onHistoryRename={(id, title) => setHistory(items => items.map(item => serverId(item) === id ? { ...item, title } : item))}
+            onHistoryDeleteRequest={id => { setError(undefined); setDeleting(id); }}
+            user={{ name: "demo-user", description: "demo@example.com", team: "가상 전략팀" }}
+            profileActions={[{ id: "notice", label: "공지사항" }, ...(initialMode === "admin-login" ? [{ id: "logout", label: "로그아웃", tone: "muted" as const }] : [])]}
+            onProfileAction={id => setResult(`${id} 의도 전달`)} onPrivacyPolicy={() => setResult("방침 열기 의도 전달")} copyright="© 가상기업"/>
+        <div className="prism-sidebar-demo-main" style={{flex:1,padding:24,minWidth:200}}>
+            <p>합성 기록만 삭제합니다. 경로와 세션 키는 이 예제 안의 표시 값입니다.</p>
+            <label>현재 대화 위치 <select aria-label="현재 대화 위치" value={context.view === "intro" ? "intro" : context.view === "other" ? "other" : context.view==="draft" ? "draft" : context.view==="favorites" ? "favorites" : context.view==="candidates" ? "candidates" : context.view==="positions" ? "positions" : context.routeConversationId ? "linked" : "root"}
+                onChange={event => { const value = event.target.value; if (value === "intro") intro(); else if(value==="candidates"||value==="positions")setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:null,view:value});else if(value==="favorites")setContext(current=>({...current,routeConversationId:null,view:"favorites"}));else if(value==="draft")setContext({routeConversationId:null,activeConversationId:null,activeLocalDraftId:"synthetic-draft",view:"draft"});else setContext({ routeConversationId: value === "root" ? null : value === "other" ? "other" : "current", activeConversationId: value === "other" ? "other" : "current", activeLocalDraftId:null, view: value === "other" ? "other" : "current" }); }}>
+                <option value="linked">URL에 ID가 있는 현재 대화</option><option value="root">기본 경로의 현재 대화</option><option value="other">다른 대화 조회 중</option><option value="intro">초기 화면</option>
+                <option value="draft">저장 전 대화 선택</option><option value="candidates">후보자 목록</option><option value="favorites">즐겨찾기 메뉴와 대화 선택 유지</option><option value="positions">포지션 목록</option>
+            </select></label>
+            <label><input type="checkbox" checked={failNext} disabled={busy} onChange={event => setFailNext(event.target.checked)}/> 다음 합성 삭제 실패</label>
+            <button type="button" disabled={!history.some(item=>item.id==="draft-row"&&item.conversationId===null)} onClick={()=>{setHistory(items=>items.map(item=>item.id==="draft-row" ? {...item,conversationId:"saved-draft",title:"저장된 합성 대화"} : item));setContext(value=>value.activeLocalDraftId==="synthetic-draft" ? {...value,activeConversationId:"saved-draft",activeLocalDraftId:null} : value);}}>저장 완료 예시</button>
+            <p role="status">선택한 화면: {context.view} · 세션 키: {session}</p><p role="status">{result}</p>
+        </div>
+        <PrismConfirmDialog open={deleting !== null} onOpenChange={open => { if (!open && !pending.current) setDeleting(null); }}
+            title="가상 대화를 삭제하시겠습니까?" content="삭제 성공 후 현재 경로와 대화 ID를 확인합니다." type="error" confirmTone="danger" confirmLabel="삭제"
+            busy={busy} error={error} onConfirm={() => { void remove(); }}/>
+    </div>;
+}

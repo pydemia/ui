@@ -80,7 +80,12 @@
       "target": "prism-directory",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Opt-in admin directory variant, source clear-all-if-any selection,10 skeleton rows, source sort icons and name-column keyboard opening. Existing generic defaults preserved. Current rendered comparison pending."
+      }
     },
     {
       "source": "components/admin/common/AdminTableToolbar.tsx",
@@ -103,8 +108,14 @@
       "name": "CompanyGroupForm",
       "target": "prism-domain-forms",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current create/detail fields and name-validation behavior implemented and checked with synthetic local fixtures. Fresh authenticated source visual/state comparison remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+      }
     },
     {
       "source": "components/admin/notices/NoticeForm.tsx",
@@ -117,34 +128,54 @@
     {
       "source": "components/admin/position-blocks/AffectedPositionSummary.tsx",
       "name": "AffectedPositionSummary",
-      "target": "prism-management",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/CriteriaDeleteDialog.tsx",
       "name": "CriteriaDeleteDialog",
-      "target": "prism-management-tools",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/CriteriaDialog.tsx",
       "name": "CriteriaDialog",
-      "target": "prism-management-tools",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/CriteriaSection.tsx",
       "name": "CriteriaSection",
-      "target": "prism-management",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/CriteriaTag.tsx",
@@ -152,15 +183,25 @@
       "target": "prism-management-tools",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Added state label, deleted/applying action restrictions, source26px tags and hover/check source colors; long labels truncate without widening the container."
+      }
     },
     {
       "source": "components/admin/position-blocks/JobCriteriaDialog.tsx",
       "name": "JobCriteriaDialog",
-      "target": "prism-management-tools",
+      "target": "prism-position-blocks",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
     },
     {
       "source": "components/admin/position-blocks/PositionBlockSkeleton.tsx",
@@ -168,7 +209,10 @@
       "target": "prism-primitives",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-position-blocks"
+      ]
     },
     {
       "source": "components/admin/positions/CompanyTaskDialog.tsx",
@@ -192,7 +236,12 @@
       "target": "prism-domain-forms",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+      }
     },
     {
       "source": "components/admin/positions/PositionFormSkeleton.tsx",
@@ -207,8 +256,14 @@
       "name": "UserForm",
       "target": "prism-domain-forms",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current create/detail fields and name-validation behavior implemented and checked with synthetic local fixtures. Fresh authenticated source visual/state comparison remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+      }
     },
     {
       "source": "components/auth/AuthBootstrapLayout.tsx",
@@ -232,23 +287,35 @@
       "target": "prism-collection",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-candidate-list"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/candidate/CandidateListContent.tsx",
       "name": "CandidateListContent",
-      "target": "prism-collection",
+      "target": "prism-candidate-list",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source selection/filter/output preparation contract implemented; authenticated deployed states and full rendered parity remain pending.",
+      "recipe": null,
+      "additionalTargets": [
+        "prism-collection"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/candidate/CandidateTable.tsx",
       "name": "CandidateTable",
       "target": "prism-directory",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismCandidateDirectory"
+      "verification": "Source-specific table behavior and styles; generic directory remains separate. Browser and reference state verification in progress.",
+      "recipe": "PrismCandidateDirectory",
+      "additionalTargets": [
+        "prism-candidate-list"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/chart/RadarChart.tsx",
@@ -261,10 +328,14 @@
     {
       "source": "components/chat/common/CandidateEvaluationHistory.tsx",
       "name": "CandidateEvaluationHistory",
-      "target": "prism-record",
+      "target": "prism-evaluation-history",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": null,
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/common/ChatHeader.tsx",
@@ -335,16 +406,18 @@
       "name": "ContextInfoLayer",
       "target": "prism-context",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current required/optional badges, trimmed 50-unit validation, source counter warnings and structured action response implemented. Source/deployed style and runtime checks are separate from full authenticated visual parity.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/contextInfo/ContextInfoSection.tsx",
       "name": "ContextInfoSection",
       "target": "prism-context",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current required/optional badges, trimmed 50-unit validation, source counter warnings and structured action response implemented. Source/deployed style and runtime checks are separate from full authenticated visual parity.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/contextInfo/ContextOptionCard.tsx",
@@ -384,7 +457,12 @@
       "target": "prism-response",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/conversation/ChatJSONRendererPanel.tsx",
@@ -392,7 +470,17 @@
       "target": "prism-response",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-position-recommendations",
+        "prism-analysis"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/conversation/ChatMarkdownRenderer.tsx",
@@ -400,7 +488,12 @@
       "target": "prism-response",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/conversation/ChatMarkdownRendererPanel.tsx",
@@ -408,7 +501,12 @@
       "target": "prism-response",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/conversation/ChatMessageQuestion.tsx",
@@ -429,18 +527,26 @@
     {
       "source": "components/chat/conversation/InlineMarkdown.tsx",
       "name": "InlineMarkdown",
-      "target": "prism-response",
+      "target": "prism-rich-text",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-response"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/favorite/FavoriteCandidateCard.tsx",
       "name": "FavoriteCandidateCard",
-      "target": "prism-profile",
+      "target": "prism-favorite-candidate",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismFavoriteProfile"
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": "PrismFavoriteProfile",
+      "additionalTargets": [
+        "prism-profile"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/favorite/FavoriteCandidateDetailTab.tsx",
@@ -453,10 +559,14 @@
     {
       "source": "components/chat/favorite/FavoriteCandidateList.tsx",
       "name": "FavoriteCandidateList",
-      "target": "prism-collection",
+      "target": "prism-favorite-candidate",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": null,
+      "additionalTargets": [
+        "prism-collection"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/main/ChatConversationSection.tsx",
@@ -477,10 +587,11 @@
     {
       "source": "components/chat/memo/MemoCard.tsx",
       "name": "MemoCard",
-      "target": "prism-detail",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoCardListSkeleton.tsx",
@@ -488,23 +599,29 @@
       "target": "prism-primitives",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-memo"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoContent.tsx",
       "name": "MemoContent",
-      "target": "prism-collection",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/memo/MemoInput.tsx",
       "name": "MemoInput",
-      "target": "prism-collection",
+      "target": "prism-memo",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current personal memo recipe, controlled single editor and mutation lifecycle implemented; synthetic browser checks and authenticated source comparisons are recorded separately.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/notice/NoticePopup.tsx",
@@ -517,82 +634,117 @@
     {
       "source": "components/chat/panel/ChatPanel.tsx",
       "name": "ChatPanel",
-      "target": "prism-panel",
+      "target": "prism-panel-recipes",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source-specific wrapper and guarded-leave composition implemented from clean local dev. JSDOM contracts checked; authenticated current rendered styles/states remain unverified.",
+      "recipe": "PrismChatPanel",
+      "additionalTargets": [
+        "prism-panel"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/panel/MemoPanel.tsx",
       "name": "MemoPanel",
-      "target": "prism-panel",
+      "target": "prism-panel-recipes",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source-specific wrapper and guarded-leave composition implemented from clean local dev. JSDOM contracts checked; authenticated current rendered styles/states remain unverified.",
+      "recipe": "PrismMemoPanel",
+      "additionalTargets": [
+        "prism-panel"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/panel/PositionPanel.tsx",
       "name": "PositionPanel",
-      "target": "prism-panel",
+      "target": "prism-panel-recipes",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source-specific wrapper and guarded-leave composition implemented from clean local dev. JSDOM contracts checked; authenticated current rendered styles/states remain unverified.",
+      "recipe": "PrismPositionPanel",
+      "additionalTargets": [
+        "prism-panel"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/panel/ProfilePanel.tsx",
       "name": "ProfilePanel",
-      "target": "prism-panel",
+      "target": "prism-panel-recipes",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Source-specific wrapper and guarded-leave composition implemented from clean local dev. JSDOM contracts checked; authenticated current rendered styles/states remain unverified.",
+      "recipe": "PrismProfilePanel",
+      "additionalTargets": [
+        "prism-panel"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/panel/SidePanel.tsx",
       "name": "SidePanel",
       "target": "prism-panel",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Public basic/expanded/closed metrics and final installed vector paint compared. Complete pixels and authenticated panel wrappers remain pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/position/PositionDetailHeader.tsx",
       "name": "PositionDetailHeader",
       "target": "prism-position",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/position/PositionDetailView.tsx",
       "name": "PositionDetailView",
       "target": "prism-position",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/position/PositionDetailViewSkeleton.tsx",
       "name": "PositionDetailViewSkeleton",
       "target": "prism-position",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/position/PositionRecommend.tsx",
       "name": "PositionRecommend",
-      "target": "prism-content",
+      "target": "prism-position-recommendations",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-content"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/position/PositionRequirementGroup.tsx",
       "name": "PositionRequirementGroup",
       "target": "prism-position",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "verification": "Current source purpose and geometry implemented: definition/context,expertise/experience groups and footnote with loading/error/empty states. Rendered parity remains pending.",
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/sidebar/InquiryHistoryDialog.tsx",
@@ -640,7 +792,8 @@
       "target": "prism-assessment",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/attitude/AttitudeSummary.tsx",
@@ -656,15 +809,20 @@
       "target": "prism-document",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/attitude/SuccessorCandidateAttitude.tsx",
       "name": "SuccessorCandidateAttitude",
-      "target": "prism-profile-sections",
+      "target": "prism-attitude-report",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismAttitudeSection"
+      "recipe": "PrismAttitudeReport",
+      "additionalTargets": [
+        "prism-profile-sections"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/BadgeSummary.tsx",
@@ -672,7 +830,8 @@
       "target": "prism-profile",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/CandidateScoreEssay.tsx",
@@ -741,18 +900,26 @@
     {
       "source": "components/chat/successorCandidate/expertise/SurveyValidation.tsx",
       "name": "SurveyValidation",
-      "target": "prism-record",
+      "target": "prism-survey",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismSurveyValidation",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/expertise/ValidationItem.tsx",
       "name": "ValidationItem",
-      "target": "prism-record",
+      "target": "prism-survey",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismSurveyValidation",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/GradeSummary.tsx",
@@ -763,25 +930,9 @@
       "recipe": "PrismGradeSummary"
     },
     {
-      "source": "components/chat/successorCandidate/leadership/LeadershipRadar.tsx",
-      "name": "LeadershipRadar",
-      "target": "prism-chart",
-      "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
-    },
-    {
       "source": "components/chat/successorCandidate/leadership/LeadershipReason.tsx",
       "name": "LeadershipReason",
       "target": "prism-assessment",
-      "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
-    },
-    {
-      "source": "components/chat/successorCandidate/leadership/LeadershipSummary.tsx",
-      "name": "LeadershipSummary",
-      "target": "prism-profile-sections",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
       "recipe": null
@@ -829,18 +980,26 @@
     {
       "source": "components/chat/successorCandidate/mgmtComments/CeoCommentForm.tsx",
       "name": "CeoCommentForm",
-      "target": "prism-record",
+      "target": "prism-mgmt-comments",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismCeoCommentForm",
+      "additionalTargets": [
+        "prism-record"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/mgmtComments/SuccessorCandidateMgmtComments.tsx",
       "name": "SuccessorCandidateMgmtComments",
-      "target": "prism-profile-sections",
+      "target": "prism-mgmt-comments",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismCommentsSection"
+      "recipe": "PrismMgmtComments",
+      "additionalTargets": [
+        "prism-profile-sections"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/NoData.tsx",
@@ -861,10 +1020,21 @@
     {
       "source": "components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
       "name": "CandidateProfilePrintPreview",
-      "target": "prism-document",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": "PrismPrintPreview / PrismPrintPage + PrismHtmlExportButton",
+      "additionalTargets": [
+        "prism-html-export",
+        "prism-document",
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+      }
     },
     {
       "source": "components/chat/successorCandidate/print/PrintAttitudeDerailmentRisk.tsx",
@@ -877,18 +1047,26 @@
     {
       "source": "components/chat/successorCandidate/print/PrintCareerTimeline.tsx",
       "name": "PrintCareerTimeline",
-      "target": "prism-print",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PrintLeaderSummary.tsx",
       "name": "PrintLeaderSummary",
-      "target": "prism-print",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PrintOptionsDialog.tsx",
@@ -901,18 +1079,26 @@
     {
       "source": "components/chat/successorCandidate/print/PrintPage.tsx",
       "name": "PrintPage",
-      "target": "prism-print",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PrintSuccessExperienceEssay.tsx",
       "name": "PrintSuccessExperienceEssay",
-      "target": "prism-print",
+      "target": "prism-profile-print",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-print"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/successExperience/ExperienceAreaChip.tsx",
@@ -967,8 +1153,10 @@
       "name": "SuccessorCandidateFavoriteProfile",
       "target": "prism-profile",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismFavoriteProfile"
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": "PrismFavoriteProfile",
+      "additionalTargets": [],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/total/SuccessorCandidateBasicInfo.tsx",
@@ -1029,10 +1217,18 @@
     {
       "source": "components/chat/templates/ChatProfileAnalysis.tsx",
       "name": "ChatProfileAnalysis",
-      "target": "prism-assessment",
+      "target": "prism-analysis",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-assessment"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+        "scope": "Leadership results rendered as blue readonly tags; deletion effect after success depends on latest route/session context."
+      }
     },
     {
       "source": "components/chat/templates/ChatProfileBrief.tsx",
@@ -1085,10 +1281,19 @@
     {
       "source": "components/chat/templates/ChatTemplatePositionRecommend.tsx",
       "name": "ChatTemplatePositionRecommend",
-      "target": "prism-content",
+      "target": "prism-position-recommendations",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "additionalTargets": [
+        "prism-content"
+      ],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+      }
     },
     {
       "source": "components/chat/templates/ChatTemplateProfile.tsx",
@@ -1175,8 +1380,10 @@
       "name": "HRXFavoriteToggle",
       "target": "prism-primitives",
       "coverage": "purpose-mapped",
-      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": "PrismFavoriteToggle"
+      "verification": "Source geometry and purpose implemented with host-owned data/actions; current actual render/native/print comparison remains pending.",
+      "recipe": "PrismFavoriteToggle",
+      "additionalTargets": [],
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/ui/button/HRXFloatingChatBtn.tsx",
@@ -1232,7 +1439,12 @@
       "target": "prism-selection",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Optional dotted display and custom placeholder preserve canonical ISO model/default; input14px/500/23px line-height/20.125px height measured from current public source date sample. Full static/variable font/pixel and all size/state parity pending."
+      }
     },
     {
       "source": "components/ui/dialog/HRXConfirmDialog.tsx",
@@ -2040,7 +2252,12 @@
       "target": "prism-field",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Optional inputOverlay preserves default textarea DOM; explicit null holds the same native node through generation. Source overlay covers input only and host retains disabled/readonly ownership."
+      }
     },
     {
       "source": "components/ui/logo/HRXAffiliateLogo.tsx",
@@ -2144,7 +2361,11 @@
       "target": "prism-sidebar",
       "coverage": "purpose-mapped",
       "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
-      "recipe": null
+      "recipe": null,
+      "latestDeltaAudit": {
+        "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+        "scope": "Leadership results rendered as blue readonly tags; deletion effect after success depends on latest route/session context."
+      }
     },
     {
       "source": "layouts/common/BlankLayout.tsx",
@@ -2157,46 +2378,416 @@
     {
       "source": "components/chat/successorCandidate/leadership/LeadershipPie.tsx",
       "name": "LeadershipPie",
-      "target": null,
-      "coverage": "pending",
-      "verification": "Added in the latest source checkout; standalone purpose and visual implementation are not yet verified.",
-      "recipe": null
+      "target": "prism-chart",
+      "coverage": "purpose-mapped",
+      "verification": "Implemented typed SVG and summary with measured deployed print-frame/style checks and42 synthetic consumer resize/distribution cases; remaining source outside-label, animation, domain and complete pixel comparisons are partial.",
+      "recipe": "PrismLeadershipPie",
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+      }
     },
     {
       "source": "components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
       "name": "LeadershipPieSummary",
-      "target": null,
-      "coverage": "pending",
-      "verification": "Added in the latest source checkout; standalone purpose and visual implementation are not yet verified.",
-      "recipe": null
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Implemented typed SVG and summary with measured deployed print-frame/style checks and42 synthetic consumer resize/distribution cases; remaining source outside-label, animation, domain and complete pixel comparisons are partial.",
+      "recipe": "PrismLeadershipPieSummary",
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+      }
     },
     {
       "source": "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
       "name": "CandidateProfilesPdfDownload",
-      "target": null,
-      "coverage": "pending",
-      "verification": "Added in the latest source checkout; standalone purpose and visual implementation are not yet verified.",
-      "recipe": null
+      "target": "prism-export",
+      "coverage": "purpose-mapped",
+      "verification": "Single PDF, multi-profile ZIP, progress, duplicate filenames, cancellation, errors and route-persistent host verified with synthetic local and fresh installed browser fixtures. Rendering/data/page breaks stay consumer-owned. Original authenticated export and full print-document parity remain unverified.",
+      "recipe": "runPrismPdfExport / PrismPdfDownloadHost with consumer PDF renderer",
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
     },
     {
       "source": "components/chat/successorCandidate/print/PdfDownloadHost.tsx",
       "name": "PdfDownloadHost",
-      "target": null,
-      "coverage": "pending",
-      "verification": "Added in the latest source checkout; standalone purpose and visual implementation are not yet verified.",
-      "recipe": null
+      "target": "prism-export",
+      "coverage": "purpose-mapped",
+      "verification": "Single PDF, multi-profile ZIP, progress, duplicate filenames, cancellation, errors and route-persistent host verified with synthetic local and fresh installed browser fixtures. Rendering/data/page breaks stay consumer-owned. Original authenticated export and full print-document parity remain unverified.",
+      "recipe": "runPrismPdfExport / PrismPdfDownloadHost with consumer PDF renderer",
+      "mappedAtRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323"
+    },
+    {
+      "source": "components/chat/position-list/PositionFilterBar.tsx",
+      "name": "PositionFilterBar",
+      "target": "prism-position-directory",
+      "coverage": "purpose-mapped",
+      "verification": "Local source and authenticated deployed default list layout observed at d677 checkout; synthetic filter, sort, paging and detail-tab example tested. Deployed detail click, full states and pixel/font parity remain unverified.",
+      "recipe": "PrismPositionDirectory form: draft company/industry/name",
+      "mappedAtRevision": "d677e551a61f672025dcc1803a56ff0cab1e36ee"
+    },
+    {
+      "source": "components/chat/position-list/PositionListContent.tsx",
+      "name": "PositionListContent",
+      "target": "prism-position-directory",
+      "coverage": "purpose-mapped",
+      "verification": "Local source and authenticated deployed default list layout observed at d677 checkout; synthetic filter, sort, paging and detail-tab example tested. Deployed detail click, full states and pixel/font parity remain unverified.",
+      "recipe": "PrismPositionDirectory list composition and pagination",
+      "mappedAtRevision": "d677e551a61f672025dcc1803a56ff0cab1e36ee"
+    },
+    {
+      "source": "components/chat/position-list/PositionTable.tsx",
+      "name": "PositionTable",
+      "target": "prism-position-directory",
+      "coverage": "purpose-mapped",
+      "verification": "Local source and authenticated deployed default list layout observed at d677 checkout; synthetic filter, sort, paging and detail-tab example tested. Deployed detail click, full states and pixel/font parity remain unverified.",
+      "recipe": "PrismPositionDirectory five-column table",
+      "mappedAtRevision": "d677e551a61f672025dcc1803a56ff0cab1e36ee"
+    },
+    {
+      "source": "components/ui/icons/EtcIcon.tsx",
+      "name": "EtcIcon",
+      "target": "prism-icon",
+      "recipe": "PrismIcon name=\"EtcIcon\"",
+      "coverage": "vector-asset-adapter",
+      "verification": "Original vector geometry retained in typed adapter; full source sidebar visual parity remains unverified.",
+      "mappedAtRevision": "d677e551a61f672025dcc1803a56ff0cab1e36ee"
     }
   ],
   "counts": {
-    "total": 273,
-    "pending": 4,
-    "vectorAssets": 87
+    "total": 275,
+    "pending": 0,
+    "vectorAssets": 88,
+    "countUnit": "source-file",
+    "nonVectorSourceFiles": 187,
+    "pendingPurposeMappings": 0,
+    "independentImplementationTargetCount": 58,
+    "independentImplementationTargetUnit": "catalog component group excluding prism-icon and prism-tokens",
+    "goalScopeBaselineRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98"
   },
   "baselineMappingRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
   "latestSourceAudit": {
+    "observedAt": "2026-10-13",
+    "revision": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
+    "checkout": "dev fast-forwarded and clean",
+    "previousRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+    "newComponents": [
+      "components/chat/position-list/PositionFilterBar.tsx",
+      "components/chat/position-list/PositionListContent.tsx",
+      "components/chat/position-list/PositionTable.tsx",
+      "components/ui/icons/EtcIcon.tsx"
+    ],
+    "newPurposeMappedComponents": 4,
+    "pendingComponents": [],
+    "deployedRevisionBinding": "Not established; authenticated runtime observation is scoped to route /chat/positions on 2026-10-13.",
+    "reviewedScope": "New user position-list filter/table/detail-tab source, default deployed list layout and EtcIcon geometry. Other 74 changed files since e5 were not reaudited in this phase.",
+    "pendingRevisionAudit": [
+      "Remaining e5-to-d677 changes outside position list and sidebar icon.",
+      "Authenticated detail tab interaction and full visual/pixel/font comparison across states and sizes.",
+      "Real service error, authorization and host integration."
+    ],
+    "claim": "All 275 current components/layouts TSX files have file-to-purpose mappings. This does not establish 275 independent target components or prove complete design/interaction coverage.",
+    "lastFetch": {
+      "observedAt": "2026-10-13",
+      "head": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
+      "originDev": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
+      "workingTree": "clean"
+    }
+  },
+  "integrationReferences": [
+    {
+      "source": "pages/chat/ChatMain.tsx",
+      "target": "prism-detail-state",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Classified detail API403/404 clears profile/position panels and subject selection. Atomic host-owned selection and optional UI request tickets extend stale-error handling. API classification, cancellation, session and authorization stay host-owned; actual deployed behavior comparison remains unverified."
+      }
+    },
+    {
+      "source": "lib/axios.ts",
+      "target": "prism-detail-state",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Classified detail API403/404 clears profile/position panels and subject selection. Atomic host-owned selection and optional UI request tickets extend stale-error handling. API classification, cancellation, session and authorization stay host-owned; actual deployed behavior comparison remains unverified."
+      }
+    },
+    {
+      "source": "pages/admin/users/UserManagementPage.tsx",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminPageHeader.tsx",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminFilterBar.tsx",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminTableToolbar.tsx",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "service/users.ts",
+      "target": "prism-admin-users",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+      }
+    },
+    {
+      "source": "pages/admin/positions/PositionPage.tsx",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "pages/admin/positions/positionListRestore.ts",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminSyncStatusBar.tsx",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminSyncStatusLabel.tsx",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "service/data-management/positionManagement.ts",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "service/data-management/sync.ts",
+      "target": "prism-position-management",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-12",
+        "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+      }
+    },
+    {
+      "source": "pages/admin/company-groups/CompanyGroupPage.tsx",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "pages/admin/notices/NoticePage.tsx",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "components/admin/common/AdminDateRangeField.tsx",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "service/companyGroups.ts",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "service/notices.ts",
+      "target": "prism-admin-lists",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+      }
+    },
+    {
+      "source": "pages/admin/position-blocks/PositionBlockPage.tsx",
+      "target": "prism-position-blocks",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
+    },
+    {
+      "source": "pages/admin/position-blocks/mapBlocks.ts",
+      "target": "prism-position-blocks",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
+    },
+    {
+      "source": "service/blocks.ts",
+      "target": "prism-position-blocks",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
+    },
+    {
+      "source": "components/admin/position-blocks/types.ts",
+      "target": "prism-position-blocks",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+      }
+    },
+    {
+      "source": "pages/admin/chat-logs/ChatLogPage.tsx",
+      "target": "prism-chat-logs",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Chat-log source placeholder list/archive, typed host query and clipboard completion, context-nudge/answer selection, block generation overlays. Current Mac lock interrupts browser verification; no original live/API parity claim."
+      }
+    },
+    {
+      "source": "pages/admin/chat-logs/ChatLogDetailPage.tsx",
+      "target": "prism-chat-logs",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Chat-log source placeholder list/archive, typed host query and clipboard completion, context-nudge/answer selection, block generation overlays. Current Mac lock interrupts browser verification; no original live/API parity claim."
+      }
+    },
+    {
+      "source": "pages/admin/chat-logs/chatLogFixture.ts",
+      "target": "prism-chat-logs",
+      "latestDeltaAudit": {
+        "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+        "observedAt": "2026-10-13",
+        "scope": "Chat-log source placeholder list/archive, typed host query and clipboard completion, context-nudge/answer selection, block generation overlays. Current Mac lock interrupts browser verification; no original live/API parity claim."
+      }
+    },
+    {
+      "source": "pages/chat/PositionList.tsx",
+      "target": "prism-position-directory",
+      "latestDeltaAudit": {
+        "revision": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
+        "observedAt": "2026-10-13",
+        "scope": "LIVE source query, server sort and pagination, detail tab deduplication and selection; local synthetic browser flow verified. Authenticated row-open input timed out, so deployed detail interaction remains unverified."
+      }
+    }
+  ],
+  "componentCountAudit": {
+    "observedAt": "2026-10-13",
+    "sourceRevision": "d677e551a61f672025dcc1803a56ff0cab1e36ee",
+    "method": "Static runtime-import dependency closure from src/main.tsx including literal dynamic import and Vite import.meta.glob expansion; product closure removes only routes/sampleRoutes.tsx. Includes composite and helper TSX modules; reachability is not independent component count or authenticated runtime proof.",
+    "counts": {
+      "product-route-reachable": 178,
+      "sample-route-only": 7,
+      "not-reachable-from-entry": 2
+    },
+    "primaryMappedGroups": 50,
+    "allMappedGroupsExcludingVectors": 51,
+    "sampleOnly": [
+      "components/admin/common/AdminAttachmentList.tsx",
+      "components/admin/common/AdminChipAutocomplete.tsx",
+      "components/ui/badge/HRXCountBadge.tsx",
+      "components/ui/input/HRXAutocomplete.tsx",
+      "components/ui/input/HRXFileAttach.tsx",
+      "components/ui/progressbar/HRXProgressBar.tsx",
+      "components/ui/table/HRXTable.tsx"
+    ],
+    "unreachable": [
+      "components/chat/common/DragDropOverlay.tsx",
+      "components/ui/popover/HRXPopover.tsx"
+    ],
+    "claim": "187 is the current count of non-vector TSX source files at d677e551;186 was the historical count at27c4fdbf.178 statically reachable files include helpers and compositions. Neither file count nor the51 mapped groups establishes the final independent implementation target or completion denominator."
+  },
+  "retiredSourceReferences": [
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipRadar.tsx",
+      "name": "LeadershipRadar",
+      "target": "prism-chart",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null,
+      "removedAtRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+      "previousRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "claim": "Removed from latest source; portable chart/summary functionality is retained as an extension."
+    },
+    {
+      "source": "components/chat/successorCandidate/leadership/LeadershipSummary.tsx",
+      "name": "LeadershipSummary",
+      "target": "prism-profile-sections",
+      "coverage": "purpose-mapped",
+      "verification": "Purpose/source correspondence recorded. Exact state and visual parity require the comparison evidence; this mapping alone is not verification.",
+      "recipe": null,
+      "removedAtRevision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+      "previousRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "claim": "Removed from latest source; portable chart/summary functionality is retained as an extension."
+    }
+  ],
+  "previousLatestSourceAudit20261013": {
     "observedAt": "2026-10-09",
     "revision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
-    "checkout": "dev fast-forwarded and clean",
+    "checkout": "dev fast-forwarded to27c4fdbf and clean",
     "previousMappedCount": 269,
     "newComponents": [
       "components/chat/successorCandidate/leadership/LeadershipPie.tsx",
@@ -2204,6 +2795,241 @@
       "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
       "components/chat/successorCandidate/print/PdfDownloadHost.tsx"
     ],
-    "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date."
+    "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date.",
+    "newPurposeMappedComponents": 4,
+    "pendingComponents": [],
+    "localRecheckedAt": "2026-10-12",
+    "fetchedRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "previousReferenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "changedFilesSinceReference": [
+      "src/components/admin/company-groups/CompanyGroupForm.module.scss",
+      "src/components/admin/company-groups/CompanyGroupForm.tsx",
+      "src/components/admin/positions/PositionForm.tsx",
+      "src/components/admin/users/UserForm.tsx",
+      "src/components/chat/conversation/ChatJSONRenderer.tsx",
+      "src/components/chat/conversation/ChatJSONRendererPanel.tsx",
+      "src/components/chat/conversation/ChatMarkdownRenderer.tsx",
+      "src/components/chat/conversation/ChatMarkdownRendererPanel.tsx",
+      "src/components/chat/position/PositionDetailView.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.module.scss",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+      "src/components/chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+      "src/components/chat/successorCandidate/leadership/mapLeadershipPie.ts",
+      "src/components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+      "src/components/chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts",
+      "src/layouts/chat/ChatSidebar.tsx",
+      "src/lib/axios.ts",
+      "src/pages/admin/positions/PositionFormPage.tsx",
+      "src/pages/admin/positions/PositionPage.tsx",
+      "src/pages/admin/positions/positionListRestore.ts",
+      "src/pages/admin/users/UserFormPage.tsx",
+      "src/pages/admin/users/UserManagementPage.tsx",
+      "src/pages/chat/ChatMain.tsx",
+      "src/pages/sample/chat/candidateProfilePrintDummy.ts",
+      "src/service/data-management/positionManagement.ts",
+      "src/service/hrx/agent.ts",
+      "src/service/recommendation/candidates.ts",
+      "src/service/users.ts",
+      "src/store/useAuthStore.ts"
+    ],
+    "unchangedProfileReferenceFiles": [
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateCard.tsx",
+      "src/components/chat/favorite/FavoriteCandidateCard.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateList.tsx",
+      "src/components/chat/favorite/FavoriteCandidateList.module.scss",
+      "src/components/chat/common/CandidateEvaluationHistory.tsx",
+      "src/components/chat/common/CandidateEvaluationHistory.module.scss",
+      "src/components/ui/button/HRXFavoriteToggle.tsx",
+      "src/styles/_btn.scss"
+    ],
+    "pendingRevisionAudit": [
+      "Administrator authenticated original rendering,real role/status/sync authorization/API,chat-log composition and full design/state parity remain pending. User,position,company-group,notice and position-block source/synthetic contracts reviewed separately.",
+      "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
+    ],
+    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
+    "reviewedLeadershipDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+    },
+    "reviewedPositionReferenceDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+    },
+    "reviewedAdminFormDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+    },
+    "reviewedChatDetailDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
+    },
+    "reviewedUserListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+    },
+    "reviewedPositionListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+    },
+    "reviewedCompanyNoticeListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+    },
+    "lastFetch": {
+      "observedAt": "2026-10-13",
+      "head": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "originDev": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "workingTree": "clean"
+    },
+    "reviewedPositionBlocksDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+    },
+    "reviewedPositionBlockCommonControls": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved."
+    },
+    "reviewedChatLogAndGenerationStates": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Chat-log placeholder source and typed host query/copy/archive contracts; source generation overlays with selected local/installed browser checks. Authenticated original visual/API parity remains unverified."
+    }
+  },
+  "previousLatestSourceAuditBeforeD677": {
+    "observedAt": "2026-10-13",
+    "revision": "e5d4d79a8933389e47d32ca44e91216bef011d7e",
+    "checkout": "dev fast-forwarded to27c4fdbf and clean",
+    "previousMappedCount": 269,
+    "newComponents": [
+      "components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+      "components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+      "components/chat/successorCandidate/print/CandidateProfilesPdfDownload.tsx",
+      "components/chat/successorCandidate/print/PdfDownloadHost.tsx"
+    ],
+    "deployedRevisionBinding": "Not established; runtime measurements name their route and observation date.",
+    "newPurposeMappedComponents": 4,
+    "pendingComponents": [],
+    "localRecheckedAt": "2026-10-12",
+    "fetchedRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "previousReferenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "changedFilesSinceReference": [
+      "src/components/admin/company-groups/CompanyGroupForm.module.scss",
+      "src/components/admin/company-groups/CompanyGroupForm.tsx",
+      "src/components/admin/positions/PositionForm.tsx",
+      "src/components/admin/users/UserForm.tsx",
+      "src/components/chat/conversation/ChatJSONRenderer.tsx",
+      "src/components/chat/conversation/ChatJSONRendererPanel.tsx",
+      "src/components/chat/conversation/ChatMarkdownRenderer.tsx",
+      "src/components/chat/conversation/ChatMarkdownRendererPanel.tsx",
+      "src/components/chat/position/PositionDetailView.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPie.tsx",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.module.scss",
+      "src/components/chat/successorCandidate/leadership/LeadershipPieSummary.tsx",
+      "src/components/chat/successorCandidate/leadership/SuccessorCandidateLeadership.tsx",
+      "src/components/chat/successorCandidate/leadership/mapLeadershipPie.ts",
+      "src/components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+      "src/components/chat/successorCandidate/print/mapComprehensiveProfileToPrintPreview.ts",
+      "src/layouts/chat/ChatSidebar.tsx",
+      "src/lib/axios.ts",
+      "src/pages/admin/positions/PositionFormPage.tsx",
+      "src/pages/admin/positions/PositionPage.tsx",
+      "src/pages/admin/positions/positionListRestore.ts",
+      "src/pages/admin/users/UserFormPage.tsx",
+      "src/pages/admin/users/UserManagementPage.tsx",
+      "src/pages/chat/ChatMain.tsx",
+      "src/pages/sample/chat/candidateProfilePrintDummy.ts",
+      "src/service/data-management/positionManagement.ts",
+      "src/service/hrx/agent.ts",
+      "src/service/recommendation/candidates.ts",
+      "src/service/users.ts",
+      "src/store/useAuthStore.ts"
+    ],
+    "unchangedProfileReferenceFiles": [
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.tsx",
+      "src/components/chat/successorCandidate/SuccessorCandidateFavoriteProfile.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateCard.tsx",
+      "src/components/chat/favorite/FavoriteCandidateCard.module.scss",
+      "src/components/chat/favorite/FavoriteCandidateList.tsx",
+      "src/components/chat/favorite/FavoriteCandidateList.module.scss",
+      "src/components/chat/common/CandidateEvaluationHistory.tsx",
+      "src/components/chat/common/CandidateEvaluationHistory.module.scss",
+      "src/components/ui/button/HRXFavoriteToggle.tsx",
+      "src/styles/_btn.scss"
+    ],
+    "pendingRevisionAudit": [
+      "Administrator authenticated original rendering,real role/status/sync authorization/API,chat-log composition and full design/state parity remain pending. User,position,company-group,notice and position-block source/synthetic contracts reviewed separately.",
+      "Remaining chat context/authStore changes and authenticated current UI comparison; sidebar links and classified detail-error selection cleanup reviewed separately."
+    ],
+    "claim": "The recorded087811ff reference remains scoped. Profile/favorite/evaluation source files are unchanged at27c4fdbf; new changes elsewhere are not asserted reproduced.",
+    "reviewedLeadershipDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Latest local leadership palette, title/content/detail roles, layout and print detail propagation. Deployed revision and actual current rendered comparison are unverified."
+    },
+    "reviewedPositionReferenceDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Historical card version/legacy1 versus versionless body-link LIVE lookup; typed references, controlled version selection and host cancellation example. No current deployed or rendered comparison claim."
+    },
+    "reviewedAdminFormDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Account roleCode/team, optional company, editable detail fields, role constraints and compound group labels; company search/default border and company-bound view403/404 callback. Administrator pages, real authorization and current rendered comparison remain unverified."
+    },
+    "reviewedChatDetailDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "ChatMain and axios classified error notification; Sidebar's five Admin links and selected route. Source-only scoped review, no deployed revision/visual/service claim."
+    },
+    "reviewedUserListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Source user-list draft/apply/role-group filters, six columns, sort/selection,500-user status confirmation and admin geometry. Synthetic host contracts only; real authorization, current deployed comparison and non-user lists remain unverified."
+    },
+    "reviewedPositionListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-12",
+      "scope": "Position list version/draft/apply/complete-result change-status filtering, source columns and sync locks; host-owned context/history restoration and first metadata guard. Source and synthetic/local browser evidence; real services and authenticated original parity remain unverified."
+    },
+    "reviewedCompanyNoticeListDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Company-group and notice list contracts, explicit per-ID delete outcomes, page-only notice sort, source date query format and rendered public date-control measurements. Synthetic/workspace evidence; real services and authenticated original pages remain unverified."
+    },
+    "lastFetch": {
+      "observedAt": "2026-10-13",
+      "head": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "originDev": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "workingTree": "clean"
+    },
+    "reviewedPositionBlocksDelta": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Position-block source list/edit/remap contracts and synthetic browser flows. Authenticated deployed source page remains blank; full visual/service parity unverified."
+    },
+    "reviewedPositionBlockCommonControls": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Follow-up source common-control audit: label-before-generation order; column/red regeneration notice and14pxInfoIcon;16px name-status icons; OutlineBox16px/12px/control-border;12px500 delete and sourceChipClose16px; inherited default textarea contract preserved."
+    },
+    "reviewedChatLogAndGenerationStates": {
+      "revision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+      "observedAt": "2026-10-13",
+      "scope": "Chat-log placeholder source and typed host query/copy/archive contracts; source generation overlays with selected local/installed browser checks. Authenticated original visual/API parity remains unverified."
+    },
+    "previousRevision": "27c4fdbf3e73234b7ab5c46e379a04d083c12df8",
+    "scope": "Latest source delta: retired disconnected Radar/Summary; leadership analysis result tags; route-vs-root-session history deletion. Baseline design evidence and prior source audits are retained separately; deployed revision remains unbound."
   }
 }

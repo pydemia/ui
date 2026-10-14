@@ -1809,3 +1809,23 @@ component 내부의 checkbox 상태는 다음 이동 대상을 고르는 데만 
 native fieldset·legend로 목록을 구분하고 checkbox와 button으로
 키보드 조작을 제공합니다. 좁은 화면에서는 두 목록과 이동 버튼을
 세로로 쌓습니다. `panel`과 `plain`은 공통 색·간격 token을 사용합니다.
+
+## Current panel caller contracts (2026-10-12)
+
+Use PrismProfilePanel/PrismMemoPanel/PrismPositionPanel/PrismChatPanel for the source-specific caller layout. Profile and memo are expandable and cap their body at840px. Profile padding is20px20px0; its memo view is0 20px; a standalone memo uses20px20px0. Profile memo remains mounted while hidden, and a different subject resets the view/content boundary.
+
+The base onCloseRequest does not mutate open or expanded. A guarded owner commits the close after beforeLeave(back/close,{subjectId,signal}) accepts. Denial and rejection preserve the current draft/view/expansion. Repeated pending requests are ignored; subject changes, external close and unmount abort stale confirmations. Hosts must decide about unsaved drafts before changing subjectId. PrismMemoLeaveDialog exposes the source confirmation text and controlled buttons without an application store.
+
+Chat uses a22px symbol/gap6 title, #EEF1F8 surface,20px messages,320px/#D6DCEE user bubble,sticky composer with30px bottom padding and34px bottom-scroll action. Closed chat content unmounts, as in the source; chat/stream persistence and scroll detection remain host-owned.
+
+Position detail displays definition, Business Context,expertise/experience groups and the source competency footnote. Preserve max840px,scroll gap20/padding20 and16px/radius12 summaries. Empty text is not a successful data load; loading/error hide stale content. Only the host selects LIVE data/main-job requirements and cancels stale requests. Stacking metadata below320px is an explicit responsive extension. These source-read rules await current rendered comparison.
+
+## Source profile and favorite contracts (2026-10-12)
+
+Use132px/gap12 for the profile photo/info header; keep name/ELP/birth/tenure together and20px print/favorite actions on the right. Display affiliation/jobFunction,12px affiliate/position and grouped evaluation history before the bottom memo button/blue count. Loading hides stale identity/actions with the source photo/name96px/department300px/position390px skeleton. The host owns bookmark/print pending state and services; readonly blocks bookmark mutation while memo/print reading remains available. Print keeps80pt portrait,10pt information and18pt tags. Current print geometry/pagination is not verified.
+
+Favorite cards use16px padding/12px radius,70px portrait,121px minimum info and12px white expertise/history. Separate native overlay/open and favorite buttons; extra actions do not bubble to a synthetic card handler. The viewport owns its named container:3 columns/gap10 normally,2 below600px and1 below360px, with optional CSS resize/scroll. Wrapping/min-height preserve long content instead of clipping it.
+
+Source evaluation history removes blank/null grades, sorts valid years descending and groups badge/year labels. Parentheses are display-only highlight markers; explicit active flags take priority. Do not infer evaluation or person ranking. Unknown year labels retain host text and order. explicit/empty props preserve alternative per-year unknown/absence display. Public formatting outputs contain no internal sort state.
+
+Portraits retry on a new subject/source and expose missing-image fallback without rewriting protected URLs or credentials. Named fields and explicit empty aliases remain authoritative host values.

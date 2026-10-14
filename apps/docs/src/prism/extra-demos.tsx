@@ -1,19 +1,23 @@
-import { PrismIcon, prismIconNames, PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent, PrismExpertiseSection, PrismExperienceSection, PrismDesignSection, PrismAgilitySection, PrismAttitudeSection, PrismLeadershipSection, PrismCommentsSection } from "@pydemia/prism";
-import { useId, useState } from "react";
+import profilePdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import { PrismIcon, prismIconNames, PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent, PrismExpertiseSection, PrismSuccessExperienceSection, PrismDesignSection, PrismAgilitySection, PrismAttitudeReport, PrismLeadershipSection, PrismMgmtComments, type PrismCeoCommentItem } from "@pydemia/prism";
+import { useEffect, useId, useRef, useState } from "react";
 import { PrismSummaryBadge, PrismNoData, PrismOutline } from "@pydemia/prism";
-import { PrismNoticeForm, PrismCompanyGroupForm, PrismUserForm, PrismPositionForm, PrismSelect, PrismPrintPage, PrismPrintLeaderSummary, PrismPrintCareer, PrismPrintRisk, PrismPrintExperience, PrismChatIntro, PrismProfileSectionState, PrismTotalSection, type PrismNoticeDraft, type PrismCompanyGroupDraft, type PrismUserDraft, type PrismPositionDraft } from "@pydemia/prism";
+import { PrismNoticeForm, PrismCompanyGroupForm, PrismUserForm, PrismPositionForm, PrismSelect, PrismPrintPage, PrismPrintLeaderSummary, PrismPrintCareer, PrismPrintRisk, PrismPrintExperience, PrismChatIntro, PrismProfileSectionState, PrismTotalSection, type PrismNoticeDraft, type PrismCompanyGroupDraft, type PrismUserAccountDraft, type PrismPositionDraft } from "@pydemia/prism";
 import { PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismCriteriaTag, PrismPositionCheckCard, PrismCompanyContextDialog, PrismCandidateDirectory, PrismDirectoryTable, PrismBlankLayout, PrismErrorContent, PrismServiceContact, type PrismCriteriaDraft, PrismResponse, PrismButton, PrismContextForm, PrismAffiliateLogo, PrismSidebarProfile, PrismSkeletonGroup, PrismPopover, PrismFavoriteToggle, PrismShowMore, PrismInputLabel,
     PrismPositionDetail, PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis,
-    PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismMemoComposer, PrismMemoCollection,
-    PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistory, PrismPolicyViewer, PrismDialog,
-    type PrismContextValues, type PrismCandidateFilters, type PrismCandidate, type PrismNotice,
+    PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismProfileMemoComposer, PrismProfileMemoCollection, type PrismProfileMemoItem,
+    PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistoryDialog, PrismPrivacyPolicyDialog, PrismAccessGate,
+    type PrismContextValues, type PrismCandidateFilters, type PrismCandidate, type PrismNotice, type PrismResponseBlock,
 } from "@pydemia/prism";
 import type { FixtureState } from "./catalog";
 const demoCandidates: PrismCandidate[] = [{id:"one",name:"김가상",company:"가상전자",position:"기술전략담당",elp:"ELP",birthDate:"1980.01.01",executiveYears:3},{id:"two",name:"이예시",company:"예시사업",position:"운영총괄",elp:"s-ELP",executiveYears:5}];
 export function ContextDemo({ state }: { state: FixtureState }) {
-    const [values,setValues] = useState<PrismContextValues>({ issue:"",expertise:[] }); const [result,setResult] = useState("");
-    return <><PrismContextForm fields={[{key:"issue",label:"핵심 현안·요구 사항",type:"textarea",required:true,description:"가상 포지션에 필요한 맥락을 입력해 주세요."},{key:"expertise",label:"전문 분야",type:"options",maxSelections:2,options:[{value:"tech",label:"기술",description:"기술 및 연구개발"},{value:"finance",label:"재무"},{value:"sales",label:"영업"},{value:"operations",label:"운영"}]}]}
-        values={values} onValueChange={setValues} onSubmit={v => setResult(JSON.stringify(v))} onCancel={() => setResult("취소")} busy={state === "loading"} /><p role="status">{result}</p></>;
+    const [values,setValues] = useState<PrismContextValues>({ issue:state==="long"?"가".repeat(800):state==="error"?"가".repeat(49):state==="readonly"?"가상 포지션의 중점 현안을 충분히 설명하고 요구 사항을 구체적으로 기록한 입력 예시입니다.":"",constraints:"",expertise:state==="readonly"?["tech"]:[] });
+    const [result,setResult] = useState(""); const [width,setWidth]=useState(800); const [reduceMotion,setReduceMotion]=useState(false);
+    return <div className="prism-demo-stack"><label className="prism-spec-label">맥락 너비 <input type="number" aria-label="맥락 너비" min={140} max={1000} value={width} onChange={event=>setWidth(Math.max(140,Math.min(1000,Number(event.target.value)||140)))}/></label>
+        <label className="prism-spec-label"><input type="checkbox" checked={reduceMotion} onChange={event=>setReduceMotion(event.target.checked)}/> 애니메이션 줄이기</label>
+        <div style={{width:"100%",maxWidth:width}}><PrismContextForm fields={[{key:"issue",label:state==="long"?"여러 조직의 중점 현안과 포지션 요구 사항을 함께 기록하는 긴 가상 입력 제목":"핵심 현안·요구 사항",type:"textarea",required:true,description:"가상 포지션에 필요한 맥락을 입력해 주세요.\n앞뒤 공백을 제외하고 50자 이상 작성합니다."},{key:"constraints",label:"추가 제약 조건",type:"textarea",description:"필요한 경우 입력합니다."},{key:"expertise",label:"전문 분야",type:"options",maxSelections:2,options:[{value:"tech",label:"기술",description:state==="long"?"긴 설명을 포함한 기술 및 연구개발 분야의 가상 선택지입니다. ".repeat(4):"기술 및 연구개발"},{value:"finance",label:"재무"},{value:"sales",label:"영업"},{value:"operations",label:"운영"}]}]}
+            defaultOpenFields={state==="default"?[]:["issue","constraints","expertise"]} reduceMotion={reduceMotion} values={values} onValueChange={setValues} onAction={(response,label)=>setResult(JSON.stringify({response,label}))} busy={state === "loading"} readOnly={state==="readonly"}/></div><p role="status">{result}</p></div>;
 }
 export function PrimitivesDemo({ state }: { state: FixtureState }) {
     const [favorite,setFavorite] = useState(false); const [expanded,setExpanded] = useState(false); const fieldId = useId();
@@ -27,113 +31,191 @@ export function PrimitivesDemo({ state }: { state: FixtureState }) {
         <PrismSummaryBadge label="가상 유형" summary={state==="empty" ? null : "가상 조직과 기술 경험을 요약한 표시 예시입니다."} note="호출자가 제공한 가상 유형의 설명입니다."/><PrismOutline><PrismNoData/></PrismOutline><PrismSkeletonGroup rows={3}/><PrismSkeletonGroup rows={2} height={60}/></div>;
 }
 export function PositionDemo({ state }: { state: FixtureState }) {
-    return <PrismPositionDetail company="가상전자" role="기술전략담당" items={[{label:"계열",value:"ICT"},{label:"직무",value:"기술·연구개발"},{label:"조직",value:"기술전략실"}]} groups={[{id:"purpose",title:"포지션 Mission",items:state === "empty" ? [] : [{id:"mission",title:"미션",content:"가상 조직의 기술전략을 수립합니다."}]},{id:"requirements",title:"후보자 요구 사항",items:[{id:"expertise",title:"전문성",content:"기술·연구개발 경험"},{id:"design",title:"Design 역량",content:null}]}]} status={state === "loading" || state === "error" ? state : "ready"} />;
+    const [retried,setRetried] = useState(false);
+    const empty = state === "empty";
+    const text = state === "long" ? "합성 포지션의 역할과 사업 맥락을 긴 본문으로 검증합니다.\n".repeat(24) : "가상 조직의 기술전략을 수립합니다.";
+    return <div style={{height:560,minWidth:0}}><PrismPositionDetail company="가상전자" role="기술전략담당"
+        items={[{label:"산업",value:"전자"},{label:"직무",value:"기술·연구개발"},{label:"직책",value:"담당"}]}
+        definition={empty ? null : text} businessContext={empty ? " " : "가상 사업의 연구개발 방향을 정리합니다."}
+        groups={empty ? [] : state === "partial-groups" ? [{id:"expertise",title:"전문성",items:[{id:"expertise-1",content:text}]}] : [{id:"expertise",title:"전문성",items:[{id:"expertise-1",content:text}]},{id:"experience",title:"성공경험",items:[{id:"experience-1",content:"가상 사업 전환 경험"}]}]}
+        status={!retried && (state === "loading" || state === "error") ? state : "ready"} onRetry={()=>setRetried(true)}/></div>;
 }
 export function AssessmentDemo({ state }: { state: FixtureState }) {
     const [topic,setTopic] = useState("growth"); const empty = state === "empty";
-    return <div className="prism-demo-stack"><PrismProfileAnalysis leader={{label:"전략 리더",description:"가상 데이터로 구성한 유형 표시"}} factors={[{id:"expertise",label:"전문성",results:["기술"],summary:empty ? null : "기술 경험 근거 표시"},{id:"experience",label:"성공경험",results:["사업 전환"],starred:["사업 전환"],summary:"예시 근거"}]} />
+    return <div className="prism-demo-stack"><PrismProfileAnalysis leader={empty ? null : {label:"전략 리더",description:"가상 데이터로 구성한 유형 표시"}} factors={empty ? [] : [{id:"expertise",label:"전문성",results:["기술"],summary:"기술 경험 근거 표시"},{id:"experience",label:"성공경험",results:["사업 전환"],starred:["사업 전환"],summary:"예시 근거"}]} />
         <PrismRiskTable items={empty ? [] : [{id:"one",label:"자기 중심",latent:true,manifest:null},{id:"two",label:"충동성",latent:false,manifest:null},{id:"three",label:"낙관 편향",latent:null,manifest:null}]} />
-        <PrismDiagnosis title="성격·가치관 진단 결과" axes={["개방성","성실성","외향성","우호성","정서 안정"]} values={empty ? [null,null,null,null,null] : [8,7,5,6,8]} heading="가상 진단" description="이미 제공된 값과 근거만 표시합니다." shares={empty ? [] : [{label:"자기초월",percent:30},{label:"안정",percent:20},{label:"개방",percent:25},{label:"자기증진",percent:25}]} valueDescription="가상 가치관 비중" />
-        <PrismScoreEssay title="역량별 근거" items={[{id:"score",name:"문제 해결",score:empty ? null : 7,max:10,description:empty ? null : "가상 프로젝트의 문제 해결 경험"}]} />
+        <PrismDiagnosis title="성격·가치관 진단 결과" axes={["개방성","성실성","외향성","우호성","정서 안정"]} values={empty ? [null,null,null,null,null] : [8,7,5,6,8]} heading={empty ? undefined : "가상 진단"} description={empty ? undefined : "이미 제공된 값과 근거만 표시합니다."} shares={empty ? [] : [{label:"자기초월",percent:30},{label:"안정",percent:20},{label:"개방",percent:25},{label:"자기증진",percent:25}]} valueDescription={empty ? undefined : "가상 가치관 비중"} />
+        <PrismScoreEssay title="역량별 근거" items={empty ? [] : [{id:"score",name:"문제 해결",score:7,max:10,description:"가상 프로젝트의 문제 해결 경험"}]} />
         <PrismExpertiseCards items={empty ? [] : [{id:"one",field:"기술",years:"10년",title:"기술전략 수립",description:"공개 배포용 가상 사례"}]} />
         <PrismExperienceTopics topics={[{id:"growth",label:"성장",starred:true},{id:"change",label:"변화"}]} value={topic} onValueChange={setTopic} />
-        <PrismExperienceEvidence title="관련 성공경험" items={[{id:topic,label:topic === "growth" ? "성장" : "변화",hasExperience:!empty,description:"새로운 역할을 맡은 가상 경험입니다."}]} />
-        <PrismLeadershipReasons title="리더십 근거" items={[{id:"manager",role:"상사",text:empty ? null : "가상 동료 의견"}]} comment="가상 의견을 요약한 표시입니다." />
+        <PrismExperienceEvidence title="관련 성공경험" items={empty ? [] : [{id:topic,label:topic === "growth" ? "성장" : "변화",hasExperience:true,description:"새로운 역할을 맡은 가상 경험입니다."}]} />
+        <PrismLeadershipReasons title="리더십 근거" items={empty ? [] : [{id:"manager",role:"상사",text:"가상 동료 의견"}]} comment={empty ? undefined : "가상 의견을 요약한 표시입니다."} />
         <PrismPositionMatrix rowAxisLabel="회사" columns={[{id:"tech",label:"기술"},{id:"finance",label:"재무"}]} rows={[{id:"one",label:"가상전자"},{id:"two",label:"예시사업"}]} current={empty ? null : {row:"one",column:"tech"}} /></div>;
 }
 export function CollectionDemo({ state }: { state: FixtureState }) {
     const [view,setView] = useState<"cards" | "table">("cards"); const [filters,setFilters] = useState<PrismCandidateFilters>({series:"all",companies:[],name:""});
-    const [result,setResult] = useState(""); const [draft,setDraft] = useState(""); const [memos,setMemos] = useState<string[]>([]); const [favorites,setFavorites] = useState<string[]>([]);
-    const items = state === "empty" ? [] : demoCandidates;
-    return <div className="prism-demo-stack"><PrismCandidateCollection title="후보자 목록" candidates={items} view={view} onViewChange={setView} onOpen={candidate => setResult(`${candidate.name} 선택`)} favorites={favorites}
-        onFavoriteChange={(candidate,checked) => setFavorites(checked ? [...favorites,candidate.id] : favorites.filter(id => id !== candidate.id))} status={state === "loading" || state === "error" ? state : "ready"}
-        filters={<PrismCandidateFilterBar value={filters} onValueChange={setFilters} seriesOptions={[{value:"all",label:"전체"},{value:"ICT",label:"ICT"}]} companyOptions={demoCandidates.map(c => ({value:c.company,label:c.company}))} onSearch={value => setResult(JSON.stringify(value))} onReset={() => setFilters({series:"all",companies:[],name:""})} disabled={state === "loading"} />} />
+    const [applied,setApplied] = useState<PrismCandidateFilters>({series:"all",companies:[],name:""});
+    const [result,setResult] = useState(""); const [draft,setDraft] = useState(""); const [memos,setMemos] = useState<PrismProfileMemoItem[]>([]); const [editingId,setEditingId]=useState<string|null>(null); const [favorites,setFavorites] = useState<string[]>([]); const [retried,setRetried] = useState(false);
+    const nextMemoId=useRef(0);
+    const items = state === "empty" || state === "loading" ? [] : demoCandidates;
+    const visibleItems = items.filter(candidate => (applied.series === "all" || applied.series === "ICT") && (!applied.companies.length || applied.companies.includes(candidate.company)) && candidate.name.includes(applied.name.trim()));
+    return <div className="prism-demo-stack"><PrismCandidateCollection title="후보자 목록" candidates={visibleItems} total={visibleItems.length} view={view} onViewChange={setView} onOpen={candidate => setResult(`${candidate.name} 선택`)} favorites={favorites}
+        onFavoriteChange={(candidate,checked) => setFavorites(checked ? [...favorites,candidate.id] : favorites.filter(id => id !== candidate.id))} status={state === "loading" || state === "error" && !retried ? state : "ready"} onRetry={() => setRetried(true)}
+        filters={<PrismCandidateFilterBar value={filters} onValueChange={setFilters} seriesOptions={[{value:"all",label:"전체"},{value:"ICT",label:"ICT"}]} companyOptions={demoCandidates.map(c => ({value:c.company,label:c.company}))} onSearch={value => {setApplied(value);setResult(JSON.stringify(value));}} onReset={() => {const empty={series:"all",companies:[],name:""};setFilters(empty);setApplied(empty);}} disabled={state === "loading"} />} />
         <PrismSuccessorBoard rows={items.length ? [{id:"one",company:"가상전자",position:"기술전략담당",current:[demoCandidates[0]],ranks:[demoCandidates[1],null,null]}] : []} onOpen={candidate => setResult(`${candidate.name} 선택`)} loading={state === "loading"} />
-        <PrismMemoCollection items={memos.map((content,index) => ({id:String(index),author:"김작성",date:"2026.10.03",content}))} composer={<PrismMemoComposer value={draft} onValueChange={setDraft} onSubmit={content => {setMemos([...memos,content]);setDraft("");}} busy={state === "loading"} />} /><p role="status">{result}</p></div>;
+        <PrismProfileMemoCollection items={memos} editingId={editingId} onEditingChange={setEditingId} height={340} status={state==="loading"?"loading":"ready"}
+            onSave={async(id,content)=>setMemos(current=>current.map(memo=>memo.id===id?{...memo,content,updatedAt:"2026-10-09T17:30:00+09:00"}:memo))}
+            onDelete={async id=>setMemos(current=>current.filter(memo=>memo.id!==id))}
+            composer={<PrismProfileMemoComposer value={draft} onValueChange={setDraft} onSubmit={async content => {const id=`demo-${++nextMemoId.current}`;setMemos(current=>[...current,{id,content,createdAt:"2026-10-09",isMine:true}]);setDraft("");}} busy={state === "loading"} />} /><p role="status">{result}</p></div>;
 }
-const notices: PrismNotice[] = [{id:"one",title:"가상 공지사항",date:"2026.10.03",author:"김작성",content:"실제 사내 공지나 인사 데이터를 포함하지 않는 UI 예시입니다."},{id:"two",title:"두 번째 가상 공지",date:"2026.10.02",author:"이작성",content:"비모달 공지의 다음 항목입니다."}];
+const notices: PrismNotice[] = [{id:"one",title:"가상 공지사항",date:"2026.10.03",author:"김작성",content:"실제 사내 공지나 인사 데이터를 포함하지 않는 UI 예시입니다.",attachments:[{id:"sample-file",name:"가상 안내문.pdf"}]},{id:"two",title:"두 번째 가상 공지",date:"2026.10.02",author:"이작성",content:"비모달 공지의 다음 항목입니다."}];
+const noticeSummaries = notices.map(({id,title,date,author}) => ({id,title,date,author}));
 export function NoticeDemo({ state }: { state: FixtureState }) {
     const [open,setOpen] = useState(false); const [popup,setPopup] = useState(false); const [selected,setSelected] = useState<string | null>(null); const [index,setIndex] = useState(0); const [order,setOrder] = useState<"latest" | "oldest">("latest");
-    const [inquiry,setInquiry] = useState<string | null>(null); const [policy,setPolicy] = useState("one"); const [policyOpen,setPolicyOpen] = useState(false);
-    return <div className="prism-demo-stack"><div className="prism-demo-row"><PrismButton onClick={() => setOpen(true)}>공지 목록 열기</PrismButton><PrismButton onClick={() => setPopup(true)}>공지 팝업 열기</PrismButton><PrismButton onClick={() => setPolicyOpen(true)}>방침 열기</PrismButton></div>
-        <PrismNoticeDialog open={open} onOpenChange={setOpen} items={state === "empty" ? [] : order === "latest" ? notices : [...notices].reverse()} selectedId={selected} onSelect={setSelected} order={order} onOrderChange={setOrder} status={state === "loading" || state === "error" ? state : "ready"} />
-        <PrismNoticePopup open={popup} notices={notices} index={index} onIndexChange={setIndex} onClose={() => setPopup(false)} />
-        <PrismInquiryHistory items={state === "empty" ? [] : [{id:"one",title:"가상 문의",date:"2026.10.03",status:"답변 대기",content:"가상 문의 내용",answer:null}]} selectedId={inquiry} onSelect={setInquiry} />
-        <PrismDialog title="개인정보처리방침" description="버전별 문서 표시 예시입니다." open={policyOpen} onOpenChange={setPolicyOpen}><PrismPolicyViewer versions={[{id:"one",label:"v1"},{id:"two",label:"v2"}]} value={policy} onValueChange={setPolicy} documentHtml={`<!doctype html><html lang="ko"><body><h1>가상 방침 ${policy === "one" ? "1" : "2"}</h1><p>법적 약관이 아닌 문서 표시용 가상 내용입니다.</p></body></html>`} /></PrismDialog></div>;
+    const [detail,setDetail] = useState<PrismNotice | null>(null); const [detailStatus,setDetailStatus] = useState<"ready" | "loading">("ready"); const detailRequest = useRef(0);
+    useEffect(() => () => { detailRequest.current += 1; }, []);
+    const [inquiry,setInquiry] = useState<string | null>(null); const [inquiryOpen,setInquiryOpen] = useState(false); const [inquiryOrder,setInquiryOrder] = useState<"latest" | "oldest">("latest");
+    const [policy,setPolicy] = useState("one"); const [policyOpen,setPolicyOpen] = useState(false); const [retried,setRetried] = useState(false); const [download,setDownload] = useState("");
+    const selectNotice = (id: string | null) => { const request = ++detailRequest.current; setSelected(id); setDetail(null); if (!id) { setDetailStatus("ready"); return; }
+        setDetailStatus("loading"); window.setTimeout(() => { if (request === detailRequest.current) { setDetail(notices.find(item => item.id === id) ?? null); setDetailStatus("ready"); } }, 160); };
+    const changeOpen = (next: boolean) => { setOpen(next); if (!next) selectNotice(null); else setOrder("latest"); };
+    const policyHtml = state === "loading" || state === "error" || state === "empty" ? "" : `<!doctype html><html lang="ko"><body><h1>가상 방침 ${policy === "one" ? "1" : "2"}</h1><p>법적 약관이 아닌 문서 표시용 가상 내용입니다.</p>${Array.from({length:22},(_,index)=>`<p>예시 조항 ${index+1}. 이 문단은 긴 HTML 문서가 대화상자 안에서 스크롤되는지 확인하기 위한 가상 내용입니다.</p>`).join("")}${policy === "two" ? `<table style="min-width:760px"><tr><th>가상 항목</th><th>설명</th></tr><tr><td>너비 확인</td><td>가로로 긴 문서를 확인합니다.</td></tr></table>` : ""}</body></html>`;
+    return <div className="prism-demo-stack"><div className="prism-demo-row"><PrismButton onClick={() => setOpen(true)}>공지 목록 열기</PrismButton><PrismButton onClick={() => setPopup(true)}>공지 팝업 열기</PrismButton><PrismButton onClick={() => {setInquiry(null);setInquiryOrder("latest");setInquiryOpen(true);}}>문의 내역 열기</PrismButton><PrismButton onClick={() => setPolicyOpen(true)}>방침 열기</PrismButton></div>
+        <PrismNoticeDialog open={open} onOpenChange={changeOpen} items={state === "empty" ? [] : noticeSummaries} total={state === "empty" ? 0 : 12} selectedId={selected} onSelect={selectNotice} detail={detail} detailStatus={detailStatus} order={order} onOrderChange={setOrder} status={state === "loading" || state === "error" && !retried ? state : "ready"} onRetry={() => setRetried(true)} onDownload={setDownload} />
+        <PrismNoticePopup open={popup} notices={notices} index={index} onIndexChange={setIndex} onClose={() => setPopup(false)} onDownload={setDownload} />
+        <PrismInquiryHistoryDialog open={inquiryOpen} onOpenChange={setInquiryOpen} items={state === "empty" ? [] : [{id:"waiting",title:"가상 문의",date:"2026.10.03",status:"waiting",content:"가상 문의 내용",answer:null},{id:"done",title:"처리된 가상 문의",date:"2026.10.02",status:"done",content:"완료된 가상 문의 내용",answer:"가상 처리 결과입니다."}]} selectedId={inquiry} onSelect={setInquiry} order={inquiryOrder} onOrderChange={setInquiryOrder} />
+        <PrismPrivacyPolicyDialog open={policyOpen} onOpenChange={setPolicyOpen} versions={[{id:"one",label:"v1"},{id:"two",label:"v2"}]} value={policy} onValueChange={setPolicy} documentHtml={policyHtml} loading={state === "loading"} /><p role="status">{download && `첨부파일 ${download} 선택`}</p></div>;
 }
 
 export function ResponseDemo({ state }: { state: FixtureState }) {
     const [result,setResult] = useState("");
-    return <div className="prism-demo-stack"><PrismResponse status={state === "loading" ? "generating" : state === "error" ? "error" : "complete"} blocks={[
-        {id:"text",type:"text",content:'<bold>Independent response</bold> <color-blue>Blue text</color> <highlight-yellow>Highlight</highlight> <badge-green>Evidence</badge>\n[Profile](profile://one) [Position](position://one)'},
+    const panel=state==="panel",long=state==="long";
+    const blocks:PrismResponseBlock[]=state==="empty"?[]:[
+        {id:"text",type:"text",content:long?'긴 합성 응답의 표와 근거를 함께 확인합니다. '.repeat(12)+'\n\n| 영역 | 값 |\n| --- | --- |\n| 점수 | 0 |':'<bold>Independent response</bold> <color-blue>Blue text</color> <highlight-yellow>Highlight</highlight> <badge-green>Evidence</badge>\n[Profile](profile://one) [Position](position://one)'},
         {id:"criteria",type:"criteria",items:["Synthetic fixture data only"]},
-        {id:"candidates",type:"candidates",candidates:state === "empty" ? [] : demoCandidates},
-        {id:"table",type:"table",title:"Comparison",columns:["Area","Value"],rows:[{id:"one",cells:["Evidence",null]},{id:"two",cells:["Score",0]}]},
+        {id:"candidates",type:"candidates",candidates:demoCandidates},
+        {id:"table",type:"table",title:"Comparison",columns:long?["Area","Value","Source","Revision","Note","State"]:["Area","Value"],rows:long?[{id:"one",cells:["Evidence",0,"합성 자료",3,"긴 근거를 표시하면서 표 안에서 가로로 이동합니다. ".repeat(3),null]}]:[{id:"one",cells:["Evidence",null]},{id:"two",cells:["Score",0]}]},
         {id:"options",type:"options",title:"Next step",options:[{id:"profile",label:"Show profile"},{id:"position",label:"Show position"}]},
         {id:"callout",type:"callout",tone:"blue",content:"This example displays supplied data without running HR decisions."},
-    ]} onCandidateOpen={c => setResult(c.name)} onOptionSelect={setResult} onAction={(kind,id) => setResult(`${kind}: ${id}`)} /><p role="status">{result}</p></div>;
+        ...(panel?[{id:"positions",type:"positions",positions:[{id:"synthetic-position",version:2,company:"가상전자",title:"가상 기술전략담당",reasons:["합성 추천 근거"]}]},{id:"six-frame",type:"six-frame",title:"가상 6 Frame",columns:[{id:"one",label:"김가상",values:{expertise:"[현재 포지션](position://synthetic-position)"}}]},{id:"analysis",type:"analysis",candidate:demoCandidates[0],leader:{label:"Good 리더",description:"합성 설명",aiComment:"합성 요약"},factors:[{id:"expertise",kind:"expertise",label:"전문성",results:["합성 기술"],summary:"합성 근거"}]},{id:"quote",type:"quote",content:"합성 인용문"},{id:"code",type:"code",content:"const result = 0;"},{id:"list",type:"list",items:["합성 목록 첫째","합성 목록 둘째"]}] as PrismResponseBlock[]:[]),
+    ];
+    return <div className="prism-demo-stack"><PrismResponse panel={panel} status={state === "loading" ? "generating" : state === "error" ? "error" : "complete"} blocks={blocks}
+        onCandidateOpen={c => setResult(c.name)} onPositionOpen={(_id,reference)=>setResult(`card: ${reference.id} v${reference.source==="card"?reference.version:"LIVE"}`)}
+        onOptionSelect={setResult} onAction={(kind,id) => setResult(`${kind}: ${id}`)} /><p role="status">{result}</p></div>;
 }
 
 export function ManagementToolsDemo({ state }: { state: FixtureState }) {
     const [open,setOpen] = useState(false); const [remove,setRemove] = useState(false); const [context,setContext] = useState(false); const [draft,setDraft] = useState<PrismCriteriaDraft>({name:"",description:"",categoryId:"",subJobs:[]});
-    const [remap,setRemap] = useState<Readonly<Record<string,string>>>({}); const [checked,setChecked] = useState(false); const [status,setStatus] = useState<"idle" | "available" | "duplicate">(state === "error" ? "duplicate" : "idle"); const [result,setResult] = useState("");
+    const [remap,setRemap] = useState<Readonly<Record<string,string>>>({}); const [checked,setChecked] = useState(false); const [status,setStatus] = useState<"idle" | "available" | "duplicate">("idle"); const [checkedName,setCheckedName] = useState(""); const [loadOverride,setLoadOverride] = useState<"ready" | null>(null); const [result,setResult] = useState("");
+    const long = state === "long";
     return <div className="prism-demo-stack"><div className="prism-demo-row"><PrismButton onClick={() => setOpen(true)}>Edit criteria</PrismButton><PrismButton variant="line" onClick={() => setRemove(true)}>Remap criteria</PrismButton><PrismButton variant="line" onClick={() => setContext(true)}>Company context</PrismButton></div>
-        <div className="prism-demo-row">{(["new","modified","deleted","applying","failed"] as const).map(change => <PrismCriteriaTag key={change} label="Example criterion" change={change} onEdit={() => setOpen(true)} onDelete={() => setRemove(true)} />)}</div>
+        <div className="prism-demo-row">{(["new","modified","deleted","applying","failed"] as const).map(change => <PrismCriteriaTag key={change} label={long ? "Example criterion with an intentionally long name that must not widen its container" : "Example criterion"} change={change} onEdit={() => setOpen(true)} onDelete={() => setRemove(true)} />)}</div>
         <PrismPositionCheckCard id="one" title="Expertise" description="Synthetic option" checked={checked} onChange={setChecked} disabled={state === "loading"} />
-        <PrismCriteriaEditor title="Job criteria" open={open} onOpenChange={setOpen} value={draft} onValueChange={value => {setDraft(value);setStatus("idle");}} categories={[{id:"tech",label:"Technology"},{id:"finance",label:"Finance"}]} checkStatus={status} onCheck={() => setStatus("available")} onGenerate={() => setDraft({...draft,description:"Generated synthetic definition"})} onSubmit={value => setResult(JSON.stringify(value))} busy={state === "loading"} positions={[{id:"one",name:"Example position",company:"Example company"}]} />
-        <PrismCriteriaRemapDialog open={remove} onOpenChange={setRemove} targetId="old" targetName="Old criterion" positions={[{id:"one",name:"Example position",company:"Example company"}]} options={[{id:"old",label:"Old criterion"},{id:"new",label:"New criterion"}]} value={remap} onValueChange={setRemap} onConfirm={value => {setResult(JSON.stringify(value));setRemove(false);}} busy={state === "loading"} />
-        <PrismCompanyContextDialog open={context} onOpenChange={setContext} company="Example company" content="Synthetic company context. No source internal content is included." onCopy={setResult} /><p role="status">{result}</p></div>;
+        <PrismCriteriaEditor title="Job criteria" open={open} onOpenChange={setOpen} value={draft} onValueChange={value => {if(value.name !== draft.name) setStatus("idle");setDraft(value);}} categories={[{id:"tech",label:"Technology"},{id:"finance",label:"Finance"}]} checkStatus={status} checkedName={checkedName} onCheck={name => {setCheckedName(name);setStatus(name === "중복 기준" ? "duplicate" : "available");}} onGenerate={() => setDraft({...draft,description:"Generated synthetic definition"})} onSubmit={value => {setResult(JSON.stringify(value));setOpen(false);}} busy={state === "loading"} positions={[{id:"one",name:"Example position",company:"Example company"}]} />
+        <PrismCriteriaRemapDialog open={remove} onOpenChange={setRemove} targetId="old" targetName="Old criterion" positions={[{id:"one",name:"Example position",company:"Example company"}]} options={[{id:"old",label:"Old criterion"},{id:"new",label:"New criterion"},{id:"pending",label:"Applying criterion",change:"applying"}]} value={remap} onValueChange={setRemap} onConfirm={value => {setResult(JSON.stringify(value));setRemove(false);}} loadState={loadOverride ?? (state === "loading" ? "loading" : state === "error" ? "error" : "ready")} loadedTargetId="old" onRetry={() => setLoadOverride("ready")} busy={state === "loading"} />
+        <PrismCompanyContextDialog open={context} onOpenChange={setContext} company={long ? "A very long synthetic company name that wraps in a narrow dialog" : "Example company"} content={long ? "Synthetic company context with long paragraphs. ".repeat(30) : "Synthetic company context. No source internal content is included."} /><p role="status">{result}</p></div>;
 }
 export function DirectoryDemo({ state }: { state: FixtureState }) {
-    const [selected,setSelected] = useState<string[]>([]); const [sort,setSort] = useState<{column:string;direction:"asc" | "desc"} | null>(null); const [opened,setOpened] = useState("");
-    const rows = state === "empty" ? [] : demoCandidates.map(candidate => ({...candidate,series:"ICT",favorite:false}));
-    return <div className="prism-demo-stack"><PrismCandidateDirectory rows={rows} selected={selected} onSelectionChange={setSelected} sort={sort} onSortChange={setSort} onOpen={candidate => setOpened(candidate.name)} loading={state === "loading"} />
-        <PrismDirectoryTable title="Administration table" rows={[{id:"shared",name:"Shared criterion",locked:true},{id:"editable",name:"Editable criterion",locked:false}]} getRowId={r => r.id} getRowLabel={r => r.name} columns={[{id:"name",label:"Name",cell:r => r.name}]} selected={selected} onSelectionChange={setSelected} isRowSelectable={r => !r.locked} />
-        <p role="status">Selection: {selected.join(", ")} | Sort: {sort?.column} {sort?.direction} | Open: {opened}</p></div>;
+    const [candidateSelected,setCandidateSelected] = useState<string[]>([]);
+    const [candidateSort,setCandidateSort] = useState<{column:string;direction:"asc" | "desc"} | null>(null);
+    const [adminSelected,setAdminSelected] = useState<string[]>(["other-page"]);
+    const [adminSort,setAdminSort] = useState<{column:string;direction:"asc" | "desc"} | null>(null);
+    const [opened,setOpened] = useState("");
+    const loading = state === "loading";
+    const candidateRows = state === "empty" ? [] : demoCandidates.map(candidate => ({...candidate,series:"ICT",favorite:false}));
+    const adminRows = state === "empty" ? [] : [{id:"shared",name:"Shared criterion",locked:true},{id:"editable",name:"Editable criterion",locked:false}];
+    return <div className="prism-demo-stack">
+        <PrismCandidateDirectory rows={candidateRows} selected={candidateSelected} onSelectionChange={setCandidateSelected}
+            sort={candidateSort} onSortChange={setCandidateSort} onOpen={candidate => setOpened(`Candidate: ${candidate.name}`)} loading={loading} />
+        <PrismDirectoryTable title="Administration table" variant="admin" selectionBehavior="clear-all-if-any"
+            rows={adminRows} getRowId={row => row.id} getRowLabel={row => row.name}
+            columns={[{id:"name",label:"Name",cell:row => row.name,sortable:true}]}
+            selected={adminSelected} onSelectionChange={setAdminSelected} isRowSelectable={row => !row.locked}
+            sort={adminSort} onSortChange={setAdminSort} onOpen={row => setOpened(`Admin: ${row.name}`)} loading={loading} />
+        <p role="status">Candidate selection: {candidateSelected.join(", ") || "none"} | Candidate sort: {candidateSort?.column} {candidateSort?.direction} | Admin selection: {adminSelected.join(", ") || "none"} | Admin sort: {adminSort?.column} {adminSort?.direction} | Open: {opened}</p>
+    </div>;
 }
 export function PageStateDemo() {
     const [count,setCount] = useState(0);
-    return <div><div style={{height:500}}><PrismBlankLayout><PrismErrorContent code="404" message="Requested page was not found." buttonLabel="Return" onAction={() => setCount(count+1)} /></PrismBlankLayout></div><PrismServiceContact email="demo@example.com" /><p role="status">Action: {count}</p></div>;
+    const [status,setStatus] = useState<"ready"|"loading"|"denied">("denied");
+    const [code,setCode] = useState("403");
+    return <div className="prism-demo-stack">
+        <PrismSelect label="접근 상태" value={status} onValueChange={value=>setStatus(value as typeof status)} options={[{value:"ready",label:"접근 허용"},{value:"loading",label:"확인 중"},{value:"denied",label:"접근 거부"}]}/>
+        <PrismSelect label="오류 코드" value={code} onValueChange={setCode} options={[{value:"403",label:"403 접근 거부"},{value:"404",label:"404 찾을 수 없음"},{value:"503",label:"503 인증 서버 장애"}]}/>
+        <div style={{height:500}}><PrismBlankLayout><PrismAccessGate status={status} fallback={<PrismErrorContent code={code} message={code==="404"?"페이지를 찾을 수 없습니다.":code==="503"?"인증 서버에 연결할 수 없습니다.\n잠시 후 다시 시도해 주세요.":"페이지에 접근 권한이 없습니다.\n관리자에게 문의하세요."} buttonLabel="다시 확인" onAction={() => setCount(current=>current+1)} />}><p>호스트에서 접근을 승인한 화면입니다.</p></PrismAccessGate></PrismBlankLayout></div>
+        <PrismServiceContact email="demo@example.com" /><p role="status">Action: {count}</p>
+    </div>;
 }
 
 export function DomainFormsDemo({state}:{state:FixtureState}) {
-    const [kind,setKind]=useState("notice"); const [result,setResult]=useState(""); const disabled=state==="loading",readOnly=state==="readonly";
+    const [kind,setKind]=useState(state==="access-error"?"position":"user"),[mode,setMode]=useState<"create"|"detail">("create"); const [result,setResult]=useState(""); const [contextFailed,setContextFailed]=useState(state==="access-error"); const disabled=state==="loading",readOnly=state==="readonly";
     const [notice,setNotice]=useState<PrismNoticeDraft>({title:"",content:"",companyIds:[],allCompanies:false,popup:false,start:null,end:null});
-    const [group,setGroup]=useState<PrismCompanyGroupDraft>({name:"",companyIds:[]});
-    const [user,setUser]=useState<PrismUserDraft>({email:"",roleId:"member",companyGroupId:""});
-    const [position,setPosition]=useState<PrismPositionDraft>({name:"",companyId:"",industryId:"",roleId:"",mainJobId:"",subJobId:"",isCore:false,context:"",definition:"",expertise:"",experience:"",subExpertise:"",subExperience:"",expertiseIds:[],experienceIds:[]});
+    const [position,setPosition]=useState<PrismPositionDraft>({name:"",companyId:state==="access-error"?"sample":"",industryId:"",roleId:"",mainJobId:"",subJobId:"",isCore:false,context:"",definition:"",expertise:"",experience:"",subExpertise:"",subExperience:"",expertiseIds:[],experienceIds:[]});
     const options=[{value:"sample",label:"가상전자"},{value:"example",label:"예시사업"}];
     const actions={onSubmit:()=>setResult("저장 의도 확인"),onCancel:()=>setResult("취소 의도 확인"),busy:disabled,readOnly,error:state==="error" ? "저장 요청을 처리하지 못했습니다." : undefined};
     return <div className="prism-demo-stack"><PrismSelect label="양식 종류" value={kind} onValueChange={setKind} options={[{value:"notice",label:"공지사항"},{value:"group",label:"회사 그룹"},{value:"user",label:"사용자"},{value:"position",label:"포지션"}]}/>
-        {kind==="notice" ? <PrismNoticeForm {...actions} value={notice} onValueChange={setNotice} companies={options} files={[]} onFilesSelected={files=>setResult(files.map(f=>f.name).join(", "))} canChooseAllCompanies/> : kind==="group" ? <PrismCompanyGroupForm {...actions} value={group} onValueChange={setGroup} companies={options}/> : kind==="user" ? <PrismUserForm {...actions} value={user} onValueChange={setUser} roles={[{value:"group",label:"그룹 HR 담당자"},{value:"member",label:"멤버사 일반 사용자",needsCompanyGroup:true}]} companyGroups={[{id:"demo",name:"가상 회사 그룹",companies:["가상전자","예시사업"]}]}/> : <PrismPositionForm {...actions} value={position} onValueChange={setPosition} companies={options} industries={[{value:"ict",label:"ICT"}]} roles={[{value:"leader",label:"사업 책임"}]} jobs={[{value:"tech",label:"기술"},{value:"sales",label:"영업"}]} expertiseOptions={[{id:"a",label:"연구개발",description:"기술 및 제품 개발"},{id:"b",label:"재무",description:"재무 및 자본 관리"},{id:"c",label:"영업",description:"고객 및 시장 개발"},{id:"d",label:"생산",description:"생산 및 운영 관리"}]} experienceOptions={[{id:"one",label:"사업 성장",description:""},{id:"two",label:"사업 전환",description:""},{id:"three",label:"Globality",description:""}]} canEditCore onGenerate={()=>setResult("생성 의도 확인")}/>}
+        {(kind==="user"||kind==="group")&&<PrismSelect label="양식 모드" value={mode} onValueChange={value=>setMode(value as typeof mode)} options={[{value:"create",label:"등록"},{value:"detail",label:"상세 / 수정"}]}/>}
+        {kind==="notice" ? <PrismNoticeForm {...actions} value={notice} onValueChange={setNotice} companies={options} files={[]} onFilesSelected={files=>setResult(files.map(f=>f.name).join(", "))} canChooseAllCompanies/> : kind==="group"||kind==="user" ? <CurrentAdminFormDemo key={`${kind}-${mode}-${state}`} kind={kind} mode={mode} state={state} onResult={setResult}/> : <PrismPositionForm {...actions} mode={state==="access-error"?"view":"create"} companyContextRequestId="synthetic" companyContextError={contextFailed?{companyId:"sample",status:403,requestId:"synthetic"}:undefined} onAccessError={()=>setResult("합성 접근 오류: 목록 복귀 의도 확인")} onRetryCompanyContext={()=>setContextFailed(false)} value={position} onValueChange={setPosition} companies={options} industries={[{value:"ict",label:"ICT"}]} roles={[{value:"leader",label:"사업 책임"}]} jobs={[{value:"tech",label:"기술"},{value:"sales",label:"영업"}]} expertiseOptions={[{id:"a",label:"연구개발",description:"기술 및 제품 개발"},{id:"b",label:"재무",description:"재무 및 자본 관리"},{id:"c",label:"영업",description:"고객 및 시장 개발"},{id:"d",label:"생산",description:"생산 및 운영 관리"}]} experienceOptions={[{id:"one",label:"사업 성장",description:""},{id:"two",label:"사업 전환",description:""},{id:"three",label:"Globality",description:""}]} canEditCore onGenerate={()=>setResult("생성 의도 확인")}/>}
         <p role="status">{result}</p></div>;
+}
+async function demoDelay(signal?:AbortSignal) {
+    await new Promise<void>((resolve,reject)=>{
+        const abort=()=>{clearTimeout(timer);reject(signal?.reason);};
+        const timer=setTimeout(()=>{signal?.removeEventListener("abort",abort);resolve();},300);
+        if(signal?.aborted)abort();else signal?.addEventListener("abort",abort,{once:true});
+    });
+}
+function CurrentAdminFormDemo({kind,mode,state,onResult}:{kind:"user"|"group";mode:"create"|"detail";state:FixtureState;onResult:(text:string)=>void}) {
+    const filled=mode==="detail"||state==="long"||state==="readonly"||state==="restricted",long=state==="long";
+    const companyName=long?"아주 긴 회사명과 연구개발 사업부를 가진 가상전자":"가상전자";
+    const companies=[{value:"sample",label:companyName},{value:"example",label:"예시사업"}];
+    const [initialUser]=useState<PrismUserAccountDraft>({email:filled?"demo@sk.com":"",lastName:filled?"김":"",firstName:filled?"가상":"",companyId:filled?"sample":"",team:filled?(long?"글로벌 연구개발 및 장기 기술전략 담당 조직":"연구팀"):"",roleCode:state==="restricted"?"SYSTEM_ADMIN":"GENERAL_USER",companyGroupId:filled&&state!=="restricted"?"demo":""});
+    const [user,setUser]=useState(initialUser);
+    const [initialGroup]=useState<PrismCompanyGroupDraft>({name:filled?(long?"글로벌 연구개발 및 장기 기술전략을 담당하는 아주 긴 가상 회사 그룹":"가상 회사 그룹"):"",companyIds:filled?["sample"]:[]});
+    const [group,setGroup]=useState(initialGroup),[status,setStatus]=useState("활성");
+    const effectiveMode=state==="readonly"||state==="restricted"?"detail":mode;
+    const actions={busy:state==="loading",readOnly:state==="readonly",onCancel:()=>onResult("취소 의도 확인"),onToggleStatus:effectiveMode==="detail"?()=>setStatus(value=>value==="활성"?"비활성":"활성"):undefined,onSubmit:async()=>{await demoDelay();if(state==="error")throw new Error("Synthetic save failure");onResult("저장 의도 확인");}};
+    if(kind==="group")return <PrismCompanyGroupForm {...actions} mode={effectiveMode} initialValue={initialGroup} value={group} onValueChange={setGroup} companies={companies}
+        validateName={async(name,{signal})=>{await demoDelay(signal);if(name==="확인 오류")throw new Error("Synthetic validation failure");return name!=="중복 그룹";}}
+        detail={effectiveMode==="detail"?{status,registrant:"김가상",createdAt:"2026.10.09",updatedAt:null}:undefined}/>;
+    const props={...actions,initialValue:initialUser,value:user,onValueChange:setUser,companies,detail:effectiveMode==="detail"?{status}:undefined,onCancel:(dirty:boolean)=>onResult(dirty?"수정된 입력이 있는 취소 의도 확인":"변경 없는 취소 의도 확인"),disabledRoleCodes:["SYSTEM_ADMIN"],
+        roles:[{value:"SYSTEM_ADMIN",label:"시스템 운영자"},{value:"GROUP_HR",label:"그룹 HR 담당자",notice:"담당 범위는 서비스의 권한 설정에 따릅니다."},{value:"GENERAL_USER",label:"멤버사 일반 사용자",needsCompanyGroup:true}],
+        companyGroups:[{id:"demo",name:initialGroup.name||"가상 회사 그룹",status:"활성" as const,companies:[{id:"sample",name:companyName}]},{id:"inactive",name:"비활성 가상 회사 그룹",status:"비활성" as const,companies:[{id:"example",name:"예시사업"}]}]};
+    return effectiveMode==="detail"?<PrismUserForm {...props} mode="detail"/>:<PrismUserForm {...props} mode="create"/>;
 }
 export function PrintDemo({state}:{state:FixtureState}) {
     const career = state === "empty" ? [] : state === "long" ? Array.from({length:36},(_,index)=>({id:`career-${index}`,period:"2020 ~ 2023",company:"가상전자",role:`인쇄 검증용 가상 직무 ${index+1}`})) : [{id:"one",period:"2024 ~ 현재",company:"가상전자",role:"기술전략담당"},{id:"two",period:"2020 ~ 2023",company:"예시사업",role:"연구개발팀장"}];
     return <div style={{overflow:"auto"}}><PrismPrintPage name="김가상" company={{brand:"가상",affiliate:"전자"}} jobTitle="기술전략담당" repeatHeader><PrismPrintLeaderSummary name="전략 리더" summary="화면 및 출력 검증을 위한 가상 데이터입니다." definition="기술 및 사업 전략을 연결하는 유형 표시"/><PrismPrintCareer items={career}/><PrismPrintRisk items={[{id:"a",label:"자기 중심",latent:true,manifest:null},{id:"b",label:"충동성",latent:false,manifest:null}]}/><PrismPrintExperience topics={["사업 성장","사업 전환"]} activeTopic="사업 성장" items={state==="empty" ? [] : [{id:"one",topic:"사업 성장",representative:true,title:"가상 제품 개발",description:"가상 사례를 표시하는 예시입니다.",keywords:["기술","협업"],interview:"외부에서 전달한 근거 텍스트 표시"}]}/></PrismPrintPage></div>;
 }
 export function IntroDemo({state}:{state:FixtureState}) {
-    const [value,setValue]=useState(""); const [result,setResult]=useState("");return <><PrismChatIntro name="김가상" loading={state==="loading"} questions={state==="empty" ? [] : ["기술 분야 후보자를 알려 주세요.","현재 포지션의 요구 사항을 확인해 주세요."]} onPromptSelect={setValue} cards={[{id:"favorite",title:"후보자 즐겨찾기",description:"저장한 후보자를 한곳에서 다시 확인해보세요",onOpen:()=>setResult("즐겨찾기 열기") }]} composer={{value,onValueChange:setValue,onSubmit:text=>{setResult(text);setValue("");},disabled:state==="disabled"}}/><p role="status">{result}</p></>;
+    const [value,setValue]=useState(""); const [result,setResult]=useState("");
+    const long=state==="long";
+    const cards=[{id:"favorite",title:long?"후보자즐겨찾기와긴이름을가진추가분류":"후보자 즐겨찾기",description:long?"좁은 카드에 담기는 긴 설명과 여러 카드를 확인하기 위한 합성 문구입니다. ".repeat(3):"저장한 후보자를 한곳에서 다시 확인해보세요",icon:<PrismIcon name="FavoriteLargeIcon" size={24}/>,onOpen:()=>setResult("즐겨찾기 열기")},
+        ...(long?[{id:"second",title:"가상 추가 카드",description:"두 번째 카드의 줄바꿈과 배치를 확인합니다.",onOpen:()=>setResult("추가 카드 열기")}]:[])];
+    const questions=state==="empty"?[]:long?["기술전략담당후보자의장기프로젝트와협업사례를자세히알려주세요".repeat(2),"현재 포지션의 요구 사항을 확인해 주세요."]: ["기술 분야 후보자를 알려 주세요.","현재 포지션의 요구 사항을 확인해 주세요."];
+    return <><PrismChatIntro name={long?"김가상후보자와여러조직을담당하는사용자":"김가상"} loading={state==="loading"} questions={questions} onPromptSelect={setValue} cards={cards} composer={{value,onValueChange:setValue,onSubmit:text=>{setResult(text);setValue("");},disabled:state==="disabled"}}/><p role="status">{result}</p></>;
 }
 export function ProfileSectionsDemo({state}:{state:FixtureState}) {
-    const [tab,setTab]=useState("total");const [topic,setTopic]=useState("growth");const [draft,setDraft]=useState("");const [comments,setComments]=useState([{id:"one",author:"김작성",date:"2026.10.03",comment:"가상 프로젝트의 협업 사례를 확인했습니다."}]);const [retried,setRetried]=useState(false);
-    const empty=state==="empty";const status=state==="loading"||state==="error"&&!retried ? state : "ready";
-    const summary={heading:empty ? null : "가상 표시 결과",description:empty ? null : "소비자가 제공한 평가 근거를 표시하는 예시입니다."};
-    const validation={title:"검증 자료",items:empty ? [] : [{id:"one",label:"가상 경력 기록",status:"confirmed" as const,evidence:"가상 프로젝트 기록"},{id:"two",label:"추가 근거",status:"missing" as const}]};
-    const score={title:"SUMMARY",items:empty ? [] : [{id:"one",name:"문제 해결",score:7,max:10,description:"기술 및 조직 문제를 해결한 가상 경험입니다."},{id:"two",name:"사업 전환",score:null,max:10,description:null}]};
-    const axes=["전략","실행","협업","육성","혁신"];const radar={title:"리더십 Survey",axes:axes.map((label,i)=>({id:String(i),label})),series:[{id:"candidate",label:"가상 후보",values:empty ? [null,null,null,null,null] : [4,3.5,4.2,3.8,4.1]}],max:5};
+    const [tab,setTab]=useState("total");const [topic,setTopic]=useState("사업 성장");const [result,setResult]=useState("");const [comments,setComments]=useState<PrismCeoCommentItem[]>([{id:"one",year:2026,category:"가상 육성 회의",author:"가상 CEO 김작성",comment:"가상 프로젝트의 협업 사례를 확인했습니다.",isMine:true}]);const [retried,setRetried]=useState(false);
+    const empty=state==="empty", long=state==="long";const status=state==="loading"||state==="error"&&!retried ? state : "ready";
+    const summary={heading:empty ? null : "가상 표시 결과",description:empty ? null : long ? "소비자가 제공한 긴 평가 근거를 표시하는 합성 예시입니다. ".repeat(10) : "소비자가 제공한 평가 근거를 표시하는 예시입니다."};
+    const survey={items:empty ? [] : [{id:"one",category:"가상 문제 해결",bars:[{role:"boss" as const,value:0,average:6.1},{role:"peer" as const,value:7.2,average:6.3},{role:"member" as const,value:null,average:null}]}]};
+    const score={title:"Design 역량 Essay",items:empty ? [] : [{id:"one",name:"문제 해결",score:7,max:10,description:"기술 및 조직 문제를 해결한 가상 경험입니다."},{id:"two",name:"사업 전환",score:null,max:10,description:null}]};
     const labels=["22년","23년","24년","25년","26년"];
     const sections=[
         {id:"total",label:"종합",content:<PrismTotalSection leader={{label:"전략 리더",summary:empty ? null : "가상 근거로 구성한 요약 표시",note:"실제 평가 결과가 아닙니다."}} basic={{items:[{label:"생년월일",value:empty ? null : "1980.01.01"},{label:"최종 학위",value:empty ? null : "가상 전공 석사"}]}} career={{entries:empty ? [] : [{id:"one",period:"2024 ~ 현재",company:"가상전자",role:"기술전략담당"}]}} compensation={{years:["24년","25년","26년"],rows:empty ? [] : [{label:"총보상",values:[null,"100",{won:"120",foreign:{currency:"USD",amount:"1,000"}}]},{label:"연봉",values:[null,"90","100"]},{label:"IB",values:[null,"10",0]}]}}/>},
-        {id:"expertise",label:"전문성",content:<PrismExpertiseSection summary={summary} fields={{items:empty ? [] : [{id:"tech",field:"기술·연구개발",years:"10년",title:"가상 제품 개발",description:"기술 분야의 대표 업적을 표시합니다."}]}} validation={validation}/>},
-        {id:"experience",label:"성공경험",content:<PrismExperienceSection summary={score} topics={{topics:[{id:"growth",label:"사업 성장",starred:true},{id:"change",label:"사업 전환"}],value:topic,onValueChange:setTopic}} experience={empty ? [] : [{title:topic==="growth" ? "가상 사업 성장" : "가상 사업 전환",area:topic==="growth" ? "사업 성장" : "사업 전환",company:"가상전자",period:"2024",grade:null,children:"제공한 경험과 근거를 표시합니다."}]} failure={{title:"실패경험",description:empty ? null : "실패 경험에 대한 가상 기록입니다."}}/>},
-        {id:"design",label:"Design 역량",content:<PrismDesignSection summary={summary} matrix={<PrismPositionMatrix rowAxisLabel="회사" rows={[{id:"one",label:"가상전자"},{id:"two",label:"예시사업"}]} columns={[{id:"tech",label:"기술"},{id:"finance",label:"재무"}]} current={empty ? null : {row:"one",column:"tech"}}/>}/>},
-        {id:"agility",label:"Learning Agility",content:<PrismAgilitySection summary={score} experience={{title:"관련 성공경험",items:empty ? [] : [{id:"one",label:"새로운 환경",hasExperience:true,description:"새로운 역할을 맡은 가상 경험입니다."},{id:"two",label:"학습 전환",hasExperience:null}]}}/>},
-        {id:"attitude",label:"Attitude",content:<PrismAttitudeSection summary={summary} diagnosis={{title:"성격·가치관 진단 결과",axes:["개방성","성실성","외향성","우호성","정서 안정"],values:empty ? [null,null,null,null,null] : [8,7,5,6,8],description:empty ? undefined : "가상 진단의 해석을 표시합니다.",shares:empty ? [] : [{label:"자기초월",percent:30},{label:"안정",percent:20},{label:"개방",percent:25},{label:"자기증진",percent:25}],valueDescription:empty ? undefined : "가상 가치관 비중"}} risk={{items:[{id:"one",label:"자기 중심",latent:empty ? null : true,manifest:null},{id:"two",label:"충동성",latent:empty ? null : false,manifest:null}]}}/>},
-        {id:"leadership",label:"리더십",content:<PrismLeadershipSection summary={summary} radar={radar} validation={validation} strength={{title:"강점",items:empty ? [] : [{id:"manager",role:"상사",text:"가상 동료 의견"}],comment:empty ? undefined : "강점에 대한 요약"}} improvement={{title:"보완할 점",items:empty ? [] : [{id:"colleague",role:"동료",text:null}]}} trend={{chart:{title:"과거 5개년 리더십 Survey 추이",labels,series:[{id:"candidate",label:"가상 후보",values:empty ? [null,null,null,null,null] : [3.8,null,4.1,3.9,4.2]}]},rows:empty ? [] : labels.map((year,i)=>({year,evaluators:10+i,respondents:i===1 ? null : 10+i,score:i===1 ? null : 3.8+i*.1,groupAverage:3.9,percentile:i===1 ? null : 20-i}))}}/>},
-        {id:"comments",label:"Mgmt. Comments",content:<PrismCommentsSection items={empty ? [] : comments} editor={{value:draft,onValueChange:setDraft,onSave:comment=>{setComments([...comments,{id:String(comments.length+1),author:"김작성",date:"2026.10.03",comment}]);setDraft("");},onCancel:()=>setDraft("")}}/>},
+        {id:"expertise",label:"전문성",content:<PrismExpertiseSection summary={summary} fields={{items:empty ? [] : [{id:"tech",field:"기술·연구개발",years:"10년",title:"가상 제품 개발",description:"기술 분야의 대표 업적을 표시합니다."}]}} survey={survey}/>},
+        {id:"experience",label:"성공경험",content:<PrismSuccessExperienceSection summary={{title:empty ? null : "가상 성과",description:empty ? null : "성과에 대한 합성 요약입니다."}} topics={["사업 성장","사업 전환"]} activeTopic={topic} onTopicChange={setTopic}
+            essays={empty ? [] : [{id:"growth",topic:"사업 성장",representative:true,title:long ? "긴 이름의 가상 사업 성장 및 기술 전환 대표 경험" : "가상 사업 성장",description:long ? "제공한 경험과 근거를 표시합니다. ".repeat(14) : "제공한 경험과 근거를 표시합니다.",keywords:long ? ["여러 조직을 함께 이끈 장기 프로젝트"] : ["협업","기술"],aiInterview:long ? "합성 인터뷰 분석입니다. ".repeat(8) : "합성 인터뷰 분석입니다."},{id:"change",topic:"사업 전환",title:"가상 사업 전환",description:"다른 영역의 경험입니다."}]}
+            failures={empty ? [] : [{id:"failure",title:"가상 실패 경험",description:"실패 원인과 후속 조치를 표시합니다."}]}/>},
+        {id:"design",label:"Design 역량",content:<PrismDesignSection grade={{grade:empty ? null : "A",summary:empty ? null : "가상 Design 역량 요약",note:"종합점수 8점 이상 上 · 6점 미만 下"}} essay={score} survey={survey}
+            diversity={{companies:empty ? [] : long ? ["가상전자의 아주 긴 사업부와 지역본부", "예시사업의 연구개발 계열"] : ["가상전자","예시사업"],functions:empty ? [] : long ? ["기술 및 연구개발 전략", "신사업과 조직 운영"] : ["기술","전략"],matrix:{rowAxisLabel:"회사",columns:[{key:"function-1",label:"Function 1"},{key:"function-2",label:"Function 2"}],rows:[{key:"company-1",label:"1"},{key:"company-2",label:"2"}],currentPosition:empty ? null : {rowKey:"company-2",columnKey:"function-2"}}}}/>},
+        {id:"agility",label:"Learning Agility",content:<PrismAgilitySection grade={{grade:empty ? null : "B",summary:empty ? null : "가상 Learning Agility 요약",note:"종합점수 8점 이상 上 · 6점 미만 下"}} essay={{...score,title:"Learning Agility Essay"}} survey={survey} experience={{title:"관련 성공경험",items:empty ? [] : [{id:"one",label:"Globality",hasExperience:true,description:"새로운 역할을 맡은 가상 경험입니다."},{id:"two",label:"AX 혁신",hasExperience:null}]}}/>},
+        {id:"attitude",label:"Attitude",content:<PrismAttitudeReport summary={summary} diagnosis={{title:"성격·가치관 진단 결과",axes:["개방성","성실성","외향성","우호성","정서 안정"],values:empty ? [null,null,null,null,null] : [8,7,5,6,8],description:empty ? undefined : "가상 진단의 해석을 표시합니다.",shares:empty ? [] : [{label:"자기초월",percent:30},{label:"안정",percent:20},{label:"개방",percent:25},{label:"자기증진",percent:25}],valueDescription:empty ? undefined : "가상 가치관 비중"}} risk={{items:[{id:"one",label:"자기 중심",latent:empty ? null : true,manifest:null},{id:"two",label:"충동성",latent:empty ? null : false,manifest:null}]}} survey={{items:empty?[]:[{id:"trust",category:"가상 신뢰",bars:[{role:"boss",value:0,average:6.1},{role:"peer",value:7.2,average:6.3},{role:"member",value:null}]}]}} report={empty?undefined:{url:"/prism/fixtures/report.pdf",workerUrl:profilePdfWorkerUrl,title:"가상 심리적강인함 결과"}}/>},
+        {id:"leadership",label:"리더십",content:<PrismLeadershipSection pieSummary={{items:[{label:"지",value:empty ? null : 33},{label:"덕",value:empty ? null : 32},{label:"용",value:empty ? null : 35}],title:empty ? "" : "가상 리더십 요약",description:empty ? "" : "미리 계산된 특성 비중과 해석을 표시합니다.",detail:empty ? "" : long ? "상세 근거를 요약과 구분해 표시합니다. 실제 평가 결과가 아닌 합성 예시입니다. ".repeat(8) : "상세 근거를 요약과 구분해 표시합니다.\n실제 평가 결과가 아닌 합성 예시입니다.",wrapTitle:long}} survey={{...survey,action:empty ? undefined : <PrismButton variant="line" onClick={()=>setResult("Culture Survey 보기 intent")}>Culture Survey 결과 보기</PrismButton>}} strength={{title:"함께 일하고 싶은 이유",items:empty ? [] : [{id:"manager",role:"상사",text:"가상 동료 의견"}],comment:empty ? undefined : "강점에 대한 요약"}} improvement={{title:"보완·개선 필요사항",items:empty ? [] : [{id:"colleague",role:"동료",text:null}]}} trend={{chart:{title:"과거 5개년 리더십 Survey 추이",labels,series:[{id:"candidate",label:"가상 후보",values:empty ? [null,null,null,null,null] : [3.8,null,4.1,3.9,4.2]}]},rows:empty ? [] : labels.map((year,i)=>({year,evaluators:10+i,respondents:i===1 ? null : 10+i,score:i===1 ? null : 3.8+i*.1,groupAverage:3.9,percentile:i===1 ? null : 20-i}))}}/>},
+        {id:"comments",label:"Mgmt. Comments",content:<PrismMgmtComments subjectId="synthetic-profile" ceoComments={empty ? [] : comments} elpComments={empty ? [] : [{id:"elp",year:2025,category:"가상 ELP 선발",author:null,comment:"가상 육성 기록입니다."}]} onCreate={async payload=>setComments(items=>[...items,{id:crypto.randomUUID(),...payload,isMine:true}])} onUpdate={async(id,payload)=>setComments(items=>items.map(item=>item.id===id?{...item,...payload}:item))} onDelete={async id=>setComments(items=>items.filter(item=>item.id!==id))}/>},
     ];
-    return <PrismTabs value={tab} onValueChange={setTab}><PrismTabsList aria-label="프로필 분류">{sections.map(section=><PrismTabsTrigger key={section.id} value={section.id}>{section.label}</PrismTabsTrigger>)}</PrismTabsList>{sections.map(section=><PrismTabsContent key={section.id} value={section.id}><PrismProfileSectionState status={status} onRetry={()=>setRetried(true)}>{section.content}</PrismProfileSectionState></PrismTabsContent>)}</PrismTabs>;
+    return <><PrismTabs value={tab} onValueChange={setTab}><PrismTabsList aria-label="프로필 분류">{sections.map(section=><PrismTabsTrigger key={section.id} value={section.id}>{section.label}</PrismTabsTrigger>)}</PrismTabsList>{sections.map(section=><PrismTabsContent key={section.id} value={section.id}><PrismProfileSectionState status={status} onRetry={()=>setRetried(true)}>{section.content}</PrismProfileSectionState></PrismTabsContent>)}</PrismTabs><p role="status">{result}</p></>;
 }
 
 export function IconDemo() { return <div className="prism-icon-gallery">{prismIconNames.map(name=><figure key={name}><PrismIcon name={name} size={48}/><figcaption>{name}</figcaption></figure>)}</div>; }

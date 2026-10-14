@@ -1,6 +1,6 @@
 import { useId, type CSSProperties, type ReactNode } from "react";
 import { PrismIcon } from "./prism-icon";
-import { PrismChevronDownGlyph as ChevronDown, PrismStarGlyph as Star } from "./prism-icon";
+import { PrismChevronDownGlyph as ChevronDown } from "./prism-icon";
 import { Popover, PopoverTrigger, PopoverContent } from "@pydemia/ui";
 import { PrismButton } from "./prism-button";
 import { PrismInfoTooltip } from "./prism-utility";
@@ -34,7 +34,7 @@ export function PrismPopover({ trigger, children, open, onOpenChange }: { trigge
     return <Popover open={open} onOpenChange={onOpenChange}><PopoverTrigger asChild>{trigger}</PopoverTrigger><PopoverContent data-prism="light" className="prism-popover">{children}</PopoverContent></Popover>;
 }
 export function PrismFavoriteToggle({ name, checked, onCheckedChange, disabled }: { name: string; checked: boolean; onCheckedChange: (checked: boolean) => void; disabled?: boolean }) {
-    return <button type="button" className="prism-favorite-toggle" aria-label={`${name} 즐겨찾기`} aria-pressed={checked} disabled={disabled} onClick={() => onCheckedChange(!checked)}><Star aria-hidden="true" fill={checked ? "currentColor" : "none"} /></button>;
+    return <button type="button" className="prism-favorite-toggle" aria-label={`${name} 즐겨찾기`} aria-pressed={checked} disabled={disabled} onClick={() => onCheckedChange(!checked)}><PrismIcon name={checked || disabled ? "FavoriteOnIcon" : "FavoriteIcon"} size={20}/></button>;
 }
 export function PrismShowMore({ expanded, hiddenCount, onExpandedChange, children, label = "더보기" }: { expanded: boolean; hiddenCount: number; onExpandedChange: (expanded: boolean) => void; children?: ReactNode; label?: string }) {
     const id = useId(); return <div className="prism-show-more">{children && <div id={id} hidden={!expanded}>{children}</div>}<PrismButton variant="line" size="large" aria-expanded={expanded} aria-controls={children ? id : undefined} icon={<ChevronDown style={{transform:expanded ? "rotate(180deg)" : undefined}} />} iconPosition="right" onClick={() => onExpandedChange(!expanded)}>{expanded ? "접기" : `${label} (${hiddenCount})`}</PrismButton></div>;
@@ -42,6 +42,14 @@ export function PrismShowMore({ expanded, hiddenCount, onExpandedChange, childre
 export function PrismFloatingChatButton({ onClick, right = 40, bottom = 40 }: { onClick: () => void; right?: CSSProperties["right"]; bottom?: CSSProperties["bottom"] }) {
     return <button className="prism-floating-chat" type="button" aria-label="대화 열기" style={{right,bottom}} onClick={onClick}><PrismIcon name="SymbolIcon" size={30} /></button>;
 }
-export function PrismDragOverlay({ active, label = "파일을 놓아 첨부하세요." }: { active: boolean; label?: string }) {
-    return active ? <div className="prism-drag-overlay" role="status">{label}</div> : null;
+export function PrismDragOverlay({ active, label = "파일을 드래그하여 대화에 추가하세요", fileName, previewUrl }: { active: boolean; label?: string; fileName?: string | null; previewUrl?: string | null }) {
+    if (!active) return null;
+    const extension = fileName?.split(".").pop();
+    return <div className="prism-drag-overlay" role="status">
+        <div className="prism-drag-overlay-content">
+            <div className="prism-drag-overlay-thumbnail">{previewUrl ? <img src={previewUrl} alt={fileName || "파일 미리보기"} /> : <><PrismIcon name="DragDropIcon" size={140} />{fileName && extension !== fileName && <small>{extension?.toUpperCase()}</small>}</>}</div>
+            {fileName && <p className="prism-drag-overlay-name" title={fileName}>{fileName}</p>}
+            <p className="prism-drag-overlay-label">{label}</p>
+        </div>
+    </div>;
 }

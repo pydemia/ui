@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prism-favorite-candidate",
+  "type": "registry:ui",
+  "title": "Favorite candidate card / Responsive grid",
+  "description": "즐겨찾기 목록의70px 사진·정보·전문 분야/평가 카드와 독립 동작·반응형/수동 크기",
+  "dependencies": [],
+  "registryDependencies": [
+    "https://ui.pydemia.ai/prism/r/prism-tokens.json",
+    "https://ui.pydemia.ai/prism/r/prism-candidate.json",
+    "https://ui.pydemia.ai/prism/r/prism-badge.json",
+    "https://ui.pydemia.ai/prism/r/prism-primitives.json",
+    "https://ui.pydemia.ai/prism/r/prism-evaluation-history.json"
+  ],
+  "files": [
+    {
+      "path": "packages/prism/src/prism-favorite-candidate.tsx",
+      "type": "registry:ui",
+      "target": "@ui/prism-favorite-candidate.tsx",
+      "content": "import { useId, type CSSProperties, type ReactNode } from \"react\";\nimport { PrismCandidatePortrait, type PrismCandidate } from \"./prism-candidate\";\nimport { PrismElpBadge } from \"./prism-badge\";\nimport { PrismAffiliateLogo, PrismFavoriteToggle, PrismSkeleton } from \"./prism-primitives\";\nimport { PrismEvaluationHistory, preparePrismEvaluationHistory } from \"./prism-evaluation-history\";\n\nexport type PrismFavoriteCandidateCardProps = {\n    candidate: PrismCandidate; favorite?: boolean; selected?: boolean;\n    onOpen?: (candidate: PrismCandidate) => void;\n    onFavoriteChange?: (favorite: boolean) => void;\n    favoriteBusy?: boolean; readOnly?: boolean; children?: ReactNode;\n};\nexport type PrismFavoriteCandidateGridProps = {\n    children: ReactNode; resize?: \"none\" | \"horizontal\" | \"both\";\n    className?: string; style?: CSSProperties;\n};\nexport function PrismFavoriteCandidateGrid({ children, resize = \"none\", className = \"\", style }: PrismFavoriteCandidateGridProps) {\n    return <div className={`prism-favorite-candidate-viewport ${className}`} style={style} data-resize={resize === \"none\" ? undefined : resize}>\n        <div className=\"prism-favorite-candidate-grid\">{children}</div>\n    </div>;\n}\nexport function PrismFavoriteCandidateSkeleton({ announce = true }: { announce?: boolean }) {\n    return <div className=\"prism-favorite-candidate-skeleton\" role={announce ? \"status\" : undefined} aria-label={announce ? \"즐겨찾기 후보를 불러오고 있습니다.\" : undefined} aria-hidden={!announce || undefined}>\n        <PrismSkeleton width={70} height={70}/><PrismSkeleton width=\"60%\" height={20}/><PrismSkeleton height={20}/>\n    </div>;\n}\n/** Independent sibling buttons replace the source's nested button-like card. */\nexport function PrismFavoriteCandidateCard({ candidate, favorite = true, selected, onOpen, onFavoriteChange,\n    favoriteBusy = false, readOnly = false, children }: PrismFavoriteCandidateCardProps) {\n    const nameId = useId();\n    const affiliation = candidate.affiliation ?? candidate.companyField;\n    const jobFunction = candidate.jobFunction ?? candidate.domain;\n    const areas = candidate.expertAreas ?? (candidate.speciality ? [candidate.speciality] : []);\n    const evaluations = preparePrismEvaluationHistory(candidate.recentEvaluations ?? []);\n    return <article className=\"prism-favorite-candidate-card\" data-selected={selected || undefined} data-actionable={!!onOpen || undefined} aria-labelledby={nameId}>\n        {onOpen && <button type=\"button\" className=\"prism-favorite-candidate-open\" aria-labelledby={nameId} onClick={() => onOpen(candidate)}/>}\n        <div className=\"prism-favorite-candidate-profile\"><div className=\"prism-favorite-candidate-photo-row\">\n            <PrismCandidatePortrait name={candidate.name} subjectId={candidate.id} src={candidate.photo} size={70}/>\n            <PrismFavoriteToggle name={candidate.name} checked={favorite} disabled={favoriteBusy || readOnly || !onFavoriteChange} onCheckedChange={next => onFavoriteChange?.(next)}/>\n        </div><div className=\"prism-favorite-candidate-info\"><div className=\"prism-favorite-candidate-name\"><strong id={nameId}>{candidate.name}</strong>{candidate.elp && <PrismElpBadge type={candidate.elp}/>}</div>\n            {(affiliation || jobFunction) && <div className=\"prism-profile-department\">{affiliation && <b>{affiliation}</b>}{affiliation && jobFunction && <span className=\"prism-profile-divider\"/>}{jobFunction}</div>}\n            {(candidate.company || candidate.position) && <div className=\"prism-favorite-candidate-position\">{candidate.company && <PrismAffiliateLogo brand={candidate.brand} affiliate={candidate.company} size={12}/>}{candidate.position && <span>{candidate.position}</span>}</div>}\n        </div></div><div className=\"prism-favorite-candidate-expertise\">\n            {areas.length > 0 && <section><h3>전문 분야</h3><p>{areas.join(\", \")}</p></section>}\n            {evaluations.length > 0 && <section><h3>최근 평가 이력</h3><PrismEvaluationHistory items={candidate.recentEvaluations ?? []}/></section>}\n            {children}\n        </div>\n    </article>;\n}\n"
+    }
+  ],
+  "meta": {
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "sourceSha256": "f65c8046ced3eb9635837c5d53bab93dd59ac8336497163feee9d589e9b32f3e",
+    "provenance": "Original implementation using pydemia/shadcn primitives; PRISM source used as design and behavior reference."
+  }
+}

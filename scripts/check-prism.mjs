@@ -6,6 +6,7 @@ import ts from "typescript";
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), "utf8").replace(/\r\n/g, "\n");
 const manifest = JSON.parse(read("apps/docs/public/prism/components.json"));
 const index = JSON.parse(read("apps/docs/public/prism/r/registry.json"));
+const sourceInventory = JSON.parse(read("apps/docs/public/prism/research/source-inventory.json"));
 const generic = new Set(JSON.parse(read("registry.json")).items.map(item => item.name));
 const names = new Set(index.items.map(item => item.name));
 const components = readdirSync(new URL("../packages/prism/src/",import.meta.url)).filter(file => file.endsWith(".tsx"));
@@ -25,6 +26,10 @@ for (const item of index.items) {
     }
 }
 for (const entry of manifest.components) {
+    const deltaAudits = [...sourceInventory.components, ...(sourceInventory.integrationReferences ?? [])].filter(item => item.target === entry.id && item.latestDeltaAudit)
+        .map(item => ({ source: item.source, ...item.latestDeltaAudit }));
+    assert.deepEqual(entry.sourceDeltaAudits ?? [], deltaAudits, "Manifest source delta audits must preserve their scoped provenance");
+    assert.deepEqual(index.items.find(item => item.name === entry.id)?.meta?.sourceDeltaAudits ?? [], deltaAudits, "Registry source delta audits must match the manifest");
     assert.ok(names.has(entry.id)); assert.ok(entry.states.length); assert.ok(entry.contract); assert.ok(entry.source.length);
     assert.equal(read(entry.sourcePath).includes("export "),true);
     const code = ts.createSourceFile("usage.tsx",entry.usage,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
@@ -43,7 +48,11 @@ for (const entry of manifest.components) {
         if (!ts.isImportDeclaration(statement)) continue;
         const specifier = statement.moduleSpecifier.text;
         assert.ok(!specifier.startsWith("@pydemia/"), "Private workspace imports must not leak into installed examples");
-        if (specifier.startsWith("@/components/ui/")) assert.ok(installed.has(specifier.split("/").pop()), `Example import is missing from ${entry.id}'s installation dependencies: ${specifier}`);
+        if (specifier.startsWith("@/components/ui/")) {
+            const file = specifier.slice("@/components/ui/".length);
+            const bundledFile = index.items.some(item => installed.has(item.name) && item.files.some(source => source.target === `@ui/${file}`));
+            assert.ok(installed.has(file) || bundledFile, `Example import is missing from ${entry.id}'s installation dependencies: ${specifier}`);
+        }
     }
 }
 // Check complete examples against public workspace declarations on every CI run.

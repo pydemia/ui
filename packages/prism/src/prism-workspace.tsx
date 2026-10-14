@@ -14,10 +14,10 @@ export function PrismWorkspace({ sidebar, header, children, panel, className, he
     const shell=useRef<HTMLDivElement>(null);const headerElement=useRef<HTMLElement>(null);const [compact,setCompact]=useState(false);const [internalOpen,setInternalOpen]=useState(false);
     const menuOpen=navigationOpen??internalOpen;
     const setMenuOpen=(next:boolean)=>{if(navigationOpen===undefined)setInternalOpen(next);onNavigationOpenChange?.(next);};
-    useEffect(()=>{const element=shell.current;if(!element)return;const measure=()=>setCompact(responsive&&element.getBoundingClientRect().width<breakpoint);measure();const observer=new ResizeObserver(measure);observer.observe(element);return()=>observer.disconnect();},[responsive,breakpoint]);
+    useEffect(()=>{const element=shell.current;if(!element)return;const measure=()=>{const width=element.getBoundingClientRect().width;if(width>0)setCompact(responsive&&width<breakpoint);};measure();const observer=new ResizeObserver(measure);observer.observe(element);return()=>observer.disconnect();},[responsive,breakpoint]);
     useEffect(()=>{if(!compact&&menuOpen){setMenuOpen(false);headerElement.current?.focus();}},[compact,menuOpen]);
     return <div ref={shell} className={`prism-workspace ${className ?? ""}`} data-compact={compact||undefined} style={{height,minHeight}}>
-        <div className="prism-workspace-sidebar" hidden={compact}>{sidebar}</div>
+        {!compact && <div className="prism-workspace-sidebar">{sidebar}</div>}
         <div className="prism-workspace-main"><header ref={headerElement} tabIndex={-1} className="prism-workspace-header">
             {compact&&<Drawer open={menuOpen} onOpenChange={setMenuOpen}><DrawerTrigger asChild><PrismButton variant="shape" iconOnly aria-label="탐색 메뉴 열기" icon={<PrismIcon name="AdminIcon" size={20}/>} /></DrawerTrigger>
                 <DrawerContent side="left" data-prism="light" className="prism-mobile-navigation"><header><DrawerTitle>PRISM 탐색</DrawerTitle><DrawerClose asChild><PrismButton variant="shape" iconOnly aria-label="탐색 메뉴 닫기" icon={<PrismIcon name="CloseIcon" size={20}/>} /></DrawerClose></header>
