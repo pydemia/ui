@@ -294,3 +294,15 @@
   생성했다. root metadata unavailable, 실제 실행 metadata unavailable 유지.
 - 새 build/snapshot/build/release-check와 소비자·공개/readback을 진행한다.
   최종 공개 확인 전에는 완료로 보고하지 않는다. PRISM source 변경 없음.
+
+## R6 최종 공개 확인
+
+- source eefe273c push, PR163 ready CI38552590567 성공 후 병합
+- main00a56c29, Vercel production READY/도메인 alias 일치, main CI38553221677 성공
+- 운영 21종 실제 적용·Basic 재방문·URL/history·문서/profile 입력 보존 확인
+- 공개 소비자 attempt-TmzCHp 설치/source/CSS/tsc/build/strict gate 및
+  21종 선택 중 열린 Dialog·지역 theme·초안 유지 확인
+- 모바일 320/390px 후보/Apply와 가로 넘침 없음 확인, viewport 복구
+- 최신 PRISM source/design·Pretendard·기존 배경·440px Dialog 유지 확인
+- 최신 사용자 결정의 공개 기준 W01–W14 14/14=100%. ENV는 후속 미검수 유지
+- 최종 commit/release와 증거·화면·인계 상태는 release-r6 기록에 연결

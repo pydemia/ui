@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 import {
     Badge, Button, Input, Select, SelectContent, SelectItem,
     SelectTrigger, SelectValue, Table, TableCell, TableHead,
-    ThemeScope, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
+    ThemeScope, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, getDesignMode,
     type ThemeSettings,
 } from "@pydemia/ui";
 import { AnalyticsWorkspace } from "../analytics-workspace";
@@ -18,10 +18,14 @@ export function DesignModePreview({ settings }: { settings: ThemeSettings }) {
     const [selected, setSelected] = useState("DS-104");
     const [status, setStatus] = useState("all");
     const [notice, setNotice] = useState("");
+    const [workspaceExpanded, setWorkspaceExpanded] = useState(false);
+    const composition = getDesignMode(settings.design).recipe !== "standard";
+    const workspaceVisible = composition || workspaceExpanded;
 
     return (
-        <ThemeScope settings={settings} options={{ allowUnreleased: true }}>
-            <div className="design-mode-preview">
+        <ThemeScope settings={settings} options={{ allowUnreleased: true }}
+            className="design-mode-preview-scene">
+            <div className="design-mode-preview" data-composition={composition}>
                 <header className="design-mode-preview-heading">
                     <div>
                         <p className="design-mode-eyebrow">WORKSPACE / DESIGN</p>
@@ -107,7 +111,7 @@ export function DesignModePreview({ settings }: { settings: ThemeSettings }) {
                 <p className="design-mode-preview-note" role="status">
                     {notice || "입력·필터·선택은 이 미리보기 안에서만 변경됩니다."}
                 </p>
-                <details className="design-mode-workspace-preview"
+                <section className="design-mode-workspace-preview"
                     onClickCapture={(event) => {
                         const anchor = event.target instanceof Element
                             ? event.target.closest("a") : null;
@@ -118,9 +122,16 @@ export function DesignModePreview({ settings }: { settings: ThemeSettings }) {
                             target.scrollIntoView({ block: "nearest", behavior: "instant" });
                         }
                     }}>
-                    <summary>조합 화면 상세 미리보기</summary>
-                    <AnalyticsWorkspace idPrefix={`design-preview-${id}`} />
-                </details>
+                    {composition ? <h4>업무 화면 미리보기</h4> :
+                        <button type="button" aria-expanded={workspaceVisible}
+                            aria-controls={`${id}-workspace`}
+                            onClick={() => setWorkspaceExpanded((value) => !value)}>
+                            조합 화면 상세 미리보기
+                        </button>}
+                    <div id={`${id}-workspace`} hidden={!workspaceVisible}>
+                        <AnalyticsWorkspace idPrefix={`design-preview-${id}`} />
+                    </div>
+                </section>
             </div>
         </ThemeScope>
     );

@@ -10,6 +10,13 @@ UI300/docs15/typecheck를 새 일반 경로로 검사했고 새 snapshot은
 실제 ENV 검수는 후속 미검수로 유지하고 사용자 최신 결정으로 공개를 진행한다.
 최종 원격·공개·소비자 결과는 release-r6 기록에 연결한다.
 
+R6 최종 공개 완료: main00a56c29 / production READY. 일반 picker의 21종을
+운영에서 실제 선택·적용했고 문서/profile 초안과 고정 iframe src를 보존했다.
+design-modes-public-coverage-r6-2026-10-14.csv와 browser-evidence의 public-r6
+기록이 현재 공개 일반 경로의 근거다. 공개 registry 소비자 설치와 strict
+21종 gate, 실제 열린 Dialog·지역 테마·초안 검증도 통과했다.
+실제 ENV는 후속 미검수이며 아래 R5 상세 matrix의 개별 상태 한계도 유지한다.
+
 아래 R5 당시에는 **Basic released / 추가20종 ready**인 공개 전 후보였다. PRISM은 최신
 main6ea262ef의 현재 디자인과 소스를 보존한다. 운영21종 게시·사용자 승인·
 실제 screen reader·전체 WCAG 인증으로 보고하지 않는다.

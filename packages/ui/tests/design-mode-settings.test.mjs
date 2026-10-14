@@ -13,6 +13,35 @@ import {
 const preview = { allowUnreleased: true };
 const resolve = (input, options = preview) => resolveThemeSettings(input, options).settings;
 
+test("supported design palettes retain readable text and semantic action pairs", () => {
+    const luminance = (hex) => {
+        const channels = hex.slice(1).match(/../g).map((part) => {
+            const value = parseInt(part, 16) / 255;
+            return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+    };
+    const pairs = [
+        ["--foreground", "--background"], ["--foreground", "--surface"],
+        ["--muted", "--surface"], ["--accent-foreground", "--accent"],
+        ["--message-user-foreground", "--message-user-background"],
+        ["--danger", "--surface"], ["--success", "--surface"],
+        ["--warning", "--surface"],
+    ];
+    const failures = [];
+    for (const mode of designModes) {
+        for (const appearance of mode.appearances) {
+            const colors = mode.palettes[appearance];
+            for (const [foreground, background] of pairs) {
+                const values = [luminance(colors[foreground]), luminance(colors[background])];
+                const ratio = (Math.max(...values) + 0.05) / (Math.min(...values) + 0.05);
+                if (ratio < 4.5) failures.push(`${mode.id}/${appearance} ${foreground}/${background}: ${ratio.toFixed(2)}`);
+            }
+        }
+    }
+    assert.deepEqual(failures, []);
+});
+
 test("accessibility media policies outrank applied inline theme tokens", () => {
     const css = readFileSync(new URL("../src/design-modes.css",
         import.meta.url), "utf8");

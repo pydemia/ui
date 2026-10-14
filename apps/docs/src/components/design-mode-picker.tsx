@@ -172,7 +172,7 @@ export function DesignModePicker({
                             {Object.values(previewSettings.overrides).some((colors) => Object.keys(colors).length) && " · 직접 조정 반영"}</p>
                         {appearance !== settings.appearance && <p>이 디자인의 기본 밝기 {appearance}로 전환됩니다.</p>}
                         {!canApply && <p>검수 중인 디자인입니다. 미리보기만 사용할 수 있습니다.</p>}
-                        {candidate.recipe !== "standard" && <p>조합 화면을 펼치면 격자와 패널 배치도 확인할 수 있습니다.</p>}
+                        {candidate.recipe !== "standard" && <p>업무 화면에서 격자와 패널 배치를 먼저 확인하세요.</p>}
                     </div>
                     <DesignModePreview settings={previewSettings} />
                 </section>
