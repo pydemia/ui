@@ -473,16 +473,57 @@ export function ContentExample() {
 ```
 
 ## Admin layout / Attachments / Sync
-관리 페이지의 검색·목록·등록·첨부·갱신 상태 구성
-Contract: 관리 chrome은 filters·toolbar·actions·pagination slot으로 구성합니다. 첨부파일 삭제·다운로드·갱신은 callback만 호출하며 실제 업로드와 저장은 소비자가 담당합니다. 파일 URL은 http(s) 또는 단일 slash 경로입니다.
-States: default, empty, loading, error
+관리 페이지의 이동·검색·선택 도구막대·첨부·동기화 상태 구성
+Contract: 관리 화면은 호스트 소유 뒤로 가기, 조회/초기화 필터, 선택 건수별 도구막대, pagination slot, 첨부파일 및 편집·예약·진행·완료·실패 동기화 상태로 조합합니다. 첨부 삭제/다운로드·동기화는 callback만 호출하며 API, 업로드, 저장, 권한은 소비자가 담당합니다. 파일 URL은 http(s) 또는 단일 slash 경로만 링크로 사용합니다.
+States: default, empty, loading, error, long, scheduled, running, synced
 Registry: /prism/r/prism-admin.json
 Source: packages/prism/src/prism-admin.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismAdminLayout } from "@/components/ui/prism-admin";
-<PrismAdminLayout title="관리" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;
+import { useState } from "react";
+import { PrismAdminLayout, PrismAdminFilterBar, PrismAdminTableToolbar, PrismAdminSyncStatusBar, PrismAttachmentList, PrismTruncatedText } from "@/components/ui/prism-admin";
+
+type Row = { id: string; name: string; company: string };
+const seed: Row[] = Array.from({ length: 11 }, (_, i) => ({ id: `position-${i + 1}`, name: `가상 포지션 ${i + 1}`, company: i % 2 ? "예시사업" : "가상전자" }));
+
+export function AdminExample() {
+  const [rows, setRows] = useState(seed);
+  const [draft, setDraft] = useState("");
+  const [applied, setApplied] = useState("");
+  const [selected, setSelected] = useState<string[]>([]);
+  const [page, setPage] = useState(1);
+  const [sync, setSync] = useState<"editing" | "scheduled">("editing");
+  const [files, setFiles] = useState([{ id: "sample", name: "가상 자료.pdf" }]);
+  const [result, setResult] = useState("");
+  const filtered = rows.filter(row => `${row.name} ${row.company}`.includes(applied));
+  const pageCount = Math.max(1, Math.ceil(filtered.length / 10));
+  return <PrismAdminLayout title="포지션 관리" breadcrumbs={["Admin", "포지션 관리"]}
+    onBack={() => setResult("이전 페이지 이동 의도")}
+    actions={<button type="button" onClick={() => setResult("등록 의도")}>등록</button>}
+    filters={<PrismAdminFilterBar
+      onReset={() => { setDraft(""); setApplied(""); setSelected([]); setPage(1); }}
+      onSearch={() => { setApplied(draft.trim()); setSelected([]); setPage(1); }}>
+      <label>포지션 검색 <input value={draft} onChange={event => setDraft(event.target.value)} /></label>
+    </PrismAdminFilterBar>}
+    toolbar={<PrismAdminTableToolbar total={filtered.length} selectedCount={selected.length}
+      actions={[{ label: "삭제", onClick: () => { setRows(current => current.filter(row => !selected.includes(row.id))); setSelected([]); setPage(1); } }]} />}
+    pagination={<nav aria-label="페이지 이동"><button type="button" disabled={page === 1} onClick={() => setPage(page - 1)}>이전</button>
+      <span>{page} / {pageCount}</span><button type="button" disabled={page >= pageCount} onClick={() => setPage(page + 1)}>다음</button></nav>}>
+    <div style={{ maxWidth: "100%", overflowX: "auto" }}><table style={{ minWidth: 560, width: "100%" }}>
+      <caption>가상 포지션 목록</caption><thead><tr><th>선택</th><th>포지션</th><th>회사</th></tr></thead>
+      <tbody>{filtered.slice((page - 1) * 10, page * 10).map(row => <tr key={row.id}>
+        <td><input type="checkbox" aria-label={`${row.name} 선택`} checked={selected.includes(row.id)}
+          onChange={event => setSelected(current => event.target.checked ? [...current, row.id] : current.filter(id => id !== row.id))} /></td>
+        <td><PrismTruncatedText text={row.name} maxLength={20} /></td><td>{row.company}</td>
+      </tr>)}</tbody></table></div>
+    <PrismAttachmentList files={files} onRemove={id => setFiles(current => current.filter(file => file.id !== id))}
+      onDownload={file => setResult(`${file.name} 다운로드 의도`)} />
+    <PrismAdminSyncStatusBar status={sync} date="2026-10-14" onSync={() => setSync("scheduled")}
+      onCancelSync={() => setSync("editing")} />
+    <p role="status">{result}</p>
+  </PrismAdminLayout>;
+}
 ```
 
 ## Standalone profile HTML export

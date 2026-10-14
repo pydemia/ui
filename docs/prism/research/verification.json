@@ -3198,8 +3198,8 @@
       }
     },
     "prism-admin": {
-      "visual": "pending",
-      "interaction": "pending",
+      "visual": "source-shell-style-and-responsive-improvements-passed",
+      "interaction": "passed-local-and-independent-consumer",
       "localRenderGate": {
         "status": "passed",
         "states": [
@@ -3214,6 +3214,51 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "checks": [
+        "Current frontend 2eeb26ff admin common source is unchanged from 27c4fdbf: page header/back and breadcrumbs, search/reset filter, selected-count toolbar, attachment names, five sync states and truncated text were audited.",
+        "The installable shell now composes host-owned back, filter/search/reset, selected-row actions, pagination, attachments and the source five-state sync bar. Position management reuses the same bar through its existing public wrapper.",
+        "Measured local header height64, padding8px 20px, title18px/600, filter padding20px and radius12px against source styles. Local browser exercised selection/delete, query/reset, scheduled/cancel, loading/error/empty/running/synced and long text.",
+        "Long text previously overflowed its measured width without a tooltip trigger after font/layout changes; a length fallback and remeasurement now expose the full text with keyboard focus.",
+        "Fresh external shadcn consumer installed five exact TSX sources plus CSS/tokens, typechecked and built the complete example, exercised paging/select/delete/sync and long-tooltip focus, and retained document width320 with only the 560px table internally scrollable."
+      ],
+      "remaining": [
+        "Authenticated deployed admin routes and exact deployment/source revision remain unverified; current IAB admin route has rendered an empty React root.",
+        "Real list/filter/paging/deletion, RBAC, upload/download and synchronization effects remain consuming-app integration work."
+      ],
+      "evidence": [
+        "local-admin-shell-goal-2026-10-14",
+        "installed-admin-shell-goal-2026-10-14"
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "components/admin/common/AdminPageLayout.tsx",
+          "components/admin/common/AdminPageHeader.tsx",
+          "components/admin/common/AdminFilterBar.tsx",
+          "components/admin/common/AdminTableToolbar.tsx",
+          "components/admin/common/AdminAttachmentList.tsx",
+          "components/admin/common/AdminSyncStatusBar.tsx",
+          "components/admin/common/AdminTruncatedText.tsx"
+        ],
+        "evidence": [
+          "The seven current source files are unchanged from the prior baseline; source geometry and each component purpose were compared with the portable shell.",
+          "Four focused admin-shell tests passed for navigation/filter/selection, attachment URL/callbacks, five sync states/position wrapper and keyboard access to long text. Local browser covered default/empty/loading/error/long/scheduled/running/synced at 320px and source header/filter measurements.",
+          "Fresh shadcn consumer installed five exact TSX sources plus CSS/tokens, typechecked the complete example, built Vite/font/notices, exercised paging/selection/deletion/sync and long tooltip; 320px document width320 while its 560px table scrolled internally."
+        ],
+        "intentionalImprovements": [
+          "Back navigation, querying, deletion and sync are explicit host callbacks instead of implicit routing or no-op buttons.",
+          "Invalid attachment URLs are never rendered as links; authenticated downloads can use a host callback.",
+          "Long text exposes the full value on keyboard focus after late font/layout changes, and filters/toolbars wrap while tables scroll inside narrow containers."
+        ],
+        "hostOwned": [
+          "The consuming application owns API-backed rows/total/page, authorization, persistence, file transfer and synchronization transactions."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed admin states, exact pixel parity and real backend effects could not be verified from the current connection."
+        ]
       }
     },
     "prism-management": {
@@ -7370,10 +7415,11 @@
       "prism-position-blocks",
       "prism-position-management",
       "prism-domain-forms",
-      "prism-page-state"
+      "prism-page-state",
+      "prism-admin"
     ],
-    "acceptedCount": 48,
-    "unassessedGroups": 10,
+    "acceptedCount": 49,
+    "unassessedGroups": 9,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   },
   "domainFormsVerification": {
@@ -7390,5 +7436,12 @@
     "focusedTests": "2/2 passed for access isolation, fallback/action and contact link.",
     "localBrowser": "403 and 503, ready/loading, retry and 320px document width320.",
     "independentConsumer": "Fresh shadcn install: three exact TSX sources, CSS/tokens exact, two examples typechecked, Vite/font/notices build; denied/loading/ready/404/503 rendered and 320px document width320."
+  },
+  "adminShellVerification": {
+    "date": "2026-10-14",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "focusedTests": "4/4 passed including shared position sync and keyboard-focusable long text.",
+    "localBrowser": "Eight admin states and selected-row/filter/sync actions; 64px header, 18px title, 20px/12px filter; 320px document with internal table scroll.",
+    "independentConsumer": "Fresh shadcn install: five exact TSX sources and CSS/tokens, complete example typechecked, Vite/font/notices build, paging/delete/sync and long tooltip; 320px document width320, table 560px scroll width inside 288px viewport."
   }
 }

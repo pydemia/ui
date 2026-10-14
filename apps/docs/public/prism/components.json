@@ -2161,14 +2161,18 @@
       "id": "prism-admin",
       "name": "Admin layout / Attachments / Sync",
       "category": "Administration",
-      "purpose": "관리 페이지의 검색·목록·등록·첨부·갱신 상태 구성",
-      "contract": "관리 chrome은 filters·toolbar·actions·pagination slot으로 구성합니다. 첨부파일 삭제·다운로드·갱신은 callback만 호출하며 실제 업로드와 저장은 소비자가 담당합니다. 파일 URL은 http(s) 또는 단일 slash 경로입니다.",
-      "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
+      "purpose": "관리 페이지의 이동·검색·선택 도구막대·첨부·동기화 상태 구성",
+      "contract": "관리 화면은 호스트 소유 뒤로 가기, 조회/초기화 필터, 선택 건수별 도구막대, pagination slot, 첨부파일 및 편집·예약·진행·완료·실패 동기화 상태로 조합합니다. 첨부 삭제/다운로드·동기화는 callback만 호출하며 API, 업로드, 저장, 권한은 소비자가 담당합니다. 파일 URL은 http(s) 또는 단일 slash 경로만 링크로 사용합니다.",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "empty",
         "loading",
-        "error"
+        "error",
+        "long",
+        "scheduled",
+        "running",
+        "synced"
       ],
       "source": [
         "admin/common/AdminPageLayout.tsx",
@@ -2179,14 +2183,14 @@
         "admin/common/AdminSyncStatusBar.tsx",
         "admin/common/AdminTruncatedText.tsx"
       ],
-      "usage": "import { PrismAdminLayout } from \"@pydemia/prism\";\n<PrismAdminLayout title=\"관리\" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;",
+      "usage": "import { useState } from \"react\";\nimport { PrismAdminLayout, PrismAdminFilterBar, PrismAdminTableToolbar, PrismAdminSyncStatusBar, PrismAttachmentList, PrismTruncatedText } from \"@pydemia/prism\";\n\ntype Row = { id: string; name: string; company: string };\nconst seed: Row[] = Array.from({ length: 11 }, (_, i) => ({ id: `position-${i + 1}`, name: `가상 포지션 ${i + 1}`, company: i % 2 ? \"예시사업\" : \"가상전자\" }));\n\nexport function AdminExample() {\n  const [rows, setRows] = useState(seed);\n  const [draft, setDraft] = useState(\"\");\n  const [applied, setApplied] = useState(\"\");\n  const [selected, setSelected] = useState<string[]>([]);\n  const [page, setPage] = useState(1);\n  const [sync, setSync] = useState<\"editing\" | \"scheduled\">(\"editing\");\n  const [files, setFiles] = useState([{ id: \"sample\", name: \"가상 자료.pdf\" }]);\n  const [result, setResult] = useState(\"\");\n  const filtered = rows.filter(row => `${row.name} ${row.company}`.includes(applied));\n  const pageCount = Math.max(1, Math.ceil(filtered.length / 10));\n  return <PrismAdminLayout title=\"포지션 관리\" breadcrumbs={[\"Admin\", \"포지션 관리\"]}\n    onBack={() => setResult(\"이전 페이지 이동 의도\")}\n    actions={<button type=\"button\" onClick={() => setResult(\"등록 의도\")}>등록</button>}\n    filters={<PrismAdminFilterBar\n      onReset={() => { setDraft(\"\"); setApplied(\"\"); setSelected([]); setPage(1); }}\n      onSearch={() => { setApplied(draft.trim()); setSelected([]); setPage(1); }}>\n      <label>포지션 검색 <input value={draft} onChange={event => setDraft(event.target.value)} /></label>\n    </PrismAdminFilterBar>}\n    toolbar={<PrismAdminTableToolbar total={filtered.length} selectedCount={selected.length}\n      actions={[{ label: \"삭제\", onClick: () => { setRows(current => current.filter(row => !selected.includes(row.id))); setSelected([]); setPage(1); } }]} />}\n    pagination={<nav aria-label=\"페이지 이동\"><button type=\"button\" disabled={page === 1} onClick={() => setPage(page - 1)}>이전</button>\n      <span>{page} / {pageCount}</span><button type=\"button\" disabled={page >= pageCount} onClick={() => setPage(page + 1)}>다음</button></nav>}>\n    <div style={{ maxWidth: \"100%\", overflowX: \"auto\" }}><table style={{ minWidth: 560, width: \"100%\" }}>\n      <caption>가상 포지션 목록</caption><thead><tr><th>선택</th><th>포지션</th><th>회사</th></tr></thead>\n      <tbody>{filtered.slice((page - 1) * 10, page * 10).map(row => <tr key={row.id}>\n        <td><input type=\"checkbox\" aria-label={`${row.name} 선택`} checked={selected.includes(row.id)}\n          onChange={event => setSelected(current => event.target.checked ? [...current, row.id] : current.filter(id => id !== row.id))} /></td>\n        <td><PrismTruncatedText text={row.name} maxLength={20} /></td><td>{row.company}</td>\n      </tr>)}</tbody></table></div>\n    <PrismAttachmentList files={files} onRemove={id => setFiles(current => current.filter(file => file.id !== id))}\n      onDownload={file => setResult(`${file.name} 다운로드 의도`)} />\n    <PrismAdminSyncStatusBar status={sync} date=\"2026-10-14\" onSync={() => setSync(\"scheduled\")}\n      onCancelSync={() => setSync(\"editing\")} />\n    <p role=\"status\">{result}</p>\n  </PrismAdminLayout>;\n}",
       "sourcePath": "packages/prism/src/prism-admin.tsx",
       "previewUrl": "/prism?component=prism-admin",
       "embedUrl": "/prism?component=prism-admin&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-admin&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "pending",
+        "visual": "source-shell-style-and-responsive-improvements-passed",
+        "interaction": "passed-local-and-independent-consumer",
         "localRenderGate": {
           "status": "passed",
           "states": [
@@ -2201,11 +2205,68 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "checks": [
+          "Current frontend 2eeb26ff admin common source is unchanged from 27c4fdbf: page header/back and breadcrumbs, search/reset filter, selected-count toolbar, attachment names, five sync states and truncated text were audited.",
+          "The installable shell now composes host-owned back, filter/search/reset, selected-row actions, pagination, attachments and the source five-state sync bar. Position management reuses the same bar through its existing public wrapper.",
+          "Measured local header height64, padding8px 20px, title18px/600, filter padding20px and radius12px against source styles. Local browser exercised selection/delete, query/reset, scheduled/cancel, loading/error/empty/running/synced and long text.",
+          "Long text previously overflowed its measured width without a tooltip trigger after font/layout changes; a length fallback and remeasurement now expose the full text with keyboard focus.",
+          "Fresh external shadcn consumer installed five exact TSX sources plus CSS/tokens, typechecked and built the complete example, exercised paging/select/delete/sync and long-tooltip focus, and retained document width320 with only the 560px table internally scrollable."
+        ],
+        "remaining": [
+          "Authenticated deployed admin routes and exact deployment/source revision remain unverified; current IAB admin route has rendered an empty React root.",
+          "Real list/filter/paging/deletion, RBAC, upload/download and synchronization effects remain consuming-app integration work."
+        ],
+        "evidence": [
+          "local-admin-shell-goal-2026-10-14",
+          "installed-admin-shell-goal-2026-10-14"
+        ],
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/admin/common/AdminPageLayout.tsx",
+            "components/admin/common/AdminPageHeader.tsx",
+            "components/admin/common/AdminFilterBar.tsx",
+            "components/admin/common/AdminTableToolbar.tsx",
+            "components/admin/common/AdminAttachmentList.tsx",
+            "components/admin/common/AdminSyncStatusBar.tsx",
+            "components/admin/common/AdminTruncatedText.tsx"
+          ],
+          "evidence": [
+            "The seven current source files are unchanged from the prior baseline; source geometry and each component purpose were compared with the portable shell.",
+            "Four focused admin-shell tests passed for navigation/filter/selection, attachment URL/callbacks, five sync states/position wrapper and keyboard access to long text. Local browser covered default/empty/loading/error/long/scheduled/running/synced at 320px and source header/filter measurements.",
+            "Fresh shadcn consumer installed five exact TSX sources plus CSS/tokens, typechecked the complete example, built Vite/font/notices, exercised paging/selection/deletion/sync and long tooltip; 320px document width320 while its 560px table scrolled internally."
+          ],
+          "intentionalImprovements": [
+            "Back navigation, querying, deletion and sync are explicit host callbacks instead of implicit routing or no-op buttons.",
+            "Invalid attachment URLs are never rendered as links; authenticated downloads can use a host callback.",
+            "Long text exposes the full value on keyboard focus after late font/layout changes, and filters/toolbars wrap while tables scroll inside narrow containers."
+          ],
+          "hostOwned": [
+            "The consuming application owns API-backed rows/total/page, authorization, persistence, file transfer and synchronization transactions."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed admin states, exact pixel parity and real backend effects could not be verified from the current connection."
+          ]
         }
       },
       "exports": [
         {
           "name": "PrismAdminLayout",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAdminFilterBar",
+          "kind": "component"
+        },
+        {
+          "name": "PrismAdminToolbarAction",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAdminTableToolbar",
           "kind": "component"
         },
         {
@@ -2221,12 +2282,20 @@
           "kind": "component"
         },
         {
+          "name": "PrismAdminSyncStatus",
+          "kind": "type"
+        },
+        {
+          "name": "PrismAdminSyncStatusBar",
+          "kind": "component"
+        },
+        {
           "name": "PrismTruncatedText",
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismAdminLayout } from \"@/components/ui/prism-admin\";\n<PrismAdminLayout title=\"관리\" filters={filters} toolbar={toolbar}>{table}</PrismAdminLayout>;"
+      "usageKind": "component-example",
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismAdminLayout, PrismAdminFilterBar, PrismAdminTableToolbar, PrismAdminSyncStatusBar, PrismAttachmentList, PrismTruncatedText } from \"@/components/ui/prism-admin\";\n\ntype Row = { id: string; name: string; company: string };\nconst seed: Row[] = Array.from({ length: 11 }, (_, i) => ({ id: `position-${i + 1}`, name: `가상 포지션 ${i + 1}`, company: i % 2 ? \"예시사업\" : \"가상전자\" }));\n\nexport function AdminExample() {\n  const [rows, setRows] = useState(seed);\n  const [draft, setDraft] = useState(\"\");\n  const [applied, setApplied] = useState(\"\");\n  const [selected, setSelected] = useState<string[]>([]);\n  const [page, setPage] = useState(1);\n  const [sync, setSync] = useState<\"editing\" | \"scheduled\">(\"editing\");\n  const [files, setFiles] = useState([{ id: \"sample\", name: \"가상 자료.pdf\" }]);\n  const [result, setResult] = useState(\"\");\n  const filtered = rows.filter(row => `${row.name} ${row.company}`.includes(applied));\n  const pageCount = Math.max(1, Math.ceil(filtered.length / 10));\n  return <PrismAdminLayout title=\"포지션 관리\" breadcrumbs={[\"Admin\", \"포지션 관리\"]}\n    onBack={() => setResult(\"이전 페이지 이동 의도\")}\n    actions={<button type=\"button\" onClick={() => setResult(\"등록 의도\")}>등록</button>}\n    filters={<PrismAdminFilterBar\n      onReset={() => { setDraft(\"\"); setApplied(\"\"); setSelected([]); setPage(1); }}\n      onSearch={() => { setApplied(draft.trim()); setSelected([]); setPage(1); }}>\n      <label>포지션 검색 <input value={draft} onChange={event => setDraft(event.target.value)} /></label>\n    </PrismAdminFilterBar>}\n    toolbar={<PrismAdminTableToolbar total={filtered.length} selectedCount={selected.length}\n      actions={[{ label: \"삭제\", onClick: () => { setRows(current => current.filter(row => !selected.includes(row.id))); setSelected([]); setPage(1); } }]} />}\n    pagination={<nav aria-label=\"페이지 이동\"><button type=\"button\" disabled={page === 1} onClick={() => setPage(page - 1)}>이전</button>\n      <span>{page} / {pageCount}</span><button type=\"button\" disabled={page >= pageCount} onClick={() => setPage(page + 1)}>다음</button></nav>}>\n    <div style={{ maxWidth: \"100%\", overflowX: \"auto\" }}><table style={{ minWidth: 560, width: \"100%\" }}>\n      <caption>가상 포지션 목록</caption><thead><tr><th>선택</th><th>포지션</th><th>회사</th></tr></thead>\n      <tbody>{filtered.slice((page - 1) * 10, page * 10).map(row => <tr key={row.id}>\n        <td><input type=\"checkbox\" aria-label={`${row.name} 선택`} checked={selected.includes(row.id)}\n          onChange={event => setSelected(current => event.target.checked ? [...current, row.id] : current.filter(id => id !== row.id))} /></td>\n        <td><PrismTruncatedText text={row.name} maxLength={20} /></td><td>{row.company}</td>\n      </tr>)}</tbody></table></div>\n    <PrismAttachmentList files={files} onRemove={id => setFiles(current => current.filter(file => file.id !== id))}\n      onDownload={file => setResult(`${file.name} 다운로드 의도`)} />\n    <PrismAdminSyncStatusBar status={sync} date=\"2026-10-14\" onSync={() => setSync(\"scheduled\")}\n      onCancelSync={() => setSync(\"editing\")} />\n    <p role=\"status\">{result}</p>\n  </PrismAdminLayout>;\n}"
     },
     {
       "id": "prism-html-export",

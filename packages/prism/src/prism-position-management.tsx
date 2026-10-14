@@ -1,18 +1,17 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import { PrismAdminLayout, PrismTruncatedText } from "./prism-admin";
+import { PrismAdminLayout, PrismAdminSyncStatusBar, PrismTruncatedText, type PrismAdminSyncStatus } from "./prism-admin";
 import { PrismDirectoryTable, type PrismDirectoryColumn } from "./prism-directory";
 import { PrismButton } from "./prism-button";
 import { PrismTag } from "./prism-badge";
 import { PrismInput } from "./prism-field";
 import { PrismMultiSelect, PrismPagination, type PrismOption } from "./prism-selection";
 import { PrismConfirmDialog } from "./prism-dialog";
-import { PrismSkeleton } from "./prism-primitives";
 import { PrismTabs, PrismTabsList, PrismTabsTrigger, PrismTabsContent } from "./prism-tabs";
 
 export type PrismPositionSource = "LIVE" | "TEMP";
 export type PrismPositionChangeFilter = "CREATE" | "UPDATE" | "DELETE" | "UNCHANGED";
 export type PrismPositionChangeStatus = PrismPositionChangeFilter | "PROGRESS" | "FAILED";
-export type PrismPositionSyncStatus = "editing" | "scheduled" | "running" | "synced" | "failed";
+export type PrismPositionSyncStatus = PrismAdminSyncStatus;
 export type PrismPositionFilterOptions = { companies: readonly PrismOption[]; industries: readonly PrismOption[]; jobs: readonly PrismOption[]; roles: readonly PrismOption[] };
 export type PrismPositionFilterDraft = { kinds: readonly ("key" | "normal")[]; companyIds: readonly string[]; industryBlockIds: readonly string[]; jobBlockIds: readonly string[]; roleBlockIds: readonly string[]; changeStatus: readonly PrismPositionChangeFilter[]; keyword: string };
 export type PrismPositionAppliedFilters = { isKeyPosition?: boolean; companyIds: readonly string[]; industryBlockIds: readonly string[]; jobBlockIds: readonly string[]; roleBlockIds: readonly string[]; changeStatus: readonly PrismPositionChangeFilter[]; keyword: string };
@@ -77,21 +76,10 @@ export function paginatePrismPositions<T extends PrismPositionListRow>(result: P
     const pageCount = Math.max(1, Math.ceil(rows.length / size)), page = Math.min(state.page, pageCount);
     return { rows: rows.slice((page - 1) * size, page * size), total: rows.length, pageCount, page };
 }
-const syncLabels: Record<PrismPositionSyncStatus, string> = { editing: "편집 중", scheduled: "동기화 예정", running: "동기화 진행 중", synced: "동기화 완료", failed: "동기화 실패" };
 export function PrismPositionSyncBar({ status, date, onSync, onCancel, loading = false, disabled = false, note }: {
     status: PrismPositionSyncStatus; date: string; onSync?: () => void; onCancel?: () => void; loading?: boolean; disabled?: boolean; note?: string;
 }) {
-    const canAct = !!(onSync || onCancel);
-    const messages: Record<PrismPositionSyncStatus, string> = {
-        editing: `현재 후보 추천에 반영되지 않은 편집 버전입니다. 후보 추천에 반영하려면 ${canAct ? "" : "포지션 관리에서 "}동기화를 진행해 주세요. (최종 수정 일자 : ${date})`,
-        scheduled: `동기화 예정인 버전입니다. 수정이 필요한 경우 동기화를 취소한 후 편집해 주세요. (동기화 예정 일자 : ${date})`,
-        running: `동기화가 진행 중입니다. 반영이 완료될 때까지 기다려 주세요. (동기화 예정 일자 : ${date})`,
-        synced: `현재 후보자 추천에 반영 중인 버전입니다. (반영 일자 : ${date})`,
-        failed: `동기화에 실패하여 변경사항이 후보 추천에 반영되지 않았습니다. 다시 동기화해 주세요. (동기화 실패 일자 : ${date})`,
-    };
-    return <div className="prism-position-sync" aria-busy={loading || undefined}><div className="prism-position-sync-info">{loading ? <><PrismSkeleton width={80} height={20}/><PrismSkeleton width="60%" height={18}/></> : <>
-        <span className="prism-position-sync-label" data-status={status}><i aria-hidden="true"/>{syncLabels[status]}</span><p role={status === "failed" ? "alert" : "status"}>{messages[status]}{note&&<><br/>{note}</>}</p></>}</div>
-        {!loading && canAct && (status === "scheduled" ? <PrismButton variant="line" size="small" disabled={disabled || !onCancel} onClick={onCancel}>동기화 취소</PrismButton> : <PrismButton size="small" disabled={disabled || !onSync || status === "running" || status === "synced"} onClick={onSync}>동기화</PrismButton>)}</div>;
+    return <PrismAdminSyncStatusBar status={status} date={date} onSync={onSync} onCancelSync={onCancel} loading={loading} syncDisabled={disabled} note={note}/>;
 }
 export type PrismPositionAction = { readonly type: "delete"; readonly ids: readonly string[] } | { readonly type: "schedule" | "cancel" };
 export type PrismPositionActionResult = { outcome: "applied" | "no-changes" };

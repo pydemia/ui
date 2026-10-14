@@ -32,7 +32,8 @@ export { PrismChipAutocomplete, PrismAutocomplete, PrismMultiSelect, PrismCheckb
 export { PrismFavoriteProfile, PrismProfile, PrismOutline, PrismCareerTimeline, PrismSummaryBadge, PrismEvidence, PrismBasicInfo, PrismCompetenceMatrix, PrismDesignCompetenceMatrix, prismProfileTabs } from "./prism-profile";
 export type { PrismProfileTab, PrismCareerEntry, PrismDesignCompetenceMatrixModel, PrismFavoriteProfileProps } from "./prism-profile";
 export { PrismMarkdown, PrismSuggestions, PrismGenerationStatus, PrismPositionCard } from "./prism-content";
-export { PrismAdminLayout, PrismAttachmentList, PrismSyncStatus, PrismTruncatedText } from "./prism-admin";
+export { PrismAdminLayout, PrismAdminFilterBar, PrismAdminTableToolbar, PrismAdminSyncStatusBar, PrismAttachmentList, PrismSyncStatus, PrismTruncatedText } from "./prism-admin";
+export type { PrismAdminToolbarAction, PrismAdminSyncStatus } from "./prism-admin";
 export type { PrismAttachment } from "./prism-admin";
 export * from "./prism-document";
 export type { PrismPrintSection, PrismPrintOptionsProps } from "./prism-document";
