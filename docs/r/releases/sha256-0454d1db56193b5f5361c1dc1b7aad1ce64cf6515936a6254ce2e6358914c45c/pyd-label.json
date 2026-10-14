@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-label",
+  "title": "Label",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-0454d1db56193b5f5361c1dc1b7aad1ce64cf6515936a6254ce2e6358914c45c/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/label.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\nfunction Label({ className, ...props }: ComponentProps<\"label\">) {\n    return (\n        <label\n            className={cn(\"block text-sm font-medium text-foreground\", className)}\n            {...props}\n        />\n    );\n}\n\nexport { Label };\n",
+      "type": "registry:ui",
+      "target": "@ui/label.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
