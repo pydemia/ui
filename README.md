@@ -87,15 +87,17 @@ SHA-256으로 기록합니다. `registry:check`는
 
 Design mode는 기존 컴포넌트의 형태·밝기·팔레트를 함께 설정합니다.
 PRISM은 별도 profile을 유지합니다. 일반 앱은 `releasedDesignModes`에서
-선택하고 `resolveThemeSettings`의 기본 출시 검사를 사용합니다. metadata에
-21개 정의가 있다는 사실은 21개가 모두 출시되었다는 의미가 아닙니다.
+선택하고 `resolveThemeSettings`의 기본 출시 검사를 사용합니다.
+Basic과 atlas 20종을 합친 21종을 지원합니다. 18종은 Light/Dark,
+Dark UI·Cyberpunk·Terminal은 Dark를 지원합니다.
+지원 목록과 후속 수동 환경 검수 범위는 [Design modes](research/design-modes.md)에 있습니다.
 `allowUnreleased`는 내부 검수용이며 제품 사용 코드에 추가하지 않습니다.
 
 `aliases.ui: "@/components/ui"`인 Vite 소비자에서 다음 항목을 설치합니다.
 `pyd-design-modes`는 기본 token과 portal scope도 의존성으로 설치합니다.
 
 ```bash
-npx shadcn@4.21.0 add https://pydemia-ui.vercel.app/r/pyd-design-modes.json https://pydemia-ui.vercel.app/r/pyd-button.json https://pydemia-ui.vercel.app/r/pyd-input.json https://pydemia-ui.vercel.app/r/pyd-table.json https://pydemia-ui.vercel.app/r/pyd-badge.json https://pydemia-ui.vercel.app/r/pyd-dialog.json
+npx shadcn@4.21.0 add https://ui.pydemia.ai/r/pyd-design-modes.json https://ui.pydemia.ai/r/pyd-button.json https://ui.pydemia.ai/r/pyd-input.json https://ui.pydemia.ai/r/pyd-table.json https://ui.pydemia.ai/r/pyd-badge.json https://ui.pydemia.ai/r/pyd-dialog.json
 ```
 
 소비자 CSS는 token을 먼저 연결합니다. 재질·디자인 표현을 사용하려면
@@ -156,7 +158,7 @@ URL 공유에는 `foundation/design-mode-settings`의 `parseThemeUrl`과
 
 ```bash
 node scripts/check-design-modes-consumer.mjs
-node scripts/check-design-modes-consumer.mjs --registry-base https://pydemia-ui.vercel.app/r/
+node scripts/check-design-modes-consumer.mjs --registry-base https://ui.pydemia.ai/r/
 ```
 
 첫 명령은 현재 compiled JSON을 로컬 HTTP mirror에서 실제

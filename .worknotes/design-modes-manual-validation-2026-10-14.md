@@ -1,7 +1,18 @@
 # R4 출시 검수 조건
 
-대상 source: `16af79a2ca4794500d14fb6404d8f50ed64c5838`.
+## 최신 사용자 결정 — R6 적용 진행
+
+사용자가 “21종 개발이 완료되었다면, 적용해 줘”라고 요청했다.
+직전의 미검수 범위 기록 후 공개 경로 설명에 이어 받은 실행 지시다.
+실제 ENV 항목은 미검수로 유지하고, 21종을 공개 적용한 뒤 후속 검수하는
+기준으로 진행한다. 아래의 응답 대기·blocked 기록은 이전 상태다.
+현재 실행과 새 source/release 정보는 design-modes-release-r6-2026-10-14.md에 연결한다.
+PRISM 현재 디자인 유지 결정도 계속 적용한다.
+
+현재 대상 source: `736fd49c09c4755b7c359d986d8552f4ecdb68bd` (R5).
+접근성 media 보완의 기반 source는 `16af79a2ca4794500d14fb6404d8f50ed64c5838`다.
 대상 화면: http://127.0.0.1:5173/ 및 /design-qa.html.
+배포용 local 빌드: http://127.0.0.1:5201/.
 사용자에게 보여 준 B 상세 이미지: design-modes-b-r3-workspace-2026-10-14.png.
 일반 표시의 UI는 R3와 같으며 R4는 특수 media 우선순위를 보완한다.
 PRISM은 main/6ea262ef의 현재 디자인과 source를 유지한다.
@@ -33,6 +44,11 @@ async 질문으로 아래 두 처리를 제시했다. 아직 응답을 받지 �
 사용자 판단이나 실제 결과를 받으면 해당 ID와 source revision에 연결한다.
 
 원격 후보: Draft PR https://github.com/pydemia/ui/pull/163,
-head5d92c7601a57ec89dfd2c3f81c6ebf5c7ff7d4a9. 해당 head의 CI는 성공했다.
+head736fd49c09c4755b7c359d986d8552f4ecdb68bd.
+해당 head의 CI38535562314는 completed/success다.
 Vercel 후보는 READY이나 기존 인증 보호가 있어 화면을 검수하지 않았다.
 운영 게시와 검수 조건 선택은 아직 완료되지 않았다.
+
+동일 선행 조건3turn 반복과 독립 보완 완료 후 impasse 판정은
+design-modes-blocked-audit-2026-10-14.md에 기록했다. 사용자 판단 또는
+실제 ENV 결과를 기다리며 Goal은 blocked로 전환한다.

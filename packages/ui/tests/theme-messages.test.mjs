@@ -4,6 +4,7 @@ import {
     createThemeMessage, readThemeMessage,
     createThemeAppliedMessage, readThemeAppliedMessage,
     createThemeInvalidatedMessage, readThemeInvalidatedMessage,
+    releasedDesignModes, resolveThemeSettings,
 } from "../dist/index.js";
 
 const settings = {
@@ -59,12 +60,16 @@ test("partial or malformed messages never silently apply fallback settings", () 
     assert.throws(() => createThemeMessage(settings, -1), TypeError);
 });
 
-test("unreleased modes need explicit QA and unsupported appearances are rejected", () => {
+test("all released modes synchronize without QA and unsupported appearances are rejected", () => {
     const swiss = { ...settings, design: "swiss", colormap: "design" };
-    assert.throws(() => createThemeMessage(swiss, 1), TypeError);
-    const message = createThemeMessage(swiss, 1, { allowUnreleased: true });
-    assert.equal(readThemeMessage(message, -1), null);
-    assert.equal(readThemeMessage(message, -1, { allowUnreleased: true }).settings.design, "swiss");
+    const message = createThemeMessage(swiss, 1);
+    assert.equal(readThemeMessage(message, -1).settings.design, "swiss");
+    for (const mode of releasedDesignModes) {
+        for (const appearance of mode.appearances) {
+            const value = resolveThemeSettings({ design: mode.id, appearance }).settings;
+            assert.deepEqual(readThemeMessage(createThemeMessage(value, 1), -1).settings, value);
+        }
+    }
     assert.equal(readThemeMessage({ ...message, settings: {
         ...settings, design: "dark-ui", appearance: "light",
     } }, -1, { allowUnreleased: true }), null);

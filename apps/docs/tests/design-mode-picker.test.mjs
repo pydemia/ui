@@ -72,9 +72,18 @@ test("all manifest modes are visible; candidate navigation cancels without apply
     } finally { await view.close(); }
 });
 
-test("unreleased modes preview actual controls without allowing commit", async (context) => {
+test("production picker commits released modes and separates any prepared modes", async () => {
     const mode = designModes.find((item) => item.releaseStatus !== "released");
-    if (!mode) return context.skip("All manifest modes are released.");
+    for (const released of designModes.filter((item) => item.releaseStatus === "released")) {
+        const view = await mount();
+        try {
+            assert.equal(option(released.name).getAttribute("aria-disabled"), "false");
+            assert.equal(option(released.name).closest('[data-prepared="true"]'), null);
+            await act(async () => option(released.name).click());
+            assert.deepEqual(view.commits, [released.id]);
+        } finally { await view.close(); }
+    }
+    if (!mode) return;
     const view = await mount();
     try {
         await act(async () => option(mode.name).click());

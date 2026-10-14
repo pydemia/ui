@@ -49,7 +49,7 @@ test("manifest has 21 unique modes, atlas cases and explicit support", () => {
     assert.equal(designModes.length, 21);
     assert.equal(new Set(designModes.map(({ id }) => id)).size, 21);
     assert.equal(new Set(designModes.slice(1).map(({ atlasCaseId }) => atlasCaseId)).size, 20);
-    assert.deepEqual(releasedDesignModes.map(({ id }) => id), ["basic"]);
+    assert.deepEqual(releasedDesignModes.map(({ id }) => id), designModes.map(({ id }) => id));
     for (const mode of designModes) {
         assert.ok(mode.appearances.includes(mode.defaultAppearance));
         assert.ok(Object.isFrozen(mode.tokens));
@@ -86,10 +86,20 @@ test("source Basic and all five palettes preserve every original color", () => {
     }
 });
 
-test("release gate, invalid schema and unsupported appearance report fallback", () => {
+test("released modes apply without QA; invalid schema and unsupported appearance report fallback", () => {
     assert.deepEqual(resolve(undefined), defaultThemeSettings);
-    assert.equal(resolveThemeSettings({ design: "swiss" }).settings.design, "basic");
-    assert.ok(resolveThemeSettings({ design: "swiss" }).issues.length);
+    assert.equal(resolveThemeSettings({ design: "swiss" }).settings.design, "swiss");
+    assert.equal(resolveThemeSettings({ design: "swiss" }).issues.length, 0);
+    for (const mode of releasedDesignModes) {
+        for (const appearance of mode.appearances) {
+            const result = resolveThemeSettings({ design: mode.id, appearance });
+            assert.equal(result.settings.design, mode.id);
+            assert.equal(result.settings.appearance, appearance);
+            assert.deepEqual(result.issues, []);
+            const url = writeThemeUrl(new URL("https://example.test/"), result.settings);
+            assert.deepEqual(parseThemeUrl(url).settings, result.settings);
+        }
+    }
     assert.equal(resolve({ design: "swiss" }).design, "swiss");
     assert.deepEqual(resolve({ version: 2, design: "swiss" }), defaultThemeSettings);
     assert.ok(resolveThemeSettings({ design: "unknown", appearance: "sepia", colormap: "bad" }).issues.length >= 3);
@@ -121,8 +131,8 @@ test("URL roundtrip preserves unrelated query, component, hash and input URL", (
     assert.equal(written.searchParams.get("light.custom"), "keep");
     assert.equal(written.hash, "#usage");
     assert.deepEqual(parseThemeUrl(written, preview).settings, value);
-    assert.equal(parseThemeUrl(written).settings.design, "basic");
-    assert.equal(writeThemeUrl(url, value).searchParams.has("design"), false);
+    assert.deepEqual(parseThemeUrl(written).settings, value);
+    assert.equal(writeThemeUrl(url, value).searchParams.get("design"), "swiss");
     assert.equal(writeThemeUrl(new URL("https://example.test/"), defaultThemeSettings).search, "");
 });
 
@@ -156,7 +166,7 @@ test("scope maps redeclare complete Basic shape, semantic aliases and compositio
     assert.equal(tokens["--accent"], "#123456");
     assert.equal(tokens["--color-accent"], "var(--accent)");
     assert.equal(tokens["--overlay"], "rgb(0 0 0 / 65%)");
-    assert.equal(resolveThemeTokens(value)["--radius"], "5px");
+    assert.equal(resolveThemeTokens(value)["--radius"], "0px");
     const profiles = designModes.map((mode) => resolveThemeTokens(resolve({ design: mode.id }), preview));
     assert.equal(new Set(profiles.map((tokens) => JSON.stringify(tokens))).size, 21);
 });

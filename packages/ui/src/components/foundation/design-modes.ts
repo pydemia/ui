@@ -1,4 +1,4 @@
-/** Pure design metadata; additional modes await visual release validation. */
+/** Pure metadata for the 21 supported design modes. */
 export type Appearance = "light" | "dark";
 export const colorTokens = [
     { name: "Background", token: "--background" },
@@ -404,7 +404,7 @@ export const designModes: readonly DesignModeDefinition[] = profiles.map(
     ([id, name, group, description, palette, tokens, colors], index) => ({
         id, name, group, description,
         atlasCaseId: index === 0 ? null : String(index).padStart(2, "0"),
-        releaseStatus: id === "basic" ? "released" : "ready",
+        releaseStatus: "released",
         appearances: ["dark-ui", "cyber", "terminal"].includes(id)
             ? ["dark"] : ["light", "dark"],
         defaultAppearance: ["dark-ui", "cyber", "terminal"].includes(id)

@@ -1,6 +1,16 @@
 # Design modes 검증 coverage
 
-현재 **Basic released / 추가20종 ready**인 공개 전 후보다. PRISM은 최신
+## R6 최신 적용 결정
+
+사용자 요청으로21종을 released로 활성화한다. R5의 Basic released20 ready
+표시는 역사적 검사 상태이며 현재 manifest의 지원 목록과 구분한다.
+UI300/docs15/typecheck를 새 일반 경로로 검사했고 새 snapshot은
+06554cd1b05b7e3c6db16b4888f65d5d66ac6e875d081596a89b776e3fe0e211/148 items다.
+시각 token/CSS/recipe와39지원 밝기는 R5와 같으며 release metadata만 바뀌었다.
+실제 ENV 검수는 후속 미검수로 유지하고 사용자 최신 결정으로 공개를 진행한다.
+최종 원격·공개·소비자 결과는 release-r6 기록에 연결한다.
+
+아래 R5 당시에는 **Basic released / 추가20종 ready**인 공개 전 후보였다. PRISM은 최신
 main6ea262ef의 현재 디자인과 소스를 보존한다. 운영21종 게시·사용자 승인·
 실제 screen reader·전체 WCAG 인증으로 보고하지 않는다.
 

@@ -200,10 +200,10 @@ test("server rendering preserves scope children and hydration identity", async (
     container.remove();
 });
 
-test("unreleased and malformed settings stay on the strict default path", () => {
+test("unknown design and malformed settings stay on the strict default path", () => {
     const element = document.createElement("div");
     const restore = applyThemeToElement(element, {
-        design: "glass", appearance: "light", colormap: "invalid",
+        design: "unknown", appearance: "light", colormap: "invalid",
         overrides: { light: { "--accent": "url(invalid)" }, dark: {} },
     });
     assert.equal(element.dataset.design, "basic");
