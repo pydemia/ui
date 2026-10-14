@@ -12,4 +12,4 @@
 
 목적·대표 상태·의도한 시각 개선·독립 설치를 확인해 `prism-record`를 **54/58번째 완료 그룹**으로 판정한다. 미판정은 `prism-export`, `prism-html-export`, `prism-print`, `prism-profile-print` 4개다. 원본 배포 revision과 실제 후보 데이터·보상/평가 산식·저장 API/권한은 확인하지 못했다. 범용 기록 요소를 원본의 전문 Survey/Essay/CEO 흐름과 동일하다고 주장하지 않는다.
 
-전체 검증과 PR/preview readback 결과는 게시 후 덧붙인다.
+게시 확인: 커밋 `ee426c05628353a1b738ac11b5a3186d94e4e38a`를 초안 PR #162에 푸시했고 PR head와 본문의 54/58·미판정 4개·362개 테스트를 다시 읽어 확인했다. 같은 SHA의 Verify UI 실행 `38512414826`은 성공했다. Preview 배포 `7056990718`은 success이며 보호된 preview의 컴포넌트 목록, 안내, 검증 기록, `prism-record` 설치 항목, 토큰, 레지스트리 6개 파일이 로컬 `docs/`와 바이트 단위로 일치한다. 인증된 운영 화면과 API 효과를 확인했다는 뜻은 아니다.

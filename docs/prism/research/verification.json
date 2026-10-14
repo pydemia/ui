@@ -1607,8 +1607,8 @@
       }
     },
     "prism-html-export": {
-      "visual": "passed-online-vs-offline-selected-layout; original full profile parity remains partial",
-      "interaction": "passed-selected-runtime",
+      "visual": "source-purpose-style-and-intentional-offline-improvement-passed",
+      "interaction": "passed-local-and-independent-consumer-with-prior-offline-runtime",
       "checks": [
         "4 actual HTML downloads and offline reopened documents at1280/320/default/long",
         "Loaded embedded Pretendard;page/pie/SUMMARY metrics and all3/48career rows match",
@@ -1618,19 +1618,26 @@
         "Live input values and frozen content during slow CSS asset load;caller DOM preserved",
         "CSS parser preserves literal URL text/comments and embeds image-set candidates",
         "Content, form values, inline style, stylesheet conditions and canvas dimensions are captured before asynchronous resources; delayed-font before/after regression demonstrates immutable snapshot.",
-        "Latest long two-profile standalone HTML at 320px has document scrollWidth 320 and internal viewer scrollWidth 718; position-relative viewer contains screen-reader-only text."
+        "Latest long two-profile standalone HTML at 320px has document scrollWidth 320 and internal viewer scrollWidth 718; position-relative viewer contains screen-reader-only text.",
+        "Current frontend 2eeb26ff CandidateProfileHtmlExport and exportProfileHtml.ts were compared: both export the rendered print document and omit the toolbar; the portable utility embeds assets and fails closed instead of retaining inaccessible external links.",
+        "Current local browser downloaded a 3,342,784-byte synthetic HTML with 3 embedded assets; the file has a CSP, no script tags, external HTTP URLs or excluded toolbar. Error state reported failed asset without a successful download, and immediate loading cancellation restored the idle state.",
+        "Fresh isolated shadcn install included 59 modules and typechecked 52 complete examples with Vite/Pretendard/notices. The installed HTML export, PDF export, print and CSS files matched emitted registry bytes. Installed example downloaded a 3,057,190-byte HTML containing embedded font and career content, with CSP and no external HTTP URLs or scripts.",
+        "Earlier current-implementation browser evidence reopened offline default/long HTML at 1280/320 and checked font/chart/layout. This turn could not reopen a file URL in the in-app browser due its URL policy; current output was inspected statically."
       ],
       "remaining": [
-        "Every original profile section/state/style comparison",
-        "All paper sizes/margins and authenticated data/image asset paths",
-        "Cross-browser and full global inherited selector contexts"
+        "Authenticated product data and image authorization paths, all original profile sections and real output pagination remain unverified; complete seven-section document acceptance belongs to prism-profile-print.",
+        "Current in-app browser policy prevented reopening a file URL; historical offline browser validation and current static output inspection are identified separately.",
+        "Cross-browser and full inherited selector contexts are not exhaustively compared."
       ],
       "evidence": [
         "final-html-export",
         "html-export-canvas-photo",
         "reference-html-export-20261009",
         "reference-html-export-offline",
-        "parsed-css-html-export"
+        "parsed-css-html-export",
+        "local-html-export-goal-2026-10-14",
+        "installed-html-export-goal-2026-10-14",
+        ".worknotes/prism-html-export-goal-audit-2026-10-14.md"
       ],
       "localRenderGate": {
         "status": "passed",
@@ -1646,6 +1653,31 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "components/chat/successorCandidate/print/CandidateProfilePrintPreview.tsx",
+          "components/chat/successorCandidate/print/exportProfileHtml.ts"
+        ],
+        "evidence": [
+          "Existing standalone HTML engine and original print-preview export cover static DOM, toolbar exclusion, CSS/font/image/chart inlining, live values, cancellation and download intent; focused tests preserve immutable snapshots and fail on unreadable assets.",
+          "Current local browser checked default download, failed asset and immediate cancellation; current output has no external HTTP, script or toolbar and retains font, chart and print content.",
+          "Fresh full independent shadcn consumer installed exact emitted sources, typechecked 52 examples and Vite built; its HTML example downloaded a standalone static file. Previous implementation-specific offline browser validation covered 1280/320 and long content."
+        ],
+        "intentionalImprovements": [
+          "Unreadable stylesheets, photographs, fonts and charts fail the download instead of leaving absolute external URLs in a purported standalone document.",
+          "The standalone document includes a restrictive CSP and strips executable nodes and handlers while preserving current form values and source DOM.",
+          "A narrow viewport scrolls a fixed-width paper inside the viewer rather than widening the entire document."
+        ],
+        "hostOwned": [
+          "The consuming application supplies the print root, authenticated asset loader, candidate data and document composition; paper sizing and PDF/native print are separate groups."
+        ],
+        "nonBlockingUnknowns": [
+          "The authenticated deployed source commit, real service assets and current file-URL reopening remain unverified."
+        ]
       }
     },
     "prism-memo": {
@@ -7581,10 +7613,11 @@
       "prism-chat-logs",
       "prism-management",
       "prism-document",
-      "prism-record"
+      "prism-record",
+      "prism-html-export"
     ],
-    "acceptedCount": 54,
-    "unassessedGroups": 4,
+    "acceptedCount": 55,
+    "unassessedGroups": 3,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   },
   "domainFormsVerification": {
@@ -7640,5 +7673,13 @@
     "result": "accepted as group 54 of 58",
     "independentConsumer": "35 exact installed files including 14 PRISM TSX; full example typecheck/Vite/Pretendard and 320px zero/missing/scroll/comment save.",
     "limits": "Generic record composition is separate from source-specific Survey, essay, compensation grid and CEO workflow; authenticated service/permissions unverified."
+  },
+  "htmlExportGoalAudit": {
+    "date": "2026-10-14",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "result": "accepted as group 55 of 58",
+    "currentRuntime": "Local browser default/error/cancel and synthetic output inspection; independent installed example download and static inspection.",
+    "priorRuntime": "Earlier offline 1280/320 default/long HTML browser validation; current file-URL reopen blocked by in-app browser policy.",
+    "limits": "Real authenticated assets, complete seven-section profile and OS print are separate boundaries."
   }
 }
