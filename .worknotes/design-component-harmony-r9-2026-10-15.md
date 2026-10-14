@@ -58,3 +58,17 @@
 - 중간snapshot89도 immutable 후보로 보존하며 이전published88 이하 변경없음. sourcefont/colormap/PRISM 제품source 변경없음.
 - 독립 reviewer 최종responsive/source 검토: actionable없음. 수정한flat/frame/disabled/rootunit 문제의 반영을source에서 확인; 실제browser검수는root수행으로 구분.
 - commit·PR·정확한head의CI·main운영배포·최종공개registry 설치/readback 남음.
+
+## PR166 최종 시각 검수 추가 수정
+
+- sourcecommit `f1b33a1a2a1e418de0a5ad61c50b83d8c0f8fe43`, PR166/CI38614790680.
+- 최종 실제Glass 편집기 캡처에서 Code/Prompt inner field가 기존 generic `:not([data-appearance=underline])` attribute specificity에 져 border/radius/inset shadow가 남는 것을 발견. scoped slot selector를 attribute specificity로 맞춰 scoped proximity 우선이 적용되도록 수정.
+- 이전39 frame 검사는 InputGroup/Affixed/Number/Tags를 검사했으며 Code/Prompt 내부border 검사는 빠져 있었음. 이 두 편집면을39모드 체크에 추가해 재검수하고 snapshot91/current source와 CI를 갱신할 예정.
+- source audit의 code field 책임 확인을 실제CSScascade 통과 증거로 대신하지 않음. 운영판은 아직R8, 이 수정까지 검증 후 병합·배포.
+
+## 편집면 수정 릴리스
+
+- Code/Prompt 양쪽 편집면39 지원 조합 실측: non-Basic에서 border0/radius0/shadow none/transparent 통과.
+- 독립 reviewer가 generic selector의0,1,0과 scoped slot0,1,0의 동률·scope proximity 우선 및 Basic제외를 재검토. 앞선 검토 누락을 기록, 해결된 targeted수정으로 판정.
+- snapshot91 `sha256-b10239521b98a8449275eaf81424a59179298b914e78a57062f86dbb9db88a2e` /148items. build→snapshot→build/currentrelease검사0. 이전89/90중간후보·88이하published 보존.
+- PR166 첫head f1b33a1a… CI38614790680 성공. 추가CSS수정의 새head CI 및 실제운영 적용/공개consumer검수는 아직남음.

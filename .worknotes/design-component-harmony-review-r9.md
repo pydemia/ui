@@ -43,3 +43,11 @@ Reviewed the final responsive and documentation-wrapper changes only. The 96px t
 The docs wrapper reset at `apps/docs/src/styles.css:365-373` is limited to a direct `.preview-stage > .preview-stack` containing one of the listed editor/composer/panel/canvas components, and is itself under a non-Basic scope boundary. In the catalog, the matching BlockEditor preview explicitly uses `appearance="panel"`; the reset removes the docs-only decorative wrapper frame while the actual component remains responsible for its own surface. I found no source-level selector that strips a primitive’s own frame or crosses into nested Basic.
 
 No actionable source-level regression found in this bounded follow-up. The reported 320/390px rendered results were not independently verified here.
+
+## Cascade correction follow-up — code/composer controls
+
+The earlier source review missed a real cascade defect that the Glass capture exposed. The unscoped generic field selector at `packages/ui/src/design-modes.css:359` places `:not([data-appearance="underline"])` outside `:where()`, so its specificity is one attribute `(0,1,0)`. The previous scoped `:where([data-slot="code-control"])` and `:where([data-slot="composer-control"])` had zero specificity; scope proximity could not make them beat the more-specific unscoped rule. As a result, the mode field border, radius, and shadow declarations could override the intended primitive resets for these controls.
+
+The current source fixes only those two selectors, now plain `[data-slot="composer-control"]` at line 658 and `[data-slot="code-control"]` at line 681. Each has `(0,1,0)`, tying the generic selector; the component rule is scoped, so its finite scoping proximity beats the unscoped generic rule. This is a targeted tie that uses the already-required `@scope` boundary, not a broad specificity increase. Both selectors remain inside the non-Basic scope, whose `to ([data-design])` boundary keeps nested Basic controls outside the rule. No source-level regression is apparent in the correction, and the cascade defect is resolved in the current tree.
+
+This supersedes the earlier blanket statement that the code/composer control reset had no issue. The reported 39-combination rendered result was not independently verified in this review.

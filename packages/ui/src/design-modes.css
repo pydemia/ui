@@ -655,7 +655,7 @@
     padding: var(--editor-inset);
     gap: var(--editor-gap);
   }
-  :where([data-slot="composer-control"]) {
+  [data-slot="composer-control"] {
     border: 0;
     border-radius: 0;
     box-shadow: none;
@@ -678,7 +678,7 @@
   :where([data-ui="code-editor"][data-variant="flat"]) > [data-slot="editor-footer"] { padding-inline: 0; }
   :where([data-slot="code-surface"]) { --code-surface-inset: calc(2 * var(--field-block-padding)); background-color: var(--surface); }
   :where([data-slot="code-gutter"]) { padding-block: var(--field-block-padding); padding-inline: 10px; width: 52px; }
-  :where([data-slot="code-control"]) {
+  [data-slot="code-control"] {
     min-height: 0;
     height: 100%;
     border: 0;
