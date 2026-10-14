@@ -78,6 +78,9 @@ test("unreleased modes preview actual controls without allowing commit", async (
     const view = await mount();
     try {
         await act(async () => option(mode.name).click());
+        assert.ok(option(mode.name).closest('[data-prepared="true"]'));
+        assert.match(option(mode.name).closest("section").getAttribute("aria-label"), /^준비 중 · /);
+        assert.equal(option("Basic").closest('[data-prepared="true"]'), null);
         assert.equal(view.commits.length, 0);
         assert.equal(document.querySelector(".design-mode-detail-heading h3").textContent, mode.name);
         assert.ok(document.querySelector(".design-mode-picker-footer button").disabled);

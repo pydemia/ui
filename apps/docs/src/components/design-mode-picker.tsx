@@ -41,10 +41,18 @@ export function DesignModePicker({
         `${mode.name} ${mode.group} ${mode.description}`
             .toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()),
     );
-    const groups = [...new Set(filtered.map((mode) => mode.group))];
-    const ordered = groups.flatMap((group) =>
-        filtered.filter((mode) => mode.group === group),
-    );
+    const groups = [false, true].flatMap((prepared) => {
+        const modes = filtered.filter((mode) =>
+            (!allowUnreleased && mode.releaseStatus !== "released") === prepared,
+        );
+        return [...new Set(modes.map((mode) => mode.group))].map((group) => ({
+            key: `${prepared ? "prepared" : "available"}-${group}`,
+            title: prepared ? `준비 중 · ${group}` : group,
+            prepared,
+            modes: modes.filter((mode) => mode.group === group),
+        }));
+    });
+    const ordered = groups.flatMap((group) => group.modes);
     const canApply = allowUnreleased || candidate.releaseStatus === "released";
     const defaultAppearance = candidate.appearances.some((value) =>
         value === settings.appearance,
@@ -112,9 +120,10 @@ export function DesignModePicker({
                         onKeyDown={(event) => navigate(event, true)} />
                     <div className="design-mode-list" aria-label="Design modes">
                         {!filtered.length && <p className="design-mode-empty" role="status">검색 결과가 없습니다.</p>}
-                        {groups.map((group) => <section key={group} aria-label={group}>
-                            <h3>{group}</h3>
-                            <ul>{filtered.filter((mode) => mode.group === group).map((mode) => {
+                        {groups.map((group) => <section key={group.key} aria-label={group.title}
+                            data-prepared={group.prepared || undefined}>
+                            <h3>{group.title}</h3>
+                            <ul>{group.modes.map((mode) => {
                                 const selectable = allowUnreleased || mode.releaseStatus === "released";
                                 const tokens = resolveThemeTokens({
                                     ...settings, design: mode.id,

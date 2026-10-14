@@ -5,7 +5,7 @@ import {
     CardTitle, Checkbox, Dashboard, DashboardPanels, designModes, Dialog, DialogClose, DialogContent,
     DialogDescription, DialogTitle, DialogTrigger, Input, NativeSelect,
     resolveThemeSettings, Select, SelectContent, SelectItem, SelectTrigger,
-    SelectValue, ThemeScope, type Appearance, type DesignModeId,
+    SelectValue, Spinner, ThemeScope, Toggle, type Appearance, type DesignModeId,
 } from "@pydemia/ui";
 import { catalog } from "./catalog";
 import { AnalyticsWorkspace } from "./analytics-workspace";
@@ -36,6 +36,7 @@ function App() {
     const [appearance, setAppearance] = useState<Appearance>("light");
     const [draft, setDraft] = useState("업무 초안 유지");
     const [selected, setSelected] = useState(true);
+    const [pressed, setPressed] = useState(false);
     const settings = resolveThemeSettings({ design, appearance }, options).settings;
     useLayoutEffect(() => applyThemeToElement(
         document.documentElement, settings, options,
@@ -75,10 +76,18 @@ function App() {
                     <Badge variant="accent">선택됨</Badge><Badge variant="danger">오류</Badge>
                     <Checkbox aria-label="검수 선택" checked={selected}
                         onCheckedChange={(value) => setSelected(value === true)} />
+                    <Toggle aria-label="검수 눌림" pressed={pressed}
+                        onPressedChange={setPressed}>눌림 상태</Toggle>
+                    <Button disabled aria-busy="true" data-qa-state="loading">
+                        <Spinner aria-label="검수 로딩" className="text-current" />처리 중
+                    </Button>
                 </div>
                 <label className="grid gap-1">유지할 초안
                     <Input aria-label="유지할 초안" value={draft}
                         onChange={(event) => setDraft(event.target.value)} />
+                </label>
+                <label className="grid gap-1">사용 불가 입력
+                    <Input aria-label="사용 불가 입력" disabled value="보존된 값" />
                 </label>
                 <label className="grid gap-1">오류 입력
                     <Input aria-label="오류 입력" aria-invalid="true"

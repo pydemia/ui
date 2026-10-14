@@ -173,3 +173,70 @@
 - 실제 환경 검수 처리에 관한 async 질문은 응답 대기다. manual-validation
   기록을 읽고 명시적 결과/조건 변경 전20 ready를 released로 올리지 않는다.
   완료율9/14=64.3% 유지. 현재 turn은 실제 통합·수정·검증 progress다.
+
+## 원격 후보와 CI 확인
+
+- codex/design-modes head5d92c7601a57ec89dfd2c3f81c6ebf5c7ff7d4a9를
+  push했고 ls-remote와 local HEAD 일치를 확인했다.
+- Draft PR https://github.com/pydemia/ui/pull/163 생성·task attachment 완료.
+  Verify UI run38527814609는 completed/success다.
+- commit 뒤 full build의 git diff --exit-code -- docs 통과. 기존 published
+  release history는6ea262ef 기준 변경0이다.
+- Vercel preview dpl_Ee3haRejQ3dij1PbF7CbYFGTuLoL은 READY/같은SHA다.
+  browser는 기존 Vercel 인증 페이지에 도달했다. 보호 설정이나 임시 bypass
+  link를 만들지 않았으며 preview 실제 화면 검수로 계산하지 않는다.
+- 운영 main6ea262ef와 현재 PRISM 디자인을 유지한다. 20 ready를 released로
+  올리거나 PR 병합·production 배포를 하지 않았다. 환경 검수 질문 응답 대기.
+- 최종 제품 source/산출물은 원격 보존됐고, 이 CI/원격 확인 문단은 로컬
+  인계 기록이다. 기존 사용자 planning/image/attachment untracked는 유지한다.
+- dev76273 port5173, 최신 consumer62124 port5200/attempt-WmV7Zz가 live다.
+  최신 UI source16af79a2, snapshot5736ea60…2c0a90d0, actual consumer browser.json을
+  사용한다. 이전 port5199/attempt는 현재 소비자 증거로 사용하지 않는다.
+- 다음 단계: 사용자 검수 조건 판단 또는 실제 ENV 결과 수신 → 필요한
+  수정/출시 상태 판정 → source/tests/build/snapshot/build/release-check →
+  원격 CI/병합/production 공개 → 공개21종·설치·PRISM readback.
+  active Goal9/14=64.3% 유지. 현재 turn은 progress이며 blocked audit가 아니다.
+
+## R5 독립 감사와 현재 상태 근거
+
+- 새 completion-audit-r4 leaf의 읽기 전용 결과를 취합했다. router decide와
+  실제 생성 요청 gpt-6-astra/low/fork none을 연결하고 execution metadata
+  unavailable을 유지했다. 결과·판정은 completion-audit-r4 기록에 있다.
+- 부족했던 상태표와 revision 연결을 보완했다. 현재198개 source hash를
+  연결해39지원 밝기·실제144catalog/16family를 재검증했다. 오류0/1280px
+  overflow0, 세 Button 실제hover, Input Tab focus-visible, Toggle pressed,
+  disabled/error/loading 표시와 한글 초안/Checkbox 해제/눌림 유지 확인.
+- QA의 Spinner가 버튼 accent 배경과 같은 색인 예시 오류를 발견했다.
+  text-current로 교정한 뒤39조합 재실행해 버튼 글자색 일치/배경 구분을
+  확인했다. 교정 전 raw도 보존한다. 제품 Spinner source 변경은 없다.
+- mode×family×appearance672행/8상태 열 CSV를 작성했다. 공통 primitive,
+  실제 표시 witness, 개별 증거 없음, 미지원 밝기를 구분하며 전체144개
+  API의 모든 상태 전환을 통과로 보고하지 않는다. solid 대비39조합 실패0.
+- F11에 맞춰 미출시 그룹은 준비 중 영역으로 구분했다. 실제 적용 gate는
+  유지한다. docs15와 현재 docs typecheck 통과. React skill의 같은-agent
+  검토는 독립 reviewer의 결과와 구분했다.
+- coverage의 최신 요약과 전달 묶음 매핑을 앞에 정리했다. 과거 JSON의
+  부재 metadata를 소급 작성하지 않았다. 새 asset loader 검사는 N/A다.
+- 첫 full build 통과, snapshot은 기존5736ea60…과 일치해 추가 생성 없음.
+  후속 build/release-check·배포용 빌드 화면·commit/push가 진행 중이다.
+- PRISM 직접 source/public/build script diff0, Basic released/20 ready,
+  환경 질문 응답 대기를 유지한다. 완료율9/14=64.3%이며 미완료 상태다.
+
+## R5 배포용 빌드 검사
+
+- build→기존 snapshot 확인→build→release-check 통과. registry는 같은
+  5736ea60…2c0a90d0/148 items이며 immutable 추가/변경 없음.
+- 배포용 local5201 화면의 준비 중 Spatial 탐색에서 rootBasic 유지,
+  후보 scopeSpatial, Apply disabled, 실제 Operations2열368.975/230.625px.
+  320×780에서도 overflow0/panelright296<client305/footerbottom771.2.
+  검색 Input의 Escape로 닫기·Design mode: Basic trigger focus 복원 확인.
+  aria-disabled preview option의 도구 press는 실패했으므로 취소 증거로
+  사용하지 않고 enabled 검색 Input에서 실제 성공한 결과를 기록했다.
+- 같은 배포용 빌드의 PRISM 진입: rootDesign null, picker0, prismLight,
+  Pretendard/body253. Dialog440px/white255/Light/nearest designScope null.
+  PRISM source/public/build script와 package-lock은 upstream diff0.
+- atlas source/output hash3d43dc2f… 일치, design-qa/profile-qa 출력 없음.
+- 새 이미지: prepared-r5, prepared-r5-mobile-320, prism-preserved-r5의
+  2026-10-14.png. 운영 공개 결과와 구분한다. 임시 viewport를 reset했다.
+- source/검사/배포 후보 보존을 commit·push할 준비가 됐다. 환경 검수 조건
+  질문은 미응답이며 Goal 완료율9/14=64.3%/Basic released20 ready 유지.

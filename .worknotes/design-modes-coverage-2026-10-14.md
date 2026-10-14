@@ -1,8 +1,82 @@
-# Design modes 개발 검증 coverage
+# Design modes 검증 coverage
 
-공개 전 후보이며 Basic만 released, 20종은 ready다. 이 기록은 개발 IAB와
-독립 설치 앱에서 root가 실행한 검사다. 사용자 승인·운영 게시·전체 WCAG
-인증이나 실제 screen reader 검증을 뜻하지 않는다.
+현재 **Basic released / 추가20종 ready**인 공개 전 후보다. PRISM은 최신
+main6ea262ef의 현재 디자인과 소스를 보존한다. 운영21종 게시·사용자 승인·
+실제 screen reader·전체 WCAG 인증으로 보고하지 않는다.
+
+## 최신 기준과 산출물
+
+| 대상 | 기준 / 결과 |
+| --- | --- |
+| 기존 제품 source | 16af79a2ca4794500d14fb6404d8f50ed64c5838 |
+| 원격 후보 / CI | head5d92c760, Draft PR163, Verify UI38527814609 성공 |
+| R5 변경 | docs Picker 준비 중 그룹, 개발 QA 눌림/로딩/disabled 예시와 관련 docs 검사. 기반 UI·PRISM 변경 없음 |
+| 실제 R5 증거 | browser-evidence/design-modes-states-r5.json. source198개 SHA-256, 시작/종료 시각, IAB2/Chromium, URL 포함. 브라우저 정확한 버전 unavailable |
+| matrix | design-modes-coverage-matrix-r5-2026-10-14.csv, 672행 / 지원624행 / 8상태 열 |
+| 최신 소비자 | attempt-WmV7Zz: shadcn4.21.0 설치15파일, 독립 tsc/Tailwind/Vite, source/CSS·strict gate 통과. 별도 실제21종 Dialog/초안/지역 palette 확인 |
+| 기반 검사 | UI300/300, docs15/15, 최신 PRISM363/363, typecheck 통과 |
+| immutable 후보 | 5736ea60…2c0a90d0 /148 items. build→snapshot→build→release-check 완료, 이전83개와 R3 후보 보존 |
+| 운영 | main6ea262ef. feature21종 공개/readback 미완료 |
+
+R5의198개 파일 해시가 현재 파일과 일치함을 조립 검사로 확인했다.
+R5 commit·후속 빌드 결과는 implementation-status 기록을 따른다.
+R4 이전 검사로 이후 변경의 실행 결과를 대신하지 않는다.
+
+## R5의 실제 상태 검사
+
+18종 Light/Dark와 Dark UI/Cyber/Terminal Dark의39지원 조합을 실행했다.
+각 조합의 실제 catalog144개/16family 렌더 오류0, 1280×720 root overflow0.
+세 Button의 실제 :hover, Tab 이동한 Input의 focus-visible, Toggle 눌림,
+aria-invalid Input, disabled Button/Input, aria-busy Button+Spinner를 확인했다.
+모든 전환 중 한글 초안·Checkbox 해제·눌림 상태 유지. Spinner는 버튼
+글자색과 일치하며 배경과 구분된다. 교정 전 QA 원본은
+states-r5-before-loading-color.json에 보존하고 최종 통과 근거로 사용하지 않는다.
+
+CSV 판정은 아래 범위를 뜻한다.
+
+- PASS_RENDER: 해당 family의 전체 catalog 예시 렌더.
+- PASS_SHARED_BUTTON / INPUT: 공통 primitive의 실제 상태 검사와 family의
+  data-ui 재사용 연결. 이 primitive의 표현 범위에 한정한다.
+- PASS_VISIBLE_WITNESS: 연결된 예시의 실제 상태·computed style. 예시의
+  표시형식 선택 버튼도 포함하므로 원 component의 상태 API로 해석하지 않는다.
+- NO_INDIVIDUAL_WITNESS: 이 fixture에 별도 상태 근거 없음. N/A나 통과로
+  대체하지 않으며 개별 API의 모든 상태 전환 검사로 확대하지 않는다.
+- UNSUPPORTED: Dark UI/Cyber/Terminal의 Light3조합.
+
+Tooltip 반전, ghost/underline control, fullscreen overlay는 의도한 표현
+예외다. 가장 가까운 ThemeScope에서 재질과 recipe를 초기화한다.
+Bento/Spatial의 중간 폭·모바일·독립 Basic recipe geometry는 기존 실제
+별도 증거에 연결하며 DOM 순서·component key를 바꾸지 않았다.
+
+R5 solid semantic 대비 최솟값: 본문12.35, muted5.48, accent6.28,
+danger6.04, focus4.97, success5.83, warning5.00. 본문4.5/focus3 기준 실패0.
+근거는 state-coverage-r5-summary.json이며 gradient/alpha/hover 픽셀과
+임의 override의 대비 인증이 아니다.
+
+새 원격 폰트·texture·비동기 asset loader는 없다. 새 로더의 실패/pending/
+경합 검사는 N/A다. system/serif/mono fallback의 한글·형태·normal layout은
+실제39조합의 표시 근거로 한정한다.
+
+## 근거의 현재성과 남은 범위
+
+이전 all-supported-browser/semantic-contrast/mobile-320-all JSON은 원본
+그대로 보존한다. 자체 commit·시각·브라우저가 없으므로 최신 revision을
+소급 작성하지 않는다. render/공통상태/solid 대비는 R5가 최신 근거다.
+320px21종 후보/명시 적용·iframe·focus는 이전 실행의 역사적 증거다.
+
+최신 소비자 browser.json은 source16af79a2를 명시한다. CLI 원문의
+browserVerified=false와 root 실제 browser21종 결과를 별도 파일로 구분한다.
+공개 registry 설치는 남았다. PRISM363 및 최신 Dialog/PDF가 기준이며
+이전 PRISM36을 최신 실행으로 혼동하지 않는다. source/public/build script는
+main6ea262ef 대비 diff0, PDF 모바일 overflow55/125도 공개 baseline과 같다.
+
+실제 screen reader·200% 확대·forced-colors/reduced-motion·blur 미지원
+환경은 manual-validation의 미검수 상태다. CSSOM 우선순위8/8은 실제
+media 실행을 대체하지 않는다. 환경 처리 질문은 응답 대기다.
+20종 release 판정·공개 설치·production 게시와 공개 후 Basic/shared URL/
+profile/portal/PRISM readback이 남았다. 완료율9/14=64.3% 유지.
+
+## 이전 실행 기록 — 아래 수치는 최신 실행을 대신하지 않음
 
 ## 실행한 조합
 

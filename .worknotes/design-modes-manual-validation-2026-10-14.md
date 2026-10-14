@@ -31,3 +31,8 @@ async 질문으로 아래 두 처리를 제시했다. 아직 응답을 받지 �
 무응답이나 도구의 질문 접수 성공을 승인으로 계산하지 않는다. Basic released,
 20 ready를 유지한다. Source·산출물·소비자·Git 검증은 계속 수행한다.
 사용자 판단이나 실제 결과를 받으면 해당 ID와 source revision에 연결한다.
+
+원격 후보: Draft PR https://github.com/pydemia/ui/pull/163,
+head5d92c7601a57ec89dfd2c3f81c6ebf5c7ff7d4a9. 해당 head의 CI는 성공했다.
+Vercel 후보는 READY이나 기존 인증 보호가 있어 화면을 검수하지 않았다.
+운영 게시와 검수 조건 선택은 아직 완료되지 않았다.
