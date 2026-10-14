@@ -3,7 +3,7 @@
   "name": "prism-domain-forms",
   "type": "registry:ui",
   "title": "Notice / Group / User / Position forms",
-  "description": "공지 노출 범위·게시기간, 사용자 기본 정보·역할별 회사 그룹과 포지션 요구 사항 입력",
+  "description": "공지 노출 범위·게시기간, 회사 그룹명·소속 회사, 사용자 기본 정보·역할별 회사 그룹, 포지션 요구 사항 입력",
   "dependencies": [],
   "registryDependencies": [
     "https://ui.pydemia.ai/prism/r/prism-tokens.json",
@@ -27,7 +27,7 @@
     }
   ],
   "meta": {
-    "sourceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
     "sourceDeltaAudits": [
       {
         "source": "components/admin/company-groups/CompanyGroupForm.tsx",

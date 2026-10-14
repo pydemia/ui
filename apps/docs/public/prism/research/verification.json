@@ -336,12 +336,14 @@
       "interaction": "partial",
       "checks": [
         "Latest account fields, optional company, editable detail, restricted/unknown roles and compound group labels verified by local source and synthetic tests.",
-        "Search and view-only company-bound403/404 callbacks preserve form drafts and host-owned navigation."
+        "Search and view-only company-bound403/404 callbacks preserve form drafts and host-owned navigation.",
+        "Current frontend 2eeb26ff notice, company-group and user form sources are unchanged from 27c4fdbf; position form only adds two redundant catch busy resets already covered by finally.",
+        "Complete portable usage now exports notice, user, company-group, editable position and position access-error examples; notice scope/popup-period contract test and 14 existing current-admin-form cases passed.",
+        "Local browser exercised all four form types, notice popup range activation and 320px notice/position widths; fresh external shadcn consumer installed 17 exact TSX sources plus CSS/tokens, typed/built all five examples, rendered their flows and kept all five within 320px."
       ],
       "remaining": [
-        "Administrator page/list/bulk/role API/position restoration purpose and style comparison.",
-        "Current source/consumer/preview keyboard, restricted, optional company, long/compact and font/pixel comparison.",
-        "Real authenticated backend and deployed revision binding; current A4 and production."
+        "Authenticated deployed forms and their exact source revision remain unverified.",
+        "Host authorization, real service validation, file upload/persistence, group/user/position save and access-error navigation require integration."
       ],
       "localRenderGate": {
         "status": "passed",
@@ -360,6 +362,37 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "evidence": [
+        "local-domain-forms-goal-2026-10-14",
+        "installed-domain-forms-goal-2026-10-14"
+      ],
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "components/admin/notices/NoticeForm.tsx",
+          "components/admin/company-groups/CompanyGroupForm.tsx",
+          "components/admin/users/UserForm.tsx",
+          "components/admin/positions/PositionForm.tsx"
+        ],
+        "evidence": [
+          "Current source audit covered notice visibility/popup period, group name/company selection, user account role/group and position context/requirements; the position-form delta only repeats busy resets in catch paths.",
+          "15 focused current-admin-form tests passed, including notice publication scope/popup dates; local browser exercised the four form types and 320px notice/position rendering.",
+          "Fresh external shadcn consumer installed 17 exact TSX sources and CSS/tokens; five complete usage exports typechecked, Vite/font/notices built, all five rendered and stayed within 320px."
+        ],
+        "intentionalImprovements": [
+          "Narrow forms use stacked fields and preserve a 320px document width instead of forcing desktop columns.",
+          "Company-group name checks abort stale requests and permit retry without discarding the draft; form submissions prevent duplicate work.",
+          "Missing/restricted user role metadata retains stored values, and position context failures preserve create/edit drafts while view access errors are scoped to the current request."
+        ],
+        "hostOwned": [
+          "The consuming application supplies available companies, roles, groups and position options, permission decisions, file upload/storage, validation services, save callbacks and navigation."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed form states, real API effects and exact pixel parity could not be verified from the current connection."
+        ]
       }
     },
     "prism-notice": {
@@ -7290,10 +7323,19 @@
       "prism-collection",
       "prism-notice",
       "prism-position-blocks",
-      "prism-position-management"
+      "prism-position-management",
+      "prism-domain-forms"
     ],
-    "acceptedCount": 46,
-    "unassessedGroups": 12,
+    "acceptedCount": 47,
+    "unassessedGroups": 11,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
+  },
+  "domainFormsVerification": {
+    "date": "2026-10-14",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "sourceDelta": "Notice, company-group and user forms unchanged; position form catch paths add two redundant busy resets.",
+    "focusedTests": "15/15 passed, including new notice scope and popup-period coverage.",
+    "localBrowser": "Four form types, notice all-companies/popup activation, 320px notice and position forms with document width320.",
+    "independentConsumer": "Fresh external shadcn install: 17 exact TSX sources, CSS/tokens exact, five exports typechecked, Vite/font/notices build; five rendered and each retained document width320."
   }
 }

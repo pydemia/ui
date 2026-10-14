@@ -5,7 +5,7 @@ const dom=new JSDOM('<!doctype html><html><body><div id="root"></div></body></ht
 for(const key of ["window","document","HTMLElement","Element","Node","Event","FocusEvent","KeyboardEvent","MouseEvent","MutationObserver","HTMLInputElement","HTMLButtonElement","HTMLFormElement","HTMLSelectElement","HTMLTextAreaElement","DocumentFragment","CustomEvent","NodeFilter"])globalThis[key]=dom.window[key];
 Object.defineProperty(globalThis,"navigator",{configurable:true,value:dom.window.navigator});globalThis.getComputedStyle=dom.window.getComputedStyle;globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const {createElement:h,act,useState,StrictMode}=await import("react"),{createRoot}=await import("react-dom/client");
-const {PrismCompanyGroupForm,PrismUserForm,PrismPositionForm,preparePrismUserAccountDraft}=await import("../dist/index.js");
+const {PrismNoticeForm,PrismCompanyGroupForm,PrismUserForm,PrismPositionForm,preparePrismUserAccountDraft}=await import("../dist/index.js");
 const root=createRoot(document.getElementById("root"));
 const options=[{value:"one",label:"가상전자"},{value:"two",label:"예시사업"}];
 const tick=()=>new Promise(resolve=>setTimeout(resolve,10));
@@ -13,6 +13,19 @@ const input=label=>[...document.querySelectorAll('.prism-field')].find(field=>fi
 const save=()=>document.querySelector('button[type="submit"]');
 async function type(label,value){await act(async()=>{const element=input(label);Object.getOwnPropertyDescriptor(dom.window.HTMLInputElement.prototype,"value").set.call(element,value);element.dispatchEvent(new Event("input",{bubbles:true}));});}
 async function blur(label){await act(async()=>{input(label).dispatchEvent(new FocusEvent("focusout",{bubbles:true}));await tick();});}
+test("notice publication requires a scope and a complete popup period, then clears hidden dates",async()=>{
+    let value,setValue;const saves=[];
+    function Demo(){const[state,update]=useState({title:"합성 공지",content:"검증 문구",companyIds:[],allCompanies:false,popup:false,start:null,end:null});value=state;setValue=update;return h(PrismNoticeForm,{value:state,onValueChange:update,companies:options,files:[],onFilesSelected(){},canChooseAllCompanies:true,onSubmit:()=>saves.push(state),onCancel(){}});}
+    const toggle=label=>[...document.querySelectorAll('label.prism-choice')].find(node=>node.textContent===label)?.querySelector('[role="switch"]');
+    await act(async()=>root.render(h(Demo)));assert.equal(save().disabled,true);
+    await act(async()=>toggle("전체 회사").click());assert.equal(value.allCompanies,true);assert.equal(save().disabled,false);
+    await act(async()=>document.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));assert.equal(saves.length,1);assert.equal(saves[0].allCompanies,true);
+    await act(async()=>toggle("팝업 노출").click());assert.equal(value.popup,true);assert.equal(save().disabled,true);
+    await act(async()=>setValue(current=>({...current,start:"2026-10-15",end:"2026-10-14"})));assert.equal(save().disabled,true);
+    await act(async()=>setValue(current=>({...current,end:"2026-10-16"})));assert.equal(save().disabled,false);
+    await act(async()=>toggle("팝업 노출").click());assert.deepEqual([value.popup,value.start,value.end],[false,null,null]);assert.equal(save().disabled,false);
+    await act(async()=>toggle("전체 회사").click());assert.equal(save().disabled,true);await act(async()=>root.render(null));
+});
 test("create group rejects stale name responses and waits for the current validated name",async()=>{
     const requests=[];function Demo(){const[value,setValue]=useState({name:"",companyIds:["one"]});return h(PrismCompanyGroupForm,{mode:"create",value,onValueChange:setValue,companies:options,validateName:(name,{signal})=>new Promise(resolve=>requests.push({name,signal,resolve})),onSubmit(){},onCancel(){}});}
     await act(async()=>root.render(h(Demo)));assert.equal(save().disabled,true);
