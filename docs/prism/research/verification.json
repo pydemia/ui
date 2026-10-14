@@ -377,7 +377,11 @@
         "Local policy synthetic long and wide HTML scrolls within dialog body at desktop and 320px, with sandbox omitting allow-scripts",
         "Policy loading preserves and dims prior HTML; absent-document loading, failure and close states pass independent DOM tests",
         "Final 289 PRISM tests and workspace typecheck pass; 59 installed sources and CSS match registry bytes; 40 complete examples and Vite/font/notices pass",
-        "Installed policy browser shows version selection, long/wide document scrolling and footer close at desktop and 320px"
+        "Installed policy browser shows version selection, long/wide document scrolling and footer close at desktop and 320px",
+        "Current source inquiry dialog, popup, notice list/detail and policy flows audited at frontend 2eeb26ff; incomplete inquiry status and missing standalone dialog corrected",
+        "Local 1280px and 320px browser exercised inquiry waiting/done detail, list ordering, popup attachment intent, notice detail, policy v1/v2 and narrow layouts",
+        "Independent shadcn consumer installed 10 exact TSX sources plus PRISM CSS and base tokens, typechecked complete notice example and built with Tailwind, Vite, Pretendard and asset notices",
+        "348 PRISM tests passed, including inquiry list/detail status and popup navigation/attachment; 48 portable usage examples typechecked"
       ],
       "evidence": [
         "local-policy",
@@ -386,12 +390,13 @@
         "local-notice-dialog-2026-10-13",
         "authenticated-policy-dialog-2026-10-13",
         "local-policy-dialog-2026-10-13",
-        "installed-policy-dialog-2026-10-13"
+        "installed-policy-dialog-2026-10-13",
+        "local-notice-goal-2026-10-14",
+        "installed-notice-goal-2026-10-14"
       ],
       "remaining": [
-        "Deployed empty/error/attachments and narrow-screen states",
-        "Full notice detail font/pixel parity and deployed source revision binding",
-        "Deployed policy version/error/mobile states and all policy font/pixel parity",
+        "Deployed empty/error/attachments and narrow-screen states are not confirmed against a bound deployment revision",
+        "Deployed policy version/error/mobile states and authenticated host service integration remain unverified",
         "Inquiry history menu trigger is commented out in current frontend source; mounted dialog is not currently reachable from that menu"
       ],
       "localRenderGate": {
@@ -408,6 +413,35 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "chat/notice/NoticePopup.tsx",
+          "chat/sidebar/NoticeDialog.tsx",
+          "chat/sidebar/InquiryHistoryDialog.tsx",
+          "chat/sidebar/PrivacyPolicyDialog.tsx"
+        ],
+        "evidence": [
+          "Source audit covered popup ordering/attachments, notice list/detail/async states, inquiry statuses and conditional answers, and sandboxed policy versions.",
+          "Local 1280px and 320px browser exercised notice/inquiry/popup/policy flows; narrow notice/inquiry lists retain date and owner/status without horizontal clipping.",
+          "Independent shadcn consumer installed 10 exact module sources, PRISM CSS and tokens; complete usage example typechecked and built with Tailwind/Vite/font/asset notices.",
+          "348 PRISM tests passed; 48 portable usage examples typechecked."
+        ],
+        "intentionalImprovements": [
+          "Notice and inquiry rows stack on narrow screens so title, status/author and date stay visible.",
+          "The mobile notice popup sizes its content to the notice instead of reserving a 500px empty body.",
+          "Inquiry pending records omit the answer section; completed records show an answer when supplied."
+        ],
+        "hostOwned": [
+          "The consuming application supplies notice and policy services, request ordering, download handling and authorization."
+        ],
+        "nonBlockingUnknowns": [
+          "Current deployed frontend revision and authenticated empty/error/mobile integration are not established.",
+          "The source inquiry sidebar trigger is commented out."
+        ]
       }
     },
     "prism-profile-sections": {
@@ -7167,10 +7201,11 @@
       "prism-directory",
       "prism-context",
       "prism-assessment",
-      "prism-collection"
+      "prism-collection",
+      "prism-notice"
     ],
-    "acceptedCount": 43,
-    "unassessedGroups": 15,
+    "acceptedCount": 44,
+    "unassessedGroups": 14,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   }
 }

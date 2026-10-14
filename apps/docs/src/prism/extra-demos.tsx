@@ -6,7 +6,7 @@ import { PrismNoticeForm, PrismCompanyGroupForm, PrismUserForm, PrismPositionFor
 import { PrismCriteriaEditor, PrismCriteriaRemapDialog, PrismCriteriaTag, PrismPositionCheckCard, PrismCompanyContextDialog, PrismCandidateDirectory, PrismDirectoryTable, PrismBlankLayout, PrismErrorContent, PrismServiceContact, type PrismCriteriaDraft, PrismResponse, PrismButton, PrismContextForm, PrismAffiliateLogo, PrismSidebarProfile, PrismSkeletonGroup, PrismPopover, PrismFavoriteToggle, PrismShowMore, PrismInputLabel,
     PrismPositionDetail, PrismRiskTable, PrismDiagnosis, PrismScoreEssay, PrismExpertiseCards, PrismExperienceTopics, PrismExperienceEvidence, PrismLeadershipReasons, PrismPositionMatrix, PrismProfileAnalysis,
     PrismCandidateCollection, PrismCandidateFilterBar, PrismSuccessorBoard, PrismProfileMemoComposer, PrismProfileMemoCollection, type PrismProfileMemoItem,
-    PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistory, PrismPrivacyPolicyDialog,
+    PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistoryDialog, PrismPrivacyPolicyDialog,
     type PrismContextValues, type PrismCandidateFilters, type PrismCandidate, type PrismNotice, type PrismResponseBlock,
 } from "@pydemia/prism";
 import type { FixtureState } from "./catalog";
@@ -68,22 +68,23 @@ export function CollectionDemo({ state }: { state: FixtureState }) {
             onDelete={async id=>setMemos(current=>current.filter(memo=>memo.id!==id))}
             composer={<PrismProfileMemoComposer value={draft} onValueChange={setDraft} onSubmit={async content => {const id=`demo-${++nextMemoId.current}`;setMemos(current=>[...current,{id,content,createdAt:"2026-10-09",isMine:true}]);setDraft("");}} busy={state === "loading"} />} /><p role="status">{result}</p></div>;
 }
-const notices: PrismNotice[] = [{id:"one",title:"가상 공지사항",date:"2026.10.03",author:"김작성",content:"실제 사내 공지나 인사 데이터를 포함하지 않는 UI 예시입니다."},{id:"two",title:"두 번째 가상 공지",date:"2026.10.02",author:"이작성",content:"비모달 공지의 다음 항목입니다."}];
+const notices: PrismNotice[] = [{id:"one",title:"가상 공지사항",date:"2026.10.03",author:"김작성",content:"실제 사내 공지나 인사 데이터를 포함하지 않는 UI 예시입니다.",attachments:[{id:"sample-file",name:"가상 안내문.pdf"}]},{id:"two",title:"두 번째 가상 공지",date:"2026.10.02",author:"이작성",content:"비모달 공지의 다음 항목입니다."}];
 const noticeSummaries = notices.map(({id,title,date,author}) => ({id,title,date,author}));
 export function NoticeDemo({ state }: { state: FixtureState }) {
     const [open,setOpen] = useState(false); const [popup,setPopup] = useState(false); const [selected,setSelected] = useState<string | null>(null); const [index,setIndex] = useState(0); const [order,setOrder] = useState<"latest" | "oldest">("latest");
     const [detail,setDetail] = useState<PrismNotice | null>(null); const [detailStatus,setDetailStatus] = useState<"ready" | "loading">("ready"); const detailRequest = useRef(0);
     useEffect(() => () => { detailRequest.current += 1; }, []);
-    const [inquiry,setInquiry] = useState<string | null>(null); const [policy,setPolicy] = useState("one"); const [policyOpen,setPolicyOpen] = useState(false);
+    const [inquiry,setInquiry] = useState<string | null>(null); const [inquiryOpen,setInquiryOpen] = useState(false); const [inquiryOrder,setInquiryOrder] = useState<"latest" | "oldest">("latest");
+    const [policy,setPolicy] = useState("one"); const [policyOpen,setPolicyOpen] = useState(false); const [retried,setRetried] = useState(false); const [download,setDownload] = useState("");
     const selectNotice = (id: string | null) => { const request = ++detailRequest.current; setSelected(id); setDetail(null); if (!id) { setDetailStatus("ready"); return; }
         setDetailStatus("loading"); window.setTimeout(() => { if (request === detailRequest.current) { setDetail(notices.find(item => item.id === id) ?? null); setDetailStatus("ready"); } }, 160); };
     const changeOpen = (next: boolean) => { setOpen(next); if (!next) selectNotice(null); else setOrder("latest"); };
     const policyHtml = state === "loading" || state === "error" || state === "empty" ? "" : `<!doctype html><html lang="ko"><body><h1>가상 방침 ${policy === "one" ? "1" : "2"}</h1><p>법적 약관이 아닌 문서 표시용 가상 내용입니다.</p>${Array.from({length:22},(_,index)=>`<p>예시 조항 ${index+1}. 이 문단은 긴 HTML 문서가 대화상자 안에서 스크롤되는지 확인하기 위한 가상 내용입니다.</p>`).join("")}${policy === "two" ? `<table style="min-width:760px"><tr><th>가상 항목</th><th>설명</th></tr><tr><td>너비 확인</td><td>가로로 긴 문서를 확인합니다.</td></tr></table>` : ""}</body></html>`;
-    return <div className="prism-demo-stack"><div className="prism-demo-row"><PrismButton onClick={() => setOpen(true)}>공지 목록 열기</PrismButton><PrismButton onClick={() => setPopup(true)}>공지 팝업 열기</PrismButton><PrismButton onClick={() => setPolicyOpen(true)}>방침 열기</PrismButton></div>
-        <PrismNoticeDialog open={open} onOpenChange={changeOpen} items={state === "empty" ? [] : noticeSummaries} total={state === "empty" ? 0 : 12} selectedId={selected} onSelect={selectNotice} detail={detail} detailStatus={detailStatus} order={order} onOrderChange={setOrder} status={state === "loading" || state === "error" ? state : "ready"} />
-        <PrismNoticePopup open={popup} notices={notices} index={index} onIndexChange={setIndex} onClose={() => setPopup(false)} />
-        <PrismInquiryHistory items={state === "empty" ? [] : [{id:"one",title:"가상 문의",date:"2026.10.03",status:"답변 대기",content:"가상 문의 내용",answer:null}]} selectedId={inquiry} onSelect={setInquiry} />
-        <PrismPrivacyPolicyDialog open={policyOpen} onOpenChange={setPolicyOpen} versions={[{id:"one",label:"v1"},{id:"two",label:"v2"}]} value={policy} onValueChange={setPolicy} documentHtml={policyHtml} loading={state === "loading"} /></div>;
+    return <div className="prism-demo-stack"><div className="prism-demo-row"><PrismButton onClick={() => setOpen(true)}>공지 목록 열기</PrismButton><PrismButton onClick={() => setPopup(true)}>공지 팝업 열기</PrismButton><PrismButton onClick={() => {setInquiry(null);setInquiryOrder("latest");setInquiryOpen(true);}}>문의 내역 열기</PrismButton><PrismButton onClick={() => setPolicyOpen(true)}>방침 열기</PrismButton></div>
+        <PrismNoticeDialog open={open} onOpenChange={changeOpen} items={state === "empty" ? [] : noticeSummaries} total={state === "empty" ? 0 : 12} selectedId={selected} onSelect={selectNotice} detail={detail} detailStatus={detailStatus} order={order} onOrderChange={setOrder} status={state === "loading" || state === "error" && !retried ? state : "ready"} onRetry={() => setRetried(true)} onDownload={setDownload} />
+        <PrismNoticePopup open={popup} notices={notices} index={index} onIndexChange={setIndex} onClose={() => setPopup(false)} onDownload={setDownload} />
+        <PrismInquiryHistoryDialog open={inquiryOpen} onOpenChange={setInquiryOpen} items={state === "empty" ? [] : [{id:"waiting",title:"가상 문의",date:"2026.10.03",status:"waiting",content:"가상 문의 내용",answer:null},{id:"done",title:"처리된 가상 문의",date:"2026.10.02",status:"done",content:"완료된 가상 문의 내용",answer:"가상 처리 결과입니다."}]} selectedId={inquiry} onSelect={setInquiry} order={inquiryOrder} onOrderChange={setInquiryOrder} />
+        <PrismPrivacyPolicyDialog open={policyOpen} onOpenChange={setPolicyOpen} versions={[{id:"one",label:"v1"},{id:"two",label:"v2"}]} value={policy} onValueChange={setPolicy} documentHtml={policyHtml} loading={state === "loading"} /><p role="status">{download && `첨부파일 ${download} 선택`}</p></div>;
 }
 
 export function ResponseDemo({ state }: { state: FixtureState }) {

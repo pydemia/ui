@@ -12,7 +12,7 @@ globalThis.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 const { createElement: h, act } = await import("react");
 const { createRoot } = await import("react-dom/client");
-const { PrismNoticeDialog, PrismPrivacyPolicyDialog } = await import("../dist/index.js");
+const { PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistoryDialog, PrismPrivacyPolicyDialog } = await import("../dist/index.js");
 const root = createRoot(document.getElementById("root"));
 afterEach(async () => { await act(async () => root.render(null)); });
 const rows = [
@@ -89,4 +89,57 @@ test("policy dialog shows loading and failure states when no document is availab
     await act(async () => root.render(h(PrismPrivacyPolicyDialog, { ...props, loading: false })));
     assert.match(dialog().textContent, /개인정보처리방침을 불러오지 못했습니다/);
     assert.match(dialog().textContent, /잠시 후 다시 시도해 주세요/);
+});
+
+test("inquiry dialog orders records, opens detail and shows a result only for completed answers", async () => {
+    const items = [
+        { id: "waiting", title: "가상 대기 문의", date: "2026.10.02", status: "waiting", content: "확인 중", answer: null },
+        { id: "done", title: "가상 완료 문의", date: "2026.10.03", status: "done", content: "처리 요청", answer: "처리했습니다." },
+    ];
+    let selectedId = null, order = "latest", closed = false;
+    const renderInquiry = () => act(async () => root.render(h(PrismInquiryHistoryDialog, { open: true, onOpenChange: next => { closed = !next; }, items, total: 9, selectedId, onSelect: next => { selectedId = next; }, order, onOrderChange: next => { order = next; } })));
+    await renderInquiry();
+    assert.match(dialog().textContent, /Total 9/);
+    assert.deepEqual([...dialog().querySelectorAll("tbody button")].map(node => node.textContent), ["가상 완료 문의", "가상 대기 문의"]);
+    await click([...dialog().querySelectorAll("button")].find(node => node.textContent === "등록 최신순"));
+    assert.equal(order, "oldest");
+    await renderInquiry();
+    assert.deepEqual([...dialog().querySelectorAll("tbody button")].map(node => node.textContent), ["가상 대기 문의", "가상 완료 문의"]);
+    await click([...dialog().querySelectorAll("tbody button")].find(node => node.textContent === "가상 대기 문의"));
+    assert.equal(selectedId, "waiting");
+    await renderInquiry();
+    assert.match(dialog().textContent, /문의내용/);
+    assert.doesNotMatch(dialog().textContent, /문의결과|처리했습니다/);
+    selectedId = "done";
+    await renderInquiry();
+    assert.match(dialog().textContent, /문의결과|처리했습니다/);
+    await click([...dialog().querySelectorAll("footer button")].find(node => node.textContent === "목록으로"));
+    assert.equal(selectedId, null);
+    selectedId = "deleted";
+    await renderInquiry();
+    assert.equal(dialog().querySelector("h2")?.textContent, "문의내역");
+    assert.match(dialog().textContent, /Total 9/);
+    await click([...dialog().querySelectorAll("footer button")].find(node => node.textContent === "닫기"));
+    assert.equal(closed, true);
+});
+
+test("notice popup cycles without a modal overlay and routes attachment intent", async () => {
+    const items = [
+        { id: "first", title: "첫 공지", date: "2026.10.03", author: "예시", content: "본문", attachments: [{ id: "file", name: "가상 파일.pdf" }] },
+        { id: "second", title: "둘째 공지", date: "2026.10.02", author: "예시", content: "본문" },
+    ];
+    let index = 0, downloaded = "", closed = false;
+    const renderPopup = () => act(async () => root.render(h(PrismNoticePopup, { open: true, notices: items, index, onIndexChange: next => { index = next; }, onClose: () => { closed = true; }, onDownload: id => { downloaded = id; } })));
+    await renderPopup();
+    const popup = document.querySelector(".prism-notice-popup");
+    assert.equal(popup.getAttribute("role"), "dialog");
+    assert.equal(document.querySelector('[data-state="open"][aria-hidden="true"]'), null);
+    await click([...popup.querySelectorAll("button")].find(node => node.textContent === "가상 파일.pdf"));
+    assert.equal(downloaded, "file");
+    await click(popup.querySelector('[aria-label="다음 공지"]'));
+    assert.equal(index, 1);
+    await renderPopup();
+    assert.match(document.querySelector(".prism-notice-popup").textContent, /둘째 공지|2\/2/);
+    await act(async () => { document.querySelector(".prism-notice-popup").dispatchEvent(new dom.window.KeyboardEvent("keydown", { key: "Escape", bubbles: true })); });
+    assert.equal(closed, true);
 });

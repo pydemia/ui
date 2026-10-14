@@ -4150,7 +4150,7 @@
       "name": "Notice / Inquiry / Policy",
       "category": "Overlays",
       "purpose": "공지 목록·상세·비모달 팝업·문의 내역·방침 버전",
-      "contract": "공지 팝업은 비모달입니다. 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 개인정보처리방침은 620px 대화상자와 140px 버전 선택, 닫기 footer를 사용합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서의 너비·높이를 실측해 대화상자 본문에서 스크롤합니다. 버전 목록·HTML·조회 상태와 요청 경쟁 방지는 소비자가 소유합니다.",
+      "contract": "공지 팝업은 비모달이며 첨부파일 선택을 호출자에게 전달합니다. 공지 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 문의 내역은 별도 대화상자에서 상태·정렬·문의내용·완료된 답변을 표시합니다. 개인정보처리방침은 620px 대화상자와 140px 버전 선택, 닫기 footer를 사용합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서의 너비·높이를 실측해 대화상자 본문에서 스크롤합니다. 버전 목록·HTML·조회 상태와 요청 경쟁 방지는 소비자가 소유합니다.",
       "referenceRevision": "7ecfc9af072d9f4aeb0f4d7706f16bd1a73f2ef9",
       "states": [
         "default",
@@ -4164,7 +4164,7 @@
         "chat/sidebar/InquiryHistoryDialog.tsx",
         "chat/sidebar/PrivacyPolicyDialog.tsx"
       ],
-      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismNoticeDialog, type PrismNotice, type PrismNoticeListItem } from \"@pydemia/prism\";\n\nconst rows: PrismNoticeListItem[] = [\n  { id: \"notice-demo\", title: \"가상 서비스 안내\", date: \"2026.10.03\", author: \"예시 운영자\" },\n];\nconst detail: PrismNotice = {\n  ...rows[0], content: \"공지 상세 조회 결과를 표시하는 합성 데이터입니다.\",\n};\n\nexport function NoticeExample() {\n  const [open, setOpen] = useState(false);\n  const [selectedId, setSelectedId] = useState<string | null>(null);\n  const [order, setOrder] = useState<\"latest\" | \"oldest\">(\"latest\");\n  return <section>\n    <PrismButton onClick={() => { setSelectedId(null); setOrder(\"latest\"); setOpen(true); }}>공지사항 열기</PrismButton>\n    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={rows} total={12}\n      selectedId={selectedId} onSelect={setSelectedId}\n      detail={selectedId === detail.id ? detail : null}\n      order={order} onOrderChange={setOrder} />\n  </section>;\n}",
+      "usage": "import { useState } from \"react\";\nimport { PrismButton, PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistoryDialog, PrismPrivacyPolicyDialog, type PrismNotice, type PrismInquiry } from \"@pydemia/prism\";\n\nconst notices: PrismNotice[] = [\n  { id: \"one\", title: \"가상 서비스 안내\", date: \"2026.10.03\", author: \"예시 운영자\", content: \"합성 공지 본문\", attachments: [{ id: \"sample\", name: \"가상 안내문.pdf\" }] },\n  { id: \"two\", title: \"가상 변경 안내\", date: \"2026.10.02\", author: \"예시 운영자\", content: \"두 번째 합성 공지\" },\n];\nconst inquiries: PrismInquiry[] = [\n  { id: \"waiting\", title: \"가상 문의\", date: \"2026.10.03\", status: \"waiting\", content: \"확인을 요청합니다.\", answer: null },\n  { id: \"done\", title: \"처리된 가상 문의\", date: \"2026.10.02\", status: \"done\", content: \"처리 요청입니다.\", answer: \"처리했습니다.\" },\n];\nconst versions = [{ id: \"one\", label: \"v1\" }, { id: \"two\", label: \"v2\" }];\nexport function NoticeExample() {\n  const [noticeOpen, setNoticeOpen] = useState(false);\n  const [popupOpen, setPopupOpen] = useState(false);\n  const [inquiryOpen, setInquiryOpen] = useState(false);\n  const [policyOpen, setPolicyOpen] = useState(false);\n  const [noticeId, setNoticeId] = useState<string | null>(null);\n  const [inquiryId, setInquiryId] = useState<string | null>(null);\n  const [noticeOrder, setNoticeOrder] = useState<\"latest\" | \"oldest\">(\"latest\");\n  const [inquiryOrder, setInquiryOrder] = useState<\"latest\" | \"oldest\">(\"latest\");\n  const [popupIndex, setPopupIndex] = useState(0);\n  const [version, setVersion] = useState(\"one\");\n  const [downloaded, setDownloaded] = useState(\"\");\n  const html = `<!doctype html><html lang=\"ko\"><body><h1>가상 방침 ${version}</h1><p>합성 문서입니다.</p></body></html>`;\n  return <section data-prism=\"light\">\n    <PrismButton onClick={() => { setNoticeId(null); setNoticeOrder(\"latest\"); setNoticeOpen(true); }}>공지사항</PrismButton>\n    <PrismButton onClick={() => { setPopupIndex(0); setPopupOpen(true); }}>공지 팝업</PrismButton>\n    <PrismButton onClick={() => { setInquiryId(null); setInquiryOrder(\"latest\"); setInquiryOpen(true); }}>문의내역</PrismButton>\n    <PrismButton onClick={() => setPolicyOpen(true)}>개인정보처리방침</PrismButton>\n    <PrismNoticeDialog open={noticeOpen} onOpenChange={setNoticeOpen}\n      items={notices.map(({ id, title, date, author }) => ({ id, title, date, author }))}\n      total={notices.length} selectedId={noticeId} onSelect={setNoticeId}\n      detail={notices.find(item => item.id === noticeId) ?? null}\n      order={noticeOrder} onOrderChange={setNoticeOrder} onDownload={setDownloaded} />\n    <PrismNoticePopup open={popupOpen} notices={notices} index={popupIndex}\n      onIndexChange={setPopupIndex} onClose={() => setPopupOpen(false)} onDownload={setDownloaded} />\n    <PrismInquiryHistoryDialog open={inquiryOpen} onOpenChange={setInquiryOpen}\n      items={inquiries} selectedId={inquiryId} onSelect={setInquiryId}\n      order={inquiryOrder} onOrderChange={setInquiryOrder} />\n    <PrismPrivacyPolicyDialog open={policyOpen} onOpenChange={setPolicyOpen}\n      versions={versions} value={version} onValueChange={setVersion} documentHtml={html} />\n    <output>{downloaded && `첨부파일 ${downloaded} 선택`}</output>\n  </section>;\n}",
       "sourcePath": "packages/prism/src/prism-notice.tsx",
       "previewUrl": "/prism?component=prism-notice",
       "embedUrl": "/prism?component=prism-notice&embed=1",
@@ -4184,7 +4184,11 @@
           "Local policy synthetic long and wide HTML scrolls within dialog body at desktop and 320px, with sandbox omitting allow-scripts",
           "Policy loading preserves and dims prior HTML; absent-document loading, failure and close states pass independent DOM tests",
           "Final 289 PRISM tests and workspace typecheck pass; 59 installed sources and CSS match registry bytes; 40 complete examples and Vite/font/notices pass",
-          "Installed policy browser shows version selection, long/wide document scrolling and footer close at desktop and 320px"
+          "Installed policy browser shows version selection, long/wide document scrolling and footer close at desktop and 320px",
+          "Current source inquiry dialog, popup, notice list/detail and policy flows audited at frontend 2eeb26ff; incomplete inquiry status and missing standalone dialog corrected",
+          "Local 1280px and 320px browser exercised inquiry waiting/done detail, list ordering, popup attachment intent, notice detail, policy v1/v2 and narrow layouts",
+          "Independent shadcn consumer installed 10 exact TSX sources plus PRISM CSS and base tokens, typechecked complete notice example and built with Tailwind, Vite, Pretendard and asset notices",
+          "348 PRISM tests passed, including inquiry list/detail status and popup navigation/attachment; 48 portable usage examples typechecked"
         ],
         "evidence": [
           "local-policy",
@@ -4193,12 +4197,13 @@
           "local-notice-dialog-2026-10-13",
           "authenticated-policy-dialog-2026-10-13",
           "local-policy-dialog-2026-10-13",
-          "installed-policy-dialog-2026-10-13"
+          "installed-policy-dialog-2026-10-13",
+          "local-notice-goal-2026-10-14",
+          "installed-notice-goal-2026-10-14"
         ],
         "remaining": [
-          "Deployed empty/error/attachments and narrow-screen states",
-          "Full notice detail font/pixel parity and deployed source revision binding",
-          "Deployed policy version/error/mobile states and all policy font/pixel parity",
+          "Deployed empty/error/attachments and narrow-screen states are not confirmed against a bound deployment revision",
+          "Deployed policy version/error/mobile states and authenticated host service integration remain unverified",
           "Inquiry history menu trigger is commented out in current frontend source; mounted dialog is not currently reachable from that menu"
         ],
         "localRenderGate": {
@@ -4215,6 +4220,35 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "chat/notice/NoticePopup.tsx",
+            "chat/sidebar/NoticeDialog.tsx",
+            "chat/sidebar/InquiryHistoryDialog.tsx",
+            "chat/sidebar/PrivacyPolicyDialog.tsx"
+          ],
+          "evidence": [
+            "Source audit covered popup ordering/attachments, notice list/detail/async states, inquiry statuses and conditional answers, and sandboxed policy versions.",
+            "Local 1280px and 320px browser exercised notice/inquiry/popup/policy flows; narrow notice/inquiry lists retain date and owner/status without horizontal clipping.",
+            "Independent shadcn consumer installed 10 exact module sources, PRISM CSS and tokens; complete usage example typechecked and built with Tailwind/Vite/font/asset notices.",
+            "348 PRISM tests passed; 48 portable usage examples typechecked."
+          ],
+          "intentionalImprovements": [
+            "Notice and inquiry rows stack on narrow screens so title, status/author and date stay visible.",
+            "The mobile notice popup sizes its content to the notice instead of reserving a 500px empty body.",
+            "Inquiry pending records omit the answer section; completed records show an answer when supplied."
+          ],
+          "hostOwned": [
+            "The consuming application supplies notice and policy services, request ordering, download handling and authorization."
+          ],
+          "nonBlockingUnknowns": [
+            "Current deployed frontend revision and authenticated empty/error/mobile integration are not established.",
+            "The source inquiry sidebar trigger is commented out."
+          ]
         }
       },
       "exports": [
@@ -4243,7 +4277,15 @@
           "kind": "type"
         },
         {
+          "name": "PrismInquiryHistoryProps",
+          "kind": "type"
+        },
+        {
           "name": "PrismInquiryHistory",
+          "kind": "component"
+        },
+        {
+          "name": "PrismInquiryHistoryDialog",
           "kind": "component"
         },
         {
@@ -4260,7 +4302,7 @@
         }
       ],
       "usageKind": "component-example",
-      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismNoticeDialog, type PrismNotice, type PrismNoticeListItem } from \"@/components/ui/prism-notice\";\n\nconst rows: PrismNoticeListItem[] = [\n  { id: \"notice-demo\", title: \"가상 서비스 안내\", date: \"2026.10.03\", author: \"예시 운영자\" },\n];\nconst detail: PrismNotice = {\n  ...rows[0], content: \"공지 상세 조회 결과를 표시하는 합성 데이터입니다.\",\n};\n\nexport function NoticeExample() {\n  const [open, setOpen] = useState(false);\n  const [selectedId, setSelectedId] = useState<string | null>(null);\n  const [order, setOrder] = useState<\"latest\" | \"oldest\">(\"latest\");\n  return <section>\n    <PrismButton onClick={() => { setSelectedId(null); setOrder(\"latest\"); setOpen(true); }}>공지사항 열기</PrismButton>\n    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={rows} total={12}\n      selectedId={selectedId} onSelect={setSelectedId}\n      detail={selectedId === detail.id ? detail : null}\n      order={order} onOrderChange={setOrder} />\n  </section>;\n}"
+      "registryUsage": "import { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistoryDialog, PrismPrivacyPolicyDialog, type PrismNotice, type PrismInquiry } from \"@/components/ui/prism-notice\";\n\nconst notices: PrismNotice[] = [\n  { id: \"one\", title: \"가상 서비스 안내\", date: \"2026.10.03\", author: \"예시 운영자\", content: \"합성 공지 본문\", attachments: [{ id: \"sample\", name: \"가상 안내문.pdf\" }] },\n  { id: \"two\", title: \"가상 변경 안내\", date: \"2026.10.02\", author: \"예시 운영자\", content: \"두 번째 합성 공지\" },\n];\nconst inquiries: PrismInquiry[] = [\n  { id: \"waiting\", title: \"가상 문의\", date: \"2026.10.03\", status: \"waiting\", content: \"확인을 요청합니다.\", answer: null },\n  { id: \"done\", title: \"처리된 가상 문의\", date: \"2026.10.02\", status: \"done\", content: \"처리 요청입니다.\", answer: \"처리했습니다.\" },\n];\nconst versions = [{ id: \"one\", label: \"v1\" }, { id: \"two\", label: \"v2\" }];\nexport function NoticeExample() {\n  const [noticeOpen, setNoticeOpen] = useState(false);\n  const [popupOpen, setPopupOpen] = useState(false);\n  const [inquiryOpen, setInquiryOpen] = useState(false);\n  const [policyOpen, setPolicyOpen] = useState(false);\n  const [noticeId, setNoticeId] = useState<string | null>(null);\n  const [inquiryId, setInquiryId] = useState<string | null>(null);\n  const [noticeOrder, setNoticeOrder] = useState<\"latest\" | \"oldest\">(\"latest\");\n  const [inquiryOrder, setInquiryOrder] = useState<\"latest\" | \"oldest\">(\"latest\");\n  const [popupIndex, setPopupIndex] = useState(0);\n  const [version, setVersion] = useState(\"one\");\n  const [downloaded, setDownloaded] = useState(\"\");\n  const html = `<!doctype html><html lang=\"ko\"><body><h1>가상 방침 ${version}</h1><p>합성 문서입니다.</p></body></html>`;\n  return <section data-prism=\"light\">\n    <PrismButton onClick={() => { setNoticeId(null); setNoticeOrder(\"latest\"); setNoticeOpen(true); }}>공지사항</PrismButton>\n    <PrismButton onClick={() => { setPopupIndex(0); setPopupOpen(true); }}>공지 팝업</PrismButton>\n    <PrismButton onClick={() => { setInquiryId(null); setInquiryOrder(\"latest\"); setInquiryOpen(true); }}>문의내역</PrismButton>\n    <PrismButton onClick={() => setPolicyOpen(true)}>개인정보처리방침</PrismButton>\n    <PrismNoticeDialog open={noticeOpen} onOpenChange={setNoticeOpen}\n      items={notices.map(({ id, title, date, author }) => ({ id, title, date, author }))}\n      total={notices.length} selectedId={noticeId} onSelect={setNoticeId}\n      detail={notices.find(item => item.id === noticeId) ?? null}\n      order={noticeOrder} onOrderChange={setNoticeOrder} onDownload={setDownloaded} />\n    <PrismNoticePopup open={popupOpen} notices={notices} index={popupIndex}\n      onIndexChange={setPopupIndex} onClose={() => setPopupOpen(false)} onDownload={setDownloaded} />\n    <PrismInquiryHistoryDialog open={inquiryOpen} onOpenChange={setInquiryOpen}\n      items={inquiries} selectedId={inquiryId} onSelect={setInquiryId}\n      order={inquiryOrder} onOrderChange={setInquiryOrder} />\n    <PrismPrivacyPolicyDialog open={policyOpen} onOpenChange={setPolicyOpen}\n      versions={versions} value={version} onValueChange={setVersion} documentHtml={html} />\n    <output>{downloaded && `첨부파일 ${downloaded} 선택`}</output>\n  </section>;\n}"
     },
     {
       "id": "prism-response",

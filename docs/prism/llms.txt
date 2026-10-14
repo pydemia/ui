@@ -1079,7 +1079,7 @@ export function CollectionExample() {
 
 ## Notice / Inquiry / Policy
 공지 목록·상세·비모달 팝업·문의 내역·방침 버전
-Contract: 공지 팝업은 비모달입니다. 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 개인정보처리방침은 620px 대화상자와 140px 버전 선택, 닫기 footer를 사용합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서의 너비·높이를 실측해 대화상자 본문에서 스크롤합니다. 버전 목록·HTML·조회 상태와 요청 경쟁 방지는 소비자가 소유합니다.
+Contract: 공지 팝업은 비모달이며 첨부파일 선택을 호출자에게 전달합니다. 공지 목록·전체 건수·정렬·선택 후 상세 조회와 각 조회 상태는 소비자가 공급합니다. 문의 내역은 별도 대화상자에서 상태·정렬·문의내용·완료된 답변을 표시합니다. 개인정보처리방침은 620px 대화상자와 140px 버전 선택, 닫기 footer를 사용합니다. 정책 HTML은 script 실행 권한 없는 sandbox iframe에 표시하고 문서의 너비·높이를 실측해 대화상자 본문에서 스크롤합니다. 버전 목록·HTML·조회 상태와 요청 경쟁 방지는 소비자가 소유합니다.
 States: default, empty, loading, error
 Registry: /prism/r/prism-notice.json
 Source: packages/prism/src/prism-notice.tsx
@@ -1088,25 +1088,48 @@ Installed usage:
 ```tsx
 import { useState } from "react";
 import { PrismButton } from "@/components/ui/prism-button";
-import { PrismNoticeDialog, type PrismNotice, type PrismNoticeListItem } from "@/components/ui/prism-notice";
+import { PrismNoticeDialog, PrismNoticePopup, PrismInquiryHistoryDialog, PrismPrivacyPolicyDialog, type PrismNotice, type PrismInquiry } from "@/components/ui/prism-notice";
 
-const rows: PrismNoticeListItem[] = [
-  { id: "notice-demo", title: "가상 서비스 안내", date: "2026.10.03", author: "예시 운영자" },
+const notices: PrismNotice[] = [
+  { id: "one", title: "가상 서비스 안내", date: "2026.10.03", author: "예시 운영자", content: "합성 공지 본문", attachments: [{ id: "sample", name: "가상 안내문.pdf" }] },
+  { id: "two", title: "가상 변경 안내", date: "2026.10.02", author: "예시 운영자", content: "두 번째 합성 공지" },
 ];
-const detail: PrismNotice = {
-  ...rows[0], content: "공지 상세 조회 결과를 표시하는 합성 데이터입니다.",
-};
-
+const inquiries: PrismInquiry[] = [
+  { id: "waiting", title: "가상 문의", date: "2026.10.03", status: "waiting", content: "확인을 요청합니다.", answer: null },
+  { id: "done", title: "처리된 가상 문의", date: "2026.10.02", status: "done", content: "처리 요청입니다.", answer: "처리했습니다." },
+];
+const versions = [{ id: "one", label: "v1" }, { id: "two", label: "v2" }];
 export function NoticeExample() {
-  const [open, setOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [order, setOrder] = useState<"latest" | "oldest">("latest");
-  return <section>
-    <PrismButton onClick={() => { setSelectedId(null); setOrder("latest"); setOpen(true); }}>공지사항 열기</PrismButton>
-    <PrismNoticeDialog open={open} onOpenChange={setOpen} items={rows} total={12}
-      selectedId={selectedId} onSelect={setSelectedId}
-      detail={selectedId === detail.id ? detail : null}
-      order={order} onOrderChange={setOrder} />
+  const [noticeOpen, setNoticeOpen] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [inquiryOpen, setInquiryOpen] = useState(false);
+  const [policyOpen, setPolicyOpen] = useState(false);
+  const [noticeId, setNoticeId] = useState<string | null>(null);
+  const [inquiryId, setInquiryId] = useState<string | null>(null);
+  const [noticeOrder, setNoticeOrder] = useState<"latest" | "oldest">("latest");
+  const [inquiryOrder, setInquiryOrder] = useState<"latest" | "oldest">("latest");
+  const [popupIndex, setPopupIndex] = useState(0);
+  const [version, setVersion] = useState("one");
+  const [downloaded, setDownloaded] = useState("");
+  const html = `<!doctype html><html lang="ko"><body><h1>가상 방침 ${version}</h1><p>합성 문서입니다.</p></body></html>`;
+  return <section data-prism="light">
+    <PrismButton onClick={() => { setNoticeId(null); setNoticeOrder("latest"); setNoticeOpen(true); }}>공지사항</PrismButton>
+    <PrismButton onClick={() => { setPopupIndex(0); setPopupOpen(true); }}>공지 팝업</PrismButton>
+    <PrismButton onClick={() => { setInquiryId(null); setInquiryOrder("latest"); setInquiryOpen(true); }}>문의내역</PrismButton>
+    <PrismButton onClick={() => setPolicyOpen(true)}>개인정보처리방침</PrismButton>
+    <PrismNoticeDialog open={noticeOpen} onOpenChange={setNoticeOpen}
+      items={notices.map(({ id, title, date, author }) => ({ id, title, date, author }))}
+      total={notices.length} selectedId={noticeId} onSelect={setNoticeId}
+      detail={notices.find(item => item.id === noticeId) ?? null}
+      order={noticeOrder} onOrderChange={setNoticeOrder} onDownload={setDownloaded} />
+    <PrismNoticePopup open={popupOpen} notices={notices} index={popupIndex}
+      onIndexChange={setPopupIndex} onClose={() => setPopupOpen(false)} onDownload={setDownloaded} />
+    <PrismInquiryHistoryDialog open={inquiryOpen} onOpenChange={setInquiryOpen}
+      items={inquiries} selectedId={inquiryId} onSelect={setInquiryId}
+      order={inquiryOrder} onOrderChange={setInquiryOrder} />
+    <PrismPrivacyPolicyDialog open={policyOpen} onOpenChange={setPolicyOpen}
+      versions={versions} value={version} onValueChange={setVersion} documentHtml={html} />
+    <output>{downloaded && `첨부파일 ${downloaded} 선택`}</output>
   </section>;
 }
 ```
