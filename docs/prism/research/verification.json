@@ -549,8 +549,8 @@
       }
     },
     "prism-document": {
-      "visual": "pending",
-      "interaction": "partial",
+      "visual": "source-purpose-style-with-responsive-improvement-passed",
+      "interaction": "passed-local-and-independent-consumer",
       "checks": [
         "Actual two-page fixture PDF renders",
         "Page 2 navigation and manual 90 percent zoom",
@@ -558,14 +558,20 @@
         "390px page fit uses 245.90625 x 348px canvas inside 356 x 380px viewport",
         "Width fit subtracts 32px total padding once: 324px canvas at 390px frame; 254px at 320px; 958px at 1024px",
         "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px",
-        "전체 bytes/host loader·native 연속 Viewer·원본 toolbar와독립 pdf.css,재시도/취소/immutable download context를 보완. 기존 출력 options/preview 소스는 byte 보존."
+        "전체 bytes/host loader·native 연속 Viewer·원본 toolbar와독립 pdf.css,재시도/취소/immutable download context를 보완. 기존 출력 options/preview 소스는 byte 보존.",
+        "Current source 2eeb26ff PDF dialog and print-options files/SCSS are unchanged from the previously reviewed 087811ff version; the full seven-section CandidateProfilePrintPreview is owned by prism-profile-print.",
+        "Local 1280px toolbar retained source 46/64px inputs and 12px 20px padding; at 320px the document stayed 320px and the PDF viewer/toolbar did not overflow.",
+        "Fresh external shadcn consumer matched 25 installed files including 9 PRISM TSX sources, typechecked and built the full dialog/options/preview example with PDF.js worker and Pretendard.",
+        "Installed 320px browser rendered a real two-page synthetic PDF in a 296px dialog, navigated to page 2, zoomed to 90% with 723px internal scroll, downloaded byte-identical PDF, rejected an HTML response and recovered on retry; print selection reset on reopening."
       ],
       "remaining": [
-        "Source PDF toolbar/fit states comparison",
-        "actual browser print pagination"
+        "Authenticated deployed PDF service URL, permissions and deployed revision remain unverified.",
+        "Actual seven-section profile pagination and OS/native print outcome are tracked in prism-profile-print/prism-print, not this PDF/options group."
       ],
       "evidence": [
-        "local-pdf-responsive"
+        "packages/prism/tests/pdf-report.test.mjs",
+        "local-prism-document-2026-10-14",
+        "installed-prism-document-2026-10-14"
       ],
       "localRenderGate": {
         "status": "passed",
@@ -579,6 +585,32 @@
         ],
         "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
         "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+      },
+      "goalAcceptance": {
+        "status": "accepted",
+        "criteria": "2026-10-14 purpose-and-design-with-improvements",
+        "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+        "sourceScope": [
+          "components/chat/successorCandidate/attitude/PdfViewerDialog.tsx",
+          "components/chat/successorCandidate/attitude/PdfViewerDialog.module.scss",
+          "components/chat/successorCandidate/print/PrintOptionsDialog.tsx",
+          "components/chat/successorCandidate/print/PrintOptionsDialog.module.scss"
+        ],
+        "evidence": [
+          "PDF viewer retains source toolbar geometry, real page navigation/zoom/fit, verified whole-file bytes, retry and cancellation contracts.",
+          "Complete installable example combines PDF dialog, controlled print options and generic preview; the isolated consumer built it and exercised actual PDF download and failure recovery at 320px.",
+          "The seven-section source print document and native print session are separately owned by prism-profile-print and prism-print."
+        ],
+        "intentionalImprovements": [
+          "At 320px the 1200px source dialog constrains to 296px while retaining internal PDF scrolling and an accessible toolbar.",
+          "An HTML response is rejected as a PDF and can be retried after the asset recovers."
+        ],
+        "hostOwned": [
+          "The consuming application supplies authorized PDF URLs or bytes, section contents and real print handling."
+        ],
+        "nonBlockingUnknowns": [
+          "Authenticated deployed PDF/service and physical print outcome were unavailable in this audit."
+        ]
       }
     },
     "prism-panel": {
@@ -7511,10 +7543,11 @@
       "prism-admin",
       "prism-management-tools",
       "prism-chat-logs",
-      "prism-management"
+      "prism-management",
+      "prism-document"
     ],
-    "acceptedCount": 52,
-    "unassessedGroups": 6,
+    "acceptedCount": 53,
+    "unassessedGroups": 5,
     "basis": "Only groups individually audited against purpose, representative design/states, intentional improvements, accessibility/responsiveness and independent installation are counted. Earlier visual/interaction partial statuses use stricter source-parity criteria."
   },
   "domainFormsVerification": {
@@ -7556,5 +7589,12 @@
     "responsiveImprovement": "320px user form changes from two approx. 121px fields to one approx. 254px field; desktop two-column layout retained.",
     "consumer": "Fresh shadcn install: 16 exact TSX sources plus exact CSS; full example typecheck/Vite build and 320px valid save, required errors, AI, criteria, affected-position dialog.",
     "limits": "Synthetic callback flows do not prove authenticated deployed pixels, backend persistence, AI, query or RBAC."
+  },
+  "documentGoalAudit": {
+    "date": "2026-10-14",
+    "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+    "result": "accepted as group 53 of 58",
+    "independentConsumer": "25 exact installed files including 9 PRISM TSX; complete example typecheck/Vite, worker/font; 320px real two-page PDF, download byte identity, error/retry, options reset.",
+    "limits": "Authenticated PDF service and physical/native print unavailable; complete profile document is separately audited."
   }
 }

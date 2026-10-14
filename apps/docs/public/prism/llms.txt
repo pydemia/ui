@@ -576,17 +576,47 @@ export function PdfDownloadExample() {
 
 ## PDF / Print
 문서 페이지·배율·맞춤·다운로드와 출력 정보 선택
-Contract: PDF.js로 실제 PDF를 렌더링하며 workerUrl은 설치한 pdfjs-dist와 같은 버전이어야 합니다. 페이지는 1부터, 수동 배율 기본 범위는 30–100%이며 minZoom/maxZoom으로 확장할 수 있습니다. height로 높이를 지정하고 페이지/너비 맞춤은 실제 viewport 여백을 반영합니다. 확대 문서는 내부 스크롤하며 비동기 렌더를 취소합니다. 출력 섹션·선택·인쇄 callback은 소비자가 소유합니다.
+Contract: PDF.js로 실제 PDF를 렌더링하며 workerUrl은 설치한 pdfjs-dist와 같은 버전이어야 합니다. PDF 대화상자는 원본의 기본 1200px/90vh와 도구막대 46/64px 입력·12px 20px padding을 따르고 좁은 화면에서는 viewport 안으로 제한합니다. 호스트가 PDF URL 또는 전체 bytes를 공급하고, URL fallback/인증은 loadPdf로 연결합니다. 페이지는 1부터, 수동 배율 기본 범위는 30–100%이며 minZoom/maxZoom으로 확장할 수 있습니다. height로 높이를 지정하고 페이지/너비 맞춤은 실제 viewport 여백을 반영합니다. 확대 문서는 내부 스크롤하며 비동기 렌더를 취소합니다. 출력 옵션은 원본의 440px 대화상자·두 기본 섹션을 예로 들며 controlled 값은 새 대화상자를 열 때 소비자가 초기화할 수 있습니다. 범용 미리보기의 섹션 내용·선택·인쇄 callback은 소비자가 소유하고, 7분류 프로필 문서·실제 인쇄는 prism-profile-print와 prism-print 범위입니다.
 States: default, error
 Registry: /prism/r/prism-document.json
 Source: packages/prism/src/prism-document.tsx
-Usage kind: integration-fragment
+Usage kind: component-example
 Installed usage:
 ```tsx
-import { PrismPdfViewer } from "@/components/ui/prism-document";
+/// <reference types="vite/client" />
+import { useState } from "react";
+import { PrismButton } from "@/components/ui/prism-button";
+import { PrismPdfDialog, PrismPrintOptions, PrismPrintPreview, type PrismPrintSection } from "@/components/ui/prism-document";
 import "@/components/ui/prism-pdf.css";
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
-<PrismPdfViewer title="문서" url="/document.pdf" workerUrl={workerUrl} />;
+
+const sections: PrismPrintSection[] = [
+  { id: "summary", label: "종합 요약 정보", content: <p>가상 후보자의 요약입니다.</p> },
+  { id: "compensation", label: "보상 정보", content: <p>가상 보상 정보입니다.</p> },
+];
+
+export function DocumentExample() {
+  const [pdfOpen, setPdfOpen] = useState(false);
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [confirmed, setConfirmed] = useState<string[] | null>(null);
+  const [status, setStatus] = useState("");
+  return <section data-prism="light" style={{ display: "grid", gap: 16 }}>
+    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+      <PrismButton onClick={() => setPdfOpen(true)}>PDF 확인</PrismButton>
+      <PrismButton variant="line" onClick={() => { setSelected([]); setOptionsOpen(true); }}>출력 정보 선택</PrismButton>
+    </div>
+    <PrismPdfDialog title="가상 검증 문서" open={pdfOpen} onOpenChange={setPdfOpen}
+      url="/document.pdf" workerUrl={workerUrl} />
+    <PrismPrintOptions sections={sections} value={selected} onValueChange={setSelected}
+      open={optionsOpen} onOpenChange={setOptionsOpen}
+      onConfirm={value => { setConfirmed([...value]); setOptionsOpen(false); }} />
+    {confirmed && <PrismPrintPreview title="가상 후보자 프로필" sections={sections}
+      selected={confirmed} onPrint={() => setStatus("인쇄 요청 의도")} />}
+    <p role="status">{status}</p>
+  </section>;
+}
+// 소비자 앱은 public/document.pdf에 접근 가능한 PDF를 둡니다.
 ```
 
 ## Workspace shell

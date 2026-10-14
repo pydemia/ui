@@ -2537,25 +2537,24 @@
       "name": "PDF / Print",
       "category": "File & media",
       "purpose": "문서 페이지·배율·맞춤·다운로드와 출력 정보 선택",
-      "contract": "PDF.js로 실제 PDF를 렌더링하며 workerUrl은 설치한 pdfjs-dist와 같은 버전이어야 합니다. 페이지는 1부터, 수동 배율 기본 범위는 30–100%이며 minZoom/maxZoom으로 확장할 수 있습니다. height로 높이를 지정하고 페이지/너비 맞춤은 실제 viewport 여백을 반영합니다. 확대 문서는 내부 스크롤하며 비동기 렌더를 취소합니다. 출력 섹션·선택·인쇄 callback은 소비자가 소유합니다.",
-      "referenceRevision": "087811ffba678ece20ee00b1c3c5d117a1d3d323",
+      "contract": "PDF.js로 실제 PDF를 렌더링하며 workerUrl은 설치한 pdfjs-dist와 같은 버전이어야 합니다. PDF 대화상자는 원본의 기본 1200px/90vh와 도구막대 46/64px 입력·12px 20px padding을 따르고 좁은 화면에서는 viewport 안으로 제한합니다. 호스트가 PDF URL 또는 전체 bytes를 공급하고, URL fallback/인증은 loadPdf로 연결합니다. 페이지는 1부터, 수동 배율 기본 범위는 30–100%이며 minZoom/maxZoom으로 확장할 수 있습니다. height로 높이를 지정하고 페이지/너비 맞춤은 실제 viewport 여백을 반영합니다. 확대 문서는 내부 스크롤하며 비동기 렌더를 취소합니다. 출력 옵션은 원본의 440px 대화상자·두 기본 섹션을 예로 들며 controlled 값은 새 대화상자를 열 때 소비자가 초기화할 수 있습니다. 범용 미리보기의 섹션 내용·선택·인쇄 callback은 소비자가 소유하고, 7분류 프로필 문서·실제 인쇄는 prism-profile-print와 prism-print 범위입니다.",
+      "referenceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
       "states": [
         "default",
         "error"
       ],
       "source": [
         "chat/successorCandidate/attitude/PdfViewerDialog.tsx",
-        "chat/successorCandidate/print/PrintOptionsDialog.tsx",
-        "chat/successorCandidate/print/CandidateProfilePrintPreview.tsx"
+        "chat/successorCandidate/print/PrintOptionsDialog.tsx"
       ],
-      "usage": "import { PrismPdfViewer } from \"@pydemia/prism\";\nimport \"@pydemia/prism/pdf.css\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n<PrismPdfViewer title=\"문서\" url=\"/document.pdf\" workerUrl={workerUrl} />;",
+      "usage": "/// <reference types=\"vite/client\" />\nimport { useState } from \"react\";\nimport { PrismButton, PrismPdfDialog, PrismPrintOptions, PrismPrintPreview, type PrismPrintSection } from \"@pydemia/prism\";\nimport \"@pydemia/prism/pdf.css\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n\nconst sections: PrismPrintSection[] = [\n  { id: \"summary\", label: \"종합 요약 정보\", content: <p>가상 후보자의 요약입니다.</p> },\n  { id: \"compensation\", label: \"보상 정보\", content: <p>가상 보상 정보입니다.</p> },\n];\n\nexport function DocumentExample() {\n  const [pdfOpen, setPdfOpen] = useState(false);\n  const [optionsOpen, setOptionsOpen] = useState(false);\n  const [selected, setSelected] = useState<string[]>([]);\n  const [confirmed, setConfirmed] = useState<string[] | null>(null);\n  const [status, setStatus] = useState(\"\");\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 16 }}>\n    <div style={{ display: \"flex\", gap: 8, flexWrap: \"wrap\" }}>\n      <PrismButton onClick={() => setPdfOpen(true)}>PDF 확인</PrismButton>\n      <PrismButton variant=\"line\" onClick={() => { setSelected([]); setOptionsOpen(true); }}>출력 정보 선택</PrismButton>\n    </div>\n    <PrismPdfDialog title=\"가상 검증 문서\" open={pdfOpen} onOpenChange={setPdfOpen}\n      url=\"/document.pdf\" workerUrl={workerUrl} />\n    <PrismPrintOptions sections={sections} value={selected} onValueChange={setSelected}\n      open={optionsOpen} onOpenChange={setOptionsOpen}\n      onConfirm={value => { setConfirmed([...value]); setOptionsOpen(false); }} />\n    {confirmed && <PrismPrintPreview title=\"가상 후보자 프로필\" sections={sections}\n      selected={confirmed} onPrint={() => setStatus(\"인쇄 요청 의도\")} />}\n    <p role=\"status\">{status}</p>\n  </section>;\n}\n// 소비자 앱은 public/document.pdf에 접근 가능한 PDF를 둡니다.",
       "sourcePath": "packages/prism/src/prism-document.tsx",
       "previewUrl": "/prism?component=prism-document",
       "embedUrl": "/prism?component=prism-document&embed=1",
       "responsivePreviewUrl": "/prism?component=prism-document&view=responsive",
       "verification": {
-        "visual": "pending",
-        "interaction": "partial",
+        "visual": "source-purpose-style-with-responsive-improvement-passed",
+        "interaction": "passed-local-and-independent-consumer",
         "checks": [
           "Actual two-page fixture PDF renders",
           "Page 2 navigation and manual 90 percent zoom",
@@ -2563,14 +2562,20 @@
           "390px page fit uses 245.90625 x 348px canvas inside 356 x 380px viewport",
           "Width fit subtracts 32px total padding once: 324px canvas at 390px frame; 254px at 320px; 958px at 1024px",
           "Page 2 and 200 percent manual zoom create internal scroll; root remains 390px",
-          "전체 bytes/host loader·native 연속 Viewer·원본 toolbar와독립 pdf.css,재시도/취소/immutable download context를 보완. 기존 출력 options/preview 소스는 byte 보존."
+          "전체 bytes/host loader·native 연속 Viewer·원본 toolbar와독립 pdf.css,재시도/취소/immutable download context를 보완. 기존 출력 options/preview 소스는 byte 보존.",
+          "Current source 2eeb26ff PDF dialog and print-options files/SCSS are unchanged from the previously reviewed 087811ff version; the full seven-section CandidateProfilePrintPreview is owned by prism-profile-print.",
+          "Local 1280px toolbar retained source 46/64px inputs and 12px 20px padding; at 320px the document stayed 320px and the PDF viewer/toolbar did not overflow.",
+          "Fresh external shadcn consumer matched 25 installed files including 9 PRISM TSX sources, typechecked and built the full dialog/options/preview example with PDF.js worker and Pretendard.",
+          "Installed 320px browser rendered a real two-page synthetic PDF in a 296px dialog, navigated to page 2, zoomed to 90% with 723px internal scroll, downloaded byte-identical PDF, rejected an HTML response and recovered on retry; print selection reset on reopening."
         ],
         "remaining": [
-          "Source PDF toolbar/fit states comparison",
-          "actual browser print pagination"
+          "Authenticated deployed PDF service URL, permissions and deployed revision remain unverified.",
+          "Actual seven-section profile pagination and OS/native print outcome are tracked in prism-profile-print/prism-print, not this PDF/options group."
         ],
         "evidence": [
-          "local-pdf-responsive"
+          "packages/prism/tests/pdf-report.test.mjs",
+          "local-prism-document-2026-10-14",
+          "installed-prism-document-2026-10-14"
         ],
         "localRenderGate": {
           "status": "passed",
@@ -2584,6 +2589,32 @@
           ],
           "sourceSha256": "31cf20034ffccb9e397b17dc3e8f5d30621c0ae0d5bdb2155fab556927b933e7",
           "scope": "Fixture presence, identity, root overflow, nested buttons and native labels; source parity and all interactions are separate."
+        },
+        "goalAcceptance": {
+          "status": "accepted",
+          "criteria": "2026-10-14 purpose-and-design-with-improvements",
+          "sourceRevision": "2eeb26ff10274745f9d86897c2f2828bff002b98",
+          "sourceScope": [
+            "components/chat/successorCandidate/attitude/PdfViewerDialog.tsx",
+            "components/chat/successorCandidate/attitude/PdfViewerDialog.module.scss",
+            "components/chat/successorCandidate/print/PrintOptionsDialog.tsx",
+            "components/chat/successorCandidate/print/PrintOptionsDialog.module.scss"
+          ],
+          "evidence": [
+            "PDF viewer retains source toolbar geometry, real page navigation/zoom/fit, verified whole-file bytes, retry and cancellation contracts.",
+            "Complete installable example combines PDF dialog, controlled print options and generic preview; the isolated consumer built it and exercised actual PDF download and failure recovery at 320px.",
+            "The seven-section source print document and native print session are separately owned by prism-profile-print and prism-print."
+          ],
+          "intentionalImprovements": [
+            "At 320px the 1200px source dialog constrains to 296px while retaining internal PDF scrolling and an accessible toolbar.",
+            "An HTML response is rejected as a PDF and can be retried after the asset recovers."
+          ],
+          "hostOwned": [
+            "The consuming application supplies authorized PDF URLs or bytes, section contents and real print handling."
+          ],
+          "nonBlockingUnknowns": [
+            "Authenticated deployed PDF/service and physical print outcome were unavailable in this audit."
+          ]
         }
       },
       "exports": [
@@ -2652,8 +2683,8 @@
           "kind": "component"
         }
       ],
-      "usageKind": "integration-fragment",
-      "registryUsage": "import { PrismPdfViewer } from \"@/components/ui/prism-document\";\nimport \"@/components/ui/prism-pdf.css\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n<PrismPdfViewer title=\"문서\" url=\"/document.pdf\" workerUrl={workerUrl} />;"
+      "usageKind": "component-example",
+      "registryUsage": "/// <reference types=\"vite/client\" />\nimport { useState } from \"react\";\nimport { PrismButton } from \"@/components/ui/prism-button\";\nimport { PrismPdfDialog, PrismPrintOptions, PrismPrintPreview, type PrismPrintSection } from \"@/components/ui/prism-document\";\nimport \"@/components/ui/prism-pdf.css\";\nimport workerUrl from \"pdfjs-dist/build/pdf.worker.min.mjs?url\";\n\nconst sections: PrismPrintSection[] = [\n  { id: \"summary\", label: \"종합 요약 정보\", content: <p>가상 후보자의 요약입니다.</p> },\n  { id: \"compensation\", label: \"보상 정보\", content: <p>가상 보상 정보입니다.</p> },\n];\n\nexport function DocumentExample() {\n  const [pdfOpen, setPdfOpen] = useState(false);\n  const [optionsOpen, setOptionsOpen] = useState(false);\n  const [selected, setSelected] = useState<string[]>([]);\n  const [confirmed, setConfirmed] = useState<string[] | null>(null);\n  const [status, setStatus] = useState(\"\");\n  return <section data-prism=\"light\" style={{ display: \"grid\", gap: 16 }}>\n    <div style={{ display: \"flex\", gap: 8, flexWrap: \"wrap\" }}>\n      <PrismButton onClick={() => setPdfOpen(true)}>PDF 확인</PrismButton>\n      <PrismButton variant=\"line\" onClick={() => { setSelected([]); setOptionsOpen(true); }}>출력 정보 선택</PrismButton>\n    </div>\n    <PrismPdfDialog title=\"가상 검증 문서\" open={pdfOpen} onOpenChange={setPdfOpen}\n      url=\"/document.pdf\" workerUrl={workerUrl} />\n    <PrismPrintOptions sections={sections} value={selected} onValueChange={setSelected}\n      open={optionsOpen} onOpenChange={setOptionsOpen}\n      onConfirm={value => { setConfirmed([...value]); setOptionsOpen(false); }} />\n    {confirmed && <PrismPrintPreview title=\"가상 후보자 프로필\" sections={sections}\n      selected={confirmed} onPrint={() => setStatus(\"인쇄 요청 의도\")} />}\n    <p role=\"status\">{status}</p>\n  </section>;\n}\n// 소비자 앱은 public/document.pdf에 접근 가능한 PDF를 둡니다."
     },
     {
       "id": "prism-workspace",
