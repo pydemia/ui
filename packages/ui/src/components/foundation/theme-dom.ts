@@ -14,7 +14,9 @@ export function applyThemeToElement(
         ...resolveThemeTokens(settings, options),
         "color-scheme": settings.appearance,
         "font-family": "var(--font-ui)",
-        "font-size": "var(--type-body-size)",
+        // rem geometry belongs to the document, not a mode or its regional scope.
+        "font-size": element === element.ownerDocument.documentElement
+            ? "var(--type-root-size, 14px)" : "var(--type-body-size)",
         "line-height": "var(--type-body-leading)",
         color: "var(--foreground)",
     };

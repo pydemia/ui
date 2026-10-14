@@ -40,6 +40,7 @@ function PromptInput({
     return (
         <form
             onSubmit={submit}
+            data-ui="prompt-input"
             className={cn(
                 "flex min-w-0 flex-col gap-2 rounded-sm border border-border " +
                 "bg-surface p-[var(--space-3)]",
@@ -55,8 +56,9 @@ function PromptInput({
                 placeholder={placeholder}
                 disabled={disabled}
                 rows={2}
+                data-slot="composer-control"
             />
-            <div className="flex justify-end">
+            <div className="flex justify-end" data-slot="composer-actions">
                 <Button type="submit" disabled={disabled || !text.trim()}>
                     보내기
                 </Button>

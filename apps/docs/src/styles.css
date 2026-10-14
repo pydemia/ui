@@ -352,6 +352,26 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .preview-stack-wide { width: 100%; min-width: 0; }
 .preview-stack > p { margin: 0; color: var(--muted); font-size: 13px; }
 .preview-stack > button { justify-self: start; }
+@scope ([data-design]:not([data-design="basic"])) to ([data-design]) {
+    :is(.preview-field, .preview-stack, .preview-alerts) {
+        width: min(100%, 460px);
+        gap: 20px;
+        padding: var(--editor-inset);
+    }
+    .preview-stack-wide { width: 100%; }
+    .preview-row { gap: 16px; padding: var(--editor-inset); }
+    .preview-stage > [data-ui="card"] { padding: 0; }
+    .preview-stage > :is([data-ui="code-editor"], [data-ui="markdown-editor"], [data-ui="block-editor"], [data-ui="node-canvas"]) { padding: 0; }
+    .preview-stage > .preview-stack:has([data-ui="code-editor"], [data-ui="markdown-editor"], [data-ui="block-editor"], [data-ui="prompt-input"], [data-ui="form-wizard"], [data-ui="node-canvas"], [data-ui="approval-card"], [data-ui="query-builder"]) {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        background-image: none;
+        box-shadow: none;
+        backdrop-filter: none;
+    }
+}
 .preview-tabs-content { padding: 12px 3px 2px; margin: 0; color: var(--muted); font-size: 14px; }
 .preview-table { width: 100%; min-width: 300px; overflow-x: auto; }
 .preview-snippet { width: 100%; min-width: 280px; }

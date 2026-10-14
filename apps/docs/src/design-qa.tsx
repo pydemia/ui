@@ -119,6 +119,15 @@ function App() {
                     <Card><CardContent>Basic panel A</CardContent></Card>
                     <Card><CardContent>Basic panel B</CardContent></Card>
                 </DashboardPanels></Dashboard>
+                <section aria-label="독립 Basic component 표현" className="grid gap-5">
+                    {catalog.filter((item) => [
+                        "input-group", "code-editor-shell", "prompt-input", "tabs",
+                        "color-input", "native-select", "button-group", "tags-input",
+                    ].includes(item.id)).map((item) => <div key={item.id}
+                        data-qa-basic-component={item.id}>
+                        <h3>{item.name}</h3>{item.preview()}
+                    </div>)}
+                </section>
             </ThemeScope>
             <div className="my-5 grid gap-5">
                 <section aria-label="QA Operations"><AnalyticsWorkspace design={settings.design} /></section>

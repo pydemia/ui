@@ -66,12 +66,12 @@ function MarkdownEditor({
     ].filter(Boolean).join(" ") || undefined;
 
     return (
-        <section {...props} className={cn(
+        <section {...props} data-ui="markdown-editor" className={cn(
             "min-w-0 overflow-hidden rounded-sm border border-border " +
             "bg-surface text-foreground",
             className,
         )}>
-            <div className={
+            <div data-slot="editor-header" className={
                 "flex flex-wrap items-center justify-between gap-2 " +
                 "border-b border-border bg-surface-subtle " +
                 "px-[var(--space-3)] py-[var(--space-2)]"
@@ -90,11 +90,11 @@ function MarkdownEditor({
                     {showPreview ? "미리보기 숨기기" : "미리보기 표시"}
                 </button>
             </div>
-            <div className={cn(
+            <div data-slot="editor-columns" className={cn(
                 "grid min-w-0",
                 showPreview && "lg:grid-cols-2",
             )}>
-                <div className={cn(
+                <div data-slot="editor-pane" className={cn(
                     "min-w-0 p-[var(--space-3)]",
                     showPreview && "border-b border-border lg:border-b-0 " +
                         "lg:border-r",
@@ -112,6 +112,7 @@ function MarkdownEditor({
                         } />
                 </div>
                 <div id={previewId} hidden={!showPreview}
+                    data-slot="editor-preview"
                     role="region" aria-labelledby={previewTitleId}
                     className="min-w-0 p-[var(--space-3)]">
                     <h3 id={previewTitleId}
@@ -126,7 +127,7 @@ function MarkdownEditor({
                 </div>
             </div>
             {(description || error) && (
-                <div className={
+                <div data-slot="editor-footer" className={
                     "grid gap-1 border-t border-border " +
                     "px-[var(--space-3)] py-[var(--space-2)]"
                 }>

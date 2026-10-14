@@ -38,6 +38,8 @@ function RadioGroupItem({
     return (
         <RadioGroupPrimitive.Item
             {...props}
+            data-ui="radio-control"
+            data-variant={card ? "card" : "default"}
             className={cn(
                 "relative inline-flex shrink-0 items-center border border-border " +
                 "bg-surface data-[state=checked]:border-accent " +

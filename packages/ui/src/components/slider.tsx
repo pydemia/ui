@@ -40,6 +40,7 @@ function Slider({
             {...props}
         >
             <SliderPrimitive.Track
+                data-slot="slider-track"
                 className={"relative h-2 w-full grow overflow-hidden rounded-full " +
                     "bg-surface-subtle data-[orientation=vertical]:w-2"}
             >
@@ -51,6 +52,7 @@ function Slider({
             {values.map((_, index) => (
                 <SliderPrimitive.Thumb
                     key={index}
+                    data-slot="slider-thumb"
                     aria-label={thumbLabels?.[index] ?? (
                         values.length > 1 ? `${label} ${index + 1}` : label
                     )}

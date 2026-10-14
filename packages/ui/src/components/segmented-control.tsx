@@ -65,7 +65,7 @@ function SegmentedControl({
                 <div className={
                     "inline-flex max-w-full gap-1 overflow-x-auto rounded-sm " +
                     "border border-border bg-surface-subtle p-1"
-                }>
+                } data-ui="segmented-control">
                     {children}
                 </div>
             </fieldset>
@@ -115,7 +115,7 @@ function SegmentedControlItem({
                     ? group.defaultValue === value : undefined}
                 onChange={() => group.onValueChange?.(value)}
                 className="peer sr-only" />
-            <span className={
+            <span data-slot="segment" className={
                 "inline-flex min-h-8 items-center justify-center rounded-sm " +
                 "px-[var(--space-3)] text-sm font-medium text-foreground " +
                 "transition-colors duration-[var(--motion-fast)] " +

@@ -181,6 +181,7 @@ function NumberInput({
     );
     const field = (
         <Input
+            data-slot={variant === "stepper" ? "field-control" : undefined}
             ref={inputRef}
             id={inputId}
             type="text"
@@ -232,17 +233,18 @@ function NumberInput({
     );
 
     return (
-        <div className={cn("grid min-w-0 gap-2", className)} {...props}>
+        <div className={cn("grid min-w-0 gap-2", className)} {...props}
+            data-ui="field">
             <label htmlFor={inputId} className="text-sm font-medium">
                 {label}
             </label>
             {variant === "stepper" ? (
-                <div className={
+                <div data-ui="field-frame" className={
                     "flex h-[var(--control-height)] overflow-hidden rounded-sm " +
                     "border border-border bg-surface focus-within:outline-2 " +
                     "focus-within:outline-focus focus-within:outline-offset-2"
                 }>
-                    <button type="button" disabled={disabled || !!error ||
+                    <button data-slot="field-action" type="button" disabled={disabled || !!error ||
                         (current !== null && min !== undefined &&
                             current <= min)}
                         aria-label={`${label} 감소`}
@@ -254,7 +256,7 @@ function NumberInput({
                         −
                     </button>
                     {field}
-                    <button type="button" disabled={disabled || !!error ||
+                    <button data-slot="field-action" type="button" disabled={disabled || !!error ||
                         (current !== null && max !== undefined &&
                             current >= max)}
                         aria-label={`${label} 증가`}

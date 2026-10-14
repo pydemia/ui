@@ -243,7 +243,7 @@ function Combobox({
             />
             {name && <input type="hidden" name={name}
                 value={selectedValue ?? ""} disabled={disabled} />}
-            <div hidden={!open || disabled || readOnly}
+            <div data-ui="overlay-panel" hidden={!open || disabled || readOnly}
                 className={
                     "absolute inset-x-0 top-full z-30 mt-1 max-h-56 " +
                     "overflow-y-auto rounded-sm border border-border " +

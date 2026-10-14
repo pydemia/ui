@@ -238,6 +238,7 @@ function BlockEditor({
     return (
         <section {...props} aria-labelledby={titleId}
             data-appearance={appearance}
+            data-ui="block-editor"
             className={cn(
                 "min-w-0 text-foreground",
                 appearance === "panel" &&
@@ -249,7 +250,7 @@ function BlockEditor({
             <div className={cn(
                 "grid gap-1 px-[var(--space-4)] py-[var(--space-3)]",
                 appearance === "panel" && "border-b border-border",
-            )}>
+            )} data-slot="editor-header">
                 <div className="flex flex-wrap items-center gap-2">
                     <h3 id={titleId}
                         className="m-0 mr-auto text-base font-semibold">
@@ -267,17 +268,18 @@ function BlockEditor({
                 {error && <p id={errorId} role="alert"
                     className="m-0 text-xs text-danger">{error}</p>}
             </div>
-            <ol className={
+            <ol data-slot="editor-blocks" className={
                 "m-0 grid list-none gap-[var(--space-3)] " +
                 "p-[var(--space-3)]"
             }>
                 {blocks.map((block, index) => (
                     <li key={block.id} data-block-id={block.id}
+                        data-slot="editor-block"
                         className={
                             "min-w-0 rounded-sm border border-border " +
                             "bg-surface-subtle p-[var(--space-3)]"
                         }>
-                        <div className={
+                        <div data-slot="block-toolbar" className={
                             "mb-2 flex flex-wrap items-center " +
                             "gap-[var(--space-2)]"
                         }>
@@ -285,6 +287,8 @@ function BlockEditor({
                                 블록 {index + 1}
                             </span>
                             <select value={block.kind} disabled={disabled}
+                                data-ui="native-select"
+                                data-appearance="outline"
                                 aria-label={`${index + 1}번 블록 형식`}
                                 onChange={(event) => replaceBlock(block.id, {
                                     kind: event.currentTarget.value as BlockKind,
@@ -341,7 +345,8 @@ function BlockEditor({
                     </li>
                 ))}
             </ol>
-            <div className="px-[var(--space-3)] pb-[var(--space-3)]">
+            <div className="px-[var(--space-3)] pb-[var(--space-3)]"
+                data-slot="editor-footer">
                 <Button ref={addButton} variant="outline"
                     disabled={disabled} onClick={() => insertBlock()}>
                     블록 추가

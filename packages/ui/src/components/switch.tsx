@@ -18,6 +18,7 @@ function Switch({ className, ...props }: ComponentProps<typeof SwitchPrimitive.R
             {...props}
         >
             <SwitchPrimitive.Thumb
+                data-slot="switch-thumb"
                 className={"block size-4 translate-x-0.5 rounded-full " +
                     "bg-surface shadow-sm transition-transform " +
                     "duration-[var(--motion-fast)] " +

@@ -151,7 +151,8 @@ function Thread({
         const composerLabel = parent
             ? `${parent.author}에게 답글` : "댓글 작성";
         return (
-            <form onSubmit={submitReply} className="grid gap-2">
+            <form onSubmit={submitReply} className="grid gap-2"
+                data-ui="thread-composer">
                 <label htmlFor={textareaId}
                     className="text-sm font-medium">{composerLabel}</label>
                 <Textarea id={textareaId} ref={textareaRef} required

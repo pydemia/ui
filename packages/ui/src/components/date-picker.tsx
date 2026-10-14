@@ -64,6 +64,8 @@ function DatePicker({
                             className,
                         )}
                         {...triggerProps}
+                        data-ui="select-trigger"
+                        data-appearance="outline"
                     >
                         <span className={value === null ? "text-muted" : undefined}>
                             {value ?? placeholder}

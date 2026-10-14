@@ -132,11 +132,15 @@ function TagsInput({
     }
 
     return (
-        <div className={cn("grid min-w-0 gap-2", className)} {...props}>
+        <div className={cn("grid min-w-0 gap-2", className)} {...props}
+            data-ui="field">
             <label htmlFor={inputId} className="text-sm font-medium">
                 {label}{required && <span aria-hidden="true"> *</span>}
             </label>
             <div
+                data-ui="field-frame"
+                data-field="tags"
+                data-variant={variant}
                 className={cn(
                     "flex min-h-[var(--control-height)] flex-wrap items-center " +
                     "gap-1.5 rounded-sm border border-border px-2 py-1 " +
@@ -153,6 +157,7 @@ function TagsInput({
                         className="m-0 flex list-none flex-wrap gap-1.5 p-0">
                         {tags.map((tag, index) => (
                             <li key={duplicateKey(tag)}
+                                data-slot="field-chip"
                                 className={
                                     "inline-flex items-center gap-1 rounded-sm " +
                                     "bg-surface-subtle px-2 py-0.5 text-sm " +
@@ -171,6 +176,7 @@ function TagsInput({
                     </ul>
                 )}
                 <input
+                    data-slot="field-control"
                     ref={inputRef}
                     id={inputId}
                     type="text"

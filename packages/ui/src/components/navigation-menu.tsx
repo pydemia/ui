@@ -87,6 +87,7 @@ function NavigationMenuContent({
 }: ComponentProps<typeof MenuPrimitive.Content>) {
     return (
         <MenuPrimitive.Content
+            data-ui="overlay-panel"
             className={cn(
                 "absolute left-0 top-full z-50 mt-2 grid min-w-64 gap-1 " +
                 "rounded-sm border border-border bg-surface p-2 " +
