@@ -37,22 +37,23 @@ function CodeBlock({
 
     return (
         <figure {...props} aria-labelledby={labelId}
+            data-ui="code-block" data-surface="panel"
             className={cn(
                 "m-0 min-w-0 overflow-hidden rounded-sm border " +
                 "border-border bg-surface",
                 className,
             )}>
-            <figcaption id={labelId}
+            <figcaption id={labelId} data-slot="surface-header"
                 className={
                     "flex min-w-0 items-center gap-2 border-b " +
                     "border-border bg-surface-subtle px-[var(--space-3)] " +
                     "py-[var(--space-1)] text-sm text-foreground"
                 }>
-                <span className="min-w-0 flex-1 truncate font-medium">
+                <span data-slot="surface-title" className="min-w-0 flex-1 truncate font-medium">
                     {label}
                 </span>
                 {language && (
-                    <span className="text-xs text-muted">{language}</span>
+                    <span data-slot="surface-meta" className="text-xs text-muted">{language}</span>
                 )}
                 {copyable && (
                     <CopyButton value={code} label={`${label} 복사`}
@@ -61,7 +62,7 @@ function CodeBlock({
                         errorMessage="코드를 복사하지 못했습니다" />
                 )}
             </figcaption>
-            <pre tabIndex={0} aria-label={`${label} 코드`}
+            <pre data-slot="reading-plane" tabIndex={0} aria-label={`${label} 코드`}
                 className={cn(
                     "m-0 max-w-full overflow-auto p-[var(--space-4)] " +
                     "text-xs leading-6 text-foreground",

@@ -12,7 +12,9 @@ function Calendar({
 
     return (
         <DayPicker
+            {...props}
             showOutsideDays={showOutsideDays}
+            data-ui="calendar"
             className={cn(
                 "relative w-fit rounded-sm border border-border bg-surface p-3",
                 className,
@@ -57,7 +59,6 @@ function Calendar({
                 hidden: cn("invisible", defaults.hidden),
                 ...classNames,
             }}
-            {...props}
         />
     );
 }

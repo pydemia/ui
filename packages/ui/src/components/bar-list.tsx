@@ -70,16 +70,20 @@ function BarList({
     const scale = max ?? (largest || 1);
 
     return (
-        <figure {...props} className={cn(
+        <figure {...props} data-ui="bar-list" data-variant={variant}
+            data-surface={variant === "panel" ? "panel" : undefined}
+            className={cn(
             "@container m-0 min-w-0 text-foreground",
             variant === "panel" &&
                 "rounded-sm border border-border bg-surface p-[var(--space-4)]",
             className,
         )}>
             <figcaption className="mb-[var(--space-4)]">
-                <strong className="text-sm font-semibold">{title}</strong>
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
                 {description && (
-                    <span className="mt-1 block text-xs text-muted">
+                    <span data-slot="surface-meta"
+                        className="mt-1 block text-xs text-muted">
                         {description}
                     </span>
                 )}

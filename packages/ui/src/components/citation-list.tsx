@@ -58,10 +58,11 @@ function CitationList({
     });
 
     return (
-        <section aria-labelledby={labelId}
+        <section aria-labelledby={labelId} data-ui="citation-list"
+            data-variant={variant}
             className={cn("min-w-0 text-sm text-foreground", className)}
             {...props}>
-            <p id={labelId} className="mb-[var(--space-2)] mt-0 font-semibold">
+            <p id={labelId} data-slot="surface-title" className="mb-[var(--space-2)] mt-0 font-semibold">
                 {label}
             </p>
             {links.length === 0 ? (
@@ -69,7 +70,9 @@ function CitationList({
             ) : (
                 <ol className="m-0 grid list-decimal gap-[var(--space-2)] pl-5">
                     {links.map((source) => (
-                        <li key={source.id} className={cn(
+                        <li key={source.id}
+                            data-surface={variant === "card" ? "row" : undefined}
+                            className={cn(
                             "min-w-0 marker:text-muted",
                             variant === "card" &&
                                 "rounded-sm border border-border " +

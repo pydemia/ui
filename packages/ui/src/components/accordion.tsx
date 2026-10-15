@@ -1,13 +1,23 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
-import type { ComponentProps } from "react";
+import {
+    forwardRef, type ComponentProps, type ComponentPropsWithoutRef,
+    type ElementRef,
+} from "react";
 import { cn } from "./utils";
 
-const Accordion = AccordionPrimitive.Root;
+const Accordion = forwardRef<
+    ElementRef<typeof AccordionPrimitive.Root>,
+    ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>
+>((props, forwardedRef) => (
+    <AccordionPrimitive.Root {...props} ref={forwardedRef}
+        data-ui="accordion" />
+));
 
 function AccordionItem({ className, ...props }: ComponentProps<typeof AccordionPrimitive.Item>) {
     return (
         <AccordionPrimitive.Item
+            data-ui="accordion-item"
             className={cn("border-b border-border", className)}
             {...props}
         />
@@ -22,6 +32,7 @@ function AccordionTrigger({
     return (
         <AccordionPrimitive.Header className="flex">
             <AccordionPrimitive.Trigger
+                data-ui="accordion-trigger"
                 className={cn(
                     "group flex min-h-[var(--control-height)] flex-1 items-center " +
                     "justify-between gap-2 py-[var(--space-2)] text-left " +
@@ -48,6 +59,7 @@ function AccordionContent({
 }: ComponentProps<typeof AccordionPrimitive.Content>) {
     return (
         <AccordionPrimitive.Content
+            data-ui="accordion-content"
             className={cn("overflow-hidden pb-[var(--space-3)] text-sm", className)}
             {...props}
         />

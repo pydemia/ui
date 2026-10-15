@@ -140,6 +140,9 @@ function Carousel({
             role="region"
             aria-roledescription="carousel"
             aria-labelledby={labelId}
+            data-ui="carousel"
+            data-variant={variant}
+            data-surface={variant === "card" ? "panel" : undefined}
             className={cn(
                 "min-w-0 text-foreground",
                 variant === "card" &&
@@ -148,7 +151,7 @@ function Carousel({
             )}
             {...props}
         >
-            <div id={labelId} className="mb-3 text-sm font-semibold">
+            <div id={labelId} data-slot="surface-title" className="mb-3 text-sm font-semibold">
                 {label}
             </div>
             {currentSlide ? (
@@ -171,7 +174,7 @@ function Carousel({
                             {currentSlide.content}
                         </div>
                     </div>
-                    <div className="mt-4 flex items-center justify-between gap-3">
+                    <div data-slot="surface-header" className="mt-4 flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
                             <IconButton
                                 variant="outline"
@@ -192,7 +195,7 @@ function Carousel({
                                 onClick={() => moveBy(1)}
                             />
                         </div>
-                        <span className="text-xs tabular-nums text-muted">
+                        <span data-slot="surface-meta" className="text-xs tabular-nums text-muted">
                             {currentIndex + 1} / {slides.length}
                         </span>
                     </div>
@@ -219,7 +222,7 @@ function Carousel({
                                             focusRingClass,
                                         )}
                                     >
-                                        <span aria-hidden="true" className={cn(
+                                        <span data-slot="carousel-indicator" aria-hidden="true" className={cn(
                                             "size-2.5 rounded-full",
                                             current
                                                 ? "bg-accent" : "bg-border",

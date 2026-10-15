@@ -79,6 +79,8 @@ function MonthPicker({
             }}>
                 <PopoverTrigger asChild>
                     <button type="button" disabled={disabled}
+                        data-ui="month-picker"
+                        data-slot="period-trigger"
                         className={cn(
                             "flex h-[var(--control-height)] w-full items-center " +
                             "justify-between gap-2 rounded-sm border border-border " +
@@ -94,9 +96,12 @@ function MonthPicker({
                     </button>
                 </PopoverTrigger>
                 <PopoverContent align="start" aria-label={placeholder}
+                    data-slot="period-panel"
                     className="w-[min(18rem,calc(100vw-2rem))] p-3">
-                    <div className="mb-3 flex items-center justify-between gap-2">
-                        <button type="button" aria-label="이전 연도"
+                    <div data-slot="surface-header"
+                        className="mb-3 flex items-center justify-between gap-2">
+                        <button type="button" data-slot="surface-action"
+                            aria-label="이전 연도"
                             disabled={year <= minYear}
                             onClick={() => setViewYear(year - 1)}
                             className={"flex size-9 items-center justify-center " +
@@ -104,10 +109,12 @@ function MonthPicker({
                                 "disabled:opacity-50"}>
                             <ChevronLeft aria-hidden="true" className="size-4" />
                         </button>
-                        <span className="text-sm font-medium" aria-live="polite">
+                        <span data-slot="surface-title"
+                            className="text-sm font-medium" aria-live="polite">
                             {year}
                         </span>
-                        <button type="button" aria-label="다음 연도"
+                        <button type="button" data-slot="surface-action"
+                            aria-label="다음 연도"
                             disabled={year >= maxYear}
                             onClick={() => setViewYear(year + 1)}
                             className={"flex size-9 items-center justify-center " +
@@ -120,6 +127,7 @@ function MonthPicker({
                         className="grid grid-cols-3 gap-1">
                         {months.map((month) => (
                             <button key={month.value} type="button"
+                                data-slot="period-option"
                                 disabled={month.disabled}
                                 aria-label={`${month.value} ${month.label}`}
                                 aria-pressed={value === month.value}

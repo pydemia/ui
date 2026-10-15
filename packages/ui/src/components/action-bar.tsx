@@ -36,6 +36,8 @@ function ActionBar({
         <div
             {...props}
             role="group"
+            data-ui="action-bar"
+            data-surface="panel"
             className={cn(
                 "flex max-w-full flex-wrap items-center gap-2 rounded-sm " +
                 "border border-border bg-surface p-[var(--space-3)] " +
@@ -46,7 +48,8 @@ function ActionBar({
                 className,
             )}
         >
-            <span role="status" className="mr-auto font-medium">
+            <span role="status" data-slot="surface-meta"
+                className="mr-auto font-medium">
                 {countText}
             </span>
             {children}

@@ -103,14 +103,17 @@ function Heatmap({
     };
 
     return (
-        <div className={cn(
+        <div {...props} data-ui="heatmap" data-surface="panel"
+            className={cn(
             "@container min-w-0 rounded-sm border border-border " +
             "bg-surface p-[var(--space-4)] text-foreground",
             className,
-        )} {...props}>
+        )}>
             <div className="mb-[var(--space-3)]">
-                <strong className="text-sm font-semibold">{title}</strong>
-                {description && <p className="mb-0 mt-1 text-xs text-muted">
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
+                {description && <p data-slot="surface-meta"
+                    className="mb-0 mt-1 text-xs text-muted">
                     {description}
                 </p>}
             </div>

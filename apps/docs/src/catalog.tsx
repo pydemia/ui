@@ -402,7 +402,7 @@ function NavigationPreview() {
                 하단 탐색: {bottomAppearance === "bar" ? "막대형" : "독형"}
             </Button>
             <div className={
-                "w-full max-w-sm overflow-hidden rounded-sm border " +
+                "preview-navigation-device w-full max-w-sm overflow-hidden rounded-sm border " +
                 "border-border bg-background"
             }>
                 <p className="grid min-h-20 place-items-center text-sm">
@@ -557,7 +557,7 @@ function AnchorNavPreview() {
                 <div id="anchor-nav-demo-scroll" role="region"
                     aria-label="보고서 내용" tabIndex={0}
                     className={
-                        "max-h-60 min-w-0 overflow-y-auto rounded-sm " +
+                        "preview-anchor-article max-h-60 min-w-0 overflow-y-auto rounded-sm " +
                         "border border-border bg-surface p-4 " +
                         "focus-visible:outline-2 focus-visible:outline-focus"
                     }>
@@ -2769,14 +2769,16 @@ function ScrollAreaPreview() {
     );
 
     return (
-        <div className="grid w-full max-w-md gap-4">
+        <div className="grid min-w-0 w-full max-w-md grid-cols-1 gap-4">
             <ScrollArea label="최근 작업" type="always"
+                data-surface="panel"
                 className="h-44 rounded-sm border border-border bg-surface">
                 <ol className="m-0 space-y-2 p-3 text-sm text-foreground">
                     {events.map((event) => <li key={event}>{event}</li>)}
                 </ol>
             </ScrollArea>
             <ScrollArea label="기간별 지표" orientation="horizontal"
+                data-surface="panel"
                 type="always"
                 className="h-24 rounded-sm border border-border bg-surface">
                 <div className="flex w-max gap-2 p-3">
@@ -3013,7 +3015,7 @@ function TreeNavPreview() {
                     onNavigate={setCurrentId} />
                 <section aria-label="선택한 페이지"
                     className={
-                        "min-h-40 rounded-sm border border-border " +
+                        "preview-navigation-page min-h-40 rounded-sm border border-border " +
                         "bg-surface p-4"
                     }>
                     <h3 className="m-0 text-base font-semibold">

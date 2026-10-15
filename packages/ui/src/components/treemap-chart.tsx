@@ -231,7 +231,9 @@ function TreemapChart({
     };
 
     return (
-        <figure {...props} data-appearance={appearance} className={cn(
+        <figure {...props} data-ui="treemap-chart"
+            data-surface={appearance === "panel" ? "panel" : undefined}
+            data-appearance={appearance} className={cn(
             "@container m-0 min-w-0 text-foreground",
             appearance === "panel" &&
                 "rounded-sm border border-border bg-surface " +
@@ -239,8 +241,10 @@ function TreemapChart({
             className,
         )}>
             <figcaption className="mb-[var(--space-4)]">
-                <strong className="text-sm font-semibold">{title}</strong>
-                {description && <span className="mt-1 block text-xs text-muted">
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
+                {description && <span data-slot="surface-meta"
+                    className="mt-1 block text-xs text-muted">
                     {description}
                 </span>}
             </figcaption>
@@ -253,7 +257,7 @@ function TreemapChart({
                     전체 {formatted(total)}
                     {total === 0 && " · 모든 항목의 값이 0입니다."}
                 </p>
-                {total > 0 && <div aria-hidden="true" className={
+                {total > 0 && <div data-slot="plot-plane" aria-hidden="true" className={
                     "relative h-56 w-full overflow-hidden rounded-sm " +
                     "bg-surface-subtle @md:h-72"
                 }>

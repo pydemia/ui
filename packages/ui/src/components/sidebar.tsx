@@ -165,13 +165,14 @@ function Sidebar({
                 side === "left" ? "border-r" : "border-l",
                 side === "right" && "order-last",
                 className,
-            )}>
-                <div className={cn(
+            )} data-ui="sidebar">
+                <div data-slot="surface-header" className={cn(
                     "flex min-h-14 items-center gap-2 border-b border-border p-2",
                     isCollapsed ? "justify-center" : "justify-between",
                 )}>
                     {!isCollapsed && (
-                        <strong className="min-w-0 truncate px-2 text-sm">
+                        <strong data-slot="surface-title"
+                            className="min-w-0 truncate px-2 text-sm">
                             {label}
                         </strong>
                     )}
@@ -202,7 +203,7 @@ function Sidebar({
                     </DrawerTrigger>
                     <DrawerContent side={side}
                         className="flex w-[min(20rem,calc(100vw-2rem))] flex-col p-0">
-                        <div className={
+                        <div data-slot="surface-header" className={
                             "flex items-center justify-between gap-2 " +
                             "border-b border-border p-[var(--space-3)]"
                         }>

@@ -57,8 +57,10 @@ function Alert({
     return (
         <div
             role={variant === "destructive" ? "alert" : "status"}
+            data-ui="alert"
             data-variant={variant}
             data-appearance={appearance}
+            data-surface={appearance === "plain" ? undefined : "status"}
             className={cn(alertVariants({ variant, appearance }), className)}
             {...props}
         />
@@ -66,7 +68,8 @@ function Alert({
 }
 
 function AlertTitle({ className, ...props }: ComponentProps<"div">) {
-    return <div className={cn("font-semibold", className)} {...props} />;
+    return <div data-slot="surface-title"
+        className={cn("font-semibold", className)} {...props} />;
 }
 
 function AlertDescription({ className, ...props }: ComponentProps<"div">) {

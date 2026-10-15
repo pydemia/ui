@@ -27,6 +27,7 @@ function NavigationMenu({
                 className,
             )}
             {...props}
+            data-ui="navigation-menu"
         >
             {children}
         </MenuPrimitive.Root>
@@ -73,6 +74,7 @@ function NavigationMenuTrigger({
         <MenuPrimitive.Trigger
             className={cn(triggerStyle, className)}
             {...props}
+            data-slot="nav-trigger"
         >
             {children}
             <ChevronDown aria-hidden="true"
@@ -122,6 +124,7 @@ function NavigationMenuLink({
                 className,
             )}
             {...props}
+            data-slot={variant === "trigger" ? "nav-trigger" : "nav-menu-link"}
         />
     );
 }

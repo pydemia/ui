@@ -150,7 +150,8 @@ function AnchorNav({
                     ? "grid gap-1 border-l border-border"
                     : "flex gap-1 overflow-x-auto pb-1",
                 className,
-            )}>
+            )}
+            data-ui="anchor-nav">
             {items.map((item) => (
                 <a key={item.id} href={`#${encodeURIComponent(item.id)}`}
                     aria-current={currentId === item.id
@@ -191,7 +192,8 @@ function AnchorNav({
                                 "aria-[current=location]:font-semibold " +
                                 "aria-[current=location]:text-accent-foreground",
                         variant === "rail" && item.depth === 2 && "pl-6",
-                    )}>
+                    )}
+                    data-slot="anchor-nav-link">
                     {item.label}
                 </a>
             ))}

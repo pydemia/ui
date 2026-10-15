@@ -169,7 +169,8 @@ function TreeNav({
                                 aria-current={currentId === item.id
                                     ? "page" : undefined}
                                 className={linkClass}
-                                onClick={() => onNavigate?.(item.id)}>
+                                onClick={() => onNavigate?.(item.id)}
+                                data-slot="tree-nav-link">
                                 {item.label}
                             </a>
                         ) : (
@@ -178,7 +179,8 @@ function TreeNav({
                                 aria-controls={childId}
                                 onClick={() => toggle(item.id)}
                                 className={cn(linkClass, "flex items-center " +
-                                    "justify-between text-left")}>
+                                    "justify-between text-left")}
+                                data-slot="tree-nav-disclosure">
                                 <span className="truncate">{item.label}</span>
                                 <span aria-hidden="true">
                                     {isOpen ? "⌄" : "›"}
@@ -198,7 +200,8 @@ function TreeNav({
                                     "hover:bg-surface-subtle " +
                                     "focus-visible:outline-2 " +
                                     "focus-visible:outline-focus"
-                                }>
+                                }
+                                data-slot="tree-nav-disclosure">
                                 <span aria-hidden="true">
                                     {isOpen ? "⌄" : "›"}
                                 </span>
@@ -207,6 +210,7 @@ function TreeNav({
                     </div>
                     {hasChildren && (
                         <ul id={childId}
+                            data-slot="tree-nav-branch"
                             className={isOpen
                                 ? "ml-3 grid list-none gap-1 border-l " +
                                   "border-border pl-2"
@@ -222,7 +226,8 @@ function TreeNav({
 
     return (
         <nav aria-label={label} data-variant={variant}
-            className={cn("min-w-0 text-sm", className)}>
+            className={cn("min-w-0 text-sm", className)}
+            data-ui="tree-nav">
             <ul className="grid min-w-0 list-none gap-1 p-0">
                 {renderItems(items)}
             </ul>

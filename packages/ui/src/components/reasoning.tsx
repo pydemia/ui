@@ -33,14 +33,17 @@ function Reasoning({
     if (!label.trim()) throw new Error("Reasoning requires a label.");
 
     return (
-        <Collapsible className={cn(
+        <Collapsible data-ui="reasoning" data-variant={variant}
+            data-surface={variant === "card" ? "panel" : undefined}
+            className={cn(
             "group min-w-0 text-sm text-foreground",
             variant === "card"
                 ? "rounded-sm border border-border bg-surface"
                 : "border-l-2 border-border pl-[var(--space-3)]",
             className,
         )} {...props}>
-            <div className={cn(
+            <div data-slot={variant === "card" ? "surface-header" : undefined}
+                className={cn(
                 "flex min-w-0 items-center gap-[var(--space-2)]",
                 variant === "card" && "px-[var(--space-3)] py-[var(--space-2)]",
             )}>
@@ -53,7 +56,7 @@ function Reasoning({
                         "size-4 shrink-0 transition-transform " +
                         "group-data-[state=open]:rotate-90"
                     } />
-                    <span className="truncate">{label}</span>
+                    <span data-slot="surface-title" className="truncate">{label}</span>
                 </CollapsibleTrigger>
                 {status && (
                     <span role="status" className={cn(

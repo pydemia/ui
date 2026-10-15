@@ -213,16 +213,17 @@ function DiffViewer({
 
     return (
         <figure {...props} aria-labelledby={captionId}
+            data-ui="diff-viewer" data-surface="panel"
             data-view={view} data-comparison={comparison.coarse
                 ? "coarse" : "full"}
             className={cn(
                 "m-0 min-w-0 overflow-hidden rounded-sm border " +
                 "border-border bg-surface", className,
             )}>
-            <figcaption id={captionId}
+            <figcaption id={captionId} data-slot="surface-header"
                 className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-surface-subtle px-[var(--space-3)] py-[var(--space-2)] text-sm">
-                <span className="font-medium text-foreground">{label}</span>
-                <span className="text-muted">
+                <span data-slot="surface-title" className="font-medium text-foreground">{label}</span>
+                <span data-slot="surface-meta" className="text-muted">
                     추가 {comparison.added}줄 · 삭제 {comparison.removed}줄
                 </span>
             </figcaption>
@@ -236,7 +237,7 @@ function DiffViewer({
                     비교할 줄이 없습니다.
                 </p>
             ) : (
-                <div role="region" tabIndex={0}
+                <div role="region" data-slot="reading-plane" tabIndex={0}
                     aria-label={`${label} 변경 내용 스크롤`}
                     className="max-h-96 max-w-full overflow-auto">
                     {view === "unified" ? (

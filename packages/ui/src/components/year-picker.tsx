@@ -71,6 +71,8 @@ function YearPicker({
             }}>
                 <PopoverTrigger asChild>
                     <button type="button" disabled={disabled}
+                        data-ui="year-picker"
+                        data-slot="period-trigger"
                         className={cn(
                             "flex h-[var(--control-height)] w-full items-center " +
                             "justify-between gap-2 rounded-sm border border-border " +
@@ -88,9 +90,12 @@ function YearPicker({
                     </button>
                 </PopoverTrigger>
                 <PopoverContent align="start" aria-label={placeholder}
+                    data-slot="period-panel"
                     className="w-[min(18rem,calc(100vw-2rem))] p-3">
-                    <div className="mb-3 flex items-center justify-between gap-2">
-                        <button type="button" aria-label="이전 10년"
+                    <div data-slot="surface-header"
+                        className="mb-3 flex items-center justify-between gap-2">
+                        <button type="button" data-slot="surface-action"
+                            aria-label="이전 10년"
                             disabled={pageStart === 0 || pageStart - 1 < minYear}
                             onClick={() => setViewStart(pageStart - 10)}
                             className={"grid size-9 place-items-center rounded-sm " +
@@ -98,11 +103,13 @@ function YearPicker({
                                 "focus-visible:outline-2 focus-visible:outline-focus"}>
                             <ChevronLeft aria-hidden="true" className="size-4" />
                         </button>
-                        <span className="text-sm font-medium" aria-live="polite">
+                        <span data-slot="surface-title"
+                            className="text-sm font-medium" aria-live="polite">
                             {String(Math.max(1, pageStart)).padStart(4, "0")}
                             {"–"}{String(pageEnd).padStart(4, "0")}
                         </span>
-                        <button type="button" aria-label="다음 10년"
+                        <button type="button" data-slot="surface-action"
+                            aria-label="다음 10년"
                             disabled={pageStart + 10 > maxYear}
                             onClick={() => setViewStart(pageStart + 10)}
                             className={"grid size-9 place-items-center rounded-sm " +
@@ -117,6 +124,7 @@ function YearPicker({
                         {years.map((year) => {
                             const yearValue = String(year).padStart(4, "0");
                             return <button key={yearValue} type="button"
+                                data-slot="period-option"
                                 disabled={year < minYear || year > maxYear}
                                 aria-label={`${yearValue}년`}
                                 aria-pressed={value === yearValue}

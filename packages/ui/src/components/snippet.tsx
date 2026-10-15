@@ -8,6 +8,8 @@ function Snippet({ className, ...props }: ComponentProps<typeof Tabs>) {
         <Tabs
             className={cn("overflow-hidden rounded-sm border border-border bg-surface", className)}
             {...props}
+            data-ui="snippet"
+            data-surface="panel"
         />
     );
 }
@@ -15,6 +17,7 @@ function Snippet({ className, ...props }: ComponentProps<typeof Tabs>) {
 function SnippetHeader({ className, ...props }: ComponentProps<"div">) {
     return (
         <div
+            data-slot="surface-header"
             className={cn("flex items-center justify-between gap-2 border-b border-border bg-surface-subtle px-2 py-1", className)}
             {...props}
         />
@@ -28,7 +31,7 @@ function SnippetCopyButton({ value }: { value: string }) {
 function SnippetContent({ className, children, ...props }: ComponentProps<typeof TabsContent>) {
     return (
         <TabsContent className={cn("m-0", className)} {...props}>
-            <pre tabIndex={0} className="overflow-x-auto p-[var(--space-4)] text-xs leading-6"><code>{children}</code></pre>
+            <pre data-slot="reading-plane" tabIndex={0} className="overflow-x-auto p-[var(--space-4)] text-xs leading-6"><code>{children}</code></pre>
         </TabsContent>
     );
 }

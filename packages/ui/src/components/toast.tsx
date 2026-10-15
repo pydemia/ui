@@ -69,6 +69,9 @@ function Toast({
 
     return (
         <div
+            data-ui="toast"
+            data-variant={variant}
+            data-surface="status"
             className={cn(
                 "pointer-events-auto min-w-0 rounded-sm border border-border " +
                 "border-l-4 bg-surface p-[var(--space-4)] text-foreground " +
@@ -81,14 +84,17 @@ function Toast({
             )}
             {...props}
         >
-            <div className="flex items-start gap-[var(--space-3)]">
+            <div data-slot="surface-header"
+                className="flex items-start gap-[var(--space-3)]">
                 <div className="min-w-0 flex-1"
                     role={variant === "error" ? "alert" : "status"}
                     aria-atomic="true">
-                    <span className="text-xs font-semibold uppercase text-muted">
+                    <span data-slot="surface-meta"
+                        className="text-xs font-semibold uppercase text-muted">
                         {statusLabel ?? variantLabel[variant]}
                     </span>
-                    <p className="m-0 mt-1 text-sm font-semibold">{title}</p>
+                    <p data-slot="surface-title"
+                        className="m-0 mt-1 text-sm font-semibold">{title}</p>
                     {description && (
                         <p className="mb-0 mt-1 text-sm text-muted">
                             {description}
@@ -97,6 +103,7 @@ function Toast({
                 </div>
                 <button
                     type="button"
+                    data-slot="surface-action"
                     aria-label={closeLabel}
                     className={
                         "-mr-1 -mt-1 rounded-sm p-1 text-muted " +

@@ -77,8 +77,10 @@ function AgentStatus({
         (status === "failed" || status === "cancelled");
 
     return (
-        <section aria-label={label} data-status={status}
-            data-variant={variant} className={cn(
+        <section aria-label={label} data-ui="agent-status" data-status={status}
+            data-variant={variant}
+            data-surface={variant === "panel" ? "panel" : undefined}
+            className={cn(
                 "min-w-0 text-foreground",
                 variant === "panel"
                     ? "rounded-sm border border-border bg-surface " +
@@ -86,9 +88,10 @@ function AgentStatus({
                     : "border-l-2 border-border pl-[var(--space-3)]",
                 className,
             )} {...props}>
-            <div className="flex flex-wrap items-start justify-between gap-2">
+            <div data-slot={variant === "panel" ? "surface-header" : undefined}
+                className="flex flex-wrap items-start justify-between gap-2">
                 <div className="min-w-0">
-                    <strong className="block text-sm font-semibold">
+                    <strong data-slot="surface-title" className="block text-sm font-semibold">
                         {label}
                     </strong>
                     <p role="status" className={cn(

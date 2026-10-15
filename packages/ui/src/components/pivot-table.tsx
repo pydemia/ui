@@ -125,7 +125,9 @@ function PivotTable({
     };
 
     return (
-        <figure {...props} data-appearance={appearance}
+        <figure {...props} data-ui="pivot-table"
+            data-surface={appearance === "panel" ? "panel" : undefined}
+            data-appearance={appearance}
             className={cn(
                 "min-w-0 text-foreground",
                 appearance === "panel" &&
@@ -134,8 +136,10 @@ function PivotTable({
                 className,
             )}>
             <figcaption className="mb-[var(--space-3)]">
-                <strong className="text-sm font-semibold">{title}</strong>
-                {description && <p className="mb-0 mt-1 text-xs text-muted">
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
+                {description && <p data-slot="surface-meta"
+                    className="mb-0 mt-1 text-xs text-muted">
                     {description}
                 </p>}
             </figcaption>

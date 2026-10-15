@@ -233,6 +233,9 @@ function JsonViewer({
     return (
         <section
             aria-label={label}
+            data-ui="json-viewer"
+            data-variant={variant}
+            data-surface={variant === "frame" ? "panel" : undefined}
             className={cn(
                 "min-w-0 bg-surface text-foreground",
                 variant === "frame" && "rounded-sm border border-border",
@@ -240,18 +243,19 @@ function JsonViewer({
             )}
             {...props}
         >
-            <div className={cn(
+            <div data-slot={variant === "frame" ? "surface-header" : undefined}
+                className={cn(
                 "flex items-center justify-between gap-3 px-3 py-2",
                 variant === "frame" && "border-b border-border",
             )}>
-                <span className="min-w-0 truncate text-sm font-medium">
+                <span data-slot="surface-title" className="min-w-0 truncate text-sm font-medium">
                     {label}
                 </span>
                 <div className="flex shrink-0 items-center gap-2">
                     <span role="status" className="text-xs text-muted">
                         {message}
                     </span>
-                    <button
+                    <button data-slot="surface-action"
                         type="button"
                         className={
                             "rounded-sm border border-border px-2 py-1 " +
@@ -265,7 +269,8 @@ function JsonViewer({
                     </button>
                 </div>
             </div>
-            <div className="max-h-96 overflow-auto px-3 py-2 font-mono text-xs">
+            <div data-slot={variant === "frame" ? "reading-plane" : undefined}
+                className="max-h-96 overflow-auto px-3 py-2 font-mono text-xs">
                 <ul>
                     <JsonNode
                         value={value}

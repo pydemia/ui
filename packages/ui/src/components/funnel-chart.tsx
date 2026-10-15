@@ -90,7 +90,10 @@ function FunnelChart({
     });
 
     return (
-        <figure {...props} data-variant={variant} className={cn(
+        <figure {...props} data-ui="funnel-chart"
+            data-variant={variant}
+            data-surface={variant === "panel" ? "panel" : undefined}
+            className={cn(
             "@container m-0 min-w-0 text-foreground",
             variant === "panel" &&
                 "rounded-sm border border-border bg-surface " +
@@ -98,9 +101,11 @@ function FunnelChart({
             className,
         )}>
             <figcaption className="mb-[var(--space-4)]">
-                <strong className="text-sm font-semibold">{title}</strong>
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
                 {description && (
-                    <span className="mt-1 block text-xs text-muted">
+                    <span data-slot="surface-meta"
+                        className="mt-1 block text-xs text-muted">
                         {description}
                     </span>
                 )}

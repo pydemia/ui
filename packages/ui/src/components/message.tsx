@@ -16,6 +16,7 @@ function Message({ from, className, ...props }: MessageProps) {
         <div
             role="group"
             aria-label={`${labels[from]} 메시지`}
+            data-ui="message"
             className={cn(
                 "group flex max-w-[92%] flex-col gap-1 text-sm",
                 from === "user" && "ml-auto items-end",
@@ -30,6 +31,7 @@ function Message({ from, className, ...props }: MessageProps) {
 function MessageContent({ className, ...props }: ComponentProps<"div">) {
     return (
         <div
+            data-surface="message"
             className={cn(
                 "min-w-0 rounded-sm border border-border bg-surface " +
                 "p-[var(--space-3)] [overflow-wrap:anywhere] " +

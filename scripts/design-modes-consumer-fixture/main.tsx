@@ -8,6 +8,16 @@ import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupText } from "./
 import { TagsInput } from "./components/ui/tags-input";
 import { CodeEditorShell } from "./components/ui/code-editor-shell";
 import { PromptInput } from "./components/ui/prompt-input";
+import { Tree } from "./components/ui/tree";
+import { SideNav, SideNavLink } from "./components/ui/navigation";
+import { Gantt } from "./components/ui/gantt";
+import { Calendar } from "./components/ui/calendar";
+import { Message, MessageContent } from "./components/ui/message";
+import { BulletChart } from "./components/ui/bullet-chart";
+import { LogConsole } from "./components/ui/log-console";
+import {
+    Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+} from "./components/ui/accordion";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/ui/tabs";
 import { Table, TableCell, TableHead } from "./components/ui/table";
 import {
@@ -47,7 +57,7 @@ function App() {
     }, options), [design]);
 
     return (
-        <main className="mx-auto grid max-w-4xl gap-6 p-6">
+        <main className="mx-auto grid min-w-0 max-w-4xl grid-cols-1 gap-6 p-6">
             <h1 className="text-2xl font-semibold">Independent registry consumer</h1>
             <p>Dark root / regional Light scope. Ready modes require private ?qa.</p>
             <label className="grid gap-2">
@@ -61,7 +71,7 @@ function App() {
                 </select>
             </label>
             <ThemeScope settings={settings} options={options}
-                className="grid gap-4 border border-border bg-background p-6">
+                className="grid min-w-0 grid-cols-1 gap-4 border border-border bg-background p-6">
                 <h2 className="text-lg font-semibold">{definition.name} scope</h2>
                 <Badge>Installed source</Badge>
                 <Input aria-label="Preserved draft" value={draft}
@@ -77,6 +87,36 @@ function App() {
                 <CodeEditorShell label="Installed code draft" value={draft}
                     onValueChange={setDraft} rows={4} />
                 <PromptInput label="Installed prompt" onSend={setDraft} />
+                <Tree label="Installed project tree" defaultExpandedIds={["project"]}
+                    items={[{ id: "project", label: "Project", children: [
+                        { id: "readme", label: "Readme" },
+                        { id: "schedule", label: "Schedule" },
+                    ] }]} />
+                <SideNav aria-label="Installed navigation">
+                    <SideNavLink href="#overview" aria-current="page">Overview</SideNavLink>
+                    <SideNavLink href="#details">Details</SideNavLink>
+                </SideNav>
+                <Gantt label="Installed schedule" rangeStart="2026-10-01"
+                    rangeEnd="2026-10-10" tasks={[
+                        { id: "plan", title: "Plan", startDate: "2026-10-02",
+                            endDate: "2026-10-05", progress: 60 },
+                    ]} />
+                <Calendar mode="single" defaultMonth={new Date(2026, 9, 1)} />
+                <Message from="user"><MessageContent>Installed user message</MessageContent></Message>
+                <Message from="assistant"><MessageContent>Installed assistant message</MessageContent></Message>
+                <BulletChart title="Installed delivery" value={64} target={80} max={100} />
+                <LogConsole label="Installed panel log" entries={[
+                    { id: "error", level: "error", message: "Meaningful error color" },
+                ]} />
+                <LogConsole label="Installed flat log" variant="flat" entries={[
+                    { id: "info", level: "info", message: "Transparent embedded output" },
+                ]} />
+                <Accordion type="single" collapsible defaultValue="details">
+                    <AccordionItem value="details">
+                        <AccordionTrigger>Installed disclosure</AccordionTrigger>
+                        <AccordionContent>Persistent disclosure content</AccordionContent>
+                    </AccordionItem>
+                </Accordion>
                 <Tabs defaultValue="overview">
                     <TabsList variant="contained" aria-label="Installed tabs">
                         <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -116,7 +156,7 @@ function App() {
                         <DialogClose asChild><Button className="mt-4">Close</Button></DialogClose>
                     </DialogContent>
                 </Dialog>
-                <output aria-label="Resolved theme">{JSON.stringify({
+                <output aria-label="Resolved theme" className="[overflow-wrap:anywhere]">{JSON.stringify({
                     design: roundTrip.settings.design,
                     appearance: settings.appearance, radius: tokens["--radius"],
                     releaseStatus: definition.releaseStatus, issues: resolved.issues,

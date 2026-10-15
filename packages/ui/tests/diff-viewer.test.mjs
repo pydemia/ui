@@ -16,7 +16,7 @@ function render(props = {}) {
 test("unified diff preserves context, numbers and change labels", () => {
     const markup = render();
     assert.match(markup, /<figure[^>]*aria-labelledby=/);
-    assert.match(markup, /role="region" tabindex="0"/);
+    assert.match(markup, /role="region"[^>]* tabindex="0"/);
     assert.match(markup, /<th scope="col"[^>]*>이전 줄<\/th>/);
     assert.match(markup, /<th scope="col"[^>]*>이후 줄<\/th>/);
     assert.equal((markup.match(/data-kind="context"/g) ?? []).length, 2);

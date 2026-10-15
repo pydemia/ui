@@ -39,6 +39,8 @@ function ToolCall({
 
     return (
         <section aria-label={`도구 실행: ${name}`}
+            data-ui="tool-call" data-variant={variant}
+            data-surface={variant === "card" ? "panel" : undefined}
             data-status={status}
             className={cn(
                 "min-w-0 text-sm text-foreground",
@@ -48,8 +50,9 @@ function ToolCall({
                     : "border-l-2 border-border pl-[var(--space-3)]",
                 className,
             )} {...props}>
-            <div className="flex min-w-0 items-center justify-between gap-2">
-                <code className="min-w-0 truncate font-medium">{name}</code>
+            <div data-slot={variant === "card" ? "surface-header" : undefined}
+                className="flex min-w-0 items-center justify-between gap-2">
+                <code data-slot="surface-title" className="min-w-0 truncate font-medium">{name}</code>
                 <span role="status" className={cn(
                     "shrink-0 text-xs",
                     status === "failed" ? "text-danger" :

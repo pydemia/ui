@@ -205,11 +205,14 @@ function Kanban({
             tabIndex={0}
             className={cn("min-w-0 overflow-x-auto", className)}
             {...props}
+            data-ui="kanban"
         >
             <div className="flex min-w-max gap-[var(--space-3)] pb-2">
                 {columns.map((column, columnIndex) => (
                     <section
                         key={column.id}
+                        data-ui="kanban-column"
+                        data-surface="panel"
                         aria-labelledby={`${id}-column-${columnIndex}`}
                         className={cn(
                             "w-64 shrink-0 rounded-sm border border-border " +
@@ -220,12 +223,14 @@ function Kanban({
                         onDrop={(event) => dropOnColumn(event, column)}
                     >
                         <h3 id={`${id}-column-${columnIndex}`}
+                            data-slot="surface-header"
                             className={
                                 "mb-[var(--space-3)] flex items-center " +
                                 "justify-between gap-2 text-sm font-semibold"
                             }>
-                            <span>{column.title}</span>
-                            <span className="text-xs font-normal text-muted">
+                            <span data-slot="surface-title">{column.title}</span>
+                            <span data-slot="surface-meta"
+                                className="text-xs font-normal text-muted">
                                 {column.cards.length}
                             </span>
                         </h3>
@@ -233,7 +238,7 @@ function Kanban({
                             <p className={
                                 "rounded-sm border border-dashed " +
                                 "border-border p-[var(--space-3)] text-xs text-muted"
-                            }>
+                            } data-surface="drop-target">
                                 카드가 없습니다
                             </p>
                         ) : (
@@ -242,6 +247,7 @@ function Kanban({
                                     <li
                                         key={card.id}
                                         data-kanban-card={card.id}
+                                        data-surface="row"
                                         draggable
                                         onDragStart={(event) =>
                                             beginDrag(event, card.id)}
@@ -278,6 +284,7 @@ function Kanban({
                                                     key={direction}
                                                     type="button"
                                                     data-kanban-action={direction}
+                                                    data-slot="surface-action"
                                                     aria-label={
                                                         `${card.title} ${actionLabels[direction]} 이동`
                                                     }

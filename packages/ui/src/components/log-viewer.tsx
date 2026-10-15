@@ -85,8 +85,10 @@ function LogViewer({
             {...props}
             role="group"
             aria-labelledby={titleId}
+            data-ui="log-viewer"
             data-variant={variant}
             data-density={density}
+            data-surface={variant === "panel" ? "panel" : undefined}
             className={cn(
                 "@container min-w-0 overflow-hidden text-foreground",
                 variant === "panel" &&
@@ -94,7 +96,8 @@ function LogViewer({
                 className,
             )}
         >
-            <div className={cn(
+            <div data-slot={variant === "panel" ? "surface-header" : undefined}
+                className={cn(
                 "flex flex-wrap items-center justify-between",
                 density === "comfortable"
                     ? "gap-[var(--space-2)] px-[var(--space-3)] " +
@@ -103,7 +106,7 @@ function LogViewer({
                       "py-[var(--space-1)]",
                 variant === "panel" && "border-b border-border",
             )}>
-                <span id={titleId} className="text-sm font-medium">
+                <span id={titleId} data-slot="surface-title" className="text-sm font-medium">
                     {label}
                 </span>
                 <div className="flex flex-wrap items-center gap-2">
@@ -111,7 +114,7 @@ function LogViewer({
                         {visibleEntries.length} / {entries.length}건
                     </span>
                     {followTail && (
-                        <button type="button" aria-pressed={following}
+                        <button type="button" data-slot="surface-action" aria-pressed={following}
                             aria-controls={logId}
                             className={cn(
                                 "rounded-sm px-2 py-1 text-xs " +

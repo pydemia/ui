@@ -116,7 +116,7 @@ function CalendarHeatmap({
     const cell = step - 4;
 
     return (
-        <figure {...props} data-density={density}
+        <figure {...props} data-ui="calendar-heatmap" data-density={density}
             data-appearance={appearance}
             className={cn(
                 "m-0 min-w-0 text-foreground",

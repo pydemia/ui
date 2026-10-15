@@ -67,7 +67,9 @@ function BulletChart({
     const maxText = formatMeasure(max);
 
     return (
-        <figure {...props} data-appearance={appearance}
+        <figure {...props} data-ui="bullet-chart"
+            data-surface={appearance === "panel" ? "panel" : undefined}
+            data-appearance={appearance}
             className={cn(
                 "@container m-0 min-w-0 text-foreground",
                 appearance === "panel" &&
@@ -76,9 +78,11 @@ function BulletChart({
                 className,
             )}>
             <figcaption className="mb-[var(--space-4)]">
-                <strong className="text-sm font-semibold">{title}</strong>
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
                 {description && (
-                    <span className="mt-1 block text-xs text-muted">
+                    <span data-slot="surface-meta"
+                        className="mt-1 block text-xs text-muted">
                         {description}
                     </span>
                 )}

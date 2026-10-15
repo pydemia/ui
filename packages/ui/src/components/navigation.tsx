@@ -14,6 +14,7 @@ function GlobalNav({ className, ...props }: NamedNavProps) {
                 className,
             )}
             {...props}
+            data-ui="global-nav"
         />
     );
 }
@@ -44,6 +45,7 @@ function GlobalNavLink({
             )}
             data-variant={variant}
             {...props}
+            data-slot="nav-link"
         />
     );
 }
@@ -53,6 +55,7 @@ function SideNav({ className, ...props }: NamedNavProps) {
         <nav
             className={cn("grid min-w-0 gap-1", className)}
             {...props}
+            data-ui="side-nav"
         />
     );
 }
@@ -84,6 +87,7 @@ function SideNavLink({
             )}
             data-variant={variant}
             {...props}
+            data-slot="nav-link"
         />
     );
 }
@@ -111,6 +115,7 @@ function BottomNav({
             )}
             data-appearance={appearance}
             {...props}
+            data-ui="bottom-nav"
         />
     );
 }
@@ -147,6 +152,7 @@ function BottomNavLink({
                 className,
             )}
             {...props}
+            data-slot="nav-link"
         >
             {icon && <span aria-hidden="true" className="size-5">{icon}</span>}
             <span>{label}</span>

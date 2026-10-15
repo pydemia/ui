@@ -24,11 +24,13 @@ function ScrollArea({
 
     return (
         <ScrollAreaPrimitive.Root
+            data-ui="scroll-area"
             type={type}
             className={cn("relative", className)}
             {...props}
         >
             <ScrollAreaPrimitive.Viewport
+                data-slot="scroll-viewport"
                 ref={viewportRef}
                 role="region"
                 aria-label={label}
@@ -62,6 +64,7 @@ function ScrollBar({
             )}
         >
             <ScrollAreaPrimitive.Thumb
+                data-slot="scroll-thumb"
                 className="relative flex-1 rounded-full bg-muted"
             />
         </ScrollAreaPrimitive.Scrollbar>

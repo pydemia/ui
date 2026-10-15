@@ -42,11 +42,11 @@ function Board({
     }
 
     return (
-        <section aria-label={label}
+        <section aria-label={label} data-ui="board" data-surface="panel"
             className={cn("min-w-0 rounded-sm border border-border bg-surface",
                 className)} {...props}>
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border p-[var(--space-3)]">
-                <h3 className="m-0 text-base font-semibold">{label}</h3>
+            <div data-slot="surface-header" className="flex flex-wrap items-center justify-between gap-2 border-b border-border p-[var(--space-3)]">
+                <h3 data-slot="surface-title" className="m-0 text-base font-semibold">{label}</h3>
                 {onCreatePost && <Button variant="outline"
                     onClick={onCreatePost}>글쓰기</Button>}
             </div>
@@ -58,7 +58,10 @@ function Board({
                 <ul className="m-0 list-none divide-y divide-border p-0">
                     {posts.map((post) => (
                         <li key={post.id}>
-                            <button type="button" onClick={() =>
+                            <button type="button" data-slot="surface-row"
+                                data-selected={selectedPostId === post.id
+                                    ? "true" : undefined}
+                                onClick={() =>
                                 onSelectPost(post.id)}
                                 aria-current={selectedPostId === post.id
                                     ? "true" : undefined}
@@ -81,7 +84,7 @@ function Board({
                                 {post.summary && <span className={
                                     "break-words text-sm text-muted"
                                 }>{post.summary}</span>}
-                                <span className={
+                                <span data-slot="surface-meta" className={
                                     "flex flex-wrap items-center gap-3 text-xs text-muted"
                                 }>
                                     <span>{post.author}</span>

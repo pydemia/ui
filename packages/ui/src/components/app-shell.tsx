@@ -86,6 +86,7 @@ function AppSidebar({
                 className,
             )}
             {...props}
+            data-slot={appearance === "inset" ? "surface-panel" : undefined}
         />
     );
 }
@@ -131,6 +132,7 @@ function AppBottomPanel({
                 className,
             )}
             {...props}
+            data-slot={appearance === "inset" ? "surface-panel" : undefined}
         />
     );
 }
@@ -154,6 +156,7 @@ function AppFloatingPanel({
                 className,
             )}
             {...props}
+            data-slot="surface-panel"
         />
     );
 }
@@ -190,6 +193,7 @@ function AppFloatingBubble({
                 className,
             )}
             {...props}
+            data-slot="app-help-trigger"
         />
     );
 }
@@ -271,7 +275,8 @@ function AppFloatingDisclosure({
                 panelClassName,
             )}>
             {children}
-            <button type="button" onClick={closePanel}
+            <button type="button" data-slot="surface-action"
+                onClick={closePanel}
                 className={
                     "mt-3 rounded-sm border border-border bg-surface " +
                     "px-3 py-1.5 text-sm hover:bg-surface-subtle " +

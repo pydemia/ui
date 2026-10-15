@@ -353,6 +353,9 @@ function DataChart({
 
     return (
         <figure
+            {...props}
+            data-ui="data-chart"
+            data-surface={appearance === "panel" ? "panel" : undefined}
             className={cn(
                 "m-0 min-w-0 text-foreground",
                 appearance === "panel" &&
@@ -361,15 +364,17 @@ function DataChart({
                 className,
             )}
             data-appearance={appearance}
-            {...props}
         >
             <figcaption className="mb-[var(--space-3)]">
                 <div className="flex items-baseline justify-between gap-2">
-                    <strong className="text-sm font-semibold">{title}</strong>
-                    {unit && <span className="text-xs text-muted">{unit}</span>}
+                    <strong data-slot="surface-heading"
+                        className="text-sm font-semibold">{title}</strong>
+                    {unit && <span data-slot="surface-meta"
+                        className="text-xs text-muted">{unit}</span>}
                 </div>
                 {description && (
-                    <span className="mt-1 block text-xs text-muted">
+                    <span data-slot="surface-meta"
+                        className="mt-1 block text-xs text-muted">
                         {description}
                     </span>
                 )}
@@ -579,7 +584,7 @@ function DataChart({
                         {hoverSummary && hoveredIndex !== null &&
                             hoveredIndex < labels.length &&
                             chartSeries.length > 0 && (
-                            <div aria-hidden="true"
+                            <div aria-hidden="true" data-slot="data-tooltip"
                                 className={
                                     "absolute top-2 z-10 w-48 max-w-[calc(100%-1rem)] " +
                                     "rounded-sm border border-border bg-surface " +

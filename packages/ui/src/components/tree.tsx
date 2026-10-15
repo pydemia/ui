@@ -282,6 +282,7 @@ function Tree({
                     }}
                 >
                     <div
+                        data-slot="tree-row"
                         style={{ paddingInlineStart: `calc(var(--space-2) + ${
                             level - 1
                         }rem)` }}
@@ -301,17 +302,18 @@ function Tree({
                             changeSelected(node.id);
                         }}
                     >
-                        <span aria-hidden="true" className={cn(
-                            "grid size-4 shrink-0 place-items-center text-xs",
-                            hasChildren && !node.disabled && "cursor-pointer",
-                        )} onClick={(event) => {
-                            if (!hasChildren || node.disabled) return;
-                            event.stopPropagation();
-                            focusItem(node.id);
-                            if (node.childState === "error" && isExpanded) {
-                                requestChildren(node);
-                            } else changeExpanded(node.id);
-                        }}>
+                        <span data-slot="tree-disclosure" aria-hidden="true"
+                            className={cn(
+                                "grid size-4 shrink-0 place-items-center text-xs",
+                                hasChildren && !node.disabled && "cursor-pointer",
+                            )} onClick={(event) => {
+                                if (!hasChildren || node.disabled) return;
+                                event.stopPropagation();
+                                focusItem(node.id);
+                                if (node.childState === "error" && isExpanded) {
+                                    requestChildren(node);
+                                } else changeExpanded(node.id);
+                            }}>
                             {node.childState === "error" && isExpanded
                                 ? "↻" : hasChildren ? isExpanded ? "▾" : "▸" : ""}
                         </span>
@@ -347,6 +349,7 @@ function Tree({
             className={cn("min-w-0 rounded-sm border border-border " +
                 "bg-surface p-[var(--space-2)] text-foreground", className)}
             {...props}
+            data-ui="tree"
         >
             {items.length ? renderNodes(items, 1) : (
                 <p role="status" className="m-0 p-[var(--space-3)] text-sm text-muted">
