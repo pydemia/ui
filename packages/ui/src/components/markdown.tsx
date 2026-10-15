@@ -42,7 +42,7 @@ function inline(source: string, depth = 0): ReactNode[] {
             const end = source.indexOf("`", index + 1);
             if (end > index + 1) {
                 flush();
-                nodes.push(<code key={index} className={
+                nodes.push(<code key={index} data-slot="inline-code" className={
                     "rounded-sm bg-surface-subtle px-1 font-mono text-[0.9em]"
                 }>{source.slice(index + 1, end)}</code>);
                 index = end + 1;
@@ -130,7 +130,7 @@ function renderBlocks(source: string): ReactNode[] {
                 code.push(lines[index++]);
             }
             if (index < lines.length) index += 1;
-            blocks.push(<pre key={start} tabIndex={0}
+            blocks.push(<pre key={start} tabIndex={0} data-slot="reading-plane"
                 aria-label={language ? `${language} 코드` : "코드"}
                 className={
                     "m-0 max-w-full overflow-auto rounded-sm border " +

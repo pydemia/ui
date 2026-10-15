@@ -45,6 +45,9 @@ function LogConsole({
         <div
             role="log"
             aria-label={label}
+            data-ui="log-console"
+            data-surface={variant === "panel" ? "well" : undefined}
+            data-slot={variant === "panel" ? "reading-plane" : undefined}
             aria-live={live}
             data-variant={variant}
             data-density={density}

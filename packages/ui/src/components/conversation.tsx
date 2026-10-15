@@ -91,12 +91,12 @@ function Conversation({
     }, []);
 
     return (
-        <div className={cn(
+        <div data-ui="conversation" data-surface="panel" className={cn(
             "relative flex h-80 min-h-0 min-w-0 flex-col overflow-hidden " +
             "rounded-sm border border-border bg-surface text-foreground",
             className,
         )} {...props}>
-            <div ref={viewportRef} role="log" aria-label={label}
+            <div ref={viewportRef} role="log" data-slot="reading-plane" aria-label={label}
                 aria-live={live} aria-relevant="additions" aria-busy={busy}
                 tabIndex={0}
                 onScroll={(event) => {

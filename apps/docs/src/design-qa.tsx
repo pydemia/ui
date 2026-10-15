@@ -1,9 +1,10 @@
 import { Component, useLayoutEffect, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import {
-    applyThemeToElement, Badge, Button, Card, CardContent, CardHeader,
+    applyThemeToElement, ArtifactViewer, Badge, Button, Card, CardContent, CardHeader,
     CardTitle, Checkbox, Dashboard, DashboardPanels, designModes, Dialog, DialogClose, DialogContent,
-    DialogDescription, DialogTitle, DialogTrigger, Input, NativeSelect,
+    DialogDescription, DialogTitle, DialogTrigger, Input, JsonViewer, LogConsole,
+    LogViewer, NativeSelect, NotificationCenter, Terminal,
     resolveThemeSettings, Select, SelectContent, SelectItem, SelectTrigger,
     SelectValue, Spinner, ThemeScope, Toggle, type Appearance, type DesignModeId,
 } from "@pydemia/ui";
@@ -125,12 +126,31 @@ function App() {
                         "color-input", "native-select", "button-group", "tags-input",
                         "tree", "tree-nav", "navigation", "anchor-nav", "gantt",
                         "calendar", "calendar-scheduler",
+                        "message", "bullet-chart", "log-console", "accordion",
+                        "board", "file-upload", "notification-center", "image",
+                        "artifact-viewer",
                     ].includes(item.id)).map((item) => <div key={item.id}
                         data-qa-basic-component={item.id}>
                         <h3>{item.name}</h3>{item.preview()}
                     </div>)}
                 </section>
             </ThemeScope>
+            <section aria-label="테두리 없는 변형 검수" className="my-5 grid gap-4">
+                <LogConsole label="Flat log" variant="flat" entries={[
+                    { id: "info", level: "info", message: "Flat output" },
+                ]} />
+                <LogViewer label="Flat viewer" variant="flat" entries={[
+                    { id: "info", level: "info", message: "Flat output" },
+                ]} />
+                <Terminal label="Flat terminal" variant="flat" lines={[]}
+                    onCommand={() => undefined} />
+                <NotificationCenter label="Plain notifications" appearance="plain"
+                    notifications={[]} onReadChange={() => undefined} />
+                <ArtifactViewer label="Plain artifact" appearance="plain" kind="text"
+                    revisions={[{ id: "one", label: "Draft", content: "Plain content" }]}
+                    revisionId="one" onRevisionChange={() => undefined} />
+                <JsonViewer label="Plain JSON" variant="plain" value={{ ready: true }} />
+            </section>
             <div className="my-5 grid gap-5">
                 <section aria-label="QA Operations"><AnalyticsWorkspace design={settings.design} /></section>
                 <section aria-label="QA Review"><ReviewWorkspace /></section>

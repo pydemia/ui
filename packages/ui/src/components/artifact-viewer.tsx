@@ -104,8 +104,10 @@ function ArtifactViewer({
 
     return (
         <section {...props} aria-labelledby={titleId}
+            data-ui="artifact-viewer"
             data-kind={kind} data-view={activeView}
             data-appearance={appearance}
+            data-surface={appearance === "panel" ? "panel" : undefined}
             className={cn(
                 "min-w-0 text-foreground",
                 appearance === "panel" &&
@@ -113,20 +115,21 @@ function ArtifactViewer({
                     "bg-surface",
                 className,
             )}>
-            <div className={cn(
+            <div data-slot={appearance === "panel" ? "surface-header" : undefined}
+                className={cn(
                 "flex flex-wrap items-start justify-between gap-3 " +
                 "px-[var(--space-4)] py-[var(--space-3)]",
                 appearance === "panel" && "border-b border-border",
             )}>
                 <div className="min-w-0 flex-1">
-                    <h3 id={titleId}
+                    <h3 id={titleId} data-slot="surface-title"
                         className="m-0 break-words text-base font-semibold">
                         {label}
                     </h3>
-                    {language && <span className="text-xs text-muted">
+                    {language && <span data-slot="surface-meta" className="text-xs text-muted">
                         {language}
                     </span>}
-                    {description && <p className="mb-0 mt-1 text-sm text-muted">
+                    {description && <p data-slot="surface-meta" className="mb-0 mt-1 text-sm text-muted">
                         {description}
                     </p>}
                 </div>
@@ -143,7 +146,8 @@ function ArtifactViewer({
             </div>
             {selected ? (
                 <>
-                    <div className={
+                    <div data-slot={appearance === "panel" ? "surface-header" : undefined}
+                        className={
                         "flex flex-wrap items-center justify-between gap-3 " +
                         "border-b border-border bg-surface-subtle " +
                         "px-[var(--space-4)] py-[var(--space-2)]"
@@ -168,7 +172,7 @@ function ArtifactViewer({
                                     </option>
                                 ))}
                             </select>
-                        ) : <span className="text-sm text-muted">
+                        ) : <span data-slot="surface-meta" className="text-sm text-muted">
                             {selected.label}
                         </span>}
                         <div role="group" aria-label="보기 방식"
@@ -189,7 +193,8 @@ function ArtifactViewer({
                             </Button>}
                         </div>
                     </div>
-                    <div role="region" aria-label={`${label} ${viewLabel}`}
+                    <div role="region" data-slot={appearance === "panel" ? "reading-plane" : undefined}
+                        aria-label={`${label} ${viewLabel}`}
                         className="min-w-0 p-[var(--space-4)]">
                         {activeView === "diff" && previous ? (
                             <DiffViewer label={`${label} 변경 비교`}

@@ -14,7 +14,10 @@ function Empty({
 
     return (
         <div
+            data-ui="empty"
             data-appearance={appearance}
+            data-surface={appearance === "panel"
+                ? "panel" : appearance === "dashed" ? "drop-target" : undefined}
             className={cn(
                 "flex min-w-0 flex-col items-center gap-3 rounded-sm " +
                 "text-center",
@@ -43,7 +46,8 @@ function EmptyMedia({ className, ...props }: ComponentProps<"div">) {
 }
 
 function EmptyTitle({ className, ...props }: ComponentProps<"h3">) {
-    return <h3 className={cn("font-semibold", className)} {...props} />;
+    return <h3 data-slot="surface-title"
+        className={cn("font-semibold", className)} {...props} />;
 }
 
 function EmptyDescription({ className, ...props }: ComponentProps<"p">) {

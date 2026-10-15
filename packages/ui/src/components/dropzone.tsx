@@ -142,6 +142,8 @@ function Dropzone({
                 onChange={handleInput}
             />
             <button
+                data-ui="dropzone"
+                data-dragging={dragging || undefined}
                 type="button"
                 disabled={disabled}
                 aria-label={label}

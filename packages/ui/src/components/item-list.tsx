@@ -75,6 +75,8 @@ function ItemList({
 
     return (
         <section {...props} aria-labelledby={labelId}
+            data-ui="item-list"
+            data-surface={appearance === "panel" ? "panel" : undefined}
             data-appearance={appearance} data-density={density}
             className={cn(
                 "@container min-w-0 text-foreground",
@@ -82,7 +84,9 @@ function ItemList({
                     "overflow-hidden rounded-sm border border-border bg-surface",
                 className,
             )}>
-            <h3 id={labelId} className={cn(
+            <h3 id={labelId}
+                data-slot={appearance === "panel" ? "surface-header" : undefined}
+                className={cn(
                 "m-0 text-sm font-semibold",
                 appearance === "panel"
                     ? "border-b border-border p-[var(--space-3)]"

@@ -171,14 +171,17 @@ function ScatterChart({
     }
 
     return (
-        <figure className={cn(
+        <figure {...props} data-ui="scatter-chart" data-surface="panel"
+            className={cn(
             "m-0 min-w-0 rounded-sm border border-border bg-surface " +
             "p-[var(--space-4)] text-foreground",
             className,
-        )} {...props}>
+        )}>
             <figcaption className="mb-[var(--space-3)]">
-                <strong className="text-sm font-semibold">{title}</strong>
-                {description && <span className="mt-1 block text-xs text-muted">
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
+                {description && <span data-slot="surface-meta"
+                    className="mt-1 block text-xs text-muted">
                     {description}
                 </span>}
             </figcaption>

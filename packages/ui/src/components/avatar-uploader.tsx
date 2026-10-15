@@ -143,16 +143,16 @@ function AvatarUploader({
     const hasImage = Boolean(imageSrc);
 
     return (
-        <section aria-label={label}
-            className={cn("grid min-w-0 gap-4", className)}>
-            <div className="flex flex-wrap items-center gap-4">
+        <section aria-label={label} data-ui="avatar-uploader"
+            className={cn("grid min-w-0 grid-cols-1 gap-4", className)}>
+            <div className="flex min-w-0 flex-wrap items-center gap-4">
                 <Avatar className="size-20">
                     {imageSrc && <AvatarImage src={imageSrc} alt={alt} />}
                     <AvatarFallback className="text-sm">
                         {fallback}
                     </AvatarFallback>
                 </Avatar>
-                <div className="grid min-w-0 flex-1 gap-2">
+                <div data-slot="avatar-details" className="grid min-w-0 flex-1 grid-cols-1 gap-2">
                     <label htmlFor={inputId}
                         className="text-sm font-medium text-foreground">
                         {label}

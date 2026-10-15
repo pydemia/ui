@@ -75,29 +75,37 @@ function NotificationCenter({
         : notifications;
 
     return (
-        <section {...props} aria-labelledby={titleId} className={cn(
+        <section {...props} aria-labelledby={titleId}
+            data-ui="notification-center"
+            data-appearance={appearance}
+            data-surface={appearance === "panel" ? "panel" : undefined}
+            className={cn(
             "min-w-0 bg-surface text-foreground",
             appearance === "panel" &&
                 "overflow-hidden rounded-sm border border-border",
             className,
         )}>
-            <div className={cn(
+            <div data-slot={appearance === "panel" ? "surface-header" : undefined}
+                className={cn(
                 "flex flex-wrap items-start justify-between gap-2 " +
                 "pb-[var(--space-3)]",
                 appearance === "panel" &&
                     "border-b border-border p-[var(--space-3)]",
             )}>
                 <div className="min-w-0">
-                    <h3 id={titleId} className="m-0 text-base font-semibold">
+                    <h3 id={titleId} data-slot="surface-title"
+                        className="m-0 text-base font-semibold">
                         {label}
                     </h3>
-                    <p className="m-0 mt-1 text-xs text-muted"
+                    <p data-slot="surface-meta"
+                        className="m-0 mt-1 text-xs text-muted"
                         aria-live="polite">
                         읽지 않음 {unreadCount}건
                     </p>
                 </div>
                 {onMarkAllRead && unreadCount > 0 && (
-                    <button type="button" onClick={() => {
+                    <button type="button" data-slot="surface-action"
+                        onClick={() => {
                         if (filter === "unread") {
                             unreadFilterRef.current?.focus();
                         }
@@ -115,7 +123,8 @@ function NotificationCenter({
                 "flex gap-1 py-[var(--space-2)]",
                 appearance === "panel" && "px-[var(--space-3)]",
             )}>
-                <button type="button" aria-pressed={filter === "all"}
+                <button type="button" data-slot="surface-action"
+                    aria-pressed={filter === "all"}
                     onClick={() => setFilter("all")}
                     className={cn(
                         "rounded-sm px-3 py-1 text-sm " +
@@ -126,6 +135,7 @@ function NotificationCenter({
                     전체
                 </button>
                 <button ref={unreadFilterRef} type="button"
+                    data-slot="surface-action"
                     aria-pressed={filter === "unread"}
                     onClick={() => setFilter("unread")}
                     className={cn(
@@ -149,7 +159,8 @@ function NotificationCenter({
             ) : (
                 <ul className="m-0 list-none divide-y divide-border p-0">
                     {visible.map((item) => (
-                        <li key={item.id} className={cn(
+                        <li key={item.id} data-slot="notification-row"
+                            className={cn(
                             "min-w-0 border-l-2 py-[var(--space-3)]",
                             appearance === "panel" &&
                                 "pl-[var(--space-3)] pr-[var(--space-4)]",
@@ -163,6 +174,7 @@ function NotificationCenter({
                                     {item.href ? (
                                         <a href={item.href}
                                             onClick={() => onOpen?.(item.id)}
+                                            data-slot="surface-title"
                                             className={
                                                 "break-words text-sm font-semibold " +
                                                 "text-foreground underline-offset-2 " +
@@ -174,6 +186,7 @@ function NotificationCenter({
                                     ) : onOpen ? (
                                         <button type="button"
                                             onClick={() => onOpen(item.id)}
+                                            data-slot="surface-title"
                                             className={
                                                 "break-words rounded-sm p-0 text-left " +
                                                 "text-sm font-semibold " +
@@ -185,14 +198,14 @@ function NotificationCenter({
                                     ) : (
                                         <strong className={
                                             "break-words text-sm font-semibold"
-                                        }>{item.title}</strong>
+                                        } data-slot="surface-title">{item.title}</strong>
                                     )}
                                     {item.message && (
                                         <p className={
                                             "m-0 mt-1 break-words text-sm text-muted"
                                         }>{item.message}</p>
                                     )}
-                                    <div className={
+                                    <div data-slot="surface-meta" className={
                                         "mt-2 flex flex-wrap items-center gap-2 " +
                                         "text-xs text-muted"
                                     }>
@@ -209,6 +222,7 @@ function NotificationCenter({
                                     </div>
                                 </div>
                                 <button type="button"
+                                    data-slot="surface-action"
                                     aria-label={
                                         `${item.title} ${item.read
                                             ? "읽지 않음" : "읽음"}으로 표시`

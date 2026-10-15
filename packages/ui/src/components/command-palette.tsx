@@ -140,7 +140,8 @@ function CommandPalette({
         <Dialog open={isOpen} onOpenChange={changeOpen}>
             <DialogTrigger asChild>{trigger}</DialogTrigger>
             <DialogContent className="max-w-xl p-0">
-                <DialogTitle className="px-4 pt-4">{title}</DialogTitle>
+                <DialogTitle data-slot="surface-title"
+                    className="px-4 pt-4">{title}</DialogTitle>
                 <DialogDescription className="sr-only">
                     검색어를 입력하고 방향키로 명령을 고른 뒤 Enter로 실행합니다.
                 </DialogDescription>
@@ -161,7 +162,8 @@ function CommandPalette({
                     }}
                     onKeyDown={onSearchKeyDown}
                     className="mx-4 mb-2 w-[calc(100%-2rem)]" />
-                <div id={listId} role="listbox" aria-label={title}
+                <div id={listId} role="listbox" data-ui="command-palette"
+                    aria-label={title}
                     className="max-h-72 overflow-y-auto border-t border-border p-2">
                     {[...groups].map(([group, items]) => (
                         <div key={group} role="group"
@@ -173,6 +175,7 @@ function CommandPalette({
                             {items.map((command) => (
                                 <button key={command.id} type="button"
                                     id={`${listId}-${command.id}`}
+                                    data-slot="command-option"
                                     role="option" tabIndex={-1}
                                     aria-selected={command.id === currentId}
                                     disabled={command.disabled}

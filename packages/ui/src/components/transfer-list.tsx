@@ -87,13 +87,15 @@ function TransferList({
                 appearance === "panel"
                     ? "border border-border bg-surface"
                     : "border-0 bg-surface-subtle",
-            )} disabled={disabled}>
-                <legend className="px-1 text-sm font-medium text-foreground">
+            )} data-surface="well" disabled={disabled}>
+                <legend data-slot="surface-title"
+                    className="px-1 text-sm font-medium text-foreground">
                     {legend} ({entries.length})
                 </legend>
                 <div className="max-h-60 min-h-24 overflow-y-auto">
                     {entries.length ? entries.map((item) => (
-                        <label key={item.value} className={
+                        <label key={item.value} data-slot="transfer-option"
+                            className={
                             "flex min-h-10 cursor-pointer items-start gap-2 " +
                             "rounded-sm px-2 py-2 text-sm hover:bg-surface-subtle " +
                             "has-[:disabled]:cursor-not-allowed " +
@@ -121,6 +123,7 @@ function TransferList({
     return (
         <div {...props} role="group" aria-label={label}
             className={cn("min-w-0", className)}
+            data-ui="transfer-list"
             data-appearance={appearance}>
             <p className="mb-2 text-sm font-medium text-foreground">{label}</p>
             <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center">

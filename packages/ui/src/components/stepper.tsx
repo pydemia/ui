@@ -70,6 +70,7 @@ function Stepper({
                 className,
             )}
             {...props}
+            data-ui="stepper"
         >
             {steps.map((step, index) => {
                 const current = index === currentIndex;
@@ -89,7 +90,8 @@ function Stepper({
                         : complete ? "완료" : "예정";
                 const content = (
                     <>
-                        <span aria-hidden="true" className={cn(
+                        <span aria-hidden="true" data-slot="step-marker"
+                            className={cn(
                             "relative z-10 grid size-6 shrink-0 place-items-center " +
                             "rounded-full border text-xs font-semibold",
                             error && "border-danger bg-surface text-danger",
@@ -123,7 +125,8 @@ function Stepper({
                         horizontal ? "min-w-32 flex-1" : "pb-5 last:pb-0",
                     )}>
                         {index < steps.length - 1 && (
-                            <span aria-hidden="true" className={cn(
+                            <span aria-hidden="true" data-slot="step-connector"
+                                className={cn(
                                 "absolute bg-border",
                                 horizontal
                                     ? "left-7 right-[-0.75rem] top-3 h-px"

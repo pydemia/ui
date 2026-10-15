@@ -53,6 +53,9 @@ function DonutChart({
 
     return (
         <figure
+            {...props}
+            data-ui="donut-chart"
+            data-surface={appearance === "panel" ? "panel" : undefined}
             className={cn(
                 "@container m-0 min-w-0 text-foreground",
                 appearance === "panel" &&
@@ -61,12 +64,13 @@ function DonutChart({
                 className,
             )}
             data-appearance={appearance}
-            {...props}
         >
             <figcaption className="mb-[var(--space-3)]">
-                <strong className="text-sm font-semibold">{title}</strong>
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
                 {description && (
-                    <span className="mt-1 block text-xs text-muted">
+                    <span data-slot="surface-meta"
+                        className="mt-1 block text-xs text-muted">
                         {description}
                     </span>
                 )}

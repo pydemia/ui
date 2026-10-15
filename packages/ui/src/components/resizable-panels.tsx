@@ -99,12 +99,15 @@ function ResizablePanels({
                     : `minmax(0, ${currentSize}fr) 8px minmax(0, ${100 - currentSize}fr)`,
             }}
             {...props}
+            data-ui="resizable-panels"
+            data-surface="panel"
         >
             <section id={firstId} role="region" aria-label={firstLabel}
                 className="min-h-0 min-w-0 overflow-auto p-[var(--space-3)]">
                 {first}
             </section>
             <div
+                data-slot="resize-handle"
                 role="separator"
                 aria-label={firstLabel}
                 aria-controls={firstId}

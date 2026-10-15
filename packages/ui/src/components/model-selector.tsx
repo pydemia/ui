@@ -117,7 +117,7 @@ function ModelSelector({
     }
 
     return (
-        <div ref={containerRef}
+        <div ref={containerRef} data-ui="model-selector"
             className={cn("grid min-w-0 gap-2", className)}>
             <label htmlFor={inputId}
                 className="text-sm font-medium text-foreground">
@@ -150,13 +150,14 @@ function ModelSelector({
                     </p>
                 ) : (
                     <section aria-label={`${selected.label} 모델 정보`}
+                        data-surface="well"
                         className={
                             "grid gap-2 rounded-sm border border-border " +
                             "bg-surface-subtle p-[var(--space-3)] text-sm"
                         }>
                         <div className="flex flex-wrap justify-between gap-2">
-                            <strong>{selected.label}</strong>
-                            <span className="text-muted">
+                            <strong data-slot="surface-title">{selected.label}</strong>
+                            <span data-slot="surface-meta" className="text-muted">
                                 {selected.provider}
                             </span>
                         </div>

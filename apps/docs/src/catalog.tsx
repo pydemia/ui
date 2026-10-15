@@ -2769,14 +2769,16 @@ function ScrollAreaPreview() {
     );
 
     return (
-        <div className="grid w-full max-w-md gap-4">
+        <div className="grid min-w-0 w-full max-w-md grid-cols-1 gap-4">
             <ScrollArea label="최근 작업" type="always"
+                data-surface="panel"
                 className="h-44 rounded-sm border border-border bg-surface">
                 <ol className="m-0 space-y-2 p-3 text-sm text-foreground">
                     {events.map((event) => <li key={event}>{event}</li>)}
                 </ol>
             </ScrollArea>
             <ScrollArea label="기간별 지표" orientation="horizontal"
+                data-surface="panel"
                 type="always"
                 className="h-24 rounded-sm border border-border bg-surface">
                 <div className="flex w-max gap-2 p-3">

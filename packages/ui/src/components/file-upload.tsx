@@ -61,7 +61,7 @@ function FileUpload({
     }
 
     return (
-        <div className={cn("grid min-w-0 gap-3", className)}>
+        <div data-ui="file-upload" className={cn("grid min-w-0 gap-3", className)}>
             <Dropzone
                 {...dropzoneProps}
                 label={label}
@@ -74,7 +74,7 @@ function FileUpload({
                 <ul aria-label={`${label} 목록`}
                     className="m-0 grid list-none gap-2 p-0">
                     {items.map((item) => (
-                        <li key={item.id} className={
+                        <li key={item.id} data-surface="row" className={
                             "min-w-0 rounded-sm border border-border " +
                             "bg-surface p-[var(--space-3)]"
                         }>
@@ -83,7 +83,7 @@ function FileUpload({
                                 "gap-2"
                             }>
                                 <div className="min-w-0 flex-1">
-                                    <strong className={
+                                    <strong data-slot="surface-title" className={
                                         "block break-all text-sm " +
                                         "font-medium " +
                                         "text-foreground"
@@ -98,6 +98,7 @@ function FileUpload({
                                     {item.status === "uploading" &&
                                         onCancel && (
                                         <button type="button"
+                                            data-slot="surface-action"
                                             onClick={() => onCancel(item.id)}
                                             className={
                                                 "rounded-sm px-2 py-1 " +
@@ -113,6 +114,7 @@ function FileUpload({
                                         item.status === "canceled") &&
                                         onRetry && (
                                             <button type="button"
+                                                data-slot="surface-action"
                                                 onClick={() =>
                                                     onRetry(item.id)}
                                                 className={
@@ -130,6 +132,7 @@ function FileUpload({
                                     {item.status !== "uploading" &&
                                         onRemove && (
                                             <button type="button"
+                                                data-slot="surface-action"
                                                 onClick={() =>
                                                     onRemove(item.id)}
                                                 className={

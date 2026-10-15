@@ -107,7 +107,9 @@ function HistogramChart({
     });
 
     return (
-        <figure {...props} data-appearance={appearance} className={cn(
+        <figure {...props} data-ui="histogram-chart"
+            data-surface={appearance === "panel" ? "panel" : undefined}
+            data-appearance={appearance} className={cn(
             "m-0 min-w-0 text-foreground",
             appearance === "panel" &&
                 "rounded-sm border border-border bg-surface " +
@@ -115,8 +117,10 @@ function HistogramChart({
             className,
         )}>
             <figcaption className="mb-[var(--space-4)]">
-                <strong className="text-sm font-semibold">{title}</strong>
-                {description && <span className="mt-1 block text-xs text-muted">
+                <strong data-slot="surface-heading"
+                    className="text-sm font-semibold">{title}</strong>
+                {description && <span data-slot="surface-meta"
+                    className="mt-1 block text-xs text-muted">
                     {description}
                 </span>}
             </figcaption>

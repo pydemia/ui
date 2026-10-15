@@ -75,6 +75,9 @@ function Image({
 
     return (
         <div
+            data-ui="image"
+            data-variant={variant}
+            data-surface={variant === "frame" ? "media" : undefined}
             className={cn(
                 "relative w-full overflow-hidden bg-surface-subtle",
                 variant === "frame" && "rounded-md border border-border",
@@ -112,13 +115,13 @@ function Image({
                 />
             )}
             {status === "loading" && (
-                <div aria-hidden="true" className={
+                <div data-surface="media-placeholder" aria-hidden="true" className={
                     "absolute inset-0 bg-surface-subtle " +
                     "motion-safe:animate-pulse"
                 } />
             )}
             {(status === "error" || status === "missing") && (
-                <div
+                <div data-surface="media-placeholder"
                     role={src === null && alt ? "img" :
                         alt ? "status" : undefined}
                     aria-label={src === null && alt ? alt : undefined}

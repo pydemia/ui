@@ -98,13 +98,15 @@ function MasterDetail({
 
     return (
         <section
+            {...props}
+            data-ui="master-detail"
+            data-surface="panel"
             aria-label={label}
             className={cn(
                 "@container min-w-0 overflow-hidden rounded-sm border " +
                 "border-border bg-surface text-foreground",
                 className,
             )}
-            {...props}
         >
             <div className={
                 "grid min-h-72 @2xl:grid-cols-[minmax(14rem,35%)_minmax(0,1fr)]"
@@ -119,10 +121,11 @@ function MasterDetail({
                         mobileDetailVisible && "hidden @2xl:block",
                     )}
                 >
-                    <div className={
+                    <div data-slot="surface-header" className={
                         "border-b border-border p-[var(--space-3)]"
                     }>
-                        <h3 className="m-0 text-sm font-semibold">{label}</h3>
+                        <h3 data-slot="surface-title"
+                            className="m-0 text-sm font-semibold">{label}</h3>
                     </div>
                     {items.length === 0 ? (
                         <div className="p-[var(--space-4)] text-sm text-muted">
@@ -137,6 +140,8 @@ function MasterDetail({
                                             ? selectedButtonRef : undefined}
                                         type="button"
                                         disabled={item.disabled}
+                                        data-slot="surface-row"
+                                        data-selected={item.id === activeId || undefined}
                                         aria-current={item.id === activeId
                                             ? "true" : undefined}
                                         aria-controls={detailId}

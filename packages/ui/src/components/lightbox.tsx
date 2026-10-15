@@ -77,6 +77,8 @@ function Lightbox({
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             {active && <DialogContent
+                data-variant={variant}
+                data-slot="lightbox"
                 className={cn(
                     "flex flex-col gap-3",
                     variant === "frame"
@@ -101,15 +103,15 @@ function Lightbox({
                         move(event.key === "ArrowLeft" ? -1 : 1);
                     }
                 }}>
-                <div className="flex items-start justify-between gap-3">
-                    <DialogTitle>{title}</DialogTitle>
+                <div data-slot="surface-header" className="flex items-start justify-between gap-3">
+                    <DialogTitle data-slot="surface-title">{title}</DialogTitle>
                     <DialogClose asChild>
                         <Button type="button" variant="outline">
                             닫기
                         </Button>
                     </DialogClose>
                 </div>
-                <DialogDescription>
+                <DialogDescription data-slot="surface-meta">
                     {activeIndex + 1} / {items.length}
                 </DialogDescription>
                 <Image key={active.id} src={active.src} alt={active.alt}
@@ -142,6 +144,7 @@ function Lightbox({
                         className="flex gap-2 overflow-x-auto pb-1">
                         {items.map((item) => (
                             <button key={item.id} type="button"
+                                data-surface="media"
                                 aria-label={`${item.alt} 보기`}
                                 aria-current={item.id === active.id
                                     ? "true" : undefined}

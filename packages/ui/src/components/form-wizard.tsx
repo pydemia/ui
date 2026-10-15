@@ -133,7 +133,7 @@ function FormWizard({
                     "p-[var(--space-4)]",
                 className,
             )}>
-            <Stepper aria-label={`${label} 단계`} steps={steps}
+            <Stepper aria-label={`${label} 단계`} steps={steps} data-embedded="true"
                 currentIndex={currentIndex} orientation={orientation} />
             <div className="grid min-w-0 gap-2">
                 <h2 ref={heading} id={headingId} tabIndex={-1}

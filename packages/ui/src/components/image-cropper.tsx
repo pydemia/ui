@@ -259,17 +259,18 @@ function ImageCropper({
         loadError || (!image ? "이미지를 불러오는 중입니다." : "");
 
     return (
-        <section aria-label={label} aria-busy={busy || undefined}
+        <section aria-label={label} data-ui="image-cropper"
+            aria-busy={busy || undefined}
             className={cn("grid min-w-0 gap-3", className)}>
-            <div>
-                <h3 className="m-0 text-sm font-semibold text-foreground">
+            <div data-slot="surface-header">
+                <h3 data-slot="surface-title" className="m-0 text-sm font-semibold text-foreground">
                     {label}
                 </h3>
                 <p id={descriptionId} className="mb-0 mt-1 text-xs text-muted">
                     이미지를 끌거나 위치·확대 슬라이더로 조정하세요.
                 </p>
             </div>
-            <div className={
+            <div data-surface="media" className={
                 "relative w-full overflow-hidden rounded-sm border " +
                 "border-border bg-surface-subtle"
             }
@@ -288,7 +289,8 @@ function ImageCropper({
                                 "active:cursor-grabbing",
                         )} />
                 ) : (
-                    <p role={loadError || !supportedFile ? "alert" : "status"}
+                    <p data-surface="media-placeholder"
+                        role={loadError || !supportedFile ? "alert" : "status"}
                         className={
                             "absolute inset-0 grid place-items-center " +
                             "p-4 text-center text-sm text-muted"

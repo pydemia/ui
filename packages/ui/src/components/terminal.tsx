@@ -98,7 +98,9 @@ function Terminal({
     }
 
     return (
-        <section aria-label={label} data-variant={variant}
+        <section aria-label={label} data-ui="terminal"
+            data-variant={variant}
+            data-surface={variant === "panel" ? "panel" : undefined}
             className={cn(
                 "grid min-w-0 overflow-hidden text-foreground",
                 variant === "panel" &&
@@ -106,17 +108,19 @@ function Terminal({
                 variant === "flat" && "border-b border-border bg-transparent",
                 className,
             )}>
-            <div className={cn(
+            <div data-slot={variant === "panel" ? "surface-header" : undefined}
+                className={cn(
                 "flex items-center justify-between gap-3 px-3 py-2",
                 variant === "panel" &&
                     "border-b border-border bg-surface-subtle",
             )}>
-                <span className="text-sm font-medium">{label}</span>
+                <span data-slot="surface-title" className="text-sm font-medium">{label}</span>
                 {pending && <span role="status" className="text-xs text-muted">
                     실행 중
                 </span>}
             </div>
-            <div role="log" aria-label={`${label} 출력`} aria-live={live}
+            <div role="log" data-slot={variant === "panel" ? "reading-plane" : undefined}
+                aria-label={`${label} 출력`} aria-live={live}
                 aria-busy={pending} aria-relevant="additions text"
                 className={
                     "max-h-80 min-h-40 min-w-0 overflow-auto px-3 py-2 " +
