@@ -250,7 +250,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
     box-shadow: var(--panel-shadow);
 }
 :root[data-design="material"] .sidebar-item {
-    border-radius: 999px;
+    border-radius: var(--navigation-radius);
     padding-block: 12px;
     margin-block: 3px;
 }
@@ -457,7 +457,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .text-link { display: inline-flex; gap: 4px; align-items: center; white-space: nowrap; font-size: 14px; font-weight: 650; color: var(--accent); }
 .example-frame { height: 560px; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; background: var(--surface); }
 .example-frame iframe { width: 100%; height: 100%; border: 0; }
-.analytics-example-frame { max-height: 720px; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--background); }
+.analytics-example-frame { max-height: 720px; overflow: auto; border: 1px solid var(--border); border-radius: var(--panel-radius-material, var(--panel-radius, 5px)); background: var(--background); }
 .analytics-install { margin-top: 14px; font-size: 13px; }
 .analytics-install summary { cursor: pointer; font-weight: 600; }
 .analytics-install pre { margin: 12px 0; padding: 12px; overflow-x: auto; background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius); white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -487,7 +487,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 }
 @media (max-width: 410px) { .colormap-grid, .colormap-fields, .swatch-grid { grid-template-columns: 1fr; } .colormap-editor { align-items: start; flex-direction: column; } .preview-stage, .preview-content { padding: 16px; } .preview-row { gap: 12px; } }
 @media (max-width: 410px) { .top-nav > .github-link { display: none; } }
-@media (max-width: 1000px) {
+@media (max-width: 1300px) {
     .version, .top-nav-secondary, .top-nav > .github-link { display: none; }
     .topbar-inner { padding-inline: 17px; gap: 9px; }
     .top-nav { gap: 0; }

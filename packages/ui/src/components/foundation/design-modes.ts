@@ -347,7 +347,7 @@ const profiles: ModeProfile[] = [
         },
     }],
     ["material", "Material Inspired", "표면", "보라색 tonal 표면과 알약형 주요 동작으로 구성한 Material 화면", "violet", {
-        "--radius": "999px", "--panel-radius": "24px",
+        "--radius": "12px", "--panel-radius": "24px",
         "--density-control-height": "44px", "--heading-weight": "700",
         "--panel-shadow": "0 3px 8px rgb(40 30 80 / 12%), 0 1px 3px rgb(40 30 80 / 10%)",
         "--docs-preview-padding": "26px",

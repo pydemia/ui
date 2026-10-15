@@ -141,6 +141,9 @@
   --scene-border: 1px;
 }
 [data-design="material"] {
+  /* Pills belong to short actions, never the inherited container geometry. */
+  --control-radius: 999px;
+  --selection-radius: 12px;
   --control-decoration: 0 3px 7px color-mix(in srgb, var(--accent) 25%, transparent);
   --pressed-decoration: inset 0 0 0 999px rgb(0 0 0 / 12%);
   --field-radius: 12px 12px 3px 3px;
@@ -565,7 +568,7 @@
   --schedule-cell-fill: color-mix(in srgb, var(--accent) 4%, var(--surface));
 }
 [data-design="material"] {
-  --navigation-radius: 999px;
+  --navigation-radius: 12px;
   --navigation-selected-shadow: none;
   --schedule-bar-radius: 999px;
   --schedule-cell-fill: color-mix(in srgb, var(--accent) 5%, var(--surface));
@@ -846,6 +849,8 @@
     font-weight: var(--component-heading-weight);
   }
   :where([data-slot="surface-row"][data-selected="true"], [data-slot="surface-row"][aria-selected="true"], [data-slot="surface-row"][aria-pressed="true"]) :where([data-slot="surface-meta"], p.text-muted, span.text-muted) { color: inherit; }
+  /* MetricCard supplies featured/compact variants through Card's data hook. */
+  :where([data-ui="card"]) { border-radius: var(--panel-radius-material); }
   :where([data-ui="card"][data-variant="subtle"]) { border-radius: var(--panel-radius-material); border-style: var(--panel-border-style); background-color: var(--navigation-fill); background-image: var(--surface-image); box-shadow: var(--field-decoration); }
   :where([data-ui="conversation"]) [role="log"] { background-color: var(--reading-fill); box-shadow: none; border-radius: inherit; }
   :where([data-surface="message"]) { border-radius: var(--field-radius); border-width: var(--border-width); border-style: var(--panel-border-style); background-color: var(--surface-fill); background-image: var(--surface-image); box-shadow: var(--secondary-decoration); padding: 14px 16px; }
