@@ -8,6 +8,10 @@ import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupText } from "./
 import { TagsInput } from "./components/ui/tags-input";
 import { CodeEditorShell } from "./components/ui/code-editor-shell";
 import { PromptInput } from "./components/ui/prompt-input";
+import { Tree } from "./components/ui/tree";
+import { SideNav, SideNavLink } from "./components/ui/navigation";
+import { Gantt } from "./components/ui/gantt";
+import { Calendar } from "./components/ui/calendar";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/ui/tabs";
 import { Table, TableCell, TableHead } from "./components/ui/table";
 import {
@@ -77,6 +81,21 @@ function App() {
                 <CodeEditorShell label="Installed code draft" value={draft}
                     onValueChange={setDraft} rows={4} />
                 <PromptInput label="Installed prompt" onSend={setDraft} />
+                <Tree label="Installed project tree" defaultExpandedIds={["project"]}
+                    items={[{ id: "project", label: "Project", children: [
+                        { id: "readme", label: "Readme" },
+                        { id: "schedule", label: "Schedule" },
+                    ] }]} />
+                <SideNav aria-label="Installed navigation">
+                    <SideNavLink href="#overview" aria-current="page">Overview</SideNavLink>
+                    <SideNavLink href="#details">Details</SideNavLink>
+                </SideNav>
+                <Gantt label="Installed schedule" rangeStart="2026-10-01"
+                    rangeEnd="2026-10-10" tasks={[
+                        { id: "plan", title: "Plan", startDate: "2026-10-02",
+                            endDate: "2026-10-05", progress: 60 },
+                    ]} />
+                <Calendar mode="single" defaultMonth={new Date(2026, 9, 1)} />
                 <Tabs defaultValue="overview">
                     <TabsList variant="contained" aria-label="Installed tabs">
                         <TabsTrigger value="overview">Overview</TabsTrigger>

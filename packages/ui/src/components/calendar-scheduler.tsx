@@ -128,14 +128,16 @@ function CalendarScheduler({
             "@container min-w-0 rounded-sm border border-border " +
             "bg-surface p-[var(--space-4)] text-foreground",
             className,
-        )} {...props}>
-            <div className="mb-[var(--space-3)] flex flex-wrap items-baseline gap-2">
+        )} {...props} data-ui="calendar-scheduler">
+            <div data-slot="schedule-header"
+                className="mb-[var(--space-3)] flex flex-wrap items-baseline gap-2">
                 <h3 className="m-0 text-base font-semibold">{label}</h3>
                 <span className="text-xs text-muted">
                     {monthPrefix} · {monthCount}건
                 </span>
             </div>
-            <div className="grid min-w-0 gap-[var(--space-4)] @2xl:grid-cols-2">
+            <div data-slot="schedule-layout"
+                className="grid min-w-0 gap-[var(--space-4)] @2xl:grid-cols-2">
                 <Calendar
                     mode="single" required
                     aria-label={`${label} 날짜`}
@@ -174,7 +176,8 @@ function CalendarScheduler({
                         },
                     }}
                 />
-                <div role="region" aria-label={`${currentDate} 일정`}
+                <div data-slot="schedule-agenda" role="region"
+                    aria-label={`${currentDate} 일정`}
                     className="min-w-0 rounded-sm border border-border p-[var(--space-3)]">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                         <h4 className="m-0 text-sm font-semibold">
@@ -230,7 +233,8 @@ function CalendarScheduler({
                                 return (
                                     <li key={event.id}>
                                         {onEventSelect ? (
-                                            <button type="button"
+                                            <button data-slot="schedule-event"
+                                                type="button"
                                                 onClick={() =>
                                                     onEventSelect(event)}
                                                 className={
@@ -243,7 +247,8 @@ function CalendarScheduler({
                                                 {content}
                                             </button>
                                         ) : (
-                                            <div className="grid gap-1 px-2 py-3">
+                                            <div data-slot="schedule-event"
+                                                className="grid gap-1 px-2 py-3">
                                                 {content}
                                             </div>
                                         )}

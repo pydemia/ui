@@ -225,10 +225,11 @@ function Gantt({
     }
 
     return (
-        <div {...props} role="region" aria-label={label}
+        <div {...props} data-ui="gantt" role="region" aria-label={label}
             className={cn("min-w-0 rounded-sm border border-border " +
                 "bg-surface text-foreground", className)}>
-            <div className={"flex flex-wrap items-center justify-between gap-2 " +
+            <div data-slot="gantt-header"
+                className={"flex flex-wrap items-center justify-between gap-2 " +
                 "border-b border-border px-4 py-3"}>
                 <strong className="text-sm">{label}</strong>
                 <span className="text-xs text-muted">
@@ -242,7 +243,8 @@ function Gantt({
                 </p>
             ) : <>
                 {selected && (
-                    <div className="border-b border-border px-4 py-3">
+                    <div data-slot="gantt-selection"
+                        className="border-b border-border px-4 py-3">
                         <p className="m-0 text-xs text-muted">
                             선택: <strong className="text-foreground">
                                 {selected.title}
@@ -253,7 +255,8 @@ function Gantt({
                         {onTasksChange && (
                             <div className="mt-2 flex flex-wrap gap-2">
                                 {operations.map(({ id, label: action }) => (
-                                    <button key={id} type="button"
+                                    <button key={id} data-slot="gantt-action"
+                                        type="button"
                                         disabled={!proposals?.[id]}
                                         onClick={() => applyChange(id)}
                                         className={"rounded-sm border border-border " +
@@ -273,20 +276,22 @@ function Gantt({
                 <p className="sr-only" role="status" aria-live="polite">
                     {announcement}
                 </p>
-                <div tabIndex={0} role="group"
+                <div data-slot="gantt-scroll" tabIndex={0} role="group"
                     aria-label={`${label} 시간축`}
                     className="min-w-0 overflow-x-auto">
                     <div style={{ width: 180 + chartWidth }}>
-                        <div className={"flex h-9 border-b border-border " +
+                        <div data-slot="gantt-scale"
+                            className={"flex h-9 border-b border-border " +
                             "bg-surface-subtle text-[10px] text-muted"}>
-                            <span className={"sticky left-0 z-30 flex w-[180px] " +
+                            <span data-slot="gantt-corner"
+                                className={"sticky left-0 z-30 flex w-[180px] " +
                                 "shrink-0 items-center border-r border-border " +
                                 "bg-surface-subtle px-3 font-semibold"}>
                                 작업 / 진행률
                             </span>
                             <div className="flex" aria-hidden="true">
                                 {ticks.map((tick) => (
-                                    <span key={tick.id}
+                                    <span key={tick.id} data-slot="gantt-tick"
                                         style={{ width: tick.width }}
                                         className={"flex shrink-0 items-center " +
                                             "border-r border-border px-1"}>
@@ -342,15 +347,20 @@ function Gantt({
                                     const dates = plan.dates.get(task.id)!;
                                     const predecessors = (task.dependsOn ?? [])
                                         .map((id) => plan.titles.get(id)!);
+                                    const isSelected = selected?.id === task.id;
                                     return <li key={task.id}
+                                        data-slot="gantt-row"
+                                        data-selected={isSelected || undefined}
                                         className={"flex h-14 border-b " +
                                             "border-border last:border-b-0"}>
-                                        <div className={"sticky left-0 z-20 w-[180px] " +
+                                        <div data-slot="gantt-label"
+                                            className={"sticky left-0 z-20 w-[180px] " +
                                             "shrink-0 border-r border-border " +
                                             "bg-surface"}>
-                                            <button type="button"
+                                            <button data-slot="gantt-task"
+                                                type="button"
                                                 aria-pressed={
-                                                    selected?.id === task.id
+                                                    isSelected
                                                 }
                                                 onClick={() =>
                                                     setSelectedId(task.id)}
@@ -379,7 +389,7 @@ function Gantt({
                                                     </span>}
                                             </button>
                                         </div>
-                                        <div aria-hidden="true"
+                                        <div data-slot="gantt-track" aria-hidden="true"
                                             onClick={() =>
                                                 setSelectedId(task.id)}
                                             className="relative shrink-0 cursor-pointer"
@@ -387,12 +397,12 @@ function Gantt({
                                                 width: chartWidth,
                                                 backgroundImage:
                                                     "linear-gradient(to right, " +
-                                                    "var(--border) 1px, " +
+                                                    "var(--schedule-grid, var(--border)) 1px, " +
                                                     "transparent 1px)",
                                                 backgroundSize:
                                                     `${tickDays * dayWidth}px 100%`,
                                             }}>
-                                            <div className={cn(
+                                            <div data-slot="gantt-bar" className={cn(
                                                 "absolute top-[18px] z-20 h-5 " +
                                                 "overflow-hidden rounded-sm border " +
                                                 "border-accent",
@@ -403,12 +413,14 @@ function Gantt({
                                                     * dayWidth + 2,
                                                 width: (dates.end - dates.start + 1)
                                                     * dayWidth - 4,
-                                                background: "color-mix(in srgb, " +
+                                                background: "var(--schedule-bar-fill, " +
+                                                    "color-mix(in srgb, " +
                                                     "var(--accent) 14%, " +
-                                                    "var(--surface))",
+                                                    "var(--surface)))",
                                             }}>
                                                 {task.progress !== undefined &&
-                                                    <span className={"block h-full " +
+                                                    <span data-slot="gantt-progress"
+                                                        className={"block h-full " +
                                                         "bg-accent"}
                                                         style={{
                                                             width:

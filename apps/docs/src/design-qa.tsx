@@ -123,6 +123,8 @@ function App() {
                     {catalog.filter((item) => [
                         "input-group", "code-editor-shell", "prompt-input", "tabs",
                         "color-input", "native-select", "button-group", "tags-input",
+                        "tree", "tree-nav", "navigation", "anchor-nav", "gantt",
+                        "calendar", "calendar-scheduler",
                     ].includes(item.id)).map((item) => <div key={item.id}
                         data-qa-basic-component={item.id}>
                         <h3>{item.name}</h3>{item.preview()}

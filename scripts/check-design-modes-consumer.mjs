@@ -52,6 +52,7 @@ const items = [
     "pyd-input", "pyd-table", "pyd-badge", "pyd-dialog",
     "pyd-input-group", "pyd-field", "pyd-tags-input", "pyd-code-editor-shell",
     "pyd-prompt-input", "pyd-tabs",
+    "pyd-tree", "pyd-navigation", "pyd-gantt", "pyd-calendar",
 ];
 const commands = [];
 const report = {

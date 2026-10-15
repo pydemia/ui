@@ -185,7 +185,8 @@ function TreeSelect({
                         defaultExpandedIds={selected?.parentIds}
                         onSelectedIdChange={choose}
                         emptyMessage={emptyMessage}
-                        className="border-0 p-0" />
+                        className="border-0 p-0"
+                        data-embedded="true" />
                 </PopoverContent>
             </Popover>
             <select ref={selectRef} name={name} form={form}
