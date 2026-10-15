@@ -17,6 +17,9 @@ import "@pydemia/ui/design-modes.css";
 
 // Repeatable browser fixture; Vite's production input excludes this HTML.
 const options = { allowUnreleased: true };
+const requestedPreviewWidth = Number(new URL(location.href).searchParams.get("previewWidth"));
+const previewWidth = requestedPreviewWidth > 0 && Number.isFinite(requestedPreviewWidth)
+    ? requestedPreviewWidth : undefined;
 class PreviewBoundary extends Component<
     { children: ReactNode; name: string }, { error: string }
 > {
@@ -63,7 +66,7 @@ function App() {
     }
 
     return <ThemeScope settings={settings} options={options}>
-        <main className="mx-auto max-w-6xl p-5">
+        <main className="mx-auto max-w-6xl p-4">
             <header className="grid gap-3 border-b border-border pb-5">
                 <h1 data-ui="heading" className="text-2xl">Design mode browser QA</h1>
                 <p>개발 전용 · 실제 catalog 144개 · 업무 상태와 공개 검증을 분리합니다.</p>
@@ -159,9 +162,18 @@ function App() {
             <section aria-label="전체 catalog" className="grid gap-5">
                 {catalog.map((item) => <section key={item.id}
                     data-qa-component={item.id} data-qa-family={item.category}
-                    className="min-w-0 rounded-sm border border-border bg-surface p-4">
-                    <h2 data-ui="heading" className="mb-3 text-lg">{item.name}</h2>
-                    <PreviewBoundary name={item.id}>{item.preview()}</PreviewBoundary>
+                    className="min-w-0 rounded-sm border border-border bg-surface">
+                    <h2 data-ui="heading" className="mb-3 px-4 pt-4 text-lg">{item.name}</h2>
+                    <PreviewBoundary name={item.id}>
+                        <div className="preview-stage" data-qa-stage
+                            style={{ maxWidth: previewWidth ?? ([
+                                "app-shell", "data-chart", "dashboard", "data-table",
+                                "gantt", "scatter-chart", "calendar-heatmap",
+                                "sankey-chart", "resizable-panels", "sidebar", "stepper",
+                            ].includes(item.id) ? undefined : 560) }}>
+                            <div className="preview-content">{item.preview()}</div>
+                        </div>
+                    </PreviewBoundary>
                 </section>)}
             </section>
         </main>

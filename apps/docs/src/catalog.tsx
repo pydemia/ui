@@ -846,6 +846,7 @@ function TagsInputPreview() {
                     .getAll("skills").map(String));
             }}>
                 <TagsInput label="기술 태그" name="skills" value={tags}
+                    className="grid-cols-1"
                     onValueChange={setTags} maxTags={5} required
                     variant={variant} placeholder="태그 입력" />
                 <Button type="submit">제출 값 확인</Button>
@@ -896,7 +897,7 @@ function RatingPreview() {
     const [variant, setVariant] = useState<"stars" | "segments">("stars");
     const [submitted, setSubmitted] = useState<string | null>(null);
 
-    return <div className="preview-stack">
+    return <div className="preview-stack preview-workspace">
         <div className="flex gap-2">
             <Button variant={variant === "stars" ? "primary" : "outline"}
                 onClick={() => setVariant("stars")}>Stars</Button>
@@ -916,6 +917,7 @@ function RatingPreview() {
             <Button type="submit">점수 제출</Button>
         </form>
         <Rating label="평균 점수" value={4} readOnly
+            className="[&_[role=img]]:flex-wrap"
             variant={variant} />
         <p role="status">현재 {score}/5점 · 제출: {submitted ?? "없음"}</p>
     </div>;
@@ -2089,6 +2091,7 @@ function CalendarSchedulerPreview() {
     return (
         <div className="preview-workspace grid gap-3">
             <CalendarScheduler label="팀 일정" initialDate="2026-10-07"
+                className="max-[410px]:p-[var(--space-3)]"
                 selectedDate={date} onSelectedDateChange={(nextDate) => {
                     setDate(nextDate);
                     setLastAction(`${nextDate} 선택`);
@@ -4606,9 +4609,13 @@ function QueryBuilderPreview() {
                 {variant === "panel" ? "Plain 형태 보기" :
                     "Panel 형태 보기"}
             </Button>
-            <QueryBuilder label="감사 이벤트 조건" fields={auditQueryFields}
-                value={query} onValueChange={setQuery}
-                onApply={setApplied} variant={variant} />
+            <div role="region" aria-label="조건 편집 영역" tabIndex={0}
+                className="min-w-0 overflow-x-auto focus-visible:outline-2 focus-visible:outline-focus">
+                <QueryBuilder label="감사 이벤트 조건" fields={auditQueryFields}
+                    className="min-w-[300px]"
+                    value={query} onValueChange={setQuery}
+                    onApply={setApplied} variant={variant} />
+            </div>
             <div className="grid gap-1 text-sm">
                 <p role="status" className="m-0 text-muted">
                     {applied ? "적용한 조건" : "조건을 적용해 보세요."}

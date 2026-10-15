@@ -153,11 +153,51 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .component-grid[data-wide="true"] { grid-template-columns: minmax(0, 1fr); }
 .component-grid[data-wide="true"] .preview-panel { border-right: 0; border-bottom: 1px solid var(--border); }
 .preview-panel, .code-panel { min-width: 0; }
-.preview-panel { border-right: 1px solid var(--border); }
+.preview-panel { display: flex; flex-direction: column; border-right: 1px solid var(--border); }
+.preview-panel > .panel-caption { flex-shrink: 0; }
 .panel-caption { height: 43px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 16px; color: var(--title-ink, var(--muted)); border-bottom: 1px solid var(--border); background: var(--title-fill, var(--surface-subtle)); }
 .panel-caption span:last-child { letter-spacing: normal; font-weight: 500; }
-.preview-stage { min-height: 327px; padding: var(--docs-preview-padding, 22px); display: grid; align-items: center; background-image: var(--canvas-image, none), linear-gradient(var(--docs-grid) 1px, transparent 1px), linear-gradient(90deg, var(--docs-grid) 1px, transparent 1px); background-size: auto, 21px 21px, 21px 21px; background-position: center, -1px -1px, -1px -1px; }
-.preview-stage > * { padding: 18px; border: var(--border-width, 1px) solid var(--border); border-radius: var(--panel-radius, 5px); background: var(--surface-fill, var(--surface)); background-image: var(--surface-image, none); backdrop-filter: var(--surface-filter, none); box-shadow: var(--panel-shadow, var(--shadow-float)); }
+.preview-stage { flex: 1; min-width: 0; min-height: 327px; padding: clamp(20px, var(--docs-preview-padding, 24px), 32px); display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; justify-items: center; background-image: var(--canvas-image, none), linear-gradient(var(--docs-grid) 1px, transparent 1px), linear-gradient(90deg, var(--docs-grid) 1px, transparent 1px); background-size: auto, 21px 21px, 21px 21px; background-position: center, -1px -1px, -1px -1px; }
+/* The example frame owns its inset; component roots keep their own layout. */
+.preview-content {
+    width: 100%;
+    max-width: 520px;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: clamp(16px, var(--editor-inset, 20px), 24px);
+    border: var(--border-width, 1px) solid var(--border);
+    border-radius: var(--panel-radius-material, var(--panel-radius, 5px));
+    background: var(--surface-fill, var(--surface));
+    background-image: var(--surface-image, none);
+    backdrop-filter: var(--surface-filter, none);
+    box-shadow: var(--panel-shadow, var(--shadow-float));
+}
+.component-grid[data-wide="true"] .preview-content { max-width: none; }
+.preview-content > :is(.preview-field, .preview-stack, .preview-alerts) { width: 100%; }
+/* Composed workspaces and framed components already provide their own surfaces. */
+.preview-content:has(
+    > .preview-workspace, [data-surface]:not([data-surface="status"]), figure, [data-ui="field-frame"],
+    [data-ui="card"], [data-ui="code-editor"], [data-ui="markdown-editor"],
+    [data-ui="block-editor"], [data-ui="node-canvas"], [data-ui="prompt-input"],
+    [data-ui="form-wizard"], [data-ui="approval-card"], [data-ui="query-builder"],
+    [data-ui="tree"], [data-ui="tree-nav"], [data-ui="global-nav"],
+    [data-ui="side-nav"], [data-ui="anchor-nav"], [data-ui="calendar"],
+    [data-ui="calendar-scheduler"], [data-ui="gantt"], [data-ui="dropzone"],
+    [data-ui="json-viewer"], [data-ui="log-console"], [data-ui="log-viewer"],
+    [data-ui="terminal"], [data-ui="artifact-viewer"], [data-ui="carousel"],
+    [data-ui="reasoning"], [data-ui="tool-call"], [data-ui="agent-status"],
+    [data-ui="image"], [data-ui="tabs"], [data-ui="alert"],
+    [data-ui="empty"], [data-ui="item-list"]
+) {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+}
 .theme-notice { margin: 16px 0; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); font-size: 14px; }
 :root[data-design]:not([data-design="basic"]) .sidebar-item.selected { border-left-color: transparent; }
 :root[data-design]:not([data-design="basic"]) .topbar {
@@ -356,21 +396,9 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
     :is(.preview-field, .preview-stack, .preview-alerts) {
         width: min(100%, 460px);
         gap: 20px;
-        padding: var(--editor-inset);
     }
     .preview-stack-wide { width: 100%; }
-    .preview-row { gap: 16px; padding: var(--editor-inset); }
-    .preview-stage > [data-ui="card"] { padding: 0; }
-    .preview-stage > :is([data-ui="code-editor"], [data-ui="markdown-editor"], [data-ui="block-editor"], [data-ui="node-canvas"]) { padding: 0; }
-    .preview-stage > .preview-stack:has([data-ui="code-editor"], [data-ui="markdown-editor"], [data-ui="block-editor"], [data-ui="prompt-input"], [data-ui="form-wizard"], [data-ui="node-canvas"], [data-ui="approval-card"], [data-ui="query-builder"], [data-ui="tree"], [data-ui="tree-nav"], [data-ui="global-nav"], [data-ui="anchor-nav"], [data-ui="calendar"], [data-surface="panel"], [data-surface="well"], [data-surface="drop-target"]) {
-        padding: 0;
-        border: 0;
-        border-radius: 0;
-        background: transparent;
-        background-image: none;
-        box-shadow: none;
-        backdrop-filter: none;
-    }
+    .preview-row { gap: 16px; }
     :is(.preview-navigation-device, .preview-navigation-page, .preview-anchor-article) {
         border-radius: var(--panel-radius-material);
         border-width: var(--border-width);
@@ -383,7 +411,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 .preview-table { width: 100%; min-width: 0; overflow-x: auto; }
 .preview-snippet { width: 100%; min-width: 0; }
 .preview-snippet > * { width: 100%; }
-.preview-stage > .preview-workspace { width: 100%; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.preview-workspace { width: 100%; min-width: 0; }
 .docs-snippet { border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
 .docs-snippet > div:first-child { min-height: 44px; }
 .docs-snippet pre { max-height: 299px; min-height: 282px; margin: 0; font-size: 12px; line-height: 1.85; }
@@ -449,6 +477,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 @media (max-width: 850px) { .sidebar-inner > div:not(.sidebar-lower) { display: contents; } }
 @media (max-width: 670px) { .topbar-inner { padding: 0 17px; gap: 9px; } .wordmark { font-size: 15px; } .version, .top-nav-secondary { display: none; } .top-nav { margin-left: auto; gap: 0; } .github-link { font-size: 0; } .github-link svg:last-child { display: none; } .theme-button { margin-left: 5px; } .main-content { padding: 0 17px; } .intro { padding: 36px 0 32px; } .intro h1 { font-size: 40px; } .intro p { font-size: 15px; } .desktop-break { display: none; } .doc-section { padding: 36px 0; } .section-lead { flex-wrap: wrap; } .colormap-grid, .colormap-fields, .swatch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .contrast-grid { grid-template-columns: 1fr; } .token-detail { grid-template-columns: repeat(2, 1fr); } .component-meta { grid-template-columns: repeat(2, 1fr); } .component-meta > div:last-child { grid-column: 1 / -1; } .usage-columns { grid-template-columns: 1fr; } .usage-columns p { min-height: 0; } .example-frame { height: 590px; } }
 @media (max-width: 670px) {
+    :root:is([data-design="glass"], [data-design="spatial"]) .layout { padding-inline: 0; }
     .component-menu { grid-template-columns: 132px minmax(0, 1fr); }
     .component-menu-categories { padding: 6px; }
     .component-menu-categories button { padding: 8px 6px; font-size: 12px; }
@@ -456,7 +485,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
     .component-menu-heading { display: grid; gap: 2px; }
     .component-menu-items { grid-template-columns: minmax(0, 1fr); }
 }
-@media (max-width: 410px) { .colormap-grid, .colormap-fields, .swatch-grid { grid-template-columns: 1fr; } .colormap-editor { align-items: start; flex-direction: column; } .preview-stage { padding: 12px; } .preview-row { padding: 12px; } }
+@media (max-width: 410px) { .colormap-grid, .colormap-fields, .swatch-grid { grid-template-columns: 1fr; } .colormap-editor { align-items: start; flex-direction: column; } .preview-stage, .preview-content { padding: 16px; } .preview-row { gap: 12px; } }
 @media (max-width: 410px) { .top-nav > .github-link { display: none; } }
 @media (max-width: 1000px) {
     .version, .top-nav-secondary, .top-nav > .github-link { display: none; }
