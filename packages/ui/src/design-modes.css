@@ -733,6 +733,34 @@
     color: var(--accent-foreground);
   }
   :where([data-slot="nav-menu-link"]) { padding-inline: 12px; }
+  :where([data-ui="menubar"]) {
+    border-radius: var(--navigation-radius);
+    border-width: var(--border-width);
+    border-style: var(--panel-border-style);
+    background-color: var(--navigation-fill);
+    background-image: var(--surface-image);
+    backdrop-filter: var(--surface-filter);
+    box-shadow: var(--field-decoration);
+  }
+  :where([data-ui="overlay-panel"])[role="menu"] {
+    border-radius: var(--navigation-radius);
+    border-style: var(--panel-border-style);
+    padding: 6px;
+  }
+  :where([data-ui="overlay-panel"][role="menu"]) :where([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]) {
+    border-radius: var(--navigation-radius);
+    min-height: 36px;
+    background-image: var(--control-image);
+  }
+  :where([data-ui="overlay-panel"][role="menu"]) :where([role="menuitemcheckbox"][data-state="checked"], [role="menuitemradio"][data-state="checked"]) {
+    background-color: var(--navigation-selected-fill);
+    box-shadow: var(--navigation-selected-shadow);
+    font-weight: var(--component-heading-weight);
+  }
+  :where([data-ui="overlay-panel"][role="menu"]) :where([data-highlighted]:not([data-disabled])) {
+    background-color: var(--navigation-hover-fill);
+    box-shadow: var(--field-decoration);
+  }
 
   /* Data planes stay quiet; title strips, cells and task paint carry the mode. */
   :where([data-ui="gantt"]) { padding: 0; overflow: hidden; background-color: var(--schedule-fill); }

@@ -2192,7 +2192,8 @@ function ActionBarPreview() {
             <Button variant={placement === "floating" ? "primary" : "outline"}
                 onClick={() => setPlacement("floating")}>Floating</Button>
         </div>
-        <div className="grid gap-2 rounded-sm border border-border p-3">
+        <div data-surface="panel"
+            className="grid gap-2 rounded-sm border border-border p-3">
             {items.map((item, index) => <label key={item.id}
                 className="flex items-center gap-2 text-sm">
                 <input ref={index === 0 ? firstItem : undefined}

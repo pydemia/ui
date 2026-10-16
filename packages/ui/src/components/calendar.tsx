@@ -16,12 +16,12 @@ function Calendar({
             showOutsideDays={showOutsideDays}
             data-ui="calendar"
             className={cn(
-                "relative w-fit rounded-sm border border-border bg-surface p-3",
+                "relative w-fit min-w-0 max-w-full rounded-sm border border-border bg-surface p-3",
                 className,
             )}
             classNames={{
                 months: cn("flex flex-col gap-4 sm:flex-row", defaults.months),
-                month: cn("relative space-y-3", defaults.month),
+                month: cn("relative w-[15.75rem] max-w-full space-y-3", defaults.month),
                 month_caption: cn("flex h-9 items-center justify-center", defaults.month_caption),
                 caption_label: cn("text-sm font-medium", defaults.caption_label),
                 chevron: cn("fill-current", defaults.chevron),
@@ -39,13 +39,13 @@ function Calendar({
                     "hover:bg-surface-subtle disabled:opacity-50",
                     defaults.button_next,
                 ),
-                month_grid: cn("w-full border-collapse", defaults.month_grid),
+                month_grid: cn("w-full table-fixed border-collapse", defaults.month_grid),
                 weekdays: cn("flex", defaults.weekdays),
                 weekday: cn("w-9 text-center text-xs text-muted", defaults.weekday),
                 week: cn("flex", defaults.week),
-                day: cn("size-9 p-0 text-center", defaults.day),
+                day: cn("size-9 min-w-0 p-0 text-center", defaults.day),
                 day_button: cn(
-                    "size-9 rounded-sm text-sm hover:bg-surface-subtle " +
+                    "size-9 max-w-full rounded-sm text-sm hover:bg-surface-subtle " +
                     "disabled:opacity-50",
                     defaults.day_button,
                 ),

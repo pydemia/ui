@@ -77,14 +77,14 @@ function Lightbox({
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             {active && <DialogContent
+                size={variant === "immersive" ? "fullscreen" : "default"}
                 data-variant={variant}
                 data-slot="lightbox"
                 className={cn(
                     "flex flex-col gap-3",
                     variant === "frame"
                         ? "max-w-5xl"
-                        : "h-[100dvh] max-h-[100dvh] w-screen max-w-none " +
-                            "rounded-none border-0 bg-background",
+                        : "bg-background",
                     className,
                 )}
                 onOpenAutoFocus={() => {
