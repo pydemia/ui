@@ -71,7 +71,9 @@ function App() {
                 <h1 data-ui="heading" className="text-2xl">Design mode browser QA</h1>
                 <p>개발 전용 · 실제 catalog 144개 · 업무 상태와 공개 검증을 분리합니다.</p>
                 {controls("페이지")}
-                <output aria-label="실제 설정">{JSON.stringify(settings)}</output>
+                <output aria-label="실제 설정" className="[overflow-wrap:anywhere]">
+                    {JSON.stringify(settings)}
+                </output>
             </header>
             <section className="my-5 grid gap-3" aria-label="대표 상태">
                 <div className="flex flex-wrap gap-3">
@@ -131,7 +133,7 @@ function App() {
                         "calendar", "calendar-scheduler",
                         "message", "bullet-chart", "log-console", "accordion",
                         "board", "file-upload", "notification-center", "image",
-                        "artifact-viewer",
+                        "artifact-viewer", "pin-input", "checkbox", "markdown", "drawer",
                     ].includes(item.id)).map((item) => <div key={item.id}
                         data-qa-basic-component={item.id}>
                         <h3>{item.name}</h3>{item.preview()}

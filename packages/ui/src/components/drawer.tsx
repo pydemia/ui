@@ -32,6 +32,7 @@ function DrawerContent({
             />
             <DialogPrimitive.Content
                 data-ui="drawer-panel"
+                data-side={side}
                 className={cn(
                     "fixed z-50 overflow-y-auto border border-border " +
                     "bg-surface p-[var(--space-6)] text-foreground " +

@@ -1,6 +1,15 @@
 import { useLayoutEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Button } from "./components/ui/button";
+import { ButtonGroup } from "./components/ui/button-group";
+import { PinInput } from "./components/ui/pin-input";
+import { ColorInput } from "./components/ui/color-input";
+import { Checkbox } from "./components/ui/checkbox";
+import { Markdown } from "./components/ui/markdown";
+import {
+    Drawer, DrawerTrigger, DrawerContent, DrawerTitle, DrawerDescription,
+    DrawerClose,
+} from "./components/ui/drawer";
 import { Input } from "./components/ui/input";
 import { Badge } from "./components/ui/badge";
 import { Field } from "./components/ui/field";
@@ -74,6 +83,36 @@ function App() {
                 className="grid min-w-0 grid-cols-1 gap-4 border border-border bg-background p-6">
                 <h2 className="text-lg font-semibold">{definition.name} scope</h2>
                 <Badge>Installed source</Badge>
+                <ButtonGroup label="Installed vertical actions" orientation="vertical">
+                    <Button variant="outline">Preview</Button>
+                    <Button variant="outline">Export</Button>
+                </ButtonGroup>
+                <PinInput label="Installed PIN" defaultValue="123456" />
+                <ColorInput label="Installed color" defaultValue="#3b6d91" />
+                <Checkbox aria-label="Installed checkbox" defaultChecked />
+                <Markdown source="Installed `registry` content" />
+                {(["left", "right", "bottom"] as const).map((side) => (
+                    <Drawer key={side}>
+                        <DrawerTrigger asChild>
+                            <Button>Open {side} drawer</Button>
+                        </DrawerTrigger>
+                        <DrawerContent side={side}>
+                            <DrawerTitle>Installed {side} drawer</DrawerTitle>
+                            <DrawerDescription>Exposed corners follow the regional theme.</DrawerDescription>
+                            <label>Drawer design mode
+                                <select aria-label="Drawer design mode" value={design}
+                                    onChange={(event) => setDesign(event.target.value as DesignModeId)}>
+                                    {modes.map((mode) => <option key={mode.id} value={mode.id}>
+                                        {mode.name}
+                                    </option>)}
+                                </select>
+                            </label>
+                            <Input aria-label="Drawer draft" value={draft}
+                                onChange={(event) => setDraft(event.target.value)} />
+                            <DrawerClose asChild><Button>Close drawer</Button></DrawerClose>
+                        </DrawerContent>
+                    </Drawer>
+                ))}
                 <Input aria-label="Preserved draft" value={draft}
                     onChange={(event) => setDraft(event.target.value)} />
                 <Field label="Installed compound draft" description="One field frame around an editable value.">
