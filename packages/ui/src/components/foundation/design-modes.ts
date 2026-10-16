@@ -315,7 +315,7 @@ type ModeProfile = [
 const profiles: ModeProfile[] = [
     ["basic", "Basic", "기본", "현재 pydemia UI의 기본 표현", "neutral", {}],
     ["glass", "Glassmorphism", "표면", "차가운 보라빛 배경 위에 겹치는 반투명 유리 패널", "violet", {
-        "--radius": "16px", "--panel-radius": "22px",
+        "--radius": "12px", "--panel-radius": "18px",
         "--panel-shadow": "0 18px 44px rgb(55 48 120 / 20%), inset 0 1px 0 rgb(255 255 255 / 58%)",
         "--density-control-height": "40px", "--docs-preview-padding": "26px",
     }, {
@@ -346,8 +346,8 @@ const profiles: ModeProfile[] = [
             "--focus": "#cfccff",
         },
     }],
-    ["material", "Material Inspired", "표면", "보라색 tonal 표면과 알약형 주요 동작으로 구성한 Material 화면", "violet", {
-        "--radius": "12px", "--panel-radius": "24px",
+    ["material", "Material Inspired", "표면", "보라색 tonal 표면과 squircle 주요 동작으로 구성한 Material 화면", "violet", {
+        "--radius": "12px", "--panel-radius": "18px",
         "--density-control-height": "44px", "--heading-weight": "700",
         "--panel-shadow": "0 3px 8px rgb(40 30 80 / 12%), 0 1px 3px rgb(40 30 80 / 10%)",
         "--docs-preview-padding": "26px",
@@ -412,7 +412,7 @@ const profiles: ModeProfile[] = [
         },
     }],
     ["neumorphic", "Neumorphism", "표면", "경계선을 덜고 같은 회색 면에 밝고 어두운 이중 그림자를 새긴 표면", "neutral", {
-        "--radius": "16px", "--panel-radius": "22px",
+        "--radius": "12px", "--panel-radius": "18px",
         "--border-width": "0px",
         "--panel-shadow": "8px 8px 18px rgb(0 0 0 / 22%), -7px -7px 18px var(--material-highlight)",
         "--shadow-float": "10px 10px 22px rgb(0 0 0 / 24%), -8px -8px 20px var(--material-highlight)",
@@ -479,7 +479,7 @@ const profiles: ModeProfile[] = [
         },
     }],
     ["bento", "Bento Grid", "조합", "큰 주제 타일과 작은 정보 타일을 비대칭 격자로 묶는 카드 구성", "neutral", {
-        "--radius": "16px", "--panel-radius": "24px",
+        "--radius": "12px", "--panel-radius": "18px",
         "--docs-preview-padding": "28px", "--space-6": "30px",
         "--docs-section-space": "46px", "--heading-weight": "720",
         "--panel-shadow": "0 8px 24px rgb(30 42 65 / 10%)",
@@ -517,8 +517,8 @@ const profiles: ModeProfile[] = [
         "--shadow-float": "4px 4px 0 var(--border)",
         "--panel-shadow": "6px 6px 0 var(--border)",
     }, { light: { "--background": "#fff9e9", "--border": "#202a35", "--accent": "#904315" }, dark: { "--accent": "#ffbd7c" } }],
-    ["clay", "Claymorphism", "표면", "복숭아빛 종이 위 파스텔 블록과 푹신한 알약 버튼·베개형 패널", "violet", {
-        "--radius": "28px", "--panel-radius": "34px",
+    ["clay", "Claymorphism", "표면", "복숭아빛 종이 위 파스텔 블록과 푹신한 깊이를 가진 squircle 패널", "violet", {
+        "--radius": "14px", "--panel-radius": "20px",
         "--density-control-height": "48px", "--heading-weight": "720",
         "--panel-shadow": "inset 8px 8px 14px color-mix(in srgb, var(--surface) 85%, white), inset -8px -8px 16px color-mix(in srgb, var(--accent) 16%, transparent), 10px 18px 26px rgb(97 61 78 / 24%)",
         "--shadow-float": "inset 0 2px 4px rgb(255 255 255 / 70%), 0 8px 0 rgb(191 136 151 / 13%), 0 14px 20px rgb(97 61 78 / 16%)",
@@ -710,7 +710,7 @@ const profiles: ModeProfile[] = [
         },
     }],
     ["aurora", "Aurora Mesh", "표면", "보라·청록·분홍 빛이 번지는 다색 배경과 맑은 콘텐츠 표면", "violet", {
-        "--radius": "18px", "--panel-radius": "24px",
+        "--radius": "12px", "--panel-radius": "18px",
         "--panel-shadow": "0 14px 38px rgb(99 77 178 / 20%), 0 2px 12px rgb(64 191 201 / 12%)",
         "--density-control-height": "40px", "--docs-preview-padding": "26px",
     }, {
@@ -893,7 +893,7 @@ const profiles: ModeProfile[] = [
         },
     }],
     ["spatial", "Spatial UI", "조합", "청색 공간에 투명도와 깊이를 달리한 큰 부유 패널을 겹치는 공간형 작업면", "ocean", {
-        "--radius": "20px", "--panel-radius": "28px",
+        "--radius": "12px", "--panel-radius": "18px",
         "--space-6": "34px", "--docs-preview-padding": "30px",
         "--panel-shadow": "0 22px 56px rgb(15 35 65 / 26%), 0 4px 14px rgb(53 111 176 / 12%)",
         "--shadow-float": "0 14px 34px rgb(15 35 65 / 24%)",

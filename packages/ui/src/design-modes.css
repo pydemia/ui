@@ -1,6 +1,7 @@
 /* Optional presentation layer. Each scope resets materials before inheritance. */
 @import "./design-fonts.css";
 [data-design] {
+  --corner-shape: round;
   --heading-font-style: normal;
   --control-decoration: none;
   --field-decoration: none;
@@ -103,6 +104,23 @@
   --calendar-gap: 3px;
   --reading-fill: color-mix(in srgb, var(--accent) 3%, var(--surface));
 }
+
+[data-design="glass"], [data-design="material"], [data-design="fluent"],
+[data-design="neumorphic"], [data-design="flat"], [data-design="bento"],
+[data-design="clay"], [data-design="skeuo"], [data-design="dark-ui"],
+[data-design="minimal"], [data-design="aurora"], [data-design="spatial"] {
+  --corner-shape: squircle;
+}
+
+/* Shape follows each local theme, including its portaled surfaces. */
+@supports (corner-shape: squircle) {
+  @scope ([data-design]:not([data-design="basic"])) to ([data-design]) {
+    :scope, :where(*) { corner-shape: var(--corner-shape); }
+    /* Explicit circles and indicator rails keep their component geometry. */
+    :where(.rounded-full, [data-shape="circle"]) { corner-shape: round; }
+    :where(input)::file-selector-button { corner-shape: var(--corner-shape); }
+  }
+}
 [data-design][data-appearance="dark"] {
   --material-highlight: rgb(255 255 255 / 7%);
 }
@@ -147,9 +165,8 @@
   --scene-border: 1px;
 }
 [data-design="material"] {
-  /* Pills belong to short actions, never the inherited container geometry. */
-  --control-radius: 999px;
-  --selection-radius: 12px;
+  --control-radius: 12px;
+  --selection-radius: 10px;
   --control-decoration: 0 3px 7px color-mix(in srgb, var(--accent) 25%, transparent);
   --pressed-decoration: inset 0 0 0 999px rgb(0 0 0 / 12%);
   --field-radius: 12px 12px 3px 3px;
@@ -175,7 +192,7 @@
   --data-fill: var(--surface);
   --secondary-decoration: 0 2px 4px color-mix(in srgb, var(--foreground) 12%, transparent);
   --featured-decoration: var(--panel-shadow);
-  --control-radius: 999px;
+  --control-radius: 12px;
   --control-image: linear-gradient(145deg, rgb(255 255 255 / 24%), transparent 65%);
   --control-decoration: inset 4px 5px 8px rgb(255 255 255 / 48%), inset -5px -6px 9px rgb(51 29 68 / 24%), 5px 9px 13px rgb(69 43 85 / 25%);
   --pressed-decoration: inset 3px 4px 7px rgb(51 29 68 / 24%), inset -3px -3px 7px rgb(255 255 255 / 32%);
@@ -557,7 +574,7 @@
   --editor-inset: 24px;
   --editor-gap: 20px;
 }
-[data-design="clay"] { --field-radius: 18px; --selection-radius: 16px; }
+[data-design="clay"] { --field-radius: 12px; --selection-radius: 10px; }
 [data-design="material"] { --field-height: max(48px, var(--control-height)); --field-inline-padding: 16px; }
 [data-design="fluent"] { --field-height: max(44px, var(--control-height)); --field-decoration: inset 0 -2px 0 var(--border); }
 [data-design="brutal"] { --field-decoration: 3px 3px 0 var(--border); --field-gap: 16px; }
@@ -585,9 +602,9 @@
   --schedule-cell-fill: color-mix(in srgb, var(--accent) 4%, var(--surface));
 }
 [data-design="material"] {
-  --navigation-radius: 12px;
+  --navigation-radius: 10px;
   --navigation-selected-shadow: none;
-  --schedule-bar-radius: 999px;
+  --schedule-bar-radius: 8px;
   --schedule-cell-fill: color-mix(in srgb, var(--accent) 5%, var(--surface));
 }
 [data-design="neumorphic"] {
