@@ -86,7 +86,7 @@ import { FolderOpen, Gauge, Inbox, Plus, Settings2 } from "lucide-react";
 import { TZDate, type DateRange } from "react-day-picker";
 import { ko } from "react-day-picker/locale";
 import {
-    useEffect, useRef, useState, type FormEvent, type ReactNode,
+    useEffect, useId, useRef, useState, type FormEvent, type ReactNode,
 } from "react";
 import type {
     AgentRunStatus, AgentStage, AppliedFilter, ApprovalStatus,
@@ -635,6 +635,7 @@ function ButtonGroupPreview() {
 }
 
 function CheckboxPreview() {
+    const inputId = useId();
     const [checked, setChecked] = useState(false);
     const [digest, setDigest] = useState(true);
     const [submitted, setSubmitted] = useState("없음");
@@ -643,20 +644,20 @@ function CheckboxPreview() {
         <div className="preview-field">
             <div className="preview-checkbox-row">
                 <Checkbox
-                    id="demo-notifications"
+                    id={`${inputId}-notifications`}
                     checked={checked}
                     onCheckedChange={(value) => setChecked(value === true)}
                 />
-                <Label htmlFor="demo-notifications">알림 받기</Label>
+                <Label htmlFor={`${inputId}-notifications`}>알림 받기</Label>
             </div>
             <p role="status">알림 {checked ? "사용" : "사용 안 함"}</p>
             <div className="preview-checkbox-row">
-                <Checkbox id="demo-partial" defaultChecked="indeterminate" />
-                <Label htmlFor="demo-partial">일부 선택</Label>
+                <Checkbox id={`${inputId}-partial`} defaultChecked="indeterminate" />
+                <Label htmlFor={`${inputId}-partial`}>일부 선택</Label>
             </div>
             <div className="preview-checkbox-row">
-                <Checkbox id="demo-disabled" disabled />
-                <Label htmlFor="demo-disabled">사용할 수 없는 옵션</Label>
+                <Checkbox id={`${inputId}-disabled`} disabled />
+                <Label htmlFor={`${inputId}-disabled`}>사용할 수 없는 옵션</Label>
             </div>
             <form className="grid gap-3" onSubmit={(event) => {
                 event.preventDefault();
@@ -4656,6 +4657,25 @@ function PaginationPreview() {
 function DrawerPreview() {
     return (
         <div className="preview-row">
+            <Drawer>
+                <DrawerTrigger asChild>
+                    <Button variant="outline">왼쪽 패널 열기</Button>
+                </DrawerTrigger>
+                <DrawerContent side="left">
+                    <DrawerHeader>
+                        <DrawerTitle>왼쪽 요청 상세</DrawerTitle>
+                        <DrawerDescription>
+                            선택한 요청의 상태와 담당자를 확인합니다.
+                        </DrawerDescription>
+                    </DrawerHeader>
+                    <p>초대 화면 · 제품팀 · 진행 중</p>
+                    <DrawerFooter>
+                        <DrawerClose asChild>
+                            <Button variant="outline">닫기</Button>
+                        </DrawerClose>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
             <Drawer>
                 <DrawerTrigger asChild>
                     <Button variant="outline">상세 패널 열기</Button>

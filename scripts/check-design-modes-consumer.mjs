@@ -54,6 +54,8 @@ const items = [
     "pyd-prompt-input", "pyd-tabs",
     "pyd-tree", "pyd-navigation", "pyd-gantt", "pyd-calendar",
     "pyd-message", "pyd-bullet-chart", "pyd-log-console", "pyd-accordion",
+    "pyd-button-group", "pyd-pin-input", "pyd-color-input", "pyd-checkbox",
+    "pyd-markdown", "pyd-drawer",
 ];
 const commands = [];
 const report = {
