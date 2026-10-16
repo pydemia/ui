@@ -260,7 +260,8 @@ function Combobox({
                                 aria-disabled={option.disabled || undefined}
                                 data-active={index === currentIndex || undefined}
                                 className={
-                                    "cursor-default rounded-sm px-3 py-2 text-sm " +
+                                    "min-w-0 cursor-default rounded-sm px-3 py-2 text-sm " +
+                                    "[overflow-wrap:anywhere] " +
                                     "data-[active=true]:bg-surface-subtle " +
                                     "aria-disabled:opacity-50"
                                 }

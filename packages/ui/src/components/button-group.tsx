@@ -27,10 +27,12 @@ function ButtonGroup({
             data-orientation={orientation}
             data-ui="button-group"
             className={cn(
-                "inline-flex w-fit max-w-full items-stretch " +
+                "inline-flex min-w-0 w-fit max-w-full items-stretch " +
                 "[&>button]:relative [&>button:focus-visible]:z-10",
                 orientation === "horizontal"
-                    ? "flex-row [&>button]:rounded-none " +
+                    ? "flex-row overflow-x-auto [&>button]:shrink-0 " +
+                      "[&>button:focus-visible]:-outline-offset-2 " +
+                      "[&>button]:rounded-none " +
                       "[&>button:first-child]:rounded-s-sm " +
                       "[&>button:last-child]:rounded-e-sm " +
                       "[&>button:not(:first-child)]:border-s-0 " +

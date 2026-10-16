@@ -263,6 +263,9 @@ function DataChart({
     const barSlot = groupWidth / Math.max(1, chartSeries.length);
     const stackWidth = Math.min(plotWidth / labels.length * 0.62, 44);
     const labelStep = Math.max(1, Math.ceil(labels.length / 8));
+    const labelLimit = Math.max(4, Math.min(16,
+        Math.floor(plotWidth / Math.max(1, labels.length) / 11),
+    ));
     const paths = chartSeries.map((item) => {
         let line = "";
         let drawing = false;
@@ -368,13 +371,13 @@ function DataChart({
             <figcaption className="mb-[var(--space-3)]">
                 <div className="flex items-baseline justify-between gap-2">
                     <strong data-slot="surface-heading"
-                        className="text-sm font-semibold">{title}</strong>
+                        className="min-w-0 flex-1 text-sm font-semibold [overflow-wrap:anywhere]">{title}</strong>
                     {unit && <span data-slot="surface-meta"
-                        className="text-xs text-muted">{unit}</span>}
+                        className="shrink-0 text-xs text-muted">{unit}</span>}
                 </div>
                 {description && (
                     <span data-slot="surface-meta"
-                        className="mt-1 block text-xs text-muted">
+                        className="mt-1 block text-xs text-muted [overflow-wrap:anywhere]">
                         {description}
                     </span>
                 )}
@@ -544,7 +547,9 @@ function DataChart({
                                     <text key={index} x={x(index)} y="238"
                                         textAnchor="middle" fontSize="11"
                                         fill="var(--muted)">
-                                        {label}
+                                        {Array.from(label).length > labelLimit
+                                            ? Array.from(label).slice(0, labelLimit - 1).join("") + "…"
+                                            : label}
                                     </text>
                                 ) : null)}
                             {inspectable && labels.map((_, index) => (
@@ -592,7 +597,7 @@ function DataChart({
                                     "shadow-[var(--shadow-float)]"
                                 }
                                 style={{ left: hoverLeft }}>
-                                <strong className="block font-semibold">
+                                <strong className="block font-semibold [overflow-wrap:anywhere]">
                                     {labels[hoveredIndex]?.trim() ||
                                         `구간 ${hoveredIndex + 1}`}
                                 </strong>
@@ -602,10 +607,10 @@ function DataChart({
                                         return (
                                             <div key={item.id}
                                                 className="flex justify-between gap-2">
-                                                <dt className="min-w-0 text-muted">
+                                                <dt className="min-w-0 text-muted [overflow-wrap:anywhere]">
                                                     {item.label}
                                                 </dt>
-                                                <dd className="m-0 tabular-nums">
+                                                <dd className="m-0 shrink-0 tabular-nums">
                                                     {value === null
                                                         ? "데이터 없음"
                                                         : `${formatValue(value)}${unit}`}
@@ -663,7 +668,7 @@ function DataChart({
                             </svg>
                         );
                         return (
-                            <li key={item.id}>
+                            <li key={item.id} className="min-w-0 max-w-full">
                                 {toggleableSeries ? (
                                     <label className={
                                         "flex min-w-0 cursor-pointer " +
@@ -689,14 +694,14 @@ function DataChart({
                                                 "accent-[var(--accent)]"
                                             } />
                                         {marker}
-                                        <span>{item.label}</span>
+                                        <span className="min-w-0 [overflow-wrap:anywhere]">{item.label}</span>
                                     </label>
                                 ) : (
                                     <span className={
                                         "flex min-w-0 items-center gap-2"
                                     }>
                                         {marker}
-                                        <span>{item.label}</span>
+                                        <span className="min-w-0 [overflow-wrap:anywhere]">{item.label}</span>
                                     </span>
                                 )}
                             </li>
@@ -721,7 +726,7 @@ function DataChart({
                                 setHoveredIndex(null);
                             }}
                             className={
-                                "h-[var(--control-height)] min-w-28 " +
+                                "h-[var(--control-height)] min-w-28 max-w-full " +
                                 "rounded-sm border border-border bg-surface " +
                                 "px-[var(--space-2)] text-sm text-foreground " +
                                 "focus-visible:outline-2 " +
@@ -744,7 +749,7 @@ function DataChart({
                                 return (
                                     <div key={item.id}
                                         className="flex justify-between gap-3">
-                                        <dt className="min-w-0 text-muted">
+                                        <dt className="min-w-0 text-muted [overflow-wrap:anywhere]">
                                             {item.label}
                                         </dt>
                                         <dd className={
@@ -782,7 +787,7 @@ function DataChart({
                 </div>
             )}
             {labels.length > 0 && chartSeries.length > 0 && (
-                <table className="sr-only">
+                <div className="sr-only"><table>
                     <caption>{title} 데이터</caption>
                     <thead><tr><th scope="col">구간</th>
                         {chartSeries.map((item) => (
@@ -822,7 +827,7 @@ function DataChart({
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table></div>
             )}
         </figure>
     );

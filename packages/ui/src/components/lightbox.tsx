@@ -104,9 +104,10 @@ function Lightbox({
                     }
                 }}>
                 <div data-slot="surface-header" className="flex items-start justify-between gap-3">
-                    <DialogTitle data-slot="surface-title">{title}</DialogTitle>
+                    <DialogTitle data-slot="surface-title"
+                        className="min-w-0 flex-1 [overflow-wrap:anywhere]">{title}</DialogTitle>
                     <DialogClose asChild>
-                        <Button data-slot="surface-action" type="button" variant="outline">
+                        <Button data-slot="surface-action" type="button" variant="outline" className="shrink-0">
                             닫기
                         </Button>
                     </DialogClose>
@@ -122,7 +123,7 @@ function Lightbox({
                         "max-h-[calc(100dvh-14rem)] rounded-sm " +
                         "border border-border"
                     } />
-                {active.caption && <p className="m-0 text-sm text-muted">
+                {active.caption && <p className="m-0 text-sm text-muted [overflow-wrap:anywhere]">
                     {active.caption}
                 </p>}
                 {items.length > 1 && <>

@@ -132,7 +132,7 @@ function TagsInput({
     }
 
     return (
-        <div className={cn("grid min-w-0 gap-2", className)} {...props}
+        <div className={cn("grid min-w-0 grid-cols-1 gap-2", className)} {...props}
             data-ui="field">
             <label htmlFor={inputId} className="text-sm font-medium">
                 {label}{required && <span aria-hidden="true"> *</span>}
@@ -142,7 +142,7 @@ function TagsInput({
                 data-field="tags"
                 data-variant={variant}
                 className={cn(
-                    "flex min-h-[var(--control-height)] flex-wrap items-center " +
+                    "flex min-w-0 min-h-[var(--control-height)] flex-wrap items-center " +
                     "gap-1.5 rounded-sm border border-border px-2 py-1 " +
                     "focus-within:outline-2 focus-within:outline-focus " +
                     "focus-within:outline-offset-2",
@@ -154,21 +154,21 @@ function TagsInput({
             >
                 {tags.length > 0 && (
                     <ul aria-label={`${label} 목록`}
-                        className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+                        className="m-0 flex min-w-0 max-w-full list-none flex-wrap gap-1.5 p-0">
                         {tags.map((tag, index) => (
                             <li key={duplicateKey(tag)}
                                 data-slot="field-chip"
                                 className={
-                                    "inline-flex items-center gap-1 rounded-sm " +
+                                    "inline-flex min-w-0 max-w-full items-center gap-1 rounded-sm " +
                                     "bg-surface-subtle px-2 py-0.5 text-sm " +
                                     "text-foreground"
                                 }>
-                                <span>{tag}</span>
+                                <span className="min-w-0 truncate" title={tag}>{tag}</span>
                                 <button type="button" disabled={disabled}
                                     aria-label={`${tag} 삭제`}
                                     onClick={() => removeTag(index)}
                                     className={
-                                        "rounded-sm px-0.5 text-muted " +
+                                        "shrink-0 rounded-sm px-0.5 text-muted " +
                                         "hover:text-foreground"
                                     }>×</button>
                             </li>

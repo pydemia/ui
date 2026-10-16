@@ -12,12 +12,15 @@ const DropdownMenuRadioGroup = MenuPrimitive.RadioGroup;
 
 const itemStyle =
     "relative flex cursor-default select-none items-center gap-2 " +
-    "rounded-sm px-[var(--space-3)] py-2 text-sm outline-none " +
+    "min-w-0 rounded-sm px-[var(--space-3)] py-2 text-sm outline-none " +
+    "[overflow-wrap:anywhere] " +
     "data-[highlighted]:bg-surface-subtle " +
     "data-[disabled]:pointer-events-none data-[disabled]:opacity-50";
 
 const contentStyle =
-    "z-50 min-w-40 max-h-[var(--radix-dropdown-menu-content-available-height)] " +
+    "z-50 min-w-[min(10rem,var(--radix-dropdown-menu-content-available-width))] " +
+    "max-w-[var(--radix-dropdown-menu-content-available-width)] " +
+    "max-h-[var(--radix-dropdown-menu-content-available-height)] " +
     "overflow-y-auto rounded-sm border border-border bg-surface " +
     "p-1 text-foreground shadow-[var(--shadow-float)]";
 
