@@ -284,7 +284,7 @@ function NodeCanvas({
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Button type="button" variant="outline" size="icon"
+                    <Button data-slot="surface-action" type="button" variant="outline" size="icon"
                         aria-label="축소" disabled={zoomIndex === 0}
                         onClick={() => setZoomIndex(zoomIndex - 1)}>
                         −
@@ -292,7 +292,7 @@ function NodeCanvas({
                     <span className="min-w-10 text-center text-xs tabular-nums">
                         {Math.round(zoom * 100)}%
                     </span>
-                    <Button type="button" variant="outline" size="icon"
+                    <Button data-slot="surface-action" type="button" variant="outline" size="icon"
                         aria-label="확대"
                         disabled={zoomIndex === zoomLevels.length - 1}
                         onClick={() => setZoomIndex(zoomIndex + 1)}>

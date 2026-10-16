@@ -90,6 +90,8 @@
   --navigation-radius: var(--selection-radius);
   --navigation-gap: 6px;
   --navigation-row-inset: 10px;
+  --embedded-hover-fill: color-mix(in srgb, var(--accent) 9%, transparent);
+  --embedded-selected-fill: color-mix(in srgb, var(--accent) 18%, transparent);
   --schedule-fill: color-mix(in srgb, var(--accent) 4%, var(--surface));
   --schedule-sticky-fill: color-mix(in srgb, var(--accent) 8%, var(--surface));
   --schedule-grid: color-mix(in srgb, var(--border) 70%, transparent);
@@ -694,8 +696,8 @@
   :where([data-slot="tree-nav-disclosure"]) { min-height: 36px; }
   :where([data-slot="nav-link"][data-variant="underline"]) { border-block-end-width: 2px; }
   :where([data-slot="tree-row"]:hover, [data-slot="tree-nav-link"]:hover, [data-slot="nav-link"]:hover, [data-slot="anchor-nav-link"]:hover, [data-slot="nav-menu-link"]:hover, [data-slot="nav-trigger"]:hover, [data-slot="nav-trigger"][data-state="open"]) {
-    background-color: var(--navigation-hover-fill);
-    background-image: var(--control-image);
+    background-color: var(--embedded-hover-fill);
+    background-image: none;
   }
   :where([role="treeitem"][aria-selected="true"]) > :where([data-slot="tree-row"]),
   :where([data-slot="tree-nav-link"][aria-current], [data-slot="nav-link"][aria-current], [data-slot="anchor-nav-link"][aria-current], [data-slot="nav-menu-link"][data-active]) {
@@ -708,11 +710,14 @@
   :where([role="treeitem"]:focus-visible) > :where([data-slot="tree-row"]),
   :where([data-slot="tree-nav-link"]:focus-visible, [data-slot="nav-link"]:focus-visible, [data-slot="anchor-nav-link"]:focus-visible, [data-slot="nav-menu-link"]:focus-visible, [data-slot="nav-trigger"]:focus-visible) { outline: 2px solid var(--focus); outline-offset: -2px; }
   :where([data-slot="tree-disclosure"], [data-slot="tree-nav-disclosure"]) {
-    border-radius: var(--field-radius);
+    border: 0;
+    border-radius: var(--compact-radius);
     color: var(--foreground);
-    background-color: var(--navigation-hover-fill);
-    box-shadow: var(--field-decoration);
+    background: transparent;
+    box-shadow: none;
   }
+  :where([data-slot="tree-nav-disclosure"]:hover:not(:disabled)) { background-color: var(--embedded-hover-fill); }
+  :where([data-slot="tree-nav-disclosure"]:focus-visible) { outline: 2px solid var(--focus); outline-offset: -2px; }
   :where([data-slot="tree-disclosure"]:empty) { background: transparent; box-shadow: none; }
   :where([role="treeitem"][aria-disabled="true"]) > :where([data-slot="tree-row"]) { background: transparent; box-shadow: none; }
   :where([data-slot="tree-nav-branch"]) { border-color: var(--schedule-grid); border-style: var(--panel-border-style); }
@@ -775,7 +780,7 @@
   :where([data-slot="gantt-header"]) span { color: inherit; }
   :where([data-slot="gantt-selection"]) { padding: 14px 16px; background-color: var(--navigation-hover-fill); border-bottom-style: var(--panel-border-style); color: var(--foreground); }
   :where([data-slot="gantt-selection"]) p { color: inherit; }
-  :where([data-slot="gantt-action"]) { border-radius: var(--field-radius); background: var(--schedule-sticky-fill); background-image: var(--control-image); box-shadow: var(--secondary-decoration); padding: 6px 10px; }
+  :where([data-slot="gantt-action"]) { border: 0; border-radius: var(--compact-radius); background: transparent; box-shadow: none; padding: 4px 8px; min-height: 32px; }
   :where([data-slot="gantt-scroll"]:focus-visible) { outline: 2px solid var(--focus); outline-offset: -3px; }
   :where([data-slot="gantt-scale"]) { background: var(--title-fill); color: var(--schedule-heading-ink); font-family: var(--font-data); }
   :where([data-slot="gantt-corner"]) { background: var(--title-fill); color: var(--schedule-heading-ink); }
@@ -802,7 +807,9 @@
   :where([data-ui="calendar"]) .rdp-months { position: relative; align-items: start; flex-wrap: wrap; max-width: 100%; }
   :where([data-ui="calendar"]) .rdp-month { width: 280px; max-width: 100%; min-width: 0; flex-shrink: 1; }
   :where([data-ui="calendar"]) .rdp-nav { position: absolute; inset: 0 0 auto; z-index: 1; height: 40px; pointer-events: none; }
-  :where([data-ui="calendar"]) :is(.rdp-button_previous, .rdp-button_next) { pointer-events: auto; width: 32px; height: 32px; align-self: center; border-radius: var(--navigation-radius); background-color: var(--title-fill); box-shadow: var(--schedule-cell-shadow); color: var(--schedule-heading-ink); }
+  :where([data-ui="calendar"]) :is(.rdp-button_previous, .rdp-button_next) { pointer-events: auto; width: 32px; height: 32px; align-self: center; border: 0; border-radius: var(--compact-radius); background: transparent; box-shadow: none; color: var(--schedule-heading-ink); }
+  :where([data-ui="calendar"]) :is(.rdp-button_previous, .rdp-button_next):hover:not(:disabled) { background-color: var(--embedded-hover-fill); }
+  :where([data-ui="calendar"]) :is(.rdp-button_previous, .rdp-button_next):focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
   :where([data-ui="calendar"]) .rdp-month_caption { min-height: 40px; height: auto; padding: 8px 36px; border-radius: var(--field-radius); background-color: var(--title-fill); background-image: var(--control-image); color: var(--schedule-heading-ink); font-family: var(--font-heading); }
   :where([data-ui="calendar"]) .rdp-month_grid { background: transparent; margin-top: 12px; }
   :where([data-ui="calendar"]) .rdp-month_grid thead { background: transparent; }
@@ -873,16 +880,18 @@
   :where([data-slot="surface-header"]) :where([data-slot="surface-title"], [data-slot="surface-meta"]) { color: inherit; }
   :where([data-slot="surface-header"]) :where([data-ui="button"][data-variant="ghost"], [data-ui="icon-button"][data-variant="ghost"]) { color: inherit; }
   :where([data-slot="surface-action"]) {
-    border-radius: var(--control-radius);
-    background-color: var(--surface);
-    background-image: var(--control-image);
-    color: var(--foreground);
-    box-shadow: var(--secondary-decoration);
-    padding: 6px 10px;
+    border: 0;
+    border-radius: var(--compact-radius);
+    background: transparent;
+    box-shadow: none;
+    clip-path: none;
+    padding: 4px 8px;
     min-height: 32px;
   }
-  :where([data-slot="surface-action"]:hover:not(:disabled)) { background-color: var(--navigation-hover-fill); }
-  :where([data-slot="surface-action"][aria-pressed="true"]) { background-color: var(--navigation-selected-fill); color: var(--navigation-selected-ink); box-shadow: var(--navigation-selected-shadow); }
+  :where([data-slot="surface-action"]:hover:not(:disabled), [data-slot="gantt-action"]:hover:not(:disabled)) { background-color: var(--embedded-hover-fill); }
+  :where([data-slot="surface-action"][aria-pressed="true"]) { background-color: var(--embedded-selected-fill); box-shadow: none; font-weight: var(--component-heading-weight); }
+  :where([data-slot="surface-action"]:active, [data-slot="gantt-action"]:active) { translate: none; }
+  :where([data-slot="surface-action"]:focus-visible, [data-slot="gantt-action"]:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
   :where([data-slot="surface-row"]:hover, [data-slot="notification-row"]:hover) { background-color: var(--navigation-hover-fill); }
   :where([data-slot="surface-row"][data-selected="true"], [data-slot="surface-row"][aria-selected="true"], [data-slot="surface-row"][aria-pressed="true"]) {
     background-color: var(--navigation-hover-fill);
@@ -916,7 +925,7 @@
   :where([data-slot="period-option"]:hover:not(:disabled), [data-slot="transfer-option"]:hover) { background-color: var(--navigation-hover-fill); }
   :where([data-ui="accordion-item"]) { border-color: var(--border); border-bottom-style: var(--panel-border-style); }
   :where([data-ui="accordion-trigger"]) { border-radius: var(--field-radius); padding: 14px 12px; }
-  :where([data-ui="accordion-trigger"]:hover, [data-ui="accordion-trigger"][data-state="open"]) { background-color: var(--navigation-hover-fill); box-shadow: var(--field-decoration); }
+  :where([data-ui="accordion-trigger"]:hover, [data-ui="accordion-trigger"][data-state="open"]) { background-color: var(--embedded-hover-fill); box-shadow: none; }
   :where([data-ui="accordion-content"]) { padding-inline: 12px; }
   :where([data-slot="app-help-trigger"]) { background-image: var(--control-image); box-shadow: var(--control-decoration); border-style: var(--control-border-style); }
   :where([data-ui="stepper"]:not([data-embedded])) [data-slot="step-marker"] { border-radius: var(--navigation-radius); background-image: var(--control-image); box-shadow: var(--control-decoration); }
@@ -1150,6 +1159,47 @@
       --editor-inset: 16px;
       --editor-gap: 14px;
     }
+  }
+}
+
+/* Embedded controls share their owner's surface; their hit areas stay intact. */
+@scope ([data-design]:not([data-design="basic"])) to ([data-design]) {
+  :where([data-ui="native-select"][data-presentation="inline"])[data-appearance="outline"] {
+    appearance: auto;
+    width: auto;
+    min-width: 0;
+    min-height: 32px;
+    height: 32px;
+    padding: 4px 8px;
+    border: 0;
+    border-radius: var(--compact-radius);
+    background: transparent;
+    box-shadow: none;
+    clip-path: none;
+  }
+  :where([data-ui="native-select"][data-presentation="inline"]):hover:not(:disabled) { background-color: var(--embedded-hover-fill); }
+  :where([data-ui="native-select"][data-presentation="inline"]):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  :where([data-ui="native-select"][data-presentation="inline"]):disabled { opacity: .5; cursor: not-allowed; }
+  :where([data-slot="row-disclosure"], [data-slot="table-sort"]) {
+    border: 0;
+    border-radius: var(--compact-radius);
+    background: transparent;
+    box-shadow: none;
+    min-height: 32px;
+  }
+  :where([data-slot="row-disclosure"]) { width: 32px; padding: 0; }
+  :where([data-slot="table-sort"]) { padding: 4px; }
+  :where([data-slot="row-disclosure"]:hover, [data-slot="table-sort"]:hover) { background-color: var(--embedded-hover-fill); }
+  :where([data-slot="row-disclosure"]:focus-visible, [data-slot="table-sort"]:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+  :where([data-slot="nav-trigger"][data-active]) { background-color: var(--embedded-selected-fill); font-weight: var(--component-heading-weight); }
+}
+@scope ([data-design="glass"], [data-design="aurora"], [data-design="spatial"]) to ([data-design]) {
+  :where([role="treeitem"][aria-selected="true"]) > :where([data-slot="tree-row"]),
+  :where([data-ui="tree-nav"][data-variant="rail"]) :where([data-slot="tree-nav-link"][aria-current]) {
+    background-color: var(--embedded-selected-fill);
+    background-image: none;
+    color: var(--foreground);
+    box-shadow: none;
   }
 }
 

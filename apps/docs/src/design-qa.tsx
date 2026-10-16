@@ -135,6 +135,7 @@ function App() {
                         "board", "file-upload", "notification-center", "image",
                         "artifact-viewer", "pin-input", "checkbox", "markdown", "drawer",
                         "menubar", "dropdown-menu", "context-menu", "lightbox",
+                        "navigation-menu", "block-editor", "carousel", "node-canvas", "data-table",
                     ].includes(item.id)).map((item) => <div key={item.id}
                         data-qa-basic-component={item.id}>
                         <h3>{item.name}</h3>{item.preview()}

@@ -32,6 +32,15 @@ import { TagsInput } from "./components/ui/tags-input";
 import { CodeEditorShell } from "./components/ui/code-editor-shell";
 import { PromptInput } from "./components/ui/prompt-input";
 import { Tree } from "./components/ui/tree";
+import { TreeNav } from "./components/ui/tree-nav";
+import {
+    NavigationMenu, NavigationMenuList, NavigationMenuItem,
+    NavigationMenuLink, NavigationMenuTrigger, NavigationMenuContent,
+} from "./components/ui/navigation-menu";
+import { BlockEditor, type BlockEditorBlock } from "./components/ui/block-editor";
+import { Carousel } from "./components/ui/carousel";
+import { NodeCanvas } from "./components/ui/node-canvas";
+import { DataTable } from "./components/ui/data-table";
 import { SideNav, SideNavLink } from "./components/ui/navigation";
 import { Gantt } from "./components/ui/gantt";
 import { Calendar } from "./components/ui/calendar";
@@ -69,6 +78,11 @@ function App() {
     const [menuChecked, setMenuChecked] = useState(true);
     const [galleryOpen, setGalleryOpen] = useState(false);
     const [galleryVariant, setGalleryVariant] = useState<"frame" | "immersive">("frame");
+    const [blocks, setBlocks] = useState<BlockEditorBlock[]>([
+        { id: "heading", kind: "heading", text: "Installed editor draft" },
+        { id: "body", kind: "paragraph", text: "Keep this text when switching modes." },
+    ]);
+    const [editorDisabled, setEditorDisabled] = useState(false);
     const modes = allowUnreleased ? designModes : releasedDesignModes;
     const resolved = resolveThemeSettings({
         design, appearance: "light", colormap: "forest",
@@ -195,6 +209,46 @@ function App() {
                     <SideNavLink href="#overview" aria-current="page">Overview</SideNavLink>
                     <SideNavLink href="#details">Details</SideNavLink>
                 </SideNav>
+                <TreeNav label="Installed page tree" currentId="builds"
+                    defaultExpandedIds={["project", "atlas"]}
+                    items={[{ id: "project", label: "Project", children: [
+                        { id: "atlas", label: "Atlas", href: "#atlas", children: [
+                            { id: "builds", label: "Build history", href: "#builds" },
+                        ] },
+                    ] }]} />
+                <NavigationMenu aria-label="Installed product menu">
+                    <NavigationMenuList>
+                        <NavigationMenuItem>
+                            <NavigationMenuLink href="#overview" variant="trigger" active>Overview</NavigationMenuLink>
+                        </NavigationMenuItem>
+                        <NavigationMenuItem>
+                            <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+                            <NavigationMenuContent>
+                                <NavigationMenuLink href="#details" variant="content">Details</NavigationMenuLink>
+                            </NavigationMenuContent>
+                        </NavigationMenuItem>
+                    </NavigationMenuList>
+                </NavigationMenu>
+                <Button variant="ghost" aria-pressed={editorDisabled}
+                    onClick={() => setEditorDisabled(!editorDisabled)}>
+                    Toggle installed editor disabled
+                </Button>
+                <BlockEditor label="Installed block editor" blocks={blocks}
+                    disabled={editorDisabled}
+                    onBlocksChange={setBlocks} />
+                <Carousel label="Installed carousel" slides={[
+                    { id: "first", label: "First", content: <p>First slide</p> },
+                    { id: "second", label: "Second", content: <p>Second slide</p> },
+                ]} />
+                <NodeCanvas label="Installed node canvas" width={400} height={240}
+                    nodes={[{ id: "source", title: "Source", x: 16, y: 16 }]}
+                    edges={[]} />
+                <DataTable caption="Installed expandable table"
+                    rows={[{ id: "first", title: "First row" }]}
+                    getRowId={(row) => row.id} getRowLabel={(row) => row.title}
+                    columns={[{ id: "title", header: "Title",
+                        cell: (row) => row.title, sortValue: (row) => row.title }]}
+                    renderRowDetails={(row) => <p>{row.title} details</p>} />
                 <Gantt label="Installed schedule" rangeStart="2026-10-01"
                     rangeEnd="2026-10-10" tasks={[
                         { id: "plan", title: "Plan", startDate: "2026-10-02",

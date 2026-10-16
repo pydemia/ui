@@ -106,7 +106,7 @@ function Lightbox({
                 <div data-slot="surface-header" className="flex items-start justify-between gap-3">
                     <DialogTitle data-slot="surface-title">{title}</DialogTitle>
                     <DialogClose asChild>
-                        <Button type="button" variant="outline">
+                        <Button data-slot="surface-action" type="button" variant="outline">
                             닫기
                         </Button>
                     </DialogClose>
@@ -128,12 +128,12 @@ function Lightbox({
                 {items.length > 1 && <>
                     <nav aria-label="이미지 이동"
                         className="flex items-center justify-between gap-3">
-                        <Button type="button" variant="outline"
+                        <Button data-slot="surface-action" type="button" variant="outline"
                             onClick={() => move(-1)}
                             disabled={activeIndex === 0}>
                             이전 이미지
                         </Button>
-                        <Button type="button" variant="outline"
+                        <Button data-slot="surface-action" type="button" variant="outline"
                             onClick={() => move(1)}
                             disabled={activeIndex === items.length - 1}>
                             다음 이미지

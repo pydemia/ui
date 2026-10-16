@@ -406,6 +406,15 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
         background-color: var(--schedule-fill);
         background-image: var(--surface-image);
     }
+    .preview-anchor-article {
+        min-height: 280px;
+        max-height: 360px;
+        padding: 16px 20px;
+        scroll-padding-block: 16px;
+        scrollbar-gutter: stable;
+    }
+    .preview-anchor-article > section { min-height: 180px; padding-block: 12px; }
+    .preview-anchor-article > section:first-child { padding-block-start: 0; }
 }
 .preview-tabs-content { padding: 12px 3px 2px; margin: 0; color: var(--muted); font-size: 14px; }
 .preview-table { width: 100%; min-width: 0; overflow-x: auto; }
