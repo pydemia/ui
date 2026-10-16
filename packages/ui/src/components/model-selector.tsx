@@ -152,12 +152,13 @@ function ModelSelector({
                     <section aria-label={`${selected.label} 모델 정보`}
                         data-surface="well"
                         className={
-                            "grid gap-2 rounded-sm border border-border " +
+                            "grid min-w-0 gap-2 rounded-sm border border-border " +
+                            "[overflow-wrap:anywhere] " +
                             "bg-surface-subtle p-[var(--space-3)] text-sm"
                         }>
                         <div className="flex flex-wrap justify-between gap-2">
-                            <strong data-slot="surface-title">{selected.label}</strong>
-                            <span data-slot="surface-meta" className="text-muted">
+                            <strong data-slot="surface-title" className="min-w-0">{selected.label}</strong>
+                            <span data-slot="surface-meta" className="min-w-0 text-muted">
                                 {selected.provider}
                             </span>
                         </div>

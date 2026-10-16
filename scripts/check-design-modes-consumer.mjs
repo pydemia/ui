@@ -60,6 +60,9 @@ const items = [
     "pyd-diff-viewer", "pyd-calendar-scheduler",
     "pyd-tree-nav", "pyd-navigation-menu", "pyd-block-editor",
     "pyd-carousel", "pyd-node-canvas", "pyd-data-table",
+    "pyd-select", "pyd-combobox", "pyd-sidebar", "pyd-radio-group",
+    "pyd-tooltip", "pyd-toast", "pyd-file-upload", "pyd-model-selector",
+    "pyd-data-chart", "pyd-terminal", "pyd-popover", "pyd-hover-card",
 ];
 const commands = [];
 const report = {

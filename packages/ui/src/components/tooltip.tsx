@@ -26,7 +26,8 @@ function TooltipContent({
             <TooltipPrimitive.Content
                 sideOffset={sideOffset}
                 className={cn(
-                    "z-50 max-w-xs rounded-sm bg-foreground " +
+                    "z-50 max-w-[min(20rem,calc(100vw-2rem))] rounded-sm bg-foreground " +
+                    "[overflow-wrap:anywhere] " +
                     "px-[var(--space-2)] py-[var(--space-1)] " +
                     "text-xs text-background shadow-[var(--shadow-float)]",
                     className,

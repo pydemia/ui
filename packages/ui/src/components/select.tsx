@@ -40,7 +40,7 @@ function SelectTrigger({
             )}
             {...props}
         >
-            {children}
+            <span className="min-w-0 flex-1 truncate text-left">{children}</span>
             <SelectPrimitive.Icon asChild>
                 <ChevronDown aria-hidden="true" className="size-4 shrink-0" />
             </SelectPrimitive.Icon>
@@ -65,7 +65,9 @@ function SelectContent({
                 position={position}
                 sideOffset={sideOffset}
                 className={cn(
-                    "z-50 max-h-64 min-w-[var(--radix-select-trigger-width)] " +
+                    "z-50 max-h-[min(16rem,var(--radix-select-content-available-height,16rem))] " +
+                    "max-w-[calc(100vw-2rem)] " +
+                    "min-w-[min(var(--radix-select-trigger-width),calc(100vw-2rem))] " +
                     "overflow-hidden rounded-sm border border-border bg-surface " +
                     "text-foreground shadow-[var(--shadow-float)]",
                     className,
@@ -89,7 +91,8 @@ function SelectItem({
         <SelectPrimitive.Item
             className={cn(
                 "relative flex min-h-9 cursor-default select-none items-center " +
-                "rounded-sm py-2 pl-8 pr-2 text-sm outline-none " +
+                "min-w-0 rounded-sm py-2 pl-8 pr-2 text-sm outline-none " +
+                "[overflow-wrap:anywhere] " +
                 "data-[highlighted]:bg-surface-subtle " +
                 "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
                 className,

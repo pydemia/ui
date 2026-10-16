@@ -4,6 +4,8 @@ import {
     applyThemeToElement, ArtifactViewer, Badge, Button, Card, CardContent, CardHeader,
     CardTitle, Checkbox, Dashboard, DashboardPanels, designModes, Dialog, DialogClose, DialogContent,
     DialogDescription, DialogTitle, DialogTrigger, Input, JsonViewer, LogConsole,
+    NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger,
+    NavigationMenuContent, NavigationMenuLink,
     LogViewer, NativeSelect, NotificationCenter, Terminal,
     resolveThemeSettings, Select, SelectContent, SelectItem, SelectTrigger,
     SelectValue, Spinner, ThemeScope, Toggle, type Appearance, type DesignModeId,
@@ -12,11 +14,13 @@ import { catalog } from "./catalog";
 import { AnalyticsWorkspace } from "./analytics-workspace";
 import { ReviewWorkspace } from "./review-workspace";
 import { IntakeWorkspace } from "./intake-workspace";
+import { AlignmentStress } from "./alignment-stress";
 import "./styles.css";
 import "@pydemia/ui/design-modes.css";
 
 // Repeatable browser fixture; Vite's production input excludes this HTML.
 const options = { allowUnreleased: true };
+const stressOnly = new URL(location.href).searchParams.has("stress");
 const requestedPreviewWidth = Number(new URL(location.href).searchParams.get("previewWidth"));
 const previewWidth = requestedPreviewWidth > 0 && Number.isFinite(requestedPreviewWidth)
     ? requestedPreviewWidth : undefined;
@@ -114,6 +118,12 @@ function App() {
                         {controls("Dialog")}
                         <Input aria-label="Dialog 초안" value={draft}
                             onChange={(event) => setDraft(event.target.value)} />
+                        <NavigationMenu aria-label="Dialog 내부 메뉴">
+                            <NavigationMenuList><NavigationMenuItem>
+                                <NavigationMenuTrigger>Dialog 작업 메뉴</NavigationMenuTrigger>
+                                <NavigationMenuContent><NavigationMenuLink href="#dialog-work">Dialog 메뉴 항목</NavigationMenuLink></NavigationMenuContent>
+                            </NavigationMenuItem></NavigationMenuList>
+                        </NavigationMenu>
                         <DialogClose asChild><Button>업무 Dialog 닫기</Button></DialogClose>
                     </DialogContent>
                 </Dialog>
@@ -126,7 +136,7 @@ function App() {
                     <Card><CardContent>Basic panel B</CardContent></Card>
                 </DashboardPanels></Dashboard>
                 <section aria-label="독립 Basic component 표현" className="grid gap-5">
-                    {catalog.filter((item) => [
+                    {catalog.filter((item) => !stressOnly && [
                         "input-group", "code-editor-shell", "prompt-input", "tabs",
                         "color-input", "native-select", "button-group", "tags-input",
                         "tree", "tree-nav", "navigation", "anchor-nav", "gantt",
@@ -158,13 +168,14 @@ function App() {
                     revisionId="one" onRevisionChange={() => undefined} />
                 <JsonViewer label="Plain JSON" variant="plain" value={{ ready: true }} />
             </section>
-            <div className="my-5 grid gap-5">
+            {!stressOnly && <div className="my-5 grid gap-5">
                 <section aria-label="QA Operations"><AnalyticsWorkspace design={settings.design} /></section>
                 <section aria-label="QA Review"><ReviewWorkspace /></section>
                 <section aria-label="QA Intake"><IntakeWorkspace /></section>
-            </div>
+            </div>}
+            <AlignmentStress />
             <section aria-label="전체 catalog" className="grid gap-5">
-                {catalog.map((item) => <section key={item.id}
+                {(stressOnly ? [] : catalog).map((item) => <section key={item.id}
                     data-qa-component={item.id} data-qa-family={item.category}
                     className="min-w-0 rounded-sm border border-border bg-surface">
                     <h2 data-ui="heading" className="mb-3 px-4 pt-4 text-lg">{item.name}</h2>

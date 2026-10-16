@@ -113,9 +113,9 @@ function Sidebar({
                 variant={linkVariant}
                 href={item.href}
                 aria-current={item.current ? "page" : undefined}
-                title={compact ? item.label : undefined}
+                title={item.label}
                 className={cn(
-                    "flex items-center gap-3 whitespace-nowrap",
+                    "flex min-w-0 items-center gap-3 whitespace-nowrap",
                     compact && "justify-center px-2",
                 )}
                 onClick={() => {
@@ -128,7 +128,7 @@ function Sidebar({
                 }>
                     {item.icon ?? Array.from(item.label)[0]}
                 </span>
-                <span className={compact ? "sr-only" : undefined}>
+                <span className={compact ? "sr-only" : "min-w-0 flex-1 truncate"}>
                     {item.label}
                 </span>
             </SideNavLink>

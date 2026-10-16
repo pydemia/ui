@@ -1,0 +1,27 @@
+# 테마·컴포넌트 돌출 및 정렬 검토 R17
+
+- 사용자 추가 요청: 다른 UI design과 component 표현을 꼼꼼히 확인하여 삐져나오는 패턴과 어긋나는 패턴 개선.
+- 이어받은 기준: R16 PR #172 merge `9c1530e66f760b5690c837c856b6ab500c7435e8`, ui.pydemia.ai production READY 및 public registry 40종 설치 검증 완료. R16 main CI 최종 상태 확인은 병행.
+- branch: `codex/design-overflow-alignment`. 기존 `.worknotes` dirty 10개와 원본 첨부 보존. root R16 기록의 배포 후 갱신도 기존 변경으로 취급.
+- 선행 검사: R16에서 144종 × 320px 39개 theme/appearance + 1440px 21개 조합의 초기 geometry 8,640건 오류·가로 넘침 없음. 이번에는 같은 검사를 반복하는 데 그치지 않고 열린 오버레이, 긴 내용, 줄바꿈, 선택/포커스, 변형의 paint/정렬 경계를 추가 검토.
+- 기준: 의도된 그림자·도형·스크롤·오버랩은 유지. 실제 잘림, focus 소실, 경계 침범, 의도하지 않은 너비/행 높이 불일치를 근거로 수정. Basic/PRISM 및 승인된 테마 concept 보존.
+- 작업 소유권: root가 모든 제품 코드, 공유 CSS, UI 브라우저, build/Git/배포를 소유. source leaf는 자신에게 지정된 검토 기록만 작성.
+- source 재검토: controls 53 / navigation 28 / surfaces 63 = 144종. 각각 `*-overflow-audit-r17.md`에 조건부 후보와 검사 여부 기록. 실제 조작 및 수정은 root 소유.
+- router: 노출된 subagent 가용 surface로 helper를 실행하여 gpt-6-luna/high/fork none leaf 3개 생성. 주/leaf 실제 runtime metadata는 unavailable이며 추천·요청값과 구분.
+- 실제 재현: Clay 320px 정상 예시 NavigationMenu가 우측에 걸림. 긴 데이터 fixture에서 Select 선택값/열린 목록, TagsInput, Tabs, ButtonGroup, Radio card, Toast, FileUpload error, ModelSelector, DataChart의 외곽 넘침 확인.
+- 추가 재현: Terminal label 797px가 277px 카드 header에서 잘림, NodeCanvas 버튼 client174/scroll781px, Sidebar 모바일 링크830px, Tooltip bubble280/text668px, Lightbox client290/scroll882 및 닫기버튼 x867px. 긴 DropdownMenu 807px 폭, Popover 1041px 높이(top -657px) 확인.
+- DataChart의 숨은 table이 자체 sr-only table layout의 intrinsic width969px로 문서 가로 너비998px를 유발함을 확인. 표 자체가 아닌 숨김 block wrapper로 보존하는 수정 진행.
+- 구현: 19종의 문자열·아이콘·선택·헤더 경계 처리, NavMenu의 Popper collision+지역 Portal, 공통 surface title/heading의 안전한 wrap. DataChart 축은 보수적으로 축약하고 inspector/native option/접근성 표의 전체 이름 보존. 테스트 1개 추가, 현재 DataChart13개 통과.
+- dependency: 이미 설치되어 다른 Radix primitive가 쓰는 정확한 버전 `@radix-ui/react-popper@1.3.7`, `@radix-ui/react-portal@1.1.17`을 직접 의존성과 pyd-navigation-menu registry에 선언. portal-scope 의존성 추가. 불필요한 별도 위치 계산 observer나 전역 DOM 보정 없음.
+- 독립 patch review에서 발견한 P2 2개(모달 focus 경계 밖 portal, React19 callback ref cleanup 손실) 수정 및 재검토 완료. root ref context로 enclosing modal 안에 기본 portal을 두고, 안정적인 callback이 consumer cleanup·legacy null·객체 ref 정리를 보존함. `.worknotes/alignment-patch-review-r17.md`에 최종 actionable finding 없음 기록.
+- 회귀: UI 306 / docs 15 tests, root typecheck 통과. 새 NavigationMenu test는 실제 mount/update/unmount에서 ref attach 안정성·정확한 cleanup과 default-open modal DOM containment 검사. 브라우저 실제 focus trap 검증과 구분.
+- 초기 화면 geometry: 실제 catalog144 + long-content19 = 163종 × 320px39 appearance 조합 + 1440px21 default = 9,780건에서 wrapper overflow 2px 초과·문서 가로 넘침·error boundary 오류 없음. `browser-evidence/alignment-r17/matrix-163-components-60-states.json`. 모달 scroll-lock 상태의 선행 측정은 별도 raw 기록으로 분리하고 정상 화면에서 다시 검사함.
+- 실제 열린 상태: Clay/Glass/Brutal/Material/Terminal mobile NavigationMenu의 collision 후 우측292.8px ≤ client305px, 텍스트 overflow0 확인. Glass의 긴 Dropdown/Popover/HoverCard와 Lightbox·Sidebar 검수, Popover/HoverCard 내부 스크롤 및 Lightbox 닫기 버튼 노출 확인. Clay Dialog 메뉴 click→ArrowDown 시 link focus/inDialog=true/aria-hidden=false, Escape trigger 복귀, 지역 Glass 전환도 확인.
+- 브라우저 순회 도중 일부 즉시 측정은 Popper 배치 전 값(0개/초기 x)을 반환했으며 전체 overlay 21종 순회는 제어 연결 timeout으로 미완료. 이를 통과 범위에 포함하지 않음. 새 탭 연결 후 대표 테마 열린 상태를 개별 조작·다음 호출 관찰로 다시 확인. Tooltip은 role 생성만 재확인했고 후속 geometry는 숨김 전환으로 미확정.
+- 빌드 첫 회 성공. snapshot 검사를 앞선 build-site 복사 완료 전에 시작해 과거 release 파일의 일시적 ENOENT로 실패한 실행이 있었음. 병행 실행을 끝낸 뒤 순차 재실행하여 정상 생성. 기존 immutable source release 수정 없음.
+- 중간 snapshot99: `sha256-27cd6420f4d70a5a11a06ec9432bf4cd27099caba7f793468edb376c15fbc7d3`, registry148종. 생성 뒤 sibling Menubar 검사에서 Clay320의 긴 항목 panel807.6px/client305px를 추가 재현하여 같은 available-width/wrap을 적용. 총 수정 component20종. long-content fixture19개 중 menu case에 Menubar도 포함.
+- 중간 snapshot은 유효한 불변 기록으로 보존하고, Menubar 수정 포함 최종 snapshot을 추가 생성하기로 결정. 중간 생성물 삭제 명령은 실행 정책에서 거절되어 실행되지 않았으며 재시도/우회하지 않음. 후속 최종 build·release-check·독립52종 설치·배포 검증 진행 중.
+- 최종 snapshot: `sha256-0c873b2b6c8028f0a97948e8f7ad66811215c975c1fda8805164e98b7a0c6cb0`(148 items). 최종 source+docs mirror만 Git에 추가하고 중간27cd snapshot은 로컬 untracked 상태로 보존하여 발행 대상에서 제외. 기존98종 불변 release 보존, 이번 발행 대상은 최종1종.
+- Menubar 수정 후 Clay320 실제 panel304.8px/client305px/overflow0 확인. 줄바꿈 Tabs ArrowRight 후 Execution history selected=true, ButtonGroup 마지막 버튼 포커스 시 내부 scrollLeft210px, Select 긴 목록 경계와 Short option 선택 동작 확인.
+- local 독립 설치52종 `attempt-ZNdK6g`: CLI/핵심 theme source equality/typecheck/Vite build/21 strict release gate 통과. 실제 compiled preview에서21개 mode 전환 시 page overflow0 및 초안 보존. modal menu 링크가 Dialog 안에서 focus되고 Escape→trigger, Dialog Close→원래 버튼 복귀 확인. 실행 로그와 browser 증거는 `browser-evidence/alignment-r17/consumer-local*`, `local-consumer-modal.png`.
+- 최종 공식 build 완료, release-check 진행. 기본 rem/font scale·테마 도형·그림자·의도된 그래프 스크롤 및 PRISM source 변경 없음. 남은 작업: PR/CI, production alias exact commit 확인, public52종 설치와 운영 browser smoke.

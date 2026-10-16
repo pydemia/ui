@@ -47,6 +47,21 @@ function nearlyEqual(first, second) {
         `${first} differs from ${second}`);
 }
 
+test("abbreviated axis labels retain full categories for inspection and data", () => {
+    const labels = ["North-America-Enterprise", "Asia-Pacific-Enterprise"];
+    const markup = renderChart({
+        categories: labels,
+        series: [{ id: "one", label: "Requests", values: [4, 6] }],
+        inspectable: true,
+    });
+    for (const label of labels) {
+        assert.ok(markup.includes(`>${label}</option>`));
+        assert.ok(markup.includes(`>${label}</th>`));
+    }
+    assert.match(markup, /<text[^>]*y="238"[^>]*>[^<]*…<\/text>/);
+    assert.ok(markup.includes(`aria-label="${labels[0]} 값"`));
+});
+
 test("signed values stack on separate sides of zero", () => {
     const markup = renderChart();
     const first = seriesRects(markup, "one");

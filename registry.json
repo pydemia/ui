@@ -623,8 +623,8 @@
     },
     {
       "name": "pyd-navigation-menu", "type": "registry:ui", "title": "Navigation Menu",
-      "dependencies": ["@radix-ui/react-navigation-menu@1.2.22", "lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "dependencies": ["@radix-ui/react-navigation-menu@1.2.22", "@radix-ui/react-popper@1.3.7", "@radix-ui/react-portal@1.1.17", "lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-utils.json", "./pyd-portal-scope.json"],
       "files": [{ "path": "packages/ui/src/components/navigation-menu.tsx", "type": "registry:ui" }]
     },
     {

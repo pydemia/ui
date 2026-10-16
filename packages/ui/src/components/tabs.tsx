@@ -19,7 +19,7 @@ function TabsList({ className, variant = "default", ...props }: TabsListProps) {
         <TabsVariantContext.Provider value={variant}>
             <TabsPrimitive.List
                 className={cn(
-                    "inline-flex gap-1",
+                    "inline-flex max-w-full flex-wrap gap-1",
                     variant === "line" && "border-b border-border",
                     variant === "contained" &&
                         "rounded-sm bg-surface-subtle p-1",
@@ -38,7 +38,8 @@ function TabsTrigger({ className, ...props }: ComponentProps<typeof TabsPrimitiv
     return (
         <TabsPrimitive.Trigger
             className={cn(
-                "px-3 py-1.5 text-sm text-muted hover:text-foreground " +
+                "min-w-0 max-w-full px-3 py-1.5 text-sm text-muted " +
+                "[overflow-wrap:anywhere] hover:text-foreground " +
                 "data-[state=active]:font-medium",
                 variant === "line"
                     ? "-mb-px border-b-2 border-transparent " +

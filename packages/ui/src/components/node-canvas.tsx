@@ -361,6 +361,7 @@ function NodeCanvas({
                                 <button type="button"
                                     aria-pressed={selected?.id === node.id}
                                     aria-label={`${node.title} 노드 선택`}
+                                    title={node.title}
                                     aria-describedby={coordinatesId}
                                     className={cn(
                                         "w-full cursor-grab touch-none " +
@@ -388,7 +389,7 @@ function NodeCanvas({
                                         drag.current = null;
                                         setPreview(null);
                                     }}>
-                                    {node.title}
+                                    <span className="block truncate">{node.title}</span>
                                 </button>
                                 <p className={"m-0 line-clamp-2 px-3 py-2 " +
                                     "text-xs text-muted"}>

@@ -165,7 +165,7 @@ function FileUpload({
                             )}
                             {item.status === "failed" && item.error && (
                                 <p role="alert" className={
-                                    "mb-0 mt-1 text-xs text-danger"
+                                    "mb-0 mt-1 text-xs text-danger [overflow-wrap:anywhere]"
                                 }>{item.error}</p>
                             )}
                         </li>

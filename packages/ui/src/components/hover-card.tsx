@@ -23,6 +23,8 @@ function HoverCardContent({
                 sideOffset={sideOffset}
                 className={cn(
                     "z-50 w-72 max-w-[calc(100vw-2rem)] rounded-sm " +
+                    "max-h-[var(--radix-hover-card-content-available-height)] overflow-y-auto " +
+                    "[overflow-wrap:anywhere] " +
                     "border border-border bg-surface p-[var(--space-4)] " +
                     "text-foreground shadow-[var(--shadow-float)]",
                     className,

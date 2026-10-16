@@ -876,6 +876,7 @@
     color: var(--schedule-heading-ink);
   }
   :where([data-slot="surface-title"], [data-slot="surface-heading"]) { font-family: var(--font-heading); font-style: var(--heading-font-style); font-weight: var(--component-heading-weight); }
+  :where([data-slot="surface-title"], [data-slot="surface-heading"]) { min-width: 0; overflow-wrap: anywhere; }
   code[data-slot="surface-title"] { font-family: var(--font-data); }
   :where([data-slot="surface-header"]) :where([data-slot="surface-title"], [data-slot="surface-meta"]) { color: inherit; }
   :where([data-slot="surface-header"]) :where([data-ui="button"][data-variant="ghost"], [data-ui="icon-button"][data-variant="ghost"]) { color: inherit; }

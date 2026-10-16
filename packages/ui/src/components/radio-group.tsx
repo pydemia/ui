@@ -63,7 +63,7 @@ function RadioGroupItem({
                 className="grid size-5 shrink-0 place-items-center rounded-full border border-border bg-surface">
                 {indicator}
             </span> : indicator}
-            {card && <span className="grid min-w-0 gap-1">
+            {card && <span className="grid min-w-0 gap-1 [overflow-wrap:anywhere]">
                 <span id={labelId} className="font-medium">{label}</span>
                 {description && <span id={descriptionId}
                     className="text-xs text-muted">{description}</span>}

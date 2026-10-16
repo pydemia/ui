@@ -114,8 +114,8 @@ function Terminal({
                 variant === "panel" &&
                     "border-b border-border bg-surface-subtle",
             )}>
-                <span data-slot="surface-title" className="text-sm font-medium">{label}</span>
-                {pending && <span role="status" className="text-xs text-muted">
+                <span data-slot="surface-title" className="min-w-0 text-sm font-medium [overflow-wrap:anywhere]">{label}</span>
+                {pending && <span role="status" className="shrink-0 text-xs text-muted">
                     실행 중
                 </span>}
             </div>

@@ -94,9 +94,9 @@ function Toast({
                         {statusLabel ?? variantLabel[variant]}
                     </span>
                     <p data-slot="surface-title"
-                        className="m-0 mt-1 text-sm font-semibold">{title}</p>
+                        className="m-0 mt-1 text-sm font-semibold [overflow-wrap:anywhere]">{title}</p>
                     {description && (
-                        <p className="mb-0 mt-1 text-sm text-muted">
+                        <p className="mb-0 mt-1 text-sm text-muted [overflow-wrap:anywhere]">
                             {description}
                         </p>
                     )}
@@ -106,7 +106,7 @@ function Toast({
                     data-slot="surface-action"
                     aria-label={closeLabel}
                     className={
-                        "-mr-1 -mt-1 rounded-sm p-1 text-muted " +
+                        "-mr-1 -mt-1 shrink-0 rounded-sm p-1 text-muted " +
                         "hover:bg-surface-subtle hover:text-foreground " +
                         "focus-visible:outline-2 focus-visible:outline-focus"
                     }

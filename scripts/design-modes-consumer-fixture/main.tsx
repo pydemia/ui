@@ -41,6 +41,8 @@ import { BlockEditor, type BlockEditorBlock } from "./components/ui/block-editor
 import { Carousel } from "./components/ui/carousel";
 import { NodeCanvas } from "./components/ui/node-canvas";
 import { DataTable } from "./components/ui/data-table";
+import { DataChart } from "./components/ui/data-chart";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./components/ui/select";
 import { SideNav, SideNavLink } from "./components/ui/navigation";
 import { Gantt } from "./components/ui/gantt";
 import { Calendar } from "./components/ui/calendar";
@@ -70,6 +72,7 @@ import "./style.css";
 // Private QA can inspect ready modes; ordinary consumers remain release gated.
 const allowUnreleased = new URL(location.href).searchParams.has("qa");
 const options = { allowUnreleased };
+const longIdentifier = "deployment_release_candidate_production_2026_10_16_".repeat(2);
 
 function App() {
     const [design, setDesign] = useState<DesignModeId>("basic");
@@ -197,6 +200,15 @@ function App() {
                     </InputGroup>}
                 </Field>
                 <TagsInput label="Installed tags" defaultValue={["review"]} />
+                <TagsInput label="Installed long tags" defaultValue={[longIdentifier]} />
+                <Select defaultValue="release">
+                    <SelectTrigger aria-label="Installed long selection"><SelectValue /></SelectTrigger>
+                    <SelectContent><SelectItem value="release">{longIdentifier}</SelectItem>
+                        <SelectItem value="short">Short selection</SelectItem></SelectContent>
+                </Select>
+                <DataChart title={longIdentifier} inspectable variant="bar"
+                    categories={["North-America-Enterprise", "Central-Europe-Enterprise", "Asia-Pacific-Enterprise"]}
+                    series={[{ id: "release", label: longIdentifier, values: [10, 14, 12] }]} />
                 <CodeEditorShell label="Installed code draft" value={draft}
                     onValueChange={setDraft} rows={4} />
                 <PromptInput label="Installed prompt" onSend={setDraft} />
@@ -301,6 +313,14 @@ function App() {
                         </label>
                         <Input aria-label="Dialog draft" value={draft}
                             onChange={(event) => setDraft(event.target.value)} />
+                        <NavigationMenu aria-label="Installed modal menu">
+                            <NavigationMenuList><NavigationMenuItem>
+                                <NavigationMenuTrigger>Modal products</NavigationMenuTrigger>
+                                <NavigationMenuContent><NavigationMenuLink href="#modal-details">
+                                    Modal details
+                                </NavigationMenuLink></NavigationMenuContent>
+                            </NavigationMenuItem></NavigationMenuList>
+                        </NavigationMenu>
                         <InputGroup>
                             <InputGroupInput aria-label="Dialog compound draft" value={draft}
                                 onChange={(event) => setDraft(event.target.value)} />
