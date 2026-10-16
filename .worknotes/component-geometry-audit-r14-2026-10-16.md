@@ -67,3 +67,43 @@
 - compiled 실제문서 MaterialButtonGroup vertical12/horizontal999 및미리보기상태갱신, DrawnleftDrawer0·6·14·0/넘침0 확인. MaterialPIN6자리제출/12·12·3·3, DrawnColor8·4·10·5/Checkbox5·4·5·5 토글/Markdowninline4 확인. compiled-checks.json.
 - 모든raw geometry와대표 screenshot의수용은구분. 144×120 초기geometry/Drawer75회/명시한입력동작과표시상태를근거로기록하며전상태·전브라우저검증을주장하지않음.
 - 이후 exact-head PR CI 및운영배포/공개registry설치 확인 필요. source/style/검사fixture는최종고정.
+
+## PR
+
+- commit73c5fa8adad3e85bdd639a1f06d056573000d3cb, codex/component-geometry-audit push완료.
+- PR170 생성/채팅첨부: https://github.com/pydemia/ui/pull/170 . base80ab6689 일치. 최종source6/자체notes3/생성문서·immutable 포함321logicalfiles.
+- check-release-history80ab6689→commit pass. 기존dirtynotes8개/첨부미포함보존. exact-headCI 대기, 아직운영반영아님.
+
+## 독립 소비자 실제 브라우저
+
+- attempt-o9RKkb의compiledfixture320px21모드전환: pageoverflow0/초안Independent geometry/체크박스unchecked/선택색#247a66 유지 확인. MaterialPIN과Drawn 수정role들의계산값확인. installed-local-21.json.
+- 동일 열린leftDrawer에서 Material0·24·24·0→Drawn0·6·14·0 변경시동일DialogID/초안 보존. right12·0·0·8/bottom12·6·0·0도확인. installed-local-drawer.json.
+- CLI browserVerified:false는수정하지않고독립실제browser기록으로구분. 입력·Portal·방향hook이실제registry설치환경에서도적용됨을확인.
+- exact-head CI38833498272 진행중. 필수배포와공개설치검수는미완료.
+
+## 컴포넌트별 판정 요약
+
+component-results.json에144개ID/이름/분류/초기geometry판정/수정여부기록. 수정7종, 이번검사에서추가변경불필요137종. 모든상태가pass라는표시는두지않음.
+
+| 컴포넌트 | 반영 |
+| --- | --- |
+| ButtonGroup | 세로형의과도한pill조정, 가로형유지 |
+| PinInput | Material4corner필드값을유효한radius로적용 |
+| TagsInput | Drawn칩의비대칭모서리복원 |
+| ColorInput | Drawn색상swatch의비대칭모서리복원 |
+| Checkbox | Drawn모서리복원, 재사용예시ID·레이블충돌해소 |
+| Markdown | Drawn인라인코드의유효한compact모서리적용 |
+| Drawer | 3방향노출corner테마/viewport접합corner0 적용 |
+
+## CI 및 병합
+
+- exact-head PR CI38833498272 completed/success, head73c5fa8adad3e85bdd639a1f06d056573000d3cb 일치. UI303/Docs15/PRISM363/typecheck/build/generated docs parity/새snapshot95와과거릴리스 보존 통과.
+- base80ab6689/현재head/mergeable=true 확인후 expected_head_sha로PR170 병합. mergeSHA0eacf43e92cc713730b6190e1dd6151dc31caeab.
+- root branch를main mergeSHA로fast-forward. 기존dirty노트8개·첨부보존. exactSHA production alias와공개registry검수진행.
+
+## 운영 확인 완료
+
+- production alias ui.pydemia.ai READY /dpl_DJY4Pd3pK1hZnTbkuhfesV2nh9Ak, mergeSHA0eacf43 일치. main pushCI38833934869 completed/success.
+- 공개registry 독립설치 attempt-yYJ8ib CLI28개 pass, 실제320px21모드 전환 pageoverflow0/입력Public registry verified/checkboxfalse 유지. installed-public-21.json.
+- 공개설치 열린leftDrawer Material→Drawn 동일ID/초안 유지, radius0·6·14·0 확인. 운영main ButtonGroup/PIN/DrawnleftDrawer production-readback.json 보존.
+- 사용자 추가 요청으로 나머지137종의 깊은 변형·상태 검수 R15를 시작. 기존초기geometry PASS를 모든상태PASS로 확장하지않음.

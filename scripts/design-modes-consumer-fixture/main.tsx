@@ -7,6 +7,20 @@ import { ColorInput } from "./components/ui/color-input";
 import { Checkbox } from "./components/ui/checkbox";
 import { Markdown } from "./components/ui/markdown";
 import {
+    Menubar, MenubarMenu, MenubarTrigger, MenubarContent,
+    MenubarItem, MenubarCheckboxItem,
+} from "./components/ui/menubar";
+import {
+    DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
+    DropdownMenuCheckboxItem, DropdownMenuItem,
+} from "./components/ui/dropdown-menu";
+import {
+    ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem,
+} from "./components/ui/context-menu";
+import { Lightbox } from "./components/ui/lightbox";
+import { DiffViewer } from "./components/ui/diff-viewer";
+import { CalendarScheduler } from "./components/ui/calendar-scheduler";
+import {
     Drawer, DrawerTrigger, DrawerContent, DrawerTitle, DrawerDescription,
     DrawerClose,
 } from "./components/ui/drawer";
@@ -52,6 +66,9 @@ function App() {
     const [design, setDesign] = useState<DesignModeId>("basic");
     const [draft, setDraft] = useState("Preserve this input while switching");
     const [open, setOpen] = useState(false);
+    const [menuChecked, setMenuChecked] = useState(true);
+    const [galleryOpen, setGalleryOpen] = useState(false);
+    const [galleryVariant, setGalleryVariant] = useState<"frame" | "immersive">("frame");
     const modes = allowUnreleased ? designModes : releasedDesignModes;
     const resolved = resolveThemeSettings({
         design, appearance: "light", colormap: "forest",
@@ -91,6 +108,49 @@ function App() {
                 <ColorInput label="Installed color" defaultValue="#3b6d91" />
                 <Checkbox aria-label="Installed checkbox" defaultChecked />
                 <Markdown source="Installed `registry` content" />
+                <DiffViewer label="Installed split comparison" view="split"
+                    before={`Synthetic before ${"x".repeat(100)}`}
+                    after={`Synthetic after ${"y".repeat(100)}`} />
+                <CalendarScheduler label="Installed calendar schedule"
+                    initialDate="2026-10-07" timeZone="Asia/Seoul"
+                    events={[{ id: "sample", date: "2026-10-07",
+                        title: "Synthetic schedule" }]} />
+                <Menubar aria-label="Installed menubar">
+                    <MenubarMenu><MenubarTrigger>Installed View</MenubarTrigger>
+                        <MenubarContent>
+                            <MenubarCheckboxItem checked={menuChecked}
+                                onCheckedChange={setMenuChecked}>Installed grid</MenubarCheckboxItem>
+                            <MenubarItem disabled>Installed unavailable</MenubarItem>
+                            <MenubarItem variant="danger">Installed remove</MenubarItem>
+                        </MenubarContent>
+                    </MenubarMenu>
+                </Menubar>
+                <DropdownMenu><DropdownMenuTrigger asChild>
+                    <Button>Installed dropdown</Button>
+                </DropdownMenuTrigger><DropdownMenuContent>
+                    <DropdownMenuCheckboxItem checked={menuChecked}
+                        onCheckedChange={setMenuChecked}>Installed grid</DropdownMenuCheckboxItem>
+                    <DropdownMenuItem disabled>Installed unavailable</DropdownMenuItem>
+                    <DropdownMenuItem variant="danger">Installed remove</DropdownMenuItem>
+                </DropdownMenuContent></DropdownMenu>
+                <ContextMenu><ContextMenuTrigger asChild>
+                    <Button>Installed context menu</Button>
+                </ContextMenuTrigger><ContextMenuContent>
+                    <ContextMenuItem>Installed context action</ContextMenuItem>
+                    <ContextMenuItem variant="danger">Installed remove</ContextMenuItem>
+                </ContextMenuContent></ContextMenu>
+                {(["frame", "immersive"] as const).map((variant) => <Button
+                    key={variant} onClick={() => {
+                        setGalleryVariant(variant);
+                        setGalleryOpen(true);
+                    }}>Open {variant} gallery</Button>)}
+                <Lightbox title="Installed gallery" variant={galleryVariant}
+                    open={galleryOpen} onOpenChange={setGalleryOpen}
+                    activeId="sample" onActiveIdChange={() => undefined}
+                    items={[{ id: "sample", alt: "Synthetic geometry sample",
+                        src: "data:image/svg+xml," + encodeURIComponent(
+                            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><rect width="320" height="180" fill="#dce9f6"/><circle cx="160" cy="90" r="48" fill="#2875ad"/></svg>',
+                        ) }]} />
                 {(["left", "right", "bottom"] as const).map((side) => (
                     <Drawer key={side}>
                         <DrawerTrigger asChild>

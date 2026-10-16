@@ -20,6 +20,7 @@ function Menubar({
     return (
         <MenubarPrimitive.Root
             aria-label={label}
+            data-ui="menubar"
             className={cn(
                 "flex max-w-full items-center gap-1 overflow-x-auto " +
                 "rounded-sm border border-border bg-surface p-1",
@@ -41,6 +42,7 @@ function MenubarTrigger({
 }: ComponentProps<typeof MenubarPrimitive.Trigger>) {
     return (
         <MenubarPrimitive.Trigger
+            data-slot="nav-trigger"
             className={cn(
                 "inline-flex h-9 shrink-0 cursor-default items-center " +
                 "rounded-sm px-3 text-sm font-medium text-foreground " +

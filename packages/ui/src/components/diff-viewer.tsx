@@ -239,7 +239,7 @@ function DiffViewer({
             ) : (
                 <div role="region" data-slot="reading-plane" tabIndex={0}
                     aria-label={`${label} 변경 내용 스크롤`}
-                    className="max-h-96 max-w-full overflow-auto">
+                    className="relative max-h-96 max-w-full overflow-auto">
                     {view === "unified" ? (
                         <table className={tableClass}>
                             <caption className="sr-only">
