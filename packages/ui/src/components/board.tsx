@@ -43,7 +43,7 @@ function Board({
 
     return (
         <section aria-label={label} data-ui="board" data-surface="panel"
-            className={cn("min-w-0 rounded-sm border border-border bg-surface",
+            className={cn("min-w-0 overflow-hidden rounded-sm border border-border bg-surface",
                 className)} {...props}>
             <div data-slot="surface-header" className="flex flex-wrap items-center justify-between gap-2 border-b border-border p-[var(--space-3)]">
                 <h3 data-slot="surface-title" className="m-0 text-base font-semibold">{label}</h3>
