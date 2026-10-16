@@ -289,6 +289,7 @@ function BlockEditor({
                             <select value={block.kind} disabled={disabled}
                                 data-ui="native-select"
                                 data-appearance="outline"
+                                data-presentation="inline"
                                 aria-label={`${index + 1}번 블록 형식`}
                                 onChange={(event) => replaceBlock(block.id, {
                                     kind: event.currentTarget.value as BlockKind,
@@ -304,20 +305,20 @@ function BlockEditor({
                                         value={kind}>{text}</option>
                                 )}
                             </select>
-                            <Button variant="outline" disabled={disabled ||
+                            <Button data-slot="surface-action" variant="outline" disabled={disabled ||
                                 index === 0} className="h-8 px-2 text-xs"
                                 aria-label={`${index + 1}번 블록 위로 이동`}
                                 onClick={() => moveBlock(index, -1)}>위로</Button>
-                            <Button variant="outline" disabled={disabled ||
+                            <Button data-slot="surface-action" variant="outline" disabled={disabled ||
                                 index === blocks.length - 1}
                                 className="h-8 px-2 text-xs"
                                 aria-label={`${index + 1}번 블록 아래로 이동`}
                                 onClick={() => moveBlock(index, 1)}>아래로</Button>
-                            <Button variant="outline" disabled={disabled}
+                            <Button data-slot="surface-action" variant="outline" disabled={disabled}
                                 className="h-8 px-2 text-xs"
                                 aria-label={`${index + 1}번 블록 다음에 추가`}
                                 onClick={() => insertBlock(block.id)}>추가</Button>
-                            <Button variant="ghost" disabled={disabled}
+                            <Button data-slot="surface-action" variant="ghost" disabled={disabled}
                                 className="h-8 px-2 text-xs"
                                 aria-label={`${index + 1}번 블록 삭제`}
                                 onClick={() => removeBlock(block.id, index)}>
@@ -347,7 +348,7 @@ function BlockEditor({
             </ol>
             <div className="px-[var(--space-3)] pb-[var(--space-3)]"
                 data-slot="editor-footer">
-                <Button ref={addButton} variant="outline"
+                <Button ref={addButton} data-slot="surface-action" variant="outline"
                     disabled={disabled} onClick={() => insertBlock()}>
                     블록 추가
                 </Button>

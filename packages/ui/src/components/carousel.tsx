@@ -177,6 +177,7 @@ function Carousel({
                     <div data-slot="surface-header" className="mt-4 flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
                             <IconButton
+                                data-slot="surface-action"
                                 variant="outline"
                                 label="이전 슬라이드"
                                 icon="←"
@@ -186,6 +187,7 @@ function Carousel({
                                 onClick={() => moveBy(-1)}
                             />
                             <IconButton
+                                data-slot="surface-action"
                                 variant="outline"
                                 label="다음 슬라이드"
                                 icon="→"

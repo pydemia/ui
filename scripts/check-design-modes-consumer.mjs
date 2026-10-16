@@ -58,6 +58,8 @@ const items = [
     "pyd-markdown", "pyd-drawer",
     "pyd-menubar", "pyd-dropdown-menu", "pyd-context-menu", "pyd-lightbox",
     "pyd-diff-viewer", "pyd-calendar-scheduler",
+    "pyd-tree-nav", "pyd-navigation-menu", "pyd-block-editor",
+    "pyd-carousel", "pyd-node-canvas", "pyd-data-table",
 ];
 const commands = [];
 const report = {

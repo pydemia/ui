@@ -373,6 +373,7 @@ function DataTable<Row>({
                                         (remote && column.sortable)) ? (
                                         <button
                                             type="button"
+                                            data-slot="table-sort"
                                             className={
                                                 "inline-flex items-center " +
                                                 "gap-1 text-left text-foreground"
@@ -440,6 +441,7 @@ function DataTable<Row>({
                                         {renderRowDetails && (
                                             <TableCell>
                                                 <button type="button"
+                                                    data-slot="row-disclosure"
                                                     aria-label={detailLabel}
                                                     aria-expanded={expanded}
                                                     aria-controls={expanded
