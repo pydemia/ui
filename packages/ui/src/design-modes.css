@@ -893,12 +893,13 @@
   :where([data-slot="surface-action"][aria-pressed="true"]) { background-color: var(--embedded-selected-fill); box-shadow: none; font-weight: var(--component-heading-weight); }
   :where([data-slot="surface-action"]:active, [data-slot="gantt-action"]:active) { translate: none; }
   :where([data-slot="surface-action"]:focus-visible, [data-slot="gantt-action"]:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+  /* Joined rows fill their owner; only the panel clips outside corners. */
+  :where([data-slot="surface-row"]) { border-radius: 0; }
   :where([data-slot="surface-row"]:hover, [data-slot="notification-row"]:hover) { background-color: var(--navigation-hover-fill); }
   :where([data-slot="surface-row"][data-selected="true"], [data-slot="surface-row"][aria-selected="true"], [data-slot="surface-row"][aria-pressed="true"]) {
     background-color: var(--navigation-hover-fill);
     color: var(--foreground);
     box-shadow: var(--navigation-selected-shadow);
-    border-radius: var(--navigation-radius);
     font-weight: var(--component-heading-weight);
   }
   :where([data-slot="surface-row"][data-selected="true"], [data-slot="surface-row"][aria-selected="true"], [data-slot="surface-row"][aria-pressed="true"]) :where([data-slot="surface-meta"], p.text-muted, span.text-muted) { color: inherit; }
