@@ -1,3 +1,4 @@
+import { ChevronDown, ChevronRight } from "lucide-react";
 import {
     useEffect, useId, useRef, useState,
     type ComponentProps, type KeyboardEvent,
@@ -304,7 +305,7 @@ function Tree({
                     >
                         <span data-slot="tree-disclosure" aria-hidden="true"
                             className={cn(
-                                "grid size-4 shrink-0 place-items-center text-xs",
+                                "grid size-[20px] shrink-0 place-items-center text-base",
                                 hasChildren && !node.disabled && "cursor-pointer",
                             )} onClick={(event) => {
                                 if (!hasChildren || node.disabled) return;
@@ -315,7 +316,11 @@ function Tree({
                                 } else changeExpanded(node.id);
                             }}>
                             {node.childState === "error" && isExpanded
-                                ? "↻" : hasChildren ? isExpanded ? "▾" : "▸" : ""}
+                                ? "↻" : hasChildren ? isExpanded
+                                    ? <ChevronDown className="size-[20px]"
+                                        strokeWidth={2.25} />
+                                    : <ChevronRight className="size-[20px]"
+                                        strokeWidth={2.25} /> : null}
                         </span>
                         <span className="min-w-0">
                             <span className="block truncate">{node.label}</span>
