@@ -640,11 +640,13 @@
     },
     {
       "name": "pyd-tree", "type": "registry:ui", "title": "Tree",
+      "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/tree.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-tree-nav", "type": "registry:ui", "title": "Tree Navigation",
+      "dependencies": ["lucide-react@0.468.0"],
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/tree-nav.tsx", "type": "registry:ui" }]
     },

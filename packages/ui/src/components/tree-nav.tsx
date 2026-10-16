@@ -1,3 +1,4 @@
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "./utils";
 
@@ -182,8 +183,12 @@ function TreeNav({
                                     "justify-between text-left")}
                                 data-slot="tree-nav-disclosure">
                                 <span className="truncate">{item.label}</span>
-                                <span aria-hidden="true">
-                                    {isOpen ? "⌄" : "›"}
+                                <span aria-hidden="true" className="shrink-0">
+                                    {isOpen
+                                        ? <ChevronDown className="size-[20px]"
+                                            strokeWidth={2.25} />
+                                        : <ChevronRight className="size-[20px]"
+                                            strokeWidth={2.25} />}
                                 </span>
                             </button>
                         )}
@@ -203,7 +208,11 @@ function TreeNav({
                                 }
                                 data-slot="tree-nav-disclosure">
                                 <span aria-hidden="true">
-                                    {isOpen ? "⌄" : "›"}
+                                    {isOpen
+                                        ? <ChevronDown className="size-[20px]"
+                                            strokeWidth={2.25} />
+                                        : <ChevronRight className="size-[20px]"
+                                            strokeWidth={2.25} />}
                                 </span>
                             </button>
                         )}
