@@ -103,6 +103,12 @@ npx shadcn@4.21.0 add https://ui.pydemia.ai/r/pyd-design-modes.json https://ui.p
 소비자 CSS는 token을 먼저 연결합니다. 재질·디자인 표현을 사용하려면
 optional `design-modes.css`도 연결합니다.
 
+둥근 디자인 모드는 지원 브라우저에서 CSS `corner-shape: squircle`을
+사용합니다. 미지원 브라우저에는 줄인 `border-radius`가 적용됩니다.
+Basic·각진/비대칭 디자인과 아바타·라디오 등의 명시적인 원형은 유지합니다.
+[브라우저 호환성](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/corner-shape#browser_compatibility)을
+확인할 수 있습니다.
+
 합성 입력, 편집기, 작성기, 탭과 선택 그룹도 선택한 디자인의 재질·형태·여백을
 따릅니다. 개별 component에 디자인 prop을 반복해서 전달할 필요가 없습니다.
 합성 입력은 외곽 프레임이 경계·그림자·포커스를 담당하며 내부 입력은 하나의

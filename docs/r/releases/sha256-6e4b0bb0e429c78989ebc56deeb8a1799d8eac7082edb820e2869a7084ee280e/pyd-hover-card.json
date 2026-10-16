@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-hover-card",
+  "title": "Hover Card",
+  "dependencies": [
+    "@radix-ui/react-hover-card@1.1.23"
+  ],
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-6e4b0bb0e429c78989ebc56deeb8a1799d8eac7082edb820e2869a7084ee280e/pyd-utils.json",
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-6e4b0bb0e429c78989ebc56deeb8a1799d8eac7082edb820e2869a7084ee280e/pyd-portal-scope.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/hover-card.tsx",
+      "content": "import * as HoverCardPrimitive from \"@radix-ui/react-hover-card\";\nimport type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\nimport { usePortalContainer } from \"./foundation/portal-scope\";\n\nconst HoverCard = HoverCardPrimitive.Root;\nconst HoverCardTrigger = HoverCardPrimitive.Trigger;\n\nfunction HoverCardContent({\n    container,\n    className,\n    align = \"center\",\n    sideOffset = 6,\n    ...props\n}: ComponentProps<typeof HoverCardPrimitive.Content> &\n    Pick<ComponentProps<typeof HoverCardPrimitive.Portal>, \"container\">) {\n    const portalContainer = usePortalContainer(container);\n    return (\n        <HoverCardPrimitive.Portal container={portalContainer}>\n            <HoverCardPrimitive.Content\n                data-ui=\"overlay-panel\"\n                align={align}\n                sideOffset={sideOffset}\n                className={cn(\n                    \"z-50 w-72 max-w-[calc(100vw-2rem)] rounded-sm \" +\n                    \"max-h-[var(--radix-hover-card-content-available-height)] overflow-y-auto \" +\n                    \"[overflow-wrap:anywhere] \" +\n                    \"border border-border bg-surface p-[var(--space-4)] \" +\n                    \"text-foreground shadow-[var(--shadow-float)]\",\n                    className,\n                )}\n                {...props}\n            />\n        </HoverCardPrimitive.Portal>\n    );\n}\n\nexport { HoverCard, HoverCardTrigger, HoverCardContent };\n",
+      "type": "registry:ui",
+      "target": "@ui/hover-card.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

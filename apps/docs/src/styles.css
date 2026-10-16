@@ -256,7 +256,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 }
 :root[data-design="clay"] .sidebar-item.selected {
     border: 0;
-    border-radius: 999px;
+    border-radius: var(--navigation-radius);
     margin-bottom: 10px;
     padding: 12px 14px;
     background: var(--surface-fill);
@@ -275,7 +275,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
 :root[data-design="clay"] .intro-meta span {
     padding: 10px 15px;
     border: 0;
-    border-radius: 999px;
+    border-radius: var(--control-radius);
     background: var(--tile-second-fill);
     color: var(--foreground);
     box-shadow: var(--control-decoration);
@@ -369,7 +369,7 @@ code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mon
     box-shadow: 4px -4px 0 var(--accent), 8px -8px 0 var(--accent), 12px -4px 0 var(--accent), 16px 0 0 var(--accent), 12px 4px 0 var(--accent), 8px 8px 0 var(--accent), 4px 4px 0 var(--accent);
 }
 :root[data-design="spatial"] .preview-stage { background-image: none; background-color: transparent; border: 0; }
-:root[data-design="spatial"] .intro-count { padding: 24px; border-radius: 50%; background: var(--surface-fill); backdrop-filter: var(--surface-filter); box-shadow: 0 28px 40px rgb(15 35 65 / 25%); }
+:root[data-design="spatial"] .intro-count { padding: 24px; border-radius: 50%; corner-shape: round; background: var(--surface-fill); backdrop-filter: var(--surface-filter); box-shadow: 0 28px 40px rgb(15 35 65 / 25%); }
 @media (min-width: 1100px) {
     :root[data-design="spatial"] .intro { margin-inline: 28px 0; }
     :root[data-design="spatial"] .doc-section:nth-of-type(even) { margin-inline: 28px 0; }
