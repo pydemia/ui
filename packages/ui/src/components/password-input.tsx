@@ -24,7 +24,7 @@ function PasswordInput({
                 id={inputId}
                 type={visible ? "text" : "password"}
                 disabled={disabled}
-                className={cn("pr-11", className)}
+                className={cn("pr-11 [&::-ms-reveal]:hidden", className)}
                 {...props}
             />
             <IconButton
