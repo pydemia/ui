@@ -1,5 +1,31 @@
 # Component 확장 작업 인계
 
+2026-10-04 Goal 공개 범위 재확인: 144개 component·16개 category,
+공개 82번째 manifest의 146개 item, 요구 범위 대표 item 12개 HTTP 200을
+확인했습니다. 좌우·하단·floating 패널, title·subtitle·텍스트 bullet과
+spinner 다섯 형태도 현재 source에 있습니다. 83번째 사이트 게시가
+남아 Goal 관리용 추정은 약 99%입니다.
+[범위 기록](goal-scope-audit-2026-10-03.md)을 참고하세요.
+2026-10-04 83번째 전체 registry 소비자 검사: GitHub raw 고정 URL의
+146개 item을 새 소비자에 동시 설치했습니다. 생성 파일 148개가
+manifest 내용과 일치하고, 146개 모듈을 모두 import한 typecheck·build와
+Chromium 로딩이 통과했습니다. 실제 개별 상호작용·독립 설치 전체는
+이번 범위가 아닙니다. 사이트 공개는 여전히 대기 중이며 Goal 추정은
+약 99%입니다. [검사 기록](full-registry-83-consumer-2026-10-04.md)을
+참고하세요.
+2026-10-04 배포 제한 확인: 83번째 사용자 도메인 manifest는 HTTP 404,
+병합 commit의 Vercel status는 `Deployment rate limited — retry in 24
+hours.`입니다. 공식 문서상 Ignored Build Step의 취소도 quota에 포함되고
+preview→production promotion은 새 build를 수행합니다. 이 둘을 제한
+우회책으로 쓰지 않습니다. GitHub raw 설치는 가능하며 Goal 추정은 약
+99%입니다. [판정 기록](quality-checklist-decision-2026-10-03.md)에
+출처와 구분을 남겼습니다.
+2026-10-04 공급·품질 체크리스트 적용 강도 재점검: 변경한 핵심 흐름의
+증거 하나와 확인된 출시 차단 결함을 구현 품질 기준으로 두고, CI·snapshot·
+공개 URL은 묶음 게시 단계에서 판정합니다. 실제 부담은 draft·main의
+전체 CI와 83개 release의 이중 복제 파일에 있습니다. workflow는
+변경하지 않았고 Goal 관리용 추정은 약 99%입니다.
+[판정 기록](quality-checklist-decision-2026-10-03.md)을 참고하세요.
 2026-10-03 Dialog raw 소비자 설치 확인: 83번째 고정 URL을 새 Vite
 소비자에 설치해 Dialog·utils·token·MIT 고지 네 파일, typecheck·
 build, Chromium의 세 크기와 focus 복원을 확인했습니다. production

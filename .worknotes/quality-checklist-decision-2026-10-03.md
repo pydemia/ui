@@ -74,3 +74,47 @@ item 전부를 `registry/releases/`와 `docs/r/releases/`에 다시
 [10개 운영 과제](quality-legacy-2026-09-29.md)의 완료 수는
 component 품질이나 Goal 달성률의 분모로 쓰지 않습니다. 이번 재검토
 자체는 공개 수량이나 관리용 Goal 추정 약 99%를 바꾸지 않습니다.
+
+## 2026-10-04 적용 강도 재점검
+
+체크리스트의 품질 하한보다 게시 절차가 무겁습니다. 현재
+`Verify UI`는 제품 코드가 바뀐 draft PR과 `main`에서 전체 typecheck·
+UI 테스트·build·registry 검사를 각각 실행합니다. Review 준비 PR에는
+현재 snapshot까지 요구합니다. 83개 release의 item 파일은
+`registry/releases/`와 `docs/r/releases/`에 각각 10,093개입니다.
+전체 복제 파일 수나 CI 반복 횟수를 component 품질 점수로 세지 않습니다.
+
+작업 판정에는 변경한 사용 흐름의 테스트 **또는** 실제 실행 하나와
+알려진 출시 차단 결함의 유무만 적용합니다. Usage·preview·registry·
+출처의 일치는 공개 후보에서, snapshot·적용 CI는 게시 묶음에서,
+대표 URL 접근은 배포 뒤에 확인합니다. 이미 통과한 동작을 다른 환경에서
+반복하거나 변경하지 않은 item을 다시 설치하지 않습니다. 실제 screen
+reader·touch·Safari·RTL은 해당 지원 경로를 변경하거나 지원을 약속한
+경우에만 별도로 적용합니다. 적용되지 않은 검사는 `해당 없음`, 적용
+대상이지만 실행하지 못한 검사는 `미검증`으로 구분합니다.
+
+확인된 값 손실·제출 오류·핵심 조작의 keyboard 접근 불가·필수 고지 누락·
+설치 실패·적용 CI 실패는 공개를 막습니다. 배포 제한은 `공개 대기`이며
+구현 품질 실패가 아닙니다. 따라서 검사 항목을 더 늘리거나 일률적으로
+삭제하지 않고, 관련 변경을 한 draft PR에 모아 review 준비 시점에
+snapshot을 한 번 만드는 운영 방식을 우선 적용합니다. CI와 snapshot
+저장 방식을 더 줄이는 변경은 불변 URL·의존 경로 보존을 검증하는
+별도 작업으로 다룹니다. 이번 검토에서 workflow와 출시 조건은 바꾸지
+않았습니다. Goal 관리용 추정은 약 99%로 유지합니다.
+
+## 배포 제한에 적용한 확인
+
+83번째 release의 사용자 도메인 manifest는 HTTP 404이며 병합 commit의
+Vercel status는 `Deployment rate limited — retry in 24 hours.`입니다.
+Vercel 공식 문서에 따르면 Ignored Build Step으로 취소한 build도 배포
+quota에 포함됩니다. 따라서 `vercel.json`의 `ignoreCommand`를 추가하는
+것은 이번 제한의 우회책이 아닙니다.
+
+Vercel의 현재 preview→production promotion 안내는 새 production
+build를 수행한다고 명시합니다. 기존 READY preview를 promote하면
+재빌드 없이 제한을 피할 수 있다는 가정도 사용하지 않습니다. 현재
+공급 상태는 GitHub raw 고정 URL 설치 가능, 사용자 사이트 preview는
+공개 대기로 구분합니다. URL:
+
+- https://vercel.com/docs/project-configuration/project-settings#ignored-build-step
+- https://vercel.com/docs/deployments/promote-preview-to-production
