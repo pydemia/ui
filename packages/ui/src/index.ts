@@ -361,6 +361,8 @@ export type {
 } from "./components/date-time-picker";
 export { ColorInput } from "./components/color-input";
 export type { ColorInputProps } from "./components/color-input";
+export { ColorPicker } from "./components/color-picker";
+export type { ColorPickerProps } from "./components/color-picker";
 export { MetricCard } from "./components/metric-card";
 export { Image } from "./components/image";
 export type { ImageProps } from "./components/image";

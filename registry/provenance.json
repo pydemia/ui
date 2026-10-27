@@ -84,6 +84,17 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "visible label for hex field, named native color picker and associated error", "keyboard": "Chromium: text entry, invalid feedback and form submission verified; native picker unverified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-color-picker", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "shadcn.io", "url": "https://www.shadcn.io/ui/color-picker", "scope": "feature comparison for color area and channels; no source copied" },
+      "dependencies": ["pyd-utils"],
+      "accessibility": {
+        "semantics": "Named hex field, native range controls for each channel, optional swatches and hidden form value; pointer area has keyboard-equivalent sliders",
+        "keyboard": "Chrome checked native range arrows and pointer area; DOM tests checked hex field and swatches; EyeDropper remains browser-dependent",
+        "screen_reader": "pending manual review"
+      }
+    },
+    {
       "name": "pyd-textarea", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "shadcn/ui", "implementation": "modified", "upstream": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/apps/v4/registry/bases/radix/ui/textarea.tsx", "license_file": "https://github.com/shadcn-ui/ui/blob/98a1fe67b439324ddc857f47fbdce056600a4329/LICENSE.md", "license": "MIT", "copyright": "2023 shadcn", "notice": "THIRD_PARTY_NOTICES.md", "consumer_notice": "registry/SHADCN_UI_LICENSE.md" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "native textarea; consumer supplies label", "keyboard": "pending browser check", "screen_reader": "pending manual review" }

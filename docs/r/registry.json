@@ -98,6 +98,11 @@
       "files": [{ "path": "packages/ui/src/components/color-input.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-color-picker", "type": "registry:ui", "title": "Color Picker",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/color-picker.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-textarea", "type": "registry:ui", "title": "Textarea",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [

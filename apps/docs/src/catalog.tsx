@@ -20,7 +20,7 @@ import {
     CardFooter, CardHeader,
     CardTitle,
     Carousel, Checkbox, CitationList, CodeBlock, CodeEditorShell,
-    ColorInput, Combobox, Autocomplete,
+    ColorInput, ColorPicker, Combobox, Autocomplete,
     CopyButton,
     CommandPalette,
     ContentList,
@@ -704,6 +704,29 @@ function ColorInputPreview() {
             <p role="status">제출 값: {submitted ?? "없음"}</p>
         </div>
     );
+}
+
+function ColorPickerPreview() {
+    const [value, setValue] = useState("#ba365b");
+    const [disabled, setDisabled] = useState(false);
+    const [submitted, setSubmitted] = useState<string | null>(null);
+
+    return <div className="preview-stack">
+        <Button variant="outline" onClick={() => setDisabled((old) => !old)}>
+            {disabled ? "색상 선택 켜기" : "색상 선택 끄기"}
+        </Button>
+        <form className="grid gap-3" onSubmit={(event) => {
+            event.preventDefault();
+            setSubmitted(String(new FormData(event.currentTarget)
+                .get("accentColor") ?? "제출되지 않음"));
+        }}>
+            <ColorPicker label="강조색" name="accentColor"
+                value={value} onValueChange={setValue} disabled={disabled}
+                swatches={["#ba365b", "#237f98", "#6b59bd80"]} />
+            <Button type="submit">선택한 색 확인</Button>
+        </form>
+        <p role="status">현재 값: {value} · 제출 값: {submitted ?? "없음"}</p>
+    </div>;
 }
 
 function SearchInputPreview() {
@@ -5761,6 +5784,20 @@ function AccentColorField() {
     value={accent} onValueChange={setAccent} variant="card" />;
 }`,
         preview: () => <ColorInputPreview />,
+    },
+    {
+        id: "color-picker", name: "ColorPicker", category: "Inputs",
+        description: "색상 영역, 색조·채도·밝기·불투명도와 hex 입력으로 색을 고릅니다. 값은 불투명할 때 #RRGGBB, 투명할 때 #RRGGBBAA이며 스포이드는 지원 브라우저에서만 표시합니다.",
+        code: `import { useState } from "react";
+import { ColorPicker } from "@pydemia/ui";
+
+function BrandColorField() {
+  const [color, setColor] = useState("#ba365b");
+  return <ColorPicker label="브랜드 색상" name="brandColor"
+    value={color} onValueChange={setColor}
+    swatches={["#ba365b", "#237f98", "#6b59bd80"]} />;
+}`,
+        preview: () => <ColorPickerPreview />,
     },
     {
         id: "password-input", name: "PasswordInput", category: "Inputs",
