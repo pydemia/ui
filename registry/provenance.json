@@ -596,6 +596,114 @@
       "dependencies": ["pyd-button", "pyd-utils"], "accessibility": { "semantics": "named scrollable canvas, selectable node buttons, labeled coordinate inputs and connection list", "keyboard": "Chromium: arrow-key move, zoom, pointer drag, coordinate and connection controls, 390px dark verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-flow-canvas",
+      "category": "Workflow",
+      "profiles": ["neutral-product", "developer-tool"],
+      "source": {
+        "provider": "pydemia/ui",
+        "implementation": "original",
+        "upstream": null,
+        "license": "project-owned"
+      },
+      "reference": {
+        "provider": "React Flow",
+        "url": "https://reactflow.dev/learn/customization/custom-nodes",
+        "scope": "graph interaction engine dependency; node and edge UI source not copied"
+      },
+      "dependencies": ["@xyflow/react@12.12.0 (MIT)", "pyd-flow-alignment", "pyd-tokens CSS"],
+      "accessibility": {
+        "semantics": "named graph region, selectable nodes and edges, connection handles and visible labels",
+        "keyboard": "pending browser check",
+        "screen_reader": "pending manual review"
+      }
+    },
+    {
+      "name": "pyd-flow-alignment",
+      "category": "Workflow",
+      "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original",
+        "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "React Flow Pro feature description",
+        "url": "https://reactflow.dev/examples/interaction/helper-lines",
+        "scope": "alignment concept only; no Pro source or template copied" },
+      "dependencies": [],
+      "accessibility": { "semantics": "visual guide accompanies a snapped graph coordinate",
+        "keyboard": "caller may set node positions through accessible controls",
+        "screen_reader": "caller announces a completed alignment operation" }
+    },
+    {
+      "name": "pyd-flow-history",
+      "category": "Workflow",
+      "profiles": ["neutral-product", "developer-tool"],
+      "source": {
+        "provider": "pydemia/ui",
+        "implementation": "original",
+        "upstream": null,
+        "license": "project-owned"
+      },
+      "reference": {
+        "provider": "React Flow Pro feature description",
+        "url": "https://reactflow.dev/examples/interaction/undo-redo",
+        "scope": "feature concept only; no Pro source or template copied"
+      },
+      "dependencies": ["react"],
+      "accessibility": {
+        "semantics": "state operation; caller supplies labeled controls",
+        "keyboard": "caller maps undo and redo commands to scoped shortcuts",
+        "screen_reader": "caller announces state changes"
+      }
+    },
+    {
+      "name": "pyd-flow-clipboard",
+      "category": "Workflow",
+      "profiles": ["neutral-product", "developer-tool"],
+      "source": {
+        "provider": "pydemia/ui",
+        "implementation": "original",
+        "upstream": null,
+        "license": "project-owned"
+      },
+      "reference": {
+        "provider": "React Flow Pro feature description",
+        "url": "https://reactflow.dev/examples/interaction/copy-paste",
+        "scope": "feature concept only; no Pro source or template copied"
+      },
+      "dependencies": ["pyd-flow-canvas"],
+      "accessibility": {
+        "semantics": "state operation; caller supplies labeled controls and messages",
+        "keyboard": "caller maps copy, cut and paste to scoped shortcuts",
+        "screen_reader": "caller announces copied and pasted item counts"
+      }
+    },
+    {
+      "name": "pyd-flow-grouping",
+      "category": "Workflow",
+      "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original",
+        "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "React Flow Pro feature description",
+        "url": "https://reactflow.dev/examples/grouping/parent-child-relation",
+        "scope": "group interaction concept only; no Pro source or template copied" },
+      "dependencies": ["pyd-flow-alignment", "pyd-flow-canvas", "pyd-flow-clipboard"],
+      "accessibility": { "semantics": "selected nodes become parent and child graph nodes",
+        "keyboard": "caller supplies group and ungroup buttons",
+        "screen_reader": "caller announces group changes" }
+    },
+    {
+      "name": "pyd-flow-layout",
+      "category": "Workflow",
+      "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original",
+        "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "React Flow Pro feature description",
+        "url": "https://reactflow.dev/examples/layout/auto-layout",
+        "scope": "layout concept only; no Pro source or template copied" },
+      "dependencies": ["pyd-flow-alignment", "pyd-flow-clipboard"],
+      "accessibility": { "semantics": "deterministic left-to-right graph coordinates",
+        "keyboard": "caller supplies an automatic layout button",
+        "screen_reader": "caller announces layout completion" }
+    },
+    {
       "name": "pyd-log-console", "category": "Developer tools", "profiles": ["developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named log with text levels; live announcements disabled by default", "keyboard": "pending browser check", "screen_reader": "pending manual review" }

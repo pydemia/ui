@@ -155,6 +155,27 @@ export { NodeCanvas } from "./components/node-canvas";
 export type {
     NodeCanvasNode, NodeCanvasEdge, NodeCanvasMove, NodeCanvasProps,
 } from "./components/node-canvas";
+export { FlowCanvas, FlowNodeCard, FlowGroupCard, FlowEdgePath } from "./components/flow-canvas";
+export type {
+    FlowCanvasProps, FlowNode, FlowEdge, FlowEdgeData, FlowNodeData,
+    FlowPoint,
+} from "./components/flow-canvas";
+export { createFlowHistory, reduceFlowHistory, resolveFlowShortcut,
+    useFlowHistory } from
+    "./components/flow-history";
+export type { FlowDocument, FlowHistoryAction, FlowHistoryState,
+    FlowShortcut, FlowShortcutEvent } from
+    "./components/flow-history";
+export { copyFlowSelection, cutFlowSelection, pasteFlowSelection } from
+    "./components/flow-clipboard";
+export type { FlowClipboard, FlowGraph } from
+    "./components/flow-clipboard";
+export { groupFlowSelection, ungroupFlowSelection } from
+    "./components/flow-grouping";
+export { layoutFlowGraph, translateFlowControls } from "./components/flow-layout";
+export { alignFlowNode, flowNodeSize } from "./components/flow-alignment";
+export type { AlignmentNode, FlowAlignment, FlowGuide } from
+    "./components/flow-alignment";
 export { ScrollArea } from "./components/scroll-area";
 export type { ScrollAreaProps } from "./components/scroll-area";
 export {

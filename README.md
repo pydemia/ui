@@ -28,6 +28,16 @@ registry item, 문서 catalog ID의 1:1 대응도 확인합니다.
 
 `npm run dev`는 문서 사이트를 `http://127.0.0.1:5173/`에서 실행합니다.
 프로필 예시만 보려면 `npm run dev:example`을 사용합니다.
+GNB의 **Components**는 기본 컴포넌트 카탈로그(`/`)를,
+**Flows**는 노드·엣지 편집 화면(`/flows/`)을 엽니다. Flows는
+`FlowCanvas`, 그룹 노드, 편집 가능한 엣지와 React Flow를 조합한
+브라우저 메모리 예시입니다. 실행 취소·다시 실행, 복사·잘라내기·붙여넣기,
+정렬 스냅, 그룹화와 자동 배치를 직접 시험할 수 있습니다. 그래프 저장과
+실행은 포함하지 않습니다.
+컴포넌트 계약과 참고 자료는 [Node + edge UI 설계](research/flow-components.md)에
+있습니다. registry 소비자는 `pyd-flow-canvas.json`과 필요한 Flow History,
+Clipboard, Grouping, Layout 항목을 설치하고 토큰 CSS,
+`@xyflow/react/dist/style.css`, 설치된 `flow-canvas.css`를 불러옵니다.
 문서의 Operations workspace는 기존 component를 조합한 분석 화면입니다.
 기간 전환, 실행 목록 검색·선택·재실행, 로그와 도움말 상태를 로컬에서
 시험할 수 있습니다. 예시 원본은

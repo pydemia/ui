@@ -13,6 +13,7 @@ import provenance from "../../../registry/provenance.json";
 import { AnalyticsWorkspace } from "./analytics-workspace";
 import { IntakeWorkspace } from "./intake-workspace";
 import { ReviewWorkspace } from "./review-workspace";
+import { FlowWorkspace } from "./flow-workspace";
 import { catalog } from "./catalog";
 import { useThemeController } from "./theme/controller";
 import { useProfileBridge } from "./theme/profile-bridge";
@@ -237,6 +238,37 @@ function App() {
     function toggleDark() { theme.setAppearance(dark ? "light" : "dark"); }
     function setColor(token: ColorToken, value: string) { theme.setOverride(token, value); }
 
+    if (location.pathname === "/flows" || location.pathname.startsWith("/flows/")) {
+        return <div className="site-shell">
+            <a className="skip-link" href="#flow-main">본문으로 이동</a>
+            <header className="topbar">
+                <div className="topbar-inner">
+                    <a href="/" className="wordmark" aria-label="pydemia UI 컴포넌트">
+                        <img className="brand-mark" src="/favicon.svg" width="38" height="38" alt="" />
+                        <span>pydemia <span className="wordmark-light">/ ui</span></span>
+                    </a>
+                    <span className="version">v0.1.0 · prototype</span>
+                    <nav className="top-nav" aria-label="상단 탐색">
+                        <a className="top-nav-flow" href="/">Components</a>
+                        <a className="top-nav-flow" href="/flows/" aria-current="page">Flows</a>
+                        <a className="top-nav-secondary" href="/prism">PRISM</a>
+                        <a className="github-link" href="https://github.com/pydemia/ui"
+                            target="_blank" rel="noreferrer">
+                            <Github size={17} aria-hidden="true" /> GitHub
+                            <ArrowUpRight size={14} aria-hidden="true" />
+                        </a>
+                    </nav>
+                    <DesignModePicker settings={settings} onCommit={theme.commitDesign}
+                        getCandidateSettings={theme.previewDesign} allowUnreleased={import.meta.env.DEV} />
+                    <button className="theme-button" type="button"
+                        aria-label={dark ? "라이트 모드로 전환" : "다크 모드로 전환"}
+                        onClick={toggleDark}>{dark ? <Sun size={18} /> : <Moon size={18} />}</button>
+                </div>
+            </header>
+            {notice && <p role="status" className="px-4 text-sm">{notice}</p>}
+            <FlowWorkspace />
+        </div>;
+    }
     return (
         <div className="site-shell">
             <a className="skip-link" href="#main">본문으로 이동</a>
@@ -304,6 +336,7 @@ function App() {
                                 </div>
                             </PopoverContent>
                         </Popover>
+                        <a className="top-nav-flow" href="/flows/">Flows</a>
                         <a className="top-nav-secondary" href="/prism">PRISM</a>
                         <a className="top-nav-secondary" href="#colormap">Colormap</a>
                         <a className="top-nav-secondary" href="#tokens">Tokens</a>

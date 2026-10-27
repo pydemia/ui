@@ -49,7 +49,7 @@ import {
     Input, InputGroup,
     InputGroupAddon,
     InputGroupButton, InputGroupInput, InputGroupText,
-    InputGroupTextarea, ItemList, JsonViewer, Kanban, NodeCanvas,
+    InputGroupTextarea, ItemList, JsonViewer, Kanban, NodeCanvas, FlowCanvas,
     Label, Lightbox, LogConsole, LogViewer, Markdown, MarkdownEditor,
     Menubar, MenubarCheckboxItem,
     MenubarContent, MenubarGroup, MenubarItem, MenubarLabel,
@@ -98,7 +98,7 @@ import type {
     DateRangeValue,
     DateTimeSelection,
     FileUploadItem, GanttTask, JsonValue, KanbanColumn,
-    NodeCanvasEdge, NodeCanvasNode,
+    NodeCanvasEdge, NodeCanvasNode, FlowNode, FlowEdge,
     LightboxItem, LogEntry, QueryField, QueryGroup, ReasoningStatus,
     ModelChoice, NotificationItem,
     ResponseFeedbackValue, ResultStatus, ThreadComment,
@@ -252,6 +252,28 @@ function NodeCanvasPreview() {
                     current.filter((edge) => edge.id !== id))} />
         </div>
     );
+}
+
+const flowPreviewNodes: FlowNode[] = [
+    { id: "input", type: "pyd-flow-node", position: { x: 40, y: 60 },
+        data: { title: "입력", kind: "trigger", status: "complete" } },
+    { id: "process", type: "pyd-flow-node", position: { x: 320, y: 60 },
+        data: { title: "처리", kind: "action", status: "running" } },
+    { id: "output", type: "pyd-flow-node", position: { x: 600, y: 60 },
+        data: { title: "출력", kind: "result" } },
+];
+const flowPreviewEdges: FlowEdge[] = [
+    { id: "input-process", type: "pyd-flow-edge", source: "input", target: "process" },
+    { id: "process-output", type: "pyd-flow-edge", source: "process", target: "output" },
+];
+
+function FlowCanvasPreview() {
+    return <div className="preview-workspace min-w-0">
+        <FlowCanvas label="처리 흐름 미리보기" nodes={flowPreviewNodes}
+            edges={flowPreviewEdges} height={360} showMiniMap={false} />
+        <p className="mt-2 text-xs text-muted">전체 편집 예시는 <a href="/flows/"
+            className="underline">Flows 화면</a>에서 확인하세요.</p>
+    </div>;
 }
 
 function MarkdownPreview() {
@@ -7842,6 +7864,94 @@ function RequestFlow() {
       current.filter((edge) => edge.id !== id))} />;
 }`,
         preview: () => <NodeCanvasPreview />,
+    },
+    {
+        id: "flow-canvas", name: "FlowCanvas", category: "Workflow",
+        description: "React Flow 기반 편집 표면입니다. 그룹 노드, 엣지 제어점, 정렬 안내선과 포트 연결·팬·줌을 제공합니다.",
+        code: `import { useEdgesState, useNodesState, addEdge } from "@xyflow/react";
+import { FlowCanvas, type FlowNode, type FlowEdge } from "@pydemia/ui";
+import "@pydemia/ui/styles.css";
+import "@xyflow/react/dist/style.css";
+import "@pydemia/ui/flow-canvas.css";
+
+const initialNodes: FlowNode[] = [
+  { id: "start", type: "pyd-flow-node", position: { x: 40, y: 60 },
+    data: { title: "시작", kind: "trigger" } },
+];
+
+function MyFlow() {
+  const [nodes, , onNodesChange] = useNodesState<FlowNode>(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<FlowEdge>([]);
+  return <FlowCanvas label="내 흐름" nodes={nodes} edges={edges}
+    onNodesChange={onNodesChange} onEdgesChange={onEdgesChange}
+    onConnect={(connection) => setEdges((current) => addEdge({
+      ...connection, type: "pyd-flow-edge",
+    }, current))} />;
+}`,
+        preview: () => <FlowCanvasPreview />,
+    },
+    {
+        id: "flow-alignment", name: "Flow Alignment", category: "Workflow",
+        description: "드래그 중 같은 축의 노드 경계를 찾아 안내선과 스냅 좌표를 계산합니다. 허용 오차는 확대 배율에 맞춰 조정됩니다.",
+        code: `import { alignFlowNode, type AlignmentNode } from "@pydemia/ui";
+
+const moving: AlignmentNode = { id: "b", position: { x: 107, y: 20 } };
+const peers: AlignmentNode[] = [{ id: "a", position: { x: 100, y: 20 } }];
+const { position, guides } = alignFlowNode(moving, peers, 1);
+// position은 스냅 결과, guides는 같은 좌표의 시각 안내선입니다.
+console.log(position, guides);`,
+        preview: () => <a href="/flows/">Flows에서 정렬 시험하기</a>,
+    },
+    {
+        id: "flow-history", name: "Flow History", category: "Workflow",
+        description: "추가·삭제·이동·문구 수정을 편집 단위로 기록하고 실행 취소와 다시 실행을 제공합니다.",
+        installItems: ["flow-history", "flow-canvas"],
+        code: `import { useFlowHistory, type FlowNode, type FlowEdge } from "@pydemia/ui";
+
+function Editor() {
+  const [history, dispatch] = useFlowHistory<FlowNode, FlowEdge>({
+    nodes: [], edges: [],
+  });
+  return <button type="button" disabled={!history.past.length}
+    onClick={() => dispatch({ type: "undo" })}>실행 취소</button>;
+}`,
+        preview: () => <a href="/flows/">Flows에서 실행 취소 시험하기</a>,
+    },
+    {
+        id: "flow-clipboard", name: "Flow Clipboard", category: "Workflow",
+        description: "선택한 노드와 내부 연결을 복사·잘라내고 새 ID로 반복 붙여넣습니다.",
+        code: `import { copyFlowSelection, pasteFlowSelection,
+  type FlowGraph } from "@pydemia/ui";
+
+function duplicate(graph: FlowGraph) {
+  const copied = copyFlowSelection(graph);
+  return copied ? pasteFlowSelection(graph, copied, { x: 32, y: 32 }) : graph;
+}`,
+        preview: () => <a href="/flows/">Flows에서 복사 시험하기</a>,
+    },
+    {
+        id: "flow-grouping", name: "Flow Grouping", category: "Workflow",
+        description: "선택한 최상위 노드를 부모 노드로 묶고 상대 좌표를 유지하며 해제합니다.",
+        code: `import { groupFlowSelection, ungroupFlowSelection,
+  type FlowGraph } from "@pydemia/ui";
+
+function group(graph: FlowGraph) {
+  return groupFlowSelection(graph, "group-1");
+}
+function ungroup(graph: FlowGraph) {
+  return ungroupFlowSelection(graph);
+}`,
+        preview: () => <a href="/flows/">Flows에서 그룹화 시험하기</a>,
+    },
+    {
+        id: "flow-layout", name: "Flow Layout", category: "Workflow",
+        description: "분기와 순환이 있는 흐름을 연결 순서에 따라 결정적인 좌우 열로 배치합니다.",
+        code: `import { layoutFlowGraph, type FlowGraph } from "@pydemia/ui";
+
+function arrange(graph: FlowGraph) {
+  return layoutFlowGraph(graph);
+}`,
+        preview: () => <a href="/flows/">Flows에서 자동 배치 시험하기</a>,
     },
     {
         id: "navigation", name: "Navigation", category: "Navigation",
