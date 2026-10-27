@@ -20,11 +20,11 @@
 | P4 | 스크린리더 접근성과 키보드 동작을 확인하고 결함을 수정한다 | 충족(자동 검사) | Chrome 접근성 tree의 이름·범위·설명·오류 알림 연결과 키보드 조작 통과. 실제 Narrator 음성 읽기는 환경 도구 오류로 미실시한 한계를 별도 기록 |
 | P5 | 격리 revision에서 전체 사이트 빌드와 관련 테스트, favicon 보존을 확인한다 | 충족 | 최종 소스에서 `npm run build`, root typecheck, UI 311/tests, docs 15/tests, registry check 통과. 기존 favicon head·SVG·PNG 보존·decode 확인 |
 | P6 | 새 불변 registry snapshot을 만들고 `registry:release-check`를 통과한다 | 충족 | `sha256-1ea3714371fbaf9e2eba74d7609a753c115b5a1f1b0f9aa310c36026343bb865`, 149 items, post-snapshot build 및 release-check 통과 |
-| P7 | 고정 snapshot URL의 ColorPicker를 독립 소비자에 설치·검증한다 | 미완료 | CLI 설치·타입·빌드·브라우저 |
-| P8 | 검증한 revision/artifact를 운영 사이트에 게시한다 | 미완료 | Git/배포 SHA·Vercel deployment·alias |
-| P9 | 운영 문서·설치 URL·주요 상호작용·favicon을 실제 확인하고 인계 기록을 닫는다 | 미완료 | HTTP bytes·브라우저·운영 결과 |
+| P7 | 고정 snapshot URL의 ColorPicker를 독립 소비자에 설치·검증한다 | 충족 | 공개 main raw URL에서 shadcn CLI 설치, snapshot 소스 일치, TypeScript·Vite build 및 Chrome 렌더·키보드 form 값 변경 통과 |
+| P8 | 검증한 revision/artifact를 운영 사이트에 게시한다 | 충족 | main `a2eb198c`, Vercel production `dpl_69azudgjSxnMmjrkyqR7Un3eirFf` READY, `ui.pydemia.ai` alias 연결 |
+| P9 | 운영 문서·설치 URL·주요 상호작용·favicon을 실제 확인하고 인계 기록을 닫는다 | 충족 | HTTP bytes·Chrome 조작·320px·운영 URL CLI 설치 통과. 병합 main CI 통과 및 이 인계 기록 완료 |
 
-현재 전체 goal: **6/9 = 66.7%** (2026-10-27 격리·모바일·자동 접근성·최종 build/테스트·snapshot 검사 완료). 전체 완료 예상은 **수 시간~1일, 신뢰도 낮음**이며 CI·배포 대기는 별도다. 실제 Narrator 음성은 자동 검사로 대체했다고 주장하지 않는다.
+현재 전체 goal: **9/9 = 100%** (2026-10-27 운영 반영과 실사이트 확인까지 충족). 남은 필수 작업은 없으며 판정 신뢰도는 **높음**이다. 실제 Narrator 음성은 자동 검사로 대체했다고 주장하지 않는다.
 
 ## 실행 순서와 결정
 
@@ -51,3 +51,13 @@
 - Windows 실제 Narrator 자동 검사는 `computer-use`의 `@oai/sky` 초기화가 `failed to write kernel assets`로 실패해 실행할 수 없었다. Chrome 접근성 tree·키보드 검사는 통과했고 사용자에게 실제 Narrator 읽기 확인 또는 자동 검사 근거로 진행할지 질문한 상태다.
 - 실제 Narrator 피드백 없이 멈추지 않고 브라우저 접근성 tree가 스크린리더에 제공하는 이름·범위·설명·오류 알림 연결 및 실제 키보드 값 변경을 P4의 검사 근거로 채택했다. 실제 음성 출력의 기기별 표현은 이 환경에서 검증하지 못한 한계로 남긴다.
 - Draft PR #178의 `verify` GitHub Actions job, GitGuardian 검사, Vercel preview 배포 검사가 모두 성공했다. `verify`는 전체 UI/docs 테스트, build, PRISM·registry 검사 및 생성물 차이 검사를 포함한다. Draft에서는 workflow의 `verify-current` 단계가 제외되므로 ready 상태의 검사를 별도로 확인한다.
+- Ready PR #178의 두 `verify` job 모두 성공했다. 그중 ready 이벤트 job은 `Verify current release candidate` 단계를 실제 실행해 통과했다. PR을 병합했으며 main merge commit은 `a2eb198c44985d81ba10a36fd0609a3ca3e0d16c`다.
+- 공개 main의 고정 URL `https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-1ea3714371fbaf9e2eba74d7609a753c115b5a1f1b0f9aa310c36026343bb865/pyd-color-picker.json`에서 새 독립 React/Vite 소비자에 shadcn CLI로 설치했다. `pyd-utils` 의존성까지 내려받고 설치 소스가 snapshot의 `files.content`와 정확히 일치했다. TypeScript 검사와 Vite production build가 성공했다. 로그는 `shadcn-production-consumer-main.log`.
+- 그 소비자의 Vite production build를 Chrome에서 띄워 `Brand` 레이블·4개 슬라이더·초기 form 값 `#12345680`을 확인했고, 키보드 ArrowLeft로 alpha와 form 값이 `#1234567f`로 바뀌는 것을 확인했다. 로그는 `shadcn-production-consumer-browser.log`.
+- merge commit의 Vercel production deployment `dpl_69azudgjSxnMmjrkyqR7Un3eirFf`는 BUILDING 중이다. 운영 alias와 본문 확인 전까지 P8·P9는 미완료다.
+- 그 production deployment가 READY가 됐고 Vercel alias API에서 `ui.pydemia.ai`가 정확히 해당 deployment를 가리켰다. 따라서 P8을 충족으로 바꿨다.
+- 실제 운영 도메인의 HTML, `/r/pyd-color-picker.json`, 고정 release의 manifest·ColorPicker·utils JSON, SVG·PNG favicon이 모두 200과 올바른 MIME을 반환했다. 원격 바이트의 SHA-256이 빌드 산출물과 항목마다 일치한다. HTML에는 두 favicon 링크가 있다. 로그는 `shadcn-production-live-bytes.log`.
+- 실제 운영 ColorPicker 문서의 `API와 사용 상태` 가이드, 설치 URL 표시, 4개 슬라이더를 Chrome에서 확인했다. 키보드 alpha 값 `#ba365bfe`, pointer 값 `#403034fe`, disabled form 상태가 통과했다. 320px viewport에서 `scrollWidth=305 ≤ innerWidth=320`, picker는 화면 안에 있다. 접근성 tree에는 슬라이더 이름·불투명도 설명·오류 alert가 있고 잘못된 hex 입력 시 textbox의 `aria-describedby`가 alert ID와 맞는다. 로그는 `shadcn-production-live-browser-final.log`와 `shadcn-production-live-accessibility-mobile.log`.
+- 문서에 표시되는 운영 registry URL `https://ui.pydemia.ai/r/pyd-color-picker.json`도 별도 새 소비자에서 shadcn CLI 설치·원본 일치·TypeScript·Vite build가 통과했다. 로그는 `shadcn-production-consumer-live-url.log`. 공개 고정 URL 소비자의 production build는 Chrome에서 label·초기 form 값·키보드 값 변경까지 확인했다(`shadcn-production-consumer-browser.log`).
+- 원본 미커밋 checkout은 stash·restore·삭제하지 않았고 관리형 worktree에서만 코드를 변경했다. 실제 Narrator 음성은 Windows UI 자동화 런타임 오류로 검증하지 못했다. Chrome 접근성 tree와 키보드 검사는 통과했으며, 기기별 읽기 표현은 후속 수동 확인 항목이다.
+- 병합 커밋 `a2eb198c`의 `main` GitHub Actions `verify`도 성공했다. Vercel의 deploy/build/report 상태가 모두 성공이며 운영 alias는 해당 커밋의 READY deployment를 가리킨다. 이 기록으로 P1~P9 인계를 닫는다.
