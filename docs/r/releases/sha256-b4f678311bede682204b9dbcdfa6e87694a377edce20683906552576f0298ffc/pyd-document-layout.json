@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-document-layout",
+  "title": "Document Layout",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-b4f678311bede682204b9dbcdfa6e87694a377edce20683906552576f0298ffc/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/document-layout.tsx",
+      "content": "import type { ReactNode } from \"react\";\nimport { cn } from \"./utils\";\n\nexport type DocumentLayoutProps = {\n    properties: ReactNode;\n    children: ReactNode;\n    layout?: \"stacked\" | \"split\";\n    label?: string;\n    className?: string;\n};\n\nexport function DocumentLayout({ properties, children, layout = \"stacked\", label = \"문서 속성\", className }: DocumentLayoutProps) {\n    if (layout !== \"stacked\" && layout !== \"split\") throw new RangeError(\"Unsupported document layout.\");\n    return <div data-ui=\"document-layout\" data-layout={layout} className={cn(\"@container min-w-0\", className)}>\n        <div className={cn(\"grid min-w-0 gap-6\", layout === \"split\" && \"@4xl:grid-cols-[minmax(12rem,16rem)_minmax(0,1fr)]\")}>\n            <aside aria-label={label} className=\"min-w-0\">{properties}</aside>\n            <div className=\"min-w-0\">{children}</div>\n        </div>\n    </div>;\n}\n",
+      "type": "registry:ui",
+      "target": "@ui/document-layout.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

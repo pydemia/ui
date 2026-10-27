@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-snackbar",
+  "title": "Snackbar",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-b4f678311bede682204b9dbcdfa6e87694a377edce20683906552576f0298ffc/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/snackbar.tsx",
+      "content": "import {\n    useEffect, useRef, type ComponentProps,\n} from \"react\";\nimport { cn } from \"./utils\";\n\ntype SnackbarProps = Omit<ComponentProps<\"div\">, \"children\"> & {\n    open: boolean;\n    onOpenChange: (open: boolean) => void;\n    message: string;\n    action?: { label: string; onClick: () => void };\n    closeLabel?: string;\n};\n\nfunction Snackbar({\n    open, onOpenChange, message, action, closeLabel = \"알림 닫기\",\n    className, ...props\n}: SnackbarProps) {\n    const hostRef = useRef<HTMLDivElement>(null);\n    const returnFocus = useRef<HTMLElement | null>(null);\n    useEffect(() => {\n        if (open && document.activeElement instanceof HTMLElement &&\n            !hostRef.current?.contains(document.activeElement)) {\n            returnFocus.current = document.activeElement;\n        }\n    }, [open]);\n\n    if (!open) return null;\n    return (\n        <div {...props} ref={hostRef} data-ui=\"snackbar\"\n            className={cn(\n                \"pointer-events-auto flex min-w-0 flex-wrap items-center \" +\n                \"gap-x-4 gap-y-2 rounded-sm bg-foreground px-4 py-3 \" +\n                \"text-sm text-background shadow-[var(--shadow-float)]\",\n                className,\n            )}>\n            <p role=\"status\" aria-atomic=\"true\"\n                className=\"m-0 min-w-0 flex-1 basis-40 [overflow-wrap:anywhere]\">\n                {message}\n            </p>\n            {action && <button type=\"button\" onClick={action.onClick}\n                className={\n                    \"shrink-0 rounded-sm px-2 py-1 font-semibold underline \" +\n                    \"underline-offset-4 hover:opacity-80 focus-visible:outline-2 \" +\n                    \"focus-visible:outline-current\"\n                }>{action.label}</button>}\n            <button type=\"button\" aria-label={closeLabel} onClick={() => {\n                const ownsFocus = hostRef.current?.contains(document.activeElement);\n                onOpenChange(false);\n                if (ownsFocus && returnFocus.current?.isConnected) {\n                    returnFocus.current.focus();\n                }\n            }} className={\n                \"shrink-0 rounded-sm px-2 py-1 hover:opacity-80 \" +\n                \"focus-visible:outline-2 focus-visible:outline-current\"\n            }><span aria-hidden=\"true\">×</span></button>\n        </div>\n    );\n}\n\nfunction SnackbarRegion({ className, ...props }: ComponentProps<\"div\">) {\n    return <div {...props} className={cn(\n        \"pointer-events-none fixed bottom-4 left-1/2 z-50 grid \" +\n        \"w-[min(36rem,calc(100vw-2rem))] -translate-x-1/2 gap-2\",\n        className,\n    )} />;\n}\n\nexport { Snackbar, SnackbarRegion };\nexport type { SnackbarProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/snackbar.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

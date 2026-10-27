@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-attachment-item",
+  "title": "Attachment Item",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-7aa502ab09969645797758c7dd5a2e2ab36dbaaef7bb9b9d5f833aa0f139fe81/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/attachment-item.tsx",
+      "content": "import type { ReactNode } from \"react\";\nimport { cn } from \"./utils\";\n\nexport type AttachmentItemProps = {\n    name: string;\n    size?: number;\n    status?: string;\n    preview?: ReactNode;\n    actions?: ReactNode;\n    error?: string;\n    className?: string;\n};\n\nexport function formatFileSize(bytes: number): string {\n    if (!Number.isFinite(bytes) || bytes < 0) throw new RangeError(\"File size must be finite and nonnegative.\");\n    if (bytes < 1024) return `${bytes} B`;\n    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;\n    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;\n}\n\nexport function AttachmentItem({ name, size, status, preview, actions, error, className }: AttachmentItemProps) {\n    if (!name.trim()) throw new Error(\"AttachmentItem requires a name.\");\n    return <div data-ui=\"attachment-item\" className={cn(\"flex min-w-0 flex-wrap items-center gap-3 rounded-sm border border-border bg-surface px-3 py-2 text-sm text-foreground\", className)}>\n        {preview && <div className=\"size-10 shrink-0 overflow-hidden rounded-sm\" aria-hidden=\"true\">{preview}</div>}\n        <div className=\"min-w-0 flex-1 basis-24\">\n            <span className=\"block [overflow-wrap:anywhere]\">{name}</span>\n            <span className=\"flex flex-wrap gap-x-2 text-xs text-muted\">\n                {size !== undefined && <span>{formatFileSize(size)}</span>}\n                {status && <span>{status}</span>}\n            </span>\n        </div>\n        {actions && <div className=\"flex flex-wrap items-center gap-2\">{actions}</div>}\n        {error && <p role=\"alert\" className=\"m-0 basis-full text-xs text-danger\">{error}</p>}\n    </div>;\n}\n",
+      "type": "registry:ui",
+      "target": "@ui/attachment-item.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

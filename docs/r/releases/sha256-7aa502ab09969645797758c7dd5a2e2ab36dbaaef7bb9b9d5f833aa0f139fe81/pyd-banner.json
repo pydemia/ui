@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-banner",
+  "title": "Banner",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-7aa502ab09969645797758c7dd5a2e2ab36dbaaef7bb9b9d5f833aa0f139fe81/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/banner.tsx",
+      "content": "import { type ComponentProps, type ReactNode } from \"react\";\nimport { cn } from \"./utils\";\n\ntype BannerProps = Omit<ComponentProps<\"div\">, \"title\" | \"children\"> & {\n    title: string;\n    children?: ReactNode;\n    variant?: \"info\" | \"success\" | \"warning\" | \"error\";\n    action?: ReactNode;\n    onDismiss?: () => void;\n    closeLabel?: string;\n};\n\nfunction Banner({\n    title, children, variant = \"info\", action, onDismiss,\n    closeLabel = \"공지 닫기\", className, ...props\n}: BannerProps) {\n    return (\n        <div {...props} data-ui=\"banner\" data-surface=\"status\"\n            data-variant={variant} className={cn(\n                \"flex min-w-0 flex-wrap items-start gap-3 rounded-sm border \" +\n                \"border-border border-l-4 bg-surface p-[var(--space-4)] \" +\n                \"text-sm text-foreground\",\n                variant === \"info\" && \"border-l-accent\",\n                variant === \"success\" && \"border-l-success\",\n                variant === \"warning\" && \"border-l-warning\",\n                variant === \"error\" && \"border-l-danger\",\n                className,\n            )}>\n            <div className=\"min-w-0 flex-1 basis-48 [overflow-wrap:anywhere]\"\n                role={variant === \"error\" ? \"alert\" : \"status\"}\n                aria-atomic=\"true\">\n                <p className=\"m-0 font-semibold\">{title}</p>\n                {children && <div className=\"mt-1 text-muted\">{children}</div>}\n            </div>\n            {action && <div className=\"flex shrink-0 flex-wrap gap-2\">{action}</div>}\n            {onDismiss && <button type=\"button\" aria-label={closeLabel}\n                onClick={onDismiss} className={\n                    \"shrink-0 rounded-sm px-2 py-1 text-muted \" +\n                    \"hover:bg-surface-subtle focus-visible:outline-2 \" +\n                    \"focus-visible:outline-focus\"\n                }><span aria-hidden=\"true\">×</span></button>}\n        </div>\n    );\n}\n\nexport { Banner };\nexport type { BannerProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/banner.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

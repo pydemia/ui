@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-notification-badge",
+  "title": "NotificationBadge",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-7aa502ab09969645797758c7dd5a2e2ab36dbaaef7bb9b9d5f833aa0f139fe81/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/notification-badge.tsx",
+      "content": "import { type ComponentProps, type ReactNode } from \"react\";\nimport { cn } from \"./utils\";\n\ntype NotificationBadgeProps = Omit<ComponentProps<\"span\">, \"children\"> & {\n    children: ReactNode;\n    label: string;\n    count?: number;\n    max?: number;\n    dot?: boolean;\n    showZero?: boolean;\n};\n\nfunction NotificationBadge({\n    children, label, count = 0, max = 99, dot = false, showZero = false,\n    className, ...props\n}: NotificationBadgeProps) {\n    if (!label.trim() || !Number.isSafeInteger(count) || count < 0 ||\n        !Number.isSafeInteger(max) || max < 1) {\n        throw new RangeError(\n            \"NotificationBadge needs a label, non-negative count and positive max.\",\n        );\n    }\n    const visible = dot || count > 0 || showZero;\n    return (\n        <span {...props} data-ui=\"notification-badge\"\n            className={cn(\"relative inline-flex shrink-0 items-center gap-2 align-middle\", className)}>\n            {children}\n            {visible && <>\n                <span aria-hidden=\"true\" data-slot=\"notification-count\"\n                    data-dot={dot || undefined} className={cn(\n                        \"pointer-events-none absolute right-0 top-0 \" +\n                        \"flex -translate-y-1/3 translate-x-1/3 items-center \" +\n                        \"justify-center rounded-full bg-accent font-semibold \" +\n                        \"text-accent-foreground ring-2 ring-surface\",\n                        dot ? \"size-2.5\" : \"min-h-5 min-w-5 px-1 text-[10px]\",\n                    )}>\n                    {!dot && (count > max ? `${max}+` : count)}\n                </span>\n                <span className=\"sr-only\">\n                    {dot ? label : `${label} ${count}건`}\n                </span>\n            </>}\n        </span>\n    );\n}\n\nexport { NotificationBadge };\nexport type { NotificationBadgeProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/notification-badge.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

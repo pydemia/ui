@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-slash-command-menu",
+  "title": "Slash Command Menu",
+  "files": [
+    {
+      "path": "packages/ui/src/components/slash-command-menu.tsx",
+      "content": "type SlashCommandItem = { id: string; label: string; keywords?: string };\ntype SlashCommandMenuProps = {\n    items: readonly SlashCommandItem[];\n    activeIndex: number;\n    onSelect: (item: SlashCommandItem) => void;\n};\n\nfunction SlashCommandMenu({\n    items, activeIndex, onSelect,\n}: SlashCommandMenuProps) {\n    return <div role=\"listbox\" aria-label=\"블록 명령\"\n        data-slot=\"slash-command-menu\"\n        className=\"grid rounded-md border border-border bg-surface p-1\">\n        {items.length === 0 && <p role=\"status\">검색 결과가 없습니다.</p>}\n        {items.map((item, index) => <button type=\"button\" role=\"option\"\n            key={item.id} aria-selected={index === activeIndex}\n            onMouseDown={(event) => event.preventDefault()}\n            onClick={() => onSelect(item)}\n            className=\"rounded-sm p-2 text-left aria-selected:bg-surface-subtle\">\n            {item.label}\n        </button>)}\n    </div>;\n}\n\nexport { SlashCommandMenu };\nexport type { SlashCommandItem, SlashCommandMenuProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/slash-command-menu.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

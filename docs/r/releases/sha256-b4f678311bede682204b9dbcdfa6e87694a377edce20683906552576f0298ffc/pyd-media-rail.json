@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-media-rail",
+  "title": "Media Rail",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-b4f678311bede682204b9dbcdfa6e87694a377edce20683906552576f0298ffc/pyd-button.json",
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-b4f678311bede682204b9dbcdfa6e87694a377edce20683906552576f0298ffc/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/media-rail.tsx",
+      "content": "import { useRef, type ReactNode } from \"react\";\nimport { Button } from \"./button\";\nimport { cn } from \"./utils\";\n\nexport type MediaRailItem = { id: string; label: string; preview: ReactNode };\nexport type MediaRailProps = {\n    label: string;\n    items: readonly MediaRailItem[];\n    value?: string;\n    onValueChange: (id: string) => void;\n    className?: string;\n};\n\nexport function MediaRail({ label, items, value, onValueChange, className }: MediaRailProps) {\n    const rail = useRef<HTMLDivElement>(null);\n    if (!label.trim() || items.some(item => !item.id.trim() || !item.label.trim()) || new Set(items.map(item => item.id)).size !== items.length) throw new Error(\"MediaRail requires a label and unique named items.\");\n    if (value !== undefined && !items.some(item => item.id === value)) throw new Error(\"MediaRail value must identify an item.\");\n    const move = (direction: number) => {\n        const element = rail.current;\n        if (!element) return;\n        const sign = element.ownerDocument.defaultView?.getComputedStyle(element).direction === \"rtl\" ? -1 : 1;\n        element.scrollBy({ left: direction * sign * element.clientWidth * 0.8, behavior: \"auto\" });\n    };\n    return <section data-ui=\"media-rail\" aria-label={label} className={cn(\"min-w-0\", className)}>\n        <div className=\"mb-3 flex items-center justify-between gap-3\">\n            <span className=\"text-sm font-medium\">{label}</span>\n            <div className=\"flex gap-1\">\n                <Button variant=\"ghost\" size=\"icon\" className=\"min-h-11 min-w-11\" aria-label={`${label} 이전 항목 보기`} disabled={!items.length} onClick={() => move(-1)}>←</Button>\n                <Button variant=\"ghost\" size=\"icon\" className=\"min-h-11 min-w-11\" aria-label={`${label} 다음 항목 보기`} disabled={!items.length} onClick={() => move(1)}>→</Button>\n            </div>\n        </div>\n        <div ref={rail} role=\"group\" aria-label={`${label} 선택`} className=\"flex min-w-0 snap-x snap-mandatory gap-3 overflow-x-auto pb-2\">\n            {items.map(item => <button key={item.id} type=\"button\" aria-pressed={value === item.id} onClick={() => onValueChange(item.id)} className={cn(\"w-36 shrink-0 snap-start rounded-sm border border-transparent bg-transparent p-1 text-left text-sm text-foreground focus-visible:outline-2 focus-visible:outline-focus\", value === item.id && \"border-accent bg-surface-subtle\")}>\n                <span className=\"block overflow-hidden rounded-sm\">{item.preview}</span>\n                <span className=\"mt-2 block [overflow-wrap:anywhere]\">{item.label}</span>\n            </button>)}\n            {!items.length && <p className=\"text-sm text-muted\">표시할 항목이 없습니다.</p>}\n        </div>\n    </section>;\n}\n",
+      "type": "registry:ui",
+      "target": "@ui/media-rail.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

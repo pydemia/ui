@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-coachmark",
+  "title": "Coachmark",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-b4f678311bede682204b9dbcdfa6e87694a377edce20683906552576f0298ffc/pyd-popover.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/coachmark.tsx",
+      "content": "import { useId, type ReactElement, type ReactNode } from \"react\";\nimport {\n    Popover, PopoverContent, PopoverTrigger, PopoverClose,\n} from \"./popover\";\n\ntype CoachmarkProps = {\n    open: boolean;\n    onOpenChange: (open: boolean) => void;\n    trigger: ReactElement;\n    title: string;\n    children: ReactNode;\n    step?: number;\n    totalSteps?: number;\n    nextAction?: { label: string; onClick: () => void };\n    closeLabel?: string;\n    side?: \"top\" | \"right\" | \"bottom\" | \"left\";\n    container?: HTMLElement | null;\n};\n\nfunction Coachmark({\n    open, onOpenChange, trigger, title, children, step, totalSteps,\n    nextAction, closeLabel = \"도움말 닫기\", side = \"bottom\", container,\n}: CoachmarkProps) {\n    const titleId = useId();\n    const descriptionId = useId();\n    if ((step !== undefined || totalSteps !== undefined) &&\n        (typeof step !== \"number\" || typeof totalSteps !== \"number\" ||\n            !Number.isSafeInteger(step) || !Number.isSafeInteger(totalSteps) ||\n            step < 1 || totalSteps < step)) {\n        throw new RangeError(\"Coachmark step must be within totalSteps.\");\n    }\n    return (\n        <Popover open={open} onOpenChange={onOpenChange} modal={false}>\n            <PopoverTrigger asChild>{trigger}</PopoverTrigger>\n            <PopoverContent container={container} side={side} sideOffset={10}\n                role=\"dialog\" aria-labelledby={titleId}\n                aria-describedby={descriptionId} data-coachmark=\"\">\n                {step !== undefined && <p className=\"m-0 mb-2 text-xs text-muted\">\n                    {step} / {totalSteps} 단계\n                </p>}\n                <h3 id={titleId} className=\"m-0 text-sm font-semibold\">{title}</h3>\n                <div id={descriptionId} className=\"mt-2 text-sm text-muted\">\n                    {children}\n                </div>\n                <div className=\"mt-4 flex flex-wrap items-center justify-end gap-2\">\n                    <PopoverClose asChild>\n                        <button type=\"button\" className={\n                            \"rounded-sm px-3 py-1.5 text-sm text-muted \" +\n                            \"hover:bg-surface-subtle focus-visible:outline-2 \" +\n                            \"focus-visible:outline-focus\"\n                        }>{closeLabel}</button>\n                    </PopoverClose>\n                    {nextAction && <button type=\"button\"\n                        onClick={nextAction.onClick} className={\n                            \"rounded-sm bg-accent px-3 py-1.5 text-sm \" +\n                            \"font-medium text-accent-foreground \" +\n                            \"focus-visible:outline-2 focus-visible:outline-focus\"\n                        }>{nextAction.label}</button>}\n                </div>\n            </PopoverContent>\n        </Popover>\n    );\n}\n\nexport { Coachmark };\nexport type { CoachmarkProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/coachmark.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

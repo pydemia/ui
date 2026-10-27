@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-inline-comment-layer",
+  "title": "Inline Comment Layer",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-b4f678311bede682204b9dbcdfa6e87694a377edce20683906552576f0298ffc/pyd-button.json",
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-b4f678311bede682204b9dbcdfa6e87694a377edce20683906552576f0298ffc/pyd-rich-document-model.json",
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-b4f678311bede682204b9dbcdfa6e87694a377edce20683906552576f0298ffc/pyd-thread.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/inline-comment-layer.tsx",
+      "content": "import { Button } from \"./button\";\nimport { Thread, type ThreadComment } from \"./thread\";\nimport type { InlineComment } from \"./editor/comment-anchors\";\n\ntype InlineCommentLayerProps = {\n    label: string;\n    comments: readonly InlineComment[];\n    onCommentsChange: (comments: InlineComment[]) => void;\n    onReply?: (threadId: string, parentId: string | null, content: string) =>\n        void | Promise<void>;\n    onSelect?: (comment: InlineComment) => void;\n    onReattach?: (id: string) => void;\n    disabled?: boolean;\n};\n\nfunction InlineCommentLayer({\n    label, comments, onCommentsChange, onReply, onSelect, onReattach,\n    disabled,\n}: InlineCommentLayerProps) {\n    return <aside aria-label={label} data-slot=\"inline-comment-layer\"\n        className=\"grid content-start gap-3\">\n        {comments.length === 0 &&\n            <p className=\"text-sm text-muted\">아직 댓글이 없습니다.</p>}\n        {comments.map((item) => <section key={item.id}\n            data-inline-thread-id={item.id} tabIndex={-1}\n            className=\"grid gap-2 rounded-md border border-border p-3\">\n            <button type=\"button\" disabled={disabled}\n                onClick={() => onSelect?.(item)}\n                className=\"text-left text-sm text-muted\">\n                {item.quote}\n            </button>\n            <p className=\"m-0 text-xs text-muted\">\n                {item.anchor === \"orphaned\" ? \"대상 유실 · \" : \"\"}\n                {item.status === \"resolved\" ? \"해결됨\" : \"열린 댓글\"}\n            </p>\n            <Thread label={`${label}: ${item.id}`}\n                comments={item.comments as readonly ThreadComment[]}\n                disabled={disabled}\n                onReply={onReply ? (parentId, content) =>\n                    onReply(item.id, parentId, content) : undefined} />\n            <div className=\"flex flex-wrap gap-2\">\n                <Button className=\"h-8 px-2 text-xs\" disabled={disabled}\n                    onClick={() => onCommentsChange(comments.map((entry) =>\n                        entry.id === item.id ? {\n                            ...entry,\n                            status: entry.status === \"open\"\n                                ? \"resolved\" : \"open\",\n                        } : entry))}>\n                    {item.status === \"open\" ? \"해결\" : \"다시 열기\"}\n                </Button>\n                {item.anchor === \"orphaned\" && onReattach &&\n                    <Button className=\"h-8 px-2 text-xs\" disabled={disabled}\n                        onMouseDown={(event) => event.preventDefault()}\n                        onClick={() => onReattach(item.id)}>\n                        선택 영역에 다시 연결\n                    </Button>}\n            </div>\n        </section>)}\n    </aside>;\n}\n\nexport { InlineCommentLayer };\nexport type { InlineCommentLayerProps, InlineComment };\n\n\n",
+      "type": "registry:ui",
+      "target": "@ui/inline-comment-layer.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

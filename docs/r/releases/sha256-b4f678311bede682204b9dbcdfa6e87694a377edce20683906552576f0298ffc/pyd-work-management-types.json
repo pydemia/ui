@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-work-management-types",
+  "title": "Work entity references",
+  "files": [
+    {
+      "path": "packages/ui/src/components/work-management-types.ts",
+      "content": "export type EntityReferenceKind =\n    | \"document\"\n    | \"project\"\n    | \"task\"\n    | \"person\";\n\nexport type EntityReference = {\n    id: string;\n    kind: EntityReferenceKind;\n    title: string;\n    path?: string;\n    description?: string;\n    disabled?: boolean;\n};\n",
+      "type": "registry:lib",
+      "target": "@ui/work-management-types.ts"
+    }
+  ],
+  "type": "registry:lib"
+}
