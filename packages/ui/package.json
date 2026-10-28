@@ -11,11 +11,13 @@
       "default": "./dist/index.js"
     },
     "./styles.css": "./src/styles.css",
-    "./design-modes.css": "./src/design-modes.css"
+    "./design-modes.css": "./src/design-modes.css",
+    "./flow-canvas.css": "./src/components/flow-canvas.css"
   },
   "files": [
     "dist",
     "src/styles.css",
+    "src/components/flow-canvas.css",
     "src/design-modes.css"
   ],
   "scripts": {
@@ -57,7 +59,8 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",
     "react-day-picker": "9.14.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "@xyflow/react": "^12.12.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",

@@ -692,6 +692,35 @@
       "files": [{ "path": "packages/ui/src/components/node-canvas.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-flow-canvas", "type": "registry:ui", "title": "Flow Canvas",
+      "dependencies": ["@xyflow/react@12.12.0"],
+      "registryDependencies": ["./pyd-flow-alignment.json"],
+      "files": [{"path":"packages/ui/src/components/flow-canvas.tsx","type":"registry:ui"},{"path":"packages/ui/src/components/flow-canvas.css","type":"registry:file","target":"@ui/flow-canvas.css"}]
+    },
+    {
+      "name": "pyd-flow-alignment", "type": "registry:ui", "title": "Flow Alignment",
+      "files": [{"path":"packages/ui/src/components/flow-alignment.ts","type":"registry:ui"}]
+    },
+    {
+      "name": "pyd-flow-history", "type": "registry:ui", "title": "Flow History",
+      "files": [{"path":"packages/ui/src/components/flow-history.ts","type":"registry:ui"}]
+    },
+    {
+      "name": "pyd-flow-clipboard", "type": "registry:ui", "title": "Flow Clipboard",
+      "registryDependencies": ["./pyd-flow-canvas.json"],
+      "files": [{"path":"packages/ui/src/components/flow-clipboard.ts","type":"registry:ui"}]
+    },
+    {
+      "name": "pyd-flow-grouping", "type": "registry:ui", "title": "Flow Grouping",
+      "registryDependencies": ["./pyd-flow-alignment.json","./pyd-flow-canvas.json","./pyd-flow-clipboard.json"],
+      "files": [{"path":"packages/ui/src/components/flow-grouping.ts","type":"registry:ui"}]
+    },
+    {
+      "name": "pyd-flow-layout", "type": "registry:ui", "title": "Flow Layout",
+      "registryDependencies": ["./pyd-flow-alignment.json","./pyd-flow-clipboard.json"],
+      "files": [{"path":"packages/ui/src/components/flow-layout.ts","type":"registry:ui"}]
+    },
+    {
       "name": "pyd-log-console", "type": "registry:ui", "title": "Log Console",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/log-console.tsx", "type": "registry:ui" }]

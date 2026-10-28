@@ -202,14 +202,22 @@ for (const item of registry.items) {
 }
 
 const componentPath = "packages/ui/src/components/";
+const publicIndexContent = readFileSync(join(root, "packages/ui/src/index.ts"),
+    "utf8");
+const isPublicComponent = (name) => name.endsWith(".tsx") ||
+    (name.endsWith(".ts") && publicIndexContent.includes(
+        `"./components/${name.slice(0, -3)}"`,
+    ));
 const sourceIds = readdirSync(join(root, componentPath))
-    .filter((name) => name.endsWith(".tsx"))
-    .map((name) => name.slice(0, -4)).sort();
+    .filter(isPublicComponent)
+    .map((name) => name.replace(/\.tsx?$/, "")).sort();
 const registryComponents = registry.items.flatMap((item) =>
     item.files.filter((entry) =>
-        entry.path.startsWith(componentPath) && entry.path.endsWith(".tsx") &&
+        entry.path.startsWith(componentPath) &&
+        isPublicComponent(basename(entry.path)) &&
         !entry.path.slice(componentPath.length).includes("/"),
-    ).map((entry) => ({ id: basename(entry.path, ".tsx"), name: item.name })),
+    ).map((entry) => ({ id: basename(entry.path).replace(/\.tsx?$/, ""),
+        name: item.name })),
 );
 const registryIds = registryComponents.map((entry) => entry.id).sort();
 for (const entry of registryComponents) {

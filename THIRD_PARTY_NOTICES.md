@@ -65,3 +65,15 @@ All bundled copyright and SIL OFL 1.1 notices are preserved in
 [fonts/design/notices.txt](apps/docs/public/fonts/design/notices.txt).
 Exact asset SHA-256, license-evidence SHA-256, faces and coverage are listed in
 [research/design-fonts.json](research/design-fonts.json). No font conversion or subsetting is included.
+
+## React Flow graph dependency
+
+`@pydemia/ui` consumes `@xyflow/react` 12.12.0 as an npm dependency for
+`FlowCanvas`. Its source is not copied into the pydemia component or registry
+file. The installed package retains the MIT license with copyright
+Copyright (c) 2019-2025 webkid GmbH. The official project is
+[React Flow](https://reactflow.dev/).
+
+Flow history, clipboard, alignment, grouping, layout, and editable edge
+controls are pydemia original source. React Flow Pro examples and templates
+were not copied into the package or public registry.

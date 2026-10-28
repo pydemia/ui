@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-flow-alignment",
+  "title": "Flow Alignment",
+  "files": [
+    {
+      "path": "packages/ui/src/components/flow-alignment.ts",
+      "content": "type AlignmentNode = {\n    id: string;\n    position: { x: number; y: number };\n    parentId?: string;\n    hidden?: boolean;\n    width?: number;\n    height?: number;\n    measured?: { width?: number; height?: number };\n};\n\nconst nodeWidth = 224;\nconst nodeHeight = 104;\n\nfunction flowNodeSize(node: AlignmentNode) {\n    return {\n        width: node.measured?.width ?? node.width ?? nodeWidth,\n        height: node.measured?.height ?? node.height ?? nodeHeight,\n    };\n}\n\ntype FlowGuide = { axis: \"x\" | \"y\"; value: number };\ntype FlowAlignment = { position: { x: number; y: number };\n    guides: FlowGuide[] };\n\nfunction alignFlowNode<Node extends AlignmentNode>(\n    moving: Node, nodes: Node[], zoom = 1, tolerancePx = 7,\n): FlowAlignment {\n    const size = flowNodeSize(moving);\n    const peers = nodes.filter((node) => node.id !== moving.id &&\n        node.parentId === moving.parentId && !node.hidden);\n    const tolerance = tolerancePx / Math.max(zoom, 0.25);\n    const anchors = (start: number, length: number) =>\n        [start, start + length / 2, start + length];\n    function nearest(axis: \"x\" | \"y\") {\n        const coordinate = moving.position[axis];\n        const length = axis === \"x\" ? size.width : size.height;\n        let best: { delta: number; value: number } | null = null;\n        for (const peer of peers) {\n            const otherLength = axis === \"x\" ? flowNodeSize(peer).width :\n                flowNodeSize(peer).height;\n            for (const selfAnchor of anchors(coordinate, length)) {\n                for (const targetAnchor of anchors(peer.position[axis],\n                    otherLength)) {\n                    const delta = targetAnchor - selfAnchor;\n                    if (Math.abs(delta) > tolerance ||\n                        (best && Math.abs(delta) >= Math.abs(best.delta))) continue;\n                    best = { delta, value: targetAnchor };\n                }\n            }\n        }\n        return best;\n    }\n    const x = nearest(\"x\");\n    const y = nearest(\"y\");\n    return {\n        position: {\n            x: moving.position.x + (x?.delta ?? 0),\n            y: moving.position.y + (y?.delta ?? 0),\n        },\n        guides: [x && { axis: \"x\" as const, value: x.value },\n            y && { axis: \"y\" as const, value: y.value }]\n            .filter((guide): guide is FlowGuide => Boolean(guide)),\n    };\n}\n\nexport { alignFlowNode, flowNodeSize };\nexport type { AlignmentNode, FlowAlignment, FlowGuide };\n",
+      "type": "registry:ui",
+      "target": "@ui/flow-alignment.ts"
+    }
+  ],
+  "type": "registry:ui"
+}

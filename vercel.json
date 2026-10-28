@@ -12,6 +12,14 @@
     {
       "source": "/prism/",
       "destination": "/prism/index.html"
+    },
+    {
+      "source": "/flows",
+      "destination": "/flows/index.html"
+    },
+    {
+      "source": "/flows/",
+      "destination": "/flows/index.html"
     }
   ]
 }
