@@ -1,5 +1,14 @@
 # 변경 기록
 
+## 2026-11-07 — Pyd Monotone 기능성 아이콘
+
+- 39종의 단색 SVG를 16·24px 별도 도안으로 추가하고, Tree·TreeNav의
+  chevron에는 20px 강조 도안을 제공합니다. Foundation 카탈로그에서
+  아이콘 ID와 뜻을 검색할 수 있습니다.
+- CopyButton, PasswordInput, Tree, TreeNav, Sidebar의 내부 아이콘을
+  새 세트로 연결합니다. `pyd-monotone-icons` registry 항목과 의존성,
+  provenance 및 사용 지침을 추가합니다.
+
 ## 2026-10-16 — 비밀번호 표시 버튼 중복 방지
 
 - `PasswordInput`에서 Edge 기본 비밀번호 표시 아이콘이 자체 버튼과

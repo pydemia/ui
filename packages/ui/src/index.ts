@@ -1,6 +1,18 @@
 export { Button } from "./components/button";
 export { IconButton } from "./components/icon-button";
 export type { IconButtonProps } from "./components/icon-button";
+export {
+    ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon, ChevronDownIcon,
+    ArrowLeftIcon, ArrowRightIcon, MenuIcon, EllipsisIcon,
+    ExternalLinkIcon, PanelLeftIcon,
+    PlusIcon, MinusIcon, XIcon, CheckIcon, PencilIcon, CopyIcon, TrashIcon,
+    RefreshIcon, UndoIcon, RedoIcon, SearchIcon, FilterIcon, UploadIcon,
+    FileIcon, FileTextIcon, FolderIcon, FolderOpenIcon, CalendarIcon,
+    EyeIcon, EyeOffIcon, StarIcon, BellIcon,
+    CircleCheckIcon, TriangleAlertIcon, CircleXIcon, InfoIcon,
+    HelpCircleIcon, LockIcon, LoaderIcon,
+} from "./components/monotone-icons";
+export type { MonotoneIconProps } from "./components/monotone-icons";
 export { ButtonGroup, ButtonGroupSeparator } from "./components/button-group";
 export type { ButtonGroupProps } from "./components/button-group";
 export { Input } from "./components/input";

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-portal-scope",
+  "title": "Regional portal scope",
+  "files": [
+    {
+      "path": "packages/ui/src/components/foundation/portal-scope.tsx",
+      "content": "import {\n    createContext, useContext, useLayoutEffect, useState, type ReactNode,\n} from \"react\";\n\nexport type PortalContainer = Element | DocumentFragment | null;\nexport type PortalScopeProps = {\n    container?: PortalContainer;\n    children?: ReactNode;\n};\nconst PortalContext = createContext<PortalContainer | undefined>(undefined);\n\nexport function PortalScope({ container, children }: PortalScopeProps) {\n    const parent = useContext(PortalContext);\n    return (\n        <PortalContext.Provider value={container === undefined ? parent : container}>\n            {children}\n        </PortalContext.Provider>\n    );\n}\n\n// An explicit null requests Radix's default body, even inside a scope.\nexport function usePortalContainer(container?: PortalContainer) {\n    const scoped = useContext(PortalContext);\n    const [mounted, setMounted] = useState(false);\n    // Match Radix Portal SSR output before selecting a custom container.\n    useLayoutEffect(() => setMounted(true), []);\n    if (!mounted) return undefined;\n    return container === undefined ? scoped : container;\n}\n",
+      "type": "registry:ui",
+      "target": "@ui/foundation/portal-scope.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

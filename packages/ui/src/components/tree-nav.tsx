@@ -1,5 +1,5 @@
-import { ChevronDown, ChevronRight } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
+import { ChevronDownIcon, ChevronRightIcon } from "./monotone-icons";
 import { cn } from "./utils";
 
 type TreeNavItem = {
@@ -185,10 +185,8 @@ function TreeNav({
                                 <span className="truncate">{item.label}</span>
                                 <span aria-hidden="true" className="shrink-0">
                                     {isOpen
-                                        ? <ChevronDown className="size-[20px]"
-                                            strokeWidth={2.25} />
-                                        : <ChevronRight className="size-[20px]"
-                                            strokeWidth={2.25} />}
+                                        ? <ChevronDownIcon size={20} />
+                                        : <ChevronRightIcon size={20} />}
                                 </span>
                             </button>
                         )}
@@ -209,10 +207,8 @@ function TreeNav({
                                 data-slot="tree-nav-disclosure">
                                 <span aria-hidden="true">
                                     {isOpen
-                                        ? <ChevronDown className="size-[20px]"
-                                            strokeWidth={2.25} />
-                                        : <ChevronRight className="size-[20px]"
-                                            strokeWidth={2.25} />}
+                                        ? <ChevronDownIcon size={20} />
+                                        : <ChevronRightIcon size={20} />}
                                 </span>
                             </button>
                         )}

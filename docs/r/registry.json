@@ -46,6 +46,18 @@
       "files": [{ "path": "packages/ui/src/components/icon-button.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-monotone-icons", "type": "registry:ui", "title": "Monotone Icons",
+      "files": [
+        { "path": "packages/ui/src/components/monotone-icons.ts", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/monotone-icons/icon-base.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/monotone-icons/navigation.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/monotone-icons/actions.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/monotone-icons/content.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/monotone-icons/status.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/monotone-icons/index.ts", "type": "registry:ui" }
+      ]
+    },
+    {
       "name": "pyd-input", "type": "registry:ui", "title": "Input",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [
@@ -68,8 +80,7 @@
     },
     {
       "name": "pyd-copy-button", "type": "registry:ui", "title": "Copy Button",
-      "dependencies": ["lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-monotone-icons.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/copy-button.tsx", "type": "registry:ui" }]
     },
     {
@@ -640,19 +651,17 @@
     },
     {
       "name": "pyd-sidebar", "type": "registry:ui", "title": "Sidebar",
-      "registryDependencies": ["./pyd-button.json", "./pyd-drawer.json", "./pyd-icon-button.json", "./pyd-navigation.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-button.json", "./pyd-drawer.json", "./pyd-icon-button.json", "./pyd-monotone-icons.json", "./pyd-navigation.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/sidebar.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-tree", "type": "registry:ui", "title": "Tree",
-      "dependencies": ["lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-monotone-icons.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/tree.tsx", "type": "registry:ui" }]
     },
     {
       "name": "pyd-tree-nav", "type": "registry:ui", "title": "Tree Navigation",
-      "dependencies": ["lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-utils.json"],
+      "registryDependencies": ["./pyd-monotone-icons.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/tree-nav.tsx", "type": "registry:ui" }]
     },
     {
@@ -900,8 +909,7 @@
     },
     {
       "name": "pyd-password-input", "type": "registry:ui", "title": "Password Input",
-      "dependencies": ["lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-icon-button.json", "./pyd-input.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-icon-button.json", "./pyd-input.json", "./pyd-monotone-icons.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/password-input.tsx", "type": "registry:ui" }]
     },
     {

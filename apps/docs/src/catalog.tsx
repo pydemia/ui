@@ -12,7 +12,7 @@ import {
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
     BreadcrumbPage, BreadcrumbSeparator, BlockDocument, BlockEditor,
     BarList, Board, BoxPlotChart, BottomNav, BottomNavLink, BulletChart,
-    Button, ButtonGroup, IconButton,
+    Button, ButtonGroup, IconButton, PlusIcon,
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
     Calendar, CalendarHeatmap, CalendarScheduler,
@@ -82,7 +82,8 @@ import {
     ToggleGroup, ToggleGroupItem,
     Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@pydemia/ui";
-import { FolderOpen, Gauge, Inbox, Plus, Settings2 } from "lucide-react";
+import { FolderOpen, Gauge, Inbox, Settings2 } from "lucide-react";
+import { MonotoneIconsPreview } from "./monotone-icons-preview";
 import { TZDate, type DateRange } from "react-day-picker";
 import { ko } from "react-day-picker/locale";
 import {
@@ -5504,11 +5505,11 @@ function ThreadPreview() {
 function IconButtonPreview() {
     const [count, setCount] = useState(0);
     return <div className="preview-row">
-        <IconButton label="항목 추가" icon={<Plus size={16} />}
+        <IconButton label="항목 추가" icon={<PlusIcon />}
             variant="primary" onClick={() => setCount((value) => value + 1)} />
-        <IconButton label="항목 추가" icon={<Plus size={16} />}
+        <IconButton label="항목 추가" icon={<PlusIcon />}
             variant="outline" onClick={() => setCount((value) => value + 1)} />
-        <IconButton label="항목 추가" icon={<Plus size={16} />}
+        <IconButton label="항목 추가" icon={<PlusIcon />}
             variant="ghost" onClick={() => setCount((value) => value + 1)} />
         <span role="status">추가한 항목 {count}개</span>
     </div>;
@@ -5542,6 +5543,18 @@ function TabsVariantPreview() {
 
 export const catalog: ComponentEntry[] = [
     {
+        id: "monotone-icons", name: "Monotone Icons", category: "Foundation",
+        installItems: ["monotone-icons", "icon-button"],
+        description: "16·24px 도안을 따로 설계한 단색 UI 아이콘 39종입니다. 트리 chevron에는 20px 강조 도안도 제공합니다.",
+        code: `import { PlusIcon, ChevronRightIcon, IconButton } from "@pydemia/ui";
+
+<>
+  <IconButton label="항목 추가" icon={<PlusIcon />} />
+  <ChevronRightIcon size={24} aria-label="다음 단계" />
+</>;`,
+        preview: () => <MonotoneIconsPreview />,
+    },
+    {
         id: "button", name: "Button", category: "Actions",
         description: "Primary, outline, ghost 변형과 disabled 상태를 지원하는 기본 동작 컴포넌트입니다.",
         code: `import { Button } from "@pydemia/ui";
@@ -5555,15 +5568,15 @@ export const catalog: ComponentEntry[] = [
     },
     {
         id: "icon-button", name: "IconButton", category: "Actions",
+        installItems: ["icon-button", "monotone-icons"],
         description: "아이콘 전용 작업에 필수 이름을 부여하고 세 가지 Button 표시 형태를 사용합니다.",
         code: `import { useState } from "react";
-import { Plus } from "lucide-react";
-import { IconButton } from "@pydemia/ui";
+import { IconButton, PlusIcon } from "@pydemia/ui";
 
 function AddItem() {
   const [count, setCount] = useState(0);
   return <>
-    <IconButton label="항목 추가" icon={<Plus size={16} />}
+    <IconButton label="항목 추가" icon={<PlusIcon />}
       variant="outline" onClick={() => setCount((value) => value + 1)} />
     <span role="status">추가한 항목 {count}개</span>
   </>;
