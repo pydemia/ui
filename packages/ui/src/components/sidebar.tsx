@@ -1,6 +1,7 @@
 import { useId, useState, type ReactNode } from "react";
 import { Button } from "./button";
 import { IconButton } from "./icon-button";
+import { ChevronLeftIcon, ChevronRightIcon, MenuIcon } from "./monotone-icons";
 import {
     Drawer, DrawerClose, DrawerContent, DrawerDescription,
     DrawerTitle, DrawerTrigger,
@@ -179,11 +180,9 @@ function Sidebar({
                     <IconButton
                         variant="ghost"
                         label={isCollapsed ? "탐색 펼치기" : "탐색 접기"}
-                        icon={<span className="text-lg leading-none">
-                            {side === "left"
-                                ? isCollapsed ? "»" : "«"
-                                : isCollapsed ? "«" : "»"}
-                        </span>}
+                        icon={side === "left"
+                            ? isCollapsed ? <ChevronRightIcon /> : <ChevronLeftIcon />
+                            : isCollapsed ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                         aria-expanded={!isCollapsed}
                         aria-controls={navId}
                         onClick={() => changeCollapsed(!isCollapsed)}
@@ -198,7 +197,7 @@ function Sidebar({
                 <Drawer open={isMobileOpen} onOpenChange={changeMobileOpen}>
                     <DrawerTrigger asChild>
                         <Button variant="outline" aria-label={`${label} 열기`}>
-                            <span aria-hidden="true">☰</span> 탐색
+                            <MenuIcon /> 탐색
                         </Button>
                     </DrawerTrigger>
                     <DrawerContent side={side}

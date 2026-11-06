@@ -1,7 +1,7 @@
-import { Eye, EyeOff } from "lucide-react";
 import { useId, useState, type ComponentProps } from "react";
 import { IconButton } from "./icon-button";
 import { Input } from "./input";
+import { EyeIcon, EyeOffIcon } from "./monotone-icons";
 import { cn } from "./utils";
 
 type PasswordInputProps = Omit<ComponentProps<"input">, "type"> & {
@@ -32,8 +32,7 @@ function PasswordInput({
                 variant="ghost"
                 disabled={disabled}
                 label={visibilityLabel}
-                icon={visible ? <EyeOff className="size-4" />
-                    : <Eye className="size-4" />}
+                icon={visible ? <EyeOffIcon /> : <EyeIcon />}
                 aria-pressed={visible}
                 aria-controls={inputId}
                 className={

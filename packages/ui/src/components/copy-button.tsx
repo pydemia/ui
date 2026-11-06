@@ -1,6 +1,6 @@
-import { Check, Copy } from "lucide-react";
 import { useId, useState } from "react";
 import { Button, type ButtonProps } from "./button";
+import { CheckIcon, CopyIcon } from "./monotone-icons";
 import { cn } from "./utils";
 
 type CopyButtonProps = Omit<
@@ -74,8 +74,8 @@ function CopyButton({
             >
                 {appearance === "icon"
                     ? currentFeedback?.success
-                        ? <Check aria-hidden="true" size={16} />
-                        : <Copy aria-hidden="true" size={16} />
+                        ? <CheckIcon size={16} />
+                        : <CopyIcon size={16} />
                     : buttonText}
             </Button>
         </span>

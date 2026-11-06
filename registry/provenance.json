@@ -33,6 +33,12 @@
       "dependencies": ["pyd-button"], "accessibility": { "semantics": "native icon-only button with required accessible name and hidden decorative icon", "keyboard": "Chromium click and Space actions verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-monotone-icons", "category": "Foundation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "reference": { "provider": "VS Code Codicon, Primer Octicons, Lucide, Tabler", "url": "https://github.com/pydemia/ui/blob/main/research/monotone-icon-system.md", "scope": "semantic IDs, optical size variants and SVG design rules; no icon paths copied" },
+      "dependencies": [], "accessibility": { "semantics": "decorative SVG by default; named standalone SVG uses role img; icon-only controls require an accessible action label", "keyboard": "not-applicable", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-button-group", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/radix/button-group", "scope": "grouped action layout and keyboard guidance; no source copied" },
@@ -42,7 +48,7 @@
       "name": "pyd-copy-button", "category": "Actions", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "W3C Clipboard API", "url": "https://www.w3.org/TR/2026/WD-clipboard-apis-20260624/", "scope": "async writeText permission and rejection behavior; no source copied" },
-      "dependencies": ["pyd-button", "pyd-utils", "lucide-react@0.468.0"], "accessibility": { "semantics": "named native button with success or failure status", "keyboard": "native Enter/Space; browser check pending", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-button", "pyd-monotone-icons", "pyd-utils"], "accessibility": { "semantics": "named native button with success or failure status", "keyboard": "native Enter/Space; browser check pending", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
@@ -550,19 +556,19 @@
       "name": "pyd-sidebar", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/aria/sidebar", "scope": "section grouping and responsive layout reference only; no source copied" },
-      "dependencies": ["pyd-button", "pyd-drawer", "pyd-icon-button", "pyd-navigation", "pyd-utils"], "accessibility": { "semantics": "named navigation with optional labelled section groups, current-page links, collapse control; modal mobile navigation via Radix Dialog", "keyboard": "Chromium: collapse Enter, mobile open/close, Escape, link selection and focus return verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-button", "pyd-drawer", "pyd-icon-button", "pyd-monotone-icons", "pyd-navigation", "pyd-utils"], "accessibility": { "semantics": "named navigation with optional labelled section groups, current-page links, collapse control; modal mobile navigation via Radix Dialog", "keyboard": "Chromium: collapse Enter, mobile open/close, Escape, link selection and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-tree", "category": "Navigation", "profiles": ["developer-tool", "neutral-product"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/treeview/", "scope": "interaction and accessibility pattern only; no source copied" },
-      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named single-select tree with nested groups, declared level/position, separate focus/selection and described lazy loading/error states", "keyboard": "Chromium: arrows, Home/End, Enter, Space, typeahead, disabled skip, lazy expand/error retry/loaded child focus and focus ring verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-monotone-icons", "pyd-utils"], "accessibility": { "semantics": "named single-select tree with nested groups, declared level/position, separate focus/selection and described lazy loading/error states", "keyboard": "Chromium: arrows, Home/End, Enter, Space, typeahead, disabled skip, lazy expand/error retry/loaded child focus and focus ring verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-tree-nav", "category": "Navigation", "profiles": ["developer-tool", "neutral-product"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "W3C WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation-hybrid/", "scope": "native nested navigation, separate page links and disclosure controls; no source copied" },
-      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named native nested lists and links with current page; branch buttons disclose child lists", "keyboard": "Chromium: Enter and Space disclosure, focus retention and link navigation verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-monotone-icons", "pyd-utils"], "accessibility": { "semantics": "named native nested lists and links with current page; branch buttons disclose child lists", "keyboard": "Chromium: Enter and Space disclosure, focus retention and link navigation verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-tree-select", "category": "Selection", "profiles": ["neutral-product", "developer-tool"],
@@ -914,7 +920,7 @@
       "name": "pyd-password-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "WAI-ARIA APG", "url": "https://www.w3.org/WAI/ARIA/apg/patterns/button/" },
-      "dependencies": ["lucide-react", "pyd-icon-button", "pyd-input", "pyd-utils"], "accessibility": { "semantics": "native password input with stable-name aria-pressed visibility toggle", "keyboard": "Chromium: Space toggles visibility, value stays, disabled state verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-icon-button", "pyd-input", "pyd-monotone-icons", "pyd-utils"], "accessibility": { "semantics": "native password input with stable-name aria-pressed visibility toggle", "keyboard": "Chromium: Space toggles visibility, value stays, disabled state verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-pin-input", "category": "Inputs", "profiles": ["neutral-product", "developer-tool"],

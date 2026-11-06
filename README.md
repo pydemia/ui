@@ -11,6 +11,29 @@ component breadth를 제공하지는 않습니다.
 
 ## 시작하기
 
+### Pyd Monotone 아이콘
+
+문서의 **Foundation → Monotone Icons**에서 기능성 아이콘 39개를 이름·뜻으로
+검색하고 16px·24px 도안을 비교할 수 있습니다. Tree·TreeNav의 chevron은
+별도 20px 도안을 사용합니다. SVG는 `currentColor` 단색이며 기본적으로
+장식 요소로 처리됩니다. 아이콘만 있는 조작에는 `IconButton.label`로 실제
+행동 이름을 제공하세요.
+
+registry 소비자는 `pyd-monotone-icons.json`을 설치합니다. IconButton과 함께
+쓰면 `pyd-icon-button.json`도 설치하고, 생성된 로컬 경로에서 가져옵니다.
+`@pydemia/ui`는 이 저장소의 private workspace 패키지입니다.
+
+```tsx
+import { IconButton } from "./components/ui/icon-button";
+import { PlusIcon } from "./components/ui/monotone-icons";
+
+<IconButton label="항목 추가" icon={<PlusIcon />} />;
+```
+
+아이콘의 의미·크기·출처 판단 근거는
+[Monotone 아이콘 시스템](research/monotone-icon-system.md)에 있습니다.
+
+
 Node.js 22 이상이 필요합니다.
 
 ```bash

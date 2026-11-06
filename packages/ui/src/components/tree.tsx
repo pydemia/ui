@@ -1,8 +1,8 @@
-import { ChevronDown, ChevronRight } from "lucide-react";
 import {
     useEffect, useId, useRef, useState,
     type ComponentProps, type KeyboardEvent,
 } from "react";
+import { ChevronDownIcon, ChevronRightIcon } from "./monotone-icons";
 import { cn } from "./utils";
 
 type TreeNodeBase = {
@@ -317,10 +317,8 @@ function Tree({
                             }}>
                             {node.childState === "error" && isExpanded
                                 ? "↻" : hasChildren ? isExpanded
-                                    ? <ChevronDown className="size-[20px]"
-                                        strokeWidth={2.25} />
-                                    : <ChevronRight className="size-[20px]"
-                                        strokeWidth={2.25} /> : null}
+                                    ? <ChevronDownIcon size={20} />
+                                    : <ChevronRightIcon size={20} /> : null}
                         </span>
                         <span className="min-w-0">
                             <span className="block truncate">{node.label}</span>
