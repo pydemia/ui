@@ -652,7 +652,10 @@
     {
       "name": "pyd-sidebar", "type": "registry:ui", "title": "Sidebar",
       "registryDependencies": ["./pyd-button.json", "./pyd-drawer.json", "./pyd-icon-button.json", "./pyd-monotone-icons.json", "./pyd-navigation.json", "./pyd-utils.json"],
-      "files": [{ "path": "packages/ui/src/components/sidebar.tsx", "type": "registry:ui" }]
+      "files": [
+        { "path": "packages/ui/src/components/sidebar.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/sidebar/resize.tsx", "type": "registry:ui" }
+      ]
     },
     {
       "name": "pyd-tree", "type": "registry:ui", "title": "Tree",

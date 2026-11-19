@@ -70,3 +70,12 @@ test("ambiguous or invalid sections fail before rendering", () => {
         ] },
     ] }), /item ids must be unique/);
 });
+
+test("desktop sidebars expose an accessible resize separator by default", () => {
+    const markup = renderSidebar();
+    assert.match(markup, /role="separator"[^>]*aria-label="프로젝트 탐색 너비"/);
+    assert.match(markup, /aria-orientation="vertical"[^>]*aria-valuemin="160"[^>]*aria-valuemax="420"[^>]*aria-valuenow="224"/);
+    assert.doesNotMatch(renderSidebar({ collapsed: true }), /role="separator"/);
+    assert.doesNotMatch(renderSidebar({ resizable: false }), /role="separator"/);
+    assert.match(renderSidebar({ side: "right" }), /left-0 before:left-0/);
+});

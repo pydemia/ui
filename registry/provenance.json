@@ -556,7 +556,7 @@
       "name": "pyd-sidebar", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/aria/sidebar", "scope": "section grouping and responsive layout reference only; no source copied" },
-      "dependencies": ["pyd-button", "pyd-drawer", "pyd-icon-button", "pyd-monotone-icons", "pyd-navigation", "pyd-utils"], "accessibility": { "semantics": "named navigation with optional labelled section groups, current-page links, collapse control; modal mobile navigation via Radix Dialog", "keyboard": "Chromium: collapse Enter, mobile open/close, Escape, link selection and focus return verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-button", "pyd-drawer", "pyd-icon-button", "pyd-monotone-icons", "pyd-navigation", "pyd-utils"], "accessibility": { "semantics": "named navigation with optional labelled section groups, current-page links, collapse control, focusable vertical resize separator with numeric bounds; modal mobile navigation via Radix Dialog", "keyboard": "Chromium: collapse Enter, mobile open/close, Escape, link selection and focus return verified", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-tree", "category": "Navigation", "profiles": ["developer-tool", "neutral-product"],

@@ -7658,7 +7658,7 @@ function Workspace() {
     {
         id: "sidebar", name: "Sidebar", category: "Framework",
         installItems: ["sidebar", "app-shell"],
-        description: "현재 페이지 링크를 단일 목록이나 이름 있는 섹션으로 표시합니다. 링크는 레일형·채움형을 고를 수 있습니다. 넓은 화면에서는 아이콘 폭으로 접히고, 좁은 화면에서는 modal drawer로 열립니다.",
+        description: "넓은 화면에서 경계를 드래그하거나 방향키로 너비를 조절하고 아이콘 폭으로 접을 수 있습니다. 좁은 화면에서는 탐색 서랍으로 열립니다. 너비 조절을 끄려면 resizable={false}를 전달합니다.",
         code: `import { AppShell, AppBody, AppMain, Sidebar } from "@pydemia/ui";
 
 const sections = [

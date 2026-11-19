@@ -8,6 +8,7 @@ import {
 } from "./drawer";
 import { SideNav, SideNavLink, type SideNavLinkProps } from "./navigation";
 import { cn } from "./utils";
+import { SidebarResizeHandle, useSidebarResize } from "./sidebar/resize";
 
 type SidebarItem = {
     id: string;
@@ -35,6 +36,7 @@ type SidebarProps = ({
     linkVariant?: SideNavLinkProps["variant"];
     collapsed?: boolean;
     defaultCollapsed?: boolean;
+    resizable?: boolean;
     onCollapsedChange?: (collapsed: boolean) => void;
     mobileOpen?: boolean;
     defaultMobileOpen?: boolean;
@@ -51,6 +53,7 @@ function Sidebar({
     linkVariant = "rail",
     collapsed,
     defaultCollapsed = false,
+    resizable = true,
     onCollapsedChange,
     mobileOpen,
     defaultMobileOpen = false,
@@ -96,6 +99,10 @@ function Sidebar({
     const navId = useId();
     const isCollapsed = collapsed ?? internalCollapsed;
     const isMobileOpen = mobileOpen ?? internalMobileOpen;
+    const resize = useSidebarResize({
+        defaultWidth: 224, minWidth: 160, maxWidth: 420, contentWidth: 320,
+        side, enabled: resizable && !isCollapsed,
+    });
 
     function changeCollapsed(next: boolean) {
         if (collapsed === undefined) setInternalCollapsed(next);
@@ -157,12 +164,15 @@ function Sidebar({
 
     return (
         <>
-            <aside className={cn(
-                "hidden min-h-0 shrink-0 flex-col border-border " +
+            <aside ref={resize.panelRef}
+                style={resizable && !isCollapsed ? resize.style : undefined}
+                className={cn(
+                "relative hidden min-h-0 shrink-0 flex-col border-border " +
                 "bg-surface-subtle text-foreground " +
                 "transition-[width] duration-[var(--motion-fast)] " +
                 "motion-reduce:transition-none @3xl:flex",
-                isCollapsed ? "w-16" : "w-56",
+                isCollapsed ? "w-16" : resizable ? "w-[var(--sidebar-width)]" : "w-56",
+                resize.handle.dragging && "transition-none",
                 side === "left" ? "border-r" : "border-l",
                 side === "right" && "order-last",
                 className,
@@ -192,6 +202,9 @@ function Sidebar({
                     className="min-h-0 flex-1 content-start overflow-y-auto p-2">
                     {navigation(isCollapsed)}
                 </SideNav>
+                {resizable && !isCollapsed && (
+                    <SidebarResizeHandle {...resize.handle} label={`${label} 너비`} controls={navId} />
+                )}
             </aside>
             <div className="p-2 @3xl:hidden">
                 <Drawer open={isMobileOpen} onOpenChange={changeMobileOpen}>
@@ -229,5 +242,5 @@ function Sidebar({
     );
 }
 
-export { Sidebar };
+export { Sidebar, SidebarResizeHandle, useSidebarResize };
 export type { SidebarItem, SidebarSection, SidebarProps };

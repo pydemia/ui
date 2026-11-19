@@ -7,7 +7,7 @@ import {
     applyThemeToElement, parseThemeUrl,
     type ColorToken, type PaletteId,
     SnippetHeader, SnippetTabsList, SnippetTabsTrigger,
-    Popover, PopoverContent, PopoverTrigger,
+    Popover, PopoverContent, PopoverTrigger, SidebarResizeHandle, useSidebarResize,
 } from "@pydemia/ui";
 import provenance from "../../../registry/provenance.json";
 import { AnalyticsWorkspace } from "./analytics-workspace";
@@ -109,6 +109,10 @@ function App() {
     const profileBridge = useProfileBridge(exampleFrame, settings, theme.revision,
         { allowUnreleased: import.meta.env.DEV });
     const sidebarInner = useRef<HTMLDivElement>(null);
+    const sidebarResize = useSidebarResize({
+        defaultWidth: 238, minWidth: 180, maxWidth: 400, contentWidth: 550,
+        storageKey: "pydemia.ui.catalog.sidebar-width",
+    });
     const mobileScroll = useRef<{ pageY: number; sidebarX: number } | null>(null);
     const mobileRestoreFrame = useRef<number | null>(null);
     const pointerScroll = useRef<{
@@ -355,7 +359,8 @@ function App() {
             </header>
 
             <div className="layout">
-                <aside className="sidebar" aria-label="컴포넌트 목록">
+                <aside ref={sidebarResize.panelRef} style={sidebarResize.style}
+                    id="catalog-sidebar" className="sidebar" aria-label="컴포넌트 목록">
                     <div className="sidebar-inner" ref={sidebarInner}>
                         <a href="#overview" className="sidebar-overview">Overview</a>
                         {sidebarCategories.map((category) => (
@@ -391,6 +396,8 @@ function App() {
                         ))}
                         <div className="sidebar-lower"><a href="#colormap">Colormap</a><a href="#tokens">Design tokens</a><a href="#examples">Profile example</a><a href="#analytics-example">Operations workspace</a><a href="#review-example">Review workspace</a><a href="#intake-example">Intake workspace</a><a href="#installation">Using the source</a></div>
                     </div>
+                    <SidebarResizeHandle {...sidebarResize.handle} className="docs-sidebar-resize"
+                        label="컴포넌트 목록 너비" controls="catalog-sidebar" />
                 </aside>
 
                 <main id="main" className="main-content">

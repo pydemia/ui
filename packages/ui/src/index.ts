@@ -216,7 +216,7 @@ export {
     MenubarRadioItem, MenubarSubTrigger, MenubarSubContent,
 } from "./components/menubar";
 export type { MenubarProps, MenubarItemProps } from "./components/menubar";
-export { Sidebar } from "./components/sidebar";
+export { Sidebar, SidebarResizeHandle, useSidebarResize } from "./components/sidebar";
 export type {
     SidebarItem, SidebarSection, SidebarProps,
 } from "./components/sidebar";
