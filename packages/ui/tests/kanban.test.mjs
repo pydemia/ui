@@ -50,9 +50,21 @@ test("board exposes named columns, actions and empty destination", () => {
     }));
     assert.match(markup, /role="region" aria-label="요청 보드"/);
     assert.match(markup, /<h3[^>]*>.*대기.*3.*<\/h3>/);
-    assert.match(markup, /aria-label="첫 작업 오른쪽 열로 이동"/);
-    assert.match(markup, /aria-label="첫 작업 아래로 이동"/);
+    assert.match(markup, /aria-label="첫 작업 작업 메뉴"/);
+    assert.match(markup, /aria-haspopup="menu"/);
+    assert.match(markup, /data-kanban-card="a"[^>]*draggable="true"/);
+    assert.doesNotMatch(markup, /[←→↑↓]|data-kanban-drag-handle/);
     assert.match(markup, /카드가 없습니다/);
+});
+
+test("read-only cards can open details with no active drag surface", () => {
+    const markup = renderToStaticMarkup(createElement(Kanban, {
+        label: "요청 보드", columns, onColumnsChange() {}, onCardOpen() {},
+        canMoveCard: () => false,
+    }));
+    assert.match(markup, /data-kanban-card="a"[^>]*draggable="false"/);
+    assert.match(markup, /<button[^>]*>첫 작업<\/button>/);
+    assert.match(markup, /aria-label="첫 작업 작업 메뉴"/);
 });
 
 test("duplicate and empty identities are rejected", () => {

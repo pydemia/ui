@@ -690,7 +690,8 @@
     },
     {
       "name": "pyd-kanban", "type": "registry:ui", "title": "Kanban",
-      "registryDependencies": ["./pyd-utils.json"],
+      "dependencies": ["lucide-react@0.468.0"],
+      "registryDependencies": ["./pyd-dropdown-menu.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/kanban.tsx", "type": "registry:ui" }]
     },
     {

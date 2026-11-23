@@ -2,6 +2,11 @@ import {
     useId, useLayoutEffect, useRef, useState,
     type ComponentProps, type DragEvent, type ReactNode,
 } from "react";
+import { Ellipsis } from "lucide-react";
+import {
+    DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "./dropdown-menu";
 import { cn } from "./utils";
 
 type KanbanCard = {
@@ -31,14 +36,27 @@ type KanbanProps = Omit<ComponentProps<"div">, "children"> & {
         columns: KanbanColumn[], move: KanbanMove,
     ) => void;
     renderCard?: (card: KanbanCard) => ReactNode;
+    renderCardTitle?: (card: KanbanCard) => ReactNode;
+    renderCardSelection?: (card: KanbanCard) => ReactNode;
+    renderColumnFooter?: (column: KanbanColumn) => ReactNode;
+    onCardOpen?: (card: KanbanCard) => void;
+    canReorder?: boolean;
+    canMoveCard?: (card: KanbanCard) => boolean;
+    canMove?: (move: KanbanMove) => boolean;
 };
 
-const actionLabels = {
-    left: "왼쪽 열로",
-    right: "오른쪽 열로",
-    up: "위로",
-    down: "아래로",
-} as const;
+function isCardControl(target: Element): boolean {
+    return !!target.closest(
+        "a, button, input, select, textarea, label, summary, " +
+        '[role="button"], [role="checkbox"], [role="link"], [role="combobox"], ' +
+        '[contenteditable]:not([contenteditable="false"]), [data-kanban-no-open]',
+    );
+}
+
+function isDragControl(target: EventTarget | null): boolean {
+    if (!(target instanceof Element) || target.closest('[data-kanban-title-edit="true"]')) return false;
+    return isCardControl(target) || !!target.closest('[draggable="false"], [data-kanban-no-drag]');
+}
 
 function validateColumns(columns: readonly KanbanColumn[]) {
     if (columns.length === 0) {
@@ -94,7 +112,7 @@ function moveKanbanCard(
         throw new RangeError("Kanban target card was not found in its column.");
     }
     if (source === target && toIndex === fromIndex) return null;
-    target.cards.splice(toIndex, 0, card);
+    target.cards.splice(toIndex, 0, card!);
 
     return {
         columns: next,
@@ -113,6 +131,13 @@ function Kanban({
     columns,
     onColumnsChange,
     renderCard,
+    renderCardTitle,
+    renderCardSelection,
+    renderColumnFooter,
+    onCardOpen,
+    canReorder = true,
+    canMove,
+    canMoveCard,
     className,
     ...props
 }: KanbanProps) {
@@ -121,8 +146,10 @@ function Kanban({
     const id = useId();
     const boardRef = useRef<HTMLDivElement>(null);
     const draggedCard = useRef<string | null>(null);
+    const pointerStart = useRef<{ cardId: string; blocked: boolean } | null>(null);
     const pendingFocus = useRef<string | null>(null);
     const [dragging, setDragging] = useState<string | null>(null);
+    const [dropTarget, setDropTarget] = useState<{ column: string; before: string | null } | null>(null);
     const [announcement, setAnnouncement] = useState("");
 
     useLayoutEffect(() => {
@@ -132,7 +159,7 @@ function Kanban({
         ) ?? [])].find((item) =>
             item.dataset.kanbanCard === pendingFocus.current);
         const button = card?.querySelector<HTMLButtonElement>(
-            "button[data-kanban-action]:not(:disabled)",
+            "button[data-kanban-menu-trigger]:not(:disabled)",
         );
         button?.focus();
         pendingFocus.current = null;
@@ -148,6 +175,9 @@ function Kanban({
             columns, card.id, toColumn.id, beforeCardId,
         );
         if (!result) return;
+        if (canMoveCard && !canMoveCard(card)) return;
+        if (canMove && !canMove(result.move)) return;
+        if (!canReorder && result.move.fromColumnId === result.move.toColumnId) return;
         if (restoreFocus) pendingFocus.current = card.id;
         onColumnsChange(result.columns, result.move);
         setAnnouncement(`${card.title}: ${toColumn.title} 열의 ` +
@@ -155,21 +185,47 @@ function Kanban({
     }
 
     function beginDrag(event: DragEvent, cardId: string) {
+        const sourceCard = columns.flatMap(column => column.cards).find(card => card.id === cardId);
+        if (!sourceCard || canMoveCard && !canMoveCard(sourceCard)) {event.preventDefault(); return;}
+        // Native dragstart can target the draggable card even when the pointer
+        // started on a nested control. Keep that original target for the guard.
+        if (isDragControl(event.target) ||
+            pointerStart.current?.cardId === cardId && pointerStart.current.blocked) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
         draggedCard.current = cardId;
         setDragging(cardId);
         event.dataTransfer.effectAllowed = "move";
         event.dataTransfer.setData("text/plain", cardId);
+        const card = (event.currentTarget as HTMLElement).closest<HTMLElement>("[data-kanban-card]");
+        if (card) event.dataTransfer.setDragImage(card, 20, 20);
     }
 
     function endDrag() {
         draggedCard.current = null;
+        pointerStart.current = null;
         setDragging(null);
+        setDropTarget(null);
     }
 
     function allowDrop(event: DragEvent) {
         if (!draggedCard.current) return;
         event.preventDefault();
         event.dataTransfer.dropEffect = "move";
+        const board = boardRef.current;
+        if (board) {
+            const bounds = board.getBoundingClientRect();
+            if (event.clientX < bounds.left + 48) board.scrollLeft -= 18;
+            if (event.clientX > bounds.right - 48) board.scrollLeft += 18;
+        }
+        const column = (event.currentTarget as HTMLElement).closest<HTMLElement>("[data-ui='kanban-column']");
+        if (column) {
+            const bounds = column.getBoundingClientRect();
+            if (event.clientY < bounds.top + 48) column.scrollTop -= 18;
+            if (event.clientY > bounds.bottom - 48) column.scrollTop += 18;
+        }
     }
 
     function dropOnColumn(event: DragEvent, column: KanbanColumn) {
@@ -183,8 +239,14 @@ function Kanban({
         endDrag();
     }
 
+    function beforeAtPointer(event: DragEvent, column: KanbanColumn, cardIndex: number): string | null {
+        const target = event.currentTarget as HTMLElement;
+        const middle = target.getBoundingClientRect().top + target.getBoundingClientRect().height / 2;
+        return event.clientY < middle ? column.cards[cardIndex]!.id : column.cards[cardIndex + 1]?.id ?? null;
+    }
+
     function dropBeforeCard(
-        event: DragEvent, column: KanbanColumn, before: KanbanCard,
+        event: DragEvent, column: KanbanColumn, cardIndex: number,
     ) {
         event.preventDefault();
         event.stopPropagation();
@@ -192,9 +254,42 @@ function Kanban({
         if (cardId) {
             const card = columns.flatMap((item) => item.cards)
                 .find((item) => item.id === cardId);
-            if (card) move(card, column, before.id);
+            if (card) move(card, column, beforeAtPointer(event, column, cardIndex));
         }
         endDrag();
+    }
+
+    function renderMenu(card: KanbanCard, column: KanbanColumn, index: number, movable: boolean) {
+        const destinations = movable ? columns.filter(target => target.id !== column.id) : [];
+        const up = movable && canReorder && index > 0;
+        const down = movable && canReorder && index + 1 < column.cards.length;
+        if (!onCardOpen && !destinations.length && !up && !down) return null;
+
+        return (
+            <DropdownMenu>
+                <DropdownMenuTrigger type="button" aria-label={`${card.title} 작업 메뉴`}
+                    data-kanban-menu-trigger className={
+                        "grid size-8 shrink-0 place-items-center rounded-sm border-0 " +
+                        "bg-transparent p-0 text-muted hover:bg-surface-subtle hover:text-foreground " +
+                        "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent " +
+                        "pointer-coarse:size-11"
+                    }>
+                    <Ellipsis size={16} aria-hidden="true" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    {onCardOpen && <DropdownMenuItem onSelect={() => onCardOpen(card)}>상세 열기</DropdownMenuItem>}
+                    {onCardOpen && (destinations.length > 0 || up || down) && <DropdownMenuSeparator />}
+                    {destinations.map(target => (
+                        <DropdownMenuItem key={target.id} onSelect={() => move(card, target, null, true)}>
+                            {target.title} 열로 이동
+                        </DropdownMenuItem>
+                    ))}
+                    {destinations.length > 0 && (up || down) && <DropdownMenuSeparator />}
+                    {up && <DropdownMenuItem onSelect={() => move(card, column, column.cards[index - 1]!.id, true)}>위로 이동</DropdownMenuItem>}
+                    {down && <DropdownMenuItem onSelect={() => move(card, column, column.cards[index + 2]?.id ?? null, true)}>아래로 이동</DropdownMenuItem>}
+                </DropdownMenuContent>
+            </DropdownMenu>
+        );
     }
 
     return (
@@ -212,14 +307,20 @@ function Kanban({
                     <section
                         key={column.id}
                         data-ui="kanban-column"
+                        data-kanban-column={column.id}
                         data-surface="panel"
                         aria-labelledby={`${id}-column-${columnIndex}`}
                         className={cn(
                             "w-64 shrink-0 rounded-sm border border-border " +
-                            "bg-surface-subtle p-[var(--space-3)]",
+                            "bg-surface-subtle p-[var(--space-3)] max-h-[70vh] overflow-y-auto",
                             dragging && "border-dashed",
+                            dropTarget?.column === column.id && dropTarget.before === null && "ring-2 ring-accent",
                         )}
-                        onDragOver={allowDrop}
+                        onDragOver={(event) => {
+                            allowDrop(event);
+                            if (draggedCard.current && event.target === event.currentTarget)
+                                setDropTarget({ column: column.id, before: null });
+                        }}
                         onDrop={(event) => dropOnColumn(event, column)}
                     >
                         <h3 id={`${id}-column-${columnIndex}`}
@@ -243,80 +344,67 @@ function Kanban({
                             </p>
                         ) : (
                             <ul className="grid gap-[var(--space-2)]">
-                                {column.cards.map((card, cardIndex) => (
-                                    <li
-                                        key={card.id}
-                                        data-kanban-card={card.id}
-                                        data-surface="row"
-                                        draggable
-                                        onDragStart={(event) =>
-                                            beginDrag(event, card.id)}
-                                        onDragEnd={endDrag}
-                                        onDragOver={allowDrop}
-                                        onDrop={(event) =>
-                                            dropBeforeCard(event, column, card)}
-                                        className={cn(
-                                            "rounded-sm border border-border " +
-                                            "bg-surface p-[var(--space-3)] " +
-                                            "shadow-[var(--shadow-float)]",
-                                            dragging === card.id && "opacity-50",
-                                        )}
-                                    >
-                                        <p className="m-0 text-sm font-medium">
-                                            {card.title}
-                                        </p>
-                                        {card.description && (
-                                            <p className="mb-0 mt-1 text-xs text-muted">
-                                                {card.description}
-                                            </p>
-                                        )}
-                                        {renderCard?.(card)}
-                                        <div role="group"
-                                            aria-label={`${card.title} 이동`}
-                                            className="mt-[var(--space-2)] flex gap-1">
-                                            {([
-                                                ["left", "←", columnIndex > 0],
-                                                ["right", "→", columnIndex < columns.length - 1],
-                                                ["up", "↑", cardIndex > 0],
-                                                ["down", "↓", cardIndex < column.cards.length - 1],
-                                            ] as const).map(([direction, symbol, enabled]) => (
-                                                <button
-                                                    key={direction}
-                                                    type="button"
-                                                    data-kanban-action={direction}
-                                                    data-slot="surface-action"
-                                                    aria-label={
-                                                        `${card.title} ${actionLabels[direction]} 이동`
-                                                    }
-                                                    disabled={!enabled}
-                                                    className={
-                                                        "grid size-7 place-items-center rounded-sm " +
-                                                        "border border-border text-xs " +
-                                                        "hover:bg-surface-subtle disabled:opacity-40"
-                                                    }
-                                                    onClick={() => {
-                                                        if (direction === "left") {
-                                                            move(card, columns[columnIndex - 1], null, true);
-                                                        } else if (direction === "right") {
-                                                            move(card, columns[columnIndex + 1], null, true);
-                                                        } else if (direction === "up") {
-                                                            move(card, column,
-                                                                column.cards[cardIndex - 1].id, true);
-                                                        } else {
-                                                            move(card, column,
-                                                                column.cards[cardIndex + 2]?.id ?? null,
-                                                                true);
-                                                        }
-                                                    }}
-                                                >
-                                                    <span aria-hidden="true">{symbol}</span>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </li>
-                                ))}
+                                {column.cards.map((card, cardIndex) => {
+                                    const movable = canMoveCard?.(card) ?? true;
+                                    return (
+                                        <li
+                                            key={card.id}
+                                            data-kanban-card={card.id}
+                                            data-surface="row"
+                                            draggable={movable}
+                                            onClick={onCardOpen ? event => {
+                                                const target = event.target;
+                                                if (!event.defaultPrevented && !draggedCard.current && target instanceof Element &&
+                                                    event.currentTarget.contains(target) && !isCardControl(target)) onCardOpen(card);
+                                            } : undefined}
+                                            onPointerDownCapture={event => {
+                                                pointerStart.current = {cardId: card.id, blocked: isDragControl(event.target)};
+                                            }}
+                                            onPointerUpCapture={() => { if (!draggedCard.current) pointerStart.current = null; }}
+                                            onDragStart={event => beginDrag(event, card.id)}
+                                            onDragEnd={endDrag}
+                                            onDragOver={(event) => {
+                                                event.stopPropagation();
+                                                allowDrop(event);
+                                                if (draggedCard.current) setDropTarget({
+                                                    column: column.id,
+                                                    before: beforeAtPointer(event, column, cardIndex),
+                                                });
+                                            }}
+                                            onDrop={(event) =>
+                                                dropBeforeCard(event, column, cardIndex)}
+                                            className={cn(
+                                                "rounded-sm border border-border " +
+                                                "bg-surface p-[var(--space-3)] " +
+                                                "shadow-[var(--shadow-float)]",
+                                                movable ? "cursor-grab active:cursor-grabbing" : onCardOpen && "cursor-pointer",
+                                                dragging === card.id && "opacity-50",
+                                                dropTarget?.column === column.id && dropTarget.before === card.id && "border-t-4 border-t-accent",
+                                            )}
+                                        >
+                                            <div data-kanban-card-header className="flex items-start gap-1.5">
+                                                {renderCardSelection?.(card)}
+                                                <div className="min-w-0 flex-1 self-center text-sm font-medium [overflow-wrap:anywhere]">
+                                                    {renderCardTitle ? renderCardTitle(card) : onCardOpen ? (
+                                                        <button type="button" data-kanban-title-edit
+                                                            className="block w-full bg-transparent text-left [font:inherit]"
+                                                            onClick={() => onCardOpen(card)}>{card.title}</button>
+                                                    ) : card.title}
+                                                </div>
+                                                {renderMenu(card, column, cardIndex, movable)}
+                                            </div>
+                                            {card.description && (
+                                                <p className="mb-0 mt-1 text-xs text-muted [overflow-wrap:anywhere]">
+                                                    {card.description}
+                                                </p>
+                                            )}
+                                            {renderCard?.(card)}
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         )}
+                        {renderColumnFooter?.(column)}
                     </section>
                 ))}
             </div>

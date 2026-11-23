@@ -598,7 +598,7 @@
       "name": "pyd-kanban", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Kibo UI", "url": "https://github.com/shadcnblocks/kibo/blob/3d63cdb15b79d972e3dc38a10997987672f9b263/packages/kanban/index.tsx", "scope": "column/card layout and move interaction only; no code copied" },
-      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named board region and columns, native move buttons, live move announcement", "keyboard": "Chromium: Enter cross-column move, focus restoration, position announcement and button reorder verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-dropdown-menu", "pyd-utils"], "accessibility": { "semantics": "named board region and columns, card action menu, live move announcement", "keyboard": "card action menu supports keyboard operation and restores focus after a move", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-gantt", "category": "Workflow", "profiles": ["neutral-product", "developer-tool"],

@@ -164,7 +164,7 @@ function KanbanPreview() {
     return (
         <div className="preview-stack min-w-0">
             <p className="m-0 text-xs text-muted">
-                카드를 끌거나 각 카드의 화살표 버튼으로 이동합니다.
+                카드를 끌거나 작업 메뉴에서 이동할 열과 순서를 선택합니다.
             </p>
             <Kanban label="요청 처리 보드" columns={columns}
                 onColumnsChange={setColumns} />
@@ -7841,7 +7841,7 @@ function RequestWizard() {
     },
     {
         id: "kanban", name: "Kanban", category: "Workflow",
-        description: "상태별 작업 카드를 정렬하고 열 사이로 이동합니다. 마우스 끌기와 카드의 방향 버튼을 함께 제공하며, 빈 열에도 카드를 놓을 수 있습니다.",
+        description: "카드를 끌거나 작업 메뉴로 상태와 순서를 바꿀 수 있습니다. 작업 메뉴에는 현재 카드에서 사용할 수 있는 이동만 표시합니다.",
         code: `import { useState } from "react";
 import { Kanban, type KanbanColumn } from "@pydemia/ui";
 
