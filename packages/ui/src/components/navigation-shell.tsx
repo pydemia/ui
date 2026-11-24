@@ -1,12 +1,12 @@
 import type { ComponentProps, ReactNode } from "react";
-import { AppBody, AppHeader, AppMain, AppShell, AppSidebar } from "./app-shell";
-import { cn } from "./utils";
+import { AppBody, AppHeader, AppMain, AppShell } from "./app-shell";
+import { RightPanel, type RightPanelProps } from "./right-panel";
 
 type NavigationShellProps = Omit<ComponentProps<typeof AppShell>, "children"> & {
     globalNav?: ReactNode;
     localNav?: ReactNode;
     sideNav?: ReactNode;
-    rightPanel?: Omit<ComponentProps<typeof AppSidebar>, "side">;
+    rightPanel?: RightPanelProps;
     footerNav?: ReactNode;
     mobileNav?: ReactNode;
     mainProps?: Omit<ComponentProps<typeof AppMain>, "children">;
@@ -29,15 +29,7 @@ function NavigationShell({
                         {localNav}
                         <AppMain {...mainProps}>{children}</AppMain>
                     </div>
-                    {rightPanel && (
-                        <AppSidebar {...rightPanel} side="right" data-panel-side="right"
-                            className={cn(
-                                "@3xl:w-auto @5xl:w-52",
-                                rightPanel.appearance !== "inset" &&
-                                    "border-b-0 border-t @3xl:border-l-0 @5xl:border-t-0 @5xl:border-l",
-                                rightPanel.className,
-                            )} />
-                    )}
+                    {rightPanel && <RightPanel {...rightPanel} />}
                 </div>
             </AppBody>
             {mobileNav && <div className="@3xl:hidden" data-slot="mobile-navigation">{mobileNav}</div>}

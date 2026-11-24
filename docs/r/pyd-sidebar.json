@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "pyd-sidebar",
-  "title": "Sidebar",
+  "title": "SNB · 왼쪽 탐색",
   "registryDependencies": [
     "https://pydemia-ui.vercel.app/r/pyd-button.json",
     "https://pydemia-ui.vercel.app/r/pyd-drawer.json",

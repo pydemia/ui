@@ -192,15 +192,12 @@ export type { AlignmentNode, FlowAlignment, FlowGuide } from
     "./components/flow-alignment";
 export { ScrollArea } from "./components/scroll-area";
 export type { ScrollAreaProps } from "./components/scroll-area";
-export {
-    GlobalNav, GlobalNavLink, LocalNav, LocalNavLink, SideNav, SideNavLink,
-    FooterNav, FooterNavLink,
-    BottomNav, BottomNavLink,
-} from "./components/navigation";
-export type {
-    GlobalNavLinkProps, SideNavLinkProps, BottomNavProps,
-    BottomNavLinkProps,
-} from "./components/navigation";
+export { GlobalNav, GlobalNavLink, type GlobalNavLinkProps } from "./components/global-nav";
+export { LocalNav, LocalNavLink } from "./components/local-nav";
+export { FooterNav, FooterNavLink } from "./components/footer-nav";
+export { RightPanel, type RightPanelProps } from "./components/right-panel";
+export { SideNav, SideNavLink, BottomNav, BottomNavLink } from "./components/navigation";
+export type { SideNavLinkProps, BottomNavProps, BottomNavLinkProps } from "./components/navigation";
 export { AnchorNav } from "./components/anchor-nav";
 export type {
     AnchorNavItem, AnchorNavProps,

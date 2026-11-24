@@ -46,7 +46,7 @@ import {
     EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
     FilterBar, FormWizard, FunnelChart, WaterfallChart, Gantt,
     FooterNav, FooterNavLink, GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
-    LocalNav, LocalNavLink,
+    LocalNav, LocalNavLink, RightPanel,
     HoverCardTrigger, Heatmap, HistogramChart, Image, ImageCropper,
     Input, InputGroup,
     InputGroupAddon,
@@ -7703,7 +7703,7 @@ function Workspace() {
         preview: () => <ResizablePanelsPreview />,
     },
     {
-        id: "sidebar", name: "Sidebar", category: "Framework",
+        id: "sidebar", name: "SNB · 왼쪽 탐색", category: "Navigation",
         installItems: ["sidebar", "app-shell"],
         description: "넓은 화면에서 경계를 드래그하거나 방향키로 너비를 조절하고 아이콘 폭으로 접을 수 있습니다. 좁은 화면에서는 탐색 서랍으로 열립니다. 너비 조절을 끄려면 resizable={false}를 전달합니다.",
         code: `import { AppShell, AppBody, AppMain, Sidebar } from "@pydemia/ui";
@@ -8049,6 +8049,54 @@ function arrange(graph: FlowGraph) {
   return layoutFlowGraph(graph);
 }`,
         preview: () => <a href="/flows/">Flows에서 자동 배치 시험하기</a>,
+    },
+    {
+        id: "global-nav", name: "GNB · 전역 탐색", category: "Navigation",
+        description: "앱 전체에서 이동할 최상위 영역을 가로로 표시합니다.",
+        code: `import { GlobalNav, GlobalNavLink } from "@pydemia/ui";
+
+<GlobalNav aria-label="앱 탐색">
+    <GlobalNavLink href="/projects" aria-current="page">Projects</GlobalNavLink>
+    <GlobalNavLink href="/notes">Note</GlobalNavLink>
+</GlobalNav>`,
+        preview: () => <GlobalNav aria-label="앱 탐색"><GlobalNavLink href="#components" aria-current="page">Projects</GlobalNavLink><GlobalNavLink href="#examples">Note</GlobalNavLink></GlobalNav>,
+    },
+    {
+        id: "local-nav", name: "LNB · 화면 탐색", category: "Navigation",
+        description: "현재 화면에서 보기를 전환합니다. 활성 보기를 밑줄로 표시합니다.",
+        code: `import { LocalNav, LocalNavLink } from "@pydemia/ui";
+
+<LocalNav aria-label="작업 보기">
+    <LocalNavLink href="/tasks" aria-current="page">목록</LocalNavLink>
+    <LocalNavLink href="/tasks/board">보드</LocalNavLink>
+</LocalNav>`,
+        preview: () => <LocalNav aria-label="작업 보기"><LocalNavLink href="#components" aria-current="page">목록</LocalNavLink><LocalNavLink href="?component=kanban#components">보드</LocalNavLink></LocalNav>,
+    },
+    {
+        id: "right-panel", name: "Right Panel · 오른쪽 상세", category: "Navigation",
+        description: "현재 선택한 작업이나 문서의 상세를 표시합니다. NavigationShell에서 좁은 화면의 상세는 본문 아래로 이어집니다.",
+        code: `import { AppShell, AppBody, AppMain, RightPanel } from "@pydemia/ui";
+
+<AppShell>
+    <AppBody>
+        <AppMain>작업 목록</AppMain>
+        <RightPanel aria-label="선택한 작업">
+            <p>담당자 · 김민지</p>
+        </RightPanel>
+    </AppBody>
+</AppShell>`,
+        preview: () => <AppShell><AppBody><AppMain as="div">작업 목록</AppMain><RightPanel aria-label="선택한 작업" appearance="inset"><h3 className="m-0 text-sm font-semibold">선택한 작업</h3><p className="mb-0 mt-2 text-sm">담당자 · 김민지</p></RightPanel></AppBody></AppShell>,
+    },
+    {
+        id: "footer-nav", name: "FNB · 하단 탐색", category: "Navigation",
+        description: "화면 하단에 도움말, 정책 등 공통 안내 링크를 표시합니다.",
+        code: `import { FooterNav, FooterNavLink } from "@pydemia/ui";
+
+<FooterNav aria-label="이용 안내">
+    <FooterNavLink href="/help">도움말</FooterNavLink>
+    <FooterNavLink href="/privacy">개인정보 처리방침</FooterNavLink>
+</FooterNav>`,
+        preview: () => <FooterNav aria-label="이용 안내"><FooterNavLink href="?component=navigation-shell#components">레이아웃 사용법</FooterNavLink><FooterNavLink href="?component=sidebar#components">사이드바 사용법</FooterNavLink></FooterNav>,
     },
     {
         id: "navigation", name: "Navigation", category: "Navigation",

@@ -515,7 +515,7 @@
       "name": "pyd-navigation-shell", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "Atlassian Design System", "url": "https://atlassian.design/components/navigation-system/layout/usage", "scope": "global navigation, workspace navigation, and contextual panel placement; no source copied" },
-      "dependencies": ["pyd-app-shell", "pyd-utils"], "accessibility": { "semantics": "optional app header, named navigation supplied by caller, one main region, named contextual aside and footer", "keyboard": "native navigation order and focusable links, with sidebar keyboard support inherited", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-app-shell", "pyd-right-panel"], "accessibility": { "semantics": "optional app header, named navigation supplied by caller, one main region, named contextual aside and footer", "keyboard": "native navigation order and focusable links, with sidebar keyboard support inherited", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-master-detail", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
@@ -535,10 +535,30 @@
       "dependencies": ["pyd-utils"], "accessibility": { "semantics": "two named regions and a range separator controlling the first panel", "keyboard": "Chromium: horizontal arrows, Shift step, Home/End, vertical arrow and pointer drag verified", "screen_reader": "pending manual review" }
     },
     {
+      "name": "pyd-global-nav", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named global navigation with current-page links", "keyboard": "native Tab order", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-local-nav", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-global-nav", "pyd-utils"], "accessibility": { "semantics": "named local navigation with current-page links", "keyboard": "native Tab order", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-right-panel", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-app-shell", "pyd-utils"], "accessibility": { "semantics": "named contextual aside", "keyboard": "native Tab order", "screen_reader": "pending manual review" }
+    },
+    {
+      "name": "pyd-footer-nav", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
+      "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
+      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named footer navigation and native links", "keyboard": "native Tab order", "screen_reader": "pending manual review" }
+    },
+    {
       "name": "pyd-navigation", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "MUI", "url": "https://mui.com/material-ui/react-bottom-navigation/", "revision": "ce3c596185a73b3c85b7702c0297163096b2e6c4", "scope": "bottom placement and primary destinations; no source copied" },
-      "dependencies": ["pyd-utils"], "accessibility": { "semantics": "named navigation landmarks and links with aria-current page; bottom links retain visible labels", "keyboard": "native Tab and Enter; browser check pending", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-global-nav", "pyd-local-nav", "pyd-footer-nav", "pyd-utils"], "accessibility": { "semantics": "named navigation landmarks and links with aria-current page; bottom links retain visible labels", "keyboard": "native Tab and Enter; browser check pending", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-anchor-nav", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
@@ -559,7 +579,7 @@
       "dependencies": ["@radix-ui/react-menubar@1.1.24", "lucide-react", "pyd-utils", "pyd-portal-scope"], "accessibility": { "semantics": "named menubar with menu triggers, items, checkboxes, radio items, disabled items and submenus via Radix", "keyboard": "Chromium: top-menu ArrowRight, checkbox and radio selection, submenu action, Escape and focus return verified", "screen_reader": "pending manual review" }
     },
     {
-      "name": "pyd-sidebar", "category": "Framework", "profiles": ["neutral-product", "developer-tool"],
+      "name": "pyd-sidebar", "category": "Navigation", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "shadcn/ui", "url": "https://ui.shadcn.com/docs/components/aria/sidebar", "scope": "section grouping and responsive layout reference only; no source copied" },
       "dependencies": ["pyd-button", "pyd-drawer", "pyd-icon-button", "pyd-monotone-icons", "pyd-navigation", "pyd-utils"], "accessibility": { "semantics": "named navigation with optional labelled section groups, current-page links, collapse control, focusable vertical resize separator with numeric bounds; modal mobile navigation via Radix Dialog", "keyboard": "Chromium: collapse Enter, mobile open/close, Escape, link selection and focus return verified", "screen_reader": "pending manual review" }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-local-nav",
+  "title": "LNB · 화면 탐색",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-4730a0fdb36a5511ca07cc943bfe4092be5f7f339c42eef592af5a453eb4cd65/pyd-global-nav.json",
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-4730a0fdb36a5511ca07cc943bfe4092be5f7f339c42eef592af5a453eb4cd65/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/local-nav.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\nimport { GlobalNavLink } from \"./global-nav\";\n\ntype NamedNavProps = ComponentProps<\"nav\"> & { \"aria-label\": string };\n\nfunction LocalNav({ className, ...props }: NamedNavProps) {\n    return (\n        <nav\n            className={cn(\n                \"flex min-w-0 items-center gap-1 overflow-x-auto \" +\n                \"border-b border-border px-[var(--space-3)]\",\n                className,\n            )}\n            {...props}\n            data-ui=\"local-nav\"\n        />\n    );\n}\n\nfunction LocalNavLink({ className, ...props }: ComponentProps<\"a\">) {\n    return <GlobalNavLink {...props} variant=\"underline\"\n        className={cn(\"whitespace-nowrap\", className)} />;\n}\n\nexport { LocalNav, LocalNavLink };\n",
+      "type": "registry:ui",
+      "target": "@ui/local-nav.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

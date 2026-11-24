@@ -2,6 +2,8 @@
 
 ## 2026-11-24 — 공용 앱 탐색
 
+- GNB, LNB, 왼쪽 SNB, 오른쪽 패널, FNB를 카탈로그에서 개별 조회하고 설치할 수 있습니다.
+
 - NavigationShell에서 GNB, LNB, 왼쪽 SNB, 오른쪽 상세 패널, FNB와 모바일 BottomNav를 조합합니다.
 - Sidebar는 저장 키를 지정하면 브라우저에 너비를 기억합니다.
 

@@ -6,94 +6,6 @@ type BottomNavProps = NamedNavProps & {
     appearance?: "bar" | "dock";
 };
 
-function GlobalNav({ className, ...props }: NamedNavProps) {
-    return (
-        <nav
-            className={cn(
-                "flex min-w-0 items-center gap-1 overflow-x-auto",
-                className,
-            )}
-            {...props}
-            data-ui="global-nav"
-        />
-    );
-}
-
-type GlobalNavLinkProps = ComponentProps<"a"> & {
-    variant?: "surface" | "underline";
-};
-
-function GlobalNavLink({
-    variant = "surface",
-    className,
-    ...props
-}: GlobalNavLinkProps) {
-    return (
-        <a
-            className={cn(
-                "shrink-0 px-[var(--space-3)] py-[var(--space-2)] " +
-                "text-sm text-muted hover:text-foreground " +
-                "aria-[current=page]:font-semibold",
-                variant === "surface"
-                    ? "rounded-sm hover:bg-surface-subtle " +
-                      "aria-[current=page]:bg-surface-subtle " +
-                      "aria-[current=page]:text-foreground"
-                    : "border-b-2 border-transparent " +
-                      "aria-[current=page]:border-accent " +
-                      "aria-[current=page]:text-accent",
-                className,
-            )}
-            data-variant={variant}
-            {...props}
-            data-slot="nav-link"
-        />
-    );
-}
-
-function LocalNav({ className, ...props }: NamedNavProps) {
-    return (
-        <nav
-            className={cn(
-                "flex min-w-0 items-center gap-1 overflow-x-auto " +
-                "border-b border-border px-[var(--space-3)]",
-                className,
-            )}
-            {...props}
-            data-ui="local-nav"
-        />
-    );
-}
-
-function LocalNavLink({ className, ...props }: ComponentProps<"a">) {
-    return <GlobalNavLink {...props} variant="underline"
-        className={cn("whitespace-nowrap", className)} />;
-}
-
-function FooterNav({ className, ...props }: NamedNavProps) {
-    return (
-        <nav
-            className={cn(
-                "flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 " +
-                "px-[var(--space-4)] py-[var(--space-2)]",
-                className,
-            )}
-            {...props}
-            data-ui="footer-nav"
-        />
-    );
-}
-
-function FooterNavLink({ className, ...props }: ComponentProps<"a">) {
-    return (
-        <a className={cn(
-            "rounded-sm py-1 text-sm text-muted hover:text-foreground " +
-            "focus-visible:outline-2 focus-visible:outline-focus " +
-            "aria-[current=page]:font-semibold aria-[current=page]:text-foreground",
-            className,
-        )} {...props} />
-    );
-}
-
 function SideNav({ className, ...props }: NamedNavProps) {
     return (
         <nav
@@ -204,12 +116,8 @@ function BottomNavLink({
     );
 }
 
-export {
-    GlobalNav, GlobalNavLink, LocalNav, LocalNavLink, SideNav, SideNavLink,
-    FooterNav, FooterNavLink,
-    BottomNav, BottomNavLink,
-};
-export type {
-    GlobalNavLinkProps, SideNavLinkProps, BottomNavProps,
-    BottomNavLinkProps,
-};
+export { SideNav, SideNavLink, BottomNav, BottomNavLink };
+export type { SideNavLinkProps, BottomNavProps, BottomNavLinkProps };
+export { GlobalNav, GlobalNavLink, type GlobalNavLinkProps } from "./global-nav";
+export { LocalNav, LocalNavLink } from "./local-nav";
+export { FooterNav, FooterNavLink } from "./footer-nav";

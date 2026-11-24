@@ -611,7 +611,7 @@
     },
     {
       "name": "pyd-navigation-shell", "type": "registry:ui", "title": "Navigation Shell",
-      "registryDependencies": ["./pyd-app-shell.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-app-shell.json", "./pyd-right-panel.json"],
       "files": [{ "path": "packages/ui/src/components/navigation-shell.tsx", "type": "registry:ui" }]
     },
     {
@@ -634,8 +634,28 @@
       "files": [{ "path": "packages/ui/src/components/resizable-panels.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "pyd-navigation", "type": "registry:ui", "title": "Global, Local, Side, Footer, and Bottom Navigation",
+      "name": "pyd-global-nav", "type": "registry:ui", "title": "GNB · 전역 탐색",
       "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/global-nav.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-local-nav", "type": "registry:ui", "title": "LNB · 화면 탐색",
+      "registryDependencies": ["./pyd-global-nav.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/local-nav.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-right-panel", "type": "registry:ui", "title": "Right Panel · 오른쪽 상세",
+      "registryDependencies": ["./pyd-app-shell.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/right-panel.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-footer-nav", "type": "registry:ui", "title": "FNB · 하단 탐색",
+      "registryDependencies": ["./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/footer-nav.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "pyd-navigation", "type": "registry:ui", "title": "Global, Local, Side, Footer, and Bottom Navigation",
+      "registryDependencies": ["./pyd-global-nav.json", "./pyd-local-nav.json", "./pyd-footer-nav.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/navigation.tsx", "type": "registry:ui" }]
     },
     {
@@ -656,7 +676,7 @@
       "files": [{ "path": "packages/ui/src/components/menubar.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "pyd-sidebar", "type": "registry:ui", "title": "Sidebar",
+      "name": "pyd-sidebar", "type": "registry:ui", "title": "SNB · 왼쪽 탐색",
       "registryDependencies": ["./pyd-button.json", "./pyd-drawer.json", "./pyd-icon-button.json", "./pyd-monotone-icons.json", "./pyd-navigation.json", "./pyd-utils.json"],
       "files": [
         { "path": "packages/ui/src/components/sidebar.tsx", "type": "registry:ui" },
