@@ -91,6 +91,7 @@ export { Skeleton } from "./components/skeleton";
 export type { SkeletonProps } from "./components/skeleton";
 export {
     Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
+    CARD_DEFAULT_WIDTH,
 } from "./components/card";
 export type { CardProps } from "./components/card";
 export { Separator } from "./components/separator";

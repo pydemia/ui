@@ -1,4 +1,5 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, CSSProperties } from "react";
+import { CARD_DEFAULT_WIDTH } from "./card-size";
 import { cn } from "./utils";
 
 type CardProps = ComponentProps<"div"> & {
@@ -13,7 +14,7 @@ const cardVariants = {
 } as const;
 
 const cardSizes = {
-    default: "[--card-spacing:var(--space-4)]",
+    default: "[--card-spacing:var(--space-4)] min-w-[min(100%,var(--card-default-width))]",
     compact: "[--card-spacing:var(--space-3)]",
 } as const;
 
@@ -21,6 +22,7 @@ function Card({
     variant = "default",
     size = "default",
     className,
+    style,
     ...props
 }: CardProps) {
     if (!Object.hasOwn(cardVariants, variant)) {
@@ -40,6 +42,7 @@ function Card({
             )}
             data-variant={variant}
             data-size={size}
+            style={{ "--card-default-width": `${CARD_DEFAULT_WIDTH}px`, ...style } as CSSProperties}
             {...props}
         />
     );
@@ -97,3 +100,4 @@ export {
     Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
 };
 export type { CardProps };
+export { CARD_DEFAULT_WIDTH } from "./card-size";

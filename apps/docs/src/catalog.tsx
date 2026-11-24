@@ -16,7 +16,7 @@ import {
     ButtonGroupSeparator, Collapsible,
     CollapsibleContent, CollapsibleTrigger,
     Calendar, CalendarHeatmap, CalendarScheduler,
-    Card, CardContent, CardDescription,
+    Card, CardContent, CardDescription, CARD_DEFAULT_WIDTH,
     CardFooter, CardHeader,
     CardTitle,
     Carousel, Checkbox, CitationList, CodeBlock, CodeEditorShell,
@@ -2341,6 +2341,10 @@ function CardPreview() {
                 <CardContent>등록 전 확인이 필요합니다.</CardContent>
                 <CardFooter><Badge>검토 대기</Badge></CardFooter>
             </Card>
+            <p className="text-xs text-muted">
+                기본 최소 너비 {CARD_DEFAULT_WIDTH}px · 좁은 영역에서는 영역 너비에 맞춥니다.
+                compact는 너비를 제한하지 않습니다.
+            </p>
         </div>
     );
 }

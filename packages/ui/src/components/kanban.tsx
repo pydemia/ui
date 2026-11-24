@@ -1,7 +1,8 @@
 import {
     useId, useLayoutEffect, useRef, useState,
-    type ComponentProps, type DragEvent, type ReactNode,
+    type ComponentProps, type CSSProperties, type DragEvent, type ReactNode,
 } from "react";
+import { CARD_DEFAULT_WIDTH } from "./card-size";
 import { Ellipsis } from "lucide-react";
 import {
     DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator,
@@ -139,6 +140,7 @@ function Kanban({
     canMove,
     canMoveCard,
     className,
+    style,
     ...props
 }: KanbanProps) {
     if (!label.trim()) throw new Error("Kanban needs a board label.");
@@ -298,7 +300,8 @@ function Kanban({
             role="region"
             aria-label={label}
             tabIndex={0}
-            className={cn("min-w-0 overflow-x-auto", className)}
+            className={cn("min-w-0 overflow-x-auto [container-type:inline-size]", className)}
+            style={{ "--card-default-width": `${CARD_DEFAULT_WIDTH}px`, ...style } as CSSProperties}
             {...props}
             data-ui="kanban"
         >
@@ -311,7 +314,7 @@ function Kanban({
                         data-surface="panel"
                         aria-labelledby={`${id}-column-${columnIndex}`}
                         className={cn(
-                            "w-64 shrink-0 rounded-sm border border-border " +
+                            "w-[min(var(--card-default-width),100cqw)] shrink-0 rounded-sm border border-border " +
                             "bg-surface-subtle p-[var(--space-3)] max-h-[70vh] overflow-y-auto",
                             dragging && "border-dashed",
                             dropTarget?.column === column.id && dropTarget.before === null && "ring-2 ring-accent",

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { Kanban, moveKanbanCard } from "../dist/index.js";
+import { Kanban, moveKanbanCard, CARD_DEFAULT_WIDTH } from "../dist/index.js";
 
 const columns = [
     { id: "queued", title: "대기", cards: [
@@ -55,6 +55,10 @@ test("board exposes named columns, actions and empty destination", () => {
     assert.match(markup, /data-kanban-card="a"[^>]*draggable="true"/);
     assert.doesNotMatch(markup, /[←→↑↓]|data-kanban-drag-handle/);
     assert.match(markup, /카드가 없습니다/);
+    assert.match(markup, new RegExp(`--card-default-width:${CARD_DEFAULT_WIDTH}px`));
+    assert.match(markup, /overflow-x-auto/);
+    assert.match(markup, /container-type:inline-size/);
+    assert.match(markup, /w-\[min\(var\(--card-default-width\),100cqw\)\]/);
 });
 
 test("read-only cards can open details with no active drag surface", () => {

@@ -244,6 +244,7 @@
       "registryDependencies": ["./pyd-utils.json"],
       "files": [
         { "path": "packages/ui/src/components/card.tsx", "type": "registry:ui" },
+        { "path": "packages/ui/src/components/card-size.ts", "type": "registry:file", "target": "@ui/card-size.ts" },
         { "path": "registry/SHADCN_UI_LICENSE.md", "type": "registry:file", "target": "@ui/SHADCN_UI_LICENSE.md" }
       ]
     },
@@ -691,7 +692,7 @@
     {
       "name": "pyd-kanban", "type": "registry:ui", "title": "Kanban",
       "dependencies": ["lucide-react@0.468.0"],
-      "registryDependencies": ["./pyd-dropdown-menu.json", "./pyd-utils.json"],
+      "registryDependencies": ["./pyd-card.json", "./pyd-dropdown-menu.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/kanban.tsx", "type": "registry:ui" }]
     },
     {
