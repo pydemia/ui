@@ -221,3 +221,26 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Theme-aware scrollbars */
+@media (forced-colors: none) {
+  :where(*) {
+    --pyd-scrollbar-thumb: color-mix(
+      in srgb,
+      var(--muted, var(--pyd-muted)) 70%,
+      var(--accent, var(--pyd-accent))
+    );
+    scrollbar-color: var(--pyd-scrollbar-thumb) transparent;
+    scrollbar-width: thin;
+  }
+
+  :where([data-ui="scroll-area"] [data-slot="scroll-thumb"]) {
+    background-color: var(--pyd-scrollbar-thumb);
+  }
+}
+
+@media (forced-colors: active) {
+  :where([data-ui="scroll-area"] [data-slot="scroll-thumb"]) {
+    background-color: ButtonText;
+  }
+}

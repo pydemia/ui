@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-footer-nav",
+  "title": "FNB · 하단 탐색",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-316e07ef209825896c1b4c69b0954286e73e30bcb78d08e63881509587c92551/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/footer-nav.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype NamedNavProps = ComponentProps<\"nav\"> & { \"aria-label\": string };\n\nfunction FooterNav({ className, ...props }: NamedNavProps) {\n    return (\n        <nav\n            className={cn(\n                \"flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 \" +\n                \"px-[var(--space-4)] py-[var(--space-2)]\",\n                className,\n            )}\n            {...props}\n            data-ui=\"footer-nav\"\n        />\n    );\n}\n\nfunction FooterNavLink({ className, ...props }: ComponentProps<\"a\">) {\n    return (\n        <a className={cn(\n            \"rounded-sm py-1 text-sm text-muted hover:text-foreground \" +\n            \"focus-visible:outline-2 focus-visible:outline-focus \" +\n            \"aria-[current=page]:font-semibold aria-[current=page]:text-foreground\",\n            className,\n        )} {...props} />\n    );\n}\n\nexport { FooterNav, FooterNavLink };\n",
+      "type": "registry:ui",
+      "target": "@ui/footer-nav.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
