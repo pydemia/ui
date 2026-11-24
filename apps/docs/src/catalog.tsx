@@ -68,7 +68,7 @@ import {
     QueryBuilder, RadarChart, SankeyChart, RadioGroup, RadioGroupItem, RangeSlider,
     Rating, Reasoning,
     ResponseFeedback, ResultState,
-    ResizablePanels, ScatterChart, ScrollArea,
+    ResizablePanels, ScatterChart, ScrollArea, type ScrollAreaProps,
     SearchInput,
     Select, SelectContent, SelectItem,
     SelectTrigger, SelectValue, Separator, Skeleton, Slider,
@@ -2829,13 +2829,38 @@ function AppShellPreview() {
 }
 
 function ScrollAreaPreview() {
+    const visibilityId = useId();
+    const appearanceId = useId();
+    const [visibility, setVisibility] = useState<NonNullable<ScrollAreaProps["type"]>>("scroll");
+    const [appearance, setAppearance] = useState<NonNullable<ScrollAreaProps["scrollbarAppearance"]>>("subtle");
     const events = Array.from({ length: 16 }, (_, index) =>
         `작업 ${String(index + 1).padStart(2, "0")} · 검토 완료`,
     );
 
     return (
         <div className="grid min-w-0 w-full max-w-md grid-cols-1 gap-4">
-            <ScrollArea label="최근 작업" type="always"
+            <div className="grid min-w-0 gap-3 sm:grid-cols-2">
+                <div className="grid min-w-0 gap-1">
+                    <Label htmlFor={visibilityId}>스크롤바 표시</Label>
+                    <NativeSelect id={visibilityId} value={visibility} onChange={(event) =>
+                        setVisibility(event.currentTarget.value as typeof visibility)}>
+                        <option value="scroll">스크롤할 때만</option>
+                        <option value="hover">마우스를 올릴 때</option>
+                        <option value="auto">내용이 넘칠 때</option>
+                        <option value="always">항상 표시</option>
+                    </NativeSelect>
+                </div>
+                <div className="grid min-w-0 gap-1">
+                    <Label htmlFor={appearanceId}>손잡이 스타일</Label>
+                    <NativeSelect id={appearanceId} value={appearance} onChange={(event) =>
+                        setAppearance(event.currentTarget.value as typeof appearance)}>
+                        <option value="subtle">반투명</option>
+                        <option value="minimal">미니멀</option>
+                        <option value="solid">선명</option>
+                    </NativeSelect>
+                </div>
+            </div>
+            <ScrollArea label="최근 작업" type={visibility} scrollbarAppearance={appearance}
                 data-surface="panel"
                 className="h-44 rounded-sm border border-border bg-surface">
                 <ol className="m-0 space-y-2 p-3 text-sm text-foreground">
@@ -2844,7 +2869,7 @@ function ScrollAreaPreview() {
             </ScrollArea>
             <ScrollArea label="기간별 지표" orientation="horizontal"
                 data-surface="panel"
-                type="always"
+                type={visibility} scrollbarAppearance={appearance}
                 className="h-24 rounded-sm border border-border bg-surface">
                 <div className="flex w-max gap-2 p-3">
                     {["월", "화", "수", "목", "금", "토", "일"].map(
@@ -7653,7 +7678,7 @@ function Workspace() {
     },
     {
         id: "scroll-area", name: "ScrollArea", category: "Framework",
-        description: "이름이 있는 스크롤 영역에 공통 token의 스크롤바를 적용합니다. 세로·가로·양방향을 지원합니다.",
+        description: "세로·가로 스크롤을 움직여 자동 숨김을 확인할 수 있습니다. 표시 타이밍과 손잡이 스타일은 따로 선택합니다.",
         code: `import { ScrollArea } from "@pydemia/ui";
 
 const events = Array.from({ length: 20 }, (_, index) => ({
@@ -7662,7 +7687,8 @@ const events = Array.from({ length: 20 }, (_, index) => ({
 const days = ["월", "화", "수", "목", "금", "토", "일"];
 
 <>
-  <ScrollArea label="최근 작업" type="always"
+  <ScrollArea label="최근 작업" type="scroll"
+    scrollbarAppearance="subtle" scrollHideDelay={600}
     className="h-48 rounded-sm border border-border">
     <ol className="p-3">
       {events.map((event) => <li key={event.id}>{event.title}</li>)}
@@ -7670,7 +7696,7 @@ const days = ["월", "화", "수", "목", "금", "토", "일"];
   </ScrollArea>
 
   <ScrollArea label="기간별 지표" orientation="horizontal"
-    className="h-24 w-full">
+    type="hover" scrollbarAppearance="minimal" className="h-24 w-full">
     <div className="flex w-max gap-2">
       {days.map((day) => <div key={day} className="w-20">{day}</div>)}
     </div>

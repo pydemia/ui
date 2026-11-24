@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-right-panel",
+  "title": "Right Panel · 오른쪽 상세",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-ffb3525d351635240669d3acb5bcb38d7d7148cd09c20de44d1888c03c52637c/pyd-app-shell.json",
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-ffb3525d351635240669d3acb5bcb38d7d7148cd09c20de44d1888c03c52637c/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/right-panel.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { AppSidebar } from \"./app-shell\";\nimport { cn } from \"./utils\";\n\ntype RightPanelProps = Omit<ComponentProps<typeof AppSidebar>, \"side\">;\n\nfunction RightPanel({ className, appearance = \"attached\", ...props }: RightPanelProps) {\n    return (\n        <AppSidebar {...props} side=\"right\" appearance={appearance}\n            data-panel-side=\"right\" className={cn(\n                \"@3xl:w-auto @5xl:w-52\",\n                appearance === \"attached\" &&\n                    \"border-b-0 border-t @3xl:border-l-0 @5xl:border-t-0 @5xl:border-l\",\n                className,\n            )} />\n    );\n}\n\nexport { RightPanel };\nexport type { RightPanelProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/right-panel.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

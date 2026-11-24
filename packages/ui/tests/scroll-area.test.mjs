@@ -12,16 +12,18 @@ test("scroll viewport is a named keyboard region", () => {
     assert.match(markup, /role="region" aria-label="Recent events"/);
     assert.match(markup, /tabindex="0"/);
     assert.match(markup, /data-orientation="vertical"/);
+    assert.match(markup, /data-scrollbar-appearance="solid"/);
     assert.doesNotMatch(markup, /data-orientation="horizontal"/);
 });
 
 test("both orientations render their scrollbar tracks", () => {
     const markup = renderToStaticMarkup(createElement(
         ScrollArea, { label: "Metrics", orientation: "both",
-            type: "always" }, "Data",
+            type: "always", scrollbarAppearance: "minimal" }, "Data",
     ));
     assert.match(markup, /data-orientation="vertical"/);
     assert.match(markup, /data-orientation="horizontal"/);
+    assert.equal((markup.match(/data-scrollbar-appearance="minimal"/g) ?? []).length, 2);
 });
 
 test("unnamed or unsupported scroll areas fail explicitly", () => {
