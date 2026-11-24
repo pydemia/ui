@@ -37,6 +37,7 @@ type SidebarProps = ({
     collapsed?: boolean;
     defaultCollapsed?: boolean;
     resizable?: boolean;
+    resizeStorageKey?: string;
     onCollapsedChange?: (collapsed: boolean) => void;
     mobileOpen?: boolean;
     defaultMobileOpen?: boolean;
@@ -54,6 +55,7 @@ function Sidebar({
     collapsed,
     defaultCollapsed = false,
     resizable = true,
+    resizeStorageKey,
     onCollapsedChange,
     mobileOpen,
     defaultMobileOpen = false,
@@ -101,7 +103,7 @@ function Sidebar({
     const isMobileOpen = mobileOpen ?? internalMobileOpen;
     const resize = useSidebarResize({
         defaultWidth: 224, minWidth: 160, maxWidth: 420, contentWidth: 320,
-        side, enabled: resizable && !isCollapsed,
+        side, enabled: resizable && !isCollapsed, storageKey: resizeStorageKey,
     });
 
     function changeCollapsed(next: boolean) {

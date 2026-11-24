@@ -137,6 +137,7 @@ export {
     AppShell, AppHeader, AppBody, AppSidebar, AppMain, AppBottomPanel,
     AppFloatingPanel, AppFloatingBubble, AppFloatingDisclosure,
 } from "./components/app-shell";
+export { NavigationShell, type NavigationShellProps } from "./components/navigation-shell";
 export type {
     AppShellProps, AppMainProps, AppSidebarProps, AppBottomPanelProps,
     AppFloatingPanelProps, AppFloatingBubbleProps,
@@ -192,7 +193,8 @@ export type { AlignmentNode, FlowAlignment, FlowGuide } from
 export { ScrollArea } from "./components/scroll-area";
 export type { ScrollAreaProps } from "./components/scroll-area";
 export {
-    GlobalNav, GlobalNavLink, SideNav, SideNavLink,
+    GlobalNav, GlobalNavLink, LocalNav, LocalNavLink, SideNav, SideNavLink,
+    FooterNav, FooterNavLink,
     BottomNav, BottomNavLink,
 } from "./components/navigation";
 export type {

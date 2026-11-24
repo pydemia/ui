@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-navigation-shell",
+  "title": "Navigation Shell",
+  "registryDependencies": [
+    "https://pydemia-ui.vercel.app/r/pyd-app-shell.json",
+    "https://pydemia-ui.vercel.app/r/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/navigation-shell.tsx",
+      "content": "import type { ComponentProps, ReactNode } from \"react\";\nimport { AppBody, AppHeader, AppMain, AppShell, AppSidebar } from \"./app-shell\";\nimport { cn } from \"./utils\";\n\ntype NavigationShellProps = Omit<ComponentProps<typeof AppShell>, \"children\"> & {\n    globalNav?: ReactNode;\n    localNav?: ReactNode;\n    sideNav?: ReactNode;\n    rightPanel?: Omit<ComponentProps<typeof AppSidebar>, \"side\">;\n    footerNav?: ReactNode;\n    mobileNav?: ReactNode;\n    mainProps?: Omit<ComponentProps<typeof AppMain>, \"children\">;\n    children: ReactNode;\n};\n\nfunction NavigationShell({\n    globalNav, localNav, sideNav, rightPanel, footerNav, mobileNav,\n    mainProps, children, ...props\n}: NavigationShellProps) {\n    return (\n        <AppShell {...props}>\n            {globalNav && <AppHeader data-slot=\"global-navigation\" className=\"min-w-0 flex-wrap py-1.5\">\n                {globalNav}\n            </AppHeader>}\n            <AppBody>\n                {sideNav}\n                <div className=\"flex min-w-0 flex-1 flex-col @5xl:flex-row\">\n                    <div className=\"flex min-w-0 flex-1 flex-col\">\n                        {localNav}\n                        <AppMain {...mainProps}>{children}</AppMain>\n                    </div>\n                    {rightPanel && (\n                        <AppSidebar {...rightPanel} side=\"right\" data-panel-side=\"right\"\n                            className={cn(\n                                \"@3xl:w-auto @5xl:w-52\",\n                                rightPanel.appearance !== \"inset\" &&\n                                    \"border-b-0 border-t @3xl:border-l-0 @5xl:border-t-0 @5xl:border-l\",\n                                rightPanel.className,\n                            )} />\n                    )}\n                </div>\n            </AppBody>\n            {mobileNav && <div className=\"@3xl:hidden\" data-slot=\"mobile-navigation\">{mobileNav}</div>}\n            {footerNav && <footer className=\"min-w-0 border-t border-border bg-surface\"\n                data-slot=\"footer-navigation\">{footerNav}</footer>}\n        </AppShell>\n    );\n}\n\nexport { NavigationShell };\nexport type { NavigationShellProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/navigation-shell.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

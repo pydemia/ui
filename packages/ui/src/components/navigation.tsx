@@ -50,6 +50,50 @@ function GlobalNavLink({
     );
 }
 
+function LocalNav({ className, ...props }: NamedNavProps) {
+    return (
+        <nav
+            className={cn(
+                "flex min-w-0 items-center gap-1 overflow-x-auto " +
+                "border-b border-border px-[var(--space-3)]",
+                className,
+            )}
+            {...props}
+            data-ui="local-nav"
+        />
+    );
+}
+
+function LocalNavLink({ className, ...props }: ComponentProps<"a">) {
+    return <GlobalNavLink {...props} variant="underline"
+        className={cn("whitespace-nowrap", className)} />;
+}
+
+function FooterNav({ className, ...props }: NamedNavProps) {
+    return (
+        <nav
+            className={cn(
+                "flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1 " +
+                "px-[var(--space-4)] py-[var(--space-2)]",
+                className,
+            )}
+            {...props}
+            data-ui="footer-nav"
+        />
+    );
+}
+
+function FooterNavLink({ className, ...props }: ComponentProps<"a">) {
+    return (
+        <a className={cn(
+            "rounded-sm py-1 text-sm text-muted hover:text-foreground " +
+            "focus-visible:outline-2 focus-visible:outline-focus " +
+            "aria-[current=page]:font-semibold aria-[current=page]:text-foreground",
+            className,
+        )} {...props} />
+    );
+}
+
 function SideNav({ className, ...props }: NamedNavProps) {
     return (
         <nav
@@ -161,7 +205,8 @@ function BottomNavLink({
 }
 
 export {
-    GlobalNav, GlobalNavLink, SideNav, SideNavLink,
+    GlobalNav, GlobalNavLink, LocalNav, LocalNavLink, SideNav, SideNavLink,
+    FooterNav, FooterNavLink,
     BottomNav, BottomNavLink,
 };
 export type {

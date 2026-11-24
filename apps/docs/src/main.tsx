@@ -412,7 +412,7 @@ function App() {
                         <div className="section-lead"><div><p className="section-index">01 / COMPONENT LIBRARY</p><h2 id="component-heading">{selected.name}</h2><p>{selected.description}</p></div><Badge>{selected.category}</Badge></div>
                         <div className="component-grid"
                             data-wide={[
-                                "app-shell", "data-chart", "dashboard",
+                                "app-shell", "navigation-shell", "data-chart", "dashboard",
                                 "data-table", "gantt", "scatter-chart",
                                 "calendar-heatmap", "sankey-chart",
                                 "resizable-panels",

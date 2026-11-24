@@ -1,3 +1,4 @@
+import { NavigationShellPreview } from "./navigation-shell-preview";
 import {
     Accordion, AccordionContent, AccordionItem, AccordionTrigger, ActionBar,
     AnchorNav,
@@ -44,7 +45,8 @@ import {
     Empty, EmptyContent, EmptyDescription,
     EmptyMedia, EmptyTitle, Editable, FavoriteToggle, Field, FileUpload,
     FilterBar, FormWizard, FunnelChart, WaterfallChart, Gantt,
-    GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
+    FooterNav, FooterNavLink, GlobalNav, GlobalNavLink, HoverCard, HoverCardContent,
+    LocalNav, LocalNavLink,
     HoverCardTrigger, Heatmap, HistogramChart, Image, ImageCropper,
     Input, InputGroup,
     InputGroupAddon,
@@ -405,6 +407,10 @@ function NavigationPreview() {
                     예시
                 </GlobalNavLink>
             </GlobalNav>
+            <LocalNav aria-label="현재 문서 보기">
+                <LocalNavLink href="#overview" aria-current="page">개요</LocalNavLink>
+                <LocalNavLink href="#examples">예시</LocalNavLink>
+            </LocalNav>
             <Button variant="outline" onClick={() => setSideVariant(
                 sideVariant === "rail" ? "filled" : "rail",
             )}>
@@ -445,6 +451,10 @@ function NavigationPreview() {
                     ))}
                 </BottomNav>
             </div>
+            <FooterNav aria-label="이용 안내">
+                <FooterNavLink href="?component=navigation-shell#components">레이아웃 사용법</FooterNavLink>
+                <FooterNavLink href="?component=sidebar#components">사이드바</FooterNavLink>
+            </FooterNav>
         </div>
     );
 }
@@ -7566,6 +7576,39 @@ function RequestWorkspace() {
         preview: () => <MasterDetailPreview />,
     },
     {
+        id: "navigation-shell", name: "NavigationShell", category: "Framework",
+        installItems: ["navigation-shell", "navigation", "sidebar"],
+        description: "앱 전역 GNB, 화면별 LNB, 왼쪽 SNB, 오른쪽 상세 패널과 FNB를 조합합니다. 모바일 주요 탐색은 BottomNav 슬롯으로 제공할 수 있습니다.",
+        code: `import { NavigationShell, GlobalNav, GlobalNavLink,
+  LocalNav, LocalNavLink, Sidebar, FooterNav, FooterNavLink,
+  BottomNav, BottomNavLink } from "@pydemia/ui";
+
+export function Workspace() {
+  return <NavigationShell
+    globalNav={<GlobalNav aria-label="앱 탐색">
+      <GlobalNavLink href="/projects" aria-current="page">Projects</GlobalNavLink>
+      <GlobalNavLink href="/note">Note</GlobalNavLink>
+    </GlobalNav>}
+    sideNav={<Sidebar label="작업공간 탐색" resizeStorageKey="workspace-sidebar"
+      items={[{ id: "all", label: "전체 작업", href: "/tasks", current: true }]} />}
+    localNav={<LocalNav aria-label="작업 보기">
+      <LocalNavLink href="/tasks" aria-current="page">목록</LocalNavLink>
+      <LocalNavLink href="/tasks/board">보드</LocalNavLink>
+    </LocalNav>}
+    rightPanel={{ "aria-label": "선택한 작업", children: <p>업무 속성</p> }}
+    mobileNav={<BottomNav aria-label="모바일 작업 탐색">
+      <BottomNavLink href="/tasks" label="작업" aria-current="page" />
+    </BottomNav>}
+    footerNav={<FooterNav aria-label="이용 안내">
+      <FooterNavLink href="/help">도움말</FooterNavLink>
+    </FooterNav>}
+  >
+    <h1>작업 목록</h1>
+  </NavigationShell>;
+}`,
+        preview: () => <NavigationShellPreview />,
+    },
+    {
         id: "app-shell", name: "AppShell", category: "Framework",
         installItems: ["app-shell", "sidebar", "button", "collapsible"],
         description: "header, 좌우·하단 panel과 floating UI를 조합합니다. Sidebar는 모바일 drawer로 열리고 하단 panel은 접을 수 있습니다. 측면·하단 panel은 attached·inset, 골격은 framed·canvas 중 선택합니다.",
@@ -8009,9 +8052,10 @@ function arrange(graph: FlowGraph) {
     },
     {
         id: "navigation", name: "Navigation", category: "Navigation",
-        description: "전역·측면·하단 탐색을 현재 페이지 상태와 함께 표시합니다. 전역 링크는 표면형·밑줄형, 측면 링크는 선형·채움형, 하단 탐색은 막대형·독형을 고를 수 있습니다.",
+        description: "앱 전역 GNB, 화면별 LNB, 측면 SNB, 이용 안내 FNB, 모바일 BottomNav용 링크 탐색을 제공합니다.",
         code: `import {
-  GlobalNav, GlobalNavLink, SideNav, SideNavLink,
+  GlobalNav, GlobalNavLink, LocalNav, LocalNavLink,
+  SideNav, SideNavLink, FooterNav, FooterNavLink,
   BottomNav, BottomNavLink,
 } from "@pydemia/ui";
 
@@ -8021,6 +8065,11 @@ function arrange(graph: FlowGraph) {
       variant="underline">개요</GlobalNavLink>
     <GlobalNavLink href="/reports" variant="underline">보고서</GlobalNavLink>
   </GlobalNav>
+
+  <LocalNav aria-label="보고서 보기">
+    <LocalNavLink href="/reports" aria-current="page">요약</LocalNavLink>
+    <LocalNavLink href="/reports/history">변경 이력</LocalNavLink>
+  </LocalNav>
 
   <SideNav aria-label="프로젝트 탐색">
     <SideNavLink href="/overview" aria-current="page"
@@ -8033,6 +8082,10 @@ function arrange(graph: FlowGraph) {
     <BottomNavLink href="/inbox" label="받은 편지함" />
     <BottomNavLink href="/settings" label="설정" />
   </BottomNav>
+
+  <FooterNav aria-label="이용 안내">
+    <FooterNavLink href="/help">도움말</FooterNavLink>
+  </FooterNav>
 </>;`,
         preview: () => <NavigationPreview />,
     },

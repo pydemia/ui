@@ -610,6 +610,11 @@
       "files": [{ "path": "packages/ui/src/components/app-shell.tsx", "type": "registry:ui" }]
     },
     {
+      "name": "pyd-navigation-shell", "type": "registry:ui", "title": "Navigation Shell",
+      "registryDependencies": ["./pyd-app-shell.json", "./pyd-utils.json"],
+      "files": [{ "path": "packages/ui/src/components/navigation-shell.tsx", "type": "registry:ui" }]
+    },
+    {
       "name": "pyd-master-detail", "type": "registry:ui", "title": "Master Detail",
       "registryDependencies": ["./pyd-button.json", "./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/master-detail.tsx", "type": "registry:ui" }]
@@ -629,7 +634,7 @@
       "files": [{ "path": "packages/ui/src/components/resizable-panels.tsx", "type": "registry:ui" }]
     },
     {
-      "name": "pyd-navigation", "type": "registry:ui", "title": "Global, Side, and Bottom Navigation",
+      "name": "pyd-navigation", "type": "registry:ui", "title": "Global, Local, Side, Footer, and Bottom Navigation",
       "registryDependencies": ["./pyd-utils.json"],
       "files": [{ "path": "packages/ui/src/components/navigation.tsx", "type": "registry:ui" }]
     },
