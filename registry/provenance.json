@@ -312,7 +312,7 @@
       "name": "pyd-date-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
       "reference": { "provider": "DayPicker", "url": "https://daypicker.dev/selections/selection-modes" },
-      "dependencies": ["pyd-calendar", "pyd-popover", "pyd-utils", "lucide-react"], "accessibility": { "semantics": "button trigger, calendar grid and hidden form value; consumer supplies label", "keyboard": "Chromium: Enter, date selection, Escape and focus return verified", "screen_reader": "pending manual review" }
+      "dependencies": ["pyd-calendar", "pyd-popover", "pyd-input", "pyd-utils", "lucide-react", "react-day-picker"], "accessibility": { "semantics": "button or native date input, calendar grid and YYYY-MM-DD form value; consumer supplies label", "keyboard": "DatePicker opens with Enter; DateInput opens on focus and Alt+ArrowDown moves focus into the calendar. Escape dismisses the popup.", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-month-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
@@ -334,8 +334,8 @@
     {
       "name": "pyd-time-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],
       "source": { "provider": "pydemia/ui", "implementation": "original", "upstream": null, "license": "project-owned" },
-      "reference": { "provider": "React", "url": "https://react.dev/reference/react-dom/components/select", "scope": "native select form and keyboard semantics; no source copied" },
-      "dependencies": ["pyd-native-select", "pyd-utils"], "accessibility": { "semantics": "fieldset legend, named native hour/minute/period selects, one HH:mm hidden form value", "keyboard": "Chromium: required focus, ArrowDown selection and form submission verified", "screen_reader": "pending manual review" }
+      "reference": { "provider": "Android Material Components", "url": "https://github.com/material-components/material-components-android/blob/master/docs/components/TimePicker.md", "scope": "two-ring 24-hour dial and hour-to-minute progression; no source copied" },
+      "dependencies": ["pyd-native-select", "pyd-utils"], "accessibility": { "semantics": "fieldset legend, named native selects and optional two-stage clock, one HH:mm form value", "keyboard": "Native select keyboard behavior and arrow keys in the dial", "screen_reader": "pending manual review" }
     },
     {
       "name": "pyd-date-time-picker", "category": "Date & time", "profiles": ["neutral-product", "developer-tool"],

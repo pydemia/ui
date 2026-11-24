@@ -376,8 +376,8 @@ export { TransferList } from "./components/transfer-list";
 export type { TransferListItem, TransferListProps } from
     "./components/transfer-list";
 export { Calendar } from "./components/calendar";
-export { DatePicker } from "./components/date-picker";
-export type { DatePickerProps } from "./components/date-picker";
+export { DateInput, DatePicker } from "./components/date-picker";
+export type { DateInputProps, DatePickerProps } from "./components/date-picker";
 export { MonthPicker } from "./components/month-picker";
 export type { MonthPickerProps } from "./components/month-picker";
 export { YearPicker } from "./components/year-picker";

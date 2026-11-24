@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useId, useState } from "react";
+import { ClockDial } from "./pickers/clock-dial";
 import { NativeSelect } from "./native-select";
 import { cn } from "./utils";
 
@@ -69,6 +70,8 @@ function TimePicker({
         throw new Error("TimePicker segment labels must not be empty.");
     }
     const minutes = readTime(value, minuteStep);
+    const [clockOpen, setClockOpen] = useState(false);
+    const clockId = useId();
     const resolvedCycle = hourCycle ?? (
         new Intl.DateTimeFormat(locale, { hour: "numeric" })
             .resolvedOptions().hourCycle?.startsWith("h1")
@@ -126,6 +129,8 @@ function TimePicker({
         );
     }
 
+    const showClock = resolvedCycle === "h23" && clockOpen;
+    const clockLabel = locale.toLowerCase().startsWith("ko") ? "시계로 선택" : "Select using clock";
     const hours = resolvedCycle === "h12"
         ? [12, ...Array.from({ length: 11 }, (_, index) => index + 1)]
         : Array.from({ length: 24 }, (_, index) => index);
@@ -185,6 +190,23 @@ function TimePicker({
                     </NativeSelect>
                 )}
             </div>
+            {resolvedCycle === "h23" && (
+                <button type="button" aria-expanded={showClock} aria-controls={showClock ? clockId : undefined}
+                    onClick={() => setClockOpen(!clockOpen)}
+                    className="mt-2 rounded-sm border border-border px-3 py-1 text-sm hover:bg-surface-subtle">
+                    {clockLabel}
+                </button>
+            )}
+            {showClock && <div id={clockId} className="mt-3">
+                <ClockDial hour={Number(segments.hour)} minute={Number(segments.minute)}
+                    hourLabel={labels.hour} minuteLabel={labels.minute}
+                    disabled={disabled} minuteStep={minuteStep}
+                    onHourChange={hour => change("hour", String(hour % 24).padStart(2, "0"))}
+                    onMinuteChange={minute => {
+                        setDraft(null);
+                        onValueChange(`${segments.hour || "00"}:${String(minute).padStart(2, "0")}`);
+                    }} />
+            </div>}
         </fieldset>
     );
 }

@@ -31,7 +31,7 @@ import {
     ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger,
     Conversation, Dashboard, DashboardMetrics,
     DashboardPanels,
-    DataChart, DataList, DataTable, DatePicker, DateRangePicker,
+    DataChart, DataList, DataTable, DateInput, DateRangePicker,
     DateTimePicker, DiffViewer,
     Dialog, DialogClose, DialogContent,
     DialogDescription, DialogFooter, DialogHeader, DialogTitle,
@@ -2052,7 +2052,7 @@ function SelectPreview() {
 }
 
 function DatePickerPreview() {
-    const [date, setDate] = useState<string | null>(null);
+    const [date, setDate] = useState("");
     const [submitted, setSubmitted] = useState<string | null>(null);
     const [tried, setTried] = useState(false);
 
@@ -2071,7 +2071,7 @@ function DatePickerPreview() {
                 required
             >
                 {(control) => (
-                    <DatePicker
+                    <DateInput
                         {...control}
                         name="date"
                         value={date}
@@ -2423,7 +2423,7 @@ function TimePickerPreview() {
                         setTime(next);
                         setSubmitted(null);
                     }}
-                    locale="ko-KR" hourCycle={cycle} minuteStep={5}
+                    locale="ko-KR" hourCycle={cycle} minuteStep={1}
                     required />
                 <Button type="submit">시각 확인</Button>
             </form>
@@ -2459,7 +2459,7 @@ function DateTimePickerPreview() {
                     setError(false);
                 }}
                 timeZone="Asia/Seoul" calendarLocale={ko}
-                hourCycle="h23" minuteStep={5} />
+                hourCycle="h23" minuteStep={1} />
             <Button type="submit">예약 값 확인</Button>
             {error && <p role="alert">날짜와 시각을 선택하세요.</p>}
             <p role="status">제출 값: {submitted ?? "없음"}</p>
@@ -7390,19 +7390,19 @@ function ReviewerForm() {
         preview: () => <TransferListPreview />,
     },
     {
-        id: "date-picker", name: "DatePicker", category: "Date & time",
+        id: "date-picker", name: "DatePicker / DateInput", category: "Date & time",
         installItems: ["date-picker", "field"],
-        description: "달력 날짜를 YYYY-MM-DD 값으로 다룹니다. null은 미선택이며 hidden input으로 form에 전달합니다.",
+        description: "DateInput에 초점을 두거나 입력란을 클릭하면 바로 아래에 달력이 열립니다. 날짜를 직접 입력하거나 달력에서 선택할 수 있고 YYYY-MM-DD를 폼에 전달합니다. DatePicker는 버튼 형태로 제공합니다.",
         code: `import { useState } from "react";
 import { ko } from "react-day-picker/locale";
-import { DatePicker, Field } from "@pydemia/ui";
+import { DateInput, Field } from "@pydemia/ui";
 
 function ReviewDate() {
-  const [date, setDate] = useState<string | null>(null);
+  const [date, setDate] = useState("");
   return (
     <Field label="검토일" required>
       {(control) => (
-        <DatePicker {...control} name="date" value={date}
+        <DateInput {...control} name="date" value={date}
           onValueChange={setDate} calendarLocale={ko} required />
       )}
     </Field>
@@ -7495,7 +7495,7 @@ function ReportPeriod() {
     },
     {
         id: "time-picker", name: "TimePicker", category: "Date & time",
-        description: "시·분과 12/24시간 표시를 선택합니다. 값은 locale과 무관한 HH:mm으로 form에 제출합니다.",
+        description: "24시간제에서는 두 링의 시계에서 시를 고른 뒤 분을 선택할 수 있습니다. 24시는 00시와 같은 위치의 자정을 뜻합니다. minuteStep을 1로 지정하면 00~59분을 고를 수 있고 폼은 HH:mm을 전달합니다.",
         code: `import { useState } from "react";
 import { Button, TimePicker } from "@pydemia/ui";
 
@@ -7507,7 +7507,7 @@ function ReviewTime() {
   }}>
     <TimePicker label="검토 시각" name="reviewTime"
       value={time} onValueChange={setTime}
-      locale="ko-KR" hourCycle="h12" minuteStep={5}
+      locale="ko-KR" hourCycle="h23" minuteStep={1}
       required />
     <Button type="submit">시각 확인</Button>
   </form>;
@@ -7545,7 +7545,7 @@ function ScheduleForm() {
         setError(false);
       }}
       timeZone="Asia/Seoul" calendarLocale={ko}
-      hourCycle="h23" minuteStep={5} />
+      hourCycle="h23" minuteStep={1} />
     <Button type="submit">예약 값 확인</Button>
     {error && <p role="alert">날짜와 시각을 선택하세요.</p>}
   </form>;

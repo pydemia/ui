@@ -98,5 +98,7 @@ function DatePicker({
     );
 }
 
+export { DateInput } from "./pickers/date-input";
+export type { DateInputProps } from "./pickers/date-input";
 export { DatePicker };
 export type { DatePickerProps };

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pyd-global-nav",
+  "title": "GNB · 전역 탐색",
+  "registryDependencies": [
+    "https://raw.githubusercontent.com/pydemia/ui/main/docs/r/releases/sha256-0dad84ed78938f3b08a1bae8f560364f1d7b67a1ccc99561573bf8ed4079bbfe/pyd-utils.json"
+  ],
+  "files": [
+    {
+      "path": "packages/ui/src/components/global-nav.tsx",
+      "content": "import type { ComponentProps } from \"react\";\nimport { cn } from \"./utils\";\n\ntype NamedNavProps = ComponentProps<\"nav\"> & { \"aria-label\": string };\n\nfunction GlobalNav({ className, ...props }: NamedNavProps) {\n    return (\n        <nav\n            className={cn(\n                \"flex min-w-0 items-center gap-1 overflow-x-auto\",\n                className,\n            )}\n            {...props}\n            data-ui=\"global-nav\"\n        />\n    );\n}\n\ntype GlobalNavLinkProps = ComponentProps<\"a\"> & {\n    variant?: \"surface\" | \"underline\";\n};\n\nfunction GlobalNavLink({\n    variant = \"surface\",\n    className,\n    ...props\n}: GlobalNavLinkProps) {\n    return (\n        <a\n            className={cn(\n                \"shrink-0 px-[var(--space-3)] py-[var(--space-2)] \" +\n                \"text-sm text-muted hover:text-foreground \" +\n                \"aria-[current=page]:font-semibold\",\n                variant === \"surface\"\n                    ? \"rounded-sm hover:bg-surface-subtle \" +\n                      \"aria-[current=page]:bg-surface-subtle \" +\n                      \"aria-[current=page]:text-foreground\"\n                    : \"border-b-2 border-transparent \" +\n                      \"aria-[current=page]:border-accent \" +\n                      \"aria-[current=page]:text-accent\",\n                className,\n            )}\n            data-variant={variant}\n            {...props}\n            data-slot=\"nav-link\"\n        />\n    );\n}\n\nexport { GlobalNav, GlobalNavLink };\nexport type { GlobalNavLinkProps };\n",
+      "type": "registry:ui",
+      "target": "@ui/global-nav.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
